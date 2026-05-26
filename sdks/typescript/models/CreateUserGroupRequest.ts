@@ -30,7 +30,7 @@ export class CreateUserGroupRequest {
     */
     'description'?: string;
     /**
-    * Privileges to assign to the group
+    * Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.
     */
     'privileges'?: Array<CreateUserGroupRequestPrivilegesEnum>;
     /**

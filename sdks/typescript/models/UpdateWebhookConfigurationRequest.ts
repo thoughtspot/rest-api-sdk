@@ -48,6 +48,10 @@ export class UpdateWebhookConfigurationRequest {
     * Status of the webhook (ENABLED or DISABLED).    Version: 26.7.0.cl or later 
     */
     'status'?: UpdateWebhookConfigurationRequestStatusEnum;
+    /**
+    * List of optional configuration sections to clear. Each value removes the corresponding configuration entirely from the webhook: AUTHENTICATION removes the authentication config, SIGNATURE_VERIFICATION removes the signature verification config, STORAGE_DESTINATION removes the storage destination config.    Version: 26.7.0.cl or later 
+    */
+    'reset_options'?: Array<UpdateWebhookConfigurationRequestResetOptionsEnum>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -111,6 +115,12 @@ export class UpdateWebhookConfigurationRequest {
             "baseName": "status",
             "type": "UpdateWebhookConfigurationRequestStatusEnum",
             "format": ""
+        },
+        {
+            "name": "reset_options",
+            "baseName": "reset_options",
+            "type": "Array<UpdateWebhookConfigurationRequestResetOptionsEnum>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -124,4 +134,5 @@ export class UpdateWebhookConfigurationRequest {
 
 export type UpdateWebhookConfigurationRequestEventsEnum = "LIVEBOARD_SCHEDULE" ;
 export type UpdateWebhookConfigurationRequestStatusEnum = "ENABLED" | "DISABLED" ;
+export type UpdateWebhookConfigurationRequestResetOptionsEnum = "AUTHENTICATION" | "SIGNATURE_VERIFICATION" | "STORAGE_DESTINATION" ;
 

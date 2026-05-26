@@ -247,7 +247,8 @@ public class CreateRoleRequest implements Serializable {
     /**
      * Privileges granted to the Role. See
      * [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for
-     * supported roles privileges.
+     * supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP,
+     * assigning it has no effect.
      *
      * @return privileges
      */

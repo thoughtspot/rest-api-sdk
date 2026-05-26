@@ -17964,6 +17964,12 @@ _UpdateWebhookConfigurationRequest.attributeTypeMap = [
     "baseName": "status",
     "type": "UpdateWebhookConfigurationRequestStatusEnum",
     "format": ""
+  },
+  {
+    "name": "reset_options",
+    "baseName": "reset_options",
+    "type": "Array<UpdateWebhookConfigurationRequestResetOptionsEnum>",
+    "format": ""
   }
 ];
 var UpdateWebhookConfigurationRequest = _UpdateWebhookConfigurationRequest;
@@ -20241,6 +20247,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateUserRequestPreferredLocaleEnum",
   "UpdateWebhookConfigurationRequestEventsEnum",
   "UpdateWebhookConfigurationRequestStatusEnum",
+  "UpdateWebhookConfigurationRequestResetOptionsEnum",
   "UserVisibilityEnum",
   "UserAccountTypeEnum",
   "UserAccountStatusEnum",
