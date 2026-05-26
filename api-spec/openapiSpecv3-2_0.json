@@ -9841,6 +9841,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "[\"Invalid request.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -9851,6 +9866,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "[\"Unauthorized access.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -9861,6 +9891,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "[\"Forbidden access.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -9871,6 +9916,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "[\"Unexpected error.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10231,6 +10291,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "[\"Invalid request.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10241,6 +10316,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "[\"Unauthorized access.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10251,6 +10341,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "[\"Forbidden access.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10261,6 +10366,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "[\"Unexpected error.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10348,6 +10468,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "[\"Invalid request.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10358,6 +10493,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "[\"Unauthorized access.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10368,6 +10518,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "[\"Forbidden access.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10378,6 +10543,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "[\"Unexpected error.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10702,6 +10882,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "[\"Invalid request.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10712,6 +10907,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "[\"Unauthorized access.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10722,6 +10932,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "[\"Forbidden access.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10732,6 +10957,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "[\"Unexpected error.\",\"\"]"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -22173,7 +22413,7 @@
                 "CAN_MANAGE_SPOTTER"
               ]
             },
-            "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "description": "Privileges that will be assigned to the group.",
             "nullable": true
           },
           "sub_group_identifiers": {
@@ -27294,7 +27534,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "description": "Privileges to assign to the group",
             "type": "array",
             "items": {
               "type": "string",
@@ -27593,7 +27833,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "description": "Privileges to assign to the group.",
             "type": "array",
             "items": {
               "type": "string",
@@ -28744,7 +28984,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
             "type": "array",
             "items": {
               "type": "string",
@@ -28939,7 +29179,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
             "type": "array",
             "items": {
               "type": "string",
