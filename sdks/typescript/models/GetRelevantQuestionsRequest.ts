@@ -25,7 +25,7 @@ export class GetRelevantQuestionsRequest {
     */
     'bypass_cache'?: boolean | null;
     /**
-    * A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis.
+    * A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis. Must be a non-empty string.
     */
     'query': string;
     'ai_context'?: GetRelevantQuestionsRequestAiContext;

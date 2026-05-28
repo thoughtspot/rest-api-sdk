@@ -43,7 +43,7 @@ public class GetDataSourceSuggestionsRequest implements Serializable {
     }
 
     /**
-     * User query used to suggest data sources.
+     * User query used to suggest data sources. Must be a non-empty string.
      *
      * @return query
      */
