@@ -16164,6 +16164,7 @@ components:
           - USER_GROUP
           - ROLE
           - FEEDBACK
+          - COLLECTION
           nullable: true
           type: string
         identifier:
