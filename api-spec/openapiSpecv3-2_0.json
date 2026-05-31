@@ -28100,6 +28100,12 @@
             "default": false,
             "type": "boolean",
             "nullable": true
+          },
+          "enable_personalized_view_upsert": {
+            "description": "<div><span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span></div>\n\nBoolean flag to enable update/insert of personalized views in liveboard.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
           }
         },
         "required": [
@@ -28147,6 +28153,12 @@
           },
           "enable_large_metadata_validation": {
             "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "enable_personalized_view_upsert": {
+            "description": "<div><span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span></div>\n\nBoolean flag to enable update/insert of personalized views in liveboard.",
             "default": false,
             "type": "boolean",
             "nullable": true

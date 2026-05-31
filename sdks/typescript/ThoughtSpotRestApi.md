@@ -4691,6 +4691,7 @@ apiInstance.importMetadataTML(
     all_orgs_override: false,
     skip_diff_check: false,
     enable_large_metadata_validation: false,
+    enable_personalized_view_upsert: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -4760,6 +4761,7 @@ apiInstance.importMetadataTMLAsync(
     import_policy: "PARTIAL_OBJECT",
     skip_diff_check: false,
     enable_large_metadata_validation: false,
+    enable_personalized_view_upsert: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

@@ -749,8 +749,8 @@ import { GroupsImportListInput    , GroupsImportListInputPrivilegesEnum   , Grou
 import { HeaderAttributeInput } from '../models/HeaderAttributeInput';
 import { HeaderUpdateInput  , HeaderUpdateInputTypeEnum    } from '../models/HeaderUpdateInput';
 import { ImportEPackAsyncTaskStatus     , ImportEPackAsyncTaskStatusTaskStatusEnum   , ImportEPackAsyncTaskStatusImportPolicyEnum          } from '../models/ImportEPackAsyncTaskStatus';
-import { ImportMetadataTMLAsyncRequest   , ImportMetadataTMLAsyncRequestImportPolicyEnum     } from '../models/ImportMetadataTMLAsyncRequest';
-import { ImportMetadataTMLRequest , ImportMetadataTMLRequestImportPolicyEnum       } from '../models/ImportMetadataTMLRequest';
+import { ImportMetadataTMLAsyncRequest   , ImportMetadataTMLAsyncRequestImportPolicyEnum      } from '../models/ImportMetadataTMLAsyncRequest';
+import { ImportMetadataTMLRequest , ImportMetadataTMLRequestImportPolicyEnum        } from '../models/ImportMetadataTMLRequest';
 import { ImportUser   , ImportUserAccountTypeEnum  , ImportUserAccountStatusEnum     , ImportUserVisibilityEnum       , ImportUserPreferredLocaleEnum    } from '../models/ImportUser';
 import { ImportUserGroupsRequest } from '../models/ImportUserGroupsRequest';
 import { ImportUserGroupsResponse } from '../models/ImportUserGroupsResponse';

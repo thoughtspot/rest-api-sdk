@@ -8503,6 +8503,12 @@ _ImportMetadataTMLAsyncRequest.attributeTypeMap = [
     "baseName": "enable_large_metadata_validation",
     "type": "boolean",
     "format": ""
+  },
+  {
+    "name": "enable_personalized_view_upsert",
+    "baseName": "enable_personalized_view_upsert",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var ImportMetadataTMLAsyncRequest = _ImportMetadataTMLAsyncRequest;
@@ -8550,6 +8556,12 @@ _ImportMetadataTMLRequest.attributeTypeMap = [
   {
     "name": "enable_large_metadata_validation",
     "baseName": "enable_large_metadata_validation",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "enable_personalized_view_upsert",
+    "baseName": "enable_personalized_view_upsert",
     "type": "boolean",
     "format": ""
   }

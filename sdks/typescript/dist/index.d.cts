@@ -11930,6 +11930,10 @@ declare class ImportMetadataTMLAsyncRequest {
     * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
     */
     'enable_large_metadata_validation'?: boolean | null;
+    /**
+    * <div>Version: 26.8.0.cl or later </div>  Boolean flag to enable update/insert of personalized views in liveboard.
+    */
+    'enable_personalized_view_upsert'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;
@@ -11983,6 +11987,10 @@ declare class ImportMetadataTMLRequest {
     * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
     */
     'enable_large_metadata_validation'?: boolean | null;
+    /**
+    * <div>Version: 26.8.0.cl or later </div>  Boolean flag to enable update/insert of personalized views in liveboard.
+    */
+    'enable_personalized_view_upsert'?: boolean | null;
     static readonly discriminator: string | undefined;
     static readonly attributeTypeMap: Array<{
         name: string;

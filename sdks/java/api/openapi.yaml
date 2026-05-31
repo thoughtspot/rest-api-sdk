@@ -21402,6 +21402,7 @@ components:
       example:
         all_orgs_override: false
         skip_diff_check: false
+        enable_personalized_view_upsert: false
         enable_large_metadata_validation: false
         import_policy: PARTIAL
         metadata_tmls:
@@ -21454,6 +21455,15 @@ components:
             Boolean to indicate if the large metadata validation should be enabled.
           nullable: true
           type: boolean
+        enable_personalized_view_upsert:
+          default: false
+          description: |-
+            <div>Version: 26.8.0.cl or later
+            </div>
+
+            Boolean flag to enable update/insert of personalized views in liveboard.
+          nullable: true
+          type: boolean
       required:
       - metadata_tmls
       type: object
@@ -21461,6 +21471,7 @@ components:
       example:
         all_orgs_override: false
         skip_diff_check: false
+        enable_personalized_view_upsert: false
         enable_large_metadata_validation: false
         import_policy: PARTIAL_OBJECT
         metadata_tmls:
@@ -21512,6 +21523,15 @@ components:
             </div>
 
             Boolean to indicate if the large metadata validation should be enabled.
+          nullable: true
+          type: boolean
+        enable_personalized_view_upsert:
+          default: false
+          description: |-
+            <div>Version: 26.8.0.cl or later
+            </div>
+
+            Boolean flag to enable update/insert of personalized views in liveboard.
           nullable: true
           type: boolean
       required:

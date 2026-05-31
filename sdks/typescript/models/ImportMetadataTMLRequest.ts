@@ -37,6 +37,10 @@ export class ImportMetadataTMLRequest {
     * <div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.
     */
     'enable_large_metadata_validation'?: boolean | null;
+    /**
+    * <div>Version: 26.8.0.cl or later </div>  Boolean flag to enable update/insert of personalized views in liveboard.
+    */
+    'enable_personalized_view_upsert'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -74,6 +78,12 @@ export class ImportMetadataTMLRequest {
         {
             "name": "enable_large_metadata_validation",
             "baseName": "enable_large_metadata_validation",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "enable_personalized_view_upsert",
+            "baseName": "enable_personalized_view_upsert",
             "type": "boolean",
             "format": ""
         }    ];
