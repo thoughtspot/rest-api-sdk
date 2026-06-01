@@ -415,6 +415,9 @@ public class JSON {
                 new com.thoughtspot.client.model.DeleteConnectionRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.DeleteManualTranslationsRequest
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.DeleteMetadataRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.DeleteMetadataTypeInput
@@ -474,6 +477,9 @@ public class JSON {
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ExportLiveboardReportRequest
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.ExportManualTranslationsRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest

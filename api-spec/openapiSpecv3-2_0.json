@@ -6802,6 +6802,319 @@
         }
       }
     },
+    "/api/rest/2.0/localizations/manual-translation/delete": {
+      "post": {
+        "operationId": "deleteManualTranslations",
+        "description": "\nDelete manual translations. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nDeletes all manual translations for the org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.\n\n#### Usage guidelines\n\n- This deletes **all** translation entries for the targeted org. The operation cannot be undone.\n- Defaults to `ORG` scope if not specified.\n- Set `scope` to `CLUSTER` to delete translations uploaded in the All-Org context.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Manual Translation",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteManualTranslationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted manual translations."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/localizations/manual-translation/export": {
+      "post": {
+        "operationId": "exportManualTranslations",
+        "description": "\nExport manual translations as a CSV file. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nDownloads all manual translations for the org as a CSV file.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.\n\n#### Usage guidelines\n\n- The response is a CSV file with columns: `content`, `locale`, `translated-content`.\n- Defaults to `ORG` scope if not specified.\n- Set `scope` to `CLUSTER` to export translations from the All-Org context.\n- Returns a `404` error if no translations exist for the targeted org or cluster scope.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Manual Translation",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportManualTranslationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "CSV file downloaded successfully.",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No translations file found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/localizations/manual-translation/locales/{locale}/export": {
+      "post": {
+        "operationId": "getManualTranslationBundle",
+        "description": "\nGet translations bundle for a locale. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves all translations for a specific locale as a JSON map.\n\nAvailable to all authenticated users. No additional privileges are required.\n\n#### Usage guidelines\n\n- `locale` parameter must be a hyphenated locale code (for example, `fr-fr`, `de-de`, `JA-JP`).\n- Returns a JSON object with a `translations` map where each key is the original string and each value is the translated string.\n- If the org has no translations for the requested locale, the endpoint falls back to cluster-level translations.\n- Returns an empty `translations` map (not an error) if no entries exist at either level.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Manual Translation",
+          "26.7.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "locale",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Locale code for which to retrieve translations.  For example, `fr-fr`, `de-de`, `JA-JP`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Translation bundle retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No translations found for the requested locale.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/localizations/manual-translation/import": {
+      "post": {
+        "operationId": "importManualTranslations",
+        "description": "\nImport manual translations from a CSV file. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a CSV file containing manual translations and upserts them into the database.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.\n\n#### Usage guidelines\n\n- The CSV file must have exactly three columns in this order: `content`, `locale`, `translated-content`.\n- Maximum file size: **30 MB**. Maximum rows: **10,000**.\n- Only `.csv` files are accepted.\n- The import performs an **upsert**: existing entries matched by `(org_id, locale, content)` are updated; new entries are inserted. Entries not in the upload are left untouched.\n- Set `scope` to `CLUSTER` to upload translations to the All-Org context. Cluster-level translations act as defaults for orgs that have no translations for a locale.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Manual Translation",
+          "26.7.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "translations_file": {
+                    "description": "CSV file containing translations. The file must have three columns:\n`content`, `locale`, `translated-content`. Max file size: 30 MB.\nMax rows: 10,000.",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "scope": {
+                    "description": "Org scope for the import. `ORG` (default) targets the calling\nuser's current org. `CLUSTER` targets the All-Org context.",
+                    "default": "ORG",
+                    "type": "string",
+                    "enum": [
+                      "ORG",
+                      "CLUSTER"
+                    ]
+                  }
+                },
+                "required": [
+                  "translations_file"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successfully imported manual translations."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/metadata/worksheets/convert": {
       "post": {
         "operationId": "convertWorksheetToModel",
@@ -27775,6 +28088,34 @@
         "required": [
           "log_type"
         ]
+      },
+      "DeleteManualTranslationsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Org scope for the delete. `ORG` (default) targets the calling\nuser's current org. `CLUSTER` targets the All-Org context.",
+            "default": "ORG",
+            "type": "string",
+            "enum": [
+              "ORG",
+              "CLUSTER"
+            ]
+          }
+        }
+      },
+      "ExportManualTranslationsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Org scope for the export. `ORG` (default) targets the calling\nuser's current org. `CLUSTER` targets the All-Org context.",
+            "default": "ORG",
+            "type": "string",
+            "enum": [
+              "ORG",
+              "CLUSTER"
+            ]
+          }
+        }
       },
       "ConvertWorksheetToModelRequest": {
         "type": "object",

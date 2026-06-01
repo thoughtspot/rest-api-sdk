@@ -5701,6 +5701,25 @@ _DeleteConnectionRequest.attributeTypeMap = [
 ];
 var DeleteConnectionRequest = _DeleteConnectionRequest;
 
+// models/DeleteManualTranslationsRequest.ts
+var _DeleteManualTranslationsRequest = class _DeleteManualTranslationsRequest {
+  static getAttributeTypeMap() {
+    return _DeleteManualTranslationsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DeleteManualTranslationsRequest.discriminator = void 0;
+_DeleteManualTranslationsRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "DeleteManualTranslationsRequestScopeEnum",
+    "format": ""
+  }
+];
+var DeleteManualTranslationsRequest = _DeleteManualTranslationsRequest;
+
 // models/DeleteMetadataRequest.ts
 var _DeleteMetadataRequest = class _DeleteMetadataRequest {
   static getAttributeTypeMap() {
@@ -6573,6 +6592,25 @@ _ExportLiveboardReportRequestPngOptions.attributeTypeMap = [
   }
 ];
 var ExportLiveboardReportRequestPngOptions = _ExportLiveboardReportRequestPngOptions;
+
+// models/ExportManualTranslationsRequest.ts
+var _ExportManualTranslationsRequest = class _ExportManualTranslationsRequest {
+  static getAttributeTypeMap() {
+    return _ExportManualTranslationsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExportManualTranslationsRequest.discriminator = void 0;
+_ExportManualTranslationsRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "ExportManualTranslationsRequestScopeEnum",
+    "format": ""
+  }
+];
+var ExportManualTranslationsRequest = _ExportManualTranslationsRequest;
 
 // models/ExportMetadataTMLBatchedRequest.ts
 var _ExportMetadataTMLBatchedRequest = class _ExportMetadataTMLBatchedRequest {
@@ -20052,6 +20090,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum",
   "CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum",
   "CustomActionMetadataTypeInputTypeEnum",
+  "DeleteManualTranslationsRequestScopeEnum",
   "DeleteMetadataTypeInputTypeEnum",
   "DeleteStyleFontsRequestScopeEnum",
   "DeployCommitRequestDeployTypeEnum",
@@ -20070,6 +20109,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ExportLiveboardReportRequestFileFormatEnum",
   "ExportLiveboardReportRequestPdfOptionsPageSizeEnum",
   "ExportLiveboardReportRequestPdfOptionsPageOrientationEnum",
+  "ExportManualTranslationsRequestScopeEnum",
   "ExportMetadataTMLBatchedRequestMetadataTypeEnum",
   "ExportMetadataTMLBatchedRequestEdocFormatEnum",
   "ExportMetadataTMLRequestEdocFormatEnum",
@@ -20442,6 +20482,7 @@ var typeMap = {
   "DeleteConfigRequest": DeleteConfigRequest,
   "DeleteConnectionConfigurationRequest": DeleteConnectionConfigurationRequest,
   "DeleteConnectionRequest": DeleteConnectionRequest,
+  "DeleteManualTranslationsRequest": DeleteManualTranslationsRequest,
   "DeleteMetadataRequest": DeleteMetadataRequest,
   "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
   "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
@@ -20469,6 +20510,7 @@ var typeMap = {
   "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
   "ExportLiveboardReportRequestPdfOptions": ExportLiveboardReportRequestPdfOptions,
   "ExportLiveboardReportRequestPngOptions": ExportLiveboardReportRequestPngOptions,
+  "ExportManualTranslationsRequest": ExportManualTranslationsRequest,
   "ExportMetadataTMLBatchedRequest": ExportMetadataTMLBatchedRequest,
   "ExportMetadataTMLRequest": ExportMetadataTMLRequest,
   "ExportMetadataTMLRequestExportOptions": ExportMetadataTMLRequestExportOptions,
@@ -50541,6 +50583,7 @@ export {
   DeleteConfigRequest,
   DeleteConnectionConfigurationRequest,
   DeleteConnectionRequest,
+  DeleteManualTranslationsRequest,
   DeleteMetadataRequest,
   DeleteMetadataTypeInput,
   DeleteOrgEmailCustomizationRequest,
@@ -50569,6 +50612,7 @@ export {
   ExportLiveboardReportRequest,
   ExportLiveboardReportRequestPdfOptions,
   ExportLiveboardReportRequestPngOptions,
+  ExportManualTranslationsRequest,
   ExportMetadataTMLBatchedRequest,
   ExportMetadataTMLRequest,
   ExportMetadataTMLRequestExportOptions,

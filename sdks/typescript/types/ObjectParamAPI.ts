@@ -153,6 +153,7 @@ import { DeleteCollectionRequest } from '../models/DeleteCollectionRequest';
 import { DeleteConfigRequest } from '../models/DeleteConfigRequest';
 import { DeleteConnectionConfigurationRequest } from '../models/DeleteConnectionConfigurationRequest';
 import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
+import { DeleteManualTranslationsRequest } from '../models/DeleteManualTranslationsRequest';
 import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput } from '../models/DeleteMetadataTypeInput';
 import { DeleteOrgEmailCustomizationRequest } from '../models/DeleteOrgEmailCustomizationRequest';
@@ -180,6 +181,7 @@ import { ExportAnswerReportRequestRegionalSettings } from '../models/ExportAnswe
 import { ExportLiveboardReportRequest } from '../models/ExportLiveboardReportRequest';
 import { ExportLiveboardReportRequestPdfOptions } from '../models/ExportLiveboardReportRequestPdfOptions';
 import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
+import { ExportManualTranslationsRequest } from '../models/ExportManualTranslationsRequest';
 import { ExportMetadataTMLBatchedRequest } from '../models/ExportMetadataTMLBatchedRequest';
 import { ExportMetadataTMLRequest } from '../models/ExportMetadataTMLRequest';
 import { ExportMetadataTMLRequestExportOptions } from '../models/ExportMetadataTMLRequestExportOptions';

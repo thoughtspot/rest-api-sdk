@@ -21105,6 +21105,30 @@ components:
       required:
       - log_type
       type: object
+    DeleteManualTranslationsRequest:
+      properties:
+        scope:
+          default: ORG
+          description: |-
+            Org scope for the delete. `ORG` (default) targets the calling
+            user's current org. `CLUSTER` targets the All-Org context.
+          enum:
+          - ORG
+          - CLUSTER
+          type: string
+      type: object
+    ExportManualTranslationsRequest:
+      properties:
+        scope:
+          default: ORG
+          description: |-
+            Org scope for the export. `ORG` (default) targets the calling
+            user's current org. `CLUSTER` targets the All-Org context.
+          enum:
+          - ORG
+          - CLUSTER
+          type: string
+      type: object
     ConvertWorksheetToModelRequest:
       example:
         worksheet_ids:

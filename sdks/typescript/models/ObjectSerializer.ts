@@ -150,6 +150,7 @@ export * from '../models/DeleteCollectionRequest';
 export * from '../models/DeleteConfigRequest';
 export * from '../models/DeleteConnectionConfigurationRequest';
 export * from '../models/DeleteConnectionRequest';
+export * from '../models/DeleteManualTranslationsRequest';
 export * from '../models/DeleteMetadataRequest';
 export * from '../models/DeleteMetadataTypeInput';
 export * from '../models/DeleteOrgEmailCustomizationRequest';
@@ -177,6 +178,7 @@ export * from '../models/ExportAnswerReportRequestRegionalSettings';
 export * from '../models/ExportLiveboardReportRequest';
 export * from '../models/ExportLiveboardReportRequestPdfOptions';
 export * from '../models/ExportLiveboardReportRequestPngOptions';
+export * from '../models/ExportManualTranslationsRequest';
 export * from '../models/ExportMetadataTMLBatchedRequest';
 export * from '../models/ExportMetadataTMLRequest';
 export * from '../models/ExportMetadataTMLRequestExportOptions';
@@ -674,6 +676,7 @@ import { DeleteCollectionRequest } from '../models/DeleteCollectionRequest';
 import { DeleteConfigRequest } from '../models/DeleteConfigRequest';
 import { DeleteConnectionConfigurationRequest } from '../models/DeleteConnectionConfigurationRequest';
 import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
+import { DeleteManualTranslationsRequest, DeleteManualTranslationsRequestScopeEnum   } from '../models/DeleteManualTranslationsRequest';
 import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum    } from '../models/DeleteMetadataTypeInput';
 import { DeleteOrgEmailCustomizationRequest } from '../models/DeleteOrgEmailCustomizationRequest';
@@ -701,6 +704,7 @@ import { ExportAnswerReportRequestRegionalSettings, ExportAnswerReportRequestReg
 import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
 import { ExportLiveboardReportRequestPdfOptions, ExportLiveboardReportRequestPdfOptionsPageSizeEnum       , ExportLiveboardReportRequestPdfOptionsPageOrientationEnum     } from '../models/ExportLiveboardReportRequestPdfOptions';
 import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
+import { ExportManualTranslationsRequest, ExportManualTranslationsRequestScopeEnum   } from '../models/ExportManualTranslationsRequest';
 import { ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestMetadataTypeEnum    , ExportMetadataTMLBatchedRequestEdocFormatEnum     } from '../models/ExportMetadataTMLBatchedRequest';
 import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , ExportMetadataTMLRequestExportSchemaVersionEnum       } from '../models/ExportMetadataTMLRequest';
 import { ExportMetadataTMLRequestExportOptions } from '../models/ExportMetadataTMLRequestExportOptions';
@@ -1126,6 +1130,7 @@ let enumsMap: Set<string> = new Set<string>([
     "CreateWebhookConfigurationRequestSignatureVerificationAlgorithmEnum",
     "CreateWebhookConfigurationRequestStorageDestinationStorageTypeEnum",
     "CustomActionMetadataTypeInputTypeEnum",
+    "DeleteManualTranslationsRequestScopeEnum",
     "DeleteMetadataTypeInputTypeEnum",
     "DeleteStyleFontsRequestScopeEnum",
     "DeployCommitRequestDeployTypeEnum",
@@ -1144,6 +1149,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ExportLiveboardReportRequestFileFormatEnum",
     "ExportLiveboardReportRequestPdfOptionsPageSizeEnum",
     "ExportLiveboardReportRequestPdfOptionsPageOrientationEnum",
+    "ExportManualTranslationsRequestScopeEnum",
     "ExportMetadataTMLBatchedRequestMetadataTypeEnum",
     "ExportMetadataTMLBatchedRequestEdocFormatEnum",
     "ExportMetadataTMLRequestEdocFormatEnum",
@@ -1517,6 +1523,7 @@ let typeMap: {[index: string]: any} = {
     "DeleteConfigRequest": DeleteConfigRequest,
     "DeleteConnectionConfigurationRequest": DeleteConnectionConfigurationRequest,
     "DeleteConnectionRequest": DeleteConnectionRequest,
+    "DeleteManualTranslationsRequest": DeleteManualTranslationsRequest,
     "DeleteMetadataRequest": DeleteMetadataRequest,
     "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
     "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
@@ -1544,6 +1551,7 @@ let typeMap: {[index: string]: any} = {
     "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
     "ExportLiveboardReportRequestPdfOptions": ExportLiveboardReportRequestPdfOptions,
     "ExportLiveboardReportRequestPngOptions": ExportLiveboardReportRequestPngOptions,
+    "ExportManualTranslationsRequest": ExportManualTranslationsRequest,
     "ExportMetadataTMLBatchedRequest": ExportMetadataTMLBatchedRequest,
     "ExportMetadataTMLRequest": ExportMetadataTMLRequest,
     "ExportMetadataTMLRequestExportOptions": ExportMetadataTMLRequestExportOptions,
