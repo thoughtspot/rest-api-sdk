@@ -47,5 +47,5 @@ export class TagMetadataTypeInput {
 }
 
 
-export type TagMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" ;
+export type TagMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "COLLECTION" ;
 

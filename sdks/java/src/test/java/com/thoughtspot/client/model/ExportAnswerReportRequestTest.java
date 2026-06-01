@@ -63,4 +63,22 @@ public class ExportAnswerReportRequestTest {
     public void regionalSettingsTest() {
         // TODO: test regionalSettings
     }
+
+    /** Test the property 'pngOptions' */
+    @Test
+    public void pngOptionsTest() {
+        // TODO: test pngOptions
+    }
+
+    /** Test the property 'personalisedViewIdentifier' */
+    @Test
+    public void personalisedViewIdentifierTest() {
+        // TODO: test personalisedViewIdentifier
+    }
+
+    /** Test the property 'type' */
+    @Test
+    public void typeTest() {
+        // TODO: test type
+    }
 }

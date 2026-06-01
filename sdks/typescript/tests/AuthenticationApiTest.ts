@@ -22,6 +22,38 @@ const instance = new PromiseAuthenticationApi(config);
 describe('AuthenticationApi', function() {
 
 
+      describe('configureAuthSettings', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "configureAuthSettings"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.configureAuthSettings(
+                    // configureAuthSettingsRequest ConfigureAuthSettingsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.configureAuthSettings(
+                    // configureAuthSettingsRequest ConfigureAuthSettingsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('getCurrentUserInfo', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -257,6 +289,38 @@ describe('AuthenticationApi', function() {
                 await expect(
                   instance.revokeToken(
                     // revokeTokenRequest RevokeTokenRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('searchAuthSettings', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchAuthSettings"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchAuthSettings(
+                    // searchAuthSettingsRequest SearchAuthSettingsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchAuthSettings(
+                    // searchAuthSettingsRequest SearchAuthSettingsRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

@@ -17,11 +17,13 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /** SharePermissionsInput */
 @javax.annotation.Generated(
@@ -95,6 +97,66 @@ public class SharePermissionsInput implements Serializable {
     @javax.annotation.Nonnull
     private ShareModeEnum shareMode;
 
+    /**
+     * Content share mode for collections. Controls access to objects within the collection. Only
+     * applicable when sharing COLLECTION metadata type.
+     */
+    @JsonAdapter(ContentShareModeEnum.Adapter.class)
+    public enum ContentShareModeEnum {
+        READ_ONLY("READ_ONLY"),
+
+        MODIFY("MODIFY");
+
+        private String value;
+
+        ContentShareModeEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static ContentShareModeEnum fromValue(String value) {
+            for (ContentShareModeEnum b : ContentShareModeEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            return null;
+        }
+
+        public static class Adapter extends TypeAdapter<ContentShareModeEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final ContentShareModeEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public ContentShareModeEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return ContentShareModeEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            ContentShareModeEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_CONTENT_SHARE_MODE = "content_share_mode";
+
+    @SerializedName(SERIALIZED_NAME_CONTENT_SHARE_MODE)
+    @javax.annotation.Nullable
+    private ContentShareModeEnum contentShareMode;
+
     public SharePermissionsInput() {}
 
     public SharePermissionsInput principal(@javax.annotation.Nonnull PrincipalsInput principal) {
@@ -133,6 +195,28 @@ public class SharePermissionsInput implements Serializable {
 
     public void setShareMode(@javax.annotation.Nonnull ShareModeEnum shareMode) {
         this.shareMode = shareMode;
+    }
+
+    public SharePermissionsInput contentShareMode(
+            @javax.annotation.Nullable ContentShareModeEnum contentShareMode) {
+        this.contentShareMode = contentShareMode;
+        return this;
+    }
+
+    /**
+     * Content share mode for collections. Controls access to objects within the collection. Only
+     * applicable when sharing COLLECTION metadata type.
+     *
+     * @return contentShareMode
+     */
+    @javax.annotation.Nullable
+    public ContentShareModeEnum getContentShareMode() {
+        return contentShareMode;
+    }
+
+    public void setContentShareMode(
+            @javax.annotation.Nullable ContentShareModeEnum contentShareMode) {
+        this.contentShareMode = contentShareMode;
     }
 
     /**
@@ -190,13 +274,30 @@ public class SharePermissionsInput implements Serializable {
         SharePermissionsInput sharePermissionsInput = (SharePermissionsInput) o;
         return Objects.equals(this.principal, sharePermissionsInput.principal)
                 && Objects.equals(this.shareMode, sharePermissionsInput.shareMode)
+                && Objects.equals(this.contentShareMode, sharePermissionsInput.contentShareMode)
                 && Objects.equals(
                         this.additionalProperties, sharePermissionsInput.additionalProperties);
     }
 
+    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+        return a == b
+                || (a != null
+                        && b != null
+                        && a.isPresent()
+                        && b.isPresent()
+                        && Objects.deepEquals(a.get(), b.get()));
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(principal, shareMode, additionalProperties);
+        return Objects.hash(principal, shareMode, contentShareMode, additionalProperties);
+    }
+
+    private static <T> int hashCodeNullable(JsonNullable<T> a) {
+        if (a == null) {
+            return 1;
+        }
+        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override
@@ -205,6 +306,7 @@ public class SharePermissionsInput implements Serializable {
         sb.append("class SharePermissionsInput {\n");
         sb.append("    principal: ").append(toIndentedString(principal)).append("\n");
         sb.append("    shareMode: ").append(toIndentedString(shareMode)).append("\n");
+        sb.append("    contentShareMode: ").append(toIndentedString(contentShareMode)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -231,6 +333,7 @@ public class SharePermissionsInput implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("principal");
         openapiFields.add("share_mode");
+        openapiFields.add("content_share_mode");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -277,6 +380,20 @@ public class SharePermissionsInput implements Serializable {
         }
         // validate the required field `share_mode`
         ShareModeEnum.validateJsonElement(jsonObj.get("share_mode"));
+        if ((jsonObj.get("content_share_mode") != null
+                        && !jsonObj.get("content_share_mode").isJsonNull())
+                && !jsonObj.get("content_share_mode").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `content_share_mode` to be a primitive type in the"
+                                    + " JSON string but got `%s`",
+                            jsonObj.get("content_share_mode").toString()));
+        }
+        // validate the optional field `content_share_mode`
+        if (jsonObj.get("content_share_mode") != null
+                && !jsonObj.get("content_share_mode").isJsonNull()) {
+            ContentShareModeEnum.validateJsonElement(jsonObj.get("content_share_mode"));
+        }
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

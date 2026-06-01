@@ -120,5 +120,5 @@ export class PdfOptions {
 }
 
 
-export type PdfOptionsPageSizeEnum = "A4" ;
+export type PdfOptionsPageSizeEnum = "A4" | "TAB_BASED" ;
 

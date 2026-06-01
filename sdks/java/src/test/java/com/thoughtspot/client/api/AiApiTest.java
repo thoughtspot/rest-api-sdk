@@ -525,4 +525,45 @@ public class AiApiTest {
         ResponseMessage response = api.singleAnswer(singleAnswerRequest);
         // TODO: test validations
     }
+
+    /**
+     * Stops an in-progress agent conversation response. Version: 26.6.0.cl or later
+     * &lt;span&gt;Version: 26.6.0.cl or later Stops an in-progress agent response for the specified
+     * conversation. Use this endpoint to cancel a response that is actively being generated — for
+     * example, when the user navigates away, reformulates their question, or no longer needs the
+     * current result. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified
+     * conversation. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation
+     * whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60; A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. If there is no
+     * active response in progress at the time of the call, the request is still treated as
+     * successful. After stopping a response, the conversation session remains active. You can
+     * continue sending messages using &#x60;sendAgentConversationMessage&#x60; or
+     * &#x60;sendAgentConversationMessageStreaming&#x60;. #### Example request
+     * &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response
+     * &#x60;&#x60;&#x60; #### Typical usage scenario This endpoint is useful when integrating
+     * Spotter into a chat UI where users can cancel a long-running query. For example: 1. User
+     * sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a
+     * \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls
+     * &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The
+     * stream is terminated and the user can ask a new question. #### Error responses | Code |
+     * Description | |------|-------------| | 401 | Unauthorized — authentication token is missing,
+     * expired, or invalid. | | 403 | Forbidden — the authenticated user does not have
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | &gt;
+     * ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not
+     * return an error. &gt; - The conversation context is preserved after stopping — previous
+     * messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later.
+     * &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter
+     * on your cluster. &gt; - This feature is available only for **Spotter 3**
+     * (&#x60;SPOTTER3&#x60;) version.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void stopConversationTest() throws ApiException {
+        String conversationIdentifier = null;
+        api.stopConversation(conversationIdentifier);
+        // TODO: test validations
+    }
 }

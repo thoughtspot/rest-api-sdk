@@ -4,6 +4,7 @@ All URIs are relative to *CLUSTER_URL*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**configureAuthSettings**](AuthenticationApi.md#configureAuthSettings) | **POST** /api/rest/2.0/auth/configure | 
 [**getCurrentUserInfo**](AuthenticationApi.md#getCurrentUserInfo) | **GET** /api/rest/2.0/auth/session/user | 
 [**getCurrentUserToken**](AuthenticationApi.md#getCurrentUserToken) | **GET** /api/rest/2.0/auth/session/token | 
 [**getCustomAccessToken**](AuthenticationApi.md#getCustomAccessToken) | **POST** /api/rest/2.0/auth/token/custom | 
@@ -12,8 +13,78 @@ Method | HTTP request | Description
 [**login**](AuthenticationApi.md#login) | **POST** /api/rest/2.0/auth/session/login | 
 [**logout**](AuthenticationApi.md#logout) | **POST** /api/rest/2.0/auth/session/logout | 
 [**revokeToken**](AuthenticationApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke | 
+[**searchAuthSettings**](AuthenticationApi.md#searchAuthSettings) | **POST** /api/rest/2.0/auth/search | 
 [**validateToken**](AuthenticationApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate | 
 
+
+# **configureAuthSettings**
+> void configureAuthSettings(configureAuthSettingsRequest)
+
+  Version: 26.6.0.cl or later   Enables or disables authentication at cluster or org level for the specified auth type. Currently supports `TRUSTED_AUTH`.  #### Required privileges  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.  #### Usage guidelines  Use `cluster_preferences` to enable or disable authentication at the cluster level. Cluster-level settings can only be configured from the Primary Org. - `ENABLED` — Generates a new access token if one does not exist. An existing token is preserved. - `DISABLED` — Revokes the existing cluster-level access token.  Use `org_preferences` to enable or disable authentication for one or more Orgs. Each entry must include an `org_identifier` (unique ID or name) and an `auth_status`. Org-level configuration requires the per-Org authentication feature to be enabled on your instance. - `ENABLED` — Generates a new org-level access token if one does not exist. - `DISABLED` — Revokes the existing org-level access token for that Org.  Both `cluster_preferences` and `org_preferences` are optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted, the API returns `204 No Content` without making any changes.  **Note**: Cluster-level and org-level settings are independent of each other. Enabling or disabling one does not affect the other.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, AuthenticationApi, ConfigureAuthSettingsRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new AuthenticationApi(configuration);
+
+apiInstance.configureAuthSettings(
+  // ConfigureAuthSettingsRequest
+  {
+    auth_type: "TRUSTED_AUTH",
+    cluster_preferences: null,
+    org_preferences: [
+      {
+        org_identifier: "org_identifier_example",
+        auth_status: "ENABLED",
+      },
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configureAuthSettingsRequest** | **ConfigureAuthSettingsRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Trusted authentication settings configured successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **getCurrentUserInfo**
 > User getCurrentUserInfo()
@@ -551,6 +622,69 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Token successfully revoked. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **searchAuthSettings**
+> SearchAuthSettingsResponse searchAuthSettings(searchAuthSettingsRequest)
+
+  Version: 26.6.0.cl or later   Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports `TRUSTED_AUTH`.  #### Required privileges  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.  #### Usage guidelines  Use `scope` to control which level of settings are returned: - `CLUSTER` — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org. - `ORG` — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance. - If `scope` is omitted, both cluster and org-level settings are returned based on the caller\'s org context and feature availability.  The `access_tokens` array in `cluster_preferences` or `org_preferences` is omitted when no token is configured at that level.  **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, AuthenticationApi, SearchAuthSettingsRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new AuthenticationApi(configuration);
+
+apiInstance.searchAuthSettings(
+  // SearchAuthSettingsRequest
+  {
+    auth_type: "TRUSTED_AUTH",
+    scope: "CLUSTER",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchAuthSettingsRequest** | **SearchAuthSettingsRequest**|  |
+
+
+### Return type
+
+**SearchAuthSettingsResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Authentication settings retrieved successfully. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

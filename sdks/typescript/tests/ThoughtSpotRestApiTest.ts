@@ -182,6 +182,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('configureAuthSettings', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "configureAuthSettings"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.configureAuthSettings(
+                    // configureAuthSettingsRequest ConfigureAuthSettingsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.configureAuthSettings(
+                    // configureAuthSettingsRequest ConfigureAuthSettingsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('configureCommunicationChannelPreferences', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -3198,6 +3230,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('searchAuthSettings', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchAuthSettings"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchAuthSettings(
+                    // searchAuthSettingsRequest SearchAuthSettingsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchAuthSettings(
+                    // searchAuthSettingsRequest SearchAuthSettingsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('searchCalendars', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -4110,6 +4174,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('stopConversation', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "stopConversation"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.stopConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.stopConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('syncMetadata', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -4437,6 +4533,42 @@ describe('ThoughtSpotRestApi', function() {
                     // configurationIdentifier configuration_identifier
                     test.Path_Variables.configuration_identifier     , 
                     // updateConnectionConfigurationRequest UpdateConnectionConfigurationRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('updateConnectionStatus', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateConnectionStatus"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateConnectionStatus(
+                    // connectionIdentifier connection_identifier
+                    test.Path_Variables.connection_identifier     , 
+                    // updateConnectionStatusRequest UpdateConnectionStatusRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateConnectionStatus(
+                    // connectionIdentifier connection_identifier
+                    test.Path_Variables.connection_identifier     , 
+                    // updateConnectionStatusRequest UpdateConnectionStatusRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

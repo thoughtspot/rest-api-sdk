@@ -453,4 +453,36 @@ describe('AIApi', function() {
           });
         });     
       });
+
+      describe('stopConversation', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "stopConversation"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.stopConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.stopConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
 });

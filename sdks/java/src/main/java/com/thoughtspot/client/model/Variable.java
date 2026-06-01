@@ -121,6 +121,12 @@ public class Variable implements Serializable {
     @javax.annotation.Nullable
     private List<VariableValue> values;
 
+    public static final String SERIALIZED_NAME_ORG = "org";
+
+    @SerializedName(SERIALIZED_NAME_ORG)
+    @javax.annotation.Nullable
+    private VariableOrgInfo org;
+
     public Variable() {}
 
     public Variable id(@javax.annotation.Nonnull String id) {
@@ -226,6 +232,25 @@ public class Variable implements Serializable {
         this.values = values;
     }
 
+    public Variable org(@javax.annotation.Nullable VariableOrgInfo org) {
+        this.org = org;
+        return this;
+    }
+
+    /**
+     * Get org
+     *
+     * @return org
+     */
+    @javax.annotation.Nullable
+    public VariableOrgInfo getOrg() {
+        return org;
+    }
+
+    public void setOrg(@javax.annotation.Nullable VariableOrgInfo org) {
+        this.org = org;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -284,6 +309,7 @@ public class Variable implements Serializable {
                 && Objects.equals(this.variableType, variable.variableType)
                 && Objects.equals(this.sensitive, variable.sensitive)
                 && Objects.equals(this.values, variable.values)
+                && Objects.equals(this.org, variable.org)
                 && Objects.equals(this.additionalProperties, variable.additionalProperties);
     }
 
@@ -298,7 +324,7 @@ public class Variable implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, variableType, sensitive, values, additionalProperties);
+        return Objects.hash(id, name, variableType, sensitive, values, org, additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -317,6 +343,7 @@ public class Variable implements Serializable {
         sb.append("    variableType: ").append(toIndentedString(variableType)).append("\n");
         sb.append("    sensitive: ").append(toIndentedString(sensitive)).append("\n");
         sb.append("    values: ").append(toIndentedString(values)).append("\n");
+        sb.append("    org: ").append(toIndentedString(org)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -346,6 +373,7 @@ public class Variable implements Serializable {
         openapiFields.add("variable_type");
         openapiFields.add("sensitive");
         openapiFields.add("values");
+        openapiFields.add("org");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -425,6 +453,10 @@ public class Variable implements Serializable {
                 }
                 ;
             }
+        }
+        // validate the optional field `org`
+        if (jsonObj.get("org") != null && !jsonObj.get("org").isJsonNull()) {
+            VariableOrgInfo.validateJsonElement(jsonObj.get("org"));
         }
     }
 

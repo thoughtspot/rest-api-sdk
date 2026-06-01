@@ -120,5 +120,5 @@ export class SchedulesPdfOptionsInput {
 }
 
 
-export type SchedulesPdfOptionsInputPageSizeEnum = "A4" ;
+export type SchedulesPdfOptionsInputPageSizeEnum = "A4" | "TAB_BASED" ;
 

@@ -563,6 +563,7 @@ apiInstance.shareMetadata(
           type: "USER",
         },
         share_mode: "READ_ONLY",
+        content_share_mode: "READ_ONLY",
       },
     ],
     visualization_identifiers: [
