@@ -3465,4 +3465,253 @@ public class AiApi {
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+    /**
+     * Build call for stopConversation
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call stopConversationCall(
+            String conversationIdentifier, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call stopConversationValidateBeforeCall(
+            String conversationIdentifier, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " stopConversation(Async)");
+        }
+
+        return stopConversationCall(conversationIdentifier, _callback);
+    }
+
+    /**
+     * Stops an in-progress agent conversation response. Version: 26.6.0.cl or later
+     * &lt;span&gt;Version: 26.6.0.cl or later Stops an in-progress agent response for the specified
+     * conversation. Use this endpoint to cancel a response that is actively being generated — for
+     * example, when the user navigates away, reformulates their question, or no longer needs the
+     * current result. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified
+     * conversation. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation
+     * whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60; A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. If there is no
+     * active response in progress at the time of the call, the request is still treated as
+     * successful. After stopping a response, the conversation session remains active. You can
+     * continue sending messages using &#x60;sendAgentConversationMessage&#x60; or
+     * &#x60;sendAgentConversationMessageStreaming&#x60;. #### Example request
+     * &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response
+     * &#x60;&#x60;&#x60; #### Typical usage scenario This endpoint is useful when integrating
+     * Spotter into a chat UI where users can cancel a long-running query. For example: 1. User
+     * sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a
+     * \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls
+     * &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The
+     * stream is terminated and the user can ask a new question. #### Error responses | Code |
+     * Description | |------|-------------| | 401 | Unauthorized — authentication token is missing,
+     * expired, or invalid. | | 403 | Forbidden — the authenticated user does not have
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | &gt;
+     * ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not
+     * return an error. &gt; - The conversation context is preserved after stopping — previous
+     * messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later.
+     * &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter
+     * on your cluster. &gt; - This feature is available only for **Spotter 3**
+     * (&#x60;SPOTTER3&#x60;) version.
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void stopConversation(String conversationIdentifier) throws ApiException {
+        stopConversationWithHttpInfo(conversationIdentifier);
+    }
+
+    /**
+     * Stops an in-progress agent conversation response. Version: 26.6.0.cl or later
+     * &lt;span&gt;Version: 26.6.0.cl or later Stops an in-progress agent response for the specified
+     * conversation. Use this endpoint to cancel a response that is actively being generated — for
+     * example, when the user navigates away, reformulates their question, or no longer needs the
+     * current result. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified
+     * conversation. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation
+     * whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60; A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. If there is no
+     * active response in progress at the time of the call, the request is still treated as
+     * successful. After stopping a response, the conversation session remains active. You can
+     * continue sending messages using &#x60;sendAgentConversationMessage&#x60; or
+     * &#x60;sendAgentConversationMessageStreaming&#x60;. #### Example request
+     * &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response
+     * &#x60;&#x60;&#x60; #### Typical usage scenario This endpoint is useful when integrating
+     * Spotter into a chat UI where users can cancel a long-running query. For example: 1. User
+     * sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a
+     * \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls
+     * &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The
+     * stream is terminated and the user can ask a new question. #### Error responses | Code |
+     * Description | |------|-------------| | 401 | Unauthorized — authentication token is missing,
+     * expired, or invalid. | | 403 | Forbidden — the authenticated user does not have
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | &gt;
+     * ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not
+     * return an error. &gt; - The conversation context is preserved after stopping — previous
+     * messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later.
+     * &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter
+     * on your cluster. &gt; - This feature is available only for **Spotter 3**
+     * (&#x60;SPOTTER3&#x60;) version.
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> stopConversationWithHttpInfo(String conversationIdentifier)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                stopConversationValidateBeforeCall(conversationIdentifier, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Stops an in-progress agent conversation response. Version: 26.6.0.cl or
+     * later &lt;span&gt;Version: 26.6.0.cl or later Stops an in-progress agent response for the
+     * specified conversation. Use this endpoint to cancel a response that is actively being
+     * generated — for example, when the user navigates away, reformulates their question, or no
+     * longer needs the current result. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to
+     * the specified conversation. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation
+     * whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60; A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. If there is no
+     * active response in progress at the time of the call, the request is still treated as
+     * successful. After stopping a response, the conversation session remains active. You can
+     * continue sending messages using &#x60;sendAgentConversationMessage&#x60; or
+     * &#x60;sendAgentConversationMessageStreaming&#x60;. #### Example request
+     * &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response
+     * &#x60;&#x60;&#x60; #### Typical usage scenario This endpoint is useful when integrating
+     * Spotter into a chat UI where users can cancel a long-running query. For example: 1. User
+     * sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a
+     * \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls
+     * &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The
+     * stream is terminated and the user can ask a new question. #### Error responses | Code |
+     * Description | |------|-------------| | 401 | Unauthorized — authentication token is missing,
+     * expired, or invalid. | | 403 | Forbidden — the authenticated user does not have
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | &gt;
+     * ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not
+     * return an error. &gt; - The conversation context is preserved after stopping — previous
+     * messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later.
+     * &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter
+     * on your cluster. &gt; - This feature is available only for **Spotter 3**
+     * (&#x60;SPOTTER3&#x60;) version.
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call stopConversationAsync(
+            String conversationIdentifier, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall =
+                stopConversationValidateBeforeCall(conversationIdentifier, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
 }

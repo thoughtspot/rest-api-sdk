@@ -120,5 +120,5 @@ export class UpdateScheduleRequestPdfOptions {
 }
 
 
-export type UpdateScheduleRequestPdfOptionsPageSizeEnum = "A4" ;
+export type UpdateScheduleRequestPdfOptionsPageSizeEnum = "A4" | "TAB_BASED" ;
 

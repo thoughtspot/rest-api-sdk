@@ -133,6 +133,76 @@ public class ExportAnswerReportRequest implements Serializable {
     @javax.annotation.Nullable
     private RegionalSettingsInput regionalSettings;
 
+    public static final String SERIALIZED_NAME_PNG_OPTIONS = "png_options";
+
+    @SerializedName(SERIALIZED_NAME_PNG_OPTIONS)
+    @javax.annotation.Nullable
+    private AnswerPngOptionsInput pngOptions;
+
+    public static final String SERIALIZED_NAME_PERSONALISED_VIEW_IDENTIFIER =
+            "personalised_view_identifier";
+
+    @SerializedName(SERIALIZED_NAME_PERSONALISED_VIEW_IDENTIFIER)
+    @javax.annotation.Nullable
+    private String personalisedViewIdentifier;
+
+    /** Type of the answer being exported. Version: 26.6.0.cl or later */
+    @JsonAdapter(TypeEnum.Adapter.class)
+    public enum TypeEnum {
+        SAVED("SAVED"),
+
+        PINNED("PINNED");
+
+        private String value;
+
+        TypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static TypeEnum fromValue(String value) {
+            for (TypeEnum b : TypeEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<TypeEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final TypeEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public TypeEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return TypeEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            TypeEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_TYPE = "type";
+
+    @SerializedName(SERIALIZED_NAME_TYPE)
+    @javax.annotation.Nullable
+    private TypeEnum type = TypeEnum.SAVED;
+
     public ExportAnswerReportRequest() {}
 
     public ExportAnswerReportRequest metadataIdentifier(
@@ -296,6 +366,66 @@ public class ExportAnswerReportRequest implements Serializable {
         this.regionalSettings = regionalSettings;
     }
 
+    public ExportAnswerReportRequest pngOptions(
+            @javax.annotation.Nullable AnswerPngOptionsInput pngOptions) {
+        this.pngOptions = pngOptions;
+        return this;
+    }
+
+    /**
+     * Options for PNG export. Version: 26.6.0.cl or later
+     *
+     * @return pngOptions
+     */
+    @javax.annotation.Nullable
+    public AnswerPngOptionsInput getPngOptions() {
+        return pngOptions;
+    }
+
+    public void setPngOptions(@javax.annotation.Nullable AnswerPngOptionsInput pngOptions) {
+        this.pngOptions = pngOptions;
+    }
+
+    public ExportAnswerReportRequest personalisedViewIdentifier(
+            @javax.annotation.Nullable String personalisedViewIdentifier) {
+        this.personalisedViewIdentifier = personalisedViewIdentifier;
+        return this;
+    }
+
+    /**
+     * GUID or name of the personalised view of the Answer object. Version: 26.6.0.cl or later
+     *
+     * @return personalisedViewIdentifier
+     */
+    @javax.annotation.Nullable
+    public String getPersonalisedViewIdentifier() {
+        return personalisedViewIdentifier;
+    }
+
+    public void setPersonalisedViewIdentifier(
+            @javax.annotation.Nullable String personalisedViewIdentifier) {
+        this.personalisedViewIdentifier = personalisedViewIdentifier;
+    }
+
+    public ExportAnswerReportRequest type(@javax.annotation.Nullable TypeEnum type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * Type of the answer being exported. Version: 26.6.0.cl or later
+     *
+     * @return type
+     */
+    @javax.annotation.Nullable
+    public TypeEnum getType() {
+        return type;
+    }
+
+    public void setType(@javax.annotation.Nullable TypeEnum type) {
+        this.type = type;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -359,6 +489,11 @@ public class ExportAnswerReportRequest implements Serializable {
                 && Objects.equals(
                         this.runtimeParamOverride, exportAnswerReportRequest.runtimeParamOverride)
                 && Objects.equals(this.regionalSettings, exportAnswerReportRequest.regionalSettings)
+                && Objects.equals(this.pngOptions, exportAnswerReportRequest.pngOptions)
+                && Objects.equals(
+                        this.personalisedViewIdentifier,
+                        exportAnswerReportRequest.personalisedViewIdentifier)
+                && Objects.equals(this.type, exportAnswerReportRequest.type)
                 && Objects.equals(
                         this.additionalProperties, exportAnswerReportRequest.additionalProperties);
     }
@@ -374,6 +509,9 @@ public class ExportAnswerReportRequest implements Serializable {
                 runtimeSort,
                 runtimeParamOverride,
                 regionalSettings,
+                pngOptions,
+                personalisedViewIdentifier,
+                type,
                 additionalProperties);
     }
 
@@ -395,6 +533,11 @@ public class ExportAnswerReportRequest implements Serializable {
                 .append(toIndentedString(runtimeParamOverride))
                 .append("\n");
         sb.append("    regionalSettings: ").append(toIndentedString(regionalSettings)).append("\n");
+        sb.append("    pngOptions: ").append(toIndentedString(pngOptions)).append("\n");
+        sb.append("    personalisedViewIdentifier: ")
+                .append(toIndentedString(personalisedViewIdentifier))
+                .append("\n");
+        sb.append("    type: ").append(toIndentedString(type)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -427,6 +570,9 @@ public class ExportAnswerReportRequest implements Serializable {
         openapiFields.add("runtime_sort");
         openapiFields.add("runtime_param_override");
         openapiFields.add("regional_settings");
+        openapiFields.add("png_options");
+        openapiFields.add("personalised_view_identifier");
+        openapiFields.add("type");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -484,6 +630,31 @@ public class ExportAnswerReportRequest implements Serializable {
         if (jsonObj.get("regional_settings") != null
                 && !jsonObj.get("regional_settings").isJsonNull()) {
             RegionalSettingsInput.validateJsonElement(jsonObj.get("regional_settings"));
+        }
+        // validate the optional field `png_options`
+        if (jsonObj.get("png_options") != null && !jsonObj.get("png_options").isJsonNull()) {
+            AnswerPngOptionsInput.validateJsonElement(jsonObj.get("png_options"));
+        }
+        if ((jsonObj.get("personalised_view_identifier") != null
+                        && !jsonObj.get("personalised_view_identifier").isJsonNull())
+                && !jsonObj.get("personalised_view_identifier").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `personalised_view_identifier` to be a primitive"
+                                    + " type in the JSON string but got `%s`",
+                            jsonObj.get("personalised_view_identifier").toString()));
+        }
+        if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull())
+                && !jsonObj.get("type").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `type` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("type").toString()));
+        }
+        // validate the optional field `type`
+        if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
+            TypeEnum.validateJsonElement(jsonObj.get("type"));
         }
     }
 

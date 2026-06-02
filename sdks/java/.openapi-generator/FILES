@@ -20,10 +20,17 @@ docs/AgentConversation.md
 docs/AiApi.md
 docs/AnswerContent.md
 docs/AnswerDataResponse.md
+docs/AnswerPngOptionsInput.md
 docs/AssignChangeAuthorRequest.md
 docs/AssignTagRequest.md
 docs/AssociateMetadataInput.md
 docs/AssociateMetadataInputCreate.md
+docs/AuthClusterPreferences.md
+docs/AuthClusterPreferencesInput.md
+docs/AuthOrgInfo.md
+docs/AuthOrgPreference.md
+docs/AuthOrgPreferenceInput.md
+docs/AuthSettingsAccessToken.md
 docs/Authentication.md
 docs/AuthenticationApi.md
 docs/AuthenticationInput.md
@@ -70,6 +77,7 @@ docs/CommitResponse.md
 docs/CommiterType.md
 docs/CommunicationChannelPreferencesResponse.md
 docs/CommunicationChannelValidateResponse.md
+docs/ConfigureAuthSettingsRequest.md
 docs/ConfigureCommunicationChannelPreferencesRequest.md
 docs/ConfigureSecuritySettingsRequest.md
 docs/ConnectionConfigurationResponse.md
@@ -303,6 +311,8 @@ docs/SchemaObject.md
 docs/Scope.md
 docs/ScriptSrcUrls.md
 docs/ScriptSrcUrlsInput.md
+docs/SearchAuthSettingsRequest.md
+docs/SearchAuthSettingsResponse.md
 docs/SearchCalendarsRequest.md
 docs/SearchChannelHistoryRequest.md
 docs/SearchChannelHistoryResponse.md
@@ -382,6 +392,7 @@ docs/UpdateColumnSecurityRulesRequest.md
 docs/UpdateConfigRequest.md
 docs/UpdateConnectionConfigurationRequest.md
 docs/UpdateConnectionRequest.md
+docs/UpdateConnectionStatusRequest.md
 docs/UpdateConnectionV2Request.md
 docs/UpdateCustomActionRequest.md
 docs/UpdateEmailCustomizationRequest.md
@@ -413,6 +424,7 @@ docs/ValueScopeInput.md
 docs/Variable.md
 docs/VariableApi.md
 docs/VariableDetailInput.md
+docs/VariableOrgInfo.md
 docs/VariablePutAssignmentInput.md
 docs/VariableUpdateAssignmentInput.md
 docs/VariableUpdateScopeInput.md
@@ -513,10 +525,17 @@ src/main/java/com/thoughtspot/client/model/ActivateUserRequest.java
 src/main/java/com/thoughtspot/client/model/AgentConversation.java
 src/main/java/com/thoughtspot/client/model/AnswerContent.java
 src/main/java/com/thoughtspot/client/model/AnswerDataResponse.java
+src/main/java/com/thoughtspot/client/model/AnswerPngOptionsInput.java
 src/main/java/com/thoughtspot/client/model/AssignChangeAuthorRequest.java
 src/main/java/com/thoughtspot/client/model/AssignTagRequest.java
 src/main/java/com/thoughtspot/client/model/AssociateMetadataInput.java
 src/main/java/com/thoughtspot/client/model/AssociateMetadataInputCreate.java
+src/main/java/com/thoughtspot/client/model/AuthClusterPreferences.java
+src/main/java/com/thoughtspot/client/model/AuthClusterPreferencesInput.java
+src/main/java/com/thoughtspot/client/model/AuthOrgInfo.java
+src/main/java/com/thoughtspot/client/model/AuthOrgPreference.java
+src/main/java/com/thoughtspot/client/model/AuthOrgPreferenceInput.java
+src/main/java/com/thoughtspot/client/model/AuthSettingsAccessToken.java
 src/main/java/com/thoughtspot/client/model/Authentication.java
 src/main/java/com/thoughtspot/client/model/AuthenticationInput.java
 src/main/java/com/thoughtspot/client/model/Author.java
@@ -561,6 +580,7 @@ src/main/java/com/thoughtspot/client/model/CommitResponse.java
 src/main/java/com/thoughtspot/client/model/CommiterType.java
 src/main/java/com/thoughtspot/client/model/CommunicationChannelPreferencesResponse.java
 src/main/java/com/thoughtspot/client/model/CommunicationChannelValidateResponse.java
+src/main/java/com/thoughtspot/client/model/ConfigureAuthSettingsRequest.java
 src/main/java/com/thoughtspot/client/model/ConfigureCommunicationChannelPreferencesRequest.java
 src/main/java/com/thoughtspot/client/model/ConfigureSecuritySettingsRequest.java
 src/main/java/com/thoughtspot/client/model/ConnectionConfigurationResponse.java
@@ -779,6 +799,8 @@ src/main/java/com/thoughtspot/client/model/SchemaObject.java
 src/main/java/com/thoughtspot/client/model/Scope.java
 src/main/java/com/thoughtspot/client/model/ScriptSrcUrls.java
 src/main/java/com/thoughtspot/client/model/ScriptSrcUrlsInput.java
+src/main/java/com/thoughtspot/client/model/SearchAuthSettingsRequest.java
+src/main/java/com/thoughtspot/client/model/SearchAuthSettingsResponse.java
 src/main/java/com/thoughtspot/client/model/SearchCalendarsRequest.java
 src/main/java/com/thoughtspot/client/model/SearchChannelHistoryRequest.java
 src/main/java/com/thoughtspot/client/model/SearchChannelHistoryResponse.java
@@ -854,6 +876,7 @@ src/main/java/com/thoughtspot/client/model/UpdateColumnSecurityRulesRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateConfigRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateConnectionConfigurationRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateConnectionRequest.java
+src/main/java/com/thoughtspot/client/model/UpdateConnectionStatusRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateConnectionV2Request.java
 src/main/java/com/thoughtspot/client/model/UpdateCustomActionRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateEmailCustomizationRequest.java
@@ -883,6 +906,7 @@ src/main/java/com/thoughtspot/client/model/ValidateTokenRequest.java
 src/main/java/com/thoughtspot/client/model/ValueScopeInput.java
 src/main/java/com/thoughtspot/client/model/Variable.java
 src/main/java/com/thoughtspot/client/model/VariableDetailInput.java
+src/main/java/com/thoughtspot/client/model/VariableOrgInfo.java
 src/main/java/com/thoughtspot/client/model/VariablePutAssignmentInput.java
 src/main/java/com/thoughtspot/client/model/VariableUpdateAssignmentInput.java
 src/main/java/com/thoughtspot/client/model/VariableUpdateScopeInput.java
@@ -948,10 +972,17 @@ src/test/java/com/thoughtspot/client/model/ActivateUserRequestTest.java
 src/test/java/com/thoughtspot/client/model/AgentConversationTest.java
 src/test/java/com/thoughtspot/client/model/AnswerContentTest.java
 src/test/java/com/thoughtspot/client/model/AnswerDataResponseTest.java
+src/test/java/com/thoughtspot/client/model/AnswerPngOptionsInputTest.java
 src/test/java/com/thoughtspot/client/model/AssignChangeAuthorRequestTest.java
 src/test/java/com/thoughtspot/client/model/AssignTagRequestTest.java
 src/test/java/com/thoughtspot/client/model/AssociateMetadataInputCreateTest.java
 src/test/java/com/thoughtspot/client/model/AssociateMetadataInputTest.java
+src/test/java/com/thoughtspot/client/model/AuthClusterPreferencesInputTest.java
+src/test/java/com/thoughtspot/client/model/AuthClusterPreferencesTest.java
+src/test/java/com/thoughtspot/client/model/AuthOrgInfoTest.java
+src/test/java/com/thoughtspot/client/model/AuthOrgPreferenceInputTest.java
+src/test/java/com/thoughtspot/client/model/AuthOrgPreferenceTest.java
+src/test/java/com/thoughtspot/client/model/AuthSettingsAccessTokenTest.java
 src/test/java/com/thoughtspot/client/model/AuthenticationInputTest.java
 src/test/java/com/thoughtspot/client/model/AuthenticationTest.java
 src/test/java/com/thoughtspot/client/model/AuthorMetadataTypeInputTest.java
@@ -996,6 +1027,7 @@ src/test/java/com/thoughtspot/client/model/CommitResponseTest.java
 src/test/java/com/thoughtspot/client/model/CommiterTypeTest.java
 src/test/java/com/thoughtspot/client/model/CommunicationChannelPreferencesResponseTest.java
 src/test/java/com/thoughtspot/client/model/CommunicationChannelValidateResponseTest.java
+src/test/java/com/thoughtspot/client/model/ConfigureAuthSettingsRequestTest.java
 src/test/java/com/thoughtspot/client/model/ConfigureCommunicationChannelPreferencesRequestTest.java
 src/test/java/com/thoughtspot/client/model/ConfigureSecuritySettingsRequestTest.java
 src/test/java/com/thoughtspot/client/model/ConnectionConfigurationResponseTest.java
@@ -1214,6 +1246,8 @@ src/test/java/com/thoughtspot/client/model/SchemaObjectTest.java
 src/test/java/com/thoughtspot/client/model/ScopeTest.java
 src/test/java/com/thoughtspot/client/model/ScriptSrcUrlsInputTest.java
 src/test/java/com/thoughtspot/client/model/ScriptSrcUrlsTest.java
+src/test/java/com/thoughtspot/client/model/SearchAuthSettingsRequestTest.java
+src/test/java/com/thoughtspot/client/model/SearchAuthSettingsResponseTest.java
 src/test/java/com/thoughtspot/client/model/SearchCalendarsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchChannelHistoryRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchChannelHistoryResponseTest.java
@@ -1289,6 +1323,7 @@ src/test/java/com/thoughtspot/client/model/UpdateColumnSecurityRulesRequestTest.
 src/test/java/com/thoughtspot/client/model/UpdateConfigRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateConnectionConfigurationRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateConnectionRequestTest.java
+src/test/java/com/thoughtspot/client/model/UpdateConnectionStatusRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateConnectionV2RequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateCustomActionRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateEmailCustomizationRequestTest.java
@@ -1317,6 +1352,7 @@ src/test/java/com/thoughtspot/client/model/ValidateMergeRequestTest.java
 src/test/java/com/thoughtspot/client/model/ValidateTokenRequestTest.java
 src/test/java/com/thoughtspot/client/model/ValueScopeInputTest.java
 src/test/java/com/thoughtspot/client/model/VariableDetailInputTest.java
+src/test/java/com/thoughtspot/client/model/VariableOrgInfoTest.java
 src/test/java/com/thoughtspot/client/model/VariablePutAssignmentInputTest.java
 src/test/java/com/thoughtspot/client/model/VariableTest.java
 src/test/java/com/thoughtspot/client/model/VariableUpdateAssignmentInputTest.java

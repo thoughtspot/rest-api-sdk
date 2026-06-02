@@ -25,6 +25,7 @@ Options for PDF export.
 | Name | Value |
 |---- | -----|
 | A4 | &quot;A4&quot; |
+| TAB_BASED | &quot;TAB_BASED&quot; |
 
 
 ## Implemented Interfaces

@@ -22,6 +22,7 @@ import com.thoughtspot.client.model.CommitHistoryResponse;
 import com.thoughtspot.client.model.CommitResponse;
 import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
 import com.thoughtspot.client.model.CommunicationChannelValidateResponse;
+import com.thoughtspot.client.model.ConfigureAuthSettingsRequest;
 import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.ConfigureSecuritySettingsRequest;
 import com.thoughtspot.client.model.ConnectionConfigurationResponse;
@@ -125,6 +126,8 @@ import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
 import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
+import com.thoughtspot.client.model.SearchAuthSettingsRequest;
+import com.thoughtspot.client.model.SearchAuthSettingsResponse;
 import com.thoughtspot.client.model.SearchCalendarsRequest;
 import com.thoughtspot.client.model.SearchChannelHistoryRequest;
 import com.thoughtspot.client.model.SearchChannelHistoryResponse;
@@ -177,6 +180,7 @@ import com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest;
 import com.thoughtspot.client.model.UpdateConfigRequest;
 import com.thoughtspot.client.model.UpdateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
+import com.thoughtspot.client.model.UpdateConnectionStatusRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import com.thoughtspot.client.model.UpdateCustomActionRequest;
 import com.thoughtspot.client.model.UpdateEmailCustomizationRequest;
@@ -289,6 +293,38 @@ public class ThoughtSpotRestApiTest {
     public void commitBranchTest() throws ApiException {
         CommitBranchRequest commitBranchRequest = null;
         CommitResponse response = api.commitBranch(commitBranchRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Enables or disables authentication at cluster or org level for
+     * the specified auth type. Currently supports &#x60;TRUSTED_AUTH&#x60;. #### Required
+     * privileges Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required. #### Usage guidelines Use
+     * &#x60;cluster_preferences&#x60; to enable or disable authentication at the cluster level.
+     * Cluster-level settings can only be configured from the Primary Org. - &#x60;ENABLED&#x60; —
+     * Generates a new access token if one does not exist. An existing token is preserved. -
+     * &#x60;DISABLED&#x60; — Revokes the existing cluster-level access token. Use
+     * &#x60;org_preferences&#x60; to enable or disable authentication for one or more Orgs. Each
+     * entry must include an &#x60;org_identifier&#x60; (unique ID or name) and an
+     * &#x60;auth_status&#x60;. Org-level configuration requires the per-Org authentication feature
+     * to be enabled on your instance. - &#x60;ENABLED&#x60; — Generates a new org-level access
+     * token if one does not exist. - &#x60;DISABLED&#x60; — Revokes the existing org-level access
+     * token for that Org. Both &#x60;cluster_preferences&#x60; and &#x60;org_preferences&#x60; are
+     * optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted,
+     * the API returns &#x60;204 No Content&#x60; without making any changes. **Note**:
+     * Cluster-level and org-level settings are independent of each other. Enabling or disabling one
+     * does not affect the other.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void configureAuthSettingsTest() throws ApiException {
+        ConfigureAuthSettingsRequest configureAuthSettingsRequest = null;
+        api.configureAuthSettings(configureAuthSettingsRequest);
         // TODO: test validations
     }
 
@@ -2669,6 +2705,33 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.6.0.cl or later Returns the authentication configuration for the specified auth
+     * type at cluster and org level. Currently supports &#x60;TRUSTED_AUTH&#x60;. #### Required
+     * privileges Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required. #### Usage guidelines Use
+     * &#x60;scope&#x60; to control which level of settings are returned: - &#x60;CLUSTER&#x60; —
+     * Returns cluster-level authentication status and access tokens. Accessible only from the
+     * Primary Org. - &#x60;ORG&#x60; — Returns org-level authentication status and access tokens
+     * for the current Org. Requires the per-Org authentication feature to be enabled on your
+     * instance. - If &#x60;scope&#x60; is omitted, both cluster and org-level settings are returned
+     * based on the caller&#39;s org context and feature availability. The &#x60;access_tokens&#x60;
+     * array in &#x60;cluster_preferences&#x60; or &#x60;org_preferences&#x60; is omitted when no
+     * token is configured at that level. **Note**: Access tokens returned in the response are
+     * sensitive credentials. Treat them with the same care as passwords.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchAuthSettingsTest() throws ApiException {
+        SearchAuthSettingsRequest searchAuthSettingsRequest = null;
+        SearchAuthSettingsResponse response = api.searchAuthSettings(searchAuthSettingsRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 10.12.0.cl or later Gets a list of [custom
      * calendars](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal). Requires
      * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
@@ -3490,6 +3553,47 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Stops an in-progress agent conversation response. Version: 26.6.0.cl or later
+     * &lt;span&gt;Version: 26.6.0.cl or later Stops an in-progress agent response for the specified
+     * conversation. Use this endpoint to cancel a response that is actively being generated — for
+     * example, when the user navigates away, reformulates their question, or no longer needs the
+     * current result. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified
+     * conversation. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation
+     * whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60; A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. If there is no
+     * active response in progress at the time of the call, the request is still treated as
+     * successful. After stopping a response, the conversation session remains active. You can
+     * continue sending messages using &#x60;sendAgentConversationMessage&#x60; or
+     * &#x60;sendAgentConversationMessageStreaming&#x60;. #### Example request
+     * &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response
+     * &#x60;&#x60;&#x60; #### Typical usage scenario This endpoint is useful when integrating
+     * Spotter into a chat UI where users can cancel a long-running query. For example: 1. User
+     * sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a
+     * \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls
+     * &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The
+     * stream is terminated and the user can ask a new question. #### Error responses | Code |
+     * Description | |------|-------------| | 401 | Unauthorized — authentication token is missing,
+     * expired, or invalid. | | 403 | Forbidden — the authenticated user does not have
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | &gt;
+     * ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not
+     * return an error. &gt; - The conversation context is preserved after stopping — previous
+     * messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later.
+     * &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter
+     * on your cluster. &gt; - This feature is available only for **Spotter 3**
+     * (&#x60;SPOTTER3&#x60;) version.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void stopConversationTest() throws ApiException {
+        String conversationIdentifier = null;
+        api.stopConversation(conversationIdentifier);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 26.5.0.cl or later Synchronizes connection metadata attributes from your Cloud Data
      * Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60; (**Can manage
      * data**) privilege. If [Role-Based Access Control
@@ -3767,6 +3871,31 @@ public class ThoughtSpotRestApiTest {
         UpdateConnectionConfigurationRequest updateConnectionConfigurationRequest = null;
         api.updateConnectionConfiguration(
                 configurationIdentifier, updateConnectionConfigurationRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Activates or deactivates a connection. A deactivated connection
+     * cannot be used for queries or operations until it is activated again. Requires
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
+     * required. Only the connection owner or an administrator can perform this operation. ####
+     * Usage guidelines To update the status of a connection, specify the connection GUID or name in
+     * the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in
+     * the request body. - **ACTIVATED**: Enables the connection. Queries and operations can resume
+     * on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove
+     * the connection metadata, but only makes the connection unavailable for queries and
+     * operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;:
+     * \&quot;ACTIVATED\&quot;.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateConnectionStatusTest() throws ApiException {
+        String connectionIdentifier = null;
+        UpdateConnectionStatusRequest updateConnectionStatusRequest = null;
+        api.updateConnectionStatus(connectionIdentifier, updateConnectionStatusRequest);
         // TODO: test validations
     }
 

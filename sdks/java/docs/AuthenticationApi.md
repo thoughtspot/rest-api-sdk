@@ -4,6 +4,7 @@ All URIs are relative to *CLUSTER_URL*
 
 | Method | HTTP request |
 |------------- | ------------- |
+| [**configureAuthSettings**](AuthenticationApi.md#configureAuthSettings) | **POST** /api/rest/2.0/auth/configure |
 | [**getCurrentUserInfo**](AuthenticationApi.md#getCurrentUserInfo) | **GET** /api/rest/2.0/auth/session/user |
 | [**getCurrentUserToken**](AuthenticationApi.md#getCurrentUserToken) | **GET** /api/rest/2.0/auth/session/token |
 | [**getCustomAccessToken**](AuthenticationApi.md#getCustomAccessToken) | **POST** /api/rest/2.0/auth/token/custom |
@@ -12,8 +13,45 @@ All URIs are relative to *CLUSTER_URL*
 | [**login**](AuthenticationApi.md#login) | **POST** /api/rest/2.0/auth/session/login |
 | [**logout**](AuthenticationApi.md#logout) | **POST** /api/rest/2.0/auth/session/logout |
 | [**revokeToken**](AuthenticationApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke |
+| [**searchAuthSettings**](AuthenticationApi.md#searchAuthSettings) | **POST** /api/rest/2.0/auth/search |
 | [**validateToken**](AuthenticationApi.md#validateToken) | **POST** /api/rest/2.0/auth/token/validate |
 
+
+<a id="configureAuthSettings"></a>
+# **configureAuthSettings**
+> configureAuthSettings(configureAuthSettingsRequest)
+
+
+
+  Version: 26.6.0.cl or later   Enables or disables authentication at cluster or org level for the specified auth type. Currently supports &#x60;TRUSTED_AUTH&#x60;.  #### Required privileges  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required.  #### Usage guidelines  Use &#x60;cluster_preferences&#x60; to enable or disable authentication at the cluster level. Cluster-level settings can only be configured from the Primary Org. - &#x60;ENABLED&#x60; — Generates a new access token if one does not exist. An existing token is preserved. - &#x60;DISABLED&#x60; — Revokes the existing cluster-level access token.  Use &#x60;org_preferences&#x60; to enable or disable authentication for one or more Orgs. Each entry must include an &#x60;org_identifier&#x60; (unique ID or name) and an &#x60;auth_status&#x60;. Org-level configuration requires the per-Org authentication feature to be enabled on your instance. - &#x60;ENABLED&#x60; — Generates a new org-level access token if one does not exist. - &#x60;DISABLED&#x60; — Revokes the existing org-level access token for that Org.  Both &#x60;cluster_preferences&#x60; and &#x60;org_preferences&#x60; are optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted, the API returns &#x60;204 No Content&#x60; without making any changes.  **Note**: Cluster-level and org-level settings are independent of each other. Enabling or disabling one does not affect the other.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **configureAuthSettingsRequest** | [**ConfigureAuthSettingsRequest**](ConfigureAuthSettingsRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Trusted authentication settings configured successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
 <a id="getCurrentUserInfo"></a>
 # **getCurrentUserInfo**
@@ -289,6 +327,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Token successfully revoked. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="searchAuthSettings"></a>
+# **searchAuthSettings**
+> SearchAuthSettingsResponse searchAuthSettings(searchAuthSettingsRequest)
+
+
+
+  Version: 26.6.0.cl or later   Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports &#x60;TRUSTED_AUTH&#x60;.  #### Required privileges  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required.  #### Usage guidelines  Use &#x60;scope&#x60; to control which level of settings are returned: - &#x60;CLUSTER&#x60; — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org. - &#x60;ORG&#x60; — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance. - If &#x60;scope&#x60; is omitted, both cluster and org-level settings are returned based on the caller&#39;s org context and feature availability.  The &#x60;access_tokens&#x60; array in &#x60;cluster_preferences&#x60; or &#x60;org_preferences&#x60; is omitted when no token is configured at that level.  **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchAuthSettingsRequest** | [**SearchAuthSettingsRequest**](SearchAuthSettingsRequest.md)
+
+### Return type
+
+[**SearchAuthSettingsResponse**](SearchAuthSettingsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Authentication settings retrieved successfully. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

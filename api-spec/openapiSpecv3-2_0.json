@@ -54,6 +54,14 @@
       "description": "Roles for version 26.5.0.cl"
     },
     {
+      "name": "26.6.0.cl",
+      "id": "26.6.0.cl",
+      "tags": [
+        "26.6.0.cl"
+      ],
+      "description": "Roles for version 26.6.0.cl"
+    },
+    {
       "name": "9.0.0.cl",
       "id": "9.0.0.cl",
       "tags": [
@@ -1453,6 +1461,138 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response": {
+      "post": {
+        "operationId": "stopConversation",
+        "description": "\nStops an in-progress agent conversation response. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span>Version: 26.6.0.cl or later</span>\n\nStops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by `createAgentConversation`\n\nA successful request returns an empty `204 No Content` response. If there is no active response in progress at the time of the call, the request is still treated as successful.\n\nAfter stopping a response, the conversation session remains active. You can continue sending messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response\n```\n\n#### Typical usage scenario\n\nThis endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:\n\n1. User sends a message via `sendAgentConversationMessageStreaming`.\n2. User clicks a \"Stop generating\" button while the response is streaming.\n3. Your client calls `stopConversation` with the active `conversation_identifier`.\n4. The stream is terminated and the user can ask a new question.\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n\n> ###### Note:\n>\n> - Calling this endpoint when no response is in progress does not return an error.\n> - The conversation context is preserved after stopping — previous messages and answers remain accessible.\n> - Available from version 26.6.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> - This feature is available only for **Spotter 3** (`SPOTTER3`) version.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.6.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to stop."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully stopped the in-progress agent conversation response for the given."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/configure": {
+      "post": {
+        "operationId": "configureAuthSettings",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nEnables or disables authentication at cluster or org level for the specified auth type. Currently supports `TRUSTED_AUTH`.\n\n#### Required privileges\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.\n\n#### Usage guidelines\n\nUse `cluster_preferences` to enable or disable authentication at the cluster level. Cluster-level settings can only be configured from the Primary Org.\n- `ENABLED` — Generates a new access token if one does not exist. An existing token is preserved.\n- `DISABLED` — Revokes the existing cluster-level access token.\n\nUse `org_preferences` to enable or disable authentication for one or more Orgs. Each entry must include an `org_identifier` (unique ID or name) and an `auth_status`. Org-level configuration requires the per-Org authentication feature to be enabled on your instance.\n- `ENABLED` — Generates a new org-level access token if one does not exist.\n- `DISABLED` — Revokes the existing org-level access token for that Org.\n\nBoth `cluster_preferences` and `org_preferences` are optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted, the API returns `204 No Content` without making any changes.\n\n**Note**: Cluster-level and org-level settings are independent of each other. Enabling or disabling one does not affect the other.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Authentication",
+          "26.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigureAuthSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Trusted authentication settings configured successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/auth/session/user": {
       "get": {
         "operationId": "getCurrentUserInfo",
@@ -1945,6 +2085,108 @@
         "responses": {
           "204": {
             "description": "Token successfully revoked."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/auth/search": {
+      "post": {
+        "operationId": "searchAuthSettings",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nReturns the authentication configuration for the specified auth type at cluster and org level. Currently supports `TRUSTED_AUTH`.\n\n#### Required privileges\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.\n\n#### Usage guidelines\n\nUse `scope` to control which level of settings are returned:\n- `CLUSTER` — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org.\n- `ORG` — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance.\n- If `scope` is omitted, both cluster and org-level settings are returned based on the caller's org context and feature availability.\n\nThe `access_tokens` array in `cluster_preferences` or `org_preferences` is omitted when no token is configured at that level.\n\n**Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Authentication",
+          "26.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchAuthSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Authentication settings retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchAuthSettingsResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "auth_type": "TRUSTED_AUTH",
+                      "cluster_preferences": {
+                        "auth_status": "ENABLED",
+                        "access_tokens": [
+                          {
+                            "key": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                          }
+                        ]
+                      },
+                      "org_preferences": [
+                        {
+                          "org": {
+                            "id": 583464508,
+                            "name": "sales_org"
+                          },
+                          "auth_status": "ENABLED",
+                          "access_tokens": [
+                            {
+                              "key": "f9e8d7c6-b5a4-3210-fedc-ba9876543210"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request.",
@@ -3334,6 +3576,92 @@
           },
           "403": {
             "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/connections/{connection_identifier}/status": {
+      "post": {
+        "operationId": "updateConnectionStatus",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\nActivates or deactivates a connection. A deactivated connection cannot be used for queries or operations until it is activated again.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required. Only the connection owner or an administrator can perform this operation.\n\n#### Usage guidelines\n\nTo update the status of a connection, specify the connection GUID or name in the `connection_identifier` path parameter and the desired `status` in the request body.\n\n- **ACTIVATED**: Enables the connection. Queries and operations can resume on an activated connection.\n- **DEACTIVATED**: Disables the connection. It does not remove the connection metadata, but only makes the connection unavailable for queries and operations. You can reactivate a deactivated connection by setting \"status\": \"ACTIVATED\".\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Connections",
+          "26.6.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConnectionStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "connection_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the connection."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Connection status updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -12054,6 +12382,42 @@
                         "name": "mike_rodriguez"
                       }
                     }
+                  },
+                  "example_3": {
+                    "description": "Webhook with GCP GCS storage destination",
+                    "value": {
+                      "id": "c9d8e7f6-a5b4-4321-9876-fedcba012345",
+                      "name": "GCS Storage Webhook",
+                      "description": "Webhook that uploads payloads to a GCS bucket",
+                      "org": {
+                        "id": "0",
+                        "name": "Primary"
+                      },
+                      "url": "https://api.example.com/webhooks",
+                      "events": [
+                        "LIVEBOARD_SCHEDULE"
+                      ],
+                      "storage_destination": {
+                        "storage_type": "GCP_GCS",
+                        "storage_config": {
+                          "gcp_gcs_config": {
+                            "bucket_name": "my-webhook-files",
+                            "service_account_email": "my-sa@my-project.iam.gserviceaccount.com",
+                            "path_prefix": "webhooks/"
+                          }
+                        }
+                      },
+                      "creation_time_in_millis": 1724279630456,
+                      "modification_time_in_millis": 1724279630456,
+                      "created_by": {
+                        "id": "3a2b1c4d-5e6f-7890-abcd-ef0123456789",
+                        "name": "priya_sharma"
+                      },
+                      "last_modified_by": {
+                        "id": "3a2b1c4d-5e6f-7890-abcd-ef0123456789",
+                        "name": "priya_sharma"
+                      }
+                    }
                   }
                 }
               }
@@ -12563,6 +12927,116 @@
             "description": "Unique identifier of the user to whom the token is issued."
           }
         }
+      },
+      "SearchAuthSettingsResponse": {
+        "type": "object",
+        "properties": {
+          "auth_type": {
+            "type": "string",
+            "enum": [
+              "TRUSTED_AUTH"
+            ],
+            "description": "Type of authentication mechanism returned.",
+            "nullable": true
+          },
+          "cluster_preferences": {
+            "$ref": "#/components/schemas/AuthClusterPreferences",
+            "description": "Cluster-level authentication configuration. Present when cluster scope was requested and the caller has ADMINISTRATION or CONTROL_TRUSTED_AUTH privilege.",
+            "nullable": true
+          },
+          "org_preferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthOrgPreference"
+            },
+            "description": "Org-level authentication configurations. Present when org scope was requested and per-org auth feature is enabled.",
+            "nullable": true
+          }
+        },
+        "description": "Response for searchAuthSettings. Contains auth type and cluster/org-level preferences."
+      },
+      "AuthClusterPreferences": {
+        "type": "object",
+        "properties": {
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Whether authentication is enabled or disabled at the cluster level.",
+            "nullable": true
+          },
+          "access_tokens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthSettingsAccessToken"
+            },
+            "description": "Cluster-level access tokens. Absent when no token is configured.",
+            "nullable": true
+          }
+        },
+        "description": "Cluster-level authentication preferences."
+      },
+      "AuthSettingsAccessToken": {
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The plaintext token key value."
+          }
+        },
+        "description": "An auth settings access token."
+      },
+      "AuthOrgPreference": {
+        "type": "object",
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/AuthOrgInfo",
+            "description": "Org identifier details.",
+            "nullable": true
+          },
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Whether authentication is enabled or disabled for this org.",
+            "nullable": true
+          },
+          "access_tokens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthSettingsAccessToken"
+            },
+            "description": "Org-level access tokens. Absent when no token is configured or the feature flag is off.",
+            "nullable": true
+          }
+        },
+        "description": "Org-level authentication preferences for a single org."
+      },
+      "AuthOrgInfo": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique identifier of the org."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the org.",
+            "nullable": true
+          }
+        },
+        "description": "Org identifier returned in auth settings search results."
       },
       "RiseSetter": {
         "type": "object",
@@ -13289,6 +13763,15 @@
             "$ref": "#/components/schemas/ClusterNonEmbedAccess",
             "description": "Non-embed access configuration at cluster level.",
             "nullable": true
+          },
+          "trusted_auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Trusted authentication status at the cluster level. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Cluster-level security preferences."
@@ -13425,6 +13908,15 @@
           "non_embed_access": {
             "$ref": "#/components/schemas/OrgNonEmbedAccess",
             "description": "Non-embed access configuration for this org.",
+            "nullable": true
+          },
+          "trusted_auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Trusted authentication status for this org. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -14640,6 +15132,29 @@
           }
         }
       },
+      "AnswerPngOptionsInput": {
+        "type": "object",
+        "properties": {
+          "x_resolution": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Desired width of the answer image in pixels. Ex. 1920 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "nullable": true
+          },
+          "y_resolution": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Desired height of the answer image in pixels. Ex. 1080 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "nullable": true
+          },
+          "scaling": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "nullable": true
+          }
+        }
+      },
       "PermissionOfPrincipalsResponse": {
         "type": "object",
         "properties": {
@@ -14721,7 +15236,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -15292,7 +15808,8 @@
               "GOOGLE_SHEETS",
               "FALCON",
               "FALCON_ONPREM",
-              "CLICKHOUSE"
+              "CLICKHOUSE",
+              "IOMETE"
             ],
             "description": "Type of data warehouse."
           },
@@ -15547,6 +16064,8 @@
                 "CAN_VIEW_FOLDERS",
                 "CAN_MODIDY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
@@ -16237,6 +16756,11 @@
             },
             "description": "Values of the variable",
             "nullable": true
+          },
+          "org": {
+            "$ref": "#/components/schemas/VariableOrgInfo",
+            "description": "Owner org of the variable.",
+            "nullable": true
           }
         },
         "description": "Variable object"
@@ -16288,6 +16812,24 @@
             "format": "int32",
             "description": "The priority assigned to this value. If there are 2 matching values, the one with the higher priority will be picked.",
             "nullable": true
+          }
+        }
+      },
+      "VariableOrgInfo": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "ID of the Org."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the Org."
           }
         }
       },
@@ -16436,7 +16978,8 @@
               "GOOGLE_SHEETS",
               "FALCON",
               "FALCON_ONPREM",
-              "CLICKHOUSE"
+              "CLICKHOUSE",
+              "IOMETE"
             ],
             "nullable": true
           },
@@ -17776,6 +18319,43 @@
           }
         }
       },
+      "AuthClusterPreferencesInput": {
+        "type": "object",
+        "properties": {
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Enable or disable authentication at the cluster level. When enabled, a new token is generated if one does not exist. When disabled, the existing token is revoked.",
+            "nullable": true
+          }
+        },
+        "description": "Input for cluster-level auth configuration."
+      },
+      "AuthOrgPreferenceInput": {
+        "type": "object",
+        "required": [
+          "org_identifier"
+        ],
+        "properties": {
+          "org_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the org to configure."
+          },
+          "auth_status": {
+            "type": "string",
+            "enum": [
+              "ENABLED",
+              "DISABLED"
+            ],
+            "description": "Enable or disable authentication for this org. When enabled, a new token is generated if one does not exist. When disabled, the existing token is revoked.",
+            "nullable": true
+          }
+        },
+        "description": "Input for org-level auth configuration."
+      },
       "ResponseActivationURL": {
         "type": "object",
         "properties": {
@@ -18355,7 +18935,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.\n  1. LIVEBOARD\n  2. ANSWERS\n  3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n  4. LOGICAL_COLUMN for a column of any data object such as tables, worksheets or views.",
             "nullable": true
@@ -18427,6 +19008,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
@@ -18982,7 +19565,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata.\n  \n\nType of metadata. Required if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -19012,6 +19596,15 @@
               "NO_ACCESS"
             ],
             "description": "Type of access to the shared object"
+          },
+          "content_share_mode": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY"
+            ],
+            "description": "Content share mode for collections. Controls access to objects within the collection. Only applicable when sharing COLLECTION metadata type.",
+            "nullable": true
           }
         }
       },
@@ -19317,7 +19910,8 @@
               "GOOGLE_SHEETS",
               "FALCON",
               "FALCON_ONPREM",
-              "CLICKHOUSE"
+              "CLICKHOUSE",
+              "IOMETE"
             ],
             "description": "Type of data warehouse."
           },
@@ -19477,6 +20071,8 @@
                 "CAN_MANAGE_VARIABLES",
                 "CAN_MODIFY_FOLDERS",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
@@ -19601,7 +20197,8 @@
           "page_size": {
             "type": "string",
             "enum": [
-              "A4"
+              "A4",
+              "TAB_BASED"
             ],
             "description": "Page size.",
             "nullable": true
@@ -19937,7 +20534,8 @@
           "page_size": {
             "type": "string",
             "enum": [
-              "A4"
+              "A4",
+              "TAB_BASED"
             ],
             "description": "Page size.",
             "nullable": true
@@ -21610,6 +22208,36 @@
           "metadata_identifier"
         ]
       },
+      "ConfigureAuthSettingsRequest": {
+        "type": "object",
+        "properties": {
+          "auth_type": {
+            "description": "Type of authentication mechanism to configure. Currently supports TRUSTED_AUTH.",
+            "type": "string",
+            "enum": [
+              "TRUSTED_AUTH"
+            ]
+          },
+          "cluster_preferences": {
+            "description": "Cluster-level authentication preferences. Omit to leave the existing cluster setting unchanged.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AuthClusterPreferencesInput"
+              }
+            ]
+          },
+          "org_preferences": {
+            "description": "Org-level authentication preferences. Each entry identifies an org and the desired status. Omit to leave existing org settings unchanged.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthOrgPreferenceInput"
+            }
+          }
+        },
+        "required": [
+          "auth_type"
+        ]
+      },
       "GetCustomAccessTokenRequest": {
         "type": "object",
         "properties": {
@@ -21863,6 +22491,29 @@
             "type": "string"
           }
         }
+      },
+      "SearchAuthSettingsRequest": {
+        "type": "object",
+        "properties": {
+          "auth_type": {
+            "description": "Type of authentication mechanism to retrieve settings for. Currently supports TRUSTED_AUTH.",
+            "type": "string",
+            "enum": [
+              "TRUSTED_AUTH"
+            ]
+          },
+          "scope": {
+            "description": "Scope of auth settings to retrieve. When absent, both cluster and org settings are returned (subject to caller privileges). Set to CLUSTER to retrieve only cluster-level settings, or ORG to retrieve only org-level settings.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        },
+        "required": [
+          "auth_type"
+        ]
       },
       "ValidateTokenRequest": {
         "type": "object",
@@ -22259,7 +22910,8 @@
               "GOOGLE_SHEETS",
               "FALCON",
               "FALCON_ONPREM",
-              "CLICKHOUSE"
+              "CLICKHOUSE",
+              "IOMETE"
             ]
           },
           "data_warehouse_config": {
@@ -22365,7 +23017,8 @@
                 "GOOGLE_SHEETS",
                 "FALCON",
                 "FALCON_ONPREM",
-                "CLICKHOUSE"
+                "CLICKHOUSE",
+                "IOMETE"
               ]
             }
           },
@@ -22492,6 +23145,20 @@
         "required": [
           "connection_identifier"
         ]
+      },
+      "UpdateConnectionStatusRequest": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "description": "Status to set for the connection. Use ACTIVATED to enable the connection or DEACTIVATED to disable it.",
+            "default": "ACTIVATED",
+            "type": "string",
+            "enum": [
+              "ACTIVATED",
+              "DEACTIVATED"
+            ]
+          }
+        }
       },
       "UpdateConnectionV2Request": {
         "type": "object",
@@ -23207,6 +23874,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
@@ -23363,6 +24032,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",
@@ -23500,6 +24171,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_DOWNLOAD_VISUALS",
@@ -24489,6 +25162,27 @@
                 "$ref": "#/components/schemas/RegionalSettingsInput"
               }
             ]
+          },
+          "png_options": {
+            "description": "Options for PNG export. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnswerPngOptionsInput"
+              }
+            ]
+          },
+          "personalised_view_identifier": {
+            "description": "GUID or name of the personalised view of the Answer object. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of the answer being exported. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "default": "SAVED",
+            "type": "string",
+            "enum": [
+              "SAVED",
+              "PINNED"
+            ]
           }
         }
       },
@@ -24628,6 +25322,8 @@
                 "CAN_MANAGE_VARIABLES",
                 "CAN_MODIFY_FOLDERS",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
@@ -24724,6 +25420,8 @@
                 "CAN_VIEW_FOLDERS",
                 "CAN_MODIDY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
@@ -24815,6 +25513,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "PREVIEW_DOCUMENT_SEARCH",
                 "PREVIEW_THOUGHTSPOT_SAGE",
                 "CAN_MANAGE_WEBHOOKS",
@@ -26413,7 +27113,8 @@
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ]
           }
         },
@@ -26548,14 +27249,15 @@
         "type": "object",
         "properties": {
           "metadata_type": {
-            "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN\n5. Connection",
+            "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN\n5. Connection\n6. Collection",
             "type": "string",
             "enum": [
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ]
           },
           "metadata_identifiers": {
@@ -27251,6 +27953,8 @@
                 "CAN_MODIFY_FOLDERS",
                 "CAN_MANAGE_VARIABLES",
                 "CAN_VIEW_FOLDERS",
+                "CAN_MANAGE_AGENTSPOT",
+                "CAN_ACCESS_AGENTSPOT",
                 "CAN_SETUP_VERSION_CONTROL",
                 "CAN_MANAGE_WEBHOOKS",
                 "CAN_DOWNLOAD_VISUALS",

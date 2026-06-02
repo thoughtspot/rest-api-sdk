@@ -29,6 +29,7 @@ import com.thoughtspot.client.model.CommitHistoryResponse;
 import com.thoughtspot.client.model.CommitResponse;
 import com.thoughtspot.client.model.CommunicationChannelPreferencesResponse;
 import com.thoughtspot.client.model.CommunicationChannelValidateResponse;
+import com.thoughtspot.client.model.ConfigureAuthSettingsRequest;
 import com.thoughtspot.client.model.ConfigureCommunicationChannelPreferencesRequest;
 import com.thoughtspot.client.model.ConfigureSecuritySettingsRequest;
 import com.thoughtspot.client.model.ConnectionConfigurationResponse;
@@ -132,6 +133,8 @@ import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
 import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
+import com.thoughtspot.client.model.SearchAuthSettingsRequest;
+import com.thoughtspot.client.model.SearchAuthSettingsResponse;
 import com.thoughtspot.client.model.SearchCalendarsRequest;
 import com.thoughtspot.client.model.SearchChannelHistoryRequest;
 import com.thoughtspot.client.model.SearchChannelHistoryResponse;
@@ -184,6 +187,7 @@ import com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest;
 import com.thoughtspot.client.model.UpdateConfigRequest;
 import com.thoughtspot.client.model.UpdateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
+import com.thoughtspot.client.model.UpdateConnectionStatusRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import com.thoughtspot.client.model.UpdateCustomActionRequest;
 import com.thoughtspot.client.model.UpdateEmailCustomizationRequest;
@@ -1142,6 +1146,229 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall = commitBranchValidateBeforeCall(commitBranchRequest, _callback);
         Type localVarReturnType = new TypeToken<CommitResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for configureAuthSettings
+     *
+     * @param configureAuthSettingsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Trusted authentication settings configured successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call configureAuthSettingsCall(
+            ConfigureAuthSettingsRequest configureAuthSettingsRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = configureAuthSettingsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/auth/configure";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call configureAuthSettingsValidateBeforeCall(
+            ConfigureAuthSettingsRequest configureAuthSettingsRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'configureAuthSettingsRequest' is set
+        if (configureAuthSettingsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'configureAuthSettingsRequest' when calling"
+                            + " configureAuthSettings(Async)");
+        }
+
+        return configureAuthSettingsCall(configureAuthSettingsRequest, _callback);
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Enables or disables authentication at cluster or org level for
+     * the specified auth type. Currently supports &#x60;TRUSTED_AUTH&#x60;. #### Required
+     * privileges Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required. #### Usage guidelines Use
+     * &#x60;cluster_preferences&#x60; to enable or disable authentication at the cluster level.
+     * Cluster-level settings can only be configured from the Primary Org. - &#x60;ENABLED&#x60; —
+     * Generates a new access token if one does not exist. An existing token is preserved. -
+     * &#x60;DISABLED&#x60; — Revokes the existing cluster-level access token. Use
+     * &#x60;org_preferences&#x60; to enable or disable authentication for one or more Orgs. Each
+     * entry must include an &#x60;org_identifier&#x60; (unique ID or name) and an
+     * &#x60;auth_status&#x60;. Org-level configuration requires the per-Org authentication feature
+     * to be enabled on your instance. - &#x60;ENABLED&#x60; — Generates a new org-level access
+     * token if one does not exist. - &#x60;DISABLED&#x60; — Revokes the existing org-level access
+     * token for that Org. Both &#x60;cluster_preferences&#x60; and &#x60;org_preferences&#x60; are
+     * optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted,
+     * the API returns &#x60;204 No Content&#x60; without making any changes. **Note**:
+     * Cluster-level and org-level settings are independent of each other. Enabling or disabling one
+     * does not affect the other.
+     *
+     * @param configureAuthSettingsRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Trusted authentication settings configured successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void configureAuthSettings(ConfigureAuthSettingsRequest configureAuthSettingsRequest)
+            throws ApiException {
+        configureAuthSettingsWithHttpInfo(configureAuthSettingsRequest);
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Enables or disables authentication at cluster or org level for
+     * the specified auth type. Currently supports &#x60;TRUSTED_AUTH&#x60;. #### Required
+     * privileges Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required. #### Usage guidelines Use
+     * &#x60;cluster_preferences&#x60; to enable or disable authentication at the cluster level.
+     * Cluster-level settings can only be configured from the Primary Org. - &#x60;ENABLED&#x60; —
+     * Generates a new access token if one does not exist. An existing token is preserved. -
+     * &#x60;DISABLED&#x60; — Revokes the existing cluster-level access token. Use
+     * &#x60;org_preferences&#x60; to enable or disable authentication for one or more Orgs. Each
+     * entry must include an &#x60;org_identifier&#x60; (unique ID or name) and an
+     * &#x60;auth_status&#x60;. Org-level configuration requires the per-Org authentication feature
+     * to be enabled on your instance. - &#x60;ENABLED&#x60; — Generates a new org-level access
+     * token if one does not exist. - &#x60;DISABLED&#x60; — Revokes the existing org-level access
+     * token for that Org. Both &#x60;cluster_preferences&#x60; and &#x60;org_preferences&#x60; are
+     * optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted,
+     * the API returns &#x60;204 No Content&#x60; without making any changes. **Note**:
+     * Cluster-level and org-level settings are independent of each other. Enabling or disabling one
+     * does not affect the other.
+     *
+     * @param configureAuthSettingsRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Trusted authentication settings configured successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> configureAuthSettingsWithHttpInfo(
+            ConfigureAuthSettingsRequest configureAuthSettingsRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                configureAuthSettingsValidateBeforeCall(configureAuthSettingsRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 26.6.0.cl or later Enables or disables authentication at cluster or
+     * org level for the specified auth type. Currently supports &#x60;TRUSTED_AUTH&#x60;. ####
+     * Required privileges Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required. #### Usage guidelines Use
+     * &#x60;cluster_preferences&#x60; to enable or disable authentication at the cluster level.
+     * Cluster-level settings can only be configured from the Primary Org. - &#x60;ENABLED&#x60; —
+     * Generates a new access token if one does not exist. An existing token is preserved. -
+     * &#x60;DISABLED&#x60; — Revokes the existing cluster-level access token. Use
+     * &#x60;org_preferences&#x60; to enable or disable authentication for one or more Orgs. Each
+     * entry must include an &#x60;org_identifier&#x60; (unique ID or name) and an
+     * &#x60;auth_status&#x60;. Org-level configuration requires the per-Org authentication feature
+     * to be enabled on your instance. - &#x60;ENABLED&#x60; — Generates a new org-level access
+     * token if one does not exist. - &#x60;DISABLED&#x60; — Revokes the existing org-level access
+     * token for that Org. Both &#x60;cluster_preferences&#x60; and &#x60;org_preferences&#x60; are
+     * optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted,
+     * the API returns &#x60;204 No Content&#x60; without making any changes. **Note**:
+     * Cluster-level and org-level settings are independent of each other. Enabling or disabling one
+     * does not affect the other.
+     *
+     * @param configureAuthSettingsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Trusted authentication settings configured successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call configureAuthSettingsAsync(
+            ConfigureAuthSettingsRequest configureAuthSettingsRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                configureAuthSettingsValidateBeforeCall(configureAuthSettingsRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
@@ -20589,6 +20816,219 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for searchAuthSettings
+     *
+     * @param searchAuthSettingsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Authentication settings retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchAuthSettingsCall(
+            SearchAuthSettingsRequest searchAuthSettingsRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchAuthSettingsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/auth/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchAuthSettingsValidateBeforeCall(
+            SearchAuthSettingsRequest searchAuthSettingsRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'searchAuthSettingsRequest' is set
+        if (searchAuthSettingsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'searchAuthSettingsRequest' when calling"
+                            + " searchAuthSettings(Async)");
+        }
+
+        return searchAuthSettingsCall(searchAuthSettingsRequest, _callback);
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Returns the authentication configuration for the specified auth
+     * type at cluster and org level. Currently supports &#x60;TRUSTED_AUTH&#x60;. #### Required
+     * privileges Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required. #### Usage guidelines Use
+     * &#x60;scope&#x60; to control which level of settings are returned: - &#x60;CLUSTER&#x60; —
+     * Returns cluster-level authentication status and access tokens. Accessible only from the
+     * Primary Org. - &#x60;ORG&#x60; — Returns org-level authentication status and access tokens
+     * for the current Org. Requires the per-Org authentication feature to be enabled on your
+     * instance. - If &#x60;scope&#x60; is omitted, both cluster and org-level settings are returned
+     * based on the caller&#39;s org context and feature availability. The &#x60;access_tokens&#x60;
+     * array in &#x60;cluster_preferences&#x60; or &#x60;org_preferences&#x60; is omitted when no
+     * token is configured at that level. **Note**: Access tokens returned in the response are
+     * sensitive credentials. Treat them with the same care as passwords.
+     *
+     * @param searchAuthSettingsRequest (required)
+     * @return SearchAuthSettingsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Authentication settings retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public SearchAuthSettingsResponse searchAuthSettings(
+            SearchAuthSettingsRequest searchAuthSettingsRequest) throws ApiException {
+        ApiResponse<SearchAuthSettingsResponse> localVarResp =
+                searchAuthSettingsWithHttpInfo(searchAuthSettingsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Returns the authentication configuration for the specified auth
+     * type at cluster and org level. Currently supports &#x60;TRUSTED_AUTH&#x60;. #### Required
+     * privileges Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required. #### Usage guidelines Use
+     * &#x60;scope&#x60; to control which level of settings are returned: - &#x60;CLUSTER&#x60; —
+     * Returns cluster-level authentication status and access tokens. Accessible only from the
+     * Primary Org. - &#x60;ORG&#x60; — Returns org-level authentication status and access tokens
+     * for the current Org. Requires the per-Org authentication feature to be enabled on your
+     * instance. - If &#x60;scope&#x60; is omitted, both cluster and org-level settings are returned
+     * based on the caller&#39;s org context and feature availability. The &#x60;access_tokens&#x60;
+     * array in &#x60;cluster_preferences&#x60; or &#x60;org_preferences&#x60; is omitted when no
+     * token is configured at that level. **Note**: Access tokens returned in the response are
+     * sensitive credentials. Treat them with the same care as passwords.
+     *
+     * @param searchAuthSettingsRequest (required)
+     * @return ApiResponse&lt;SearchAuthSettingsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Authentication settings retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<SearchAuthSettingsResponse> searchAuthSettingsWithHttpInfo(
+            SearchAuthSettingsRequest searchAuthSettingsRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                searchAuthSettingsValidateBeforeCall(searchAuthSettingsRequest, null);
+        Type localVarReturnType = new TypeToken<SearchAuthSettingsResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.6.0.cl or later Returns the authentication configuration for the
+     * specified auth type at cluster and org level. Currently supports &#x60;TRUSTED_AUTH&#x60;.
+     * #### Required privileges Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
+     * or &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required. #### Usage guidelines Use
+     * &#x60;scope&#x60; to control which level of settings are returned: - &#x60;CLUSTER&#x60; —
+     * Returns cluster-level authentication status and access tokens. Accessible only from the
+     * Primary Org. - &#x60;ORG&#x60; — Returns org-level authentication status and access tokens
+     * for the current Org. Requires the per-Org authentication feature to be enabled on your
+     * instance. - If &#x60;scope&#x60; is omitted, both cluster and org-level settings are returned
+     * based on the caller&#39;s org context and feature availability. The &#x60;access_tokens&#x60;
+     * array in &#x60;cluster_preferences&#x60; or &#x60;org_preferences&#x60; is omitted when no
+     * token is configured at that level. **Note**: Access tokens returned in the response are
+     * sensitive credentials. Treat them with the same care as passwords.
+     *
+     * @param searchAuthSettingsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Authentication settings retrieved successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchAuthSettingsAsync(
+            SearchAuthSettingsRequest searchAuthSettingsRequest,
+            final ApiCallback<SearchAuthSettingsResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                searchAuthSettingsValidateBeforeCall(searchAuthSettingsRequest, _callback);
+        Type localVarReturnType = new TypeToken<SearchAuthSettingsResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for searchCalendars
      *
      * @param searchCalendarsRequest (required)
@@ -26858,6 +27298,255 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for stopConversation
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call stopConversationCall(
+            String conversationIdentifier, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call stopConversationValidateBeforeCall(
+            String conversationIdentifier, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " stopConversation(Async)");
+        }
+
+        return stopConversationCall(conversationIdentifier, _callback);
+    }
+
+    /**
+     * Stops an in-progress agent conversation response. Version: 26.6.0.cl or later
+     * &lt;span&gt;Version: 26.6.0.cl or later Stops an in-progress agent response for the specified
+     * conversation. Use this endpoint to cancel a response that is actively being generated — for
+     * example, when the user navigates away, reformulates their question, or no longer needs the
+     * current result. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified
+     * conversation. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation
+     * whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60; A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. If there is no
+     * active response in progress at the time of the call, the request is still treated as
+     * successful. After stopping a response, the conversation session remains active. You can
+     * continue sending messages using &#x60;sendAgentConversationMessage&#x60; or
+     * &#x60;sendAgentConversationMessageStreaming&#x60;. #### Example request
+     * &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response
+     * &#x60;&#x60;&#x60; #### Typical usage scenario This endpoint is useful when integrating
+     * Spotter into a chat UI where users can cancel a long-running query. For example: 1. User
+     * sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a
+     * \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls
+     * &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The
+     * stream is terminated and the user can ask a new question. #### Error responses | Code |
+     * Description | |------|-------------| | 401 | Unauthorized — authentication token is missing,
+     * expired, or invalid. | | 403 | Forbidden — the authenticated user does not have
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | &gt;
+     * ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not
+     * return an error. &gt; - The conversation context is preserved after stopping — previous
+     * messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later.
+     * &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter
+     * on your cluster. &gt; - This feature is available only for **Spotter 3**
+     * (&#x60;SPOTTER3&#x60;) version.
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void stopConversation(String conversationIdentifier) throws ApiException {
+        stopConversationWithHttpInfo(conversationIdentifier);
+    }
+
+    /**
+     * Stops an in-progress agent conversation response. Version: 26.6.0.cl or later
+     * &lt;span&gt;Version: 26.6.0.cl or later Stops an in-progress agent response for the specified
+     * conversation. Use this endpoint to cancel a response that is actively being generated — for
+     * example, when the user navigates away, reformulates their question, or no longer needs the
+     * current result. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified
+     * conversation. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation
+     * whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60; A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. If there is no
+     * active response in progress at the time of the call, the request is still treated as
+     * successful. After stopping a response, the conversation session remains active. You can
+     * continue sending messages using &#x60;sendAgentConversationMessage&#x60; or
+     * &#x60;sendAgentConversationMessageStreaming&#x60;. #### Example request
+     * &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response
+     * &#x60;&#x60;&#x60; #### Typical usage scenario This endpoint is useful when integrating
+     * Spotter into a chat UI where users can cancel a long-running query. For example: 1. User
+     * sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a
+     * \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls
+     * &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The
+     * stream is terminated and the user can ask a new question. #### Error responses | Code |
+     * Description | |------|-------------| | 401 | Unauthorized — authentication token is missing,
+     * expired, or invalid. | | 403 | Forbidden — the authenticated user does not have
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | &gt;
+     * ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not
+     * return an error. &gt; - The conversation context is preserved after stopping — previous
+     * messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later.
+     * &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter
+     * on your cluster. &gt; - This feature is available only for **Spotter 3**
+     * (&#x60;SPOTTER3&#x60;) version.
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> stopConversationWithHttpInfo(String conversationIdentifier)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                stopConversationValidateBeforeCall(conversationIdentifier, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Stops an in-progress agent conversation response. Version: 26.6.0.cl or
+     * later &lt;span&gt;Version: 26.6.0.cl or later Stops an in-progress agent response for the
+     * specified conversation. Use this endpoint to cancel a response that is actively being
+     * generated — for example, when the user navigates away, reformulates their question, or no
+     * longer needs the current result. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to
+     * the specified conversation. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation
+     * whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60; A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. If there is no
+     * active response in progress at the time of the call, the request is still treated as
+     * successful. After stopping a response, the conversation session remains active. You can
+     * continue sending messages using &#x60;sendAgentConversationMessage&#x60; or
+     * &#x60;sendAgentConversationMessageStreaming&#x60;. #### Example request
+     * &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response
+     * &#x60;&#x60;&#x60; #### Typical usage scenario This endpoint is useful when integrating
+     * Spotter into a chat UI where users can cancel a long-running query. For example: 1. User
+     * sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a
+     * \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls
+     * &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The
+     * stream is terminated and the user can ask a new question. #### Error responses | Code |
+     * Description | |------|-------------| | 401 | Unauthorized — authentication token is missing,
+     * expired, or invalid. | | 403 | Forbidden — the authenticated user does not have
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | &gt;
+     * ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not
+     * return an error. &gt; - The conversation context is preserved after stopping — previous
+     * messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later.
+     * &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter
+     * on your cluster. &gt; - This feature is available only for **Spotter 3**
+     * (&#x60;SPOTTER3&#x60;) version.
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call stopConversationAsync(
+            String conversationIdentifier, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall =
+                stopConversationValidateBeforeCall(conversationIdentifier, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for syncMetadata
      *
      * @param connectionIdentifier Unique ID or name of the connection. (required)
@@ -29081,6 +29770,236 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 updateConnectionConfigurationValidateBeforeCall(
                         configurationIdentifier, updateConnectionConfigurationRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateConnectionStatus
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionStatusRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Connection status updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateConnectionStatusCall(
+            String connectionIdentifier,
+            UpdateConnectionStatusRequest updateConnectionStatusRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateConnectionStatusRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/connections/{connection_identifier}/status"
+                        .replace(
+                                "{" + "connection_identifier" + "}",
+                                localVarApiClient.escapeString(connectionIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateConnectionStatusValidateBeforeCall(
+            String connectionIdentifier,
+            UpdateConnectionStatusRequest updateConnectionStatusRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'connectionIdentifier' is set
+        if (connectionIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'connectionIdentifier' when calling"
+                            + " updateConnectionStatus(Async)");
+        }
+
+        // verify the required parameter 'updateConnectionStatusRequest' is set
+        if (updateConnectionStatusRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'updateConnectionStatusRequest' when calling"
+                            + " updateConnectionStatus(Async)");
+        }
+
+        return updateConnectionStatusCall(
+                connectionIdentifier, updateConnectionStatusRequest, _callback);
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Activates or deactivates a connection. A deactivated connection
+     * cannot be used for queries or operations until it is activated again. Requires
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
+     * required. Only the connection owner or an administrator can perform this operation. ####
+     * Usage guidelines To update the status of a connection, specify the connection GUID or name in
+     * the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in
+     * the request body. - **ACTIVATED**: Enables the connection. Queries and operations can resume
+     * on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove
+     * the connection metadata, but only makes the connection unavailable for queries and
+     * operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;:
+     * \&quot;ACTIVATED\&quot;.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionStatusRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Connection status updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void updateConnectionStatus(
+            String connectionIdentifier,
+            UpdateConnectionStatusRequest updateConnectionStatusRequest)
+            throws ApiException {
+        updateConnectionStatusWithHttpInfo(connectionIdentifier, updateConnectionStatusRequest);
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Activates or deactivates a connection. A deactivated connection
+     * cannot be used for queries or operations until it is activated again. Requires
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
+     * required. Only the connection owner or an administrator can perform this operation. ####
+     * Usage guidelines To update the status of a connection, specify the connection GUID or name in
+     * the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in
+     * the request body. - **ACTIVATED**: Enables the connection. Queries and operations can resume
+     * on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove
+     * the connection metadata, but only makes the connection unavailable for queries and
+     * operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;:
+     * \&quot;ACTIVATED\&quot;.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionStatusRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Connection status updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> updateConnectionStatusWithHttpInfo(
+            String connectionIdentifier,
+            UpdateConnectionStatusRequest updateConnectionStatusRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                updateConnectionStatusValidateBeforeCall(
+                        connectionIdentifier, updateConnectionStatusRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 26.6.0.cl or later Activates or deactivates a connection. A
+     * deactivated connection cannot be used for queries or operations until it is activated again.
+     * Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access
+     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
+     * the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
+     * required. Only the connection owner or an administrator can perform this operation. ####
+     * Usage guidelines To update the status of a connection, specify the connection GUID or name in
+     * the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in
+     * the request body. - **ACTIVATED**: Enables the connection. Queries and operations can resume
+     * on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove
+     * the connection metadata, but only makes the connection unavailable for queries and
+     * operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;:
+     * \&quot;ACTIVATED\&quot;.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionStatusRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Connection status updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateConnectionStatusAsync(
+            String connectionIdentifier,
+            UpdateConnectionStatusRequest updateConnectionStatusRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                updateConnectionStatusValidateBeforeCall(
+                        connectionIdentifier, updateConnectionStatusRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

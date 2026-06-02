@@ -1397,6 +1397,154 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response:
+    post:
+      description: "\nStops an in-progress agent conversation response. \n  Version:\
+        \ 26.6.0.cl or later\n\n\n<span>Version: 26.6.0.cl or later\n\n\nStops an\
+        \ in-progress agent response for the specified conversation. Use this endpoint\
+        \ to cancel a response that is actively being generated — for example, when\
+        \ the user navigates away, reformulates their question, or no longer needs\
+        \ the current result.\n\nRequires `CAN_USE_SPOTTER` privilege and access to\
+        \ the specified conversation.\n\n#### Usage guidelines\n\nThe request must\
+        \ include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID\
+        \ of the conversation whose active response should be stopped, as returned\
+        \ by `createAgentConversation`\n\nA successful request returns an empty `204\
+        \ No Content` response. If there is no active response in progress at the\
+        \ time of the call, the request is still treated as successful.\n\nAfter stopping\
+        \ a response, the conversation session remains active. You can continue sending\
+        \ messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.\n\
+        \n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response\n\
+        ```\n\n#### Typical usage scenario\n\nThis endpoint is useful when integrating\
+        \ Spotter into a chat UI where users can cancel a long-running query. For\
+        \ example:\n\n1. User sends a message via `sendAgentConversationMessageStreaming`.\n\
+        2. User clicks a \"Stop generating\" button while the response is streaming.\n\
+        3. Your client calls `stopConversation` with the active `conversation_identifier`.\n\
+        4. The stream is terminated and the user can ask a new question.\n\n#### Error\
+        \ responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized\
+        \ — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden\
+        \ — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks\
+        \ access to the specified conversation. |\n\n> ###### Note:\n>\n> - Calling\
+        \ this endpoint when no response is in progress does not return an error.\n\
+        > - The conversation context is preserved after stopping — previous messages\
+        \ and answers remain accessible.\n> - Available from version 26.6.0.cl and\
+        \ later.\n> - This endpoint requires Spotter — please contact ThoughtSpot\
+        \ Support to enable Spotter on your cluster.\n> - This feature is available\
+        \ only for **Spotter 3** (`SPOTTER3`) version.\n\n\n\n\n\n"
+      operationId: stopConversation
+      parameters:
+      - description: Unique identifier of the conversation to stop.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successfully stopped the in-progress agent conversation response
+            for the given.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/auth/configure:
+    post:
+      description: |2+
+
+         Version: 26.6.0.cl or later
+
+
+        Enables or disables authentication at cluster or org level for the specified auth type. Currently supports `TRUSTED_AUTH`.
+
+        #### Required privileges
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.
+
+        #### Usage guidelines
+
+        Use `cluster_preferences` to enable or disable authentication at the cluster level. Cluster-level settings can only be configured from the Primary Org.
+        - `ENABLED` — Generates a new access token if one does not exist. An existing token is preserved.
+        - `DISABLED` — Revokes the existing cluster-level access token.
+
+        Use `org_preferences` to enable or disable authentication for one or more Orgs. Each entry must include an `org_identifier` (unique ID or name) and an `auth_status`. Org-level configuration requires the per-Org authentication feature to be enabled on your instance.
+        - `ENABLED` — Generates a new org-level access token if one does not exist.
+        - `DISABLED` — Revokes the existing org-level access token for that Org.
+
+        Both `cluster_preferences` and `org_preferences` are optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted, the API returns `204 No Content` without making any changes.
+
+        **Note**: Cluster-level and org-level settings are independent of each other. Enabling or disabling one does not affect the other.
+
+
+
+
+
+      operationId: configureAuthSettings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigureAuthSettingsRequest'
+        required: true
+      responses:
+        "204":
+          description: Trusted authentication settings configured successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Authentication
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/auth/session/user:
     get:
       description: |2+
@@ -1929,6 +2077,94 @@ paths:
       responses:
         "204":
           description: Token successfully revoked.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Authentication
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/auth/search:
+    post:
+      description: |2+
+
+         Version: 26.6.0.cl or later
+
+
+        Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports `TRUSTED_AUTH`.
+
+        #### Required privileges
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.
+
+        #### Usage guidelines
+
+        Use `scope` to control which level of settings are returned:
+        - `CLUSTER` — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org.
+        - `ORG` — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance.
+        - If `scope` is omitted, both cluster and org-level settings are returned based on the caller's org context and feature availability.
+
+        The `access_tokens` array in `cluster_preferences` or `org_preferences` is omitted when no token is configured at that level.
+
+        **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.
+
+
+
+
+
+      operationId: searchAuthSettings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchAuthSettingsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                    auth_type: TRUSTED_AUTH
+                    cluster_preferences:
+                      auth_status: ENABLED
+                      access_tokens:
+                      - key: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    org_preferences:
+                    - org:
+                        id: 583464508
+                        name: sales_org
+                      auth_status: ENABLED
+                      access_tokens:
+                      - key: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+              schema:
+                $ref: '#/components/schemas/SearchAuthSettingsResponse'
+          description: Authentication settings retrieved successfully.
         "400":
           content:
             application/json:
@@ -3297,6 +3533,84 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Connections
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/connections/{connection_identifier}/status:
+    post:
+      description: |2+
+
+         Version: 26.6.0.cl or later
+
+
+        Activates or deactivates a connection. A deactivated connection cannot be used for queries or operations until it is activated again.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required. Only the connection owner or an administrator can perform this operation.
+
+        #### Usage guidelines
+
+        To update the status of a connection, specify the connection GUID or name in the `connection_identifier` path parameter and the desired `status` in the request body.
+
+        - **ACTIVATED**: Enables the connection. Queries and operations can resume on an activated connection.
+        - **DEACTIVATED**: Disables the connection. It does not remove the connection metadata, but only makes the connection unavailable for queries and operations. You can reactivate a deactivated connection by setting "status": "ACTIVATED".
+
+
+
+
+
+
+      operationId: updateConnectionStatus
+      parameters:
+      - description: Unique ID or name of the connection.
+        explode: false
+        in: path
+        name: connection_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConnectionStatusRequest'
+        required: true
+      responses:
+        "204":
+          description: Connection status updated successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Object not found
         "500":
           content:
             application/json:
@@ -11246,6 +11560,33 @@ paths:
                     created_by:
                       id: 7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d
                       name: mike_rodriguez
+                example_3:
+                  description: Webhook with GCP GCS storage destination
+                  value:
+                    id: c9d8e7f6-a5b4-4321-9876-fedcba012345
+                    name: GCS Storage Webhook
+                    description: Webhook that uploads payloads to a GCS bucket
+                    org:
+                      id: "0"
+                      name: Primary
+                    url: https://api.example.com/webhooks
+                    events:
+                    - LIVEBOARD_SCHEDULE
+                    storage_destination:
+                      storage_type: GCP_GCS
+                      storage_config:
+                        gcp_gcs_config:
+                          bucket_name: my-webhook-files
+                          service_account_email: my-sa@my-project.iam.gserviceaccount.com
+                          path_prefix: webhooks/
+                    creation_time_in_millis: 1724279630456
+                    modification_time_in_millis: 1724279630456
+                    created_by:
+                      id: 3a2b1c4d-5e6f-7890-abcd-ef0123456789
+                      name: priya_sharma
+                    last_modified_by:
+                      id: 3a2b1c4d-5e6f-7890-abcd-ef0123456789
+                      name: priya_sharma
               schema:
                 $ref: '#/components/schemas/WebhookResponse'
           description: Webhook configuration created successfully
@@ -11640,6 +11981,127 @@ components:
       - token
       - valid_for_user_id
       - valid_for_username
+      type: object
+    SearchAuthSettingsResponse:
+      description: Response for searchAuthSettings. Contains auth type and cluster/org-level
+        preferences.
+      example:
+        auth_type: TRUSTED_AUTH
+        cluster_preferences:
+          auth_status: ENABLED
+          access_tokens:
+          - key: key
+          - key: key
+        org_preferences:
+        - org:
+            name: name
+            id: 0
+          auth_status: ENABLED
+          access_tokens:
+          - key: key
+          - key: key
+        - org:
+            name: name
+            id: 0
+          auth_status: ENABLED
+          access_tokens:
+          - key: key
+          - key: key
+      properties:
+        auth_type:
+          description: Type of authentication mechanism returned.
+          enum:
+          - TRUSTED_AUTH
+          nullable: true
+          type: string
+        cluster_preferences:
+          $ref: '#/components/schemas/AuthClusterPreferences'
+        org_preferences:
+          description: Org-level authentication configurations. Present when org scope
+            was requested and per-org auth feature is enabled.
+          items:
+            $ref: '#/components/schemas/AuthOrgPreference'
+          nullable: true
+          type: array
+      type: object
+    AuthClusterPreferences:
+      description: Cluster-level authentication preferences.
+      example:
+        auth_status: ENABLED
+        access_tokens:
+        - key: key
+        - key: key
+      properties:
+        auth_status:
+          description: Whether authentication is enabled or disabled at the cluster
+            level.
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
+        access_tokens:
+          description: Cluster-level access tokens. Absent when no token is configured.
+          items:
+            $ref: '#/components/schemas/AuthSettingsAccessToken'
+          nullable: true
+          type: array
+      type: object
+    AuthSettingsAccessToken:
+      description: An auth settings access token.
+      example:
+        key: key
+      properties:
+        key:
+          description: The plaintext token key value.
+          type: string
+      required:
+      - key
+      type: object
+    AuthOrgPreference:
+      description: Org-level authentication preferences for a single org.
+      example:
+        org:
+          name: name
+          id: 0
+        auth_status: ENABLED
+        access_tokens:
+        - key: key
+        - key: key
+      properties:
+        org:
+          $ref: '#/components/schemas/AuthOrgInfo'
+        auth_status:
+          description: Whether authentication is enabled or disabled for this org.
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
+        access_tokens:
+          description: Org-level access tokens. Absent when no token is configured
+            or the feature flag is off.
+          items:
+            $ref: '#/components/schemas/AuthSettingsAccessToken'
+          nullable: true
+          type: array
+      type: object
+    AuthOrgInfo:
+      description: Org identifier returned in auth settings search results.
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          description: Unique identifier of the org.
+          format: int32
+          type: integer
+        name:
+          description: Name of the org.
+          nullable: true
+          type: string
+      required:
+      - id
       type: object
     RiseSetter:
       properties:
@@ -12387,6 +12849,7 @@ components:
             - style_src_urls
             - style_src_urls
           enable_partitioned_cookies: true
+          trusted_auth_status: ENABLED
         org_preferences:
         - cors_whitelisted_urls:
           - cors_whitelisted_urls
@@ -12401,6 +12864,7 @@ components:
           org:
             name: name
             id: 0
+          trusted_auth_status: ENABLED
         - cors_whitelisted_urls:
           - cors_whitelisted_urls
           - cors_whitelisted_urls
@@ -12414,6 +12878,7 @@ components:
           org:
             name: name
             id: 0
+          trusted_auth_status: ENABLED
       properties:
         cluster_preferences:
           $ref: '#/components/schemas/SecuritySettingsClusterPreferences'
@@ -12465,6 +12930,7 @@ components:
           - style_src_urls
           - style_src_urls
         enable_partitioned_cookies: true
+        trusted_auth_status: ENABLED
       properties:
         enable_partitioned_cookies:
           description: Support embedded access when third-party cookies are blocked.
@@ -12486,6 +12952,14 @@ components:
           type: array
         non_embed_access:
           $ref: '#/components/schemas/ClusterNonEmbedAccess'
+        trusted_auth_status:
+          description: "Trusted authentication status at the cluster level. \n  Version:\
+            \ 26.6.0.cl or later\n"
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
       type: object
     CspSettings:
       description: CSP (Content Security Policy) settings.
@@ -12627,6 +13101,7 @@ components:
         org:
           name: name
           id: 0
+        trusted_auth_status: ENABLED
       properties:
         org:
           $ref: '#/components/schemas/SecuritySettingsOrgDetails'
@@ -12638,6 +13113,14 @@ components:
           type: array
         non_embed_access:
           $ref: '#/components/schemas/OrgNonEmbedAccess'
+        trusted_auth_status:
+          description: "Trusted authentication status for this org. \n  Version: 26.6.0.cl\
+            \ or later\n"
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
       type: object
     SecuritySettingsOrgDetails:
       description: Org details for security settings.
@@ -13878,6 +14361,27 @@ components:
           nullable: true
           type: string
       type: object
+    AnswerPngOptionsInput:
+      properties:
+        x_resolution:
+          description: "Desired width of the answer image in pixels. Ex. 1920 for\
+            \ Full HD image \n Version: 26.6.0.cl or later\n"
+          format: int32
+          nullable: true
+          type: integer
+        y_resolution:
+          description: "Desired height of the answer image in pixels. Ex. 1080 for\
+            \ Full HD image \n Version: 26.6.0.cl or later\n"
+          format: int32
+          nullable: true
+          type: integer
+        scaling:
+          description: "The scale of the image in percentage. Ex. 100 for 100% scale.\
+            \ \n Version: 26.6.0.cl or later\n"
+          format: int32
+          nullable: true
+          type: integer
+      type: object
     PermissionOfPrincipalsResponse:
       example:
         principal_permission_details: "{}"
@@ -13956,6 +14460,7 @@ components:
           - LOGICAL_TABLE
           - LOGICAL_COLUMN
           - CONNECTION
+          - COLLECTION
           nullable: true
           type: string
         identifier:
@@ -14789,6 +15294,7 @@ components:
           - FALCON
           - FALCON_ONPREM
           - CLICKHOUSE
+          - IOMETE
           type: string
         data_warehouse_objects:
           $ref: '#/components/schemas/DataWarehouseObjects'
@@ -15365,6 +15871,8 @@ components:
             - CAN_VIEW_FOLDERS
             - CAN_MODIDY_FOLDERS
             - CAN_MANAGE_VARIABLES
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
@@ -16074,6 +16582,9 @@ components:
       description: Variable object
       example:
         variable_type: CONNECTION_PROPERTY
+        org:
+          name: name
+          id: 6
         values:
         - principal_identifier: principal_identifier
           model_identifier: model_identifier
@@ -16123,6 +16634,8 @@ components:
             $ref: '#/components/schemas/VariableValue'
           nullable: true
           type: array
+        org:
+          $ref: '#/components/schemas/VariableOrgInfo'
       required:
       - id
       - name
@@ -16177,6 +16690,22 @@ components:
           type: integer
       required:
       - org_identifier
+      type: object
+    VariableOrgInfo:
+      example:
+        name: name
+        id: 6
+      properties:
+        id:
+          description: ID of the Org.
+          format: int32
+          type: integer
+        name:
+          description: Name of the Org.
+          type: string
+      required:
+      - id
+      - name
       type: object
     SortOption:
       properties:
@@ -16326,6 +16855,7 @@ components:
           - FALCON
           - FALCON_ONPREM
           - CLICKHOUSE
+          - IOMETE
           nullable: true
           type: string
         policy_type:
@@ -17760,6 +18290,40 @@ components:
       required:
       - id
       type: object
+    AuthClusterPreferencesInput:
+      description: Input for cluster-level auth configuration.
+      properties:
+        auth_status:
+          description: "Enable or disable authentication at the cluster level. When\
+            \ enabled, a new token is generated if one does not exist. When disabled,\
+            \ the existing token is revoked."
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
+      type: object
+    AuthOrgPreferenceInput:
+      description: Input for org-level auth configuration.
+      example:
+        org_identifier: org_identifier
+        auth_status: ENABLED
+      properties:
+        org_identifier:
+          description: Unique ID or name of the org to configure.
+          type: string
+        auth_status:
+          description: "Enable or disable authentication for this org. When enabled,\
+            \ a new token is generated if one does not exist. When disabled, the existing\
+            \ token is revoked."
+          enum:
+          - ENABLED
+          - DISABLED
+          nullable: true
+          type: string
+      required:
+      - org_identifier
+      type: object
     ResponseActivationURL:
       description: The object representation with activation link.
       example:
@@ -18335,6 +18899,7 @@ components:
           - LOGICAL_TABLE
           - LOGICAL_COLUMN
           - CONNECTION
+          - COLLECTION
           nullable: true
           type: string
         identifier:
@@ -18412,6 +18977,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
@@ -18998,6 +19565,7 @@ components:
           - LOGICAL_TABLE
           - LOGICAL_COLUMN
           - CONNECTION
+          - COLLECTION
           nullable: true
           type: string
         identifier:
@@ -19012,6 +19580,7 @@ components:
           identifier: identifier
           type: USER
         share_mode: READ_ONLY
+        content_share_mode: READ_ONLY
       properties:
         principal:
           $ref: '#/components/schemas/PrincipalsInput'
@@ -19021,6 +19590,15 @@ components:
           - READ_ONLY
           - MODIFY
           - NO_ACCESS
+          type: string
+        content_share_mode:
+          description: Content share mode for collections. Controls access to objects
+            within the collection. Only applicable when sharing COLLECTION metadata
+            type.
+          enum:
+          - READ_ONLY
+          - MODIFY
+          nullable: true
           type: string
       required:
       - principal
@@ -19343,6 +19921,7 @@ components:
           - FALCON
           - FALCON_ONPREM
           - CLICKHOUSE
+          - IOMETE
           type: string
         details:
           description: Details of the connection.
@@ -19510,6 +20089,8 @@ components:
             - CAN_MANAGE_VARIABLES
             - CAN_MODIFY_FOLDERS
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - CAN_SETUP_VERSION_CONTROL
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_WEBHOOKS
@@ -19617,6 +20198,7 @@ components:
           description: Page size.
           enum:
           - A4
+          - TAB_BASED
           nullable: true
           type: string
         truncate_table:
@@ -19955,6 +20537,7 @@ components:
           description: Page size.
           enum:
           - A4
+          - TAB_BASED
           nullable: true
           type: string
         truncate_table:
@@ -21563,6 +22146,36 @@ components:
       - metadata_identifier
       - query
       type: object
+    ConfigureAuthSettingsRequest:
+      example:
+        auth_type: TRUSTED_AUTH
+        cluster_preferences: ""
+        org_preferences:
+        - org_identifier: org_identifier
+          auth_status: ENABLED
+        - org_identifier: org_identifier
+          auth_status: ENABLED
+      properties:
+        auth_type:
+          description: Type of authentication mechanism to configure. Currently supports
+            TRUSTED_AUTH.
+          enum:
+          - TRUSTED_AUTH
+          type: string
+        cluster_preferences:
+          allOf:
+          - $ref: '#/components/schemas/AuthClusterPreferencesInput'
+          description: Cluster-level authentication preferences. Omit to leave the
+            existing cluster setting unchanged.
+        org_preferences:
+          description: Org-level authentication preferences. Each entry identifies
+            an org and the desired status. Omit to leave existing org settings unchanged.
+          items:
+            $ref: '#/components/schemas/AuthOrgPreferenceInput'
+          type: array
+      required:
+      - auth_type
+      type: object
     GetCustomAccessTokenRequest:
       example:
         parameter_values:
@@ -21892,6 +22505,29 @@ components:
           type: string
         token:
           type: string
+      type: object
+    SearchAuthSettingsRequest:
+      example:
+        auth_type: TRUSTED_AUTH
+        scope: CLUSTER
+      properties:
+        auth_type:
+          description: Type of authentication mechanism to retrieve settings for.
+            Currently supports TRUSTED_AUTH.
+          enum:
+          - TRUSTED_AUTH
+          type: string
+        scope:
+          description: "Scope of auth settings to retrieve. When absent, both cluster\
+            \ and org settings are returned (subject to caller privileges). Set to\
+            \ CLUSTER to retrieve only cluster-level settings, or ORG to retrieve\
+            \ only org-level settings."
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+      required:
+      - auth_type
       type: object
     ValidateTokenRequest:
       example:
@@ -22311,6 +22947,7 @@ components:
           - FALCON
           - FALCON_ONPREM
           - CLICKHOUSE
+          - IOMETE
           type: string
         data_warehouse_config:
           description: "Connection configuration attributes in JSON format. To create\
@@ -22456,6 +23093,7 @@ components:
             - FALCON
             - FALCON_ONPREM
             - CLICKHOUSE
+            - IOMETE
             type: string
           type: array
         record_offset:
@@ -22581,6 +23219,19 @@ components:
           type: boolean
       required:
       - connection_identifier
+      type: object
+    UpdateConnectionStatusRequest:
+      example:
+        status: ACTIVATED
+      properties:
+        status:
+          default: ACTIVATED
+          description: Status to set for the connection. Use ACTIVATED to enable the
+            connection or DEACTIVATED to disable it.
+          enum:
+          - ACTIVATED
+          - DEACTIVATED
+          type: string
       type: object
     UpdateConnectionV2Request:
       example:
@@ -23339,6 +23990,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
@@ -23541,6 +24194,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
@@ -23685,6 +24340,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_DOWNLOAD_VISUALS
@@ -24702,10 +25359,13 @@ components:
       example:
         runtime_filter: "{}"
         regional_settings: ""
+        png_options: ""
         metadata_identifier: metadata_identifier
+        personalised_view_identifier: personalised_view_identifier
         session_identifier: session_identifier
         runtime_sort: "{}"
         generation_number: 0
+        type: SAVED
         runtime_param_override: "{}"
         file_format: CSV
       properties:
@@ -24746,6 +25406,22 @@ components:
           - $ref: '#/components/schemas/RegionalSettingsInput'
           description: Options for specific region specific overrides to support date/number/string/currency
             formatting.
+        png_options:
+          allOf:
+          - $ref: '#/components/schemas/AnswerPngOptionsInput'
+          description: "Options for PNG export. \n Version: 26.6.0.cl or later\n"
+        personalised_view_identifier:
+          description: "GUID or name of the personalised view of the Answer object.\
+            \ \n Version: 26.6.0.cl or later\n"
+          type: string
+        type:
+          default: SAVED
+          description: "Type of the answer being exported. \n Version: 26.6.0.cl or\
+            \ later\n"
+          enum:
+          - SAVED
+          - PINNED
+          type: string
       type: object
     ExportLiveboardReportRequest:
       example:
@@ -24926,6 +25602,8 @@ components:
             - CAN_MANAGE_VARIABLES
             - CAN_MODIFY_FOLDERS
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - CAN_SETUP_VERSION_CONTROL
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_WEBHOOKS
@@ -25033,6 +25711,8 @@ components:
             - CAN_VIEW_FOLDERS
             - CAN_MODIDY_FOLDERS
             - CAN_MANAGE_VARIABLES
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
@@ -25118,6 +25798,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - PREVIEW_DOCUMENT_SEARCH
             - PREVIEW_THOUGHTSPOT_SAGE
             - CAN_MANAGE_WEBHOOKS
@@ -26712,6 +27394,7 @@ components:
           - LOGICAL_TABLE
           - LOGICAL_COLUMN
           - CONNECTION
+          - COLLECTION
           type: string
       required:
       - principals
@@ -26881,10 +27564,12 @@ components:
             identifier: identifier
             type: USER
           share_mode: READ_ONLY
+          content_share_mode: READ_ONLY
         - principal:
             identifier: identifier
             type: USER
           share_mode: READ_ONLY
+          content_share_mode: READ_ONLY
         visualization_identifiers:
         - visualization_identifiers
         - visualization_identifiers
@@ -26903,12 +27588,14 @@ components:
             3. LOGICAL_TABLE for any data object such as table, worksheet or view.
             4. LOGICAL_COLUMN
             5. Connection
+            6. Collection
           enum:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
           - LOGICAL_COLUMN
           - CONNECTION
+          - COLLECTION
           type: string
         metadata_identifiers:
           description: "Unique ID or name of metadata objects. Note: All the names\
@@ -27746,6 +28433,8 @@ components:
             - CAN_MODIFY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_VIEW_FOLDERS
+            - CAN_MANAGE_AGENTSPOT
+            - CAN_ACCESS_AGENTSPOT
             - CAN_SETUP_VERSION_CONTROL
             - CAN_MANAGE_WEBHOOKS
             - CAN_DOWNLOAD_VISUALS
@@ -28819,6 +29508,11 @@ x-roles:
   tags:
   - 26.5.0.cl
   description: Roles for version 26.5.0.cl
+- name: 26.6.0.cl
+  id: 26.6.0.cl
+  tags:
+  - 26.6.0.cl
+  description: Roles for version 26.6.0.cl
 - name: 9.0.0.cl
   id: 9.0.0.cl
   tags:

@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -49,6 +50,63 @@ public class SecuritySettingsOrgPreferences implements Serializable {
     @SerializedName(SERIALIZED_NAME_NON_EMBED_ACCESS)
     @javax.annotation.Nullable
     private OrgNonEmbedAccess nonEmbedAccess;
+
+    /** Trusted authentication status for this org. Version: 26.6.0.cl or later */
+    @JsonAdapter(TrustedAuthStatusEnum.Adapter.class)
+    public enum TrustedAuthStatusEnum {
+        ENABLED("ENABLED"),
+
+        DISABLED("DISABLED");
+
+        private String value;
+
+        TrustedAuthStatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static TrustedAuthStatusEnum fromValue(String value) {
+            for (TrustedAuthStatusEnum b : TrustedAuthStatusEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            return null;
+        }
+
+        public static class Adapter extends TypeAdapter<TrustedAuthStatusEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final TrustedAuthStatusEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public TrustedAuthStatusEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return TrustedAuthStatusEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            TrustedAuthStatusEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_TRUSTED_AUTH_STATUS = "trusted_auth_status";
+
+    @SerializedName(SERIALIZED_NAME_TRUSTED_AUTH_STATUS)
+    @javax.annotation.Nullable
+    private TrustedAuthStatusEnum trustedAuthStatus;
 
     public SecuritySettingsOrgPreferences() {}
 
@@ -122,6 +180,27 @@ public class SecuritySettingsOrgPreferences implements Serializable {
         this.nonEmbedAccess = nonEmbedAccess;
     }
 
+    public SecuritySettingsOrgPreferences trustedAuthStatus(
+            @javax.annotation.Nullable TrustedAuthStatusEnum trustedAuthStatus) {
+        this.trustedAuthStatus = trustedAuthStatus;
+        return this;
+    }
+
+    /**
+     * Trusted authentication status for this org. Version: 26.6.0.cl or later
+     *
+     * @return trustedAuthStatus
+     */
+    @javax.annotation.Nullable
+    public TrustedAuthStatusEnum getTrustedAuthStatus() {
+        return trustedAuthStatus;
+    }
+
+    public void setTrustedAuthStatus(
+            @javax.annotation.Nullable TrustedAuthStatusEnum trustedAuthStatus) {
+        this.trustedAuthStatus = trustedAuthStatus;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -183,6 +262,8 @@ public class SecuritySettingsOrgPreferences implements Serializable {
                 && Objects.equals(
                         this.nonEmbedAccess, securitySettingsOrgPreferences.nonEmbedAccess)
                 && Objects.equals(
+                        this.trustedAuthStatus, securitySettingsOrgPreferences.trustedAuthStatus)
+                && Objects.equals(
                         this.additionalProperties,
                         securitySettingsOrgPreferences.additionalProperties);
     }
@@ -198,7 +279,8 @@ public class SecuritySettingsOrgPreferences implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(org, corsWhitelistedUrls, nonEmbedAccess, additionalProperties);
+        return Objects.hash(
+                org, corsWhitelistedUrls, nonEmbedAccess, trustedAuthStatus, additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -217,6 +299,9 @@ public class SecuritySettingsOrgPreferences implements Serializable {
                 .append(toIndentedString(corsWhitelistedUrls))
                 .append("\n");
         sb.append("    nonEmbedAccess: ").append(toIndentedString(nonEmbedAccess)).append("\n");
+        sb.append("    trustedAuthStatus: ")
+                .append(toIndentedString(trustedAuthStatus))
+                .append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -244,6 +329,7 @@ public class SecuritySettingsOrgPreferences implements Serializable {
         openapiFields.add("org");
         openapiFields.add("cors_whitelisted_urls");
         openapiFields.add("non_embed_access");
+        openapiFields.add("trusted_auth_status");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -286,6 +372,20 @@ public class SecuritySettingsOrgPreferences implements Serializable {
         if (jsonObj.get("non_embed_access") != null
                 && !jsonObj.get("non_embed_access").isJsonNull()) {
             OrgNonEmbedAccess.validateJsonElement(jsonObj.get("non_embed_access"));
+        }
+        if ((jsonObj.get("trusted_auth_status") != null
+                        && !jsonObj.get("trusted_auth_status").isJsonNull())
+                && !jsonObj.get("trusted_auth_status").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `trusted_auth_status` to be a primitive type in"
+                                    + " the JSON string but got `%s`",
+                            jsonObj.get("trusted_auth_status").toString()));
+        }
+        // validate the optional field `trusted_auth_status`
+        if (jsonObj.get("trusted_auth_status") != null
+                && !jsonObj.get("trusted_auth_status").isJsonNull()) {
+            TrustedAuthStatusEnum.validateJsonElement(jsonObj.get("trusted_auth_status"));
         }
     }
 

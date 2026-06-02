@@ -6,12 +6,15 @@ package com.thoughtspot.client.api;
 
 import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.AccessToken;
+import com.thoughtspot.client.model.ConfigureAuthSettingsRequest;
 import com.thoughtspot.client.model.GetCustomAccessTokenRequest;
 import com.thoughtspot.client.model.GetFullAccessTokenRequest;
 import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
 import com.thoughtspot.client.model.GetTokenResponse;
 import com.thoughtspot.client.model.LoginRequest;
 import com.thoughtspot.client.model.RevokeTokenRequest;
+import com.thoughtspot.client.model.SearchAuthSettingsRequest;
+import com.thoughtspot.client.model.SearchAuthSettingsResponse;
 import com.thoughtspot.client.model.Token;
 import com.thoughtspot.client.model.TokenValidationResponse;
 import com.thoughtspot.client.model.User;
@@ -24,6 +27,38 @@ import org.junit.jupiter.api.Test;
 public class AuthenticationApiTest {
 
     private final AuthenticationApi api = new AuthenticationApi();
+
+    /**
+     * Version: 26.6.0.cl or later Enables or disables authentication at cluster or org level for
+     * the specified auth type. Currently supports &#x60;TRUSTED_AUTH&#x60;. #### Required
+     * privileges Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required. #### Usage guidelines Use
+     * &#x60;cluster_preferences&#x60; to enable or disable authentication at the cluster level.
+     * Cluster-level settings can only be configured from the Primary Org. - &#x60;ENABLED&#x60; —
+     * Generates a new access token if one does not exist. An existing token is preserved. -
+     * &#x60;DISABLED&#x60; — Revokes the existing cluster-level access token. Use
+     * &#x60;org_preferences&#x60; to enable or disable authentication for one or more Orgs. Each
+     * entry must include an &#x60;org_identifier&#x60; (unique ID or name) and an
+     * &#x60;auth_status&#x60;. Org-level configuration requires the per-Org authentication feature
+     * to be enabled on your instance. - &#x60;ENABLED&#x60; — Generates a new org-level access
+     * token if one does not exist. - &#x60;DISABLED&#x60; — Revokes the existing org-level access
+     * token for that Org. Both &#x60;cluster_preferences&#x60; and &#x60;org_preferences&#x60; are
+     * optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted,
+     * the API returns &#x60;204 No Content&#x60; without making any changes. **Note**:
+     * Cluster-level and org-level settings are independent of each other. Enabling or disabling one
+     * does not affect the other.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void configureAuthSettingsTest() throws ApiException {
+        ConfigureAuthSettingsRequest configureAuthSettingsRequest = null;
+        api.configureAuthSettings(configureAuthSettingsRequest);
+        // TODO: test validations
+    }
 
     /**
      * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
@@ -256,6 +291,33 @@ public class AuthenticationApiTest {
     public void revokeTokenTest() throws ApiException {
         RevokeTokenRequest revokeTokenRequest = null;
         api.revokeToken(revokeTokenRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Returns the authentication configuration for the specified auth
+     * type at cluster and org level. Currently supports &#x60;TRUSTED_AUTH&#x60;. #### Required
+     * privileges Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required. #### Usage guidelines Use
+     * &#x60;scope&#x60; to control which level of settings are returned: - &#x60;CLUSTER&#x60; —
+     * Returns cluster-level authentication status and access tokens. Accessible only from the
+     * Primary Org. - &#x60;ORG&#x60; — Returns org-level authentication status and access tokens
+     * for the current Org. Requires the per-Org authentication feature to be enabled on your
+     * instance. - If &#x60;scope&#x60; is omitted, both cluster and org-level settings are returned
+     * based on the caller&#39;s org context and feature availability. The &#x60;access_tokens&#x60;
+     * array in &#x60;cluster_preferences&#x60; or &#x60;org_preferences&#x60; is omitted when no
+     * token is configured at that level. **Note**: Access tokens returned in the response are
+     * sensitive credentials. Treat them with the same care as passwords.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchAuthSettingsTest() throws ApiException {
+        SearchAuthSettingsRequest searchAuthSettingsRequest = null;
+        SearchAuthSettingsResponse response = api.searchAuthSettings(searchAuthSettingsRequest);
         // TODO: test validations
     }
 

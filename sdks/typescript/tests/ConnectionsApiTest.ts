@@ -318,6 +318,42 @@ describe('ConnectionsApi', function() {
         });     
       });
 
+      describe('updateConnectionStatus', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateConnectionStatus"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateConnectionStatus(
+                    // connectionIdentifier connection_identifier
+                    test.Path_Variables.connection_identifier     , 
+                    // updateConnectionStatusRequest UpdateConnectionStatusRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateConnectionStatus(
+                    // connectionIdentifier connection_identifier
+                    test.Path_Variables.connection_identifier     , 
+                    // updateConnectionStatusRequest UpdateConnectionStatusRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('updateConnectionV2', function() {
 
         const testReqBodies = requestBodies.filter(

@@ -17,6 +17,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**sendMessage**](AiApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
 | [**setNLInstructions**](AiApi.md#setNLInstructions) | **POST** /api/rest/2.0/ai/instructions/set |
 | [**singleAnswer**](AiApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create |
+| [**stopConversation**](AiApi.md#stopConversation) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response |
 
 
 <a id="createAgentConversation"></a>
@@ -499,6 +500,42 @@ All URIs are relative to *CLUSTER_URL*
 |-------------|-------------|------------------|
 | **200** | Common successful response |  -  |
 | **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="stopConversation"></a>
+# **stopConversation**
+> stopConversation(conversationIdentifier)
+
+
+
+ Stops an in-progress agent conversation response.    Version: 26.6.0.cl or later   &lt;span&gt;Version: 26.6.0.cl or later   Stops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60;  A successful request returns an empty &#x60;204 No Content&#x60; response. If there is no active response in progress at the time of the call, the request is still treated as successful.  After stopping a response, the conversation session remains active. You can continue sending messages using &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;.  #### Example request  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response &#x60;&#x60;&#x60;  #### Typical usage scenario  This endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:  1. User sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The stream is terminated and the user can ask a new question.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. |  &gt; ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not return an error. &gt; - The conversation context is preserved after stopping — previous messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt; - This feature is available only for **Spotter 3** (&#x60;SPOTTER3&#x60;) version.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully stopped the in-progress agent conversation response for the given. |  -  |
 | **400** | Operation failed |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

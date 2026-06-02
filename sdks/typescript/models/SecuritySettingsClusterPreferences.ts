@@ -32,6 +32,10 @@ export class SecuritySettingsClusterPreferences {
     */
     'saml_redirect_urls'?: Array<string> | null;
     'non_embed_access'?: ClusterNonEmbedAccess;
+    /**
+    * Trusted authentication status at the cluster level.    Version: 26.6.0.cl or later 
+    */
+    'trusted_auth_status'?: SecuritySettingsClusterPreferencesTrustedAuthStatusEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -65,6 +69,12 @@ export class SecuritySettingsClusterPreferences {
             "baseName": "non_embed_access",
             "type": "ClusterNonEmbedAccess",
             "format": ""
+        },
+        {
+            "name": "trusted_auth_status",
+            "baseName": "trusted_auth_status",
+            "type": "SecuritySettingsClusterPreferencesTrustedAuthStatusEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -74,4 +84,7 @@ export class SecuritySettingsClusterPreferences {
     public constructor() {
     }
 }
+
+
+export type SecuritySettingsClusterPreferencesTrustedAuthStatusEnum = "ENABLED" | "DISABLED" ;
 

@@ -24,6 +24,10 @@ export class SecuritySettingsOrgPreferences {
     */
     'cors_whitelisted_urls'?: Array<string> | null;
     'non_embed_access'?: OrgNonEmbedAccess;
+    /**
+    * Trusted authentication status for this org.    Version: 26.6.0.cl or later 
+    */
+    'trusted_auth_status'?: SecuritySettingsOrgPreferencesTrustedAuthStatusEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -45,6 +49,12 @@ export class SecuritySettingsOrgPreferences {
             "baseName": "non_embed_access",
             "type": "OrgNonEmbedAccess",
             "format": ""
+        },
+        {
+            "name": "trusted_auth_status",
+            "baseName": "trusted_auth_status",
+            "type": "SecuritySettingsOrgPreferencesTrustedAuthStatusEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -54,4 +64,7 @@ export class SecuritySettingsOrgPreferences {
     public constructor() {
     }
 }
+
+
+export type SecuritySettingsOrgPreferencesTrustedAuthStatusEnum = "ENABLED" | "DISABLED" ;
 

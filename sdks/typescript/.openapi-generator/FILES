@@ -75,10 +75,17 @@ models/ActivateUserRequest.ts
 models/AgentConversation.ts
 models/AnswerContent.ts
 models/AnswerDataResponse.ts
+models/AnswerPngOptionsInput.ts
 models/AssignChangeAuthorRequest.ts
 models/AssignTagRequest.ts
 models/AssociateMetadataInput.ts
 models/AssociateMetadataInputCreate.ts
+models/AuthClusterPreferences.ts
+models/AuthClusterPreferencesInput.ts
+models/AuthOrgInfo.ts
+models/AuthOrgPreference.ts
+models/AuthOrgPreferenceInput.ts
+models/AuthSettingsAccessToken.ts
 models/Authentication.ts
 models/AuthenticationInput.ts
 models/Author.ts
@@ -123,6 +130,8 @@ models/CommitResponse.ts
 models/CommiterType.ts
 models/CommunicationChannelPreferencesResponse.ts
 models/CommunicationChannelValidateResponse.ts
+models/ConfigureAuthSettingsRequest.ts
+models/ConfigureAuthSettingsRequestClusterPreferences.ts
 models/ConfigureCommunicationChannelPreferencesRequest.ts
 models/ConfigureSecuritySettingsRequest.ts
 models/ConfigureSecuritySettingsRequestClusterPreferences.ts
@@ -208,6 +217,7 @@ models/EventChannelConfig.ts
 models/EventChannelConfigInput.ts
 models/ExcludeMetadataListItemInput.ts
 models/ExportAnswerReportRequest.ts
+models/ExportAnswerReportRequestPngOptions.ts
 models/ExportAnswerReportRequestRegionalSettings.ts
 models/ExportLiveboardReportRequest.ts
 models/ExportLiveboardReportRequestPdfOptions.ts
@@ -365,6 +375,8 @@ models/SchemaObject.ts
 models/Scope.ts
 models/ScriptSrcUrls.ts
 models/ScriptSrcUrlsInput.ts
+models/SearchAuthSettingsRequest.ts
+models/SearchAuthSettingsResponse.ts
 models/SearchCalendarsRequest.ts
 models/SearchCalendarsRequestSortOptions.ts
 models/SearchChannelHistoryRequest.ts
@@ -451,6 +463,7 @@ models/UpdateColumnSecurityRulesRequest.ts
 models/UpdateConfigRequest.ts
 models/UpdateConnectionConfigurationRequest.ts
 models/UpdateConnectionRequest.ts
+models/UpdateConnectionStatusRequest.ts
 models/UpdateConnectionV2Request.ts
 models/UpdateCustomActionRequest.ts
 models/UpdateCustomActionRequestActionDetails.ts
@@ -486,6 +499,7 @@ models/ValidateTokenRequest.ts
 models/ValueScopeInput.ts
 models/Variable.ts
 models/VariableDetailInput.ts
+models/VariableOrgInfo.ts
 models/VariablePutAssignmentInput.ts
 models/VariableUpdateAssignmentInput.ts
 models/VariableUpdateScopeInput.ts

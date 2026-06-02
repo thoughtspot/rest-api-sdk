@@ -15,10 +15,17 @@ import { ActivateUserRequest } from '../models/ActivateUserRequest';
 import { AgentConversation } from '../models/AgentConversation';
 import { AnswerContent } from '../models/AnswerContent';
 import { AnswerDataResponse } from '../models/AnswerDataResponse';
+import { AnswerPngOptionsInput } from '../models/AnswerPngOptionsInput';
 import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
 import { AssignTagRequest } from '../models/AssignTagRequest';
 import { AssociateMetadataInput } from '../models/AssociateMetadataInput';
 import { AssociateMetadataInputCreate } from '../models/AssociateMetadataInputCreate';
+import { AuthClusterPreferences } from '../models/AuthClusterPreferences';
+import { AuthClusterPreferencesInput } from '../models/AuthClusterPreferencesInput';
+import { AuthOrgInfo } from '../models/AuthOrgInfo';
+import { AuthOrgPreference } from '../models/AuthOrgPreference';
+import { AuthOrgPreferenceInput } from '../models/AuthOrgPreferenceInput';
+import { AuthSettingsAccessToken } from '../models/AuthSettingsAccessToken';
 import { Authentication } from '../models/Authentication';
 import { AuthenticationInput } from '../models/AuthenticationInput';
 import { Author } from '../models/Author';
@@ -63,6 +70,8 @@ import { CommitResponse } from '../models/CommitResponse';
 import { CommiterType } from '../models/CommiterType';
 import { CommunicationChannelPreferencesResponse } from '../models/CommunicationChannelPreferencesResponse';
 import { CommunicationChannelValidateResponse } from '../models/CommunicationChannelValidateResponse';
+import { ConfigureAuthSettingsRequest } from '../models/ConfigureAuthSettingsRequest';
+import { ConfigureAuthSettingsRequestClusterPreferences } from '../models/ConfigureAuthSettingsRequestClusterPreferences';
 import { ConfigureCommunicationChannelPreferencesRequest } from '../models/ConfigureCommunicationChannelPreferencesRequest';
 import { ConfigureSecuritySettingsRequest } from '../models/ConfigureSecuritySettingsRequest';
 import { ConfigureSecuritySettingsRequestClusterPreferences } from '../models/ConfigureSecuritySettingsRequestClusterPreferences';
@@ -148,6 +157,7 @@ import { EventChannelConfig } from '../models/EventChannelConfig';
 import { EventChannelConfigInput } from '../models/EventChannelConfigInput';
 import { ExcludeMetadataListItemInput } from '../models/ExcludeMetadataListItemInput';
 import { ExportAnswerReportRequest } from '../models/ExportAnswerReportRequest';
+import { ExportAnswerReportRequestPngOptions } from '../models/ExportAnswerReportRequestPngOptions';
 import { ExportAnswerReportRequestRegionalSettings } from '../models/ExportAnswerReportRequestRegionalSettings';
 import { ExportLiveboardReportRequest } from '../models/ExportLiveboardReportRequest';
 import { ExportLiveboardReportRequestPdfOptions } from '../models/ExportLiveboardReportRequestPdfOptions';
@@ -304,6 +314,8 @@ import { SchemaObject } from '../models/SchemaObject';
 import { Scope } from '../models/Scope';
 import { ScriptSrcUrls } from '../models/ScriptSrcUrls';
 import { ScriptSrcUrlsInput } from '../models/ScriptSrcUrlsInput';
+import { SearchAuthSettingsRequest } from '../models/SearchAuthSettingsRequest';
+import { SearchAuthSettingsResponse } from '../models/SearchAuthSettingsResponse';
 import { SearchCalendarsRequest } from '../models/SearchCalendarsRequest';
 import { SearchCalendarsRequestSortOptions } from '../models/SearchCalendarsRequestSortOptions';
 import { SearchChannelHistoryRequest } from '../models/SearchChannelHistoryRequest';
@@ -390,6 +402,7 @@ import { UpdateColumnSecurityRulesRequest } from '../models/UpdateColumnSecurity
 import { UpdateConfigRequest } from '../models/UpdateConfigRequest';
 import { UpdateConnectionConfigurationRequest } from '../models/UpdateConnectionConfigurationRequest';
 import { UpdateConnectionRequest } from '../models/UpdateConnectionRequest';
+import { UpdateConnectionStatusRequest } from '../models/UpdateConnectionStatusRequest';
 import { UpdateConnectionV2Request } from '../models/UpdateConnectionV2Request';
 import { UpdateCustomActionRequest } from '../models/UpdateCustomActionRequest';
 import { UpdateCustomActionRequestActionDetails } from '../models/UpdateCustomActionRequestActionDetails';
@@ -425,6 +438,7 @@ import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
 import { ValueScopeInput } from '../models/ValueScopeInput';
 import { Variable } from '../models/Variable';
 import { VariableDetailInput } from '../models/VariableDetailInput';
+import { VariableOrgInfo } from '../models/VariableOrgInfo';
 import { VariablePutAssignmentInput } from '../models/VariablePutAssignmentInput';
 import { VariableUpdateAssignmentInput } from '../models/VariableUpdateAssignmentInput';
 import { VariableUpdateScopeInput } from '../models/VariableUpdateScopeInput';
@@ -595,6 +609,15 @@ export interface AIApiSingleAnswerRequest {
     singleAnswerRequest: SingleAnswerRequest
 }
 
+export interface AIApiStopConversationRequest {
+    /**
+     * Unique identifier of the conversation to stop.
+     * @type string
+     * @memberof AIApistopConversation
+     */
+    conversationIdentifier: string
+}
+
 export class ObjectAIApi {
     private api: ObservableAIApi
 
@@ -706,10 +729,27 @@ export class ObjectAIApi {
         return this.api.singleAnswer(param.singleAnswerRequest,  options).toPromise();
     }
 
+    /**
+     *  Stops an in-progress agent conversation response.    Version: 26.6.0.cl or later   <span>Version: 26.6.0.cl or later   Stops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.  Requires `CAN_USE_SPOTTER` privilege and access to the specified conversation.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by `createAgentConversation`  A successful request returns an empty `204 No Content` response. If there is no active response in progress at the time of the call, the request is still treated as successful.  After stopping a response, the conversation session remains active. You can continue sending messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.  #### Example request  ```bash POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response ```  #### Typical usage scenario  This endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:  1. User sends a message via `sendAgentConversationMessageStreaming`. 2. User clicks a \"Stop generating\" button while the response is streaming. 3. Your client calls `stopConversation` with the active `conversation_identifier`. 4. The stream is terminated and the user can ask a new question.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |  > ###### Note: > > - Calling this endpoint when no response is in progress does not return an error. > - The conversation context is preserved after stopping — previous messages and answers remain accessible. > - Available from version 26.6.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > - This feature is available only for **Spotter 3** (`SPOTTER3`) version.      
+     * @param param the request object
+     */
+    public stopConversation(param: AIApiStopConversationRequest, options?: Configuration): Promise<void> {
+        return this.api.stopConversation(param.conversationIdentifier,  options).toPromise();
+    }
+
 }
 
 import { ObservableAuthenticationApi } from "./ObservableAPI";
 import { AuthenticationApiRequestFactory, AuthenticationApiResponseProcessor} from "../apis/AuthenticationApi";
+
+export interface AuthenticationApiConfigureAuthSettingsRequest {
+    /**
+     * 
+     * @type ConfigureAuthSettingsRequest
+     * @memberof AuthenticationApiconfigureAuthSettings
+     */
+    configureAuthSettingsRequest: ConfigureAuthSettingsRequest
+}
 
 export interface AuthenticationApiGetCurrentUserInfoRequest {
 }
@@ -765,6 +805,15 @@ export interface AuthenticationApiRevokeTokenRequest {
     revokeTokenRequest: RevokeTokenRequest
 }
 
+export interface AuthenticationApiSearchAuthSettingsRequest {
+    /**
+     * 
+     * @type SearchAuthSettingsRequest
+     * @memberof AuthenticationApisearchAuthSettings
+     */
+    searchAuthSettingsRequest: SearchAuthSettingsRequest
+}
+
 export interface AuthenticationApiValidateTokenRequest {
     /**
      * 
@@ -779,6 +828,14 @@ export class ObjectAuthenticationApi {
 
     public constructor(configuration: Configuration, requestFactory?: AuthenticationApiRequestFactory, responseProcessor?: AuthenticationApiResponseProcessor) {
         this.api = new ObservableAuthenticationApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     *   Version: 26.6.0.cl or later   Enables or disables authentication at cluster or org level for the specified auth type. Currently supports `TRUSTED_AUTH`.  #### Required privileges  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.  #### Usage guidelines  Use `cluster_preferences` to enable or disable authentication at the cluster level. Cluster-level settings can only be configured from the Primary Org. - `ENABLED` — Generates a new access token if one does not exist. An existing token is preserved. - `DISABLED` — Revokes the existing cluster-level access token.  Use `org_preferences` to enable or disable authentication for one or more Orgs. Each entry must include an `org_identifier` (unique ID or name) and an `auth_status`. Org-level configuration requires the per-Org authentication feature to be enabled on your instance. - `ENABLED` — Generates a new org-level access token if one does not exist. - `DISABLED` — Revokes the existing org-level access token for that Org.  Both `cluster_preferences` and `org_preferences` are optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted, the API returns `204 No Content` without making any changes.  **Note**: Cluster-level and org-level settings are independent of each other. Enabling or disabling one does not affect the other.      
+     * @param param the request object
+     */
+    public configureAuthSettings(param: AuthenticationApiConfigureAuthSettingsRequest, options?: Configuration): Promise<void> {
+        return this.api.configureAuthSettings(param.configureAuthSettingsRequest,  options).toPromise();
     }
 
     /**
@@ -843,6 +900,14 @@ export class ObjectAuthenticationApi {
      */
     public revokeToken(param: AuthenticationApiRevokeTokenRequest, options?: Configuration): Promise<void> {
         return this.api.revokeToken(param.revokeTokenRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.6.0.cl or later   Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports `TRUSTED_AUTH`.  #### Required privileges  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.  #### Usage guidelines  Use `scope` to control which level of settings are returned: - `CLUSTER` — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org. - `ORG` — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance. - If `scope` is omitted, both cluster and org-level settings are returned based on the caller\'s org context and feature availability.  The `access_tokens` array in `cluster_preferences` or `org_preferences` is omitted when no token is configured at that level.  **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.      
+     * @param param the request object
+     */
+    public searchAuthSettings(param: AuthenticationApiSearchAuthSettingsRequest, options?: Configuration): Promise<SearchAuthSettingsResponse> {
+        return this.api.searchAuthSettings(param.searchAuthSettingsRequest,  options).toPromise();
     }
 
     /**
@@ -1123,6 +1188,21 @@ export interface ConnectionsApiUpdateConnectionRequest {
     updateConnectionRequest: UpdateConnectionRequest
 }
 
+export interface ConnectionsApiUpdateConnectionStatusRequest {
+    /**
+     * Unique ID or name of the connection.
+     * @type string
+     * @memberof ConnectionsApiupdateConnectionStatus
+     */
+    connectionIdentifier: string
+    /**
+     * 
+     * @type UpdateConnectionStatusRequest
+     * @memberof ConnectionsApiupdateConnectionStatus
+     */
+    updateConnectionStatusRequest: UpdateConnectionStatusRequest
+}
+
 export interface ConnectionsApiUpdateConnectionV2Request {
     /**
      * Unique ID or name of the connection.
@@ -1215,6 +1295,14 @@ export class ObjectConnectionsApi {
      */
     public updateConnection(param: ConnectionsApiUpdateConnectionRequest, options?: Configuration): Promise<void> {
         return this.api.updateConnection(param.updateConnectionRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.6.0.cl or later   Activates or deactivates a connection. A deactivated connection cannot be used for queries or operations until it is activated again.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required. Only the connection owner or an administrator can perform this operation.  #### Usage guidelines  To update the status of a connection, specify the connection GUID or name in the `connection_identifier` path parameter and the desired `status` in the request body.  - **ACTIVATED**: Enables the connection. Queries and operations can resume on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove the connection metadata, but only makes the connection unavailable for queries and operations. You can reactivate a deactivated connection by setting \"status\": \"ACTIVATED\".       
+     * @param param the request object
+     */
+    public updateConnectionStatus(param: ConnectionsApiUpdateConnectionStatusRequest, options?: Configuration): Promise<void> {
+        return this.api.updateConnectionStatus(param.connectionIdentifier, param.updateConnectionStatusRequest,  options).toPromise();
     }
 
     /**
@@ -3085,6 +3173,15 @@ export interface ThoughtSpotRestApiCommitBranchRequest {
     commitBranchRequest: CommitBranchRequest
 }
 
+export interface ThoughtSpotRestApiConfigureAuthSettingsRequest {
+    /**
+     * 
+     * @type ConfigureAuthSettingsRequest
+     * @memberof ThoughtSpotRestApiconfigureAuthSettings
+     */
+    configureAuthSettingsRequest: ConfigureAuthSettingsRequest
+}
+
 export interface ThoughtSpotRestApiConfigureCommunicationChannelPreferencesRequest {
     /**
      * 
@@ -3982,6 +4079,15 @@ export interface ThoughtSpotRestApiRevokeTokenRequest {
     revokeTokenRequest: RevokeTokenRequest
 }
 
+export interface ThoughtSpotRestApiSearchAuthSettingsRequest {
+    /**
+     * 
+     * @type SearchAuthSettingsRequest
+     * @memberof ThoughtSpotRestApisearchAuthSettings
+     */
+    searchAuthSettingsRequest: SearchAuthSettingsRequest
+}
+
 export interface ThoughtSpotRestApiSearchCalendarsRequest {
     /**
      * 
@@ -4258,6 +4364,15 @@ export interface ThoughtSpotRestApiSingleAnswerRequest {
     singleAnswerRequest: SingleAnswerRequest
 }
 
+export interface ThoughtSpotRestApiStopConversationRequest {
+    /**
+     * Unique identifier of the conversation to stop.
+     * @type string
+     * @memberof ThoughtSpotRestApistopConversation
+     */
+    conversationIdentifier: string
+}
+
 export interface ThoughtSpotRestApiSyncMetadataRequest {
     /**
      * Unique ID or name of the connection.
@@ -4370,6 +4485,21 @@ export interface ThoughtSpotRestApiUpdateConnectionConfigurationRequest {
      * @memberof ThoughtSpotRestApiupdateConnectionConfiguration
      */
     updateConnectionConfigurationRequest: UpdateConnectionConfigurationRequest
+}
+
+export interface ThoughtSpotRestApiUpdateConnectionStatusRequest {
+    /**
+     * Unique ID or name of the connection.
+     * @type string
+     * @memberof ThoughtSpotRestApiupdateConnectionStatus
+     */
+    connectionIdentifier: string
+    /**
+     * 
+     * @type UpdateConnectionStatusRequest
+     * @memberof ThoughtSpotRestApiupdateConnectionStatus
+     */
+    updateConnectionStatusRequest: UpdateConnectionStatusRequest
 }
 
 export interface ThoughtSpotRestApiUpdateConnectionV2Request {
@@ -4711,6 +4841,14 @@ export class ObjectThoughtSpotRestApi {
      */
     public commitBranch(param: ThoughtSpotRestApiCommitBranchRequest, options?: Configuration): Promise<CommitResponse> {
         return this.api.commitBranch(param.commitBranchRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.6.0.cl or later   Enables or disables authentication at cluster or org level for the specified auth type. Currently supports `TRUSTED_AUTH`.  #### Required privileges  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.  #### Usage guidelines  Use `cluster_preferences` to enable or disable authentication at the cluster level. Cluster-level settings can only be configured from the Primary Org. - `ENABLED` — Generates a new access token if one does not exist. An existing token is preserved. - `DISABLED` — Revokes the existing cluster-level access token.  Use `org_preferences` to enable or disable authentication for one or more Orgs. Each entry must include an `org_identifier` (unique ID or name) and an `auth_status`. Org-level configuration requires the per-Org authentication feature to be enabled on your instance. - `ENABLED` — Generates a new org-level access token if one does not exist. - `DISABLED` — Revokes the existing org-level access token for that Org.  Both `cluster_preferences` and `org_preferences` are optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted, the API returns `204 No Content` without making any changes.  **Note**: Cluster-level and org-level settings are independent of each other. Enabling or disabling one does not affect the other.      
+     * @param param the request object
+     */
+    public configureAuthSettings(param: ThoughtSpotRestApiConfigureAuthSettingsRequest, options?: Configuration): Promise<void> {
+        return this.api.configureAuthSettings(param.configureAuthSettingsRequest,  options).toPromise();
     }
 
     /**
@@ -5458,6 +5596,14 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *   Version: 26.6.0.cl or later   Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports `TRUSTED_AUTH`.  #### Required privileges  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.  #### Usage guidelines  Use `scope` to control which level of settings are returned: - `CLUSTER` — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org. - `ORG` — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance. - If `scope` is omitted, both cluster and org-level settings are returned based on the caller\'s org context and feature availability.  The `access_tokens` array in `cluster_preferences` or `org_preferences` is omitted when no token is configured at that level.  **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.      
+     * @param param the request object
+     */
+    public searchAuthSettings(param: ThoughtSpotRestApiSearchAuthSettingsRequest, options?: Configuration): Promise<SearchAuthSettingsResponse> {
+        return this.api.searchAuthSettings(param.searchAuthSettingsRequest,  options).toPromise();
+    }
+
+    /**
      *   Version: 10.12.0.cl or later   Gets a list of [custom calendars](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR` (**Can manage custom calendars**) privilege is required.  #### Usage guidelines  By default, the API returns a list of custom calendars for all connection objects. To retrieve custom calendar details for a particular connection, specify the connection ID. You can also use other search parameters such as `name_pattern` and `sort_options` as search filters.  The `name_pattern` parameter filters and returns only those objects that match the specified pattern. Use `%` as a wildcard for pattern matching.      
      * @param param the request object
      */
@@ -5682,6 +5828,14 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *  Stops an in-progress agent conversation response.    Version: 26.6.0.cl or later   <span>Version: 26.6.0.cl or later   Stops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.  Requires `CAN_USE_SPOTTER` privilege and access to the specified conversation.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by `createAgentConversation`  A successful request returns an empty `204 No Content` response. If there is no active response in progress at the time of the call, the request is still treated as successful.  After stopping a response, the conversation session remains active. You can continue sending messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.  #### Example request  ```bash POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response ```  #### Typical usage scenario  This endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:  1. User sends a message via `sendAgentConversationMessageStreaming`. 2. User clicks a \"Stop generating\" button while the response is streaming. 3. Your client calls `stopConversation` with the active `conversation_identifier`. 4. The stream is terminated and the user can ask a new question.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |  > ###### Note: > > - Calling this endpoint when no response is in progress does not return an error. > - The conversation context is preserved after stopping — previous messages and answers remain accessible. > - Available from version 26.6.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > - This feature is available only for **Spotter 3** (`SPOTTER3`) version.      
+     * @param param the request object
+     */
+    public stopConversation(param: ThoughtSpotRestApiStopConversationRequest, options?: Configuration): Promise<void> {
+        return this.api.stopConversation(param.conversationIdentifier,  options).toPromise();
+    }
+
+    /**
      *   Version: 26.5.0.cl or later   Synchronizes connection metadata attributes from your Cloud Data Warehouse (CDW) with ThoughtSpot.  Requires the  `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.  #### Usage guidelines  To synchronize attributes from a CDW, specify the connection GUID or name in the `connection_identifier` path parameter and  `sync_attributes` in the request body. Default attribute is `[\"DESCRIPTION\"]`.  ##### Hierarchical schema  * Connection: The connection object for the sync operation. * Tables: Tables for the sync operation. When no table is specified, all tables are synchronized. * Columns: If the table is specified, you can add the columns for the sync operation. If no columns are specified, all columns in the specified table are considered for the sync operation.  To set the scope for the sync operation:  * Connection-level: To sync all tables and columns, pass an empty request body, or only the attributes in the request body. * Table-level: To synchronize specific tables and their columns, specify the table identifiers in the `tables` array. * Column-level: To synchronize specific columns, specify the table identifier as the key and column identifiers as the value in the `tables` array.  ``` {   \"tables\": [     {\"table-guid-1\": [\"column-guid-1\", \"column-guid-2\"]},     \"table-guid-2\"   ],   \"sync_attributes\": [\"DESCRIPTION\"] } ```  ##### API response  If the sync operation is successful, the API returns the following information:  * Status of the sync operation. For example, `SUCCESS`, `PARTIAL_SUCCESS`, or `NO_UPDATE`. * Number of tables and columns that were updated. * Number of tables and columns with the sync failed status when the overall sync status is `PARTIAL_SUCCESS`. * Message text indicating the sync results.      
      * @param param the request object
      */
@@ -5759,6 +5913,14 @@ export class ObjectThoughtSpotRestApi {
      */
     public updateConnectionConfiguration(param: ThoughtSpotRestApiUpdateConnectionConfigurationRequest, options?: Configuration): Promise<void> {
         return this.api.updateConnectionConfiguration(param.configurationIdentifier, param.updateConnectionConfigurationRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.6.0.cl or later   Activates or deactivates a connection. A deactivated connection cannot be used for queries or operations until it is activated again.  Requires `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required. Only the connection owner or an administrator can perform this operation.  #### Usage guidelines  To update the status of a connection, specify the connection GUID or name in the `connection_identifier` path parameter and the desired `status` in the request body.  - **ACTIVATED**: Enables the connection. Queries and operations can resume on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove the connection metadata, but only makes the connection unavailable for queries and operations. You can reactivate a deactivated connection by setting \"status\": \"ACTIVATED\".       
+     * @param param the request object
+     */
+    public updateConnectionStatus(param: ThoughtSpotRestApiUpdateConnectionStatusRequest, options?: Configuration): Promise<void> {
+        return this.api.updateConnectionStatus(param.connectionIdentifier, param.updateConnectionStatusRequest,  options).toPromise();
     }
 
     /**
