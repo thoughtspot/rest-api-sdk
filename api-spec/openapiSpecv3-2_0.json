@@ -10701,7 +10701,7 @@
     "/api/rest/2.0/customization/styles/update": {
       "post": {
         "operationId": "updateStyleCustomization",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts` and `visualization_fonts.table_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -20978,6 +20978,14 @@
             },
             "description": "Font assignments for table visualization areas.",
             "nullable": true
+          },
+          "advanced_chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvancedChartVisualizationFontRecord"
+            },
+            "description": "Font assignments for advanced chart visualization areas.",
+            "nullable": true
           }
         },
         "description": "Effective font assignments per visualization type."
@@ -21049,6 +21057,35 @@
           }
         },
         "description": "Font assignment for a table visualization area in the response."
+      },
+      "AdvancedChartVisualizationFontRecord": {
+        "type": "object",
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "ADVANCED_CHART_LABELS"
+            ],
+            "description": "Advanced chart visualization area.",
+            "nullable": true
+          },
+          "font_id": {
+            "type": "string",
+            "description": "UUID of the font assigned to this area. Null when the system default font\nis active.",
+            "nullable": true
+          },
+          "font_name": {
+            "type": "string",
+            "description": "Display name of the font assigned to this area. Null when the system\ndefault font is active.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for an advanced chart visualization area in the response."
       },
       "StyleFontRecord": {
         "type": "object",
@@ -21145,7 +21182,8 @@
                 "CHART_COLUMN_DATA_LABELS",
                 "CHART_BAR_DATA_LABELS",
                 "CHART_AREA_DATA_LABELS",
-                "TABLE_VALUE_CELLS"
+                "TABLE_VALUE_CELLS",
+                "ADVANCED_CHART_LABELS"
               ]
             },
             "description": "Visualization areas using this font.",
@@ -25442,7 +25480,8 @@
                 "CHART_COLUMN_DATA_LABELS",
                 "CHART_BAR_DATA_LABELS",
                 "CHART_AREA_DATA_LABELS",
-                "TABLE_VALUE_CELLS"
+                "TABLE_VALUE_CELLS",
+                "ADVANCED_CHART_LABELS"
               ]
             },
             "description": "Visualization areas whose font assignments should revert to the system\ndefault font.",
@@ -25530,6 +25569,14 @@
             },
             "description": "Font assignments for table visualization areas. Provide only the areas to\nupdate; omitted areas remain unchanged.",
             "nullable": true
+          },
+          "advanced_chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvancedChartFontAssignmentInput"
+            },
+            "description": "Font assignments for advanced chart visualization areas. Provide only the\nareas to update; omitted areas remain unchanged.",
+            "nullable": true
           }
         },
         "description": "Font assignments grouped by visualization type."
@@ -25585,6 +25632,27 @@
           }
         },
         "description": "Font assignment for a single table visualization area."
+      },
+      "AdvancedChartFontAssignmentInput": {
+        "type": "object",
+        "required": [
+          "visualization_area",
+          "font_identifier"
+        ],
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "ADVANCED_CHART_LABELS"
+            ],
+            "description": "Advanced chart visualization area to assign the font to."
+          },
+          "font_identifier": {
+            "type": "string",
+            "description": "UUID or name of the font to assign to this area."
+          }
+        },
+        "description": "Font assignment for a single advanced chart visualization area."
       },
       "StyleFontUploadData": {
         "type": "object",
@@ -25642,7 +25710,8 @@
                 "CHART_COLUMN_DATA_LABELS",
                 "CHART_BAR_DATA_LABELS",
                 "CHART_AREA_DATA_LABELS",
-                "TABLE_VALUE_CELLS"
+                "TABLE_VALUE_CELLS",
+                "ADVANCED_CHART_LABELS"
               ]
             },
             "description": "Visualization areas that used the deleted font and were automatically reset\nto the system default font.",
