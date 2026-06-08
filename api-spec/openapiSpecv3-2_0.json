@@ -10154,6 +10154,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Field 'font_identifiers' must contain at least one identifier."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10164,6 +10179,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to delete custom fonts from the font library."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10174,6 +10204,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Only Tenant admin can delete cluster-level fonts."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10184,6 +10229,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting fonts from the font library."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10544,6 +10604,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Field 'org_identifiers' is only allowed when scope is ORG."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10554,6 +10629,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve style preferences for the cluster or org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10564,6 +10654,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Cluster config can only be accessed from PRIMARY org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10574,6 +10679,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving style customization preferences."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10661,6 +10781,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Only one of 'font_identifier' or 'name_pattern' may be provided."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10671,6 +10806,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to search the cluster-level or org-level font library."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10681,6 +10831,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Cluster config can only be accessed from PRIMARY org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10691,6 +10856,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while searching the font library."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11015,6 +11195,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Unsupported font format. Only WOFF and WOFF2 are accepted."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11025,6 +11220,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to upload a custom font to the font library."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11035,6 +11245,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Cluster config can only be accessed from PRIMARY org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11045,6 +11270,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while uploading the custom font."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
