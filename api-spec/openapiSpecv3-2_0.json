@@ -23166,8 +23166,7 @@
               "USER",
               "USER_GROUP",
               "ROLE",
-              "FEEDBACK",
-              "COLLECTION"
+              "FEEDBACK"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -28681,12 +28680,6 @@
             "default": false,
             "type": "boolean",
             "nullable": true
-          },
-          "enable_personalized_view_upsert": {
-            "description": "<div><span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span></div>\n\nBoolean flag to enable update/insert of personalized views in liveboard.",
-            "default": false,
-            "type": "boolean",
-            "nullable": true
           }
         },
         "required": [
@@ -28734,12 +28727,6 @@
           },
           "enable_large_metadata_validation": {
             "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
-            "default": false,
-            "type": "boolean",
-            "nullable": true
-          },
-          "enable_personalized_view_upsert": {
-            "description": "<div><span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span></div>\n\nBoolean flag to enable update/insert of personalized views in liveboard.",
             "default": false,
             "type": "boolean",
             "nullable": true
