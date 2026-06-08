@@ -20984,7 +20984,7 @@
             "items": {
               "$ref": "#/components/schemas/AdvancedChartVisualizationFontRecord"
             },
-            "description": "Font assignments for advanced chart visualization areas.",
+            "description": "Font assignments for advanced chart visualization areas. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -25575,7 +25575,7 @@
             "items": {
               "$ref": "#/components/schemas/AdvancedChartFontAssignmentInput"
             },
-            "description": "Font assignments for advanced chart visualization areas. Provide only the\nareas to update; omitted areas remain unchanged.",
+            "description": "Font assignments for advanced chart visualization areas. Provide only the\nareas to update; omitted areas remain unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -25645,11 +25645,11 @@
             "enum": [
               "ADVANCED_CHART_LABELS"
             ],
-            "description": "Advanced chart visualization area to assign the font to."
+            "description": "Advanced chart visualization area to assign the font to. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>"
           },
           "font_identifier": {
             "type": "string",
-            "description": "UUID or name of the font to assign to this area."
+            "description": "UUID or name of the font to assign to this area. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>"
           }
         },
         "description": "Font assignment for a single advanced chart visualization area."
