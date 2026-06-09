@@ -11958,7 +11958,7 @@ declare class HeaderUpdateInput {
     }[];
     constructor();
 }
-type HeaderUpdateInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP";
+type HeaderUpdateInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "FOLDER";
 
 /**
  * ThoughtSpot Public REST API
@@ -21457,7 +21457,7 @@ declare class UpdateObjIdInput {
     }[];
     constructor();
 }
-type UpdateObjIdInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP";
+type UpdateObjIdInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "FOLDER";
 
 /**
  * ThoughtSpot Public REST API

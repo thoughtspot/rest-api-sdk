@@ -27,6 +27,7 @@ Favorite object options.
 | DATA_SOURCE | &quot;DATA_SOURCE&quot; |
 | USER | &quot;USER&quot; |
 | USER_GROUP | &quot;USER_GROUP&quot; |
+| FOLDER | &quot;FOLDER&quot; |
 
 
 ## Implemented Interfaces

@@ -16080,6 +16080,7 @@ components:
           - DATA_SOURCE
           - USER
           - USER_GROUP
+          - FOLDER
           nullable: true
           type: string
         attributes:
@@ -16130,6 +16131,7 @@ components:
           - DATA_SOURCE
           - USER
           - USER_GROUP
+          - FOLDER
           nullable: true
           type: string
         current_obj_id:

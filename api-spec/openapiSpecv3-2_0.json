@@ -23081,7 +23081,8 @@
               "ACTION_OBJECT",
               "DATA_SOURCE",
               "USER",
-              "USER_GROUP"
+              "USER_GROUP",
+              "FOLDER"
             ],
             "description": "Optional type of the header object.",
             "nullable": true
@@ -23135,7 +23136,8 @@
               "ACTION_OBJECT",
               "DATA_SOURCE",
               "USER",
-              "USER_GROUP"
+              "USER_GROUP",
+              "FOLDER"
             ],
             "description": "Type of metadata. Required if metadata_identifier is name of the object.",
             "nullable": true
