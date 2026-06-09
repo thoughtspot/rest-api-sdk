@@ -1737,7 +1737,18 @@
           },
           "required": true
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "X-TS-Org-Id",
+            "in": "header",
+            "required": false,
+            "description": "Org-awareness (SCAL-283418): scope this request to a specific Org or to the entire cluster. Accepts an Org ID or Org name, or the literal value `ALL` for cluster-wide results. `ALL` requires tenant/instance admin privilege; a specific Org requires the caller to have access to that Org. When omitted, the request is scoped to the caller's current session Org.",
+            "schema": {
+              "type": "string",
+              "example": "ALL"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "ABAC token creation was successful.",
@@ -1811,7 +1822,18 @@
           },
           "required": true
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "X-TS-Org-Id",
+            "in": "header",
+            "required": false,
+            "description": "Org-awareness (SCAL-283418): scope this request to a specific Org or to the entire cluster. Accepts an Org ID or Org name, or the literal value `ALL` for cluster-wide results. `ALL` requires tenant/instance admin privilege; a specific Org requires the caller to have access to that Org. When omitted, the request is scoped to the caller's current session Org.",
+            "schema": {
+              "type": "string",
+              "example": "ALL"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Bearer auth token creation successful.",
@@ -1885,7 +1907,18 @@
           },
           "required": true
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "X-TS-Org-Id",
+            "in": "header",
+            "required": false,
+            "description": "Org-awareness (SCAL-283418): scope this request to a specific Org or to the entire cluster. Accepts an Org ID or Org name, or the literal value `ALL` for cluster-wide results. `ALL` requires tenant/instance admin privilege; a specific Org requires the caller to have access to that Org. When omitted, the request is scoped to the caller's current session Org.",
+            "schema": {
+              "type": "string",
+              "example": "ALL"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Bearer auth token creation successful.",
@@ -10970,18 +11003,7 @@
           },
           "required": true
         },
-        "parameters": [
-          {
-            "name": "X-TS-Org-Id",
-            "in": "header",
-            "required": false,
-            "description": "Org-awareness: scope this request to a specific Org or to the entire cluster. Accepts an Org ID or Org name, or the literal value `ALL` for cluster-wide results. `ALL` requires tenant/instance admin privilege; a specific Org requires the caller to have access to that Org. When omitted, the request is scoped to the caller's current session Org.",
-            "schema": {
-              "type": "string",
-              "example": "ALL"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "User search result.",
@@ -28809,12 +28831,22 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      },
+      "orgIdHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-TS-Org-Id",
+        "description": "Org-awareness (SCAL-283418): scope this request to a specific Org or to the entire cluster. Accepts an Org ID or Org name, or the literal value `ALL` for cluster-wide results. `ALL` requires tenant/instance admin privilege; a specific Org requires the caller to have access to that Org. When omitted, the request is scoped to the caller's current session Org."
       }
     }
   },
   "security": [
     {
       "bearerAuth": []
+    },
+    {
+      "bearerAuth": [],
+      "orgIdHeader": []
     }
   ],
   "servers": [
