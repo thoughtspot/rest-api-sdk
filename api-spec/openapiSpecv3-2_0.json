@@ -28830,23 +28830,22 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
-      },
-      "orgIdHeader": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "X-TS-Org-Id",
-        "description": "Org-awareness (SCAL-283418): scope this request to a specific Org or to the entire cluster. Accepts an Org ID or Org name, or the literal value `ALL` for cluster-wide results. `ALL` requires tenant/instance admin privilege; a specific Org requires the caller to have access to that Org. When omitted, the request is scoped to the caller's current session Org."
+        "scheme": "bearer",
+        "x-additional-headers": [
+          {
+            "name": "X-TS-Org-Id",
+            "description": "Org-awareness (SCAL-283418): scope this request to a specific Org or to the entire cluster. Accepts an Org ID or Org name, or the literal value `ALL` for cluster-wide results. `ALL` requires tenant/instance admin privilege; a specific Org requires the caller to have access to that Org. When omitted, the request is scoped to the caller's current session Org.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     }
   },
   "security": [
     {
       "bearerAuth": []
-    },
-    {
-      "bearerAuth": [],
-      "orgIdHeader": []
     }
   ],
   "servers": [
