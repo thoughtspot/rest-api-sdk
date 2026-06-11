@@ -47,6 +47,13 @@ public class VisualizationFontsInput implements Serializable {
     @javax.annotation.Nullable
     private List<TableFontAssignmentInput> tableVisualizationFonts;
 
+    public static final String SERIALIZED_NAME_ADVANCED_CHART_VISUALIZATION_FONTS =
+            "advanced_chart_visualization_fonts";
+
+    @SerializedName(SERIALIZED_NAME_ADVANCED_CHART_VISUALIZATION_FONTS)
+    @javax.annotation.Nullable
+    private List<AdvancedChartFontAssignmentInput> advancedChartVisualizationFonts;
+
     public VisualizationFontsInput() {}
 
     public VisualizationFontsInput chartVisualizationFonts(
@@ -111,6 +118,39 @@ public class VisualizationFontsInput implements Serializable {
         this.tableVisualizationFonts = tableVisualizationFonts;
     }
 
+    public VisualizationFontsInput advancedChartVisualizationFonts(
+            @javax.annotation.Nullable
+                    List<AdvancedChartFontAssignmentInput> advancedChartVisualizationFonts) {
+        this.advancedChartVisualizationFonts = advancedChartVisualizationFonts;
+        return this;
+    }
+
+    public VisualizationFontsInput addAdvancedChartVisualizationFontsItem(
+            AdvancedChartFontAssignmentInput advancedChartVisualizationFontsItem) {
+        if (this.advancedChartVisualizationFonts == null) {
+            this.advancedChartVisualizationFonts = new ArrayList<>();
+        }
+        this.advancedChartVisualizationFonts.add(advancedChartVisualizationFontsItem);
+        return this;
+    }
+
+    /**
+     * Font assignments for advanced chart visualization areas. Provide only the areas to update;
+     * omitted areas remain unchanged. Version: 26.7.0.cl or later
+     *
+     * @return advancedChartVisualizationFonts
+     */
+    @javax.annotation.Nullable
+    public List<AdvancedChartFontAssignmentInput> getAdvancedChartVisualizationFonts() {
+        return advancedChartVisualizationFonts;
+    }
+
+    public void setAdvancedChartVisualizationFonts(
+            @javax.annotation.Nullable
+                    List<AdvancedChartFontAssignmentInput> advancedChartVisualizationFonts) {
+        this.advancedChartVisualizationFonts = advancedChartVisualizationFonts;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -171,6 +211,9 @@ public class VisualizationFontsInput implements Serializable {
                         this.tableVisualizationFonts,
                         visualizationFontsInput.tableVisualizationFonts)
                 && Objects.equals(
+                        this.advancedChartVisualizationFonts,
+                        visualizationFontsInput.advancedChartVisualizationFonts)
+                && Objects.equals(
                         this.additionalProperties, visualizationFontsInput.additionalProperties);
     }
 
@@ -185,7 +228,11 @@ public class VisualizationFontsInput implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(chartVisualizationFonts, tableVisualizationFonts, additionalProperties);
+        return Objects.hash(
+                chartVisualizationFonts,
+                tableVisualizationFonts,
+                advancedChartVisualizationFonts,
+                additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -204,6 +251,9 @@ public class VisualizationFontsInput implements Serializable {
                 .append("\n");
         sb.append("    tableVisualizationFonts: ")
                 .append(toIndentedString(tableVisualizationFonts))
+                .append("\n");
+        sb.append("    advancedChartVisualizationFonts: ")
+                .append(toIndentedString(advancedChartVisualizationFonts))
                 .append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
@@ -231,6 +281,7 @@ public class VisualizationFontsInput implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("chart_visualization_fonts");
         openapiFields.add("table_visualization_fonts");
+        openapiFields.add("advanced_chart_visualization_fonts");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -294,6 +345,28 @@ public class VisualizationFontsInput implements Serializable {
                 for (int i = 0; i < jsonArraytableVisualizationFonts.size(); i++) {
                     TableFontAssignmentInput.validateJsonElement(
                             jsonArraytableVisualizationFonts.get(i));
+                }
+                ;
+            }
+        }
+        if (jsonObj.get("advanced_chart_visualization_fonts") != null
+                && !jsonObj.get("advanced_chart_visualization_fonts").isJsonNull()) {
+            JsonArray jsonArrayadvancedChartVisualizationFonts =
+                    jsonObj.getAsJsonArray("advanced_chart_visualization_fonts");
+            if (jsonArrayadvancedChartVisualizationFonts != null) {
+                // ensure the json data is an array
+                if (!jsonObj.get("advanced_chart_visualization_fonts").isJsonArray()) {
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "Expected the field `advanced_chart_visualization_fonts` to be"
+                                            + " an array in the JSON string but got `%s`",
+                                    jsonObj.get("advanced_chart_visualization_fonts").toString()));
+                }
+
+                // validate the optional field `advanced_chart_visualization_fonts` (array)
+                for (int i = 0; i < jsonArrayadvancedChartVisualizationFonts.size(); i++) {
+                    AdvancedChartFontAssignmentInput.validateJsonElement(
+                            jsonArrayadvancedChartVisualizationFonts.get(i));
                 }
                 ;
             }

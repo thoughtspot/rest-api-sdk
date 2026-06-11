@@ -29,6 +29,7 @@ Visualization areas assigned to a font, grouped by org context.
 | CHART_BAR_DATA_LABELS | &quot;CHART_BAR_DATA_LABELS&quot; |
 | CHART_AREA_DATA_LABELS | &quot;CHART_AREA_DATA_LABELS&quot; |
 | TABLE_VALUE_CELLS | &quot;TABLE_VALUE_CELLS&quot; |
+| ADVANCED_CHART_LABELS | &quot;ADVANCED_CHART_LABELS&quot; |
 
 
 ## Implemented Interfaces

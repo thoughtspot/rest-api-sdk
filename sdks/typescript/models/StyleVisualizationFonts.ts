@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { AdvancedChartVisualizationFontRecord } from '../models/AdvancedChartVisualizationFontRecord';
 import { ChartVisualizationFontRecord } from '../models/ChartVisualizationFontRecord';
 import { TableVisualizationFontRecord } from '../models/TableVisualizationFontRecord';
 import { HttpFile } from '../http/http';
@@ -26,6 +27,10 @@ export class StyleVisualizationFonts {
     * Font assignments for table visualization areas.
     */
     'table_visualization_fonts'?: Array<TableVisualizationFontRecord> | null;
+    /**
+    * Font assignments for advanced chart visualization areas.    Version: 26.7.0.cl or later 
+    */
+    'advanced_chart_visualization_fonts'?: Array<AdvancedChartVisualizationFontRecord> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -40,6 +45,12 @@ export class StyleVisualizationFonts {
             "name": "table_visualization_fonts",
             "baseName": "table_visualization_fonts",
             "type": "Array<TableVisualizationFontRecord>",
+            "format": ""
+        },
+        {
+            "name": "advanced_chart_visualization_fonts",
+            "baseName": "advanced_chart_visualization_fonts",
+            "type": "Array<AdvancedChartVisualizationFontRecord>",
             "format": ""
         }    ];
 

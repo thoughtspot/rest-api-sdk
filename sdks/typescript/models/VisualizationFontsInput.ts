@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { AdvancedChartFontAssignmentInput } from '../models/AdvancedChartFontAssignmentInput';
 import { ChartFontAssignmentInput } from '../models/ChartFontAssignmentInput';
 import { TableFontAssignmentInput } from '../models/TableFontAssignmentInput';
 import { HttpFile } from '../http/http';
@@ -26,6 +27,10 @@ export class VisualizationFontsInput {
     * Font assignments for table visualization areas. Provide only the areas to update; omitted areas remain unchanged.
     */
     'table_visualization_fonts'?: Array<TableFontAssignmentInput> | null;
+    /**
+    * Font assignments for advanced chart visualization areas. Provide only the areas to update; omitted areas remain unchanged.    Version: 26.7.0.cl or later 
+    */
+    'advanced_chart_visualization_fonts'?: Array<AdvancedChartFontAssignmentInput> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -40,6 +45,12 @@ export class VisualizationFontsInput {
             "name": "table_visualization_fonts",
             "baseName": "table_visualization_fonts",
             "type": "Array<TableFontAssignmentInput>",
+            "format": ""
+        },
+        {
+            "name": "advanced_chart_visualization_fonts",
+            "baseName": "advanced_chart_visualization_fonts",
+            "type": "Array<AdvancedChartFontAssignmentInput>",
             "format": ""
         }    ];
 

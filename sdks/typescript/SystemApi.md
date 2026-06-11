@@ -4,11 +4,178 @@ All URIs are relative to *CLUSTER_URL*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**configureCommunicationChannelPreferences**](SystemApi.md#configureCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/configure | 
+[**configureSecuritySettings**](SystemApi.md#configureSecuritySettings) | **POST** /api/rest/2.0/system/security-settings/configure | 
 [**getSystemConfig**](SystemApi.md#getSystemConfig) | **GET** /api/rest/2.0/system/config | 
 [**getSystemInformation**](SystemApi.md#getSystemInformation) | **GET** /api/rest/2.0/system | 
 [**getSystemOverrideInfo**](SystemApi.md#getSystemOverrideInfo) | **GET** /api/rest/2.0/system/config-overrides | 
+[**searchCommunicationChannelPreferences**](SystemApi.md#searchCommunicationChannelPreferences) | **POST** /api/rest/2.0/system/preferences/communication-channels/search | 
+[**searchSecuritySettings**](SystemApi.md#searchSecuritySettings) | **POST** /api/rest/2.0/system/security-settings/search | 
 [**updateSystemConfig**](SystemApi.md#updateSystemConfig) | **POST** /api/rest/2.0/system/config-update | 
+[**validateCommunicationChannel**](SystemApi.md#validateCommunicationChannel) | **POST** /api/rest/2.0/system/communication-channels/validate | 
 
+
+# **configureCommunicationChannelPreferences**
+> void configureCommunicationChannelPreferences(configureCommunicationChannelPreferencesRequest)
+
+ Version: 10.14.0.cl or later   Configure communication channel preferences. - Use `cluster_preferences` to update the default preferences for your ThoughtSpot application instance. - If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use `org_preferences` to specify Org-specific preferences that override the defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege are also authorized to perform this action.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, SystemApi, ConfigureCommunicationChannelPreferencesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new SystemApi(configuration);
+
+apiInstance.configureCommunicationChannelPreferences(
+  // ConfigureCommunicationChannelPreferencesRequest
+  {
+    cluster_preferences: [
+      {
+        event_type: "LIVEBOARD_SCHEDULE",
+        channels: [
+          "EMAIL",
+        ],
+      },
+    ],
+    org_preferences: [
+      {
+        org_identifier: "org_identifier_example",
+        operation: "REPLACE",
+        preferences: [
+          {
+            event_type: "LIVEBOARD_SCHEDULE",
+            channels: [
+              "EMAIL",
+            ],
+          },
+        ],
+        reset_events: [
+          "LIVEBOARD_SCHEDULE",
+        ],
+      },
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configureCommunicationChannelPreferencesRequest** | **ConfigureCommunicationChannelPreferencesRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Communication channel preferences successfully updated. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **configureSecuritySettings**
+> void configureSecuritySettings(configureSecuritySettingsRequest)
+
+  Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, SystemApi, ConfigureSecuritySettingsRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new SystemApi(configuration);
+
+apiInstance.configureSecuritySettings(
+  // ConfigureSecuritySettingsRequest
+  {
+    cluster_preferences: null,
+    org_preferences: [
+      {
+        org_identifier: "org_identifier_example",
+        cors_whitelisted_urls: [
+          "cors_whitelisted_urls_example",
+        ],
+        non_embed_access: {
+          block_full_app_access: true,
+          groups_identifiers_with_access: [
+            "groups_identifiers_with_access_example",
+          ],
+        },
+      },
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configureSecuritySettingsRequest** | **ConfigureSecuritySettingsRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successfully configured the security settings. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **getSystemConfig**
 > SystemConfig getSystemConfig()
@@ -172,6 +339,140 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **searchCommunicationChannelPreferences**
+> CommunicationChannelPreferencesResponse searchCommunicationChannelPreferences(searchCommunicationChannelPreferencesRequest)
+
+ Version: 10.14.0.cl or later   Fetch communication channel preferences. - Use `cluster_preferences` to fetch the default preferences for your ThoughtSpot application instance. - If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), use `org_preferences` to fetch any Org-specific preferences that override the defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege are also authorized to perform this action.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, SystemApi, SearchCommunicationChannelPreferencesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new SystemApi(configuration);
+
+apiInstance.searchCommunicationChannelPreferences(
+  // SearchCommunicationChannelPreferencesRequest
+  {
+    cluster_preferences: [
+      "LIVEBOARD_SCHEDULE",
+    ],
+    org_preferences: [
+      {
+        org_identifier: "org_identifier_example",
+        event_types: [
+          "LIVEBOARD_SCHEDULE",
+        ],
+      },
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchCommunicationChannelPreferencesRequest** | **SearchCommunicationChannelPreferencesRequest**|  |
+
+
+### Return type
+
+**CommunicationChannelPreferencesResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Communication channel preferences retrieved successfully. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **searchSecuritySettings**
+> SecuritySettingsResponse searchSecuritySettings(searchSecuritySettingsRequest)
+
+  Version: 26.2.0.cl or later   Fetch security settings for your ThoughtSpot application instance. - Use `scope: CLUSTER` to retrieve cluster-level security settings, including CORS and CSP allowlists, SAML redirect URLs, and settings that control access to non-embedded pages. - Use `scope: ORG` to retrieve Org-level security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this returns CORS and non-embed access settings specific to the Org. - If `scope` is not specified, returns both cluster and Org-specific settings based on user privileges.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, SystemApi, SearchSecuritySettingsRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new SystemApi(configuration);
+
+apiInstance.searchSecuritySettings(
+  // SearchSecuritySettingsRequest
+  {
+    scope: "CLUSTER",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **searchSecuritySettingsRequest** | **SearchSecuritySettingsRequest**|  |
+
+
+### Return type
+
+**SecuritySettingsResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully retrieved the list of security settings. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **updateSystemConfig**
 > void updateSystemConfig(updateSystemConfigRequest)
 
@@ -227,6 +528,70 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Configuration successfully updated. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **validateCommunicationChannel**
+> CommunicationChannelValidateResponse validateCommunicationChannel(validateCommunicationChannelRequest)
+
+ Version: 26.4.0.cl or later   Validates a communication channel configuration to ensure it is properly set up and can receive events. - Use `channel_type` to specify the type of communication channel to validate (e.g., WEBHOOK). - Use `channel_identifier` to provide the unique identifier or name for the communication channel. - Use `event_type` to specify the event type to validate for this channel.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. For webhook channels, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, SystemApi, ValidateCommunicationChannelRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new SystemApi(configuration);
+
+apiInstance.validateCommunicationChannel(
+  // ValidateCommunicationChannelRequest
+  {
+    channel_type: "WEBHOOK",
+    channel_identifier: "channel_identifier_example",
+    event_type: "LIVEBOARD_SCHEDULE",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **validateCommunicationChannelRequest** | **ValidateCommunicationChannelRequest**|  |
+
+
+### Return type
+
+**CommunicationChannelValidateResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | communication channel configuration validated successfully. |  -  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

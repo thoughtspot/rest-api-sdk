@@ -12,11 +12,16 @@ import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
 import { ColumnSecurityRuleResponse } from '../models/ColumnSecurityRuleResponse';
 import { ErrorResponse } from '../models/ErrorResponse';
 import { FetchColumnSecurityRulesRequest } from '../models/FetchColumnSecurityRulesRequest';
+import { FetchObjectPrivilegesRequest } from '../models/FetchObjectPrivilegesRequest';
 import { FetchPermissionsOfPrincipalsRequest } from '../models/FetchPermissionsOfPrincipalsRequest';
 import { FetchPermissionsOnMetadataRequest } from '../models/FetchPermissionsOnMetadataRequest';
+import { ManageObjectPrivilegeRequest } from '../models/ManageObjectPrivilegeRequest';
+import { ObjectPrivilegesOfMetadataResponse } from '../models/ObjectPrivilegesOfMetadataResponse';
 import { PermissionOfMetadataResponse } from '../models/PermissionOfMetadataResponse';
 import { PermissionOfPrincipalsResponse } from '../models/PermissionOfPrincipalsResponse';
+import { PublishMetadataRequest } from '../models/PublishMetadataRequest';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
+import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
 import { UpdateColumnSecurityRulesRequest } from '../models/UpdateColumnSecurityRulesRequest';
 
 /**
@@ -107,6 +112,57 @@ export class SecurityApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(fetchColumnSecurityRulesRequest, "FetchColumnSecurityRulesRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *   Version: 26.3.0.cl or later   This API fetches the object privileges present for the given list of principals (user or group), on the given set of objects. It supports pagination, which can be enabled and configured using the request parameters. It provides users access to certain features based on privilege based access control.  #### Usage guidelines  - Specify the `type` (`USER` or `USER_GROUP`) and `identifier` (either GUID or name) of the principals for which you want to retrieve object privilege information in the `principals` array. - Specify the `type`  (`LOGICAL_TABLE`)  and `identifier` (either GUID or name) of the metadata objects for which you want to retrieve object privilege information in the `metadata` array. Only `LOGICAL_TABLE` metadata type is supported for now. It may be extended for other metadata types in future. - To control the offset from where principals have to be fetched, use `record_offset`. When `record_offset` is 0, information is fetched from the beginning. - To control the number of principals to be fetched, use `record_size`. Default `record_size` is 20. - Ensure `record_offset` for a subsequent request is one more than the value of `record_size` of the previous request. - Ensure using correct Authorization Bearer Token corresponding to specific user & org.   #### Example request  ```json {   \"principals\": [     {       \"type\": \"type-1\",       \"identifier\": \"principal-guid-or-name-1\"     },     {       \"type\": \"type-2\",       \"identifier\": \"principal-guid-or-name-2\"     }   ],   \"metadata\": [     {       \"type\": \"metadata-type-1\",       \"identifier\": \"metadata-guid-or-name-1\"     },     {       \"type\": \"metadata-type-2\",       \"identifier\": \"metadata-guid-or-name-2\"     }   ],   \"record_offset\": 0,   \"record_size\": 20 } ```   #### Response format  The API returns an array of `metadata_object_privileges` objects wrapped in JSON. Each `metadata_object_privileges` object contains: - Metadata information (GUID, name and type) - Array of `principal_object_privilege_info`. - Each `principal_object_privilege_info` contains:   - Principal type. All principals of this type are listed as described below.   - Array of `principal_object_privileges`.   - Each `principal_object_privileges` contains:     - Principal information (GUID, name, subtype)     - List of applied object level privileges.  #### Example response  ```json {     \"metadata_object_privileges\": [       {         \"metadata_id\": \"metadata-guid-1\",         \"metadata_name\": \"metadata-name-1\",         \"metadata_type\": \"metadata-type-1\",         \"principal_object_privilege_info\": [           {             \"principal_type\": \"principal-type-1\",             \"principal_object_privileges\": [               {                 \"principal_id\": \"principal-guid-1\",                 \"principal_name\": \"principal-name-1\",                 \"principal_sub_type\": \"principal-sub-type-1\",                 \"object_privileges\": \"[object-privilege-1, object-privilege-2]\"               },               {                 \"principal_id\": \"principal-guid-2\",                 \"principal_name\": \"principal-name-2\",                 \"principal_sub_type\": \"principal-sub-type-2\",                 \"object_privileges\": \"[object-privilege-1, object-privilege-2]\"               }             ]           },           {             \"principal_type\": \"principal-type-2\",             \"principal_object_privileges\": [               {                 \"principal_id\": \"principal-guid-3\",                 \"principal_name\": \"principal-guid-4\",                 \"principal_sub_type\": \"principal-sub-type-4\",                 \"object_privileges\": \"[object-privilege-1]\"               }             ]           }         ]       },       {         \"metadata_id\": \"metadata-guid-2\",         \"metadata_name\": \"metadata-name-2\",         \"metadata_type\": \"metadata-type-2\",         \"principal_object_privilege_info\": [           {             \"principal_type\": \"principal-type-1\",             \"principal_object_privileges\": [               {                 \"principal_id\": \"principal-guid-1\",                 \"principal_name\": \"principal-name-1\",                 \"principal_sub_type\": \"principal-sub-type-1\",                 \"object_privileges\": \"[object-privilege-3, object-privilege-4]\"               },               {                 \"principal_id\": \"principal-guid-2\",                 \"principal_name\": \"principal-name-2\",                 \"principal_sub_type\": \"principal-sub-type-2\",                 \"object_privileges\": \"[object-privilege-4]\"               }             ]           }         ]       }     ] } ```     
+     * @param fetchObjectPrivilegesRequest 
+     */
+    public async fetchObjectPrivileges(fetchObjectPrivilegesRequest: FetchObjectPrivilegesRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'fetchObjectPrivilegesRequest' is not null or undefined
+        if (fetchObjectPrivilegesRequest === null || fetchObjectPrivilegesRequest === undefined) {
+            throw new RequiredError("SecurityApi", "fetchObjectPrivileges", "fetchObjectPrivilegesRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/security/metadata/fetch-object-privileges';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(fetchObjectPrivilegesRequest, "FetchObjectPrivilegesRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -229,6 +285,108 @@ export class SecurityApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     *   Version: 26.3.0.cl or later   This API allows the addition or deletion of object level privileges for a set of users and groups, on a set of metadata objects. It provides users to access certain features based on privilege based access control.  #### Usage guidelines  - Specify the `operation`. The supported operations are: `ADD`, `REMOVE`. - Specify the type of the objects on which the object privileges are being provided in `metadata_type`. Only `LOGICAL_TABLE` metadata type is supported for now. It may be extended for other metadata types in future. - Specify the list of object privilege types in the `object_privilege_types` array. The supported object privilege types are: `SPOTTER_COACHING_PRIVILEGE`. - Specify the identifiers (either GUID or name) for the metadata objects in the `metadata_identifiers` array. - Specify the `type` (`USER` or `USER_GROUP`) and `identifier` (either GUID or name) of the principals to which you want to apply the given operation and given object privileges in the `principals` array. - Ensure using correct Authorization Bearer Token corresponding to specific user & org.  #### Example request  ```json {   \"operation\": \"operation-type\",   \"metadata_type\": \"metadata-type\",   \"object_privilege_types\": [\"privilege-type-1\", \"privilege-type-2\"],   \"metadata_identifiers\": [\"metadata-guid-or-name-1\", \"metadata-guid-or-name-1\"],   \"principals\": [     {       \"type\": \"type-1\",        \"identifier\": \"principal-guid-or-name-1\"     },     {       \"type\": \"type-2\",       \"identifier\": \"principal-guid-or-name-2\"     }   ] } ```  > ###### Note: > * Only admin users, users with edit access and users with coaching privilege on a given data-model can add or remove principals related to SPOTTER_COACHING_PRIVILEGE       
+     * @param manageObjectPrivilegeRequest 
+     */
+    public async manageObjectPrivilege(manageObjectPrivilegeRequest: ManageObjectPrivilegeRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'manageObjectPrivilegeRequest' is not null or undefined
+        if (manageObjectPrivilegeRequest === null || manageObjectPrivilegeRequest === undefined) {
+            throw new RequiredError("SecurityApi", "manageObjectPrivilege", "manageObjectPrivilegeRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/security/metadata/manage-object-privilege';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(manageObjectPrivilegeRequest, "ManageObjectPrivilegeRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+     * @param publishMetadataRequest 
+     */
+    public async publishMetadata(publishMetadataRequest: PublishMetadataRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'publishMetadataRequest' is not null or undefined
+        if (publishMetadataRequest === null || publishMetadataRequest === undefined) {
+            throw new RequiredError("SecurityApi", "publishMetadata", "publishMetadataRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/security/metadata/publish';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(publishMetadataRequest, "PublishMetadataRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      *   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  #### Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views * Connections * Collections  #### Object permissions  You can provide `READ_ONLY` or `MODIFY` access when sharing an object with another user or group. The `READ_ONLY` permission grants view access to the shared object, whereas `MODIFY` provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set `shareMode` to `NO_ACCESS`.  #### Sharing a visualization  * Sharing a visualization implicitly shares the entire Liveboard with the recipient. * Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI. * If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.  #### Sharing a collection  Collections support **dual permissions** that provide fine-grained control:  * **Collection permissions** (`share_mode`) - controls access to the collection itself (view, edit, delete the collection) * **Content permissions** (`content_share_mode`) - controls access to objects within the collection (view, edit objects inside)  **Default Behavior:** - If only `share_mode` is specified, the content permissions default to `READ_ONLY` (except when `share_mode` is `NO_ACCESS`, then content also gets `NO_ACCESS`) - To give users edit access to collection contents, explicitly set `content_share_mode: \"MODIFY\"`  ## Examples  The following JSON examples can be copy-pasted as request bodies for the REST v2 API endpoint:  ```bash POST /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded ```  ### Basic collection sharing Share a collection with read-only access:  ```json {   \"metadata_type\": \"COLLECTION\",   \"metadata_identifiers\": [\"Sales Reports Collection\"],   \"permissions\": [{     \"principal\": {       \"type\": \"USER\",       \"identifier\": \"alice@company.com\"     },     \"share_mode\": \"READ_ONLY\"   }],   \"notification\": {     \"message\": \"I\'ve shared the Sales Reports collection with you\",     \"notify_on_share\": true   } } ```  ### Collection sharing with dual permissions Share a collection with different permissions for the collection vs. its contents:  ```json {   \"metadata_type\": \"COLLECTION\",   \"metadata_identifiers\": [\"Marketing Analytics\"],   \"permissions\": [{     \"principal\": {       \"type\": \"USER\",       \"identifier\": \"bob@company.com\"     },     \"share_mode\": \"MODIFY\",     \"content_share_mode\": \"READ_ONLY\"   }, {     \"principal\": {       \"type\": \"USER_GROUP\",       \"identifier\": \"Marketing Team\"     },     \"share_mode\": \"READ_ONLY\",     \"content_share_mode\": \"READ_ONLY\"   }],   \"notification\": {     \"emails\": [\"bob@company.com\"],     \"message\": \"You can edit the collection but content is read-only\",     \"enable_custom_url\": false,     \"notify_on_share\": true   },   \"has_lenient_discoverability\": false } ```  ### Multiple collections sharing Share multiple collections with different users:  ```json {   \"metadata\": [     {       \"type\": \"COLLECTION\",       \"identifier\": \"Q4 Reports\"     },     {       \"type\": \"COLLECTION\",       \"identifier\": \"Executive Dashboard Collection\"     }   ],   \"permissions\": [{     \"principal\": {       \"type\": \"USER_GROUP\",       \"identifier\": \"Executives\"     },     \"share_mode\": \"MODIFY\"   }, {     \"principal\": {       \"type\": \"USER\",       \"identifier\": \"manager@company.com\"     },     \"share_mode\": \"READ_ONLY\",     \"content_share_mode\": \"MODIFY\"   }],   \"notification\": {     \"message\": \"Sharing quarterly collections with leadership team\",     \"notify_on_share\": true   } } ```  ### Remove collection access Remove access to a collection by setting share_mode to NO_ACCESS:  ```json {   \"metadata_type\": \"COLLECTION\",   \"metadata_identifiers\": [\"Confidential Reports\"],   \"permissions\": [{     \"principal\": {       \"type\": \"USER\",       \"identifier\": \"former-employee@company.com\"     },     \"share_mode\": \"NO_ACCESS\"   }],   \"notification\": {     \"notify_on_share\": false   } } ```  ### Collection Permission Scenarios  **Scenario 1: Collection Admin** - `share_mode: MODIFY` + `content_share_mode: MODIFY` = Full control over collection and its contents  **Scenario 2: Collection Curator** - `share_mode: MODIFY` + `content_share_mode: READ_ONLY` = Can manage collection structure but not edit contents  **Scenario 3: Content Editor** - `share_mode: READ_ONLY` + `content_share_mode: MODIFY` = Can edit objects within collection but can\'t change collection itself  **Scenario 4: Viewer** - `share_mode: READ_ONLY` + `content_share_mode: READ_ONLY` = View-only access to collection and contents      
      * @param shareMetadataRequest 
      */
@@ -260,6 +418,57 @@ export class SecurityApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(shareMetadataRequest, "ShareMetadataRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+     * @param unpublishMetadataRequest 
+     */
+    public async unpublishMetadata(unpublishMetadataRequest: UnpublishMetadataRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'unpublishMetadataRequest' is not null or undefined
+        if (unpublishMetadataRequest === null || unpublishMetadataRequest === undefined) {
+            throw new RequiredError("SecurityApi", "unpublishMetadata", "unpublishMetadataRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/security/metadata/unpublish';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(unpublishMetadataRequest, "UnpublishMetadataRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -448,6 +657,63 @@ export class SecurityApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to fetchObjectPrivileges
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async fetchObjectPrivileges(response: ResponseContext): Promise<ObjectPrivilegesOfMetadataResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: ObjectPrivilegesOfMetadataResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ObjectPrivilegesOfMetadataResponse", ""
+            ) as ObjectPrivilegesOfMetadataResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: ObjectPrivilegesOfMetadataResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ObjectPrivilegesOfMetadataResponse", ""
+            ) as ObjectPrivilegesOfMetadataResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to fetchPermissionsOfPrincipals
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -562,10 +828,169 @@ export class SecurityApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to manageObjectPrivilege
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async manageObjectPrivilege(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to publishMetadata
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async publishMetadata(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to shareMetadata
      * @throws ApiException if the response code was not in [200, 299]
      */
      public async shareMetadata(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to unpublishMetadata
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async unpublishMetadata(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;

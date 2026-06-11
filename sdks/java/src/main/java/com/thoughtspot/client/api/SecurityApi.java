@@ -15,11 +15,16 @@ import com.thoughtspot.client.Pair;
 import com.thoughtspot.client.model.AssignChangeAuthorRequest;
 import com.thoughtspot.client.model.ColumnSecurityRuleResponse;
 import com.thoughtspot.client.model.FetchColumnSecurityRulesRequest;
+import com.thoughtspot.client.model.FetchObjectPrivilegesRequest;
 import com.thoughtspot.client.model.FetchPermissionsOfPrincipalsRequest;
 import com.thoughtspot.client.model.FetchPermissionsOnMetadataRequest;
+import com.thoughtspot.client.model.ManageObjectPrivilegeRequest;
+import com.thoughtspot.client.model.ObjectPrivilegesOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfPrincipalsResponse;
+import com.thoughtspot.client.model.PublishMetadataRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
+import com.thoughtspot.client.model.UnpublishMetadataRequest;
 import com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -502,6 +507,357 @@ public class SecurityApi {
         return localVarCall;
     }
     /**
+     * Build call for fetchObjectPrivileges
+     *
+     * @param fetchObjectPrivilegesRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching defined object privileges of metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call fetchObjectPrivilegesCall(
+            FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = fetchObjectPrivilegesRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/security/metadata/fetch-object-privileges";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call fetchObjectPrivilegesValidateBeforeCall(
+            FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'fetchObjectPrivilegesRequest' is set
+        if (fetchObjectPrivilegesRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'fetchObjectPrivilegesRequest' when calling"
+                            + " fetchObjectPrivileges(Async)");
+        }
+
+        return fetchObjectPrivilegesCall(fetchObjectPrivilegesRequest, _callback);
+    }
+
+    /**
+     * Version: 26.3.0.cl or later This API fetches the object privileges present for the given list
+     * of principals (user or group), on the given set of objects. It supports pagination, which can
+     * be enabled and configured using the request parameters. It provides users access to certain
+     * features based on privilege based access control. #### Usage guidelines - Specify the
+     * &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and &#x60;identifier&#x60;
+     * (either GUID or name) of the principals for which you want to retrieve object privilege
+     * information in the &#x60;principals&#x60; array. - Specify the &#x60;type&#x60;
+     * (&#x60;LOGICAL_TABLE&#x60;) and &#x60;identifier&#x60; (either GUID or name) of the metadata
+     * objects for which you want to retrieve object privilege information in the
+     * &#x60;metadata&#x60; array. Only &#x60;LOGICAL_TABLE&#x60; metadata type is supported for
+     * now. It may be extended for other metadata types in future. - To control the offset from
+     * where principals have to be fetched, use &#x60;record_offset&#x60;. When
+     * &#x60;record_offset&#x60; is 0, information is fetched from the beginning. - To control the
+     * number of principals to be fetched, use &#x60;record_size&#x60;. Default
+     * &#x60;record_size&#x60; is 20. - Ensure &#x60;record_offset&#x60; for a subsequent request is
+     * one more than the value of &#x60;record_size&#x60; of the previous request. - Ensure using
+     * correct Authorization Bearer Token corresponding to specific user &amp; org. #### Example
+     * request &#x60;&#x60;&#x60;json { \&quot;principals\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;type-1\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, {
+     * \&quot;type\&quot;: \&quot;type-2\&quot;, \&quot;identifier\&quot;:
+     * \&quot;principal-guid-or-name-2\&quot; } ], \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;metadata-type-1\&quot;, \&quot;identifier\&quot;:
+     * \&quot;metadata-guid-or-name-1\&quot; }, { \&quot;type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;identifier\&quot;: \&quot;metadata-guid-or-name-2\&quot; } ],
+     * \&quot;record_offset\&quot;: 0, \&quot;record_size\&quot;: 20 } &#x60;&#x60;&#x60; ####
+     * Response format The API returns an array of &#x60;metadata_object_privileges&#x60; objects
+     * wrapped in JSON. Each &#x60;metadata_object_privileges&#x60; object contains: - Metadata
+     * information (GUID, name and type) - Array of &#x60;principal_object_privilege_info&#x60;. -
+     * Each &#x60;principal_object_privilege_info&#x60; contains: - Principal type. All principals
+     * of this type are listed as described below. - Array of
+     * &#x60;principal_object_privileges&#x60;. - Each &#x60;principal_object_privileges&#x60;
+     * contains: - Principal information (GUID, name, subtype) - List of applied object level
+     * privileges. #### Example response &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_object_privileges\&quot;: [ { \&quot;metadata_id\&quot;:
+     * \&quot;metadata-guid-1\&quot;, \&quot;metadata_name\&quot;: \&quot;metadata-name-1\&quot;,
+     * \&quot;metadata_type\&quot;: \&quot;metadata-type-1\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-1, object-privilege-2]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1, object-privilege-2]\&quot; } ]
+     * }, { \&quot;principal_type\&quot;: \&quot;principal-type-2\&quot;,
+     * \&quot;principal_object_privileges\&quot;: [ { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-3\&quot;, \&quot;principal_name\&quot;: \&quot;principal-guid-4\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-4\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1]\&quot; } ] } ] }, {
+     * \&quot;metadata_id\&quot;: \&quot;metadata-guid-2\&quot;, \&quot;metadata_name\&quot;:
+     * \&quot;metadata-name-2\&quot;, \&quot;metadata_type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-3, object-privilege-4]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-4]\&quot; } ] } ] } ] }
+     * &#x60;&#x60;&#x60;
+     *
+     * @param fetchObjectPrivilegesRequest (required)
+     * @return ObjectPrivilegesOfMetadataResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching defined object privileges of metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ObjectPrivilegesOfMetadataResponse fetchObjectPrivileges(
+            FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest) throws ApiException {
+        ApiResponse<ObjectPrivilegesOfMetadataResponse> localVarResp =
+                fetchObjectPrivilegesWithHttpInfo(fetchObjectPrivilegesRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.3.0.cl or later This API fetches the object privileges present for the given list
+     * of principals (user or group), on the given set of objects. It supports pagination, which can
+     * be enabled and configured using the request parameters. It provides users access to certain
+     * features based on privilege based access control. #### Usage guidelines - Specify the
+     * &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and &#x60;identifier&#x60;
+     * (either GUID or name) of the principals for which you want to retrieve object privilege
+     * information in the &#x60;principals&#x60; array. - Specify the &#x60;type&#x60;
+     * (&#x60;LOGICAL_TABLE&#x60;) and &#x60;identifier&#x60; (either GUID or name) of the metadata
+     * objects for which you want to retrieve object privilege information in the
+     * &#x60;metadata&#x60; array. Only &#x60;LOGICAL_TABLE&#x60; metadata type is supported for
+     * now. It may be extended for other metadata types in future. - To control the offset from
+     * where principals have to be fetched, use &#x60;record_offset&#x60;. When
+     * &#x60;record_offset&#x60; is 0, information is fetched from the beginning. - To control the
+     * number of principals to be fetched, use &#x60;record_size&#x60;. Default
+     * &#x60;record_size&#x60; is 20. - Ensure &#x60;record_offset&#x60; for a subsequent request is
+     * one more than the value of &#x60;record_size&#x60; of the previous request. - Ensure using
+     * correct Authorization Bearer Token corresponding to specific user &amp; org. #### Example
+     * request &#x60;&#x60;&#x60;json { \&quot;principals\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;type-1\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, {
+     * \&quot;type\&quot;: \&quot;type-2\&quot;, \&quot;identifier\&quot;:
+     * \&quot;principal-guid-or-name-2\&quot; } ], \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;metadata-type-1\&quot;, \&quot;identifier\&quot;:
+     * \&quot;metadata-guid-or-name-1\&quot; }, { \&quot;type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;identifier\&quot;: \&quot;metadata-guid-or-name-2\&quot; } ],
+     * \&quot;record_offset\&quot;: 0, \&quot;record_size\&quot;: 20 } &#x60;&#x60;&#x60; ####
+     * Response format The API returns an array of &#x60;metadata_object_privileges&#x60; objects
+     * wrapped in JSON. Each &#x60;metadata_object_privileges&#x60; object contains: - Metadata
+     * information (GUID, name and type) - Array of &#x60;principal_object_privilege_info&#x60;. -
+     * Each &#x60;principal_object_privilege_info&#x60; contains: - Principal type. All principals
+     * of this type are listed as described below. - Array of
+     * &#x60;principal_object_privileges&#x60;. - Each &#x60;principal_object_privileges&#x60;
+     * contains: - Principal information (GUID, name, subtype) - List of applied object level
+     * privileges. #### Example response &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_object_privileges\&quot;: [ { \&quot;metadata_id\&quot;:
+     * \&quot;metadata-guid-1\&quot;, \&quot;metadata_name\&quot;: \&quot;metadata-name-1\&quot;,
+     * \&quot;metadata_type\&quot;: \&quot;metadata-type-1\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-1, object-privilege-2]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1, object-privilege-2]\&quot; } ]
+     * }, { \&quot;principal_type\&quot;: \&quot;principal-type-2\&quot;,
+     * \&quot;principal_object_privileges\&quot;: [ { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-3\&quot;, \&quot;principal_name\&quot;: \&quot;principal-guid-4\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-4\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1]\&quot; } ] } ] }, {
+     * \&quot;metadata_id\&quot;: \&quot;metadata-guid-2\&quot;, \&quot;metadata_name\&quot;:
+     * \&quot;metadata-name-2\&quot;, \&quot;metadata_type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-3, object-privilege-4]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-4]\&quot; } ] } ] } ] }
+     * &#x60;&#x60;&#x60;
+     *
+     * @param fetchObjectPrivilegesRequest (required)
+     * @return ApiResponse&lt;ObjectPrivilegesOfMetadataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching defined object privileges of metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<ObjectPrivilegesOfMetadataResponse> fetchObjectPrivilegesWithHttpInfo(
+            FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                fetchObjectPrivilegesValidateBeforeCall(fetchObjectPrivilegesRequest, null);
+        Type localVarReturnType = new TypeToken<ObjectPrivilegesOfMetadataResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.3.0.cl or later This API fetches the object privileges present
+     * for the given list of principals (user or group), on the given set of objects. It supports
+     * pagination, which can be enabled and configured using the request parameters. It provides
+     * users access to certain features based on privilege based access control. #### Usage
+     * guidelines - Specify the &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and
+     * &#x60;identifier&#x60; (either GUID or name) of the principals for which you want to retrieve
+     * object privilege information in the &#x60;principals&#x60; array. - Specify the
+     * &#x60;type&#x60; (&#x60;LOGICAL_TABLE&#x60;) and &#x60;identifier&#x60; (either GUID or name)
+     * of the metadata objects for which you want to retrieve object privilege information in the
+     * &#x60;metadata&#x60; array. Only &#x60;LOGICAL_TABLE&#x60; metadata type is supported for
+     * now. It may be extended for other metadata types in future. - To control the offset from
+     * where principals have to be fetched, use &#x60;record_offset&#x60;. When
+     * &#x60;record_offset&#x60; is 0, information is fetched from the beginning. - To control the
+     * number of principals to be fetched, use &#x60;record_size&#x60;. Default
+     * &#x60;record_size&#x60; is 20. - Ensure &#x60;record_offset&#x60; for a subsequent request is
+     * one more than the value of &#x60;record_size&#x60; of the previous request. - Ensure using
+     * correct Authorization Bearer Token corresponding to specific user &amp; org. #### Example
+     * request &#x60;&#x60;&#x60;json { \&quot;principals\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;type-1\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, {
+     * \&quot;type\&quot;: \&quot;type-2\&quot;, \&quot;identifier\&quot;:
+     * \&quot;principal-guid-or-name-2\&quot; } ], \&quot;metadata\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;metadata-type-1\&quot;, \&quot;identifier\&quot;:
+     * \&quot;metadata-guid-or-name-1\&quot; }, { \&quot;type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;identifier\&quot;: \&quot;metadata-guid-or-name-2\&quot; } ],
+     * \&quot;record_offset\&quot;: 0, \&quot;record_size\&quot;: 20 } &#x60;&#x60;&#x60; ####
+     * Response format The API returns an array of &#x60;metadata_object_privileges&#x60; objects
+     * wrapped in JSON. Each &#x60;metadata_object_privileges&#x60; object contains: - Metadata
+     * information (GUID, name and type) - Array of &#x60;principal_object_privilege_info&#x60;. -
+     * Each &#x60;principal_object_privilege_info&#x60; contains: - Principal type. All principals
+     * of this type are listed as described below. - Array of
+     * &#x60;principal_object_privileges&#x60;. - Each &#x60;principal_object_privileges&#x60;
+     * contains: - Principal information (GUID, name, subtype) - List of applied object level
+     * privileges. #### Example response &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_object_privileges\&quot;: [ { \&quot;metadata_id\&quot;:
+     * \&quot;metadata-guid-1\&quot;, \&quot;metadata_name\&quot;: \&quot;metadata-name-1\&quot;,
+     * \&quot;metadata_type\&quot;: \&quot;metadata-type-1\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-1, object-privilege-2]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1, object-privilege-2]\&quot; } ]
+     * }, { \&quot;principal_type\&quot;: \&quot;principal-type-2\&quot;,
+     * \&quot;principal_object_privileges\&quot;: [ { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-3\&quot;, \&quot;principal_name\&quot;: \&quot;principal-guid-4\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-4\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-1]\&quot; } ] } ] }, {
+     * \&quot;metadata_id\&quot;: \&quot;metadata-guid-2\&quot;, \&quot;metadata_name\&quot;:
+     * \&quot;metadata-name-2\&quot;, \&quot;metadata_type\&quot;: \&quot;metadata-type-2\&quot;,
+     * \&quot;principal_object_privilege_info\&quot;: [ { \&quot;principal_type\&quot;:
+     * \&quot;principal-type-1\&quot;, \&quot;principal_object_privileges\&quot;: [ {
+     * \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;, \&quot;principal_name\&quot;:
+     * \&quot;principal-name-1\&quot;, \&quot;principal_sub_type\&quot;:
+     * \&quot;principal-sub-type-1\&quot;, \&quot;object_privileges\&quot;:
+     * \&quot;[object-privilege-3, object-privilege-4]\&quot; }, { \&quot;principal_id\&quot;:
+     * \&quot;principal-guid-2\&quot;, \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,
+     * \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,
+     * \&quot;object_privileges\&quot;: \&quot;[object-privilege-4]\&quot; } ] } ] } ] }
+     * &#x60;&#x60;&#x60;
+     *
+     * @param fetchObjectPrivilegesRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Fetching defined object privileges of metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call fetchObjectPrivilegesAsync(
+            FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest,
+            final ApiCallback<ObjectPrivilegesOfMetadataResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                fetchObjectPrivilegesValidateBeforeCall(fetchObjectPrivilegesRequest, _callback);
+        Type localVarReturnType = new TypeToken<ObjectPrivilegesOfMetadataResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for fetchPermissionsOfPrincipals
      *
      * @param fetchPermissionsOfPrincipalsRequest (required)
@@ -886,6 +1242,413 @@ public class SecurityApi {
         return localVarCall;
     }
     /**
+     * Build call for manageObjectPrivilege
+     *
+     * @param manageObjectPrivilegeRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Object privileges added/removed successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call manageObjectPrivilegeCall(
+            ManageObjectPrivilegeRequest manageObjectPrivilegeRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = manageObjectPrivilegeRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/security/metadata/manage-object-privilege";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call manageObjectPrivilegeValidateBeforeCall(
+            ManageObjectPrivilegeRequest manageObjectPrivilegeRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'manageObjectPrivilegeRequest' is set
+        if (manageObjectPrivilegeRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'manageObjectPrivilegeRequest' when calling"
+                            + " manageObjectPrivilege(Async)");
+        }
+
+        return manageObjectPrivilegeCall(manageObjectPrivilegeRequest, _callback);
+    }
+
+    /**
+     * Version: 26.3.0.cl or later This API allows the addition or deletion of object level
+     * privileges for a set of users and groups, on a set of metadata objects. It provides users to
+     * access certain features based on privilege based access control. #### Usage guidelines -
+     * Specify the &#x60;operation&#x60;. The supported operations are: &#x60;ADD&#x60;,
+     * &#x60;REMOVE&#x60;. - Specify the type of the objects on which the object privileges are
+     * being provided in &#x60;metadata_type&#x60;. Only &#x60;LOGICAL_TABLE&#x60; metadata type is
+     * supported for now. It may be extended for other metadata types in future. - Specify the list
+     * of object privilege types in the &#x60;object_privilege_types&#x60; array. The supported
+     * object privilege types are: &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;. - Specify the identifiers
+     * (either GUID or name) for the metadata objects in the &#x60;metadata_identifiers&#x60; array.
+     * - Specify the &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and
+     * &#x60;identifier&#x60; (either GUID or name) of the principals to which you want to apply the
+     * given operation and given object privileges in the &#x60;principals&#x60; array. - Ensure
+     * using correct Authorization Bearer Token corresponding to specific user &amp; org. ####
+     * Example request &#x60;&#x60;&#x60;json { \&quot;operation\&quot;:
+     * \&quot;operation-type\&quot;, \&quot;metadata_type\&quot;: \&quot;metadata-type\&quot;,
+     * \&quot;object_privilege_types\&quot;: [\&quot;privilege-type-1\&quot;,
+     * \&quot;privilege-type-2\&quot;], \&quot;metadata_identifiers\&quot;:
+     * [\&quot;metadata-guid-or-name-1\&quot;, \&quot;metadata-guid-or-name-1\&quot;],
+     * \&quot;principals\&quot;: [ { \&quot;type\&quot;: \&quot;type-1\&quot;,
+     * \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, { \&quot;type\&quot;:
+     * \&quot;type-2\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-2\&quot; } ] }
+     * &#x60;&#x60;&#x60; &gt; ###### Note: &gt; * Only admin users, users with edit access and
+     * users with coaching privilege on a given data-model can add or remove principals related to
+     * SPOTTER_COACHING_PRIVILEGE
+     *
+     * @param manageObjectPrivilegeRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Object privileges added/removed successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void manageObjectPrivilege(ManageObjectPrivilegeRequest manageObjectPrivilegeRequest)
+            throws ApiException {
+        manageObjectPrivilegeWithHttpInfo(manageObjectPrivilegeRequest);
+    }
+
+    /**
+     * Version: 26.3.0.cl or later This API allows the addition or deletion of object level
+     * privileges for a set of users and groups, on a set of metadata objects. It provides users to
+     * access certain features based on privilege based access control. #### Usage guidelines -
+     * Specify the &#x60;operation&#x60;. The supported operations are: &#x60;ADD&#x60;,
+     * &#x60;REMOVE&#x60;. - Specify the type of the objects on which the object privileges are
+     * being provided in &#x60;metadata_type&#x60;. Only &#x60;LOGICAL_TABLE&#x60; metadata type is
+     * supported for now. It may be extended for other metadata types in future. - Specify the list
+     * of object privilege types in the &#x60;object_privilege_types&#x60; array. The supported
+     * object privilege types are: &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;. - Specify the identifiers
+     * (either GUID or name) for the metadata objects in the &#x60;metadata_identifiers&#x60; array.
+     * - Specify the &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and
+     * &#x60;identifier&#x60; (either GUID or name) of the principals to which you want to apply the
+     * given operation and given object privileges in the &#x60;principals&#x60; array. - Ensure
+     * using correct Authorization Bearer Token corresponding to specific user &amp; org. ####
+     * Example request &#x60;&#x60;&#x60;json { \&quot;operation\&quot;:
+     * \&quot;operation-type\&quot;, \&quot;metadata_type\&quot;: \&quot;metadata-type\&quot;,
+     * \&quot;object_privilege_types\&quot;: [\&quot;privilege-type-1\&quot;,
+     * \&quot;privilege-type-2\&quot;], \&quot;metadata_identifiers\&quot;:
+     * [\&quot;metadata-guid-or-name-1\&quot;, \&quot;metadata-guid-or-name-1\&quot;],
+     * \&quot;principals\&quot;: [ { \&quot;type\&quot;: \&quot;type-1\&quot;,
+     * \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, { \&quot;type\&quot;:
+     * \&quot;type-2\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-2\&quot; } ] }
+     * &#x60;&#x60;&#x60; &gt; ###### Note: &gt; * Only admin users, users with edit access and
+     * users with coaching privilege on a given data-model can add or remove principals related to
+     * SPOTTER_COACHING_PRIVILEGE
+     *
+     * @param manageObjectPrivilegeRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Object privileges added/removed successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> manageObjectPrivilegeWithHttpInfo(
+            ManageObjectPrivilegeRequest manageObjectPrivilegeRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                manageObjectPrivilegeValidateBeforeCall(manageObjectPrivilegeRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 26.3.0.cl or later This API allows the addition or deletion of
+     * object level privileges for a set of users and groups, on a set of metadata objects. It
+     * provides users to access certain features based on privilege based access control. #### Usage
+     * guidelines - Specify the &#x60;operation&#x60;. The supported operations are:
+     * &#x60;ADD&#x60;, &#x60;REMOVE&#x60;. - Specify the type of the objects on which the object
+     * privileges are being provided in &#x60;metadata_type&#x60;. Only &#x60;LOGICAL_TABLE&#x60;
+     * metadata type is supported for now. It may be extended for other metadata types in future. -
+     * Specify the list of object privilege types in the &#x60;object_privilege_types&#x60; array.
+     * The supported object privilege types are: &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;. - Specify
+     * the identifiers (either GUID or name) for the metadata objects in the
+     * &#x60;metadata_identifiers&#x60; array. - Specify the &#x60;type&#x60; (&#x60;USER&#x60; or
+     * &#x60;USER_GROUP&#x60;) and &#x60;identifier&#x60; (either GUID or name) of the principals to
+     * which you want to apply the given operation and given object privileges in the
+     * &#x60;principals&#x60; array. - Ensure using correct Authorization Bearer Token corresponding
+     * to specific user &amp; org. #### Example request &#x60;&#x60;&#x60;json {
+     * \&quot;operation\&quot;: \&quot;operation-type\&quot;, \&quot;metadata_type\&quot;:
+     * \&quot;metadata-type\&quot;, \&quot;object_privilege_types\&quot;:
+     * [\&quot;privilege-type-1\&quot;, \&quot;privilege-type-2\&quot;],
+     * \&quot;metadata_identifiers\&quot;: [\&quot;metadata-guid-or-name-1\&quot;,
+     * \&quot;metadata-guid-or-name-1\&quot;], \&quot;principals\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;type-1\&quot;, \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot; }, {
+     * \&quot;type\&quot;: \&quot;type-2\&quot;, \&quot;identifier\&quot;:
+     * \&quot;principal-guid-or-name-2\&quot; } ] } &#x60;&#x60;&#x60; &gt; ###### Note: &gt; * Only
+     * admin users, users with edit access and users with coaching privilege on a given data-model
+     * can add or remove principals related to SPOTTER_COACHING_PRIVILEGE
+     *
+     * @param manageObjectPrivilegeRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Object privileges added/removed successfully </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call manageObjectPrivilegeAsync(
+            ManageObjectPrivilegeRequest manageObjectPrivilegeRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                manageObjectPrivilegeValidateBeforeCall(manageObjectPrivilegeRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for publishMetadata
+     *
+     * @param publishMetadataRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Publishing metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call publishMetadataCall(
+            PublishMetadataRequest publishMetadataRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = publishMetadataRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/security/metadata/publish";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call publishMetadataValidateBeforeCall(
+            PublishMetadataRequest publishMetadataRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'publishMetadataRequest' is set
+        if (publishMetadataRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'publishMetadataRequest' when calling"
+                            + " publishMetadata(Async)");
+        }
+
+        return publishMetadataCall(publishMetadataRequest, _callback);
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
+     * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
+     * This API will essentially share the objects along with it&#39;s dependencies to the org
+     * admins of the orgs to which it is being published.
+     *
+     * @param publishMetadataRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Publishing metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void publishMetadata(PublishMetadataRequest publishMetadataRequest) throws ApiException {
+        publishMetadataWithHttpInfo(publishMetadataRequest);
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
+     * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
+     * This API will essentially share the objects along with it&#39;s dependencies to the org
+     * admins of the orgs to which it is being published.
+     *
+     * @param publishMetadataRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Publishing metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> publishMetadataWithHttpInfo(
+            PublishMetadataRequest publishMetadataRequest) throws ApiException {
+        okhttp3.Call localVarCall = publishMetadataValidateBeforeCall(publishMetadataRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 26.5.0.cl or later Allows publishing metadata objects across
+     * organizations in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint
+     * allows publishing the following types of metadata objects: * Liveboards * Answers * Logical
+     * Tables This API will essentially share the objects along with it&#39;s dependencies to the
+     * org admins of the orgs to which it is being published.
+     *
+     * @param publishMetadataRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Publishing metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call publishMetadataAsync(
+            PublishMetadataRequest publishMetadataRequest, final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                publishMetadataValidateBeforeCall(publishMetadataRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for shareMetadata
      *
      * @param shareMetadataRequest (required)
@@ -1256,6 +2019,186 @@ public class SecurityApi {
 
         okhttp3.Call localVarCall =
                 shareMetadataValidateBeforeCall(shareMetadataRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for unpublishMetadata
+     *
+     * @param unpublishMetadataRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Unpublishing metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call unpublishMetadataCall(
+            UnpublishMetadataRequest unpublishMetadataRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = unpublishMetadataRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/security/metadata/unpublish";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call unpublishMetadataValidateBeforeCall(
+            UnpublishMetadataRequest unpublishMetadataRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'unpublishMetadataRequest' is set
+        if (unpublishMetadataRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'unpublishMetadataRequest' when calling"
+                            + " unpublishMetadata(Async)");
+        }
+
+        return unpublishMetadataCall(unpublishMetadataRequest, _callback);
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
+     * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
+     * When unpublishing objects, you can: * Include dependencies by setting
+     * &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no
+     * other published object is using them * Force unpublish by setting &#x60;force&#x60; to true -
+     * this will break all dependent objects in the unpublished organizations
+     *
+     * @param unpublishMetadataRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Unpublishing metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void unpublishMetadata(UnpublishMetadataRequest unpublishMetadataRequest)
+            throws ApiException {
+        unpublishMetadataWithHttpInfo(unpublishMetadataRequest);
+    }
+
+    /**
+     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
+     * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
+     * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
+     * When unpublishing objects, you can: * Include dependencies by setting
+     * &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no
+     * other published object is using them * Force unpublish by setting &#x60;force&#x60; to true -
+     * this will break all dependent objects in the unpublished organizations
+     *
+     * @param unpublishMetadataRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Unpublishing metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> unpublishMetadataWithHttpInfo(
+            UnpublishMetadataRequest unpublishMetadataRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                unpublishMetadataValidateBeforeCall(unpublishMetadataRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 26.5.0.cl or later Allows unpublishing metadata objects from
+     * organizations in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint
+     * allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical
+     * Tables When unpublishing objects, you can: * Include dependencies by setting
+     * &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no
+     * other published object is using them * Force unpublish by setting &#x60;force&#x60; to true -
+     * this will break all dependent objects in the unpublished organizations
+     *
+     * @param unpublishMetadataRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Unpublishing metadata objects is successful. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call unpublishMetadataAsync(
+            UnpublishMetadataRequest unpublishMetadataRequest, final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                unpublishMetadataValidateBeforeCall(unpublishMetadataRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

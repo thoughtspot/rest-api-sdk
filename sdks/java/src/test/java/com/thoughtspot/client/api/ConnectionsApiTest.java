@@ -9,8 +9,12 @@ import com.thoughtspot.client.model.CreateConnectionRequest;
 import com.thoughtspot.client.model.CreateConnectionResponse;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
 import com.thoughtspot.client.model.FetchConnectionDiffStatusResponse;
+import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
+import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.SearchConnectionRequest;
 import com.thoughtspot.client.model.SearchConnectionResponse;
+import com.thoughtspot.client.model.SyncMetadataRequest;
+import com.thoughtspot.client.model.SyncMetadataResponse;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import java.io.File;
@@ -38,12 +42,13 @@ public class ConnectionsApiTest {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
-     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
-     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
-     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
-     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB1\&quot;, \&quot;DB2\&quot;], \&quot;externalDatabases\&quot;:[ ] }
+     * &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the
+     * &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly
+     * provide the authenticationType property in the payload. If you do not specify
+     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. ####
+     * Create a connection with tables If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
@@ -54,7 +59,8 @@ public class ConnectionsApiTest {
      * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB1\&quot;, \&quot;DB2\&quot;, \&quot;AllDatatypes\&quot;],
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -74,7 +80,15 @@ public class ConnectionsApiTest {
      * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
      * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
      * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type.
+     * SERVICE_ACCOUNT as the authentication type. The optional &#x60;databases&#x60; property in
+     * &#x60;data_warehouse_config&#x60; accepts a list of database names. When specified,
+     * ThoughtSpot persists this list on the connection and uses it to scope metadata fetching to
+     * only the specified databases in subsequent table add and remove operations. If omitted, all
+     * databases in the data warehouse are accessible for metadata operations. The
+     * &#x60;databases&#x60; and &#x60;externalDatabases&#x60; serve different purposes.
+     * &#x60;databases&#x60; is a flat list of database names that controls which databases are
+     * scanned during metadata operations. &#x60;externalDatabases&#x60; defines the full table
+     * hierarchy and determines which tables are linked into ThoughtSpot.
      *
      * @throws ApiException if the Api call fails
      */
@@ -167,6 +181,43 @@ public class ConnectionsApiTest {
     }
 
     /**
+     * Version: 26.2.0.cl or later Revokes OAuth refresh tokens for users who no longer require
+     * access to a data warehouse connection. When a token is revoked, the affected user&#39;s
+     * session for that connection is terminated, and they must re-authenticate to regain access.
+     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance,
+     * users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**)
+     * privilege can also make API requests to revoke tokens for connection users. #### Usage
+     * guidelines You can specify different combinations of identifiers to control which refresh
+     * tokens are revoked. - **connection_identifier**: Revokes refresh tokens for all users of the
+     * connection, except the connection author. - **connection_identifier** and
+     * **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If
+     * the name or ID of the connection author is included in the request, their token will also be
+     * revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh
+     * tokens for all users on the specified configurations, except the configuration author. -
+     * **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes
+     * refresh tokens for the specified users on the specified configurations. -
+     * **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified
+     * Orgs. Applicable only for published connections. - **connection_identifier**,
+     * **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users
+     * in the specified Orgs. Applicable only for published connections. **NOTE**: The
+     * &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using
+     * this parameter for unpublished connections will result in an error. Ensure that the
+     * connections are published before making the API request.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void revokeRefreshTokensTest() throws ApiException {
+        String connectionIdentifier = null;
+        RevokeRefreshTokensRequest revokeRefreshTokensRequest = null;
+        RevokeRefreshTokensResponse response =
+                api.revokeRefreshTokens(connectionIdentifier, revokeRefreshTokensRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.2.0.cl or later Gets connection objects. Requires &#x60;DATAMANAGEMENT&#x60;
      * (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
      * privilege. If [Role-Based Access Control
@@ -245,6 +296,44 @@ public class ConnectionsApiTest {
     }
 
     /**
+     * Version: 26.5.0.cl or later Synchronizes connection metadata attributes from your Cloud Data
+     * Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60; (**Can manage
+     * data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
+     * required. #### Usage guidelines To synchronize attributes from a CDW, specify the connection
+     * GUID or name in the &#x60;connection_identifier&#x60; path parameter and
+     * &#x60;sync_attributes&#x60; in the request body. Default attribute is
+     * &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;. ##### Hierarchical schema * Connection: The
+     * connection object for the sync operation. * Tables: Tables for the sync operation. When no
+     * table is specified, all tables are synchronized. * Columns: If the table is specified, you
+     * can add the columns for the sync operation. If no columns are specified, all columns in the
+     * specified table are considered for the sync operation. To set the scope for the sync
+     * operation: * Connection-level: To sync all tables and columns, pass an empty request body, or
+     * only the attributes in the request body. * Table-level: To synchronize specific tables and
+     * their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level:
+     * To synchronize specific columns, specify the table identifier as the key and column
+     * identifiers as the value in the &#x60;tables&#x60; array. &#x60;&#x60;&#x60; {
+     * \&quot;tables\&quot;: [ {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;,
+     * \&quot;column-guid-2\&quot;]}, \&quot;table-guid-2\&quot; ], \&quot;sync_attributes\&quot;:
+     * [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60; ##### API response If the sync operation is
+     * successful, the API returns the following information: * Status of the sync operation. For
+     * example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number
+     * of tables and columns that were updated. * Number of tables and columns with the sync failed
+     * status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating
+     * the sync results.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void syncMetadataTest() throws ApiException {
+        String connectionIdentifier = null;
+        SyncMetadataRequest syncMetadataRequest = null;
+        SyncMetadataResponse response = api.syncMetadata(connectionIdentifier, syncMetadataRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.2.0.cl or later **Important**: This endpoint is deprecated and will be removed
      * from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Update
      * connection V2](#/http/api-endpoints/connections/update-connection-v2) endpoint to update your
@@ -285,7 +374,8 @@ public class ConnectionsApiTest {
      * JSON map of configuration attributes, database details, and table properties in
      * &#x60;data_warehouse_config&#x60; as shown in the following example: * This is an example of
      * updating a single table in a empty connection: &#x60;&#x60;&#x60; {
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB2\&quot;, \&quot;DB3\&quot;, \&quot;DEVELOPMENT\&quot;],
      * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
      * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
      * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
@@ -315,7 +405,8 @@ public class ConnectionsApiTest {
      * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
      * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
      * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB2\&quot;, \&quot;DB3\&quot;, \&quot;DEVELOPMENT\&quot;],
      * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
      * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
      * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
@@ -353,7 +444,16 @@ public class ConnectionsApiTest {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60;
+     * \&quot;databases\&quot;:[\&quot;DB1\&quot;, \&quot;DB2\&quot;],
+     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; The optional &#x60;databases&#x60;
+     * property in &#x60;data_warehouse_config&#x60; accepts a list of database names. When
+     * specified, ThoughtSpot persists this list on the connection and uses it to scope metadata
+     * fetching to only the specified databases in subsequent table add and remove operations. If
+     * omitted, all databases in the data warehouse are accessible for metadata operations. The
+     * &#x60;databases&#x60; and &#x60;externalDatabases&#x60; serve different purposes.
+     * &#x60;databases&#x60; is a flat list of database names that controls which databases are
+     * scanned during metadata operations. &#x60;externalDatabases&#x60; defines the full table
+     * hierarchy and determines which tables are linked into ThoughtSpot.
      *
      * @throws ApiException if the Api call fails
      */

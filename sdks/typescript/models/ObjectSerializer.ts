@@ -10,6 +10,8 @@ export * from '../models/ActionDetails';
 export * from '../models/ActionDetailsInput';
 export * from '../models/ActionDetailsInputCreate';
 export * from '../models/ActivateUserRequest';
+export * from '../models/AdvancedChartFontAssignmentInput';
+export * from '../models/AdvancedChartVisualizationFontRecord';
 export * from '../models/AgentConversation';
 export * from '../models/AgentConversationHistoryResponse';
 export * from '../models/AgentConversationList';
@@ -536,6 +538,8 @@ import { ActionDetails } from '../models/ActionDetails';
 import { ActionDetailsInput } from '../models/ActionDetailsInput';
 import { ActionDetailsInputCreate } from '../models/ActionDetailsInputCreate';
 import { ActivateUserRequest } from '../models/ActivateUserRequest';
+import { AdvancedChartFontAssignmentInput, AdvancedChartFontAssignmentInputVisualizationAreaEnum    } from '../models/AdvancedChartFontAssignmentInput';
+import { AdvancedChartVisualizationFontRecord, AdvancedChartVisualizationFontRecordVisualizationAreaEnum      } from '../models/AdvancedChartVisualizationFontRecord';
 import { AgentConversation } from '../models/AgentConversation';
 import { AgentConversationHistoryResponse } from '../models/AgentConversationHistoryResponse';
 import { AgentConversationList } from '../models/AgentConversationList';
@@ -1072,6 +1076,8 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 let enumsMap: Set<string> = new Set<string>([
     "ActionConfigInputPositionEnum",
     "ActionConfigInputCreatePositionEnum",
+    "AdvancedChartFontAssignmentInputVisualizationAreaEnum",
+    "AdvancedChartVisualizationFontRecordVisualizationAreaEnum",
     "AnswerDetailsVisualizationTypeEnum",
     "AssociateMetadataInputTypeEnum",
     "AssociateMetadataInputCreateTypeEnum",
@@ -1383,6 +1389,8 @@ let typeMap: {[index: string]: any} = {
     "ActionDetailsInput": ActionDetailsInput,
     "ActionDetailsInputCreate": ActionDetailsInputCreate,
     "ActivateUserRequest": ActivateUserRequest,
+    "AdvancedChartFontAssignmentInput": AdvancedChartFontAssignmentInput,
+    "AdvancedChartVisualizationFontRecord": AdvancedChartVisualizationFontRecord,
     "AgentConversation": AgentConversation,
     "AgentConversationHistoryResponse": AgentConversationHistoryResponse,
     "AgentConversationList": AgentConversationList,

@@ -65,7 +65,7 @@ public class HeaderUpdateInput implements Serializable {
 
         USER_GROUP("USER_GROUP"),
 
-        FOLDER("FOLDER");
+        COLLECTION("COLLECTION");
 
         private String value;
 

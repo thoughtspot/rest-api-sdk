@@ -6,9 +6,13 @@ All URIs are relative to *CLUSTER_URL*
 |------------- | ------------- |
 | [**assignChangeAuthor**](SecurityApi.md#assignChangeAuthor) | **POST** /api/rest/2.0/security/metadata/assign |
 | [**fetchColumnSecurityRules**](SecurityApi.md#fetchColumnSecurityRules) | **POST** /api/rest/2.0/security/column/rules/fetch |
+| [**fetchObjectPrivileges**](SecurityApi.md#fetchObjectPrivileges) | **POST** /api/rest/2.0/security/metadata/fetch-object-privileges |
 | [**fetchPermissionsOfPrincipals**](SecurityApi.md#fetchPermissionsOfPrincipals) | **POST** /api/rest/2.0/security/principals/fetch-permissions |
 | [**fetchPermissionsOnMetadata**](SecurityApi.md#fetchPermissionsOnMetadata) | **POST** /api/rest/2.0/security/metadata/fetch-permissions |
+| [**manageObjectPrivilege**](SecurityApi.md#manageObjectPrivilege) | **POST** /api/rest/2.0/security/metadata/manage-object-privilege |
+| [**publishMetadata**](SecurityApi.md#publishMetadata) | **POST** /api/rest/2.0/security/metadata/publish |
 | [**shareMetadata**](SecurityApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share |
+| [**unpublishMetadata**](SecurityApi.md#unpublishMetadata) | **POST** /api/rest/2.0/security/metadata/unpublish |
 | [**updateColumnSecurityRules**](SecurityApi.md#updateColumnSecurityRules) | **POST** /api/rest/2.0/security/column/rules/update |
 
 
@@ -84,6 +88,42 @@ null (empty response body)
 | **403** | Forbidden - User doesn&#39;t have permission to access security rules for this table |  -  |
 | **500** | Internal server error |  -  |
 
+<a id="fetchObjectPrivileges"></a>
+# **fetchObjectPrivileges**
+> ObjectPrivilegesOfMetadataResponse fetchObjectPrivileges(fetchObjectPrivilegesRequest)
+
+
+
+  Version: 26.3.0.cl or later   This API fetches the object privileges present for the given list of principals (user or group), on the given set of objects. It supports pagination, which can be enabled and configured using the request parameters. It provides users access to certain features based on privilege based access control.  #### Usage guidelines  - Specify the &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and &#x60;identifier&#x60; (either GUID or name) of the principals for which you want to retrieve object privilege information in the &#x60;principals&#x60; array. - Specify the &#x60;type&#x60;  (&#x60;LOGICAL_TABLE&#x60;)  and &#x60;identifier&#x60; (either GUID or name) of the metadata objects for which you want to retrieve object privilege information in the &#x60;metadata&#x60; array. Only &#x60;LOGICAL_TABLE&#x60; metadata type is supported for now. It may be extended for other metadata types in future. - To control the offset from where principals have to be fetched, use &#x60;record_offset&#x60;. When &#x60;record_offset&#x60; is 0, information is fetched from the beginning. - To control the number of principals to be fetched, use &#x60;record_size&#x60;. Default &#x60;record_size&#x60; is 20. - Ensure &#x60;record_offset&#x60; for a subsequent request is one more than the value of &#x60;record_size&#x60; of the previous request. - Ensure using correct Authorization Bearer Token corresponding to specific user &amp; org.   #### Example request  &#x60;&#x60;&#x60;json {   \&quot;principals\&quot;: [     {       \&quot;type\&quot;: \&quot;type-1\&quot;,       \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot;     },     {       \&quot;type\&quot;: \&quot;type-2\&quot;,       \&quot;identifier\&quot;: \&quot;principal-guid-or-name-2\&quot;     }   ],   \&quot;metadata\&quot;: [     {       \&quot;type\&quot;: \&quot;metadata-type-1\&quot;,       \&quot;identifier\&quot;: \&quot;metadata-guid-or-name-1\&quot;     },     {       \&quot;type\&quot;: \&quot;metadata-type-2\&quot;,       \&quot;identifier\&quot;: \&quot;metadata-guid-or-name-2\&quot;     }   ],   \&quot;record_offset\&quot;: 0,   \&quot;record_size\&quot;: 20 } &#x60;&#x60;&#x60;   #### Response format  The API returns an array of &#x60;metadata_object_privileges&#x60; objects wrapped in JSON. Each &#x60;metadata_object_privileges&#x60; object contains: - Metadata information (GUID, name and type) - Array of &#x60;principal_object_privilege_info&#x60;. - Each &#x60;principal_object_privilege_info&#x60; contains:   - Principal type. All principals of this type are listed as described below.   - Array of &#x60;principal_object_privileges&#x60;.   - Each &#x60;principal_object_privileges&#x60; contains:     - Principal information (GUID, name, subtype)     - List of applied object level privileges.  #### Example response  &#x60;&#x60;&#x60;json {     \&quot;metadata_object_privileges\&quot;: [       {         \&quot;metadata_id\&quot;: \&quot;metadata-guid-1\&quot;,         \&quot;metadata_name\&quot;: \&quot;metadata-name-1\&quot;,         \&quot;metadata_type\&quot;: \&quot;metadata-type-1\&quot;,         \&quot;principal_object_privilege_info\&quot;: [           {             \&quot;principal_type\&quot;: \&quot;principal-type-1\&quot;,             \&quot;principal_object_privileges\&quot;: [               {                 \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;,                 \&quot;principal_name\&quot;: \&quot;principal-name-1\&quot;,                 \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-1\&quot;,                 \&quot;object_privileges\&quot;: \&quot;[object-privilege-1, object-privilege-2]\&quot;               },               {                 \&quot;principal_id\&quot;: \&quot;principal-guid-2\&quot;,                 \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,                 \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,                 \&quot;object_privileges\&quot;: \&quot;[object-privilege-1, object-privilege-2]\&quot;               }             ]           },           {             \&quot;principal_type\&quot;: \&quot;principal-type-2\&quot;,             \&quot;principal_object_privileges\&quot;: [               {                 \&quot;principal_id\&quot;: \&quot;principal-guid-3\&quot;,                 \&quot;principal_name\&quot;: \&quot;principal-guid-4\&quot;,                 \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-4\&quot;,                 \&quot;object_privileges\&quot;: \&quot;[object-privilege-1]\&quot;               }             ]           }         ]       },       {         \&quot;metadata_id\&quot;: \&quot;metadata-guid-2\&quot;,         \&quot;metadata_name\&quot;: \&quot;metadata-name-2\&quot;,         \&quot;metadata_type\&quot;: \&quot;metadata-type-2\&quot;,         \&quot;principal_object_privilege_info\&quot;: [           {             \&quot;principal_type\&quot;: \&quot;principal-type-1\&quot;,             \&quot;principal_object_privileges\&quot;: [               {                 \&quot;principal_id\&quot;: \&quot;principal-guid-1\&quot;,                 \&quot;principal_name\&quot;: \&quot;principal-name-1\&quot;,                 \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-1\&quot;,                 \&quot;object_privileges\&quot;: \&quot;[object-privilege-3, object-privilege-4]\&quot;               },               {                 \&quot;principal_id\&quot;: \&quot;principal-guid-2\&quot;,                 \&quot;principal_name\&quot;: \&quot;principal-name-2\&quot;,                 \&quot;principal_sub_type\&quot;: \&quot;principal-sub-type-2\&quot;,                 \&quot;object_privileges\&quot;: \&quot;[object-privilege-4]\&quot;               }             ]           }         ]       }     ] } &#x60;&#x60;&#x60;     
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **fetchObjectPrivilegesRequest** | [**FetchObjectPrivilegesRequest**](FetchObjectPrivilegesRequest.md)
+
+### Return type
+
+[**ObjectPrivilegesOfMetadataResponse**](ObjectPrivilegesOfMetadataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Fetching defined object privileges of metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="fetchPermissionsOfPrincipals"></a>
 # **fetchPermissionsOfPrincipals**
 > PermissionOfPrincipalsResponse fetchPermissionsOfPrincipals(fetchPermissionsOfPrincipalsRequest)
@@ -156,6 +196,78 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="manageObjectPrivilege"></a>
+# **manageObjectPrivilege**
+> manageObjectPrivilege(manageObjectPrivilegeRequest)
+
+
+
+  Version: 26.3.0.cl or later   This API allows the addition or deletion of object level privileges for a set of users and groups, on a set of metadata objects. It provides users to access certain features based on privilege based access control.  #### Usage guidelines  - Specify the &#x60;operation&#x60;. The supported operations are: &#x60;ADD&#x60;, &#x60;REMOVE&#x60;. - Specify the type of the objects on which the object privileges are being provided in &#x60;metadata_type&#x60;. Only &#x60;LOGICAL_TABLE&#x60; metadata type is supported for now. It may be extended for other metadata types in future. - Specify the list of object privilege types in the &#x60;object_privilege_types&#x60; array. The supported object privilege types are: &#x60;SPOTTER_COACHING_PRIVILEGE&#x60;. - Specify the identifiers (either GUID or name) for the metadata objects in the &#x60;metadata_identifiers&#x60; array. - Specify the &#x60;type&#x60; (&#x60;USER&#x60; or &#x60;USER_GROUP&#x60;) and &#x60;identifier&#x60; (either GUID or name) of the principals to which you want to apply the given operation and given object privileges in the &#x60;principals&#x60; array. - Ensure using correct Authorization Bearer Token corresponding to specific user &amp; org.  #### Example request  &#x60;&#x60;&#x60;json {   \&quot;operation\&quot;: \&quot;operation-type\&quot;,   \&quot;metadata_type\&quot;: \&quot;metadata-type\&quot;,   \&quot;object_privilege_types\&quot;: [\&quot;privilege-type-1\&quot;, \&quot;privilege-type-2\&quot;],   \&quot;metadata_identifiers\&quot;: [\&quot;metadata-guid-or-name-1\&quot;, \&quot;metadata-guid-or-name-1\&quot;],   \&quot;principals\&quot;: [     {       \&quot;type\&quot;: \&quot;type-1\&quot;,        \&quot;identifier\&quot;: \&quot;principal-guid-or-name-1\&quot;     },     {       \&quot;type\&quot;: \&quot;type-2\&quot;,       \&quot;identifier\&quot;: \&quot;principal-guid-or-name-2\&quot;     }   ] } &#x60;&#x60;&#x60;  &gt; ###### Note: &gt; * Only admin users, users with edit access and users with coaching privilege on a given data-model can add or remove principals related to SPOTTER_COACHING_PRIVILEGE       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **manageObjectPrivilegeRequest** | [**ManageObjectPrivilegeRequest**](ManageObjectPrivilegeRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Object privileges added/removed successfully |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Unauthorized access |  -  |
+| **403** | Forbidden access |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="publishMetadata"></a>
+# **publishMetadata**
+> publishMetadata(publishMetadataRequest)
+
+
+
+  Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **publishMetadataRequest** | [**PublishMetadataRequest**](PublishMetadataRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Publishing metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="shareMetadata"></a>
 # **shareMetadata**
 > shareMetadata(shareMetadataRequest)
@@ -187,6 +299,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Sharing metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="unpublishMetadata"></a>
+# **unpublishMetadata**
+> unpublishMetadata(unpublishMetadataRequest)
+
+
+
+  Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **unpublishMetadataRequest** | [**UnpublishMetadataRequest**](UnpublishMetadataRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Unpublishing metadata objects is successful. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
