@@ -2143,6 +2143,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "At least one of cluster_preferences or org_preferences must be provided."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2153,6 +2168,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to configure authentication settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2163,6 +2193,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "ADMINISTRATION or CONTROL_TRUSTED_AUTH privilege required to configure authentication settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2173,6 +2218,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while configuring authentication settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2196,6 +2256,52 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Current user info for an admin user in the primary org",
+                    "value": {
+                      "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "name": "tsadmin",
+                      "display_name": "TS Admin",
+                      "visibility": "SHARABLE",
+                      "author_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "can_change_password": true,
+                      "complete_detail": true,
+                      "creation_time_in_millis": 1699900000000,
+                      "current_org": {
+                        "id": 0,
+                        "name": "Primary"
+                      },
+                      "deleted": false,
+                      "deprecated": false,
+                      "account_type": "LOCAL_USER",
+                      "account_status": "ACTIVE",
+                      "email": "tsadmin@example.com"
+                    }
+                  },
+                  "example_2": {
+                    "description": "Current user info for a SAML user switched to a non-primary org",
+                    "value": {
+                      "id": "7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c",
+                      "name": "sales_analyst",
+                      "display_name": "Sales Analyst",
+                      "visibility": "SHARABLE",
+                      "author_id": "7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c",
+                      "can_change_password": false,
+                      "complete_detail": true,
+                      "creation_time_in_millis": 1699900000000,
+                      "current_org": {
+                        "id": 583464508,
+                        "name": "sales_org"
+                      },
+                      "deleted": false,
+                      "deprecated": false,
+                      "account_type": "SAML_USER",
+                      "account_status": "ACTIVE",
+                      "email": "sales_analyst@example.com"
+                    }
+                  }
                 }
               }
             }
@@ -2216,6 +2322,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve the current user information."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2236,6 +2357,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving current user information."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2259,6 +2395,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetTokenResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Standard session token valid for 1 hour",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_token_payload.signature",
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724281030000,
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "valid_for_username": "tsadmin"
+                    }
+                  },
+                  "example_2": {
+                    "description": "Short-lived session token valid for 5 minutes",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_short_token_payload.signature",
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "valid_for_user_id": "7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c",
+                      "valid_for_username": "sales_analyst"
+                    }
+                  }
                 }
               }
             }
@@ -2279,6 +2437,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve the current session token."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2299,6 +2472,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving the current user session token."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2332,6 +2520,42 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AccessToken"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Custom access token with variable values and APPEND persist option for an existing user",
+                    "value": {
+                      "id": "9f8e7d6c-5b4a-3210-fedc-ba9876543210",
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_custom_token.signature",
+                      "org": {
+                        "id": 0,
+                        "name": "Primary"
+                      },
+                      "user": {
+                        "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                        "name": "analyst_user"
+                      },
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000
+                    }
+                  },
+                  "example_2": {
+                    "description": "Custom access token with variable values for a JIT-provisioned user",
+                    "value": {
+                      "id": "1a2b3c4d-5e6f-7890-abcd-ef1234567890",
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_jit_custom_token.signature",
+                      "org": {
+                        "id": 1,
+                        "name": "SalesOrg"
+                      },
+                      "user": {
+                        "id": "3f2e1d4c-9b8a-7e6f-5d4c-3b2a1e0f9d8c",
+                        "name": "new_sales_user@example.com"
+                      },
+                      "creation_time_in_millis": 1724278000000,
+                      "expiration_time_in_millis": 1724278300000
+                    }
+                  }
                 }
               }
             }
@@ -2342,6 +2566,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Invalid persistOption: 'APPEND'. Expected: 'RESET' when resetOption is provided."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2352,6 +2591,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Invalid credentials. The provided secret key or password is incorrect."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2362,6 +2616,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Trusted authentication is not enabled for this cluster or org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2372,6 +2641,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while generating the custom access token."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2406,6 +2690,36 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Token"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Full-access token generated using cluster secret key",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_full_token.signature",
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "access_type": "FULL",
+                        "org_id": 0
+                      },
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "valid_for_username": "tsadmin"
+                    }
+                  },
+                  "example_2": {
+                    "description": "Full-access token for a JIT-provisioned user in a specific org",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_jit_full_token.signature",
+                      "creation_time_in_millis": 1724278000000,
+                      "expiration_time_in_millis": 1724278300000,
+                      "scope": {
+                        "access_type": "FULL",
+                        "org_id": 1
+                      },
+                      "valid_for_user_id": "b3d9e1f7-2a4c-4e8b-9d1f-6c5a3b8e7d2f",
+                      "valid_for_username": "jit_analyst@example.com"
+                    }
+                  }
                 }
               }
             }
@@ -2416,6 +2730,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Either secret_key or password must be provided."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2426,6 +2755,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Invalid credentials. The provided secret key or password is incorrect."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2436,6 +2780,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Trusted authentication is not enabled for this cluster or org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2446,6 +2805,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while generating the full-access token."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2480,6 +2854,38 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Token"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Object-scoped access token for a specific liveboard",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_object_token.signature",
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "access_type": "REPORT_BOOK_VIEW",
+                        "org_id": 0,
+                        "metadata_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                      },
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "valid_for_username": "tsadmin"
+                    }
+                  },
+                  "example_2": {
+                    "description": "Object-scoped token with JIT user provisioning",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_jit_object_token.signature",
+                      "creation_time_in_millis": 1724278000000,
+                      "expiration_time_in_millis": 1724278300000,
+                      "scope": {
+                        "access_type": "REPORT_BOOK_VIEW",
+                        "org_id": 0,
+                        "metadata_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      },
+                      "valid_for_user_id": "7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c",
+                      "valid_for_username": "new_user@example.com"
+                    }
+                  }
                 }
               }
             }
@@ -2490,6 +2896,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Either secret_key or password must be provided."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2500,6 +2921,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Invalid credentials. The provided secret key or password is incorrect."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2510,6 +2946,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Trusted authentication is not enabled for this cluster or org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2520,6 +2971,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while generating the object-scoped access token."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2557,6 +3023,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "The specified org_identifier does not refer to a valid or accessible org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2567,6 +3048,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication failed. Verify that the username and password are correct."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2577,6 +3073,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "User account is inactive or locked."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2587,6 +3098,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error during login."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2623,6 +3149,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "No active session found. User is not logged in."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2643,6 +3184,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error during logout."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2679,6 +3235,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Either user_identifier or token must be provided."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2689,6 +3260,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to revoke a token."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2699,6 +3285,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to revoke tokens for another user."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2709,6 +3310,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while revoking the token."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2781,6 +3397,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "auth_type must be specified and currently only TRUSTED_AUTH is supported."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2791,6 +3422,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve authentication settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2801,6 +3447,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "ADMINISTRATION or CONTROL_TRUSTED_AUTH privilege required to retrieve authentication settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2811,6 +3472,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving authentication settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2844,6 +3520,35 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TokenValidationResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Valid full-access token",
+                    "value": {
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "access_type": "FULL",
+                        "org_id": 0
+                      },
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "token_type": "BEARER"
+                    }
+                  },
+                  "example_2": {
+                    "description": "Valid object-scoped token",
+                    "value": {
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "access_type": "REPORT_BOOK_VIEW",
+                        "org_id": 0,
+                        "metadata_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                      },
+                      "valid_for_user_id": "7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c",
+                      "token_type": "BEARER"
+                    }
+                  }
                 }
               }
             }
@@ -2854,6 +3559,36 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "malformed_token": {
+                    "summary": "Malformed token",
+                    "description": "The token cannot be parsed. Both malformed and expired tokens return error code 10002 — the debug field distinguishes the root cause.",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "The provided token is malformed and cannot be parsed."
+                        }
+                      }
+                    }
+                  },
+                  "expired_token": {
+                    "summary": "Expired token",
+                    "description": "The token signature is valid but the token has passed its expiration time. Both malformed and expired tokens return error code 10002 — the debug field distinguishes the root cause.",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcf-ef1234567891",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcf-ef1234567891",
+                          "debug": "The provided token has expired."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2864,6 +3599,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to validate a token."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2884,6 +3634,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while validating the token."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -3500,7 +4265,7 @@
     "/api/rest/2.0/connection/create": {
       "post": {
         "operationId": "createConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCreates a connection to a data warehouse for live query services.  \n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n#### Create a connection without tables\n\nTo create a connection without tables:\n\n1. Pass these parameters in your API request.\n * Name of the connection.\n * Type of the data warehouse to connect to.\n * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:\n  ```\n  {\n     \"configuration\":{\n        \"accountName\":\"thoughtspot_partner\",\n        \"user\":\"tsadmin\",\n        \"password\":\"TestConn123\",\n        \"role\":\"sysadmin\",\n        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"authenticationType\": \"SERVICE_ACCOUNT\",\n     \"externalDatabases\":[\n\n     ]\n  }\n  ```\n2. Set `validate` to `false`.\n\n**NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n#### Create a connection with tables\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.\n\nTo create a connection with tables:\n\n1. Pass these parameters in your API request.\n * Name of the connection.\n * Type of the data warehouse to connect to.\n * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n  ```\n  {\n     \"configuration\":{\n        \"accountName\":\"thoughtspot_partner\",\n        \"user\":\"tsadmin\",\n        \"password\":\"TestConn123\",\n        \"role\":\"sysadmin\",\n        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"authenticationType\": \"SERVICE_ACCOUNT\",\n     \"externalDatabases\":[\n        {\n           \"name\":\"AllDatatypes\",\n           \"isAutoCreated\":false,\n           \"schemas\":[\n              {\n                 \"name\":\"alldatatypes\",\n                 \"tables\":[\n                    {\n                       \"name\":\"allDatatypes\",\n                       \"type\":\"TABLE\",\n                       \"description\":\"\",\n                       \"selected\":true,\n                       \"linked\":true,\n                       \"columns\":[\n                          {\n                             \"name\":\"CNUMBER\",\n                             \"type\":\"INT64\",\n                             \"canImport\":true,\n                             \"selected\":true,\n                             \"isLinkedActive\":true,\n                             \"isImported\":false,\n                             \"tableName\":\"allDatatypes\",\n                             \"schemaName\":\"alldatatypes\",\n                             \"dbName\":\"AllDatatypes\"\n                          },\n                          {\n                             \"name\":\"CDECIMAL\",\n                             \"type\":\"INT64\",\n                             \"canImport\":true,\n                             \"selected\":true,\n                             \"isLinkedActive\":true,\n                             \"isImported\":false,\n                             \"tableName\":\"allDatatypes\",\n                             \"schemaName\":\"alldatatypes\",\n                             \"dbName\":\"AllDatatypes\"\n                          }\n                       ]\n                    }\n                 ]\n              }\n           ]\n        }\n     ]\n  }\n  ```\n2. Set `validate` to `true`.\n\n**NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nCreates a connection to a data warehouse for live query services.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n#### Create a connection without tables\n\nTo create a connection without tables:\n\n1. Pass these parameters in your API request.\n * Name of the connection.\n * Type of the data warehouse to connect to.\n * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a SnowFlake connection:\n  ```\n  {\n     \"configuration\":{\n        \"accountName\":\"thoughtspot_partner\",\n        \"user\":\"tsadmin\",\n        \"password\":\"TestConn123\",\n        \"role\":\"sysadmin\",\n        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"authenticationType\": \"SERVICE_ACCOUNT\",\n     \"databases\": [\"DB1\", \"DB2\"],\n     \"externalDatabases\":[\n\n     ]\n  }\n  ```\n2. Set `validate` to `false`.\n\n**NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n#### Create a connection with tables\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) and `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**) privilege is required.\n\nTo create a connection with tables:\n\n1. Pass these parameters in your API request.\n* Name of the connection.\n* Type of the data warehouse to connect to.\n* A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n  ```\n  {\n     \"configuration\":{\n        \"accountName\":\"thoughtspot_partner\",\n        \"user\":\"tsadmin\",\n        \"password\":\"TestConn123\",\n        \"role\":\"sysadmin\",\n        \"warehouse\":\"MEDIUM_WH\"\n     },\n     \"authenticationType\": \"SERVICE_ACCOUNT\",\n     \"databases\": [\"DB1\", \"DB2\", \"AllDatatypes\"],\n     \"externalDatabases\":[\n        {\n           \"name\":\"AllDatatypes\",\n           \"isAutoCreated\":false,\n           \"schemas\":[\n              {\n                 \"name\":\"alldatatypes\",\n                 \"tables\":[\n                    {\n                       \"name\":\"allDatatypes\",\n                       \"type\":\"TABLE\",\n                       \"description\":\"\",\n                       \"selected\":true,\n                       \"linked\":true,\n                       \"columns\":[\n                          {\n                             \"name\":\"CNUMBER\",\n                             \"type\":\"INT64\",\n                             \"canImport\":true,\n                             \"selected\":true,\n                             \"isLinkedActive\":true,\n                             \"isImported\":false,\n                             \"tableName\":\"allDatatypes\",\n                             \"schemaName\":\"alldatatypes\",\n                             \"dbName\":\"AllDatatypes\"\n                          },\n                          {\n                             \"name\":\"CDECIMAL\",\n                             \"type\":\"INT64\",\n                             \"canImport\":true,\n                             \"selected\":true,\n                             \"isLinkedActive\":true,\n                             \"isImported\":false,\n                             \"tableName\":\"allDatatypes\",\n                             \"schemaName\":\"alldatatypes\",\n                             \"dbName\":\"AllDatatypes\"\n                          }\n                       ]\n                    }\n                 ]\n              }\n           ]\n        }\n     ]\n  }\n  ```\n2. Set `validate` to `true`.\n\n**NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\nThe optional `databases` property in `data_warehouse_config` accepts a list of database names. When specified, ThoughtSpot persists this list on the connection and uses it to scope metadata fetching to only the specified databases in subsequent table add and remove operations. If omitted, all databases in the data warehouse are accessible for metadata operations.\n\nThe `databases` and `externalDatabases` serve different purposes. `databases` is a flat list of database names that controls which databases are scanned during metadata operations. `externalDatabases` defines the full table hierarchy and determines which tables are linked into ThoughtSpot.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "9.2.0.cl"
@@ -4273,7 +5038,7 @@
     "/api/rest/2.0/connections/{connection_identifier}/update": {
       "post": {
         "operationId": "updateConnectionV2",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   \n   **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n   * This is an example of updating a single table in a empty connection:\n   \n      ```\n      {\n        \"authenticationType\": \"SERVICE_ACCOUNT\",\n        \"externalDatabases\": [\n          {\n            \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\": false,\n            \"schemas\": [\n              {\n                \"name\": \"TS_dataset\",\n                \"tables\": [\n                  {\n                    \"name\": \"DEMORENAME\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [\n                      {\n                        \"name\": \"Col1\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col2\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col3\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col312\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col4\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      }\n                    ],\n                    \"relationships\": []\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"configuration\": {\n          \"password\": \"\",\n          \"database\": \"DEVELOPMENT\",\n          \"role\": \"DEV\",\n          \"accountName\": \"thoughtspot_partner\",\n          \"warehouse\": \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n      }\n      ```\n      \n* This is an example of updating a single table in an existing connection with tables:\n    \n      ```\n      {\n        \"authenticationType\": \"SERVICE_ACCOUNT\",\n        \"externalDatabases\": [\n          {\n            \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\": false,\n            \"schemas\": [\n              {\n                \"name\": \"TS_dataset\",\n                \"tables\": [\n                  {\n                    \"name\": \"CUSTOMER\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [],\n                    \"relationships\": []\n                  },\n                  {\n                    \"name\": \"tpch5k_falcon_default_schema_users\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [\n                      {\n                        \"name\": \"user_id\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"product_id\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"user_cost\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      }\n                    ],\n                    \"relationships\": []\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"configuration\": {\n          \"password\": \"\",\n          \"database\": \"DEVELOPMENT\",\n          \"role\": \"DEV\",\n          \"accountName\": \"thoughtspot_partner\",\n          \"warehouse\": \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n      }\n      ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"externalDatabases\":[\n\n      ]\n   }\n   ```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nUpdates a connection object.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) and edit permissions to the connection object, or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\nTo update a connection object, pass these parameters in your API request:\n\n1. GUID of the connection object.\n2. If you are updating tables or database schema of a connection object:\n   a. Add the updated JSON map of metadata with database, schema, and tables in `data_warehouse_config`.\n   b. Set `validate` to `true`.\n   \n   **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n   * A JSON map of configuration attributes, database details, and table properties in `data_warehouse_config` as shown in the following example:\n   * This is an example of updating a single table in a empty connection:\n   \n      ```\n      {\n        \"authenticationType\": \"SERVICE_ACCOUNT\",\n        \"databases\": [\"DB2\", \"DB3\", \"DEVELOPMENT\"],\n        \"externalDatabases\": [\n          {\n            \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\": false,\n            \"schemas\": [\n              {\n                \"name\": \"TS_dataset\",\n                \"tables\": [\n                  {\n                    \"name\": \"DEMORENAME\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [\n                      {\n                        \"name\": \"Col1\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col2\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col3\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col312\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"Col4\",\n                        \"type\": \"VARCHAR\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      }\n                    ],\n                    \"relationships\": []\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"configuration\": {\n          \"password\": \"\",\n          \"database\": \"DEVELOPMENT\",\n          \"role\": \"DEV\",\n          \"accountName\": \"thoughtspot_partner\",\n          \"warehouse\": \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n      }\n      ```\n      \n* This is an example of updating a single table in an existing connection with tables:\n    \n      ```\n      {\n        \"authenticationType\": \"SERVICE_ACCOUNT\",\n        \"databases\": [\"DB2\", \"DB3\", \"DEVELOPMENT\"],\n        \"externalDatabases\": [\n          {\n            \"name\": \"DEVELOPMENT\",\n            \"isAutoCreated\": false,\n            \"schemas\": [\n              {\n                \"name\": \"TS_dataset\",\n                \"tables\": [\n                  {\n                    \"name\": \"CUSTOMER\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [],\n                    \"relationships\": []\n                  },\n                  {\n                    \"name\": \"tpch5k_falcon_default_schema_users\",\n                    \"type\": \"TABLE\",\n                    \"description\": \"\",\n                    \"selected\": true,\n                    \"linked\": true,\n                    \"gid\": 0,\n                    \"datasetId\": \"-1\",\n                    \"subType\": \"\",\n                    \"reportId\": \"\",\n                    \"viewId\": \"\",\n                    \"columns\": [\n                      {\n                        \"name\": \"user_id\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"product_id\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      },\n                      {\n                        \"name\": \"user_cost\",\n                        \"type\": \"INT64\",\n                        \"canImport\": true,\n                        \"selected\": true,\n                        \"description\": \"\",\n                        \"isLinkedActive\": true,\n                        \"isAggregate\": false\n                      }\n                    ],\n                    \"relationships\": []\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"configuration\": {\n          \"password\": \"\",\n          \"database\": \"DEVELOPMENT\",\n          \"role\": \"DEV\",\n          \"accountName\": \"thoughtspot_partner\",\n          \"warehouse\": \"DEMO_WH\",\n          \"user\": \"DEV_USER\"\n        }\n      }\n      ```\n\n3. If you are updating a configuration attribute, connection name, or description, you can set `validate` to `false`.\n\n  **NOTE:** If the `authentication_type` is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.\n\n  * A JSON map of configuration attributes in `data_warehouse_config`. The following example shows the configuration attributes for a Snowflake connection:\n   ```\n   {\n      \"configuration\":{\n         \"accountName\":\"thoughtspot_partner\",\n         \"user\":\"tsadmin\",\n         \"password\":\"TestConn123\",\n         \"role\":\"sysadmin\",\n         \"warehouse\":\"MEDIUM_WH\"\n      },\n      \"databases\":[\"DB1\", \"DB2\"],\n      \"externalDatabases\":[\n\n      ]\n   }\n   ```\n\nThe optional `databases` property in `data_warehouse_config` accepts a list of database names. When specified, ThoughtSpot persists this list on the connection and uses it to scope metadata fetching to only the specified databases in subsequent table add and remove operations. If omitted, all databases in the data warehouse are accessible for metadata operations.\n\nThe `databases` and `externalDatabases` serve different purposes. `databases` is a flat list of database names that controls which databases are scanned during metadata operations. `externalDatabases` defines the full table hierarchy and determines which tables are linked into ThoughtSpot.\n\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "10.4.0.cl"
@@ -4400,6 +5165,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "A custom action with the same name already exists. The custom action name must be unique."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4410,6 +5190,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to create a custom action."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4420,6 +5215,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to create custom actions."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4430,6 +5240,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while creating the custom action."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4466,6 +5291,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Custom action with the specified identifier was not found."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4476,6 +5316,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to delete a custom action."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4486,6 +5341,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to delete custom actions."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4496,6 +5366,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the custom action."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4560,6 +5445,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Custom action identifier is invalid or malformed."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4570,6 +5470,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to search custom actions."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4590,6 +5505,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while searching custom actions."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4636,6 +5566,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Custom action with the specified identifier was not found."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4646,6 +5591,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to update a custom action."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4656,6 +5616,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to update custom actions."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4666,6 +5641,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while updating the custom action."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -6689,6 +7679,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "channel_type must be specified. Currently only WEBHOOK is supported."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -6699,6 +7704,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve channel delivery history."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -6709,6 +7729,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to retrieve channel delivery history."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -6719,6 +7754,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving channel delivery history."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10293,6 +11343,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to export style logos."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10303,6 +11368,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Cluster-level logos can only be exported from PRIMARY org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10313,6 +11393,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while exporting style logos."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -10881,7 +11976,7 @@
     "/api/rest/2.0/customization/styles/update": {
       "post": {
         "operationId": "updateStyleCustomization",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts` and `visualization_fonts.table_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -10990,6 +12085,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "chart_color_palette must specify exactly 8 color entries when operation is REPLACE."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11000,6 +12110,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to update style customization preferences."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11010,6 +12135,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Cluster-level style customization can only be updated from PRIMARY org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11020,6 +12160,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while updating style customization preferences."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11066,6 +12221,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Font color must be a valid 6-digit hex string (e.g. '#333333')."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11076,6 +12246,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to update a custom font."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11086,6 +12271,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Only Tenant admin can update cluster-level fonts."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11096,6 +12296,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while updating the custom font."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11321,6 +12536,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "RESET operation requires reset_events to be specified."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11331,6 +12561,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to configure communication channel preferences."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11341,6 +12586,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "ADMINISTRATION privilege required to configure cluster-level communication channel preferences."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11351,6 +12611,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while configuring communication channel preferences."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11387,6 +12662,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "groups_identifiers_with_access can only be set when block_full_app_access is true."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11397,6 +12687,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to configure security settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11407,6 +12712,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "ADMINISTRATION privilege required to configure cluster-level security settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11417,6 +12737,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while configuring security settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11469,6 +12804,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve system configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11479,6 +12829,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "ADMINISTRATION privilege required to retrieve system configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11489,6 +12854,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving system configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11561,6 +12941,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve system information."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11571,6 +12966,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "ADMINISTRATION privilege required to retrieve system information."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11581,6 +12991,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving system information."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11604,6 +13029,25 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SystemOverrideInfo"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "System configuration overrides. The config_override_info field is a free-form JSON object whose keys are camelCase internal configuration property identifiers as returned by the server.",
+                    "value": {
+                      "config_override_info": {
+                        "maxTableRowsPerPage": 500,
+                        "enableCustomCalendar": true,
+                        "allowMultipleOrgs": true,
+                        "sessionTimeout": 3600
+                      }
+                    }
+                  },
+                  "example_2": {
+                    "description": "No configuration overrides applied",
+                    "value": {
+                      "config_override_info": {}
+                    }
+                  }
                 }
               }
             }
@@ -11624,6 +13068,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve system configuration overrides."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11634,6 +13093,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "ADMINISTRATION privilege required to retrieve system configuration overrides."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11644,6 +13118,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving system configuration overrides."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11717,6 +13206,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "org_identifier in org_preferences does not match a known org."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11727,6 +13231,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to search communication channel preferences."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11737,6 +13256,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "ADMINISTRATION privilege required to retrieve cluster-level communication channel preferences."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11747,6 +13281,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while searching communication channel preferences."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11854,6 +13403,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "scope must be one of CLUSTER or ORG."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11864,6 +13428,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve security settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11874,6 +13453,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "ADMINISTRATION privilege required to retrieve cluster-level security settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11884,6 +13478,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving security settings."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11920,6 +13529,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "The configuration JSON contains an unknown or unsupported key."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11930,6 +13554,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to update system configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11940,6 +13579,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "ADMINISTRATION privilege required to update system configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11950,6 +13604,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while updating system configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -11983,6 +13652,86 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CommunicationChannelValidateResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Successful webhook validation with HTTP check only",
+                    "value": {
+                      "channel_type": "WEBHOOK",
+                      "channel_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                      "channel_name": "My Liveboard Webhook",
+                      "event_type": "LIVEBOARD_SCHEDULE",
+                      "job_id": "9a8b7c6d-5e4f-3210-fedc-ba9876543210",
+                      "result_code": "SUCCESS",
+                      "details": [
+                        {
+                          "validation_step": "HTTP_CONNECTION_CHECK",
+                          "status": "SUCCESS",
+                          "http_status": 200,
+                          "error_message": null,
+                          "aws_s3_info": null
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "description": "Successful webhook validation with both HTTP and S3 storage checks",
+                    "value": {
+                      "channel_type": "WEBHOOK",
+                      "channel_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "channel_name": "S3 Storage Webhook",
+                      "event_type": "LIVEBOARD_SCHEDULE",
+                      "job_id": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                      "result_code": "SUCCESS",
+                      "details": [
+                        {
+                          "validation_step": "HTTP_CONNECTION_CHECK",
+                          "status": "SUCCESS",
+                          "http_status": 200,
+                          "error_message": null,
+                          "aws_s3_info": null
+                        },
+                        {
+                          "validation_step": "STORAGE_FILE_UPLOAD_CHECK",
+                          "status": "SUCCESS",
+                          "http_status": null,
+                          "error_message": null,
+                          "aws_s3_info": {
+                            "bucket_name": "my-webhook-files",
+                            "file_name": "thoughtspot-validation-test.json",
+                            "object_key": "webhooks/thoughtspot-validation-test.json"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "example_3": {
+                    "description": "Partial success: HTTP check passed but S3 upload failed",
+                    "value": {
+                      "channel_type": "WEBHOOK",
+                      "channel_id": "c3d4e5f6-7890-1234-cdef-345678901234",
+                      "channel_name": "Failed S3 Webhook",
+                      "event_type": "LIVEBOARD_SCHEDULE",
+                      "job_id": "d4e5f678-9012-3456-defa-456789012345",
+                      "result_code": "PARTIAL_SUCCESS",
+                      "details": [
+                        {
+                          "validation_step": "HTTP_CONNECTION_CHECK",
+                          "status": "SUCCESS",
+                          "http_status": 200,
+                          "error_message": null,
+                          "aws_s3_info": null
+                        },
+                        {
+                          "validation_step": "STORAGE_FILE_UPLOAD_CHECK",
+                          "status": "FAILED",
+                          "http_status": null,
+                          "error_message": "Access denied. Ensure the IAM role has s3:PutObject permission on the target bucket.",
+                          "aws_s3_info": null
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -11993,6 +13742,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Webhook with the specified channel_identifier was not found."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -12003,6 +13767,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to validate a communication channel."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -12013,6 +13792,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to validate communication channels."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -12023,6 +13817,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while validating the communication channel."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14538,6 +16347,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "At least one event type must be specified in the events field."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14548,6 +16372,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to create a webhook configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14558,6 +16397,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to create webhook configurations."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14568,6 +16422,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while creating the webhook configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14679,7 +16548,7 @@
                             "LIVEBOARD_SCHEDULE"
                           ],
                           "authentication": {
-                            "NO_AUTH": ""
+                            "BEARER_TOKEN": "***"
                           },
                           "creation_time_in_millis": 1724276415456,
                           "modification_time_in_millis": 1724276415456,
@@ -14693,7 +16562,7 @@
                         {
                           "id": "a3f7c1e4-9b2d-4a6e-8f3c-1e5b7a9c4f2e",
                           "name": "Non-existent Webhook",
-                          "error_message": "Webhook not found or access denied"
+                          "error": "Webhook not found or access denied"
                         }
                       ]
                     }
@@ -14708,6 +16577,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "webhook_identifiers must contain at least one identifier."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14718,6 +16602,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to delete webhook configurations."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14728,6 +16627,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to delete webhook configurations."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14738,6 +16652,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting webhook configurations."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14915,6 +16844,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve webhook storage configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14925,6 +16869,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to retrieve webhook storage configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -14935,6 +16894,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving webhook storage configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -15075,6 +17049,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "record_size must be a positive integer."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -15085,6 +17074,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to search webhook configurations."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -15095,6 +17099,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to search webhook configurations."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -15105,6 +17124,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while searching webhook configurations."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -15151,6 +17185,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Webhook with the specified identifier was not found."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -15161,6 +17210,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to update a webhook configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -15171,6 +17235,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Insufficient privileges to update webhook configurations."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -15181,6 +17260,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while updating the webhook configuration."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -21218,6 +23312,14 @@
             },
             "description": "Font assignments for table visualization areas.",
             "nullable": true
+          },
+          "advanced_chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvancedChartVisualizationFontRecord"
+            },
+            "description": "Font assignments for advanced chart visualization areas. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Effective font assignments per visualization type."
@@ -21289,6 +23391,35 @@
           }
         },
         "description": "Font assignment for a table visualization area in the response."
+      },
+      "AdvancedChartVisualizationFontRecord": {
+        "type": "object",
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "ADVANCED_CHART_LABELS"
+            ],
+            "description": "Advanced chart visualization area.",
+            "nullable": true
+          },
+          "font_id": {
+            "type": "string",
+            "description": "UUID of the font assigned to this area. Null when the system default font\nis active.",
+            "nullable": true
+          },
+          "font_name": {
+            "type": "string",
+            "description": "Display name of the font assigned to this area. Null when the system\ndefault font is active.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for an advanced chart visualization area in the response."
       },
       "StyleFontRecord": {
         "type": "object",
@@ -21385,7 +23516,8 @@
                 "CHART_COLUMN_DATA_LABELS",
                 "CHART_BAR_DATA_LABELS",
                 "CHART_AREA_DATA_LABELS",
-                "TABLE_VALUE_CELLS"
+                "TABLE_VALUE_CELLS",
+                "ADVANCED_CHART_LABELS"
               ]
             },
             "description": "Visualization areas using this font.",
@@ -23082,7 +25214,7 @@
               "DATA_SOURCE",
               "USER",
               "USER_GROUP",
-              "FOLDER"
+              "COLLECTION"
             ],
             "description": "Optional type of the header object.",
             "nullable": true
@@ -23137,7 +25269,7 @@
               "DATA_SOURCE",
               "USER",
               "USER_GROUP",
-              "FOLDER"
+              "COLLECTION"
             ],
             "description": "Type of metadata. Required if metadata_identifier is name of the object.",
             "nullable": true
@@ -25684,7 +27816,8 @@
                 "CHART_COLUMN_DATA_LABELS",
                 "CHART_BAR_DATA_LABELS",
                 "CHART_AREA_DATA_LABELS",
-                "TABLE_VALUE_CELLS"
+                "TABLE_VALUE_CELLS",
+                "ADVANCED_CHART_LABELS"
               ]
             },
             "description": "Visualization areas whose font assignments should revert to the system\ndefault font.",
@@ -25772,6 +27905,14 @@
             },
             "description": "Font assignments for table visualization areas. Provide only the areas to\nupdate; omitted areas remain unchanged.",
             "nullable": true
+          },
+          "advanced_chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvancedChartFontAssignmentInput"
+            },
+            "description": "Font assignments for advanced chart visualization areas. Provide only the\nareas to update; omitted areas remain unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Font assignments grouped by visualization type."
@@ -25827,6 +27968,27 @@
           }
         },
         "description": "Font assignment for a single table visualization area."
+      },
+      "AdvancedChartFontAssignmentInput": {
+        "type": "object",
+        "required": [
+          "visualization_area",
+          "font_identifier"
+        ],
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "ADVANCED_CHART_LABELS"
+            ],
+            "description": "Advanced chart visualization area to assign the font to. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>"
+          },
+          "font_identifier": {
+            "type": "string",
+            "description": "UUID or name of the font to assign to this area. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>"
+          }
+        },
+        "description": "Font assignment for a single advanced chart visualization area."
       },
       "StyleFontUploadData": {
         "type": "object",
@@ -25884,7 +28046,8 @@
                 "CHART_COLUMN_DATA_LABELS",
                 "CHART_BAR_DATA_LABELS",
                 "CHART_AREA_DATA_LABELS",
-                "TABLE_VALUE_CELLS"
+                "TABLE_VALUE_CELLS",
+                "ADVANCED_CHART_LABELS"
               ]
             },
             "description": "Visualization areas that used the deleted font and were automatically reset\nto the system default font.",
