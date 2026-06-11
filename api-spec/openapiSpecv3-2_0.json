@@ -22726,7 +22726,7 @@
                 "CAN_MANAGE_SPOTTER"
               ]
             },
-            "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "description": "Privileges that will be assigned to the group.",
             "nullable": true
           },
           "sub_group_identifiers": {
@@ -27850,7 +27850,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "description": "Privileges to assign to the group",
             "type": "array",
             "items": {
               "type": "string",
@@ -28149,7 +28149,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "description": "Privileges to assign to the group.",
             "type": "array",
             "items": {
               "type": "string",
@@ -29340,7 +29340,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
             "type": "array",
             "items": {
               "type": "string",
@@ -29535,7 +29535,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
             "type": "array",
             "items": {
               "type": "string",
