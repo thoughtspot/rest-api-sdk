@@ -34129,7 +34129,7 @@
             "type": "object"
           },
           "trigger_welcome_email": {
-            "description": "lag to indicate whether an activation email should be sent to the user. This parameter applies only on clusters where IAM (IAMv2) is enabled. If not specified, it defaults to `true`. To avoid sending an activation email, either set this flag to `false` or provide a valid password in the request.",
+            "description": "Flag to indicate whether an activation email should be sent to the user. This parameter applies only on clusters where IAM (IAMv2) is enabled. If not specified, it defaults to `true`. To avoid sending an activation email, either set this flag to `false` or provide a valid password in the request.",
             "type": "boolean",
             "nullable": true
           },
