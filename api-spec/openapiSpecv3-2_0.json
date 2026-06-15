@@ -30,6 +30,14 @@
       "description": "Roles for version 26.7.0.cl"
     },
     {
+      "name": "26.8.0.cl",
+      "id": "26.8.0.cl",
+      "tags": [
+        "26.8.0.cl"
+      ],
+      "description": "Roles for version 26.8.0.cl"
+    },
+    {
       "name": "26.6.0.cl",
       "id": "26.6.0.cl",
       "tags": [
@@ -196,6 +204,14 @@
         "26.3.0.cl"
       ],
       "description": "Roles for version 26.3.0.cl"
+    },
+    {
+      "name": "26.9.0.cl",
+      "id": "26.9.0.cl",
+      "tags": [
+        "26.9.0.cl"
+      ],
+      "description": "Roles for version 26.9.0.cl"
     },
     {
       "name": "10.14.0.cl",
@@ -464,6 +480,97 @@
         }
       }
     },
+    "/api/rest/2.0/ai/memory/export": {
+      "post": {
+        "operationId": "exportMemory",
+        "description": "\nExports memory entries (rules, recipes, and non-semantic rules) for\nthe specified data-models as a single YAML payload.\nRequires `CAN_USE_SPOTTER` privilege and read access on every\nreferenced data-model. Routes through eureka-agent, which applies\nthe same accessibility filtering and obj_id resolution as the\ninternal GraphQL surface. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nThis API allows users to export data-model memories (can be extended to agent memories in future) for a given list of data-models. This exported yaml file can then be modified and used as input to the import API in target env.\n\nThis API enables customers to migrate memories from a source env to a target env. This improves memory adoption for Spotter by giving the users a chance to develop their memories in a dev env and replicate the same in a prod env.\n\nTo use this API, the user needs either edit access or memory privilege on the data-model or manage-spotter privilege and they must use corresponding org related bearerToken where the data-model exists.\n\n#### Usage guidelines\n\nTo export memory for one or more data-models, the request may include:\n- `sources`: A list of typed scope groups identifying which data-models to export memory for. Each group contains:\n  - `type`: The source object type for this group — `DATA_MODEL`.\n  - `identifiers`: An array of GUIDs or human-readable `obj_id`s of the data-models to export memory for. obj_ids are resolved server-side before forwarding.\n\nThe memory types (`RULES`, `RECIPES`, and `NON_SEMANTIC_RULES`) and the output format (`YAML`) are fixed for this endpoint and are not request parameters.\n\nThe API returns a response object with:\n- `content`: The serialized memory payload (currently YAML) — exactly the shape that the `importMemory` API consumes. Edit it locally and pass it back through `importMemory` to apply changes.\n\n#### Source Type\n\n- **DATA_MODEL**: The `identifiers` are data-model (worksheet) GUIDs. This is the default (and currently only) source type for Spotter memory and covers the rules and recipes attached directly to a data-model.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                                                  |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                         |\n| 403  | Forbidden — the authenticated user does not have necessary permissions, or lacks read access on a referenced data-model, or the bearer token does not correspond to the data-model's org. |\n\n> ###### Note:\n> - To use this API, the user needs either edit access or memory privilege on the data-model or manage-spotter privilege and they must use corresponding org related bearerToken where the data-model exists.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - Available from version 26.8.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportMemoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_ExportMemoryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Serialized YAML memory payload returned (truncated)",
+                    "value": {
+                      "content": "memories:\n  - type: RULE\n    content:\n      rule_definition: always show revenue in USD\n    datamodel_sources:\n      - guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890\n        obj_id: sales_model\n"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_ExportMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/agent/instructions/get": {
       "get": {
         "operationId": "getAgentInstructions",
@@ -635,10 +742,10 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 30
             },
-            "description": "Maximum number of conversations to return. Used for pagination.",
-            "default": 30
+            "description": "Maximum number of conversations to return. Used for pagination."
           },
           {
             "in": "query",
@@ -646,20 +753,20 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 0
             },
-            "description": "Number of conversations to skip before returning results. Used for pagination.",
-            "default": 0
+            "description": "Number of conversations to skip before returning results. Used for pagination."
           },
           {
             "in": "query",
             "name": "skip_empty",
             "required": false,
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "default": true
             },
-            "description": "When true, excludes conversations with no messages. Defaults to true.",
-            "default": true
+            "description": "When true, excludes conversations with no messages. Defaults to true."
           }
         ],
         "responses": {
@@ -928,6 +1035,113 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/memory/import": {
+      "post": {
+        "operationId": "importMemory",
+        "description": "\nImports memory entries from a YAML payload. Performs an\natomic, exact-subset replacement on the target data-models declared\nin the payload itself: every existing memory whose `datamodel_sources`\nset is a subset of the payload's union is deleted, and every row in\nthe payload is inserted.\nPhase 1 (insert) is all-or-nothing; any insert failure rolls back\nevery prior insert and returns `ROLLED_BACK`. Phase 2 (delete old)\nis best-effort; partial delete failures surface as\n`RESIDUAL_ORPHAN` entries in `warnings` (a follow-up sweeper\nreconciles them).\n`dry_run` is required: pass `true` first to inspect the preview\ncounts and row failures, then re-run with `dry_run = false` once the\ncaller is satisfied. A real import refuses to write when any row\nfailed validation.\nRequires `CAN_USE_SPOTTER` privilege and edit / coaching access on\nevery referenced data-model. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nThis API allows users to import data-model memories (can be extended to agent memories in future) using a given yaml file. This yaml file can be obtained from the export memory API in source env and can be modified and used as input to the import API in target env.\n\nThis API enables customers to migrate memories from a source env to a target env. This improves memory adoption for Spotter by giving the users a chance to develop their memories in a dev env and replicate the same in a prod env.\n\nTo use this API, the user needs either edit access or memory privilege on the data-model or manage-spotter privilege and they must use corresponding org related bearerToken where the data-model exists.\n\n#### Usage guidelines\n\nTo import memory, the request must include:\n- `content`: The full serialized memory payload to import (currently YAML). Typically the `content` value returned by the `exportMemory` API, edited locally and re-submitted. The payload itself declares which data-models the memory applies to (via each row's `datamodel_sources`), so no separate identifier list is required.\n- `dry_run`: Required. When `true`, validate the payload and return preview counts without writing anything; when `false`, apply the atomic replacement. There is no default — always run with `dry_run = true` first, then re-run with `dry_run = false` once you are satisfied with the preview.\n\nThe import performs an atomic, exact-subset replacement on the data-models referenced in the payload: every existing memory whose `datamodel_sources` set is a subset of the payload's union is deleted, and every row in the payload is inserted.\n\nThe API returns a response object with:\n- `status`: The terminal status of the import (`SUCCESS`, `VALIDATION_FAILED`, or `FAILED`).\n- `summary`: Per `(memory_type, source)` counts. In a dry run the `deleted_record_count`/`inserted_record_count` are previews; in a real import they are actuals.\n- `validation_failures`: Per-item validation failures, each with `line_number`, `reason`, `field_name`, and `message` for click-to-locate and inline highlighting.\n- `diagnostics`: Groups of diagnostic messages, each with a `sub_status` (`WARNING`, `FAILURE`, `ROLLED_BACK`, or `UNKNOWN`) and a `messages` list. This is the single channel for both non-fatal observations (e.g. a `RESIDUAL_ORPHAN` entry under `WARNING` when a best-effort delete left an old doc behind, reconciled later by a sweeper using `operation_id`) and fatal causes (e.g. the failure reason under `FAILURE`, or a `ROLLED_BACK` group when inserts were undone).\n- `operation_id`: A server-minted UUID for log correlation and follow-up cleanup.\n\n#### Dry run\n\n`dry_run` is required and has no default, so the import is always a deliberate two-step flow:\n\n1. **First, call with `dry_run = true`.** This validates the payload and previews what would happen — the counts in `summary` and any `validation_failures` — without writing anything.\n2. **Then, after reviewing a clean preview, call again with `dry_run = false`** (same `content`). This performs the atomic replacement. It refuses to write when any item fails validation, so fix the reported `validation_failures` and resubmit.\n\n> ###### Important:\n> Never call `dry_run = false` without first inspecting a `dry_run = true` preview. A real import deletes and replaces existing memories on the referenced data-models.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                                                  |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                      \n             |\n\n#### Logical failures\n\nValidation and write failures are not returned in the error envelope. The call returns `200` with a terminal `status` of `VALIDATION_FAILED` or `FAILED`, and the details live in `validation_failures` / `diagnostics`:\n\n- **VALIDATION_FAILED** — one or more items failed schema/semantic validation; nothing was written. Inspect `validation_failures`, fix the items, and resubmit.\n- **FAILED** — the import did not complete. This covers both internal errors and rollbacks. Inspect `diagnostics`: a `ROLLED_BACK` group means Phase-1 inserts failed and every successful insert was undone (the originals are intact, no destructive change), while a `FAILURE` group carries another non-validation cause (e.g. an internal error).\n\nSample `VALIDATION_FAILED` response (HTTP 200):\n\n```json\n{\n  \"status\": \"VALIDATION_FAILED\",\n  \"summary\": [\n    {\n      \"memory_type\": \"RULES\",\n      \"source\": {\n        \"identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n        \"type\": \"DATA_MODEL\"\n      },\n      \"existing_record_count\": 3,\n      \"deleted_record_count\": 0,\n      \"inserted_record_count\": 0,\n      \"failed_record_count\": 1\n    }\n  ],\n  \"validation_failures\": [\n    {\n      \"line_number\": 4,\n      \"reason\": \"CHAR_LIMIT\",\n      \"field_name\": \"content.rule_definition\",\n      \"message\": \"Rule definition exceeds the maximum allowed length.\"\n    }\n  ],\n  \"diagnostics\": [],\n  \"operation_id\": \"550e8400-e29b-41d4-a716-446655440000\"\n}\n```\n\n> ###### Note:\n> - To use this API, the user needs either edit access or memory privilege on the data-model or manage-spotter privilege and they must use corresponding org related bearerToken where the data-model exists.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - Available from version 26.8.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportMemoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_ImportMemoryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Successful dry-run preview",
+                    "value": {
+                      "status": "SUCCESS",
+                      "summary": [
+                        {
+                          "memory_type": "RULES",
+                          "source": {
+                            "identifier": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "type": "DATA_MODEL"
+                          },
+                          "existing_record_count": 3,
+                          "deleted_record_count": 3,
+                          "inserted_record_count": 1,
+                          "failed_record_count": 0
+                        }
+                      ],
+                      "validation_failures": [],
+                      "diagnostics": [],
+                      "operation_id": "550e8400-e29b-41d4-a716-446655440000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_ImportMemoryResponse"
                 }
               }
             }
@@ -6030,7 +6244,7 @@
     "/api/rest/2.0/metadata/answer/data": {
       "post": {
         "operationId": "fetchAnswerData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches data from a saved Answer.\n\nRequires at least view access to the saved Answer.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches data from a saved Answer.\n\nRequires at least view access to the saved Answer. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.\n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -6103,7 +6317,7 @@
     "/api/rest/2.0/metadata/liveboard/data": {
       "post": {
         "operationId": "fetchLiveboardData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets data from a Liveboard object and its visualization.  \n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\nFor more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets data from a Liveboard object and its visualization.  \n\nRequires at least view access to the Liveboard. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or names of the visualizations in the API request.\n\nTo include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes. If the new Liveboard experience mode, the transient content includes ad hoc changes to visualizations such as sorting, toggling of legends, and data drill down.\n\nFor more information, and see [Liveboard data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_fetch_liveboard_data_api).\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -6176,7 +6390,7 @@
     "/api/rest/2.0/searchdata": {
       "post": {
         "operationId": "searchData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source object (Worksheet or View).\n\n#### Usage guidelines\n\nTo search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example:\n\n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\nFor more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).  \n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.\n\n#### Usage guidelines\n\nTo search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example:\n\n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\nFor more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).  \n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -7553,6 +7767,264 @@
           },
           "500": {
             "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/create": {
+      "post": {
+        "operationId": "createInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nCreates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required.\n\n#### Usage guidelines\n\nTo create an input table, provide the following in the request body:\n\n* **`table_name`** — Physical name of the table to create in the external warehouse.\n* **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata.\n* **`table_definition`** — Describes the table schema:\n  * `referenced_columns` — List of column GUIDs from the linked model to include as read-only reference columns in the input table. These columns anchor the input data to existing model dimensions.\n  * `new_columns` — List of new editable columns to create. Each column requires:\n    * `name` — Column display name.\n    * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).\n    * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.\n\n**Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.\n\n#### Examples\n\nCreate an input table with one referenced model column and one new editable measure column:\n\n```json\n{\n  \"table_name\": \"Sales Region Targets\",\n  \"model_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"table_definition\": {\n    \"referenced_columns\": [\"c7d8e9f0-1234-5678-abcd-ef0987654321\"],\n    \"new_columns\": [\n      {\n        \"name\": \"target_revenue\",\n        \"data_type\": \"DOUBLE\",\n        \"type\": \"MEASURE\"\n      }\n    ]\n  }\n}\n```\n\nCreate an input table with multiple new editable columns and no referenced columns:\n\n```json\n{\n  \"table_name\": \"Budget Adjustments\",\n  \"model_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"table_definition\": {\n    \"referenced_columns\": [],\n    \"new_columns\": [\n      {\n        \"name\": \"region\",\n        \"data_type\": \"VARCHAR\",\n        \"type\": \"ATTRIBUTE\"\n      },\n      {\n        \"name\": \"adjustment_amount\",\n        \"data_type\": \"DOUBLE\",\n        \"type\": \"MEASURE\"\n      },\n      {\n        \"name\": \"effective_date\",\n        \"data_type\": \"DATE\",\n        \"type\": \"ATTRIBUTE\"\n      }\n    ]\n  }\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInputTableRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Input table created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputTableResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Input table created successfully",
+                    "value": {
+                      "input_table_identifier": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — invalid payload, no columns selected, or upload disabled on the connection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Model not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/delete": {
+      "post": {
+        "operationId": "deleteInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nDeletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required.\n\n#### Usage guidelines\n\nSpecify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.\n\n**Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.\n\n#### Example\n\nPass the input table GUID as a path parameter. This endpoint has no request body.\n\n```\nDELETE /api/rest/2.0/input-tables/a1b2c3d4-e5f6-7890-abcd-ef1234567890/delete\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.8.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the input table and dropped the physical CDW table."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/update": {
+      "post": {
+        "operationId": "updateInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nWrites rows of data into an existing input table. The supplied rows replace the current contents of the table: each call serializes the provided values to CSV and loads them into the input table via DataManager, overwriting any previously stored rows.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:\n\n* **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. Only the listed columns are written; unlisted columns retain their existing values.\n* **`rows`** — List of rows to load. Each row is an array of string values in the same order as `columns`. All cell values must be passed as strings regardless of the column's underlying data type.\n\n**Note**: Each call fully replaces the previously loaded rows. To clear the table, send an empty `rows` array. Partial updates to individual rows are not supported; re-submit all rows on every write.\n\n#### Examples\n\nWrite two rows to an input table. Pass the input table GUID as the\n`input_table_identifier` path parameter:\n\n```\nPOST /api/rest/2.0/input-tables/{input_table_identifier}/update\n```\n\n```json\n{\n  \"columns\": [\"region\", \"target_revenue\", \"effective_date\"],\n  \"rows\": [\n    [\"West\", \"1500000\", \"2025-01-01\"],\n    [\"East\", \"2000000\", \"2025-01-01\"]\n  ]\n}\n```\n\nThe response returns the number of rows written:\n\n```json\n{ \"rows_loaded\": 2 }\n```\n\nClear all rows from an input table:\n\n```json\n{\n  \"columns\": [\"region\", \"target_revenue\"],\n  \"rows\": []\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInputTableRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rows loaded successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputTableUpdateResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Rows loaded successfully",
+                    "value": {
+                      "rows_loaded": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed request or unknown column name.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the input table.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Input table not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
             "content": {
               "application/json": {
                 "schema": {
@@ -9636,7 +10108,7 @@
     "/api/rest/2.0/report/answer": {
       "post": {
         "operationId": "exportAnswerReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires at least view access to the Answer.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\nUse the `type` parameter to specify whether the Answer being exported is a saved Answer (`SAVED`) or a pinned Answer on a Liveboard (`PINNED`). Defaults to `SAVED`. When using `PINNED`, the `metadata_identifier` must be the container id.\n\n**NOTE**:\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n* HTML rendering is not supported for PDF exports of Answers with tables.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  \n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires at least view access to the Answer. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the `DATADOWNLOADING` (**Can download Data**) privilege is required. If RBAC is enabled, the required download privilege depends on the selected `file_format`: `CSV`, `XLSX`, and `PDF` require the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege, and `PNG` requires the `CAN_DOWNLOAD_VISUALS` (**Can download visuals**) privilege. For an Answer, the `PDF` export is a table PDF, which is why it falls under `CAN_DOWNLOAD_DETAILED_DATA` rather than `CAN_DOWNLOAD_VISUALS`.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\nUse the `type` parameter to specify whether the Answer being exported is a saved Answer (`SAVED`) or a pinned Answer on a Liveboard (`PINNED`). Defaults to `SAVED`. When using `PINNED`, the `metadata_identifier` must be the container id.\n\n**NOTE**:\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n* HTML rendering is not supported for PDF exports of Answers with tables.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -9705,7 +10177,7 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports a Liveboard and its visualizations in PDF, PNG, CSV, or XLSX file format.\nThe default `file_format` is CSV.\n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\n**NOTE**: \n\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\n* Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\n* To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api). \n\n* Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.\n\n* Starting with the ThoughtSpot Cloud 26.2.0.cl release,\n\n  * Liveboards can be exported in CSV format. \n    * All visualizations within a Liveboard can be exported as individual CSV files. \n    * When exporting multiple visualizations or the entire Liveboard, the system returns the report as a compressed ZIP file containing the separate CSV files for each visualization.\n\n  * Liveboards can also be exported in XLSX format. \n    * All selected visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). \n    * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports a Liveboard and its visualizations in PDF, PNG, CSV, or XLSX file format.\nThe default `file_format` is CSV.\n\nRequires at least view access to the Liveboard. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the `DATADOWNLOADING` (**Can download Data**) privilege is required. If RBAC is enabled, the required download privilege depends on the selected `file_format`: `CSV` and `XLSX` require the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege, and `PNG` and `PDF` require the `CAN_DOWNLOAD_VISUALS` (**Can download visuals**) privilege.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\n**NOTE**: \n\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\n* Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\n* To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api). \n\n* Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.\n\n* Starting with the ThoughtSpot Cloud 26.2.0.cl release,\n\n  * Liveboards can be exported in CSV format. \n    * All visualizations within a Liveboard can be exported as individual CSV files. \n    * When exporting multiple visualizations or the entire Liveboard, the system returns the report as a compressed ZIP file containing the separate CSV files for each visualization.\n\n  * Liveboards can also be exported in XLSX format. \n    * All selected visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). \n    * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -10072,7 +10544,7 @@
     "/api/rest/2.0/schedules/create": {
       "post": {
         "operationId": "createSchedule",
-        "description": "\nCreate schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nCreates a Liveboard schedule job.\n\nRequires at least edit access to Liveboards. To create a schedule on behalf of another user, you need  `ADMINISTRATION` (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**) privilege and edit access to the Liveboard.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is required.\n\n#### Usage guidelines\n\n* The description text is mandatory.  The description text appears as **Description: <your content>** in the Liveboard schedule email notifications.\n* For Liveboards with both charts and tables, schedule creation is only supported in PDF and XLS formats. Schedules created in CSV formats for such Liveboards will fail to run. If `PDF` is set as the `file_format`, enable `pdf_options` to get the correct attachment. Not doing so may cause the attachment to be rendered empty.\n* To include only specific visualizations, specify the visualization GUIDs in the `visualization_identifiers` array.\n* You can schedule a Liveboard job to run periodically by setting frequency parameters. You can set the schedule to run daily, weekly, monthly or every n minutes or hours. The scheduled job can also be configured to run at a specific time of the day or on specific days of the week or month. Please ensure that when setting the schedule frequency for _minute of the object_, only values that are multiples of 5 are included.\n* If the `frequency` parameters are defined, you can set the time zone to a value that matches your server's time zone. For example, `US/Central`, `Etc/UTC`, `CET`. The default time zone is `America/Los_Angeles`.\n\nFor more information about Liveboard jobs, see [ThoughtSpot Product Documentation](https://docs.thoughtspot.com/cloud/latest/liveboard-schedule).\n\n\n\n#### Endpoint URL\n",
+        "description": "\nCreate schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nCreates a Liveboard schedule job.\n\nRequires at least edit access to Liveboards. To create a schedule on behalf of another user, you need  `ADMINISTRATION` (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**) privilege and edit access to the Liveboard.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is required.\n\nIf RBAC is enabled, creating a schedule also requires the download privilege that corresponds to the selected `file_format`: `CSV` and `XLSX` require the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege, and `PDF` requires the `CAN_DOWNLOAD_VISUALS` (**Can download visuals**) privilege.\n\n#### Usage guidelines\n\n* The description text is mandatory.  The description text appears as **Description: <your content>** in the Liveboard schedule email notifications.\n* For Liveboards with both charts and tables, schedule creation is only supported in PDF and XLS formats. Schedules created in CSV formats for such Liveboards will fail to run. If `PDF` is set as the `file_format`, enable `pdf_options` to get the correct attachment. Not doing so may cause the attachment to be rendered empty.\n* To include only specific visualizations, specify the visualization GUIDs in the `visualization_identifiers` array.\n* You can schedule a Liveboard job to run periodically by setting frequency parameters. You can set the schedule to run daily, weekly, monthly or every n minutes or hours. The scheduled job can also be configured to run at a specific time of the day or on specific days of the week or month. Please ensure that when setting the schedule frequency for _minute of the object_, only values that are multiples of 5 are included.\n* If the `frequency` parameters are defined, you can set the time zone to a value that matches your server's time zone. For example, `US/Central`, `Etc/UTC`, `CET`. The default time zone is `America/Los_Angeles`.\n\nFor more information about Liveboard jobs, see [ThoughtSpot Product Documentation](https://docs.thoughtspot.com/cloud/latest/liveboard-schedule).\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Schedules",
           "9.4.0.cl"
@@ -10287,7 +10759,7 @@
     "/api/rest/2.0/schedules/{schedule_identifier}/update": {
       "post": {
         "operationId": "updateSchedule",
-        "description": "\nUpdate schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nUpdates a scheduled Liveboard job.\n\nRequires at least edit access to Liveboards. To update a schedule on behalf of another user, you need `ADMINISTRATION` (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**) privilege and edit access to the Liveboard.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is required.\n\nThe API endpoint allows you to pause a scheduled job, change the status of a paused job. You can also edit the recipients list, frequency of the job, format of the file to send to the recipients in email notifications, PDF options, and time zone setting.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate schedule. <br/>  <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nUpdates a scheduled Liveboard job.\n\nRequires at least edit access to Liveboards. To update a schedule on behalf of another user, you need `ADMINISTRATION` (**Can administer Org**) or `JOBSCHEDULING` (**Can schedule for others**) privilege and edit access to the Liveboard.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is required.\n\nIf RBAC is enabled, changing a schedule's `file_format` also requires the download privilege that corresponds to the selected format: `CSV` and `XLSX` require the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege, and `PDF` requires the `CAN_DOWNLOAD_VISUALS` (**Can download visuals**) privilege.\n\nThe API endpoint allows you to pause a scheduled job, change the status of a paused job. You can also edit the recipients list, frequency of the job, format of the file to send to the recipients in email notifications, PDF options, and time zone setting.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Schedules",
           "9.4.0.cl"
@@ -11143,6 +11615,324 @@
         }
       }
     },
+    "/api/rest/2.0/semantic-integrations/create": {
+      "post": {
+        "operationId": "createSemanticIntegration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nCreates a new semantic integration in ThoughtSpot from a CDW semantic view.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About create semantic integration\n\nA semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.\n\n- `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required.\n- `name` must be unique across the user's organization. The integration's display name is also used as the generated model name.\n- Supported `type` values are listed in the `SemanticIntegrationType` enum (currently `RDBMS_SNOWFLAKE`).\n- The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSemanticIntegrationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Semantic integration created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticIntegrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Connection not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Duplicate integration name.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete": {
+      "post": {
+        "operationId": "deleteSemanticIntegration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nDeletes a semantic integration and its associated ThoughtSpot model.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About delete semantic integration\n\nRemoves the specified semantic integration and its generated ThoughtSpot model from the system.\n\n- `semantic_integration_identifier` is the GUID or name of the integration to delete.\n- Deletions cannot be undone. Re-import the integration with `createSemanticIntegration` if needed.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "semantic_integration_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the semantic integration to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Semantic integration deleted successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import": {
+      "post": {
+        "operationId": "importSemanticIntegration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nImports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About import semantic integration\n\nRe-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.\n\n- `semantic_integration_identifier` is the GUID or name of the integration to import updates for.\n- Import preserves the integration's GUID, name, and `model_id`; only the underlying formula set is refreshed.\n- The response includes the same `semantic_report` as create, with an additional `change_status` per formula indicating whether each formula is `NEW`, `UPDATED`, or `UNCHANGED` since the previous import.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "semantic_integration_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the semantic integration to import updates for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Semantic integration imported successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticIntegrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Semantic integration not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/semantic-integrations/search": {
+      "post": {
+        "operationId": "searchSemanticIntegrations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nSearches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About search semantic integrations\n\nReturns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.\n\n- `pattern` matches the integration name as a case-insensitive substring.\n- `author_identifiers`, `connection_identifiers`, and `tag_identifiers` accept either GUIDs or names.\n- `sort_options.field_name` defaults to `MODIFIED_TIME`; set `sort_options.order` to `ASC` or `DESC` to control sort direction.\n- `record_offset` and `record_size` control pagination. Use `record_size: 0` to return all matching records in a single response.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchSemanticIntegrationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Semantic integrations retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SemanticIntegrationSearchResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/customization/styles/fonts/delete": {
       "post": {
         "operationId": "deleteStyleFonts",
@@ -11319,12 +12109,24 @@
           },
           "required": true
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/zip"
+              ],
+              "default": "application/zip"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Logo ZIP archive retrieved successfully.",
             "content": {
-              "application/octet-stream": {}
+              "application/zip": {}
             }
           },
           "400": {
@@ -12185,7 +12987,7 @@
     "/api/rest/2.0/customization/styles/fonts/{font_identifier}/update": {
       "post": {
         "operationId": "updateStyleFont",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Identify the font using `font_identifier` (UUID or name).\n- Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user's org library.\n- To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`.\n- `name` must be unique within the target scope if provided.\n- `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Identify the font using `font_identifier` (UUID or name).\n- Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user's org library.\n- To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`.\n- `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -12321,7 +13123,7 @@
     "/api/rest/2.0/customization/styles/fonts/upload": {
       "post": {
         "operationId": "uploadStyleFont",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error.\n- The `name` field must be unique within the target scope. Uploading a font with a name that already exists returns an error.\n- Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library.\n- `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`.\n- `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`.\n- `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`).\n- The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error.\n- Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library.\n- `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`.\n- `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`.\n- `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`).\n- The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -12342,7 +13144,7 @@
                     ]
                   },
                   "name": {
-                    "description": "Display name for the font (e.g. \"Acme Sans\"). Must be unique within the\ntarget scope; returns an error if a font with this name already exists.",
+                    "description": "Display name for the font (e.g. \"Acme Sans\").",
                     "type": "string"
                   },
                   "weight": {
@@ -18697,9 +19499,10 @@
               "USER",
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
-              "INSIGHT_SPEC"
+              "INSIGHT_SPEC",
+              "COLLECTION"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values\n10. INSIGHT_SPEC for SpotIQ objects",
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects",
             "nullable": true
           },
           "subtypes": {
@@ -18766,9 +19569,10 @@
               "USER",
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
-              "INSIGHT_SPEC"
+              "INSIGHT_SPEC",
+              "COLLECTION"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.\n10. INSIGHT_SPEC for SpotIQ objects"
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects"
           }
         }
       },
@@ -18850,7 +19654,8 @@
               "USER",
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
-              "INSIGHT_SPEC"
+              "INSIGHT_SPEC",
+              "COLLECTION"
             ],
             "description": "Type of the metadata."
           },
@@ -20472,7 +21277,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -21938,6 +22748,41 @@
           }
         }
       },
+      "eureka_MemorySources": {
+        "type": "object",
+        "required": [
+          "type",
+          "identifiers"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "DATA_MODEL"
+            ],
+            "description": "Source object type for this group. Must be `DATA_MODEL`."
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Data-models to export memory for. Each entry may be a GUID or a\nhuman-readable obj_id; the eureka-agent resolves obj_ids before\nforwarding."
+          }
+        },
+        "description": "A single typed scope group identifying objects whose memory entries\nshould be exported. One group binds a single `type` to a set of\n`identifiers`; pass a list of groups to `exportMemory` to scope the\nexport to multiple objects in one call. Each group maps to one filter\ngroup on the eureka request."
+      },
+      "eureka_ExportMemoryResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "Serialized memory payload (currently YAML). This is the shape\nimportMemory consumes.",
+            "nullable": true
+          }
+        },
+        "description": "Response from exportMemory. Contains the serialized payload\nready for local editing and re-submission to importMemory."
+      },
       "VariableDetailInput": {
         "type": "object",
         "properties": {
@@ -22213,7 +23058,8 @@
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             },
             "nullable": true
@@ -23525,6 +24371,136 @@
           }
         },
         "description": "Visualization areas assigned to a font, grouped by org context."
+      },
+      "SemanticIntegrationSortOptions": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "enum": [
+              "NAME",
+              "AUTHOR",
+              "CREATED_TIME",
+              "MODIFIED_TIME"
+            ],
+            "description": "Name of the field to apply the sort on.",
+            "nullable": true
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Sort order: `ASC` for ascending, `DESC` for descending.",
+            "nullable": true
+          }
+        },
+        "description": "Sort options for semantic integration search."
+      },
+      "SemanticIntegrationSearchResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the semantic integration.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the semantic integration.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of the semantic integration.",
+            "nullable": true
+          },
+          "model_id": {
+            "type": "string",
+            "description": "GUID of the associated ThoughtSpot model generated for this integration.",
+            "nullable": true
+          },
+          "model_name": {
+            "type": "string",
+            "description": "Name of the associated ThoughtSpot model.",
+            "nullable": true
+          },
+          "import_type": {
+            "type": "string",
+            "enum": [
+              "CDW",
+              "FILE"
+            ],
+            "description": "How the semantic definition was sourced.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "RDBMS_SNOWFLAKE"
+            ],
+            "description": "CDW connector type.",
+            "nullable": true
+          },
+          "connection_id": {
+            "type": "string",
+            "description": "GUID of the CDW connection backing the integration.",
+            "nullable": true
+          },
+          "connection_name": {
+            "type": "string",
+            "description": "Display name of the CDW connection backing the integration.",
+            "nullable": true
+          },
+          "author_id": {
+            "type": "string",
+            "description": "GUID of the user who created the integration.",
+            "nullable": true
+          },
+          "author_name": {
+            "type": "string",
+            "description": "Username of the user who created the integration.",
+            "nullable": true
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Creation time in Unix epoch milliseconds.",
+            "nullable": true
+          },
+          "modification_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Last modification time in Unix epoch milliseconds.",
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SemanticIntegrationTagReference"
+            },
+            "description": "Tags associated with the integration.",
+            "nullable": true
+          }
+        },
+        "description": "Single semantic integration entry returned by search."
+      },
+      "SemanticIntegrationTagReference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the tag.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the tag.",
+            "nullable": true
+          }
+        },
+        "description": "Tag reference associated with a semantic integration."
       },
       "GenericInfo": {
         "type": "object",
@@ -24855,7 +25831,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
@@ -25923,7 +26904,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -27090,6 +28076,177 @@
           }
         }
       },
+      "eureka_ImportMemoryResponse": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "VALIDATION_FAILED",
+              "FAILED"
+            ],
+            "description": "Terminal status of the import."
+          },
+          "summary": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_ImportSummary"
+            },
+            "description": "Per (memory type, target source) result entries. Null when the\nimport failed before any record processing occurred.",
+            "nullable": true
+          },
+          "validation_failures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_ImportFailure"
+            },
+            "description": "Per-item validation failure entries. Null when the import failed\nbefore item validation could run.",
+            "nullable": true
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_ImportDiagnostic"
+            },
+            "description": "Diagnostic message groups (errors, rollbacks, and non-fatal\nwarnings), each keyed by a `sub_status`. Null when the import\nproduced no diagnostics.",
+            "nullable": true
+          },
+          "operation_id": {
+            "type": "string",
+            "description": "Server-minted UUID for log correlation. Echo this in support\ntickets and in the follow-up orphan-cleanup call.",
+            "nullable": true
+          }
+        },
+        "description": "Response from importMemory. On `SUCCESS`, `summary` is fully\npopulated. `diagnostics` carries any fatal errors, rollbacks, and\nnon-fatal observations (including residual-orphan doc ids that a\nfollow-up sweeper will reconcile)."
+      },
+      "eureka_ImportSummary": {
+        "type": "object",
+        "properties": {
+          "memory_type": {
+            "type": "string",
+            "enum": [
+              "RULES",
+              "RECIPES",
+              "ALWAYS_APPLY_RULES"
+            ],
+            "description": "The kind of memory (`RULES`, `RECIPES`, or `ALWAYS_APPLY_RULES`)\nthese counts apply to.",
+            "nullable": true
+          },
+          "source": {
+            "$ref": "#/components/schemas/eureka_ImportTargetSource",
+            "description": "The target object these counts apply to.",
+            "nullable": true
+          },
+          "existing_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of memory entries of this type that already existed on the\ntarget object before the import.",
+            "nullable": true
+          },
+          "deleted_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of existing entries that will be (DRY_RUN) or were\n(EXECUTE_IMPORT) deleted as part of the replacement.",
+            "nullable": true
+          },
+          "inserted_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of entries from the payload that will be (DRY_RUN) or were\n(EXECUTE_IMPORT) inserted.",
+            "nullable": true
+          },
+          "failed_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of records of this type that failed validation or processing.",
+            "nullable": true
+          }
+        },
+        "description": "Per (memory type, target source) summary of what importMemory did — or\nwould do, in DRY_RUN. `deleted_record_count` and `inserted_record_count`\nare previews in DRY_RUN and actuals in EXECUTE_IMPORT."
+      },
+      "eureka_ImportTargetSource": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Identifier (GUID) of the target object these counts apply to.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "DATA_MODEL"
+            ],
+            "description": "Source object kind (currently `DATA_MODEL`).",
+            "nullable": true
+          }
+        },
+        "description": "Identifies the target object a group of import counts applies to.\n`type` is the source kind (currently `DATA_MODEL`) and `identifier` is\nthe object's GUID."
+      },
+      "eureka_ImportFailure": {
+        "type": "object",
+        "properties": {
+          "line_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Best-effort line number of the offending item in the uploaded YAML.\nUI uses it for click-to-locate. May be null when the line cannot be\ndetermined.",
+            "nullable": true
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "UNKNOWN_FAILURE_REASON",
+              "VALIDATION",
+              "UNRESOLVED_SOURCE",
+              "ACCESS_DENIED",
+              "CHAR_LIMIT",
+              "SCHEMA"
+            ],
+            "description": "Machine-readable category for the failure (e.g. `VALIDATION`,\n`ACCESS_DENIED`, `CHAR_LIMIT`). UI uses this to decide messaging.",
+            "nullable": true
+          },
+          "field_name": {
+            "type": "string",
+            "description": "Dotted path to the offending field within the item (e.g.\n`content.rule_definition`) for inline highlighting. Absent when the\nfailure is item-level rather than field-level.",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description of the failure.",
+            "nullable": true
+          }
+        },
+        "description": "One per-item import failure surfaced by importMemory. `line_number` is\nthe best-effort line number in the uploaded YAML; UI uses it for\nclick-to-locate. `field_name` is a dotted path within the item (e.g.\n`content.rule_definition`) for inline highlighting; absent when the\nfailure is item-level rather than field-level."
+      },
+      "eureka_ImportDiagnostic": {
+        "type": "object",
+        "properties": {
+          "sub_status": {
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "FAILURE",
+              "WARNING",
+              "ROLLED_BACK"
+            ],
+            "description": "Severity / disposition category these messages share (e.g.\n`WARNING`, `FAILURE`, `ROLLED_BACK`).",
+            "nullable": true
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Human-readable messages for this category (e.g. the residual-orphan\ndoc ids for a `WARNING`, or the failure cause for a `FAILURE`).",
+            "nullable": true
+          }
+        },
+        "description": "A group of importMemory diagnostic messages that share a severity /\ndisposition. This is the single, uniform channel for fatal errors,\nrollbacks, and non-fatal observations."
+      },
       "VariableUpdateAssignmentInput": {
         "type": "object",
         "required": [
@@ -27421,6 +28578,79 @@
             "description": "Name of the table. Table names may be case-sensitive depending on the database system."
           }
         }
+      },
+      "InputTableDefinitionInput": {
+        "type": "object",
+        "required": [
+          "new_columns",
+          "referenced_columns"
+        ],
+        "properties": {
+          "new_columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnSchemaInput"
+            },
+            "description": "New input-only columns to create in the table."
+          },
+          "referenced_columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Column IDs from the linked model to include in the table.\nPass an empty array to create an input table with no reference\ncolumns from the model."
+          }
+        },
+        "description": "Definition of the input table schema."
+      },
+      "InputColumnSchemaInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "data_type",
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the column."
+          },
+          "data_type": {
+            "type": "string",
+            "description": "Physical data type of the column as recognized by the connected\nwarehouse (for example, VARCHAR, INT64, DOUBLE, BOOL, DATE).\nThe accepted values depend on the underlying Cloud Data Warehouse."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ATTRIBUTE",
+              "MEASURE"
+            ],
+            "description": "Semantic role of the column in ThoughtSpot. Use ATTRIBUTE for\ndimensional data such as text, dates, and identifiers, and\nMEASURE for numeric or aggregatable values."
+          }
+        },
+        "description": "Schema definition for a single input column."
+      },
+      "InputTableResponse": {
+        "type": "object",
+        "properties": {
+          "input_table_identifier": {
+            "type": "string",
+            "description": "Unique ID of the newly created input table.",
+            "nullable": true
+          }
+        }
+      },
+      "InputTableUpdateResponse": {
+        "type": "object",
+        "properties": {
+          "rows_loaded": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of rows successfully written to the input table.",
+            "nullable": true
+          }
+        },
+        "description": "Response returned after successfully writing rows to an input table."
       },
       "PolicyProcessOptionsInput": {
         "type": "object",
@@ -28056,6 +29286,127 @@
         },
         "description": "A visualization area assignment affected by a font deletion."
       },
+      "SemanticIntegrationResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the semantic integration.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the semantic integration.",
+            "nullable": true
+          },
+          "model_id": {
+            "type": "string",
+            "description": "Model GUID generated for this integration.",
+            "nullable": true
+          },
+          "model_name": {
+            "type": "string",
+            "description": "Model name generated for this integration.",
+            "nullable": true
+          },
+          "semantic_report": {
+            "$ref": "#/components/schemas/SemanticIntegrationReport",
+            "description": "Per-formula import report.",
+            "nullable": true
+          }
+        },
+        "description": "Response object for a semantic integration."
+      },
+      "SemanticIntegrationReport": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/SemanticIntegrationReportSummary",
+            "description": "Summary of formula import counts.",
+            "nullable": true
+          },
+          "formulas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SemanticIntegrationFormulaReport"
+            },
+            "description": "Formula import details.",
+            "nullable": true
+          }
+        },
+        "description": "Per-formula import report for a semantic integration."
+      },
+      "SemanticIntegrationReportSummary": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of formulas.",
+            "nullable": true
+          },
+          "imported": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of successfully imported formulas.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of failed formula imports.",
+            "nullable": true
+          },
+          "skipped": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of skipped formulas.",
+            "nullable": true
+          }
+        },
+        "description": "Formula import counts summary."
+      },
+      "SemanticIntegrationFormulaReport": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Formula ID in the model.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Formula name.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Formula description.",
+            "nullable": true
+          },
+          "source_expression": {
+            "type": "string",
+            "description": "CDW source expression.",
+            "nullable": true
+          },
+          "translated_formula": {
+            "type": "string",
+            "description": "ThoughtSpot formula equivalent.",
+            "nullable": true
+          },
+          "import_status": {
+            "type": "string",
+            "description": "Import status: `IMPORTED`, `FAILED`, or `SKIPPED`.",
+            "nullable": true
+          },
+          "change_status": {
+            "type": "string",
+            "description": "Change status since last import: `NEW`, `UPDATED`, or `UNCHANGED`. Null on initial create.",
+            "nullable": true
+          }
+        },
+        "description": "Import details for a single formula."
+      },
       "Runtime_Filter": {
         "type": "object",
         "properties": {
@@ -28127,6 +29478,21 @@
           "metadata_identifier"
         ]
       },
+      "ExportMemoryRequest": {
+        "type": "object",
+        "properties": {
+          "sources": {
+            "description": "List of typed scope groups selecting which data-models to export\nmemory for. Supply `DATA_MODEL` group to scope the\nexport to specific data-models.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_MemorySources"
+            }
+          }
+        },
+        "required": [
+          "sources"
+        ]
+      },
       "GetDataSourceSuggestionsRequest": {
         "type": "object",
         "properties": {
@@ -28188,6 +29554,23 @@
         "required": [
           "metadata_context",
           "query"
+        ]
+      },
+      "ImportMemoryRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "description": "The full serialized memory payload to import (currently YAML) —\ntypically a previous `exportMemory` response's `content`, edited\nlocally and re-submitted.",
+            "type": "string"
+          },
+          "dry_run": {
+            "description": "Required. When `true`, validate the payload and return preview\ncounts and row failures without writing anything. Pass `false` to\napply the atomic replacement. The caller must choose explicitly so\na real import is never triggered by omission.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "content",
+          "dry_run"
         ]
       },
       "QueryGetDecomposedQueryRequest": {
@@ -28890,7 +30273,8 @@
               "KEY_PAIR",
               "PERSONAL_ACCESS_TOKEN",
               "OAUTH_WITH_SERVICE_PRINCIPAL",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "configuration": {
@@ -28915,13 +30299,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           }
@@ -28990,7 +30375,8 @@
               "EXTOAUTH_WITH_PKCE",
               "OAUTH_WITH_PKCE",
               "PERSONAL_ACCESS_TOKEN",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "configuration": {
@@ -29014,13 +30400,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           },
@@ -29255,7 +30642,8 @@
               "OAUTH_WITH_PKCE",
               "EXTOAUTH_WITH_PKCE",
               "OAUTH_WITH_PEZ",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "show_resolved_parameters": {
@@ -30053,7 +31441,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -30212,7 +31605,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -30352,7 +31750,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -30406,6 +31809,58 @@
             ]
           }
         }
+      },
+      "CreateInputTableRequest": {
+        "type": "object",
+        "properties": {
+          "table_name": {
+            "description": "Physical table name to create in the external warehouse.",
+            "type": "string"
+          },
+          "model_identifier": {
+            "description": "Unique ID or name of the model (worksheet) to link the\ninput table to.",
+            "type": "string"
+          },
+          "table_definition": {
+            "description": "Definition of the input table, including new columns\nand referenced model columns.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputTableDefinitionInput"
+              }
+            ]
+          }
+        },
+        "required": [
+          "table_name",
+          "model_identifier",
+          "table_definition"
+        ]
+      },
+      "UpdateInputTableRequest": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "description": "Names of the columns being written, in the same order as\nthe values in each row.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rows": {
+            "description": "Rows to write into the input table. Each row is an array\nof string values aligned positionally with columns.",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "columns",
+          "rows"
+        ]
       },
       "SearchChannelHistoryRequest": {
         "type": "object",
@@ -31550,7 +33005,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -31649,7 +33109,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -31743,7 +33208,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           }
@@ -33608,6 +35078,100 @@
           "column_security_rules"
         ]
       },
+      "CreateSemanticIntegrationRequest": {
+        "type": "object",
+        "properties": {
+          "connection_identifier": {
+            "description": "ID or name of the CDW connection.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the semantic integration. Must be unique.",
+            "type": "string"
+          },
+          "database_name": {
+            "description": "Database name in the CDW.",
+            "type": "string"
+          },
+          "schema_name": {
+            "description": "Schema name in the CDW.",
+            "type": "string"
+          },
+          "semantic_view_name": {
+            "description": "Semantic view name in the CDW.",
+            "type": "string"
+          },
+          "type": {
+            "description": "CDW connector type.",
+            "type": "string",
+            "enum": [
+              "RDBMS_SNOWFLAKE"
+            ]
+          },
+          "description": {
+            "description": "Optional description of the semantic integration.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "connection_identifier",
+          "name",
+          "database_name",
+          "schema_name",
+          "semantic_view_name",
+          "type"
+        ]
+      },
+      "SearchSemanticIntegrationsRequest": {
+        "type": "object",
+        "properties": {
+          "sort_options": {
+            "description": "Sort options for the search results.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SemanticIntegrationSortOptions"
+              }
+            ]
+          },
+          "record_offset": {
+            "description": "Number of records to skip for pagination. Minimum value is 0.",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "record_size": {
+            "description": "Maximum number of records to return. Use 0 to return all records (no pagination).",
+            "default": 10,
+            "type": "integer",
+            "format": "int32"
+          },
+          "pattern": {
+            "description": "Name filter substring to narrow search results.",
+            "type": "string"
+          },
+          "author_identifiers": {
+            "description": "Filter by author IDs or names who created the integrations.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "connection_identifiers": {
+            "description": "Filter by connection IDs or names associated with the integrations.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tag_identifiers": {
+            "description": "Filter by tag IDs or names associated with the integrations.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "DeleteStyleFontsRequest": {
         "type": "object",
         "properties": {
@@ -33705,7 +35269,7 @@
             ]
           },
           "name": {
-            "description": "New display name for the font. Must be unique within the target scope.",
+            "description": "New display name for the font.",
             "type": "string"
           },
           "weight": {
@@ -34307,7 +35871,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
