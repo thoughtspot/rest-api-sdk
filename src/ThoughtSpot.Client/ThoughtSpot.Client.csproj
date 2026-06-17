@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>ThoughtSpot.Client</AssemblyName>
+    <PackageId>ThoughtSpot.Client</PackageId>
+    <OutputType>Library</OutputType>
+    <Authors>ThoughtSpot</Authors>
+    <Company>ThoughtSpot, Inc.</Company>
+    <AssemblyTitle>ThoughtSpot Rest API SDK</AssemblyTitle>
+    <Description>Official ThoughtSpot REST API SDK for .NET</Description>
+    <Copyright>Copyright ThoughtSpot, Inc. 2025</Copyright>
+    <RootNamespace>ThoughtSpot.Client</RootNamespace>
+    <Version>0.1.0-beta</Version>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ThoughtSpot.Client.xml</DocumentationFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Nullable>annotations</Nullable>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSubTypes" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Polly" Version="8.1.0" />
+
+    <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  
+</Project> 
