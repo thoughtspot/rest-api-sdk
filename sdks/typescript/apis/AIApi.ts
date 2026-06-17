@@ -9,7 +9,10 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { AgentConversation } from '../models/AgentConversation';
+import { AgentConversationHistoryResponse } from '../models/AgentConversationHistoryResponse';
+import { AgentInstructions } from '../models/AgentInstructions';
 import { Conversation } from '../models/Conversation';
+import { ConversationMessageResponse } from '../models/ConversationMessageResponse';
 import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
 import { CreateConversationRequest } from '../models/CreateConversationRequest';
 import { ErrorResponse } from '../models/ErrorResponse';
@@ -21,6 +24,7 @@ import { EurekaSetNLInstructionsResponse } from '../models/EurekaSetNLInstructio
 import { GetDataSourceSuggestionsRequest } from '../models/GetDataSourceSuggestionsRequest';
 import { GetNLInstructionsRequest } from '../models/GetNLInstructionsRequest';
 import { GetRelevantQuestionsRequest } from '../models/GetRelevantQuestionsRequest';
+import { LoadAnswerResponse } from '../models/LoadAnswerResponse';
 import { QueryGetDecomposedQueryRequest } from '../models/QueryGetDecomposedQueryRequest';
 import { ResponseMessage } from '../models/ResponseMessage';
 import { SendAgentConversationMessageRequest } from '../models/SendAgentConversationMessageRequest';
@@ -29,8 +33,10 @@ import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
 import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';
 import { SendMessageRequest } from '../models/SendMessageRequest';
+import { SetAgentInstructionsRequest } from '../models/SetAgentInstructionsRequest';
 import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
 import { SingleAnswerRequest } from '../models/SingleAnswerRequest';
+import { UpdateConversationRequest } from '../models/UpdateConversationRequest';
 
 /**
  * no description
@@ -56,8 +62,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -107,8 +113,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -123,6 +129,175 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
             contentType
         );
         requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Deletes an existing agent conversation.    Version: 26.7.0.cl or later   Permanently deletes an existing saved agent conversation and all its associated messages. This operation is irreversible — deleted conversations cannot be recovered.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being deleted.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to delete, as returned by `createAgentConversation` or `getConversationList`  A successful request returns an empty `204 No Content` response. The deleted conversation no longer appears in `getConversationList`.  #### Example request  ```bash DELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete ```  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |  > ###### Note: > > - Deletion is permanent and cannot be undone. Ensure the correct `conversation_identifier` is used before calling this endpoint. > - Only conversations created with `enable_save_chat: true` are persisted and can be deleted via this endpoint. > - Available from version 26.7.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param conversationIdentifier Unique identifier of the conversation to delete.
+     */
+    public async deleteConversation(conversationIdentifier: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'conversationIdentifier' is not null or undefined
+        if (conversationIdentifier === null || conversationIdentifier === undefined) {
+            throw new RequiredError("AIApi", "deleteConversation", "conversationIdentifier");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete'
+            .replace('{' + 'conversation_identifier' + '}', encodeURIComponent(String(conversationIdentifier)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
+      
+
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Version: 26.6.0.cl or later   Retrieves the admin instructions currently configured for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations.  Requires admin privileges. Only users with org admin access can retrieve agent instructions.  #### Usage guidelines  No input parameters are required. The API returns the stored `AgentInstructions` record for the caller\'s tenant and org.  If no instructions have been configured yet, the API returns a record with an empty `instructions` field and `null` values for `id`, `created_at`, `updated_at`, and `last_updated_by`.  If the request is successful, the response includes:  - `id`: unique identifier of the instructions record - `instructions`: the configured instructions text - `created_at`: ISO timestamp when the instructions were first saved - `updated_at`: ISO timestamp when the instructions were last updated - `last_updated_by`: user ID of the admin who last updated the instructions (may be `null` for older records)  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have org admin privileges required to read agent instructions. |  > ###### Note: > > - Use `setAgentInstructions` to create or update agent instructions. > - Available from version 26.6.0.cl and later.      
+     */
+    public async getAgentInstructions(_options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/ai/agent/instructions/get';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
+      
+
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Retrieves the full public-safe content of a saved agent conversation: ordered turns (user messages and agent response items) and sanitized code-execution file metadata. Internal graph or branch state, Azure file identifiers, and messages with a `SYSTEM` source are omitted. The full answer payload is not embedded; fetch it separately via `loadAnswer` using the `answer_id` on each `answer` response item. Requires `CAN_USE_SPOTTER` privilege and access to the specified conversation.    Version: 26.7.0.cl or later   Retrieves the full public-safe content of a saved agent conversation. Returns ordered conversation messages — each carrying an optional user prompt (the user\'s message and any attachments) and the agent response items produced for that turn — plus sanitized metadata for any files generated by the code-execution tool.   Use this endpoint to render a persisted conversation in a UI, build an audit trail, or post-process a completed conversation. The full answer payload is not embedded — fetch it separately via `loadAnswer` using the `answer_id` on each `answer` response item.  Requires `CAN_USE_SPOTTER` privilege and access to the specified conversation.  #### Usage guidelines  The request must include:  - `conversation_identifier` _(path parameter)_: the unique ID of the conversation, as returned by `createAgentConversation` or `getConversationList`.  If the request is successful, the response contains two top-level fields:  | Field                  | Type                                        | Description                                                                                                                                          | | ---------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | | `messages`             | `ConversationMessage[]`                     | Ordered oldest to newest. Empty array when the conversation has no messages.                                                                         | | `code_execution_files` | `CodeExecutionFileMetadata[]`               | List of sanitized file metadata entries (one per `file_id`). Covers all code-execution-generated files referenced anywhere in the conversation. Empty array when there are none. |  No other top-level fields are returned.  #### ConversationMessage fields  | Field                 | Type                         | Description                                                                                                    | | --------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- | | `message_id`          | `String`                     | Stable identifier for the turn. For liveboard-started synthetic first turns, this is the root node identifier. | | `timestamp_in_millis` | `Long`                       | Milliseconds since Unix epoch for the turn.                                                                    | | `user_prompt`         | `UserPrompt`                 | User-authored prompt that started the turn (message and attachments). `null` for liveboard-started synthetic first turns. | | `response_items`      | `ConversationResponseItem[]` | Agent-side output produced in response to this turn. Empty array for in-progress turns.                        |  #### UserPrompt fields  | Field         | Type                   | Description                                                                                          | | ------------- | ---------------------- | ---------------------------------------------------------------------------------------------------- | | `message`     | `UserMessage`          | User query that started the turn. `null` for liveboard-started synthetic first turns.                | | `attachments` | `UserAttachmentItem[]` | Files or connector resources attached to the user message. Empty array when there are no attachments. |  #### UserMessage fields  | Field        | Type     | Description                                   | | ------------ | -------- | --------------------------------------------- | | `message_id` | `String` | Unique identifier of the user-source message. | | `content`    | `String` | Text body of the user query.                  |  #### UserAttachmentItem fields  Discriminated by `type`. Only `\"file\"` or `\"resource\"` are valid values. Only the fields for the indicated variant are populated. See `ConversationResponseItem` below for the field definitions of the `file` and `resource` variants — `UserAttachmentItem` uses the same fields.  #### ConversationResponseItem fields  Every item carries a `type` discriminator and these shared fields:  | Field                 | Type      | Description                                                                                                                    | | --------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ | | `type`                | `String`  | Discriminator. One of `\"text\"`, `\"tool_call\"`, `\"tool_result\"`, `\"answer\"`, `\"file\"`, `\"resource\"`, `\"search_datasets\"`.       | | `timestamp_in_millis` | `Long`    | Milliseconds since Unix epoch when this item was produced.                                                                     | | `is_thinking`         | `Boolean` | `true` when the item represents internal agent reasoning rather than user-facing output. Consumers may hide or collapse these. | | `step_title`          | `String`  | Human-readable label for the agent step producing this item (e.g. `\"Searching\"`, `\"Visualising\"`).                             |  Variant-specific fields:  - **`text`** — agent text output: `content` (String), `content_type` (`ContentMimeType` enum), `file_reference` (FileReference). - **`tool_call`** — agent invoked a tool: `tool_call_id` (String), `tool_name` (String), `arguments` (JSON object). - **`tool_result`** — result returned from a tool invocation: `tool_call_id`, `tool_name`, `content`, `content_type` (`ContentMimeType` enum), `success` (Boolean). - **`answer`** — slim reference to a saved answer: `answer_id` (String), `tool_call_id`, `tool_name`. - **`file`** — uploaded or generated files: `files` (`PublicFileInfo[]`). - **`resource`** — MCP connector resource: `title`, `uri`, `name`, `mime_type`, `description`, `size` (Int), `connector_id`, `connector_name`, `connector_slug`, `transport_type` (`TransportType` enum). - **`search_datasets`** — dataset discovery result: `text` (String), `data_sources` (`DataSourceInfo[]`).  Clients should switch on `type` and ignore unknown variants for forward-compatibility.  #### content_type values  `content_type` is the `ContentMimeType` enum. The following values are defined:  | Value                       | Wire MIME                   | Meaning                                              | | --------------------------- | --------------------------- | ---------------------------------------------------- | | `TEXT_PLAIN`                | `text/plain`                | Plain text. Default for `tool_result`.               | | `TEXT_MARKDOWN`             | `text/markdown`             | Markdown. Default for `text`.                        | | `TEXT_X_MARKDOWN_WITH_CODE` | `text/x-markdown-with-code` | Markdown whose body starts with a fenced code block. | | `TEXT_HTML`                 | `text/html`                 | Raw HTML.                                            |  #### transport_type values  `transport_type` is the `TransportType` enum used on the `resource` variant.  | Value              | Meaning                                       | | ------------------ | --------------------------------------------- | | `STREAMABLE_HTTP`  | Streamable HTTP transport (default for MCP).  | | `SSE`              | Server-sent events transport.                 |  #### FileReference fields  | Field                    | Type     | Description                                                  | | ------------------------ | -------- | ------------------------------------------------------------ | | `file_id`                | `String` | Unique identifier of the code-execution-generated file.      | | `display_name`           | `String` | Human-readable file name.                                    | | `created_time_in_millis` | `Long`   | Milliseconds since Unix epoch when the file was created.     |  Cross-reference `file_id` against `code_execution_files` to retrieve full metadata including the `expired` flag before attempting a download.  #### PublicFileInfo fields  | Field                    | Type     | Description                                              | | ------------------------ | -------- | -------------------------------------------------------- | | `file_id`                | `String` | Unique identifier of the file.                           | | `display_name`           | `String` | Human-readable file name.                                | | `file_type`              | `String` | File type such as `csv`, `pdf`, or `png`.                | | `created_time_in_millis` | `Long`   | Milliseconds since Unix epoch when the file was created. | | `size_bytes`             | `Int`    | File size in bytes.                                      |  #### CodeExecutionFileMetadata fields  Each entry in the `code_execution_files` array contains:  | Field                    | Type      | Description                                                                                                                     | | ------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------- | | `file_id`                | `String`  | Unique identifier of the file.                                                                                                  | | `display_name`           | `String`  | Human-readable file name.                                                                                                       | | `file_type`              | `String`  | File type such as `csv`, `pdf`, or `png`.                                                                                       | | `created_time_in_millis` | `Long`    | Milliseconds since Unix epoch when the file was created.                                                                        | | `expired`                | `Boolean` | When `true`, the underlying file is no longer retrievable from code-execution storage; UIs should disable download and preview. |  #### Loading answer payloads  Each `AnswerResponseItem` in the response contains an `answer_id` field. Pass this value as the `answer_identifier` parameter to `loadAnswer` to retrieve the full answer payload (TML tokens, visualization metadata) for that item.  #### Example request  ```bash GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages ```  #### Example response  ```json {   \"messages\": [     {       \"message_id\": \"node_u_01\",       \"timestamp_in_millis\": 1744000000000,       \"user_prompt\": {         \"message\": {           \"message_id\": \"msg_u_01\",           \"content\": \"Show me revenue by region as a chart.\"         },         \"attachments\": []       },       \"response_items\": [         {           \"type\": \"tool_call\",           \"tool_call_id\": \"toolu_01ABC\",           \"tool_name\": \"search_datasets\",           \"step_title\": \"Searching datasets\",           \"arguments\": { \"query\": \"revenue\" },           \"timestamp_in_millis\": 1744000001000,           \"is_thinking\": false         },         {           \"type\": \"answer\",           \"answer_id\": \"ans_01XYZ\",           \"tool_call_id\": \"toolu_02DEF\",           \"tool_name\": \"fetch_and_visualize\",           \"step_title\": \"Visualising\",           \"timestamp_in_millis\": 1744000004000,           \"is_thinking\": false         },         {           \"type\": \"text\",           \"content\": \"Revenue is highest in APAC.\",           \"content_type\": \"TEXT_MARKDOWN\",           \"timestamp_in_millis\": 1744000005000,           \"is_thinking\": false,           \"step_title\": null,           \"file_reference\": {             \"file_id\": \"revenue_by_region.csv\",             \"display_name\": \"revenue_by_region.csv\",             \"created_time_in_millis\": 1744027200000           }         }       ]     }   ],   \"code_execution_files\": [     {       \"file_id\": \"revenue_by_region.csv\",       \"display_name\": \"revenue_by_region.csv\",       \"file_type\": \"csv\",       \"created_time_in_millis\": 1744027200000,       \"expired\": false     }   ] } ```  #### Example: liveboard-started conversation  When a conversation is initiated from a saved liveboard visualization rather than a user query, the first turn is synthetic. `user_prompt` is `null`, and `response_items` contains a single `answer` item referencing the seed visualization.  ```json {   \"messages\": [     {       \"message_id\": \"ROOT_NODE\",       \"timestamp_in_millis\": 1743999000000,       \"user_prompt\": null,       \"response_items\": [         {           \"type\": \"answer\",           \"answer_id\": \"lb_seed_01\",           \"tool_call_id\": null,           \"tool_name\": null,           \"step_title\": null,           \"timestamp_in_millis\": 1743999000000,           \"is_thinking\": false         }       ]     }   ],   \"code_execution_files\": [] } ```  Subsequent turns follow the normal user-to-agent pattern.  #### Error responses  | Code | Description                                                                                                                 | | ---- | --------------------------------------------------------------------------------------------------------------------------- | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                        | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. | | 404  | Not Found — no conversation exists with the given identifier for the authenticated user.                                    |  > ###### Note: > > - Messages with an internal `SYSTEM` source are always dropped from the response. > - In-progress turns are still returned with an empty `response_items` array so clients can render the user message immediately. > - Do not assume every `tool_call` has a paired `tool_result` or `answer` — an interrupted conversation can leave a dangling call. > - Available from version 26.7.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param conversationIdentifier Unique identifier of the conversation to load.
+     */
+    public async getConversation(conversationIdentifier: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'conversationIdentifier' is not null or undefined
+        if (conversationIdentifier === null || conversationIdentifier === undefined) {
+            throw new RequiredError("AIApi", "getConversation", "conversationIdentifier");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages'
+            .replace('{' + 'conversation_identifier' + '}', encodeURIComponent(String(conversationIdentifier)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
+      
+
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Retrieves the list of saved agent conversations for the currently authenticated user. Only conversations created with `enable_save_chat: true` are returned.    Version: 26.7.0.cl or later   Retrieves a paginated list of saved agent conversations for the currently authenticated user. Only conversations that were created with `enable_save_chat: true` in `createAgentConversation` are returned.  Requires `CAN_USE_SPOTTER` privilege.  #### Usage guidelines  The request supports the following optional query parameters:  - `limit`: maximum number of conversations to return. Use this together with `offset` for pagination. - `offset`: number of conversations to skip before returning results. Defaults to `0`. - `skip_empty`: when `true` (default), conversations with no messages are excluded from the results. Set to `false` to include empty conversations.  If the request is successful, the response includes a `conversations` array. Each entry contains:  - `conversation_identifier`: the unique ID of the conversation, used as input to `sendAgentConversationMessage`, `updateConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer` - `conversation_title`: the display name of the conversation - `created_at`: ISO 8601 timestamp of when the conversation was created - `updated_at`: ISO 8601 timestamp of the most recent update to the conversation - `data_source_identifiers`: list of unique IDs of the data sources associated with the conversation - `data_source_names`: array of `{ id, name }` objects for the data sources associated with the conversation  #### Pagination  Use `limit` and `offset` to page through large result sets:  ``` GET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0   → first page GET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20  → second page ```  #### Pagination and `has_more`  The response includes a `has_more: Boolean` field. When `true`, there are additional conversations beyond the current page — increment `offset` by `limit` to fetch the next page. When `has_more` is `false`, the current page is the last. Note that `total_count` is not returned; use `has_more` to drive paging controls.  #### Example response  ```json {   \"conversations\": [     {       \"conversation_identifier\": \"abc123\",       \"conversation_title\": \"Sales by Region Q1\",       \"created_at\": \"2026-03-01T10:00:00Z\",       \"updated_at\": \"2026-03-05T14:23:00Z\",       \"data_source_identifiers\": [\"ds-001\"],       \"data_source_names\": [{ \"id\": \"ds-001\", \"name\": \"Retail Sales\" }]     }   ],   \"has_more\": false } ```  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` appear in this list. Conversations created with `enable_save_chat: false` (the default) are not persisted and cannot be retrieved. > - Available from version 26.7.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param limit Maximum number of conversations to return. Used for pagination.
+     * @param offset Number of conversations to skip before returning results. Used for pagination.
+     * @param skipEmpty When true, excludes conversations with no messages. Defaults to true.
+     */
+    public async getConversationList(limit?: number, offset?: number, skipEmpty?: boolean, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/ai/agent/conversations';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
+      
+
+
+        // Query Params
+        if (limit !== undefined) {
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
+        }
+
+        // Query Params
+        if (offset !== undefined) {
+            requestContext.setQueryParam("offset", ObjectSerializer.serialize(offset, "number", "int32"));
+        }
+
+        // Query Params
+        if (skipEmpty !== undefined) {
+            requestContext.setQueryParam("skip_empty", ObjectSerializer.serialize(skipEmpty, "boolean", ""));
+        }
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -158,8 +333,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -209,8 +384,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -260,8 +435,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -276,6 +451,55 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
             contentType
         );
         requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Loads the full answer payload for a specific answer item in an agent conversation. Returns structured answer data including the TML query, token breakdown, visualization metadata, and agent context state. Pass the `answer_id` from an `AnswerResponseItem` in the `getConversation` response as the `answer_identifier` parameter. Requires `CAN_USE_SPOTTER` privilege and access to the specified conversation.    Version: 26.7.0.cl or later   Loads the answer details for a specific answer item in an agent conversation. Returns structured answer data including the TML token list, visualization metadata, and agent context state. Use this endpoint to retrieve the full answer representation for an answer item — for example, to re-render a chart, export a query, or inspect the generated TML.  Requires `CAN_USE_SPOTTER` privilege and access to the specified conversation.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation, as returned by `createAgentConversation` - `answer_identifier` *(path parameter)*: the `answer_id` field from an `AnswerResponseItem` in the `getConversation` response  If the request is successful, the response contains an `answer` object with the following fields:  | Field | Type | Description | |-------|------|-------------| | `title` | `String` | Display title of the generated answer (e.g., `\"sales by month\"`). | | `description` | `String` | Optional description of the answer. | | `session_identifier` | `String` | Unique identifier of the session in which this answer was generated. | | `generation_number` | `Int` | Generation sequence number of this answer within the session. | | `tokens` | `[String]` | Ordered list of TML token strings that make up the answer query (e.g., `[\"[sales]\", \"[date].\'monthly\'\"]`). | | `visualization_type` | `VizType` | Suggested visualization type: `Chart`, `Table`, or `Undefined`. `null` if no suggestion is available. | | `formulas` | `[String]` | List of formula names referenced in the answer. Empty if none are used. | | `parameters` | `[String]` | List of parameter names applied to the answer. Empty if none are used. | | `sub_queries` | `[JSON]` | List of sub-query objects used in the answer. Empty if none are present. | | `ac_state` | `ACState` | Agent context state, including `transaction_identifier` and `generation_number`, used to correlate this answer with a specific agent turn. |  #### ACState fields  | Field | Type | Description | |-------|------|-------------| | `transaction_identifier` | `String` | Unique identifier of the agent transaction that produced this answer. | | `generation_number` | `Int` | Generation number within the transaction. |  #### Example request  ```bash GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details ```  #### Example response  ```json {   \"answer\": {     \"title\": \"sales by month\",     \"description\": \"\",     \"session_identifier\": \"7b00b801-73f4-4639-af5e-e775584ceba6\",     \"generation_number\": 1,     \"tokens\": [\"[sales]\", \"[date].\'monthly\'\"],     \"visualization_type\": null,     \"formulas\": [],     \"parameters\": [],     \"sub_queries\": [],     \"ac_state\": {       \"transaction_identifier\": \"7f6c9948-b4c7-4098-bb1f-6c67bc0e5699\",       \"generation_number\": 1     }   } } ```  #### Typical usage scenario  1. Call `getConversation` to retrieve the full conversation history. 2. Locate an `AnswerResponseItem` in `response_items` — note its `answer_id` field. 3. Call `loadAnswer` with the `conversation_identifier` and `answer_id` as `answer_identifier`. 4. The returned `tokens` array can be used to open the answer in the ThoughtSpot search interface or rendered as pill chips in the UI.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. | | 404  | Not Found — no conversation or message exists with the given identifiers for the authenticated user. | | 422  | Unprocessable Entity — the message does not contain an answer of the expected type. |  > ###### Note: > > - This endpoint only loads answer-type messages. Other message types are not supported. > - `visualization_type` may be `null` if the agent did not produce a visualization suggestion for this answer. > - `formulas`, `parameters`, and `sub_queries` are returned as empty arrays when not applicable — they are never `null`. > - Available from version 26.7.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param conversationIdentifier Unique identifier of the conversation.
+     * @param answerIdentifier Unique identifier of the answer to load. Use the &#x60;answer_id&#x60; field from an &#x60;AnswerResponseItem&#x60; returned by &#x60;getConversation&#x60;.
+     */
+    public async loadAnswer(conversationIdentifier: string, answerIdentifier: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'conversationIdentifier' is not null or undefined
+        if (conversationIdentifier === null || conversationIdentifier === undefined) {
+            throw new RequiredError("AIApi", "loadAnswer", "conversationIdentifier");
+        }
+
+
+        // verify required parameter 'answerIdentifier' is not null or undefined
+        if (answerIdentifier === null || answerIdentifier === undefined) {
+            throw new RequiredError("AIApi", "loadAnswer", "answerIdentifier");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details'
+            .replace('{' + 'conversation_identifier' + '}', encodeURIComponent(String(conversationIdentifier)))
+            .replace('{' + 'answer_identifier' + '}', encodeURIComponent(String(answerIdentifier)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
+      
+
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -311,8 +535,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -370,8 +594,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -429,8 +653,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -488,8 +712,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -539,8 +763,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -598,8 +822,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -611,6 +835,57 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(sendMessageRequest, "SendMessageRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Version: 26.6.0.cl or later   Creates or updates the admin instructions for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations. If instructions already exist for the org, they are replaced (upsert semantics).  Requires admin privileges. Only users with org admin access can set agent instructions.  #### Usage guidelines  The request must include:  - `instructions`: the instructions text to apply to the agent (maximum 5000 characters)  Instructions are validated against system guardrails before being saved. If the instructions contain content that conflicts with guardrails, the request is rejected with a `409` error and the existing instructions remain unchanged.  If the request is successful, the response includes the saved `AgentInstructions` record:  - `id`: unique identifier of the record - `instructions`: the saved instructions text - `created_at`: ISO timestamp when the instructions were first created - `updated_at`: ISO timestamp of this update - `last_updated_by`: user ID of the admin who performed this update  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad request — the request body is missing required fields or the `instructions` field exceeds the maximum allowed length of 5000 characters. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have org admin privileges required to set agent instructions. | | 409  | Conflict — the provided instructions conflict with system guardrails. Review and revise the instructions text before retrying. | | 500  | Internal server error. |  > ###### Note: > > - This operation uses upsert semantics: it creates the instructions record if none exists, or replaces the existing one. > - Instructions take effect immediately for new conversations created after the update. > - Use `getAgentInstructions` to retrieve the current instructions before making changes. > - Available from version 26.6.0.cl and later.      
+     * @param setAgentInstructionsRequest 
+     */
+    public async setAgentInstructions(setAgentInstructionsRequest: SetAgentInstructionsRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'setAgentInstructionsRequest' is not null or undefined
+        if (setAgentInstructionsRequest === null || setAgentInstructionsRequest === undefined) {
+            throw new RequiredError("AIApi", "setAgentInstructions", "setAgentInstructionsRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/ai/agent/instructions/set';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(setAgentInstructionsRequest, "SetAgentInstructionsRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -649,8 +924,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -700,8 +975,8 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -713,6 +988,106 @@ export class AIApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(singleAnswerRequest, "SingleAnswerRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Stops an in-progress agent conversation response.    Version: 26.6.0.cl or later   <span>Version: 26.6.0.cl or later   Stops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.  Requires `CAN_USE_SPOTTER` privilege and access to the specified conversation.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by `createAgentConversation`  A successful request returns an empty `204 No Content` response. If there is no active response in progress at the time of the call, the request is still treated as successful.  After stopping a response, the conversation session remains active. You can continue sending messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.  #### Example request  ```bash POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response ```  #### Typical usage scenario  This endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:  1. User sends a message via `sendAgentConversationMessageStreaming`. 2. User clicks a \"Stop generating\" button while the response is streaming. 3. Your client calls `stopConversation` with the active `conversation_identifier`. 4. The stream is terminated and the user can ask a new question.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |  > ###### Note: > > - Calling this endpoint when no response is in progress does not return an error. > - The conversation context is preserved after stopping — previous messages and answers remain accessible. > - Available from version 26.6.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > - This feature is available only for **Spotter 3** (`SPOTTER3`) version.      
+     * @param conversationIdentifier Unique identifier of the conversation to stop.
+     */
+    public async stopConversation(conversationIdentifier: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'conversationIdentifier' is not null or undefined
+        if (conversationIdentifier === null || conversationIdentifier === undefined) {
+            throw new RequiredError("AIApi", "stopConversation", "conversationIdentifier");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response'
+            .replace('{' + 'conversation_identifier' + '}', encodeURIComponent(String(conversationIdentifier)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
+      
+
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Currently only the conversation\'s display `title` can be updated; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. When provided, must be a non-empty string.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body is empty or `title` is provided as an empty string. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - Available from version 26.7.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param conversationIdentifier Unique identifier of the conversation to update.
+     * @param updateConversationRequest 
+     */
+    public async updateConversation(conversationIdentifier: string, updateConversationRequest: UpdateConversationRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'conversationIdentifier' is not null or undefined
+        if (conversationIdentifier === null || conversationIdentifier === undefined) {
+            throw new RequiredError("AIApi", "updateConversation", "conversationIdentifier");
+        }
+
+
+        // verify required parameter 'updateConversationRequest' is not null or undefined
+        if (updateConversationRequest === null || updateConversationRequest === undefined) {
+            throw new RequiredError("AIApi", "updateConversation", "updateConversationRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update'
+            .replace('{' + 'conversation_identifier' + '}', encodeURIComponent(String(conversationIdentifier)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(updateConversationRequest, "UpdateConversationRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -858,6 +1233,251 @@ export class AIApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Conversation", ""
             ) as Conversation;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to deleteConversation
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async deleteConversation(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getAgentInstructions
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getAgentInstructions(response: ResponseContext): Promise<AgentInstructions > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: AgentInstructions = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AgentInstructions", ""
+            ) as AgentInstructions;
+            return body;
+        }
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: AgentInstructions = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AgentInstructions", ""
+            ) as AgentInstructions;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: AgentInstructions = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AgentInstructions", ""
+            ) as AgentInstructions;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getConversation
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getConversation(response: ResponseContext): Promise<ConversationMessageResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: ConversationMessageResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ConversationMessageResponse", ""
+            ) as ConversationMessageResponse;
+            return body;
+        }
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: ConversationMessageResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ConversationMessageResponse", ""
+            ) as ConversationMessageResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: ConversationMessageResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ConversationMessageResponse", ""
+            ) as ConversationMessageResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getConversationList
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getConversationList(response: ResponseContext): Promise<AgentConversationHistoryResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: AgentConversationHistoryResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AgentConversationHistoryResponse", ""
+            ) as AgentConversationHistoryResponse;
+            return body;
+        }
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: AgentConversationHistoryResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AgentConversationHistoryResponse", ""
+            ) as AgentConversationHistoryResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: AgentConversationHistoryResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AgentConversationHistoryResponse", ""
+            ) as AgentConversationHistoryResponse;
             return body;
         }
 
@@ -1050,6 +1670,70 @@ export class AIApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "EurekaGetRelevantQuestionsResponse", ""
             ) as EurekaGetRelevantQuestionsResponse;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to loadAnswer
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async loadAnswer(response: ResponseContext): Promise<LoadAnswerResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: LoadAnswerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "LoadAnswerResponse", ""
+            ) as LoadAnswerResponse;
+            return body;
+        }
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: LoadAnswerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "LoadAnswerResponse", ""
+            ) as LoadAnswerResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: LoadAnswerResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "LoadAnswerResponse", ""
+            ) as LoadAnswerResponse;
             return body;
         }
 
@@ -1444,6 +2128,70 @@ export class AIApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to setAgentInstructions
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async setAgentInstructions(response: ResponseContext): Promise<AgentInstructions > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: AgentInstructions = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AgentInstructions", ""
+            ) as AgentInstructions;
+            return body;
+        }
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: AgentInstructions = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AgentInstructions", ""
+            ) as AgentInstructions;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: AgentInstructions = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "AgentInstructions", ""
+            ) as AgentInstructions;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to setNLInstructions
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -1562,6 +2310,112 @@ export class AIApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ResponseMessage", ""
             ) as ResponseMessage;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to stopConversation
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async stopConversation(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateConversation
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async updateConversation(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
             return body;
         }
 

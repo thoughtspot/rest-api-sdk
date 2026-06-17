@@ -13,42 +13,29 @@
 import { HttpFile } from '../http/http';
 
 /**
-* Font assignment for a single table visualization area.
+* Response from exportMemory. Contains the serialized payload ready for local editing and re-submission to importMemory.
 */
-export class TableFontAssignmentInput {
+export class EurekaExportMemoryResponse {
     /**
-    * Table visualization area to assign the font to.
+    * Serialized memory payload (currently YAML). This is the shape importMemory consumes.
     */
-    'visualization_area': TableFontAssignmentInputVisualizationAreaEnum;
-    /**
-    * UUID or name of the font to assign to this area.
-    */
-    'font_identifier': string;
+    'content'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "visualization_area",
-            "baseName": "visualization_area",
-            "type": "TableFontAssignmentInputVisualizationAreaEnum",
-            "format": ""
-        },
-        {
-            "name": "font_identifier",
-            "baseName": "font_identifier",
+            "name": "content",
+            "baseName": "content",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return TableFontAssignmentInput.attributeTypeMap;
+        return EurekaExportMemoryResponse.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-
-
-export type TableFontAssignmentInputVisualizationAreaEnum = "TABLE_VALUE_CELLS" ;
 

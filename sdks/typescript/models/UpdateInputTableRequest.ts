@@ -12,37 +12,34 @@
 
 import { HttpFile } from '../http/http';
 
-/**
-* A single color entry in the chart color palette.
-*/
-export class StyleColorEntryInput {
+export class UpdateInputTableRequest {
     /**
-    * Primary color as a 6-digit hex string (e.g. \"#2359B6\"). Required.
+    * Names of the columns being written, in the same order as the values in each row.
     */
-    'primary': string;
+    'columns': Array<string>;
     /**
-    * Array of exactly 4 secondary shade hex strings. If omitted, the server auto-generates 4 shades from the primary color. If provided, must contain exactly 4 valid 6-digit hex color strings.
+    * Rows to write into the input table. Each row is an array of string values aligned positionally with columns.
     */
-    'secondary'?: Array<string> | null;
+    'rows': Array<Array<string>>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "primary",
-            "baseName": "primary",
-            "type": "string",
+            "name": "columns",
+            "baseName": "columns",
+            "type": "Array<string>",
             "format": ""
         },
         {
-            "name": "secondary",
-            "baseName": "secondary",
-            "type": "Array<string>",
+            "name": "rows",
+            "baseName": "rows",
+            "type": "Array<Array<string>>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return StyleColorEntryInput.attributeTypeMap;
+        return UpdateInputTableRequest.attributeTypeMap;
     }
 
     public constructor() {

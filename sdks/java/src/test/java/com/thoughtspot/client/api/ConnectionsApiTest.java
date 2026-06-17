@@ -16,6 +16,7 @@ import com.thoughtspot.client.model.SearchConnectionResponse;
 import com.thoughtspot.client.model.SyncMetadataRequest;
 import com.thoughtspot.client.model.SyncMetadataResponse;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
+import com.thoughtspot.client.model.UpdateConnectionStatusRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import java.io.File;
 import java.util.List;
@@ -355,6 +356,31 @@ public class ConnectionsApiTest {
     public void updateConnectionTest() throws ApiException {
         UpdateConnectionRequest updateConnectionRequest = null;
         api.updateConnection(updateConnectionRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Activates or deactivates a connection. A deactivated connection
+     * cannot be used for queries or operations until it is activated again. Requires
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
+     * required. Only the connection owner or an administrator can perform this operation. ####
+     * Usage guidelines To update the status of a connection, specify the connection GUID or name in
+     * the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in
+     * the request body. - **ACTIVATED**: Enables the connection. Queries and operations can resume
+     * on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove
+     * the connection metadata, but only makes the connection unavailable for queries and
+     * operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;:
+     * \&quot;ACTIVATED\&quot;.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateConnectionStatusTest() throws ApiException {
+        String connectionIdentifier = null;
+        UpdateConnectionStatusRequest updateConnectionStatusRequest = null;
+        api.updateConnectionStatus(connectionIdentifier, updateConnectionStatusRequest);
         // TODO: test validations
     }
 

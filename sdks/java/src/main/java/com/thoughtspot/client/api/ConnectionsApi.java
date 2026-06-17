@@ -23,6 +23,7 @@ import com.thoughtspot.client.model.SearchConnectionResponse;
 import com.thoughtspot.client.model.SyncMetadataRequest;
 import com.thoughtspot.client.model.SyncMetadataResponse;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
+import com.thoughtspot.client.model.UpdateConnectionStatusRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import java.io.File;
 import java.lang.reflect.Type;
@@ -2333,6 +2334,236 @@ public class ConnectionsApi {
 
         okhttp3.Call localVarCall =
                 updateConnectionValidateBeforeCall(updateConnectionRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateConnectionStatus
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionStatusRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Connection status updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateConnectionStatusCall(
+            String connectionIdentifier,
+            UpdateConnectionStatusRequest updateConnectionStatusRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateConnectionStatusRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/connections/{connection_identifier}/status"
+                        .replace(
+                                "{" + "connection_identifier" + "}",
+                                localVarApiClient.escapeString(connectionIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateConnectionStatusValidateBeforeCall(
+            String connectionIdentifier,
+            UpdateConnectionStatusRequest updateConnectionStatusRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'connectionIdentifier' is set
+        if (connectionIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'connectionIdentifier' when calling"
+                            + " updateConnectionStatus(Async)");
+        }
+
+        // verify the required parameter 'updateConnectionStatusRequest' is set
+        if (updateConnectionStatusRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'updateConnectionStatusRequest' when calling"
+                            + " updateConnectionStatus(Async)");
+        }
+
+        return updateConnectionStatusCall(
+                connectionIdentifier, updateConnectionStatusRequest, _callback);
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Activates or deactivates a connection. A deactivated connection
+     * cannot be used for queries or operations until it is activated again. Requires
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
+     * required. Only the connection owner or an administrator can perform this operation. ####
+     * Usage guidelines To update the status of a connection, specify the connection GUID or name in
+     * the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in
+     * the request body. - **ACTIVATED**: Enables the connection. Queries and operations can resume
+     * on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove
+     * the connection metadata, but only makes the connection unavailable for queries and
+     * operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;:
+     * \&quot;ACTIVATED\&quot;.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionStatusRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Connection status updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void updateConnectionStatus(
+            String connectionIdentifier,
+            UpdateConnectionStatusRequest updateConnectionStatusRequest)
+            throws ApiException {
+        updateConnectionStatusWithHttpInfo(connectionIdentifier, updateConnectionStatusRequest);
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Activates or deactivates a connection. A deactivated connection
+     * cannot be used for queries or operations until it is activated again. Requires
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
+     * required. Only the connection owner or an administrator can perform this operation. ####
+     * Usage guidelines To update the status of a connection, specify the connection GUID or name in
+     * the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in
+     * the request body. - **ACTIVATED**: Enables the connection. Queries and operations can resume
+     * on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove
+     * the connection metadata, but only makes the connection unavailable for queries and
+     * operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;:
+     * \&quot;ACTIVATED\&quot;.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionStatusRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Connection status updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> updateConnectionStatusWithHttpInfo(
+            String connectionIdentifier,
+            UpdateConnectionStatusRequest updateConnectionStatusRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                updateConnectionStatusValidateBeforeCall(
+                        connectionIdentifier, updateConnectionStatusRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Version: 26.6.0.cl or later Activates or deactivates a connection. A
+     * deactivated connection cannot be used for queries or operations until it is activated again.
+     * Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access
+     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
+     * the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
+     * required. Only the connection owner or an administrator can perform this operation. ####
+     * Usage guidelines To update the status of a connection, specify the connection GUID or name in
+     * the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in
+     * the request body. - **ACTIVATED**: Enables the connection. Queries and operations can resume
+     * on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove
+     * the connection metadata, but only makes the connection unavailable for queries and
+     * operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;:
+     * \&quot;ACTIVATED\&quot;.
+     *
+     * @param connectionIdentifier Unique ID or name of the connection. (required)
+     * @param updateConnectionStatusRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Connection status updated successfully. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Object not found </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateConnectionStatusAsync(
+            String connectionIdentifier,
+            UpdateConnectionStatusRequest updateConnectionStatusRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                updateConnectionStatusValidateBeforeCall(
+                        connectionIdentifier, updateConnectionStatusRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

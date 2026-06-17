@@ -9,6 +9,7 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { AccessToken } from '../models/AccessToken';
+import { ConfigureAuthSettingsRequest } from '../models/ConfigureAuthSettingsRequest';
 import { ErrorResponse } from '../models/ErrorResponse';
 import { GetCustomAccessTokenRequest } from '../models/GetCustomAccessTokenRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
@@ -16,6 +17,8 @@ import { GetObjectAccessTokenRequest } from '../models/GetObjectAccessTokenReque
 import { GetTokenResponse } from '../models/GetTokenResponse';
 import { LoginRequest } from '../models/LoginRequest';
 import { RevokeTokenRequest } from '../models/RevokeTokenRequest';
+import { SearchAuthSettingsRequest } from '../models/SearchAuthSettingsRequest';
+import { SearchAuthSettingsResponse } from '../models/SearchAuthSettingsResponse';
 import { Token } from '../models/Token';
 import { TokenValidationResponse } from '../models/TokenValidationResponse';
 import { User } from '../models/User';
@@ -25,6 +28,57 @@ import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
  * no description
  */
 export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
+
+    /**
+     *   Version: 26.6.0.cl or later   Enables or disables authentication at cluster or org level for the specified auth type. Currently supports `TRUSTED_AUTH`.  #### Required privileges  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.  #### Usage guidelines  Use `cluster_preferences` to enable or disable authentication at the cluster level. Cluster-level settings can only be configured from the Primary Org. - `ENABLED` — Generates a new access token if one does not exist. An existing token is preserved. - `DISABLED` — Revokes the existing cluster-level access token.  Use `org_preferences` to enable or disable authentication for one or more Orgs. Each entry must include an `org_identifier` (unique ID or name) and an `auth_status`. Org-level configuration requires the per-Org authentication feature to be enabled on your instance. - `ENABLED` — Generates a new org-level access token if one does not exist. - `DISABLED` — Revokes the existing org-level access token for that Org.  Both `cluster_preferences` and `org_preferences` are optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted, the API returns `204 No Content` without making any changes.  **Note**: Cluster-level and org-level settings are independent of each other. Enabling or disabling one does not affect the other.      
+     * @param configureAuthSettingsRequest 
+     */
+    public async configureAuthSettings(configureAuthSettingsRequest: ConfigureAuthSettingsRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'configureAuthSettingsRequest' is not null or undefined
+        if (configureAuthSettingsRequest === null || configureAuthSettingsRequest === undefined) {
+            throw new RequiredError("AuthenticationApi", "configureAuthSettings", "configureAuthSettingsRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/auth/configure';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(configureAuthSettingsRequest, "ConfigureAuthSettingsRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
 
     /**
      *   Version: 9.0.0.cl or later   Retrieves details of the current user session for the token provided in the request header.  Any ThoughtSpot user can access this endpoint and send an API request. The data returned in the API response varies according to user\'s privilege and object access permissions.  **NOTE**: In ThoughtSpot, users with cluster administration privileges can access all Orgs by default. However, unless the administrator is explicitly added to an Org, the Orgs list in the session information returned by the API will include only the Primary Org. To include other Orgs in the API response, you must explicitly add the administrator to each Org in the Admin settings page in the UI or via user REST API.     
@@ -38,8 +92,8 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -71,8 +125,8 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -111,8 +165,8 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -156,8 +210,8 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -201,8 +255,8 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -246,8 +300,8 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -290,8 +344,8 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -330,8 +384,8 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -343,6 +397,57 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(revokeTokenRequest, "RevokeTokenRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *   Version: 26.6.0.cl or later   Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports `TRUSTED_AUTH`.  #### Required privileges  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.  #### Usage guidelines  Use `scope` to control which level of settings are returned: - `CLUSTER` — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org. - `ORG` — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance. - If `scope` is omitted, both cluster and org-level settings are returned based on the caller\'s org context and feature availability.  The `access_tokens` array in `cluster_preferences` or `org_preferences` is omitted when no token is configured at that level.  **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.      
+     * @param searchAuthSettingsRequest 
+     */
+    public async searchAuthSettings(searchAuthSettingsRequest: SearchAuthSettingsRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'searchAuthSettingsRequest' is not null or undefined
+        if (searchAuthSettingsRequest === null || searchAuthSettingsRequest === undefined) {
+            throw new RequiredError("AuthenticationApi", "searchAuthSettings", "searchAuthSettingsRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/auth/search';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
+      
+
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(searchAuthSettingsRequest, "SearchAuthSettingsRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -381,8 +486,8 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
 
@@ -416,6 +521,59 @@ export class AuthenticationApiRequestFactory extends BaseAPIRequestFactory {
 }
 
 export class AuthenticationApiResponseProcessor {
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to configureAuthSettings
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async configureAuthSettings(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
@@ -855,6 +1013,63 @@ export class AuthenticationApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to searchAuthSettings
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async searchAuthSettings(response: ResponseContext): Promise<SearchAuthSettingsResponse > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: SearchAuthSettingsResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SearchAuthSettingsResponse", ""
+            ) as SearchAuthSettingsResponse;
+            return body;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: SearchAuthSettingsResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SearchAuthSettingsResponse", ""
+            ) as SearchAuthSettingsResponse;
             return body;
         }
 

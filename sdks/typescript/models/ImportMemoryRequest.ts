@@ -10,40 +10,36 @@
  * Do not edit the class manually.
  */
 
-import { StyleColorEntryInput } from '../models/StyleColorEntryInput';
 import { HttpFile } from '../http/http';
 
-/**
-* Chart color palette configuration.
-*/
-export class StyleColorPaletteInput {
+export class ImportMemoryRequest {
     /**
-    * Ordered array of exactly 8 color entries defining the chart color palette.
+    * The full serialized memory payload to import (currently YAML) — typically a previous `exportMemory` response\'s `content`, edited locally and re-submitted.
     */
-    'colors'?: Array<StyleColorEntryInput> | null;
+    'content': string;
     /**
-    * When true, disables automatic color rotation across chart data series.
+    * Required. When `true`, validate the payload and return preview counts and row failures without writing anything. Pass `false` to apply the atomic replacement. The caller must choose explicitly so a real import is never triggered by omission.
     */
-    'disable_color_rotation'?: boolean | null;
+    'dry_run': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "colors",
-            "baseName": "colors",
-            "type": "Array<StyleColorEntryInput>",
+            "name": "content",
+            "baseName": "content",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "disable_color_rotation",
-            "baseName": "disable_color_rotation",
+            "name": "dry_run",
+            "baseName": "dry_run",
             "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return StyleColorPaletteInput.attributeTypeMap;
+        return ImportMemoryRequest.attributeTypeMap;
     }
 
     public constructor() {

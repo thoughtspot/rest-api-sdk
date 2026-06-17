@@ -220,6 +220,524 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete:
+    delete:
+      description: "\nDeletes an existing agent conversation. \n  Version: 26.7.0.cl\
+        \ or later\n\n\nPermanently deletes an existing saved agent conversation and\
+        \ all its associated messages. This operation is irreversible — deleted conversations\
+        \ cannot be recovered.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership\
+        \ of the conversation being deleted.\n\n#### Usage guidelines\n\nThe request\
+        \ must include:\n\n- `conversation_identifier` *(path parameter)*: the unique\
+        \ ID of the conversation to delete, as returned by `createAgentConversation`\
+        \ or `getConversationList`\n\nA successful request returns an empty `204 No\
+        \ Content` response. The deleted conversation no longer appears in `getConversationList`.\n\
+        \n#### Example request\n\n```bash\nDELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete\n\
+        ```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n\
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.\
+        \ |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER`\
+        \ privilege or does not own the specified conversation. |\n| 404  | Not Found\
+        \ — no conversation exists with the given `conversation_identifier` for the\
+        \ authenticated user. |\n\n> ###### Note:\n>\n> - Deletion is permanent and\
+        \ cannot be undone. Ensure the correct `conversation_identifier` is used before\
+        \ calling this endpoint.\n> - Only conversations created with `enable_save_chat:\
+        \ true` are persisted and can be deleted via this endpoint.\n> - Available\
+        \ from version 26.7.0.cl and later.\n> - This endpoint requires Spotter —\
+        \ please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\
+        \n\n\n\n"
+      operationId: deleteConversation
+      parameters:
+      - description: Unique identifier of the conversation to delete.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successfully deleted the agent conversation.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/instructions/get:
+    get:
+      description: |2+
+
+        Version: 26.6.0.cl or later
+
+
+        Retrieves the admin instructions currently configured for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations.
+
+        Requires admin privileges. Only users with org admin access can retrieve agent instructions.
+
+        #### Usage guidelines
+
+        No input parameters are required. The API returns the stored `AgentInstructions` record for the caller's tenant and org.
+
+        If no instructions have been configured yet, the API returns a record with an empty `instructions` field and `null` values for `id`, `created_at`, `updated_at`, and `last_updated_by`.
+
+        If the request is successful, the response includes:
+
+        - `id`: unique identifier of the instructions record
+        - `instructions`: the configured instructions text
+        - `created_at`: ISO timestamp when the instructions were first saved
+        - `updated_at`: ISO timestamp when the instructions were last updated
+        - `last_updated_by`: user ID of the admin who last updated the instructions (may be `null` for older records)
+
+        #### Error responses
+
+        | Code | Description |
+        |------|-------------|
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid. |
+        | 403  | Forbidden — the authenticated user does not have org admin privileges required to read agent instructions. |
+
+        > ###### Note:
+        >
+        > - Use `setAgentInstructions` to create or update agent instructions.
+        > - Available from version 26.6.0.cl and later.
+
+
+
+
+
+      operationId: getAgentInstructions
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInstructions'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInstructions'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages:
+    get:
+      description: "\nRetrieves the full public-safe content of a saved agent conversation:\
+        \ ordered\nturns (user messages and agent response items) and sanitized code-execution\n\
+        file metadata. Internal graph or branch state, Azure file identifiers, and\n\
+        messages with a `SYSTEM` source are omitted. The full answer payload is not\n\
+        embedded; fetch it separately via `loadAnswer` using the `answer_id` on each\n\
+        `answer` response item.\nRequires `CAN_USE_SPOTTER` privilege and access to\
+        \ the specified conversation. \n  Version: 26.7.0.cl or later\n\n\nRetrieves\
+        \ the full public-safe content of a saved agent conversation. Returns ordered\
+        \ conversation messages — each carrying an optional user prompt (the user's\
+        \ message and any attachments) and the agent response items produced for that\
+        \ turn — plus sanitized metadata for any files generated by the code-execution\
+        \ tool. \n\nUse this endpoint to render a persisted conversation in a UI,\
+        \ build an audit trail, or post-process a completed conversation. The full\
+        \ answer payload is not embedded — fetch it separately via `loadAnswer` using\
+        \ the `answer_id` on each `answer` response item.\n\nRequires `CAN_USE_SPOTTER`\
+        \ privilege and access to the specified conversation.\n\n#### Usage guidelines\n\
+        \nThe request must include:\n\n- `conversation_identifier` _(path parameter)_:\
+        \ the unique ID of the conversation, as returned by `createAgentConversation`\
+        \ or `getConversationList`.\n\nIf the request is successful, the response\
+        \ contains two top-level fields:\n\n| Field                  | Type      \
+        \                                  | Description                         \
+        \                                                                        \
+        \                                         |\n| ---------------------- | -------------------------------------------\
+        \ | ----------------------------------------------------------------------------------------------------------------------------------------------------\
+        \ |\n| `messages`             | `ConversationMessage[]`                  \
+        \   | Ordered oldest to newest. Empty array when the conversation has no messages.\
+        \                                                                        \
+        \ |\n| `code_execution_files` | `CodeExecutionFileMetadata[]`            \
+        \   | List of sanitized file metadata entries (one per `file_id`). Covers\
+        \ all code-execution-generated files referenced anywhere in the conversation.\
+        \ Empty array when there are none. |\n\nNo other top-level fields are returned.\n\
+        \n#### ConversationMessage fields\n\n| Field                 | Type      \
+        \                   | Description                                        \
+        \                                                            |\n| ---------------------\
+        \ | ---------------------------- | --------------------------------------------------------------------------------------------------------------\
+        \ |\n| `message_id`          | `String`                     | Stable identifier\
+        \ for the turn. For liveboard-started synthetic first turns, this is the root\
+        \ node identifier. |\n| `timestamp_in_millis` | `Long`                   \
+        \    | Milliseconds since Unix epoch for the turn.                       \
+        \                                             |\n| `user_prompt`         |\
+        \ `UserPrompt`                 | User-authored prompt that started the turn\
+        \ (message and attachments). `null` for liveboard-started synthetic first\
+        \ turns. |\n| `response_items`      | `ConversationResponseItem[]` | Agent-side\
+        \ output produced in response to this turn. Empty array for in-progress turns.\
+        \                        |\n\n#### UserPrompt fields\n\n| Field         |\
+        \ Type                   | Description                                   \
+        \                                                       |\n| -------------\
+        \ | ---------------------- | ----------------------------------------------------------------------------------------------------\
+        \ |\n| `message`     | `UserMessage`          | User query that started the\
+        \ turn. `null` for liveboard-started synthetic first turns.              \
+        \  |\n| `attachments` | `UserAttachmentItem[]` | Files or connector resources\
+        \ attached to the user message. Empty array when there are no attachments.\
+        \ |\n\n#### UserMessage fields\n\n| Field        | Type     | Description\
+        \                                   |\n| ------------ | -------- | ---------------------------------------------\
+        \ |\n| `message_id` | `String` | Unique identifier of the user-source message.\
+        \ |\n| `content`    | `String` | Text body of the user query.            \
+        \      |\n\n#### UserAttachmentItem fields\n\nDiscriminated by `type`. Only\
+        \ `\"file\"` or `\"resource\"` are valid values. Only the fields for the indicated\
+        \ variant are populated. See `ConversationResponseItem` below for the field\
+        \ definitions of the `file` and `resource` variants — `UserAttachmentItem`\
+        \ uses the same fields.\n\n#### ConversationResponseItem fields\n\nEvery item\
+        \ carries a `type` discriminator and these shared fields:\n\n| Field     \
+        \            | Type      | Description                                   \
+        \                                                                        \
+        \         |\n| --------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------\
+        \ |\n| `type`                | `String`  | Discriminator. One of `\"text\"\
+        `, `\"tool_call\"`, `\"tool_result\"`, `\"answer\"`, `\"file\"`, `\"resource\"\
+        `, `\"search_datasets\"`.       |\n| `timestamp_in_millis` | `Long`    | Milliseconds\
+        \ since Unix epoch when this item was produced.                          \
+        \                                           |\n| `is_thinking`         | `Boolean`\
+        \ | `true` when the item represents internal agent reasoning rather than user-facing\
+        \ output. Consumers may hide or collapse these. |\n| `step_title`        \
+        \  | `String`  | Human-readable label for the agent step producing this item\
+        \ (e.g. `\"Searching\"`, `\"Visualising\"`).                             |\n\
+        \nVariant-specific fields:\n\n- **`text`** — agent text output: `content`\
+        \ (String), `content_type` (`ContentMimeType` enum), `file_reference` (FileReference).\n\
+        - **`tool_call`** — agent invoked a tool: `tool_call_id` (String), `tool_name`\
+        \ (String), `arguments` (JSON object).\n- **`tool_result`** — result returned\
+        \ from a tool invocation: `tool_call_id`, `tool_name`, `content`, `content_type`\
+        \ (`ContentMimeType` enum), `success` (Boolean).\n- **`answer`** — slim reference\
+        \ to a saved answer: `answer_id` (String), `tool_call_id`, `tool_name`.\n\
+        - **`file`** — uploaded or generated files: `files` (`PublicFileInfo[]`).\n\
+        - **`resource`** — MCP connector resource: `title`, `uri`, `name`, `mime_type`,\
+        \ `description`, `size` (Int), `connector_id`, `connector_name`, `connector_slug`,\
+        \ `transport_type` (`TransportType` enum).\n- **`search_datasets`** — dataset\
+        \ discovery result: `text` (String), `data_sources` (`DataSourceInfo[]`).\n\
+        \nClients should switch on `type` and ignore unknown variants for forward-compatibility.\n\
+        \n#### content_type values\n\n`content_type` is the `ContentMimeType` enum.\
+        \ The following values are defined:\n\n| Value                       | Wire\
+        \ MIME                   | Meaning                                       \
+        \       |\n| --------------------------- | --------------------------- | ----------------------------------------------------\
+        \ |\n| `TEXT_PLAIN`                | `text/plain`                | Plain text.\
+        \ Default for `tool_result`.               |\n| `TEXT_MARKDOWN`          \
+        \   | `text/markdown`             | Markdown. Default for `text`.        \
+        \                |\n| `TEXT_X_MARKDOWN_WITH_CODE` | `text/x-markdown-with-code`\
+        \ | Markdown whose body starts with a fenced code block. |\n| `TEXT_HTML`\
+        \                 | `text/html`                 | Raw HTML.              \
+        \                              |\n\n#### transport_type values\n\n`transport_type`\
+        \ is the `TransportType` enum used on the `resource` variant.\n\n| Value \
+        \             | Meaning                                       |\n| ------------------\
+        \ | --------------------------------------------- |\n| `STREAMABLE_HTTP` \
+        \ | Streamable HTTP transport (default for MCP).  |\n| `SSE`             \
+        \ | Server-sent events transport.                 |\n\n#### FileReference\
+        \ fields\n\n| Field                    | Type     | Description          \
+        \                                        |\n| ------------------------ | --------\
+        \ | ------------------------------------------------------------ |\n| `file_id`\
+        \                | `String` | Unique identifier of the code-execution-generated\
+        \ file.      |\n| `display_name`           | `String` | Human-readable file\
+        \ name.                                    |\n| `created_time_in_millis` |\
+        \ `Long`   | Milliseconds since Unix epoch when the file was created.    \
+        \ |\n\nCross-reference `file_id` against `code_execution_files` to retrieve\
+        \ full metadata including the `expired` flag before attempting a download.\n\
+        \n#### PublicFileInfo fields\n\n| Field                    | Type     | Description\
+        \                                              |\n| ------------------------\
+        \ | -------- | -------------------------------------------------------- |\n\
+        | `file_id`                | `String` | Unique identifier of the file.   \
+        \                        |\n| `display_name`           | `String` | Human-readable\
+        \ file name.                                |\n| `file_type`             \
+        \ | `String` | File type such as `csv`, `pdf`, or `png`.                |\n\
+        | `created_time_in_millis` | `Long`   | Milliseconds since Unix epoch when\
+        \ the file was created. |\n| `size_bytes`             | `Int`    | File size\
+        \ in bytes.                                      |\n\n#### CodeExecutionFileMetadata\
+        \ fields\n\nEach entry in the `code_execution_files` array contains:\n\n|\
+        \ Field                    | Type      | Description                     \
+        \                                                                        \
+        \                        |\n| ------------------------ | --------- | -------------------------------------------------------------------------------------------------------------------------------\
+        \ |\n| `file_id`                | `String`  | Unique identifier of the file.\
+        \                                                                        \
+        \                          |\n| `display_name`           | `String`  | Human-readable\
+        \ file name.                                                             \
+        \                                          |\n| `file_type`              |\
+        \ `String`  | File type such as `csv`, `pdf`, or `png`.                  \
+        \                                                                     |\n\
+        | `created_time_in_millis` | `Long`    | Milliseconds since Unix epoch when\
+        \ the file was created.                                                  \
+        \                      |\n| `expired`                | `Boolean` | When `true`,\
+        \ the underlying file is no longer retrievable from code-execution storage;\
+        \ UIs should disable download and preview. |\n\n#### Loading answer payloads\n\
+        \nEach `AnswerResponseItem` in the response contains an `answer_id` field.\
+        \ Pass this value as the `answer_identifier` parameter to `loadAnswer` to\
+        \ retrieve the full answer payload (TML tokens, visualization metadata) for\
+        \ that item.\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages\n\
+        ```\n\n#### Example response\n\n```json\n{\n  \"messages\": [\n    {\n   \
+        \   \"message_id\": \"node_u_01\",\n      \"timestamp_in_millis\": 1744000000000,\n\
+        \      \"user_prompt\": {\n        \"message\": {\n          \"message_id\"\
+        : \"msg_u_01\",\n          \"content\": \"Show me revenue by region as a chart.\"\
+        \n        },\n        \"attachments\": []\n      },\n      \"response_items\"\
+        : [\n        {\n          \"type\": \"tool_call\",\n          \"tool_call_id\"\
+        : \"toolu_01ABC\",\n          \"tool_name\": \"search_datasets\",\n      \
+        \    \"step_title\": \"Searching datasets\",\n          \"arguments\": { \"\
+        query\": \"revenue\" },\n          \"timestamp_in_millis\": 1744000001000,\n\
+        \          \"is_thinking\": false\n        },\n        {\n          \"type\"\
+        : \"answer\",\n          \"answer_id\": \"ans_01XYZ\",\n          \"tool_call_id\"\
+        : \"toolu_02DEF\",\n          \"tool_name\": \"fetch_and_visualize\",\n  \
+        \        \"step_title\": \"Visualising\",\n          \"timestamp_in_millis\"\
+        : 1744000004000,\n          \"is_thinking\": false\n        },\n        {\n\
+        \          \"type\": \"text\",\n          \"content\": \"Revenue is highest\
+        \ in APAC.\",\n          \"content_type\": \"TEXT_MARKDOWN\",\n          \"\
+        timestamp_in_millis\": 1744000005000,\n          \"is_thinking\": false,\n\
+        \          \"step_title\": null,\n          \"file_reference\": {\n      \
+        \      \"file_id\": \"revenue_by_region.csv\",\n            \"display_name\"\
+        : \"revenue_by_region.csv\",\n            \"created_time_in_millis\": 1744027200000\n\
+        \          }\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\"\
+        : [\n    {\n      \"file_id\": \"revenue_by_region.csv\",\n      \"display_name\"\
+        : \"revenue_by_region.csv\",\n      \"file_type\": \"csv\",\n      \"created_time_in_millis\"\
+        : 1744027200000,\n      \"expired\": false\n    }\n  ]\n}\n```\n\n#### Example:\
+        \ liveboard-started conversation\n\nWhen a conversation is initiated from\
+        \ a saved liveboard visualization rather than a user query, the first turn\
+        \ is synthetic. `user_prompt` is `null`, and `response_items` contains a single\
+        \ `answer` item referencing the seed visualization.\n\n```json\n{\n  \"messages\"\
+        : [\n    {\n      \"message_id\": \"ROOT_NODE\",\n      \"timestamp_in_millis\"\
+        : 1743999000000,\n      \"user_prompt\": null,\n      \"response_items\":\
+        \ [\n        {\n          \"type\": \"answer\",\n          \"answer_id\":\
+        \ \"lb_seed_01\",\n          \"tool_call_id\": null,\n          \"tool_name\"\
+        : null,\n          \"step_title\": null,\n          \"timestamp_in_millis\"\
+        : 1743999000000,\n          \"is_thinking\": false\n        }\n      ]\n \
+        \   }\n  ],\n  \"code_execution_files\": []\n}\n```\n\nSubsequent turns follow\
+        \ the normal user-to-agent pattern.\n\n#### Error responses\n\n| Code | Description\
+        \                                                                        \
+        \                                         |\n| ---- | ---------------------------------------------------------------------------------------------------------------------------\
+        \ |\n| 401  | Unauthorized — authentication token is missing, expired, or\
+        \ invalid.                                                        |\n| 403\
+        \  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege\
+        \ or lacks access to the specified conversation. |\n| 404  | Not Found — no\
+        \ conversation exists with the given identifier for the authenticated user.\
+        \                                    |\n\n> ###### Note:\n>\n> - Messages\
+        \ with an internal `SYSTEM` source are always dropped from the response.\n\
+        > - In-progress turns are still returned with an empty `response_items` array\
+        \ so clients can render the user message immediately.\n> - Do not assume every\
+        \ `tool_call` has a paired `tool_result` or `answer` — an interrupted conversation\
+        \ can leave a dangling call.\n> - Available from version 26.7.0.cl and later.\n\
+        > - This endpoint requires Spotter — please contact ThoughtSpot Support to\
+        \ enable Spotter on your cluster.\n\n\n\n\n\n"
+      operationId: getConversation
+      parameters:
+      - description: Unique identifier of the conversation to load.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationMessageResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationMessageResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/conversations:
+    get:
+      description: "\nRetrieves the list of saved agent conversations for the currently\
+        \ authenticated user.\nOnly conversations created with `enable_save_chat:\
+        \ true` are returned. \n  Version: 26.7.0.cl or later\n\n\nRetrieves a paginated\
+        \ list of saved agent conversations for the currently authenticated user.\
+        \ Only conversations that were created with `enable_save_chat: true` in `createAgentConversation`\
+        \ are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Usage guidelines\n\
+        \nThe request supports the following optional query parameters:\n\n- `limit`:\
+        \ maximum number of conversations to return. Use this together with `offset`\
+        \ for pagination.\n- `offset`: number of conversations to skip before returning\
+        \ results. Defaults to `0`.\n- `skip_empty`: when `true` (default), conversations\
+        \ with no messages are excluded from the results. Set to `false` to include\
+        \ empty conversations.\n\nIf the request is successful, the response includes\
+        \ a `conversations` array. Each entry contains:\n\n- `conversation_identifier`:\
+        \ the unique ID of the conversation, used as input to `sendAgentConversationMessage`,\
+        \ `updateConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer`\n\
+        - `conversation_title`: the display name of the conversation\n- `created_at`:\
+        \ ISO 8601 timestamp of when the conversation was created\n- `updated_at`:\
+        \ ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`:\
+        \ list of unique IDs of the data sources associated with the conversation\n\
+        - `data_source_names`: array of `{ id, name }` objects for the data sources\
+        \ associated with the conversation\n\n#### Pagination\n\nUse `limit` and `offset`\
+        \ to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0\
+        \   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20\
+        \  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes\
+        \ a `has_more: Boolean` field. When `true`, there are additional conversations\
+        \ beyond the current page — increment `offset` by `limit` to fetch the next\
+        \ page. When `has_more` is `false`, the current page is the last. Note that\
+        \ `total_count` is not returned; use `has_more` to drive paging controls.\n\
+        \n#### Example response\n\n```json\n{\n  \"conversations\": [\n    {\n   \
+        \   \"conversation_identifier\": \"abc123\",\n      \"conversation_title\"\
+        : \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\"\
+        ,\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifiers\"\
+        : [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\"\
+        : \"Retail Sales\" }]\n    }\n  ],\n  \"has_more\": false\n}\n```\n\n####\
+        \ Error responses\n\n| Code | Description |\n|------|-------------|\n| 401\
+        \  | Unauthorized — authentication token is missing, expired, or invalid.\
+        \ |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER`\
+        \ privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat:\
+        \ true` appear in this list. Conversations created with `enable_save_chat:\
+        \ false` (the default) are not persisted and cannot be retrieved.\n> - Available\
+        \ from version 26.7.0.cl and later.\n> - This endpoint requires Spotter —\
+        \ please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\
+        \n\n\n\n"
+      operationId: getConversationList
+      parameters:
+      - description: Maximum number of conversations to return. Used for pagination.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 30
+          format: int32
+          type: integer
+        style: form
+      - description: Number of conversations to skip before returning results. Used
+          for pagination.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - description: "When true, excludes conversations with no messages. Defaults\
+          \ to true."
+        explode: true
+        in: query
+        name: skip_empty
+        required: false
+        schema:
+          default: true
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentConversationHistoryResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentConversationHistoryResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/data-source-suggestions:
     post:
       description: |2+
@@ -504,6 +1022,133 @@ paths:
       - AI
       - ThoughtSpotRest
       x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details:
+    get:
+      description: "\nLoads the full answer payload for a specific answer item in\
+        \ an agent\nconversation. Returns structured answer data including the TML\
+        \ query, token\nbreakdown, visualization metadata, and agent context state.\n\
+        Pass the `answer_id` from an `AnswerResponseItem` in the `getConversation`\n\
+        response as the `answer_identifier` parameter.\nRequires `CAN_USE_SPOTTER`\
+        \ privilege and access to the specified conversation. \n  Version: 26.7.0.cl\
+        \ or later\n\n\nLoads the answer details for a specific answer item in an\
+        \ agent conversation. Returns structured answer data including the TML token\
+        \ list, visualization metadata, and agent context state. Use this endpoint\
+        \ to retrieve the full answer representation for an answer item — for example,\
+        \ to re-render a chart, export a query, or inspect the generated TML.\n\n\
+        Requires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\
+        \n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`\
+        \ *(path parameter)*: the unique ID of the conversation, as returned by `createAgentConversation`\n\
+        - `answer_identifier` *(path parameter)*: the `answer_id` field from an `AnswerResponseItem`\
+        \ in the `getConversation` response\n\nIf the request is successful, the response\
+        \ contains an `answer` object with the following fields:\n\n| Field | Type\
+        \ | Description |\n|-------|------|-------------|\n| `title` | `String` |\
+        \ Display title of the generated answer (e.g., `\"sales by month\"`). |\n\
+        | `description` | `String` | Optional description of the answer. |\n| `session_identifier`\
+        \ | `String` | Unique identifier of the session in which this answer was generated.\
+        \ |\n| `generation_number` | `Int` | Generation sequence number of this answer\
+        \ within the session. |\n| `tokens` | `[String]` | Ordered list of TML token\
+        \ strings that make up the answer query (e.g., `[\"[sales]\", \"[date].'monthly'\"\
+        ]`). |\n| `visualization_type` | `VizType` | Suggested visualization type:\
+        \ `Chart`, `Table`, or `Undefined`. `null` if no suggestion is available.\
+        \ |\n| `formulas` | `[String]` | List of formula names referenced in the answer.\
+        \ Empty if none are used. |\n| `parameters` | `[String]` | List of parameter\
+        \ names applied to the answer. Empty if none are used. |\n| `sub_queries`\
+        \ | `[JSON]` | List of sub-query objects used in the answer. Empty if none\
+        \ are present. |\n| `ac_state` | `ACState` | Agent context state, including\
+        \ `transaction_identifier` and `generation_number`, used to correlate this\
+        \ answer with a specific agent turn. |\n\n#### ACState fields\n\n| Field |\
+        \ Type | Description |\n|-------|------|-------------|\n| `transaction_identifier`\
+        \ | `String` | Unique identifier of the agent transaction that produced this\
+        \ answer. |\n| `generation_number` | `Int` | Generation number within the\
+        \ transaction. |\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details\n\
+        ```\n\n#### Example response\n\n```json\n{\n  \"answer\": {\n    \"title\"\
+        : \"sales by month\",\n    \"description\": \"\",\n    \"session_identifier\"\
+        : \"7b00b801-73f4-4639-af5e-e775584ceba6\",\n    \"generation_number\": 1,\n\
+        \    \"tokens\": [\"[sales]\", \"[date].'monthly'\"],\n    \"visualization_type\"\
+        : null,\n    \"formulas\": [],\n    \"parameters\": [],\n    \"sub_queries\"\
+        : [],\n    \"ac_state\": {\n      \"transaction_identifier\": \"7f6c9948-b4c7-4098-bb1f-6c67bc0e5699\"\
+        ,\n      \"generation_number\": 1\n    }\n  }\n}\n```\n\n#### Typical usage\
+        \ scenario\n\n1. Call `getConversation` to retrieve the full conversation\
+        \ history.\n2. Locate an `AnswerResponseItem` in `response_items` — note its\
+        \ `answer_id` field.\n3. Call `loadAnswer` with the `conversation_identifier`\
+        \ and `answer_id` as `answer_identifier`.\n4. The returned `tokens` array\
+        \ can be used to open the answer in the ThoughtSpot search interface or rendered\
+        \ as pill chips in the UI.\n\n#### Error responses\n\n| Code | Description\
+        \ |\n|------|-------------|\n| 401  | Unauthorized — authentication token\
+        \ is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated\
+        \ user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified\
+        \ conversation. |\n| 404  | Not Found — no conversation or message exists\
+        \ with the given identifiers for the authenticated user. |\n| 422  | Unprocessable\
+        \ Entity — the message does not contain an answer of the expected type. |\n\
+        \n> ###### Note:\n>\n> - This endpoint only loads answer-type messages. Other\
+        \ message types are not supported.\n> - `visualization_type` may be `null`\
+        \ if the agent did not produce a visualization suggestion for this answer.\n\
+        > - `formulas`, `parameters`, and `sub_queries` are returned as empty arrays\
+        \ when not applicable — they are never `null`.\n> - Available from version\
+        \ 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact\
+        \ ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n\n"
+      operationId: loadAnswer
+      parameters:
+      - description: Unique identifier of the conversation.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |-
+          Unique identifier of the answer to load. Use the `answer_id` field from an
+          `AnswerResponseItem` returned by `getConversation`.
+        explode: false
+        in: path
+        name: answer_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadAnswerResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadAnswerResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
       x-accepts:
       - application/json
   /api/rest/2.0/ai/analytical-questions:
@@ -1209,6 +1854,105 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/ai/agent/instructions/set:
+    put:
+      description: |2+
+
+        Version: 26.6.0.cl or later
+
+
+        Creates or updates the admin instructions for the AI agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior across all conversations. If instructions already exist for the org, they are replaced (upsert semantics).
+
+        Requires admin privileges. Only users with org admin access can set agent instructions.
+
+        #### Usage guidelines
+
+        The request must include:
+
+        - `instructions`: the instructions text to apply to the agent (maximum 5000 characters)
+
+        Instructions are validated against system guardrails before being saved. If the instructions contain content that conflicts with guardrails, the request is rejected with a `409` error and the existing instructions remain unchanged.
+
+        If the request is successful, the response includes the saved `AgentInstructions` record:
+
+        - `id`: unique identifier of the record
+        - `instructions`: the saved instructions text
+        - `created_at`: ISO timestamp when the instructions were first created
+        - `updated_at`: ISO timestamp of this update
+        - `last_updated_by`: user ID of the admin who performed this update
+
+        #### Error responses
+
+        | Code | Description |
+        |------|-------------|
+        | 400  | Bad request — the request body is missing required fields or the `instructions` field exceeds the maximum allowed length of 5000 characters. |
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid. |
+        | 403  | Forbidden — the authenticated user does not have org admin privileges required to set agent instructions. |
+        | 409  | Conflict — the provided instructions conflict with system guardrails. Review and revise the instructions text before retrying. |
+        | 500  | Internal server error. |
+
+        > ###### Note:
+        >
+        > - This operation uses upsert semantics: it creates the instructions record if none exists, or replaces the existing one.
+        > - Instructions take effect immediately for new conversations created after the update.
+        > - Use `getAgentInstructions` to retrieve the current instructions before making changes.
+        > - Available from version 26.6.0.cl and later.
+
+
+
+
+
+      operationId: setAgentInstructions
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetAgentInstructionsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInstructions'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInstructions'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/instructions/set:
     post:
       description: |2+
@@ -1393,6 +2137,280 @@ paths:
           description: Operation failed
       tags:
       - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response:
+    post:
+      description: "\nStops an in-progress agent conversation response. \n  Version:\
+        \ 26.6.0.cl or later\n\n\n<span>Version: 26.6.0.cl or later\n\n\nStops an\
+        \ in-progress agent response for the specified conversation. Use this endpoint\
+        \ to cancel a response that is actively being generated — for example, when\
+        \ the user navigates away, reformulates their question, or no longer needs\
+        \ the current result.\n\nRequires `CAN_USE_SPOTTER` privilege and access to\
+        \ the specified conversation.\n\n#### Usage guidelines\n\nThe request must\
+        \ include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID\
+        \ of the conversation whose active response should be stopped, as returned\
+        \ by `createAgentConversation`\n\nA successful request returns an empty `204\
+        \ No Content` response. If there is no active response in progress at the\
+        \ time of the call, the request is still treated as successful.\n\nAfter stopping\
+        \ a response, the conversation session remains active. You can continue sending\
+        \ messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.\n\
+        \n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response\n\
+        ```\n\n#### Typical usage scenario\n\nThis endpoint is useful when integrating\
+        \ Spotter into a chat UI where users can cancel a long-running query. For\
+        \ example:\n\n1. User sends a message via `sendAgentConversationMessageStreaming`.\n\
+        2. User clicks a \"Stop generating\" button while the response is streaming.\n\
+        3. Your client calls `stopConversation` with the active `conversation_identifier`.\n\
+        4. The stream is terminated and the user can ask a new question.\n\n#### Error\
+        \ responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized\
+        \ — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden\
+        \ — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks\
+        \ access to the specified conversation. |\n\n> ###### Note:\n>\n> - Calling\
+        \ this endpoint when no response is in progress does not return an error.\n\
+        > - The conversation context is preserved after stopping — previous messages\
+        \ and answers remain accessible.\n> - Available from version 26.6.0.cl and\
+        \ later.\n> - This endpoint requires Spotter — please contact ThoughtSpot\
+        \ Support to enable Spotter on your cluster.\n> - This feature is available\
+        \ only for **Spotter 3** (`SPOTTER3`) version.\n\n\n\n\n\n"
+      operationId: stopConversation
+      parameters:
+      - description: Unique identifier of the conversation to stop.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successfully stopped the in-progress agent conversation response
+            for the given.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update:
+    post:
+      description: "\nUpdates attributes of an existing agent conversation. Currently\
+        \ only the\ndisplay title can be updated; additional conversation attributes\
+        \ may be\nsupported in future versions. At least one updatable attribute must\
+        \ be\nprovided in the request body. \n  Version: 26.7.0.cl or later\n\n\n\
+        Updates attributes of an existing saved agent conversation. Currently only\
+        \ the conversation's display `title` can be updated; additional updatable\
+        \ attributes may be supported in future versions. At least one updatable attribute\
+        \ must be supplied in the request body.\n\nRequires `CAN_USE_SPOTTER` privilege\
+        \ and ownership of the conversation being updated.\n\n#### Usage guidelines\n\
+        \nThe request must include:\n\n- `conversation_identifier` *(path parameter)*:\
+        \ the unique ID of the conversation to update, as returned by `createAgentConversation`\
+        \ or `getConversationList`\n- At least one updatable attribute in the request\
+        \ body:\n    - `title` *(optional)*: the new display name for the conversation.\
+        \ When provided, must be a non-empty string.\n\nA successful request returns\
+        \ an empty `204 No Content` response. Updated attributes are reflected immediately\
+        \ in subsequent calls to `getConversationList`.\n\n#### Example request\n\n\
+        ```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\n\
+        Content-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product\
+        \ Line\"\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n\
+        | 400  | Bad Request — the request body is empty or `title` is provided as\
+        \ an empty string. |\n| 401  | Unauthorized — authentication token is missing,\
+        \ expired, or invalid. |\n| 403  | Forbidden — the authenticated user does\
+        \ not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation.\
+        \ |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier`\
+        \ for the authenticated user. |\n| 422  | Unprocessable Entity — the request\
+        \ body is malformed or contains an invalid field value. |\n\n> ###### Note:\n\
+        >\n> - Only conversations created with `enable_save_chat: true` can be updated.\
+        \ Unsaved conversations are not persisted and do not have a retrievable identifier.\n\
+        > - Available from version 26.7.0.cl and later.\n> - This endpoint requires\
+        \ Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\
+        \n\n\n\n\n"
+      operationId: updateConversation
+      parameters:
+      - description: Unique identifier of the conversation to update.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConversationRequest'
+        required: true
+      responses:
+        "204":
+          description: Successfully updated the agent conversation.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/auth/configure:
+    post:
+      description: |2+
+
+         Version: 26.6.0.cl or later
+
+
+        Enables or disables authentication at cluster or org level for the specified auth type. Currently supports `TRUSTED_AUTH`.
+
+        #### Required privileges
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.
+
+        #### Usage guidelines
+
+        Use `cluster_preferences` to enable or disable authentication at the cluster level. Cluster-level settings can only be configured from the Primary Org.
+        - `ENABLED` — Generates a new access token if one does not exist. An existing token is preserved.
+        - `DISABLED` — Revokes the existing cluster-level access token.
+
+        Use `org_preferences` to enable or disable authentication for one or more Orgs. Each entry must include an `org_identifier` (unique ID or name) and an `auth_status`. Org-level configuration requires the per-Org authentication feature to be enabled on your instance.
+        - `ENABLED` — Generates a new org-level access token if one does not exist.
+        - `DISABLED` — Revokes the existing org-level access token for that Org.
+
+        Both `cluster_preferences` and `org_preferences` are optional. Omitting a field leaves the corresponding settings unchanged. If both are omitted, the API returns `204 No Content` without making any changes.
+
+        **Note**: Cluster-level and org-level settings are independent of each other. Enabling or disabling one does not affect the other.
+
+
+
+
+
+      operationId: configureAuthSettings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigureAuthSettingsRequest'
+        required: true
+      responses:
+        "204":
+          description: Trusted authentication settings configured successfully.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_request:
+                  summary: Invalid request
+                  value:
+                    error:
+                      message:
+                        code: 10002
+                        incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        debug: At least one of cluster_preferences or org_preferences
+                          must be provided.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        code: 10097
+                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        debug: Authentication required to configure authentication
+                          settings.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: ADMINISTRATION or CONTROL_TRUSTED_AUTH privilege required
+                          to configure authentication settings.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while configuring authentication
+                          settings.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Authentication
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts:
@@ -2363,6 +3381,138 @@ paths:
                         incident_id_guid: d4e5f678-9012-3456-defa-456789012345
                         trace_id_guid: d4e5f678-9012-3456-defa-456789012345
                         debug: Unexpected server error while revoking the token.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Authentication
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/auth/search:
+    post:
+      description: |2+
+
+         Version: 26.6.0.cl or later
+
+
+        Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports `TRUSTED_AUTH`.
+
+        #### Required privileges
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.
+
+        #### Usage guidelines
+
+        Use `scope` to control which level of settings are returned:
+        - `CLUSTER` — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org.
+        - `ORG` — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance.
+        - If `scope` is omitted, both cluster and org-level settings are returned based on the caller's org context and feature availability.
+
+        The `access_tokens` array in `cluster_preferences` or `org_preferences` is omitted when no token is configured at that level.
+
+        **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.
+
+
+
+
+
+      operationId: searchAuthSettings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchAuthSettingsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                    auth_type: TRUSTED_AUTH
+                    cluster_preferences:
+                      auth_status: ENABLED
+                      access_tokens:
+                      - key: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    org_preferences:
+                    - org:
+                        id: 583464508
+                        name: sales_org
+                      auth_status: ENABLED
+                      access_tokens:
+                      - key: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+              schema:
+                $ref: '#/components/schemas/SearchAuthSettingsResponse'
+          description: Authentication settings retrieved successfully.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_request:
+                  summary: Invalid request
+                  value:
+                    error:
+                      message:
+                        code: 10002
+                        incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        debug: auth_type must be specified and currently only TRUSTED_AUTH
+                          is supported.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        code: 10097
+                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        debug: Authentication required to retrieve authentication
+                          settings.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: ADMINISTRATION or CONTROL_TRUSTED_AUTH privilege required
+                          to retrieve authentication settings.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while retrieving authentication
+                          settings.
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unexpected error
@@ -3848,6 +4998,84 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/connections/{connection_identifier}/status:
+    post:
+      description: |2+
+
+         Version: 26.6.0.cl or later
+
+
+        Activates or deactivates a connection. A deactivated connection cannot be used for queries or operations until it is activated again.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required. Only the connection owner or an administrator can perform this operation.
+
+        #### Usage guidelines
+
+        To update the status of a connection, specify the connection GUID or name in the `connection_identifier` path parameter and the desired `status` in the request body.
+
+        - **ACTIVATED**: Enables the connection. Queries and operations can resume on an activated connection.
+        - **DEACTIVATED**: Disables the connection. It does not remove the connection metadata, but only makes the connection unavailable for queries and operations. You can reactivate a deactivated connection by setting "status": "ACTIVATED".
+
+
+
+
+
+
+      operationId: updateConnectionStatus
+      parameters:
+      - description: Unique ID or name of the connection.
+        explode: false
+        in: path
+        name: connection_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConnectionStatusRequest'
+        required: true
+      responses:
+        "204":
+          description: Connection status updated successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Object not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Connections
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/connections/{connection_identifier}/update:
     post:
       description: "\n Version: 10.4.0.cl or later\n\n\nUpdates a connection object.\n\
@@ -4838,7 +6066,7 @@ paths:
 
         Fetches data from a saved Answer.
 
-        Requires at least view access to the saved Answer.
+        Requires at least view access to the saved Answer. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.
 
         The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
 
@@ -4894,8 +6122,10 @@ paths:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nGets data from a Liveboard\
         \ object and its visualization.  \n\nRequires at least view access to the\
-        \ Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the\
-        \ GUID or name of the Liveboard. To get data for specific visualizations,\
+        \ Liveboard. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**)\
+        \ privilege is also required.\n\n#### Usage guidelines\n\nIn the request body,\
+        \ specify the GUID or name of the Liveboard. To get data for specific visualizations,\
         \ add the GUIDs or names of the visualizations in the API request.\n\nTo include\
         \ unsaved changes in the report, pass the `transient_pinboard_content` script\
         \ generated from the `getExportRequestForCurrentPinboard` method in the Visual\
@@ -4953,11 +6183,13 @@ paths:
     post:
       description: "\n Version: 9.0.0.cl or later\n\n\nGenerates an Answer from a\
         \ given data source.\n\nRequires at least view access to the data source object\
-        \ (Worksheet or View).\n\n#### Usage guidelines\n\nTo search data, specify\
-        \ the data source GUID in `logical_table_identifier`. The data source can\
-        \ be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string`\
-        \ attribute in the API request as shown in the following example:\n\n```\n\
-        {\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\"\
+        \ (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+        \ is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**)\
+        \ privilege is also required.\n\n#### Usage guidelines\n\nTo search data,\
+        \ specify the data source GUID in `logical_table_identifier`. The data source\
+        \ can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the\
+        \ `query_string` attribute in the API request as shown in the following example:\n\
+        \n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\"\
         : \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\nFor more information\
         \ about the `query_string` format and data source attribute, see [Search data\
         \ API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).\
@@ -6352,6 +7584,242 @@ paths:
       - Log
       - ThoughtSpotRest
       x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/localizations/manual-translation/delete:
+    post:
+      description: "\nDelete manual translations. \n  Version: 26.7.0.cl or later\n\
+        \n\nDeletes all manual translations for the org.\n\nRequires `ADMINISTRATION`\
+        \ (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer\
+        \ Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**)\
+        \ privilege.\n\n#### Usage guidelines\n\n- This deletes **all** translation\
+        \ entries for the targeted org. The operation cannot be undone.\n- Defaults\
+        \ to `ORG` scope if not specified.\n- Set `scope` to `CLUSTER` to delete translations\
+        \ uploaded in the All-Org context.\n\n\n\n\n\n"
+      operationId: deleteManualTranslations
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteManualTranslationsRequest'
+        required: true
+      responses:
+        "204":
+          description: Successfully deleted manual translations.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - Manual Translation
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/localizations/manual-translation/export:
+    post:
+      description: "\nExport manual translations as a CSV file. \n  Version: 26.7.0.cl\
+        \ or later\n\n\nDownloads all manual translations for the org as a CSV file.\n\
+        \nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION`\
+        \ (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer\
+        \ application**) privilege.\n\n#### Usage guidelines\n\n- The response is\
+        \ a CSV file with columns: `content`, `locale`, `translated-content`.\n- Defaults\
+        \ to `ORG` scope if not specified.\n- Set `scope` to `CLUSTER` to export translations\
+        \ from the All-Org context.\n- Returns a `404` error if no translations exist\
+        \ for the targeted org or cluster scope.\n\n\n\n\n\n"
+      operationId: exportManualTranslations
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportManualTranslationsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: CSV file downloaded successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: No translations file found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error.
+      tags:
+      - Manual Translation
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/octet-stream
+  /api/rest/2.0/localizations/manual-translation/locales/{locale}/export:
+    post:
+      description: "\nGet translations bundle for a locale. \n  Version: 26.7.0.cl\
+        \ or later\n\n\nRetrieves all translations for a specific locale as a JSON\
+        \ map.\n\nAvailable to all authenticated users. No additional privileges are\
+        \ required.\n\n#### Usage guidelines\n\n- `locale` parameter must be a hyphenated\
+        \ locale code (for example, `fr-fr`, `de-de`, `JA-JP`).\n- Returns a JSON\
+        \ object with a `translations` map where each key is the original string and\
+        \ each value is the translated string.\n- If the org has no translations for\
+        \ the requested locale, the endpoint falls back to cluster-level translations.\n\
+        - Returns an empty `translations` map (not an error) if no entries exist at\
+        \ either level.\n\n\n\n\n\n"
+      operationId: getManualTranslationBundle
+      parameters:
+      - description: "Locale code for which to retrieve translations.  For example,\
+          \ `fr-fr`, `de-de`, `JA-JP`."
+        explode: false
+        in: path
+        name: locale
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Translation bundle retrieved successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: No translations found for the requested locale.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error.
+      tags:
+      - Manual Translation
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/localizations/manual-translation/import:
+    post:
+      description: "\nImport manual translations from a CSV file. \n  Version: 26.7.0.cl\
+        \ or later\n\n\nUploads a CSV file containing manual translations and upserts\
+        \ them into the database.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**),\
+        \ `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION`\
+        \ (**Can administer application**) privilege.\n\n#### Usage guidelines\n\n\
+        - The CSV file must have exactly three columns in this order: `content`, `locale`,\
+        \ `translated-content`.\n- Maximum file size: **30 MB**. Maximum rows: **10,000**.\n\
+        - Only `.csv` files are accepted.\n- The import performs an **upsert**: existing\
+        \ entries matched by `(org_id, locale, content)` are updated; new entries\
+        \ are inserted. Entries not in the upload are left untouched.\n- Set `scope`\
+        \ to `CLUSTER` to upload translations to the All-Org context. Cluster-level\
+        \ translations act as defaults for orgs that have no translations for a locale.\n\
+        \n\n\n\n\n"
+      operationId: importManualTranslations
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/importManualTranslations_request'
+        required: true
+      responses:
+        "204":
+          description: Successfully imported manual translations.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - Manual Translation
+      - ThoughtSpotRest
+      x-content-type: multipart/form-data
       x-accepts:
       - application/json
   /api/rest/2.0/metadata/worksheets/convert:
@@ -8126,10 +9594,14 @@ paths:
         \ privilege and edit access to the Liveboard.\nIf [Role-Based Access Control\
         \ (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your\
         \ instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is\
-        \ required.\n\n#### Usage guidelines\n\n* The description text is mandatory.\
-        \  The description text appears as **Description: <your content>** in the\
-        \ Liveboard schedule email notifications.\n* For Liveboards with both charts\
-        \ and tables, schedule creation is only supported in PDF and XLS formats.\
+        \ required.\n\nIf RBAC is enabled, creating a schedule also requires the download\
+        \ privilege that corresponds to the selected `file_format`: `CSV` and `XLSX`\
+        \ require the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**)\
+        \ privilege, and `PDF` requires the `CAN_DOWNLOAD_VISUALS` (**Can download\
+        \ visuals**) privilege.\n\n#### Usage guidelines\n\n* The description text\
+        \ is mandatory.  The description text appears as **Description: <your content>**\
+        \ in the Liveboard schedule email notifications.\n* For Liveboards with both\
+        \ charts and tables, schedule creation is only supported in PDF and XLS formats.\
         \ Schedules created in CSV formats for such Liveboards will fail to run. If\
         \ `PDF` is set as the `file_format`, enable `pdf_options` to get the correct\
         \ attachment. Not doing so may cause the attachment to be rendered empty.\n\
@@ -8304,10 +9776,15 @@ paths:
         \ privilege and edit access to the Liveboard.\nIf [Role-Based Access Control\
         \ (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your\
         \ instance, the `JOBSCHEDULING` (**Can schedule for others**) privilege is\
-        \ required.\n\nThe API endpoint allows you to pause a scheduled job, change\
-        \ the status of a paused job. You can also edit the recipients list, frequency\
-        \ of the job, format of the file to send to the recipients in email notifications,\
-        \ PDF options, and time zone setting.\n\n\n\n\n\n"
+        \ required.\n\nIf RBAC is enabled, changing a schedule's `file_format` also\
+        \ requires the download privilege that corresponds to the selected format:\
+        \ `CSV` and `XLSX` require the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download\
+        \ detailed data**) privilege, and `PDF` requires the `CAN_DOWNLOAD_VISUALS`\
+        \ (**Can download visuals**) privilege.\n\nThe API endpoint allows you to\
+        \ pause a scheduled job, change the status of a paused job. You can also edit\
+        \ the recipients list, frequency of the job, format of the file to send to\
+        \ the recipients in email notifications, PDF options, and time zone setting.\n\
+        \n\n\n\n\n"
       operationId: updateSchedule
       parameters:
       - description: Unique ID or name of the schedule.
@@ -9287,6 +10764,1020 @@ paths:
       - Security
       - ThoughtSpotRest
       x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/customization/styles/fonts/delete:
+    post:
+      description: |2+
+
+         Version: 26.7.0.cl or later
+
+
+        Deletes one or more custom fonts from the cluster-level or org-level font library. If a deleted font is assigned to visualization areas, those assignments automatically fallback to the cluster/system default font. The response lists all affected areas where the font was explicitly set. Note: dry_run defaults to true. To actually delete fonts, you must explicitly pass dry_run: false.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
+
+        #### Usage guidelines
+
+        - Provide one or more font UUIDs or names in `font_identifiers`.
+        - Set `scope` to `CLUSTER` to delete from the cluster-level library. Set `scope` to `ORG` (default) to delete from the authenticated user's org library.
+        - Use `dry_run: true` to preview which visualization areas would be affected without actually deleting the font. The response lists affected assignments; no changes are applied.
+        - Deletions cannot be undone. Re-upload the font file using `uploadStyleFont` if needed.
+
+
+
+
+
+      operationId: deleteStyleFonts
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteStyleFontsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Font deleted with affected assignments
+                  value:
+                    affected_assignments:
+                    - org:
+                        id: 1234567890
+                        name: Sales
+                      visualization_areas:
+                      - CHART_X_AXIS_LABELS
+                      - CHART_Y_AXIS_LABELS
+                example_2:
+                  summary: Font deleted with no affected assignments
+                  value:
+                    affected_assignments: []
+              schema:
+                $ref: '#/components/schemas/StyleFontDeleteData'
+          description: Font deleted successfully.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_request:
+                  summary: Invalid request
+                  value:
+                    error:
+                      message:
+                        code: 10002
+                        incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        debug: Field 'font_identifiers' must contain at least one
+                          identifier.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        code: 10097
+                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        debug: Authentication required to delete custom fonts from
+                          the font library.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: Only Tenant admin can delete cluster-level fonts.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while deleting fonts from the
+                          font library.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Style Customization
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/customization/styles/logos/export:
+    post:
+      description: |2+
+
+         Version: 26.7.0.cl or later
+
+
+        Downloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
+
+        #### Usage guidelines
+
+        - Set `scope` to `CLUSTER` to download cluster-level logos.
+        - Set `scope` to `ORG` (default) to download logos for the authenticated user's org.
+        - The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file.
+        - The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.
+
+
+
+
+
+      operationId: exportStyleLogos
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportStyleLogosRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: Logo ZIP archive retrieved successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        code: 10097
+                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        debug: Authentication required to export style logos.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: Cluster-level logos can only be exported from PRIMARY
+                          org.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while exporting style logos.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Style Customization
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/octet-stream
+  /api/rest/2.0/customization/styles/search:
+    post:
+      description: |2+
+
+         Version: 26.7.0.cl or later
+
+
+        Retrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
+
+        #### Usage guidelines
+
+        - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.
+        - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.
+        - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).
+
+
+
+
+
+      operationId: searchStyleCustomizations
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchStyleCustomizationsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                  - scope: CLUSTER
+                    navigation_panel:
+                      theme: DARK
+                      is_overridden: false
+                    chart_color_palette:
+                      colors:
+                      - primary: '#2359B6'
+                        secondary:
+                        - '#1A4690'
+                        - '#0E2E66'
+                        - '#07194A'
+                        - '#030D30'
+                      - primary: '#E8552D'
+                        secondary:
+                        - '#C4421A'
+                        - '#9E2F0D'
+                        - '#7A2005'
+                        - '#581302'
+                      - primary: '#F5A623'
+                        secondary:
+                        - '#D08B0E'
+                        - '#A86E05'
+                        - '#825202'
+                        - '#5E3900'
+                      - primary: '#7ED321'
+                        secondary:
+                        - '#62A815'
+                        - '#488009'
+                        - '#305A03'
+                        - '#1C3800'
+                      - primary: '#9B59B6'
+                        secondary:
+                        - '#7D3F9A'
+                        - '#612C7E'
+                        - '#481C62'
+                        - '#320F48'
+                      - primary: '#1ABC9C'
+                        secondary:
+                        - '#0E9E81'
+                        - '#077F67'
+                        - '#03624E'
+                        - '#014838'
+                      - primary: '#E74C3C'
+                        secondary:
+                        - '#C0392B'
+                        - '#9A2518'
+                        - '#761409'
+                        - '#540703'
+                      - primary: '#3498DB'
+                        secondary:
+                        - '#1A7DC0'
+                        - '#0E60A0'
+                        - '#074580'
+                        - '#032C60'
+                      disable_color_rotation: false
+                      is_overridden: false
+                    embedded_footer_text:
+                      value: ""
+                      is_overridden: false
+                    logo:
+                      default_logo:
+                        id: a1b2c3d4-0001-0001-0001-000000000001
+                        is_overridden: false
+                      wide_logo:
+                        id: a1b2c3d4-0002-0002-0002-000000000002
+                        is_overridden: false
+                    visualization_fonts:
+                      chart_visualization_fonts:
+                      - visualization_area: CHART_X_AXIS_LABELS
+                        font_id: null
+                        font_name: null
+                        is_overridden: false
+                      table_visualization_fonts:
+                      - visualization_area: TABLE_VALUE_CELLS
+                        font_id: null
+                        font_name: null
+                        is_overridden: false
+                  - scope: ORG
+                    org:
+                      id: 1234567890
+                      name: Sales
+                    navigation_panel:
+                      theme: CUSTOM
+                      base_color: '#2359B6'
+                      is_overridden: true
+                    chart_color_palette:
+                      colors:
+                      - primary: '#2359B6'
+                        secondary:
+                        - '#1A4690'
+                        - '#0E2E66'
+                        - '#07194A'
+                        - '#030D30'
+                      - primary: '#E8552D'
+                        secondary:
+                        - '#C4421A'
+                        - '#9E2F0D'
+                        - '#7A2005'
+                        - '#581302'
+                      - primary: '#F5A623'
+                        secondary:
+                        - '#D08B0E'
+                        - '#A86E05'
+                        - '#825202'
+                        - '#5E3900'
+                      - primary: '#7ED321'
+                        secondary:
+                        - '#62A815'
+                        - '#488009'
+                        - '#305A03'
+                        - '#1C3800'
+                      - primary: '#9B59B6'
+                        secondary:
+                        - '#7D3F9A'
+                        - '#612C7E'
+                        - '#481C62'
+                        - '#320F48'
+                      - primary: '#1ABC9C'
+                        secondary:
+                        - '#0E9E81'
+                        - '#077F67'
+                        - '#03624E'
+                        - '#014838'
+                      - primary: '#E74C3C'
+                        secondary:
+                        - '#C0392B'
+                        - '#9A2518'
+                        - '#761409'
+                        - '#540703'
+                      - primary: '#3498DB'
+                        secondary:
+                        - '#1A7DC0'
+                        - '#0E60A0'
+                        - '#074580'
+                        - '#032C60'
+                      disable_color_rotation: false
+                      is_overridden: false
+                    embedded_footer_text:
+                      value: Powered by Sales Analytics
+                      is_overridden: true
+                    logo:
+                      default_logo:
+                        id: b2c3d4e5-0001-0001-0001-000000000011
+                        is_overridden: true
+                      wide_logo:
+                        id: b2c3d4e5-0002-0002-0002-000000000022
+                        is_overridden: true
+                    visualization_fonts:
+                      chart_visualization_fonts:
+                      - visualization_area: CHART_X_AXIS_LABELS
+                        font_id: c3d4e5f6-1111-1111-1111-111111111111
+                        font_name: Acme Sans
+                        is_overridden: true
+                      table_visualization_fonts:
+                      - visualization_area: TABLE_VALUE_CELLS
+                        font_id: null
+                        font_name: "Optimo-Plain, Helvetica Neue, Helvetica, Arial,\
+                          \ sans-serif"
+                        is_overridden: false
+              schema:
+                items:
+                  $ref: '#/components/schemas/StylePreference'
+                type: array
+          description: Style preferences retrieved successfully.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_request:
+                  summary: Invalid request
+                  value:
+                    error:
+                      message:
+                        code: 10002
+                        incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        debug: Field 'org_identifiers' is only allowed when scope
+                          is ORG.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        code: 10097
+                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        debug: Authentication required to retrieve style preferences
+                          for the cluster or org.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: Cluster config can only be accessed from PRIMARY org.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while retrieving style customization
+                          preferences.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Style Customization
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/customization/styles/fonts/search:
+    post:
+      description: |2+
+
+         Version: 26.7.0.cl or later
+
+
+        Returns custom fonts from the cluster-level or org-level font library. Omitting all filter fields returns all fonts in the target scope.
+
+        When `include_font_assignments` is `true`, the response includes only the visualization areas explicitly assigned to each font. For cluster-scoped fonts, `org` is returned as `null`.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
+
+        #### Usage guidelines
+
+        - Set `scope` to `CLUSTER` to search the cluster-level library. Set `scope` to `ORG` (default) to search the authenticated user's org library.
+        - Use `font_identifier` to look up a specific font by UUID or name.
+        - Use `name_pattern` for partial, case-insensitive name matching.
+        - Set `include_font_assignments` to `true` to include visualization areas this font is currently assigned to. Defaults to `false`.
+
+
+
+
+
+      operationId: searchStyleFonts
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchStyleFontsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                  - id: c3d4e5f6-1111-1111-1111-111111111111
+                    scope: ORG
+                    org:
+                      id: 1234567890
+                      name: Sales
+                    name: Acme Sans
+                    weight: NORMAL
+                    style: NORMAL
+                    color: '#333333'
+                    creation_time_in_millis: 1714000000000
+                    assignments:
+                    - org:
+                        id: 1234567890
+                        name: Sales
+                      visualization_areas:
+                      - CHART_X_AXIS_LABELS
+                      - CHART_Y_AXIS_LABELS
+                  - id: d4e5f6a7-2222-2222-2222-222222222222
+                    scope: CLUSTER
+                    name: Corporate Bold
+                    weight: BOLD
+                    style: NORMAL
+                    color: '#000000'
+                    creation_time_in_millis: 1713500000000
+                    assignments: []
+              schema:
+                items:
+                  $ref: '#/components/schemas/StyleFontRecord'
+                type: array
+          description: Custom fonts retrieved successfully.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_request:
+                  summary: Invalid request
+                  value:
+                    error:
+                      message:
+                        code: 10002
+                        incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        debug: Only one of 'font_identifier' or 'name_pattern' may
+                          be provided.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        code: 10097
+                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        debug: Authentication required to search the cluster-level
+                          or org-level font library.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: Cluster config can only be accessed from PRIMARY org.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while searching the font library.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Style Customization
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/customization/styles/update:
+    post:
+      description: |2+
+
+         Version: 26.7.0.cl or later
+
+
+        Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.
+
+        #### Usage guidelines
+
+        Two operations are supported via the `operation` field:
+
+        - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.
+        - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.
+
+        #### Logo upload
+
+        Logo files are uploaded as binary fields using `multipart/form-data`:
+
+        - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.
+        - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.
+
+        To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.
+
+        #### Navigation panel color
+
+        Set `navigation_panel.theme` to one of:
+
+        - `DARK`: Default dark theme.
+        - `TWO_TONE`: Dual-tone panel style.
+        - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).
+
+        #### Chart color palette
+
+        Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.
+
+        #### Font assignments
+
+        Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.
+
+
+
+
+
+      operationId: updateStyleCustomization
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              reset_options:
+                contentType: application/json
+                style: form
+              navigation_panel:
+                contentType: application/json
+                style: form
+              chart_color_palette:
+                contentType: application/json
+                style: form
+              visualization_fonts:
+                contentType: application/json
+                style: form
+            schema:
+              $ref: '#/components/schemas/updateStyleCustomization_request'
+        required: true
+      responses:
+        "204":
+          description: Style preferences updated successfully.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_request:
+                  summary: Invalid request
+                  value:
+                    error:
+                      message:
+                        code: 10002
+                        incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        debug: chart_color_palette must specify exactly 8 color entries
+                          when operation is REPLACE.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        code: 10097
+                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        debug: Authentication required to update style customization
+                          preferences.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: Cluster-level style customization can only be updated
+                          from PRIMARY org.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while updating style customization
+                          preferences.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Style Customization
+      - ThoughtSpotRest
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+  /api/rest/2.0/customization/styles/fonts/{font_identifier}/update:
+    post:
+      description: |2+
+
+         Version: 26.7.0.cl or later
+
+
+        Updates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
+
+        #### Usage guidelines
+
+        - Identify the font using `font_identifier` (UUID or name).
+        - Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user's org library.
+        - To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`.
+        - `name` must be unique within the target scope if provided.
+        - `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.
+
+
+
+
+
+      operationId: updateStyleFont
+      parameters:
+      - description: UUID or name of the font to update.
+        explode: false
+        in: path
+        name: font_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStyleFontRequest'
+        required: true
+      responses:
+        "204":
+          description: Font metadata updated successfully.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_request:
+                  summary: Invalid request
+                  value:
+                    error:
+                      message:
+                        code: 10002
+                        incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        debug: Font color must be a valid 6-digit hex string (e.g.
+                          '#333333').
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        code: 10097
+                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        debug: Authentication required to update a custom font.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: Only Tenant admin can update cluster-level fonts.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while updating the custom font.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error.
+      tags:
+      - Style Customization
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/customization/styles/fonts/upload:
+    post:
+      description: |2+
+
+         Version: 26.7.0.cl or later
+
+
+        Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
+
+        #### Usage guidelines
+
+        - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error.
+        - The `name` field must be unique within the target scope. Uploading a font with a name that already exists returns an error.
+        - Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library.
+        - `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`.
+        - `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`.
+        - `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`).
+        - The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.
+
+
+
+
+
+      operationId: uploadStyleFont
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/uploadStyleFont_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                    id: c3d4e5f6-1111-1111-1111-111111111111
+                    name: Acme Sans
+              schema:
+                $ref: '#/components/schemas/StyleFontUploadData'
+          description: Font uploaded successfully.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_request:
+                  summary: Invalid request
+                  value:
+                    error:
+                      message:
+                        code: 10002
+                        incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        debug: Unsupported font format. Only WOFF and WOFF2 are accepted.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        code: 10097
+                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        debug: Authentication required to upload a custom font to
+                          the font library.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: Cluster config can only be accessed from PRIMARY org.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while uploading the custom
+                          font.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Style Customization
+      - ThoughtSpotRest
+      x-content-type: multipart/form-data
       x-accepts:
       - application/json
   /api/rest/2.0/system/preferences/communication-channels/configure:
@@ -12690,6 +15181,194 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/webhooks/storage-config:
+    get:
+      description: |2+
+
+         Version: 26.7.0.cl or later
+
+
+        Returns cluster-level storage setup information for configuring customer-managed storage. Use this endpoint to obtain the IAM identity details required before configuring a webhook storage destination. For S3 destinations, returns the platform AWS account ID and IAM trust policy template. For GCS destinations, returns the platform GCP service account email and the IAM role to grant for service account impersonation.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.
+
+
+
+
+
+      operationId: getWebhookStorageConfig
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  description: AWS-hosted cluster — customer configuring S3 storage
+                    destination
+                  value:
+                  - storage_type: OBJECT_STORAGE
+                    provider: AWS_S3
+                    config:
+                      config_type: AWS_TO_S3_STORAGE
+                      aws_account_id: "123456789012"
+                      trust_policy_template:
+                        Version: 2012-10-17
+                        Statement:
+                        - Effect: Allow
+                          Principal:
+                            AWS: arn:aws:iam::123456789012:root
+                          Action: sts:AssumeRole
+                          Condition:
+                            StringEquals:
+                              sts:ExternalId: ts-webhook-a1b2c3d4-7890
+                      setup_instructions:
+                      - 1. Create an IAM role in your AWS account
+                      - 2. Attach the trust policy template to the role
+                      - "3. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl)\
+                        \ to the role"
+                      - 4. Use the role ARN in your webhook storage configuration
+                example_2:
+                  description: GCP-hosted cluster — customer configuring S3 storage
+                    destination
+                  value:
+                  - storage_type: OBJECT_STORAGE
+                    provider: AWS_S3
+                    config:
+                      config_type: GCP_TO_S3_STORAGE
+                      gcp_service_account_id: "115663769112811637952"
+                      oidc_provider: accounts.google.com
+                      trust_policy_template:
+                        Version: 2012-10-17
+                        Statement:
+                        - Effect: Allow
+                          Principal:
+                            Federated: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/accounts.google.com
+                          Action: sts:AssumeRoleWithWebIdentity
+                          Condition:
+                            StringEquals:
+                              accounts.google.com:sub: "115663769112811637952"
+                      setup_instructions:
+                      - 1. Add accounts.google.com as an Identity Provider in AWS
+                        IAM
+                      - 2. Create an IAM role with Web Identity Federation trust
+                      - 3. Configure the trust policy with the GCP service account
+                        ID
+                      - "4. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl)\
+                        \ to the role"
+                      - 5. Use the role ARN in your webhook storage configuration
+                example_3:
+                  description: GCP-hosted cluster — customer configuring both S3 and
+                    GCS storage destinations
+                  value:
+                  - storage_type: OBJECT_STORAGE
+                    provider: AWS_S3
+                    config:
+                      config_type: GCP_TO_S3_STORAGE
+                      gcp_service_account_id: "115663769112811637952"
+                      oidc_provider: accounts.google.com
+                      trust_policy_template:
+                        Version: 2012-10-17
+                        Statement:
+                        - Effect: Allow
+                          Principal:
+                            Federated: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/accounts.google.com
+                          Action: sts:AssumeRoleWithWebIdentity
+                          Condition:
+                            StringEquals:
+                              accounts.google.com:sub: "115663769112811637952"
+                      setup_instructions:
+                      - 1. Add accounts.google.com as an Identity Provider in AWS
+                        IAM
+                      - 2. Create an IAM role with Web Identity Federation trust
+                      - 3. Configure the trust policy with the GCP service account
+                        ID
+                      - "4. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl)\
+                        \ to the role"
+                      - 5. Use the role ARN in your webhook storage configuration
+                  - storage_type: OBJECT_STORAGE
+                    provider: GCP_GCS
+                    config:
+                      config_type: GCP_TO_GCS_STORAGE
+                      service_account_email: webhook-sa@example-project.iam.gserviceaccount.com
+                      required_role: roles/iam.serviceAccountTokenCreator
+                      setup_instructions:
+                      - "1. In GCP Console, go to IAM & Admin > Service Accounts"
+                      - 2. Click on the service account that has write access to your
+                        GCS bucket
+                      - 3. Open the 'Principals with access' tab and click 'Grant
+                        Access'
+                      - 4. Enter the service account email as the principal
+                      - 5. Assign the roles/iam.serviceAccountTokenCreator role and
+                        save
+                      - 6. Use your service account email in the webhook storage configuration
+              schema:
+                items:
+                  $ref: '#/components/schemas/WebhookStorageConfigInfo'
+                type: array
+          description: Storage setup information retrieved successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        code: 10097
+                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                        debug: Authentication required to retrieve webhook storage
+                          configuration.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: Insufficient privileges to retrieve webhook storage
+                          configuration.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while retrieving webhook storage
+                          configuration.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Webhooks
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
   /api/rest/2.0/webhooks/search:
     post:
       description: |2+
@@ -13008,6 +15687,28 @@ components:
     SearchAuthSettingsResponse:
       description: Response for searchAuthSettings. Contains auth type and cluster/org-level
         preferences.
+      example:
+        auth_type: TRUSTED_AUTH
+        cluster_preferences:
+          auth_status: ENABLED
+          access_tokens:
+          - key: key
+          - key: key
+        org_preferences:
+        - org:
+            name: name
+            id: 0
+          auth_status: ENABLED
+          access_tokens:
+          - key: key
+          - key: key
+        - org:
+            name: name
+            id: 0
+          auth_status: ENABLED
+          access_tokens:
+          - key: key
+          - key: key
       properties:
         auth_type:
           description: Type of authentication mechanism returned.
@@ -13027,6 +15728,11 @@ components:
       type: object
     AuthClusterPreferences:
       description: Cluster-level authentication preferences.
+      example:
+        auth_status: ENABLED
+        access_tokens:
+        - key: key
+        - key: key
       properties:
         auth_status:
           description: Whether authentication is enabled or disabled at the cluster
@@ -13045,6 +15751,8 @@ components:
       type: object
     AuthSettingsAccessToken:
       description: An auth settings access token.
+      example:
+        key: key
       properties:
         key:
           description: The plaintext token key value.
@@ -13054,6 +15762,14 @@ components:
       type: object
     AuthOrgPreference:
       description: Org-level authentication preferences for a single org.
+      example:
+        org:
+          name: name
+          id: 0
+        auth_status: ENABLED
+        access_tokens:
+        - key: key
+        - key: key
       properties:
         org:
           $ref: '#/components/schemas/AuthOrgInfo'
@@ -13074,6 +15790,9 @@ components:
       type: object
     AuthOrgInfo:
       description: Org identifier returned in auth settings search results.
+      example:
+        name: name
+        id: 0
       properties:
         id:
           description: Unique identifier of the org.
@@ -14496,6 +17215,7 @@ components:
             8. USER_GROUP for group objects.
             9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values
             10. INSIGHT_SPEC for SpotIQ objects
+            11. COLLECTION for collection objects
           enum:
           - LIVEBOARD
           - ANSWER
@@ -14507,6 +17227,7 @@ components:
           - USER_GROUP
           - LOGICAL_RELATIONSHIP
           - INSIGHT_SPEC
+          - COLLECTION
           nullable: true
           type: string
         subtypes:
@@ -14568,6 +17289,7 @@ components:
             8. USER_GROUP for group objects
             9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.
             10. INSIGHT_SPEC for SpotIQ objects
+            11. COLLECTION for collection objects
           enum:
           - LIVEBOARD
           - ANSWER
@@ -14579,6 +17301,7 @@ components:
           - USER_GROUP
           - LOGICAL_RELATIONSHIP
           - INSIGHT_SPEC
+          - COLLECTION
           type: string
       required:
       - identifier
@@ -14663,6 +17386,7 @@ components:
           - USER_GROUP
           - LOGICAL_RELATIONSHIP
           - INSIGHT_SPEC
+          - COLLECTION
           type: string
         metadata_obj_id:
           description: |-
@@ -17496,6 +20220,12 @@ components:
       type: object
     AgentInstructions:
       description: Admin instructions configured for the AI agent.
+      example:
+        instructions: instructions
+        last_updated_by: last_updated_by
+        updated_at: updated_at
+        created_at: created_at
+        id: id
       properties:
         id:
           description: Unique identifier of the record.
@@ -17521,6 +20251,33 @@ components:
       type: object
     AgentConversationHistoryResponse:
       description: Response returned by getConversationList.
+      example:
+        has_more: true
+        conversations:
+        - updated_at: updated_at
+          conversation_title: conversation_title
+          created_at: created_at
+          conversation_identifier: conversation_identifier
+          data_source_identifiers:
+          - data_source_identifiers
+          - data_source_identifiers
+          data_source_names:
+          - name: name
+            id: id
+          - name: name
+            id: id
+        - updated_at: updated_at
+          conversation_title: conversation_title
+          created_at: created_at
+          conversation_identifier: conversation_identifier
+          data_source_identifiers:
+          - data_source_identifiers
+          - data_source_identifiers
+          data_source_names:
+          - name: name
+            id: id
+          - name: name
+            id: id
       properties:
         conversations:
           description: List of saved agent conversations for the current user.
@@ -17538,6 +20295,19 @@ components:
       type: object
     AgentConversationList:
       description: A saved agent conversation item returned in list responses.
+      example:
+        updated_at: updated_at
+        conversation_title: conversation_title
+        created_at: created_at
+        conversation_identifier: conversation_identifier
+        data_source_identifiers:
+        - data_source_identifiers
+        - data_source_identifiers
+        data_source_names:
+        - name: name
+          id: id
+        - name: name
+          id: id
       properties:
         conversation_identifier:
           description: Unique identifier of the conversation.
@@ -17574,6 +20344,9 @@ components:
     DataSourceEntry:
       description: "A data source associated with a conversation, returned as a typed\
         \ entry."
+      example:
+        name: name
+        id: id
       properties:
         id:
           description: Unique identifier of the data source.
@@ -17590,6 +20363,43 @@ components:
         Response body of getConversation. `messages` is ordered oldest to newest.
         `code_execution_files` is a list of sanitized code-execution file metadata
         entries, keyed in upstream by `file_id`.
+      example:
+        code_execution_files:
+        - expired: true
+          file_type: file_type
+          file_id: file_id
+          created_time_in_millis: "{}"
+          display_name: display_name
+        - expired: true
+          file_type: file_type
+          file_id: file_id
+          created_time_in_millis: "{}"
+          display_name: display_name
+        messages:
+        - response_items:
+          - "{}"
+          - "{}"
+          timestamp_in_millis: "{}"
+          message_id: message_id
+          user_prompt:
+            attachments:
+            - "{}"
+            - "{}"
+            message:
+              message_id: message_id
+              content: content
+        - response_items:
+          - "{}"
+          - "{}"
+          timestamp_in_millis: "{}"
+          message_id: message_id
+          user_prompt:
+            attachments:
+            - "{}"
+            - "{}"
+            message:
+              message_id: message_id
+              content: content
       properties:
         messages:
           description: Ordered conversation messages. Empty array when the conversation
@@ -17611,6 +20421,19 @@ components:
       description: |-
         One conversational exchange: an optional user prompt (message and attachments),
         followed by the agent's response items for that turn.
+      example:
+        response_items:
+        - "{}"
+        - "{}"
+        timestamp_in_millis: "{}"
+        message_id: message_id
+        user_prompt:
+          attachments:
+          - "{}"
+          - "{}"
+          message:
+            message_id: message_id
+            content: content
       properties:
         message_id:
           description: |-
@@ -17638,6 +20461,13 @@ components:
       description: |-
         User-authored prompt for a conversation turn: the user's text message and any
         files or connector resources attached to it.
+      example:
+        attachments:
+        - "{}"
+        - "{}"
+        message:
+          message_id: message_id
+          content: content
       properties:
         message:
           $ref: '#/components/schemas/UserMessage'
@@ -17654,6 +20484,9 @@ components:
       description: |-
         User-authored text message that begins a conversation turn.
         Null when the turn is a synthetic liveboard-started first turn.
+      example:
+        message_id: message_id
+        content: content
       properties:
         message_id:
           description: Unique identifier of the user message.
@@ -18113,6 +20946,12 @@ components:
       description: |-
         Sanitized public metadata for a code-execution-generated file. Internal
         storage identifiers (e.g. Azure blob ids) are deliberately not exposed.
+      example:
+        expired: true
+        file_type: file_type
+        file_id: file_id
+        created_time_in_millis: "{}"
+        display_name: display_name
       properties:
         file_id:
           description: |-
@@ -18142,11 +20981,54 @@ components:
       - file_id
       type: object
     LoadAnswerResponse:
+      example:
+        answer:
+          ac_state:
+            transaction_identifier: transaction_identifier
+            generation_number: 6
+          formulas:
+          - formulas
+          - formulas
+          description: description
+          session_identifier: session_identifier
+          tokens:
+          - tokens
+          - tokens
+          visualization_type: Chart
+          title: title
+          generation_number: 0
+          parameters:
+          - parameters
+          - parameters
+          sub_queries:
+          - "{}"
+          - "{}"
       properties:
         answer:
           $ref: '#/components/schemas/AnswerDetails'
       type: object
     AnswerDetails:
+      example:
+        ac_state:
+          transaction_identifier: transaction_identifier
+          generation_number: 6
+        formulas:
+        - formulas
+        - formulas
+        description: description
+        session_identifier: session_identifier
+        tokens:
+        - tokens
+        - tokens
+        visualization_type: Chart
+        title: title
+        generation_number: 0
+        parameters:
+        - parameters
+        - parameters
+        sub_queries:
+        - "{}"
+        - "{}"
       properties:
         title:
           description: Display title of the answer.
@@ -18204,6 +21086,9 @@ components:
           $ref: '#/components/schemas/ACState'
       type: object
     ACState:
+      example:
+        transaction_identifier: transaction_identifier
+        generation_number: 6
       properties:
         transaction_identifier:
           description: Unique identifier of the transaction.
@@ -18224,6 +21109,43 @@ components:
       required:
       - name
       - type
+      type: object
+    eureka_MemorySources:
+      description: |-
+        A single typed scope group identifying objects whose memory entries
+        should be exported. One group binds a single `type` to a set of
+        `identifiers`; pass a list of groups to `exportMemory` to scope the
+        export to multiple objects in one call. Each group maps to one filter
+        group on the eureka request.
+      properties:
+        type:
+          description: Source object type for this group. Must be `DATA_MODEL`.
+          enum:
+          - DATA_MODEL
+          type: string
+        identifiers:
+          description: |-
+            Data-models to export memory for. Each entry may be a GUID or a
+            human-readable obj_id; the eureka-agent resolves obj_ids before
+            forwarding.
+          items:
+            type: string
+          type: array
+      required:
+      - identifiers
+      - type
+      type: object
+    eureka_ExportMemoryResponse:
+      description: |-
+        Response from exportMemory. Contains the serialized payload
+        ready for local editing and re-submission to importMemory.
+      properties:
+        content:
+          description: |-
+            Serialized memory payload (currently YAML). This is the shape
+            importMemory consumes.
+          nullable: true
+          type: string
       type: object
     VariableDetailInput:
       description: Input for variable details in search
@@ -18603,6 +21525,20 @@ components:
     WebhookStorageConfigInfo:
       description: Cluster-level storage setup information for configuring customer-managed
         storage.
+      example:
+        storage_type: OBJECT_STORAGE
+        provider: AWS_S3
+        config:
+          required_role: required_role
+          aws_account_id: aws_account_id
+          gcp_service_account_id: gcp_service_account_id
+          oidc_provider: oidc_provider
+          trust_policy_template: "{}"
+          config_type: AWS_TO_S3_STORAGE
+          service_account_email: service_account_email
+          setup_instructions:
+          - setup_instructions
+          - setup_instructions
       properties:
         storage_type:
           description: Type of storage destination.
@@ -18628,6 +21564,17 @@ components:
         AWS_TO_S3_STORAGE: aws_account_id, trust_policy_template, setup_instructions.
         GCP_TO_S3_STORAGE: gcp_service_account_id, oidc_provider, trust_policy_template, setup_instructions.
         GCP_TO_GCS_STORAGE: service_account_email, required_role, setup_instructions.
+      example:
+        required_role: required_role
+        aws_account_id: aws_account_id
+        gcp_service_account_id: gcp_service_account_id
+        oidc_provider: oidc_provider
+        trust_policy_template: "{}"
+        config_type: AWS_TO_S3_STORAGE
+        service_account_email: service_account_email
+        setup_instructions:
+        - setup_instructions
+        - setup_instructions
       properties:
         config_type:
           description: "Discriminator identifying the upload path. One of: AWS_TO_S3_STORAGE,\
@@ -19602,6 +22549,65 @@ components:
       type: object
     StylePreference:
       description: Style preferences for a single scope entry.
+      example:
+        embedded_footer_text:
+          is_overridden: true
+          value: value
+        org:
+          name: name
+          id: 0
+        scope: CLUSTER
+        visualization_fonts:
+          table_visualization_fonts:
+          - is_overridden: true
+            font_id: font_id
+            visualization_area: TABLE_VALUE_CELLS
+            font_name: font_name
+          - is_overridden: true
+            font_id: font_id
+            visualization_area: TABLE_VALUE_CELLS
+            font_name: font_name
+          advanced_chart_visualization_fonts:
+          - is_overridden: true
+            font_id: font_id
+            visualization_area: ADVANCED_CHART_LABELS
+            font_name: font_name
+          - is_overridden: true
+            font_id: font_id
+            visualization_area: ADVANCED_CHART_LABELS
+            font_name: font_name
+          chart_visualization_fonts:
+          - is_overridden: true
+            font_id: font_id
+            visualization_area: CHART_X_AXIS_LABELS
+            font_name: font_name
+          - is_overridden: true
+            font_id: font_id
+            visualization_area: CHART_X_AXIS_LABELS
+            font_name: font_name
+        logo:
+          default_logo:
+            is_overridden: true
+            id: id
+          wide_logo:
+            is_overridden: true
+            id: id
+        chart_color_palette:
+          is_overridden: true
+          disable_color_rotation: true
+          colors:
+          - secondary:
+            - secondary
+            - secondary
+            primary: primary
+          - secondary:
+            - secondary
+            - secondary
+            primary: primary
+        navigation_panel:
+          is_overridden: true
+          theme: DARK
+          base_color: base_color
       properties:
         scope:
           description: Scope at which these style preferences apply.
@@ -19625,6 +22631,9 @@ components:
       type: object
     StyleOrgInfo:
       description: Org information returned in style API responses.
+      example:
+        name: name
+        id: 0
       properties:
         id:
           description: Unique integer ID of the org.
@@ -19638,6 +22647,10 @@ components:
       type: object
     StyleNavigationPanel:
       description: Navigation panel color configuration for a specific scope.
+      example:
+        is_overridden: true
+        theme: DARK
+        base_color: base_color
       properties:
         theme:
           description: Navigation panel color mode.
@@ -19660,6 +22673,18 @@ components:
       type: object
     StyleChartColorPalette:
       description: Chart color palette configuration for a specific scope.
+      example:
+        is_overridden: true
+        disable_color_rotation: true
+        colors:
+        - secondary:
+          - secondary
+          - secondary
+          primary: primary
+        - secondary:
+          - secondary
+          - secondary
+          primary: primary
       properties:
         colors:
           description: Ordered array of 8 color entries.
@@ -19680,6 +22705,11 @@ components:
       type: object
     StyleColorEntry:
       description: A single color entry in the chart color palette.
+      example:
+        secondary:
+        - secondary
+        - secondary
+        primary: primary
       properties:
         primary:
           description: Primary color as a 6-digit hex string.
@@ -19694,6 +22724,9 @@ components:
       type: object
     StyleEmbeddedFooterText:
       description: Embedded footer text configuration for a specific scope.
+      example:
+        is_overridden: true
+        value: value
       properties:
         value:
           description: Footer text value. Empty string indicates no footer is set.
@@ -19707,6 +22740,13 @@ components:
       type: object
     StyleLogoStatus:
       description: Logo status per slot.
+      example:
+        default_logo:
+          is_overridden: true
+          id: id
+        wide_logo:
+          is_overridden: true
+          id: id
       properties:
         default_logo:
           $ref: '#/components/schemas/StyleLogoSlot'
@@ -19715,6 +22755,9 @@ components:
       type: object
     StyleLogoSlot:
       description: Status of a single logo slot.
+      example:
+        is_overridden: true
+        id: id
       properties:
         id:
           description: UUID of the active logo.
@@ -19729,6 +22772,34 @@ components:
       type: object
     StyleVisualizationFonts:
       description: Effective font assignments per visualization type.
+      example:
+        table_visualization_fonts:
+        - is_overridden: true
+          font_id: font_id
+          visualization_area: TABLE_VALUE_CELLS
+          font_name: font_name
+        - is_overridden: true
+          font_id: font_id
+          visualization_area: TABLE_VALUE_CELLS
+          font_name: font_name
+        advanced_chart_visualization_fonts:
+        - is_overridden: true
+          font_id: font_id
+          visualization_area: ADVANCED_CHART_LABELS
+          font_name: font_name
+        - is_overridden: true
+          font_id: font_id
+          visualization_area: ADVANCED_CHART_LABELS
+          font_name: font_name
+        chart_visualization_fonts:
+        - is_overridden: true
+          font_id: font_id
+          visualization_area: CHART_X_AXIS_LABELS
+          font_name: font_name
+        - is_overridden: true
+          font_id: font_id
+          visualization_area: CHART_X_AXIS_LABELS
+          font_name: font_name
       properties:
         chart_visualization_fonts:
           description: Font assignments for chart visualization areas.
@@ -19752,6 +22823,11 @@ components:
       type: object
     ChartVisualizationFontRecord:
       description: Font assignment for a chart visualization area in the response.
+      example:
+        is_overridden: true
+        font_id: font_id
+        visualization_area: CHART_X_AXIS_LABELS
+        font_name: font_name
       properties:
         visualization_area:
           description: Chart visualization area.
@@ -19789,6 +22865,11 @@ components:
       type: object
     TableVisualizationFontRecord:
       description: Font assignment for a table visualization area in the response.
+      example:
+        is_overridden: true
+        font_id: font_id
+        visualization_area: TABLE_VALUE_CELLS
+        font_name: font_name
       properties:
         visualization_area:
           description: Table visualization area.
@@ -19817,6 +22898,11 @@ components:
     AdvancedChartVisualizationFontRecord:
       description: Font assignment for an advanced chart visualization area in the
         response.
+      example:
+        is_overridden: true
+        font_id: font_id
+        visualization_area: ADVANCED_CHART_LABELS
+        font_name: font_name
       properties:
         visualization_area:
           description: Advanced chart visualization area.
@@ -19844,6 +22930,30 @@ components:
       type: object
     StyleFontRecord:
       description: A custom font record in the font library.
+      example:
+        assignments:
+        - visualization_areas:
+          - CHART_X_AXIS_LABELS
+          - CHART_X_AXIS_LABELS
+          org:
+            name: name
+            id: 0
+        - visualization_areas:
+          - CHART_X_AXIS_LABELS
+          - CHART_X_AXIS_LABELS
+          org:
+            name: name
+            id: 0
+        color: color
+        creation_time_in_millis: 0.8008282
+        org:
+          name: name
+          id: 0
+        scope: CLUSTER
+        name: name
+        weight: NORMAL
+        style: NORMAL
+        id: id
       properties:
         id:
           description: Unique UUID identifier of the font.
@@ -19900,6 +23010,13 @@ components:
       type: object
     StyleFontAssignment:
       description: "Visualization areas assigned to a font, grouped by org context."
+      example:
+        visualization_areas:
+        - CHART_X_AXIS_LABELS
+        - CHART_X_AXIS_LABELS
+        org:
+          name: name
+          id: 0
       properties:
         org:
           $ref: '#/components/schemas/StyleOrgInfo'
@@ -20466,6 +23583,9 @@ components:
       type: object
     AuthOrgPreferenceInput:
       description: Input for org-level auth configuration.
+      example:
+        org_identifier: org_identifier
+        auth_status: ENABLED
       properties:
         org_identifier:
           description: Unique ID or name of the org to configure.
@@ -23361,6 +26481,183 @@ components:
       required:
       - success
       type: object
+    eureka_ImportMemoryResponse:
+      description: |-
+        Response from importMemory. On `SUCCESS`, `summary` is fully
+        populated. `diagnostics` carries any fatal errors, rollbacks, and
+        non-fatal observations (including residual-orphan doc ids that a
+        follow-up sweeper will reconcile).
+      properties:
+        status:
+          description: Terminal status of the import.
+          enum:
+          - SUCCESS
+          - VALIDATION_FAILED
+          - FAILED
+          type: string
+        summary:
+          description: |-
+            Per (memory type, target source) result entries. Null when the
+            import failed before any record processing occurred.
+          items:
+            $ref: '#/components/schemas/eureka_ImportSummary'
+          nullable: true
+          type: array
+        validation_failures:
+          description: |-
+            Per-item validation failure entries. Null when the import failed
+            before item validation could run.
+          items:
+            $ref: '#/components/schemas/eureka_ImportFailure'
+          nullable: true
+          type: array
+        diagnostics:
+          description: |-
+            Diagnostic message groups (errors, rollbacks, and non-fatal
+            warnings), each keyed by a `sub_status`. Null when the import
+            produced no diagnostics.
+          items:
+            $ref: '#/components/schemas/eureka_ImportDiagnostic'
+          nullable: true
+          type: array
+        operation_id:
+          description: |-
+            Server-minted UUID for log correlation. Echo this in support
+            tickets and in the follow-up orphan-cleanup call.
+          nullable: true
+          type: string
+      required:
+      - status
+      type: object
+    eureka_ImportSummary:
+      description: |-
+        Per (memory type, target source) summary of what importMemory did — or
+        would do, in DRY_RUN. `deleted_record_count` and `inserted_record_count`
+        are previews in DRY_RUN and actuals in EXECUTE_IMPORT.
+      properties:
+        memory_type:
+          description: |-
+            The kind of memory (`RULES`, `RECIPES`, or `ALWAYS_APPLY_RULES`)
+            these counts apply to.
+          enum:
+          - RULES
+          - RECIPES
+          - ALWAYS_APPLY_RULES
+          nullable: true
+          type: string
+        source:
+          $ref: '#/components/schemas/eureka_ImportTargetSource'
+        existing_record_count:
+          description: |-
+            Number of memory entries of this type that already existed on the
+            target object before the import.
+          format: int32
+          nullable: true
+          type: integer
+        deleted_record_count:
+          description: |-
+            Number of existing entries that will be (DRY_RUN) or were
+            (EXECUTE_IMPORT) deleted as part of the replacement.
+          format: int32
+          nullable: true
+          type: integer
+        inserted_record_count:
+          description: |-
+            Number of entries from the payload that will be (DRY_RUN) or were
+            (EXECUTE_IMPORT) inserted.
+          format: int32
+          nullable: true
+          type: integer
+        failed_record_count:
+          description: Number of records of this type that failed validation or processing.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    eureka_ImportTargetSource:
+      description: |-
+        Identifies the target object a group of import counts applies to.
+        `type` is the source kind (currently `DATA_MODEL`) and `identifier` is
+        the object's GUID.
+      properties:
+        identifier:
+          description: Identifier (GUID) of the target object these counts apply to.
+          nullable: true
+          type: string
+        type:
+          description: Source object kind (currently `DATA_MODEL`).
+          enum:
+          - DATA_MODEL
+          nullable: true
+          type: string
+      type: object
+    eureka_ImportFailure:
+      description: |-
+        One per-item import failure surfaced by importMemory. `line_number` is
+        the best-effort line number in the uploaded YAML; UI uses it for
+        click-to-locate. `field_name` is a dotted path within the item (e.g.
+        `content.rule_definition`) for inline highlighting; absent when the
+        failure is item-level rather than field-level.
+      properties:
+        line_number:
+          description: |-
+            Best-effort line number of the offending item in the uploaded YAML.
+            UI uses it for click-to-locate. May be null when the line cannot be
+            determined.
+          format: int32
+          nullable: true
+          type: integer
+        reason:
+          description: |-
+            Machine-readable category for the failure (e.g. `VALIDATION`,
+            `ACCESS_DENIED`, `CHAR_LIMIT`). UI uses this to decide messaging.
+          enum:
+          - UNKNOWN_FAILURE_REASON
+          - VALIDATION
+          - UNRESOLVED_SOURCE
+          - ACCESS_DENIED
+          - CHAR_LIMIT
+          - SCHEMA
+          nullable: true
+          type: string
+        field_name:
+          description: |-
+            Dotted path to the offending field within the item (e.g.
+            `content.rule_definition`) for inline highlighting. Absent when the
+            failure is item-level rather than field-level.
+          nullable: true
+          type: string
+        message:
+          description: Human-readable description of the failure.
+          nullable: true
+          type: string
+      type: object
+    eureka_ImportDiagnostic:
+      description: |-
+        A group of importMemory diagnostic messages that share a severity /
+        disposition. This is the single, uniform channel for fatal errors,
+        rollbacks, and non-fatal observations.
+      properties:
+        sub_status:
+          description: |-
+            Severity / disposition category these messages share (e.g.
+            `WARNING`, `FAILURE`, `ROLLED_BACK`).
+          enum:
+          - UNKNOWN
+          - FAILURE
+          - WARNING
+          - ROLLED_BACK
+          nullable: true
+          type: string
+        messages:
+          description: |-
+            Human-readable messages for this category (e.g. the residual-orphan
+            doc ids for a `WARNING`, or the failure cause for a `FAILURE`).
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
     VariableUpdateAssignmentInput:
       description: Input for variable value update in batch operations
       example:
@@ -23655,6 +26952,68 @@ components:
       required:
       - connection_identifier
       - table_name
+      type: object
+    InputTableDefinitionInput:
+      description: Definition of the input table schema.
+      properties:
+        new_columns:
+          description: New input-only columns to create in the table.
+          items:
+            $ref: '#/components/schemas/InputColumnSchemaInput'
+          type: array
+        referenced_columns:
+          description: |-
+            Column IDs from the linked model to include in the table.
+            Pass an empty array to create an input table with no reference
+            columns from the model.
+          items:
+            type: string
+          type: array
+      required:
+      - new_columns
+      - referenced_columns
+      type: object
+    InputColumnSchemaInput:
+      description: Schema definition for a single input column.
+      properties:
+        name:
+          description: Name of the column.
+          type: string
+        data_type:
+          description: |-
+            Physical data type of the column as recognized by the connected
+            warehouse (for example, VARCHAR, INT64, DOUBLE, BOOL, DATE).
+            The accepted values depend on the underlying Cloud Data Warehouse.
+          type: string
+        type:
+          description: |-
+            Semantic role of the column in ThoughtSpot. Use ATTRIBUTE for
+            dimensional data such as text, dates, and identifiers, and
+            MEASURE for numeric or aggregatable values.
+          enum:
+          - ATTRIBUTE
+          - MEASURE
+          type: string
+      required:
+      - data_type
+      - name
+      - type
+      type: object
+    InputTableResponse:
+      properties:
+        input_table_identifier:
+          description: Unique ID of the newly created input table.
+          nullable: true
+          type: string
+      type: object
+    InputTableUpdateResponse:
+      description: Response returned after successfully writing rows to an input table.
+      properties:
+        rows_loaded:
+          description: Number of rows successfully written to the input table.
+          format: int32
+          nullable: true
+          type: integer
       type: object
     PolicyProcessOptionsInput:
       properties:
@@ -24280,6 +27639,9 @@ components:
       type: object
     StyleFontUploadData:
       description: Font data returned after a successful upload.
+      example:
+        name: name
+        id: id
       properties:
         id:
           description: Unique UUID identifier of the uploaded font.
@@ -24293,6 +27655,20 @@ components:
       type: object
     StyleFontDeleteData:
       description: Result data for font deletion.
+      example:
+        affected_assignments:
+        - visualization_areas:
+          - CHART_X_AXIS_LABELS
+          - CHART_X_AXIS_LABELS
+          org:
+            name: name
+            id: 0
+        - visualization_areas:
+          - CHART_X_AXIS_LABELS
+          - CHART_X_AXIS_LABELS
+          org:
+            name: name
+            id: 0
       properties:
         affected_assignments:
           description: |-
@@ -24305,6 +27681,13 @@ components:
       type: object
     StyleFontDeleteAffectedAssignment:
       description: A visualization area assignment affected by a font deletion.
+      example:
+        visualization_areas:
+        - CHART_X_AXIS_LABELS
+        - CHART_X_AXIS_LABELS
+        org:
+          name: name
+          id: 0
       properties:
         org:
           $ref: '#/components/schemas/StyleOrgInfo'
@@ -24385,6 +27768,19 @@ components:
       required:
       - metadata_identifier
       type: object
+    ExportMemoryRequest:
+      properties:
+        sources:
+          description: |-
+            List of typed scope groups selecting which data-models to export
+            memory for. Supply `DATA_MODEL` group to scope the
+            export to specific data-models.
+          items:
+            $ref: '#/components/schemas/eureka_MemorySources'
+          type: array
+      required:
+      - sources
+      type: object
     GetDataSourceSuggestionsRequest:
       example:
         query: query
@@ -24442,6 +27838,25 @@ components:
       required:
       - metadata_context
       - query
+      type: object
+    ImportMemoryRequest:
+      properties:
+        content:
+          description: |-
+            The full serialized memory payload to import (currently YAML) —
+            typically a previous `exportMemory` response's `content`, edited
+            locally and re-submitted.
+          type: string
+        dry_run:
+          description: |-
+            Required. When `true`, validate the payload and return preview
+            counts and row failures without writing anything. Pass `false` to
+            apply the atomic replacement. The caller must choose explicitly so
+            a real import is never triggered by omission.
+          type: boolean
+      required:
+      - content
+      - dry_run
       type: object
     QueryGetDecomposedQueryRequest:
       example:
@@ -24578,6 +27993,8 @@ components:
       - metadata_identifier
       type: object
     SetAgentInstructionsRequest:
+      example:
+        instructions: instructions
       properties:
         instructions:
           description: The admin instructions text to set for the agent.
@@ -24627,6 +28044,8 @@ components:
       - query
       type: object
     UpdateConversationRequest:
+      example:
+        title: title
       properties:
         title:
           description: |-
@@ -24635,6 +28054,14 @@ components:
           type: string
       type: object
     ConfigureAuthSettingsRequest:
+      example:
+        auth_type: TRUSTED_AUTH
+        cluster_preferences: ""
+        org_preferences:
+        - org_identifier: org_identifier
+          auth_status: ENABLED
+        - org_identifier: org_identifier
+          auth_status: ENABLED
       properties:
         auth_type:
           description: Type of authentication mechanism to configure. Currently supports
@@ -24987,6 +28414,9 @@ components:
           type: string
       type: object
     SearchAuthSettingsRequest:
+      example:
+        auth_type: TRUSTED_AUTH
+        scope: CLUSTER
       properties:
         auth_type:
           description: Type of authentication mechanism to retrieve settings for.
@@ -25698,6 +29128,8 @@ components:
       - connection_identifier
       type: object
     UpdateConnectionStatusRequest:
+      example:
+        status: ACTIVATED
       properties:
         status:
           default: ACTIVATED
@@ -26871,6 +30303,49 @@ components:
           - REPLACE
           type: string
       type: object
+    CreateInputTableRequest:
+      properties:
+        table_name:
+          description: Physical table name to create in the external warehouse.
+          type: string
+        model_identifier:
+          description: |-
+            Unique ID or name of the model (worksheet) to link the
+            input table to.
+          type: string
+        table_definition:
+          allOf:
+          - $ref: '#/components/schemas/InputTableDefinitionInput'
+          description: |-
+            Definition of the input table, including new columns
+            and referenced model columns.
+      required:
+      - model_identifier
+      - table_definition
+      - table_name
+      type: object
+    UpdateInputTableRequest:
+      properties:
+        columns:
+          description: |-
+            Names of the columns being written, in the same order as
+            the values in each row.
+          items:
+            type: string
+          type: array
+        rows:
+          description: |-
+            Rows to write into the input table. Each row is an array
+            of string values aligned positionally with columns.
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+      required:
+      - columns
+      - rows
+      type: object
     SearchChannelHistoryRequest:
       example:
         channel_status: PENDING
@@ -26958,6 +30433,8 @@ components:
       - log_type
       type: object
     DeleteManualTranslationsRequest:
+      example:
+        scope: ORG
       properties:
         scope:
           default: ORG
@@ -26970,6 +30447,8 @@ components:
           type: string
       type: object
     ExportManualTranslationsRequest:
+      example:
+        scope: ORG
       properties:
         scope:
           default: ORG
@@ -30271,6 +33750,12 @@ components:
       - column_security_rules
       type: object
     DeleteStyleFontsRequest:
+      example:
+        scope: ORG
+        dry_run: true
+        font_identifiers:
+        - font_identifiers
+        - font_identifiers
       properties:
         scope:
           default: ORG
@@ -30301,6 +33786,8 @@ components:
       - font_identifiers
       type: object
     ExportStyleLogosRequest:
+      example:
+        scope: ORG
       properties:
         scope:
           default: ORG
@@ -30315,6 +33802,8 @@ components:
           type: string
       type: object
     SearchStyleCustomizationsRequest:
+      example:
+        scope: CLUSTER
       properties:
         scope:
           description: |-
@@ -30328,6 +33817,11 @@ components:
           type: string
       type: object
     SearchStyleFontsRequest:
+      example:
+        font_identifier: font_identifier
+        include_font_assignments: false
+        name_pattern: name_pattern
+        scope: CLUSTER
       properties:
         scope:
           description: |-
@@ -30354,6 +33848,12 @@ components:
           type: boolean
       type: object
     UpdateStyleFontRequest:
+      example:
+        color: color
+        scope: ORG
+        name: name
+        weight: NORMAL
+        style: NORMAL
       properties:
         scope:
           default: ORG
@@ -32195,6 +35695,129 @@ components:
       required:
       - dbt_connection_identifier
       type: object
+    importManualTranslations_request:
+      properties:
+        translations_file:
+          description: |-
+            CSV file containing translations. The file must have three columns:
+            `content`, `locale`, `translated-content`. Max file size: 30 MB.
+            Max rows: 10,000.
+          format: binary
+          type: string
+        scope:
+          default: ORG
+          description: |-
+            Org scope for the import. `ORG` (default) targets the calling
+            user's current org. `CLUSTER` targets the All-Org context.
+          enum:
+          - ORG
+          - CLUSTER
+          type: string
+      required:
+      - translations_file
+      type: object
+    updateStyleCustomization_request:
+      properties:
+        scope:
+          default: ORG
+          description: |-
+            Scope at which to apply the preferences. CLUSTER sets cluster-level
+            defaults for all orgs. ORG applies to the authenticated user's org.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+        operation:
+          default: REPLACE
+          description: |-
+            Operation to perform. REPLACE (default) applies the provided fields and
+            leaves omitted fields unchanged. RESET reverts fields listed in
+            reset_options to defaults.
+          enum:
+          - REPLACE
+          - RESET
+          type: string
+        reset_options:
+          $ref: '#/components/schemas/StyleResetOptionsInput'
+        navigation_panel:
+          $ref: '#/components/schemas/NavigationPanelInput'
+        chart_color_palette:
+          $ref: '#/components/schemas/StyleColorPaletteInput'
+        embedded_footer_text:
+          description: |-
+            Custom footer text for the embedded application. An empty
+            string clears the footer.
+          type: string
+        visualization_fonts:
+          $ref: '#/components/schemas/VisualizationFontsInput'
+        default_logo:
+          description: |-
+            Binary image for the DEFAULT logo slot (square app icon and favicon;
+            recommended 140x140 px). Accepted formats: PNG, JPG.
+          format: binary
+          type: string
+        wide_logo:
+          description: |-
+            Binary image for the WIDE logo slot (horizontal top nav bar logo;
+            recommended 230x45 px). Accepted formats: PNG, JPG.
+          format: binary
+          type: string
+      required:
+      - scope
+      type: object
+    uploadStyleFont_request:
+      properties:
+        scope:
+          default: ORG
+          description: |-
+            Scope of the font library to upload to. CLUSTER uploads to the
+            cluster-level library, making the font available as a default for all
+            orgs. ORG uploads to the authenticated user's org library. Defaults to
+            ORG if omitted.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+        name:
+          description: |-
+            Display name for the font (e.g. "Acme Sans"). Must be unique within the
+            target scope; returns an error if a font with this name already exists.
+          type: string
+        weight:
+          default: NORMAL
+          description: |-
+            Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to
+            NORMAL if omitted.
+          enum:
+          - NORMAL
+          - LIGHT
+          - BOLD
+          type: string
+        style:
+          default: NORMAL
+          description: |-
+            Style of the font. Supported values: NORMAL, ITALIC, OBLIQUE. Defaults
+            to NORMAL if omitted.
+          enum:
+          - NORMAL
+          - ITALIC
+          - OBLIQUE
+          type: string
+        color:
+          description: |-
+            Color of the font as a 6-digit hex string (e.g. "#333333"). Defaults to
+            #000000 (black) if omitted. Returns an error if the value is malformed.
+          type: string
+        file_content:
+          description: |-
+            Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats
+            are accepted; TTF and OTF are rejected. The file is validated on upload.
+          format: binary
+          type: string
+      required:
+      - file_content
+      - name
+      type: object
   securitySchemes:
     bearerAuth:
       scheme: bearer
@@ -32215,6 +35838,11 @@ x-roles:
   tags:
   - 26.7.0.cl
   description: Roles for version 26.7.0.cl
+- name: 26.8.0.cl
+  id: 26.8.0.cl
+  tags:
+  - 26.8.0.cl
+  description: Roles for version 26.8.0.cl
 - name: 26.6.0.cl
   id: 26.6.0.cl
   tags:

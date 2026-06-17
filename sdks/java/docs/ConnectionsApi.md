@@ -13,6 +13,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchConnection**](ConnectionsApi.md#searchConnection) | **POST** /api/rest/2.0/connection/search |
 | [**syncMetadata**](ConnectionsApi.md#syncMetadata) | **POST** /api/rest/2.0/connections/{connection_identifier}/resync-metadata |
 | [**updateConnection**](ConnectionsApi.md#updateConnection) | **POST** /api/rest/2.0/connection/update |
+| [**updateConnectionStatus**](ConnectionsApi.md#updateConnectionStatus) | **POST** /api/rest/2.0/connections/{connection_identifier}/status |
 | [**updateConnectionV2**](ConnectionsApi.md#updateConnectionV2) | **POST** /api/rest/2.0/connections/{connection_identifier}/update |
 
 
@@ -343,6 +344,44 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="updateConnectionStatus"></a>
+# **updateConnectionStatus**
+> updateConnectionStatus(connectionIdentifier, updateConnectionStatusRequest)
+
+
+
+  Version: 26.6.0.cl or later   Activates or deactivates a connection. A deactivated connection cannot be used for queries or operations until it is activated again.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required. Only the connection owner or an administrator can perform this operation.  #### Usage guidelines  To update the status of a connection, specify the connection GUID or name in the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in the request body.  - **ACTIVATED**: Enables the connection. Queries and operations can resume on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove the connection metadata, but only makes the connection unavailable for queries and operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;: \&quot;ACTIVATED\&quot;.       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **connectionIdentifier** | **String**
+| **updateConnectionStatusRequest** | [**UpdateConnectionStatusRequest**](UpdateConnectionStatusRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Connection status updated successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Object not found |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="updateConnectionV2"></a>

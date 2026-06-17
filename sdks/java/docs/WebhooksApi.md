@@ -6,6 +6,7 @@ All URIs are relative to *CLUSTER_URL*
 |------------- | ------------- |
 | [**createWebhookConfiguration**](WebhooksApi.md#createWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/create |
 | [**deleteWebhookConfigurations**](WebhooksApi.md#deleteWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/delete |
+| [**getWebhookStorageConfig**](WebhooksApi.md#getWebhookStorageConfig) | **GET** /api/rest/2.0/webhooks/storage-config |
 | [**searchWebhookConfigurations**](WebhooksApi.md#searchWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/search |
 | [**updateWebhookConfiguration**](WebhooksApi.md#updateWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/{webhook_identifier}/update |
 
@@ -77,6 +78,39 @@ All URIs are relative to *CLUSTER_URL*
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Webhook configurations deleted successfully |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="getWebhookStorageConfig"></a>
+# **getWebhookStorageConfig**
+> List&lt;WebhookStorageConfigInfo&gt; getWebhookStorageConfig()
+
+
+
+  Version: 26.7.0.cl or later   Returns cluster-level storage setup information for configuring customer-managed storage. Use this endpoint to obtain the IAM identity details required before configuring a webhook storage destination. For S3 destinations, returns the platform AWS account ID and IAM trust policy template. For GCS destinations, returns the platform GCP service account email and the IAM role to grant for service account impersonation.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;WebhookStorageConfigInfo&gt;**](WebhookStorageConfigInfo.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Storage setup information retrieved successfully |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
