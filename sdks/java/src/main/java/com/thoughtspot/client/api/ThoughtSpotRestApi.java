@@ -36741,12 +36741,16 @@ public class ThoughtSpotRestApi {
      * @param operation Operation to perform. REPLACE (default) applies the provided fields and
      *     leaves omitted fields unchanged. RESET reverts fields listed in reset_options to
      *     defaults. (optional, default to REPLACE)
-     * @param resetOptions (optional)
-     * @param navigationPanel (optional)
-     * @param chartColorPalette (optional)
+     * @param resetOptions Fields to reset when operation is RESET. Specify style fields and
+     *     visualization areas to revert to defaults. (optional)
+     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also
+     *     provide base_color. (optional)
+     * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8
+     *     color entries must be specified in colors. (optional)
      * @param embeddedFooterText Custom footer text for the embedded application. An empty string
      *     clears the footer. (optional)
-     * @param visualizationFonts (optional)
+     * @param visualizationFonts Font assignments per visualization area. Provide only the areas to
+     *     update; omitted areas remain unchanged. (optional)
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon;
      *     recommended 140x140 px). Accepted formats: PNG, JPG. (optional)
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended
@@ -36935,12 +36939,16 @@ public class ThoughtSpotRestApi {
      * @param operation Operation to perform. REPLACE (default) applies the provided fields and
      *     leaves omitted fields unchanged. RESET reverts fields listed in reset_options to
      *     defaults. (optional, default to REPLACE)
-     * @param resetOptions (optional)
-     * @param navigationPanel (optional)
-     * @param chartColorPalette (optional)
+     * @param resetOptions Fields to reset when operation is RESET. Specify style fields and
+     *     visualization areas to revert to defaults. (optional)
+     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also
+     *     provide base_color. (optional)
+     * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8
+     *     color entries must be specified in colors. (optional)
      * @param embeddedFooterText Custom footer text for the embedded application. An empty string
      *     clears the footer. (optional)
-     * @param visualizationFonts (optional)
+     * @param visualizationFonts Font assignments per visualization area. Provide only the areas to
+     *     update; omitted areas remain unchanged. (optional)
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon;
      *     recommended 140x140 px). Accepted formats: PNG, JPG. (optional)
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended
@@ -37018,12 +37026,16 @@ public class ThoughtSpotRestApi {
      * @param operation Operation to perform. REPLACE (default) applies the provided fields and
      *     leaves omitted fields unchanged. RESET reverts fields listed in reset_options to
      *     defaults. (optional, default to REPLACE)
-     * @param resetOptions (optional)
-     * @param navigationPanel (optional)
-     * @param chartColorPalette (optional)
+     * @param resetOptions Fields to reset when operation is RESET. Specify style fields and
+     *     visualization areas to revert to defaults. (optional)
+     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also
+     *     provide base_color. (optional)
+     * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8
+     *     color entries must be specified in colors. (optional)
      * @param embeddedFooterText Custom footer text for the embedded application. An empty string
      *     clears the footer. (optional)
-     * @param visualizationFonts (optional)
+     * @param visualizationFonts Font assignments per visualization area. Provide only the areas to
+     *     update; omitted areas remain unchanged. (optional)
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon;
      *     recommended 140x140 px). Accepted formats: PNG, JPG. (optional)
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended
@@ -37105,12 +37117,16 @@ public class ThoughtSpotRestApi {
      * @param operation Operation to perform. REPLACE (default) applies the provided fields and
      *     leaves omitted fields unchanged. RESET reverts fields listed in reset_options to
      *     defaults. (optional, default to REPLACE)
-     * @param resetOptions (optional)
-     * @param navigationPanel (optional)
-     * @param chartColorPalette (optional)
+     * @param resetOptions Fields to reset when operation is RESET. Specify style fields and
+     *     visualization areas to revert to defaults. (optional)
+     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also
+     *     provide base_color. (optional)
+     * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8
+     *     color entries must be specified in colors. (optional)
      * @param embeddedFooterText Custom footer text for the embedded application. An empty string
      *     clears the footer. (optional)
-     * @param visualizationFonts (optional)
+     * @param visualizationFonts Font assignments per visualization area. Provide only the areas to
+     *     update; omitted areas remain unchanged. (optional)
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon;
      *     recommended 140x140 px). Accepted formats: PNG, JPG. (optional)
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended

@@ -3219,22 +3219,22 @@ export interface StyleCustomizationApiUpdateStyleCustomizationRequest {
     operation?: string
     /**
      * 
-     * @type StyleResetOptionsInput
+     * @type UpdateStyleCustomizationRequestResetOptions
      * @memberof StyleCustomizationApiupdateStyleCustomization
      */
-    resetOptions?: StyleResetOptionsInput
+    resetOptions?: UpdateStyleCustomizationRequestResetOptions
     /**
      * 
-     * @type NavigationPanelInput
+     * @type UpdateStyleCustomizationRequestNavigationPanel
      * @memberof StyleCustomizationApiupdateStyleCustomization
      */
-    navigationPanel?: NavigationPanelInput
+    navigationPanel?: UpdateStyleCustomizationRequestNavigationPanel
     /**
      * 
-     * @type StyleColorPaletteInput
+     * @type UpdateStyleCustomizationRequestChartColorPalette
      * @memberof StyleCustomizationApiupdateStyleCustomization
      */
-    chartColorPalette?: StyleColorPaletteInput
+    chartColorPalette?: UpdateStyleCustomizationRequestChartColorPalette
     /**
      * Custom footer text for the embedded application. An empty string clears the footer.
      * @type string
@@ -3243,10 +3243,10 @@ export interface StyleCustomizationApiUpdateStyleCustomizationRequest {
     embeddedFooterText?: string
     /**
      * 
-     * @type VisualizationFontsInput
+     * @type UpdateStyleCustomizationRequestVisualizationFonts
      * @memberof StyleCustomizationApiupdateStyleCustomization
      */
-    visualizationFonts?: VisualizationFontsInput
+    visualizationFonts?: UpdateStyleCustomizationRequestVisualizationFonts
     /**
      * Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
      * @type HttpFile
@@ -5384,22 +5384,22 @@ export interface ThoughtSpotRestApiUpdateStyleCustomizationRequest {
     operation?: string
     /**
      * 
-     * @type StyleResetOptionsInput
+     * @type UpdateStyleCustomizationRequestResetOptions
      * @memberof ThoughtSpotRestApiupdateStyleCustomization
      */
-    resetOptions?: StyleResetOptionsInput
+    resetOptions?: UpdateStyleCustomizationRequestResetOptions
     /**
      * 
-     * @type NavigationPanelInput
+     * @type UpdateStyleCustomizationRequestNavigationPanel
      * @memberof ThoughtSpotRestApiupdateStyleCustomization
      */
-    navigationPanel?: NavigationPanelInput
+    navigationPanel?: UpdateStyleCustomizationRequestNavigationPanel
     /**
      * 
-     * @type StyleColorPaletteInput
+     * @type UpdateStyleCustomizationRequestChartColorPalette
      * @memberof ThoughtSpotRestApiupdateStyleCustomization
      */
-    chartColorPalette?: StyleColorPaletteInput
+    chartColorPalette?: UpdateStyleCustomizationRequestChartColorPalette
     /**
      * Custom footer text for the embedded application. An empty string clears the footer.
      * @type string
@@ -5408,10 +5408,10 @@ export interface ThoughtSpotRestApiUpdateStyleCustomizationRequest {
     embeddedFooterText?: string
     /**
      * 
-     * @type VisualizationFontsInput
+     * @type UpdateStyleCustomizationRequestVisualizationFonts
      * @memberof ThoughtSpotRestApiupdateStyleCustomization
      */
-    visualizationFonts?: VisualizationFontsInput
+    visualizationFonts?: UpdateStyleCustomizationRequestVisualizationFonts
     /**
      * Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
      * @type HttpFile

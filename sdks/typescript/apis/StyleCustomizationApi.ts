@@ -11,17 +11,17 @@ import {SecurityAuthentication} from '../auth/auth';
 import { DeleteStyleFontsRequest } from '../models/DeleteStyleFontsRequest';
 import { ErrorResponse } from '../models/ErrorResponse';
 import { ExportStyleLogosRequest } from '../models/ExportStyleLogosRequest';
-import { NavigationPanelInput } from '../models/NavigationPanelInput';
 import { SearchStyleCustomizationsRequest } from '../models/SearchStyleCustomizationsRequest';
 import { SearchStyleFontsRequest } from '../models/SearchStyleFontsRequest';
-import { StyleColorPaletteInput } from '../models/StyleColorPaletteInput';
 import { StyleFontDeleteData } from '../models/StyleFontDeleteData';
 import { StyleFontRecord } from '../models/StyleFontRecord';
 import { StyleFontUploadData } from '../models/StyleFontUploadData';
 import { StylePreference } from '../models/StylePreference';
-import { StyleResetOptionsInput } from '../models/StyleResetOptionsInput';
+import { UpdateStyleCustomizationRequestChartColorPalette } from '../models/UpdateStyleCustomizationRequestChartColorPalette';
+import { UpdateStyleCustomizationRequestNavigationPanel } from '../models/UpdateStyleCustomizationRequestNavigationPanel';
+import { UpdateStyleCustomizationRequestResetOptions } from '../models/UpdateStyleCustomizationRequestResetOptions';
+import { UpdateStyleCustomizationRequestVisualizationFonts } from '../models/UpdateStyleCustomizationRequestVisualizationFonts';
 import { UpdateStyleFontRequest } from '../models/UpdateStyleFontRequest';
-import { VisualizationFontsInput } from '../models/VisualizationFontsInput';
 
 /**
  * no description
@@ -244,7 +244,7 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
      */
-    public async updateStyleCustomization(scope: string, operation?: string, resetOptions?: StyleResetOptionsInput, navigationPanel?: NavigationPanelInput, chartColorPalette?: StyleColorPaletteInput, embeddedFooterText?: string, visualizationFonts?: VisualizationFontsInput, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<RequestContext> {
+    public async updateStyleCustomization(scope: string, operation?: string, resetOptions?: UpdateStyleCustomizationRequestResetOptions, navigationPanel?: UpdateStyleCustomizationRequestNavigationPanel, chartColorPalette?: UpdateStyleCustomizationRequestChartColorPalette, embeddedFooterText?: string, visualizationFonts?: UpdateStyleCustomizationRequestVisualizationFonts, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'scope' is not null or undefined

@@ -12470,20 +12470,40 @@
                     ]
                   },
                   "reset_options": {
-                    "$ref": "#/components/schemas/StyleResetOptionsInput"
+                    "description": "Fields to reset when operation is RESET. Specify style fields and\nvisualization areas to revert to defaults.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleResetOptionsInput"
+                      }
+                    ]
                   },
                   "navigation_panel": {
-                    "$ref": "#/components/schemas/NavigationPanelInput"
+                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/NavigationPanelInput"
+                      }
+                    ]
                   },
                   "chart_color_palette": {
-                    "$ref": "#/components/schemas/StyleColorPaletteInput"
+                    "description": "Chart color palette. When provided with operation REPLACE, exactly 8\ncolor entries must be specified in colors.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleColorPaletteInput"
+                      }
+                    ]
                   },
                   "embedded_footer_text": {
                     "description": "Custom footer text for the embedded application. An empty\nstring clears the footer.",
                     "type": "string"
                   },
                   "visualization_fonts": {
-                    "$ref": "#/components/schemas/VisualizationFontsInput"
+                    "description": "Font assignments per visualization area. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/VisualizationFontsInput"
+                      }
+                    ]
                   },
                   "default_logo": {
                     "description": "Binary image for the DEFAULT logo slot (square app icon and favicon;\nrecommended 140x140 px). Accepted formats: PNG, JPG.",

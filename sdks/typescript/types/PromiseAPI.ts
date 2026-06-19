@@ -2153,7 +2153,7 @@ export class PromiseStyleCustomizationApi {
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
      */
-    public updateStyleCustomization(scope: string, operation?: string, resetOptions?: StyleResetOptionsInput, navigationPanel?: NavigationPanelInput, chartColorPalette?: StyleColorPaletteInput, embeddedFooterText?: string, visualizationFonts?: VisualizationFontsInput, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<void> {
+    public updateStyleCustomization(scope: string, operation?: string, resetOptions?: UpdateStyleCustomizationRequestResetOptions, navigationPanel?: UpdateStyleCustomizationRequestNavigationPanel, chartColorPalette?: UpdateStyleCustomizationRequestChartColorPalette, embeddedFooterText?: string, visualizationFonts?: UpdateStyleCustomizationRequestVisualizationFonts, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<void> {
         const result = this.api.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options);
         return result.toPromise();
     }
@@ -3908,7 +3908,7 @@ export class PromiseThoughtSpotRestApi {
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
      */
-    public updateStyleCustomization(scope: string, operation?: string, resetOptions?: StyleResetOptionsInput, navigationPanel?: NavigationPanelInput, chartColorPalette?: StyleColorPaletteInput, embeddedFooterText?: string, visualizationFonts?: VisualizationFontsInput, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<void> {
+    public updateStyleCustomization(scope: string, operation?: string, resetOptions?: UpdateStyleCustomizationRequestResetOptions, navigationPanel?: UpdateStyleCustomizationRequestNavigationPanel, chartColorPalette?: UpdateStyleCustomizationRequestChartColorPalette, embeddedFooterText?: string, visualizationFonts?: UpdateStyleCustomizationRequestVisualizationFonts, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<void> {
         const result = this.api.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options);
         return result.toPromise();
     }

@@ -35738,18 +35738,34 @@ components:
           - RESET
           type: string
         reset_options:
-          $ref: '#/components/schemas/StyleResetOptionsInput'
+          allOf:
+          - $ref: '#/components/schemas/StyleResetOptionsInput'
+          description: |-
+            Fields to reset when operation is RESET. Specify style fields and
+            visualization areas to revert to defaults.
         navigation_panel:
-          $ref: '#/components/schemas/NavigationPanelInput'
+          allOf:
+          - $ref: '#/components/schemas/NavigationPanelInput'
+          description: |-
+            Navigation panel color. Provide theme and, when theme is CUSTOM, also
+            provide base_color.
         chart_color_palette:
-          $ref: '#/components/schemas/StyleColorPaletteInput'
+          allOf:
+          - $ref: '#/components/schemas/StyleColorPaletteInput'
+          description: |-
+            Chart color palette. When provided with operation REPLACE, exactly 8
+            color entries must be specified in colors.
         embedded_footer_text:
           description: |-
             Custom footer text for the embedded application. An empty
             string clears the footer.
           type: string
         visualization_fonts:
-          $ref: '#/components/schemas/VisualizationFontsInput'
+          allOf:
+          - $ref: '#/components/schemas/VisualizationFontsInput'
+          description: |-
+            Font assignments per visualization area. Provide only the areas to
+            update; omitted areas remain unchanged.
         default_logo:
           description: |-
             Binary image for the DEFAULT logo slot (square app icon and favicon;

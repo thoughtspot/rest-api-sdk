@@ -11551,55 +11551,16 @@ apiInstance.updateStyleCustomization(
   "ORG" , 
   // string | Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional)
   "REPLACE" , 
-  // StyleResetOptionsInput (optional)
-  {
-    style: [
-      "CHART_COLOR_PALETTE",
-    ],
-    visualization_areas: [
-      "CHART_X_AXIS_LABELS",
-    ],
-  } , 
-  // NavigationPanelInput (optional)
-  {
-    theme: "DARK",
-    base_color: "base_color_example",
-  } , 
-  // StyleColorPaletteInput (optional)
-  {
-    colors: [
-      {
-        primary: "primary_example",
-        secondary: [
-          "secondary_example",
-        ],
-      },
-    ],
-    disable_color_rotation: true,
-  } , 
+  // UpdateStyleCustomizationRequestResetOptions (optional)
+  null , 
+  // UpdateStyleCustomizationRequestNavigationPanel (optional)
+  null , 
+  // UpdateStyleCustomizationRequestChartColorPalette (optional)
+  null , 
   // string | Custom footer text for the embedded application. An empty string clears the footer. (optional)
   "embeddedFooterText_example" , 
-  // VisualizationFontsInput (optional)
-  {
-    chart_visualization_fonts: [
-      {
-        visualization_area: "CHART_X_AXIS_LABELS",
-        font_identifier: "font_identifier_example",
-      },
-    ],
-    table_visualization_fonts: [
-      {
-        visualization_area: "TABLE_VALUE_CELLS",
-        font_identifier: "font_identifier_example",
-      },
-    ],
-    advanced_chart_visualization_fonts: [
-      {
-        visualization_area: "ADVANCED_CHART_LABELS",
-        font_identifier: "font_identifier_example",
-      },
-    ],
-  } , 
+  // UpdateStyleCustomizationRequestVisualizationFonts (optional)
+  null , 
   // HttpFile | Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG. (optional)
   { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' } , 
   // HttpFile | Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG. (optional)
@@ -11618,11 +11579,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | [**string**]**Array<&#39;CLUSTER&#39; &#124; &#39;ORG&#39;>** | Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org. | defaults to 'ORG'
  **operation** | [**string**]**Array<&#39;REPLACE&#39; &#124; &#39;RESET&#39;>** | Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. | (optional) defaults to 'REPLACE'
- **resetOptions** | **StyleResetOptionsInput** |  | (optional) defaults to undefined
- **navigationPanel** | **NavigationPanelInput** |  | (optional) defaults to undefined
- **chartColorPalette** | **StyleColorPaletteInput** |  | (optional) defaults to undefined
+ **resetOptions** | **UpdateStyleCustomizationRequestResetOptions** |  | (optional) defaults to undefined
+ **navigationPanel** | **UpdateStyleCustomizationRequestNavigationPanel** |  | (optional) defaults to undefined
+ **chartColorPalette** | **UpdateStyleCustomizationRequestChartColorPalette** |  | (optional) defaults to undefined
  **embeddedFooterText** | [**string**] | Custom footer text for the embedded application. An empty string clears the footer. | (optional) defaults to undefined
- **visualizationFonts** | **VisualizationFontsInput** |  | (optional) defaults to undefined
+ **visualizationFonts** | **UpdateStyleCustomizationRequestVisualizationFonts** |  | (optional) defaults to undefined
  **defaultLogo** | [**HttpFile**] | Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG. | (optional) defaults to undefined
  **wideLogo** | [**HttpFile**] | Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG. | (optional) defaults to undefined
 

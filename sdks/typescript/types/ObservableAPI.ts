@@ -3957,7 +3957,7 @@ export class ObservableStyleCustomizationApi {
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
      */
-    public updateStyleCustomization(scope: string, operation?: string, resetOptions?: StyleResetOptionsInput, navigationPanel?: NavigationPanelInput, chartColorPalette?: StyleColorPaletteInput, embeddedFooterText?: string, visualizationFonts?: VisualizationFontsInput, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Observable<void> {
+    public updateStyleCustomization(scope: string, operation?: string, resetOptions?: UpdateStyleCustomizationRequestResetOptions, navigationPanel?: UpdateStyleCustomizationRequestNavigationPanel, chartColorPalette?: UpdateStyleCustomizationRequestChartColorPalette, embeddedFooterText?: string, visualizationFonts?: UpdateStyleCustomizationRequestVisualizationFonts, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Observable<void> {
         const requestContextPromise = this.requestFactory.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options);
 
         // build promise chain
@@ -8271,7 +8271,7 @@ export class ObservableThoughtSpotRestApi {
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
      */
-    public updateStyleCustomization(scope: string, operation?: string, resetOptions?: StyleResetOptionsInput, navigationPanel?: NavigationPanelInput, chartColorPalette?: StyleColorPaletteInput, embeddedFooterText?: string, visualizationFonts?: VisualizationFontsInput, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Observable<void> {
+    public updateStyleCustomization(scope: string, operation?: string, resetOptions?: UpdateStyleCustomizationRequestResetOptions, navigationPanel?: UpdateStyleCustomizationRequestNavigationPanel, chartColorPalette?: UpdateStyleCustomizationRequestChartColorPalette, embeddedFooterText?: string, visualizationFonts?: UpdateStyleCustomizationRequestVisualizationFonts, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Observable<void> {
         const requestContextPromise = this.requestFactory.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options);
 
         // build promise chain

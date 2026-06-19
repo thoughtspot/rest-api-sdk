@@ -115,7 +115,6 @@ import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
 import { ManageObjectPrivilegeRequest } from '../models/ManageObjectPrivilegeRequest';
 import { MetadataSearchResponse } from '../models/MetadataSearchResponse';
-import { NavigationPanelInput } from '../models/NavigationPanelInput';
 import { ObjectPrivilegesOfMetadataResponse } from '../models/ObjectPrivilegesOfMetadataResponse';
 import { OrgResponse } from '../models/OrgResponse';
 import { ParameterizeMetadataFieldsRequest } from '../models/ParameterizeMetadataFieldsRequest';
@@ -179,12 +178,10 @@ import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
 import { SingleAnswerRequest } from '../models/SingleAnswerRequest';
 import { SqlQueryResponse } from '../models/SqlQueryResponse';
-import { StyleColorPaletteInput } from '../models/StyleColorPaletteInput';
 import { StyleFontDeleteData } from '../models/StyleFontDeleteData';
 import { StyleFontRecord } from '../models/StyleFontRecord';
 import { StyleFontUploadData } from '../models/StyleFontUploadData';
 import { StylePreference } from '../models/StylePreference';
-import { StyleResetOptionsInput } from '../models/StyleResetOptionsInput';
 import { SyncMetadataRequest } from '../models/SyncMetadataRequest';
 import { SyncMetadataResponse } from '../models/SyncMetadataResponse';
 import { SystemConfig } from '../models/SystemConfig';
@@ -212,6 +209,10 @@ import { UpdateMetadataObjIdRequest } from '../models/UpdateMetadataObjIdRequest
 import { UpdateOrgRequest } from '../models/UpdateOrgRequest';
 import { UpdateRoleRequest } from '../models/UpdateRoleRequest';
 import { UpdateScheduleRequest } from '../models/UpdateScheduleRequest';
+import { UpdateStyleCustomizationRequestChartColorPalette } from '../models/UpdateStyleCustomizationRequestChartColorPalette';
+import { UpdateStyleCustomizationRequestNavigationPanel } from '../models/UpdateStyleCustomizationRequestNavigationPanel';
+import { UpdateStyleCustomizationRequestResetOptions } from '../models/UpdateStyleCustomizationRequestResetOptions';
+import { UpdateStyleCustomizationRequestVisualizationFonts } from '../models/UpdateStyleCustomizationRequestVisualizationFonts';
 import { UpdateStyleFontRequest } from '../models/UpdateStyleFontRequest';
 import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
@@ -226,7 +227,6 @@ import { ValidateCommunicationChannelRequest } from '../models/ValidateCommunica
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
 import { Variable } from '../models/Variable';
-import { VisualizationFontsInput } from '../models/VisualizationFontsInput';
 import { WebhookDeleteResponse } from '../models/WebhookDeleteResponse';
 import { WebhookResponse } from '../models/WebhookResponse';
 import { WebhookSearchResponse } from '../models/WebhookSearchResponse';
@@ -8706,7 +8706,7 @@ export class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
      */
-    public async updateStyleCustomization(scope: string, operation?: string, resetOptions?: StyleResetOptionsInput, navigationPanel?: NavigationPanelInput, chartColorPalette?: StyleColorPaletteInput, embeddedFooterText?: string, visualizationFonts?: VisualizationFontsInput, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<RequestContext> {
+    public async updateStyleCustomization(scope: string, operation?: string, resetOptions?: UpdateStyleCustomizationRequestResetOptions, navigationPanel?: UpdateStyleCustomizationRequestNavigationPanel, chartColorPalette?: UpdateStyleCustomizationRequestChartColorPalette, embeddedFooterText?: string, visualizationFonts?: UpdateStyleCustomizationRequestVisualizationFonts, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'scope' is not null or undefined
