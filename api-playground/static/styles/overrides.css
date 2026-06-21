@@ -93,3 +93,10 @@ strong {
     font-weight: normal;
     background: grey;
 }
+
+/* Hide the global "API Configurations" panel (environment / Base URL / auth).
+   Console calls stay enabled; this only hides the rarely-needed config UI.
+   Targets the stable data-testid (styled-component sc-* classes are unstable). */
+[data-testid="config-section"] {
+    display: none !important;
+}
