@@ -124,3 +124,17 @@ window.addEventListener('message', (event) => {
 window.test = (config) => {
   setPlaygroundConfig(playgroundConfig);
 };
+
+// Start the "API Configurations" panel collapsed (still user-expandable).
+// Its open/closed state is React-controlled, so CSS can't set the initial
+// state — we click the toggle once on first render. The dataset flag means we
+// never re-collapse a section the user has chosen to open.
+new MutationObserver(() => {
+  const toggle = document.querySelector(
+    '[data-testid="config-section"] [aria-label="Toggle section"][aria-expanded="true"]',
+  );
+  if (toggle && !toggle.dataset.tsCollapsed) {
+    toggle.dataset.tsCollapsed = '1';
+    toggle.click();
+  }
+}).observe(document.documentElement, { childList: true, subtree: true });
