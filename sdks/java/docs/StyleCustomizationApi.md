@@ -51,7 +51,7 @@ All URIs are relative to *CLUSTER_URL*
 
 <a id="exportStyleLogos"></a>
 # **exportStyleLogos**
-> File exportStyleLogos(exportStyleLogosRequest)
+> exportStyleLogos(exportStyleLogosRequest)
 
 
 
@@ -65,7 +65,7 @@ All URIs are relative to *CLUSTER_URL*
 
 ### Return type
 
-[**File**](File.md)
+null (empty response body)
 
 ### Authorization
 
@@ -74,7 +74,7 @@ All URIs are relative to *CLUSTER_URL*
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/octet-stream, application/json
+ - **Accept**: application/zip, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |

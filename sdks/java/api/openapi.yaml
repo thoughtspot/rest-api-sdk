@@ -10924,10 +10924,7 @@ paths:
       responses:
         "200":
           content:
-            application/octet-stream:
-              schema:
-                format: binary
-                type: string
+            application/zip: {}
           description: Logo ZIP archive retrieved successfully.
         "400":
           content:
@@ -10990,7 +10987,7 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-      - application/octet-stream
+      - application/zip
   /api/rest/2.0/customization/styles/search:
     post:
       description: |2+

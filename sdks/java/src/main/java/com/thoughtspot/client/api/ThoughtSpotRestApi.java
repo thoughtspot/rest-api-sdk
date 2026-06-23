@@ -13341,7 +13341,7 @@ public class ThoughtSpotRestApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {"application/octet-stream", "application/json"};
+        final String[] localVarAccepts = {"application/zip", "application/json"};
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
@@ -13397,7 +13397,6 @@ public class ThoughtSpotRestApi {
      * one for the WIDE slot — even if no custom logo is set at the requested scope.
      *
      * @param exportStyleLogosRequest (required)
-     * @return File
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -13411,10 +13410,9 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public File exportStyleLogos(ExportStyleLogosRequest exportStyleLogosRequest)
+    public void exportStyleLogos(ExportStyleLogosRequest exportStyleLogosRequest)
             throws ApiException {
-        ApiResponse<File> localVarResp = exportStyleLogosWithHttpInfo(exportStyleLogosRequest);
-        return localVarResp.getData();
+        exportStyleLogosWithHttpInfo(exportStyleLogosRequest);
     }
 
     /**
@@ -13431,7 +13429,7 @@ public class ThoughtSpotRestApi {
      * one for the WIDE slot — even if no custom logo is set at the requested scope.
      *
      * @param exportStyleLogosRequest (required)
-     * @return ApiResponse&lt;File&gt;
+     * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -13445,12 +13443,11 @@ public class ThoughtSpotRestApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<File> exportStyleLogosWithHttpInfo(
+    public ApiResponse<Void> exportStyleLogosWithHttpInfo(
             ExportStyleLogosRequest exportStyleLogosRequest) throws ApiException {
         okhttp3.Call localVarCall =
                 exportStyleLogosValidateBeforeCall(exportStyleLogosRequest, null);
-        Type localVarReturnType = new TypeToken<File>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.execute(localVarCall);
     }
 
     /**
@@ -13483,13 +13480,12 @@ public class ThoughtSpotRestApi {
      * </table>
      */
     public okhttp3.Call exportStyleLogosAsync(
-            ExportStyleLogosRequest exportStyleLogosRequest, final ApiCallback<File> _callback)
+            ExportStyleLogosRequest exportStyleLogosRequest, final ApiCallback<Void> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
                 exportStyleLogosValidateBeforeCall(exportStyleLogosRequest, _callback);
-        Type localVarReturnType = new TypeToken<File>() {}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**

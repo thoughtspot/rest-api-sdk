@@ -71,7 +71,7 @@ public class StyleCustomizationApiTest {
     @Test
     public void exportStyleLogosTest() throws ApiException {
         ExportStyleLogosRequest exportStyleLogosRequest = null;
-        File response = api.exportStyleLogos(exportStyleLogosRequest);
+        api.exportStyleLogos(exportStyleLogosRequest);
         // TODO: test validations
     }
 

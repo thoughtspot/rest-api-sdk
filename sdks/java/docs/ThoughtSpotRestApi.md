@@ -2471,7 +2471,7 @@ null (empty response body)
 
 <a id="exportStyleLogos"></a>
 # **exportStyleLogos**
-> File exportStyleLogos(exportStyleLogosRequest)
+> exportStyleLogos(exportStyleLogosRequest)
 
 
 
@@ -2485,7 +2485,7 @@ null (empty response body)
 
 ### Return type
 
-[**File**](File.md)
+null (empty response body)
 
 ### Authorization
 
@@ -2494,7 +2494,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/octet-stream, application/json
+ - **Accept**: application/zip, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
