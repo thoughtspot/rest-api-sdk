@@ -20119,7 +20119,8 @@
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             },
             "nullable": true
@@ -26725,8 +26726,7 @@
               "KEY_PAIR",
               "PERSONAL_ACCESS_TOKEN",
               "OAUTH_WITH_SERVICE_PRINCIPAL",
-              "OAUTH_CLIENT_CREDENTIALS",
-              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
+              "OAUTH_CLIENT_CREDENTIALS"
             ]
           },
           "configuration": {
@@ -26751,13 +26751,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           }
@@ -26826,8 +26827,7 @@
               "EXTOAUTH_WITH_PKCE",
               "OAUTH_WITH_PKCE",
               "PERSONAL_ACCESS_TOKEN",
-              "OAUTH_CLIENT_CREDENTIALS",
-              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
+              "OAUTH_CLIENT_CREDENTIALS"
             ]
           },
           "configuration": {
@@ -26851,13 +26851,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           },
