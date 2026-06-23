@@ -11590,7 +11590,8 @@
           "200": {
             "description": "Logo ZIP archive retrieved successfully.",
             "content": {
-              "application/zip": {}
+              "application/zip": {},
+              "application/octet-stream": {}
             }
           },
           "400": {
