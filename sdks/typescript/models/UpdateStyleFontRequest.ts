@@ -18,7 +18,7 @@ export class UpdateStyleFontRequest {
     */
     'scope'?: UpdateStyleFontRequestScopeEnum;
     /**
-    * New display name for the font. Must be unique within the target scope.
+    * New display name for the font.
     */
     'name'?: string;
     /**

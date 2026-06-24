@@ -248,7 +248,7 @@ public class UpdateStyleFontRequest implements Serializable {
     }
 
     /**
-     * New display name for the font. Must be unique within the target scope.
+     * New display name for the font.
      *
      * @return name
      */

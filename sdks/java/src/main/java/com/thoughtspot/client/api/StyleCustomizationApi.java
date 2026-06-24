@@ -1436,9 +1436,8 @@ public class StyleCustomizationApi {
      * Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to target the cluster-level library. Set
      * &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to target the authenticated user&#39;s org
      * library. - To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and
-     * re-upload using &#x60;uploadStyleFont&#x60;. - &#x60;name&#x60; must be unique within the
-     * target scope if provided. - &#x60;color&#x60; must be a valid 6-digit hex string (e.g.
-     * &#x60;#333333&#x60;) if provided.
+     * re-upload using &#x60;uploadStyleFont&#x60;. - &#x60;color&#x60; must be a valid 6-digit hex
+     * string (e.g. &#x60;#333333&#x60;) if provided.
      *
      * @param fontIdentifier UUID or name of the font to update. (required)
      * @param updateStyleFontRequest (required)
@@ -1470,9 +1469,8 @@ public class StyleCustomizationApi {
      * Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to target the cluster-level library. Set
      * &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to target the authenticated user&#39;s org
      * library. - To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and
-     * re-upload using &#x60;uploadStyleFont&#x60;. - &#x60;name&#x60; must be unique within the
-     * target scope if provided. - &#x60;color&#x60; must be a valid 6-digit hex string (e.g.
-     * &#x60;#333333&#x60;) if provided.
+     * re-upload using &#x60;uploadStyleFont&#x60;. - &#x60;color&#x60; must be a valid 6-digit hex
+     * string (e.g. &#x60;#333333&#x60;) if provided.
      *
      * @param fontIdentifier UUID or name of the font to update. (required)
      * @param updateStyleFontRequest (required)
@@ -1507,9 +1505,8 @@ public class StyleCustomizationApi {
      * Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to target the cluster-level library. Set
      * &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to target the authenticated user&#39;s org
      * library. - To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and
-     * re-upload using &#x60;uploadStyleFont&#x60;. - &#x60;name&#x60; must be unique within the
-     * target scope if provided. - &#x60;color&#x60; must be a valid 6-digit hex string (e.g.
-     * &#x60;#333333&#x60;) if provided.
+     * re-upload using &#x60;uploadStyleFont&#x60;. - &#x60;color&#x60; must be a valid 6-digit hex
+     * string (e.g. &#x60;#333333&#x60;) if provided.
      *
      * @param fontIdentifier UUID or name of the font to update. (required)
      * @param updateStyleFontRequest (required)
@@ -1543,9 +1540,7 @@ public class StyleCustomizationApi {
     /**
      * Build call for uploadStyleFont
      *
-     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique
-     *     within the target scope; returns an error if a font with this name already exists.
-     *     (required)
+     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). (required)
      * @param fileContent Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are
      *     accepted; TTF and OTF are rejected. The file is validated on upload. (required)
      * @param scope Scope of the font library to upload to. CLUSTER uploads to the cluster-level
@@ -1690,20 +1685,17 @@ public class StyleCustomizationApi {
      * available within that org. Requires &#x60;ADMINISTRATION&#x60; (**Can administer
      * ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. #### Usage
      * guidelines - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are
-     * rejected with an error. - The &#x60;name&#x60; field must be unique within the target scope.
-     * Uploading a font with a name that already exists returns an error. - Set &#x60;scope&#x60; to
-     * &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to
-     * &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. -
-     * &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values:
-     * &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to
-     * &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;,
-     * &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted.
-     * Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be
-     * assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.
+     * rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the
+     * cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the
+     * authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if
+     * omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. -
+     * &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values:
+     * &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to
+     * &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g.
+     * &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the
+     * &#x60;updateStyleCustomization&#x60; endpoint.
      *
-     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique
-     *     within the target scope; returns an error if a font with this name already exists.
-     *     (required)
+     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). (required)
      * @param fileContent Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are
      *     accepted; TTF and OTF are rejected. The file is validated on upload. (required)
      * @param scope Scope of the font library to upload to. CLUSTER uploads to the cluster-level
@@ -1745,20 +1737,17 @@ public class StyleCustomizationApi {
      * available within that org. Requires &#x60;ADMINISTRATION&#x60; (**Can administer
      * ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. #### Usage
      * guidelines - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are
-     * rejected with an error. - The &#x60;name&#x60; field must be unique within the target scope.
-     * Uploading a font with a name that already exists returns an error. - Set &#x60;scope&#x60; to
-     * &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to
-     * &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. -
-     * &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values:
-     * &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to
-     * &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;,
-     * &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted.
-     * Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be
-     * assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.
+     * rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the
+     * cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the
+     * authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if
+     * omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. -
+     * &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values:
+     * &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to
+     * &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g.
+     * &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the
+     * &#x60;updateStyleCustomization&#x60; endpoint.
      *
-     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique
-     *     within the target scope; returns an error if a font with this name already exists.
-     *     (required)
+     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). (required)
      * @param fileContent Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are
      *     accepted; TTF and OTF are rejected. The file is validated on upload. (required)
      * @param scope Scope of the font library to upload to. CLUSTER uploads to the cluster-level
@@ -1802,20 +1791,17 @@ public class StyleCustomizationApi {
      * fonts are only available within that org. Requires &#x60;ADMINISTRATION&#x60; (**Can
      * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
      * #### Usage guidelines - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF
-     * files are rejected with an error. - The &#x60;name&#x60; field must be unique within the
-     * target scope. Uploading a font with a name that already exists returns an error. - Set
-     * &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set
-     * &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org
-     * library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values:
-     * &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to
-     * &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;,
-     * &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted.
-     * Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be
-     * assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.
+     * files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to
+     * the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to
+     * the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60;
+     * if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. -
+     * &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values:
+     * &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to
+     * &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g.
+     * &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the
+     * &#x60;updateStyleCustomization&#x60; endpoint.
      *
-     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique
-     *     within the target scope; returns an error if a font with this name already exists.
-     *     (required)
+     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). (required)
      * @param fileContent Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are
      *     accepted; TTF and OTF are rejected. The file is validated on upload. (required)
      * @param scope Scope of the font library to upload to. CLUSTER uploads to the cluster-level
