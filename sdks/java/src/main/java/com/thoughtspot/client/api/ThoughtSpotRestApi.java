@@ -12295,7 +12295,15 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Exports an Answer in the given file format. You can download the
-     * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer.
+     * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not
+     * enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If
+     * RBAC is enabled, the required download privilege depends on the selected
+     * &#x60;file_format&#x60;: &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;PDF&#x60; require the
+     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and
+     * &#x60;PNG&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**)
+     * privilege. For an Answer, the &#x60;PDF&#x60; export is a table PDF, which is why it falls
+     * under &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; rather than &#x60;CAN_DOWNLOAD_VISUALS&#x60;.
      * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
      * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
      * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
@@ -12330,7 +12338,15 @@ public class ThoughtSpotRestApi {
 
     /**
      * Version: 9.0.0.cl or later Exports an Answer in the given file format. You can download the
-     * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer.
+     * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not
+     * enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If
+     * RBAC is enabled, the required download privilege depends on the selected
+     * &#x60;file_format&#x60;: &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;PDF&#x60; require the
+     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and
+     * &#x60;PNG&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**)
+     * privilege. For an Answer, the &#x60;PDF&#x60; export is a table PDF, which is why it falls
+     * under &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; rather than &#x60;CAN_DOWNLOAD_VISUALS&#x60;.
      * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
      * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
      * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
@@ -12368,15 +12384,23 @@ public class ThoughtSpotRestApi {
     /**
      * (asynchronously) Version: 9.0.0.cl or later Exports an Answer in the given file format. You
      * can download the Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access
-     * to the Answer. #### Usage guidelines In the request body, specify the GUID or name of the
-     * Answer and set &#x60;file_format&#x60;. The default file format is CSV. Use the
-     * &#x60;type&#x60; parameter to specify whether the Answer being exported is a saved Answer
-     * (&#x60;SAVED&#x60;) or a pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to
-     * &#x60;SAVED&#x60;. When using &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be
-     * the container id. **NOTE**: * The downloadable file returned in API response file is
-     * extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML
-     * rendering is not supported for PDF exports of Answers with tables. Optionally, you can define
-     * [runtime
+     * to the Answer. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the
+     * &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is
+     * enabled, the required download privilege depends on the selected &#x60;file_format&#x60;:
+     * &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;PDF&#x60; require the
+     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and
+     * &#x60;PNG&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**)
+     * privilege. For an Answer, the &#x60;PDF&#x60; export is a table PDF, which is why it falls
+     * under &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; rather than &#x60;CAN_DOWNLOAD_VISUALS&#x60;.
+     * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
+     * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
+     * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
+     * pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using
+     * &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id. **NOTE**: *
+     * The downloadable file returned in API response file is extensionless. Please rename the
+     * downloaded file by typing in the relevant extension. * HTML rendering is not supported for
+     * PDF exports of Answers with tables. Optionally, you can define [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data.
      *
@@ -12496,11 +12520,18 @@ public class ThoughtSpotRestApi {
     /**
      * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
      * XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at least view access
-     * to the Liveboard. #### Usage guidelines In the request body, specify the GUID or name of the
-     * Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of
-     * the visualizations. **NOTE**: * The downloadable file returned in API response file is
-     * extensionless. Please rename the downloaded file by typing in the relevant extension. *
-     * Optionally, you can define [runtime
+     * to the Liveboard. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the
+     * &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is
+     * enabled, the required download privilege depends on the selected &#x60;file_format&#x60;:
+     * &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60;
+     * (**Can download detailed data**) privilege, and &#x60;PNG&#x60; and &#x60;PDF&#x60; require
+     * the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege. #### Usage
+     * guidelines In the request body, specify the GUID or name of the Liveboard. To generate a
+     * Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
+     * **NOTE**: * The downloadable file returned in API response file is extensionless. Please
+     * rename the downloaded file by typing in the relevant extension. * Optionally, you can define
+     * [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data. * To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
@@ -12546,11 +12577,18 @@ public class ThoughtSpotRestApi {
     /**
      * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
      * XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at least view access
-     * to the Liveboard. #### Usage guidelines In the request body, specify the GUID or name of the
-     * Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of
-     * the visualizations. **NOTE**: * The downloadable file returned in API response file is
-     * extensionless. Please rename the downloaded file by typing in the relevant extension. *
-     * Optionally, you can define [runtime
+     * to the Liveboard. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the
+     * &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is
+     * enabled, the required download privilege depends on the selected &#x60;file_format&#x60;:
+     * &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60;
+     * (**Can download detailed data**) privilege, and &#x60;PNG&#x60; and &#x60;PDF&#x60; require
+     * the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege. #### Usage
+     * guidelines In the request body, specify the GUID or name of the Liveboard. To generate a
+     * Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
+     * **NOTE**: * The downloadable file returned in API response file is extensionless. Please
+     * rename the downloaded file by typing in the relevant extension. * Optionally, you can define
+     * [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data. * To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
@@ -12597,11 +12635,18 @@ public class ThoughtSpotRestApi {
     /**
      * (asynchronously) Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in
      * PDF, PNG, CSV, or XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at
-     * least view access to the Liveboard. #### Usage guidelines In the request body, specify the
-     * GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations,
-     * add GUIDs or names of the visualizations. **NOTE**: * The downloadable file returned in API
-     * response file is extensionless. Please rename the downloaded file by typing in the relevant
-     * extension. * Optionally, you can define [runtime
+     * least view access to the Liveboard. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the
+     * &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is
+     * enabled, the required download privilege depends on the selected &#x60;file_format&#x60;:
+     * &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60;
+     * (**Can download detailed data**) privilege, and &#x60;PNG&#x60; and &#x60;PDF&#x60; require
+     * the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege. #### Usage
+     * guidelines In the request body, specify the GUID or name of the Liveboard. To generate a
+     * Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
+     * **NOTE**: * The downloadable file returned in API response file is extensionless. Please
+     * rename the downloaded file by typing in the relevant extension. * Optionally, you can define
+     * [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data. * To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
