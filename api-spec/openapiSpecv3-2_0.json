@@ -29668,7 +29668,8 @@
               "KEY_PAIR",
               "PERSONAL_ACCESS_TOKEN",
               "OAUTH_WITH_SERVICE_PRINCIPAL",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "configuration": {
@@ -29768,7 +29769,8 @@
               "EXTOAUTH_WITH_PKCE",
               "OAUTH_WITH_PKCE",
               "PERSONAL_ACCESS_TOKEN",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "configuration": {
@@ -30033,7 +30035,8 @@
               "OAUTH_WITH_PKCE",
               "EXTOAUTH_WITH_PKCE",
               "OAUTH_WITH_PEZ",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "show_resolved_parameters": {
