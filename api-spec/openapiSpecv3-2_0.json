@@ -11585,21 +11585,16 @@
           },
           "required": true
         },
-        "parameters": [{
-          "name": "Accept",
-          "in": "header",
-          "schema": {
-            "type": "string",
-            "enum": [
-              "application/zip"
-            ],
-            "default": "application/zip"
-          }
-        }],
         "responses": {
           "200": {
             "description": "Logo ZIP archive retrieved successfully.",
             "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
               "application/zip": {
                 "schema": {
                   "type": "string",
