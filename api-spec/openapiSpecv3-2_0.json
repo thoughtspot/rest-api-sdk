@@ -12649,7 +12649,7 @@
     "/api/rest/2.0/customization/styles/fonts/{font_identifier}/update": {
       "post": {
         "operationId": "updateStyleFont",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Identify the font using `font_identifier` (UUID or name).\n- Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user's org library.\n- To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`.\n- `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Identify the font using `font_identifier` (UUID or name).\n- Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user's org library.\n- To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`.\n- `name` must be unique within the target scope if provided.\n- `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -12785,7 +12785,7 @@
     "/api/rest/2.0/customization/styles/fonts/upload": {
       "post": {
         "operationId": "uploadStyleFont",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error.\n- Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library.\n- `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`.\n- `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`.\n- `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`).\n- The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error.\n- The `name` field must be unique within the target scope. Uploading a font with a name that already exists returns an error.\n- Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library.\n- `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`.\n- `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`.\n- `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`).\n- The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -12806,7 +12806,7 @@
                     ]
                   },
                   "name": {
-                    "description": "Display name for the font (e.g. \"Acme Sans\").",
+                    "description": "Display name for the font (e.g. \"Acme Sans\"). Must be unique within the\ntarget scope; returns an error if a font with this name already exists.",
                     "type": "string"
                   },
                   "weight": {
@@ -22715,7 +22715,8 @@
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             },
             "nullable": true
@@ -29693,13 +29694,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           }
@@ -29792,13 +29794,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           },
@@ -34535,7 +34538,7 @@
             ]
           },
           "name": {
-            "description": "New display name for the font.",
+            "description": "New display name for the font. Must be unique within the target scope.",
             "type": "string"
           },
           "weight": {
