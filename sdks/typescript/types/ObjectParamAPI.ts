@@ -3184,6 +3184,12 @@ export interface StyleCustomizationApiExportStyleLogosRequest {
      * @memberof StyleCustomizationApiexportStyleLogos
      */
     exportStyleLogosRequest: ExportStyleLogosRequest
+    /**
+     * 
+     * @type &#39;application/zip&#39;
+     * @memberof StyleCustomizationApiexportStyleLogos
+     */
+    accept?: 'application/zip'
 }
 
 export interface StyleCustomizationApiSearchStyleCustomizationsRequest {
@@ -3334,8 +3340,8 @@ export class ObjectStyleCustomizationApi {
      *   Version: 26.7.0.cl or later   Downloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to download cluster-level logos. - Set `scope` to `ORG` (default) to download logos for the authenticated user\'s org. - The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file. - The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.      
      * @param param the request object
      */
-    public exportStyleLogos(param: StyleCustomizationApiExportStyleLogosRequest, options?: Configuration): Promise<void> {
-        return this.api.exportStyleLogos(param.exportStyleLogosRequest,  options).toPromise();
+    public exportStyleLogos(param: StyleCustomizationApiExportStyleLogosRequest, options?: Configuration): Promise<HttpFile> {
+        return this.api.exportStyleLogos(param.exportStyleLogosRequest, param.accept,  options).toPromise();
     }
 
     /**
@@ -4314,6 +4320,12 @@ export interface ThoughtSpotRestApiExportStyleLogosRequest {
      * @memberof ThoughtSpotRestApiexportStyleLogos
      */
     exportStyleLogosRequest: ExportStyleLogosRequest
+    /**
+     * 
+     * @type &#39;application/zip&#39;
+     * @memberof ThoughtSpotRestApiexportStyleLogos
+     */
+    accept?: 'application/zip'
 }
 
 export interface ThoughtSpotRestApiFetchAnswerDataRequest {
@@ -6118,8 +6130,8 @@ export class ObjectThoughtSpotRestApi {
      *   Version: 26.7.0.cl or later   Downloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to download cluster-level logos. - Set `scope` to `ORG` (default) to download logos for the authenticated user\'s org. - The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file. - The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.      
      * @param param the request object
      */
-    public exportStyleLogos(param: ThoughtSpotRestApiExportStyleLogosRequest, options?: Configuration): Promise<void> {
-        return this.api.exportStyleLogos(param.exportStyleLogosRequest,  options).toPromise();
+    public exportStyleLogos(param: ThoughtSpotRestApiExportStyleLogosRequest, options?: Configuration): Promise<HttpFile> {
+        return this.api.exportStyleLogos(param.exportStyleLogosRequest, param.accept,  options).toPromise();
     }
 
     /**

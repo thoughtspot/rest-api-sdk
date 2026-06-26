@@ -33840,8 +33840,9 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
    *   Version: 26.7.0.cl or later   Downloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to download cluster-level logos. - Set `scope` to `ORG` (default) to download logos for the authenticated user\'s org. - The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file. - The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.      
    * @param exportStyleLogosRequest 
+   * @param accept 
    */
-  exportStyleLogos(exportStyleLogosRequest, _options) {
+  exportStyleLogos(exportStyleLogosRequest, accept, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
@@ -33853,6 +33854,7 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0");
       requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0");
+      requestContext.setHeaderParam("Accept", ObjectSerializer.serialize(accept, "'application/zip'", ""));
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -34218,13 +34220,14 @@ var StyleCustomizationApiResponseProcessor = class {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("200", response.httpStatusCode)) {
-        return;
+        const body = yield response.getBodyAsFile();
+        return body;
       }
       if (isCodeInRange("400", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
       }
@@ -34232,7 +34235,7 @@ var StyleCustomizationApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
       }
@@ -34240,7 +34243,7 @@ var StyleCustomizationApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
       }
@@ -34248,15 +34251,15 @@ var StyleCustomizationApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
       }
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
+          "HttpFile",
+          "binary"
         );
         return body;
       }
@@ -38269,8 +38272,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
    *   Version: 26.7.0.cl or later   Downloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to download cluster-level logos. - Set `scope` to `ORG` (default) to download logos for the authenticated user\'s org. - The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file. - The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.      
    * @param exportStyleLogosRequest 
+   * @param accept 
    */
-  exportStyleLogos(exportStyleLogosRequest, _options) {
+  exportStyleLogos(exportStyleLogosRequest, accept, _options) {
     return __async(this, null, function* () {
       var _a, _b, _c;
       let _config = _options || this.configuration;
@@ -38282,6 +38286,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
       requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0");
       requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0");
+      requestContext.setHeaderParam("Accept", ObjectSerializer.serialize(accept, "'application/zip'", ""));
       const contentType = ObjectSerializer.getPreferredMediaType([
         "application/json"
       ]);
@@ -46363,13 +46368,14 @@ var ThoughtSpotRestApiResponseProcessor = class {
     return __async(this, null, function* () {
       const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
       if (isCodeInRange("200", response.httpStatusCode)) {
-        return;
+        const body = yield response.getBodyAsFile();
+        return body;
       }
       if (isCodeInRange("400", response.httpStatusCode)) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
       }
@@ -46377,7 +46383,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
       }
@@ -46385,7 +46391,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
       }
@@ -46393,15 +46399,15 @@ var ThoughtSpotRestApiResponseProcessor = class {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
           "ErrorResponse",
-          ""
+          "binary"
         );
         throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
       }
       if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
         const body = ObjectSerializer.deserialize(
           ObjectSerializer.parse(yield response.body.text(), contentType),
-          "void",
-          ""
+          "HttpFile",
+          "binary"
         );
         return body;
       }
@@ -58853,9 +58859,10 @@ var ObservableStyleCustomizationApi = class {
   /**
    *   Version: 26.7.0.cl or later   Downloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to download cluster-level logos. - Set `scope` to `ORG` (default) to download logos for the authenticated user\'s org. - The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file. - The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.      
    * @param exportStyleLogosRequest 
+   * @param accept 
    */
-  exportStyleLogos(exportStyleLogosRequest, _options) {
-    const requestContextPromise = this.requestFactory.exportStyleLogos(exportStyleLogosRequest, _options);
+  exportStyleLogos(exportStyleLogosRequest, accept, _options) {
+    const requestContextPromise = this.requestFactory.exportStyleLogos(exportStyleLogosRequest, accept, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -60413,9 +60420,10 @@ var ObservableThoughtSpotRestApi = class {
   /**
    *   Version: 26.7.0.cl or later   Downloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to download cluster-level logos. - Set `scope` to `ORG` (default) to download logos for the authenticated user\'s org. - The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file. - The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.      
    * @param exportStyleLogosRequest 
+   * @param accept 
    */
-  exportStyleLogos(exportStyleLogosRequest, _options) {
-    const requestContextPromise = this.requestFactory.exportStyleLogos(exportStyleLogosRequest, _options);
+  exportStyleLogos(exportStyleLogosRequest, accept, _options) {
+    const requestContextPromise = this.requestFactory.exportStyleLogos(exportStyleLogosRequest, accept, _options);
     let middlewarePreObservable = from(requestContextPromise);
     for (let middleware of this.configuration.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -64297,9 +64305,10 @@ var PromiseStyleCustomizationApi = class {
   /**
    *   Version: 26.7.0.cl or later   Downloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to download cluster-level logos. - Set `scope` to `ORG` (default) to download logos for the authenticated user\'s org. - The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file. - The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.      
    * @param exportStyleLogosRequest 
+   * @param accept 
    */
-  exportStyleLogos(exportStyleLogosRequest, _options) {
-    const result = this.api.exportStyleLogos(exportStyleLogosRequest, _options);
+  exportStyleLogos(exportStyleLogosRequest, accept, _options) {
+    const result = this.api.exportStyleLogos(exportStyleLogosRequest, accept, _options);
     return result.toPromise();
   }
   /**
@@ -65011,9 +65020,10 @@ var PromiseThoughtSpotRestApi = class {
   /**
    *   Version: 26.7.0.cl or later   Downloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to download cluster-level logos. - Set `scope` to `ORG` (default) to download logos for the authenticated user\'s org. - The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file. - The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.      
    * @param exportStyleLogosRequest 
+   * @param accept 
    */
-  exportStyleLogos(exportStyleLogosRequest, _options) {
-    const result = this.api.exportStyleLogos(exportStyleLogosRequest, _options);
+  exportStyleLogos(exportStyleLogosRequest, accept, _options) {
+    const result = this.api.exportStyleLogos(exportStyleLogosRequest, accept, _options);
     return result.toPromise();
   }
   /**

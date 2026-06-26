@@ -51,7 +51,7 @@ All URIs are relative to *CLUSTER_URL*
 
 <a id="exportStyleLogos"></a>
 # **exportStyleLogos**
-> exportStyleLogos(exportStyleLogosRequest)
+> File exportStyleLogos(exportStyleLogosRequest, accept)
 
 
 
@@ -62,10 +62,11 @@ All URIs are relative to *CLUSTER_URL*
 | Name | Type |
 |------------- | ------------- |
 | **exportStyleLogosRequest** | [**ExportStyleLogosRequest**](ExportStyleLogosRequest.md)
+| **accept** | **String**
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 

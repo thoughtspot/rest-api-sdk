@@ -1785,7 +1785,8 @@ public class ThoughtSpotRestApiTest {
     @Test
     public void exportStyleLogosTest() throws ApiException {
         ExportStyleLogosRequest exportStyleLogosRequest = null;
-        api.exportStyleLogos(exportStyleLogosRequest);
+        String accept = null;
+        File response = api.exportStyleLogos(exportStyleLogosRequest, accept);
         // TODO: test validations
     }
 

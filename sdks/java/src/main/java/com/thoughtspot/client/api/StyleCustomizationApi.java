@@ -299,6 +299,7 @@ public class StyleCustomizationApi {
      * Build call for exportStyleLogos
      *
      * @param exportStyleLogosRequest (required)
+     * @param accept (optional, default to application/zip)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -314,7 +315,9 @@ public class StyleCustomizationApi {
      * </table>
      */
     public okhttp3.Call exportStyleLogosCall(
-            ExportStyleLogosRequest exportStyleLogosRequest, final ApiCallback _callback)
+            ExportStyleLogosRequest exportStyleLogosRequest,
+            String accept,
+            final ApiCallback _callback)
             throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -353,6 +356,10 @@ public class StyleCustomizationApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
+        if (accept != null) {
+            localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
+        }
+
         String[] localVarAuthNames = new String[] {"bearerAuth"};
         return localVarApiClient.buildCall(
                 basePath,
@@ -370,7 +377,9 @@ public class StyleCustomizationApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call exportStyleLogosValidateBeforeCall(
-            ExportStyleLogosRequest exportStyleLogosRequest, final ApiCallback _callback)
+            ExportStyleLogosRequest exportStyleLogosRequest,
+            String accept,
+            final ApiCallback _callback)
             throws ApiException {
         // verify the required parameter 'exportStyleLogosRequest' is set
         if (exportStyleLogosRequest == null) {
@@ -379,7 +388,7 @@ public class StyleCustomizationApi {
                             + " exportStyleLogos(Async)");
         }
 
-        return exportStyleLogosCall(exportStyleLogosRequest, _callback);
+        return exportStyleLogosCall(exportStyleLogosRequest, accept, _callback);
     }
 
     /**
@@ -396,6 +405,8 @@ public class StyleCustomizationApi {
      * one for the WIDE slot — even if no custom logo is set at the requested scope.
      *
      * @param exportStyleLogosRequest (required)
+     * @param accept (optional, default to application/zip)
+     * @return File
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -409,9 +420,11 @@ public class StyleCustomizationApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public void exportStyleLogos(ExportStyleLogosRequest exportStyleLogosRequest)
+    public File exportStyleLogos(ExportStyleLogosRequest exportStyleLogosRequest, String accept)
             throws ApiException {
-        exportStyleLogosWithHttpInfo(exportStyleLogosRequest);
+        ApiResponse<File> localVarResp =
+                exportStyleLogosWithHttpInfo(exportStyleLogosRequest, accept);
+        return localVarResp.getData();
     }
 
     /**
@@ -428,7 +441,8 @@ public class StyleCustomizationApi {
      * one for the WIDE slot — even if no custom logo is set at the requested scope.
      *
      * @param exportStyleLogosRequest (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @param accept (optional, default to application/zip)
+     * @return ApiResponse&lt;File&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -442,11 +456,12 @@ public class StyleCustomizationApi {
      * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<Void> exportStyleLogosWithHttpInfo(
-            ExportStyleLogosRequest exportStyleLogosRequest) throws ApiException {
+    public ApiResponse<File> exportStyleLogosWithHttpInfo(
+            ExportStyleLogosRequest exportStyleLogosRequest, String accept) throws ApiException {
         okhttp3.Call localVarCall =
-                exportStyleLogosValidateBeforeCall(exportStyleLogosRequest, null);
-        return localVarApiClient.execute(localVarCall);
+                exportStyleLogosValidateBeforeCall(exportStyleLogosRequest, accept, null);
+        Type localVarReturnType = new TypeToken<File>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -463,6 +478,7 @@ public class StyleCustomizationApi {
      * one for the WIDE slot — even if no custom logo is set at the requested scope.
      *
      * @param exportStyleLogosRequest (required)
+     * @param accept (optional, default to application/zip)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -479,12 +495,15 @@ public class StyleCustomizationApi {
      * </table>
      */
     public okhttp3.Call exportStyleLogosAsync(
-            ExportStyleLogosRequest exportStyleLogosRequest, final ApiCallback<Void> _callback)
+            ExportStyleLogosRequest exportStyleLogosRequest,
+            String accept,
+            final ApiCallback<File> _callback)
             throws ApiException {
 
         okhttp3.Call localVarCall =
-                exportStyleLogosValidateBeforeCall(exportStyleLogosRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+                exportStyleLogosValidateBeforeCall(exportStyleLogosRequest, accept, _callback);
+        Type localVarReturnType = new TypeToken<File>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**

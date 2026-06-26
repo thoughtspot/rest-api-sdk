@@ -10928,7 +10928,17 @@ paths:
 
 
       operationId: exportStyleLogos
-      parameters: []
+      parameters:
+      - explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          default: application/zip
+          enum:
+          - application/zip
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -10938,7 +10948,10 @@ paths:
       responses:
         "200":
           content:
-            application/zip: {}
+            application/zip:
+              schema:
+                format: binary
+                type: string
           description: Logo ZIP archive retrieved successfully.
         "400":
           content:

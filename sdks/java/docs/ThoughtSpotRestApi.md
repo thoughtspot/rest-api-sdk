@@ -2471,7 +2471,7 @@ null (empty response body)
 
 <a id="exportStyleLogos"></a>
 # **exportStyleLogos**
-> exportStyleLogos(exportStyleLogosRequest)
+> File exportStyleLogos(exportStyleLogosRequest, accept)
 
 
 
@@ -2482,10 +2482,11 @@ null (empty response body)
 | Name | Type |
 |------------- | ------------- |
 | **exportStyleLogosRequest** | [**ExportStyleLogosRequest**](ExportStyleLogosRequest.md)
+| **accept** | **String**
 
 ### Return type
 
-null (empty response body)
+[**File**](File.md)
 
 ### Authorization
 

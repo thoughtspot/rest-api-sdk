@@ -82,14 +82,16 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
     /**
      *   Version: 26.7.0.cl or later   Downloads the active logos (default and wide slots) at the requested scope as a single ZIP archive containing both logo image files. If no custom logo has been uploaded at the ORG scope, the archive contains the resolved logo falling through from the cluster. If no cluster logo has been uploaded, no file is returned.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to download cluster-level logos. - Set `scope` to `ORG` (default) to download logos for the authenticated user\'s org. - The response is a ZIP archive (`application/zip`). Save the response body directly to a `.zip` file. - The archive always contains two files — one for the DEFAULT slot and one for the WIDE slot — even if no custom logo is set at the requested scope.      
      * @param exportStyleLogosRequest 
+     * @param accept 
      */
-    public async exportStyleLogos(exportStyleLogosRequest: ExportStyleLogosRequest, _options?: Configuration): Promise<RequestContext> {
+    public async exportStyleLogos(exportStyleLogosRequest: ExportStyleLogosRequest, accept?: 'application/zip', _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'exportStyleLogosRequest' is not null or undefined
         if (exportStyleLogosRequest === null || exportStyleLogosRequest === undefined) {
             throw new RequiredError("StyleCustomizationApi", "exportStyleLogos", "exportStyleLogosRequest");
         }
+
 
 
         // Path Params
@@ -102,6 +104,9 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
       
 
+
+        // Header Params
+        requestContext.setHeaderParam("Accept", ObjectSerializer.serialize(accept, "'application/zip'", ""));
 
 
         // Body Params
@@ -578,46 +583,47 @@ export class StyleCustomizationApiResponseProcessor {
      * @params response Response returned by the server for a request to exportStyleLogos
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async exportStyleLogos(response: ResponseContext): Promise<void > {
+     public async exportStyleLogos(response: ResponseContext): Promise<HttpFile > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            const body: HttpFile = await response.getBodyAsFile() as any as HttpFile;
+            return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
         }
         if (isCodeInRange("500", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ErrorResponse", ""
+                "ErrorResponse", "binary"
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
+            const body: HttpFile = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
+                "HttpFile", "binary"
+            ) as HttpFile;
             return body;
         }
 
