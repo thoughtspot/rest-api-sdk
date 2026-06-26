@@ -11783,7 +11783,19 @@
           },
           "required": true
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/zip"
+              ],
+              "default": "application/zip"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Logo ZIP archive retrieved successfully.",
