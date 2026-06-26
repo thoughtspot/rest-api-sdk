@@ -125,7 +125,7 @@ export class CreateConnectionConfigurationRequest {
 }
 
 
-export type CreateConnectionConfigurationRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "KEY_PAIR" | "PERSONAL_ACCESS_TOKEN" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "OAUTH_CLIENT_CREDENTIALS" ;
+export type CreateConnectionConfigurationRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "KEY_PAIR" | "PERSONAL_ACCESS_TOKEN" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "OAUTH_CLIENT_CREDENTIALS" | "OAUTH_CLIENT_CREDENTIALS_WITH_X509" ;
 export type CreateConnectionConfigurationRequestPolicyTypeEnum = "NO_POLICY" | "PRINCIPALS" | "PROCESSES" ;
 export type CreateConnectionConfigurationRequestPolicyProcessesEnum = "SAGE_INDEXING" | "ROW_COUNT_STATS" ;
 

@@ -82,7 +82,9 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
 
         PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN"),
 
-        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS");
+        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS"),
+
+        OAUTH_CLIENT_CREDENTIALS_WITH_X509("OAUTH_CLIENT_CREDENTIALS_WITH_X509");
 
         private String value;
 

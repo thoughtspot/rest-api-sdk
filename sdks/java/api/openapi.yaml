@@ -28691,6 +28691,7 @@ components:
           - PERSONAL_ACCESS_TOKEN
           - OAUTH_WITH_SERVICE_PRINCIPAL
           - OAUTH_CLIENT_CREDENTIALS
+          - OAUTH_CLIENT_CREDENTIALS_WITH_X509
           type: string
         configuration:
           description: Configuration properties in JSON.
@@ -28793,6 +28794,7 @@ components:
           - OAUTH_WITH_PKCE
           - PERSONAL_ACCESS_TOKEN
           - OAUTH_CLIENT_CREDENTIALS
+          - OAUTH_CLIENT_CREDENTIALS_WITH_X509
           type: string
         configuration:
           description: Configuration properties in JSON.
@@ -29082,6 +29084,7 @@ components:
           - EXTOAUTH_WITH_PKCE
           - OAUTH_WITH_PEZ
           - OAUTH_CLIENT_CREDENTIALS
+          - OAUTH_CLIENT_CREDENTIALS_WITH_X509
           type: string
         show_resolved_parameters:
           default: false
