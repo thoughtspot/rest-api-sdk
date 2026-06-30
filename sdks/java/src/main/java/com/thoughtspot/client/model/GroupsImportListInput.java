@@ -129,7 +129,9 @@ public class GroupsImportListInput implements Serializable {
 
         CAN_DOWNLOAD_DETAILED_DATA("CAN_DOWNLOAD_DETAILED_DATA"),
 
-        CAN_USE_SPOTTER("CAN_USE_SPOTTER");
+        CAN_USE_SPOTTER("CAN_USE_SPOTTER"),
+
+        CAN_MANAGE_SPOTTER("CAN_MANAGE_SPOTTER");
 
         private String value;
 
@@ -419,7 +421,8 @@ public class GroupsImportListInput implements Serializable {
     }
 
     /**
-     * Privileges that will be assigned to the group.
+     * Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited
+     * via ALL_GROUP, assigning it has no effect.
      *
      * @return privileges
      */

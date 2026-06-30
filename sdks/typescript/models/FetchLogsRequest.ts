@@ -32,6 +32,8 @@ export class FetchLogsRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "log_type",
@@ -66,6 +68,5 @@ export class FetchLogsRequest {
     }
 }
 
-
-export type FetchLogsRequestLogTypeEnum = "SECURITY_AUDIT" ;
+    export type FetchLogsRequestLogTypeEnum = "SECURITY_AUDIT" ;
 

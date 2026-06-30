@@ -55,7 +55,9 @@ public class UpdateObjIdInput implements Serializable {
 
         USER("USER"),
 
-        USER_GROUP("USER_GROUP");
+        USER_GROUP("USER_GROUP"),
+
+        COLLECTION("COLLECTION");
 
         private String value;
 

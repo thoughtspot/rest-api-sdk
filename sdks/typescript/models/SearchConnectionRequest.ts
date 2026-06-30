@@ -11,7 +11,7 @@
  */
 
 import { ConnectionInput } from '../models/ConnectionInput';
-import { SearchConnectionRequestSortOptions } from '../models/SearchConnectionRequestSortOptions';
+import { SortOptionInput } from '../models/SortOptionInput';
 import { HttpFile } from '../http/http';
 
 export class SearchConnectionRequest {
@@ -39,7 +39,10 @@ export class SearchConnectionRequest {
     * Data warehouse object type.
     */
     'data_warehouse_object_type'?: SearchConnectionRequestDataWarehouseObjectTypeEnum;
-    'sort_options'?: SearchConnectionRequestSortOptions;
+    /**
+    * Sort options.
+    */
+    'sort_options'?: SortOptionInput;
     /**
     * Indicates whether to include complete details of the connection objects.
     */
@@ -58,6 +61,8 @@ export class SearchConnectionRequest {
     'show_resolved_parameters'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -99,7 +104,7 @@ export class SearchConnectionRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "SearchConnectionRequestSortOptions",
+            "type": "SortOptionInput",
             "format": ""
         },
         {
@@ -135,8 +140,7 @@ export class SearchConnectionRequest {
     }
 }
 
-
-export type SearchConnectionRequestDataWarehouseTypesEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS" | "FALCON" | "FALCON_ONPREM" | "CLICKHOUSE" | "IOMETE" ;
-export type SearchConnectionRequestDataWarehouseObjectTypeEnum = "DATABASE" | "SCHEMA" | "TABLE" | "COLUMN" ;
-export type SearchConnectionRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "IAM" | "EXTOAUTH" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "PERSONAL_ACCESS_TOKEN" | "KEY_PAIR" | "OAUTH_WITH_PKCE" | "EXTOAUTH_WITH_PKCE" | "OAUTH_WITH_PEZ" | "OAUTH_CLIENT_CREDENTIALS" ;
+    export type SearchConnectionRequestDataWarehouseTypesEnum = "SNOWFLAKE" | "AMAZON_REDSHIFT" | "GOOGLE_BIGQUERY" | "AZURE_SYNAPSE" | "TERADATA" | "SAP_HANA" | "STARBURST" | "ORACLE_ADW" | "DATABRICKS" | "DENODO" | "DREMIO" | "TRINO" | "PRESTO" | "POSTGRES" | "SQLSERVER" | "MYSQL" | "GENERIC_JDBC" | "AMAZON_RDS_POSTGRESQL" | "AMAZON_AURORA_POSTGRESQL" | "AMAZON_RDS_MYSQL" | "AMAZON_AURORA_MYSQL" | "LOOKER" | "AMAZON_ATHENA" | "SINGLESTORE" | "GCP_SQLSERVER" | "GCP_ALLOYDB_POSTGRESQL" | "GCP_POSTGRESQL" | "GCP_MYSQL" | "MODE" | "GOOGLE_SHEETS" | "FALCON" | "FALCON_ONPREM" | "CLICKHOUSE" | "IOMETE" ;
+    export type SearchConnectionRequestDataWarehouseObjectTypeEnum = "DATABASE" | "SCHEMA" | "TABLE" | "COLUMN" ;
+    export type SearchConnectionRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "IAM" | "EXTOAUTH" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "PERSONAL_ACCESS_TOKEN" | "KEY_PAIR" | "OAUTH_WITH_PKCE" | "EXTOAUTH_WITH_PKCE" | "OAUTH_WITH_PEZ" | "OAUTH_CLIENT_CREDENTIALS" ;
 

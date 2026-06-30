@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SearchCollectionsRequestSortOptions } from '../models/SearchCollectionsRequestSortOptions';
+import { SortOptions } from '../models/SortOptions';
 import { HttpFile } from '../http/http';
 
 export class SearchCollectionsRequest {
@@ -38,9 +38,14 @@ export class SearchCollectionsRequest {
     * Include collection metadata items in the response.
     */
     'include_metadata'?: boolean | null;
-    'sort_options'?: SearchCollectionsRequestSortOptions;
+    /**
+    * Sort options.
+    */
+    'sort_options'?: SortOptions;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -82,7 +87,7 @@ export class SearchCollectionsRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "SearchCollectionsRequestSortOptions",
+            "type": "SortOptions",
             "format": ""
         }    ];
 
@@ -93,4 +98,3 @@ export class SearchCollectionsRequest {
     public constructor() {
     }
 }
-

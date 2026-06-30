@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
+import { ActionDetailsInputCreate } from '../models/ActionDetailsInputCreate';
 import { AssociateMetadataInputCreate } from '../models/AssociateMetadataInputCreate';
-import { CreateCustomActionRequestActionDetails } from '../models/CreateCustomActionRequestActionDetails';
-import { CreateCustomActionRequestDefaultActionConfig } from '../models/CreateCustomActionRequestDefaultActionConfig';
+import { DefaultActionConfigInputCreate } from '../models/DefaultActionConfigInputCreate';
 import { HttpFile } from '../http/http';
 
 export class CreateCustomActionRequest {
@@ -20,18 +20,26 @@ export class CreateCustomActionRequest {
     * Name of the custom action. The custom action name must be unique.
     */
     'name': string;
-    'action_details': CreateCustomActionRequestActionDetails;
+    /**
+    * Action details includes `Type` and Configuration data for Custom Actions, either Callback or URL is required.
+    */
+    'action_details': ActionDetailsInputCreate;
     /**
     * Metadata objects to which the custom action needs to be associated.
     */
     'associate_metadata'?: Array<AssociateMetadataInputCreate>;
-    'default_action_config'?: CreateCustomActionRequestDefaultActionConfig;
+    /**
+    * Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.
+    */
+    'default_action_config'?: DefaultActionConfigInputCreate;
     /**
     * Unique ID or name of the groups that can view and access the custom action.
     */
     'group_identifiers'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -43,7 +51,7 @@ export class CreateCustomActionRequest {
         {
             "name": "action_details",
             "baseName": "action_details",
-            "type": "CreateCustomActionRequestActionDetails",
+            "type": "ActionDetailsInputCreate",
             "format": ""
         },
         {
@@ -55,7 +63,7 @@ export class CreateCustomActionRequest {
         {
             "name": "default_action_config",
             "baseName": "default_action_config",
-            "type": "CreateCustomActionRequestDefaultActionConfig",
+            "type": "DefaultActionConfigInputCreate",
             "format": ""
         },
         {
@@ -72,4 +80,3 @@ export class CreateCustomActionRequest {
     public constructor() {
     }
 }
-

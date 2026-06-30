@@ -32,6 +32,8 @@ export class ConversationSettingsInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "enable_contextual_change_analysis",
@@ -65,4 +67,3 @@ export class ConversationSettingsInput {
     public constructor() {
     }
 }
-

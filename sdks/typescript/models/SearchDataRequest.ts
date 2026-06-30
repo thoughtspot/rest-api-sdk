@@ -48,6 +48,8 @@ export class SearchDataRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "query_string",
@@ -106,6 +108,5 @@ export class SearchDataRequest {
     }
 }
 
-
-export type SearchDataRequestDataFormatEnum = "FULL" | "COMPACT" ;
+    export type SearchDataRequestDataFormatEnum = "FULL" | "COMPACT" ;
 

@@ -55,6 +55,8 @@ export class PdfOptions {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "complete_liveboard",
@@ -119,6 +121,5 @@ export class PdfOptions {
     }
 }
 
-
-export type PdfOptionsPageSizeEnum = "A4" | "TAB_BASED" ;
+    export type PdfOptionsPageSizeEnum = "A4" | "TAB_BASED" ;
 

@@ -127,7 +127,9 @@ public class UpdateUserGroupRequest implements Serializable {
 
         CAN_DOWNLOAD_DETAILED_DATA("CAN_DOWNLOAD_DETAILED_DATA"),
 
-        CAN_USE_SPOTTER("CAN_USE_SPOTTER");
+        CAN_USE_SPOTTER("CAN_USE_SPOTTER"),
+
+        CAN_MANAGE_SPOTTER("CAN_MANAGE_SPOTTER");
 
         private String value;
 
@@ -481,7 +483,8 @@ public class UpdateUserGroupRequest implements Serializable {
     }
 
     /**
-     * Privileges to assign to the group.
+     * Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via
+     * ALL_GROUP, assigning it has no effect.
      *
      * @return privileges
      */

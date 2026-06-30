@@ -26,6 +26,8 @@ export class SecuritySettingsResponse {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "cluster_preferences",
@@ -47,4 +49,3 @@ export class SecuritySettingsResponse {
     public constructor() {
     }
 }
-

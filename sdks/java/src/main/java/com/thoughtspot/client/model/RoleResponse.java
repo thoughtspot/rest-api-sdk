@@ -155,7 +155,9 @@ public class RoleResponse implements Serializable {
 
         CAN_DOWNLOAD_DETAILED_DATA("CAN_DOWNLOAD_DETAILED_DATA"),
 
-        CAN_USE_SPOTTER("CAN_USE_SPOTTER");
+        CAN_USE_SPOTTER("CAN_USE_SPOTTER"),
+
+        CAN_MANAGE_SPOTTER("CAN_MANAGE_SPOTTER");
 
         private String value;
 

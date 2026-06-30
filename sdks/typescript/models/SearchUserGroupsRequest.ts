@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SearchUserGroupsRequestSortOptions } from '../models/SearchUserGroupsRequestSortOptions';
+import { SortOptions } from '../models/SortOptions';
 import { HttpFile } from '../http/http';
 
 export class SearchUserGroupsRequest {
@@ -70,7 +70,10 @@ export class SearchUserGroupsRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: SearchUserGroupsRequestSortOptions;
+    /**
+    * Sort options to filter group details.
+    */
+    'sort_options'?: SortOptions;
     /**
     * <div>Version: 10.10.0.cl or later </div>  Define Parameter to consider if the users should be included in group search response.
     */
@@ -81,6 +84,8 @@ export class SearchUserGroupsRequest {
     'include_sub_groups'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -170,7 +175,7 @@ export class SearchUserGroupsRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "SearchUserGroupsRequestSortOptions",
+            "type": "SortOptions",
             "format": ""
         },
         {
@@ -194,8 +199,7 @@ export class SearchUserGroupsRequest {
     }
 }
 
-
-export type SearchUserGroupsRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "APPLICATION_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_MODIFY_FOLDERS" | "CAN_MANAGE_VARIABLES" | "CAN_VIEW_FOLDERS" | "CAN_MANAGE_AGENTSPOT" | "CAN_ACCESS_AGENTSPOT" | "CAN_SETUP_VERSION_CONTROL" | "CAN_MANAGE_WEBHOOKS" | "CAN_DOWNLOAD_VISUALS" | "CAN_DOWNLOAD_DETAILED_DATA" | "CAN_USE_SPOTTER" ;
-export type SearchUserGroupsRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP" | "TEAM_GROUP" | "TENANT_GROUP" ;
-export type SearchUserGroupsRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
+    export type SearchUserGroupsRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "APPLICATION_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_MODIFY_FOLDERS" | "CAN_MANAGE_VARIABLES" | "CAN_VIEW_FOLDERS" | "CAN_MANAGE_AGENTSPOT" | "CAN_ACCESS_AGENTSPOT" | "CAN_SETUP_VERSION_CONTROL" | "CAN_MANAGE_WEBHOOKS" | "CAN_DOWNLOAD_VISUALS" | "CAN_DOWNLOAD_DETAILED_DATA" | "CAN_USE_SPOTTER" | "CAN_MANAGE_SPOTTER" ;
+    export type SearchUserGroupsRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP" | "TEAM_GROUP" | "TENANT_GROUP" ;
+    export type SearchUserGroupsRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
 

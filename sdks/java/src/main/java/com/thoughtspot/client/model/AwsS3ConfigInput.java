@@ -109,7 +109,7 @@ public class AwsS3ConfigInput implements Serializable {
 
     /**
      * ARN of the IAM role to assume for S3 access. Example:
-     * \&quot;arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\&quot;
+     * \&quot;arn:aws:iam::123456789012:role/WebhookDeliveryRole\&quot;
      *
      * @return roleArn
      */
@@ -149,7 +149,7 @@ public class AwsS3ConfigInput implements Serializable {
 
     /**
      * Optional path prefix for organizing objects within the bucket. Example:
-     * \&quot;thoughtspot-webhooks/\&quot;
+     * \&quot;webhook-deliveries/\&quot;
      *
      * @return pathPrefix
      */

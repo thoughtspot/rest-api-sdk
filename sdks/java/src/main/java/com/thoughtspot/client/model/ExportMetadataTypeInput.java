@@ -54,7 +54,9 @@ public class ExportMetadataTypeInput implements Serializable {
 
         ROLE("ROLE"),
 
-        FEEDBACK("FEEDBACK");
+        FEEDBACK("FEEDBACK"),
+
+        COLLECTION("COLLECTION");
 
         private String value;
 

@@ -28,6 +28,8 @@ export class ValidateCommunicationChannelRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "channel_type",
@@ -56,7 +58,6 @@ export class ValidateCommunicationChannelRequest {
     }
 }
 
-
-export type ValidateCommunicationChannelRequestChannelTypeEnum = "WEBHOOK" ;
-export type ValidateCommunicationChannelRequestEventTypeEnum = "LIVEBOARD_SCHEDULE" ;
+    export type ValidateCommunicationChannelRequestChannelTypeEnum = "WEBHOOK" ;
+    export type ValidateCommunicationChannelRequestEventTypeEnum = "LIVEBOARD_SCHEDULE" ;
 

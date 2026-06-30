@@ -2,7 +2,7 @@
   "compilerOptions": {
     "strict": true,
     /* Basic Options */
-    "target": "es6",
+    "target": "es2021",
     "esModuleInterop": true,
     "moduleResolution": "node",
     "declaration": true,
@@ -17,7 +17,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "noLib": false,
-    "lib": [ "es6", "dom" ],
+    "lib": [ "es2021", "dom" ],
     "resolveJsonModule": true
   },
   "exclude": [

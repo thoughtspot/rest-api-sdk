@@ -201,6 +201,8 @@ export class User {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "id",
@@ -493,9 +495,8 @@ export class User {
     }
 }
 
-
-export type UserVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
-export type UserAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER" ;
-export type UserAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED" ;
-export type UserParentTypeEnum = "USER" | "GROUP" ;
+    export type UserVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
+    export type UserAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER" ;
+    export type UserAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED" ;
+    export type UserParentTypeEnum = "USER" | "GROUP" ;
 

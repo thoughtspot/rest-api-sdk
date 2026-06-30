@@ -9,7 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**name** | **String** | Unique name of the Role. |  |
 |**description** | **String** | Description of the Role. |  [optional] |
-|**privileges** | [**List&lt;PrivilegesEnum&gt;**](#List&lt;PrivilegesEnum&gt;) | Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. |  [optional] |
+|**privileges** | [**List&lt;PrivilegesEnum&gt;**](#List&lt;PrivilegesEnum&gt;) | Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect. |  [optional] |
 |**readOnly** | **Boolean** | &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Indicates whether the role is read only. A readonly role can neither be updated nor deleted. |  [optional] |
 
 
@@ -60,6 +60,7 @@
 | CAN_DOWNLOAD_VISUALS | &quot;CAN_DOWNLOAD_VISUALS&quot; |
 | CAN_DOWNLOAD_DETAILED_DATA | &quot;CAN_DOWNLOAD_DETAILED_DATA&quot; |
 | CAN_USE_SPOTTER | &quot;CAN_USE_SPOTTER&quot; |
+| CAN_MANAGE_SPOTTER | &quot;CAN_MANAGE_SPOTTER&quot; |
 
 
 ## Implemented Interfaces

@@ -28,6 +28,8 @@ export class AuthClusterPreferences {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "auth_status",
@@ -50,6 +52,5 @@ export class AuthClusterPreferences {
     }
 }
 
-
-export type AuthClusterPreferencesAuthStatusEnum = "ENABLED" | "DISABLED" ;
+    export type AuthClusterPreferencesAuthStatusEnum = "ENABLED" | "DISABLED" ;
 

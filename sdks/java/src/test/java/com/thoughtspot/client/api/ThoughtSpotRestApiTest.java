@@ -8,6 +8,8 @@ import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.AccessToken;
 import com.thoughtspot.client.model.ActivateUserRequest;
 import com.thoughtspot.client.model.AgentConversation;
+import com.thoughtspot.client.model.AgentConversationHistoryResponse;
+import com.thoughtspot.client.model.AgentInstructions;
 import com.thoughtspot.client.model.AnswerDataResponse;
 import com.thoughtspot.client.model.AssignChangeAuthorRequest;
 import com.thoughtspot.client.model.AssignTagRequest;
@@ -28,6 +30,7 @@ import com.thoughtspot.client.model.ConfigureSecuritySettingsRequest;
 import com.thoughtspot.client.model.ConnectionConfigurationResponse;
 import com.thoughtspot.client.model.ConnectionConfigurationSearchRequest;
 import com.thoughtspot.client.model.Conversation;
+import com.thoughtspot.client.model.ConversationMessageResponse;
 import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
 import com.thoughtspot.client.model.CreateAgentConversationRequest;
@@ -41,6 +44,7 @@ import com.thoughtspot.client.model.CreateConversationRequest;
 import com.thoughtspot.client.model.CreateCustomActionRequest;
 import com.thoughtspot.client.model.CreateEmailCustomizationRequest;
 import com.thoughtspot.client.model.CreateEmailCustomizationResponse;
+import com.thoughtspot.client.model.CreateInputTableRequest;
 import com.thoughtspot.client.model.CreateOrgRequest;
 import com.thoughtspot.client.model.CreateRoleRequest;
 import com.thoughtspot.client.model.CreateScheduleRequest;
@@ -55,21 +59,28 @@ import com.thoughtspot.client.model.DeleteCollectionRequest;
 import com.thoughtspot.client.model.DeleteConfigRequest;
 import com.thoughtspot.client.model.DeleteConnectionConfigurationRequest;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
+import com.thoughtspot.client.model.DeleteManualTranslationsRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
 import com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest;
+import com.thoughtspot.client.model.DeleteStyleFontsRequest;
 import com.thoughtspot.client.model.DeleteVariablesRequest;
 import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
 import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
+import com.thoughtspot.client.model.EurekaExportMemoryResponse;
 import com.thoughtspot.client.model.EurekaGetNLInstructionsResponse;
 import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
+import com.thoughtspot.client.model.EurekaImportMemoryResponse;
 import com.thoughtspot.client.model.EurekaSetNLInstructionsResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
+import com.thoughtspot.client.model.ExportManualTranslationsRequest;
+import com.thoughtspot.client.model.ExportMemoryRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLRequest;
+import com.thoughtspot.client.model.ExportStyleLogosRequest;
 import com.thoughtspot.client.model.FetchAnswerDataRequest;
 import com.thoughtspot.client.model.FetchAnswerSqlQueryRequest;
 import com.thoughtspot.client.model.FetchAsyncImportTaskStatusRequest;
@@ -92,17 +103,22 @@ import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.GetTokenResponse;
 import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
+import com.thoughtspot.client.model.ImportMemoryRequest;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
 import com.thoughtspot.client.model.ImportMetadataTMLRequest;
 import com.thoughtspot.client.model.ImportUserGroupsRequest;
 import com.thoughtspot.client.model.ImportUserGroupsResponse;
 import com.thoughtspot.client.model.ImportUsersRequest;
 import com.thoughtspot.client.model.ImportUsersResponse;
+import com.thoughtspot.client.model.InputTableResponse;
+import com.thoughtspot.client.model.InputTableUpdateResponse;
 import com.thoughtspot.client.model.LiveboardDataResponse;
+import com.thoughtspot.client.model.LoadAnswerResponse;
 import com.thoughtspot.client.model.LogResponse;
 import com.thoughtspot.client.model.LoginRequest;
 import com.thoughtspot.client.model.ManageObjectPrivilegeRequest;
 import com.thoughtspot.client.model.MetadataSearchResponse;
+import com.thoughtspot.client.model.NavigationPanelInput;
 import com.thoughtspot.client.model.ObjectPrivilegesOfMetadataResponse;
 import com.thoughtspot.client.model.OrgResponse;
 import com.thoughtspot.client.model.ParameterizeMetadataFieldsRequest;
@@ -147,6 +163,8 @@ import com.thoughtspot.client.model.SearchRoleResponse;
 import com.thoughtspot.client.model.SearchRolesRequest;
 import com.thoughtspot.client.model.SearchSchedulesRequest;
 import com.thoughtspot.client.model.SearchSecuritySettingsRequest;
+import com.thoughtspot.client.model.SearchStyleCustomizationsRequest;
+import com.thoughtspot.client.model.SearchStyleFontsRequest;
 import com.thoughtspot.client.model.SearchTagsRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
@@ -159,10 +177,17 @@ import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
+import com.thoughtspot.client.model.SetAgentInstructionsRequest;
 import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.SqlQueryResponse;
+import com.thoughtspot.client.model.StyleColorPaletteInput;
+import com.thoughtspot.client.model.StyleFontDeleteData;
+import com.thoughtspot.client.model.StyleFontRecord;
+import com.thoughtspot.client.model.StyleFontUploadData;
+import com.thoughtspot.client.model.StylePreference;
+import com.thoughtspot.client.model.StyleResetOptionsInput;
 import com.thoughtspot.client.model.SyncMetadataRequest;
 import com.thoughtspot.client.model.SyncMetadataResponse;
 import com.thoughtspot.client.model.SystemConfig;
@@ -182,13 +207,16 @@ import com.thoughtspot.client.model.UpdateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
 import com.thoughtspot.client.model.UpdateConnectionStatusRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
+import com.thoughtspot.client.model.UpdateConversationRequest;
 import com.thoughtspot.client.model.UpdateCustomActionRequest;
 import com.thoughtspot.client.model.UpdateEmailCustomizationRequest;
+import com.thoughtspot.client.model.UpdateInputTableRequest;
 import com.thoughtspot.client.model.UpdateMetadataHeaderRequest;
 import com.thoughtspot.client.model.UpdateMetadataObjIdRequest;
 import com.thoughtspot.client.model.UpdateOrgRequest;
 import com.thoughtspot.client.model.UpdateRoleRequest;
 import com.thoughtspot.client.model.UpdateScheduleRequest;
+import com.thoughtspot.client.model.UpdateStyleFontRequest;
 import com.thoughtspot.client.model.UpdateSystemConfigRequest;
 import com.thoughtspot.client.model.UpdateTagRequest;
 import com.thoughtspot.client.model.UpdateUserGroupRequest;
@@ -202,9 +230,11 @@ import com.thoughtspot.client.model.ValidateCommunicationChannelRequest;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
 import com.thoughtspot.client.model.Variable;
+import com.thoughtspot.client.model.VisualizationFontsInput;
 import com.thoughtspot.client.model.WebhookDeleteResponse;
 import com.thoughtspot.client.model.WebhookResponse;
 import com.thoughtspot.client.model.WebhookSearchResponse;
+import com.thoughtspot.client.model.WebhookStorageConfigInfo;
 import java.io.File;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
@@ -629,12 +659,13 @@ public class ThoughtSpotRestApiTest {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
-     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
-     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
-     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
-     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB1\&quot;, \&quot;DB2\&quot;], \&quot;externalDatabases\&quot;:[ ] }
+     * &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the
+     * &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly
+     * provide the authenticationType property in the payload. If you do not specify
+     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. ####
+     * Create a connection with tables If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
@@ -645,7 +676,8 @@ public class ThoughtSpotRestApiTest {
      * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB1\&quot;, \&quot;DB2\&quot;, \&quot;AllDatatypes\&quot;],
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -665,7 +697,15 @@ public class ThoughtSpotRestApiTest {
      * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
      * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
      * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type.
+     * SERVICE_ACCOUNT as the authentication type. The optional &#x60;databases&#x60; property in
+     * &#x60;data_warehouse_config&#x60; accepts a list of database names. When specified,
+     * ThoughtSpot persists this list on the connection and uses it to scope metadata fetching to
+     * only the specified databases in subsequent table add and remove operations. If omitted, all
+     * databases in the data warehouse are accessible for metadata operations. The
+     * &#x60;databases&#x60; and &#x60;externalDatabases&#x60; serve different purposes.
+     * &#x60;databases&#x60; is a flat list of database names that controls which databases are
+     * scanned during metadata operations. &#x60;externalDatabases&#x60; defines the full table
+     * hierarchy and determines which tables are linked into ThoughtSpot.
      *
      * @throws ApiException if the Api call fails
      */
@@ -801,6 +841,57 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.8.0.cl or later Creates an input table and links it to a ThoughtSpot model
+     * (worksheet). An input table is a user-editable table stored in the model&#39;s external Cloud
+     * Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the
+     * ThoughtSpot UI without requiring access to the underlying warehouse. Requires
+     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
+     * instance, the &#x60;CAN_MANAGE_INPUT_TABLES&#x60; (**Can manage input tables**) privilege is
+     * required. #### Usage guidelines To create an input table, provide the following in the
+     * request body: * **&#x60;table_name&#x60;** — Physical name of the table to create in the
+     * external warehouse. * **&#x60;model_identifier&#x60;** — GUID or name of the model
+     * (worksheet) to link the input table to. The connection, database, and schema used to create
+     * the physical table are derived from this model&#39;s metadata. *
+     * **&#x60;table_definition&#x60;** — Describes the table schema: *
+     * &#x60;referenced_columns&#x60; — List of column GUIDs from the linked model to include as
+     * read-only reference columns in the input table. These columns anchor the input data to
+     * existing model dimensions. * &#x60;new_columns&#x60; — List of new editable columns to
+     * create. Each column requires: * &#x60;name&#x60; — Column display name. *
+     * &#x60;data_type&#x60; — Warehouse data type (for example, &#x60;VARCHAR&#x60;,
+     * &#x60;DOUBLE&#x60;, &#x60;DATE&#x60;). * &#x60;type&#x60; — Semantic role of the column:
+     * &#x60;ATTRIBUTE&#x60; for dimension columns or &#x60;MEASURE&#x60; for numeric columns.
+     * **Note**: The physical table is created in the same connection, database, and schema as the
+     * linked model. Ensure the connection user has &#x60;CREATE TABLE&#x60; permissions in the
+     * target schema. #### Examples Create an input table with one referenced model column and one
+     * new editable measure column: &#x60;&#x60;&#x60;json { \&quot;table_name\&quot;: \&quot;Sales
+     * Region Targets\&quot;, \&quot;model_identifier\&quot;:
+     * \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;, \&quot;table_definition\&quot;: {
+     * \&quot;referenced_columns\&quot;: [\&quot;c7d8e9f0-1234-5678-abcd-ef0987654321\&quot;],
+     * \&quot;new_columns\&quot;: [ { \&quot;name\&quot;: \&quot;target_revenue\&quot;,
+     * \&quot;data_type\&quot;: \&quot;DOUBLE\&quot;, \&quot;type\&quot;: \&quot;MEASURE\&quot; } ]
+     * } } &#x60;&#x60;&#x60; Create an input table with multiple new editable columns and no
+     * referenced columns: &#x60;&#x60;&#x60;json { \&quot;table_name\&quot;: \&quot;Budget
+     * Adjustments\&quot;, \&quot;model_identifier\&quot;:
+     * \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;, \&quot;table_definition\&quot;: {
+     * \&quot;referenced_columns\&quot;: [], \&quot;new_columns\&quot;: [ { \&quot;name\&quot;:
+     * \&quot;region\&quot;, \&quot;data_type\&quot;: \&quot;VARCHAR\&quot;, \&quot;type\&quot;:
+     * \&quot;ATTRIBUTE\&quot; }, { \&quot;name\&quot;: \&quot;adjustment_amount\&quot;,
+     * \&quot;data_type\&quot;: \&quot;DOUBLE\&quot;, \&quot;type\&quot;: \&quot;MEASURE\&quot; }, {
+     * \&quot;name\&quot;: \&quot;effective_date\&quot;, \&quot;data_type\&quot;:
+     * \&quot;DATE\&quot;, \&quot;type\&quot;: \&quot;ATTRIBUTE\&quot; } ] } } &#x60;&#x60;&#x60;
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createInputTableTest() throws ApiException {
+        CreateInputTableRequest createInputTableRequest = null;
+        InputTableResponse response = api.createInputTable(createInputTableRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Creates an Org object. To use this API, the
      * [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview) feature must be enabled in
      * your cluster. Requires cluster administration (**Can administer Org**) privileges. If
@@ -838,21 +929,25 @@ public class ThoughtSpotRestApiTest {
      * &#x60;ADMINISTRATION&#x60; (**Can administer Org**) or &#x60;JOBSCHEDULING&#x60; (**Can
      * schedule for others**) privilege and edit access to the Liveboard. If [Role-Based Access
      * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;JOBSCHEDULING&#x60; (**Can schedule for others**) privilege is required. #### Usage
-     * guidelines * The description text is mandatory. The description text appears as
-     * **Description: &lt;your content&gt;** in the Liveboard schedule email notifications. * For
-     * Liveboards with both charts and tables, schedule creation is only supported in PDF and XLS
-     * formats. Schedules created in CSV formats for such Liveboards will fail to run. If
-     * &#x60;PDF&#x60; is set as the &#x60;file_format&#x60;, enable &#x60;pdf_options&#x60; to get
-     * the correct attachment. Not doing so may cause the attachment to be rendered empty. * To
-     * include only specific visualizations, specify the visualization GUIDs in the
-     * &#x60;visualization_identifiers&#x60; array. * You can schedule a Liveboard job to run
-     * periodically by setting frequency parameters. You can set the schedule to run daily, weekly,
-     * monthly or every n minutes or hours. The scheduled job can also be configured to run at a
-     * specific time of the day or on specific days of the week or month. Please ensure that when
-     * setting the schedule frequency for _minute of the object_, only values that are multiples of
-     * 5 are included. * If the &#x60;frequency&#x60; parameters are defined, you can set the time
-     * zone to a value that matches your server&#39;s time zone. For example,
+     * the &#x60;JOBSCHEDULING&#x60; (**Can schedule for others**) privilege is required. If RBAC is
+     * enabled, creating a schedule also requires the download privilege that corresponds to the
+     * selected &#x60;file_format&#x60;: &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the
+     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and
+     * &#x60;PDF&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**)
+     * privilege. #### Usage guidelines * The description text is mandatory. The description text
+     * appears as **Description: &lt;your content&gt;** in the Liveboard schedule email
+     * notifications. * For Liveboards with both charts and tables, schedule creation is only
+     * supported in PDF and XLS formats. Schedules created in CSV formats for such Liveboards will
+     * fail to run. If &#x60;PDF&#x60; is set as the &#x60;file_format&#x60;, enable
+     * &#x60;pdf_options&#x60; to get the correct attachment. Not doing so may cause the attachment
+     * to be rendered empty. * To include only specific visualizations, specify the visualization
+     * GUIDs in the &#x60;visualization_identifiers&#x60; array. * You can schedule a Liveboard job
+     * to run periodically by setting frequency parameters. You can set the schedule to run daily,
+     * weekly, monthly or every n minutes or hours. The scheduled job can also be configured to run
+     * at a specific time of the day or on specific days of the week or month. Please ensure that
+     * when setting the schedule frequency for _minute of the object_, only values that are
+     * multiples of 5 are included. * If the &#x60;frequency&#x60; parameters are defined, you can
+     * set the time zone to a value that matches your server&#39;s time zone. For example,
      * &#x60;US/Central&#x60;, &#x60;Etc/UTC&#x60;, &#x60;CET&#x60;. The default time zone is
      * &#x60;America/Los_Angeles&#x60;. For more information about Liveboard jobs, see [ThoughtSpot
      * Product Documentation](https://docs.thoughtspot.com/cloud/latest/liveboard-schedule).
@@ -1030,7 +1125,9 @@ public class ThoughtSpotRestApiTest {
     public void dbtGenerateSyncTmlTest() throws ApiException {
         String dbtConnectionIdentifier = null;
         File fileContent = null;
-        Object response = api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent);
+        Boolean includeSemanticReport = null;
+        Object response =
+                api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport);
         // TODO: test validations
     }
 
@@ -1056,13 +1153,15 @@ public class ThoughtSpotRestApiTest {
         String importWorksheets = null;
         String worksheets = null;
         File fileContent = null;
+        Boolean includeSemanticReport = null;
         Object response =
                 api.dbtGenerateTml(
                         dbtConnectionIdentifier,
                         modelTables,
                         importWorksheets,
                         worksheets,
-                        fileContent);
+                        fileContent,
+                        includeSemanticReport);
         // TODO: test validations
     }
 
@@ -1219,6 +1318,38 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Deletes an existing agent conversation. Version: 26.7.0.cl or later Permanently deletes an
+     * existing saved agent conversation and all its associated messages. This operation is
+     * irreversible — deleted conversations cannot be recovered. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being deleted. ####
+     * Usage guidelines The request must include: - &#x60;conversation_identifier&#x60; *(path
+     * parameter)*: the unique ID of the conversation to delete, as returned by
+     * &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; A successful request
+     * returns an empty &#x60;204 No Content&#x60; response. The deleted conversation no longer
+     * appears in &#x60;getConversationList&#x60;. #### Example request &#x60;&#x60;&#x60;bash
+     * DELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete
+     * &#x60;&#x60;&#x60; #### Error responses | Code | Description | |------|-------------| | 401 |
+     * Unauthorized — authentication token is missing, expired, or invalid. | | 403 | Forbidden —
+     * the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own
+     * the specified conversation. | | 404 | Not Found — no conversation exists with the given
+     * &#x60;conversation_identifier&#x60; for the authenticated user. | &gt; ###### Note: &gt; &gt;
+     * - Deletion is permanent and cannot be undone. Ensure the correct
+     * &#x60;conversation_identifier&#x60; is used before calling this endpoint. &gt; - Only
+     * conversations created with &#x60;enable_save_chat: true&#x60; are persisted and can be
+     * deleted via this endpoint. &gt; - Available from version 26.7.0.cl and later. &gt; - This
+     * endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
+     * cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteConversationTest() throws ApiException {
+        String conversationIdentifier = null;
+        api.deleteConversation(conversationIdentifier);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.6.0.cl or later Removes the custom action specified in the API request. Requires
      * &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can
      * administer ThoughtSpot**) privilege. If [Role-Based Access Control
@@ -1270,6 +1401,52 @@ public class ThoughtSpotRestApiTest {
     public void deleteEmailCustomizationTest() throws ApiException {
         String templateIdentifier = null;
         api.deleteEmailCustomization(templateIdentifier);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.8.0.cl or later Deletes an input table. This operation unlinks the input table
+     * from its owner model, removes it from the connection metadata, and drops the physical table
+     * from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the
+     * input table is permanently deleted. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**)
+     * or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based
+     * Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your
+     * ThoughtSpot instance, the &#x60;CAN_MANAGE_INPUT_TABLES&#x60; (**Can manage input tables**)
+     * privilege is required. #### Usage guidelines Specify the GUID of the input table to delete as
+     * the &#x60;input_table_identifier&#x60; path parameter. The owner model (worksheet) is derived
+     * from the input table&#39;s metadata and is used to locate and clean up the associated
+     * connection entry. **Note**: Deleting an input table does not delete the linked model.
+     * However, any Answers or Liveboards that reference columns from the deleted input table will
+     * lose access to that data and may return errors until the affected visualizations are updated.
+     * #### Example Pass the input table GUID as a path parameter. This endpoint has no request
+     * body. &#x60;&#x60;&#x60; DELETE
+     * /api/rest/2.0/input-tables/a1b2c3d4-e5f6-7890-abcd-ef1234567890/delete &#x60;&#x60;&#x60;
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteInputTableTest() throws ApiException {
+        String inputTableIdentifier = null;
+        api.deleteInputTable(inputTableIdentifier);
+        // TODO: test validations
+    }
+
+    /**
+     * Delete manual translations. Version: 26.7.0.cl or later Deletes all manual translations for
+     * the org. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**),
+     * &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege. #### Usage
+     * guidelines - This deletes **all** translation entries for the targeted org. The operation
+     * cannot be undone. - Defaults to &#x60;ORG&#x60; scope if not specified. - Set
+     * &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to delete translations uploaded in the All-Org
+     * context.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteManualTranslationsTest() throws ApiException {
+        DeleteManualTranslationsRequest deleteManualTranslationsRequest = null;
+        api.deleteManualTranslations(deleteManualTranslationsRequest);
         // TODO: test validations
     }
 
@@ -1351,6 +1528,30 @@ public class ThoughtSpotRestApiTest {
     public void deleteScheduleTest() throws ApiException {
         String scheduleIdentifier = null;
         api.deleteSchedule(scheduleIdentifier);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.7.0.cl or later Deletes one or more custom fonts from the cluster-level or
+     * org-level font library. If a deleted font is assigned to visualization areas, those
+     * assignments automatically fallback to the cluster/system default font. The response lists all
+     * affected areas where the font was explicitly set. Note: dry_run defaults to true. To actually
+     * delete fonts, you must explicitly pass dry_run: false. Requires &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**)
+     * privilege. #### Usage guidelines - Provide one or more font UUIDs or names in
+     * &#x60;font_identifiers&#x60;. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to delete from
+     * the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to delete from
+     * the authenticated user&#39;s org library. - Use &#x60;dry_run: true&#x60; to preview which
+     * visualization areas would be affected without actually deleting the font. The response lists
+     * affected assignments; no changes are applied. - Deletions cannot be undone. Re-upload the
+     * font file using &#x60;uploadStyleFont&#x60; if needed.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteStyleFontsTest() throws ApiException {
+        DeleteStyleFontsRequest deleteStyleFontsRequest = null;
+        StyleFontDeleteData response = api.deleteStyleFonts(deleteStyleFontsRequest);
         // TODO: test validations
     }
 
@@ -1499,7 +1700,15 @@ public class ThoughtSpotRestApiTest {
 
     /**
      * Version: 9.0.0.cl or later Exports an Answer in the given file format. You can download the
-     * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer.
+     * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not
+     * enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If
+     * RBAC is enabled, the required download privilege depends on the selected
+     * &#x60;file_format&#x60;: &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;PDF&#x60; require the
+     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and
+     * &#x60;PNG&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**)
+     * privilege. For an Answer, the &#x60;PDF&#x60; export is a table PDF, which is why it falls
+     * under &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; rather than &#x60;CAN_DOWNLOAD_VISUALS&#x60;.
      * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
      * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
      * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
@@ -1523,11 +1732,18 @@ public class ThoughtSpotRestApiTest {
     /**
      * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
      * XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at least view access
-     * to the Liveboard. #### Usage guidelines In the request body, specify the GUID or name of the
-     * Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of
-     * the visualizations. **NOTE**: * The downloadable file returned in API response file is
-     * extensionless. Please rename the downloaded file by typing in the relevant extension. *
-     * Optionally, you can define [runtime
+     * to the Liveboard. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the
+     * &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is
+     * enabled, the required download privilege depends on the selected &#x60;file_format&#x60;:
+     * &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60;
+     * (**Can download detailed data**) privilege, and &#x60;PNG&#x60; and &#x60;PDF&#x60; require
+     * the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege. #### Usage
+     * guidelines In the request body, specify the GUID or name of the Liveboard. To generate a
+     * Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
+     * **NOTE**: * The downloadable file returned in API response file is extensionless. Please
+     * rename the downloaded file by typing in the relevant extension. * Optionally, you can define
+     * [runtime
      * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
      * to apply to the Answer data. * To include unsaved changes in the report, pass the
      * &#x60;transient_pinboard_content&#x60; script generated from the
@@ -1554,6 +1770,73 @@ public class ThoughtSpotRestApiTest {
     public void exportLiveboardReportTest() throws ApiException {
         ExportLiveboardReportRequest exportLiveboardReportRequest = null;
         File response = api.exportLiveboardReport(exportLiveboardReportRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Export manual translations as a CSV file. Version: 26.7.0.cl or later Downloads all manual
+     * translations for the org as a CSV file. Requires &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or
+     * &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege. #### Usage
+     * guidelines - The response is a CSV file with columns: &#x60;content&#x60;,
+     * &#x60;locale&#x60;, &#x60;translated-content&#x60;. - Defaults to &#x60;ORG&#x60; scope if
+     * not specified. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to export translations from the
+     * All-Org context. - Returns a &#x60;404&#x60; error if no translations exist for the targeted
+     * org or cluster scope.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void exportManualTranslationsTest() throws ApiException {
+        ExportManualTranslationsRequest exportManualTranslationsRequest = null;
+        File response = api.exportManualTranslations(exportManualTranslationsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Exports memory entries (rules, recipes, and non-semantic rules) for the specified data-models
+     * as a single YAML payload. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and read access on
+     * every referenced data-model. Routes through eureka-agent, which applies the same
+     * accessibility filtering and obj_id resolution as the internal GraphQL surface. Version:
+     * 26.8.0.cl or later This API allows users to export data-model memories (can be extended to
+     * agent memories in future) for a given list of data-models. This exported yaml file can then
+     * be modified and used as input to the import API in target env. This API enables customers to
+     * migrate memories from a source env to a target env. This improves memory adoption for Spotter
+     * by giving the users a chance to develop their memories in a dev env and replicate the same in
+     * a prod env. To use this API, the user needs either edit access or memory privilege on the
+     * data-model or manage-spotter privilege and they must use corresponding org related
+     * bearerToken where the data-model exists. #### Usage guidelines To export memory for one or
+     * more data-models, the request may include: - &#x60;sources&#x60;: A list of typed scope
+     * groups identifying which data-models to export memory for. Each group contains: -
+     * &#x60;type&#x60;: The source object type for this group — &#x60;DATA_MODEL&#x60;. -
+     * &#x60;identifiers&#x60;: An array of GUIDs or human-readable &#x60;obj_id&#x60;s of the
+     * data-models to export memory for. obj_ids are resolved server-side before forwarding. The
+     * memory types (&#x60;RULES&#x60;, &#x60;RECIPES&#x60;, and &#x60;NON_SEMANTIC_RULES&#x60;) and
+     * the output format (&#x60;YAML&#x60;) are fixed for this endpoint and are not request
+     * parameters. The API returns a response object with: - &#x60;content&#x60;: The serialized
+     * memory payload (currently YAML) — exactly the shape that the &#x60;importMemory&#x60; API
+     * consumes. Edit it locally and pass it back through &#x60;importMemory&#x60; to apply changes.
+     * #### Source Type - **DATA_MODEL**: The &#x60;identifiers&#x60; are data-model (worksheet)
+     * GUIDs. This is the default (and currently only) source type for Spotter memory and covers the
+     * rules and recipes attached directly to a data-model. #### Error responses | Code |
+     * Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have necessary permissions, or lacks read access
+     * on a referenced data-model, or the bearer token does not correspond to the data-model&#39;s
+     * org. | &gt; ###### Note: &gt; - To use this API, the user needs either edit access or memory
+     * privilege on the data-model or manage-spotter privilege and they must use corresponding org
+     * related bearerToken where the data-model exists. &gt; - This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; -
+     * Available from version 26.8.0.cl and later. &gt; - This endpoint requires Spotter — please
+     * contact ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void exportMemoryTest() throws ApiException {
+        ExportMemoryRequest exportMemoryRequest = null;
+        EurekaExportMemoryResponse response = api.exportMemory(exportMemoryRequest);
         // TODO: test validations
     }
 
@@ -1618,10 +1901,36 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.7.0.cl or later Downloads the active logos (default and wide slots) at the
+     * requested scope as a single ZIP archive containing both logo image files. If no custom logo
+     * has been uploaded at the ORG scope, the archive contains the resolved logo falling through
+     * from the cluster. If no cluster logo has been uploaded, no file is returned. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. #### Usage guidelines - Set &#x60;scope&#x60; to
+     * &#x60;CLUSTER&#x60; to download cluster-level logos. - Set &#x60;scope&#x60; to
+     * &#x60;ORG&#x60; (default) to download logos for the authenticated user&#39;s org. - The
+     * response is a ZIP archive (&#x60;application/zip&#x60;). Save the response body directly to a
+     * &#x60;.zip&#x60; file. - The archive always contains two files — one for the DEFAULT slot and
+     * one for the WIDE slot — even if no custom logo is set at the requested scope.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void exportStyleLogosTest() throws ApiException {
+        ExportStyleLogosRequest exportStyleLogosRequest = null;
+        String accept = null;
+        File response = api.exportStyleLogos(exportStyleLogosRequest, accept);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Fetches data from a saved Answer. Requires at least view access to
-     * the saved Answer. The &#x60;record_size&#x60; attribute determines the number of records to
-     * retrieve in an API call. For more information about pagination, record size, and maximum row
-     * limit, see [Pagination and record size
+     * the saved Answer. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege is also
+     * required. The &#x60;record_size&#x60; attribute determines the number of records to retrieve
+     * in an API call. For more information about pagination, record size, and maximum row limit,
+     * see [Pagination and record size
      * settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_apis).
      *
      * @throws ApiException if the Api call fails
@@ -1751,10 +2060,13 @@ public class ThoughtSpotRestApiTest {
 
     /**
      * Version: 9.0.0.cl or later Gets data from a Liveboard object and its visualization. Requires
-     * at least view access to the Liveboard. #### Usage guidelines In the request body, specify the
-     * GUID or name of the Liveboard. To get data for specific visualizations, add the GUIDs or
-     * names of the visualizations in the API request. To include unsaved changes in the report,
-     * pass the &#x60;transient_pinboard_content&#x60; script generated from the
+     * at least view access to the Liveboard. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege is also
+     * required. #### Usage guidelines In the request body, specify the GUID or name of the
+     * Liveboard. To get data for specific visualizations, add the GUIDs or names of the
+     * visualizations in the API request. To include unsaved changes in the report, pass the
+     * &#x60;transient_pinboard_content&#x60; script generated from the
      * &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon
      * successful execution, the API returns the report with unsaved changes. If the new Liveboard
      * experience mode, the transient content includes ad hoc changes to visualizations such as
@@ -1980,6 +2292,275 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.6.0.cl or later Retrieves the admin instructions currently configured for the AI
+     * agent (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior
+     * across all conversations. Requires admin privileges. Only users with org admin access can
+     * retrieve agent instructions. #### Usage guidelines No input parameters are required. The API
+     * returns the stored &#x60;AgentInstructions&#x60; record for the caller&#39;s tenant and org.
+     * If no instructions have been configured yet, the API returns a record with an empty
+     * &#x60;instructions&#x60; field and &#x60;null&#x60; values for &#x60;id&#x60;,
+     * &#x60;created_at&#x60;, &#x60;updated_at&#x60;, and &#x60;last_updated_by&#x60;. If the
+     * request is successful, the response includes: - &#x60;id&#x60;: unique identifier of the
+     * instructions record - &#x60;instructions&#x60;: the configured instructions text -
+     * &#x60;created_at&#x60;: ISO timestamp when the instructions were first saved -
+     * &#x60;updated_at&#x60;: ISO timestamp when the instructions were last updated -
+     * &#x60;last_updated_by&#x60;: user ID of the admin who last updated the instructions (may be
+     * &#x60;null&#x60; for older records) #### Error responses | Code | Description |
+     * |------|-------------| | 401 | Unauthorized — authentication token is missing, expired, or
+     * invalid. | | 403 | Forbidden — the authenticated user does not have org admin privileges
+     * required to read agent instructions. | &gt; ###### Note: &gt; &gt; - Use
+     * &#x60;setAgentInstructions&#x60; to create or update agent instructions. &gt; - Available
+     * from version 26.6.0.cl and later.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAgentInstructionsTest() throws ApiException {
+        AgentInstructions response = api.getAgentInstructions();
+        // TODO: test validations
+    }
+
+    /**
+     * Retrieves the full public-safe content of a saved agent conversation: ordered turns (user
+     * messages and agent response items) and sanitized code-execution file metadata. Internal graph
+     * or branch state, Azure file identifiers, and messages with a &#x60;SYSTEM&#x60; source are
+     * omitted. The full answer payload is not embedded; fetch it separately via
+     * &#x60;loadAnswer&#x60; using the &#x60;answer_id&#x60; on each &#x60;answer&#x60; response
+     * item. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified
+     * conversation. Version: 26.7.0.cl or later Retrieves the full public-safe content of a saved
+     * agent conversation. Returns ordered conversation messages — each carrying an optional user
+     * prompt (the user&#39;s message and any attachments) and the agent response items produced for
+     * that turn — plus sanitized metadata for any files generated by the code-execution tool. Use
+     * this endpoint to render a persisted conversation in a UI, build an audit trail, or
+     * post-process a completed conversation. The full answer payload is not embedded — fetch it
+     * separately via &#x60;loadAnswer&#x60; using the &#x60;answer_id&#x60; on each
+     * &#x60;answer&#x60; response item. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access
+     * to the specified conversation. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; _(path parameter)_: the unique ID of the conversation, as
+     * returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60;. If the
+     * request is successful, the response contains two top-level fields: | Field | Type |
+     * Description | | ---------------------- | ------------------------------------------- |
+     * ----------------------------------------------------------------------------------------------------------------------------------------------------
+     * | | &#x60;messages&#x60; | &#x60;ConversationMessage[]&#x60; | Ordered oldest to newest.
+     * Empty array when the conversation has no messages. | | &#x60;code_execution_files&#x60; |
+     * &#x60;CodeExecutionFileMetadata[]&#x60; | List of sanitized file metadata entries (one per
+     * &#x60;file_id&#x60;). Covers all code-execution-generated files referenced anywhere in the
+     * conversation. Empty array when there are none. | No other top-level fields are returned. ####
+     * ConversationMessage fields | Field | Type | Description | | --------------------- |
+     * ---------------------------- |
+     * --------------------------------------------------------------------------------------------------------------
+     * | | &#x60;message_id&#x60; | &#x60;String&#x60; | Stable identifier for the turn. For
+     * liveboard-started synthetic first turns, this is the root node identifier. | |
+     * &#x60;timestamp_in_millis&#x60; | &#x60;Long&#x60; | Milliseconds since Unix epoch for the
+     * turn. | | &#x60;user_prompt&#x60; | &#x60;UserPrompt&#x60; | User-authored prompt that
+     * started the turn (message and attachments). &#x60;null&#x60; for liveboard-started synthetic
+     * first turns. | | &#x60;response_items&#x60; | &#x60;ConversationResponseItem[]&#x60; |
+     * Agent-side output produced in response to this turn. Empty array for in-progress turns. |
+     * #### UserPrompt fields | Field | Type | Description | | ------------- |
+     * ---------------------- |
+     * ----------------------------------------------------------------------------------------------------
+     * | | &#x60;message&#x60; | &#x60;UserMessage&#x60; | User query that started the turn.
+     * &#x60;null&#x60; for liveboard-started synthetic first turns. | | &#x60;attachments&#x60; |
+     * &#x60;UserAttachmentItem[]&#x60; | Files or connector resources attached to the user message.
+     * Empty array when there are no attachments. | #### UserMessage fields | Field | Type |
+     * Description | | ------------ | -------- | --------------------------------------------- | |
+     * &#x60;message_id&#x60; | &#x60;String&#x60; | Unique identifier of the user-source message. |
+     * | &#x60;content&#x60; | &#x60;String&#x60; | Text body of the user query. | ####
+     * UserAttachmentItem fields Discriminated by &#x60;type&#x60;. Only
+     * &#x60;\&quot;file\&quot;&#x60; or &#x60;\&quot;resource\&quot;&#x60; are valid values. Only
+     * the fields for the indicated variant are populated. See &#x60;ConversationResponseItem&#x60;
+     * below for the field definitions of the &#x60;file&#x60; and &#x60;resource&#x60; variants —
+     * &#x60;UserAttachmentItem&#x60; uses the same fields. #### ConversationResponseItem fields
+     * Every item carries a &#x60;type&#x60; discriminator and these shared fields: | Field | Type |
+     * Description | | --------------------- | --------- |
+     * ------------------------------------------------------------------------------------------------------------------------------
+     * | | &#x60;type&#x60; | &#x60;String&#x60; | Discriminator. One of
+     * &#x60;\&quot;text\&quot;&#x60;, &#x60;\&quot;tool_call\&quot;&#x60;,
+     * &#x60;\&quot;tool_result\&quot;&#x60;, &#x60;\&quot;answer\&quot;&#x60;,
+     * &#x60;\&quot;file\&quot;&#x60;, &#x60;\&quot;resource\&quot;&#x60;,
+     * &#x60;\&quot;search_datasets\&quot;&#x60;. | | &#x60;timestamp_in_millis&#x60; |
+     * &#x60;Long&#x60; | Milliseconds since Unix epoch when this item was produced. | |
+     * &#x60;is_thinking&#x60; | &#x60;Boolean&#x60; | &#x60;true&#x60; when the item represents
+     * internal agent reasoning rather than user-facing output. Consumers may hide or collapse
+     * these. | | &#x60;step_title&#x60; | &#x60;String&#x60; | Human-readable label for the agent
+     * step producing this item (e.g. &#x60;\&quot;Searching\&quot;&#x60;,
+     * &#x60;\&quot;Visualising\&quot;&#x60;). | Variant-specific fields: - **&#x60;text&#x60;** —
+     * agent text output: &#x60;content&#x60; (String), &#x60;content_type&#x60;
+     * (&#x60;ContentMimeType&#x60; enum), &#x60;file_reference&#x60; (FileReference). -
+     * **&#x60;tool_call&#x60;** — agent invoked a tool: &#x60;tool_call_id&#x60; (String),
+     * &#x60;tool_name&#x60; (String), &#x60;arguments&#x60; (JSON object). -
+     * **&#x60;tool_result&#x60;** — result returned from a tool invocation:
+     * &#x60;tool_call_id&#x60;, &#x60;tool_name&#x60;, &#x60;content&#x60;,
+     * &#x60;content_type&#x60; (&#x60;ContentMimeType&#x60; enum), &#x60;success&#x60; (Boolean). -
+     * **&#x60;answer&#x60;** — slim reference to a saved answer: &#x60;answer_id&#x60; (String),
+     * &#x60;tool_call_id&#x60;, &#x60;tool_name&#x60;. - **&#x60;file&#x60;** — uploaded or
+     * generated files: &#x60;files&#x60; (&#x60;PublicFileInfo[]&#x60;). - **&#x60;resource&#x60;**
+     * — MCP connector resource: &#x60;title&#x60;, &#x60;uri&#x60;, &#x60;name&#x60;,
+     * &#x60;mime_type&#x60;, &#x60;description&#x60;, &#x60;size&#x60; (Int),
+     * &#x60;connector_id&#x60;, &#x60;connector_name&#x60;, &#x60;connector_slug&#x60;,
+     * &#x60;transport_type&#x60; (&#x60;TransportType&#x60; enum). -
+     * **&#x60;search_datasets&#x60;** — dataset discovery result: &#x60;text&#x60; (String),
+     * &#x60;data_sources&#x60; (&#x60;DataSourceInfo[]&#x60;). Clients should switch on
+     * &#x60;type&#x60; and ignore unknown variants for forward-compatibility. #### content_type
+     * values &#x60;content_type&#x60; is the &#x60;ContentMimeType&#x60; enum. The following values
+     * are defined: | Value | Wire MIME | Meaning | | --------------------------- |
+     * --------------------------- | ---------------------------------------------------- | |
+     * &#x60;TEXT_PLAIN&#x60; | &#x60;text/plain&#x60; | Plain text. Default for
+     * &#x60;tool_result&#x60;. | | &#x60;TEXT_MARKDOWN&#x60; | &#x60;text/markdown&#x60; |
+     * Markdown. Default for &#x60;text&#x60;. | | &#x60;TEXT_X_MARKDOWN_WITH_CODE&#x60; |
+     * &#x60;text/x-markdown-with-code&#x60; | Markdown whose body starts with a fenced code block.
+     * | | &#x60;TEXT_HTML&#x60; | &#x60;text/html&#x60; | Raw HTML. | #### transport_type values
+     * &#x60;transport_type&#x60; is the &#x60;TransportType&#x60; enum used on the
+     * &#x60;resource&#x60; variant. | Value | Meaning | | ------------------ |
+     * --------------------------------------------- | | &#x60;STREAMABLE_HTTP&#x60; | Streamable
+     * HTTP transport (default for MCP). | | &#x60;SSE&#x60; | Server-sent events transport. | ####
+     * FileReference fields | Field | Type | Description | | ------------------------ | -------- |
+     * ------------------------------------------------------------ | | &#x60;file_id&#x60; |
+     * &#x60;String&#x60; | Unique identifier of the code-execution-generated file. | |
+     * &#x60;display_name&#x60; | &#x60;String&#x60; | Human-readable file name. | |
+     * &#x60;created_time_in_millis&#x60; | &#x60;Long&#x60; | Milliseconds since Unix epoch when
+     * the file was created. | Cross-reference &#x60;file_id&#x60; against
+     * &#x60;code_execution_files&#x60; to retrieve full metadata including the &#x60;expired&#x60;
+     * flag before attempting a download. #### PublicFileInfo fields | Field | Type | Description |
+     * | ------------------------ | -------- |
+     * -------------------------------------------------------- | | &#x60;file_id&#x60; |
+     * &#x60;String&#x60; | Unique identifier of the file. | | &#x60;display_name&#x60; |
+     * &#x60;String&#x60; | Human-readable file name. | | &#x60;file_type&#x60; | &#x60;String&#x60;
+     * | File type such as &#x60;csv&#x60;, &#x60;pdf&#x60;, or &#x60;png&#x60;. | |
+     * &#x60;created_time_in_millis&#x60; | &#x60;Long&#x60; | Milliseconds since Unix epoch when
+     * the file was created. | | &#x60;size_bytes&#x60; | &#x60;Int&#x60; | File size in bytes. |
+     * #### CodeExecutionFileMetadata fields Each entry in the &#x60;code_execution_files&#x60;
+     * array contains: | Field | Type | Description | | ------------------------ | --------- |
+     * -------------------------------------------------------------------------------------------------------------------------------
+     * | | &#x60;file_id&#x60; | &#x60;String&#x60; | Unique identifier of the file. | |
+     * &#x60;display_name&#x60; | &#x60;String&#x60; | Human-readable file name. | |
+     * &#x60;file_type&#x60; | &#x60;String&#x60; | File type such as &#x60;csv&#x60;,
+     * &#x60;pdf&#x60;, or &#x60;png&#x60;. | | &#x60;created_time_in_millis&#x60; |
+     * &#x60;Long&#x60; | Milliseconds since Unix epoch when the file was created. | |
+     * &#x60;expired&#x60; | &#x60;Boolean&#x60; | When &#x60;true&#x60;, the underlying file is no
+     * longer retrievable from code-execution storage; UIs should disable download and preview. |
+     * #### Loading answer payloads Each &#x60;AnswerResponseItem&#x60; in the response contains an
+     * &#x60;answer_id&#x60; field. Pass this value as the &#x60;answer_identifier&#x60; parameter
+     * to &#x60;loadAnswer&#x60; to retrieve the full answer payload (TML tokens, visualization
+     * metadata) for that item. #### Example request &#x60;&#x60;&#x60;bash GET
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages &#x60;&#x60;&#x60;
+     * #### Example response &#x60;&#x60;&#x60;json { \&quot;messages\&quot;: [ {
+     * \&quot;message_id\&quot;: \&quot;node_u_01\&quot;, \&quot;timestamp_in_millis\&quot;:
+     * 1744000000000, \&quot;user_prompt\&quot;: { \&quot;message\&quot;: {
+     * \&quot;message_id\&quot;: \&quot;msg_u_01\&quot;, \&quot;content\&quot;: \&quot;Show me
+     * revenue by region as a chart.\&quot; }, \&quot;attachments\&quot;: [] },
+     * \&quot;response_items\&quot;: [ { \&quot;type\&quot;: \&quot;tool_call\&quot;,
+     * \&quot;tool_call_id\&quot;: \&quot;toolu_01ABC\&quot;, \&quot;tool_name\&quot;:
+     * \&quot;search_datasets\&quot;, \&quot;step_title\&quot;: \&quot;Searching datasets\&quot;,
+     * \&quot;arguments\&quot;: { \&quot;query\&quot;: \&quot;revenue\&quot; },
+     * \&quot;timestamp_in_millis\&quot;: 1744000001000, \&quot;is_thinking\&quot;: false }, {
+     * \&quot;type\&quot;: \&quot;answer\&quot;, \&quot;answer_id\&quot;: \&quot;ans_01XYZ\&quot;,
+     * \&quot;tool_call_id\&quot;: \&quot;toolu_02DEF\&quot;, \&quot;tool_name\&quot;:
+     * \&quot;fetch_and_visualize\&quot;, \&quot;step_title\&quot;: \&quot;Visualising\&quot;,
+     * \&quot;timestamp_in_millis\&quot;: 1744000004000, \&quot;is_thinking\&quot;: false }, {
+     * \&quot;type\&quot;: \&quot;text\&quot;, \&quot;content\&quot;: \&quot;Revenue is highest in
+     * APAC.\&quot;, \&quot;content_type\&quot;: \&quot;TEXT_MARKDOWN\&quot;,
+     * \&quot;timestamp_in_millis\&quot;: 1744000005000, \&quot;is_thinking\&quot;: false,
+     * \&quot;step_title\&quot;: null, \&quot;file_reference\&quot;: { \&quot;file_id\&quot;:
+     * \&quot;revenue_by_region.csv\&quot;, \&quot;display_name\&quot;:
+     * \&quot;revenue_by_region.csv\&quot;, \&quot;created_time_in_millis\&quot;: 1744027200000 } }
+     * ] } ], \&quot;code_execution_files\&quot;: [ { \&quot;file_id\&quot;:
+     * \&quot;revenue_by_region.csv\&quot;, \&quot;display_name\&quot;:
+     * \&quot;revenue_by_region.csv\&quot;, \&quot;file_type\&quot;: \&quot;csv\&quot;,
+     * \&quot;created_time_in_millis\&quot;: 1744027200000, \&quot;expired\&quot;: false } ] }
+     * &#x60;&#x60;&#x60; #### Example: liveboard-started conversation When a conversation is
+     * initiated from a saved liveboard visualization rather than a user query, the first turn is
+     * synthetic. &#x60;user_prompt&#x60; is &#x60;null&#x60;, and &#x60;response_items&#x60;
+     * contains a single &#x60;answer&#x60; item referencing the seed visualization.
+     * &#x60;&#x60;&#x60;json { \&quot;messages\&quot;: [ { \&quot;message_id\&quot;:
+     * \&quot;ROOT_NODE\&quot;, \&quot;timestamp_in_millis\&quot;: 1743999000000,
+     * \&quot;user_prompt\&quot;: null, \&quot;response_items\&quot;: [ { \&quot;type\&quot;:
+     * \&quot;answer\&quot;, \&quot;answer_id\&quot;: \&quot;lb_seed_01\&quot;,
+     * \&quot;tool_call_id\&quot;: null, \&quot;tool_name\&quot;: null, \&quot;step_title\&quot;:
+     * null, \&quot;timestamp_in_millis\&quot;: 1743999000000, \&quot;is_thinking\&quot;: false } ]
+     * } ], \&quot;code_execution_files\&quot;: [] } &#x60;&#x60;&#x60; Subsequent turns follow the
+     * normal user-to-agent pattern. #### Error responses | Code | Description | | ---- |
+     * ---------------------------------------------------------------------------------------------------------------------------
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * lacks access to the specified conversation. | | 404 | Not Found — no conversation exists with
+     * the given identifier for the authenticated user. | &gt; ###### Note: &gt; &gt; - Messages
+     * with an internal &#x60;SYSTEM&#x60; source are always dropped from the response. &gt; -
+     * In-progress turns are still returned with an empty &#x60;response_items&#x60; array so
+     * clients can render the user message immediately. &gt; - Do not assume every
+     * &#x60;tool_call&#x60; has a paired &#x60;tool_result&#x60; or &#x60;answer&#x60; — an
+     * interrupted conversation can leave a dangling call. &gt; - Available from version 26.7.0.cl
+     * and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to
+     * enable Spotter on your cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getConversationTest() throws ApiException {
+        String conversationIdentifier = null;
+        ConversationMessageResponse response = api.getConversation(conversationIdentifier);
+        // TODO: test validations
+    }
+
+    /**
+     * Retrieves the list of saved agent conversations for the currently authenticated user. Only
+     * conversations created with &#x60;enable_save_chat: true&#x60; are returned. Version:
+     * 26.7.0.cl or later Retrieves a paginated list of saved agent conversations for the currently
+     * authenticated user. Only conversations that were created with &#x60;enable_save_chat:
+     * true&#x60; in &#x60;createAgentConversation&#x60; are returned. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege. #### Usage guidelines The request supports the
+     * following optional query parameters: - &#x60;limit&#x60;: maximum number of conversations to
+     * return. Use this together with &#x60;offset&#x60; for pagination. - &#x60;offset&#x60;:
+     * number of conversations to skip before returning results. Defaults to &#x60;0&#x60;. -
+     * &#x60;skip_empty&#x60;: when &#x60;true&#x60; (default), conversations with no messages are
+     * excluded from the results. Set to &#x60;false&#x60; to include empty conversations. If the
+     * request is successful, the response includes a &#x60;conversations&#x60; array. Each entry
+     * contains: - &#x60;conversation_identifier&#x60;: the unique ID of the conversation, used as
+     * input to &#x60;sendAgentConversationMessage&#x60;, &#x60;updateConversation&#x60;,
+     * &#x60;deleteConversation&#x60;, &#x60;stopConversation&#x60;, and &#x60;loadAnswer&#x60; -
+     * &#x60;conversation_title&#x60;: the display name of the conversation -
+     * &#x60;created_at&#x60;: ISO 8601 timestamp of when the conversation was created -
+     * &#x60;updated_at&#x60;: ISO 8601 timestamp of the most recent update to the conversation -
+     * &#x60;data_source_identifiers&#x60;: list of unique IDs of the data sources associated with
+     * the conversation - &#x60;data_source_names&#x60;: array of &#x60;{ id, name }&#x60; objects
+     * for the data sources associated with the conversation #### Pagination Use &#x60;limit&#x60;
+     * and &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
+     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 → first page GET
+     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second page
+     * &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
+     * &#x60;has_more: Boolean&#x60; field. When &#x60;true&#x60;, there are additional
+     * conversations beyond the current page — increment &#x60;offset&#x60; by &#x60;limit&#x60; to
+     * fetch the next page. When &#x60;has_more&#x60; is &#x60;false&#x60;, the current page is the
+     * last. Note that &#x60;total_count&#x60; is not returned; use &#x60;has_more&#x60; to drive
+     * paging controls. #### Example response &#x60;&#x60;&#x60;json { \&quot;conversations\&quot;:
+     * [ { \&quot;conversation_identifier\&quot;: \&quot;abc123\&quot;,
+     * \&quot;conversation_title\&quot;: \&quot;Sales by Region Q1\&quot;, \&quot;created_at\&quot;:
+     * \&quot;2026-03-01T10:00:00Z\&quot;, \&quot;updated_at\&quot;:
+     * \&quot;2026-03-05T14:23:00Z\&quot;, \&quot;data_source_identifiers\&quot;:
+     * [\&quot;ds-001\&quot;], \&quot;data_source_names\&quot;: [{ \&quot;id\&quot;:
+     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }] } ],
+     * \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; #### Error responses | Code | Description
+     * | |------|-------------| | 401 | Unauthorized — authentication token is missing, expired, or
+     * invalid. | | 403 | Forbidden — the authenticated user does not have
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; - Only conversations
+     * created with &#x60;enable_save_chat: true&#x60; appear in this list. Conversations created
+     * with &#x60;enable_save_chat: false&#x60; (the default) are not persisted and cannot be
+     * retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires
+     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getConversationListTest() throws ApiException {
+        Integer limit = null;
+        Integer offset = null;
+        Boolean skipEmpty = null;
+        AgentConversationHistoryResponse response =
+                api.getConversationList(limit, offset, skipEmpty);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Retrieves details of the current user session for the token
      * provided in the request header. Any ThoughtSpot user can access this endpoint and send an API
      * request. The data returned in the API response varies according to user&#39;s privilege and
@@ -2156,6 +2737,26 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Get translations bundle for a locale. Version: 26.7.0.cl or later Retrieves all translations
+     * for a specific locale as a JSON map. Available to all authenticated users. No additional
+     * privileges are required. #### Usage guidelines - &#x60;locale&#x60; parameter must be a
+     * hyphenated locale code (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
+     * &#x60;JA-JP&#x60;). - Returns a JSON object with a &#x60;translations&#x60; map where each
+     * key is the original string and each value is the translated string. - If the org has no
+     * translations for the requested locale, the endpoint falls back to cluster-level translations.
+     * - Returns an empty &#x60;translations&#x60; map (not an error) if no entries exist at either
+     * level.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getManualTranslationBundleTest() throws ApiException {
+        String locale = null;
+        Object response = api.getManualTranslationBundle(locale);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 10.15.0.cl or later Retrieves existing natural language (NL) instructions configured
      * for a specific data model. These instructions guide the AI system in understanding data
      * context and generating more accurate responses. Requires &#x60;CAN_USE_SPOTTER&#x60;
@@ -2320,6 +2921,146 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.7.0.cl or later Returns cluster-level storage setup information for configuring
+     * customer-managed storage. Use this endpoint to obtain the IAM identity details required
+     * before configuring a webhook storage destination. For S3 destinations, returns the platform
+     * AWS account ID and IAM trust policy template. For GCS destinations, returns the platform GCP
+     * service account email and the IAM role to grant for service account impersonation. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getWebhookStorageConfigTest() throws ApiException {
+        List<WebhookStorageConfigInfo> response = api.getWebhookStorageConfig();
+        // TODO: test validations
+    }
+
+    /**
+     * Import manual translations from a CSV file. Version: 26.7.0.cl or later Uploads a CSV file
+     * containing manual translations and upserts them into the database. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60;
+     * (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer
+     * application**) privilege. #### Usage guidelines - The CSV file must have exactly three
+     * columns in this order: &#x60;content&#x60;, &#x60;locale&#x60;,
+     * &#x60;translated-content&#x60;. - Maximum file size: **30 MB**. Maximum rows: **10,000**. -
+     * Only &#x60;.csv&#x60; files are accepted. - The import performs an **upsert**: existing
+     * entries matched by &#x60;(org_id, locale, content)&#x60; are updated; new entries are
+     * inserted. Entries not in the upload are left untouched. - Set &#x60;scope&#x60; to
+     * &#x60;CLUSTER&#x60; to upload translations to the All-Org context. Cluster-level translations
+     * act as defaults for orgs that have no translations for a locale.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void importManualTranslationsTest() throws ApiException {
+        File translationsFile = null;
+        String scope = null;
+        api.importManualTranslations(translationsFile, scope);
+        // TODO: test validations
+    }
+
+    /**
+     * Imports memory entries from a YAML payload. Performs an atomic, exact-subset replacement on
+     * the target data-models declared in the payload itself: every existing memory whose
+     * &#x60;datamodel_sources&#x60; set is a subset of the payload&#39;s union is deleted, and
+     * every row in the payload is inserted. Phase 1 (insert) is all-or-nothing; any insert failure
+     * rolls back every prior insert and returns &#x60;ROLLED_BACK&#x60;. Phase 2 (delete old) is
+     * best-effort; partial delete failures surface as &#x60;RESIDUAL_ORPHAN&#x60; entries in
+     * &#x60;warnings&#x60; (a follow-up sweeper reconciles them). &#x60;dry_run&#x60; is required:
+     * pass &#x60;true&#x60; first to inspect the preview counts and row failures, then re-run with
+     * &#x60;dry_run &#x3D; false&#x60; once the caller is satisfied. A real import refuses to write
+     * when any row failed validation. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and edit /
+     * coaching access on every referenced data-model. Version: 26.8.0.cl or later This API allows
+     * users to import data-model memories (can be extended to agent memories in future) using a
+     * given yaml file. This yaml file can be obtained from the export memory API in source env and
+     * can be modified and used as input to the import API in target env. This API enables customers
+     * to migrate memories from a source env to a target env. This improves memory adoption for
+     * Spotter by giving the users a chance to develop their memories in a dev env and replicate the
+     * same in a prod env. To use this API, the user needs either edit access or memory privilege on
+     * the data-model or manage-spotter privilege and they must use corresponding org related
+     * bearerToken where the data-model exists. #### Usage guidelines To import memory, the request
+     * must include: - &#x60;content&#x60;: The full serialized memory payload to import (currently
+     * YAML). Typically the &#x60;content&#x60; value returned by the &#x60;exportMemory&#x60; API,
+     * edited locally and re-submitted. The payload itself declares which data-models the memory
+     * applies to (via each row&#39;s &#x60;datamodel_sources&#x60;), so no separate identifier list
+     * is required. - &#x60;dry_run&#x60;: Required. When &#x60;true&#x60;, validate the payload and
+     * return preview counts without writing anything; when &#x60;false&#x60;, apply the atomic
+     * replacement. There is no default — always run with &#x60;dry_run &#x3D; true&#x60; first,
+     * then re-run with &#x60;dry_run &#x3D; false&#x60; once you are satisfied with the preview.
+     * The import performs an atomic, exact-subset replacement on the data-models referenced in the
+     * payload: every existing memory whose &#x60;datamodel_sources&#x60; set is a subset of the
+     * payload&#39;s union is deleted, and every row in the payload is inserted. The API returns a
+     * response object with: - &#x60;status&#x60;: The terminal status of the import
+     * (&#x60;SUCCESS&#x60;, &#x60;VALIDATION_FAILED&#x60;, or &#x60;FAILED&#x60;). -
+     * &#x60;summary&#x60;: Per &#x60;(memory_type, source)&#x60; counts. In a dry run the
+     * &#x60;deleted_record_count&#x60;/&#x60;inserted_record_count&#x60; are previews; in a real
+     * import they are actuals. - &#x60;validation_failures&#x60;: Per-item validation failures,
+     * each with &#x60;line_number&#x60;, &#x60;reason&#x60;, &#x60;field_name&#x60;, and
+     * &#x60;message&#x60; for click-to-locate and inline highlighting. - &#x60;diagnostics&#x60;:
+     * Groups of diagnostic messages, each with a &#x60;sub_status&#x60; (&#x60;WARNING&#x60;,
+     * &#x60;FAILURE&#x60;, &#x60;ROLLED_BACK&#x60;, or &#x60;UNKNOWN&#x60;) and a
+     * &#x60;messages&#x60; list. This is the single channel for both non-fatal observations (e.g. a
+     * &#x60;RESIDUAL_ORPHAN&#x60; entry under &#x60;WARNING&#x60; when a best-effort delete left an
+     * old doc behind, reconciled later by a sweeper using &#x60;operation_id&#x60;) and fatal
+     * causes (e.g. the failure reason under &#x60;FAILURE&#x60;, or a &#x60;ROLLED_BACK&#x60; group
+     * when inserts were undone). - &#x60;operation_id&#x60;: A server-minted UUID for log
+     * correlation and follow-up cleanup. #### Dry run &#x60;dry_run&#x60; is required and has no
+     * default, so the import is always a deliberate two-step flow: 1. **First, call with
+     * &#x60;dry_run &#x3D; true&#x60;.** This validates the payload and previews what would happen
+     * — the counts in &#x60;summary&#x60; and any &#x60;validation_failures&#x60; — without writing
+     * anything. 2. **Then, after reviewing a clean preview, call again with &#x60;dry_run &#x3D;
+     * false&#x60;** (same &#x60;content&#x60;). This performs the atomic replacement. It refuses to
+     * write when any item fails validation, so fix the reported &#x60;validation_failures&#x60; and
+     * resubmit. &gt; ###### Important: &gt; Never call &#x60;dry_run &#x3D; false&#x60; without
+     * first inspecting a &#x60;dry_run &#x3D; true&#x60; preview. A real import deletes and
+     * replaces existing memories on the referenced data-models. #### Error responses | Code |
+     * Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | #### Logical
+     * failures Validation and write failures are not returned in the error envelope. The call
+     * returns &#x60;200&#x60; with a terminal &#x60;status&#x60; of &#x60;VALIDATION_FAILED&#x60;
+     * or &#x60;FAILED&#x60;, and the details live in &#x60;validation_failures&#x60; /
+     * &#x60;diagnostics&#x60;: - **VALIDATION_FAILED** — one or more items failed schema/semantic
+     * validation; nothing was written. Inspect &#x60;validation_failures&#x60;, fix the items, and
+     * resubmit. - **FAILED** — the import did not complete. This covers both internal errors and
+     * rollbacks. Inspect &#x60;diagnostics&#x60;: a &#x60;ROLLED_BACK&#x60; group means Phase-1
+     * inserts failed and every successful insert was undone (the originals are intact, no
+     * destructive change), while a &#x60;FAILURE&#x60; group carries another non-validation cause
+     * (e.g. an internal error). Sample &#x60;VALIDATION_FAILED&#x60; response (HTTP 200):
+     * &#x60;&#x60;&#x60;json { \&quot;status\&quot;: \&quot;VALIDATION_FAILED\&quot;,
+     * \&quot;summary\&quot;: [ { \&quot;memory_type\&quot;: \&quot;RULES\&quot;,
+     * \&quot;source\&quot;: { \&quot;identifier\&quot;:
+     * \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;, \&quot;type\&quot;:
+     * \&quot;DATA_MODEL\&quot; }, \&quot;existing_record_count\&quot;: 3,
+     * \&quot;deleted_record_count\&quot;: 0, \&quot;inserted_record_count\&quot;: 0,
+     * \&quot;failed_record_count\&quot;: 1 } ], \&quot;validation_failures\&quot;: [ {
+     * \&quot;line_number\&quot;: 4, \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;,
+     * \&quot;field_name\&quot;: \&quot;content.rule_definition\&quot;, \&quot;message\&quot;:
+     * \&quot;Rule definition exceeds the maximum allowed length.\&quot; } ],
+     * \&quot;diagnostics\&quot;: [], \&quot;operation_id\&quot;:
+     * \&quot;550e8400-e29b-41d4-a716-446655440000\&quot; } &#x60;&#x60;&#x60; &gt; ###### Note:
+     * &gt; - To use this API, the user needs either edit access or memory privilege on the
+     * data-model or manage-spotter privilege and they must use corresponding org related
+     * bearerToken where the data-model exists. &gt; - This endpoint is currently in Beta. Breaking
+     * changes may be introduced before the endpoint is made Generally Available. &gt; - Available
+     * from version 26.8.0.cl and later. &gt; - This endpoint requires Spotter — please contact
+     * ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void importMemoryTest() throws ApiException {
+        ImportMemoryRequest importMemoryRequest = null;
+        EurekaImportMemoryResponse response = api.importMemory(importMemoryRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Imports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files
      * into ThoughtSpot. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtsSpot**) privilege. If [Role-Based Access
@@ -2423,6 +3164,83 @@ public class ThoughtSpotRestApiTest {
     public void importUsersTest() throws ApiException {
         ImportUsersRequest importUsersRequest = null;
         ImportUsersResponse response = api.importUsers(importUsersRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Loads the full answer payload for a specific answer item in an agent conversation. Returns
+     * structured answer data including the TML query, token breakdown, visualization metadata, and
+     * agent context state. Pass the &#x60;answer_id&#x60; from an &#x60;AnswerResponseItem&#x60; in
+     * the &#x60;getConversation&#x60; response as the &#x60;answer_identifier&#x60; parameter.
+     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.
+     * Version: 26.7.0.cl or later Loads the answer details for a specific answer item in an agent
+     * conversation. Returns structured answer data including the TML token list, visualization
+     * metadata, and agent context state. Use this endpoint to retrieve the full answer
+     * representation for an answer item — for example, to re-render a chart, export a query, or
+     * inspect the generated TML. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the
+     * specified conversation. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation, as
+     * returned by &#x60;createAgentConversation&#x60; - &#x60;answer_identifier&#x60; *(path
+     * parameter)*: the &#x60;answer_id&#x60; field from an &#x60;AnswerResponseItem&#x60; in the
+     * &#x60;getConversation&#x60; response If the request is successful, the response contains an
+     * &#x60;answer&#x60; object with the following fields: | Field | Type | Description |
+     * |-------|------|-------------| | &#x60;title&#x60; | &#x60;String&#x60; | Display title of
+     * the generated answer (e.g., &#x60;\&quot;sales by month\&quot;&#x60;). | |
+     * &#x60;description&#x60; | &#x60;String&#x60; | Optional description of the answer. | |
+     * &#x60;session_identifier&#x60; | &#x60;String&#x60; | Unique identifier of the session in
+     * which this answer was generated. | | &#x60;generation_number&#x60; | &#x60;Int&#x60; |
+     * Generation sequence number of this answer within the session. | | &#x60;tokens&#x60; |
+     * &#x60;[String]&#x60; | Ordered list of TML token strings that make up the answer query (e.g.,
+     * &#x60;[\&quot;[sales]\&quot;, \&quot;[date].&#39;monthly&#39;\&quot;]&#x60;). | |
+     * &#x60;visualization_type&#x60; | &#x60;VizType&#x60; | Suggested visualization type:
+     * &#x60;Chart&#x60;, &#x60;Table&#x60;, or &#x60;Undefined&#x60;. &#x60;null&#x60; if no
+     * suggestion is available. | | &#x60;formulas&#x60; | &#x60;[String]&#x60; | List of formula
+     * names referenced in the answer. Empty if none are used. | | &#x60;parameters&#x60; |
+     * &#x60;[String]&#x60; | List of parameter names applied to the answer. Empty if none are used.
+     * | | &#x60;sub_queries&#x60; | &#x60;[JSON]&#x60; | List of sub-query objects used in the
+     * answer. Empty if none are present. | | &#x60;ac_state&#x60; | &#x60;ACState&#x60; | Agent
+     * context state, including &#x60;transaction_identifier&#x60; and
+     * &#x60;generation_number&#x60;, used to correlate this answer with a specific agent turn. |
+     * #### ACState fields | Field | Type | Description | |-------|------|-------------| |
+     * &#x60;transaction_identifier&#x60; | &#x60;String&#x60; | Unique identifier of the agent
+     * transaction that produced this answer. | | &#x60;generation_number&#x60; | &#x60;Int&#x60; |
+     * Generation number within the transaction. | #### Example request &#x60;&#x60;&#x60;bash GET
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details
+     * &#x60;&#x60;&#x60; #### Example response &#x60;&#x60;&#x60;json { \&quot;answer\&quot;: {
+     * \&quot;title\&quot;: \&quot;sales by month\&quot;, \&quot;description\&quot;: \&quot;\&quot;,
+     * \&quot;session_identifier\&quot;: \&quot;7b00b801-73f4-4639-af5e-e775584ceba6\&quot;,
+     * \&quot;generation_number\&quot;: 1, \&quot;tokens\&quot;: [\&quot;[sales]\&quot;,
+     * \&quot;[date].&#39;monthly&#39;\&quot;], \&quot;visualization_type\&quot;: null,
+     * \&quot;formulas\&quot;: [], \&quot;parameters\&quot;: [], \&quot;sub_queries\&quot;: [],
+     * \&quot;ac_state\&quot;: { \&quot;transaction_identifier\&quot;:
+     * \&quot;7f6c9948-b4c7-4098-bb1f-6c67bc0e5699\&quot;, \&quot;generation_number\&quot;: 1 } } }
+     * &#x60;&#x60;&#x60; #### Typical usage scenario 1. Call &#x60;getConversation&#x60; to
+     * retrieve the full conversation history. 2. Locate an &#x60;AnswerResponseItem&#x60; in
+     * &#x60;response_items&#x60; — note its &#x60;answer_id&#x60; field. 3. Call
+     * &#x60;loadAnswer&#x60; with the &#x60;conversation_identifier&#x60; and &#x60;answer_id&#x60;
+     * as &#x60;answer_identifier&#x60;. 4. The returned &#x60;tokens&#x60; array can be used to
+     * open the answer in the ThoughtSpot search interface or rendered as pill chips in the UI. ####
+     * Error responses | Code | Description | |------|-------------| | 401 | Unauthorized —
+     * authentication token is missing, expired, or invalid. | | 403 | Forbidden — the authenticated
+     * user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified
+     * conversation. | | 404 | Not Found — no conversation or message exists with the given
+     * identifiers for the authenticated user. | | 422 | Unprocessable Entity — the message does not
+     * contain an answer of the expected type. | &gt; ###### Note: &gt; &gt; - This endpoint only
+     * loads answer-type messages. Other message types are not supported. &gt; -
+     * &#x60;visualization_type&#x60; may be &#x60;null&#x60; if the agent did not produce a
+     * visualization suggestion for this answer. &gt; - &#x60;formulas&#x60;,
+     * &#x60;parameters&#x60;, and &#x60;sub_queries&#x60; are returned as empty arrays when not
+     * applicable — they are never &#x60;null&#x60;. &gt; - Available from version 26.7.0.cl and
+     * later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable
+     * Spotter on your cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void loadAnswerTest() throws ApiException {
+        String conversationIdentifier = null;
+        String answerIdentifier = null;
+        LoadAnswerResponse response = api.loadAnswer(conversationIdentifier, answerIdentifier);
         // TODO: test validations
     }
 
@@ -2953,14 +3771,16 @@ public class ThoughtSpotRestApiTest {
 
     /**
      * Version: 9.0.0.cl or later Generates an Answer from a given data source. Requires at least
-     * view access to the data source object (Worksheet or View). #### Usage guidelines To search
-     * data, specify the data source GUID in &#x60;logical_table_identifier&#x60;. The data source
-     * can be a Worksheet, View, Table, or SQL view. Pass search tokens in the
-     * &#x60;query_string&#x60; attribute in the API request as shown in the following example:
-     * &#x60;&#x60;&#x60; { \&quot;query_string\&quot;: \&quot;[sales] by [store]\&quot;,
-     * \&quot;logical_table_identifier\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;, }
-     * &#x60;&#x60;&#x60; For more information about the &#x60;query_string&#x60; format and data
-     * source attribute, see [Search data
+     * view access to the data source object (Worksheet or View). If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the
+     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege is also
+     * required. #### Usage guidelines To search data, specify the data source GUID in
+     * &#x60;logical_table_identifier&#x60;. The data source can be a Worksheet, View, Table, or SQL
+     * view. Pass search tokens in the &#x60;query_string&#x60; attribute in the API request as
+     * shown in the following example: &#x60;&#x60;&#x60; { \&quot;query_string\&quot;:
+     * \&quot;[sales] by [store]\&quot;, \&quot;logical_table_identifier\&quot;:
+     * \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;, } &#x60;&#x60;&#x60; For more information
+     * about the &#x60;query_string&#x60; format and data source attribute, see [Search data
      * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).
      * The &#x60;record_size&#x60; attribute determines the number of records to retrieve in an API
      * call. For more information about pagination, record size, and maximum row limit, see
@@ -3103,6 +3923,50 @@ public class ThoughtSpotRestApiTest {
         SearchSecuritySettingsRequest searchSecuritySettingsRequest = null;
         SecuritySettingsResponse response =
                 api.searchSecuritySettings(searchSecuritySettingsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.7.0.cl or later Retrieves style preferences at cluster level or for the
+     * authenticated user&#39;s org. Cluster-level preferences serve as defaults for all orgs.
+     * Org-level preferences override cluster defaults. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * #### Usage guidelines - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to retrieve
+     * cluster-level style defaults. - Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to
+     * retrieve preferences for the authenticated user&#39;s org. - Each field in the response
+     * includes an &#x60;is_overridden&#x60; flag indicating whether the value was explicitly set at
+     * the requested scope or inherited from a parent scope (cluster or system default).
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchStyleCustomizationsTest() throws ApiException {
+        SearchStyleCustomizationsRequest searchStyleCustomizationsRequest = null;
+        List<StylePreference> response =
+                api.searchStyleCustomizations(searchStyleCustomizationsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.7.0.cl or later Returns custom fonts from the cluster-level or org-level font
+     * library. Omitting all filter fields returns all fonts in the target scope. When
+     * &#x60;include_font_assignments&#x60; is &#x60;true&#x60;, the response includes only the
+     * visualization areas explicitly assigned to each font. For cluster-scoped fonts,
+     * &#x60;org&#x60; is returned as &#x60;null&#x60;. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * #### Usage guidelines - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to search the
+     * cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to search the
+     * authenticated user&#39;s org library. - Use &#x60;font_identifier&#x60; to look up a specific
+     * font by UUID or name. - Use &#x60;name_pattern&#x60; for partial, case-insensitive name
+     * matching. - Set &#x60;include_font_assignments&#x60; to &#x60;true&#x60; to include
+     * visualization areas this font is currently assigned to. Defaults to &#x60;false&#x60;.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchStyleFontsTest() throws ApiException {
+        SearchStyleFontsRequest searchStyleFontsRequest = null;
+        List<StyleFontRecord> response = api.searchStyleFonts(searchStyleFontsRequest);
         // TODO: test validations
     }
 
@@ -3396,6 +4260,41 @@ public class ThoughtSpotRestApiTest {
         SendMessageRequest sendMessageRequest = null;
         List<ResponseMessage> response =
                 api.sendMessage(conversationIdentifier, sendMessageRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.6.0.cl or later Creates or updates the admin instructions for the AI agent
+     * (Spotter). Admin instructions are tenant- and org-scoped text that guide agent behavior
+     * across all conversations. If instructions already exist for the org, they are replaced
+     * (upsert semantics). Requires admin privileges. Only users with org admin access can set agent
+     * instructions. #### Usage guidelines The request must include: - &#x60;instructions&#x60;: the
+     * instructions text to apply to the agent (maximum 5000 characters) Instructions are validated
+     * against system guardrails before being saved. If the instructions contain content that
+     * conflicts with guardrails, the request is rejected with a &#x60;409&#x60; error and the
+     * existing instructions remain unchanged. If the request is successful, the response includes
+     * the saved &#x60;AgentInstructions&#x60; record: - &#x60;id&#x60;: unique identifier of the
+     * record - &#x60;instructions&#x60;: the saved instructions text - &#x60;created_at&#x60;: ISO
+     * timestamp when the instructions were first created - &#x60;updated_at&#x60;: ISO timestamp of
+     * this update - &#x60;last_updated_by&#x60;: user ID of the admin who performed this update
+     * #### Error responses | Code | Description | |------|-------------| | 400 | Bad request — the
+     * request body is missing required fields or the &#x60;instructions&#x60; field exceeds the
+     * maximum allowed length of 5000 characters. | | 401 | Unauthorized — authentication token is
+     * missing, expired, or invalid. | | 403 | Forbidden — the authenticated user does not have org
+     * admin privileges required to set agent instructions. | | 409 | Conflict — the provided
+     * instructions conflict with system guardrails. Review and revise the instructions text before
+     * retrying. | | 500 | Internal server error. | &gt; ###### Note: &gt; &gt; - This operation
+     * uses upsert semantics: it creates the instructions record if none exists, or replaces the
+     * existing one. &gt; - Instructions take effect immediately for new conversations created after
+     * the update. &gt; - Use &#x60;getAgentInstructions&#x60; to retrieve the current instructions
+     * before making changes. &gt; - Available from version 26.6.0.cl and later.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void setAgentInstructionsTest() throws ApiException {
+        SetAgentInstructionsRequest setAgentInstructionsRequest = null;
+        AgentInstructions response = api.setAgentInstructions(setAgentInstructionsRequest);
         // TODO: test validations
     }
 
@@ -3915,7 +4814,8 @@ public class ThoughtSpotRestApiTest {
      * JSON map of configuration attributes, database details, and table properties in
      * &#x60;data_warehouse_config&#x60; as shown in the following example: * This is an example of
      * updating a single table in a empty connection: &#x60;&#x60;&#x60; {
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB2\&quot;, \&quot;DB3\&quot;, \&quot;DEVELOPMENT\&quot;],
      * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
      * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
      * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
@@ -3945,7 +4845,8 @@ public class ThoughtSpotRestApiTest {
      * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
      * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
      * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB2\&quot;, \&quot;DB3\&quot;, \&quot;DEVELOPMENT\&quot;],
      * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
      * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
      * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
@@ -3983,7 +4884,16 @@ public class ThoughtSpotRestApiTest {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60;
+     * \&quot;databases\&quot;:[\&quot;DB1\&quot;, \&quot;DB2\&quot;],
+     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; The optional &#x60;databases&#x60;
+     * property in &#x60;data_warehouse_config&#x60; accepts a list of database names. When
+     * specified, ThoughtSpot persists this list on the connection and uses it to scope metadata
+     * fetching to only the specified databases in subsequent table add and remove operations. If
+     * omitted, all databases in the data warehouse are accessible for metadata operations. The
+     * &#x60;databases&#x60; and &#x60;externalDatabases&#x60; serve different purposes.
+     * &#x60;databases&#x60; is a flat list of database names that controls which databases are
+     * scanned during metadata operations. &#x60;externalDatabases&#x60; defines the full table
+     * hierarchy and determines which tables are linked into ThoughtSpot.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3992,6 +4902,47 @@ public class ThoughtSpotRestApiTest {
         String connectionIdentifier = null;
         UpdateConnectionV2Request updateConnectionV2Request = null;
         api.updateConnectionV2(connectionIdentifier, updateConnectionV2Request);
+        // TODO: test validations
+    }
+
+    /**
+     * Updates attributes of an existing agent conversation. Currently only the display title can be
+     * updated; additional conversation attributes may be supported in future versions. At least one
+     * updatable attribute must be provided in the request body. Version: 26.7.0.cl or later Updates
+     * attributes of an existing saved agent conversation. Currently only the conversation&#39;s
+     * display &#x60;title&#x60; can be updated; additional updatable attributes may be supported in
+     * future versions. At least one updatable attribute must be supplied in the request body.
+     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being
+     * updated. #### Usage guidelines The request must include: -
+     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to
+     * update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60;
+     * - At least one updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the
+     * new display name for the conversation. When provided, must be a non-empty string. A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes
+     * are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;. ####
+     * Example request &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; }
+     * &#x60;&#x60;&#x60; #### Error responses | Code | Description | |------|-------------| | 400 |
+     * Bad Request — the request body is empty or &#x60;title&#x60; is provided as an empty string.
+     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
+     * does not own the specified conversation. | | 404 | Not Found — no conversation exists with
+     * the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422 |
+     * Unprocessable Entity — the request body is malformed or contains an invalid field value. |
+     * &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat:
+     * true&#x60; can be updated. Unsaved conversations are not persisted and do not have a
+     * retrievable identifier. &gt; - Available from version 26.7.0.cl and later. &gt; - This
+     * endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
+     * cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateConversationTest() throws ApiException {
+        String conversationIdentifier = null;
+        UpdateConversationRequest updateConversationRequest = null;
+        api.updateConversation(conversationIdentifier, updateConversationRequest);
         // TODO: test validations
     }
 
@@ -4099,6 +5050,47 @@ public class ThoughtSpotRestApiTest {
     public void updateEmailCustomizationTest() throws ApiException {
         UpdateEmailCustomizationRequest updateEmailCustomizationRequest = null;
         api.updateEmailCustomization(updateEmailCustomizationRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.8.0.cl or later Writes rows of data into an existing input table. The supplied
+     * rows replace the current contents of the table: each call serializes the provided values to
+     * CSV and loads them into the input table via DataManager, overwriting any previously stored
+     * rows. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot
+     * instance, the &#x60;CAN_MANAGE_INPUT_TABLES&#x60; (**Can manage input tables**) privilege is
+     * required. The caller must also have &#x60;MODIFY&#x60; permission on the input table object.
+     * #### Usage guidelines Specify the input table GUID as the &#x60;input_table_identifier&#x60;
+     * path parameter and provide the row data in the request body: * **&#x60;columns&#x60;** —
+     * Ordered list of column names to write. Column names must exactly match the names defined when
+     * the input table was created. Only the listed columns are written; unlisted columns retain
+     * their existing values. * **&#x60;rows&#x60;** — List of rows to load. Each row is an array of
+     * string values in the same order as &#x60;columns&#x60;. All cell values must be passed as
+     * strings regardless of the column&#39;s underlying data type. **Note**: Each call fully
+     * replaces the previously loaded rows. To clear the table, send an empty &#x60;rows&#x60;
+     * array. Partial updates to individual rows are not supported; re-submit all rows on every
+     * write. #### Examples Write two rows to an input table. Pass the input table GUID as the
+     * &#x60;input_table_identifier&#x60; path parameter: &#x60;&#x60;&#x60; POST
+     * /api/rest/2.0/input-tables/{input_table_identifier}/update &#x60;&#x60;&#x60;
+     * &#x60;&#x60;&#x60;json { \&quot;columns\&quot;: [\&quot;region\&quot;,
+     * \&quot;target_revenue\&quot;, \&quot;effective_date\&quot;], \&quot;rows\&quot;: [
+     * [\&quot;West\&quot;, \&quot;1500000\&quot;, \&quot;2025-01-01\&quot;], [\&quot;East\&quot;,
+     * \&quot;2000000\&quot;, \&quot;2025-01-01\&quot;] ] } &#x60;&#x60;&#x60; The response returns
+     * the number of rows written: &#x60;&#x60;&#x60;json { \&quot;rows_loaded\&quot;: 2 }
+     * &#x60;&#x60;&#x60; Clear all rows from an input table: &#x60;&#x60;&#x60;json {
+     * \&quot;columns\&quot;: [\&quot;region\&quot;, \&quot;target_revenue\&quot;],
+     * \&quot;rows\&quot;: [] } &#x60;&#x60;&#x60;
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateInputTableTest() throws ApiException {
+        String inputTableIdentifier = null;
+        UpdateInputTableRequest updateInputTableRequest = null;
+        InputTableUpdateResponse response =
+                api.updateInputTable(inputTableIdentifier, updateInputTableRequest);
         // TODO: test validations
     }
 
@@ -4230,10 +5222,14 @@ public class ThoughtSpotRestApiTest {
      * &#x60;ADMINISTRATION&#x60; (**Can administer Org**) or &#x60;JOBSCHEDULING&#x60; (**Can
      * schedule for others**) privilege and edit access to the Liveboard. If [Role-Based Access
      * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;JOBSCHEDULING&#x60; (**Can schedule for others**) privilege is required. The API
-     * endpoint allows you to pause a scheduled job, change the status of a paused job. You can also
-     * edit the recipients list, frequency of the job, format of the file to send to the recipients
-     * in email notifications, PDF options, and time zone setting.
+     * the &#x60;JOBSCHEDULING&#x60; (**Can schedule for others**) privilege is required. If RBAC is
+     * enabled, changing a schedule&#39;s &#x60;file_format&#x60; also requires the download
+     * privilege that corresponds to the selected format: &#x60;CSV&#x60; and &#x60;XLSX&#x60;
+     * require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**)
+     * privilege, and &#x60;PDF&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download
+     * visuals**) privilege. The API endpoint allows you to pause a scheduled job, change the status
+     * of a paused job. You can also edit the recipients list, frequency of the job, format of the
+     * file to send to the recipients in email notifications, PDF options, and time zone setting.
      *
      * @throws ApiException if the Api call fails
      */
@@ -4242,6 +5238,86 @@ public class ThoughtSpotRestApiTest {
         String scheduleIdentifier = null;
         UpdateScheduleRequest updateScheduleRequest = null;
         api.updateSchedule(scheduleIdentifier, updateScheduleRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.7.0.cl or later Updates style preferences at cluster level or for the
+     * authenticated user&#39;s org, including navigation panel color, chart color palette, embedded
+     * footer text, logo, and font assignments per visualization area. Cluster-level preferences
+     * serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an
+     * Org-level preference falls back to Cluster-level preference, which on reset falls back to
+     * system defaults. Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
+     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. #### Usage guidelines Two
+     * operations are supported via the &#x60;operation&#x60; field: - **REPLACE** (default):
+     * Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**:
+     * Reverts specific fields to defaults. Specify which fields to reset using
+     * &#x60;reset_options.style&#x60; (for style fields) and
+     * &#x60;reset_options.visualization_areas&#x60; (for font assignments). Fields not listed in
+     * &#x60;reset_options&#x60; are not affected. #### Logo upload Logo files are uploaded as
+     * binary fields using &#x60;multipart/form-data&#x60;: - &#x60;default_logo&#x60;: Square app
+     * icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. -
+     * &#x60;wide_logo&#x60;: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted
+     * formats: PNG, JPG. To reset a logo to the default, use &#x60;operation: RESET&#x60; with
+     * &#x60;reset_options.style&#x60; set to &#x60;DEFAULT_LOGO&#x60; or &#x60;WIDE_LOGO&#x60;.
+     * #### Navigation panel color Set &#x60;navigation_panel.theme&#x60; to one of: -
+     * &#x60;DARK&#x60;: Default dark theme. - &#x60;TWO_TONE&#x60;: Dual-tone panel style. -
+     * &#x60;CUSTOM&#x60;: User-defined color. Provide &#x60;navigation_panel.base_color&#x60; as a
+     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### Chart color palette Provide exactly 8
+     * color entries in &#x60;chart_color_palette.colors&#x60;. Each entry requires a
+     * &#x60;primary&#x60; hex color. If &#x60;secondary&#x60; shades are omitted, the server
+     * auto-generates 4 shades from the primary color. #### Font assignments Specify
+     * &#x60;visualization_fonts.chart_visualization_fonts&#x60;,
+     * &#x60;visualization_fonts.table_visualization_fonts&#x60;, and
+     * &#x60;visualization_fonts.advanced_chart_visualization_fonts&#x60; to assign custom fonts to
+     * specific visualization areas. Only provide the areas you want to update; omitted areas remain
+     * unchanged.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateStyleCustomizationTest() throws ApiException {
+        String scope = null;
+        String operation = null;
+        StyleResetOptionsInput resetOptions = null;
+        NavigationPanelInput navigationPanel = null;
+        StyleColorPaletteInput chartColorPalette = null;
+        String embeddedFooterText = null;
+        VisualizationFontsInput visualizationFonts = null;
+        File defaultLogo = null;
+        File wideLogo = null;
+        api.updateStyleCustomization(
+                scope,
+                operation,
+                resetOptions,
+                navigationPanel,
+                chartColorPalette,
+                embeddedFooterText,
+                visualizationFonts,
+                defaultLogo,
+                wideLogo);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.7.0.cl or later Updates the metadata of an existing custom font in the
+     * cluster-level or org-level font library. Only the fields provided in the request are
+     * modified; omitted fields remain unchanged. Requires &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
+     * #### Usage guidelines - Identify the font using &#x60;font_identifier&#x60; (UUID or name). -
+     * Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to target the cluster-level library. Set
+     * &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to target the authenticated user&#39;s org
+     * library. - To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and
+     * re-upload using &#x60;uploadStyleFont&#x60;. - &#x60;color&#x60; must be a valid 6-digit hex
+     * string (e.g. &#x60;#333333&#x60;) if provided.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateStyleFontTest() throws ApiException {
+        String fontIdentifier = null;
+        UpdateStyleFontRequest updateStyleFontRequest = null;
+        api.updateStyleFont(fontIdentifier, updateStyleFontRequest);
         // TODO: test validations
     }
 
@@ -4376,6 +5452,37 @@ public class ThoughtSpotRestApiTest {
         String webhookIdentifier = null;
         UpdateWebhookConfigurationRequest updateWebhookConfigurationRequest = null;
         api.updateWebhookConfiguration(webhookIdentifier, updateWebhookConfigurationRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.7.0.cl or later Uploads a custom font to the cluster-level or org-level font
+     * library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only
+     * available within that org. Requires &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. #### Usage
+     * guidelines - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are
+     * rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the
+     * cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the
+     * authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if
+     * omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. -
+     * &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values:
+     * &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to
+     * &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g.
+     * &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the
+     * &#x60;updateStyleCustomization&#x60; endpoint.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void uploadStyleFontTest() throws ApiException {
+        String name = null;
+        File fileContent = null;
+        String scope = null;
+        String weight = null;
+        String style = null;
+        String color = null;
+        StyleFontUploadData response =
+                api.uploadStyleFont(name, fileContent, scope, weight, style, color);
         // TODO: test validations
     }
 

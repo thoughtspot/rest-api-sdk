@@ -51,4 +51,10 @@ public class SearchChannelHistoryRequestTest {
     public void startEpochTimeInMillisTest() {
         // TODO: test startEpochTimeInMillis
     }
+
+    /** Test the property 'endEpochTimeInMillis' */
+    @Test
+    public void endEpochTimeInMillisTest() {
+        // TODO: test endEpochTimeInMillis
+    }
 }

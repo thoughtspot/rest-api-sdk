@@ -13,6 +13,7 @@ Validation detail result for a sub-step.
 |**httpStatus** | **Integer** | HTTP status code returned by the channel (if applicable). |  [optional] |
 |**errorMessage** | **String** | Error message from the channel or validation process. |  [optional] |
 |**awsS3Info** | [**ChannelValidationAwsS3Info**](ChannelValidationAwsS3Info.md) |  |  [optional] |
+|**gcpGcsInfo** | [**ChannelValidationGcpGcsInfo**](ChannelValidationGcpGcsInfo.md) |  |  [optional] |
 
 
 

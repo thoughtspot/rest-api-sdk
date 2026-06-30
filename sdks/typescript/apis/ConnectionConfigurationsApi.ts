@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpFile, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
@@ -37,12 +37,10 @@ export class ConnectionConfigurationsApiRequestFactory extends BaseAPIRequestFac
         const localVarPath = '/api/rest/2.0/connection-configurations/search';
 
         // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
-      
-
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
 
 
         // Body Params
@@ -63,7 +61,7 @@ export class ConnectionConfigurationsApiRequestFactory extends BaseAPIRequestFac
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -88,12 +86,10 @@ export class ConnectionConfigurationsApiRequestFactory extends BaseAPIRequestFac
         const localVarPath = '/api/rest/2.0/connection-configurations/create';
 
         // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
-      
-
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
 
 
         // Body Params
@@ -114,7 +110,7 @@ export class ConnectionConfigurationsApiRequestFactory extends BaseAPIRequestFac
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -139,12 +135,10 @@ export class ConnectionConfigurationsApiRequestFactory extends BaseAPIRequestFac
         const localVarPath = '/api/rest/2.0/connection-configurations/delete';
 
         // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
-      
-
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
 
 
         // Body Params
@@ -165,7 +159,7 @@ export class ConnectionConfigurationsApiRequestFactory extends BaseAPIRequestFac
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -195,15 +189,13 @@ export class ConnectionConfigurationsApiRequestFactory extends BaseAPIRequestFac
 
         // Path Params
         const localVarPath = '/api/rest/2.0/connection-configurations/{configuration_identifier}/update'
-            .replace('{' + 'configuration_identifier' + '}', encodeURIComponent(String(configurationIdentifier)));
+            .replace('{configuration_identifier}', encodeURIComponent(String(configurationIdentifier)));
 
         // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST); 
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.25.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.25.0")
-      
-
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.27.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.27.0")
 
 
         // Body Params
@@ -224,7 +216,7 @@ export class ConnectionConfigurationsApiRequestFactory extends BaseAPIRequestFac
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -243,14 +235,14 @@ export class ConnectionConfigurationsApiResponseProcessor {
      * @params response Response returned by the server for a request to connectionConfigurationSearch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async connectionConfigurationSearch(response: ResponseContext): Promise<Array<ConnectionConfigurationResponse> > {
+     public async connectionConfigurationSearchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Array<ConnectionConfigurationResponse> >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Array<ConnectionConfigurationResponse> = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Array<ConnectionConfigurationResponse>", ""
             ) as Array<ConnectionConfigurationResponse>;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
@@ -287,7 +279,7 @@ export class ConnectionConfigurationsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Array<ConnectionConfigurationResponse>", ""
             ) as Array<ConnectionConfigurationResponse>;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -300,14 +292,14 @@ export class ConnectionConfigurationsApiResponseProcessor {
      * @params response Response returned by the server for a request to createConnectionConfiguration
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createConnectionConfiguration(response: ResponseContext): Promise<ConnectionConfigurationResponse > {
+     public async createConnectionConfigurationWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ConnectionConfigurationResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ConnectionConfigurationResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ConnectionConfigurationResponse", ""
             ) as ConnectionConfigurationResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
@@ -344,7 +336,7 @@ export class ConnectionConfigurationsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ConnectionConfigurationResponse", ""
             ) as ConnectionConfigurationResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -357,10 +349,10 @@ export class ConnectionConfigurationsApiResponseProcessor {
      * @params response Response returned by the server for a request to deleteConnectionConfiguration
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async deleteConnectionConfiguration(response: ResponseContext): Promise<void > {
+     public async deleteConnectionConfigurationWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
@@ -397,7 +389,7 @@ export class ConnectionConfigurationsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -410,10 +402,10 @@ export class ConnectionConfigurationsApiResponseProcessor {
      * @params response Response returned by the server for a request to updateConnectionConfiguration
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateConnectionConfiguration(response: ResponseContext): Promise<void > {
+     public async updateConnectionConfigurationWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
@@ -450,7 +442,7 @@ export class ConnectionConfigurationsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

@@ -10,18 +10,24 @@
  * Do not edit the class manually.
  */
 
+import { ActionDetailsInput } from '../models/ActionDetailsInput';
 import { AssociateMetadataInput } from '../models/AssociateMetadataInput';
-import { UpdateCustomActionRequestActionDetails } from '../models/UpdateCustomActionRequestActionDetails';
-import { UpdateCustomActionRequestDefaultActionConfig } from '../models/UpdateCustomActionRequestDefaultActionConfig';
+import { DefaultActionConfigInput } from '../models/DefaultActionConfigInput';
 import { HttpFile } from '../http/http';
 
 export class UpdateCustomActionRequest {
-    'action_details'?: UpdateCustomActionRequestActionDetails;
+    /**
+    * Action details includes `Type` and Configuration for Custom Actions, either Callback or URL is required.
+    */
+    'action_details'?: ActionDetailsInput;
     /**
     * Metadata objects to which the custom action needs to be associated.
     */
     'associate_metadata'?: Array<AssociateMetadataInput>;
-    'default_action_config'?: UpdateCustomActionRequestDefaultActionConfig;
+    /**
+    * Default Custom action configuration. This includes if the custom action available on visualizations and Answers. By default, a custom action is added to all visualizations and Answers.
+    */
+    'default_action_config'?: DefaultActionConfigInput;
     /**
     * Unique ID or name of the groups that can view and access the custom action.
     */
@@ -37,11 +43,13 @@ export class UpdateCustomActionRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "action_details",
             "baseName": "action_details",
-            "type": "UpdateCustomActionRequestActionDetails",
+            "type": "ActionDetailsInput",
             "format": ""
         },
         {
@@ -53,7 +61,7 @@ export class UpdateCustomActionRequest {
         {
             "name": "default_action_config",
             "baseName": "default_action_config",
-            "type": "UpdateCustomActionRequestDefaultActionConfig",
+            "type": "DefaultActionConfigInput",
             "format": ""
         },
         {
@@ -83,6 +91,5 @@ export class UpdateCustomActionRequest {
     }
 }
 
-
-export type UpdateCustomActionRequestOperationEnum = "ADD" | "REMOVE" ;
+    export type UpdateCustomActionRequestOperationEnum = "ADD" | "REMOVE" ;
 

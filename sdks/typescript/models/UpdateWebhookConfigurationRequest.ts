@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-import { CreateWebhookConfigurationRequestAuthentication } from '../models/CreateWebhookConfigurationRequestAuthentication';
-import { CreateWebhookConfigurationRequestSignatureVerification } from '../models/CreateWebhookConfigurationRequestSignatureVerification';
-import { CreateWebhookConfigurationRequestStorageDestination } from '../models/CreateWebhookConfigurationRequestStorageDestination';
+import { StorageDestinationInput } from '../models/StorageDestinationInput';
+import { WebhookAuthenticationInput } from '../models/WebhookAuthenticationInput';
 import { WebhookKeyValuePairInput } from '../models/WebhookKeyValuePairInput';
+import { WebhookSignatureVerificationInput } from '../models/WebhookSignatureVerificationInput';
 import { HttpFile } from '../http/http';
 
 export class UpdateWebhookConfigurationRequest {
@@ -37,15 +37,34 @@ export class UpdateWebhookConfigurationRequest {
     * List of events to subscribe to.
     */
     'events'?: Array<UpdateWebhookConfigurationRequestEventsEnum>;
-    'authentication'?: CreateWebhookConfigurationRequestAuthentication;
-    'signature_verification'?: CreateWebhookConfigurationRequestSignatureVerification;
-    'storage_destination'?: CreateWebhookConfigurationRequestStorageDestination;
+    /**
+    * Authorization configuration for the webhook.
+    */
+    'authentication'?: WebhookAuthenticationInput;
+    /**
+    * Configuration for webhook signature verification.
+    */
+    'signature_verification'?: WebhookSignatureVerificationInput;
+    /**
+    * Configuration for storage destination. AWS S3 example: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} GCP GCS example: {\"storage_type\": \"GCP_GCS\", \"storage_config\": {\"gcp_gcs_config\": {\"bucket_name\": \"my-webhook-files\", \"service_account_email\": \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"}}}    Version: 26.3.0.cl or later 
+    */
+    'storage_destination'?: StorageDestinationInput;
     /**
     * Additional headers as an array of key-value pairs. Example: [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}]    Version: 26.4.0.cl or later 
     */
     'additional_headers'?: Array<WebhookKeyValuePairInput>;
+    /**
+    * Status of the webhook (ENABLED or DISABLED).    Version: 26.7.0.cl or later 
+    */
+    'status'?: UpdateWebhookConfigurationRequestStatusEnum;
+    /**
+    * List of optional configuration sections to clear. Each value removes the corresponding configuration entirely from the webhook: AUTHENTICATION removes the authentication config, SIGNATURE_VERIFICATION removes the signature verification config, STORAGE_DESTINATION removes the storage destination config.    Version: 26.7.0.cl or later 
+    */
+    'reset_options'?: Array<UpdateWebhookConfigurationRequestResetOptionsEnum>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -81,25 +100,37 @@ export class UpdateWebhookConfigurationRequest {
         {
             "name": "authentication",
             "baseName": "authentication",
-            "type": "CreateWebhookConfigurationRequestAuthentication",
+            "type": "WebhookAuthenticationInput",
             "format": ""
         },
         {
             "name": "signature_verification",
             "baseName": "signature_verification",
-            "type": "CreateWebhookConfigurationRequestSignatureVerification",
+            "type": "WebhookSignatureVerificationInput",
             "format": ""
         },
         {
             "name": "storage_destination",
             "baseName": "storage_destination",
-            "type": "CreateWebhookConfigurationRequestStorageDestination",
+            "type": "StorageDestinationInput",
             "format": ""
         },
         {
             "name": "additional_headers",
             "baseName": "additional_headers",
             "type": "Array<WebhookKeyValuePairInput>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "UpdateWebhookConfigurationRequestStatusEnum",
+            "format": ""
+        },
+        {
+            "name": "reset_options",
+            "baseName": "reset_options",
+            "type": "Array<UpdateWebhookConfigurationRequestResetOptionsEnum>",
             "format": ""
         }    ];
 
@@ -111,6 +142,7 @@ export class UpdateWebhookConfigurationRequest {
     }
 }
 
-
-export type UpdateWebhookConfigurationRequestEventsEnum = "LIVEBOARD_SCHEDULE" ;
+    export type UpdateWebhookConfigurationRequestEventsEnum = "LIVEBOARD_SCHEDULE" ;
+    export type UpdateWebhookConfigurationRequestStatusEnum = "ENABLED" | "DISABLED" ;
+    export type UpdateWebhookConfigurationRequestResetOptionsEnum = "AUTHENTICATION" | "SIGNATURE_VERIFICATION" | "STORAGE_DESTINATION" ;
 

@@ -24,6 +24,8 @@ export class EventChannelConfig {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "event_type",
@@ -46,7 +48,6 @@ export class EventChannelConfig {
     }
 }
 
-
-export type EventChannelConfigEventTypeEnum = "LIVEBOARD_SCHEDULE" ;
-export type EventChannelConfigChannelsEnum = "EMAIL" | "WEBHOOK" ;
+    export type EventChannelConfigEventTypeEnum = "LIVEBOARD_SCHEDULE" ;
+    export type EventChannelConfigChannelsEnum = "EMAIL" | "WEBHOOK" ;
 

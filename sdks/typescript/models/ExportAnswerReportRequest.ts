@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ExportAnswerReportRequestPngOptions } from '../models/ExportAnswerReportRequestPngOptions';
-import { ExportAnswerReportRequestRegionalSettings } from '../models/ExportAnswerReportRequestRegionalSettings';
+import { AnswerPngOptionsInput } from '../models/AnswerPngOptionsInput';
+import { RegionalSettingsInput } from '../models/RegionalSettingsInput';
 import { HttpFile } from '../http/http';
 
 export class ExportAnswerReportRequest {
@@ -43,8 +43,14 @@ export class ExportAnswerReportRequest {
     * JSON object for setting values of parameters in runtime.
     */
     'runtime_param_override'?: any;
-    'regional_settings'?: ExportAnswerReportRequestRegionalSettings;
-    'png_options'?: ExportAnswerReportRequestPngOptions;
+    /**
+    * Options for specific region specific overrides to support date/number/string/currency formatting.
+    */
+    'regional_settings'?: RegionalSettingsInput;
+    /**
+    * Options for PNG export.   Version: 26.6.0.cl or later 
+    */
+    'png_options'?: AnswerPngOptionsInput;
     /**
     * GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later 
     */
@@ -55,6 +61,8 @@ export class ExportAnswerReportRequest {
     'type'?: ExportAnswerReportRequestTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -102,13 +110,13 @@ export class ExportAnswerReportRequest {
         {
             "name": "regional_settings",
             "baseName": "regional_settings",
-            "type": "ExportAnswerReportRequestRegionalSettings",
+            "type": "RegionalSettingsInput",
             "format": ""
         },
         {
             "name": "png_options",
             "baseName": "png_options",
-            "type": "ExportAnswerReportRequestPngOptions",
+            "type": "AnswerPngOptionsInput",
             "format": ""
         },
         {
@@ -132,7 +140,6 @@ export class ExportAnswerReportRequest {
     }
 }
 
-
-export type ExportAnswerReportRequestFileFormatEnum = "CSV" | "PDF" | "XLSX" | "PNG" ;
-export type ExportAnswerReportRequestTypeEnum = "SAVED" | "PINNED" ;
+    export type ExportAnswerReportRequestFileFormatEnum = "CSV" | "PDF" | "XLSX" | "PNG" ;
+    export type ExportAnswerReportRequestTypeEnum = "SAVED" | "PINNED" ;
 

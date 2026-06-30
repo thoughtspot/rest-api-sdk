@@ -31,6 +31,8 @@ export class VariableDetailInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "identifier",
@@ -59,6 +61,5 @@ export class VariableDetailInput {
     }
 }
 
-
-export type VariableDetailInputTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" | "USER_PROPERTY" ;
+    export type VariableDetailInputTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" | "USER_PROPERTY" ;
 

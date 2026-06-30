@@ -130,7 +130,9 @@ public class CreateRoleRequest implements Serializable {
 
         CAN_DOWNLOAD_DETAILED_DATA("CAN_DOWNLOAD_DETAILED_DATA"),
 
-        CAN_USE_SPOTTER("CAN_USE_SPOTTER");
+        CAN_USE_SPOTTER("CAN_USE_SPOTTER"),
+
+        CAN_MANAGE_SPOTTER("CAN_MANAGE_SPOTTER");
 
         private String value;
 
@@ -245,7 +247,8 @@ public class CreateRoleRequest implements Serializable {
     /**
      * Privileges granted to the Role. See
      * [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for
-     * supported roles privileges.
+     * supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP,
+     * assigning it has no effect.
      *
      * @return privileges
      */

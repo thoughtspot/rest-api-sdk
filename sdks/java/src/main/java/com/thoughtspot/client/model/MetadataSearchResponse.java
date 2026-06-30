@@ -66,7 +66,9 @@ public class MetadataSearchResponse implements Serializable {
 
         LOGICAL_RELATIONSHIP("LOGICAL_RELATIONSHIP"),
 
-        INSIGHT_SPEC("INSIGHT_SPEC");
+        INSIGHT_SPEC("INSIGHT_SPEC"),
+
+        COLLECTION("COLLECTION");
 
         private String value;
 

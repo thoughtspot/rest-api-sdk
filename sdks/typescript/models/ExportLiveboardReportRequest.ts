@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { ExportAnswerReportRequestRegionalSettings } from '../models/ExportAnswerReportRequestRegionalSettings';
-import { ExportLiveboardReportRequestPdfOptions } from '../models/ExportLiveboardReportRequestPdfOptions';
-import { ExportLiveboardReportRequestPngOptions } from '../models/ExportLiveboardReportRequestPngOptions';
+import { PdfOptionsInput } from '../models/PdfOptionsInput';
+import { PngOptionsInput } from '../models/PngOptionsInput';
+import { RegionalSettingsInput } from '../models/RegionalSettingsInput';
 import { HttpFile } from '../http/http';
 
 export class ExportLiveboardReportRequest {
@@ -52,15 +52,26 @@ export class ExportLiveboardReportRequest {
     * JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
     'runtime_sort'?: any;
-    'pdf_options'?: ExportLiveboardReportRequestPdfOptions;
-    'png_options'?: ExportLiveboardReportRequestPngOptions;
+    /**
+    * Options for PDF export.
+    */
+    'pdf_options'?: PdfOptionsInput;
+    /**
+    * Options for PNG export.
+    */
+    'png_options'?: PngOptionsInput;
     /**
     * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
     'runtime_param_override'?: any;
-    'regional_settings'?: ExportAnswerReportRequestRegionalSettings;
+    /**
+    * Options for specific region specific overrides to support date/number/string/currency formatting.
+    */
+    'regional_settings'?: RegionalSettingsInput;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -120,13 +131,13 @@ export class ExportLiveboardReportRequest {
         {
             "name": "pdf_options",
             "baseName": "pdf_options",
-            "type": "ExportLiveboardReportRequestPdfOptions",
+            "type": "PdfOptionsInput",
             "format": ""
         },
         {
             "name": "png_options",
             "baseName": "png_options",
-            "type": "ExportLiveboardReportRequestPngOptions",
+            "type": "PngOptionsInput",
             "format": ""
         },
         {
@@ -138,7 +149,7 @@ export class ExportLiveboardReportRequest {
         {
             "name": "regional_settings",
             "baseName": "regional_settings",
-            "type": "ExportAnswerReportRequestRegionalSettings",
+            "type": "RegionalSettingsInput",
             "format": ""
         }    ];
 
@@ -150,6 +161,5 @@ export class ExportLiveboardReportRequest {
     }
 }
 
-
-export type ExportLiveboardReportRequestFileFormatEnum = "PDF" | "PNG" | "CSV" | "XLSX" ;
+    export type ExportLiveboardReportRequestFileFormatEnum = "PDF" | "PNG" | "CSV" | "XLSX" ;
 

@@ -12,6 +12,8 @@ import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.WebhookDeleteResponse;
 import com.thoughtspot.client.model.WebhookResponse;
 import com.thoughtspot.client.model.WebhookSearchResponse;
+import com.thoughtspot.client.model.WebhookStorageConfigInfo;
+import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -56,6 +58,26 @@ public class WebhooksApiTest {
         DeleteWebhookConfigurationsRequest deleteWebhookConfigurationsRequest = null;
         WebhookDeleteResponse response =
                 api.deleteWebhookConfigurations(deleteWebhookConfigurationsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.7.0.cl or later Returns cluster-level storage setup information for configuring
+     * customer-managed storage. Use this endpoint to obtain the IAM identity details required
+     * before configuring a webhook storage destination. For S3 destinations, returns the platform
+     * AWS account ID and IAM trust policy template. For GCS destinations, returns the platform GCP
+     * service account email and the IAM role to grant for service account impersonation. Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
+     * developer privilege**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
+     * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
+     * perform this action.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getWebhookStorageConfigTest() throws ApiException {
+        List<WebhookStorageConfigInfo> response = api.getWebhookStorageConfig();
         // TODO: test validations
     }
 

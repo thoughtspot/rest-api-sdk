@@ -26,7 +26,7 @@ export class MetadataListItemInput {
     */
     'name_pattern'?: string | null;
     /**
-    * Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view. 5. CONNECTION for creating or modify data connections. 6. TAG for tag objects. 7. USER for user objects. 8. USER_GROUP for group objects. 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values 10. INSIGHT_SPEC for SpotIQ objects
+    * Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view. 5. CONNECTION for creating or modify data connections. 6. TAG for tag objects. 7. USER for user objects. 8. USER_GROUP for group objects. 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values 10. INSIGHT_SPEC for SpotIQ objects 11. COLLECTION for collection objects
     */
     'type'?: MetadataListItemInputTypeEnum | null;
     /**
@@ -35,6 +35,8 @@ export class MetadataListItemInput {
     'subtypes'?: Array<MetadataListItemInputSubtypesEnum> | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -76,7 +78,6 @@ export class MetadataListItemInput {
     }
 }
 
-
-export type MetadataListItemInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP" | "INSIGHT_SPEC" ;
-export type MetadataListItemInputSubtypesEnum = "ONE_TO_ONE_LOGICAL" | "WORKSHEET" | "PRIVATE_WORKSHEET" | "USER_DEFINED" | "AGGR_WORKSHEET" | "SQL_VIEW" ;
+    export type MetadataListItemInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP" | "INSIGHT_SPEC" | "COLLECTION" ;
+    export type MetadataListItemInputSubtypesEnum = "ONE_TO_ONE_LOGICAL" | "WORKSHEET" | "PRIVATE_WORKSHEET" | "USER_DEFINED" | "AGGR_WORKSHEET" | "SQL_VIEW" ;
 

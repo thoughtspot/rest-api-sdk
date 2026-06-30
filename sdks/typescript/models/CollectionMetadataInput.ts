@@ -27,6 +27,8 @@ export class CollectionMetadataInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "type",
@@ -49,6 +51,5 @@ export class CollectionMetadataInput {
     }
 }
 
-
-export type CollectionMetadataInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "COLLECTION" ;
+    export type CollectionMetadataInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "COLLECTION" ;
 

@@ -69,4 +69,16 @@ public class UpdateWebhookConfigurationRequestTest {
     public void additionalHeadersTest() {
         // TODO: test additionalHeaders
     }
+
+    /** Test the property 'status' */
+    @Test
+    public void statusTest() {
+        // TODO: test status
+    }
+
+    /** Test the property 'resetOptions' */
+    @Test
+    public void resetOptionsTest() {
+        // TODO: test resetOptions
+    }
 }

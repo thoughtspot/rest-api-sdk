@@ -11,7 +11,7 @@
 |**displayName** | **String** | Display name for the group. |  |
 |**defaultLiveboardIdentifiers** | **List&lt;String&gt;** | GUID of the Liveboards to assign as default Liveboards to the users in the group. |  [optional] |
 |**description** | **String** | Description of the group |  [optional] |
-|**privileges** | [**List&lt;PrivilegesEnum&gt;**](#List&lt;PrivilegesEnum&gt;) | Privileges to assign to the group |  [optional] |
+|**privileges** | [**List&lt;PrivilegesEnum&gt;**](#List&lt;PrivilegesEnum&gt;) | Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect. |  [optional] |
 |**subGroupIdentifiers** | **List&lt;String&gt;** | GUID or name of the sub groups. A subgroup is a group assigned to a parent group. |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) | Group type. |  [optional] |
 |**userIdentifiers** | **List&lt;String&gt;** | GUID or name of the users to assign to the group. |  [optional] |
@@ -59,6 +59,7 @@
 | CAN_DOWNLOAD_VISUALS | &quot;CAN_DOWNLOAD_VISUALS&quot; |
 | CAN_DOWNLOAD_DETAILED_DATA | &quot;CAN_DOWNLOAD_DETAILED_DATA&quot; |
 | CAN_USE_SPOTTER | &quot;CAN_USE_SPOTTER&quot; |
+| CAN_MANAGE_SPOTTER | &quot;CAN_MANAGE_SPOTTER&quot; |
 
 
 

@@ -10,27 +10,35 @@
  * Do not edit the class manually.
  */
 
-import { CreateAgentConversationRequestConversationSettings } from '../models/CreateAgentConversationRequestConversationSettings';
-import { CreateAgentConversationRequestMetadataContext } from '../models/CreateAgentConversationRequestMetadataContext';
+import { ContextPayloadV2Input } from '../models/ContextPayloadV2Input';
+import { ConversationSettingsInput } from '../models/ConversationSettingsInput';
 import { HttpFile } from '../http/http';
 
 export class CreateAgentConversationRequest {
-    'metadata_context': CreateAgentConversationRequestMetadataContext;
-    'conversation_settings': CreateAgentConversationRequestConversationSettings;
+    /**
+    * Context for the conversation.
+    */
+    'metadata_context': ContextPayloadV2Input;
+    /**
+    * Conversation settings.
+    */
+    'conversation_settings': ConversationSettingsInput;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "metadata_context",
             "baseName": "metadata_context",
-            "type": "CreateAgentConversationRequestMetadataContext",
+            "type": "ContextPayloadV2Input",
             "format": ""
         },
         {
             "name": "conversation_settings",
             "baseName": "conversation_settings",
-            "type": "CreateAgentConversationRequestConversationSettings",
+            "type": "ConversationSettingsInput",
             "format": ""
         }    ];
 
@@ -41,4 +49,3 @@ export class CreateAgentConversationRequest {
     public constructor() {
     }
 }
-

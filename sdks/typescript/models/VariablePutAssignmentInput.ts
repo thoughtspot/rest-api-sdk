@@ -43,6 +43,8 @@ export class VariablePutAssignmentInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "assigned_values",
@@ -89,6 +91,5 @@ export class VariablePutAssignmentInput {
     }
 }
 
-
-export type VariablePutAssignmentInputPrincipalTypeEnum = "USER" | "USER_GROUP" ;
+    export type VariablePutAssignmentInputPrincipalTypeEnum = "USER" | "USER_GROUP" ;
 

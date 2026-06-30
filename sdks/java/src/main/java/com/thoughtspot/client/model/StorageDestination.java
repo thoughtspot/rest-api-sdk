@@ -33,7 +33,9 @@ public class StorageDestination implements Serializable {
     /** Type of storage destination (e.g., AWS_S3). */
     @JsonAdapter(StorageTypeEnum.Adapter.class)
     public enum StorageTypeEnum {
-        AWS_S3("AWS_S3");
+        AWS_S3("AWS_S3"),
+
+        GCP_GCS("GCP_GCS");
 
         private String value;
 

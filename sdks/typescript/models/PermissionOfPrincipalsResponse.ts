@@ -17,6 +17,8 @@ export class PermissionOfPrincipalsResponse {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "principal_permission_details",
@@ -32,4 +34,3 @@ export class PermissionOfPrincipalsResponse {
     public constructor() {
     }
 }
-

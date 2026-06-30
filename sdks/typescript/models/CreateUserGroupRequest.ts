@@ -30,7 +30,7 @@ export class CreateUserGroupRequest {
     */
     'description'?: string;
     /**
-    * Privileges to assign to the group
+    * Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.
     */
     'privileges'?: Array<CreateUserGroupRequestPrivilegesEnum>;
     /**
@@ -55,6 +55,8 @@ export class CreateUserGroupRequest {
     'role_identifiers'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -126,8 +128,7 @@ export class CreateUserGroupRequest {
     }
 }
 
-
-export type CreateUserGroupRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "CAN_MODIFY_FOLDERS" | "CAN_MANAGE_VARIABLES" | "CAN_VIEW_FOLDERS" | "CAN_MANAGE_AGENTSPOT" | "CAN_ACCESS_AGENTSPOT" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL" | "CAN_DOWNLOAD_VISUALS" | "CAN_DOWNLOAD_DETAILED_DATA" | "CAN_USE_SPOTTER" ;
-export type CreateUserGroupRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP" | "TEAM_GROUP" | "TENANT_GROUP" ;
-export type CreateUserGroupRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
+    export type CreateUserGroupRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "CAN_MODIFY_FOLDERS" | "CAN_MANAGE_VARIABLES" | "CAN_VIEW_FOLDERS" | "CAN_MANAGE_AGENTSPOT" | "CAN_ACCESS_AGENTSPOT" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_SETUP_VERSION_CONTROL" | "CAN_DOWNLOAD_VISUALS" | "CAN_DOWNLOAD_DETAILED_DATA" | "CAN_USE_SPOTTER" | "CAN_MANAGE_SPOTTER" ;
+    export type CreateUserGroupRequestTypeEnum = "LOCAL_GROUP" | "LDAP_GROUP" | "TEAM_GROUP" | "TENANT_GROUP" ;
+    export type CreateUserGroupRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
 
