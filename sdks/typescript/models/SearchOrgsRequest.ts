@@ -36,6 +36,8 @@ export class SearchOrgsRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "org_identifier",
@@ -76,7 +78,6 @@ export class SearchOrgsRequest {
     }
 }
 
-
-export type SearchOrgsRequestVisibilityEnum = "SHOW" | "HIDDEN" ;
-export type SearchOrgsRequestStatusEnum = "ACTIVE" | "IN_ACTIVE" ;
+    export type SearchOrgsRequestVisibilityEnum = "SHOW" | "HIDDEN" ;
+    export type SearchOrgsRequestStatusEnum = "ACTIVE" | "IN_ACTIVE" ;
 

@@ -36,6 +36,8 @@ export class MetadataListItemInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "identifier",
@@ -76,7 +78,6 @@ export class MetadataListItemInput {
     }
 }
 
-
-export type MetadataListItemInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP" | "INSIGHT_SPEC" ;
-export type MetadataListItemInputSubtypesEnum = "ONE_TO_ONE_LOGICAL" | "WORKSHEET" | "PRIVATE_WORKSHEET" | "USER_DEFINED" | "AGGR_WORKSHEET" | "SQL_VIEW" ;
+    export type MetadataListItemInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP" | "INSIGHT_SPEC" ;
+    export type MetadataListItemInputSubtypesEnum = "ONE_TO_ONE_LOGICAL" | "WORKSHEET" | "PRIVATE_WORKSHEET" | "USER_DEFINED" | "AGGR_WORKSHEET" | "SQL_VIEW" ;
 

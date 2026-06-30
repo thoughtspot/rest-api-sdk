@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SearchCalendarsRequestSortOptions } from '../models/SearchCalendarsRequestSortOptions';
+import { SortOption } from '../models/SortOption';
 import { HttpFile } from '../http/http';
 
 export class SearchCalendarsRequest {
@@ -30,9 +30,14 @@ export class SearchCalendarsRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: SearchCalendarsRequestSortOptions;
+    /**
+    * Sort options.
+    */
+    'sort_options'?: SortOption;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -62,7 +67,7 @@ export class SearchCalendarsRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "SearchCalendarsRequestSortOptions",
+            "type": "SortOption",
             "format": ""
         }    ];
 
@@ -73,4 +78,3 @@ export class SearchCalendarsRequest {
     public constructor() {
     }
 }
-

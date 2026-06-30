@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { UpdateCalendarRequestTableReference } from '../models/UpdateCalendarRequestTableReference';
+import { ExternalTableInput } from '../models/ExternalTableInput';
 import { HttpFile } from '../http/http';
 
 export class UpdateCalendarRequest {
@@ -18,7 +18,10 @@ export class UpdateCalendarRequest {
     * Type of update operation.
     */
     'update_method'?: UpdateCalendarRequestUpdateMethodEnum;
-    'table_reference': UpdateCalendarRequestTableReference;
+    /**
+    * Table reference containing connection identifier and table details in this format: `{\"connection_identifier\":\"conn1\", \"database_name\":\"db1\", \"schema_name\":\"sc1\", \"table_name\":\"tb1\"}`.
+    */
+    'table_reference': ExternalTableInput;
     /**
     * Start date for the calendar in `MM/dd/yyyy` format. This parameter is mandatory if `update_method` is set as `FROM_INPUT_PARAMS`.
     */
@@ -50,6 +53,8 @@ export class UpdateCalendarRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "update_method",
@@ -60,7 +65,7 @@ export class UpdateCalendarRequest {
         {
             "name": "table_reference",
             "baseName": "table_reference",
-            "type": "UpdateCalendarRequestTableReference",
+            "type": "ExternalTableInput",
             "format": ""
         },
         {
@@ -114,9 +119,8 @@ export class UpdateCalendarRequest {
     }
 }
 
-
-export type UpdateCalendarRequestUpdateMethodEnum = "FROM_INPUT_PARAMS" | "FROM_EXISTING_TABLE" ;
-export type UpdateCalendarRequestCalendarTypeEnum = "MONTH_OFFSET" | "FOUR_FOUR_FIVE" | "FOUR_FIVE_FOUR" | "FIVE_FOUR_FOUR" ;
-export type UpdateCalendarRequestMonthOffsetEnum = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December" ;
-export type UpdateCalendarRequestStartDayOfWeekEnum = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" ;
+    export type UpdateCalendarRequestUpdateMethodEnum = "FROM_INPUT_PARAMS" | "FROM_EXISTING_TABLE" ;
+    export type UpdateCalendarRequestCalendarTypeEnum = "MONTH_OFFSET" | "FOUR_FOUR_FIVE" | "FOUR_FIVE_FOUR" | "FIVE_FOUR_FOUR" ;
+    export type UpdateCalendarRequestMonthOffsetEnum = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December" ;
+    export type UpdateCalendarRequestStartDayOfWeekEnum = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" ;
 

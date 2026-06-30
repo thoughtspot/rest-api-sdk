@@ -20,6 +20,8 @@ export class DeleteWebhookConfigurationsRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "webhook_identifiers",
@@ -35,4 +37,3 @@ export class DeleteWebhookConfigurationsRequest {
     public constructor() {
     }
 }
-

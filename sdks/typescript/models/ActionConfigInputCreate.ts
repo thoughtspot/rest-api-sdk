@@ -27,6 +27,8 @@ export class ActionConfigInputCreate {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "position",
@@ -49,6 +51,5 @@ export class ActionConfigInputCreate {
     }
 }
 
-
-export type ActionConfigInputCreatePositionEnum = "MENU" | "PRIMARY" | "CONTEXT_MENU" ;
+    export type ActionConfigInputCreatePositionEnum = "MENU" | "PRIMARY" | "CONTEXT_MENU" ;
 

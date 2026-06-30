@@ -31,6 +31,8 @@ export class VariableUpdateAssignmentInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "variable_identifier",
@@ -59,6 +61,5 @@ export class VariableUpdateAssignmentInput {
     }
 }
 
-
-export type VariableUpdateAssignmentInputOperationEnum = "ADD" | "REMOVE" | "REPLACE" | "RESET" ;
+    export type VariableUpdateAssignmentInputOperationEnum = "ADD" | "REMOVE" | "REPLACE" | "RESET" ;
 

@@ -37,6 +37,8 @@ export class ManageObjectPrivilegeRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "operation",
@@ -77,8 +79,7 @@ export class ManageObjectPrivilegeRequest {
     }
 }
 
-
-export type ManageObjectPrivilegeRequestOperationEnum = "ADD" | "REMOVE" ;
-export type ManageObjectPrivilegeRequestMetadataTypeEnum = "LOGICAL_TABLE" ;
-export type ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum = "SPOTTER_COACHING_PRIVILEGE" ;
+    export type ManageObjectPrivilegeRequestOperationEnum = "ADD" | "REMOVE" ;
+    export type ManageObjectPrivilegeRequestMetadataTypeEnum = "LOGICAL_TABLE" ;
+    export type ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum = "SPOTTER_COACHING_PRIVILEGE" ;
 

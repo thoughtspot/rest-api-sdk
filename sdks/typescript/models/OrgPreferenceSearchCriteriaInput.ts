@@ -24,6 +24,8 @@ export class OrgPreferenceSearchCriteriaInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "org_identifier",
@@ -46,6 +48,5 @@ export class OrgPreferenceSearchCriteriaInput {
     }
 }
 
-
-export type OrgPreferenceSearchCriteriaInputEventTypesEnum = "LIVEBOARD_SCHEDULE" ;
+    export type OrgPreferenceSearchCriteriaInputEventTypesEnum = "LIVEBOARD_SCHEDULE" ;
 

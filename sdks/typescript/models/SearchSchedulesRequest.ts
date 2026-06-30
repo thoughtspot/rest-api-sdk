@@ -11,8 +11,8 @@
  */
 
 import { MetadataInput } from '../models/MetadataInput';
-import { SearchSchedulesRequestHistoryRunsOptions } from '../models/SearchSchedulesRequestHistoryRunsOptions';
-import { SearchSchedulesRequestSortOptions } from '../models/SearchSchedulesRequestSortOptions';
+import { ScheduleHistoryRunsOptionsInput } from '../models/ScheduleHistoryRunsOptionsInput';
+import { SortingOptions } from '../models/SortingOptions';
 import { HttpFile } from '../http/http';
 
 export class SearchSchedulesRequest {
@@ -28,14 +28,22 @@ export class SearchSchedulesRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: SearchSchedulesRequestSortOptions;
-    'history_runs_options'?: SearchSchedulesRequestHistoryRunsOptions;
+    /**
+    * Sort options.
+    */
+    'sort_options'?: SortingOptions;
+    /**
+    * Options while fetching history runs for the schedule.
+    */
+    'history_runs_options'?: ScheduleHistoryRunsOptionsInput;
     /**
     * unique ID or name of the Schedule
     */
     'schedule_identifiers'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -59,13 +67,13 @@ export class SearchSchedulesRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "SearchSchedulesRequestSortOptions",
+            "type": "SortingOptions",
             "format": ""
         },
         {
             "name": "history_runs_options",
             "baseName": "history_runs_options",
-            "type": "SearchSchedulesRequestHistoryRunsOptions",
+            "type": "ScheduleHistoryRunsOptionsInput",
             "format": ""
         },
         {
@@ -82,4 +90,3 @@ export class SearchSchedulesRequest {
     public constructor() {
     }
 }
-

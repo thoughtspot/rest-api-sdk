@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
+import { AuthClusterPreferencesInput } from '../models/AuthClusterPreferencesInput';
 import { AuthOrgPreferenceInput } from '../models/AuthOrgPreferenceInput';
-import { ConfigureAuthSettingsRequestClusterPreferences } from '../models/ConfigureAuthSettingsRequestClusterPreferences';
 import { HttpFile } from '../http/http';
 
 export class ConfigureAuthSettingsRequest {
@@ -19,13 +19,18 @@ export class ConfigureAuthSettingsRequest {
     * Type of authentication mechanism to configure. Currently supports TRUSTED_AUTH.
     */
     'auth_type': ConfigureAuthSettingsRequestAuthTypeEnum;
-    'cluster_preferences'?: ConfigureAuthSettingsRequestClusterPreferences;
+    /**
+    * Cluster-level authentication preferences. Omit to leave the existing cluster setting unchanged.
+    */
+    'cluster_preferences'?: AuthClusterPreferencesInput;
     /**
     * Org-level authentication preferences. Each entry identifies an org and the desired status. Omit to leave existing org settings unchanged.
     */
     'org_preferences'?: Array<AuthOrgPreferenceInput>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -37,7 +42,7 @@ export class ConfigureAuthSettingsRequest {
         {
             "name": "cluster_preferences",
             "baseName": "cluster_preferences",
-            "type": "ConfigureAuthSettingsRequestClusterPreferences",
+            "type": "AuthClusterPreferencesInput",
             "format": ""
         },
         {
@@ -55,6 +60,5 @@ export class ConfigureAuthSettingsRequest {
     }
 }
 
-
-export type ConfigureAuthSettingsRequestAuthTypeEnum = "TRUSTED_AUTH" ;
+    export type ConfigureAuthSettingsRequestAuthTypeEnum = "TRUSTED_AUTH" ;
 

@@ -105,4 +105,10 @@ public class WebhookResponseTest {
     public void storageDestinationTest() {
         // TODO: test storageDestination
     }
+
+    /** Test the property 'status' */
+    @Test
+    public void statusTest() {
+        // TODO: test status
+    }
 }

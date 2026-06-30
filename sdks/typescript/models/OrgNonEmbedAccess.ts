@@ -28,6 +28,8 @@ export class OrgNonEmbedAccess {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "block_full_app_access",
@@ -49,4 +51,3 @@ export class OrgNonEmbedAccess {
     public constructor() {
     }
 }
-

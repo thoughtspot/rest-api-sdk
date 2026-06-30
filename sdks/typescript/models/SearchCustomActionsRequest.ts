@@ -11,7 +11,7 @@
  */
 
 import { CustomActionMetadataTypeInput } from '../models/CustomActionMetadataTypeInput';
-import { SearchCustomActionsRequestDefaultActionConfig } from '../models/SearchCustomActionsRequestDefaultActionConfig';
+import { DefaultActionConfigSearchInput } from '../models/DefaultActionConfigSearchInput';
 import { HttpFile } from '../http/http';
 
 export class SearchCustomActionsRequest {
@@ -23,7 +23,10 @@ export class SearchCustomActionsRequest {
     * A pattern to match case-insensitive name of the custom-action object.
     */
     'name_pattern'?: string;
-    'default_action_config'?: SearchCustomActionsRequestDefaultActionConfig;
+    /**
+    * Default Custom action configuration. This includes if the custom action is available on all visualizations. By default, a custom action is added to all visualizations and Answers.
+    */
+    'default_action_config'?: DefaultActionConfigSearchInput;
     /**
     * When set to true, returns the associated groups for a custom action.
     */
@@ -43,6 +46,8 @@ export class SearchCustomActionsRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "custom_action_identifier",
@@ -59,7 +64,7 @@ export class SearchCustomActionsRequest {
         {
             "name": "default_action_config",
             "baseName": "default_action_config",
-            "type": "SearchCustomActionsRequestDefaultActionConfig",
+            "type": "DefaultActionConfigSearchInput",
             "format": ""
         },
         {
@@ -95,6 +100,5 @@ export class SearchCustomActionsRequest {
     }
 }
 
-
-export type SearchCustomActionsRequestTypeEnum = "CALLBACK" | "URL" ;
+    export type SearchCustomActionsRequestTypeEnum = "CALLBACK" | "URL" ;
 

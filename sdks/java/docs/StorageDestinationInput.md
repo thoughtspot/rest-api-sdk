@@ -18,6 +18,7 @@ Input type for storage destination configuration.
 | Name | Value |
 |---- | -----|
 | AWS_S3 | &quot;AWS_S3&quot; |
+| GCP_GCS | &quot;GCP_GCS&quot; |
 
 
 ## Implemented Interfaces

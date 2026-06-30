@@ -43,12 +43,13 @@ public class ConnectionsApiTest {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
-     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
-     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
-     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
-     * authentication type. #### Create a connection with tables If [Role-Based Access Control
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB1\&quot;, \&quot;DB2\&quot;], \&quot;externalDatabases\&quot;:[ ] }
+     * &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the
+     * &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly
+     * provide the authenticationType property in the payload. If you do not specify
+     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. ####
+     * Create a connection with tables If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
      * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
      * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
@@ -59,7 +60,8 @@ public class ConnectionsApiTest {
      * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB1\&quot;, \&quot;DB2\&quot;, \&quot;AllDatatypes\&quot;],
      * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
      * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
      * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
@@ -79,7 +81,15 @@ public class ConnectionsApiTest {
      * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
      * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
      * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type.
+     * SERVICE_ACCOUNT as the authentication type. The optional &#x60;databases&#x60; property in
+     * &#x60;data_warehouse_config&#x60; accepts a list of database names. When specified,
+     * ThoughtSpot persists this list on the connection and uses it to scope metadata fetching to
+     * only the specified databases in subsequent table add and remove operations. If omitted, all
+     * databases in the data warehouse are accessible for metadata operations. The
+     * &#x60;databases&#x60; and &#x60;externalDatabases&#x60; serve different purposes.
+     * &#x60;databases&#x60; is a flat list of database names that controls which databases are
+     * scanned during metadata operations. &#x60;externalDatabases&#x60; defines the full table
+     * hierarchy and determines which tables are linked into ThoughtSpot.
      *
      * @throws ApiException if the Api call fails
      */
@@ -390,7 +400,8 @@ public class ConnectionsApiTest {
      * JSON map of configuration attributes, database details, and table properties in
      * &#x60;data_warehouse_config&#x60; as shown in the following example: * This is an example of
      * updating a single table in a empty connection: &#x60;&#x60;&#x60; {
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB2\&quot;, \&quot;DB3\&quot;, \&quot;DEVELOPMENT\&quot;],
      * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
      * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
      * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
@@ -420,7 +431,8 @@ public class ConnectionsApiTest {
      * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
      * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
      * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,
+     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
+     * [\&quot;DB2\&quot;, \&quot;DB3\&quot;, \&quot;DEVELOPMENT\&quot;],
      * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
      * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
      * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
@@ -458,7 +470,16 @@ public class ConnectionsApiTest {
      * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
      * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
      * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60;
+     * \&quot;databases\&quot;:[\&quot;DB1\&quot;, \&quot;DB2\&quot;],
+     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; The optional &#x60;databases&#x60;
+     * property in &#x60;data_warehouse_config&#x60; accepts a list of database names. When
+     * specified, ThoughtSpot persists this list on the connection and uses it to scope metadata
+     * fetching to only the specified databases in subsequent table add and remove operations. If
+     * omitted, all databases in the data warehouse are accessible for metadata operations. The
+     * &#x60;databases&#x60; and &#x60;externalDatabases&#x60; serve different purposes.
+     * &#x60;databases&#x60; is a flat list of database names that controls which databases are
+     * scanned during metadata operations. &#x60;externalDatabases&#x60; defines the full table
+     * hierarchy and determines which tables are linked into ThoughtSpot.
      *
      * @throws ApiException if the Api call fails
      */

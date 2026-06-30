@@ -40,6 +40,8 @@ export class FetchAsyncImportTaskStatusRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "task_ids",
@@ -86,6 +88,5 @@ export class FetchAsyncImportTaskStatusRequest {
     }
 }
 
-
-export type FetchAsyncImportTaskStatusRequestTaskStatusEnum = "COMPLETED" | "IN_QUEUE" | "IN_PROGRESS" | "FAILED" ;
+    export type FetchAsyncImportTaskStatusRequestTaskStatusEnum = "COMPLETED" | "IN_QUEUE" | "IN_PROGRESS" | "FAILED" ;
 

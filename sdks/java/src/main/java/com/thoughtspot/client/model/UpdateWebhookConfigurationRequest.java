@@ -135,6 +135,63 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
     @javax.annotation.Nullable
     private List<WebhookKeyValuePairInput> additionalHeaders;
 
+    /** Status of the webhook (ENABLED or DISABLED). Version: 26.7.0.cl or later */
+    @JsonAdapter(StatusEnum.Adapter.class)
+    public enum StatusEnum {
+        ENABLED("ENABLED"),
+
+        DISABLED("DISABLED");
+
+        private String value;
+
+        StatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static StatusEnum fromValue(String value) {
+            for (StatusEnum b : StatusEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<StatusEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final StatusEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public StatusEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return StatusEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            StatusEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_STATUS = "status";
+
+    @SerializedName(SERIALIZED_NAME_STATUS)
+    @javax.annotation.Nullable
+    private StatusEnum status;
+
     public UpdateWebhookConfigurationRequest() {}
 
     public UpdateWebhookConfigurationRequest name(@javax.annotation.Nullable String name) {
@@ -292,13 +349,17 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
     }
 
     /**
-     * Configuration for storage destination. Example: {\&quot;storage_type\&quot;:
+     * Configuration for storage destination. AWS S3 example: {\&quot;storage_type\&quot;:
      * \&quot;AWS_S3\&quot;, \&quot;storage_config\&quot;: {\&quot;aws_s3_config\&quot;:
      * {\&quot;bucket_name\&quot;: \&quot;my-webhook-files\&quot;, \&quot;region\&quot;:
      * \&quot;us-west-2\&quot;, \&quot;role_arn\&quot;:
      * \&quot;arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\&quot;,
      * \&quot;external_id\&quot;: \&quot;ts-webhook-a1b2c3d4-7890\&quot;, \&quot;path_prefix\&quot;:
-     * \&quot;thoughtspot-webhooks/\&quot;}}} Version: 26.3.0.cl or later
+     * \&quot;thoughtspot-webhooks/\&quot;}}} GCP GCS example: {\&quot;storage_type\&quot;:
+     * \&quot;GCP_GCS\&quot;, \&quot;storage_config\&quot;: {\&quot;gcp_gcs_config\&quot;:
+     * {\&quot;bucket_name\&quot;: \&quot;my-webhook-files\&quot;,
+     * \&quot;service_account_email\&quot;: \&quot;my-sa@my-project.iam.gserviceaccount.com\&quot;,
+     * \&quot;path_prefix\&quot;: \&quot;webhooks/\&quot;}}} Version: 26.3.0.cl or later
      *
      * @return storageDestination
      */
@@ -342,6 +403,25 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
     public void setAdditionalHeaders(
             @javax.annotation.Nullable List<WebhookKeyValuePairInput> additionalHeaders) {
         this.additionalHeaders = additionalHeaders;
+    }
+
+    public UpdateWebhookConfigurationRequest status(@javax.annotation.Nullable StatusEnum status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Status of the webhook (ENABLED or DISABLED). Version: 26.7.0.cl or later
+     *
+     * @return status
+     */
+    @javax.annotation.Nullable
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+        this.status = status;
     }
 
     /**
@@ -413,6 +493,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                         updateWebhookConfigurationRequest.storageDestination)
                 && Objects.equals(
                         this.additionalHeaders, updateWebhookConfigurationRequest.additionalHeaders)
+                && Objects.equals(this.status, updateWebhookConfigurationRequest.status)
                 && Objects.equals(
                         this.additionalProperties,
                         updateWebhookConfigurationRequest.additionalProperties);
@@ -430,6 +511,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 signatureVerification,
                 storageDestination,
                 additionalHeaders,
+                status,
                 additionalProperties);
     }
 
@@ -452,6 +534,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         sb.append("    additionalHeaders: ")
                 .append(toIndentedString(additionalHeaders))
                 .append("\n");
+        sb.append("    status: ").append(toIndentedString(status)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -485,6 +568,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         openapiFields.add("signature_verification");
         openapiFields.add("storage_destination");
         openapiFields.add("additional_headers");
+        openapiFields.add("status");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -578,6 +662,18 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 }
                 ;
             }
+        }
+        if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull())
+                && !jsonObj.get("status").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `status` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("status").toString()));
+        }
+        // validate the optional field `status`
+        if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
+            StatusEnum.validateJsonElement(jsonObj.get("status"));
         }
     }
 

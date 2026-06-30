@@ -52,4 +52,10 @@ public class SearchWebhookConfigurationsRequestTest {
     public void sortOptionsTest() {
         // TODO: test sortOptions
     }
+
+    /** Test the property 'status' */
+    @Test
+    public void statusTest() {
+        // TODO: test status
+    }
 }

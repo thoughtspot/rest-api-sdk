@@ -31,6 +31,8 @@ export class FilterRules {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "column_name",
@@ -59,6 +61,5 @@ export class FilterRules {
     }
 }
 
-
-export type FilterRulesOperatorEnum = "EQ" | "NE" | "LT" | "LE" | "GT" | "GE" | "IN" | "BW" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BW_INC" | "BW_INC_MIN" | "BW_INC_MAX" | "LIKE" | "NOT_IN" ;
+    export type FilterRulesOperatorEnum = "EQ" | "NE" | "LT" | "LE" | "GT" | "GE" | "IN" | "BW" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BW_INC" | "BW_INC_MIN" | "BW_INC_MAX" | "LIKE" | "NOT_IN" ;
 

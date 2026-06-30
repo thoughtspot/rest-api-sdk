@@ -36,6 +36,8 @@ export class RuntimeSorts {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "column_name",
@@ -70,6 +72,5 @@ export class RuntimeSorts {
     }
 }
 
-
-export type RuntimeSortsOrderEnum = "ASC" | "DESC" ;
+    export type RuntimeSortsOrderEnum = "ASC" | "DESC" ;
 

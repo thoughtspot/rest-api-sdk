@@ -13,6 +13,7 @@
 |**recordOffset** | **Integer** | The offset point, starting from where the webhooks should be included in the response. |  [optional] |
 |**recordSize** | **Integer** | The number of webhooks that should be included in the response starting from offset position. |  [optional] |
 |**sortOptions** | [**WebhookSortOptionsInput**](WebhookSortOptionsInput.md) | Sort option includes sort field and sort order. |  [optional] |
+|**status** | [**StatusEnum**](#StatusEnum) | Filter webhooks by status (ENABLED or DISABLED).    Version: 26.7.0.cl or later  |  [optional] |
 
 
 
@@ -21,6 +22,15 @@
 | Name | Value |
 |---- | -----|
 | LIVEBOARD_SCHEDULE | &quot;LIVEBOARD_SCHEDULE&quot; |
+
+
+
+## Enum: StatusEnum
+
+| Name | Value |
+|---- | -----|
+| ENABLED | &quot;ENABLED&quot; |
+| DISABLED | &quot;DISABLED&quot; |
 
 
 ## Implemented Interfaces

@@ -44,6 +44,8 @@ export class GenerateCSVRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "start_date",
@@ -96,8 +98,7 @@ export class GenerateCSVRequest {
     }
 }
 
-
-export type GenerateCSVRequestCalendarTypeEnum = "MONTH_OFFSET" | "FOUR_FOUR_FIVE" | "FOUR_FIVE_FOUR" | "FIVE_FOUR_FOUR" ;
-export type GenerateCSVRequestMonthOffsetEnum = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December" ;
-export type GenerateCSVRequestStartDayOfWeekEnum = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" ;
+    export type GenerateCSVRequestCalendarTypeEnum = "MONTH_OFFSET" | "FOUR_FOUR_FIVE" | "FOUR_FIVE_FOUR" | "FIVE_FOUR_FOUR" ;
+    export type GenerateCSVRequestMonthOffsetEnum = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December" ;
+    export type GenerateCSVRequestStartDayOfWeekEnum = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" ;
 

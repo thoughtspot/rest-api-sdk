@@ -32,6 +32,8 @@ export class DeployCommitRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "commit_id",
@@ -66,7 +68,6 @@ export class DeployCommitRequest {
     }
 }
 
-
-export type DeployCommitRequestDeployTypeEnum = "FULL" | "DELTA" ;
-export type DeployCommitRequestDeployPolicyEnum = "ALL_OR_NONE" | "PARTIAL" | "VALIDATE_ONLY" ;
+    export type DeployCommitRequestDeployTypeEnum = "FULL" | "DELTA" ;
+    export type DeployCommitRequestDeployPolicyEnum = "ALL_OR_NONE" | "PARTIAL" | "VALIDATE_ONLY" ;
 

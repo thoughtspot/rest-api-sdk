@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SearchWebhookConfigurationsRequestSortOptions } from '../models/SearchWebhookConfigurationsRequestSortOptions';
+import { WebhookSortOptionsInput } from '../models/WebhookSortOptionsInput';
 import { HttpFile } from '../http/http';
 
 export class SearchWebhookConfigurationsRequest {
@@ -34,9 +34,18 @@ export class SearchWebhookConfigurationsRequest {
     * The number of webhooks that should be included in the response starting from offset position.
     */
     'record_size'?: number;
-    'sort_options'?: SearchWebhookConfigurationsRequestSortOptions;
+    /**
+    * Sort option includes sort field and sort order.
+    */
+    'sort_options'?: WebhookSortOptionsInput;
+    /**
+    * Filter webhooks by status (ENABLED or DISABLED).    Version: 26.7.0.cl or later 
+    */
+    'status'?: SearchWebhookConfigurationsRequestStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -72,7 +81,13 @@ export class SearchWebhookConfigurationsRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "SearchWebhookConfigurationsRequestSortOptions",
+            "type": "WebhookSortOptionsInput",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "SearchWebhookConfigurationsRequestStatusEnum",
             "format": ""
         }    ];
 
@@ -84,6 +99,6 @@ export class SearchWebhookConfigurationsRequest {
     }
 }
 
-
-export type SearchWebhookConfigurationsRequestEventTypeEnum = "LIVEBOARD_SCHEDULE" ;
+    export type SearchWebhookConfigurationsRequestEventTypeEnum = "LIVEBOARD_SCHEDULE" ;
+    export type SearchWebhookConfigurationsRequestStatusEnum = "ENABLED" | "DISABLED" ;
 

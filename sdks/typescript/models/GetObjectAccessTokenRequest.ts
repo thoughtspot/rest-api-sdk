@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { GetFullAccessTokenRequestUserParameters } from '../models/GetFullAccessTokenRequestUserParameters';
+import { UserParameterOptions } from '../models/UserParameterOptions';
 import { HttpFile } from '../http/http';
 
 export class GetObjectAccessTokenRequest {
@@ -54,9 +54,14 @@ export class GetObjectAccessTokenRequest {
     * Unique ID or name of the groups to which you want to assign the new user. You can specify this attribute to dynamically assign privileges during just-in-time (JIT) provisioning.
     */
     'group_identifiers'?: Array<string>;
-    'user_parameters'?: GetFullAccessTokenRequestUserParameters;
+    /**
+    * <div>Deprecated: 10.4.0.cl and later </div>  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).
+    */
+    'user_parameters'?: UserParameterOptions;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -122,7 +127,7 @@ export class GetObjectAccessTokenRequest {
         {
             "name": "user_parameters",
             "baseName": "user_parameters",
-            "type": "GetFullAccessTokenRequestUserParameters",
+            "type": "UserParameterOptions",
             "format": ""
         }    ];
 
@@ -133,4 +138,3 @@ export class GetObjectAccessTokenRequest {
     public constructor() {
     }
 }
-

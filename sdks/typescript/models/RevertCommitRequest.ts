@@ -29,6 +29,8 @@ export class RevertCommitRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "metadata",
@@ -57,6 +59,5 @@ export class RevertCommitRequest {
     }
 }
 
-
-export type RevertCommitRequestRevertPolicyEnum = "ALL_OR_NONE" | "PARTIAL" ;
+    export type RevertCommitRequestRevertPolicyEnum = "ALL_OR_NONE" | "PARTIAL" ;
 

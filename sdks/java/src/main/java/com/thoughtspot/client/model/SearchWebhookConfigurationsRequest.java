@@ -115,6 +115,63 @@ public class SearchWebhookConfigurationsRequest implements Serializable {
     @javax.annotation.Nullable
     private WebhookSortOptionsInput sortOptions;
 
+    /** Filter webhooks by status (ENABLED or DISABLED). Version: 26.7.0.cl or later */
+    @JsonAdapter(StatusEnum.Adapter.class)
+    public enum StatusEnum {
+        ENABLED("ENABLED"),
+
+        DISABLED("DISABLED");
+
+        private String value;
+
+        StatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static StatusEnum fromValue(String value) {
+            for (StatusEnum b : StatusEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<StatusEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final StatusEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public StatusEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return StatusEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            StatusEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_STATUS = "status";
+
+    @SerializedName(SERIALIZED_NAME_STATUS)
+    @javax.annotation.Nullable
+    private StatusEnum status;
+
     public SearchWebhookConfigurationsRequest() {}
 
     public SearchWebhookConfigurationsRequest orgIdentifier(
@@ -237,6 +294,25 @@ public class SearchWebhookConfigurationsRequest implements Serializable {
         this.sortOptions = sortOptions;
     }
 
+    public SearchWebhookConfigurationsRequest status(@javax.annotation.Nullable StatusEnum status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Filter webhooks by status (ENABLED or DISABLED). Version: 26.7.0.cl or later
+     *
+     * @return status
+     */
+    @javax.annotation.Nullable
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+        this.status = status;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -300,6 +376,7 @@ public class SearchWebhookConfigurationsRequest implements Serializable {
                         this.recordOffset, searchWebhookConfigurationsRequest.recordOffset)
                 && Objects.equals(this.recordSize, searchWebhookConfigurationsRequest.recordSize)
                 && Objects.equals(this.sortOptions, searchWebhookConfigurationsRequest.sortOptions)
+                && Objects.equals(this.status, searchWebhookConfigurationsRequest.status)
                 && Objects.equals(
                         this.additionalProperties,
                         searchWebhookConfigurationsRequest.additionalProperties);
@@ -314,6 +391,7 @@ public class SearchWebhookConfigurationsRequest implements Serializable {
                 recordOffset,
                 recordSize,
                 sortOptions,
+                status,
                 additionalProperties);
     }
 
@@ -329,6 +407,7 @@ public class SearchWebhookConfigurationsRequest implements Serializable {
         sb.append("    recordOffset: ").append(toIndentedString(recordOffset)).append("\n");
         sb.append("    recordSize: ").append(toIndentedString(recordSize)).append("\n");
         sb.append("    sortOptions: ").append(toIndentedString(sortOptions)).append("\n");
+        sb.append("    status: ").append(toIndentedString(status)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -359,6 +438,7 @@ public class SearchWebhookConfigurationsRequest implements Serializable {
         openapiFields.add("record_offset");
         openapiFields.add("record_size");
         openapiFields.add("sort_options");
+        openapiFields.add("status");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -416,6 +496,18 @@ public class SearchWebhookConfigurationsRequest implements Serializable {
         // validate the optional field `sort_options`
         if (jsonObj.get("sort_options") != null && !jsonObj.get("sort_options").isJsonNull()) {
             WebhookSortOptionsInput.validateJsonElement(jsonObj.get("sort_options"));
+        }
+        if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull())
+                && !jsonObj.get("status").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `status` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("status").toString()));
+        }
+        // validate the optional field `status`
+        if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
+            StatusEnum.validateJsonElement(jsonObj.get("status"));
         }
     }
 

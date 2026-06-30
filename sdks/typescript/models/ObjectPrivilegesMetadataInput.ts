@@ -24,6 +24,8 @@ export class ObjectPrivilegesMetadataInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "type",
@@ -46,6 +48,5 @@ export class ObjectPrivilegesMetadataInput {
     }
 }
 
-
-export type ObjectPrivilegesMetadataInputTypeEnum = "LOGICAL_TABLE" ;
+    export type ObjectPrivilegesMetadataInputTypeEnum = "LOGICAL_TABLE" ;
 

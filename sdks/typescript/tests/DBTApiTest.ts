@@ -105,6 +105,8 @@ describe('DBTApi', function() {
                     // dbtConnectionIdentifier dbt_connection_identifier
                         , 
                     // fileContent file_content
+                        , 
+                    // includeSemanticReport include_semantic_report
                        
                 )
               } catch (er) {
@@ -117,6 +119,8 @@ describe('DBTApi', function() {
                     // dbtConnectionIdentifier dbt_connection_identifier
                         , 
                     // fileContent file_content
+                        , 
+                    // includeSemanticReport include_semantic_report
                        
                   )
                 ).to.be.rejectedWith(Error);
@@ -147,6 +151,8 @@ describe('DBTApi', function() {
                     // worksheets worksheets
                         , 
                     // fileContent file_content
+                        , 
+                    // includeSemanticReport include_semantic_report
                        
                 )
               } catch (er) {
@@ -165,6 +171,8 @@ describe('DBTApi', function() {
                     // worksheets worksheets
                         , 
                     // fileContent file_content
+                        , 
+                    // includeSemanticReport include_semantic_report
                        
                   )
                 ).to.be.rejectedWith(Error);

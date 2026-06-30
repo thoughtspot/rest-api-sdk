@@ -52,6 +52,8 @@ export class LiveboardContent {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "available_data_row_count",
@@ -115,4 +117,3 @@ export class LiveboardContent {
     public constructor() {
     }
 }
-

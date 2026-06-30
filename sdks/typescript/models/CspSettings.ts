@@ -45,6 +45,8 @@ export class CspSettings {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "connect_src_urls",
@@ -96,4 +98,3 @@ export class CspSettings {
     public constructor() {
     }
 }
-

@@ -24,6 +24,8 @@ export class MetadataObject {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "identifier",
@@ -46,6 +48,5 @@ export class MetadataObject {
     }
 }
 
-
-export type MetadataObjectTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CUSTOM_ACTION" ;
+    export type MetadataObjectTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CUSTOM_ACTION" ;
 

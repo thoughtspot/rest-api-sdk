@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ExportMetadataTMLRequestExportOptions } from '../models/ExportMetadataTMLRequestExportOptions';
 import { ExportMetadataTypeInput } from '../models/ExportMetadataTypeInput';
+import { ExportOptions } from '../models/ExportOptions';
 import { HttpFile } from '../http/http';
 
 export class ExportMetadataTMLRequest {
@@ -47,9 +47,14 @@ export class ExportMetadataTMLRequest {
     * Indicates whether to export is happening from all orgs context.
     */
     'all_orgs_override'?: boolean | null;
-    'export_options'?: ExportMetadataTMLRequestExportOptions;
+    /**
+    * Flags to specify additional options for export.    Version: 10.6.0.cl or later 
+    */
+    'export_options'?: ExportOptions;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -103,7 +108,7 @@ export class ExportMetadataTMLRequest {
         {
             "name": "export_options",
             "baseName": "export_options",
-            "type": "ExportMetadataTMLRequestExportOptions",
+            "type": "ExportOptions",
             "format": ""
         }    ];
 
@@ -115,7 +120,6 @@ export class ExportMetadataTMLRequest {
     }
 }
 
-
-export type ExportMetadataTMLRequestEdocFormatEnum = "JSON" | "YAML" ;
-export type ExportMetadataTMLRequestExportSchemaVersionEnum = "DEFAULT" | "V1" | "V2" ;
+    export type ExportMetadataTMLRequestEdocFormatEnum = "JSON" | "YAML" ;
+    export type ExportMetadataTMLRequestExportSchemaVersionEnum = "DEFAULT" | "V1" | "V2" ;
 

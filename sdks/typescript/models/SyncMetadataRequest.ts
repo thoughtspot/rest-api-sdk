@@ -24,6 +24,8 @@ export class SyncMetadataRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "tables",
@@ -46,6 +48,5 @@ export class SyncMetadataRequest {
     }
 }
 
-
-export type SyncMetadataRequestSyncAttributesEnum = "DESCRIPTION" ;
+    export type SyncMetadataRequestSyncAttributesEnum = "DESCRIPTION" ;
 

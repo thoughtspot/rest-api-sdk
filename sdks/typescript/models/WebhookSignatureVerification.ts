@@ -32,6 +32,8 @@ export class WebhookSignatureVerification {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "type",
@@ -66,7 +68,6 @@ export class WebhookSignatureVerification {
     }
 }
 
-
-export type WebhookSignatureVerificationTypeEnum = "HMAC_SHA256" ;
-export type WebhookSignatureVerificationAlgorithmEnum = "SHA256" ;
+    export type WebhookSignatureVerificationTypeEnum = "HMAC_SHA256" ;
+    export type WebhookSignatureVerificationAlgorithmEnum = "SHA256" ;
 

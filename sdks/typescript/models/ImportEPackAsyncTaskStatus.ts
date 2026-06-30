@@ -76,6 +76,8 @@ export class ImportEPackAsyncTaskStatus {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "tenant_id",
@@ -176,7 +178,6 @@ export class ImportEPackAsyncTaskStatus {
     }
 }
 
-
-export type ImportEPackAsyncTaskStatusTaskStatusEnum = "COMPLETED" | "IN_QUEUE" | "IN_PROGRESS" | "FAILED" ;
-export type ImportEPackAsyncTaskStatusImportPolicyEnum = "PARTIAL" | "ALL_OR_NONE" | "VALIDATE_ONLY" | "PARTIAL_OBJECT" ;
+    export type ImportEPackAsyncTaskStatusTaskStatusEnum = "COMPLETED" | "IN_QUEUE" | "IN_PROGRESS" | "FAILED" ;
+    export type ImportEPackAsyncTaskStatusImportPolicyEnum = "PARTIAL" | "ALL_OR_NONE" | "VALIDATE_ONLY" | "PARTIAL_OBJECT" ;
 
