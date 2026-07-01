@@ -16,7 +16,7 @@
 |**_configuration** | **Object** | Configuration properties in JSON. |  [optional] |
 |**policyType** | [**PolicyTypeEnum**](#PolicyTypeEnum) | Type of policy. |  [optional] |
 |**policyPrincipals** | **List&lt;String&gt;** | Unique ID or name of the User and User Groups. |  [optional] |
-|**policyProcesses** | [**List&lt;PolicyProcessesEnum&gt;**](#List&lt;PolicyProcessesEnum&gt;) | Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS. |  [optional] |
+|**policyProcesses** | [**List&lt;PolicyProcessesEnum&gt;**](#List&lt;PolicyProcessesEnum&gt;) | Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS. |  [optional] |
 |**disable** | **Boolean** | Indicates whether the configuration enable/disable. |  [optional] |
 
 
@@ -54,6 +54,7 @@
 |---- | -----|
 | SAGE_INDEXING | &quot;SAGE_INDEXING&quot; |
 | ROW_COUNT_STATS | &quot;ROW_COUNT_STATS&quot; |
+| SCHEDULED_LIVEBOARDS | &quot;SCHEDULED_LIVEBOARDS&quot; |
 
 
 ## Implemented Interfaces

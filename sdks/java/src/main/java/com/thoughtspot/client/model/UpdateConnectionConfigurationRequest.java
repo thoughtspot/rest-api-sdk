@@ -212,7 +212,9 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
     public enum PolicyProcessesEnum {
         SAGE_INDEXING("SAGE_INDEXING"),
 
-        ROW_COUNT_STATS("ROW_COUNT_STATS");
+        ROW_COUNT_STATS("ROW_COUNT_STATS"),
+
+        SCHEDULED_LIVEBOARDS("SCHEDULED_LIVEBOARDS");
 
         private String value;
 
@@ -483,8 +485,8 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
     }
 
     /**
-     * Action that the query performed on the data warehouse, such as SAGE_INDEXING and
-     * ROW_COUNT_STATS.
+     * Action that the query performed on the data warehouse, such as SAGE_INDEXING,
+     * ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.
      *
      * @return policyProcesses
      */

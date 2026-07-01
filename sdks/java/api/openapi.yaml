@@ -21463,6 +21463,7 @@ components:
             enum:
             - SAGE_INDEXING
             - ROW_COUNT_STATS
+            - SCHEDULED_LIVEBOARDS
             type: string
           nullable: true
           type: array
@@ -28711,11 +28712,12 @@ components:
           type: array
         policy_processes:
           description: "Action that the query performed on the data warehouse, such\
-            \ as SAGE_INDEXING and ROW_COUNT_STATS."
+            \ as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS."
           items:
             enum:
             - SAGE_INDEXING
             - ROW_COUNT_STATS
+            - SCHEDULED_LIVEBOARDS
             type: string
           type: array
       required:
@@ -28813,11 +28815,12 @@ components:
           type: array
         policy_processes:
           description: "Action that the query performed on the data warehouse, such\
-            \ as SAGE_INDEXING and ROW_COUNT_STATS."
+            \ as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS."
           items:
             enum:
             - SAGE_INDEXING
             - ROW_COUNT_STATS
+            - SCHEDULED_LIVEBOARDS
             type: string
           type: array
         disable:

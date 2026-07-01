@@ -70,7 +70,9 @@ public class ConnectionConfigurationResponse implements Serializable {
     public enum PolicyProcessesEnum {
         SAGE_INDEXING("SAGE_INDEXING"),
 
-        ROW_COUNT_STATS("ROW_COUNT_STATS");
+        ROW_COUNT_STATS("ROW_COUNT_STATS"),
+
+        SCHEDULED_LIVEBOARDS("SCHEDULED_LIVEBOARDS");
 
         private String value;
 
