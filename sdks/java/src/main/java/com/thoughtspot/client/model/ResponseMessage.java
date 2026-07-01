@@ -104,9 +104,15 @@ public class ResponseMessage implements Serializable {
     public enum VisualizationTypeEnum {
         CHART("Chart"),
 
+        CHART2("CHART"),
+
         TABLE("Table"),
 
-        UNDEFINED("Undefined");
+        TABLE2("TABLE"),
+
+        UNDEFINED("Undefined"),
+
+        UNDEFINED2("UNDEFINED");
 
         private String value;
 

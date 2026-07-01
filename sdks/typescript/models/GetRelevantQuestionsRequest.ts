@@ -10,12 +10,15 @@
  * Do not edit the class manually.
  */
 
-import { GetRelevantQuestionsRequestAiContext } from '../models/GetRelevantQuestionsRequestAiContext';
-import { GetRelevantQuestionsRequestMetadataContext } from '../models/GetRelevantQuestionsRequestMetadataContext';
+import { AIContext } from '../models/AIContext';
+import { MetadataContext } from '../models/MetadataContext';
 import { HttpFile } from '../http/http';
 
 export class GetRelevantQuestionsRequest {
-    'metadata_context': GetRelevantQuestionsRequestMetadataContext;
+    /**
+    * metadata for the query to enable generation of relevant sub-questions; at least one context identifier is required.
+    */
+    'metadata_context': MetadataContext;
     /**
     * Maximum number of relevant questions that is allowed in the response, default = 5.
     */
@@ -28,15 +31,20 @@ export class GetRelevantQuestionsRequest {
     * A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis.
     */
     'query': string;
-    'ai_context'?: GetRelevantQuestionsRequestAiContext;
+    /**
+    * Additional context to guide the response.
+    */
+    'ai_context'?: AIContext;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "metadata_context",
             "baseName": "metadata_context",
-            "type": "GetRelevantQuestionsRequestMetadataContext",
+            "type": "MetadataContext",
             "format": ""
         },
         {
@@ -60,7 +68,7 @@ export class GetRelevantQuestionsRequest {
         {
             "name": "ai_context",
             "baseName": "ai_context",
-            "type": "GetRelevantQuestionsRequestAiContext",
+            "type": "AIContext",
             "format": ""
         }    ];
 
@@ -71,4 +79,3 @@ export class GetRelevantQuestionsRequest {
     public constructor() {
     }
 }
-

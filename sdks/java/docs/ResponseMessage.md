@@ -29,8 +29,11 @@
 | Name | Value |
 |---- | -----|
 | CHART | &quot;Chart&quot; |
+| CHART2 | &quot;CHART&quot; |
 | TABLE | &quot;Table&quot; |
+| TABLE2 | &quot;TABLE&quot; |
 | UNDEFINED | &quot;Undefined&quot; |
+| UNDEFINED2 | &quot;UNDEFINED&quot; |
 
 
 ## Implemented Interfaces

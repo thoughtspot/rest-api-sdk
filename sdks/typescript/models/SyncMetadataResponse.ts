@@ -43,6 +43,8 @@ export class SyncMetadataResponse {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "status",
@@ -89,6 +91,5 @@ export class SyncMetadataResponse {
     }
 }
 
-
-export type SyncMetadataResponseStatusEnum = "SUCCESS" | "PARTIAL_SUCCESS" | "NO_UPDATE" ;
+    export type SyncMetadataResponseStatusEnum = "SUCCESS" | "PARTIAL_SUCCESS" | "NO_UPDATE" ;
 

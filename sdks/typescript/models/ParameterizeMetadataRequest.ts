@@ -36,6 +36,8 @@ export class ParameterizeMetadataRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "metadata_type",
@@ -76,7 +78,6 @@ export class ParameterizeMetadataRequest {
     }
 }
 
-
-export type ParameterizeMetadataRequestMetadataTypeEnum = "LOGICAL_TABLE" | "CONNECTION" | "CONNECTION_CONFIG" ;
-export type ParameterizeMetadataRequestFieldTypeEnum = "ATTRIBUTE" | "CONNECTION_PROPERTY" ;
+    export type ParameterizeMetadataRequestMetadataTypeEnum = "LOGICAL_TABLE" | "CONNECTION" | "CONNECTION_CONFIG" ;
+    export type ParameterizeMetadataRequestFieldTypeEnum = "ATTRIBUTE" | "CONNECTION_PROPERTY" ;
 

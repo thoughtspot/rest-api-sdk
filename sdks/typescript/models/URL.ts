@@ -34,6 +34,8 @@ export class URL {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "authentication",
@@ -67,4 +69,3 @@ export class URL {
     public constructor() {
     }
 }
-

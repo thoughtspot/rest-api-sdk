@@ -17,6 +17,8 @@ export class PolicyProcessOptionsInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "impersonate_user",
@@ -32,4 +34,3 @@ export class PolicyProcessOptionsInput {
     public constructor() {
     }
 }
-

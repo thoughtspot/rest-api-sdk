@@ -38,6 +38,8 @@ export class SearchVariablesRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "variable_details",
@@ -78,6 +80,5 @@ export class SearchVariablesRequest {
     }
 }
 
-
-export type SearchVariablesRequestResponseContentEnum = "METADATA" | "METADATA_AND_VALUES" ;
+    export type SearchVariablesRequestResponseContentEnum = "METADATA" | "METADATA_AND_VALUES" ;
 

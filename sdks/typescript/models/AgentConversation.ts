@@ -24,6 +24,8 @@ export class AgentConversation {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "conversation_id",
@@ -45,4 +47,3 @@ export class AgentConversation {
     public constructor() {
     }
 }
-

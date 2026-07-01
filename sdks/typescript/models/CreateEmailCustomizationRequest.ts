@@ -10,11 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { CreateEmailCustomizationRequestTemplateProperties } from '../models/CreateEmailCustomizationRequestTemplateProperties';
+import { TemplatePropertiesInputCreate } from '../models/TemplatePropertiesInputCreate';
 import { HttpFile } from '../http/http';
 
 export class CreateEmailCustomizationRequest {
-    'template_properties': CreateEmailCustomizationRequestTemplateProperties;
+    /**
+    * Email customization configuration as key value pair
+    */
+    'template_properties': TemplatePropertiesInputCreate;
     /**
     * Unique ID or name of org    Version: 10.12.0.cl or later 
     */
@@ -22,11 +25,13 @@ export class CreateEmailCustomizationRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "template_properties",
             "baseName": "template_properties",
-            "type": "CreateEmailCustomizationRequestTemplateProperties",
+            "type": "TemplatePropertiesInputCreate",
             "format": ""
         },
         {
@@ -43,4 +48,3 @@ export class CreateEmailCustomizationRequest {
     public constructor() {
     }
 }
-

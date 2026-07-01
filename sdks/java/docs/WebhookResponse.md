@@ -22,6 +22,7 @@
 |**createdBy** | [**WebhookUser**](WebhookUser.md) |  |  [optional] |
 |**lastModifiedBy** | [**WebhookUser**](WebhookUser.md) |  |  [optional] |
 |**storageDestination** | [**StorageDestination**](StorageDestination.md) |  |  [optional] |
+|**status** | [**StatusEnum**](#StatusEnum) | Status of the webhook (ENABLED or DISABLED). Only present when explicitly set.    Version: 26.7.0.cl or later  |  [optional] |
 
 
 
@@ -30,6 +31,15 @@
 | Name | Value |
 |---- | -----|
 | LIVEBOARD_SCHEDULE | &quot;LIVEBOARD_SCHEDULE&quot; |
+
+
+
+## Enum: StatusEnum
+
+| Name | Value |
+|---- | -----|
+| ENABLED | &quot;ENABLED&quot; |
+| DISABLED | &quot;DISABLED&quot; |
 
 
 ## Implemented Interfaces

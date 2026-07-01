@@ -38,8 +38,14 @@ export class SearchChannelHistoryRequest {
     * Filter records created on or after this time (epoch milliseconds).
     */
     'start_epoch_time_in_millis'?: number;
+    /**
+    * Filter records created before this time (epoch milliseconds).    Version: 26.7.0.cl or later 
+    */
+    'end_epoch_time_in_millis'?: number;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -77,6 +83,12 @@ export class SearchChannelHistoryRequest {
             "baseName": "start_epoch_time_in_millis",
             "type": "number",
             "format": "float"
+        },
+        {
+            "name": "end_epoch_time_in_millis",
+            "baseName": "end_epoch_time_in_millis",
+            "type": "number",
+            "format": "float"
         }    ];
 
     static getAttributeTypeMap() {
@@ -87,7 +99,6 @@ export class SearchChannelHistoryRequest {
     }
 }
 
-
-export type SearchChannelHistoryRequestChannelTypeEnum = "WEBHOOK" ;
-export type SearchChannelHistoryRequestChannelStatusEnum = "PENDING" | "RETRY" | "SUCCESS" | "FAILED" ;
+    export type SearchChannelHistoryRequestChannelTypeEnum = "WEBHOOK" ;
+    export type SearchChannelHistoryRequestChannelStatusEnum = "PENDING" | "RETRY" | "SUCCESS" | "FAILED" ;
 

@@ -24,6 +24,8 @@ export class WebhookSortOptionsInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "field_name",
@@ -46,7 +48,6 @@ export class WebhookSortOptionsInput {
     }
 }
 
-
-export type WebhookSortOptionsInputFieldNameEnum = "CREATED" | "MODIFIED" | "NAME" ;
-export type WebhookSortOptionsInputOrderEnum = "ASC" | "DESC" ;
+    export type WebhookSortOptionsInputFieldNameEnum = "CREATED" | "MODIFIED" | "NAME" ;
+    export type WebhookSortOptionsInputOrderEnum = "ASC" | "DESC" ;
 

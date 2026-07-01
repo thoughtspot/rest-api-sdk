@@ -35,6 +35,12 @@ public class StorageConfigInput implements Serializable {
     @javax.annotation.Nullable
     private AwsS3ConfigInput awsS3Config;
 
+    public static final String SERIALIZED_NAME_GCP_GCS_CONFIG = "gcp_gcs_config";
+
+    @SerializedName(SERIALIZED_NAME_GCP_GCS_CONFIG)
+    @javax.annotation.Nullable
+    private GcpGcsConfigInput gcpGcsConfig;
+
     public StorageConfigInput() {}
 
     public StorageConfigInput awsS3Config(@javax.annotation.Nullable AwsS3ConfigInput awsS3Config) {
@@ -54,6 +60,26 @@ public class StorageConfigInput implements Serializable {
 
     public void setAwsS3Config(@javax.annotation.Nullable AwsS3ConfigInput awsS3Config) {
         this.awsS3Config = awsS3Config;
+    }
+
+    public StorageConfigInput gcpGcsConfig(
+            @javax.annotation.Nullable GcpGcsConfigInput gcpGcsConfig) {
+        this.gcpGcsConfig = gcpGcsConfig;
+        return this;
+    }
+
+    /**
+     * Get gcpGcsConfig
+     *
+     * @return gcpGcsConfig
+     */
+    @javax.annotation.Nullable
+    public GcpGcsConfigInput getGcpGcsConfig() {
+        return gcpGcsConfig;
+    }
+
+    public void setGcpGcsConfig(@javax.annotation.Nullable GcpGcsConfigInput gcpGcsConfig) {
+        this.gcpGcsConfig = gcpGcsConfig;
     }
 
     /**
@@ -110,13 +136,14 @@ public class StorageConfigInput implements Serializable {
         }
         StorageConfigInput storageConfigInput = (StorageConfigInput) o;
         return Objects.equals(this.awsS3Config, storageConfigInput.awsS3Config)
+                && Objects.equals(this.gcpGcsConfig, storageConfigInput.gcpGcsConfig)
                 && Objects.equals(
                         this.additionalProperties, storageConfigInput.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(awsS3Config, additionalProperties);
+        return Objects.hash(awsS3Config, gcpGcsConfig, additionalProperties);
     }
 
     @Override
@@ -124,6 +151,7 @@ public class StorageConfigInput implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("class StorageConfigInput {\n");
         sb.append("    awsS3Config: ").append(toIndentedString(awsS3Config)).append("\n");
+        sb.append("    gcpGcsConfig: ").append(toIndentedString(gcpGcsConfig)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -149,6 +177,7 @@ public class StorageConfigInput implements Serializable {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
         openapiFields.add("aws_s3_config");
+        openapiFields.add("gcp_gcs_config");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -175,6 +204,10 @@ public class StorageConfigInput implements Serializable {
         // validate the optional field `aws_s3_config`
         if (jsonObj.get("aws_s3_config") != null && !jsonObj.get("aws_s3_config").isJsonNull()) {
             AwsS3ConfigInput.validateJsonElement(jsonObj.get("aws_s3_config"));
+        }
+        // validate the optional field `gcp_gcs_config`
+        if (jsonObj.get("gcp_gcs_config") != null && !jsonObj.get("gcp_gcs_config").isJsonNull()) {
+            GcpGcsConfigInput.validateJsonElement(jsonObj.get("gcp_gcs_config"));
         }
     }
 

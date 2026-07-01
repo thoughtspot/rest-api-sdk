@@ -40,6 +40,8 @@ export class ExportMetadataTMLBatchedRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "metadata_type",
@@ -86,7 +88,6 @@ export class ExportMetadataTMLBatchedRequest {
     }
 }
 
-
-export type ExportMetadataTMLBatchedRequestMetadataTypeEnum = "USER" | "USER_GROUP" | "ROLE" ;
-export type ExportMetadataTMLBatchedRequestEdocFormatEnum = "JSON" | "YAML" ;
+    export type ExportMetadataTMLBatchedRequestMetadataTypeEnum = "USER" | "USER_GROUP" | "ROLE" ;
+    export type ExportMetadataTMLBatchedRequestEdocFormatEnum = "JSON" | "YAML" ;
 

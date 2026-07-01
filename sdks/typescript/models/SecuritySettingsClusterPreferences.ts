@@ -39,6 +39,8 @@ export class SecuritySettingsClusterPreferences {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "enable_partitioned_cookies",
@@ -85,6 +87,5 @@ export class SecuritySettingsClusterPreferences {
     }
 }
 
-
-export type SecuritySettingsClusterPreferencesTrustedAuthStatusEnum = "ENABLED" | "DISABLED" ;
+    export type SecuritySettingsClusterPreferencesTrustedAuthStatusEnum = "ENABLED" | "DISABLED" ;
 

@@ -164,6 +164,12 @@ public class ChannelValidationDetail implements Serializable {
     @javax.annotation.Nullable
     private ChannelValidationAwsS3Info awsS3Info;
 
+    public static final String SERIALIZED_NAME_GCP_GCS_INFO = "gcp_gcs_info";
+
+    @SerializedName(SERIALIZED_NAME_GCP_GCS_INFO)
+    @javax.annotation.Nullable
+    private ChannelValidationGcpGcsInfo gcpGcsInfo;
+
     public ChannelValidationDetail() {}
 
     public ChannelValidationDetail validationStep(
@@ -263,6 +269,26 @@ public class ChannelValidationDetail implements Serializable {
         this.awsS3Info = awsS3Info;
     }
 
+    public ChannelValidationDetail gcpGcsInfo(
+            @javax.annotation.Nullable ChannelValidationGcpGcsInfo gcpGcsInfo) {
+        this.gcpGcsInfo = gcpGcsInfo;
+        return this;
+    }
+
+    /**
+     * Get gcpGcsInfo
+     *
+     * @return gcpGcsInfo
+     */
+    @javax.annotation.Nullable
+    public ChannelValidationGcpGcsInfo getGcpGcsInfo() {
+        return gcpGcsInfo;
+    }
+
+    public void setGcpGcsInfo(@javax.annotation.Nullable ChannelValidationGcpGcsInfo gcpGcsInfo) {
+        this.gcpGcsInfo = gcpGcsInfo;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -321,6 +347,7 @@ public class ChannelValidationDetail implements Serializable {
                 && Objects.equals(this.httpStatus, channelValidationDetail.httpStatus)
                 && Objects.equals(this.errorMessage, channelValidationDetail.errorMessage)
                 && Objects.equals(this.awsS3Info, channelValidationDetail.awsS3Info)
+                && Objects.equals(this.gcpGcsInfo, channelValidationDetail.gcpGcsInfo)
                 && Objects.equals(
                         this.additionalProperties, channelValidationDetail.additionalProperties);
     }
@@ -337,7 +364,13 @@ public class ChannelValidationDetail implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(
-                validationStep, status, httpStatus, errorMessage, awsS3Info, additionalProperties);
+                validationStep,
+                status,
+                httpStatus,
+                errorMessage,
+                awsS3Info,
+                gcpGcsInfo,
+                additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -356,6 +389,7 @@ public class ChannelValidationDetail implements Serializable {
         sb.append("    httpStatus: ").append(toIndentedString(httpStatus)).append("\n");
         sb.append("    errorMessage: ").append(toIndentedString(errorMessage)).append("\n");
         sb.append("    awsS3Info: ").append(toIndentedString(awsS3Info)).append("\n");
+        sb.append("    gcpGcsInfo: ").append(toIndentedString(gcpGcsInfo)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -385,6 +419,7 @@ public class ChannelValidationDetail implements Serializable {
         openapiFields.add("http_status");
         openapiFields.add("error_message");
         openapiFields.add("aws_s3_info");
+        openapiFields.add("gcp_gcs_info");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -449,6 +484,10 @@ public class ChannelValidationDetail implements Serializable {
         // validate the optional field `aws_s3_info`
         if (jsonObj.get("aws_s3_info") != null && !jsonObj.get("aws_s3_info").isJsonNull()) {
             ChannelValidationAwsS3Info.validateJsonElement(jsonObj.get("aws_s3_info"));
+        }
+        // validate the optional field `gcp_gcs_info`
+        if (jsonObj.get("gcp_gcs_info") != null && !jsonObj.get("gcp_gcs_info").isJsonNull()) {
+            ChannelValidationGcpGcsInfo.validateJsonElement(jsonObj.get("gcp_gcs_info"));
         }
     }
 

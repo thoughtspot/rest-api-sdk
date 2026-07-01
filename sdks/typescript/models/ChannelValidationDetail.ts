@@ -11,6 +11,7 @@
  */
 
 import { ChannelValidationAwsS3Info } from '../models/ChannelValidationAwsS3Info';
+import { ChannelValidationGcpGcsInfo } from '../models/ChannelValidationGcpGcsInfo';
 import { HttpFile } from '../http/http';
 
 /**
@@ -34,8 +35,11 @@ export class ChannelValidationDetail {
     */
     'error_message'?: string | null;
     'aws_s3_info'?: ChannelValidationAwsS3Info;
+    'gcp_gcs_info'?: ChannelValidationGcpGcsInfo;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -67,6 +71,12 @@ export class ChannelValidationDetail {
             "baseName": "aws_s3_info",
             "type": "ChannelValidationAwsS3Info",
             "format": ""
+        },
+        {
+            "name": "gcp_gcs_info",
+            "baseName": "gcp_gcs_info",
+            "type": "ChannelValidationGcpGcsInfo",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -77,7 +87,6 @@ export class ChannelValidationDetail {
     }
 }
 
-
-export type ChannelValidationDetailValidationStepEnum = "HTTP_CONNECTION_CHECK" | "STORAGE_FILE_UPLOAD_CHECK" ;
-export type ChannelValidationDetailStatusEnum = "SUCCESS" | "FAILED" ;
+    export type ChannelValidationDetailValidationStepEnum = "HTTP_CONNECTION_CHECK" | "STORAGE_FILE_UPLOAD_CHECK" ;
+    export type ChannelValidationDetailStatusEnum = "SUCCESS" | "FAILED" ;
 

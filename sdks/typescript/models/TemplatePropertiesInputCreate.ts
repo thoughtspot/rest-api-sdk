@@ -131,6 +131,8 @@ export class TemplatePropertiesInputCreate {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "cta_button_bg_color",
@@ -308,4 +310,3 @@ export class TemplatePropertiesInputCreate {
     public constructor() {
     }
 }
-

@@ -28,6 +28,8 @@ export class ScheduleHistoryRunsOptionsInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "include_history_runs",
@@ -55,4 +57,3 @@ export class ScheduleHistoryRunsOptionsInput {
     public constructor() {
     }
 }
-

@@ -79,7 +79,9 @@ public class DbtApiTest {
     public void dbtGenerateSyncTmlTest() throws ApiException {
         String dbtConnectionIdentifier = null;
         File fileContent = null;
-        Object response = api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent);
+        Boolean includeSemanticReport = null;
+        Object response =
+                api.dbtGenerateSyncTml(dbtConnectionIdentifier, fileContent, includeSemanticReport);
         // TODO: test validations
     }
 
@@ -105,13 +107,15 @@ public class DbtApiTest {
         String importWorksheets = null;
         String worksheets = null;
         File fileContent = null;
+        Boolean includeSemanticReport = null;
         Object response =
                 api.dbtGenerateTml(
                         dbtConnectionIdentifier,
                         modelTables,
                         importWorksheets,
                         worksheets,
-                        fileContent);
+                        fileContent,
+                        includeSemanticReport);
         // TODO: test validations
     }
 

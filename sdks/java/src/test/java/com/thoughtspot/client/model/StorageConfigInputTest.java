@@ -21,4 +21,10 @@ public class StorageConfigInputTest {
     public void awsS3ConfigTest() {
         // TODO: test awsS3Config
     }
+
+    /** Test the property 'gcpGcsConfig' */
+    @Test
+    public void gcpGcsConfigTest() {
+        // TODO: test gcpGcsConfig
+    }
 }

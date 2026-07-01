@@ -32,6 +32,8 @@ export class CreateVariableRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "type",
@@ -66,7 +68,6 @@ export class CreateVariableRequest {
     }
 }
 
-
-export type CreateVariableRequestTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" ;
-export type CreateVariableRequestDataTypeEnum = "VARCHAR" | "INT32" | "INT64" | "DOUBLE" | "DATE" | "DATE_TIME" ;
+    export type CreateVariableRequestTypeEnum = "CONNECTION_PROPERTY" | "TABLE_MAPPING" | "CONNECTION_PROPERTY_PER_PRINCIPAL" | "FORMULA_VARIABLE" ;
+    export type CreateVariableRequestDataTypeEnum = "VARCHAR" | "INT32" | "INT64" | "DOUBLE" | "DATE" | "DATE_TIME" ;
 

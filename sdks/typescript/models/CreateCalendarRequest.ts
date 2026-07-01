@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CreateCalendarRequestTableReference } from '../models/CreateCalendarRequestTableReference';
+import { ExternalTableInput } from '../models/ExternalTableInput';
 import { HttpFile } from '../http/http';
 
 export class CreateCalendarRequest {
@@ -22,7 +22,10 @@ export class CreateCalendarRequest {
     * Type of create operation.
     */
     'creation_method': CreateCalendarRequestCreationMethodEnum;
-    'table_reference': CreateCalendarRequestTableReference;
+    /**
+    * Table reference containing connection identifier and table details in this format: `{\"connection_identifier\":\"conn1\", \"database_name\":\"db1\", \"schema_name\":\"sc1\", \"table_name\":\"tb1\"}`. The given table will be created if `creation_method` is set as `FROM_INPUT_PARAMS`.
+    */
+    'table_reference': ExternalTableInput;
     /**
     * Start date for the calendar in `MM/dd/yyyy` format. This parameter is mandatory if `creation_method` is set as `FROM_INPUT_PARAMS`.
     */
@@ -54,6 +57,8 @@ export class CreateCalendarRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "name",
@@ -70,7 +75,7 @@ export class CreateCalendarRequest {
         {
             "name": "table_reference",
             "baseName": "table_reference",
-            "type": "CreateCalendarRequestTableReference",
+            "type": "ExternalTableInput",
             "format": ""
         },
         {
@@ -124,9 +129,8 @@ export class CreateCalendarRequest {
     }
 }
 
-
-export type CreateCalendarRequestCreationMethodEnum = "FROM_INPUT_PARAMS" | "FROM_EXISTING_TABLE" ;
-export type CreateCalendarRequestCalendarTypeEnum = "MONTH_OFFSET" | "FOUR_FOUR_FIVE" | "FOUR_FIVE_FOUR" | "FIVE_FOUR_FOUR" ;
-export type CreateCalendarRequestMonthOffsetEnum = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December" ;
-export type CreateCalendarRequestStartDayOfWeekEnum = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" ;
+    export type CreateCalendarRequestCreationMethodEnum = "FROM_INPUT_PARAMS" | "FROM_EXISTING_TABLE" ;
+    export type CreateCalendarRequestCalendarTypeEnum = "MONTH_OFFSET" | "FOUR_FOUR_FIVE" | "FOUR_FIVE_FOUR" | "FIVE_FOUR_FOUR" ;
+    export type CreateCalendarRequestMonthOffsetEnum = "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December" ;
+    export type CreateCalendarRequestStartDayOfWeekEnum = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" ;
 

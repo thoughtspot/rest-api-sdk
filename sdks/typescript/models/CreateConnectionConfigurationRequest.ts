@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CreateConnectionConfigurationRequestPolicyProcessOptions } from '../models/CreateConnectionConfigurationRequestPolicyProcessOptions';
+import { PolicyProcessOptionsInput } from '../models/PolicyProcessOptionsInput';
 import { HttpFile } from '../http/http';
 
 export class CreateConnectionConfigurationRequest {
@@ -30,7 +30,10 @@ export class CreateConnectionConfigurationRequest {
     * Specifies whether the connection configuration should inherit all properties and authentication type from its parent connection. This attribute is only applicable to parameterized connections. When set to true, the configuration uses only the connection properties and authentication type inherited from the parent.    Version: 26.2.0.cl or later 
     */
     'same_as_parent'?: boolean | null;
-    'policy_process_options'?: CreateConnectionConfigurationRequestPolicyProcessOptions;
+    /**
+    * This attribute is only applicable to parameterized connections. Ensure that the policy is set to Processes to allow the configuration to be used exclusively for system processes.    Version: 26.2.0.cl or later 
+    */
+    'policy_process_options'?: PolicyProcessOptionsInput;
     /**
     * Type of authentication used for the connection.
     */
@@ -53,6 +56,8 @@ export class CreateConnectionConfigurationRequest {
     'policy_processes'?: Array<CreateConnectionConfigurationRequestPolicyProcessesEnum>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -82,7 +87,7 @@ export class CreateConnectionConfigurationRequest {
         {
             "name": "policy_process_options",
             "baseName": "policy_process_options",
-            "type": "CreateConnectionConfigurationRequestPolicyProcessOptions",
+            "type": "PolicyProcessOptionsInput",
             "format": ""
         },
         {
@@ -124,8 +129,7 @@ export class CreateConnectionConfigurationRequest {
     }
 }
 
-
-export type CreateConnectionConfigurationRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "KEY_PAIR" | "PERSONAL_ACCESS_TOKEN" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "OAUTH_CLIENT_CREDENTIALS" ;
-export type CreateConnectionConfigurationRequestPolicyTypeEnum = "NO_POLICY" | "PRINCIPALS" | "PROCESSES" ;
-export type CreateConnectionConfigurationRequestPolicyProcessesEnum = "SAGE_INDEXING" | "ROW_COUNT_STATS" ;
+    export type CreateConnectionConfigurationRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "KEY_PAIR" | "PERSONAL_ACCESS_TOKEN" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "OAUTH_CLIENT_CREDENTIALS" ;
+    export type CreateConnectionConfigurationRequestPolicyTypeEnum = "NO_POLICY" | "PRINCIPALS" | "PROCESSES" ;
+    export type CreateConnectionConfigurationRequestPolicyProcessesEnum = "SAGE_INDEXING" | "ROW_COUNT_STATS" ;
 

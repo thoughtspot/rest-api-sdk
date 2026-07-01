@@ -61,8 +61,14 @@ export class WebhookResponse {
     'created_by'?: WebhookUser;
     'last_modified_by'?: WebhookUser;
     'storage_destination'?: StorageDestination;
+    /**
+    * Status of the webhook (ENABLED or DISABLED). Only present when explicitly set.    Version: 26.7.0.cl or later 
+    */
+    'status'?: WebhookResponseStatusEnum | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -154,6 +160,12 @@ export class WebhookResponse {
             "baseName": "storage_destination",
             "type": "StorageDestination",
             "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "WebhookResponseStatusEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -164,6 +176,6 @@ export class WebhookResponse {
     }
 }
 
-
-export type WebhookResponseEventsEnum = "LIVEBOARD_SCHEDULE" ;
+    export type WebhookResponseEventsEnum = "LIVEBOARD_SCHEDULE" ;
+    export type WebhookResponseStatusEnum = "ENABLED" | "DISABLED" ;
 

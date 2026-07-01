@@ -28,6 +28,8 @@ export class DeleteCollectionRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "collection_identifiers",
@@ -55,4 +57,3 @@ export class DeleteCollectionRequest {
     public constructor() {
     }
 }
-

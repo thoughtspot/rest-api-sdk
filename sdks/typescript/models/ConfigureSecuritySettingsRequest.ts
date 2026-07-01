@@ -10,12 +10,15 @@
  * Do not edit the class manually.
  */
 
-import { ConfigureSecuritySettingsRequestClusterPreferences } from '../models/ConfigureSecuritySettingsRequestClusterPreferences';
+import { SecuritySettingsClusterPreferencesInput } from '../models/SecuritySettingsClusterPreferencesInput';
 import { SecuritySettingsOrgPreferencesInput } from '../models/SecuritySettingsOrgPreferencesInput';
 import { HttpFile } from '../http/http';
 
 export class ConfigureSecuritySettingsRequest {
-    'cluster_preferences'?: ConfigureSecuritySettingsRequestClusterPreferences;
+    /**
+    * Cluster-level security preferences.
+    */
+    'cluster_preferences'?: SecuritySettingsClusterPreferencesInput;
     /**
     * Org-level security preferences for the current org.
     */
@@ -23,11 +26,13 @@ export class ConfigureSecuritySettingsRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "cluster_preferences",
             "baseName": "cluster_preferences",
-            "type": "ConfigureSecuritySettingsRequestClusterPreferences",
+            "type": "SecuritySettingsClusterPreferencesInput",
             "format": ""
         },
         {
@@ -44,4 +49,3 @@ export class ConfigureSecuritySettingsRequest {
     public constructor() {
     }
 }
-

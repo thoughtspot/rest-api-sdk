@@ -27,6 +27,8 @@ export class UserObject {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "type",
@@ -49,6 +51,5 @@ export class UserObject {
     }
 }
 
-
-export type UserObjectTypeEnum = "LOGICAL_TABLE" ;
+    export type UserObjectTypeEnum = "LOGICAL_TABLE" ;
 

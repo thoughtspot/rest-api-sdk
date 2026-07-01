@@ -24,6 +24,8 @@ export class NLInstructionsInfoInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "instructions",
@@ -46,6 +48,5 @@ export class NLInstructionsInfoInput {
     }
 }
 
-
-export type NLInstructionsInfoInputScopeEnum = "GLOBAL" ;
+    export type NLInstructionsInfoInputScopeEnum = "GLOBAL" ;
 

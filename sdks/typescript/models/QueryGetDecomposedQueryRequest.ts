@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { QueryGetDecomposedQueryRequestNlsRequest } from '../models/QueryGetDecomposedQueryRequestNlsRequest';
+import { InputEurekaNLSRequest } from '../models/InputEurekaNLSRequest';
 import { HttpFile } from '../http/http';
 
 export class QueryGetDecomposedQueryRequest {
@@ -34,13 +34,18 @@ export class QueryGetDecomposedQueryRequest {
     * Maximum number of decomposed queries that is allowed in the response, default = 5.
     */
     'maxDecomposedQueries'?: number;
-    'nlsRequest'?: QueryGetDecomposedQueryRequestNlsRequest;
+    /**
+    * NLSRequest object containing user query & instructions.
+    */
+    'nlsRequest'?: InputEurekaNLSRequest;
     /**
     * List of worksheetIds to provide context for decomposing user query into analytical queries that can be run on them.
     */
     'worksheetIds'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -76,7 +81,7 @@ export class QueryGetDecomposedQueryRequest {
         {
             "name": "nlsRequest",
             "baseName": "nlsRequest",
-            "type": "QueryGetDecomposedQueryRequestNlsRequest",
+            "type": "InputEurekaNLSRequest",
             "format": ""
         },
         {
@@ -93,4 +98,3 @@ export class QueryGetDecomposedQueryRequest {
     public constructor() {
     }
 }
-

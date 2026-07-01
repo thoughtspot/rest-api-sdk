@@ -28,6 +28,8 @@ export class AnswerPngOptionsInput {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "x_resolution",
@@ -55,4 +57,3 @@ export class AnswerPngOptionsInput {
     public constructor() {
     }
 }
-

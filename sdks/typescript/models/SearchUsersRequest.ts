@@ -11,7 +11,7 @@
  */
 
 import { FavoriteMetadataInput } from '../models/FavoriteMetadataInput';
-import { SearchCollectionsRequestSortOptions } from '../models/SearchCollectionsRequestSortOptions';
+import { SortOptions } from '../models/SortOptions';
 import { HttpFile } from '../http/http';
 
 export class SearchUsersRequest {
@@ -83,7 +83,10 @@ export class SearchUsersRequest {
     * The number of records that should be included.
     */
     'record_size'?: number;
-    'sort_options'?: SearchCollectionsRequestSortOptions;
+    /**
+    * Sort options.
+    */
+    'sort_options'?: SortOptions;
     /**
     * Filters by the role assigned to the user.
     */
@@ -98,6 +101,8 @@ export class SearchUsersRequest {
     'include_variable_values'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -205,7 +210,7 @@ export class SearchUsersRequest {
         {
             "name": "sort_options",
             "baseName": "sort_options",
-            "type": "SearchCollectionsRequestSortOptions",
+            "type": "SortOptions",
             "format": ""
         },
         {
@@ -235,9 +240,8 @@ export class SearchUsersRequest {
     }
 }
 
-
-export type SearchUsersRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
-export type SearchUsersRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "APPLICATION_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_MODIFY_FOLDERS" | "CAN_MANAGE_VARIABLES" | "CAN_VIEW_FOLDERS" | "CAN_MANAGE_AGENTSPOT" | "CAN_ACCESS_AGENTSPOT" | "CAN_SETUP_VERSION_CONTROL" | "CAN_MANAGE_WEBHOOKS" | "CAN_DOWNLOAD_VISUALS" | "CAN_DOWNLOAD_DETAILED_DATA" | "CAN_USE_SPOTTER" ;
-export type SearchUsersRequestAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER" ;
-export type SearchUsersRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED" ;
+    export type SearchUsersRequestVisibilityEnum = "SHARABLE" | "NON_SHARABLE" ;
+    export type SearchUsersRequestPrivilegesEnum = "ADMINISTRATION" | "AUTHORING" | "USERDATAUPLOADING" | "DATADOWNLOADING" | "USERMANAGEMENT" | "DATAMANAGEMENT" | "SHAREWITHALL" | "JOBSCHEDULING" | "A3ANALYSIS" | "EXPERIMENTALFEATUREPRIVILEGE" | "BYPASSRLS" | "RANALYSIS" | "DEVELOPER" | "USER_ADMINISTRATION" | "GROUP_ADMINISTRATION" | "SYNCMANAGEMENT" | "CAN_CREATE_CATALOG" | "DISABLE_PINBOARD_CREATION" | "LIVEBOARD_VERIFIER" | "PREVIEW_THOUGHTSPOT_SAGE" | "APPLICATION_ADMINISTRATION" | "SYSTEM_INFO_ADMINISTRATION" | "ORG_ADMINISTRATION" | "ROLE_ADMINISTRATION" | "AUTHENTICATION_ADMINISTRATION" | "BILLING_INFO_ADMINISTRATION" | "CAN_MANAGE_CUSTOM_CALENDAR" | "CAN_CREATE_OR_EDIT_CONNECTIONS" | "CAN_MANAGE_WORKSHEET_VIEWS_TABLES" | "CAN_MANAGE_VERSION_CONTROL" | "THIRDPARTY_ANALYSIS" | "ALLOW_NON_EMBED_FULL_APP_ACCESS" | "CAN_ACCESS_ANALYST_STUDIO" | "CAN_MANAGE_ANALYST_STUDIO" | "PREVIEW_DOCUMENT_SEARCH" | "CAN_MODIFY_FOLDERS" | "CAN_MANAGE_VARIABLES" | "CAN_VIEW_FOLDERS" | "CAN_MANAGE_AGENTSPOT" | "CAN_ACCESS_AGENTSPOT" | "CAN_SETUP_VERSION_CONTROL" | "CAN_MANAGE_WEBHOOKS" | "CAN_DOWNLOAD_VISUALS" | "CAN_DOWNLOAD_DETAILED_DATA" | "CAN_USE_SPOTTER" | "CAN_MANAGE_SPOTTER" ;
+    export type SearchUsersRequestAccountTypeEnum = "LOCAL_USER" | "LDAP_USER" | "SAML_USER" | "OIDC_USER" | "REMOTE_USER" ;
+    export type SearchUsersRequestAccountStatusEnum = "ACTIVE" | "INACTIVE" | "EXPIRED" | "LOCKED" | "PENDING" | "SUSPENDED" ;
 

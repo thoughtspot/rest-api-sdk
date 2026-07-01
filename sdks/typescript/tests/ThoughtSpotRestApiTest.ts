@@ -1001,6 +1001,8 @@ describe('ThoughtSpotRestApi', function() {
                     // dbtConnectionIdentifier dbt_connection_identifier
                         , 
                     // fileContent file_content
+                        , 
+                    // includeSemanticReport include_semantic_report
                        
                 )
               } catch (er) {
@@ -1013,6 +1015,8 @@ describe('ThoughtSpotRestApi', function() {
                     // dbtConnectionIdentifier dbt_connection_identifier
                         , 
                     // fileContent file_content
+                        , 
+                    // includeSemanticReport include_semantic_report
                        
                   )
                 ).to.be.rejectedWith(Error);
@@ -1043,6 +1047,8 @@ describe('ThoughtSpotRestApi', function() {
                     // worksheets worksheets
                         , 
                     // fileContent file_content
+                        , 
+                    // includeSemanticReport include_semantic_report
                        
                 )
               } catch (er) {
@@ -1061,6 +1067,8 @@ describe('ThoughtSpotRestApi', function() {
                     // worksheets worksheets
                         , 
                     // fileContent file_content
+                        , 
+                    // includeSemanticReport include_semantic_report
                        
                   )
                 ).to.be.rejectedWith(Error);
@@ -1322,6 +1330,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('deleteConversation', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "deleteConversation"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.deleteConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.deleteConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('deleteCustomAction', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -1410,6 +1450,38 @@ describe('ThoughtSpotRestApi', function() {
                   instance.deleteEmailCustomization(
                     // templateIdentifier template_identifier
                     test.Path_Variables.template_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('deleteManualTranslations', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "deleteManualTranslations"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.deleteManualTranslations(
+                    // deleteManualTranslationsRequest DeleteManualTranslationsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.deleteManualTranslations(
+                    // deleteManualTranslationsRequest DeleteManualTranslationsRequest
+                     test.Body   
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -1570,6 +1642,38 @@ describe('ThoughtSpotRestApi', function() {
                   instance.deleteSchedule(
                     // scheduleIdentifier schedule_identifier
                     test.Path_Variables.schedule_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('deleteStyleFonts', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "deleteStyleFonts"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.deleteStyleFonts(
+                    // deleteStyleFontsRequest DeleteStyleFontsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.deleteStyleFonts(
+                    // deleteStyleFontsRequest DeleteStyleFontsRequest
+                     test.Body   
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -1898,6 +2002,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('exportManualTranslations', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "exportManualTranslations"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.exportManualTranslations(
+                    // exportManualTranslationsRequest ExportManualTranslationsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.exportManualTranslations(
+                    // exportManualTranslationsRequest ExportManualTranslationsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('exportMetadataTML', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -1954,6 +2090,42 @@ describe('ThoughtSpotRestApi', function() {
                   instance.exportMetadataTMLBatched(
                     // exportMetadataTMLBatchedRequest ExportMetadataTMLBatchedRequest
                      test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('exportStyleLogos', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "exportStyleLogos"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.exportStyleLogos(
+                    // exportStyleLogosRequest ExportStyleLogosRequest
+                     test.Body    , 
+                    // accept Accept
+                       
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.exportStyleLogos(
+                    // exportStyleLogosRequest ExportStyleLogosRequest
+                     test.Body    , 
+                    // accept Accept
+                       
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -2378,6 +2550,106 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('getAgentInstructions', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getAgentInstructions"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getAgentInstructions(
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getAgentInstructions(
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('getConversation', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getConversation"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('getConversationList', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getConversationList"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getConversationList(
+                    // limit limit
+                        , 
+                    // offset offset
+                        , 
+                    // skipEmpty skip_empty
+                       
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getConversationList(
+                    // limit limit
+                        , 
+                    // offset offset
+                        , 
+                    // skipEmpty skip_empty
+                       
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('getCurrentUserInfo', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -2522,6 +2794,38 @@ describe('ThoughtSpotRestApi', function() {
                   instance.getFullAccessToken(
                     // getFullAccessTokenRequest GetFullAccessTokenRequest
                      test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('getManualTranslationBundle', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getManualTranslationBundle"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getManualTranslationBundle(
+                    // locale locale
+                    test.Path_Variables.locale    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getManualTranslationBundle(
+                    // locale locale
+                    test.Path_Variables.locale    
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -2710,6 +3014,70 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('getWebhookStorageConfig', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getWebhookStorageConfig"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getWebhookStorageConfig(
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getWebhookStorageConfig(
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('importManualTranslations', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "importManualTranslations"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.importManualTranslations(
+                    // translationsFile translations_file
+                        , 
+                    // scope scope
+                       
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.importManualTranslations(
+                    // translationsFile translations_file
+                        , 
+                    // scope scope
+                       
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('importMetadataTML', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -2830,6 +3198,42 @@ describe('ThoughtSpotRestApi', function() {
                   instance.importUsers(
                     // importUsersRequest ImportUsersRequest
                      test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('loadAnswer', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "loadAnswer"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.loadAnswer(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier     , 
+                    // answerIdentifier answer_identifier
+                    test.Path_Variables.answer_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.loadAnswer(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier     , 
+                    // answerIdentifier answer_identifier
+                    test.Path_Variables.answer_identifier    
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -3742,6 +4146,70 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('searchStyleCustomizations', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchStyleCustomizations"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchStyleCustomizations(
+                    // searchStyleCustomizationsRequest SearchStyleCustomizationsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchStyleCustomizations(
+                    // searchStyleCustomizationsRequest SearchStyleCustomizationsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('searchStyleFonts', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchStyleFonts"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchStyleFonts(
+                    // searchStyleFontsRequest SearchStyleFontsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchStyleFonts(
+                    // searchStyleFontsRequest SearchStyleFontsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('searchTags', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -4069,6 +4537,38 @@ describe('ThoughtSpotRestApi', function() {
                     // conversationIdentifier conversation_identifier
                     test.Path_Variables.conversation_identifier     , 
                     // sendMessageRequest SendMessageRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('setAgentInstructions', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "setAgentInstructions"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.setAgentInstructions(
+                    // setAgentInstructionsRequest SetAgentInstructionsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.setAgentInstructions(
+                    // setAgentInstructionsRequest SetAgentInstructionsRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);
@@ -4614,6 +5114,42 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('updateConversation', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateConversation"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier     , 
+                    // updateConversationRequest UpdateConversationRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier     , 
+                    // updateConversationRequest UpdateConversationRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('updateCustomAction', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -4926,6 +5462,106 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('updateStyleCustomization', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateStyleCustomization"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateStyleCustomization(
+                    // scope scope
+                        , 
+                    // operation operation
+                        , 
+                    // resetOptions reset_options
+                        , 
+                    // navigationPanel navigation_panel
+                        , 
+                    // chartColorPalette chart_color_palette
+                        , 
+                    // embeddedFooterText embedded_footer_text
+                        , 
+                    // visualizationFonts visualization_fonts
+                        , 
+                    // defaultLogo default_logo
+                        , 
+                    // wideLogo wide_logo
+                       
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateStyleCustomization(
+                    // scope scope
+                        , 
+                    // operation operation
+                        , 
+                    // resetOptions reset_options
+                        , 
+                    // navigationPanel navigation_panel
+                        , 
+                    // chartColorPalette chart_color_palette
+                        , 
+                    // embeddedFooterText embedded_footer_text
+                        , 
+                    // visualizationFonts visualization_fonts
+                        , 
+                    // defaultLogo default_logo
+                        , 
+                    // wideLogo wide_logo
+                       
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('updateStyleFont', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateStyleFont"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateStyleFont(
+                    // fontIdentifier font_identifier
+                    test.Path_Variables.font_identifier     , 
+                    // updateStyleFontRequest UpdateStyleFontRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateStyleFont(
+                    // fontIdentifier font_identifier
+                    test.Path_Variables.font_identifier     , 
+                    // updateStyleFontRequest UpdateStyleFontRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('updateSystemConfig', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -5162,6 +5798,58 @@ describe('ThoughtSpotRestApi', function() {
                     test.Path_Variables.webhook_identifier     , 
                     // updateWebhookConfigurationRequest UpdateWebhookConfigurationRequest
                      test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('uploadStyleFont', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "uploadStyleFont"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.uploadStyleFont(
+                    // name name
+                        , 
+                    // fileContent file_content
+                        , 
+                    // scope scope
+                        , 
+                    // weight weight
+                        , 
+                    // style style
+                        , 
+                    // color color
+                       
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.uploadStyleFont(
+                    // name name
+                        , 
+                    // fileContent file_content
+                        , 
+                    // scope scope
+                        , 
+                    // weight weight
+                        , 
+                    // style style
+                        , 
+                    // color color
+                       
                   )
                 ).to.be.rejectedWith(Error);
             }

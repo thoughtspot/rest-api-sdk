@@ -30,6 +30,8 @@ export class AuthOrgPreference {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "org",
@@ -58,6 +60,5 @@ export class AuthOrgPreference {
     }
 }
 
-
-export type AuthOrgPreferenceAuthStatusEnum = "ENABLED" | "DISABLED" ;
+    export type AuthOrgPreferenceAuthStatusEnum = "ENABLED" | "DISABLED" ;
 

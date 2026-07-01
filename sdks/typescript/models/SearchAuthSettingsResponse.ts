@@ -30,6 +30,8 @@ export class SearchAuthSettingsResponse {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "auth_type",
@@ -58,6 +60,5 @@ export class SearchAuthSettingsResponse {
     }
 }
 
-
-export type SearchAuthSettingsResponseAuthTypeEnum = "TRUSTED_AUTH" ;
+    export type SearchAuthSettingsResponseAuthTypeEnum = "TRUSTED_AUTH" ;
 

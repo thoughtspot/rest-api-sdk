@@ -25,6 +25,8 @@ export class SearchCommunicationChannelPreferencesRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "cluster_preferences",
@@ -47,6 +49,5 @@ export class SearchCommunicationChannelPreferencesRequest {
     }
 }
 
-
-export type SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum = "LIVEBOARD_SCHEDULE" ;
+    export type SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum = "LIVEBOARD_SCHEDULE" ;
 

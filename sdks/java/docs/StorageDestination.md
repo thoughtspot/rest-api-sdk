@@ -18,6 +18,7 @@ Storage destination configuration for webhook payload delivery.
 | Name | Value |
 |---- | -----|
 | AWS_S3 | &quot;AWS_S3&quot; |
+| GCP_GCS | &quot;GCP_GCS&quot; |
 
 
 ## Implemented Interfaces
