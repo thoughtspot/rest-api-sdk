@@ -22727,7 +22727,8 @@
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             },
             "nullable": true
@@ -29706,13 +29707,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           }
@@ -29806,13 +29808,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           },
