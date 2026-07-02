@@ -20951,7 +20951,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -25370,7 +25375,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
@@ -26438,7 +26448,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -30849,7 +30864,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -31008,7 +31028,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -31148,7 +31173,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -32398,7 +32428,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -32497,7 +32532,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -32591,7 +32631,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           }
@@ -35155,7 +35200,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
