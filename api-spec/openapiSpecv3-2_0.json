@@ -206,6 +206,14 @@
       "description": "Roles for version 26.3.0.cl"
     },
     {
+      "name": "26.9.0.cl",
+      "id": "26.9.0.cl",
+      "tags": [
+        "26.9.0.cl"
+      ],
+      "description": "Roles for version 26.9.0.cl"
+    },
+    {
       "name": "10.14.0.cl",
       "id": "10.14.0.cl",
       "tags": [
@@ -11596,6 +11604,324 @@
           },
           "500": {
             "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/semantic-integrations/create": {
+      "post": {
+        "operationId": "createSemanticIntegration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nCreates a new semantic integration in ThoughtSpot from a CDW semantic view.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About create semantic integration\n\nA semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.\n\n- `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required.\n- `name` must be unique across the user's organization. The integration's display name is also used as the generated model name.\n- Supported `type` values are listed in the `SemanticIntegrationType` enum (currently `RDBMS_SNOWFLAKE`).\n- The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSemanticIntegrationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Semantic integration created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticIntegrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Connection not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Duplicate integration name.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete": {
+      "post": {
+        "operationId": "deleteSemanticIntegration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nDeletes a semantic integration and its associated ThoughtSpot model.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About delete semantic integration\n\nRemoves the specified semantic integration and its generated ThoughtSpot model from the system.\n\n- `semantic_integration_identifier` is the GUID or name of the integration to delete.\n- Deletions cannot be undone. Re-import the integration with `createSemanticIntegration` if needed.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "semantic_integration_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the semantic integration to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Semantic integration deleted successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import": {
+      "post": {
+        "operationId": "importSemanticIntegration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nImports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About import semantic integration\n\nRe-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.\n\n- `semantic_integration_identifier` is the GUID or name of the integration to import updates for.\n- Import preserves the integration's GUID, name, and `model_id`; only the underlying formula set is refreshed.\n- The response includes the same `semantic_report` as create, with an additional `change_status` per formula indicating whether each formula is `NEW`, `UPDATED`, or `UNCHANGED` since the previous import.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "semantic_integration_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the semantic integration to import updates for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Semantic integration imported successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticIntegrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Semantic integration not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/semantic-integrations/search": {
+      "post": {
+        "operationId": "searchSemanticIntegrations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nSearches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About search semantic integrations\n\nReturns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.\n\n- `pattern` matches the integration name as a case-insensitive substring.\n- `author_identifiers`, `connection_identifiers`, and `tag_identifiers` accept either GUIDs or names.\n- `sort_options.field_name` defaults to `MODIFIED_TIME`; set `sort_options.order` to `ASC` or `DESC` to control sort direction.\n- `record_offset` and `record_size` control pagination. Use `record_size: 0` to return all matching records in a single response.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchSemanticIntegrationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Semantic integrations retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SemanticIntegrationSearchResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -24046,6 +24372,136 @@
         },
         "description": "Visualization areas assigned to a font, grouped by org context."
       },
+      "SemanticIntegrationSortOptions": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "enum": [
+              "NAME",
+              "AUTHOR",
+              "CREATED_TIME",
+              "MODIFIED_TIME"
+            ],
+            "description": "Name of the field to apply the sort on.",
+            "nullable": true
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Sort order: `ASC` for ascending, `DESC` for descending.",
+            "nullable": true
+          }
+        },
+        "description": "Sort options for semantic integration search."
+      },
+      "SemanticIntegrationSearchResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the semantic integration.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the semantic integration.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of the semantic integration.",
+            "nullable": true
+          },
+          "model_id": {
+            "type": "string",
+            "description": "GUID of the associated ThoughtSpot model generated for this integration.",
+            "nullable": true
+          },
+          "model_name": {
+            "type": "string",
+            "description": "Name of the associated ThoughtSpot model.",
+            "nullable": true
+          },
+          "import_type": {
+            "type": "string",
+            "enum": [
+              "CDW",
+              "FILE"
+            ],
+            "description": "How the semantic definition was sourced.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "RDBMS_SNOWFLAKE"
+            ],
+            "description": "CDW connector type.",
+            "nullable": true
+          },
+          "connection_id": {
+            "type": "string",
+            "description": "GUID of the CDW connection backing the integration.",
+            "nullable": true
+          },
+          "connection_name": {
+            "type": "string",
+            "description": "Display name of the CDW connection backing the integration.",
+            "nullable": true
+          },
+          "author_id": {
+            "type": "string",
+            "description": "GUID of the user who created the integration.",
+            "nullable": true
+          },
+          "author_name": {
+            "type": "string",
+            "description": "Username of the user who created the integration.",
+            "nullable": true
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Creation time in Unix epoch milliseconds.",
+            "nullable": true
+          },
+          "modification_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Last modification time in Unix epoch milliseconds.",
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SemanticIntegrationTagReference"
+            },
+            "description": "Tags associated with the integration.",
+            "nullable": true
+          }
+        },
+        "description": "Single semantic integration entry returned by search."
+      },
+      "SemanticIntegrationTagReference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the tag.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the tag.",
+            "nullable": true
+          }
+        },
+        "description": "Tag reference associated with a semantic integration."
+      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -28829,6 +29285,127 @@
           }
         },
         "description": "A visualization area assignment affected by a font deletion."
+      },
+      "SemanticIntegrationResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the semantic integration.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the semantic integration.",
+            "nullable": true
+          },
+          "model_id": {
+            "type": "string",
+            "description": "Model GUID generated for this integration.",
+            "nullable": true
+          },
+          "model_name": {
+            "type": "string",
+            "description": "Model name generated for this integration.",
+            "nullable": true
+          },
+          "semantic_report": {
+            "$ref": "#/components/schemas/SemanticIntegrationReport",
+            "description": "Per-formula import report.",
+            "nullable": true
+          }
+        },
+        "description": "Response object for a semantic integration."
+      },
+      "SemanticIntegrationReport": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/SemanticIntegrationReportSummary",
+            "description": "Summary of formula import counts.",
+            "nullable": true
+          },
+          "formulas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SemanticIntegrationFormulaReport"
+            },
+            "description": "Formula import details.",
+            "nullable": true
+          }
+        },
+        "description": "Per-formula import report for a semantic integration."
+      },
+      "SemanticIntegrationReportSummary": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of formulas.",
+            "nullable": true
+          },
+          "imported": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of successfully imported formulas.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of failed formula imports.",
+            "nullable": true
+          },
+          "skipped": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of skipped formulas.",
+            "nullable": true
+          }
+        },
+        "description": "Formula import counts summary."
+      },
+      "SemanticIntegrationFormulaReport": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Formula ID in the model.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Formula name.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Formula description.",
+            "nullable": true
+          },
+          "source_expression": {
+            "type": "string",
+            "description": "CDW source expression.",
+            "nullable": true
+          },
+          "translated_formula": {
+            "type": "string",
+            "description": "ThoughtSpot formula equivalent.",
+            "nullable": true
+          },
+          "import_status": {
+            "type": "string",
+            "description": "Import status: `IMPORTED`, `FAILED`, or `SKIPPED`.",
+            "nullable": true
+          },
+          "change_status": {
+            "type": "string",
+            "description": "Change status since last import: `NEW`, `UPDATED`, or `UNCHANGED`. Null on initial create.",
+            "nullable": true
+          }
+        },
+        "description": "Import details for a single formula."
       },
       "Runtime_Filter": {
         "type": "object",
@@ -34500,6 +35077,100 @@
         "required": [
           "column_security_rules"
         ]
+      },
+      "CreateSemanticIntegrationRequest": {
+        "type": "object",
+        "properties": {
+          "connection_identifier": {
+            "description": "ID or name of the CDW connection.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the semantic integration. Must be unique.",
+            "type": "string"
+          },
+          "database_name": {
+            "description": "Database name in the CDW.",
+            "type": "string"
+          },
+          "schema_name": {
+            "description": "Schema name in the CDW.",
+            "type": "string"
+          },
+          "semantic_view_name": {
+            "description": "Semantic view name in the CDW.",
+            "type": "string"
+          },
+          "type": {
+            "description": "CDW connector type.",
+            "type": "string",
+            "enum": [
+              "RDBMS_SNOWFLAKE"
+            ]
+          },
+          "description": {
+            "description": "Optional description of the semantic integration.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "connection_identifier",
+          "name",
+          "database_name",
+          "schema_name",
+          "semantic_view_name",
+          "type"
+        ]
+      },
+      "SearchSemanticIntegrationsRequest": {
+        "type": "object",
+        "properties": {
+          "sort_options": {
+            "description": "Sort options for the search results.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SemanticIntegrationSortOptions"
+              }
+            ]
+          },
+          "record_offset": {
+            "description": "Number of records to skip for pagination. Minimum value is 0.",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "record_size": {
+            "description": "Maximum number of records to return. Use 0 to return all records (no pagination).",
+            "default": 10,
+            "type": "integer",
+            "format": "int32"
+          },
+          "pattern": {
+            "description": "Name filter substring to narrow search results.",
+            "type": "string"
+          },
+          "author_identifiers": {
+            "description": "Filter by author IDs or names who created the integrations.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "connection_identifiers": {
+            "description": "Filter by connection IDs or names associated with the integrations.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tag_identifiers": {
+            "description": "Filter by tag IDs or names associated with the integrations.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
       },
       "DeleteStyleFontsRequest": {
         "type": "object",
