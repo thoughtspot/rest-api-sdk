@@ -30,6 +30,14 @@
       "description": "Roles for version 26.7.0.cl"
     },
     {
+      "name": "26.8.0.cl",
+      "id": "26.8.0.cl",
+      "tags": [
+        "26.8.0.cl"
+      ],
+      "description": "Roles for version 26.8.0.cl"
+    },
+    {
       "name": "26.6.0.cl",
       "id": "26.6.0.cl",
       "tags": [
@@ -140,14 +148,6 @@
         "10.10.0.cl"
       ],
       "description": "Roles for version 10.10.0.cl"
-    },
-    {
-      "name": "26.8.0.cl",
-      "id": "26.8.0.cl",
-      "tags": [
-        "26.8.0.cl"
-      ],
-      "description": "Roles for version 26.8.0.cl"
     },
     {
       "name": "10.6.0.cl",
@@ -428,6 +428,97 @@
         "responses": {
           "204": {
             "description": "Successfully deleted the agent conversation."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/memory/export": {
+      "post": {
+        "operationId": "exportMemory",
+        "description": "\nExports memory entries (rules, recipes, and non-semantic rules) for\nthe specified data-models as a single YAML payload.\nRequires `CAN_USE_SPOTTER` privilege and read access on every\nreferenced data-model. Routes through eureka-agent, which applies\nthe same accessibility filtering and obj_id resolution as the\ninternal GraphQL surface. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nThis API allows users to export data-model memories (can be extended to agent memories in future) for a given list of data-models. This exported yaml file can then be modified and used as input to the import API in target env.\n\nThis API enables customers to migrate memories from a source env to a target env. This improves memory adoption for Spotter by giving the users a chance to develop their memories in a dev env and replicate the same in a prod env.\n\nTo use this API, the user needs either edit access or memory privilege on the data-model or manage-spotter privilege and they must use corresponding org related bearerToken where the data-model exists.\n\n#### Usage guidelines\n\nTo export memory for one or more data-models, the request may include:\n- `sources`: A list of typed scope groups identifying which data-models to export memory for. Each group contains:\n  - `type`: The source object type for this group — `DATA_MODEL`.\n  - `identifiers`: An array of GUIDs or human-readable `obj_id`s of the data-models to export memory for. obj_ids are resolved server-side before forwarding.\n\nThe memory types (`RULES`, `RECIPES`, and `NON_SEMANTIC_RULES`) and the output format (`YAML`) are fixed for this endpoint and are not request parameters.\n\nThe API returns a response object with:\n- `content`: The serialized memory payload (currently YAML) — exactly the shape that the `importMemory` API consumes. Edit it locally and pass it back through `importMemory` to apply changes.\n\n#### Source Type\n\n- **DATA_MODEL**: The `identifiers` are data-model (worksheet) GUIDs. This is the default (and currently only) source type for Spotter memory and covers the rules and recipes attached directly to a data-model.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                                                  |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                         |\n| 403  | Forbidden — the authenticated user does not have necessary permissions, or lacks read access on a referenced data-model, or the bearer token does not correspond to the data-model's org. |\n\n> ###### Note:\n> - To use this API, the user needs either edit access or memory privilege on the data-model or manage-spotter privilege and they must use corresponding org related bearerToken where the data-model exists.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - Available from version 26.8.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportMemoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_ExportMemoryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Serialized YAML memory payload returned (truncated)",
+                    "value": {
+                      "content": "memories:\n  - type: RULE\n    content:\n      rule_definition: always show revenue in USD\n    datamodel_sources:\n      - guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890\n        obj_id: sales_model\n"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_ExportMemoryResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Operation failed",
@@ -983,6 +1074,113 @@
         }
       }
     },
+    "/api/rest/2.0/ai/memory/import": {
+      "post": {
+        "operationId": "importMemory",
+        "description": "\nImports memory entries from a YAML payload. Performs an\natomic, exact-subset replacement on the target data-models declared\nin the payload itself: every existing memory whose `datamodel_sources`\nset is a subset of the payload's union is deleted, and every row in\nthe payload is inserted.\nPhase 1 (insert) is all-or-nothing; any insert failure rolls back\nevery prior insert and returns `ROLLED_BACK`. Phase 2 (delete old)\nis best-effort; partial delete failures surface as\n`RESIDUAL_ORPHAN` entries in `warnings` (a follow-up sweeper\nreconciles them).\n`dry_run` is required: pass `true` first to inspect the preview\ncounts and row failures, then re-run with `dry_run = false` once the\ncaller is satisfied. A real import refuses to write when any row\nfailed validation.\nRequires `CAN_USE_SPOTTER` privilege and edit / coaching access on\nevery referenced data-model. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nThis API allows users to import data-model memories (can be extended to agent memories in future) using a given yaml file. This yaml file can be obtained from the export memory API in source env and can be modified and used as input to the import API in target env.\n\nThis API enables customers to migrate memories from a source env to a target env. This improves memory adoption for Spotter by giving the users a chance to develop their memories in a dev env and replicate the same in a prod env.\n\nTo use this API, the user needs either edit access or memory privilege on the data-model or manage-spotter privilege and they must use corresponding org related bearerToken where the data-model exists.\n\n#### Usage guidelines\n\nTo import memory, the request must include:\n- `content`: The full serialized memory payload to import (currently YAML). Typically the `content` value returned by the `exportMemory` API, edited locally and re-submitted. The payload itself declares which data-models the memory applies to (via each row's `datamodel_sources`), so no separate identifier list is required.\n- `dry_run`: Required. When `true`, validate the payload and return preview counts without writing anything; when `false`, apply the atomic replacement. There is no default — always run with `dry_run = true` first, then re-run with `dry_run = false` once you are satisfied with the preview.\n\nThe import performs an atomic, exact-subset replacement on the data-models referenced in the payload: every existing memory whose `datamodel_sources` set is a subset of the payload's union is deleted, and every row in the payload is inserted.\n\nThe API returns a response object with:\n- `status`: The terminal status of the import (`SUCCESS`, `VALIDATION_FAILED`, or `FAILED`).\n- `summary`: Per `(memory_type, source)` counts. In a dry run the `deleted_record_count`/`inserted_record_count` are previews; in a real import they are actuals.\n- `validation_failures`: Per-item validation failures, each with `line_number`, `reason`, `field_name`, and `message` for click-to-locate and inline highlighting.\n- `diagnostics`: Groups of diagnostic messages, each with a `sub_status` (`WARNING`, `FAILURE`, `ROLLED_BACK`, or `UNKNOWN`) and a `messages` list. This is the single channel for both non-fatal observations (e.g. a `RESIDUAL_ORPHAN` entry under `WARNING` when a best-effort delete left an old doc behind, reconciled later by a sweeper using `operation_id`) and fatal causes (e.g. the failure reason under `FAILURE`, or a `ROLLED_BACK` group when inserts were undone).\n- `operation_id`: A server-minted UUID for log correlation and follow-up cleanup.\n\n#### Dry run\n\n`dry_run` is required and has no default, so the import is always a deliberate two-step flow:\n\n1. **First, call with `dry_run = true`.** This validates the payload and previews what would happen — the counts in `summary` and any `validation_failures` — without writing anything.\n2. **Then, after reviewing a clean preview, call again with `dry_run = false`** (same `content`). This performs the atomic replacement. It refuses to write when any item fails validation, so fix the reported `validation_failures` and resubmit.\n\n> ###### Important:\n> Never call `dry_run = false` without first inspecting a `dry_run = true` preview. A real import deletes and replaces existing memories on the referenced data-models.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                                                  |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                      \n             |\n\n#### Logical failures\n\nValidation and write failures are not returned in the error envelope. The call returns `200` with a terminal `status` of `VALIDATION_FAILED` or `FAILED`, and the details live in `validation_failures` / `diagnostics`:\n\n- **VALIDATION_FAILED** — one or more items failed schema/semantic validation; nothing was written. Inspect `validation_failures`, fix the items, and resubmit.\n- **FAILED** — the import did not complete. This covers both internal errors and rollbacks. Inspect `diagnostics`: a `ROLLED_BACK` group means Phase-1 inserts failed and every successful insert was undone (the originals are intact, no destructive change), while a `FAILURE` group carries another non-validation cause (e.g. an internal error).\n\nSample `VALIDATION_FAILED` response (HTTP 200):\n\n```json\n{\n  \"status\": \"VALIDATION_FAILED\",\n  \"summary\": [\n    {\n      \"memory_type\": \"RULES\",\n      \"source\": {\n        \"identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n        \"type\": \"DATA_MODEL\"\n      },\n      \"existing_record_count\": 3,\n      \"deleted_record_count\": 0,\n      \"inserted_record_count\": 0,\n      \"failed_record_count\": 1\n    }\n  ],\n  \"validation_failures\": [\n    {\n      \"line_number\": 4,\n      \"reason\": \"CHAR_LIMIT\",\n      \"field_name\": \"content.rule_definition\",\n      \"message\": \"Rule definition exceeds the maximum allowed length.\"\n    }\n  ],\n  \"diagnostics\": [],\n  \"operation_id\": \"550e8400-e29b-41d4-a716-446655440000\"\n}\n```\n\n> ###### Note:\n> - To use this API, the user needs either edit access or memory privilege on the data-model or manage-spotter privilege and they must use corresponding org related bearerToken where the data-model exists.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - Available from version 26.8.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportMemoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_ImportMemoryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Successful dry-run preview",
+                    "value": {
+                      "status": "SUCCESS",
+                      "summary": [
+                        {
+                          "memory_type": "RULES",
+                          "source": {
+                            "identifier": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "type": "DATA_MODEL"
+                          },
+                          "existing_record_count": 3,
+                          "deleted_record_count": 3,
+                          "inserted_record_count": 1,
+                          "failed_record_count": 0
+                        }
+                      ],
+                      "validation_failures": [],
+                      "diagnostics": [],
+                      "operation_id": "550e8400-e29b-41d4-a716-446655440000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eureka_ImportMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details": {
       "get": {
         "operationId": "loadAnswer",
@@ -1323,6 +1521,7 @@
           "AI",
           "26.5.0.cl"
         ],
+        "x-streaming": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -9902,7 +10101,7 @@
     "/api/rest/2.0/report/answer": {
       "post": {
         "operationId": "exportAnswerReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires at least view access to the Answer.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\nUse the `type` parameter to specify whether the Answer being exported is a saved Answer (`SAVED`) or a pinned Answer on a Liveboard (`PINNED`). Defaults to `SAVED`. When using `PINNED`, the `metadata_identifier` must be the container id.\n\n**NOTE**:\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n* HTML rendering is not supported for PDF exports of Answers with tables.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  \n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.\n\nRequires at least view access to the Answer. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the `DATADOWNLOADING` (**Can download Data**) privilege is required. If RBAC is enabled, the required download privilege depends on the selected `file_format`: `CSV`, `XLSX`, and `PDF` require the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege, and `PNG` requires the `CAN_DOWNLOAD_VISUALS` (**Can download visuals**) privilege. For an Answer, the `PDF` export is a table PDF, which is why it falls under `CAN_DOWNLOAD_DETAILED_DATA` rather than `CAN_DOWNLOAD_VISUALS`.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Answer and set `file_format`. The default file format is CSV.\n\nUse the `type` parameter to specify whether the Answer being exported is a saved Answer (`SAVED`) or a pinned Answer on a Liveboard (`PINNED`). Defaults to `SAVED`. When using `PINNED`, the `metadata_identifier` must be the container id.\n\n**NOTE**:\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n* HTML rendering is not supported for PDF exports of Answers with tables.\n\nOptionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  \n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -9971,7 +10170,7 @@
     "/api/rest/2.0/report/liveboard": {
       "post": {
         "operationId": "exportLiveboardReport",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports a Liveboard and its visualizations in PDF, PNG, CSV, or XLSX file format.\nThe default `file_format` is CSV.\n\nRequires at least view access to the Liveboard.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\n**NOTE**: \n\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\n* Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\n* To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api). \n\n* Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.\n\n* Starting with the ThoughtSpot Cloud 26.2.0.cl release,\n\n  * Liveboards can be exported in CSV format. \n    * All visualizations within a Liveboard can be exported as individual CSV files. \n    * When exporting multiple visualizations or the entire Liveboard, the system returns the report as a compressed ZIP file containing the separate CSV files for each visualization.\n\n  * Liveboards can also be exported in XLSX format. \n    * All selected visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). \n    * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nExports a Liveboard and its visualizations in PDF, PNG, CSV, or XLSX file format.\nThe default `file_format` is CSV.\n\nRequires at least view access to the Liveboard. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the `DATADOWNLOADING` (**Can download Data**) privilege is required. If RBAC is enabled, the required download privilege depends on the selected `file_format`: `CSV` and `XLSX` require the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege, and `PNG` and `PDF` require the `CAN_DOWNLOAD_VISUALS` (**Can download visuals**) privilege.\n\n#### Usage guidelines\n\nIn the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.\n\n**NOTE**: \n\n* The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.\n\n* Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.\n\n* To include unsaved changes in the report, pass the `transient_pinboard_content` script generated from the `getExportRequestForCurrentPinboard` method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api). \n\n* Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options `include_cover_page`,`include_filter_page` within the `png_options` will not be available for PNG exports.\n\n* Starting with the ThoughtSpot Cloud 26.2.0.cl release,\n\n  * Liveboards can be exported in CSV format. \n    * All visualizations within a Liveboard can be exported as individual CSV files. \n    * When exporting multiple visualizations or the entire Liveboard, the system returns the report as a compressed ZIP file containing the separate CSV files for each visualization.\n\n  * Liveboards can also be exported in XLSX format. \n    * All selected visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). \n    * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Reports",
           "9.0.0.cl"
@@ -11585,22 +11784,24 @@
           },
           "required": true
         },
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/zip"
+              ],
+              "default": "application/zip"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Logo ZIP archive retrieved successfully.",
             "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "application/zip": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
+              "application/zip": {}
             }
           },
           "400": {
@@ -12282,20 +12483,40 @@
                     ]
                   },
                   "reset_options": {
-                    "$ref": "#/components/schemas/StyleResetOptionsInput"
+                    "description": "Fields to reset when operation is RESET. Specify style fields and\nvisualization areas to revert to defaults.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleResetOptionsInput"
+                      }
+                    ]
                   },
                   "navigation_panel": {
-                    "$ref": "#/components/schemas/NavigationPanelInput"
+                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/NavigationPanelInput"
+                      }
+                    ]
                   },
                   "chart_color_palette": {
-                    "$ref": "#/components/schemas/StyleColorPaletteInput"
+                    "description": "Chart color palette. When provided with operation REPLACE, exactly 8\ncolor entries must be specified in colors.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/StyleColorPaletteInput"
+                      }
+                    ]
                   },
                   "embedded_footer_text": {
                     "description": "Custom footer text for the embedded application. An empty\nstring clears the footer.",
                     "type": "string"
                   },
                   "visualization_fonts": {
-                    "$ref": "#/components/schemas/VisualizationFontsInput"
+                    "description": "Font assignments per visualization area. Provide only the areas to\nupdate; omitted areas remain unchanged.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/VisualizationFontsInput"
+                      }
+                    ]
                   },
                   "default_logo": {
                     "description": "Binary image for the DEFAULT logo slot (square app icon and favicon;\nrecommended 140x140 px). Accepted formats: PNG, JPG.",
@@ -12441,7 +12662,7 @@
     "/api/rest/2.0/customization/styles/fonts/{font_identifier}/update": {
       "post": {
         "operationId": "updateStyleFont",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Identify the font using `font_identifier` (UUID or name).\n- Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user's org library.\n- To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`.\n- `name` must be unique within the target scope if provided.\n- `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Identify the font using `font_identifier` (UUID or name).\n- Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user's org library.\n- To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`.\n- `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -12577,7 +12798,7 @@
     "/api/rest/2.0/customization/styles/fonts/upload": {
       "post": {
         "operationId": "uploadStyleFont",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error.\n- The `name` field must be unique within the target scope. Uploading a font with a name that already exists returns an error.\n- Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library.\n- `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`.\n- `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`.\n- `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`).\n- The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error.\n- Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library.\n- `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`.\n- `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`.\n- `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`).\n- The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -12598,7 +12819,7 @@
                     ]
                   },
                   "name": {
-                    "description": "Display name for the font (e.g. \"Acme Sans\"). Must be unique within the\ntarget scope; returns an error if a font with this name already exists.",
+                    "description": "Display name for the font (e.g. \"Acme Sans\").",
                     "type": "string"
                   },
                   "weight": {
@@ -17846,11 +18067,8 @@
             "nullable": true
           },
           "incomplete_details": {
+            "type": "object",
             "description": "Incomplete details of user if any present.",
-            "oneOf": [
-              {"type": "object"},
-              {"type": "array"}
-            ],
             "nullable": true
           },
           "is_first_login": {
@@ -20734,7 +20952,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -22200,6 +22423,41 @@
           }
         }
       },
+      "eureka_MemorySources": {
+        "type": "object",
+        "required": [
+          "type",
+          "identifiers"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "DATA_MODEL"
+            ],
+            "description": "Source object type for this group. Must be `DATA_MODEL`."
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Data-models to export memory for. Each entry may be a GUID or a\nhuman-readable obj_id; the eureka-agent resolves obj_ids before\nforwarding."
+          }
+        },
+        "description": "A single typed scope group identifying objects whose memory entries\nshould be exported. One group binds a single `type` to a set of\n`identifiers`; pass a list of groups to `exportMemory` to scope the\nexport to multiple objects in one call. Each group maps to one filter\ngroup on the eureka request."
+      },
+      "eureka_ExportMemoryResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "Serialized memory payload (currently YAML). This is the shape\nimportMemory consumes.",
+            "nullable": true
+          }
+        },
+        "description": "Response from exportMemory. Contains the serialized payload\nready for local editing and re-submission to importMemory."
+      },
       "VariableDetailInput": {
         "type": "object",
         "properties": {
@@ -22475,7 +22733,8 @@
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             },
             "nullable": true
@@ -25117,7 +25376,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
@@ -26185,7 +26449,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -27352,6 +27621,177 @@
           }
         }
       },
+      "eureka_ImportMemoryResponse": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "VALIDATION_FAILED",
+              "FAILED"
+            ],
+            "description": "Terminal status of the import."
+          },
+          "summary": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_ImportSummary"
+            },
+            "description": "Per (memory type, target source) result entries. Null when the\nimport failed before any record processing occurred.",
+            "nullable": true
+          },
+          "validation_failures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_ImportFailure"
+            },
+            "description": "Per-item validation failure entries. Null when the import failed\nbefore item validation could run.",
+            "nullable": true
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_ImportDiagnostic"
+            },
+            "description": "Diagnostic message groups (errors, rollbacks, and non-fatal\nwarnings), each keyed by a `sub_status`. Null when the import\nproduced no diagnostics.",
+            "nullable": true
+          },
+          "operation_id": {
+            "type": "string",
+            "description": "Server-minted UUID for log correlation. Echo this in support\ntickets and in the follow-up orphan-cleanup call.",
+            "nullable": true
+          }
+        },
+        "description": "Response from importMemory. On `SUCCESS`, `summary` is fully\npopulated. `diagnostics` carries any fatal errors, rollbacks, and\nnon-fatal observations (including residual-orphan doc ids that a\nfollow-up sweeper will reconcile)."
+      },
+      "eureka_ImportSummary": {
+        "type": "object",
+        "properties": {
+          "memory_type": {
+            "type": "string",
+            "enum": [
+              "RULES",
+              "RECIPES",
+              "ALWAYS_APPLY_RULES"
+            ],
+            "description": "The kind of memory (`RULES`, `RECIPES`, or `ALWAYS_APPLY_RULES`)\nthese counts apply to.",
+            "nullable": true
+          },
+          "source": {
+            "$ref": "#/components/schemas/eureka_ImportTargetSource",
+            "description": "The target object these counts apply to.",
+            "nullable": true
+          },
+          "existing_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of memory entries of this type that already existed on the\ntarget object before the import.",
+            "nullable": true
+          },
+          "deleted_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of existing entries that will be (DRY_RUN) or were\n(EXECUTE_IMPORT) deleted as part of the replacement.",
+            "nullable": true
+          },
+          "inserted_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of entries from the payload that will be (DRY_RUN) or were\n(EXECUTE_IMPORT) inserted.",
+            "nullable": true
+          },
+          "failed_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of records of this type that failed validation or processing.",
+            "nullable": true
+          }
+        },
+        "description": "Per (memory type, target source) summary of what importMemory did — or\nwould do, in DRY_RUN. `deleted_record_count` and `inserted_record_count`\nare previews in DRY_RUN and actuals in EXECUTE_IMPORT."
+      },
+      "eureka_ImportTargetSource": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Identifier (GUID) of the target object these counts apply to.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "DATA_MODEL"
+            ],
+            "description": "Source object kind (currently `DATA_MODEL`).",
+            "nullable": true
+          }
+        },
+        "description": "Identifies the target object a group of import counts applies to.\n`type` is the source kind (currently `DATA_MODEL`) and `identifier` is\nthe object's GUID."
+      },
+      "eureka_ImportFailure": {
+        "type": "object",
+        "properties": {
+          "line_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Best-effort line number of the offending item in the uploaded YAML.\nUI uses it for click-to-locate. May be null when the line cannot be\ndetermined.",
+            "nullable": true
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "UNKNOWN_FAILURE_REASON",
+              "VALIDATION",
+              "UNRESOLVED_SOURCE",
+              "ACCESS_DENIED",
+              "CHAR_LIMIT",
+              "SCHEMA"
+            ],
+            "description": "Machine-readable category for the failure (e.g. `VALIDATION`,\n`ACCESS_DENIED`, `CHAR_LIMIT`). UI uses this to decide messaging.",
+            "nullable": true
+          },
+          "field_name": {
+            "type": "string",
+            "description": "Dotted path to the offending field within the item (e.g.\n`content.rule_definition`) for inline highlighting. Absent when the\nfailure is item-level rather than field-level.",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description of the failure.",
+            "nullable": true
+          }
+        },
+        "description": "One per-item import failure surfaced by importMemory. `line_number` is\nthe best-effort line number in the uploaded YAML; UI uses it for\nclick-to-locate. `field_name` is a dotted path within the item (e.g.\n`content.rule_definition`) for inline highlighting; absent when the\nfailure is item-level rather than field-level."
+      },
+      "eureka_ImportDiagnostic": {
+        "type": "object",
+        "properties": {
+          "sub_status": {
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "FAILURE",
+              "WARNING",
+              "ROLLED_BACK"
+            ],
+            "description": "Severity / disposition category these messages share (e.g.\n`WARNING`, `FAILURE`, `ROLLED_BACK`).",
+            "nullable": true
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Human-readable messages for this category (e.g. the residual-orphan\ndoc ids for a `WARNING`, or the failure cause for a `FAILURE`).",
+            "nullable": true
+          }
+        },
+        "description": "A group of importMemory diagnostic messages that share a severity /\ndisposition. This is the single, uniform channel for fatal errors,\nrollbacks, and non-fatal observations."
+      },
       "VariableUpdateAssignmentInput": {
         "type": "object",
         "required": [
@@ -28462,6 +28902,21 @@
           "metadata_identifier"
         ]
       },
+      "ExportMemoryRequest": {
+        "type": "object",
+        "properties": {
+          "sources": {
+            "description": "List of typed scope groups selecting which data-models to export\nmemory for. Supply `DATA_MODEL` group to scope the\nexport to specific data-models.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/eureka_MemorySources"
+            }
+          }
+        },
+        "required": [
+          "sources"
+        ]
+      },
       "GetDataSourceSuggestionsRequest": {
         "type": "object",
         "properties": {
@@ -28523,6 +28978,23 @@
         "required": [
           "metadata_context",
           "query"
+        ]
+      },
+      "ImportMemoryRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "description": "The full serialized memory payload to import (currently YAML) —\ntypically a previous `exportMemory` response's `content`, edited\nlocally and re-submitted.",
+            "type": "string"
+          },
+          "dry_run": {
+            "description": "Required. When `true`, validate the payload and return preview\ncounts and row failures without writing anything. Pass `false` to\napply the atomic replacement. The caller must choose explicitly so\na real import is never triggered by omission.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "content",
+          "dry_run"
         ]
       },
       "QueryGetDecomposedQueryRequest": {
@@ -29225,7 +29697,8 @@
               "KEY_PAIR",
               "PERSONAL_ACCESS_TOKEN",
               "OAUTH_WITH_SERVICE_PRINCIPAL",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "configuration": {
@@ -29250,13 +29723,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           }
@@ -29325,7 +29799,8 @@
               "EXTOAUTH_WITH_PKCE",
               "OAUTH_WITH_PKCE",
               "PERSONAL_ACCESS_TOKEN",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "configuration": {
@@ -29349,13 +29824,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           },
@@ -29590,7 +30066,8 @@
               "OAUTH_WITH_PKCE",
               "EXTOAUTH_WITH_PKCE",
               "OAUTH_WITH_PEZ",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "show_resolved_parameters": {
@@ -30388,7 +30865,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -30547,7 +31029,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -30687,7 +31174,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -31937,7 +32429,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -32036,7 +32533,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -32130,7 +32632,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           }
@@ -34092,7 +34599,7 @@
             ]
           },
           "name": {
-            "description": "New display name for the font. Must be unique within the target scope.",
+            "description": "New display name for the font.",
             "type": "string"
           },
           "weight": {
@@ -34694,7 +35201,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
