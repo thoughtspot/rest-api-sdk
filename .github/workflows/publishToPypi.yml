@@ -21,4 +21,4 @@ jobs:
       - name: Publish package to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: rest-api-sdk/sdks/python/dist/
+          packages-dir: sdks/python/dist/
