@@ -29,9 +29,9 @@ class FetchAnswerDataRequest(BaseModel):
     data_format: Optional[StrictStr] = Field(default='COMPACT', description="JSON output in compact or full format. The FULL option is available in 9.12.5.cl or later.")
     record_offset: Optional[StrictInt] = Field(default=0, description="The starting record number from where the records should be included.")
     record_size: Optional[StrictInt] = Field(default=10, description="The number of records to include in a batch.")
-    runtime_filter: Optional[Dict[str, Any]] = Field(default=None, description="JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).")
-    runtime_sort: Optional[Dict[str, Any]] = Field(default=None, description="JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).")
-    runtime_param_override: Optional[Dict[str, Any]] = Field(default=None, description="JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).")
+    runtime_filter: Optional[Any] = Field(default=None, description="JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).")
+    runtime_sort: Optional[Any] = Field(default=None, description="JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).")
+    runtime_param_override: Optional[Any] = Field(default=None, description="JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["metadata_identifier", "data_format", "record_offset", "record_size", "runtime_filter", "runtime_sort", "runtime_param_override"]
 
@@ -90,6 +90,21 @@ class FetchAnswerDataRequest(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if runtime_filter (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_filter is None and "runtime_filter" in self.model_fields_set:
+            _dict['runtime_filter'] = None
+
+        # set to None if runtime_sort (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_sort is None and "runtime_sort" in self.model_fields_set:
+            _dict['runtime_sort'] = None
+
+        # set to None if runtime_param_override (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_param_override is None and "runtime_param_override" in self.model_fields_set:
+            _dict['runtime_param_override'] = None
 
         return _dict
 

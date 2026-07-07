@@ -43,15 +43,15 @@ export class ExportLiveboardReportRequest {
     /**
     * JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
     /**
     * Applied to the liveboard and overrides any filters already applied on the same columns in liveboard. Following example illustrate different kinds of filters: {   \"override_filters\": [     {       \"column_name\": \"Color\",       \"generic_filter\": {         \"op\": \"IN\",         \"values\": [           \"almond\",           \"turquoise\"         ]       },       \"negate\": false     },     {       \"column_name\": \"Commit Date\",       \"date_filter\": {         \"datePeriod\": \"HOUR\",         \"number\": 3,         \"type\": \"LAST_N_PERIOD\",         \"op\": \"EQ\"       }     },     {       \"column_name\": \"Sales\",       \"generic_filter\": {         \"op\": \"BW_INC\",         \"values\": [           \"100000\",           \"70000\"         ]       },       \"negate\": true     }   ] }
     */
-    'override_filters'?: any;
+    'override_filters'?: any | null;
     /**
     * JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
     /**
     * Options for PDF export.
     */
@@ -63,7 +63,7 @@ export class ExportLiveboardReportRequest {
     /**
     * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
     /**
     * Options for specific region specific overrides to support date/number/string/currency formatting.
     */

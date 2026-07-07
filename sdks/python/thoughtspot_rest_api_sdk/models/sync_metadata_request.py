@@ -25,7 +25,7 @@ class SyncMetadataRequest(BaseModel):
     """
     SyncMetadataRequest
     """ # noqa: E501
-    tables: Optional[Dict[str, Any]] = Field(default=None, description="Array of tables to sync. Each element can be: - String: Table identifier (GUID or name) to sync   all columns for that table. - Object: {tableId: [columnIds]} to sync specific   columns. If not provided, syncs all tables in the connection.")
+    tables: Optional[Any] = Field(default=None, description="Array of tables to sync. Each element can be: - String: Table identifier (GUID or name) to sync   all columns for that table. - Object: {tableId: [columnIds]} to sync specific   columns. If not provided, syncs all tables in the connection.")
     sync_attributes: Optional[List[StrictStr]] = Field(default=None, description="List of sync_attributes to sync from CDW. The default value is DESCRIPTION.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["tables", "sync_attributes"]
@@ -86,6 +86,11 @@ class SyncMetadataRequest(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if tables (nullable) is None
+        # and model_fields_set contains the field
+        if self.tables is None and "tables" in self.model_fields_set:
+            _dict['tables'] = None
 
         return _dict
 

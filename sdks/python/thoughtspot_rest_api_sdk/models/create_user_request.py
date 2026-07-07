@@ -42,8 +42,8 @@ class CreateUserRequest(BaseModel):
     favorite_metadata: Optional[List[FavoriteMetadataInput]] = Field(default=None, description="Metadata objects to add to the user's favorites list.")
     preferred_locale: Optional[StrictStr] = Field(default=None, description="Locale for the user. When setting this value, do not set use_browser_language to true, otherwise the browser's language setting will take precedence and the preferred_locale value will be ignored.")
     use_browser_language: Optional[StrictBool] = Field(default=None, description="Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser's language setting takes precedence.    Version: 26.3.0.cl or later ")
-    extended_properties: Optional[Dict[str, Any]] = Field(default=None, description="Properties for the user")
-    extended_preferences: Optional[Dict[str, Any]] = Field(default=None, description="Preferences for the user")
+    extended_properties: Optional[Any] = Field(default=None, description="Properties for the user")
+    extended_preferences: Optional[Any] = Field(default=None, description="Preferences for the user")
     trigger_welcome_email: Optional[StrictBool] = Field(default=None, description="Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.")
     trigger_activation_email: Optional[StrictBool] = Field(default=None, description="Flag to indicate whether activation email should be sent to the user. Default value for IAMv2 users is set to true. Users must either set this to false, or enter a valid  password if they do not want to trigger an activation email.")
     additional_properties: Dict[str, Any] = {}
@@ -161,6 +161,16 @@ class CreateUserRequest(BaseModel):
         # and model_fields_set contains the field
         if self.use_browser_language is None and "use_browser_language" in self.model_fields_set:
             _dict['use_browser_language'] = None
+
+        # set to None if extended_properties (nullable) is None
+        # and model_fields_set contains the field
+        if self.extended_properties is None and "extended_properties" in self.model_fields_set:
+            _dict['extended_properties'] = None
+
+        # set to None if extended_preferences (nullable) is None
+        # and model_fields_set contains the field
+        if self.extended_preferences is None and "extended_preferences" in self.model_fields_set:
+            _dict['extended_preferences'] = None
 
         # set to None if trigger_welcome_email (nullable) is None
         # and model_fields_set contains the field

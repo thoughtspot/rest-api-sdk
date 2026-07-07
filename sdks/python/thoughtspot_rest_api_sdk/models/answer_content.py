@@ -27,7 +27,7 @@ class AnswerContent(BaseModel):
     """ # noqa: E501
     available_data_row_count: StrictInt = Field(description="Total available data row count.")
     column_names: List[StrictStr] = Field(description="Name of the columns.")
-    data_rows: List[Dict[str, Any]] = Field(description="Rows of data set.")
+    data_rows: List[Any] = Field(description="Rows of data set.")
     record_offset: StrictInt = Field(description="The starting record number from where the records should be included.")
     record_size: StrictInt = Field(description="The number of records that should be included.")
     returned_data_row_count: StrictInt = Field(description="Total returned data row count.")

@@ -25,9 +25,9 @@ class JWTParameter(BaseModel):
     """
     List of runtime parameters need to set during the session.
     """ # noqa: E501
-    runtime_filter: Optional[Dict[str, Any]] = Field(default=None, description="Runtime filter parameter type in JWT.")
-    runtime_sort: Optional[Dict[str, Any]] = Field(default=None, description="Runtime sort parameter type in JWT.")
-    runtime_param_override: Optional[Dict[str, Any]] = Field(default=None, description="Runtime param override type in JWT.")
+    runtime_filter: Optional[Any] = Field(default=None, description="Runtime filter parameter type in JWT.")
+    runtime_sort: Optional[Any] = Field(default=None, description="Runtime sort parameter type in JWT.")
+    runtime_param_override: Optional[Any] = Field(default=None, description="Runtime param override type in JWT.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["runtime_filter", "runtime_sort", "runtime_param_override"]
 

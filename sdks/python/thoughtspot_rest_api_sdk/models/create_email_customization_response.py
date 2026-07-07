@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from thoughtspot_rest_api_sdk.models.org_type import OrgType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +29,7 @@ class CreateEmailCustomizationResponse(BaseModel):
     tenant_id: StrictStr = Field(description="Tenant ID")
     org: OrgType
     name: StrictStr = Field(description="Email customization name.")
-    template_properties: Dict[str, Any] = Field(description="Customization configuration for the email")
+    template_properties: Optional[Any] = Field(description="Customization configuration for the email")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["tenant_id", "org", "name", "template_properties"]
 
@@ -81,6 +81,11 @@ class CreateEmailCustomizationResponse(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if template_properties (nullable) is None
+        # and model_fields_set contains the field
+        if self.template_properties is None and "template_properties" in self.model_fields_set:
+            _dict['template_properties'] = None
 
         return _dict
 

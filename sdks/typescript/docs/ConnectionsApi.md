@@ -40,7 +40,7 @@ apiInstance.createConnection(
     name: "name_example",
     description: "description_example",
     data_warehouse_type: "SNOWFLAKE",
-    data_warehouse_config: {},
+    data_warehouse_config: null,
     validate: true,
   } 
 ).then((data:any) => {
@@ -445,7 +445,7 @@ apiInstance.searchConnection(
     data_warehouse_object_type: "DATABASE",
     sort_options: null,
     include_details: true,
-    configuration: {},
+    configuration: null,
     authentication_type: "SERVICE_ACCOUNT",
     show_resolved_parameters: false,
   } 
@@ -511,7 +511,7 @@ apiInstance.syncMetadata(
   "connection_identifier_example" , 
   // SyncMetadataRequest
   {
-    tables: {},
+    tables: null,
     sync_attributes: ["DESCRIPTION"],
   } 
 ).then((data:any) => {
@@ -579,7 +579,7 @@ apiInstance.updateConnection(
     connection_identifier: "connection_identifier_example",
     name: "name_example",
     description: "description_example",
-    data_warehouse_config: {},
+    data_warehouse_config: null,
     validate: true,
   } 
 ).then((data:any) => {
@@ -712,7 +712,7 @@ apiInstance.updateConnectionV2(
   {
     name: "name_example",
     description: "description_example",
-    data_warehouse_config: {},
+    data_warehouse_config: null,
     validate: true,
   } 
 ).then((data:any) => {

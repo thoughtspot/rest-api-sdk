@@ -16,7 +16,7 @@ export class SyncMetadataRequest {
     /**
     * Array of tables to sync. Each element can be: - String: Table identifier (GUID or name) to sync   all columns for that table. - Object: {tableId: [columnIds]} to sync specific   columns. If not provided, syncs all tables in the connection.
     */
-    'tables'?: any;
+    'tables'?: any | null;
     /**
     * List of sync_attributes to sync from CDW. The default value is DESCRIPTION.
     */

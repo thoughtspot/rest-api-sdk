@@ -34,8 +34,8 @@ class DataSourceInfo(BaseModel):
     confidence: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Tool-reported confidence that this data source matches the query, in `[0, 1]`.")
     reasoning: Optional[StrictStr] = Field(default=None, description="LLM reasoning describing why the data source was selected.")
     header: Optional[DataSourceHeader] = None
-    related_liveboard_visualizations: Optional[List[Dict[str, Any]]] = Field(default=None, description="Related liveboard visualizations for this data source. Open-ended JSON shape driven by the underlying proto.")
-    related_answers: Optional[List[Dict[str, Any]]] = Field(default=None, description="Related saved answers for this data source. Open-ended JSON shape driven by the underlying proto.")
+    related_liveboard_visualizations: Optional[List[Any]] = Field(default=None, description="Related liveboard visualizations for this data source. Open-ended JSON shape driven by the underlying proto.")
+    related_answers: Optional[List[Any]] = Field(default=None, description="Related saved answers for this data source. Open-ended JSON shape driven by the underlying proto.")
     related_spotter_queries: Optional[List[StrictStr]] = Field(default=None, description="Related Spotter queries previously run against this data source. Truncated to a small upper bound by the tool.")
     popularity: Optional[DataSourcePopularity] = None
     user_usage: Optional[DataSourceUserUsage] = None

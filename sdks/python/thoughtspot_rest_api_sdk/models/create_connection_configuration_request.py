@@ -32,7 +32,7 @@ class CreateConnectionConfigurationRequest(BaseModel):
     same_as_parent: Optional[StrictBool] = Field(default=False, description="Specifies whether the connection configuration should inherit all properties and authentication type from its parent connection. This attribute is only applicable to parameterized connections. When set to true, the configuration uses only the connection properties and authentication type inherited from the parent.    Version: 26.2.0.cl or later ")
     policy_process_options: Optional[PolicyProcessOptionsInput] = Field(default=None, description="This attribute is only applicable to parameterized connections. Ensure that the policy is set to Processes to allow the configuration to be used exclusively for system processes.    Version: 26.2.0.cl or later ")
     authentication_type: Optional[StrictStr] = Field(default='SERVICE_ACCOUNT', description="Type of authentication used for the connection.")
-    configuration: Dict[str, Any] = Field(description="Configuration properties in JSON.")
+    configuration: Optional[Any] = Field(description="Configuration properties in JSON.")
     policy_type: Optional[StrictStr] = Field(default='NO_POLICY', description="Type of policy.")
     policy_principals: Optional[List[StrictStr]] = Field(default=None, description="Unique ID or name of the User and User Groups.")
     policy_processes: Optional[List[StrictStr]] = Field(default=None, description="Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.")
@@ -123,6 +123,11 @@ class CreateConnectionConfigurationRequest(BaseModel):
         # and model_fields_set contains the field
         if self.same_as_parent is None and "same_as_parent" in self.model_fields_set:
             _dict['same_as_parent'] = None
+
+        # set to None if configuration (nullable) is None
+        # and model_fields_set contains the field
+        if self.configuration is None and "configuration" in self.model_fields_set:
+            _dict['configuration'] = None
 
         return _dict
 

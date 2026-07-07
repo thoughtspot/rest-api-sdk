@@ -100,7 +100,7 @@ apiInstance.createConnectionConfiguration(
     same_as_parent: false,
     policy_process_options: null,
     authentication_type: "SERVICE_ACCOUNT",
-    configuration: {},
+    configuration: null,
     policy_type: "NO_POLICY",
     policy_principals: [
       "policy_principals_example",
@@ -240,7 +240,7 @@ apiInstance.updateConnectionConfiguration(
     same_as_parent: false,
     policy_process_options: null,
     authentication_type: "SERVICE_ACCOUNT",
-    configuration: {},
+    configuration: null,
     policy_type: "NO_POLICY",
     policy_principals: [
       "policy_principals_example",

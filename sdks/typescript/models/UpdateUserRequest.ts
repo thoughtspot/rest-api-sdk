@@ -81,11 +81,11 @@ export class UpdateUserRequest {
     /**
     * Properties for the user
     */
-    'extended_properties'?: any;
+    'extended_properties'?: any | null;
     /**
     * Preferences for the user
     */
-    'extended_preferences'?: any;
+    'extended_preferences'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

@@ -32,7 +32,7 @@ class Table(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="Description of the table")
     selected: Optional[StrictBool] = Field(default=None, description="Determines if the table is selected")
     linked: Optional[StrictBool] = Field(default=None, description="Determines if the table is linked")
-    relationships: Optional[List[Dict[str, Any]]] = Field(default=None, description="List of relationships for the table")
+    relationships: Optional[List[Any]] = Field(default=None, description="List of relationships for the table")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "columns", "type", "description", "selected", "linked", "relationships"]
 

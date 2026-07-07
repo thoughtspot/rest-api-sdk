@@ -140,7 +140,7 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_CONFIGURATION)
     @javax.annotation.Nullable
-    private Object _configuration;
+    private Object _configuration = null;
 
     /** Type of policy. */
     @JsonAdapter(PolicyTypeEnum.Adapter.class)

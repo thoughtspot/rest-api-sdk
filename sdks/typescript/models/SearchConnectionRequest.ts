@@ -50,7 +50,7 @@ export class SearchConnectionRequest {
     /**
     * Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\"warehouse\":\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when data_warehouse_object_type is selected.
     */
-    'configuration'?: any;
+    'configuration'?: any | null;
     /**
     * List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.
     */

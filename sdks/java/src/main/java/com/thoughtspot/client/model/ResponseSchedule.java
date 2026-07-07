@@ -42,8 +42,8 @@ public class ResponseSchedule implements Serializable {
     public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
 
     @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
-    @javax.annotation.Nonnull
-    private Object creationTimeInMillis;
+    @javax.annotation.Nullable
+    private Object creationTimeInMillis = null;
 
     public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
@@ -145,7 +145,7 @@ public class ResponseSchedule implements Serializable {
     }
 
     public ResponseSchedule creationTimeInMillis(
-            @javax.annotation.Nonnull Object creationTimeInMillis) {
+            @javax.annotation.Nullable Object creationTimeInMillis) {
         this.creationTimeInMillis = creationTimeInMillis;
         return this;
     }
@@ -155,12 +155,12 @@ public class ResponseSchedule implements Serializable {
      *
      * @return creationTimeInMillis
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public Object getCreationTimeInMillis() {
         return creationTimeInMillis;
     }
 
-    public void setCreationTimeInMillis(@javax.annotation.Nonnull Object creationTimeInMillis) {
+    public void setCreationTimeInMillis(@javax.annotation.Nullable Object creationTimeInMillis) {
         this.creationTimeInMillis = creationTimeInMillis;
     }
 

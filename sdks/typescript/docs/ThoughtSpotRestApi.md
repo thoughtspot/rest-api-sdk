@@ -1253,7 +1253,7 @@ apiInstance.createConnection(
     name: "name_example",
     description: "description_example",
     data_warehouse_type: "SNOWFLAKE",
-    data_warehouse_config: {},
+    data_warehouse_config: null,
     validate: true,
   } 
 ).then((data:any) => {
@@ -1322,7 +1322,7 @@ apiInstance.createConnectionConfiguration(
     same_as_parent: false,
     policy_process_options: null,
     authentication_type: "SERVICE_ACCOUNT",
-    configuration: {},
+    configuration: null,
     policy_type: "NO_POLICY",
     policy_principals: [
       "policy_principals_example",
@@ -1884,8 +1884,8 @@ apiInstance.createUser(
     ],
     preferred_locale: "en-CA",
     use_browser_language: true,
-    extended_properties: {},
-    extended_preferences: {},
+    extended_properties: null,
+    extended_preferences: null,
     trigger_welcome_email: true,
     trigger_activation_email: true,
   } 
@@ -2098,7 +2098,7 @@ apiInstance.createWebhookConfiguration(
     name: "name_example",
     description: "description_example",
     url: "url_example",
-    url_params: {},
+    url_params: null,
     events: [
       "LIVEBOARD_SCHEDULE",
     ],
@@ -4068,9 +4068,9 @@ apiInstance.exportAnswerReport(
     session_identifier: "session_identifier_example",
     generation_number: 1,
     file_format: "CSV",
-    runtime_filter: {},
-    runtime_sort: {},
-    runtime_param_override: {},
+    runtime_filter: null,
+    runtime_sort: null,
+    runtime_param_override: null,
     regional_settings: null,
     png_options: null,
     personalised_view_identifier: "personalised_view_identifier_example",
@@ -4146,12 +4146,12 @@ apiInstance.exportLiveboardReport(
     ],
     transient_content: "transient_content_example",
     file_format: "PDF",
-    runtime_filter: {},
-    override_filters: {},
-    runtime_sort: {},
+    runtime_filter: null,
+    override_filters: null,
+    runtime_sort: null,
     pdf_options: null,
     png_options: null,
-    runtime_param_override: {},
+    runtime_param_override: null,
     regional_settings: null,
   } 
 ).then((data:any) => {
@@ -4490,9 +4490,9 @@ apiInstance.fetchAnswerData(
     data_format: "COMPACT",
     record_offset: 0,
     record_size: 10,
-    runtime_filter: {},
-    runtime_sort: {},
-    runtime_param_override: {},
+    runtime_filter: null,
+    runtime_sort: null,
+    runtime_param_override: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -4822,9 +4822,9 @@ apiInstance.fetchLiveboardData(
     data_format: "COMPACT",
     record_offset: 0,
     record_size: 10,
-    runtime_filter: {},
-    runtime_sort: {},
-    runtime_param_override: {},
+    runtime_filter: null,
+    runtime_sort: null,
+    runtime_param_override: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -5678,7 +5678,7 @@ apiInstance.getCustomAccessToken(
         column_name: "column_name_example",
         operator: "EQ",
         values: [
-          {},
+          null,
         ],
       },
     ],
@@ -5686,7 +5686,7 @@ apiInstance.getCustomAccessToken(
       {
         name: "name_example",
         values: [
-          {},
+          null,
         ],
       },
     ],
@@ -5694,7 +5694,7 @@ apiInstance.getCustomAccessToken(
       {
         name: "name_example",
         values: [
-          {},
+          null,
         ],
       },
     ],
@@ -8166,7 +8166,7 @@ apiInstance.searchConnection(
     data_warehouse_object_type: "DATABASE",
     sort_options: null,
     include_details: true,
-    configuration: {},
+    configuration: null,
     authentication_type: "SERVICE_ACCOUNT",
     show_resolved_parameters: false,
   } 
@@ -8308,9 +8308,9 @@ apiInstance.searchData(
     data_format: "COMPACT",
     record_offset: 0,
     record_size: 10,
-    runtime_filter: {},
-    runtime_sort: {},
-    runtime_param_override: {},
+    runtime_filter: null,
+    runtime_sort: null,
+    runtime_param_override: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -10043,7 +10043,7 @@ apiInstance.syncMetadata(
   "connection_identifier_example" , 
   // SyncMetadataRequest
   {
-    tables: {},
+    tables: null,
     sync_attributes: ["DESCRIPTION"],
   } 
 ).then((data:any) => {
@@ -10616,7 +10616,7 @@ apiInstance.updateConnection(
     connection_identifier: "connection_identifier_example",
     name: "name_example",
     description: "description_example",
-    data_warehouse_config: {},
+    data_warehouse_config: null,
     validate: true,
   } 
 ).then((data:any) => {
@@ -10687,7 +10687,7 @@ apiInstance.updateConnectionConfiguration(
     same_as_parent: false,
     policy_process_options: null,
     authentication_type: "SERVICE_ACCOUNT",
-    configuration: {},
+    configuration: null,
     policy_type: "NO_POLICY",
     policy_principals: [
       "policy_principals_example",
@@ -10828,7 +10828,7 @@ apiInstance.updateConnectionV2(
   {
     name: "name_example",
     description: "description_example",
-    data_warehouse_config: {},
+    data_warehouse_config: null,
     validate: true,
   } 
 ).then((data:any) => {
@@ -11706,7 +11706,7 @@ const apiInstance = new ThoughtSpotRestApi(configuration);
 apiInstance.updateSystemConfig(
   // UpdateSystemConfigRequest
   {
-    configuration: {},
+    configuration: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -11861,8 +11861,8 @@ apiInstance.updateUser(
     operation: "REPLACE",
     preferred_locale: "en-CA",
     use_browser_language: true,
-    extended_properties: {},
-    extended_preferences: {},
+    extended_properties: null,
+    extended_preferences: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -12159,7 +12159,7 @@ apiInstance.updateWebhookConfiguration(
     name: "name_example",
     description: "description_example",
     url: "url_example",
-    url_params: {},
+    url_params: null,
     events: [
       "LIVEBOARD_SCHEDULE",
     ],

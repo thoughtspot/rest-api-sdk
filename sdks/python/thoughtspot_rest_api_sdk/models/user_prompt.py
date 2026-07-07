@@ -27,7 +27,7 @@ class UserPrompt(BaseModel):
     User-authored prompt for a conversation turn: the user's text message and any files or connector resources attached to it.
     """ # noqa: E501
     message: Optional[UserMessage] = None
-    attachments: Optional[List[Dict[str, Any]]] = Field(default=None, description="Files or connector resources attached to the user message. Empty array when there are no attachments.")
+    attachments: Optional[List[Any]] = Field(default=None, description="Files or connector resources attached to the user message. Empty array when there are no attachments.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["message", "attachments"]
 

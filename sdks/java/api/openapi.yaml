@@ -1369,14 +1369,12 @@ paths:
 
                         The visualization shows the side-by-side comparison of total sales (in USD) between the two years, allowing you to see the year-over-year performance. You can see the sales figures for both 2024 and 2025, making it easy to identify growth or decline trends in your retail apparel business.
                       agent_context: ""
-              schema:
-                type: object
+              schema: {}
           description: Common successful response
         "201":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Common error response
         "400":
           content:
@@ -1544,6 +1542,7 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+      x-streaming: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1612,14 +1611,12 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Common successful response
         "201":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Common error response
         "400":
           content:
@@ -1748,6 +1745,7 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+      x-streaming: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -5878,8 +5876,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: "Generate custom calendar data based on specifications, as\
             \ a CSV file."
         "400":
@@ -6285,8 +6282,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Succesfully created DBT Connection.
         "400":
           content:
@@ -6350,8 +6346,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Sync Table and Worksheet TML's are successfully generated.
         "400":
           content:
@@ -6418,8 +6413,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Required Table and Worksheet TML's are successfully generated.
         "400":
           content:
@@ -6611,8 +6605,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: DBT Connection successfully updated.
         "400":
           content:
@@ -7736,8 +7729,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Translation bundle retrieved successfully.
         "400":
           content:
@@ -8057,8 +8049,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  type: object
+                items: {}
                 type: array
           description: Export TMLs of specified metadata objects is successful.
         "400":
@@ -8130,8 +8121,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Export TMLs of specified metadata objects is successful.
         "400":
           content:
@@ -8418,8 +8408,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  type: object
+                items: {}
                 type: array
           description: Import metadata objects using specified TMLs is successful.
         "400":
@@ -15676,11 +15665,10 @@ components:
   schemas:
     ErrorResponse:
       example:
-        error: "{}"
+        error: ""
       properties:
         error:
           nullable: true
-          type: object
       type: object
     GetTokenResponse:
       example:
@@ -15868,7 +15856,7 @@ components:
           id: 6
         owner_id: owner_id
         deprecated: true
-        access_control_properties: "{}"
+        access_control_properties: ""
         modification_time_in_millis: 2.302136
         account_status: ACTIVE
         home_liveboard:
@@ -15885,11 +15873,11 @@ components:
         super_user: true
         id: id
         system_user: true
-        incomplete_details: "{}"
-        extended_preferences: "{}"
+        incomplete_details: ""
+        extended_preferences: ""
         email: email
         welcome_email_sent: true
-        org_privileges: "{}"
+        org_privileges: ""
         visibility: SHARABLE
         display_name: display_name
         parent_type: USER
@@ -15903,10 +15891,10 @@ components:
         show_onboarding_experience: true
         is_first_login: true
         external: true
-        user_parameters: "{}"
+        user_parameters: ""
         deleted: true
-        extended_properties: "{}"
-        variable_values: "{}"
+        extended_properties: ""
+        variable_values: ""
         name: name
         modifier_id: modifier_id
         complete_detail: true
@@ -16025,7 +16013,6 @@ components:
         incomplete_details:
           description: Incomplete details of user if any present.
           nullable: true
-          type: object
         is_first_login:
           description: Indicates whether it is first login of the user.
           nullable: true
@@ -16112,7 +16099,6 @@ components:
         org_privileges:
           description: Privileges which are assigned to the user with org.
           nullable: true
-          type: object
         preferred_locale:
           description: Locale for the user.
           nullable: true
@@ -16127,24 +16113,19 @@ components:
         extended_properties:
           description: Properties for the user
           nullable: true
-          type: object
         extended_preferences:
           description: Preferences for the user
           nullable: true
-          type: object
         user_parameters:
           description: User Parameters which are specified for the user via JWToken
           nullable: true
-          type: object
         access_control_properties:
           description: Access Control Properties which are specified for the user
             via JWToken
           nullable: true
-          type: object
         variable_values:
           description: Formula Variables which are specified for the user via JWToken
           nullable: true
-          type: object
       required:
       - display_name
       - id
@@ -16394,11 +16375,10 @@ components:
       type: object
     SystemOverrideInfo:
       example:
-        config_override_info: "{}"
+        config_override_info: ""
       properties:
         config_override_info:
           nullable: true
-          type: object
       type: object
     OrgPreferenceSearchCriteriaInput:
       example:
@@ -17004,7 +16984,7 @@ components:
         description: description
         modification_time_in_millis: 2.302136
         type: LOCAL_GROUP
-        content: "{}"
+        content: ""
         index_version: 5
         sub_groups:
         - name: name
@@ -17052,7 +17032,6 @@ components:
         content:
           description: Content details of the group
           nullable: true
-          type: object
         creation_time_in_millis:
           description: Creation time of the group in milliseconds
           format: float
@@ -17381,16 +17360,16 @@ components:
       description: Metadata Search Response Object.
       example:
         metadata_name: metadata_name
-        dependent_objects: "{}"
-        metadata_detail: "{}"
-        metadata_header: "{}"
+        dependent_objects: ""
+        metadata_detail: ""
+        metadata_header: ""
         visualization_headers:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         incomplete_objects:
-        - "{}"
-        - "{}"
-        stats: "{}"
+        - ""
+        - ""
+        stats: ""
         metadata_type: LIVEBOARD
         metadata_id: metadata_id
         metadata_obj_id: metadata_obj_id
@@ -17427,32 +17406,26 @@ components:
         dependent_objects:
           description: Details of dependent objects of the metadata objects.
           nullable: true
-          type: object
         incomplete_objects:
           description: Details of incomplete information of the metadata objects if
             any.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
         metadata_detail:
           description: Complete details of the metadata objects.
           nullable: true
-          type: object
         metadata_header:
           description: Header information of the metadata objects.
           nullable: true
-          type: object
         visualization_headers:
           description: Visualization header information of the metadata objects.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
         stats:
           description: "Stats of the metadata object. Includes views, favorites, last_accessed."
           nullable: true
-          type: object
       required:
       - metadata_type
       type: object
@@ -17470,7 +17443,7 @@ components:
           object_processed_count: 2
           completed_at: 5.962134
           org_id: 0
-          import_response: "{}"
+          import_response: ""
           author_id: author_id
           modified_at: 7.0614014
           author_display_name: author_display_name
@@ -17485,7 +17458,7 @@ components:
           object_processed_count: 2
           completed_at: 5.962134
           org_id: 0
-          import_response: "{}"
+          import_response: ""
           author_id: author_id
           modified_at: 7.0614014
           author_display_name: author_display_name
@@ -17514,7 +17487,7 @@ components:
         object_processed_count: 2
         completed_at: 5.962134
         org_id: 0
-        import_response: "{}"
+        import_response: ""
         author_id: author_id
         modified_at: 7.0614014
         author_display_name: author_display_name
@@ -17540,7 +17513,6 @@ components:
         import_response:
           description: Response of imported objects so far.
           nullable: true
-          type: object
         task_status:
           description: Current status of the task.
           enum:
@@ -18121,19 +18093,17 @@ components:
       type: object
     PermissionOfPrincipalsResponse:
       example:
-        principal_permission_details: "{}"
+        principal_permission_details: ""
       properties:
         principal_permission_details:
           nullable: true
-          type: object
       type: object
     PermissionOfMetadataResponse:
       example:
-        metadata_permission_details: "{}"
+        metadata_permission_details: ""
       properties:
         metadata_permission_details:
           nullable: true
-          type: object
       type: object
     ObjectPrivilegesMetadataInput:
       example:
@@ -18156,11 +18126,10 @@ components:
       type: object
     ObjectPrivilegesOfMetadataResponse:
       example:
-        metadata_object_privileges: "{}"
+        metadata_object_privileges: ""
       properties:
         metadata_object_privileges:
           nullable: true
-          type: object
       type: object
     PrincipalsInput:
       example:
@@ -18341,8 +18310,8 @@ components:
       example:
         contents:
         - data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18352,8 +18321,8 @@ components:
           returned_data_row_count: 5
           record_offset: 6
         - data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18374,8 +18343,8 @@ components:
     AnswerContent:
       example:
         data_rows:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         record_size: 1
         available_data_row_count: 0
         sampling_ratio: 5.637377
@@ -18396,8 +18365,7 @@ components:
           type: array
         data_rows:
           description: Rows of data set.
-          items:
-            type: object
+          items: {}
           type: array
         record_offset:
           description: The starting record number from where the records should be
@@ -18434,8 +18402,8 @@ components:
         contents:
         - visualization_id: visualization_id
           data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18447,8 +18415,8 @@ components:
           record_offset: 6
         - visualization_id: visualization_id
           data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18480,8 +18448,8 @@ components:
       example:
         visualization_id: visualization_id
         data_rows:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         record_size: 1
         available_data_row_count: 0
         sampling_ratio: 5.637377
@@ -18503,8 +18471,7 @@ components:
           type: array
         data_rows:
           description: Rows of data set.
-          items:
-            type: object
+          items: {}
           type: array
         record_offset:
           description: The starting record number from where the records should be
@@ -18549,8 +18516,8 @@ components:
         metadata_name: metadata_name
         contents:
         - data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18560,8 +18527,8 @@ components:
           returned_data_row_count: 5
           record_offset: 6
         - data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18800,8 +18767,8 @@ components:
           - schemas:
             - tables:
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18821,8 +18788,8 @@ components:
                 selected: true
                 linked: true
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18844,8 +18811,8 @@ components:
               name: name
             - tables:
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18865,8 +18832,8 @@ components:
                 selected: true
                 linked: true
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18891,8 +18858,8 @@ components:
           - schemas:
             - tables:
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18912,8 +18879,8 @@ components:
                 selected: true
                 linked: true
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18935,8 +18902,8 @@ components:
               name: name
             - tables:
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18956,8 +18923,8 @@ components:
                 selected: true
                 linked: true
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18981,7 +18948,7 @@ components:
             auto_created: true
         name: name
         description: description
-        details: "{}"
+        details: ""
         id: id
         data_warehouse_type: SNOWFLAKE
       properties:
@@ -19038,7 +19005,6 @@ components:
         details:
           description: Details of the connection.
           nullable: true
-          type: object
       required:
       - data_warehouse_type
       - id
@@ -19050,8 +19016,8 @@ components:
         - schemas:
           - tables:
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19071,8 +19037,8 @@ components:
               selected: true
               linked: true
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19094,8 +19060,8 @@ components:
             name: name
           - tables:
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19115,8 +19081,8 @@ components:
               selected: true
               linked: true
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19141,8 +19107,8 @@ components:
         - schemas:
           - tables:
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19162,8 +19128,8 @@ components:
               selected: true
               linked: true
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19185,8 +19151,8 @@ components:
             name: name
           - tables:
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19206,8 +19172,8 @@ components:
               selected: true
               linked: true
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19243,8 +19209,8 @@ components:
         schemas:
         - tables:
           - relationships:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             columns:
             - is_aggregate: is_aggregate
               can_import: true
@@ -19264,8 +19230,8 @@ components:
             selected: true
             linked: true
           - relationships:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             columns:
             - is_aggregate: is_aggregate
               can_import: true
@@ -19287,8 +19253,8 @@ components:
           name: name
         - tables:
           - relationships:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             columns:
             - is_aggregate: is_aggregate
               can_import: true
@@ -19308,8 +19274,8 @@ components:
             selected: true
             linked: true
           - relationships:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             columns:
             - is_aggregate: is_aggregate
               can_import: true
@@ -19352,8 +19318,8 @@ components:
       example:
         tables:
         - relationships:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           columns:
           - is_aggregate: is_aggregate
             can_import: true
@@ -19373,8 +19339,8 @@ components:
           selected: true
           linked: true
         - relationships:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           columns:
           - is_aggregate: is_aggregate
             can_import: true
@@ -19410,8 +19376,8 @@ components:
     Table:
       example:
         relationships:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         columns:
         - is_aggregate: is_aggregate
           can_import: true
@@ -19458,8 +19424,7 @@ components:
           type: boolean
         relationships:
           description: List of relationships for the table
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
       required:
@@ -19508,7 +19473,7 @@ components:
         - UNKNOWN
         - UNKNOWN
         groups_assigned_count: 0
-        creation_time_in_millis: "{}"
+        creation_time_in_millis: ""
         hidden: true
         deprecated: true
         description: description
@@ -19518,7 +19483,7 @@ components:
         - name: name
           id: id
         permission: READ_ONLY
-        modification_time_in_millis: "{}"
+        modification_time_in_millis: ""
         external: true
         deleted: true
         name: name
@@ -19643,11 +19608,9 @@ components:
         creation_time_in_millis:
           description: Creation time of the role in milliseconds.
           nullable: true
-          type: object
         modification_time_in_millis:
           description: Last modified time of the role in milliseconds.
           nullable: true
-          type: object
         deleted:
           description: Indicates whether the role is deleted.
           nullable: true
@@ -20403,35 +20366,35 @@ components:
         - expired: true
           file_type: file_type
           file_id: file_id
-          created_time_in_millis: "{}"
+          created_time_in_millis: ""
           display_name: display_name
         - expired: true
           file_type: file_type
           file_id: file_id
-          created_time_in_millis: "{}"
+          created_time_in_millis: ""
           display_name: display_name
         messages:
         - response_items:
-          - "{}"
-          - "{}"
-          timestamp_in_millis: "{}"
+          - ""
+          - ""
+          timestamp_in_millis: ""
           message_id: message_id
           user_prompt:
             attachments:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             message:
               message_id: message_id
               content: content
         - response_items:
-          - "{}"
-          - "{}"
-          timestamp_in_millis: "{}"
+          - ""
+          - ""
+          timestamp_in_millis: ""
           message_id: message_id
           user_prompt:
             attachments:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             message:
               message_id: message_id
               content: content
@@ -20458,14 +20421,14 @@ components:
         followed by the agent's response items for that turn.
       example:
         response_items:
-        - "{}"
-        - "{}"
-        timestamp_in_millis: "{}"
+        - ""
+        - ""
+        timestamp_in_millis: ""
         message_id: message_id
         user_prompt:
           attachments:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           message:
             message_id: message_id
             content: content
@@ -20477,15 +20440,13 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch for the turn.
-          type: object
         user_prompt:
           $ref: '#/components/schemas/UserPrompt'
         response_items:
           description: |-
             Agent-side output produced in response to this turn. Empty array for
             in-progress turns where the agent has not yet produced output.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
       required:
@@ -20498,8 +20459,8 @@ components:
         files or connector resources attached to it.
       example:
         attachments:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         message:
           message_id: message_id
           content: content
@@ -20510,8 +20471,7 @@ components:
           description: |-
             Files or connector resources attached to the user message. Empty array when
             there are no attachments.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
       type: object
@@ -20541,7 +20501,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20580,7 +20539,6 @@ components:
         created_time_in_millis:
           description: Milliseconds since Unix epoch when the file was created.
           nullable: true
-          type: object
         size_bytes:
           description: File size in bytes.
           format: int32
@@ -20599,7 +20557,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20667,7 +20624,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20712,7 +20668,6 @@ components:
         created_time_in_millis:
           description: Milliseconds since Unix epoch when the file was created.
           nullable: true
-          type: object
       required:
       - file_id
       type: object
@@ -20724,7 +20679,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20745,7 +20699,6 @@ components:
           type: string
         arguments:
           description: Input arguments passed to the tool. Shape depends on the tool.
-          type: object
       required:
       - arguments
       - timestamp_in_millis
@@ -20759,7 +20712,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20811,7 +20763,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20845,7 +20796,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20901,16 +20851,14 @@ components:
           description: |-
             Related liveboard visualizations for this data source. Open-ended JSON shape
             driven by the underlying proto.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
         related_answers:
           description: |-
             Related saved answers for this data source. Open-ended JSON shape driven by
             the underlying proto.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
         related_spotter_queries:
@@ -20985,7 +20933,7 @@ components:
         expired: true
         file_type: file_type
         file_id: file_id
-        created_time_in_millis: "{}"
+        created_time_in_millis: ""
         display_name: display_name
       properties:
         file_id:
@@ -21006,7 +20954,6 @@ components:
         created_time_in_millis:
           description: Milliseconds since Unix epoch when the file was created.
           nullable: true
-          type: object
         expired:
           description: True when the file is no longer downloadable (storage expired
             or evicted).
@@ -21036,8 +20983,8 @@ components:
           - parameters
           - parameters
           sub_queries:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
       properties:
         answer:
           $ref: '#/components/schemas/AnswerDetails'
@@ -21062,8 +21009,8 @@ components:
         - parameters
         - parameters
         sub_queries:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
       properties:
         title:
           description: Display title of the answer.
@@ -21113,8 +21060,7 @@ components:
           type: array
         sub_queries:
           description: List of sub-queries used in the answer.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
         ac_state:
@@ -21437,7 +21383,7 @@ components:
         policy_process_options:
           impersonate_user: impersonate_user
         configuration_identifier: configuration_identifier
-        configuration: "{}"
+        configuration: ""
         name: name
         same_as_parent: true
         description: description
@@ -21465,7 +21411,6 @@ components:
           type: string
         configuration:
           nullable: true
-          type: object
         policy_principals:
           items:
             $ref: '#/components/schemas/UserPrincipal'
@@ -21569,7 +21514,7 @@ components:
           aws_account_id: aws_account_id
           gcp_service_account_id: gcp_service_account_id
           oidc_provider: oidc_provider
-          trust_policy_template: "{}"
+          trust_policy_template: ""
           config_type: AWS_TO_S3_STORAGE
           service_account_email: service_account_email
           setup_instructions:
@@ -21605,7 +21550,7 @@ components:
         aws_account_id: aws_account_id
         gcp_service_account_id: gcp_service_account_id
         oidc_provider: oidc_provider
-        trust_policy_template: "{}"
+        trust_policy_template: ""
         config_type: AWS_TO_S3_STORAGE
         service_account_email: service_account_email
         setup_instructions:
@@ -21639,7 +21584,6 @@ components:
           description: Sample IAM trust policy JSON. Populated for AWS_TO_S3_STORAGE
             and GCP_TO_S3_STORAGE.
           nullable: true
-          type: object
         service_account_email:
           description: GCP service account email of the platform. Populated for GCP_TO_GCS_STORAGE.
             Grant it roles/iam.serviceAccountTokenCreator on your service account.
@@ -21723,7 +21667,7 @@ components:
                 bucket_name: bucket_name
                 service_account_email: service_account_email
                 path_prefix: path_prefix
-          url_params: "{}"
+          url_params: ""
           name: name
           id: id
           events:
@@ -21778,7 +21722,7 @@ components:
                 bucket_name: bucket_name
                 service_account_email: service_account_email
                 path_prefix: path_prefix
-          url_params: "{}"
+          url_params: ""
           name: name
           id: id
           events:
@@ -21847,7 +21791,7 @@ components:
               bucket_name: bucket_name
               service_account_email: service_account_email
               path_prefix: path_prefix
-        url_params: "{}"
+        url_params: ""
         name: name
         id: id
         events:
@@ -21885,7 +21829,6 @@ components:
         url_params:
           description: Additional URL parameters as key-value pairs.
           nullable: true
-          type: object
         events:
           description: List of events this webhook subscribes to.
           items:
@@ -23109,8 +23052,7 @@ components:
         *Deprecated in 9.12.0.cl. Use user_parameters instead.*
       properties:
         parameters:
-          items:
-            type: object
+          items: {}
           type: array
         metadata:
           items:
@@ -23124,15 +23066,12 @@ components:
         runtime_filter:
           description: Runtime filter parameter type in JWT.
           nullable: true
-          type: object
         runtime_sort:
           description: Runtime sort parameter type in JWT.
           nullable: true
-          type: object
         runtime_param_override:
           description: Runtime param override type in JWT.
           nullable: true
-          type: object
       type: object
     JWT_Metadata_Object:
       description: Metadata objects.
@@ -23423,8 +23362,8 @@ components:
       description: Filter Rules to be applied on Objects.
       example:
         values:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         column_name: column_name
         operator: EQ
       properties:
@@ -23455,8 +23394,7 @@ components:
         values:
           description: "The values to filter on. To get all records, use TS_WILDCARD_ALL\
             \ as values."
-          items:
-            type: object
+          items: {}
           type: array
       required:
       - column_name
@@ -23467,8 +23405,8 @@ components:
       description: Filter Rules to be applied on Objects.
       example:
         values:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         name: name
       properties:
         name:
@@ -23476,8 +23414,7 @@ components:
           type: string
         values:
           description: The values to filter on. Only single value is supported currently.
-          items:
-            type: object
+          items: {}
           type: array
       required:
       - name
@@ -23487,8 +23424,8 @@ components:
       description: Variable values.
       example:
         values:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         name: name
       properties:
         name:
@@ -23496,8 +23433,7 @@ components:
           type: string
         values:
           description: The values to filter on.
-          items:
-            type: object
+          items: {}
           type: array
       required:
       - name
@@ -25233,7 +25169,7 @@ components:
     CreateConnectionResponse:
       example:
         name: name
-        details: "{}"
+        details: ""
         id: id
         data_warehouse_type: SNOWFLAKE
       properties:
@@ -25284,7 +25220,6 @@ components:
         details:
           description: Details of the connection.
           nullable: true
-          type: object
       required:
       - data_warehouse_type
       - id
@@ -25359,7 +25294,7 @@ components:
         - USERDATAUPLOADING
         - USERDATAUPLOADING
         groups_assigned_count: 0
-        creation_time_in_millis: "{}"
+        creation_time_in_millis: ""
         hidden: true
         deprecated: true
         description: description
@@ -25369,7 +25304,7 @@ components:
         - name: name
           id: id
         permission: READ_ONLY
-        modification_time_in_millis: "{}"
+        modification_time_in_millis: ""
         external: true
         deleted: true
         name: name
@@ -25482,11 +25417,9 @@ components:
         creation_time_in_millis:
           description: Creation time of the role in milliseconds.
           nullable: true
-          type: object
         modification_time_in_millis:
           description: Last modified time of the role in milliseconds.
           nullable: true
-          type: object
         deleted:
           description: Indicates whether the role is deleted.
           nullable: true
@@ -25641,7 +25574,7 @@ components:
           name: name
           id: id
           type: LIVEBOARD
-        creation_time_in_millis: "{}"
+        creation_time_in_millis: ""
         author:
           name: name
           id: id
@@ -25699,7 +25632,6 @@ components:
           $ref: '#/components/schemas/Author'
         creation_time_in_millis:
           description: Schedule creation time in milliseconds.
-          type: object
         description:
           description: Description of the job.
           nullable: true
@@ -26826,7 +26758,7 @@ components:
           name: name
           id: 0
         name: name
-        template_properties: "{}"
+        template_properties: ""
       properties:
         tenant_id:
           description: Tenant ID
@@ -26838,7 +26770,6 @@ components:
           type: string
         template_properties:
           description: Customization configuration for the email
-          type: object
       required:
       - name
       - org
@@ -27290,7 +27221,7 @@ components:
                 bucket_name: bucket_name
                 service_account_email: service_account_email
                 path_prefix: path_prefix
-          url_params: "{}"
+          url_params: ""
           name: name
           id: id
           events:
@@ -27345,7 +27276,7 @@ components:
                 bucket_name: bucket_name
                 service_account_email: service_account_email
                 path_prefix: path_prefix
-          url_params: "{}"
+          url_params: ""
           name: name
           id: id
           events:
@@ -27765,21 +27696,18 @@ components:
       properties:
         runtime_filter:
           description: Runtime filter parameter type in JWT.
-          type: object
       type: object
     Runtime_Sort:
       description: List of runtime parameters need to set during the session.
       properties:
         runtime_sort:
           description: Runtime sort parameter type in JWT.
-          type: object
       type: object
     Runtime_Param_Override:
       description: List of runtime parameters need to set during the session.
       properties:
         runtime_param_override:
           description: Runtime param override type in JWT.
-          type: object
       type: object
     CreateAgentConversationRequest:
       example:
@@ -28133,12 +28061,12 @@ components:
       example:
         parameter_values:
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           name: name
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           name: name
         org_identifier: org_identifier
         objects:
@@ -28155,23 +28083,23 @@ components:
         password: ""
         variable_values:
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           name: name
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           name: name
         validity_time_in_sec: 0
         filter_rules:
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           column_name: column_name
           operator: EQ
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           column_name: column_name
           operator: EQ
         email: email
@@ -28667,7 +28595,7 @@ components:
       example:
         policy_process_options: ""
         policy_type: NO_POLICY
-        configuration: "{}"
+        configuration: ""
         name: name
         same_as_parent: false
         description: description
@@ -28719,7 +28647,6 @@ components:
           type: string
         configuration:
           description: Configuration properties in JSON.
-          type: object
         policy_type:
           default: NO_POLICY
           description: Type of policy.
@@ -28767,7 +28694,7 @@ components:
       example:
         policy_process_options: ""
         policy_type: NO_POLICY
-        configuration: "{}"
+        configuration: ""
         disable: false
         name: name
         same_as_parent: false
@@ -28823,7 +28750,6 @@ components:
           type: string
         configuration:
           description: Configuration properties in JSON.
-          type: object
         policy_type:
           description: Type of policy.
           enum:
@@ -28856,7 +28782,7 @@ components:
       type: object
     CreateConnectionRequest:
       example:
-        data_warehouse_config: "{}"
+        data_warehouse_config: ""
         name: name
         description: description
         data_warehouse_type: SNOWFLAKE
@@ -28910,7 +28836,6 @@ components:
           description: "Connection configuration attributes in JSON format. To create\
             \ a connection with tables, include table attributes. See the documentation\
             \ above for sample JSON."
-          type: object
         validate:
           default: true
           description: "Validates the connection metadata if tables are included.\
@@ -28973,7 +28898,7 @@ components:
         tag_identifiers:
         - tag_identifiers
         - tag_identifiers
-        configuration: "{}"
+        configuration: ""
         record_size: 6
         data_warehouse_types:
         - SNOWFLAKE
@@ -29092,7 +29017,6 @@ components:
             \ config details to fetch specific details. Example input: {}, {\"warehouse\"\
             :\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when\
             \ data_warehouse_object_type is selected."
-          type: object
         authentication_type:
           default: SERVICE_ACCOUNT
           description: List of authentication types to fetch data_ware_house_objects
@@ -29124,7 +29048,7 @@ components:
       type: object
     SyncMetadataRequest:
       example:
-        tables: "{}"
+        tables: ""
         sync_attributes:
         - DESCRIPTION
         - DESCRIPTION
@@ -29137,7 +29061,6 @@ components:
             - Object: {tableId: [columnIds]} to sync specific
               columns.
             If not provided, syncs all tables in the connection.
-          type: object
         sync_attributes:
           default:
           - DESCRIPTION
@@ -29152,7 +29075,7 @@ components:
       type: object
     UpdateConnectionRequest:
       example:
-        data_warehouse_config: "{}"
+        data_warehouse_config: ""
         name: name
         description: description
         connection_identifier: connection_identifier
@@ -29169,7 +29092,6 @@ components:
           type: string
         data_warehouse_config:
           description: Configuration of the data warehouse in JSON.
-          type: object
         validate:
           default: true
           description: Indicates whether to validate the connection details.
@@ -29193,7 +29115,7 @@ components:
       type: object
     UpdateConnectionV2Request:
       example:
-        data_warehouse_config: "{}"
+        data_warehouse_config: ""
         name: name
         description: description
         validate: true
@@ -29206,7 +29128,6 @@ components:
           type: string
         data_warehouse_config:
           description: Configuration of the data warehouse in JSON.
-          type: object
         validate:
           default: true
           description: Indicates whether to validate the connection details.
@@ -29644,11 +29565,11 @@ components:
     FetchAnswerDataRequest:
       example:
         data_format: COMPACT
-        runtime_filter: "{}"
+        runtime_filter: ""
         metadata_identifier: metadata_identifier
         record_size: 6
-        runtime_sort: "{}"
-        runtime_param_override: "{}"
+        runtime_sort: ""
+        runtime_param_override: ""
         record_offset: 0
       properties:
         metadata_identifier:
@@ -29679,34 +29600,31 @@ components:
             EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing\
             \ the number at the end, for example, col2, op2, val2, and col3, op3,\
             \ val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters)."
-          type: object
         runtime_sort:
           description: "JSON object representing columns to sort data at runtime.\
             \ For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
-          type: object
         runtime_param_override:
           description: "JSON object for setting values of parameters at runtime. For\
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)."
-          type: object
       required:
       - metadata_identifier
       type: object
     FetchLiveboardDataRequest:
       example:
         data_format: COMPACT
-        runtime_filter: "{}"
+        runtime_filter: ""
         metadata_identifier: metadata_identifier
         record_size: 6
         visualization_identifiers:
         - visualization_identifiers
         - visualization_identifiers
-        runtime_sort: "{}"
+        runtime_sort: ""
         transient_content: transient_content
-        runtime_param_override: "{}"
+        runtime_param_override: ""
         record_offset: 0
       properties:
         metadata_identifier:
@@ -29745,30 +29663,27 @@ components:
             EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing\
             \ the number at the end, for example, col2, op2, val2, and col3, op3,\
             \ val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters)."
-          type: object
         runtime_sort:
           description: "JSON object representing columns to sort data at runtime.\
             \ For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
-          type: object
         runtime_param_override:
           description: "JSON object for setting values of parameters at runtime. For\
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)."
-          type: object
       required:
       - metadata_identifier
       type: object
     SearchDataRequest:
       example:
         data_format: COMPACT
-        runtime_filter: "{}"
+        runtime_filter: ""
         logical_table_identifier: logical_table_identifier
         record_size: 6
-        runtime_sort: "{}"
-        runtime_param_override: "{}"
+        runtime_sort: ""
+        runtime_param_override: ""
         query_string: query_string
         record_offset: 0
       properties:
@@ -29807,19 +29722,16 @@ components:
             EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing\
             \ the number at the end, for example, col2, op2, val2, and col3, op3,\
             \ val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters)."
-          type: object
         runtime_sort:
           description: "JSON object representing columns to sort data at runtime.\
             \ For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
-          type: object
         runtime_param_override:
           description: "JSON object for setting values of parameters at runtime. For\
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)."
-          type: object
       required:
       - logical_table_identifier
       - query_string
@@ -31432,16 +31344,16 @@ components:
       type: object
     ExportAnswerReportRequest:
       example:
-        runtime_filter: "{}"
+        runtime_filter: ""
         regional_settings: ""
         png_options: ""
         metadata_identifier: metadata_identifier
         personalised_view_identifier: personalised_view_identifier
         session_identifier: session_identifier
-        runtime_sort: "{}"
+        runtime_sort: ""
         generation_number: 0
         type: SAVED
-        runtime_param_override: "{}"
+        runtime_param_override: ""
         file_format: CSV
       properties:
         metadata_identifier:
@@ -31467,15 +31379,12 @@ components:
           description: |-
             JSON string representing runtime filter.
             { col1:region, op1: EQ, val1: northeast }
-          type: object
         runtime_sort:
           description: |-
             JSON string representing runtime sort.
             { sortCol1: region, asc1 :true, sortCol2 : date }
-          type: object
         runtime_param_override:
           description: JSON object for setting values of parameters in runtime.
-          type: object
         regional_settings:
           allOf:
           - $ref: '#/components/schemas/RegionalSettingsInput'
@@ -31503,8 +31412,8 @@ components:
         regional_settings: ""
         pdf_options: ""
         transient_content: transient_content
-        runtime_param_override: "{}"
-        runtime_filter: "{}"
+        runtime_param_override: ""
+        runtime_filter: ""
         png_options: ""
         metadata_identifier: metadata_identifier
         tab_identifiers:
@@ -31514,8 +31423,8 @@ components:
         visualization_identifiers:
         - visualization_identifiers
         - visualization_identifiers
-        runtime_sort: "{}"
-        override_filters: "{}"
+        runtime_sort: ""
+        override_filters: ""
         file_format: PDF
       properties:
         metadata_identifier:
@@ -31556,7 +31465,6 @@ components:
             val1\": \"northeast\" }. You can add multiple keys by incrementing the\
             \ number at the end, for example, col2, op2, val2. For more information,\
             \ see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters)."
-          type: object
         override_filters:
           description: |-
             Applied to the liveboard and overrides any filters already applied on the same columns in liveboard.
@@ -31596,11 +31504,9 @@ components:
                 }
               ]
             }
-          type: object
         runtime_sort:
           description: "JSON string representing runtime sort. For example, {\"sortCol1\"\
             : \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
-          type: object
         pdf_options:
           allOf:
           - $ref: '#/components/schemas/PdfOptionsInput'
@@ -31614,7 +31520,6 @@ components:
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)."
-          type: object
         regional_settings:
           allOf:
           - $ref: '#/components/schemas/RegionalSettingsInput'
@@ -34100,12 +34005,11 @@ components:
       type: object
     UpdateSystemConfigRequest:
       example:
-        configuration: "{}"
+        configuration: ""
       properties:
         configuration:
           description: Configuration JSON with the key-value pair of configuration
             attributes to be updated.
-          type: object
       required:
       - configuration
       type: object
@@ -34292,12 +34196,12 @@ components:
         group_identifiers:
         - group_identifiers
         - group_identifiers
-        extended_properties: "{}"
+        extended_properties: ""
         name: name
         org_identifiers:
         - org_identifiers
         - org_identifiers
-        extended_preferences: "{}"
+        extended_preferences: ""
         email: email
       properties:
         name:
@@ -34425,10 +34329,8 @@ components:
           type: boolean
         extended_properties:
           description: Properties for the user
-          type: object
         extended_preferences:
           description: Preferences for the user
-          type: object
         trigger_welcome_email:
           description: Flag to indicate whether welcome email should be sent to user.
             This parameter is applied only on clusters on which IAM is disabled.
@@ -34782,13 +34684,13 @@ components:
         group_identifiers:
         - group_identifiers
         - group_identifiers
-        extended_properties: "{}"
+        extended_properties: ""
         name: name
         org_identifiers:
         - org_identifiers
         - org_identifiers
         operation: REPLACE
-        extended_preferences: "{}"
+        extended_preferences: ""
         email: email
       properties:
         name:
@@ -34914,10 +34816,8 @@ components:
           type: boolean
         extended_properties:
           description: Properties for the user
-          type: object
         extended_preferences:
           description: Preferences for the user
-          type: object
       type: object
     CreateVariableRequest:
       example:
@@ -35405,7 +35305,7 @@ components:
       type: object
     CreateWebhookConfigurationRequest:
       example:
-        url_params: "{}"
+        url_params: ""
         additional_headers:
         - value: value
           key: key
@@ -35433,7 +35333,6 @@ components:
           type: string
         url_params:
           description: Additional URL parameters as key-value pairs.
-          type: object
         events:
           description: List of events to subscribe to.
           items:
@@ -35542,7 +35441,7 @@ components:
       type: object
     UpdateWebhookConfigurationRequest:
       example:
-        url_params: "{}"
+        url_params: ""
         additional_headers:
         - value: value
           key: key
@@ -35573,7 +35472,6 @@ components:
           type: string
         url_params:
           description: Additional URL parameters as key-value pairs.
-          type: object
         events:
           description: List of events to subscribe to.
           items:

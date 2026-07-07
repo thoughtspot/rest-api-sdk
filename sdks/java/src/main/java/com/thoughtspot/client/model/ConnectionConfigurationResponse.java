@@ -57,7 +57,7 @@ public class ConnectionConfigurationResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_CONFIGURATION)
     @javax.annotation.Nullable
-    private Object _configuration;
+    private Object _configuration = null;
 
     public static final String SERIALIZED_NAME_POLICY_PRINCIPALS = "policy_principals";
 

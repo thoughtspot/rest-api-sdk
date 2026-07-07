@@ -30,7 +30,7 @@ class ConnectionConfigurationResponse(BaseModel):
     configuration_identifier: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
-    configuration: Optional[Dict[str, Any]] = None
+    configuration: Optional[Any] = None
     policy_principals: Optional[List[UserPrincipal]] = None
     policy_processes: Optional[List[StrictStr]] = None
     disabled: Optional[StrictBool] = None

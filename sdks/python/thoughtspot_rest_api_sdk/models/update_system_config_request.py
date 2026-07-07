@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -25,7 +25,7 @@ class UpdateSystemConfigRequest(BaseModel):
     """
     UpdateSystemConfigRequest
     """ # noqa: E501
-    configuration: Dict[str, Any] = Field(description="Configuration JSON with the key-value pair of configuration attributes to be updated.")
+    configuration: Optional[Any] = Field(description="Configuration JSON with the key-value pair of configuration attributes to be updated.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["configuration"]
 
@@ -74,6 +74,11 @@ class UpdateSystemConfigRequest(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if configuration (nullable) is None
+        # and model_fields_set contains the field
+        if self.configuration is None and "configuration" in self.model_fields_set:
+            _dict['configuration'] = None
 
         return _dict
 

@@ -318,14 +318,14 @@ public class SearchRoleResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
     @javax.annotation.Nullable
-    private Object creationTimeInMillis;
+    private Object creationTimeInMillis = null;
 
     public static final String SERIALIZED_NAME_MODIFICATION_TIME_IN_MILLIS =
             "modification_time_in_millis";
 
     @SerializedName(SERIALIZED_NAME_MODIFICATION_TIME_IN_MILLIS)
     @javax.annotation.Nullable
-    private Object modificationTimeInMillis;
+    private Object modificationTimeInMillis = null;
 
     public static final String SERIALIZED_NAME_DELETED = "deleted";
 

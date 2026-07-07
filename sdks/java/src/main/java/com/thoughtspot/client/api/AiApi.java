@@ -3855,15 +3855,15 @@ public class AiApi {
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
-    public SendAgentMessageResponse sendAgentConversationMessageStreaming(
+    public InputStream sendAgentConversationMessageStreaming(
             String conversationIdentifier,
             SendAgentConversationMessageStreamingRequest
                     sendAgentConversationMessageStreamingRequest)
             throws ApiException {
-        ApiResponse<SendAgentMessageResponse> localVarResp =
+        InputStream localVarResp =
                 sendAgentConversationMessageStreamingWithHttpInfo(
                         conversationIdentifier, sendAgentConversationMessageStreamingRequest);
-        return localVarResp.getData();
+        return localVarResp;
     }
 
     /**
@@ -3918,7 +3918,7 @@ public class AiApi {
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<SendAgentMessageResponse> sendAgentConversationMessageStreamingWithHttpInfo(
+    public InputStream sendAgentConversationMessageStreamingWithHttpInfo(
             String conversationIdentifier,
             SendAgentConversationMessageStreamingRequest
                     sendAgentConversationMessageStreamingRequest)
@@ -3927,7 +3927,7 @@ public class AiApi {
                 sendAgentConversationMessageStreamingValidateBeforeCall(
                         conversationIdentifier, sendAgentConversationMessageStreamingRequest, null);
         Type localVarReturnType = new TypeToken<SendAgentMessageResponse>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.executeStream(localVarCall, localVarReturnType);
     }
 
     /**
@@ -4425,11 +4425,11 @@ public class AiApi {
      * @deprecated
      */
     @Deprecated
-    public SendAgentMessageResponse sendAgentMessageStreaming(
+    public InputStream sendAgentMessageStreaming(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
-        ApiResponse<SendAgentMessageResponse> localVarResp =
+        InputStream localVarResp =
                 sendAgentMessageStreamingWithHttpInfo(sendAgentMessageStreamingRequest);
-        return localVarResp.getData();
+        return localVarResp;
     }
 
     /**
@@ -4487,12 +4487,12 @@ public class AiApi {
      * @deprecated
      */
     @Deprecated
-    public ApiResponse<SendAgentMessageResponse> sendAgentMessageStreamingWithHttpInfo(
+    public InputStream sendAgentMessageStreamingWithHttpInfo(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
         okhttp3.Call localVarCall =
                 sendAgentMessageStreamingValidateBeforeCall(sendAgentMessageStreamingRequest, null);
         Type localVarReturnType = new TypeToken<SendAgentMessageResponse>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.executeStream(localVarCall, localVarReturnType);
     }
 
     /**

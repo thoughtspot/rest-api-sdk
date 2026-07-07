@@ -32,7 +32,7 @@ export class CreateWebhookConfigurationRequest {
     /**
     * Additional URL parameters as key-value pairs.
     */
-    'url_params'?: any;
+    'url_params'?: any | null;
     /**
     * List of events to subscribe to.
     */

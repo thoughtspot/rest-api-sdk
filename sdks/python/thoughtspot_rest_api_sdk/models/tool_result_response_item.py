@@ -26,7 +26,7 @@ class ToolResultResponseItem(BaseModel):
     Result returned from a tool invocation.
     """ # noqa: E501
     type: StrictStr = Field(description="Variant discriminator. Always `\"tool_result\"`.")
-    timestamp_in_millis: Dict[str, Any] = Field(description="Milliseconds since Unix epoch when this item was produced.")
+    timestamp_in_millis: Optional[Any] = Field(description="Milliseconds since Unix epoch when this item was produced.")
     is_thinking: Optional[StrictBool] = Field(default=None, description="True when the item represents internal agent reasoning rather than user-facing output.")
     step_title: Optional[StrictStr] = Field(default=None, description="Human-readable label for the agent step producing this item.")
     tool_call_id: Optional[StrictStr] = Field(default=None, description="Matches the originating tool_call.")
@@ -92,6 +92,11 @@ class ToolResultResponseItem(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if timestamp_in_millis (nullable) is None
+        # and model_fields_set contains the field
+        if self.timestamp_in_millis is None and "timestamp_in_millis" in self.model_fields_set:
+            _dict['timestamp_in_millis'] = None
 
         # set to None if is_thinking (nullable) is None
         # and model_fields_set contains the field

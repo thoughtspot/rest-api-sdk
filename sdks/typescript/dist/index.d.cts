@@ -1841,7 +1841,7 @@ declare class AnswerResponseItem {
     /**
     * Milliseconds since Unix epoch when this item was produced.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     /**
     * True when the item represents internal agent reasoning rather than user-facing output.
     */
@@ -5467,7 +5467,7 @@ declare class ConversationMessage {
     /**
     * Milliseconds since Unix epoch for the turn.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     'user_prompt'?: UserPrompt;
     /**
     * Agent-side output produced in response to this turn. Empty array for in-progress turns where the agent has not yet produced output.
@@ -6019,7 +6019,7 @@ declare class CreateConnectionConfigurationRequest {
     /**
     * Configuration properties in JSON.
     */
-    'configuration': any;
+    'configuration': any | null;
     /**
     * Type of policy.
     */
@@ -6081,7 +6081,7 @@ declare class CreateConnectionRequest {
     /**
     * Connection configuration attributes in JSON format. To create a connection with tables, include table attributes. See the documentation above for sample JSON.
     */
-    'data_warehouse_config': any;
+    'data_warehouse_config': any | null;
     /**
     * Validates the connection metadata if tables are included. If you are creating a connection without tables, specify `false`.
     */
@@ -6527,7 +6527,7 @@ declare class CreateEmailCustomizationResponse {
     /**
     * Customization configuration for the email
     */
-    'template_properties': any;
+    'template_properties': any | null;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -7365,11 +7365,11 @@ declare class CreateUserRequest {
     /**
     * Properties for the user
     */
-    'extended_properties'?: any;
+    'extended_properties'?: any | null;
     /**
     * Preferences for the user
     */
-    'extended_preferences'?: any;
+    'extended_preferences'?: any | null;
     /**
     * Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.
     */
@@ -7853,7 +7853,7 @@ declare class CreateWebhookConfigurationRequest {
     /**
     * Additional URL parameters as key-value pairs.
     */
-    'url_params'?: any;
+    'url_params'?: any | null;
     /**
     * List of events to subscribe to.
     */
@@ -10101,15 +10101,15 @@ declare class ExportAnswerReportRequest {
     /**
     * JSON string representing runtime filter. { col1:region, op1: EQ, val1: northeast }
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
     /**
     * JSON string representing runtime sort. { sortCol1: region, asc1 :true, sortCol2 : date }
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
     /**
     * JSON object for setting values of parameters in runtime.
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
     /**
     * Options for specific region specific overrides to support date/number/string/currency formatting.
     */
@@ -10311,15 +10311,15 @@ declare class ExportLiveboardReportRequest {
     /**
     * JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
     /**
     * Applied to the liveboard and overrides any filters already applied on the same columns in liveboard. Following example illustrate different kinds of filters: {   \"override_filters\": [     {       \"column_name\": \"Color\",       \"generic_filter\": {         \"op\": \"IN\",         \"values\": [           \"almond\",           \"turquoise\"         ]       },       \"negate\": false     },     {       \"column_name\": \"Commit Date\",       \"date_filter\": {         \"datePeriod\": \"HOUR\",         \"number\": 3,         \"type\": \"LAST_N_PERIOD\",         \"op\": \"EQ\"       }     },     {       \"column_name\": \"Sales\",       \"generic_filter\": {         \"op\": \"BW_INC\",         \"values\": [           \"100000\",           \"70000\"         ]       },       \"negate\": true     }   ] }
     */
-    'override_filters'?: any;
+    'override_filters'?: any | null;
     /**
     * JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
     /**
     * Options for PDF export.
     */
@@ -10331,7 +10331,7 @@ declare class ExportLiveboardReportRequest {
     /**
     * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
     /**
     * Options for specific region specific overrides to support date/number/string/currency formatting.
     */
@@ -10817,15 +10817,15 @@ declare class FetchAnswerDataRequest {
     /**
     * JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
     /**
     * JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
     /**
     * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -11047,15 +11047,15 @@ declare class FetchLiveboardDataRequest {
     /**
     * JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
     /**
     * JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
     /**
     * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -11566,7 +11566,7 @@ declare class FileResponseItem {
     /**
     * Milliseconds since Unix epoch when this item was produced.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     /**
     * True when the item represents internal agent reasoning rather than user-facing output.
     */
@@ -15477,7 +15477,7 @@ declare class ResourceResponseItem {
     /**
     * Milliseconds since Unix epoch when this item was produced.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     /**
     * True when the item represents internal agent reasoning rather than user-facing output.
     */
@@ -16037,7 +16037,7 @@ declare class ResponseSchedule {
     /**
     * Schedule creation time in milliseconds.
     */
-    'creation_time_in_millis': any;
+    'creation_time_in_millis': any | null;
     /**
     * Description of the job.
     */
@@ -16719,7 +16719,7 @@ declare class RuntimeFilter {
     /**
     * Runtime filter parameter type in JWT.
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -16757,7 +16757,7 @@ declare class RuntimeParamOverride {
     /**
     * Runtime param override type in JWT.
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -16795,7 +16795,7 @@ declare class RuntimeSort {
     /**
     * Runtime sort parameter type in JWT.
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -17502,7 +17502,7 @@ declare class SearchConnectionRequest {
     /**
     * Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\"warehouse\":\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when data_warehouse_object_type is selected.
     */
-    'configuration'?: any;
+    'configuration'?: any | null;
     /**
     * List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.
     */
@@ -17683,15 +17683,15 @@ declare class SearchDataRequest {
     /**
     * JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
     /**
     * JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
     /**
     * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -17774,7 +17774,7 @@ declare class SearchDatasetsResponseItem {
     /**
     * Milliseconds since Unix epoch when this item was produced.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     /**
     * True when the item represents internal agent reasoning rather than user-facing output.
     */
@@ -20616,7 +20616,7 @@ declare class SyncMetadataRequest {
     /**
     * Array of tables to sync. Each element can be: - String: Table identifier (GUID or name) to sync   all columns for that table. - Object: {tableId: [columnIds]} to sync specific   columns. If not provided, syncs all tables in the connection.
     */
-    'tables'?: any;
+    'tables'?: any | null;
     /**
     * List of sync_attributes to sync from CDW. The default value is DESCRIPTION.
     */
@@ -20998,7 +20998,7 @@ declare class TextResponseItem {
     /**
     * Milliseconds since Unix epoch when this item was produced.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     /**
     * True when the item represents internal agent reasoning rather than user-facing output.
     */
@@ -21160,7 +21160,7 @@ declare class ToolCallResponseItem {
     /**
     * Milliseconds since Unix epoch when this item was produced.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     /**
     * True when the item represents internal agent reasoning rather than user-facing output.
     */
@@ -21180,7 +21180,7 @@ declare class ToolCallResponseItem {
     /**
     * Input arguments passed to the tool. Shape depends on the tool.
     */
-    'arguments': any;
+    'arguments': any | null;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -21222,7 +21222,7 @@ declare class ToolResultResponseItem {
     /**
     * Milliseconds since Unix epoch when this item was produced.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     /**
     * True when the item represents internal agent reasoning rather than user-facing output.
     */
@@ -21680,7 +21680,7 @@ declare class UpdateConnectionConfigurationRequest {
     /**
     * Configuration properties in JSON.
     */
-    'configuration'?: any;
+    'configuration'?: any | null;
     /**
     * Type of policy.
     */
@@ -21746,7 +21746,7 @@ declare class UpdateConnectionRequest {
     /**
     * Configuration of the data warehouse in JSON.
     */
-    'data_warehouse_config'?: any;
+    'data_warehouse_config'?: any | null;
     /**
     * Indicates whether to validate the connection details.
     */
@@ -21829,7 +21829,7 @@ declare class UpdateConnectionV2Request {
     /**
     * Configuration of the data warehouse in JSON.
     */
-    'data_warehouse_config'?: any;
+    'data_warehouse_config'?: any | null;
     /**
     * Indicates whether to validate the connection details.
     */
@@ -22400,7 +22400,7 @@ declare class UpdateSystemConfigRequest {
     /**
     * Configuration JSON with the key-value pair of configuration attributes to be updated.
     */
-    'configuration': any;
+    'configuration': any | null;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -22618,11 +22618,11 @@ declare class UpdateUserRequest {
     /**
     * Properties for the user
     */
-    'extended_properties'?: any;
+    'extended_properties'?: any | null;
     /**
     * Preferences for the user
     */
-    'extended_preferences'?: any;
+    'extended_preferences'?: any | null;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -22852,7 +22852,7 @@ declare class UpdateWebhookConfigurationRequest {
     /**
     * Additional URL parameters as key-value pairs.
     */
-    'url_params'?: any;
+    'url_params'?: any | null;
     /**
     * List of events to subscribe to.
     */

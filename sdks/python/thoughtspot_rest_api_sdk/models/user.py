@@ -49,7 +49,7 @@ class User(BaseModel):
     group_mask: Optional[StrictInt] = Field(default=None, description="Group mask of the user.")
     hidden: Optional[StrictBool] = Field(default=None, description="Indicates whether the user is hidden.")
     home_liveboard: Optional[ObjectIDAndName] = None
-    incomplete_details: Optional[Dict[str, Any]] = Field(default=None, description="Incomplete details of user if any present.")
+    incomplete_details: Optional[Any] = Field(default=None, description="Incomplete details of user if any present.")
     is_first_login: Optional[StrictBool] = Field(default=None, description="Indicates whether it is first login of the user.")
     modification_time_in_millis: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Last modified time of the user in milliseconds.")
     modifier_id: Optional[StrictStr] = Field(default=None, description="Unique identifier of modifier of the user.")
@@ -67,14 +67,14 @@ class User(BaseModel):
     user_groups: Optional[List[ObjectIDAndName]] = Field(default=None, description="Groups to which the user is assigned.")
     user_inherited_groups: Optional[List[ObjectIDAndName]] = Field(default=None, description="Inherited User Groups which the user is part of.")
     welcome_email_sent: Optional[StrictBool] = Field(default=None, description="Indicates whether welcome email is sent for the user.")
-    org_privileges: Optional[Dict[str, Any]] = Field(default=None, description="Privileges which are assigned to the user with org.")
+    org_privileges: Optional[Any] = Field(default=None, description="Privileges which are assigned to the user with org.")
     preferred_locale: Optional[StrictStr] = Field(default=None, description="Locale for the user.")
     use_browser_language: Optional[StrictBool] = Field(default=None, description="Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser's language setting takes precedence.    Version: 26.3.0.cl or later ")
-    extended_properties: Optional[Dict[str, Any]] = Field(default=None, description="Properties for the user")
-    extended_preferences: Optional[Dict[str, Any]] = Field(default=None, description="Preferences for the user")
-    user_parameters: Optional[Dict[str, Any]] = Field(default=None, description="User Parameters which are specified for the user via JWToken")
-    access_control_properties: Optional[Dict[str, Any]] = Field(default=None, description="Access Control Properties which are specified for the user via JWToken")
-    variable_values: Optional[Dict[str, Any]] = Field(default=None, description="Formula Variables which are specified for the user via JWToken")
+    extended_properties: Optional[Any] = Field(default=None, description="Properties for the user")
+    extended_preferences: Optional[Any] = Field(default=None, description="Preferences for the user")
+    user_parameters: Optional[Any] = Field(default=None, description="User Parameters which are specified for the user via JWToken")
+    access_control_properties: Optional[Any] = Field(default=None, description="Access Control Properties which are specified for the user via JWToken")
+    variable_values: Optional[Any] = Field(default=None, description="Formula Variables which are specified for the user via JWToken")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "display_name", "visibility", "author_id", "can_change_password", "complete_detail", "creation_time_in_millis", "current_org", "deleted", "deprecated", "account_type", "account_status", "email", "expiration_time_in_millis", "external", "favorite_metadata", "first_login_time_in_millis", "group_mask", "hidden", "home_liveboard", "incomplete_details", "is_first_login", "modification_time_in_millis", "modifier_id", "notify_on_share", "onboarding_experience_completed", "orgs", "owner_id", "parent_type", "privileges", "show_onboarding_experience", "super_user", "system_user", "tags", "tenant_id", "user_groups", "user_inherited_groups", "welcome_email_sent", "org_privileges", "preferred_locale", "use_browser_language", "extended_properties", "extended_preferences", "user_parameters", "access_control_properties", "variable_values"]
 

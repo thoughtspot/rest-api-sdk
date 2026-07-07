@@ -25,7 +25,7 @@ class PermissionOfMetadataResponse(BaseModel):
     """
     PermissionOfMetadataResponse
     """ # noqa: E501
-    metadata_permission_details: Optional[Dict[str, Any]] = None
+    metadata_permission_details: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["metadata_permission_details"]
 

@@ -27,9 +27,9 @@ class ConversationMessage(BaseModel):
     One conversational exchange: an optional user prompt (message and attachments), followed by the agent's response items for that turn.
     """ # noqa: E501
     message_id: StrictStr = Field(description="Stable identifier for the turn. For liveboard-started synthetic first turns, this is the root node identifier.")
-    timestamp_in_millis: Dict[str, Any] = Field(description="Milliseconds since Unix epoch for the turn.")
+    timestamp_in_millis: Optional[Any] = Field(description="Milliseconds since Unix epoch for the turn.")
     user_prompt: Optional[UserPrompt] = None
-    response_items: Optional[List[Dict[str, Any]]] = Field(default=None, description="Agent-side output produced in response to this turn. Empty array for in-progress turns where the agent has not yet produced output.")
+    response_items: Optional[List[Any]] = Field(default=None, description="Agent-side output produced in response to this turn. Empty array for in-progress turns where the agent has not yet produced output.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["message_id", "timestamp_in_millis", "user_prompt", "response_items"]
 
@@ -81,6 +81,11 @@ class ConversationMessage(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if timestamp_in_millis (nullable) is None
+        # and model_fields_set contains the field
+        if self.timestamp_in_millis is None and "timestamp_in_millis" in self.model_fields_set:
+            _dict['timestamp_in_millis'] = None
 
         # set to None if response_items (nullable) is None
         # and model_fields_set contains the field

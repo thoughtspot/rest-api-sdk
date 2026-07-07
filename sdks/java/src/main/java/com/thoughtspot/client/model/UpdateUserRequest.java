@@ -468,13 +468,13 @@ public class UpdateUserRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_EXTENDED_PROPERTIES)
     @javax.annotation.Nullable
-    private Object extendedProperties;
+    private Object extendedProperties = null;
 
     public static final String SERIALIZED_NAME_EXTENDED_PREFERENCES = "extended_preferences";
 
     @SerializedName(SERIALIZED_NAME_EXTENDED_PREFERENCES)
     @javax.annotation.Nullable
-    private Object extendedPreferences;
+    private Object extendedPreferences = null;
 
     public UpdateUserRequest() {}
 

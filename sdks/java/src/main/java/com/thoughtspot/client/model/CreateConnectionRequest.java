@@ -168,8 +168,8 @@ public class CreateConnectionRequest implements Serializable {
     public static final String SERIALIZED_NAME_DATA_WAREHOUSE_CONFIG = "data_warehouse_config";
 
     @SerializedName(SERIALIZED_NAME_DATA_WAREHOUSE_CONFIG)
-    @javax.annotation.Nonnull
-    private Object dataWarehouseConfig;
+    @javax.annotation.Nullable
+    private Object dataWarehouseConfig = null;
 
     public static final String SERIALIZED_NAME_VALIDATE = "validate";
 
@@ -239,7 +239,7 @@ public class CreateConnectionRequest implements Serializable {
     }
 
     public CreateConnectionRequest dataWarehouseConfig(
-            @javax.annotation.Nonnull Object dataWarehouseConfig) {
+            @javax.annotation.Nullable Object dataWarehouseConfig) {
         this.dataWarehouseConfig = dataWarehouseConfig;
         return this;
     }
@@ -250,12 +250,12 @@ public class CreateConnectionRequest implements Serializable {
      *
      * @return dataWarehouseConfig
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public Object getDataWarehouseConfig() {
         return dataWarehouseConfig;
     }
 
-    public void setDataWarehouseConfig(@javax.annotation.Nonnull Object dataWarehouseConfig) {
+    public void setDataWarehouseConfig(@javax.annotation.Nullable Object dataWarehouseConfig) {
         this.dataWarehouseConfig = dataWarehouseConfig;
     }
 

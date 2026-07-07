@@ -28,7 +28,7 @@ export class CreateConnectionRequest {
     /**
     * Connection configuration attributes in JSON format. To create a connection with tables, include table attributes. See the documentation above for sample JSON.
     */
-    'data_warehouse_config': any;
+    'data_warehouse_config': any | null;
     /**
     * Validates the connection metadata if tables are included. If you are creating a connection without tables, specify `false`.
     */

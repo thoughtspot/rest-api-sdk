@@ -28,7 +28,7 @@ class CreateConnectionRequest(BaseModel):
     name: StrictStr = Field(description="Unique name for the connection.")
     description: Optional[StrictStr] = Field(default=None, description="Description of the connection.")
     data_warehouse_type: StrictStr = Field(description="Type of the data warehouse.")
-    data_warehouse_config: Dict[str, Any] = Field(description="Connection configuration attributes in JSON format. To create a connection with tables, include table attributes. See the documentation above for sample JSON.")
+    data_warehouse_config: Optional[Any] = Field(description="Connection configuration attributes in JSON format. To create a connection with tables, include table attributes. See the documentation above for sample JSON.")
     validate: Optional[StrictBool] = Field(default=True, description="Validates the connection metadata if tables are included. If you are creating a connection without tables, specify `false`.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "description", "data_warehouse_type", "data_warehouse_config", "validate"]
@@ -85,6 +85,11 @@ class CreateConnectionRequest(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if data_warehouse_config (nullable) is None
+        # and model_fields_set contains the field
+        if self.data_warehouse_config is None and "data_warehouse_config" in self.model_fields_set:
+            _dict['data_warehouse_config'] = None
 
         # set to None if validate (nullable) is None
         # and model_fields_set contains the field

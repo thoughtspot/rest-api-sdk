@@ -29,7 +29,7 @@ class ImportEPackAsyncTaskStatus(BaseModel):
     org_id: Optional[StrictInt] = Field(default=None, description="Organisation ID of the user who initiated the task.")
     task_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the task.")
     task_name: Optional[StrictStr] = Field(default=None, description="Name of the task.")
-    import_response: Optional[Dict[str, Any]] = Field(default=None, description="Response of imported objects so far.")
+    import_response: Optional[Any] = Field(default=None, description="Response of imported objects so far.")
     task_status: Optional[StrictStr] = Field(default=None, description="Current status of the task.")
     author_id: Optional[StrictStr] = Field(default=None, description="ID of the user who initiated the task.")
     import_policy: Optional[StrictStr] = Field(default=None, description="Policy used for the import task.")

@@ -336,7 +336,7 @@ public class User implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_INCOMPLETE_DETAILS)
     @javax.annotation.Nullable
-    private Object incompleteDetails;
+    private Object incompleteDetails = null;
 
     public static final String SERIALIZED_NAME_IS_FIRST_LOGIN = "is_first_login";
 
@@ -498,7 +498,7 @@ public class User implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_ORG_PRIVILEGES)
     @javax.annotation.Nullable
-    private Object orgPrivileges;
+    private Object orgPrivileges = null;
 
     public static final String SERIALIZED_NAME_PREFERRED_LOCALE = "preferred_locale";
 
@@ -516,32 +516,32 @@ public class User implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_EXTENDED_PROPERTIES)
     @javax.annotation.Nullable
-    private Object extendedProperties;
+    private Object extendedProperties = null;
 
     public static final String SERIALIZED_NAME_EXTENDED_PREFERENCES = "extended_preferences";
 
     @SerializedName(SERIALIZED_NAME_EXTENDED_PREFERENCES)
     @javax.annotation.Nullable
-    private Object extendedPreferences;
+    private Object extendedPreferences = null;
 
     public static final String SERIALIZED_NAME_USER_PARAMETERS = "user_parameters";
 
     @SerializedName(SERIALIZED_NAME_USER_PARAMETERS)
     @javax.annotation.Nullable
-    private Object userParameters;
+    private Object userParameters = null;
 
     public static final String SERIALIZED_NAME_ACCESS_CONTROL_PROPERTIES =
             "access_control_properties";
 
     @SerializedName(SERIALIZED_NAME_ACCESS_CONTROL_PROPERTIES)
     @javax.annotation.Nullable
-    private Object accessControlProperties;
+    private Object accessControlProperties = null;
 
     public static final String SERIALIZED_NAME_VARIABLE_VALUES = "variable_values";
 
     @SerializedName(SERIALIZED_NAME_VARIABLE_VALUES)
     @javax.annotation.Nullable
-    private Object variableValues;
+    private Object variableValues = null;
 
     public User() {}
 

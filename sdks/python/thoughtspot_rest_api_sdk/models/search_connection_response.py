@@ -31,7 +31,7 @@ class SearchConnectionResponse(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="Description of the connection.")
     data_warehouse_type: StrictStr = Field(description="Type of data warehouse.")
     data_warehouse_objects: Optional[DataWarehouseObjects] = None
-    details: Optional[Dict[str, Any]] = Field(default=None, description="Details of the connection.")
+    details: Optional[Any] = Field(default=None, description="Details of the connection.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "description", "data_warehouse_type", "data_warehouse_objects", "details"]
 

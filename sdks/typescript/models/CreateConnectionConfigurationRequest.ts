@@ -41,7 +41,7 @@ export class CreateConnectionConfigurationRequest {
     /**
     * Configuration properties in JSON.
     */
-    'configuration': any;
+    'configuration': any | null;
     /**
     * Type of policy.
     */

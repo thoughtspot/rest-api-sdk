@@ -32,7 +32,7 @@ class CreateWebhookConfigurationRequest(BaseModel):
     name: StrictStr = Field(description="Name of the webhook configuration.")
     description: Optional[StrictStr] = Field(default=None, description="Description of the webhook configuration.")
     url: StrictStr = Field(description="The webhook endpoint URL.")
-    url_params: Optional[Dict[str, Any]] = Field(default=None, description="Additional URL parameters as key-value pairs.")
+    url_params: Optional[Any] = Field(default=None, description="Additional URL parameters as key-value pairs.")
     events: List[StrictStr] = Field(description="List of events to subscribe to.")
     authentication: Optional[WebhookAuthenticationInput] = Field(default=None, description="Authorization configuration for the webhook.")
     signature_verification: Optional[WebhookSignatureVerificationInput] = Field(default=None, description="Configuration for webhook signature verification.")
@@ -121,6 +121,11 @@ class CreateWebhookConfigurationRequest(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if url_params (nullable) is None
+        # and model_fields_set contains the field
+        if self.url_params is None and "url_params" in self.model_fields_set:
+            _dict['url_params'] = None
 
         return _dict
 

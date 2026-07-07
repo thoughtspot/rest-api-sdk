@@ -29,12 +29,12 @@ class MetadataSearchResponse(BaseModel):
     metadata_name: Optional[StrictStr] = Field(default=None, description="Name of the metadata.")
     metadata_type: StrictStr = Field(description="Type of the metadata.")
     metadata_obj_id: Optional[StrictStr] = Field(default=None, description="Custom identifier of the metadata. (Available from 10.8.0.cl onwards)")
-    dependent_objects: Optional[Dict[str, Any]] = Field(default=None, description="Details of dependent objects of the metadata objects.")
-    incomplete_objects: Optional[List[Dict[str, Any]]] = Field(default=None, description="Details of incomplete information of the metadata objects if any.")
-    metadata_detail: Optional[Dict[str, Any]] = Field(default=None, description="Complete details of the metadata objects.")
-    metadata_header: Optional[Dict[str, Any]] = Field(default=None, description="Header information of the metadata objects.")
-    visualization_headers: Optional[List[Dict[str, Any]]] = Field(default=None, description="Visualization header information of the metadata objects.")
-    stats: Optional[Dict[str, Any]] = Field(default=None, description="Stats of the metadata object. Includes views, favorites, last_accessed.")
+    dependent_objects: Optional[Any] = Field(default=None, description="Details of dependent objects of the metadata objects.")
+    incomplete_objects: Optional[List[Any]] = Field(default=None, description="Details of incomplete information of the metadata objects if any.")
+    metadata_detail: Optional[Any] = Field(default=None, description="Complete details of the metadata objects.")
+    metadata_header: Optional[Any] = Field(default=None, description="Header information of the metadata objects.")
+    visualization_headers: Optional[List[Any]] = Field(default=None, description="Visualization header information of the metadata objects.")
+    stats: Optional[Any] = Field(default=None, description="Stats of the metadata object. Includes views, favorites, last_accessed.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["metadata_id", "metadata_name", "metadata_type", "metadata_obj_id", "dependent_objects", "incomplete_objects", "metadata_detail", "metadata_header", "visualization_headers", "stats"]
 

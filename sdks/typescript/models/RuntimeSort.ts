@@ -19,7 +19,7 @@ export class RuntimeSort {
     /**
     * Runtime sort parameter type in JWT.
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

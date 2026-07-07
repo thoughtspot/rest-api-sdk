@@ -60,7 +60,7 @@ public class ImportEPackAsyncTaskStatus implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_IMPORT_RESPONSE)
     @javax.annotation.Nullable
-    private Object importResponse;
+    private Object importResponse = null;
 
     /** Current status of the task. */
     @JsonAdapter(TaskStatusEnum.Adapter.class)

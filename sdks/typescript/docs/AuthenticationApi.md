@@ -225,7 +225,7 @@ apiInstance.getCustomAccessToken(
         column_name: "column_name_example",
         operator: "EQ",
         values: [
-          {},
+          null,
         ],
       },
     ],
@@ -233,7 +233,7 @@ apiInstance.getCustomAccessToken(
       {
         name: "name_example",
         values: [
-          {},
+          null,
         ],
       },
     ],
@@ -241,7 +241,7 @@ apiInstance.getCustomAccessToken(
       {
         name: "name_example",
         values: [
-          {},
+          null,
         ],
       },
     ],

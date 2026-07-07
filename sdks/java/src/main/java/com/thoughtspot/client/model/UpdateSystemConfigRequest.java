@@ -32,13 +32,13 @@ public class UpdateSystemConfigRequest implements Serializable {
     public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
 
     @SerializedName(SERIALIZED_NAME_CONFIGURATION)
-    @javax.annotation.Nonnull
-    private Object _configuration;
+    @javax.annotation.Nullable
+    private Object _configuration = null;
 
     public UpdateSystemConfigRequest() {}
 
     public UpdateSystemConfigRequest _configuration(
-            @javax.annotation.Nonnull Object _configuration) {
+            @javax.annotation.Nullable Object _configuration) {
         this._configuration = _configuration;
         return this;
     }
@@ -48,12 +48,12 @@ public class UpdateSystemConfigRequest implements Serializable {
      *
      * @return _configuration
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public Object getConfiguration() {
         return _configuration;
     }
 
-    public void setConfiguration(@javax.annotation.Nonnull Object _configuration) {
+    public void setConfiguration(@javax.annotation.Nullable Object _configuration) {
         this._configuration = _configuration;
     }
 

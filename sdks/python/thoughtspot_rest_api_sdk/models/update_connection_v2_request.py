@@ -27,7 +27,7 @@ class UpdateConnectionV2Request(BaseModel):
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="Updated name of the connection.")
     description: Optional[StrictStr] = Field(default=None, description="Updated description of the connection.")
-    data_warehouse_config: Optional[Dict[str, Any]] = Field(default=None, description="Configuration of the data warehouse in JSON.")
+    data_warehouse_config: Optional[Any] = Field(default=None, description="Configuration of the data warehouse in JSON.")
     validate: Optional[StrictBool] = Field(default=True, description="Indicates whether to validate the connection details.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "description", "data_warehouse_config", "validate"]
@@ -77,6 +77,11 @@ class UpdateConnectionV2Request(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if data_warehouse_config (nullable) is None
+        # and model_fields_set contains the field
+        if self.data_warehouse_config is None and "data_warehouse_config" in self.model_fields_set:
+            _dict['data_warehouse_config'] = None
 
         # set to None if validate (nullable) is None
         # and model_fields_set contains the field

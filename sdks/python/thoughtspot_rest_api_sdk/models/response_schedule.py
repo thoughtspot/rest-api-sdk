@@ -33,7 +33,7 @@ class ResponseSchedule(BaseModel):
     ResponseSchedule
     """ # noqa: E501
     author: Author
-    creation_time_in_millis: Dict[str, Any] = Field(description="Schedule creation time in milliseconds.")
+    creation_time_in_millis: Optional[Any] = Field(description="Schedule creation time in milliseconds.")
     description: Optional[StrictStr] = Field(default=None, description="Description of the job.")
     file_format: StrictStr = Field(description="Export file format.")
     frequency: Frequency
@@ -120,6 +120,11 @@ class ResponseSchedule(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if creation_time_in_millis (nullable) is None
+        # and model_fields_set contains the field
+        if self.creation_time_in_millis is None and "creation_time_in_millis" in self.model_fields_set:
+            _dict['creation_time_in_millis'] = None
 
         # set to None if description (nullable) is None
         # and model_fields_set contains the field

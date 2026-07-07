@@ -25,7 +25,7 @@ class ObjectPrivilegesOfMetadataResponse(BaseModel):
     """
     ObjectPrivilegesOfMetadataResponse
     """ # noqa: E501
-    metadata_object_privileges: Optional[Dict[str, Any]] = None
+    metadata_object_privileges: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["metadata_object_privileges"]
 

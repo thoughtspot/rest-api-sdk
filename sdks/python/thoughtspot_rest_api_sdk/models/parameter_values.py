@@ -26,7 +26,7 @@ class ParameterValues(BaseModel):
     Filter Rules to be applied on Objects.
     """ # noqa: E501
     name: StrictStr = Field(description="The name of the column to apply the filter on.")
-    values: List[Dict[str, Any]] = Field(description="The values to filter on. Only single value is supported currently.")
+    values: List[Any] = Field(description="The values to filter on. Only single value is supported currently.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "values"]
 

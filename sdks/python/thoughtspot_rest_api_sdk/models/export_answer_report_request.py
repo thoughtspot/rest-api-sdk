@@ -31,9 +31,9 @@ class ExportAnswerReportRequest(BaseModel):
     session_identifier: Optional[StrictStr] = Field(default=None, description="Unique ID of the answer session.")
     generation_number: Optional[StrictInt] = Field(default=None, description="Generation number of the answer session.")
     file_format: Optional[StrictStr] = Field(default='CSV', description="Export file format.")
-    runtime_filter: Optional[Dict[str, Any]] = Field(default=None, description="JSON string representing runtime filter. { col1:region, op1: EQ, val1: northeast }")
-    runtime_sort: Optional[Dict[str, Any]] = Field(default=None, description="JSON string representing runtime sort. { sortCol1: region, asc1 :true, sortCol2 : date }")
-    runtime_param_override: Optional[Dict[str, Any]] = Field(default=None, description="JSON object for setting values of parameters in runtime.")
+    runtime_filter: Optional[Any] = Field(default=None, description="JSON string representing runtime filter. { col1:region, op1: EQ, val1: northeast }")
+    runtime_sort: Optional[Any] = Field(default=None, description="JSON string representing runtime sort. { sortCol1: region, asc1 :true, sortCol2 : date }")
+    runtime_param_override: Optional[Any] = Field(default=None, description="JSON object for setting values of parameters in runtime.")
     regional_settings: Optional[RegionalSettingsInput] = Field(default=None, description="Options for specific region specific overrides to support date/number/string/currency formatting.")
     png_options: Optional[AnswerPngOptionsInput] = Field(default=None, description="Options for PNG export.   Version: 26.6.0.cl or later ")
     personalised_view_identifier: Optional[StrictStr] = Field(default=None, description="GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later ")
@@ -112,6 +112,21 @@ class ExportAnswerReportRequest(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if runtime_filter (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_filter is None and "runtime_filter" in self.model_fields_set:
+            _dict['runtime_filter'] = None
+
+        # set to None if runtime_sort (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_sort is None and "runtime_sort" in self.model_fields_set:
+            _dict['runtime_sort'] = None
+
+        # set to None if runtime_param_override (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_param_override is None and "runtime_param_override" in self.model_fields_set:
+            _dict['runtime_param_override'] = None
 
         return _dict
 

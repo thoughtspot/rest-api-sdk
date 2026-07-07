@@ -24,7 +24,7 @@ export class ResponseSchedule {
     /**
     * Schedule creation time in milliseconds.
     */
-    'creation_time_in_millis': any;
+    'creation_time_in_millis': any | null;
     /**
     * Description of the job.
     */

@@ -27,7 +27,7 @@ class FilterRules(BaseModel):
     """ # noqa: E501
     column_name: StrictStr = Field(description="The name of the column to apply the filter on.")
     operator: StrictStr = Field(description="The operator to use for filtering. Example: EQ (equals), GT(greater than), etc.")
-    values: List[Dict[str, Any]] = Field(description="The values to filter on. To get all records, use TS_WILDCARD_ALL as values.")
+    values: List[Any] = Field(description="The values to filter on. To get all records, use TS_WILDCARD_ALL as values.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["column_name", "operator", "values"]
 

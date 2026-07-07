@@ -25,7 +25,7 @@ class PermissionOfPrincipalsResponse(BaseModel):
     """
     PermissionOfPrincipalsResponse
     """ # noqa: E501
-    principal_permission_details: Optional[Dict[str, Any]] = None
+    principal_permission_details: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["principal_permission_details"]
 

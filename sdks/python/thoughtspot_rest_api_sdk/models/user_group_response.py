@@ -29,7 +29,7 @@ class UserGroupResponse(BaseModel):
     """ # noqa: E501
     author_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the object")
     complete_detail: Optional[StrictBool] = Field(default=None, description="Indicates whether the response has complete detail of the group.")
-    content: Optional[Dict[str, Any]] = Field(default=None, description="Content details of the group")
+    content: Optional[Any] = Field(default=None, description="Content details of the group")
     creation_time_in_millis: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Creation time of the group in milliseconds")
     default_liveboards: Optional[List[UserGroup]] = Field(default=None, description="Liveboards that are assigned as default Liveboards to the group.")
     deleted: Optional[StrictBool] = Field(default=None, description="Indicates whether the group is deleted")

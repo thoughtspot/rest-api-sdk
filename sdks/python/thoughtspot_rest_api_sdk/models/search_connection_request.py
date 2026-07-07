@@ -35,7 +35,7 @@ class SearchConnectionRequest(BaseModel):
     data_warehouse_object_type: Optional[StrictStr] = Field(default=None, description="Data warehouse object type.")
     sort_options: Optional[SortOptionInput] = Field(default=None, description="Sort options.")
     include_details: Optional[StrictBool] = Field(default=None, description="Indicates whether to include complete details of the connection objects.")
-    configuration: Optional[Dict[str, Any]] = Field(default=None, description="Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\"warehouse\":\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when data_warehouse_object_type is selected.")
+    configuration: Optional[Any] = Field(default=None, description="Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\"warehouse\":\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when data_warehouse_object_type is selected.")
     authentication_type: Optional[StrictStr] = Field(default='SERVICE_ACCOUNT', description="List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.")
     show_resolved_parameters: Optional[StrictBool] = Field(default=False, description="<div>Version: 10.9.0.cl or later </div>  Indicates whether to show resolved parameterised values.")
     additional_properties: Dict[str, Any] = {}
@@ -132,6 +132,11 @@ class SearchConnectionRequest(BaseModel):
         # and model_fields_set contains the field
         if self.include_details is None and "include_details" in self.model_fields_set:
             _dict['include_details'] = None
+
+        # set to None if configuration (nullable) is None
+        # and model_fields_set contains the field
+        if self.configuration is None and "configuration" in self.model_fields_set:
+            _dict['configuration'] = None
 
         # set to None if show_resolved_parameters (nullable) is None
         # and model_fields_set contains the field

@@ -25,7 +25,7 @@ class RuntimeFilter(BaseModel):
     """
     List of runtime parameters need to set during the session.
     """ # noqa: E501
-    runtime_filter: Optional[Dict[str, Any]] = Field(default=None, description="Runtime filter parameter type in JWT.")
+    runtime_filter: Optional[Any] = Field(default=None, description="Runtime filter parameter type in JWT.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["runtime_filter"]
 
@@ -74,6 +74,11 @@ class RuntimeFilter(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if runtime_filter (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_filter is None and "runtime_filter" in self.model_fields_set:
+            _dict['runtime_filter'] = None
 
         return _dict
 

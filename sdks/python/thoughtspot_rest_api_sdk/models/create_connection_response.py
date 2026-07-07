@@ -28,7 +28,7 @@ class CreateConnectionResponse(BaseModel):
     id: StrictStr = Field(description="ID of the connection created.")
     name: StrictStr = Field(description="Name of the connection.")
     data_warehouse_type: StrictStr = Field(description="Type of data warehouse.")
-    details: Optional[Dict[str, Any]] = Field(default=None, description="Details of the connection.")
+    details: Optional[Any] = Field(default=None, description="Details of the connection.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "data_warehouse_type", "details"]
 

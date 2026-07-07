@@ -14,7 +14,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBytes, StrictStr, field_validator
-from typing import Any, Dict, Optional, Tuple, Union
+from typing import Any, Optional, Tuple, Union
 from typing_extensions import Annotated
 from thoughtspot_rest_api_sdk.models.delete_manual_translations_request import DeleteManualTranslationsRequest
 from thoughtspot_rest_api_sdk.models.export_manual_translations_request import ExportManualTranslationsRequest

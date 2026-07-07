@@ -29,7 +29,7 @@ class WebhookStorageSetupConfig(BaseModel):
     aws_account_id: Optional[StrictStr] = Field(default=None, description="AWS Account ID of the platform. Populated for AWS_TO_S3_STORAGE. Include in your IAM role trust policy.")
     gcp_service_account_id: Optional[StrictStr] = Field(default=None, description="GCP service account numeric ID of the platform (the 'sub' claim in OIDC tokens). Populated for GCP_TO_S3_STORAGE.")
     oidc_provider: Optional[StrictStr] = Field(default=None, description="OIDC identity provider URL. Populated for GCP_TO_S3_STORAGE; always 'accounts.google.com' for GCP.")
-    trust_policy_template: Optional[Dict[str, Any]] = Field(default=None, description="Sample IAM trust policy JSON. Populated for AWS_TO_S3_STORAGE and GCP_TO_S3_STORAGE.")
+    trust_policy_template: Optional[Any] = Field(default=None, description="Sample IAM trust policy JSON. Populated for AWS_TO_S3_STORAGE and GCP_TO_S3_STORAGE.")
     service_account_email: Optional[StrictStr] = Field(default=None, description="GCP service account email of the platform. Populated for GCP_TO_GCS_STORAGE. Grant it roles/iam.serviceAccountTokenCreator on your service account.")
     required_role: Optional[StrictStr] = Field(default=None, description="IAM role the customer must grant to the platform service account. Populated for GCP_TO_GCS_STORAGE.")
     setup_instructions: List[StrictStr] = Field(description="Step-by-step instructions to configure the storage destination.")

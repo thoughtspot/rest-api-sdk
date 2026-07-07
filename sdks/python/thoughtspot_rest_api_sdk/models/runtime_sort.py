@@ -25,7 +25,7 @@ class RuntimeSort(BaseModel):
     """
     List of runtime parameters need to set during the session.
     """ # noqa: E501
-    runtime_sort: Optional[Dict[str, Any]] = Field(default=None, description="Runtime sort parameter type in JWT.")
+    runtime_sort: Optional[Any] = Field(default=None, description="Runtime sort parameter type in JWT.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["runtime_sort"]
 
@@ -74,6 +74,11 @@ class RuntimeSort(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if runtime_sort (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_sort is None and "runtime_sort" in self.model_fields_set:
+            _dict['runtime_sort'] = None
 
         return _dict
 

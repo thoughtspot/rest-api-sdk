@@ -25,7 +25,7 @@ class ErrorResponse(BaseModel):
     """
     ErrorResponse
     """ # noqa: E501
-    error: Optional[Dict[str, Any]] = None
+    error: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["error"]
 

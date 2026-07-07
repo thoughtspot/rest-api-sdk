@@ -50,7 +50,7 @@ public class FileReference implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_CREATED_TIME_IN_MILLIS)
     @javax.annotation.Nullable
-    private Object createdTimeInMillis;
+    private Object createdTimeInMillis = null;
 
     public FileReference() {}
 

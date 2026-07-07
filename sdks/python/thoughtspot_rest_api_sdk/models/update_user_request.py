@@ -42,8 +42,8 @@ class UpdateUserRequest(BaseModel):
     operation: Optional[StrictStr] = Field(default='REPLACE', description="Type of update operation. Default operation type is REPLACE")
     preferred_locale: Optional[StrictStr] = Field(default=None, description="Locale for the user. When setting this value, do not set use_browser_language to true, otherwise the browser's language setting will take precedence and the preferred_locale value will be ignored.")
     use_browser_language: Optional[StrictBool] = Field(default=None, description="Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser's language setting takes precedence.    Version: 26.3.0.cl or later ")
-    extended_properties: Optional[Dict[str, Any]] = Field(default=None, description="Properties for the user")
-    extended_preferences: Optional[Dict[str, Any]] = Field(default=None, description="Preferences for the user")
+    extended_properties: Optional[Any] = Field(default=None, description="Properties for the user")
+    extended_preferences: Optional[Any] = Field(default=None, description="Preferences for the user")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "display_name", "visibility", "email", "account_status", "notify_on_share", "show_onboarding_experience", "onboarding_experience_completed", "account_type", "group_identifiers", "home_liveboard_identifier", "favorite_metadata", "org_identifiers", "operation", "preferred_locale", "use_browser_language", "extended_properties", "extended_preferences"]
 
@@ -169,6 +169,16 @@ class UpdateUserRequest(BaseModel):
         # and model_fields_set contains the field
         if self.use_browser_language is None and "use_browser_language" in self.model_fields_set:
             _dict['use_browser_language'] = None
+
+        # set to None if extended_properties (nullable) is None
+        # and model_fields_set contains the field
+        if self.extended_properties is None and "extended_properties" in self.model_fields_set:
+            _dict['extended_properties'] = None
+
+        # set to None if extended_preferences (nullable) is None
+        # and model_fields_set contains the field
+        if self.extended_preferences is None and "extended_preferences" in self.model_fields_set:
+            _dict['extended_preferences'] = None
 
         return _dict
 

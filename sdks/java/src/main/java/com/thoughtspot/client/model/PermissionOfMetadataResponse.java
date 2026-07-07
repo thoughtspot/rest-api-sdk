@@ -36,7 +36,7 @@ public class PermissionOfMetadataResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_METADATA_PERMISSION_DETAILS)
     @javax.annotation.Nullable
-    private Object metadataPermissionDetails;
+    private Object metadataPermissionDetails = null;
 
     public PermissionOfMetadataResponse() {}
 

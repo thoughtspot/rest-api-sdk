@@ -190,8 +190,8 @@ apiInstance.createUser(
     ],
     preferred_locale: "en-CA",
     use_browser_language: true,
-    extended_properties: {},
-    extended_preferences: {},
+    extended_properties: null,
+    extended_preferences: null,
     trigger_welcome_email: true,
     trigger_activation_email: true,
   } 
@@ -720,8 +720,8 @@ apiInstance.updateUser(
     operation: "REPLACE",
     preferred_locale: "en-CA",
     use_browser_language: true,
-    extended_properties: {},
-    extended_preferences: {},
+    extended_properties: null,
+    extended_preferences: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

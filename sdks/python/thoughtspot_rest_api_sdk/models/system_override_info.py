@@ -25,7 +25,7 @@ class SystemOverrideInfo(BaseModel):
     """
     SystemOverrideInfo
     """ # noqa: E501
-    config_override_info: Optional[Dict[str, Any]] = None
+    config_override_info: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["config_override_info"]
 

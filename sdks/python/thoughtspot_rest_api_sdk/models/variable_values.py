@@ -26,7 +26,7 @@ class VariableValues(BaseModel):
     Variable values.
     """ # noqa: E501
     name: StrictStr = Field(description="The name of the existing formula variable.")
-    values: List[Dict[str, Any]] = Field(description="The values to filter on.")
+    values: List[Any] = Field(description="The values to filter on.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "values"]
 

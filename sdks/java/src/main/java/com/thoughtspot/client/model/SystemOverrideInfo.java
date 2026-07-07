@@ -35,7 +35,7 @@ public class SystemOverrideInfo implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_CONFIG_OVERRIDE_INFO)
     @javax.annotation.Nullable
-    private Object configOverrideInfo;
+    private Object configOverrideInfo = null;
 
     public SystemOverrideInfo() {}
 

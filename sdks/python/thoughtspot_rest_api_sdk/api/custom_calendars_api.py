@@ -14,7 +14,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List
+from typing import Any, List
 from typing_extensions import Annotated
 from thoughtspot_rest_api_sdk.models.calendar_response import CalendarResponse
 from thoughtspot_rest_api_sdk.models.create_calendar_request import CreateCalendarRequest

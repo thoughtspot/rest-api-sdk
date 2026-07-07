@@ -36,15 +36,15 @@ export class SearchDataRequest {
     /**
     * JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
     /**
     * JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
     /**
     * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

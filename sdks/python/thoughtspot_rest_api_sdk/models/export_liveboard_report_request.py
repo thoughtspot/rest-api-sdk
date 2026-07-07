@@ -34,12 +34,12 @@ class ExportLiveboardReportRequest(BaseModel):
     visualization_identifiers: Optional[List[StrictStr]] = Field(default=None, description="GUID or name of visualizations on the Liveboard. If this parameter is not defined, the API returns a report with all visualizations saved on a Liveboard.")
     transient_content: Optional[StrictStr] = Field(default=None, description="Transient content of the Liveboard.")
     file_format: Optional[StrictStr] = Field(default='PDF', description="Export file format.")
-    runtime_filter: Optional[Dict[str, Any]] = Field(default=None, description="JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).")
-    override_filters: Optional[Dict[str, Any]] = Field(default=None, description="Applied to the liveboard and overrides any filters already applied on the same columns in liveboard. Following example illustrate different kinds of filters: {   \"override_filters\": [     {       \"column_name\": \"Color\",       \"generic_filter\": {         \"op\": \"IN\",         \"values\": [           \"almond\",           \"turquoise\"         ]       },       \"negate\": false     },     {       \"column_name\": \"Commit Date\",       \"date_filter\": {         \"datePeriod\": \"HOUR\",         \"number\": 3,         \"type\": \"LAST_N_PERIOD\",         \"op\": \"EQ\"       }     },     {       \"column_name\": \"Sales\",       \"generic_filter\": {         \"op\": \"BW_INC\",         \"values\": [           \"100000\",           \"70000\"         ]       },       \"negate\": true     }   ] }")
-    runtime_sort: Optional[Dict[str, Any]] = Field(default=None, description="JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).")
+    runtime_filter: Optional[Any] = Field(default=None, description="JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).")
+    override_filters: Optional[Any] = Field(default=None, description="Applied to the liveboard and overrides any filters already applied on the same columns in liveboard. Following example illustrate different kinds of filters: {   \"override_filters\": [     {       \"column_name\": \"Color\",       \"generic_filter\": {         \"op\": \"IN\",         \"values\": [           \"almond\",           \"turquoise\"         ]       },       \"negate\": false     },     {       \"column_name\": \"Commit Date\",       \"date_filter\": {         \"datePeriod\": \"HOUR\",         \"number\": 3,         \"type\": \"LAST_N_PERIOD\",         \"op\": \"EQ\"       }     },     {       \"column_name\": \"Sales\",       \"generic_filter\": {         \"op\": \"BW_INC\",         \"values\": [           \"100000\",           \"70000\"         ]       },       \"negate\": true     }   ] }")
+    runtime_sort: Optional[Any] = Field(default=None, description="JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).")
     pdf_options: Optional[PdfOptionsInput] = Field(default=None, description="Options for PDF export.")
     png_options: Optional[PngOptionsInput] = Field(default=None, description="Options for PNG export.")
-    runtime_param_override: Optional[Dict[str, Any]] = Field(default=None, description="JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).")
+    runtime_param_override: Optional[Any] = Field(default=None, description="JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).")
     regional_settings: Optional[RegionalSettingsInput] = Field(default=None, description="Options for specific region specific overrides to support date/number/string/currency formatting.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["metadata_identifier", "tab_identifiers", "personalised_view_identifier", "visualization_identifiers", "transient_content", "file_format", "runtime_filter", "override_filters", "runtime_sort", "pdf_options", "png_options", "runtime_param_override", "regional_settings"]
@@ -108,6 +108,26 @@ class ExportLiveboardReportRequest(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if runtime_filter (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_filter is None and "runtime_filter" in self.model_fields_set:
+            _dict['runtime_filter'] = None
+
+        # set to None if override_filters (nullable) is None
+        # and model_fields_set contains the field
+        if self.override_filters is None and "override_filters" in self.model_fields_set:
+            _dict['override_filters'] = None
+
+        # set to None if runtime_sort (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_sort is None and "runtime_sort" in self.model_fields_set:
+            _dict['runtime_sort'] = None
+
+        # set to None if runtime_param_override (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_param_override is None and "runtime_param_override" in self.model_fields_set:
+            _dict['runtime_param_override'] = None
 
         return _dict
 

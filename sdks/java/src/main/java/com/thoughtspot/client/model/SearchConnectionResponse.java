@@ -181,7 +181,7 @@ public class SearchConnectionResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_DETAILS)
     @javax.annotation.Nullable
-    private Object details;
+    private Object details = null;
 
     public SearchConnectionResponse() {}
 

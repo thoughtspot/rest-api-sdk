@@ -27,7 +27,7 @@ class FileReference(BaseModel):
     """ # noqa: E501
     file_id: StrictStr = Field(description="Unique identifier of the code-execution-generated file.")
     display_name: Optional[StrictStr] = Field(default=None, description="Human-readable file name.")
-    created_time_in_millis: Optional[Dict[str, Any]] = Field(default=None, description="Milliseconds since Unix epoch when the file was created.")
+    created_time_in_millis: Optional[Any] = Field(default=None, description="Milliseconds since Unix epoch when the file was created.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["file_id", "display_name", "created_time_in_millis"]
 

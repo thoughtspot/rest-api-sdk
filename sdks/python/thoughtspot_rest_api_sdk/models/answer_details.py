@@ -34,7 +34,7 @@ class AnswerDetails(BaseModel):
     visualization_type: Optional[StrictStr] = Field(default=None, description="Visualization type for the answer.")
     formulas: Optional[List[StrictStr]] = Field(default=None, description="List of formulas used in the answer.")
     parameters: Optional[List[StrictStr]] = Field(default=None, description="List of parameters used in the answer.")
-    sub_queries: Optional[List[Dict[str, Any]]] = Field(default=None, description="List of sub-queries used in the answer.")
+    sub_queries: Optional[List[Any]] = Field(default=None, description="List of sub-queries used in the answer.")
     ac_state: Optional[ACState] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["title", "description", "session_identifier", "generation_number", "tokens", "visualization_type", "formulas", "parameters", "sub_queries", "ac_state"]

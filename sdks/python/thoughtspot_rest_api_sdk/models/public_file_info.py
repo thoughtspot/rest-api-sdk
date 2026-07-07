@@ -28,7 +28,7 @@ class PublicFileInfo(BaseModel):
     file_id: StrictStr = Field(description="Unique identifier of the file.")
     display_name: Optional[StrictStr] = Field(default=None, description="Human-readable file name.")
     file_type: Optional[StrictStr] = Field(default=None, description="File type such as `csv`, `pdf`, or `png`.")
-    created_time_in_millis: Optional[Dict[str, Any]] = Field(default=None, description="Milliseconds since Unix epoch when the file was created.")
+    created_time_in_millis: Optional[Any] = Field(default=None, description="Milliseconds since Unix epoch when the file was created.")
     size_bytes: Optional[StrictInt] = Field(default=None, description="File size in bytes.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["file_id", "display_name", "file_type", "created_time_in_millis", "size_bytes"]

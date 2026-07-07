@@ -14,7 +14,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import Any, List, Optional
 from typing_extensions import Annotated
 from thoughtspot_rest_api_sdk.models.agent_conversation import AgentConversation
 from thoughtspot_rest_api_sdk.models.agent_conversation_history_response import AgentConversationHistoryResponse
@@ -5115,6 +5115,43 @@ class AIApi:
         )
 
 
+
+    async def send_agent_conversation_message_streaming_stream(
+        self,
+        conversation_identifier: Annotated[StrictStr, Field(description="Unique identifier for the conversation (used to track context)")],
+        send_agent_conversation_message_streaming_request: SendAgentConversationMessageStreamingRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ):
+        """Stream SSE events for send_agent_conversation_message_streaming.
+
+        Yields event dicts as the server emits them. Authorization +
+        token refresh handled at the httpx.Auth layer (see
+        thoughtspot_rest_api_sdk.rest._TokenAuth).
+        """
+        from thoughtspot_rest_api_sdk.rest import stream_sse_via_serialized
+
+        _param = self._send_agent_conversation_message_streaming_serialize(
+            conversation_identifier=conversation_identifier,
+            send_agent_conversation_message_streaming_request=send_agent_conversation_message_streaming_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+        async for _ev in stream_sse_via_serialized(self.api_client, _param):
+            yield _ev
+
     def _send_agent_conversation_message_streaming_serialize(
         self,
         conversation_identifier,
@@ -5926,6 +5963,41 @@ class AIApi:
             )
         )
 
+
+
+    async def send_agent_message_streaming_stream(
+        self,
+        send_agent_message_streaming_request: SendAgentMessageStreamingRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ):
+        """Stream SSE events for send_agent_message_streaming.
+
+        Yields event dicts as the server emits them. Authorization +
+        token refresh handled at the httpx.Auth layer (see
+        thoughtspot_rest_api_sdk.rest._TokenAuth).
+        """
+        from thoughtspot_rest_api_sdk.rest import stream_sse_via_serialized
+
+        _param = self._send_agent_message_streaming_serialize(
+            send_agent_message_streaming_request=send_agent_message_streaming_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+        async for _ev in stream_sse_via_serialized(self.api_client, _param):
+            yield _ev
 
     def _send_agent_message_streaming_serialize(
         self,

@@ -56,7 +56,7 @@ public class PublicFileInfo implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_CREATED_TIME_IN_MILLIS)
     @javax.annotation.Nullable
-    private Object createdTimeInMillis;
+    private Object createdTimeInMillis = null;
 
     public static final String SERIALIZED_NAME_SIZE_BYTES = "size_bytes";
 

@@ -36,7 +36,7 @@ public class ObjectPrivilegesOfMetadataResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_METADATA_OBJECT_PRIVILEGES)
     @javax.annotation.Nullable
-    private Object metadataObjectPrivileges;
+    private Object metadataObjectPrivileges = null;
 
     public ObjectPrivilegesOfMetadataResponse() {}
 

@@ -36,7 +36,7 @@ class WebhookResponse(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="Description of the webhook configuration.")
     org: Optional[WebhookOrg] = None
     url: StrictStr = Field(description="The webhook endpoint URL.")
-    url_params: Optional[Dict[str, Any]] = Field(default=None, description="Additional URL parameters as key-value pairs.")
+    url_params: Optional[Any] = Field(default=None, description="Additional URL parameters as key-value pairs.")
     events: List[StrictStr] = Field(description="List of events this webhook subscribes to.")
     authentication: Optional[WebhookAuthentication] = None
     signature_verification: Optional[WebhookSignatureVerification] = None

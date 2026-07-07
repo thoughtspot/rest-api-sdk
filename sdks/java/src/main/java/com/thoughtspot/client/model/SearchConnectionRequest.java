@@ -259,7 +259,7 @@ public class SearchConnectionRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_CONFIGURATION)
     @javax.annotation.Nullable
-    private Object _configuration;
+    private Object _configuration = null;
 
     /**
      * List of authentication types to fetch data_ware_house_objects from external Data warehouse.

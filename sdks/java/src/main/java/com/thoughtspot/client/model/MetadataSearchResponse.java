@@ -130,7 +130,7 @@ public class MetadataSearchResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_DEPENDENT_OBJECTS)
     @javax.annotation.Nullable
-    private Object dependentObjects;
+    private Object dependentObjects = null;
 
     public static final String SERIALIZED_NAME_INCOMPLETE_OBJECTS = "incomplete_objects";
 
@@ -142,13 +142,13 @@ public class MetadataSearchResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_METADATA_DETAIL)
     @javax.annotation.Nullable
-    private Object metadataDetail;
+    private Object metadataDetail = null;
 
     public static final String SERIALIZED_NAME_METADATA_HEADER = "metadata_header";
 
     @SerializedName(SERIALIZED_NAME_METADATA_HEADER)
     @javax.annotation.Nullable
-    private Object metadataHeader;
+    private Object metadataHeader = null;
 
     public static final String SERIALIZED_NAME_VISUALIZATION_HEADERS = "visualization_headers";
 
@@ -160,7 +160,7 @@ public class MetadataSearchResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_STATS)
     @javax.annotation.Nullable
-    private Object stats;
+    private Object stats = null;
 
     public MetadataSearchResponse() {}
 

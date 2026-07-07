@@ -25,7 +25,7 @@ class RuntimeParamOverride(BaseModel):
     """
     List of runtime parameters need to set during the session.
     """ # noqa: E501
-    runtime_param_override: Optional[Dict[str, Any]] = Field(default=None, description="Runtime param override type in JWT.")
+    runtime_param_override: Optional[Any] = Field(default=None, description="Runtime param override type in JWT.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["runtime_param_override"]
 
@@ -74,6 +74,11 @@ class RuntimeParamOverride(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if runtime_param_override (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_param_override is None and "runtime_param_override" in self.model_fields_set:
+            _dict['runtime_param_override'] = None
 
         return _dict
 

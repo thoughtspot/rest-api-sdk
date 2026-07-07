@@ -14,7 +14,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictBytes, StrictStr, field_validator
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 from thoughtspot_rest_api_sdk.models.dbt_search_response import DbtSearchResponse
 

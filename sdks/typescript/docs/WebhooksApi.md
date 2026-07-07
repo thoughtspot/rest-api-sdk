@@ -34,7 +34,7 @@ apiInstance.createWebhookConfiguration(
     name: "name_example",
     description: "description_example",
     url: "url_example",
-    url_params: {},
+    url_params: null,
     events: [
       "LIVEBOARD_SCHEDULE",
     ],
@@ -300,7 +300,7 @@ apiInstance.updateWebhookConfiguration(
     name: "name_example",
     description: "description_example",
     url: "url_example",
-    url_params: {},
+    url_params: null,
     events: [
       "LIVEBOARD_SCHEDULE",
     ],

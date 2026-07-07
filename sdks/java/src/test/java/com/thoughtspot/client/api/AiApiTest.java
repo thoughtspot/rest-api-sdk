@@ -26,7 +26,6 @@ import com.thoughtspot.client.model.ResponseMessage;
 import com.thoughtspot.client.model.SendAgentConversationMessageRequest;
 import com.thoughtspot.client.model.SendAgentConversationMessageStreamingRequest;
 import com.thoughtspot.client.model.SendAgentMessageRequest;
-import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.SetAgentInstructionsRequest;
@@ -719,7 +718,7 @@ public class AiApiTest {
         String conversationIdentifier = null;
         SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest =
                 null;
-        SendAgentMessageResponse response =
+        InputStream response =
                 api.sendAgentConversationMessageStreaming(
                         conversationIdentifier, sendAgentConversationMessageStreamingRequest);
         // TODO: test validations
@@ -800,8 +799,7 @@ public class AiApiTest {
     @Test
     public void sendAgentMessageStreamingTest() throws ApiException {
         SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest = null;
-        SendAgentMessageResponse response =
-                api.sendAgentMessageStreaming(sendAgentMessageStreamingRequest);
+        InputStream response = api.sendAgentMessageStreaming(sendAgentMessageStreamingRequest);
         // TODO: test validations
     }
 
