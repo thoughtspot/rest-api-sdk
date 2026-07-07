@@ -1649,7 +1649,8 @@
               }
             }
           }
-        }
+        },
+        "x-streaming": true
       }
     },
     "/api/rest/2.0/ai/agent/{conversation_identifier}/converse": {
@@ -1827,7 +1828,8 @@
               }
             }
           }
-        }
+        },
+        "x-streaming": true
       }
     },
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
