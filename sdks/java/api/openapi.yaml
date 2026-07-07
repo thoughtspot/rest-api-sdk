@@ -2788,6 +2788,14 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden access. The user does not have permission to access
             this resource.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Conflict. A concurrent update to the same template variable
+            was detected and the request could not be applied. Retry the request after
+            serializing concurrent variable updates.
         "500":
           content:
             application/json:

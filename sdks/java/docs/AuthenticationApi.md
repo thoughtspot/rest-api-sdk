@@ -153,6 +153,7 @@ No authorization required
 | **400** | Invalid request. This could be due to missing or incorrect parameters. |  -  |
 | **401** | Unauthorized access. The request could not be authenticated. |  -  |
 | **403** | Forbidden access. The user does not have permission to access this resource. |  -  |
+| **409** | Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. |  -  |
 | **500** | An unexpected error occurred on the server. |  -  |
 
 <a id="getFullAccessToken"></a>

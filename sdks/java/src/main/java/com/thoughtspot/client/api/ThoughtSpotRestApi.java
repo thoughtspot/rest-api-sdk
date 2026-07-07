@@ -17924,6 +17924,7 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
      * </table>
      */
@@ -18069,6 +18070,7 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
      * </table>
      */
@@ -18152,6 +18154,7 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
      * </table>
      */
@@ -18237,6 +18240,7 @@ public class ThoughtSpotRestApi {
      * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
      * </table>
      */
