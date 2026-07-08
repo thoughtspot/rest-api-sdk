@@ -107,6 +107,7 @@ export * from '../models/CreateInputTableRequest';
 export * from '../models/CreateOrgRequest';
 export * from '../models/CreateRoleRequest';
 export * from '../models/CreateScheduleRequest';
+export * from '../models/CreateSemanticIntegrationRequest';
 export * from '../models/CreateTagRequest';
 export * from '../models/CreateUserGroupRequest';
 export * from '../models/CreateUserRequest';
@@ -353,6 +354,7 @@ export * from '../models/SearchRoleResponse';
 export * from '../models/SearchRolesRequest';
 export * from '../models/SearchSchedulesRequest';
 export * from '../models/SearchSecuritySettingsRequest';
+export * from '../models/SearchSemanticIntegrationsRequest';
 export * from '../models/SearchStyleCustomizationsRequest';
 export * from '../models/SearchStyleFontsRequest';
 export * from '../models/SearchTagsRequest';
@@ -366,6 +368,13 @@ export * from '../models/SecuritySettingsOrgDetails';
 export * from '../models/SecuritySettingsOrgPreferences';
 export * from '../models/SecuritySettingsOrgPreferencesInput';
 export * from '../models/SecuritySettingsResponse';
+export * from '../models/SemanticIntegrationFormulaReport';
+export * from '../models/SemanticIntegrationReport';
+export * from '../models/SemanticIntegrationReportSummary';
+export * from '../models/SemanticIntegrationResponse';
+export * from '../models/SemanticIntegrationSearchResponse';
+export * from '../models/SemanticIntegrationSortOptions';
+export * from '../models/SemanticIntegrationTagReference';
 export * from '../models/SendAgentConversationMessageRequest';
 export * from '../models/SendAgentConversationMessageStreamingRequest';
 export * from '../models/SendAgentMessageRequest';
@@ -608,6 +617,7 @@ import { CreateInputTableRequest } from '../models/CreateInputTableRequest';
 import { CreateOrgRequest } from '../models/CreateOrgRequest';
 import { CreateRoleRequest  , CreateRoleRequestPrivilegesEnum    } from '../models/CreateRoleRequest';
 import { CreateScheduleRequest  , CreateScheduleRequestMetadataTypeEnum   , CreateScheduleRequestFileFormatEnum    , CreateScheduleRequestTimeZoneEnum      } from '../models/CreateScheduleRequest';
+import { CreateSemanticIntegrationRequest     , CreateSemanticIntegrationRequestTypeEnum    } from '../models/CreateSemanticIntegrationRequest';
 import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest    , CreateUserGroupRequestPrivilegesEnum   , CreateUserGroupRequestTypeEnum   , CreateUserGroupRequestVisibilityEnum    } from '../models/CreateUserGroupRequest';
 import { CreateUserRequest    , CreateUserRequestAccountTypeEnum  , CreateUserRequestAccountStatusEnum    , CreateUserRequestVisibilityEnum       , CreateUserRequestPreferredLocaleEnum        } from '../models/CreateUserRequest';
@@ -854,6 +864,7 @@ import { SearchRoleResponse      , SearchRoleResponsePrivilegesEnum  , SearchRol
 import { SearchRolesRequest   , SearchRolesRequestPrivilegesEnum     , SearchRolesRequestPermissionsEnum   } from '../models/SearchRolesRequest';
 import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
 import { SearchSecuritySettingsRequest, SearchSecuritySettingsRequestScopeEnum   } from '../models/SearchSecuritySettingsRequest';
+import { SearchSemanticIntegrationsRequest } from '../models/SearchSemanticIntegrationsRequest';
 import { SearchStyleCustomizationsRequest, SearchStyleCustomizationsRequestScopeEnum   } from '../models/SearchStyleCustomizationsRequest';
 import { SearchStyleFontsRequest, SearchStyleFontsRequestScopeEnum      } from '../models/SearchStyleFontsRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
@@ -867,6 +878,13 @@ import { SecuritySettingsOrgDetails } from '../models/SecuritySettingsOrgDetails
 import { SecuritySettingsOrgPreferences   , SecuritySettingsOrgPreferencesTrustedAuthStatusEnum   } from '../models/SecuritySettingsOrgPreferences';
 import { SecuritySettingsOrgPreferencesInput } from '../models/SecuritySettingsOrgPreferencesInput';
 import { SecuritySettingsResponse } from '../models/SecuritySettingsResponse';
+import { SemanticIntegrationFormulaReport     , SemanticIntegrationFormulaReportImportStatusEnum  , SemanticIntegrationFormulaReportChangeStatusEnum   } from '../models/SemanticIntegrationFormulaReport';
+import { SemanticIntegrationReport } from '../models/SemanticIntegrationReport';
+import { SemanticIntegrationReportSummary } from '../models/SemanticIntegrationReportSummary';
+import { SemanticIntegrationResponse } from '../models/SemanticIntegrationResponse';
+import { SemanticIntegrationSearchResponse     , SemanticIntegrationSearchResponseImportTypeEnum  , SemanticIntegrationSearchResponseTypeEnum          } from '../models/SemanticIntegrationSearchResponse';
+import { SemanticIntegrationSortOptions, SemanticIntegrationSortOptionsFieldNameEnum  , SemanticIntegrationSortOptionsOrderEnum   } from '../models/SemanticIntegrationSortOptions';
+import { SemanticIntegrationTagReference } from '../models/SemanticIntegrationTagReference';
 import { SendAgentConversationMessageRequest } from '../models/SendAgentConversationMessageRequest';
 import { SendAgentConversationMessageStreamingRequest } from '../models/SendAgentConversationMessageStreamingRequest';
 import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
@@ -1057,6 +1075,7 @@ let enumsMap: Set<string> = new Set<string>([
     "CreateScheduleRequestMetadataTypeEnum",
     "CreateScheduleRequestFileFormatEnum",
     "CreateScheduleRequestTimeZoneEnum",
+    "CreateSemanticIntegrationRequestTypeEnum",
     "CreateUserGroupRequestPrivilegesEnum",
     "CreateUserGroupRequestTypeEnum",
     "CreateUserGroupRequestVisibilityEnum",
@@ -1203,6 +1222,12 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchWebhookConfigurationsRequestStatusEnum",
     "SecuritySettingsClusterPreferencesTrustedAuthStatusEnum",
     "SecuritySettingsOrgPreferencesTrustedAuthStatusEnum",
+    "SemanticIntegrationFormulaReportImportStatusEnum",
+    "SemanticIntegrationFormulaReportChangeStatusEnum",
+    "SemanticIntegrationSearchResponseImportTypeEnum",
+    "SemanticIntegrationSearchResponseTypeEnum",
+    "SemanticIntegrationSortOptionsFieldNameEnum",
+    "SemanticIntegrationSortOptionsOrderEnum",
     "ShareMetadataRequestMetadataTypeEnum",
     "ShareMetadataTypeInputTypeEnum",
     "SharePermissionsInputShareModeEnum",
@@ -1407,6 +1432,7 @@ let typeMap: {[index: string]: any} = {
     "CreateOrgRequest": CreateOrgRequest,
     "CreateRoleRequest": CreateRoleRequest,
     "CreateScheduleRequest": CreateScheduleRequest,
+    "CreateSemanticIntegrationRequest": CreateSemanticIntegrationRequest,
     "CreateTagRequest": CreateTagRequest,
     "CreateUserGroupRequest": CreateUserGroupRequest,
     "CreateUserRequest": CreateUserRequest,
@@ -1653,6 +1679,7 @@ let typeMap: {[index: string]: any} = {
     "SearchRolesRequest": SearchRolesRequest,
     "SearchSchedulesRequest": SearchSchedulesRequest,
     "SearchSecuritySettingsRequest": SearchSecuritySettingsRequest,
+    "SearchSemanticIntegrationsRequest": SearchSemanticIntegrationsRequest,
     "SearchStyleCustomizationsRequest": SearchStyleCustomizationsRequest,
     "SearchStyleFontsRequest": SearchStyleFontsRequest,
     "SearchTagsRequest": SearchTagsRequest,
@@ -1666,6 +1693,13 @@ let typeMap: {[index: string]: any} = {
     "SecuritySettingsOrgPreferences": SecuritySettingsOrgPreferences,
     "SecuritySettingsOrgPreferencesInput": SecuritySettingsOrgPreferencesInput,
     "SecuritySettingsResponse": SecuritySettingsResponse,
+    "SemanticIntegrationFormulaReport": SemanticIntegrationFormulaReport,
+    "SemanticIntegrationReport": SemanticIntegrationReport,
+    "SemanticIntegrationReportSummary": SemanticIntegrationReportSummary,
+    "SemanticIntegrationResponse": SemanticIntegrationResponse,
+    "SemanticIntegrationSearchResponse": SemanticIntegrationSearchResponse,
+    "SemanticIntegrationSortOptions": SemanticIntegrationSortOptions,
+    "SemanticIntegrationTagReference": SemanticIntegrationTagReference,
     "SendAgentConversationMessageRequest": SendAgentConversationMessageRequest,
     "SendAgentConversationMessageStreamingRequest": SendAgentConversationMessageStreamingRequest,
     "SendAgentMessageRequest": SendAgentMessageRequest,

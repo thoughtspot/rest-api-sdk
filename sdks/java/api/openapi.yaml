@@ -23020,6 +23020,108 @@ components:
           nullable: true
           type: array
       type: object
+    SemanticIntegrationSortOptions:
+      description: Sort options for semantic integration search.
+      properties:
+        field_name:
+          description: Name of the field to apply the sort on.
+          enum:
+          - NAME
+          - AUTHOR
+          - CREATED_TIME
+          - MODIFIED_TIME
+          nullable: true
+          type: string
+        order:
+          description: "Sort order: `ASC` for ascending, `DESC` for descending."
+          enum:
+          - ASC
+          - DESC
+          nullable: true
+          type: string
+      type: object
+    SemanticIntegrationSearchResponse:
+      description: Single semantic integration entry returned by search.
+      properties:
+        id:
+          description: Unique identifier of the semantic integration.
+          nullable: true
+          type: string
+        name:
+          description: Name of the semantic integration.
+          nullable: true
+          type: string
+        description:
+          description: Optional description of the semantic integration.
+          nullable: true
+          type: string
+        model_id:
+          description: GUID of the associated ThoughtSpot model generated for this
+            integration.
+          nullable: true
+          type: string
+        model_name:
+          description: Name of the associated ThoughtSpot model.
+          nullable: true
+          type: string
+        import_type:
+          description: How the semantic definition was sourced.
+          enum:
+          - CDW
+          - FILE
+          nullable: true
+          type: string
+        type:
+          description: CDW connector type.
+          enum:
+          - RDBMS_SNOWFLAKE
+          nullable: true
+          type: string
+        connection_id:
+          description: GUID of the CDW connection backing the integration.
+          nullable: true
+          type: string
+        connection_name:
+          description: Display name of the CDW connection backing the integration.
+          nullable: true
+          type: string
+        author_id:
+          description: GUID of the user who created the integration.
+          nullable: true
+          type: string
+        author_name:
+          description: Username of the user who created the integration.
+          nullable: true
+          type: string
+        creation_time_in_millis:
+          description: Creation time in Unix epoch milliseconds.
+          format: float
+          nullable: true
+          type: number
+        modification_time_in_millis:
+          description: Last modification time in Unix epoch milliseconds.
+          format: float
+          nullable: true
+          type: number
+        tags:
+          description: Tags associated with the integration.
+          items:
+            $ref: '#/components/schemas/SemanticIntegrationTagReference'
+          nullable: true
+          type: array
+      type: object
+    SemanticIntegrationTagReference:
+      description: Tag reference associated with a semantic integration.
+      properties:
+        id:
+          description: Unique identifier of the tag.
+          nullable: true
+          type: string
+        name:
+          description: Name of the tag.
+          nullable: true
+          type: string
+      type: object
     GenericInfo:
       example:
         name: name
@@ -27690,6 +27792,104 @@ components:
             type: string
           nullable: true
           type: array
+      type: object
+    SemanticIntegrationResponse:
+      description: Response object for a semantic integration.
+      properties:
+        id:
+          description: Unique identifier of the semantic integration.
+          nullable: true
+          type: string
+        name:
+          description: Name of the semantic integration.
+          nullable: true
+          type: string
+        model_id:
+          description: Model GUID generated for this integration.
+          nullable: true
+          type: string
+        model_name:
+          description: Model name generated for this integration.
+          nullable: true
+          type: string
+        semantic_report:
+          $ref: '#/components/schemas/SemanticIntegrationReport'
+      type: object
+    SemanticIntegrationReport:
+      description: Per-formula import report for a semantic integration.
+      properties:
+        summary:
+          $ref: '#/components/schemas/SemanticIntegrationReportSummary'
+        formulas:
+          description: Formula import details.
+          items:
+            $ref: '#/components/schemas/SemanticIntegrationFormulaReport'
+          nullable: true
+          type: array
+      type: object
+    SemanticIntegrationReportSummary:
+      description: Formula import counts summary.
+      properties:
+        total:
+          description: Total number of formulas.
+          format: int32
+          nullable: true
+          type: integer
+        imported:
+          description: Number of successfully imported formulas.
+          format: int32
+          nullable: true
+          type: integer
+        failed:
+          description: Number of failed formula imports.
+          format: int32
+          nullable: true
+          type: integer
+        skipped:
+          description: Number of skipped formulas.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    SemanticIntegrationFormulaReport:
+      description: Import details for a single formula.
+      properties:
+        id:
+          description: Formula ID in the model.
+          nullable: true
+          type: string
+        name:
+          description: Formula name.
+          nullable: true
+          type: string
+        description:
+          description: Formula description.
+          nullable: true
+          type: string
+        source_expression:
+          description: CDW source expression.
+          nullable: true
+          type: string
+        translated_formula:
+          description: ThoughtSpot formula equivalent.
+          nullable: true
+          type: string
+        import_status:
+          description: Import status.
+          enum:
+          - IMPORTED
+          - FAILED
+          - SKIPPED
+          nullable: true
+          type: string
+        change_status:
+          description: Change status since last import. Null on initial create.
+          enum:
+          - NEW
+          - UPDATED
+          - UNCHANGED
+          nullable: true
+          type: string
       type: object
     Runtime_Filter:
       description: List of runtime parameters need to set during the session.
@@ -33735,6 +33935,71 @@ components:
       required:
       - column_security_rules
       type: object
+    CreateSemanticIntegrationRequest:
+      properties:
+        connection_identifier:
+          description: ID or name of the CDW connection.
+          type: string
+        name:
+          description: Name of the semantic integration. Must be unique.
+          type: string
+        database_name:
+          description: Database name in the CDW.
+          type: string
+        schema_name:
+          description: Schema name in the CDW.
+          type: string
+        semantic_view_name:
+          description: Semantic view name in the CDW.
+          type: string
+        type:
+          description: CDW connector type.
+          enum:
+          - RDBMS_SNOWFLAKE
+          type: string
+        description:
+          description: Optional description of the semantic integration.
+          type: string
+      required:
+      - connection_identifier
+      - database_name
+      - name
+      - schema_name
+      - semantic_view_name
+      - type
+      type: object
+    SearchSemanticIntegrationsRequest:
+      properties:
+        sort_options:
+          allOf:
+          - $ref: '#/components/schemas/SemanticIntegrationSortOptions'
+          description: Sort options for the search results.
+        record_offset:
+          default: 0
+          description: Number of records to skip for pagination. Minimum value is
+            0.
+          format: int32
+          type: integer
+        record_size:
+          default: 10
+          description: Maximum number of records to return. Use 0 to return all records
+            (no pagination).
+          format: int32
+          type: integer
+        pattern:
+          description: Name filter substring to narrow search results.
+          type: string
+        author_identifiers:
+          description: Filter by author IDs or names who created the integrations.
+          items:
+            type: string
+          type: array
+        connection_identifiers:
+          description: Filter by connection IDs or names associated with the integrations.
+          items:
+            type: string
+          type: array
+      type: object
     DeleteStyleFontsRequest:
       example:
         scope: ORG
@@ -35945,6 +36210,11 @@ x-roles:
   tags:
   - 26.3.0.cl
   description: Roles for version 26.3.0.cl
+- name: 26.9.0.cl
+  id: 26.9.0.cl
+  tags:
+  - 26.9.0.cl
+  description: Roles for version 26.9.0.cl
 - name: 10.14.0.cl
   id: 10.14.0.cl
   tags:

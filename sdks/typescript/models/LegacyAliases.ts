@@ -21,6 +21,7 @@ import { RegionalSettingsInput } from './RegionalSettingsInput';
 import { ScheduleHistoryRunsOptionsInput } from './ScheduleHistoryRunsOptionsInput';
 import { SchedulesPdfOptionsInput } from './SchedulesPdfOptionsInput';
 import { SecuritySettingsClusterPreferencesInput } from './SecuritySettingsClusterPreferencesInput';
+import { SemanticIntegrationSortOptions } from './SemanticIntegrationSortOptions';
 import { SortOption } from './SortOption';
 import { SortOptionInput } from './SortOptionInput';
 import { SortOptions } from './SortOptions';
@@ -58,6 +59,7 @@ export type SearchMetadataRequestFavoriteObjectOptions = FavoriteObjectOptionsIn
 export type SearchMetadataRequestSortOptions = MetadataSearchSortOptions;
 export type SearchSchedulesRequestHistoryRunsOptions = ScheduleHistoryRunsOptionsInput;
 export type SearchSchedulesRequestSortOptions = SortingOptions;
+export type SearchSemanticIntegrationsRequestSortOptions = SemanticIntegrationSortOptions;
 export type SearchUserGroupsRequestSortOptions = SortOptions;
 export type SearchUsersRequestSortOptions = SortOptions;
 export type SearchWebhookConfigurationsRequestSortOptions = WebhookSortOptionsInput;
