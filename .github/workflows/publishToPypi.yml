@@ -1,0 +1,24 @@
+name: Publish Python SDK to PyPI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pypi-publish:
+    name: Upload SDK to PyPI
+    runs-on: ubuntu-latest
+    
+    # Notice: The 'environment' block is completely removed here
+      
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: sdks/python/dist/
