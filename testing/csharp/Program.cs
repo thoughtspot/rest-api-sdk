@@ -18,10 +18,10 @@
 //   TS_PASSWORD  — login password
 //
 
-using ThoughtSpot.Client;
-using ThoughtSpot.Client.Api;
-using ThoughtSpot.Client.Client;
-using ThoughtSpot.Client.Model;
+using thoughtspot_rest_api_sdk;
+using thoughtspot_rest_api_sdk.Api;
+using thoughtspot_rest_api_sdk.Client;
+using thoughtspot_rest_api_sdk.Model;
 
 // ── Fallback credentials (used only if env vars are absent) ────────────────
 const string FallbackHost     = "";
