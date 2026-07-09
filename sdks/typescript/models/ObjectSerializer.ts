@@ -89,7 +89,9 @@ export * from '../models/ContextPayloadV2Input';
 export * from '../models/Conversation';
 export * from '../models/ConversationMessage';
 export * from '../models/ConversationMessageResponse';
+export * from '../models/ConversationPrincipalInfo';
 export * from '../models/ConversationSettingsInput';
+export * from '../models/ConversationShareStatusResponse';
 export * from '../models/ConvertWorksheetToModelRequest';
 export * from '../models/CopyObjectRequest';
 export * from '../models/CreateAgentConversationRequest';
@@ -281,6 +283,7 @@ export * from '../models/PermissionsMetadataTypeInput';
 export * from '../models/PngOptionsInput';
 export * from '../models/PolicyProcessOptions';
 export * from '../models/PolicyProcessOptionsInput';
+export * from '../models/PrincipalRefInput';
 export * from '../models/PrincipalsInput';
 export * from '../models/PrincipalsListItem';
 export * from '../models/PrincipalsListItemInput';
@@ -383,9 +386,11 @@ export * from '../models/SendAgentMessageStreamingRequest';
 export * from '../models/SendMessageRequest';
 export * from '../models/SetAgentInstructionsRequest';
 export * from '../models/SetNLInstructionsRequest';
+export * from '../models/ShareConversationRequest';
 export * from '../models/ShareMetadataRequest';
 export * from '../models/ShareMetadataTypeInput';
 export * from '../models/SharePermissionsInput';
+export * from '../models/SharedConversationResponse';
 export * from '../models/SingleAnswerRequest';
 export * from '../models/SortOption';
 export * from '../models/SortOptionInput';
@@ -599,7 +604,9 @@ import { ContextPayloadV2Input, ContextPayloadV2InputTypeEnum    } from '../mode
 import { Conversation } from '../models/Conversation';
 import { ConversationMessage } from '../models/ConversationMessage';
 import { ConversationMessageResponse } from '../models/ConversationMessageResponse';
+import { ConversationPrincipalInfo , ConversationPrincipalInfoTypeEnum    , ConversationPrincipalInfoPermissionEnum   } from '../models/ConversationPrincipalInfo';
 import { ConversationSettingsInput } from '../models/ConversationSettingsInput';
+import { ConversationShareStatusResponse } from '../models/ConversationShareStatusResponse';
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest  , CopyObjectRequestTypeEnum    } from '../models/CopyObjectRequest';
 import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
@@ -791,6 +798,7 @@ import { PermissionsMetadataTypeInput, PermissionsMetadataTypeInputTypeEnum    }
 import { PngOptionsInput } from '../models/PngOptionsInput';
 import { PolicyProcessOptions } from '../models/PolicyProcessOptions';
 import { PolicyProcessOptionsInput } from '../models/PolicyProcessOptionsInput';
+import { PrincipalRefInput , PrincipalRefInputPrincipalTypeEnum   } from '../models/PrincipalRefInput';
 import { PrincipalsInput , PrincipalsInputTypeEnum   } from '../models/PrincipalsInput';
 import { PrincipalsListItem } from '../models/PrincipalsListItem';
 import { PrincipalsListItemInput } from '../models/PrincipalsListItemInput';
@@ -893,9 +901,11 @@ import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStre
 import { SendMessageRequest } from '../models/SendMessageRequest';
 import { SetAgentInstructionsRequest } from '../models/SetAgentInstructionsRequest';
 import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
+import { ShareConversationRequest } from '../models/ShareConversationRequest';
 import { ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum            } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum    } from '../models/ShareMetadataTypeInput';
 import { SharePermissionsInput , SharePermissionsInputShareModeEnum  , SharePermissionsInputContentShareModeEnum   } from '../models/SharePermissionsInput';
+import { SharedConversationResponse } from '../models/SharedConversationResponse';
 import { SingleAnswerRequest } from '../models/SingleAnswerRequest';
 import { SortOption, SortOptionFieldNameEnum  , SortOptionOrderEnum   } from '../models/SortOption';
 import { SortOptionInput, SortOptionInputFieldNameEnum  , SortOptionInputOrderEnum   } from '../models/SortOptionInput';
@@ -1061,6 +1071,8 @@ let enumsMap: Set<string> = new Set<string>([
     "ConnectionConfigurationResponsePolicyTypeEnum",
     "ConnectionConfigurationSearchRequestPolicyTypeEnum",
     "ContextPayloadV2InputTypeEnum",
+    "ConversationPrincipalInfoTypeEnum",
+    "ConversationPrincipalInfoPermissionEnum",
     "CopyObjectRequestTypeEnum",
     "CreateCalendarRequestCreationMethodEnum",
     "CreateCalendarRequestCalendarTypeEnum",
@@ -1170,6 +1182,7 @@ let enumsMap: Set<string> = new Set<string>([
     "PdfOptionsInputPageOrientationEnum",
     "PermissionInputShareModeEnum",
     "PermissionsMetadataTypeInputTypeEnum",
+    "PrincipalRefInputPrincipalTypeEnum",
     "PrincipalsInputTypeEnum",
     "PublishMetadataListItemTypeEnum",
     "PutVariableValuesRequestOperationEnum",
@@ -1414,7 +1427,9 @@ let typeMap: {[index: string]: any} = {
     "Conversation": Conversation,
     "ConversationMessage": ConversationMessage,
     "ConversationMessageResponse": ConversationMessageResponse,
+    "ConversationPrincipalInfo": ConversationPrincipalInfo,
     "ConversationSettingsInput": ConversationSettingsInput,
+    "ConversationShareStatusResponse": ConversationShareStatusResponse,
     "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
     "CopyObjectRequest": CopyObjectRequest,
     "CreateAgentConversationRequest": CreateAgentConversationRequest,
@@ -1606,6 +1621,7 @@ let typeMap: {[index: string]: any} = {
     "PngOptionsInput": PngOptionsInput,
     "PolicyProcessOptions": PolicyProcessOptions,
     "PolicyProcessOptionsInput": PolicyProcessOptionsInput,
+    "PrincipalRefInput": PrincipalRefInput,
     "PrincipalsInput": PrincipalsInput,
     "PrincipalsListItem": PrincipalsListItem,
     "PrincipalsListItemInput": PrincipalsListItemInput,
@@ -1708,9 +1724,11 @@ let typeMap: {[index: string]: any} = {
     "SendMessageRequest": SendMessageRequest,
     "SetAgentInstructionsRequest": SetAgentInstructionsRequest,
     "SetNLInstructionsRequest": SetNLInstructionsRequest,
+    "ShareConversationRequest": ShareConversationRequest,
     "ShareMetadataRequest": ShareMetadataRequest,
     "ShareMetadataTypeInput": ShareMetadataTypeInput,
     "SharePermissionsInput": SharePermissionsInput,
+    "SharedConversationResponse": SharedConversationResponse,
     "SingleAnswerRequest": SingleAnswerRequest,
     "SortOption": SortOption,
     "SortOptionInput": SortOptionInput,

@@ -307,7 +307,13 @@ public class JSON {
                 new com.thoughtspot.client.model.ConversationMessageResponse
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.ConversationPrincipalInfo
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ConversationSettingsInput
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.ConversationShareStatusResponse
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ConvertWorksheetToModelRequest
@@ -777,6 +783,8 @@ public class JSON {
                 new com.thoughtspot.client.model.PolicyProcessOptionsInput
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.PrincipalRefInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.PrincipalsInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.PrincipalsListItem.CustomTypeAdapterFactory());
@@ -1034,11 +1042,17 @@ public class JSON {
                 new com.thoughtspot.client.model.SetNLInstructionsRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.ShareConversationRequest
+                        .CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ShareMetadataRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.ShareMetadataTypeInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SharePermissionsInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(
+                new com.thoughtspot.client.model.SharedConversationResponse
+                        .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.SingleAnswerRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(

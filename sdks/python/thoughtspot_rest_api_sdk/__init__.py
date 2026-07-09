@@ -154,7 +154,9 @@ __all__ = [
     "Conversation",
     "ConversationMessage",
     "ConversationMessageResponse",
+    "ConversationPrincipalInfo",
     "ConversationSettingsInput",
+    "ConversationShareStatusResponse",
     "ConvertWorksheetToModelRequest",
     "CopyObjectRequest",
     "CreateAgentConversationRequest",
@@ -346,6 +348,7 @@ __all__ = [
     "PngOptionsInput",
     "PolicyProcessOptions",
     "PolicyProcessOptionsInput",
+    "PrincipalRefInput",
     "PrincipalsInput",
     "PrincipalsListItem",
     "PrincipalsListItemInput",
@@ -448,9 +451,11 @@ __all__ = [
     "SendMessageRequest",
     "SetAgentInstructionsRequest",
     "SetNLInstructionsRequest",
+    "ShareConversationRequest",
     "ShareMetadataRequest",
     "ShareMetadataTypeInput",
     "SharePermissionsInput",
+    "SharedConversationResponse",
     "SingleAnswerRequest",
     "SortOption",
     "SortOptionInput",
@@ -709,7 +714,9 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.conversation import Conversation as Conversation
     from thoughtspot_rest_api_sdk.models.conversation_message import ConversationMessage as ConversationMessage
     from thoughtspot_rest_api_sdk.models.conversation_message_response import ConversationMessageResponse as ConversationMessageResponse
+    from thoughtspot_rest_api_sdk.models.conversation_principal_info import ConversationPrincipalInfo as ConversationPrincipalInfo
     from thoughtspot_rest_api_sdk.models.conversation_settings_input import ConversationSettingsInput as ConversationSettingsInput
+    from thoughtspot_rest_api_sdk.models.conversation_share_status_response import ConversationShareStatusResponse as ConversationShareStatusResponse
     from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest as ConvertWorksheetToModelRequest
     from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest as CopyObjectRequest
     from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest as CreateAgentConversationRequest
@@ -901,6 +908,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.png_options_input import PngOptionsInput as PngOptionsInput
     from thoughtspot_rest_api_sdk.models.policy_process_options import PolicyProcessOptions as PolicyProcessOptions
     from thoughtspot_rest_api_sdk.models.policy_process_options_input import PolicyProcessOptionsInput as PolicyProcessOptionsInput
+    from thoughtspot_rest_api_sdk.models.principal_ref_input import PrincipalRefInput as PrincipalRefInput
     from thoughtspot_rest_api_sdk.models.principals_input import PrincipalsInput as PrincipalsInput
     from thoughtspot_rest_api_sdk.models.principals_list_item import PrincipalsListItem as PrincipalsListItem
     from thoughtspot_rest_api_sdk.models.principals_list_item_input import PrincipalsListItemInput as PrincipalsListItemInput
@@ -1003,9 +1011,11 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.send_message_request import SendMessageRequest as SendMessageRequest
     from thoughtspot_rest_api_sdk.models.set_agent_instructions_request import SetAgentInstructionsRequest as SetAgentInstructionsRequest
     from thoughtspot_rest_api_sdk.models.set_nl_instructions_request import SetNLInstructionsRequest as SetNLInstructionsRequest
+    from thoughtspot_rest_api_sdk.models.share_conversation_request import ShareConversationRequest as ShareConversationRequest
     from thoughtspot_rest_api_sdk.models.share_metadata_request import ShareMetadataRequest as ShareMetadataRequest
     from thoughtspot_rest_api_sdk.models.share_metadata_type_input import ShareMetadataTypeInput as ShareMetadataTypeInput
     from thoughtspot_rest_api_sdk.models.share_permissions_input import SharePermissionsInput as SharePermissionsInput
+    from thoughtspot_rest_api_sdk.models.shared_conversation_response import SharedConversationResponse as SharedConversationResponse
     from thoughtspot_rest_api_sdk.models.single_answer_request import SingleAnswerRequest as SingleAnswerRequest
     from thoughtspot_rest_api_sdk.models.sort_option import SortOption as SortOption
     from thoughtspot_rest_api_sdk.models.sort_option_input import SortOptionInput as SortOptionInput
@@ -1270,7 +1280,9 @@ from thoughtspot_rest_api_sdk.models.context_payload_v2_input import ContextPayl
 from thoughtspot_rest_api_sdk.models.conversation import Conversation as Conversation
 from thoughtspot_rest_api_sdk.models.conversation_message import ConversationMessage as ConversationMessage
 from thoughtspot_rest_api_sdk.models.conversation_message_response import ConversationMessageResponse as ConversationMessageResponse
+from thoughtspot_rest_api_sdk.models.conversation_principal_info import ConversationPrincipalInfo as ConversationPrincipalInfo
 from thoughtspot_rest_api_sdk.models.conversation_settings_input import ConversationSettingsInput as ConversationSettingsInput
+from thoughtspot_rest_api_sdk.models.conversation_share_status_response import ConversationShareStatusResponse as ConversationShareStatusResponse
 from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest as ConvertWorksheetToModelRequest
 from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest as CopyObjectRequest
 from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest as CreateAgentConversationRequest
@@ -1462,6 +1474,7 @@ from thoughtspot_rest_api_sdk.models.permissions_metadata_type_input import Perm
 from thoughtspot_rest_api_sdk.models.png_options_input import PngOptionsInput as PngOptionsInput
 from thoughtspot_rest_api_sdk.models.policy_process_options import PolicyProcessOptions as PolicyProcessOptions
 from thoughtspot_rest_api_sdk.models.policy_process_options_input import PolicyProcessOptionsInput as PolicyProcessOptionsInput
+from thoughtspot_rest_api_sdk.models.principal_ref_input import PrincipalRefInput as PrincipalRefInput
 from thoughtspot_rest_api_sdk.models.principals_input import PrincipalsInput as PrincipalsInput
 from thoughtspot_rest_api_sdk.models.principals_list_item import PrincipalsListItem as PrincipalsListItem
 from thoughtspot_rest_api_sdk.models.principals_list_item_input import PrincipalsListItemInput as PrincipalsListItemInput
@@ -1564,9 +1577,11 @@ from thoughtspot_rest_api_sdk.models.send_agent_message_streaming_request import
 from thoughtspot_rest_api_sdk.models.send_message_request import SendMessageRequest as SendMessageRequest
 from thoughtspot_rest_api_sdk.models.set_agent_instructions_request import SetAgentInstructionsRequest as SetAgentInstructionsRequest
 from thoughtspot_rest_api_sdk.models.set_nl_instructions_request import SetNLInstructionsRequest as SetNLInstructionsRequest
+from thoughtspot_rest_api_sdk.models.share_conversation_request import ShareConversationRequest as ShareConversationRequest
 from thoughtspot_rest_api_sdk.models.share_metadata_request import ShareMetadataRequest as ShareMetadataRequest
 from thoughtspot_rest_api_sdk.models.share_metadata_type_input import ShareMetadataTypeInput as ShareMetadataTypeInput
 from thoughtspot_rest_api_sdk.models.share_permissions_input import SharePermissionsInput as SharePermissionsInput
+from thoughtspot_rest_api_sdk.models.shared_conversation_response import SharedConversationResponse as SharedConversationResponse
 from thoughtspot_rest_api_sdk.models.single_answer_request import SingleAnswerRequest as SingleAnswerRequest
 from thoughtspot_rest_api_sdk.models.sort_option import SortOption as SortOption
 from thoughtspot_rest_api_sdk.models.sort_option_input import SortOptionInput as SortOptionInput
