@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reference the freshly generated SDK source directly so this smoke test
+         always exercises the code the pipeline just produced, not a
+         previously published NuGet version. -->
+    <ProjectReference Include="../../sdks/csharp/src/ThoughtSpot.Client/ThoughtSpot.Client.csproj" />
+  </ItemGroup>
+
+</Project>
