@@ -741,7 +741,7 @@ import { ImportUserGroupsResponse } from '../models/ImportUserGroupsResponse';
 import { ImportUserType } from '../models/ImportUserType';
 import { ImportUsersRequest } from '../models/ImportUsersRequest';
 import { ImportUsersResponse } from '../models/ImportUsersResponse';
-import { InputColumnSchemaInput  , InputColumnSchemaInputTypeEnum   } from '../models/InputColumnSchemaInput';
+import { InputColumnSchemaInput  , InputColumnSchemaInputTypeEnum    } from '../models/InputColumnSchemaInput';
 import { InputEurekaNLSRequest } from '../models/InputEurekaNLSRequest';
 import { InputTableDefinitionInput } from '../models/InputTableDefinitionInput';
 import { InputTableResponse } from '../models/InputTableResponse';

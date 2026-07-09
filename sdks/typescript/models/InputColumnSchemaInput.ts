@@ -28,6 +28,10 @@ export class InputColumnSchemaInput {
     * Semantic role of the column in ThoughtSpot. Use ATTRIBUTE for dimensional data such as text, dates, and identifiers, and MEASURE for numeric or aggregatable values.
     */
     'type': InputColumnSchemaInputTypeEnum;
+    /**
+    * Optional list of permitted values for the column. When provided, data written to this column is restricted to these values. Omit or leave empty to allow any value supported by the data type.    Version: 26.9.0.cl or later 
+    */
+    'allowed_values'?: Array<string> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -50,6 +54,12 @@ export class InputColumnSchemaInput {
             "name": "type",
             "baseName": "type",
             "type": "InputColumnSchemaInputTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "allowed_values",
+            "baseName": "allowed_values",
+            "type": "Array<string>",
             "format": ""
         }    ];
 

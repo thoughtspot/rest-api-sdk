@@ -27194,6 +27194,15 @@ components:
           - ATTRIBUTE
           - MEASURE
           type: string
+        allowed_values:
+          description: "Optional list of permitted values for the column. When provided,\n\
+            data written to this column is restricted to these values. Omit\nor leave\
+            \ empty to allow any value supported by the data type. \n  Version: 26.9.0.cl\
+            \ or later\n"
+          items:
+            type: string
+          nullable: true
+          type: array
       required:
       - data_type
       - name
