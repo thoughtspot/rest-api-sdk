@@ -1,0 +1,83 @@
+name: Publish C# SDK to NuGet
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Informational only for C# (NuGet has no dist-tags like npm) — logged for parity with the TS workflow'
+        required: false
+        default: 'latest'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # required so this job can request a GitHub OIDC token for NuGet Trusted Publishing
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Extract version from thoughtspot_rest_api_sdk.csproj
+        id: version
+        working-directory: sdks/csharp/src/thoughtspot_rest_api_sdk
+        run: |
+          VERSION=$(grep -oP '(?<=<Version>).*(?=</Version>)' thoughtspot_rest_api_sdk.csproj)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
+      - name: Get Branch Name
+        id: branch_name
+        run: echo "BRANCH_NAME=$(git branch --show-current)" >> $GITHUB_OUTPUT
+
+      - name: Build SDK
+        working-directory: sdks/csharp
+        run: dotnet build -c Release
+
+      - name: Pack SDK
+        working-directory: sdks/csharp
+        run: dotnet pack -c Release -o ./nupkg
+
+      - name: Point smoke test at the packed .nupkg
+        working-directory: testing/csharp
+        run: |
+          dotnet remove reference ../../sdks/csharp/src/thoughtspot_rest_api_sdk/thoughtspot_rest_api_sdk.csproj
+          dotnet add package thoughtspot_rest_api_sdk \
+            --version ${{ steps.version.outputs.version }} \
+            --source ${{ github.workspace }}/sdks/csharp/nupkg
+
+      - name: Run C# SDK smoke tests against the packed SDK
+        working-directory: testing/csharp
+        env:
+          TS_HOST: ${{ secrets.TS_HOST }}
+          TS_USERNAME: ${{ secrets.TS_USERNAME }}
+          TS_PASSWORD: ${{ secrets.TS_PASSWORD }}
+        run: dotnet run -c Release
+
+      - name: NuGet login (OIDC -> short-lived API key)
+        uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: ${{ secrets.NUGET_USER }} # nuget.org profile name of the account/org that owns the Trusted Publishing policy, NOT an email address
+
+      - name: Publish to NuGet
+        working-directory: sdks/csharp
+        run: |
+          dotnet nuget push ./nupkg/*.nupkg \
+            --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+
+      - name: Summary
+        run: |
+          echo "Published thoughtspot_rest_api_sdk@${{ steps.version.outputs.version }} from branch ${{ steps.branch_name.outputs.BRANCH_NAME }}" >> $GITHUB_STEP_SUMMARY
