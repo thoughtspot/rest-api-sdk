@@ -10,14 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { EurekaMemorySources } from '../models/EurekaMemorySources';
+import { MemorySources } from '../models/MemorySources';
 import { HttpFile } from '../http/http';
 
 export class ExportMemoryRequest {
     /**
     * List of typed scope groups selecting which data-models to export memory for. Supply `DATA_MODEL` group to scope the export to specific data-models.
     */
-    'sources': Array<EurekaMemorySources>;
+    'sources': Array<MemorySources>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,7 +27,7 @@ export class ExportMemoryRequest {
         {
             "name": "sources",
             "baseName": "sources",
-            "type": "Array<EurekaMemorySources>",
+            "type": "Array<MemorySources>",
             "format": ""
         }    ];
 

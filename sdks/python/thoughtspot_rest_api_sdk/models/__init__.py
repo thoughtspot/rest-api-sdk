@@ -167,17 +167,10 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.error_response import ErrorResponse
     from thoughtspot_rest_api_sdk.models.eureka_data_source_suggestion_response import EurekaDataSourceSuggestionResponse
     from thoughtspot_rest_api_sdk.models.eureka_decompose_query_response import EurekaDecomposeQueryResponse
-    from thoughtspot_rest_api_sdk.models.eureka_export_memory_response import EurekaExportMemoryResponse
     from thoughtspot_rest_api_sdk.models.eureka_get_nl_instructions_response import EurekaGetNLInstructionsResponse
     from thoughtspot_rest_api_sdk.models.eureka_get_relevant_questions_response import EurekaGetRelevantQuestionsResponse
-    from thoughtspot_rest_api_sdk.models.eureka_import_diagnostic import EurekaImportDiagnostic
-    from thoughtspot_rest_api_sdk.models.eureka_import_failure import EurekaImportFailure
-    from thoughtspot_rest_api_sdk.models.eureka_import_memory_response import EurekaImportMemoryResponse
-    from thoughtspot_rest_api_sdk.models.eureka_import_summary import EurekaImportSummary
-    from thoughtspot_rest_api_sdk.models.eureka_import_target_source import EurekaImportTargetSource
     from thoughtspot_rest_api_sdk.models.eureka_llm_decompose_query_response import EurekaLLMDecomposeQueryResponse
     from thoughtspot_rest_api_sdk.models.eureka_llm_suggested_query import EurekaLLMSuggestedQuery
-    from thoughtspot_rest_api_sdk.models.eureka_memory_sources import EurekaMemorySources
     from thoughtspot_rest_api_sdk.models.eureka_relevant_question import EurekaRelevantQuestion
     from thoughtspot_rest_api_sdk.models.eureka_set_nl_instructions_response import EurekaSetNLInstructionsResponse
     from thoughtspot_rest_api_sdk.models.event_channel_config import EventChannelConfig
@@ -187,6 +180,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest
     from thoughtspot_rest_api_sdk.models.export_manual_translations_request import ExportManualTranslationsRequest
     from thoughtspot_rest_api_sdk.models.export_memory_request import ExportMemoryRequest
+    from thoughtspot_rest_api_sdk.models.export_memory_response import ExportMemoryResponse
     from thoughtspot_rest_api_sdk.models.export_metadata_tml_batched_request import ExportMetadataTMLBatchedRequest
     from thoughtspot_rest_api_sdk.models.export_metadata_tml_request import ExportMetadataTMLRequest
     from thoughtspot_rest_api_sdk.models.export_metadata_type_input import ExportMetadataTypeInput
@@ -230,10 +224,15 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.groups_import_list_input import GroupsImportListInput
     from thoughtspot_rest_api_sdk.models.header_attribute_input import HeaderAttributeInput
     from thoughtspot_rest_api_sdk.models.header_update_input import HeaderUpdateInput
+    from thoughtspot_rest_api_sdk.models.import_diagnostic import ImportDiagnostic
     from thoughtspot_rest_api_sdk.models.import_e_pack_async_task_status import ImportEPackAsyncTaskStatus
+    from thoughtspot_rest_api_sdk.models.import_failure import ImportFailure
     from thoughtspot_rest_api_sdk.models.import_memory_request import ImportMemoryRequest
+    from thoughtspot_rest_api_sdk.models.import_memory_response import ImportMemoryResponse
     from thoughtspot_rest_api_sdk.models.import_metadata_tml_async_request import ImportMetadataTMLAsyncRequest
     from thoughtspot_rest_api_sdk.models.import_metadata_tml_request import ImportMetadataTMLRequest
+    from thoughtspot_rest_api_sdk.models.import_summary import ImportSummary
+    from thoughtspot_rest_api_sdk.models.import_target_source import ImportTargetSource
     from thoughtspot_rest_api_sdk.models.import_user import ImportUser
     from thoughtspot_rest_api_sdk.models.import_user_groups_request import ImportUserGroupsRequest
     from thoughtspot_rest_api_sdk.models.import_user_groups_response import ImportUserGroupsResponse
@@ -258,6 +257,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.log_response import LogResponse
     from thoughtspot_rest_api_sdk.models.login_request import LoginRequest
     from thoughtspot_rest_api_sdk.models.manage_object_privilege_request import ManageObjectPrivilegeRequest
+    from thoughtspot_rest_api_sdk.models.memory_sources import MemorySources
     from thoughtspot_rest_api_sdk.models.metadata_association_item import MetadataAssociationItem
     from thoughtspot_rest_api_sdk.models.metadata_context import MetadataContext
     from thoughtspot_rest_api_sdk.models.metadata_input import MetadataInput
@@ -689,17 +689,10 @@ from thoughtspot_rest_api_sdk.models.entity_header import EntityHeader
 from thoughtspot_rest_api_sdk.models.error_response import ErrorResponse
 from thoughtspot_rest_api_sdk.models.eureka_data_source_suggestion_response import EurekaDataSourceSuggestionResponse
 from thoughtspot_rest_api_sdk.models.eureka_decompose_query_response import EurekaDecomposeQueryResponse
-from thoughtspot_rest_api_sdk.models.eureka_export_memory_response import EurekaExportMemoryResponse
 from thoughtspot_rest_api_sdk.models.eureka_get_nl_instructions_response import EurekaGetNLInstructionsResponse
 from thoughtspot_rest_api_sdk.models.eureka_get_relevant_questions_response import EurekaGetRelevantQuestionsResponse
-from thoughtspot_rest_api_sdk.models.eureka_import_diagnostic import EurekaImportDiagnostic
-from thoughtspot_rest_api_sdk.models.eureka_import_failure import EurekaImportFailure
-from thoughtspot_rest_api_sdk.models.eureka_import_memory_response import EurekaImportMemoryResponse
-from thoughtspot_rest_api_sdk.models.eureka_import_summary import EurekaImportSummary
-from thoughtspot_rest_api_sdk.models.eureka_import_target_source import EurekaImportTargetSource
 from thoughtspot_rest_api_sdk.models.eureka_llm_decompose_query_response import EurekaLLMDecomposeQueryResponse
 from thoughtspot_rest_api_sdk.models.eureka_llm_suggested_query import EurekaLLMSuggestedQuery
-from thoughtspot_rest_api_sdk.models.eureka_memory_sources import EurekaMemorySources
 from thoughtspot_rest_api_sdk.models.eureka_relevant_question import EurekaRelevantQuestion
 from thoughtspot_rest_api_sdk.models.eureka_set_nl_instructions_response import EurekaSetNLInstructionsResponse
 from thoughtspot_rest_api_sdk.models.event_channel_config import EventChannelConfig
@@ -709,6 +702,7 @@ from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportA
 from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest
 from thoughtspot_rest_api_sdk.models.export_manual_translations_request import ExportManualTranslationsRequest
 from thoughtspot_rest_api_sdk.models.export_memory_request import ExportMemoryRequest
+from thoughtspot_rest_api_sdk.models.export_memory_response import ExportMemoryResponse
 from thoughtspot_rest_api_sdk.models.export_metadata_tml_batched_request import ExportMetadataTMLBatchedRequest
 from thoughtspot_rest_api_sdk.models.export_metadata_tml_request import ExportMetadataTMLRequest
 from thoughtspot_rest_api_sdk.models.export_metadata_type_input import ExportMetadataTypeInput
@@ -752,10 +746,15 @@ from thoughtspot_rest_api_sdk.models.group_object import GroupObject
 from thoughtspot_rest_api_sdk.models.groups_import_list_input import GroupsImportListInput
 from thoughtspot_rest_api_sdk.models.header_attribute_input import HeaderAttributeInput
 from thoughtspot_rest_api_sdk.models.header_update_input import HeaderUpdateInput
+from thoughtspot_rest_api_sdk.models.import_diagnostic import ImportDiagnostic
 from thoughtspot_rest_api_sdk.models.import_e_pack_async_task_status import ImportEPackAsyncTaskStatus
+from thoughtspot_rest_api_sdk.models.import_failure import ImportFailure
 from thoughtspot_rest_api_sdk.models.import_memory_request import ImportMemoryRequest
+from thoughtspot_rest_api_sdk.models.import_memory_response import ImportMemoryResponse
 from thoughtspot_rest_api_sdk.models.import_metadata_tml_async_request import ImportMetadataTMLAsyncRequest
 from thoughtspot_rest_api_sdk.models.import_metadata_tml_request import ImportMetadataTMLRequest
+from thoughtspot_rest_api_sdk.models.import_summary import ImportSummary
+from thoughtspot_rest_api_sdk.models.import_target_source import ImportTargetSource
 from thoughtspot_rest_api_sdk.models.import_user import ImportUser
 from thoughtspot_rest_api_sdk.models.import_user_groups_request import ImportUserGroupsRequest
 from thoughtspot_rest_api_sdk.models.import_user_groups_response import ImportUserGroupsResponse
@@ -780,6 +779,7 @@ from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerRespo
 from thoughtspot_rest_api_sdk.models.log_response import LogResponse
 from thoughtspot_rest_api_sdk.models.login_request import LoginRequest
 from thoughtspot_rest_api_sdk.models.manage_object_privilege_request import ManageObjectPrivilegeRequest
+from thoughtspot_rest_api_sdk.models.memory_sources import MemorySources
 from thoughtspot_rest_api_sdk.models.metadata_association_item import MetadataAssociationItem
 from thoughtspot_rest_api_sdk.models.metadata_context import MetadataContext
 from thoughtspot_rest_api_sdk.models.metadata_input import MetadataInput

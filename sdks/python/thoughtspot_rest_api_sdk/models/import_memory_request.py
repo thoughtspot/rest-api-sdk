@@ -25,8 +25,8 @@ class ImportMemoryRequest(BaseModel):
     """
     ImportMemoryRequest
     """ # noqa: E501
-    content: StrictStr = Field(description="The full serialized memory payload to import (currently YAML) — typically a previous `exportMemory` response's `content`, edited locally and re-submitted.")
-    dry_run: StrictBool = Field(description="Required. When `true`, validate the payload and return preview counts and row failures without writing anything. Pass `false` to apply the atomic replacement. The caller must choose explicitly so a real import is never triggered by omission.")
+    content: StrictStr = Field(description="The full serialized memory payload to import (YAML) — typically a previous `exportMemory` response's `content`, edited locally and re-submitted.")
+    dry_run: StrictBool = Field(description="Required. When `true`, validate the payload and return preview counts and row failures without writing anything. Pass `false` to apply the import. The caller must choose explicitly so a real import is never triggered by omission.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["content", "dry_run"]
 

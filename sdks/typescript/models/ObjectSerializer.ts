@@ -153,17 +153,10 @@ export * from '../models/EntityHeader';
 export * from '../models/ErrorResponse';
 export * from '../models/EurekaDataSourceSuggestionResponse';
 export * from '../models/EurekaDecomposeQueryResponse';
-export * from '../models/EurekaExportMemoryResponse';
 export * from '../models/EurekaGetNLInstructionsResponse';
 export * from '../models/EurekaGetRelevantQuestionsResponse';
-export * from '../models/EurekaImportDiagnostic';
-export * from '../models/EurekaImportFailure';
-export * from '../models/EurekaImportMemoryResponse';
-export * from '../models/EurekaImportSummary';
-export * from '../models/EurekaImportTargetSource';
 export * from '../models/EurekaLLMDecomposeQueryResponse';
 export * from '../models/EurekaLLMSuggestedQuery';
-export * from '../models/EurekaMemorySources';
 export * from '../models/EurekaRelevantQuestion';
 export * from '../models/EurekaSetNLInstructionsResponse';
 export * from '../models/EventChannelConfig';
@@ -173,6 +166,7 @@ export * from '../models/ExportAnswerReportRequest';
 export * from '../models/ExportLiveboardReportRequest';
 export * from '../models/ExportManualTranslationsRequest';
 export * from '../models/ExportMemoryRequest';
+export * from '../models/ExportMemoryResponse';
 export * from '../models/ExportMetadataTMLBatchedRequest';
 export * from '../models/ExportMetadataTMLRequest';
 export * from '../models/ExportMetadataTypeInput';
@@ -216,10 +210,15 @@ export * from '../models/GroupObject';
 export * from '../models/GroupsImportListInput';
 export * from '../models/HeaderAttributeInput';
 export * from '../models/HeaderUpdateInput';
+export * from '../models/ImportDiagnostic';
 export * from '../models/ImportEPackAsyncTaskStatus';
+export * from '../models/ImportFailure';
 export * from '../models/ImportMemoryRequest';
+export * from '../models/ImportMemoryResponse';
 export * from '../models/ImportMetadataTMLAsyncRequest';
 export * from '../models/ImportMetadataTMLRequest';
+export * from '../models/ImportSummary';
+export * from '../models/ImportTargetSource';
 export * from '../models/ImportUser';
 export * from '../models/ImportUserGroupsRequest';
 export * from '../models/ImportUserGroupsResponse';
@@ -244,6 +243,7 @@ export * from '../models/LoadAnswerResponse';
 export * from '../models/LogResponse';
 export * from '../models/LoginRequest';
 export * from '../models/ManageObjectPrivilegeRequest';
+export * from '../models/MemorySources';
 export * from '../models/MetadataAssociationItem';
 export * from '../models/MetadataContext';
 export * from '../models/MetadataInput';
@@ -668,17 +668,10 @@ import { EntityHeader } from '../models/EntityHeader';
 import { ErrorResponse } from '../models/ErrorResponse';
 import { EurekaDataSourceSuggestionResponse } from '../models/EurekaDataSourceSuggestionResponse';
 import { EurekaDecomposeQueryResponse } from '../models/EurekaDecomposeQueryResponse';
-import { EurekaExportMemoryResponse } from '../models/EurekaExportMemoryResponse';
 import { EurekaGetNLInstructionsResponse } from '../models/EurekaGetNLInstructionsResponse';
 import { EurekaGetRelevantQuestionsResponse } from '../models/EurekaGetRelevantQuestionsResponse';
-import { EurekaImportDiagnostic, EurekaImportDiagnosticSubStatusEnum    } from '../models/EurekaImportDiagnostic';
-import { EurekaImportFailure , EurekaImportFailureReasonEnum     } from '../models/EurekaImportFailure';
-import { EurekaImportMemoryResponse, EurekaImportMemoryResponseStatusEnum       } from '../models/EurekaImportMemoryResponse';
-import { EurekaImportSummary, EurekaImportSummaryMemoryTypeEnum        } from '../models/EurekaImportSummary';
-import { EurekaImportTargetSource , EurekaImportTargetSourceTypeEnum   } from '../models/EurekaImportTargetSource';
 import { EurekaLLMDecomposeQueryResponse } from '../models/EurekaLLMDecomposeQueryResponse';
 import { EurekaLLMSuggestedQuery } from '../models/EurekaLLMSuggestedQuery';
-import { EurekaMemorySources, EurekaMemorySourcesTypeEnum    } from '../models/EurekaMemorySources';
 import { EurekaRelevantQuestion } from '../models/EurekaRelevantQuestion';
 import { EurekaSetNLInstructionsResponse } from '../models/EurekaSetNLInstructionsResponse';
 import { EventChannelConfig, EventChannelConfigEventTypeEnum  , EventChannelConfigChannelsEnum   } from '../models/EventChannelConfig';
@@ -688,6 +681,7 @@ import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum  
 import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
 import { ExportManualTranslationsRequest, ExportManualTranslationsRequestScopeEnum   } from '../models/ExportManualTranslationsRequest';
 import { ExportMemoryRequest } from '../models/ExportMemoryRequest';
+import { ExportMemoryResponse } from '../models/ExportMemoryResponse';
 import { ExportMetadataTMLBatchedRequest, ExportMetadataTMLBatchedRequestMetadataTypeEnum    , ExportMetadataTMLBatchedRequestEdocFormatEnum     } from '../models/ExportMetadataTMLBatchedRequest';
 import { ExportMetadataTMLRequest   , ExportMetadataTMLRequestEdocFormatEnum  , ExportMetadataTMLRequestExportSchemaVersionEnum       } from '../models/ExportMetadataTMLRequest';
 import { ExportMetadataTypeInput, ExportMetadataTypeInputTypeEnum      } from '../models/ExportMetadataTypeInput';
@@ -731,10 +725,15 @@ import { GroupObject } from '../models/GroupObject';
 import { GroupsImportListInput    , GroupsImportListInputPrivilegesEnum   , GroupsImportListInputTypeEnum   , GroupsImportListInputVisibilityEnum   } from '../models/GroupsImportListInput';
 import { HeaderAttributeInput } from '../models/HeaderAttributeInput';
 import { HeaderUpdateInput  , HeaderUpdateInputTypeEnum    } from '../models/HeaderUpdateInput';
+import { ImportDiagnostic, ImportDiagnosticSubStatusEnum    } from '../models/ImportDiagnostic';
 import { ImportEPackAsyncTaskStatus     , ImportEPackAsyncTaskStatusTaskStatusEnum   , ImportEPackAsyncTaskStatusImportPolicyEnum          } from '../models/ImportEPackAsyncTaskStatus';
+import { ImportFailure , ImportFailureReasonEnum     } from '../models/ImportFailure';
 import { ImportMemoryRequest } from '../models/ImportMemoryRequest';
+import { ImportMemoryResponse, ImportMemoryResponseStatusEnum       } from '../models/ImportMemoryResponse';
 import { ImportMetadataTMLAsyncRequest   , ImportMetadataTMLAsyncRequestImportPolicyEnum      } from '../models/ImportMetadataTMLAsyncRequest';
 import { ImportMetadataTMLRequest , ImportMetadataTMLRequestImportPolicyEnum        } from '../models/ImportMetadataTMLRequest';
+import { ImportSummary, ImportSummaryMemoryTypeEnum        } from '../models/ImportSummary';
+import { ImportTargetSource , ImportTargetSourceTypeEnum   } from '../models/ImportTargetSource';
 import { ImportUser   , ImportUserAccountTypeEnum  , ImportUserAccountStatusEnum     , ImportUserVisibilityEnum       , ImportUserPreferredLocaleEnum    } from '../models/ImportUser';
 import { ImportUserGroupsRequest } from '../models/ImportUserGroupsRequest';
 import { ImportUserGroupsResponse } from '../models/ImportUserGroupsResponse';
@@ -759,6 +758,7 @@ import { LoadAnswerResponse } from '../models/LoadAnswerResponse';
 import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
 import { ManageObjectPrivilegeRequest, ManageObjectPrivilegeRequestOperationEnum  , ManageObjectPrivilegeRequestMetadataTypeEnum  , ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum     } from '../models/ManageObjectPrivilegeRequest';
+import { MemorySources, MemorySourcesTypeEnum    } from '../models/MemorySources';
 import { MetadataAssociationItem } from '../models/MetadataAssociationItem';
 import { MetadataContext } from '../models/MetadataContext';
 import { MetadataInput , MetadataInputTypeEnum   } from '../models/MetadataInput';
@@ -1105,12 +1105,6 @@ let enumsMap: Set<string> = new Set<string>([
     "DeleteStyleFontsRequestScopeEnum",
     "DeployCommitRequestDeployTypeEnum",
     "DeployCommitRequestDeployPolicyEnum",
-    "EurekaImportDiagnosticSubStatusEnum",
-    "EurekaImportFailureReasonEnum",
-    "EurekaImportMemoryResponseStatusEnum",
-    "EurekaImportSummaryMemoryTypeEnum",
-    "EurekaImportTargetSourceTypeEnum",
-    "EurekaMemorySourcesTypeEnum",
     "EventChannelConfigEventTypeEnum",
     "EventChannelConfigChannelsEnum",
     "EventChannelConfigInputEventTypeEnum",
@@ -1142,10 +1136,15 @@ let enumsMap: Set<string> = new Set<string>([
     "GroupsImportListInputTypeEnum",
     "GroupsImportListInputVisibilityEnum",
     "HeaderUpdateInputTypeEnum",
+    "ImportDiagnosticSubStatusEnum",
     "ImportEPackAsyncTaskStatusTaskStatusEnum",
     "ImportEPackAsyncTaskStatusImportPolicyEnum",
+    "ImportFailureReasonEnum",
+    "ImportMemoryResponseStatusEnum",
     "ImportMetadataTMLAsyncRequestImportPolicyEnum",
     "ImportMetadataTMLRequestImportPolicyEnum",
+    "ImportSummaryMemoryTypeEnum",
+    "ImportTargetSourceTypeEnum",
     "ImportUserAccountTypeEnum",
     "ImportUserAccountStatusEnum",
     "ImportUserVisibilityEnum",
@@ -1156,6 +1155,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ManageObjectPrivilegeRequestOperationEnum",
     "ManageObjectPrivilegeRequestMetadataTypeEnum",
     "ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum",
+    "MemorySourcesTypeEnum",
     "MetadataInputTypeEnum",
     "MetadataListItemInputTypeEnum",
     "MetadataListItemInputSubtypesEnum",
@@ -1491,17 +1491,10 @@ let typeMap: {[index: string]: any} = {
     "ErrorResponse": ErrorResponse,
     "EurekaDataSourceSuggestionResponse": EurekaDataSourceSuggestionResponse,
     "EurekaDecomposeQueryResponse": EurekaDecomposeQueryResponse,
-    "EurekaExportMemoryResponse": EurekaExportMemoryResponse,
     "EurekaGetNLInstructionsResponse": EurekaGetNLInstructionsResponse,
     "EurekaGetRelevantQuestionsResponse": EurekaGetRelevantQuestionsResponse,
-    "EurekaImportDiagnostic": EurekaImportDiagnostic,
-    "EurekaImportFailure": EurekaImportFailure,
-    "EurekaImportMemoryResponse": EurekaImportMemoryResponse,
-    "EurekaImportSummary": EurekaImportSummary,
-    "EurekaImportTargetSource": EurekaImportTargetSource,
     "EurekaLLMDecomposeQueryResponse": EurekaLLMDecomposeQueryResponse,
     "EurekaLLMSuggestedQuery": EurekaLLMSuggestedQuery,
-    "EurekaMemorySources": EurekaMemorySources,
     "EurekaRelevantQuestion": EurekaRelevantQuestion,
     "EurekaSetNLInstructionsResponse": EurekaSetNLInstructionsResponse,
     "EventChannelConfig": EventChannelConfig,
@@ -1511,6 +1504,7 @@ let typeMap: {[index: string]: any} = {
     "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
     "ExportManualTranslationsRequest": ExportManualTranslationsRequest,
     "ExportMemoryRequest": ExportMemoryRequest,
+    "ExportMemoryResponse": ExportMemoryResponse,
     "ExportMetadataTMLBatchedRequest": ExportMetadataTMLBatchedRequest,
     "ExportMetadataTMLRequest": ExportMetadataTMLRequest,
     "ExportMetadataTypeInput": ExportMetadataTypeInput,
@@ -1554,10 +1548,15 @@ let typeMap: {[index: string]: any} = {
     "GroupsImportListInput": GroupsImportListInput,
     "HeaderAttributeInput": HeaderAttributeInput,
     "HeaderUpdateInput": HeaderUpdateInput,
+    "ImportDiagnostic": ImportDiagnostic,
     "ImportEPackAsyncTaskStatus": ImportEPackAsyncTaskStatus,
+    "ImportFailure": ImportFailure,
     "ImportMemoryRequest": ImportMemoryRequest,
+    "ImportMemoryResponse": ImportMemoryResponse,
     "ImportMetadataTMLAsyncRequest": ImportMetadataTMLAsyncRequest,
     "ImportMetadataTMLRequest": ImportMetadataTMLRequest,
+    "ImportSummary": ImportSummary,
+    "ImportTargetSource": ImportTargetSource,
     "ImportUser": ImportUser,
     "ImportUserGroupsRequest": ImportUserGroupsRequest,
     "ImportUserGroupsResponse": ImportUserGroupsResponse,
@@ -1582,6 +1581,7 @@ let typeMap: {[index: string]: any} = {
     "LogResponse": LogResponse,
     "LoginRequest": LoginRequest,
     "ManageObjectPrivilegeRequest": ManageObjectPrivilegeRequest,
+    "MemorySources": MemorySources,
     "MetadataAssociationItem": MetadataAssociationItem,
     "MetadataContext": MetadataContext,
     "MetadataInput": MetadataInput,

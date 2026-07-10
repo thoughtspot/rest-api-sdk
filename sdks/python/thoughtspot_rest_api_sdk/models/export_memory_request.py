@@ -17,7 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
-from thoughtspot_rest_api_sdk.models.eureka_memory_sources import EurekaMemorySources
+from thoughtspot_rest_api_sdk.models.memory_sources import MemorySources
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -26,7 +26,7 @@ class ExportMemoryRequest(BaseModel):
     """
     ExportMemoryRequest
     """ # noqa: E501
-    sources: List[EurekaMemorySources] = Field(description="List of typed scope groups selecting which data-models to export memory for. Supply `DATA_MODEL` group to scope the export to specific data-models.")
+    sources: List[MemorySources] = Field(description="List of typed scope groups selecting which data-models to export memory for. Supply `DATA_MODEL` group to scope the export to specific data-models.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["sources"]
 
@@ -95,7 +95,7 @@ class ExportMemoryRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "sources": [EurekaMemorySources.from_dict(_item) for _item in obj["sources"]] if obj.get("sources") is not None else None
+            "sources": [MemorySources.from_dict(_item) for _item in obj["sources"]] if obj.get("sources") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

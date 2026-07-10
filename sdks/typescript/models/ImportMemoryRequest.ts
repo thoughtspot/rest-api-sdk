@@ -14,11 +14,11 @@ import { HttpFile } from '../http/http';
 
 export class ImportMemoryRequest {
     /**
-    * The full serialized memory payload to import (currently YAML) — typically a previous `exportMemory` response\'s `content`, edited locally and re-submitted.
+    * The full serialized memory payload to import (YAML) — typically a previous `exportMemory` response\'s `content`, edited locally and re-submitted.
     */
     'content': string;
     /**
-    * Required. When `true`, validate the payload and return preview counts and row failures without writing anything. Pass `false` to apply the atomic replacement. The caller must choose explicitly so a real import is never triggered by omission.
+    * Required. When `true`, validate the payload and return preview counts and row failures without writing anything. Pass `false` to apply the import. The caller must choose explicitly so a real import is never triggered by omission.
     */
     'dry_run': boolean;
 

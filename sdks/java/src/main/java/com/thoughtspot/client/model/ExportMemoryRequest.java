@@ -35,17 +35,16 @@ public class ExportMemoryRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_SOURCES)
     @javax.annotation.Nonnull
-    private List<EurekaMemorySources> sources;
+    private List<MemorySources> sources;
 
     public ExportMemoryRequest() {}
 
-    public ExportMemoryRequest sources(
-            @javax.annotation.Nonnull List<EurekaMemorySources> sources) {
+    public ExportMemoryRequest sources(@javax.annotation.Nonnull List<MemorySources> sources) {
         this.sources = sources;
         return this;
     }
 
-    public ExportMemoryRequest addSourcesItem(EurekaMemorySources sourcesItem) {
+    public ExportMemoryRequest addSourcesItem(MemorySources sourcesItem) {
         if (this.sources == null) {
             this.sources = new ArrayList<>();
         }
@@ -60,11 +59,11 @@ public class ExportMemoryRequest implements Serializable {
      * @return sources
      */
     @javax.annotation.Nonnull
-    public List<EurekaMemorySources> getSources() {
+    public List<MemorySources> getSources() {
         return sources;
     }
 
-    public void setSources(@javax.annotation.Nonnull List<EurekaMemorySources> sources) {
+    public void setSources(@javax.annotation.Nonnull List<MemorySources> sources) {
         this.sources = sources;
     }
 
@@ -207,7 +206,7 @@ public class ExportMemoryRequest implements Serializable {
         JsonArray jsonArraysources = jsonObj.getAsJsonArray("sources");
         // validate the required field `sources` (array)
         for (int i = 0; i < jsonArraysources.size(); i++) {
-            EurekaMemorySources.validateJsonElement(jsonArraysources.get(i));
+            MemorySources.validateJsonElement(jsonArraysources.get(i));
         }
         ;
     }
