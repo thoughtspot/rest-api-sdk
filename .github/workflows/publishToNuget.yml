@@ -1,10 +1,9 @@
 name: Publish C# SDK to NuGet
-
 on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Informational only for C# (NuGet has no dist-tags like npm) — logged for parity with the TS workflow'
+        description: 'Tag to publish (latest, beta, alpha). Appended to version for non-latest.'
         required: false
         default: 'latest'
         type: string
@@ -17,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # required so this job can request a GitHub OIDC token for NuGet Trusted Publishing
+      id-token: write
 
     steps:
       - uses: actions/checkout@v3
@@ -28,32 +27,53 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Extract version from thoughtspot_rest_api_sdk.csproj
-        id: version
-        working-directory: sdks/csharp/src/thoughtspot_rest_api_sdk
-        run: |
-          VERSION=$(grep -oP '(?<=<Version>).*(?=</Version>)' thoughtspot_rest_api_sdk.csproj)
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Version: $VERSION"
-
       - name: Get Branch Name
         id: branch_name
         run: echo "BRANCH_NAME=$(git branch --show-current)" >> $GITHUB_OUTPUT
 
+      - name: Compute Final Version
+        id: version
+        working-directory: sdks/csharp/src/thoughtspot_rest_api_sdk
+        run: |
+          BASE_VERSION=$(grep -oP '(?<=<Version>).*(?=</Version>)' thoughtspot_rest_api_sdk.csproj)
+          BRANCH_NAME="${{ steps.branch_name.outputs.BRANCH_NAME }}"
+          TAG=$(echo "${{ github.event.inputs.tag }}" | tr '[:upper:]' '[:lower:]')
+          
+          if [ "$TAG" = "latest" ]; then
+            # Rule 1: 'latest' can ONLY be used on the 'release' branch
+            if [ "$BRANCH_NAME" != "release" ]; then
+              echo "Error: The 'latest' tag can only be used when publishing from the 'release' branch."
+              echo "Current branch: $BRANCH_NAME"
+              exit 1
+            fi
+            # Stable release: version remains exactly as it is in .csproj
+            FINAL_VERSION="$BASE_VERSION"
+          else
+            # Rule 2 & 3: For any other tag (beta, alpha), append it dynamically
+            # We append .${{ github.run_number }} so multiple beta builds don't collide on NuGet
+            FINAL_VERSION="${BASE_VERSION}-${TAG}.${{ github.run_number }}"
+          fi
+          
+          echo "Base Version from .csproj: $BASE_VERSION"
+          echo "Computed Final Version: $FINAL_VERSION"
+          echo "final_version=$FINAL_VERSION" >> $GITHUB_OUTPUT
+
       - name: Build SDK
         working-directory: sdks/csharp
-        run: dotnet build -c Release
+        # Pass the newly computed version into the build process
+        run: dotnet build -c Release -p:Version=${{ steps.version.outputs.final_version }}
 
       - name: Pack SDK
         working-directory: sdks/csharp
-        run: dotnet pack -c Release -o ./nupkg
+        # Pass the newly computed version into the pack process
+        run: dotnet pack -c Release -p:Version=${{ steps.version.outputs.final_version }} -o ./nupkg
 
       - name: Point smoke test at the packed .nupkg
         working-directory: testing/csharp
         run: |
           dotnet remove reference ../../sdks/csharp/src/thoughtspot_rest_api_sdk/thoughtspot_rest_api_sdk.csproj
           dotnet add package thoughtspot_rest_api_sdk \
-            --version ${{ steps.version.outputs.version }} \
+            --version ${{ steps.version.outputs.final_version }} \
             --source ${{ github.workspace }}/sdks/csharp/nupkg
 
       - name: Run C# SDK smoke tests against the packed SDK
@@ -68,7 +88,7 @@ jobs:
         uses: NuGet/login@v1
         id: nuget-login
         with:
-          user: ${{ secrets.NUGET_USER }} # nuget.org profile name of the account/org that owns the Trusted Publishing policy, NOT an email address
+          user: ${{ secrets.NUGET_USER }}
 
       - name: Publish to NuGet
         working-directory: sdks/csharp
@@ -80,4 +100,4 @@ jobs:
 
       - name: Summary
         run: |
-          echo "Published thoughtspot_rest_api_sdk@${{ steps.version.outputs.version }} from branch ${{ steps.branch_name.outputs.BRANCH_NAME }}" >> $GITHUB_STEP_SUMMARY
+          echo "Published thoughtspot_rest_api_sdk@${{ steps.version.outputs.final_version }} from branch ${{ steps.branch_name.outputs.BRANCH_NAME }}" >> $GITHUB_STEP_SUMMARY
