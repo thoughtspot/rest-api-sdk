@@ -51,6 +51,12 @@ public class ResponseCustomAction implements Serializable {
     @javax.annotation.Nonnull
     private String id;
 
+    public static final String SERIALIZED_NAME_OBJ_ID = "obj_id";
+
+    @SerializedName(SERIALIZED_NAME_OBJ_ID)
+    @javax.annotation.Nullable
+    private String objId;
+
     public static final String SERIALIZED_NAME_METADATA_ASSOCIATION = "metadata_association";
 
     @SerializedName(SERIALIZED_NAME_METADATA_ASSOCIATION)
@@ -129,6 +135,25 @@ public class ResponseCustomAction implements Serializable {
 
     public void setId(@javax.annotation.Nonnull String id) {
         this.id = id;
+    }
+
+    public ResponseCustomAction objId(@javax.annotation.Nullable String objId) {
+        this.objId = objId;
+        return this;
+    }
+
+    /**
+     * Custom object ID (obj_id) of the custom action, if one is set. Version: 26.9.0.cl or later
+     *
+     * @return objId
+     */
+    @javax.annotation.Nullable
+    public String getObjId() {
+        return objId;
+    }
+
+    public void setObjId(@javax.annotation.Nullable String objId) {
+        this.objId = objId;
     }
 
     public ResponseCustomAction metadataAssociation(
@@ -265,6 +290,7 @@ public class ResponseCustomAction implements Serializable {
                 && Objects.equals(
                         this.defaultActionConfig, responseCustomAction.defaultActionConfig)
                 && Objects.equals(this.id, responseCustomAction.id)
+                && Objects.equals(this.objId, responseCustomAction.objId)
                 && Objects.equals(
                         this.metadataAssociation, responseCustomAction.metadataAssociation)
                 && Objects.equals(this.name, responseCustomAction.name)
@@ -288,6 +314,7 @@ public class ResponseCustomAction implements Serializable {
                 actionDetails,
                 defaultActionConfig,
                 id,
+                objId,
                 metadataAssociation,
                 name,
                 userGroups,
@@ -310,6 +337,7 @@ public class ResponseCustomAction implements Serializable {
                 .append(toIndentedString(defaultActionConfig))
                 .append("\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
+        sb.append("    objId: ").append(toIndentedString(objId)).append("\n");
         sb.append("    metadataAssociation: ")
                 .append(toIndentedString(metadataAssociation))
                 .append("\n");
@@ -342,6 +370,7 @@ public class ResponseCustomAction implements Serializable {
         openapiFields.add("action_details");
         openapiFields.add("default_action_config");
         openapiFields.add("id");
+        openapiFields.add("obj_id");
         openapiFields.add("metadata_association");
         openapiFields.add("name");
         openapiFields.add("user_groups");
@@ -392,6 +421,14 @@ public class ResponseCustomAction implements Serializable {
                             "Expected the field `id` to be a primitive type in the JSON string but"
                                     + " got `%s`",
                             jsonObj.get("id").toString()));
+        }
+        if ((jsonObj.get("obj_id") != null && !jsonObj.get("obj_id").isJsonNull())
+                && !jsonObj.get("obj_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `obj_id` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("obj_id").toString()));
         }
         if (jsonObj.get("metadata_association") != null
                 && !jsonObj.get("metadata_association").isJsonNull()) {

@@ -558,9 +558,12 @@ public class CollectionsApi {
      * Search options * **name_pattern**: Use &#39;%&#39; as a wildcard character to match
      * collection names * **collection_identifiers**: Search for specific collections by their GUIDs
      * or names * **include_metadata**: When set to &#x60;true&#x60;, includes the metadata objects
-     * within each collection in the response **NOTE**: If the API returns an empty list, consider
-     * increasing the value of the &#x60;record_size&#x60; parameter. To search across all available
-     * collections, set &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     * within each collection in the response **NOTE**: In addition to the GUID and name,
+     * &#x60;collection_identifiers&#x60; accepts a Custom object ID if one is configured for the
+     * collection. The response also includes the &#x60;obj_id&#x60; field for each collection that
+     * has one set. **NOTE**: If the API returns an empty list, consider increasing the value of the
+     * &#x60;record_size&#x60; parameter. To search across all available collections, set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60;.
      *
      * @param searchCollectionsRequest (required)
      * @return CollectionSearchResponse
@@ -591,9 +594,12 @@ public class CollectionsApi {
      * Search options * **name_pattern**: Use &#39;%&#39; as a wildcard character to match
      * collection names * **collection_identifiers**: Search for specific collections by their GUIDs
      * or names * **include_metadata**: When set to &#x60;true&#x60;, includes the metadata objects
-     * within each collection in the response **NOTE**: If the API returns an empty list, consider
-     * increasing the value of the &#x60;record_size&#x60; parameter. To search across all available
-     * collections, set &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     * within each collection in the response **NOTE**: In addition to the GUID and name,
+     * &#x60;collection_identifiers&#x60; accepts a Custom object ID if one is configured for the
+     * collection. The response also includes the &#x60;obj_id&#x60; field for each collection that
+     * has one set. **NOTE**: If the API returns an empty list, consider increasing the value of the
+     * &#x60;record_size&#x60; parameter. To search across all available collections, set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60;.
      *
      * @param searchCollectionsRequest (required)
      * @return ApiResponse&lt;CollectionSearchResponse&gt;
@@ -625,9 +631,12 @@ public class CollectionsApi {
      * criteria. #### Search options * **name_pattern**: Use &#39;%&#39; as a wildcard character to
      * match collection names * **collection_identifiers**: Search for specific collections by their
      * GUIDs or names * **include_metadata**: When set to &#x60;true&#x60;, includes the metadata
-     * objects within each collection in the response **NOTE**: If the API returns an empty list,
-     * consider increasing the value of the &#x60;record_size&#x60; parameter. To search across all
-     * available collections, set &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     * objects within each collection in the response **NOTE**: In addition to the GUID and name,
+     * &#x60;collection_identifiers&#x60; accepts a Custom object ID if one is configured for the
+     * collection. The response also includes the &#x60;obj_id&#x60; field for each collection that
+     * has one set. **NOTE**: If the API returns an empty list, consider increasing the value of the
+     * &#x60;record_size&#x60; parameter. To search across all available collections, set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60;.
      *
      * @param searchCollectionsRequest (required)
      * @param _callback The callback to be executed when the API call finishes

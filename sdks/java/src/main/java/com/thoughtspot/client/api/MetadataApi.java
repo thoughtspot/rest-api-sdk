@@ -2797,14 +2797,18 @@ public class MetadataApi {
      * value is true. - For liveboard metadata type, to get the newer format, set the
      * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
      * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
-     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
-     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * is false. **NOTE**: &#x60;obj_identifier&#x60; is supported for the following object types:
+     * &#x60;LIVEBOARD&#x60;, &#x60;ANSWER&#x60;, &#x60;LOGICAL_TABLE&#x60;,
+     * &#x60;LOGICAL_COLUMN&#x60;, &#x60;CONNECTION&#x60;, &#x60;USER_GROUP&#x60;,
+     * &#x60;COLLECTION&#x60;. The response includes the &#x60;metadata_obj_id&#x60; field for
+     * objects that have a Custom object ID set. **NOTE**: The following parameters support
+     * pagination of metadata records: - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; -
+     * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
+     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
+     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
+     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @return List&lt;MetadataSearchResponse&gt;
@@ -2849,14 +2853,18 @@ public class MetadataApi {
      * value is true. - For liveboard metadata type, to get the newer format, set the
      * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
      * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
-     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
-     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * is false. **NOTE**: &#x60;obj_identifier&#x60; is supported for the following object types:
+     * &#x60;LIVEBOARD&#x60;, &#x60;ANSWER&#x60;, &#x60;LOGICAL_TABLE&#x60;,
+     * &#x60;LOGICAL_COLUMN&#x60;, &#x60;CONNECTION&#x60;, &#x60;USER_GROUP&#x60;,
+     * &#x60;COLLECTION&#x60;. The response includes the &#x60;metadata_obj_id&#x60; field for
+     * objects that have a Custom object ID set. **NOTE**: The following parameters support
+     * pagination of metadata records: - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; -
+     * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
+     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
+     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
+     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @return ApiResponse&lt;List&lt;MetadataSearchResponse&gt;&gt;
@@ -2901,14 +2909,18 @@ public class MetadataApi {
      * value is true. - For liveboard metadata type, to get the newer format, set the
      * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
      * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
-     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
-     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * is false. **NOTE**: &#x60;obj_identifier&#x60; is supported for the following object types:
+     * &#x60;LIVEBOARD&#x60;, &#x60;ANSWER&#x60;, &#x60;LOGICAL_TABLE&#x60;,
+     * &#x60;LOGICAL_COLUMN&#x60;, &#x60;CONNECTION&#x60;, &#x60;USER_GROUP&#x60;,
+     * &#x60;COLLECTION&#x60;. The response includes the &#x60;metadata_obj_id&#x60; field for
+     * objects that have a Custom object ID set. **NOTE**: The following parameters support
+     * pagination of metadata records: - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; -
+     * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
+     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
+     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
+     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes

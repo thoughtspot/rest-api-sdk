@@ -282,10 +282,14 @@ public class ConnectionsApiTest {
      * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
      * supported on Snowflake connections only. - To include more details about connection objects
      * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
-     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
-     * records by parameters other than &#x60;data_warehouse_types&#x60; or
-     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
-     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
+     * the output by field names and filter connections by tags. **NOTE**: In addition to the
+     * connection GUID and name, the &#x60;identifier&#x60; field on each entry in
+     * &#x60;connections&#x60; accepts a Custom object ID if one is configured for the connection.
+     * The response also includes the &#x60;obj_id&#x60; field for each connection that has one set.
+     * **NOTE**: When filtering connection records by parameters other than
+     * &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure that you set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60; for
+     * precise results.
      *
      * @throws ApiException if the Api call fails
      */

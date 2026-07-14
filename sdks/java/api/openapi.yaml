@@ -3816,6 +3816,8 @@ paths:
         * **collection_identifiers**: Search for specific collections by their GUIDs or names
         * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response
 
+        **NOTE**: In addition to the GUID and name, `collection_identifiers` accepts a Custom object ID if one is configured for the collection. The response also includes the `obj_id` field for each collection that has one set.
+
         **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.
 
 
@@ -4781,6 +4783,8 @@ paths:
           - `OAUTH_CLIENT_CREDENTIALS`: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.
         - To include more details about connection objects in the API response, set `include_details` to `true`.
         - You can also sort the output by field names and filter connections by tags.
+
+        **NOTE**: In addition to the connection GUID and name, the `identifier` field on each entry in `connections` accepts a Custom object ID if one is configured for the connection. The response also includes the `obj_id` field for each connection that has one set.
 
         **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.
 
@@ -7230,6 +7234,8 @@ paths:
 
         If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.
 
+        **NOTE**: In addition to the GUID and name, `group_identifier` accepts a Custom object ID if one is configured for the group. The response also includes the `obj_id` field for each group that has one set.
+
         **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.
 
 
@@ -8647,6 +8653,8 @@ paths:
         - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1.
         - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.
 
+        **NOTE**: `obj_identifier` is supported for the following object types: `LIVEBOARD`, `ANSWER`, `LOGICAL_TABLE`, `LOGICAL_COLUMN`, `CONNECTION`, `USER_GROUP`, `COLLECTION`. The response includes the `metadata_obj_id` field for objects that have a Custom object ID set.
+
         **NOTE**: The following parameters support pagination of metadata records:
 
         - `tag_identifiers`
@@ -9476,6 +9484,8 @@ paths:
         Available if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.
 
         To get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.
+
+        **NOTE**: In addition to the GUID and name, `role_identifiers` accepts a Custom object ID if one is configured for the role. The response also includes the `obj_id` field for each role that has one set.
 
 
 
@@ -16994,6 +17004,7 @@ components:
         id: id
         generation_number: 6
         metadata_version: 5
+        obj_id: obj_id
         visibility: SHARABLE
         index: 1
         display_name: display_name
@@ -17021,6 +17032,11 @@ components:
           id: id
         author_id: author_id
       properties:
+        obj_id:
+          description: "Custom object ID (obj_id) of the group, if one is set. \n\
+            \  Version: 26.9.0.cl or later\n"
+          nullable: true
+          type: string
         author_id:
           description: The unique identifier of the object
           nullable: true
@@ -18946,6 +18962,7 @@ components:
               name: name
             name: name
             auto_created: true
+        obj_id: obj_id
         name: name
         description: description
         details: ""
@@ -18957,6 +18974,11 @@ components:
           type: string
         name:
           description: Name of the connection.
+          type: string
+        obj_id:
+          description: "Custom object ID (obj_id) of the connection, if one is set.\
+            \ \n  Version: 26.9.0.cl or later\n"
+          nullable: true
           type: string
         description:
           description: Description of the connection.
@@ -19472,6 +19494,7 @@ components:
         privileges:
         - UNKNOWN
         - UNKNOWN
+        obj_id: obj_id
         groups_assigned_count: 0
         creation_time_in_millis: ""
         hidden: true
@@ -19502,6 +19525,11 @@ components:
           type: string
         name:
           description: Name of the role
+          type: string
+        obj_id:
+          description: "Custom object ID (obj_id) of the role, if one is set. \n \
+            \ Version: 26.9.0.cl or later\n"
+          nullable: true
           type: string
         description:
           description: Description of the role
@@ -19685,6 +19713,7 @@ components:
             position: position
         default_action_config:
           visibility: true
+        obj_id: obj_id
         name: name
         id: id
         user_groups:
@@ -19699,6 +19728,11 @@ components:
           $ref: '#/components/schemas/Default_action_config'
         id:
           description: Unique Id of the custom action.
+          type: string
+        obj_id:
+          description: "Custom object ID (obj_id) of the custom action, if one is\
+            \ set. \n  Version: 26.9.0.cl or later\n"
+          nullable: true
           type: string
         metadata_association:
           description: Metadata objects to assign the the custom action to.
@@ -22275,6 +22309,7 @@ components:
             - identifier: identifier
               name: name
             type: type
+          obj_id: obj_id
           updated_at: updated_at
           org:
             identifier: identifier
@@ -22298,6 +22333,7 @@ components:
             - identifier: identifier
               name: name
             type: type
+          obj_id: obj_id
           updated_at: updated_at
           org:
             identifier: identifier
@@ -22356,6 +22392,7 @@ components:
           - identifier: identifier
             name: name
           type: type
+        obj_id: obj_id
         updated_at: updated_at
         org:
           identifier: identifier
@@ -22371,6 +22408,11 @@ components:
           type: string
         name:
           description: Name of the collection.
+          type: string
+        obj_id:
+          description: "Custom object ID (obj_id) of the collection, if one is set.\
+            \ \n  Version: 26.9.0.cl or later\n"
+          nullable: true
           type: string
         description:
           description: Description of the collection.

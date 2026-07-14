@@ -10,6 +10,7 @@ Response object for a collection.
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** | Unique identifier of the collection. |  |
 |**name** | **String** | Name of the collection. |  |
+|**objId** | **String** | Custom object ID (obj_id) of the collection, if one is set.    Version: 26.9.0.cl or later  |  [optional] |
 |**description** | **String** | Description of the collection. |  [optional] |
 |**metadata** | [**List&lt;CollectionMetadataItem&gt;**](CollectionMetadataItem.md) | Metadata objects in the collection. |  [optional] |
 |**createdAt** | **String** | Creation timestamp in milliseconds. |  [optional] |

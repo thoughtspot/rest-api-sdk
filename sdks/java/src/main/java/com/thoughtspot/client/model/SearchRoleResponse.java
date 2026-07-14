@@ -46,6 +46,12 @@ public class SearchRoleResponse implements Serializable {
     @javax.annotation.Nonnull
     private String name;
 
+    public static final String SERIALIZED_NAME_OBJ_ID = "obj_id";
+
+    @SerializedName(SERIALIZED_NAME_OBJ_ID)
+    @javax.annotation.Nullable
+    private String objId;
+
     public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
     @SerializedName(SERIALIZED_NAME_DESCRIPTION)
@@ -395,6 +401,25 @@ public class SearchRoleResponse implements Serializable {
 
     public void setName(@javax.annotation.Nonnull String name) {
         this.name = name;
+    }
+
+    public SearchRoleResponse objId(@javax.annotation.Nullable String objId) {
+        this.objId = objId;
+        return this;
+    }
+
+    /**
+     * Custom object ID (obj_id) of the role, if one is set. Version: 26.9.0.cl or later
+     *
+     * @return objId
+     */
+    @javax.annotation.Nullable
+    public String getObjId() {
+        return objId;
+    }
+
+    public void setObjId(@javax.annotation.Nullable String objId) {
+        this.objId = objId;
     }
 
     public SearchRoleResponse description(@javax.annotation.Nonnull String description) {
@@ -767,6 +792,7 @@ public class SearchRoleResponse implements Serializable {
         SearchRoleResponse searchRoleResponse = (SearchRoleResponse) o;
         return Objects.equals(this.id, searchRoleResponse.id)
                 && Objects.equals(this.name, searchRoleResponse.name)
+                && Objects.equals(this.objId, searchRoleResponse.objId)
                 && Objects.equals(this.description, searchRoleResponse.description)
                 && Objects.equals(this.groupsAssignedCount, searchRoleResponse.groupsAssignedCount)
                 && Objects.equals(this.orgs, searchRoleResponse.orgs)
@@ -802,6 +828,7 @@ public class SearchRoleResponse implements Serializable {
         return Objects.hash(
                 id,
                 name,
+                objId,
                 description,
                 groupsAssignedCount,
                 orgs,
@@ -833,6 +860,7 @@ public class SearchRoleResponse implements Serializable {
         sb.append("class SearchRoleResponse {\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
+        sb.append("    objId: ").append(toIndentedString(objId)).append("\n");
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
         sb.append("    groupsAssignedCount: ")
                 .append(toIndentedString(groupsAssignedCount))
@@ -882,6 +910,7 @@ public class SearchRoleResponse implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("id");
         openapiFields.add("name");
+        openapiFields.add("obj_id");
         openapiFields.add("description");
         openapiFields.add("groups_assigned_count");
         openapiFields.add("orgs");
@@ -947,6 +976,14 @@ public class SearchRoleResponse implements Serializable {
                             "Expected the field `name` to be a primitive type in the JSON string"
                                     + " but got `%s`",
                             jsonObj.get("name").toString()));
+        }
+        if ((jsonObj.get("obj_id") != null && !jsonObj.get("obj_id").isJsonNull())
+                && !jsonObj.get("obj_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `obj_id` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("obj_id").toString()));
         }
         if (!jsonObj.get("description").isJsonPrimitive()) {
             throw new IllegalArgumentException(

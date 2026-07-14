@@ -34,6 +34,12 @@ public class ResponseCustomActionTest {
         // TODO: test id
     }
 
+    /** Test the property 'objId' */
+    @Test
+    public void objIdTest() {
+        // TODO: test objId
+    }
+
     /** Test the property 'metadataAssociation' */
     @Test
     public void metadataAssociationTest() {

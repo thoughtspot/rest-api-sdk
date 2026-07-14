@@ -3376,9 +3376,12 @@ public class ThoughtSpotRestApiTest {
      * Search options * **name_pattern**: Use &#39;%&#39; as a wildcard character to match
      * collection names * **collection_identifiers**: Search for specific collections by their GUIDs
      * or names * **include_metadata**: When set to &#x60;true&#x60;, includes the metadata objects
-     * within each collection in the response **NOTE**: If the API returns an empty list, consider
-     * increasing the value of the &#x60;record_size&#x60; parameter. To search across all available
-     * collections, set &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     * within each collection in the response **NOTE**: In addition to the GUID and name,
+     * &#x60;collection_identifiers&#x60; accepts a Custom object ID if one is configured for the
+     * collection. The response also includes the &#x60;obj_id&#x60; field for each collection that
+     * has one set. **NOTE**: If the API returns an empty list, consider increasing the value of the
+     * &#x60;record_size&#x60; parameter. To search across all available collections, set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60;.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3509,10 +3512,14 @@ public class ThoughtSpotRestApiTest {
      * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
      * supported on Snowflake connections only. - To include more details about connection objects
      * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
-     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
-     * records by parameters other than &#x60;data_warehouse_types&#x60; or
-     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
-     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
+     * the output by field names and filter connections by tags. **NOTE**: In addition to the
+     * connection GUID and name, the &#x60;identifier&#x60; field on each entry in
+     * &#x60;connections&#x60; accepts a Custom object ID if one is configured for the connection.
+     * The response also includes the &#x60;obj_id&#x60; field for each connection that has one set.
+     * **NOTE**: When filtering connection records by parameters other than
+     * &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure that you set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60; for
+     * precise results.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3606,14 +3613,18 @@ public class ThoughtSpotRestApiTest {
      * value is true. - For liveboard metadata type, to get the newer format, set the
      * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
      * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
-     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
-     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * is false. **NOTE**: &#x60;obj_identifier&#x60; is supported for the following object types:
+     * &#x60;LIVEBOARD&#x60;, &#x60;ANSWER&#x60;, &#x60;LOGICAL_TABLE&#x60;,
+     * &#x60;LOGICAL_COLUMN&#x60;, &#x60;CONNECTION&#x60;, &#x60;USER_GROUP&#x60;,
+     * &#x60;COLLECTION&#x60;. The response includes the &#x60;metadata_obj_id&#x60; field for
+     * objects that have a Custom object ID set. **NOTE**: The following parameters support
+     * pagination of metadata records: - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; -
+     * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
+     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
+     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
+     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3647,7 +3658,10 @@ public class ThoughtSpotRestApiTest {
      * enabled on your instance. To search for Roles, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can
      * manage roles**) privilege is required. To get details of a specific Role object, specify the
      * GUID or name. You can also filter the API response based on user group and Org identifiers,
-     * privileges assigned to the Role, and deprecation status.
+     * privileges assigned to the Role, and deprecation status. **NOTE**: In addition to the GUID
+     * and name, &#x60;role_identifiers&#x60; accepts a Custom object ID if one is configured for
+     * the role. The response also includes the &#x60;obj_id&#x60; field for each role that has one
+     * set.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3762,9 +3776,11 @@ public class ThoughtSpotRestApiTest {
      * Available to all users. Users with &#x60;ADMINISTRATION&#x60; (**Can administer
      * ThoughtSpot**) privileges can view all users properties. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: If
-     * you do not get precise results, try setting &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: In
+     * addition to the GUID and name, &#x60;group_identifier&#x60; accepts a Custom object ID if one
+     * is configured for the group. The response also includes the &#x60;obj_id&#x60; field for each
+     * group that has one set. **NOTE**: If you do not get precise results, try setting
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @throws ApiException if the Api call fails
      */

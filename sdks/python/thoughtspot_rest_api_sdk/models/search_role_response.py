@@ -28,6 +28,7 @@ class SearchRoleResponse(BaseModel):
     """ # noqa: E501
     id: StrictStr = Field(description="Unique Id of the role.")
     name: StrictStr = Field(description="Name of the role")
+    obj_id: Optional[StrictStr] = Field(default=None, description="Custom object ID (obj_id) of the role, if one is set.    Version: 26.9.0.cl or later ")
     description: StrictStr = Field(description="Description of the role")
     groups_assigned_count: Optional[StrictInt] = Field(default=None, description="number of groups assigned with this role")
     orgs: Optional[List[GenericInfo]] = Field(default=None, description="Orgs in which role exists.")
@@ -44,7 +45,7 @@ class SearchRoleResponse(BaseModel):
     hidden: Optional[StrictBool] = Field(default=None, description="Indicates whether the role is hidden.")
     shared_via_connection: Optional[StrictBool] = Field(default=None, description="Indicates whether the role is shared via connection")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "description", "groups_assigned_count", "orgs", "groups", "privileges", "permission", "author_id", "modifier_id", "creation_time_in_millis", "modification_time_in_millis", "deleted", "deprecated", "external", "hidden", "shared_via_connection"]
+    __properties: ClassVar[List[str]] = ["id", "name", "obj_id", "description", "groups_assigned_count", "orgs", "groups", "privileges", "permission", "author_id", "modifier_id", "creation_time_in_millis", "modification_time_in_millis", "deleted", "deprecated", "external", "hidden", "shared_via_connection"]
 
     @field_validator('privileges')
     def privileges_validate_enum(cls, value):
@@ -123,6 +124,11 @@ class SearchRoleResponse(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if obj_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.obj_id is None and "obj_id" in self.model_fields_set:
+            _dict['obj_id'] = None
 
         # set to None if groups_assigned_count (nullable) is None
         # and model_fields_set contains the field
@@ -203,6 +209,7 @@ class SearchRoleResponse(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
+            "obj_id": obj.get("obj_id"),
             "description": obj.get("description"),
             "groups_assigned_count": obj.get("groups_assigned_count"),
             "orgs": [GenericInfo.from_dict(_item) for _item in obj["orgs"]] if obj.get("orgs") is not None else None,

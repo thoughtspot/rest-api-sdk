@@ -16,6 +16,12 @@ public class UserGroupResponseTest {
         // TODO: test UserGroupResponse
     }
 
+    /** Test the property 'objId' */
+    @Test
+    public void objIdTest() {
+        // TODO: test objId
+    }
+
     /** Test the property 'authorId' */
     @Test
     public void authorIdTest() {

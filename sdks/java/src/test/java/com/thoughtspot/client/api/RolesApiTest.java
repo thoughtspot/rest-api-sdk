@@ -56,7 +56,10 @@ public class RolesApiTest {
      * enabled on your instance. To search for Roles, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can
      * manage roles**) privilege is required. To get details of a specific Role object, specify the
      * GUID or name. You can also filter the API response based on user group and Org identifiers,
-     * privileges assigned to the Role, and deprecation status.
+     * privileges assigned to the Role, and deprecation status. **NOTE**: In addition to the GUID
+     * and name, &#x60;role_identifiers&#x60; accepts a Custom object ID if one is configured for
+     * the role. The response also includes the &#x60;obj_id&#x60; field for each role that has one
+     * set.
      *
      * @throws ApiException if the Api call fails
      */
