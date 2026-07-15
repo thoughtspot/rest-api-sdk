@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo><!-- setting GenerateAssemblyInfo to false causes this bug https://github.com/dotnet/project-system/issues/3934 -->
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>ThoughtSpot.RestApi.Sdk</AssemblyName>
+    <PackageId>ThoughtSpot.RestApi.Sdk</PackageId>
+    <OutputType>Library</OutputType>
+    <Authors>ThoughtSpot</Authors>
+    <Company>ThoughtSpot, Inc.</Company>
+    <AssemblyTitle>ThoughtSpot Rest API SDK</AssemblyTitle>
+    <Description>Official ThoughtSpot REST API SDK for .NET</Description>
+    <Copyright>No Copyright</Copyright>
+    <RootNamespace>ThoughtSpot.RestApi.Sdk</RootNamespace>
+    <Version>2.27.0</Version>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ThoughtSpot.RestApi.Sdk.xml</DocumentationFile>
+    <RepositoryUrl>https://github.com/GIT_USER_ID/GIT_REPO_ID.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>Minor update</PackageReleaseNotes>
+    <Nullable>annotations</Nullable>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSubTypes" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Polly" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- PackageId already comes out correctly as ThoughtSpot.RestApi.Sdk from
+         the generator's own default (<PackageId>ThoughtSpot.RestApi.Sdk</PackageId>),
+         since packageName in config.yaml is ThoughtSpot.RestApi.Sdk — no
+         override needed here. RepositoryUrl still needs one: it otherwise
+         renders as the generator's unfilled
+         https://github.com/GIT_USER_ID/GIT_REPO_ID.git placeholder, since
+         gitUserId/gitRepoId are not set in config.yaml. -->
+    <RepositoryUrl>https://github.com/thoughtspot/rest-api-sdk/tree/release/sdks</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+    <None Include="LICENSE.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+</Project>
