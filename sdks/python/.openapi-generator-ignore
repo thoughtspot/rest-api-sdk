@@ -1,0 +1,32 @@
+# .openapi-generator-ignore — files the generator must NOT write into sdks/python.
+#
+# pyproject.toml + README.md ARE generated, but via our custom mustache templates
+# (template/pyproject.mustache, template/README.mustache), so they are NOT listed.
+
+# Our own license file — copied to the output root by generate.sh; OG must not
+# overwrite it (pyproject's `license = {file = "LICENSE"}` reads it at build time).
+LICENSE
+
+# OG default test stubs / docs / CI workflow — we don't ship them.
+test/
+docs/
+.github/
+
+# OG packaging boilerplate we don't use: library metadata + dependencies live in
+# pyproject.toml. setup.py/setup.cfg carry stale, conflicting values (wrong
+# author, python>=3.10 vs our 3.9, mismatched pins); requirements*.txt duplicate
+# the dependency list.
+setup.py
+setup.cfg
+requirements.txt
+test-requirements.txt
+tox.ini
+
+# OG-generated helper script / CI configs — we have our own generate.sh + CI.
+git_push.sh
+.travis.yml
+.gitlab-ci.yml
+
+# We don't ship a changelog or contributing guide.
+CHANGELOG.md
+CONTRIBUTING.md

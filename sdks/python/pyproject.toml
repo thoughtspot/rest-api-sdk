@@ -1,0 +1,50 @@
+[project]
+name = "thoughtspot-rest-api-sdk"
+version = "2.26.0"
+description = "Python SDK for the ThoughtSpot Public REST API"
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{name = "ThoughtSpot, Inc.", email = "support@thoughtspot.com"}]
+keywords = ["thoughtspot", "rest", "api", "sdk", "analytics", "bi"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "License :: Other/Proprietary License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Typing :: Typed",
+]
+dependencies = [
+  "python-dateutil>=2.8.2,<3",
+  "httpx>=0.27,<1",
+  "pydantic>=2,<3",
+  "typing-extensions>=4.7.1",
+  "lazy-imports>=1,<2",
+]
+
+[project.urls]
+Homepage = "https://www.thoughtspot.com"
+Repository = "https://github.com/thoughtspot/rest-api-sdk"
+Documentation = "https://developers.thoughtspot.com/docs/rest-api-sdk"
+License = "https://github.com/thoughtspot/rest-api-sdk/blob/release/LICENSE.md"
+
+[project.optional-dependencies]
+test = ["pytest>=7.4", "pytest-asyncio>=0.23", "respx>=0.21", "pytest-cov>=4"]
+dev = ["mypy>=1.5", "ruff>=0.4", "build", "twine"]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["thoughtspot_rest_api_sdk*"]
+
+[tool.setuptools.package-data]
+thoughtspot_rest_api_sdk = ["py.typed"]
