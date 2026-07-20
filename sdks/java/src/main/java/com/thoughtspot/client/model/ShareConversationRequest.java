@@ -51,6 +51,12 @@ public class ShareConversationRequest implements Serializable {
     @javax.annotation.Nonnull
     private List<PrincipalRefInput> revoke = new ArrayList<>();
 
+    public static final String SERIALIZED_NAME_NOTIFY_ON_SHARE = "notify_on_share";
+
+    @SerializedName(SERIALIZED_NAME_NOTIFY_ON_SHARE)
+    @javax.annotation.Nullable
+    private Boolean notifyOnShare = true;
+
     public ShareConversationRequest() {}
 
     public ShareConversationRequest refreshSharedContent(
@@ -130,6 +136,29 @@ public class ShareConversationRequest implements Serializable {
         this.revoke = revoke;
     }
 
+    public ShareConversationRequest notifyOnShare(
+            @javax.annotation.Nullable Boolean notifyOnShare) {
+        this.notifyOnShare = notifyOnShare;
+        return this;
+    }
+
+    /**
+     * &lt;div&gt;Version: 26.10.0.cl or later &lt;/div&gt; When &#x60;true&#x60; (default), newly
+     * granted principals are notified of the share. When &#x60;false&#x60;, access is granted
+     * without sending a notification. Has no effect on principals passed in &#x60;revoke&#x60;.
+     * Does not re-notify a principal who already had access.
+     *
+     * @return notifyOnShare
+     */
+    @javax.annotation.Nullable
+    public Boolean getNotifyOnShare() {
+        return notifyOnShare;
+    }
+
+    public void setNotifyOnShare(@javax.annotation.Nullable Boolean notifyOnShare) {
+        this.notifyOnShare = notifyOnShare;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -187,6 +216,7 @@ public class ShareConversationRequest implements Serializable {
                         this.refreshSharedContent, shareConversationRequest.refreshSharedContent)
                 && Objects.equals(this.grant, shareConversationRequest.grant)
                 && Objects.equals(this.revoke, shareConversationRequest.revoke)
+                && Objects.equals(this.notifyOnShare, shareConversationRequest.notifyOnShare)
                 && Objects.equals(
                         this.additionalProperties, shareConversationRequest.additionalProperties);
     }
@@ -202,7 +232,8 @@ public class ShareConversationRequest implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(refreshSharedContent, grant, revoke, additionalProperties);
+        return Objects.hash(
+                refreshSharedContent, grant, revoke, notifyOnShare, additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -221,6 +252,7 @@ public class ShareConversationRequest implements Serializable {
                 .append("\n");
         sb.append("    grant: ").append(toIndentedString(grant)).append("\n");
         sb.append("    revoke: ").append(toIndentedString(revoke)).append("\n");
+        sb.append("    notifyOnShare: ").append(toIndentedString(notifyOnShare)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -248,6 +280,7 @@ public class ShareConversationRequest implements Serializable {
         openapiFields.add("refresh_shared_content");
         openapiFields.add("grant");
         openapiFields.add("revoke");
+        openapiFields.add("notify_on_share");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

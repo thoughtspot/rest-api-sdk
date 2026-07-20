@@ -46,7 +46,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="refreshSharedContent">When &#x60;true&#x60;, always regenerates the shared view from the latest conversation state, even if one already exists. When &#x60;false&#x60; (default), reuses the existing shared view. (default to false).</param>
         /// <param name="grant">Principals to grant read-only access to the conversation. (required).</param>
         /// <param name="revoke">Principals to revoke access from the conversation. (required).</param>
-        public ShareConversationRequest(bool? refreshSharedContent = false, List<PrincipalRefInput> grant = default, List<PrincipalRefInput> revoke = default)
+        /// <param name="notifyOnShare">&lt;div&gt;Version: 26.10.0.cl or later &lt;/div&gt;  When &#x60;true&#x60; (default), newly granted principals are notified of the share. When &#x60;false&#x60;, access is granted without sending a notification. Has no effect on principals passed in &#x60;revoke&#x60;. Does not re-notify a principal who already had access. (default to true).</param>
+        public ShareConversationRequest(bool? refreshSharedContent = false, List<PrincipalRefInput> grant = default, List<PrincipalRefInput> revoke = default, bool? notifyOnShare = true)
         {
             // to ensure "grant" is required (not null)
             if (grant == null)
@@ -62,6 +63,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.Revoke = revoke;
             // use default value if no "refreshSharedContent" provided
             this.RefreshSharedContent = refreshSharedContent ?? false;
+            // use default value if no "notifyOnShare" provided
+            this.NotifyOnShare = notifyOnShare ?? true;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -87,6 +90,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public List<PrincipalRefInput> Revoke { get; set; }
 
         /// <summary>
+        /// &lt;div&gt;Version: 26.10.0.cl or later &lt;/div&gt;  When &#x60;true&#x60; (default), newly granted principals are notified of the share. When &#x60;false&#x60;, access is granted without sending a notification. Has no effect on principals passed in &#x60;revoke&#x60;. Does not re-notify a principal who already had access.
+        /// </summary>
+        /// <value>&lt;div&gt;Version: 26.10.0.cl or later &lt;/div&gt;  When &#x60;true&#x60; (default), newly granted principals are notified of the share. When &#x60;false&#x60;, access is granted without sending a notification. Has no effect on principals passed in &#x60;revoke&#x60;. Does not re-notify a principal who already had access.</value>
+        [DataMember(Name = "notify_on_share", EmitDefaultValue = true)]
+        public bool? NotifyOnShare { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -103,6 +113,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  RefreshSharedContent: ").Append(RefreshSharedContent).Append("\n");
             sb.Append("  Grant: ").Append(Grant).Append("\n");
             sb.Append("  Revoke: ").Append(Revoke).Append("\n");
+            sb.Append("  NotifyOnShare: ").Append(NotifyOnShare).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

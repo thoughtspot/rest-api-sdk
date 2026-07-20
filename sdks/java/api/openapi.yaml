@@ -28390,6 +28390,15 @@ components:
           items:
             $ref: '#/components/schemas/PrincipalRefInput'
           type: array
+        notify_on_share:
+          default: true
+          description: |-
+            <div>Version: 26.10.0.cl or later
+            </div>
+
+            When `true` (default), newly granted principals are notified of the share. When `false`, access is granted without sending a notification. Has no effect on principals passed in `revoke`. Does not re-notify a principal who already had access.
+          nullable: true
+          type: boolean
       required:
       - grant
       - revoke

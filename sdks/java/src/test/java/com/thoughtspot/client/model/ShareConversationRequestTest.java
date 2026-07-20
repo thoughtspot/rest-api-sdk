@@ -33,4 +33,10 @@ public class ShareConversationRequestTest {
     public void revokeTest() {
         // TODO: test revoke
     }
+
+    /** Test the property 'notifyOnShare' */
+    @Test
+    public void notifyOnShareTest() {
+        // TODO: test notifyOnShare
+    }
 }
