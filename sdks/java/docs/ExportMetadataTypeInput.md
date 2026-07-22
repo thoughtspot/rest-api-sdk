@@ -29,6 +29,7 @@ MetadataType InputType used in Export MetadataType API
 | ROLE | &quot;ROLE&quot; |
 | FEEDBACK | &quot;FEEDBACK&quot; |
 | COLLECTION | &quot;COLLECTION&quot; |
+| TEMPLATE_VARIABLE | &quot;TEMPLATE_VARIABLE&quot; |
 
 
 ## Implemented Interfaces

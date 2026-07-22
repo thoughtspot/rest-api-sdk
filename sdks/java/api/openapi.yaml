@@ -25004,6 +25004,7 @@ components:
           - ROLE
           - FEEDBACK
           - COLLECTION
+          - TEMPLATE_VARIABLE
           nullable: true
           type: string
         identifier:
