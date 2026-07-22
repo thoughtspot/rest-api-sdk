@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtSpot.RestApi.Sdk", "src\ThoughtSpot.RestApi.Sdk\ThoughtSpot.RestApi.Sdk.csproj", "{D79A2484-3E34-48E6-93BD-390F0115739E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtSpot.RestApi.Sdk", "src\ThoughtSpot.RestApi.Sdk\ThoughtSpot.RestApi.Sdk.csproj", "{60905F99-2E37-49D4-B3B1-856907221990}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtSpot.RestApi.Sdk.Test", "src\ThoughtSpot.RestApi.Sdk.Test\ThoughtSpot.RestApi.Sdk.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D79A2484-3E34-48E6-93BD-390F0115739E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D79A2484-3E34-48E6-93BD-390F0115739E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D79A2484-3E34-48E6-93BD-390F0115739E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D79A2484-3E34-48E6-93BD-390F0115739E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60905F99-2E37-49D4-B3B1-856907221990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60905F99-2E37-49D4-B3B1-856907221990}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60905F99-2E37-49D4-B3B1-856907221990}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60905F99-2E37-49D4-B3B1-856907221990}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
