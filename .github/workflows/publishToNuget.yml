@@ -28,11 +28,11 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Extract version from thoughtspot_rest_api_sdk.csproj
+      - name: Extract version from ThoughtSpot.RestApi.Sdk.csproj
         id: version
-        working-directory: sdks/csharp/src/thoughtspot_rest_api_sdk
+        working-directory: sdks/csharp/src/ThoughtSpot.RestApi.Sdk
         run: |
-          VERSION=$(grep -oP '(?<=<Version>).*(?=</Version>)' thoughtspot_rest_api_sdk.csproj)
+          VERSION=$(grep -oP '(?<=<Version>).*(?=</Version>)' ThoughtSpot.RestApi.Sdk.csproj)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Version: $VERSION"
 
@@ -64,4 +64,4 @@ jobs:
 
       - name: Summary
         run: |
-          echo "Published thoughtspot_rest_api_sdk@${{ steps.version.outputs.version }} from branch ${{ steps.branch_name.outputs.BRANCH_NAME }}" >> $GITHUB_STEP_SUMMARY
+          echo "Published ThoughtSpot.RestApi.Sdk@${{ steps.version.outputs.version }} from branch ${{ steps.branch_name.outputs.BRANCH_NAME }}" >> $GITHUB_STEP_SUMMARY
