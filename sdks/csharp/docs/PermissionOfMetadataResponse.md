@@ -1,0 +1,10 @@
+# ThoughtSpot.RestApi.Sdk.Model.PermissionOfMetadataResponse
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**MetadataPermissionDetails** | **Object** |  | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
