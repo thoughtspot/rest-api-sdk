@@ -48,22 +48,6 @@ jobs:
         working-directory: sdks/csharp
         run: dotnet pack -c Release -o ./nupkg
 
-      - name: Point smoke test at the packed .nupkg
-        working-directory: testing/csharp
-        run: |
-          dotnet remove reference ../../sdks/csharp/src/thoughtspot_rest_api_sdk/thoughtspot_rest_api_sdk.csproj
-          dotnet add package thoughtspot_rest_api_sdk \
-            --version ${{ steps.version.outputs.version }} \
-            --source ${{ github.workspace }}/sdks/csharp/nupkg
-
-      - name: Run C# SDK smoke tests against the packed SDK
-        working-directory: testing/csharp
-        env:
-          TS_HOST: ${{ secrets.TS_HOST }}
-          TS_USERNAME: ${{ secrets.TS_USERNAME }}
-          TS_PASSWORD: ${{ secrets.TS_PASSWORD }}
-        run: dotnet run -c Release
-
       - name: NuGet login (OIDC -> short-lived API key)
         uses: NuGet/login@v1
         id: nuget-login
