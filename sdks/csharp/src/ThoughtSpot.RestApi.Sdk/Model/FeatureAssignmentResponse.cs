@@ -43,7 +43,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="FeatureAssignmentResponse" /> class.
         /// </summary>
-        /// <param name="featureId">Underlying unique feature ID. (required).</param>
+        /// <param name="featureId">Underlying unique feature ID. The dotted-path format (for example, &#x60;orion.embraceConfig.doIndexing&#x60;) is internal and subject to change without notice; use &#x60;feature_name&#x60; as the stable display identifier where possible. (required).</param>
         /// <param name="featureName">User-friendly feature name. Present when the feature declares one..</param>
         /// <param name="assignedOrgs">Updated set of Orgs assigned to the feature. (required).</param>
         public FeatureAssignmentResponse(string featureId = default, string featureName = default, List<FeatureOrgInfo> assignedOrgs = default)
@@ -65,9 +65,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Underlying unique feature ID.
+        /// Underlying unique feature ID. The dotted-path format (for example, &#x60;orion.embraceConfig.doIndexing&#x60;) is internal and subject to change without notice; use &#x60;feature_name&#x60; as the stable display identifier where possible.
         /// </summary>
-        /// <value>Underlying unique feature ID.</value>
+        /// <value>Underlying unique feature ID. The dotted-path format (for example, &#x60;orion.embraceConfig.doIndexing&#x60;) is internal and subject to change without notice; use &#x60;feature_name&#x60; as the stable display identifier where possible.</value>
         [DataMember(Name = "feature_id", IsRequired = true, EmitDefaultValue = true)]
         public string FeatureId { get; set; }
 

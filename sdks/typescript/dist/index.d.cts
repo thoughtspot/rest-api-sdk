@@ -10766,7 +10766,7 @@ declare class FeatureOrgInfo {
 */
 declare class FeatureAssignmentResponse {
     /**
-    * Underlying unique feature ID.
+    * Underlying unique feature ID. The dotted-path format (for example, `orion.embraceConfig.doIndexing`) is internal and subject to change without notice; use `feature_name` as the stable display identifier where possible.
     */
     'feature_id': string;
     /**
@@ -10813,7 +10813,7 @@ declare class FeatureAssignmentResponse {
 */
 declare class FeatureDetail {
     /**
-    * Underlying unique feature ID.
+    * Underlying unique feature ID. The dotted-path format (for example, `orion.embraceConfig.doIndexing`) is internal and subject to change without notice; use `feature_name` as the stable display identifier where possible.
     */
     'feature_id': string;
     /**
@@ -10829,7 +10829,7 @@ declare class FeatureDetail {
     */
     'is_org_aware'?: boolean | null;
     /**
-    * Current cluster-level value of the feature. Populated in the cluster-admin view for non-org-aware features; null for Org-aware features.
+    * Current cluster-level value of the feature. Populated in the cluster-admin view for non-org-aware features; null for Org-aware features. Values are always returned as strings; for boolean toggles this is `\"true\"` or `\"false\"`.
     */
     'feature_value'?: string | null;
     /**
@@ -10837,7 +10837,7 @@ declare class FeatureDetail {
     */
     'element_type'?: string | null;
     /**
-    * UI element configuration for the feature. Populated in the org-admin view.
+    * UI element configuration for the feature. Populated in the org-admin view. An opaque blob whose structure varies by `element_type`; a `label` string is the common envelope field.
     */
     'element_config'?: any | null;
     /**
@@ -10930,7 +10930,7 @@ declare class FeatureGroup {
 */
 declare class FeatureValueResponse {
     /**
-    * Underlying unique feature ID.
+    * Underlying unique feature ID. The dotted-path format (for example, `orion.embraceConfig.doIndexing`) is internal and subject to change without notice; use `feature_name` as the stable display identifier where possible.
     */
     'feature_id': string;
     /**

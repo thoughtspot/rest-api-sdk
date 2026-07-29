@@ -26,13 +26,13 @@ class FeatureDetail(BaseModel):
     """
     Detail for a single feature. Fields are populated according to the scope of the search: cluster-admin (CLUSTER) responses populate assigned_orgs, is_org_aware, and (for non-org-aware features) feature_value; org-admin (ORG) responses populate element_type, element_config, and element_value.
     """ # noqa: E501
-    feature_id: StrictStr = Field(description="Underlying unique feature ID.")
+    feature_id: StrictStr = Field(description="Underlying unique feature ID. The dotted-path format (for example, `orion.embraceConfig.doIndexing`) is internal and subject to change without notice; use `feature_name` as the stable display identifier where possible.")
     feature_name: Optional[StrictStr] = Field(default=None, description="User-friendly feature name. Present when the feature declares one.")
     assigned_orgs: Optional[List[FeatureOrgInfo]] = Field(default=None, description="Orgs currently assigned to this feature. Populated in the cluster-admin view.")
     is_org_aware: Optional[StrictBool] = Field(default=None, description="Whether the feature is Org-aware. Org-aware features are managed via per-Org assignment; non-org-aware features are cluster-level toggles. Populated in the cluster-admin view.")
-    feature_value: Optional[StrictStr] = Field(default=None, description="Current cluster-level value of the feature. Populated in the cluster-admin view for non-org-aware features; null for Org-aware features.")
+    feature_value: Optional[StrictStr] = Field(default=None, description="Current cluster-level value of the feature. Populated in the cluster-admin view for non-org-aware features; null for Org-aware features. Values are always returned as strings; for boolean toggles this is `\"true\"` or `\"false\"`.")
     element_type: Optional[StrictStr] = Field(default=None, description="UI element type hint for the feature. Populated in the org-admin view.")
-    element_config: Optional[Any] = Field(default=None, description="UI element configuration for the feature. Populated in the org-admin view.")
+    element_config: Optional[Any] = Field(default=None, description="UI element configuration for the feature. Populated in the org-admin view. An opaque blob whose structure varies by `element_type`; a `label` string is the common envelope field.")
     element_value: Optional[StrictStr] = Field(default=None, description="Current value of the feature for the requested Org. Populated in the org-admin view.")
     docs_url: Optional[StrictStr] = Field(default=None, description="Per-feature documentation URL, when available.")
     additional_properties: Dict[str, Any] = {}

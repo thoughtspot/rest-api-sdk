@@ -57,7 +57,9 @@ public class FeatureValueResponse implements Serializable {
     }
 
     /**
-     * Underlying unique feature ID.
+     * Underlying unique feature ID. The dotted-path format (for example,
+     * &#x60;orion.embraceConfig.doIndexing&#x60;) is internal and subject to change without notice;
+     * use &#x60;feature_name&#x60; as the stable display identifier where possible.
      *
      * @return featureId
      */

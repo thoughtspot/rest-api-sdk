@@ -43,13 +43,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="FeatureDetail" /> class.
         /// </summary>
-        /// <param name="featureId">Underlying unique feature ID. (required).</param>
+        /// <param name="featureId">Underlying unique feature ID. The dotted-path format (for example, &#x60;orion.embraceConfig.doIndexing&#x60;) is internal and subject to change without notice; use &#x60;feature_name&#x60; as the stable display identifier where possible. (required).</param>
         /// <param name="featureName">User-friendly feature name. Present when the feature declares one..</param>
         /// <param name="assignedOrgs">Orgs currently assigned to this feature. Populated in the cluster-admin view..</param>
         /// <param name="isOrgAware">Whether the feature is Org-aware. Org-aware features are managed via per-Org assignment; non-org-aware features are cluster-level toggles. Populated in the cluster-admin view..</param>
-        /// <param name="featureValue">Current cluster-level value of the feature. Populated in the cluster-admin view for non-org-aware features; null for Org-aware features..</param>
+        /// <param name="featureValue">Current cluster-level value of the feature. Populated in the cluster-admin view for non-org-aware features; null for Org-aware features. Values are always returned as strings; for boolean toggles this is &#x60;\&quot;true\&quot;&#x60; or &#x60;\&quot;false\&quot;&#x60;..</param>
         /// <param name="elementType">UI element type hint for the feature. Populated in the org-admin view..</param>
-        /// <param name="elementConfig">UI element configuration for the feature. Populated in the org-admin view..</param>
+        /// <param name="elementConfig">UI element configuration for the feature. Populated in the org-admin view. An opaque blob whose structure varies by &#x60;element_type&#x60;; a &#x60;label&#x60; string is the common envelope field..</param>
         /// <param name="elementValue">Current value of the feature for the requested Org. Populated in the org-admin view..</param>
         /// <param name="docsUrl">Per-feature documentation URL, when available..</param>
         public FeatureDetail(string featureId = default, string featureName = default, List<FeatureOrgInfo> assignedOrgs = default, bool? isOrgAware = default, string featureValue = default, string elementType = default, Object elementConfig = default, string elementValue = default, string docsUrl = default)
@@ -72,9 +72,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Underlying unique feature ID.
+        /// Underlying unique feature ID. The dotted-path format (for example, &#x60;orion.embraceConfig.doIndexing&#x60;) is internal and subject to change without notice; use &#x60;feature_name&#x60; as the stable display identifier where possible.
         /// </summary>
-        /// <value>Underlying unique feature ID.</value>
+        /// <value>Underlying unique feature ID. The dotted-path format (for example, &#x60;orion.embraceConfig.doIndexing&#x60;) is internal and subject to change without notice; use &#x60;feature_name&#x60; as the stable display identifier where possible.</value>
         [DataMember(Name = "feature_id", IsRequired = true, EmitDefaultValue = true)]
         public string FeatureId { get; set; }
 
@@ -100,9 +100,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public bool? IsOrgAware { get; set; }
 
         /// <summary>
-        /// Current cluster-level value of the feature. Populated in the cluster-admin view for non-org-aware features; null for Org-aware features.
+        /// Current cluster-level value of the feature. Populated in the cluster-admin view for non-org-aware features; null for Org-aware features. Values are always returned as strings; for boolean toggles this is &#x60;\&quot;true\&quot;&#x60; or &#x60;\&quot;false\&quot;&#x60;.
         /// </summary>
-        /// <value>Current cluster-level value of the feature. Populated in the cluster-admin view for non-org-aware features; null for Org-aware features.</value>
+        /// <value>Current cluster-level value of the feature. Populated in the cluster-admin view for non-org-aware features; null for Org-aware features. Values are always returned as strings; for boolean toggles this is &#x60;\&quot;true\&quot;&#x60; or &#x60;\&quot;false\&quot;&#x60;.</value>
         [DataMember(Name = "feature_value", EmitDefaultValue = true)]
         public string FeatureValue { get; set; }
 
@@ -114,9 +114,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string ElementType { get; set; }
 
         /// <summary>
-        /// UI element configuration for the feature. Populated in the org-admin view.
+        /// UI element configuration for the feature. Populated in the org-admin view. An opaque blob whose structure varies by &#x60;element_type&#x60;; a &#x60;label&#x60; string is the common envelope field.
         /// </summary>
-        /// <value>UI element configuration for the feature. Populated in the org-admin view.</value>
+        /// <value>UI element configuration for the feature. Populated in the org-admin view. An opaque blob whose structure varies by &#x60;element_type&#x60;; a &#x60;label&#x60; string is the common envelope field.</value>
         [DataMember(Name = "element_config", EmitDefaultValue = true)]
         public Object ElementConfig { get; set; }
 

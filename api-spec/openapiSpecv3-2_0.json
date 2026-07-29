@@ -7930,6 +7930,10 @@
                         ]
                       }
                     ]
+                  },
+                  "example_3": {
+                    "description": "Empty result — no features match the requested category",
+                    "value": []
                   }
                 }
               }
@@ -7948,7 +7952,7 @@
                     "value": {
                       "error": {
                         "message": {
-                          "code": 10002,
+                          "code": 10000,
                           "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
                           "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
                           "debug": "org_identifier is required when scope=ORG."
@@ -8088,7 +8092,7 @@
                     "value": {
                       "error": {
                         "message": {
-                          "code": 10002,
+                          "code": 10000,
                           "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
                           "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
                           "debug": "org_identifiers is required."
@@ -8234,10 +8238,23 @@
                     "value": {
                       "error": {
                         "message": {
-                          "code": 10002,
+                          "code": 10000,
                           "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
                           "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
                           "debug": "reset_org_overrides is only valid for scope=CLUSTER."
+                        }
+                      }
+                    }
+                  },
+                  "missing_org_identifier": {
+                    "summary": "Bad Request — org_identifier is required when scope is ORG",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10000,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "org_identifier is required when scope=ORG."
                         }
                       }
                     }
@@ -25581,7 +25598,7 @@
         "properties": {
           "feature_id": {
             "type": "string",
-            "description": "Underlying unique feature ID."
+            "description": "Underlying unique feature ID. The dotted-path format (for example,\n`orion.embraceConfig.doIndexing`) is internal and subject to change without\nnotice; use `feature_name` as the stable display identifier where possible."
           },
           "feature_name": {
             "type": "string",
@@ -25603,7 +25620,7 @@
           },
           "feature_value": {
             "type": "string",
-            "description": "Current cluster-level value of the feature. Populated in the cluster-admin\nview for non-org-aware features; null for Org-aware features.",
+            "description": "Current cluster-level value of the feature. Populated in the cluster-admin\nview for non-org-aware features; null for Org-aware features. Values are\nalways returned as strings; for boolean toggles this is `\"true\"` or\n`\"false\"`.",
             "nullable": true
           },
           "element_type": {
@@ -25613,7 +25630,7 @@
           },
           "element_config": {
             "type": "object",
-            "description": "UI element configuration for the feature. Populated in the org-admin view.",
+            "description": "UI element configuration for the feature. Populated in the org-admin view.\nAn opaque blob whose structure varies by `element_type`; a `label` string is\nthe common envelope field.",
             "nullable": true
           },
           "element_value": {
@@ -30603,7 +30620,7 @@
         "properties": {
           "feature_id": {
             "type": "string",
-            "description": "Underlying unique feature ID."
+            "description": "Underlying unique feature ID. The dotted-path format (for example,\n`orion.embraceConfig.doIndexing`) is internal and subject to change without\nnotice; use `feature_name` as the stable display identifier where possible."
           },
           "feature_name": {
             "type": "string",
@@ -30629,7 +30646,7 @@
         "properties": {
           "feature_id": {
             "type": "string",
-            "description": "Underlying unique feature ID."
+            "description": "Underlying unique feature ID. The dotted-path format (for example,\n`orion.embraceConfig.doIndexing`) is internal and subject to change without\nnotice; use `feature_name` as the stable display identifier where possible."
           },
           "feature_name": {
             "type": "string",

@@ -18,7 +18,7 @@ import { HttpFile } from '../http/http';
 */
 export class FeatureAssignmentResponse {
     /**
-    * Underlying unique feature ID.
+    * Underlying unique feature ID. The dotted-path format (for example, `orion.embraceConfig.doIndexing`) is internal and subject to change without notice; use `feature_name` as the stable display identifier where possible.
     */
     'feature_id': string;
     /**

@@ -23297,7 +23297,10 @@ components:
         populate element_type, element_config, and element_value.
       properties:
         feature_id:
-          description: Underlying unique feature ID.
+          description: |-
+            Underlying unique feature ID. The dotted-path format (for example,
+            `orion.embraceConfig.doIndexing`) is internal and subject to change without
+            notice; use `feature_name` as the stable display identifier where possible.
           type: string
         feature_name:
           description: User-friendly feature name. Present when the feature declares
@@ -23321,7 +23324,9 @@ components:
         feature_value:
           description: |-
             Current cluster-level value of the feature. Populated in the cluster-admin
-            view for non-org-aware features; null for Org-aware features.
+            view for non-org-aware features; null for Org-aware features. Values are
+            always returned as strings; for boolean toggles this is `"true"` or
+            `"false"`.
           nullable: true
           type: string
         element_type:
@@ -23330,8 +23335,10 @@ components:
           nullable: true
           type: string
         element_config:
-          description: UI element configuration for the feature. Populated in the
-            org-admin view.
+          description: |-
+            UI element configuration for the feature. Populated in the org-admin view.
+            An opaque blob whose structure varies by `element_type`; a `label` string is
+            the common envelope field.
           nullable: true
         element_value:
           description: |-
@@ -28164,7 +28171,10 @@ components:
       description: Response returned when a feature's Org assignments are updated.
       properties:
         feature_id:
-          description: Underlying unique feature ID.
+          description: |-
+            Underlying unique feature ID. The dotted-path format (for example,
+            `orion.embraceConfig.doIndexing`) is internal and subject to change without
+            notice; use `feature_name` as the stable display identifier where possible.
           type: string
         feature_name:
           description: User-friendly feature name. Present when the feature declares
@@ -28184,7 +28194,10 @@ components:
       description: Response returned when a feature's value is set.
       properties:
         feature_id:
-          description: Underlying unique feature ID.
+          description: |-
+            Underlying unique feature ID. The dotted-path format (for example,
+            `orion.embraceConfig.doIndexing`) is internal and subject to change without
+            notice; use `feature_name` as the stable display identifier where possible.
           type: string
         feature_name:
           description: User-friendly feature name. Present when the feature declares

@@ -25,7 +25,7 @@ class FeatureValueResponse(BaseModel):
     """
     Response returned when a feature's value is set.
     """ # noqa: E501
-    feature_id: StrictStr = Field(description="Underlying unique feature ID.")
+    feature_id: StrictStr = Field(description="Underlying unique feature ID. The dotted-path format (for example, `orion.embraceConfig.doIndexing`) is internal and subject to change without notice; use `feature_name` as the stable display identifier where possible.")
     feature_name: Optional[StrictStr] = Field(default=None, description="User-friendly feature name. Present when the feature declares one.")
     feature_value: StrictStr = Field(description="The value that was written.")
     additional_properties: Dict[str, Any] = {}
