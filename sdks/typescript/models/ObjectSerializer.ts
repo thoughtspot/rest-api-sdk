@@ -176,6 +176,11 @@ export * from '../models/ExternalTableInput';
 export * from '../models/FavoriteMetadataInput';
 export * from '../models/FavoriteMetadataItem';
 export * from '../models/FavoriteObjectOptionsInput';
+export * from '../models/FeatureAssignmentResponse';
+export * from '../models/FeatureDetail';
+export * from '../models/FeatureGroup';
+export * from '../models/FeatureOrgInfo';
+export * from '../models/FeatureValueResponse';
 export * from '../models/FetchAnswerDataRequest';
 export * from '../models/FetchAnswerSqlQueryRequest';
 export * from '../models/FetchAsyncImportTaskStatusRequest';
@@ -351,6 +356,7 @@ export * from '../models/SearchDataRequest';
 export * from '../models/SearchDataResponse';
 export * from '../models/SearchDatasetsResponseItem';
 export * from '../models/SearchEmailCustomizationRequest';
+export * from '../models/SearchFeaturesRequest';
 export * from '../models/SearchMetadataRequest';
 export * from '../models/SearchOrgsRequest';
 export * from '../models/SearchRoleResponse';
@@ -453,6 +459,8 @@ export * from '../models/UpdateConnectionV2Request';
 export * from '../models/UpdateConversationRequest';
 export * from '../models/UpdateCustomActionRequest';
 export * from '../models/UpdateEmailCustomizationRequest';
+export * from '../models/UpdateFeatureAssignmentsRequest';
+export * from '../models/UpdateFeatureValueRequest';
 export * from '../models/UpdateInputTableRequest';
 export * from '../models/UpdateMetadataHeaderRequest';
 export * from '../models/UpdateMetadataObjIdRequest';
@@ -691,6 +699,11 @@ import { ExternalTableInput } from '../models/ExternalTableInput';
 import { FavoriteMetadataInput , FavoriteMetadataInputTypeEnum   } from '../models/FavoriteMetadataInput';
 import { FavoriteMetadataItem  , FavoriteMetadataItemTypeEnum   } from '../models/FavoriteMetadataItem';
 import { FavoriteObjectOptionsInput } from '../models/FavoriteObjectOptionsInput';
+import { FeatureAssignmentResponse } from '../models/FeatureAssignmentResponse';
+import { FeatureDetail } from '../models/FeatureDetail';
+import { FeatureGroup } from '../models/FeatureGroup';
+import { FeatureOrgInfo } from '../models/FeatureOrgInfo';
+import { FeatureValueResponse } from '../models/FeatureValueResponse';
 import { FetchAnswerDataRequest , FetchAnswerDataRequestDataFormatEnum        } from '../models/FetchAnswerDataRequest';
 import { FetchAnswerSqlQueryRequest } from '../models/FetchAnswerSqlQueryRequest';
 import { FetchAsyncImportTaskStatusRequest , FetchAsyncImportTaskStatusRequestTaskStatusEnum       } from '../models/FetchAsyncImportTaskStatusRequest';
@@ -866,6 +879,7 @@ import { SearchDataRequest  , SearchDataRequestDataFormatEnum        } from '../
 import { SearchDataResponse } from '../models/SearchDataResponse';
 import { SearchDatasetsResponseItem } from '../models/SearchDatasetsResponseItem';
 import { SearchEmailCustomizationRequest } from '../models/SearchEmailCustomizationRequest';
+import { SearchFeaturesRequest, SearchFeaturesRequestScopeEnum   , SearchFeaturesRequestCategoryEnum   } from '../models/SearchFeaturesRequest';
 import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                      , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
 import { SearchOrgsRequest  , SearchOrgsRequestVisibilityEnum  , SearchOrgsRequestStatusEnum    } from '../models/SearchOrgsRequest';
 import { SearchRoleResponse       , SearchRoleResponsePrivilegesEnum  , SearchRoleResponsePermissionEnum            } from '../models/SearchRoleResponse';
@@ -968,6 +982,8 @@ import { UpdateConnectionV2Request } from '../models/UpdateConnectionV2Request';
 import { UpdateConversationRequest } from '../models/UpdateConversationRequest';
 import { UpdateCustomActionRequest     , UpdateCustomActionRequestOperationEnum   } from '../models/UpdateCustomActionRequest';
 import { UpdateEmailCustomizationRequest } from '../models/UpdateEmailCustomizationRequest';
+import { UpdateFeatureAssignmentsRequest  , UpdateFeatureAssignmentsRequestOperationEnum   } from '../models/UpdateFeatureAssignmentsRequest';
+import { UpdateFeatureValueRequest, UpdateFeatureValueRequestScopeEnum       } from '../models/UpdateFeatureValueRequest';
 import { UpdateInputTableRequest } from '../models/UpdateInputTableRequest';
 import { UpdateMetadataHeaderRequest } from '../models/UpdateMetadataHeaderRequest';
 import { UpdateMetadataObjIdRequest } from '../models/UpdateMetadataObjIdRequest';
@@ -1212,6 +1228,8 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchConnectionResponseDataWarehouseTypeEnum",
     "SearchCustomActionsRequestTypeEnum",
     "SearchDataRequestDataFormatEnum",
+    "SearchFeaturesRequestScopeEnum",
+    "SearchFeaturesRequestCategoryEnum",
     "SearchMetadataRequestDependentObjectVersionEnum",
     "SearchMetadataRequestLiveboardResponseVersionEnum",
     "SearchOrgsRequestVisibilityEnum",
@@ -1283,6 +1301,8 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateConnectionConfigurationRequestPolicyProcessesEnum",
     "UpdateConnectionStatusRequestStatusEnum",
     "UpdateCustomActionRequestOperationEnum",
+    "UpdateFeatureAssignmentsRequestOperationEnum",
+    "UpdateFeatureValueRequestScopeEnum",
     "UpdateObjIdInputTypeEnum",
     "UpdateOrgRequestOperationEnum",
     "UpdateRoleRequestPrivilegesEnum",
@@ -1514,6 +1534,11 @@ let typeMap: {[index: string]: any} = {
     "FavoriteMetadataInput": FavoriteMetadataInput,
     "FavoriteMetadataItem": FavoriteMetadataItem,
     "FavoriteObjectOptionsInput": FavoriteObjectOptionsInput,
+    "FeatureAssignmentResponse": FeatureAssignmentResponse,
+    "FeatureDetail": FeatureDetail,
+    "FeatureGroup": FeatureGroup,
+    "FeatureOrgInfo": FeatureOrgInfo,
+    "FeatureValueResponse": FeatureValueResponse,
     "FetchAnswerDataRequest": FetchAnswerDataRequest,
     "FetchAnswerSqlQueryRequest": FetchAnswerSqlQueryRequest,
     "FetchAsyncImportTaskStatusRequest": FetchAsyncImportTaskStatusRequest,
@@ -1689,6 +1714,7 @@ let typeMap: {[index: string]: any} = {
     "SearchDataResponse": SearchDataResponse,
     "SearchDatasetsResponseItem": SearchDatasetsResponseItem,
     "SearchEmailCustomizationRequest": SearchEmailCustomizationRequest,
+    "SearchFeaturesRequest": SearchFeaturesRequest,
     "SearchMetadataRequest": SearchMetadataRequest,
     "SearchOrgsRequest": SearchOrgsRequest,
     "SearchRoleResponse": SearchRoleResponse,
@@ -1791,6 +1817,8 @@ let typeMap: {[index: string]: any} = {
     "UpdateConversationRequest": UpdateConversationRequest,
     "UpdateCustomActionRequest": UpdateCustomActionRequest,
     "UpdateEmailCustomizationRequest": UpdateEmailCustomizationRequest,
+    "UpdateFeatureAssignmentsRequest": UpdateFeatureAssignmentsRequest,
+    "UpdateFeatureValueRequest": UpdateFeatureValueRequest,
     "UpdateInputTableRequest": UpdateInputTableRequest,
     "UpdateMetadataHeaderRequest": UpdateMetadataHeaderRequest,
     "UpdateMetadataObjIdRequest": UpdateMetadataObjIdRequest,

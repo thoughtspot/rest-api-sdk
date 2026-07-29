@@ -241,6 +241,11 @@ __all__ = [
     "FavoriteMetadataInput",
     "FavoriteMetadataItem",
     "FavoriteObjectOptionsInput",
+    "FeatureAssignmentResponse",
+    "FeatureDetail",
+    "FeatureGroup",
+    "FeatureOrgInfo",
+    "FeatureValueResponse",
     "FetchAnswerDataRequest",
     "FetchAnswerSqlQueryRequest",
     "FetchAsyncImportTaskStatusRequest",
@@ -416,6 +421,7 @@ __all__ = [
     "SearchDataResponse",
     "SearchDatasetsResponseItem",
     "SearchEmailCustomizationRequest",
+    "SearchFeaturesRequest",
     "SearchMetadataRequest",
     "SearchOrgsRequest",
     "SearchRoleResponse",
@@ -518,6 +524,8 @@ __all__ = [
     "UpdateConversationRequest",
     "UpdateCustomActionRequest",
     "UpdateEmailCustomizationRequest",
+    "UpdateFeatureAssignmentsRequest",
+    "UpdateFeatureValueRequest",
     "UpdateInputTableRequest",
     "UpdateMetadataHeaderRequest",
     "UpdateMetadataObjIdRequest",
@@ -801,6 +809,11 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.favorite_metadata_input import FavoriteMetadataInput as FavoriteMetadataInput
     from thoughtspot_rest_api_sdk.models.favorite_metadata_item import FavoriteMetadataItem as FavoriteMetadataItem
     from thoughtspot_rest_api_sdk.models.favorite_object_options_input import FavoriteObjectOptionsInput as FavoriteObjectOptionsInput
+    from thoughtspot_rest_api_sdk.models.feature_assignment_response import FeatureAssignmentResponse as FeatureAssignmentResponse
+    from thoughtspot_rest_api_sdk.models.feature_detail import FeatureDetail as FeatureDetail
+    from thoughtspot_rest_api_sdk.models.feature_group import FeatureGroup as FeatureGroup
+    from thoughtspot_rest_api_sdk.models.feature_org_info import FeatureOrgInfo as FeatureOrgInfo
+    from thoughtspot_rest_api_sdk.models.feature_value_response import FeatureValueResponse as FeatureValueResponse
     from thoughtspot_rest_api_sdk.models.fetch_answer_data_request import FetchAnswerDataRequest as FetchAnswerDataRequest
     from thoughtspot_rest_api_sdk.models.fetch_answer_sql_query_request import FetchAnswerSqlQueryRequest as FetchAnswerSqlQueryRequest
     from thoughtspot_rest_api_sdk.models.fetch_async_import_task_status_request import FetchAsyncImportTaskStatusRequest as FetchAsyncImportTaskStatusRequest
@@ -976,6 +989,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.search_data_response import SearchDataResponse as SearchDataResponse
     from thoughtspot_rest_api_sdk.models.search_datasets_response_item import SearchDatasetsResponseItem as SearchDatasetsResponseItem
     from thoughtspot_rest_api_sdk.models.search_email_customization_request import SearchEmailCustomizationRequest as SearchEmailCustomizationRequest
+    from thoughtspot_rest_api_sdk.models.search_features_request import SearchFeaturesRequest as SearchFeaturesRequest
     from thoughtspot_rest_api_sdk.models.search_metadata_request import SearchMetadataRequest as SearchMetadataRequest
     from thoughtspot_rest_api_sdk.models.search_orgs_request import SearchOrgsRequest as SearchOrgsRequest
     from thoughtspot_rest_api_sdk.models.search_role_response import SearchRoleResponse as SearchRoleResponse
@@ -1078,6 +1092,8 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.update_conversation_request import UpdateConversationRequest as UpdateConversationRequest
     from thoughtspot_rest_api_sdk.models.update_custom_action_request import UpdateCustomActionRequest as UpdateCustomActionRequest
     from thoughtspot_rest_api_sdk.models.update_email_customization_request import UpdateEmailCustomizationRequest as UpdateEmailCustomizationRequest
+    from thoughtspot_rest_api_sdk.models.update_feature_assignments_request import UpdateFeatureAssignmentsRequest as UpdateFeatureAssignmentsRequest
+    from thoughtspot_rest_api_sdk.models.update_feature_value_request import UpdateFeatureValueRequest as UpdateFeatureValueRequest
     from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest as UpdateInputTableRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest as UpdateMetadataHeaderRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest as UpdateMetadataObjIdRequest
@@ -1367,6 +1383,11 @@ from thoughtspot_rest_api_sdk.models.external_table_input import ExternalTableIn
 from thoughtspot_rest_api_sdk.models.favorite_metadata_input import FavoriteMetadataInput as FavoriteMetadataInput
 from thoughtspot_rest_api_sdk.models.favorite_metadata_item import FavoriteMetadataItem as FavoriteMetadataItem
 from thoughtspot_rest_api_sdk.models.favorite_object_options_input import FavoriteObjectOptionsInput as FavoriteObjectOptionsInput
+from thoughtspot_rest_api_sdk.models.feature_assignment_response import FeatureAssignmentResponse as FeatureAssignmentResponse
+from thoughtspot_rest_api_sdk.models.feature_detail import FeatureDetail as FeatureDetail
+from thoughtspot_rest_api_sdk.models.feature_group import FeatureGroup as FeatureGroup
+from thoughtspot_rest_api_sdk.models.feature_org_info import FeatureOrgInfo as FeatureOrgInfo
+from thoughtspot_rest_api_sdk.models.feature_value_response import FeatureValueResponse as FeatureValueResponse
 from thoughtspot_rest_api_sdk.models.fetch_answer_data_request import FetchAnswerDataRequest as FetchAnswerDataRequest
 from thoughtspot_rest_api_sdk.models.fetch_answer_sql_query_request import FetchAnswerSqlQueryRequest as FetchAnswerSqlQueryRequest
 from thoughtspot_rest_api_sdk.models.fetch_async_import_task_status_request import FetchAsyncImportTaskStatusRequest as FetchAsyncImportTaskStatusRequest
@@ -1542,6 +1563,7 @@ from thoughtspot_rest_api_sdk.models.search_data_request import SearchDataReques
 from thoughtspot_rest_api_sdk.models.search_data_response import SearchDataResponse as SearchDataResponse
 from thoughtspot_rest_api_sdk.models.search_datasets_response_item import SearchDatasetsResponseItem as SearchDatasetsResponseItem
 from thoughtspot_rest_api_sdk.models.search_email_customization_request import SearchEmailCustomizationRequest as SearchEmailCustomizationRequest
+from thoughtspot_rest_api_sdk.models.search_features_request import SearchFeaturesRequest as SearchFeaturesRequest
 from thoughtspot_rest_api_sdk.models.search_metadata_request import SearchMetadataRequest as SearchMetadataRequest
 from thoughtspot_rest_api_sdk.models.search_orgs_request import SearchOrgsRequest as SearchOrgsRequest
 from thoughtspot_rest_api_sdk.models.search_role_response import SearchRoleResponse as SearchRoleResponse
@@ -1644,6 +1666,8 @@ from thoughtspot_rest_api_sdk.models.update_connection_v2_request import UpdateC
 from thoughtspot_rest_api_sdk.models.update_conversation_request import UpdateConversationRequest as UpdateConversationRequest
 from thoughtspot_rest_api_sdk.models.update_custom_action_request import UpdateCustomActionRequest as UpdateCustomActionRequest
 from thoughtspot_rest_api_sdk.models.update_email_customization_request import UpdateEmailCustomizationRequest as UpdateEmailCustomizationRequest
+from thoughtspot_rest_api_sdk.models.update_feature_assignments_request import UpdateFeatureAssignmentsRequest as UpdateFeatureAssignmentsRequest
+from thoughtspot_rest_api_sdk.models.update_feature_value_request import UpdateFeatureValueRequest as UpdateFeatureValueRequest
 from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest as UpdateInputTableRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest as UpdateMetadataHeaderRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest as UpdateMetadataObjIdRequest

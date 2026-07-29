@@ -22753,6 +22753,107 @@ components:
           nullable: true
           type: string
       type: object
+    FeatureGroup:
+      description: |-
+        A named group of related features. Returned by searchFeatures; the contents of
+        features depend on the requested scope (cluster-admin vs. org-admin view).
+      properties:
+        feature_group:
+          description: Display name of the feature group.
+          nullable: true
+          type: string
+        docs_url:
+          description: "Documentation URL for the feature group, when available."
+          nullable: true
+          type: string
+        features:
+          description: |-
+            Feature details within this group. Each entry contains the fields relevant to
+            the requested scope; org-admin-only and cluster-admin-only fields are null in
+            the other view.
+          items:
+            $ref: "#/components/schemas/FeatureDetail"
+          type: array
+      required:
+      - features
+      type: object
+    FeatureDetail:
+      description: |-
+        Detail for a single feature. Fields are populated according to the scope of the
+        search: cluster-admin (CLUSTER) responses populate assigned_orgs, is_org_aware,
+        and (for non-org-aware features) feature_value; org-admin (ORG) responses
+        populate element_type, element_config, and element_value.
+      properties:
+        feature_id:
+          description: Underlying unique feature ID.
+          type: string
+        feature_name:
+          description: User-friendly feature name. Present when the feature declares
+            one.
+          nullable: true
+          type: string
+        assigned_orgs:
+          description: Orgs currently assigned to this feature. Populated in the cluster-admin
+            view.
+          items:
+            $ref: "#/components/schemas/FeatureOrgInfo"
+          nullable: true
+          type: array
+        is_org_aware:
+          description: |-
+            Whether the feature is Org-aware. Org-aware features are managed via per-Org
+            assignment; non-org-aware features are cluster-level toggles. Populated in the
+            cluster-admin view.
+          nullable: true
+          type: boolean
+        feature_value:
+          description: |-
+            Current cluster-level value of the feature. Populated in the cluster-admin
+            view for non-org-aware features; null for Org-aware features.
+          nullable: true
+          type: string
+        element_type:
+          description: UI element type hint for the feature. Populated in the org-admin
+            view.
+          nullable: true
+          type: string
+        element_config:
+          description: UI element configuration for the feature. Populated in the
+            org-admin view.
+          nullable: true
+        element_value:
+          description: |-
+            Current value of the feature for the requested Org. Populated in the
+            org-admin view.
+          nullable: true
+          type: string
+        docs_url:
+          description: "Per-feature documentation URL, when available."
+          nullable: true
+          type: string
+      required:
+      - feature_id
+      type: object
+    FeatureOrgInfo:
+      description: |-
+        Lightweight Org identifier and display name, as returned in feature
+        assignment responses.
+        The field names org_id / org_name intentionally deviate from the bare id /
+        name used by the shared Org type: they are the literal wire keys emitted by
+        the Callosum backend, so they are load-bearing for Prism's response field
+        mapping and cannot be renamed without a backend change.
+      properties:
+        org_id:
+          description: Numeric ID of the Org.
+          format: int32
+          type: integer
+        org_name:
+          description: Display name of the Org.
+          type: string
+      required:
+      - org_id
+      - org_name
+      type: object
     GenericInfo:
       example:
         id: id
@@ -27547,6 +27648,44 @@ components:
           nullable: true
           type: string
       type: object
+    FeatureAssignmentResponse:
+      description: Response returned when a feature's Org assignments are updated.
+      properties:
+        feature_id:
+          description: Underlying unique feature ID.
+          type: string
+        feature_name:
+          description: User-friendly feature name. Present when the feature declares
+            one.
+          nullable: true
+          type: string
+        assigned_orgs:
+          description: Updated set of Orgs assigned to the feature.
+          items:
+            $ref: "#/components/schemas/FeatureOrgInfo"
+          type: array
+      required:
+      - assigned_orgs
+      - feature_id
+      type: object
+    FeatureValueResponse:
+      description: Response returned when a feature's value is set.
+      properties:
+        feature_id:
+          description: Underlying unique feature ID.
+          type: string
+        feature_name:
+          description: User-friendly feature name. Present when the feature declares
+            one.
+          nullable: true
+          type: string
+        feature_value:
+          description: The value that was written.
+          type: string
+      required:
+      - feature_id
+      - feature_value
+      type: object
     Runtime_Filter:
       description: List of runtime parameters need to set during the session.
       properties:
@@ -29680,6 +29819,104 @@ components:
           type: string
       required:
       - template_properties
+      type: object
+    SearchFeaturesRequest:
+      properties:
+        scope:
+          description: |-
+            Determines the administrative view for the search.
+            Use CLUSTER for the cluster-admin view (returns org assignments per feature);
+            use ORG for the org-admin view (returns the current value of each feature
+            assigned to the org).
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+        org_identifier:
+          description: |-
+            Numeric ID of the Org to scope the search to. Required when scope is ORG;
+            ignored when scope is CLUSTER.
+          format: int32
+          type: integer
+        category:
+          default: GENERAL_ACCESS
+          description: |-
+            Category of features to return. GENERAL_ACCESS returns features that are
+            generally available; EARLY_ACCESS returns features still in early access.
+            Defaults to GENERAL_ACCESS.
+          enum:
+          - GENERAL_ACCESS
+          - EARLY_ACCESS
+          type: string
+      required:
+      - scope
+      type: object
+    UpdateFeatureAssignmentsRequest:
+      properties:
+        feature_identifier:
+          description: |-
+            User-friendly feature name (feature_name) or the underlying feature ID
+            (feature_id) of the feature whose Org assignments should be updated.
+          type: string
+        org_identifiers:
+          description: |-
+            Numeric IDs of the Orgs to assign to the feature. Send an empty array with
+            operation REPLACE to clear all Org assignments for this feature.
+          items:
+            format: int32
+            type: integer
+          type: array
+        operation:
+          default: REPLACE
+          description: |-
+            Type of update to apply to the Org assignments. ADD assigns the given Orgs
+            in addition to existing ones; REMOVE unassigns the given Orgs; REPLACE sets
+            the assignment to exactly the given Orgs. Defaults to REPLACE.
+          enum:
+          - ADD
+          - REMOVE
+          - REPLACE
+          type: string
+      required:
+      - feature_identifier
+      - org_identifiers
+      type: object
+    UpdateFeatureValueRequest:
+      properties:
+        scope:
+          description: |-
+            Determines the scope at which the value is set. Use CLUSTER to set the
+            cluster-level value; use ORG to set a per-Org value override.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+        org_identifier:
+          description: |-
+            Numeric ID of the Org for which to set the value. Required when scope is
+            ORG; ignored when scope is CLUSTER.
+          format: int32
+          type: integer
+        feature_identifier:
+          description: |-
+            User-friendly feature name (feature_name) or the underlying feature ID
+            (feature_id) of the feature whose value should be set.
+          type: string
+        feature_value:
+          description: New value to set for the feature.
+          type: string
+        reset_org_overrides:
+          description: "Applicable only when `scope` is `CLUSTER`. When `true`, any\
+            \ existing per-Org value overrides for this feature are removed so that\
+            \ all Orgs inherit the new cluster-level value. Required when `scope`\
+            \ is `CLUSTER` for an org-aware feature. Must be omitted when `scope`\
+            \ is `ORG`; passing it at `ORG` scope returns a 400 error."
+          nullable: true
+          type: boolean
+      required:
+      - feature_identifier
+      - feature_value
+      - scope
       type: object
     CreateUserGroupRequest:
       example:
@@ -35871,6 +36108,11 @@ x-roles:
   tags:
   - 10.10.0.cl
   description: Roles for version 10.10.0.cl
+- name: 26.10.0.cl
+  id: 26.10.0.cl
+  tags:
+  - 26.10.0.cl
+  description: Roles for version 26.10.0.cl
 - name: 10.6.0.cl
   id: 10.6.0.cl
   tags:
