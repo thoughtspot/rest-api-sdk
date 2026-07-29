@@ -158,6 +158,14 @@
       "description": "Roles for version 10.10.0.cl"
     },
     {
+      "name": "26.10.0.cl",
+      "id": "26.10.0.cl",
+      "tags": [
+        "26.10.0.cl"
+      ],
+      "description": "Roles for version 26.10.0.cl"
+    },
+    {
       "name": "10.6.0.cl",
       "id": "10.6.0.cl",
       "tags": [
@@ -7836,6 +7844,470 @@
           },
           "500": {
             "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/configurations/features/search": {
+      "post": {
+        "operationId": "searchFeatures",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nReturns the feature configurations available on the ThoughtSpot system, grouped by feature group.\n\n#### Pre-requisites\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo retrieve feature configurations, pass these parameters in your API request:\n\n- `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org).\n- `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.\n- `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.\n\nThe response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.\n\nThe following example retrieves the general-access features for the cluster-admin view:\n\n```\n{\n  \"scope\": \"CLUSTER\",\n  \"category\": \"GENERAL_ACCESS\"\n}\n```\n\nFor the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):\n\n```\n{\n  \"scope\": \"ORG\",\n  \"org_identifier\": 1,\n  \"category\": \"GENERAL_ACCESS\"\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Feature Management",
+          "26.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchFeaturesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Feature groups returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeatureGroup"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Cluster-admin view (scope=CLUSTER) — org-aware feature with assignments",
+                    "value": [
+                      {
+                        "feature_group": "search",
+                        "docs_url": null,
+                        "features": [
+                          {
+                            "feature_id": "orion.embraceConfig.doIndexing",
+                            "feature_name": "index_columns",
+                            "assigned_orgs": [
+                              {
+                                "org_id": 0,
+                                "org_name": "Primary"
+                              }
+                            ],
+                            "is_org_aware": true,
+                            "feature_value": null,
+                            "docs_url": null
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "example_2": {
+                    "description": "Org-admin view (scope=ORG) — element type, config, and current value for the org",
+                    "value": [
+                      {
+                        "feature_group": "search",
+                        "docs_url": null,
+                        "features": [
+                          {
+                            "feature_id": "orion.embraceConfig.doIndexing",
+                            "feature_name": "index_columns",
+                            "element_type": "toggle",
+                            "element_config": {
+                              "label": "Index columns"
+                            },
+                            "element_value": "true",
+                            "docs_url": null
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "missing_org_identifier": {
+                    "summary": "Bad Request — org_identifier is required when scope is ORG",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "org_identifier is required when scope=ORG."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient privileges.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden — ADMINISTRATION privilege required",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "Insufficient privileges."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Feature management not enabled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/configurations/features/assignments/update": {
+      "post": {
+        "operationId": "updateFeatureAssignments",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nUpdates the Org assignments for a feature. Available to cluster admins only.\n\n#### Pre-requisites\n\nRequires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo update the Org assignments for a feature, pass these parameters in your API request:\n\n- `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update.\n- `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature.\n- `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.\n\nThe following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:\n\n```\n{\n  \"feature_identifier\": \"index_columns\",\n  \"org_identifiers\": [1, 2],\n  \"operation\": \"ADD\"\n}\n```\n\nClear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):\n\n```\n{\n  \"feature_identifier\": \"index_columns\",\n  \"org_identifiers\": [],\n  \"operation\": \"REPLACE\"\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Feature Management",
+          "26.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeatureAssignmentsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Assignments updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureAssignmentResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Assign Orgs 1 and 2 to the feature (operation ADD)",
+                    "value": {
+                      "feature_id": "orion.embraceConfig.doIndexing",
+                      "feature_name": "index_columns",
+                      "assigned_orgs": [
+                        {
+                          "org_id": 1,
+                          "org_name": "Acme"
+                        },
+                        {
+                          "org_id": 2,
+                          "org_name": "Beta"
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "description": "Clear all Org assignments (operation REPLACE with an empty org_identifiers array); assigned_orgs comes back empty",
+                    "value": {
+                      "feature_id": "orion.embraceConfig.doIndexing",
+                      "feature_name": "index_columns",
+                      "assigned_orgs": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "missing_org_identifiers": {
+                    "summary": "Bad Request — org_identifiers is required",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "org_identifiers is required."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient privileges.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden — ADMINISTRATION privilege required",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "Insufficient privileges."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Feature not found or feature management not enabled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "feature_not_found": {
+                    "summary": "Not Found — feature_identifier does not match any known feature",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10000,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "Feature 'orion.__does_not_exist__' not found in config."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/configurations/features/values/update": {
+      "post": {
+        "operationId": "updateFeatureValue",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nSets the value of a feature at the cluster or Org scope.\n\n#### Pre-requisites\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo set a feature value, pass these parameters in your API request:\n\n- `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override.\n- `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.\n- `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set.\n- `feature_value` — New value to set for the feature.\n- `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.\n\nThe following example sets a per-Org value override for Org `1`:\n\n```\n{\n  \"scope\": \"ORG\",\n  \"org_identifier\": 1,\n  \"feature_identifier\": \"index_columns\",\n  \"feature_value\": \"true\"\n}\n```\n\nSet the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:\n\n```\n{\n  \"scope\": \"CLUSTER\",\n  \"feature_identifier\": \"index_columns\",\n  \"feature_value\": \"true\",\n  \"reset_org_overrides\": true\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Feature Management",
+          "26.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeatureValueRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Value updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureValueResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Set a per-Org value override (scope=ORG)",
+                    "value": {
+                      "feature_id": "orion.embraceConfig.doIndexing",
+                      "feature_name": "index_columns",
+                      "feature_value": "true"
+                    }
+                  },
+                  "example_2": {
+                    "description": "Set the cluster-level value and clear per-Org overrides (scope=CLUSTER, reset_org_overrides=true)",
+                    "value": {
+                      "feature_id": "orion.embraceConfig.doIndexing",
+                      "feature_name": "index_columns",
+                      "feature_value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_reset_org_overrides": {
+                    "summary": "Bad Request — reset_org_overrides is not allowed when scope is ORG",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "reset_org_overrides is only valid for scope=CLUSTER."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient privileges or org not assigned to feature.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden — ADMINISTRATION privilege required",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "Insufficient privileges."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Feature not found or feature management not enabled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "feature_not_found": {
+                    "summary": "Not Found — feature_identifier does not match any known feature",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10000,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "Feature 'orion.__does_not_exist__' not found in config."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
             "content": {
               "application/json": {
                 "schema": {
@@ -25075,6 +25547,107 @@
         },
         "description": "Tag reference associated with a semantic integration."
       },
+      "FeatureGroup": {
+        "type": "object",
+        "required": [
+          "features"
+        ],
+        "properties": {
+          "feature_group": {
+            "type": "string",
+            "description": "Display name of the feature group.",
+            "nullable": true
+          },
+          "docs_url": {
+            "type": "string",
+            "description": "Documentation URL for the feature group, when available.",
+            "nullable": true
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeatureDetail"
+            },
+            "description": "Feature details within this group. Each entry contains the fields relevant to\nthe requested scope; org-admin-only and cluster-admin-only fields are null in\nthe other view."
+          }
+        },
+        "description": "A named group of related features. Returned by searchFeatures; the contents of\nfeatures depend on the requested scope (cluster-admin vs. org-admin view)."
+      },
+      "FeatureDetail": {
+        "type": "object",
+        "required": [
+          "feature_id"
+        ],
+        "properties": {
+          "feature_id": {
+            "type": "string",
+            "description": "Underlying unique feature ID."
+          },
+          "feature_name": {
+            "type": "string",
+            "description": "User-friendly feature name. Present when the feature declares one.",
+            "nullable": true
+          },
+          "assigned_orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeatureOrgInfo"
+            },
+            "description": "Orgs currently assigned to this feature. Populated in the cluster-admin view.",
+            "nullable": true
+          },
+          "is_org_aware": {
+            "type": "boolean",
+            "description": "Whether the feature is Org-aware. Org-aware features are managed via per-Org\nassignment; non-org-aware features are cluster-level toggles. Populated in the\ncluster-admin view.",
+            "nullable": true
+          },
+          "feature_value": {
+            "type": "string",
+            "description": "Current cluster-level value of the feature. Populated in the cluster-admin\nview for non-org-aware features; null for Org-aware features.",
+            "nullable": true
+          },
+          "element_type": {
+            "type": "string",
+            "description": "UI element type hint for the feature. Populated in the org-admin view.",
+            "nullable": true
+          },
+          "element_config": {
+            "type": "object",
+            "description": "UI element configuration for the feature. Populated in the org-admin view.",
+            "nullable": true
+          },
+          "element_value": {
+            "type": "string",
+            "description": "Current value of the feature for the requested Org. Populated in the\norg-admin view.",
+            "nullable": true
+          },
+          "docs_url": {
+            "type": "string",
+            "description": "Per-feature documentation URL, when available.",
+            "nullable": true
+          }
+        },
+        "description": "Detail for a single feature. Fields are populated according to the scope of the\nsearch: cluster-admin (CLUSTER) responses populate assigned_orgs, is_org_aware,\nand (for non-org-aware features) feature_value; org-admin (ORG) responses\npopulate element_type, element_config, and element_value."
+      },
+      "FeatureOrgInfo": {
+        "type": "object",
+        "required": [
+          "org_id",
+          "org_name"
+        ],
+        "properties": {
+          "org_id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Numeric ID of the Org."
+          },
+          "org_name": {
+            "type": "string",
+            "description": "Display name of the Org."
+          }
+        },
+        "description": "Lightweight Org identifier and display name, as returned in feature\nassignment responses.\nThe field names org_id / org_name intentionally deviate from the bare id /\nname used by the shared Org type: they are the literal wire keys emitted by\nthe Callosum backend, so they are load-bearing for Prism's response field\nmapping and cannot be renamed without a backend change."
+      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -30021,6 +30594,55 @@
         },
         "description": "Import details for a single formula."
       },
+      "FeatureAssignmentResponse": {
+        "type": "object",
+        "required": [
+          "feature_id",
+          "assigned_orgs"
+        ],
+        "properties": {
+          "feature_id": {
+            "type": "string",
+            "description": "Underlying unique feature ID."
+          },
+          "feature_name": {
+            "type": "string",
+            "description": "User-friendly feature name. Present when the feature declares one.",
+            "nullable": true
+          },
+          "assigned_orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeatureOrgInfo"
+            },
+            "description": "Updated set of Orgs assigned to the feature."
+          }
+        },
+        "description": "Response returned when a feature's Org assignments are updated."
+      },
+      "FeatureValueResponse": {
+        "type": "object",
+        "required": [
+          "feature_id",
+          "feature_value"
+        ],
+        "properties": {
+          "feature_id": {
+            "type": "string",
+            "description": "Underlying unique feature ID."
+          },
+          "feature_name": {
+            "type": "string",
+            "description": "User-friendly feature name. Present when the feature declares one.",
+            "nullable": true
+          },
+          "feature_value": {
+            "type": "string",
+            "description": "The value that was written."
+          }
+        },
+        "description": "Response returned when a feature's value is set."
+      },
       "Runtime_Filter": {
         "type": "object",
         "properties": {
@@ -32027,6 +32649,103 @@
         },
         "required": [
           "template_properties"
+        ]
+      },
+      "SearchFeaturesRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Determines the administrative view for the search.\nUse CLUSTER for the cluster-admin view (returns org assignments per feature);\nuse ORG for the org-admin view (returns the current value of each feature\nassigned to the org).",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "org_identifier": {
+            "description": "Numeric ID of the Org to scope the search to. Required when scope is ORG;\nignored when scope is CLUSTER.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "category": {
+            "description": "Category of features to return. GENERAL_ACCESS returns features that are\ngenerally available; EARLY_ACCESS returns features still in early access.\nDefaults to GENERAL_ACCESS.",
+            "default": "GENERAL_ACCESS",
+            "type": "string",
+            "enum": [
+              "GENERAL_ACCESS",
+              "EARLY_ACCESS"
+            ]
+          }
+        },
+        "required": [
+          "scope"
+        ]
+      },
+      "UpdateFeatureAssignmentsRequest": {
+        "type": "object",
+        "properties": {
+          "feature_identifier": {
+            "description": "User-friendly feature name (feature_name) or the underlying feature ID\n(feature_id) of the feature whose Org assignments should be updated.",
+            "type": "string"
+          },
+          "org_identifiers": {
+            "description": "Numeric IDs of the Orgs to assign to the feature. Send an empty array with\noperation REPLACE to clear all Org assignments for this feature.",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "operation": {
+            "description": "Type of update to apply to the Org assignments. ADD assigns the given Orgs\nin addition to existing ones; REMOVE unassigns the given Orgs; REPLACE sets\nthe assignment to exactly the given Orgs. Defaults to REPLACE.",
+            "default": "REPLACE",
+            "type": "string",
+            "enum": [
+              "ADD",
+              "REMOVE",
+              "REPLACE"
+            ]
+          }
+        },
+        "required": [
+          "feature_identifier",
+          "org_identifiers"
+        ]
+      },
+      "UpdateFeatureValueRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Determines the scope at which the value is set. Use CLUSTER to set the\ncluster-level value; use ORG to set a per-Org value override.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "org_identifier": {
+            "description": "Numeric ID of the Org for which to set the value. Required when scope is\nORG; ignored when scope is CLUSTER.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "feature_identifier": {
+            "description": "User-friendly feature name (feature_name) or the underlying feature ID\n(feature_id) of the feature whose value should be set.",
+            "type": "string"
+          },
+          "feature_value": {
+            "description": "New value to set for the feature.",
+            "type": "string"
+          },
+          "reset_org_overrides": {
+            "description": "Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "scope",
+          "feature_identifier",
+          "feature_value"
         ]
       },
       "CreateUserGroupRequest": {
