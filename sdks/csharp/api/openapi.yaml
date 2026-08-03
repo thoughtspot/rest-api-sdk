@@ -278,6 +278,302 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+  /api/rest/2.0/ai/memory/export:
+    post:
+      description: "\nExports memory entries (rules, recipes, and always-apply rules)\
+        \ for\nthe specified data-models as a single YAML payload. The payload can\n\
+        be edited locally and re-submitted through `importMemory`.\nRequires Spotter\
+        \ access (use/manage) and either edit or memory\naccess on corresponding data\
+        \ model sources. \n Version: 26.8.0.cl or later\n\n\nThis API allows users\
+        \ to export data-model memories for a given list of data-models. This exported\
+        \ yaml file can then be modified and used as input to the import API in target\
+        \ env.\n\nThis API enables customers to migrate memories from a source env\
+        \ to a target env. This improves memory adoption for Spotter by giving the\
+        \ users a chance to develop their memories in one env and replicate the same\
+        \ in another env.\n\n#### Usage guidelines\n\nTo export memory for one or\
+        \ more data-models, the request may include:\n- `sources`: A list of typed\
+        \ scope groups identifying which data-models to export memory for. Each group\
+        \ contains:\n  - `type`: The source object type for this group — `DATA_MODEL`.\n\
+        \  - `identifiers`: An array of GUIDs or human-readable `obj_id`s of the data-models\
+        \ to export memory for. obj_ids are resolved server-side before forwarding.\n\
+        \nThe API returns a response object with:\n- `content`: The serialized memory\
+        \ payload (YAML) — exactly the shape that the `importMemory` API consumes.\
+        \ Edit it locally and pass it back through `importMemory` to apply changes.\n\
+        \n#### Source Type\n\n- **DATA_MODEL**: The `identifiers` are data-model GUIDs.\
+        \ This is the default source type for Spotter memory and covers the rules,\
+        \ recipes and always-apply rules attached directly to a data-model.\n\n####\
+        \ File format\n\nThe exported `content` is a YAML document with a single top-level\
+        \ `memories` key holding a list of memory items — exactly the format the `importMemory`\
+        \ API consumes. The full format reference (an annotated example, memory item\
+        \ fields, per-type content, and `datamodel_sources` identification) is documented\
+        \ in the `importMemory` API's **File format** section. Exported files populate\
+        \ each source's `guid` and, if present, `obj_id` as well.\n\n#### Error responses\n\
+        \n| Code | Description                                                   \
+        \                                                                        \
+        \                                                       |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n\
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.\
+        \                                                                        \
+        \                                                 |\n| 403  | Forbidden —\
+        \ the authenticated user does not have necessary permissions, or lacks read\
+        \ access on a referenced data-model, or the bearer token does not correspond\
+        \ to the data-model's org. |\n\n> ###### Note:\n> - To use this API, the user\
+        \ needs Spotter access (use/manage) and either edit or memory access on the\
+        \ data-model and they must use corresponding org related bearerToken where\
+        \ the data-model exists.\n> - This endpoint is currently in Beta. Breaking\
+        \ changes may be introduced before the endpoint is made Generally Available.\n\
+        > - Available from version 26.8.0.cl and later.\n> - This endpoint requires\
+        \ Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\
+        \n\n\n\n\n"
+      operationId: exportMemory
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExportMemoryRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Serialized YAML memory payload returned
+                  value:
+                    content: |
+                      memories:
+                      - type: RULE
+                        content:
+                          rule_definition: "Earnings: total sales filtered to West region only."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition: "Geographic data is organized in a three-level hierarchy from broadest to most specific: Region (highest level) → State (middle level) → County (lowest level). This hierarchical structure enables progressive drill-down analysis, where each level provides increasingly granular geographic segmentation for sales and quantity metrics."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition: "Hot products: top 5 products by total sales (no region filter applied)."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: Calculate earnings for East region current year
+                          recipe: "{\"task\": \"Compute earnings by extracting sales and filtering to East region for the current year\", \"steps\": [{\"instruction\": \"Extract sales, then apply a filter for current year and a filter for East region.\", \"analytical_mappings\": {\"tml_tokens\": [\"[sales] [date] = 'this year' [region] = 'east'\"], \"formulas\": []}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: Total sales for East region current year
+                          recipe: "{\"task\": \"Compute total sales filtered to East region for the current year\", \"steps\": [{\"instruction\": \"Calculate total sales where region is East and date is current year.\", \"analytical_mappings\": {\"tml_tokens\": [\"[sales] [date] = 'this year' [region] = 'east'\"], \"formulas\": []}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: What is the total quantity purchased by city and region?
+                          recipe: "{\"task\":\"Calculate total quantity purchased grouped by city and region\",\"steps\":[{\"instruction\":\"Sum the quantity purchased metric and group the results by city and region to show purchasing volumes across different geographic locations\",\"analytical_mappings\":{\"tml_tokens\":[\"[quantity purchased] [city] [region]\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: What were total jacket sales in 2024?
+                          recipe: "{\"task\":\"Compute the aggregate 2024 jacket sales revenue.\",\"steps\":[{\"instruction\":\"Shows the total sales revenue for jackets in 2024. This provides a high-level metric to understand overall jacket sales performance for the year.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [item type] = [item type].\\\"jackets\\\" [date] = \\\"2024\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: How are monthly sales and quantity tracking by state?
+                          recipe: "{\"task\":\"Aggregate monthly sales and quantity by state for a state-level performance view.\",\"steps\":[{\"instruction\":\"Shows monthly sales and quantity purchased metrics organized by state. Provides a state-wise view of sales performance with additional dimensional context.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [state] [date]\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: "What's the quarterly sales and quantity by region and state for the last 3 years, with yearly rollups?"
+                          recipe: "{\"task\":\"Build a 3-year quarterly view of sales and quantity grouped by region and state, with quarterly and yearly aggregation.\",\"steps\":[{\"instruction\":\"Displays quarterly performance metrics including sales and quantity purchased, broken down by region and state over the last 3 years. Enables analysis of regional and state-level trends with both quarterly and yearly views.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [region] [state] [date].\\\"quarterly\\\" [date].\\\"last 3 years\\\" [date].\\\"yearly\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: How are we doing against quarterly sales and quantity targets per region?
+                          recipe: "{\"task\":\"Render bullet charts contrasting quarterly actual vs target sales and quantity per region.\",\"steps\":[{\"instruction\":\"Compares actual quarterly sales and quantity metrics against targets by region using bullet charts. Provides a target vs actual performance view to track progress.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [region] [date].\\\"quarterly\\\" [Target sales] [Target quantity]\"],\"formulas\":[\"{\\\"name\\\": \\\"Target sales\\\", \\\"expression\\\": \\\"random ( ) * sum ( sales ) * 2\\\"}\",\"{\\\"name\\\": \\\"Target quantity\\\", \\\"expression\\\": \\\"random ( ) * sum ( quantity purchased  ) * 2\\\"}\"]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                example_2:
+                  summary: Serialized YAML memory payload returned
+                  value:
+                    content: |
+                      memories:
+                      - type: RULE
+                        content:
+                          rule_definition: "Earnings: total sales filtered to West region only."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition: "Hot products: top 5 products by total sales (no region filter applied)."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition: "Geographic data is organized in a three-level hierarchy from broadest to most specific: Region (highest level) → State (middle level) → County (lowest level). This hierarchical structure enables progressive drill-down analysis, where each level provides increasingly granular geographic segmentation for sales and quantity metrics."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition: "When analyzing quantity purchased, apply a date filter for the last 3 years."
+                        datamodel_sources:
+                        - guid: 44444444-4444-4444-4444-444444444444
+                          obj_id: sample-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition:  User's total sales target is 1 million USD.
+                        datamodel_sources:
+                        - guid: 44444444-4444-4444-4444-444444444444
+                          obj_id: sample-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition:  Sales analyses must filter to east region only.
+                        datamodel_sources:
+                        - guid: 44444444-4444-4444-4444-444444444444
+                          obj_id: sample-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: Calculate earnings for East region current year
+                          recipe: "{\"task\": \"Compute earnings by extracting sales and filtering to East region for the current year\", \"steps\": [{\"instruction\": \"Extract sales, then apply a filter for current year and a filter for East region.\", \"analytical_mappings\": {\"tml_tokens\": [\"[sales] [date] = 'this year' [region] = 'east'\"], \"formulas\": []}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: Total sales for East region current year
+                          recipe: "{\"task\": \"Compute total sales filtered to East region for the current year\", \"steps\": [{\"instruction\": \"Calculate total sales where region is East and date is current year.\", \"analytical_mappings\": {\"tml_tokens\": [\"[sales] [date] = 'this year' [region] = 'east'\"], \"formulas\": []}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: What is the total quantity purchased by city and region?
+                          recipe: "{\"task\":\"Calculate total quantity purchased grouped by city and region\",\"steps\":[{\"instruction\":\"Sum the quantity purchased metric and group the results by city and region to show purchasing volumes across different geographic locations\",\"analytical_mappings\":{\"tml_tokens\":[\"[quantity purchased] [city] [region]\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: "What's the quarterly sales and quantity by region and state for the last 3 years, with yearly rollups?"
+                          recipe: "{\"task\":\"Build a 3-year quarterly view of sales and quantity grouped by region and state, with quarterly and yearly aggregation.\",\"steps\":[{\"instruction\":\"Displays quarterly performance metrics including sales and quantity purchased, broken down by region and state over the last 3 years. Enables analysis of regional and state-level trends with both quarterly and yearly views.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [region] [state] [date].\\\"quarterly\\\" [date].\\\"last 3 years\\\" [date].\\\"yearly\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: How are we doing against quarterly sales and quantity targets per region?
+                          recipe: "{\"task\":\"Render bullet charts contrasting quarterly actual vs target sales and quantity per region.\",\"steps\":[{\"instruction\":\"Compares actual quarterly sales and quantity metrics against targets by region using bullet charts. Provides a target vs actual performance view to track progress.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [region] [date].\\\"quarterly\\\" [Target sales] [Target quantity]\"],\"formulas\":[\"{\\\"name\\\": \\\"Target sales\\\", \\\"expression\\\": \\\"random ( ) * sum ( sales ) * 2\\\"}\",\"{\\\"name\\\": \\\"Target quantity\\\", \\\"expression\\\": \\\"random ( ) * sum ( quantity purchased  ) * 2\\\"}\"]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: How are monthly sales and quantity tracking by state?
+                          recipe: "{\"task\":\"Aggregate monthly sales and quantity by state for a state-level performance view.\",\"steps\":[{\"instruction\":\"Shows monthly sales and quantity purchased metrics organized by state. Provides a state-wise view of sales performance with additional dimensional context.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [state] [date]\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: What were total jacket sales in 2024?
+                          recipe: "{\"task\":\"Compute the aggregate 2024 jacket sales revenue.\",\"steps\":[{\"instruction\":\"Shows the total sales revenue for jackets in 2024. This provides a high-level metric to understand overall jacket sales performance for the year.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [item type] = [item type].\\\"jackets\\\" [date] = \\\"2024\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: What were jacket sales by region in 2024?
+                          recipe: "{\"task\":\"Break out 2024 jacket sales revenue by region to compare regional performance.\",\"steps\":[{\"instruction\":\"Shows jacket sales revenue broken down by region for 2024. This helps identify which geographic regions are performing best in jacket sales and enables regional performance comparison.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] by [region] [item type] = [item type].\\\"jackets\\\" [date] = \\\"2024\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 44444444-4444-4444-4444-444444444444
+                          obj_id: sample-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: "Show me quarterly sales and quantity trends over the past 3 years, newest first."
+                          recipe: "{\"task\":\"Plot quarterly sales and quantity trends for the past 3 years in reverse chronological order.\",\"steps\":[{\"instruction\":\"Presents quarterly sales and quantity purchased trends over the last 3 years, sorted by most recent periods first. Enables time-based analysis of sales performance.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [date].\\\"quarterly\\\" [date].\\\"last 3 years\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 44444444-4444-4444-4444-444444444444
+                          obj_id: sample-model
+                        tags: []
+              schema:
+                $ref: "#/components/schemas/ExportMemoryResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExportMemoryResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
   /api/rest/2.0/ai/agent/instructions/get:
     get:
       description: |2+
@@ -973,6 +1269,309 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/eureka_GetRelevantQuestionsResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+  /api/rest/2.0/ai/memory/import:
+    post:
+      description: "\nImports memory entries (rules, recipes, and always-apply rules)\
+        \ from\na YAML payload, typically a payload produced by `exportMemory` and\n\
+        edited locally. The imported entries replace the existing memory for\nthe\
+        \ data-models referenced in the payload.\n`dry_run` is required. Pass `true`\
+        \ first to validate the payload and\nreview the preview counts and any row-level\
+        \ failures without making\nchanges, then re-run with `dry_run = false` to\
+        \ apply the import. An\nimport is not applied if any row fails validation.\n\
+        Requires Spotter access (use/manage) and either edit or memory\naccess on\
+        \ corresponding data model sources. \n Version: 26.8.0.cl or later\n\n\nThis\
+        \ API allows users to import data-model memories using a given yaml file.\
+        \ This yaml file can be obtained from the export memory API in source env\
+        \ and can be modified and used as input to the import API in target env.\n\
+        \nThis API enables customers to migrate memories from a source env to a target\
+        \ env. This improves memory adoption for Spotter by giving the users a chance\
+        \ to develop their memories in one env and replicate the same in another env.\n\
+        \n#### Usage guidelines\n\nTo import memory, the request must include:\n-\
+        \ `content`: The full serialized memory payload to import (YAML). Typically\
+        \ the `content` value returned by the `exportMemory` API, edited locally and\
+        \ re-submitted. The payload itself identifies which data-models the memory\
+        \ applies to, so no separate identifier list is required.\n- `dry_run`: Required.\
+        \ When `true`, validate the payload and return preview counts without writing\
+        \ anything; when `false`, apply the import. Always run with `dry_run = true`\
+        \ first, then re-run with `dry_run = false` once you are satisfied with the\
+        \ preview.\n\nThe import replaces the existing global memories on the data-models\
+        \ referenced in the payload with the entries supplied in the payload.\n\n\
+        The API returns a response object with:\n- `status`: The terminal status of\
+        \ the import (`SUCCESS`, `VALIDATION_FAILED`, or `FAILED`).\n- `summary`:\
+        \ Per `(memory_type, source)` counts. In a dry run the `deleted_record_count`/`inserted_record_count`\
+        \ are previews; in a real import they are actuals. On `VALIDATION_FAILED`,\
+        \ `summary` is `null` when validation fails before any item is processed (e.g.\
+        \ an unresolved or inaccessible data-model source) and an empty list otherwise\
+        \ — treat both as \"no counts available\".\n- `validation_failures`: Per-item\
+        \ validation failures, each with `line_number`, `reason`, `field_name`, and\
+        \ `message` for click-to-locate and inline highlighting.\n- `diagnostics`:\
+        \ Groups of diagnostic messages, each with a `sub_status` (`WARNING`, `FAILURE`,\
+        \ `ROLLED_BACK`, or `UNKNOWN`) and a `messages` list. This is the single channel\
+        \ for both non-fatal warnings (under `WARNING`, e.g. when some older memory\
+        \ entries could not be fully cleaned up) and fatal causes (e.g. the failure\
+        \ reason under `FAILURE`, or a `ROLLED_BACK` group when new entries were undone).\n\
+        - `operation_id`: A server-generated identifier for this import operation;\
+        \ include it when contacting support to help correlate server-side logs. Populated\
+        \ once the server registers the import operation; `null` when the request\
+        \ fails earlier (e.g. while parsing the payload or resolving its data-model\
+        \ sources).\n\n#### File format\n\nThe payload is a YAML document with a single\
+        \ top-level `memories` key holding a list of memory items. Each item is self-contained:\
+        \ a `type`, a typed `content` block, a `datamodel_sources` list, and optional\
+        \ `tags`. Typically you don't hand-author this file — you obtain it from `exportMemory`,\
+        \ edit it, and submit it back through `importMemory`.\n\n```yaml\nmemories:\n\
+        - type: RULE\n  content:\n    rule_definition: \"Always filter revenue to\
+        \ closed-won deals.\"\n  datamodel_sources:\n  - guid: 11111111-1111-1111-1111-111111111111\n\
+        \    obj_id: sales_data_model\n  tags:\n  - finance\n- type: RULE\n  content:\n\
+        \    rule_definition: \"Exclude internal test accounts from all results.\"\
+        \n  datamodel_sources:\n  - obj_id: sales_data_model\n- type: RECIPE\n  content:\n\
+        \    user_query: \"top accounts by revenue\"\n    recipe: |\n      {\"steps\"\
+        : [...serialized recipe blob...]}\n  datamodel_sources:\n  - obj_id: sales_data_model\n\
+        - type: RECIPE\n  content:\n    user_query: \"monthly new customer count\"\
+        \n    recipe: |\n      {\"steps\": [...serialized recipe blob...]}\n  datamodel_sources:\n\
+        \  - obj_id: sales_data_model\n- type: ALWAYS_APPLY_RULES\n  content:\n  \
+        \  rules:\n    - \"Never show internal test accounts.\"\n    - \"Round currency\
+        \ to whole dollars.\"\n  datamodel_sources:\n  - guid: 22222222-2222-2222-2222-222222222222\n\
+        ```\n\nA file can contain multiple `RULE` and multiple `RECIPE` items for\
+        \ a data-model, but at most one `ALWAYS_APPLY_RULES` item per data-model.\n\
+        \n##### Memory item fields\n\n| Field | Required | Type | Description |\n\
+        |-------|----------|------|-------------|\n| `type` | Yes | String enum |\
+        \ One of `RULE`, `RECIPE`, or `ALWAYS_APPLY_RULES`. |\n| `content` | Yes |\
+        \ Mapping | Type-specific content block (see below). |\n| `datamodel_sources`\
+        \ | Yes | Non-empty list | The data-model(s) the memory attaches to. |\n|\
+        \ `tags` | No | List of strings | Free-form labels. |\n\n##### Memory types\
+        \ and content\n\n| `type` | Content fields | Notes |\n|--------|----------------|-------|\n\
+        | `RULE` | `rule_definition` — required, non-empty string | A single semantic\
+        \ rule. |\n| `RECIPE` | `recipe` and `user_query` — both required, non-empty\
+        \ strings | `recipe` is an opaque serialized blob; `user_query` is the natural-language\
+        \ query it answers. |\n| `ALWAYS_APPLY_RULES` | `rules` — required, non-empty\
+        \ list of non-empty strings | Data-model-wide always-apply rules. At most\
+        \ one `ALWAYS_APPLY_RULES` item per data-model. |\n\n##### Identifying data-models\
+        \ (`datamodel_sources`)\n\nEach item must list at least one source. Each entry\
+        \ identifies a data-model by at least one of:\n- `guid` — the data-model GUID.\n\
+        - `obj_id` — a stable object ID, resolved to a GUID server-side.\n\nIf both\
+        \ are supplied, `obj_id` takes precedence and `guid` is ignored entirely;\
+        \ `guid` takes effect only when `obj_id` is absent. Exported files populate\
+        \ `guid` and, if present, `obj_id` as well.\n\n> ⚠️ **Cross-environment import:**\
+        \ When `obj_id` is present it is\n> authoritative — the accompanying `guid`\
+        \ is **not** used as a fallback.\n> If an `obj_id` does not exist in the target\
+        \ environment, that item\n> fails with `UNRESOLVED_SOURCE`. Remove or correct\
+        \ stale `obj_id`\n> values before importing across environments.\n\n#### Validations\
+        \ reference\n\nThe payload is fully validated before anything is written.\
+        \ This applies to `dry_run = true` and `dry_run = false` alike: if any item\
+        \ fails validation, the entire import is rejected — no partial writes — and\
+        \ all failures are returned together so you can fix them in one pass.\n\n\
+        ##### Limits\n\nDefault limits (may be adjusted in future if the need arises):\n\
+        \n| Limit | Default |\n|-------|---------|\n| Uploaded file size | 10 MiB\
+        \ |\n| Total memory items | 10,000 |\n| `rule_definition` length | 1,000 characters\
+        \ |\n| `user_query` length | 1,000 characters |\n| `recipe` length | 2,000\
+        \ characters |\n| `rules` combined length (`ALWAYS_APPLY_RULES`) | 2,000 characters\
+        \ |\n| Tags per item | 10 |\n| Characters per tag | 50 |\n\nThe `rules` limit\
+        \ in `ALWAYS_APPLY_RULES` is a combined budget across all entries in the list,\
+        \ not per entry.\n\n##### Structural rules\n\n- The document must be a mapping\
+        \ with a `memories` key whose value is a list.\n- Unknown keys — at the top\
+        \ level, within an item, or under `content` — are rejected.\n- Each item's\
+        \ `type` must be one of the three supported values, and `content` must match\
+        \ that type's shape.\n- Null, empty-string, or wrong-typed values in a required\
+        \ field are treated as missing.\n- Non-string or empty `tags` entries are\
+        \ dropped silently; certain tags reserved for internal use are stripped automatically\
+        \ before the item is stored.\n\n##### Cross-item rules\n\n- A data-model referenced\
+        \ by more than one `ALWAYS_APPLY_RULES` item is rejected — combine them into\
+        \ a single item's `rules` list.\n\n##### Failure reasons\n\nEach entry in\
+        \ `validation_failures` carries one of:\n\n| Reason | Meaning |\n|--------|---------|\n\
+        | `SCHEMA` | YAML structure is invalid or unsupported. |\n| `VALIDATION` |\
+        \ A required field is missing/empty, a count exceeds a limit, or a GUID is\
+        \ malformed. |\n| `CHAR_LIMIT` | A content field or tag exceeds its size limit.\
+        \ |\n| `UNRESOLVED_SOURCE` | A `guid` or `obj_id` could not be resolved to\
+        \ an existing data-model. |\n| `ACCESS_DENIED` | The caller lacks sufficient\
+        \ access on the referenced data-model. |\n\n#### Dry run\n\n`dry_run` is required\
+        \ and has no default, so the import is always a deliberate two-step flow:\n\
+        \n1. **First, call with `dry_run = true`.** This validates the payload and\
+        \ previews what would happen — the counts in `summary` and any `validation_failures`\
+        \ — without writing anything.\n2. **Then, after reviewing a clean preview,\
+        \ call again with `dry_run = false`** (same `content`). This applies the import.\
+        \ It refuses to write when any item fails validation, so fix the reported\
+        \ `validation_failures` and resubmit.\n\n> ###### Important:\n> Never call\
+        \ `dry_run = false` without first inspecting a `dry_run = true` preview. A\
+        \ real import deletes and replaces existing global memories on the referenced\
+        \ data-models.\n\n#### Error responses\n\n| Code | Description           \
+        \                                                                        \
+        \                                                                        \
+        \                       |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n\
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.\
+        \                                                                        \
+        \                                                |\n| 403  | Forbidden — the\
+        \ authenticated user does not have the necessary Spotter permissions, or the\
+        \ bearer token does not correspond to the data-model's org. Per-data-model\
+        \ access failures do not use this code — they surface as `ACCESS_DENIED` validation\
+        \ failures with HTTP `200` (see Logical failures below). |\n\n#### Logical\
+        \ failures\n\nValidation and write failures are not returned in the error\
+        \ envelope. The call returns `200` with a terminal `status` of `VALIDATION_FAILED`\
+        \ or `FAILED`, and the details live in `validation_failures` / `diagnostics`:\n\
+        \n- **VALIDATION_FAILED** — one or more items failed schema/semantic validation;\
+        \ nothing was written. Inspect `validation_failures`, fix the items, and resubmit.\n\
+        - **FAILED** — the import did not complete. Inspect `diagnostics`: a `ROLLED_BACK`\
+        \ group means writing the new entries failed and any entries written before\
+        \ the failure were undone (existing memory is intact, no destructive change),\
+        \ while a `FAILURE` group carries another non-validation cause.\n\nSample\
+        \ `VALIDATION_FAILED` responses (HTTP 200):\n\n**Invalid data-model (unresolved\
+        \ source):**\n\n```json\n{\n    \"status\": \"VALIDATION_FAILED\",\n    \"\
+        summary\": null,\n    \"validation_failures\": [\n        {\n            \"\
+        line_number\": 2,\n            \"reason\": \"UNRESOLVED_SOURCE\",\n      \
+        \      \"field_name\": \"datamodel_sources[0].guid\",\n            \"message\"\
+        : \"unknown datamodel guid: 55555555-5555-5555-5555-555555555555\"\n     \
+        \   }\n    ],\n    \"diagnostics\": [\n        {\n            \"sub_status\"\
+        : \"FAILURE\",\n            \"messages\": [\n                \"unknown datamodel\
+        \ guid: 55555555-5555-5555-5555-555555555555\"\n            ]\n        }\n\
+        \    ],\n    \"operation_id\": null\n}\n```\n\n**Inaccessible data-models:**\n\
+        \n```json\n{\n    \"status\": \"VALIDATION_FAILED\",\n    \"summary\": null,\n\
+        \    \"validation_failures\": [\n        {\n            \"line_number\": 2,\n\
+        \            \"reason\": \"ACCESS_DENIED\",\n            \"field_name\": \"\
+        datamodel_sources[0]\",\n            \"message\": \"Insufficient permissions\
+        \ on datamodel '44444444-4444-4444-4444-444444444444'\"\n        },\n    \
+        \    {\n            \"line_number\": 8,\n            \"reason\": \"ACCESS_DENIED\"\
+        ,\n            \"field_name\": \"datamodel_sources[0]\",\n            \"message\"\
+        : \"Insufficient permissions on datamodel '33333333-3333-3333-3333-333333333333'\"\
+        \n        }\n    ],\n    \"diagnostics\": [\n        {\n            \"sub_status\"\
+        : \"FAILURE\",\n            \"messages\": [\n                \"Memory import\
+        \ validation failed with 2 error(s): Insufficient permissions on datamodel\
+        \ '44444444-4444-4444-4444-444444444444'; Insufficient permissions on datamodel\
+        \ '33333333-3333-3333-3333-333333333333'\"\n            ]\n        }\n   \
+        \ ],\n    \"operation_id\": null\n}\n```\n\n**Character-limit validations:**\n\
+        \n```json\n{\n    \"status\": \"VALIDATION_FAILED\",\n    \"summary\": [],\n\
+        \    \"validation_failures\": [\n        {\n            \"line_number\": 3,\n\
+        \            \"reason\": \"CHAR_LIMIT\",\n            \"field_name\": \"content.rule_definition\"\
+        ,\n            \"message\": \"content.rule_definition is 1073 characters;\
+        \ max allowed is 1000\"\n        },\n        {\n            \"line_number\"\
+        : 49,\n            \"reason\": \"CHAR_LIMIT\",\n            \"field_name\"\
+        : \"content.user_query\",\n            \"message\": \"content.user_query is\
+        \ 1150 characters; max allowed is 1000\"\n        },\n        {\n        \
+        \    \"line_number\": 49,\n            \"reason\": \"CHAR_LIMIT\",\n     \
+        \       \"field_name\": \"content.recipe\",\n            \"message\": \"content.recipe\
+        \ is 3574 characters; max allowed is 2000\"\n        }\n    ],\n    \"diagnostics\"\
+        : [\n        {\n            \"sub_status\": \"FAILURE\",\n            \"messages\"\
+        : [\n                \"Validation failures present; fix them and re-run to\
+        \ see the DRY_RUN preview.\"\n            ]\n        }\n    ],\n    \"operation_id\"\
+        : \"66666666-6666-6666-6666-666666666666\"\n}\n```\n\n> ###### Note:\n> -\
+        \ To use this API, the user needs Spotter access (use/manage) and either edit\
+        \ or memory access on the data-model and they must use corresponding org related\
+        \ bearerToken where the data-model exists.\n> - This endpoint is currently\
+        \ in Beta. Breaking changes may be introduced before the endpoint is made\
+        \ Generally Available.\n> - Available from version 26.8.0.cl and later.\n\
+        > - This endpoint requires Spotter — please contact ThoughtSpot Support to\
+        \ enable Spotter on your cluster.\n\n\n\n\n\n"
+      operationId: importMemory
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportMemoryRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Successful dry-run preview
+                  value:
+                    status: SUCCESS
+                    summary:
+                    - memory_type: RULES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 3
+                      deleted_record_count: 3
+                      inserted_record_count: 2
+                      failed_record_count: 0
+                    - memory_type: RECIPES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 7
+                      deleted_record_count: 7
+                      inserted_record_count: 4
+                      failed_record_count: 0
+                    - memory_type: ALWAYS_APPLY_RULES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 0
+                      deleted_record_count: 0
+                      inserted_record_count: 1
+                      failed_record_count: 0
+                    validation_failures: []
+                    diagnostics: []
+                    operation_id: 77777777-7777-7777-7777-777777777777
+                example_2:
+                  summary: Successful import (dry_run=false)
+                  value:
+                    status: SUCCESS
+                    summary:
+                    - memory_type: RULES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 3
+                      deleted_record_count: 3
+                      inserted_record_count: 2
+                      failed_record_count: 0
+                    - memory_type: RECIPES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 7
+                      deleted_record_count: 7
+                      inserted_record_count: 4
+                      failed_record_count: 0
+                    - memory_type: ALWAYS_APPLY_RULES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 0
+                      deleted_record_count: 0
+                      inserted_record_count: 1
+                      failed_record_count: 0
+                    validation_failures: []
+                    diagnostics: []
+                    operation_id: 88888888-8888-8888-8888-888888888888
+              schema:
+                $ref: "#/components/schemas/ImportMemoryResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportMemoryResponse"
           description: Common error response
         "400":
           content:
@@ -2582,7 +3181,7 @@ paths:
         You can generate a token by providing a `username` and `password`, or by using a `secret_key`. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.
 
         **Note**:
-        * When both `password` and `secret_key` are included in the API request, `password` takes precedence.
+        * When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.
         * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username`  and `password` returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.
 
         The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.
@@ -2765,7 +3364,7 @@ paths:
         You can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.
 
         **Note**:
-        * When both `password` and `secret_key` are included in the API request, `password` takes precedence.
+        * When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.
         * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with  `secret_key` or contact ThoughtSpot Support for assistance.
 
         The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.
@@ -2915,7 +3514,7 @@ paths:
         You can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.
 
         **Note**:
-        * When both `password` and `secret_key` are included in the API request, `password` takes precedence.
+        * When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.
         * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with `secret_key` or contact ThoughtSpot Support for assistance.
 
         The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.
@@ -7141,6 +7740,333 @@ paths:
           description: Unexpected error
       tags:
       - Groups
+      - ThoughtSpotRest
+  /api/rest/2.0/input-tables/create:
+    post:
+      description: |2+
+
+         Version: 26.8.0.cl or later
+
+
+        Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required.
+
+        #### Usage guidelines
+
+        To create an input table, provide the following in the request body:
+
+        * **`table_name`** — Physical name of the table to create in the external warehouse.
+        * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata.
+        * **`table_definition`** — Describes the table schema:
+          * `referenced_columns` — List of column GUIDs from the linked model to include as read-only reference columns in the input table. These columns anchor the input data to existing model dimensions.
+          * `new_columns` — List of new editable columns to create. Each column requires:
+            * `name` — Column display name.
+            * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).
+            * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.
+
+        **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.
+
+        #### Examples
+
+        Create an input table with one referenced model column and one new editable measure column:
+
+        ```json
+        {
+          "table_name": "Sales Region Targets",
+          "model_identifier": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "table_definition": {
+            "referenced_columns": ["c7d8e9f0-1234-5678-abcd-ef0987654321"],
+            "new_columns": [
+              {
+                "name": "target_revenue",
+                "data_type": "DOUBLE",
+                "type": "MEASURE"
+              }
+            ]
+          }
+        }
+        ```
+
+        Create an input table with multiple new editable columns and no referenced columns:
+
+        ```json
+        {
+          "table_name": "Budget Adjustments",
+          "model_identifier": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "table_definition": {
+            "referenced_columns": [],
+            "new_columns": [
+              {
+                "name": "region",
+                "data_type": "VARCHAR",
+                "type": "ATTRIBUTE"
+              },
+              {
+                "name": "adjustment_amount",
+                "data_type": "DOUBLE",
+                "type": "MEASURE"
+              },
+              {
+                "name": "effective_date",
+                "data_type": "DATE",
+                "type": "ATTRIBUTE"
+              }
+            ]
+          }
+        }
+        ```
+
+
+
+
+
+      operationId: createInputTable
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInputTableRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Input table created successfully
+                  value:
+                    input_table_identifier: f47ac10b-58cc-4372-a567-0e02b2c3d479
+              schema:
+                $ref: "#/components/schemas/InputTableResponse"
+          description: Input table created successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad request — invalid payload, no columns selected, or upload\
+            \ disabled on the connection."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden — caller does not have MODIFY permission on the model.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Model not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error.
+      tags:
+      - Input Tables
+      - ThoughtSpotRest
+  /api/rest/2.0/input-tables/{input_table_identifier}/delete:
+    post:
+      description: |2+
+
+         Version: 26.8.0.cl or later
+
+
+        Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required.
+
+        #### Usage guidelines
+
+        Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.
+
+        **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.
+
+        #### Example
+
+        Pass the input table GUID as a path parameter. This endpoint has no request body.
+
+        ```
+        DELETE /api/rest/2.0/input-tables/a1b2c3d4-e5f6-7890-abcd-ef1234567890/delete
+        ```
+
+
+
+
+
+      operationId: deleteInputTable
+      parameters:
+      - description: Unique ID of the input table to delete.
+        explode: false
+        in: path
+        name: input_table_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successfully deleted the input table and dropped the physical
+            CDW table.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - Input Tables
+      - ThoughtSpotRest
+  /api/rest/2.0/input-tables/{input_table_identifier}/update:
+    post:
+      description: |2+
+
+         Version: 26.8.0.cl or later
+
+
+        Writes rows of data into an existing input table. The supplied rows replace the current contents of the table: each call serializes the provided values to CSV and loads them into the input table via DataManager, overwriting any previously stored rows.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.
+
+        #### Usage guidelines
+
+        Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:
+
+        * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. Only the listed columns are written; unlisted columns retain their existing values.
+        * **`rows`** — List of rows to load. Each row is an array of string values in the same order as `columns`. All cell values must be passed as strings regardless of the column's underlying data type.
+
+        **Note**: Each call fully replaces the previously loaded rows. To clear the table, send an empty `rows` array. Partial updates to individual rows are not supported; re-submit all rows on every write.
+
+        #### Examples
+
+        Write two rows to an input table. Pass the input table GUID as the
+        `input_table_identifier` path parameter:
+
+        ```
+        POST /api/rest/2.0/input-tables/{input_table_identifier}/update
+        ```
+
+        ```json
+        {
+          "columns": ["region", "target_revenue", "effective_date"],
+          "rows": [
+            ["West", "1500000", "2025-01-01"],
+            ["East", "2000000", "2025-01-01"]
+          ]
+        }
+        ```
+
+        The response returns the number of rows written:
+
+        ```json
+        { "rows_loaded": 2 }
+        ```
+
+        Clear all rows from an input table:
+
+        ```json
+        {
+          "columns": ["region", "target_revenue"],
+          "rows": []
+        }
+        ```
+
+
+
+
+
+      operationId: updateInputTable
+      parameters:
+      - description: Unique ID of the input table to update.
+        explode: false
+        in: path
+        name: input_table_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateInputTableRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Rows loaded successfully
+                  value:
+                    rows_loaded: 3
+              schema:
+                $ref: "#/components/schemas/InputTableUpdateResponse"
+          description: Rows loaded successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Malformed request or unknown column name.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden — caller does not have MODIFY permission on the input
+            table.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Input table not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error.
+      tags:
+      - Input Tables
       - ThoughtSpotRest
   /api/rest/2.0/jobs/history/communication-channels/search:
     post:
@@ -20722,6 +21648,11 @@ components:
         should be exported. One group binds a single `type` to a set of
         `identifiers`; pass one or more data-model identifiers in a group to
         scope the memory export to multiple data-models in one call.
+      example:
+        type: DATA_MODEL
+        identifiers:
+        - identifiers
+        - identifiers
       properties:
         type:
           description: Source object type for this group. Must be `DATA_MODEL`.
@@ -20743,6 +21674,8 @@ components:
       description: |-
         Response from exportMemory. Contains the serialized payload
         ready for local editing and re-submission to importMemory.
+      example:
+        content: content
       properties:
         content:
           description: |-
@@ -26324,6 +27257,44 @@ components:
         Response from importMemory. On `SUCCESS`, `summary` is fully
         populated. `diagnostics` carries any fatal errors, rollbacks, and
         non-fatal warnings produced during the import.
+      example:
+        status: SUCCESS
+        summary:
+        - memory_type: RULES
+          source:
+            identifier: identifier
+            type: DATA_MODEL
+          existing_record_count: 0
+          deleted_record_count: 6
+          inserted_record_count: 1
+          failed_record_count: 5
+        - memory_type: RULES
+          source:
+            identifier: identifier
+            type: DATA_MODEL
+          existing_record_count: 0
+          deleted_record_count: 6
+          inserted_record_count: 1
+          failed_record_count: 5
+        validation_failures:
+        - line_number: 5
+          reason: UNKNOWN_FAILURE_REASON
+          field_name: field_name
+          message: message
+        - line_number: 5
+          reason: UNKNOWN_FAILURE_REASON
+          field_name: field_name
+          message: message
+        diagnostics:
+        - sub_status: UNKNOWN
+          messages:
+          - messages
+          - messages
+        - sub_status: UNKNOWN
+          messages:
+          - messages
+          - messages
+        operation_id: operation_id
       properties:
         status:
           description: Terminal status of the import.
@@ -26371,6 +27342,15 @@ components:
         Per (memory type, target source) summary of what importMemory did — or
         would do, in DRY_RUN. `deleted_record_count` and `inserted_record_count`
         are previews in DRY_RUN and actuals in EXECUTE_IMPORT.
+      example:
+        memory_type: RULES
+        source:
+          identifier: identifier
+          type: DATA_MODEL
+        existing_record_count: 0
+        deleted_record_count: 6
+        inserted_record_count: 1
+        failed_record_count: 5
       properties:
         memory_type:
           description: |-
@@ -26416,6 +27396,9 @@ components:
         Identifies the target object a group of import counts applies to.
         `type` is the source kind (`DATA_MODEL`) and `identifier` is
         the object's GUID.
+      example:
+        identifier: identifier
+        type: DATA_MODEL
       properties:
         identifier:
           description: Identifier (GUID) of the target object these counts apply to.
@@ -26434,6 +27417,11 @@ components:
         the best-effort line number in the uploaded YAML; `field_name` is a
         dotted path within the item (e.g. `content.rule_definition`) for inline
         highlighting; absent when the failure is item-level rather than field-level.
+      example:
+        line_number: 5
+        reason: UNKNOWN_FAILURE_REASON
+        field_name: field_name
+        message: message
       properties:
         line_number:
           description: |-
@@ -26472,6 +27460,11 @@ components:
         A group of importMemory diagnostic messages that share a severity /
         disposition. This is the single, uniform channel for fatal errors,
         rollbacks, and non-fatal observations.
+      example:
+        sub_status: UNKNOWN
+        messages:
+        - messages
+        - messages
       properties:
         sub_status:
           description: |-
@@ -26843,6 +27836,8 @@ components:
       - type
       type: object
     InputTableResponse:
+      example:
+        input_table_identifier: input_table_identifier
       properties:
         input_table_identifier:
           description: Unique ID of the newly created input table.
@@ -26851,6 +27846,8 @@ components:
       type: object
     InputTableUpdateResponse:
       description: Response returned after successfully writing rows to an input table.
+      example:
+        rows_loaded: 0
       properties:
         rows_loaded:
           description: Number of rows successfully written to the input table.
@@ -27751,6 +28748,16 @@ components:
       - metadata_identifier
       type: object
     ExportMemoryRequest:
+      example:
+        sources:
+        - type: DATA_MODEL
+          identifiers:
+          - identifiers
+          - identifiers
+        - type: DATA_MODEL
+          identifiers:
+          - identifiers
+          - identifiers
       properties:
         sources:
           description: |-
@@ -27822,6 +28829,9 @@ components:
       - query
       type: object
     ImportMemoryRequest:
+      example:
+        content: content
+        dry_run: true
       properties:
         content:
           description: |-
@@ -30423,6 +31433,10 @@ components:
           type: string
       type: object
     CreateInputTableRequest:
+      example:
+        table_name: table_name
+        model_identifier: model_identifier
+        table_definition: ""
       properties:
         table_name:
           description: Physical table name to create in the external warehouse.
@@ -30444,6 +31458,15 @@ components:
       - table_name
       type: object
     UpdateInputTableRequest:
+      example:
+        columns:
+        - columns
+        - columns
+        rows:
+        - - rows
+          - rows
+        - - rows
+          - rows
       properties:
         columns:
           description: |-

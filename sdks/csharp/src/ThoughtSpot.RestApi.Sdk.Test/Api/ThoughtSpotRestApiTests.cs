@@ -288,6 +288,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test CreateInputTable
+        /// </summary>
+        [Fact]
+        public void CreateInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateInputTableRequest createInputTableRequest = null;
+            //var response = instance.CreateInputTable(createInputTableRequest);
+            //Assert.IsType<InputTableResponse>(response);
+        }
+
+        /// <summary>
         /// Test CreateOrg
         /// </summary>
         [Fact]
@@ -570,6 +582,17 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test DeleteInputTable
+        /// </summary>
+        [Fact]
+        public void DeleteInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //instance.DeleteInputTable(inputTableIdentifier);
+        }
+
+        /// <summary>
         /// Test DeleteManualTranslations
         /// </summary>
         [Fact]
@@ -772,6 +795,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //ExportManualTranslationsRequest exportManualTranslationsRequest = null;
             //var response = instance.ExportManualTranslations(exportManualTranslationsRequest);
             //Assert.IsType<FileParameter>(response);
+        }
+
+        /// <summary>
+        /// Test ExportMemory
+        /// </summary>
+        [Fact]
+        public void ExportMemoryTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ExportMemoryRequest exportMemoryRequest = null;
+            //var response = instance.ExportMemory(exportMemoryRequest);
+            //Assert.IsType<ExportMemoryResponse>(response);
         }
 
         /// <summary>
@@ -1163,6 +1198,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //FileParameter translationsFile = null;
             //string? scope = null;
             //instance.ImportManualTranslations(translationsFile, scope);
+        }
+
+        /// <summary>
+        /// Test ImportMemory
+        /// </summary>
+        [Fact]
+        public void ImportMemoryTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ImportMemoryRequest importMemoryRequest = null;
+            //var response = instance.ImportMemory(importMemoryRequest);
+            //Assert.IsType<ImportMemoryResponse>(response);
         }
 
         /// <summary>
@@ -1956,6 +2003,19 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //UpdateEmailCustomizationRequest updateEmailCustomizationRequest = null;
             //instance.UpdateEmailCustomization(updateEmailCustomizationRequest);
+        }
+
+        /// <summary>
+        /// Test UpdateInputTable
+        /// </summary>
+        [Fact]
+        public void UpdateInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //UpdateInputTableRequest updateInputTableRequest = null;
+            //var response = instance.UpdateInputTable(inputTableIdentifier, updateInputTableRequest);
+            //Assert.IsType<InputTableUpdateResponse>(response);
         }
 
         /// <summary>

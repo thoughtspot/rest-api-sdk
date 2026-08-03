@@ -21,7 +21,7 @@ _ts_warnings.filterwarnings(
 """  # noqa: E501
 
 
-__version__ = "2.27.0"
+__version__ = "2.28.0"
 
 # Define package exports
 __all__ = [
@@ -37,6 +37,7 @@ __all__ = [
     "DataApi",
     "EmailCustomizationApi",
     "GroupsApi",
+    "InputTablesApi",
     "JobsApi",
     "LogApi",
     "ManualTranslationApi",
@@ -601,6 +602,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.data_api import DataApi as DataApi
     from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi as EmailCustomizationApi
     from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi as GroupsApi
+    from thoughtspot_rest_api_sdk.api.input_tables_api import InputTablesApi as InputTablesApi
     from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi as JobsApi
     from thoughtspot_rest_api_sdk.api.log_api import LogApi as LogApi
     from thoughtspot_rest_api_sdk.api.manual_translation_api import ManualTranslationApi as ManualTranslationApi
@@ -1175,6 +1177,7 @@ from thoughtspot_rest_api_sdk.api.dbt_api import DBTApi as DBTApi
 from thoughtspot_rest_api_sdk.api.data_api import DataApi as DataApi
 from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi as EmailCustomizationApi
 from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi as GroupsApi
+from thoughtspot_rest_api_sdk.api.input_tables_api import InputTablesApi as InputTablesApi
 from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi as JobsApi
 from thoughtspot_rest_api_sdk.api.log_api import LogApi as LogApi
 from thoughtspot_rest_api_sdk.api.manual_translation_api import ManualTranslationApi as ManualTranslationApi

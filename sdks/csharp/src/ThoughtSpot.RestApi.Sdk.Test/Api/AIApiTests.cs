@@ -89,6 +89,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test ExportMemory
+        /// </summary>
+        [Fact]
+        public void ExportMemoryTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ExportMemoryRequest exportMemoryRequest = null;
+            //var response = instance.ExportMemory(exportMemoryRequest);
+            //Assert.IsType<ExportMemoryResponse>(response);
+        }
+
+        /// <summary>
         /// Test GetAgentInstructions
         /// </summary>
         [Fact]
@@ -159,6 +171,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //GetRelevantQuestionsRequest getRelevantQuestionsRequest = null;
             //var response = instance.GetRelevantQuestions(getRelevantQuestionsRequest);
             //Assert.IsType<EurekaGetRelevantQuestionsResponse>(response);
+        }
+
+        /// <summary>
+        /// Test ImportMemory
+        /// </summary>
+        [Fact]
+        public void ImportMemoryTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ImportMemoryRequest importMemoryRequest = null;
+            //var response = instance.ImportMemory(importMemoryRequest);
+            //Assert.IsType<ImportMemoryResponse>(response);
         }
 
         /// <summary>

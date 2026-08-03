@@ -12,7 +12,7 @@
     <Description>Official ThoughtSpot REST API SDK for .NET</Description>
     <Copyright>No Copyright</Copyright>
     <RootNamespace>ThoughtSpot.RestApi.Sdk</RootNamespace>
-    <Version>2.27.0</Version>
+    <Version>2.28.0</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ThoughtSpot.RestApi.Sdk.xml</DocumentationFile>
     <RepositoryUrl>https://github.com/GIT_USER_ID/GIT_REPO_ID.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
