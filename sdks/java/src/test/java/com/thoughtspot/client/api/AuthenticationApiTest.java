@@ -113,7 +113,7 @@ public class AuthenticationApiTest {
      * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
      * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
      * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication
      * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
      * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
      * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
@@ -174,7 +174,7 @@ public class AuthenticationApiTest {
      * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
      * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
      * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication
      * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
      * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
      * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
@@ -216,7 +216,7 @@ public class AuthenticationApiTest {
      * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
      * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
      * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication
      * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
      * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
      * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact

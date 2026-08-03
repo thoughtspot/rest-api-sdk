@@ -129,8 +129,8 @@ public class CreateConnectionConfigurationRequest implements Serializable {
     public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
 
     @SerializedName(SERIALIZED_NAME_CONFIGURATION)
-    @javax.annotation.Nonnull
-    private Object _configuration;
+    @javax.annotation.Nullable
+    private Object _configuration = null;
 
     /** Type of policy. */
     @JsonAdapter(PolicyTypeEnum.Adapter.class)
@@ -383,7 +383,7 @@ public class CreateConnectionConfigurationRequest implements Serializable {
     }
 
     public CreateConnectionConfigurationRequest _configuration(
-            @javax.annotation.Nonnull Object _configuration) {
+            @javax.annotation.Nullable Object _configuration) {
         this._configuration = _configuration;
         return this;
     }
@@ -393,12 +393,12 @@ public class CreateConnectionConfigurationRequest implements Serializable {
      *
      * @return _configuration
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public Object getConfiguration() {
         return _configuration;
     }
 
-    public void setConfiguration(@javax.annotation.Nonnull Object _configuration) {
+    public void setConfiguration(@javax.annotation.Nullable Object _configuration) {
         this._configuration = _configuration;
     }
 

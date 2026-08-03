@@ -132,7 +132,7 @@ public class GetRelevantQuestionsRequest implements Serializable {
 
     /**
      * A user query that requires breaking down into smaller, more manageable analytical questions
-     * to facilitate better understanding and analysis.
+     * to facilitate better understanding and analysis. Must be a non-empty string.
      *
      * @return query
      */

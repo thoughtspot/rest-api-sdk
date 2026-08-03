@@ -121,7 +121,9 @@ public class StyleResetOptionsInput implements Serializable {
 
         CHART_AREA_DATA_LABELS("CHART_AREA_DATA_LABELS"),
 
-        TABLE_VALUE_CELLS("TABLE_VALUE_CELLS");
+        TABLE_VALUE_CELLS("TABLE_VALUE_CELLS"),
+
+        ADVANCED_CHART_LABELS("ADVANCED_CHART_LABELS");
 
         private String value;
 

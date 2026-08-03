@@ -51,4 +51,10 @@ public class ImportMetadataTMLAsyncRequestTest {
     public void enableLargeMetadataValidationTest() {
         // TODO: test enableLargeMetadataValidation
     }
+
+    /** Test the property 'enablePersonalizedViewUpsert' */
+    @Test
+    public void enablePersonalizedViewUpsertTest() {
+        // TODO: test enablePersonalizedViewUpsert
+    }
 }

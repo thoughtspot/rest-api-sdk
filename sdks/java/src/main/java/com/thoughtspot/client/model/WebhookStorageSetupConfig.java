@@ -122,7 +122,7 @@ public class WebhookStorageSetupConfig implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_TRUST_POLICY_TEMPLATE)
     @javax.annotation.Nullable
-    private Object trustPolicyTemplate;
+    private Object trustPolicyTemplate = null;
 
     public static final String SERIALIZED_NAME_SERVICE_ACCOUNT_EMAIL = "service_account_email";
 

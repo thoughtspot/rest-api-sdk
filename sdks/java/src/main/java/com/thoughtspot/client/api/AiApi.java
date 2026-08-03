@@ -24,9 +24,13 @@ import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
 import com.thoughtspot.client.model.EurekaGetNLInstructionsResponse;
 import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
 import com.thoughtspot.client.model.EurekaSetNLInstructionsResponse;
+import com.thoughtspot.client.model.ExportMemoryRequest;
+import com.thoughtspot.client.model.ExportMemoryResponse;
 import com.thoughtspot.client.model.GetDataSourceSuggestionsRequest;
 import com.thoughtspot.client.model.GetNLInstructionsRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
+import com.thoughtspot.client.model.ImportMemoryRequest;
+import com.thoughtspot.client.model.ImportMemoryResponse;
 import com.thoughtspot.client.model.LoadAnswerResponse;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
 import com.thoughtspot.client.model.ResponseMessage;
@@ -40,6 +44,7 @@ import com.thoughtspot.client.model.SetAgentInstructionsRequest;
 import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.UpdateConversationRequest;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -841,6 +846,281 @@ public class AiApi {
         okhttp3.Call localVarCall =
                 deleteConversationValidateBeforeCall(conversationIdentifier, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for exportMemory
+     *
+     * @param exportMemoryRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call exportMemoryCall(
+            ExportMemoryRequest exportMemoryRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = exportMemoryRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/memory/export";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call exportMemoryValidateBeforeCall(
+            ExportMemoryRequest exportMemoryRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'exportMemoryRequest' is set
+        if (exportMemoryRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'exportMemoryRequest' when calling"
+                            + " exportMemory(Async)");
+        }
+
+        return exportMemoryCall(exportMemoryRequest, _callback);
+    }
+
+    /**
+     * Exports memory entries (rules, recipes, and always-apply rules) for the specified data-models
+     * as a single YAML payload. The payload can be edited locally and re-submitted through
+     * &#x60;importMemory&#x60;. Requires Spotter access (use/manage) and either edit or memory
+     * access on corresponding data model sources. Version: 26.8.0.cl or later This API allows users
+     * to export data-model memories for a given list of data-models. This exported yaml file can
+     * then be modified and used as input to the import API in target env. This API enables
+     * customers to migrate memories from a source env to a target env. This improves memory
+     * adoption for Spotter by giving the users a chance to develop their memories in one env and
+     * replicate the same in another env. #### Usage guidelines To export memory for one or more
+     * data-models, the request may include: - &#x60;sources&#x60;: A list of typed scope groups
+     * identifying which data-models to export memory for. Each group contains: - &#x60;type&#x60;:
+     * The source object type for this group — &#x60;DATA_MODEL&#x60;. - &#x60;identifiers&#x60;: An
+     * array of GUIDs or human-readable &#x60;obj_id&#x60;s of the data-models to export memory for.
+     * obj_ids are resolved server-side before forwarding. The API returns a response object with: -
+     * &#x60;content&#x60;: The serialized memory payload (YAML) — exactly the shape that the
+     * &#x60;importMemory&#x60; API consumes. Edit it locally and pass it back through
+     * &#x60;importMemory&#x60; to apply changes. #### Source Type - **DATA_MODEL**: The
+     * &#x60;identifiers&#x60; are data-model GUIDs. This is the default source type for Spotter
+     * memory and covers the rules, recipes and always-apply rules attached directly to a
+     * data-model. #### File format The exported &#x60;content&#x60; is a YAML document with a
+     * single top-level &#x60;memories&#x60; key holding a list of memory items — exactly the format
+     * the &#x60;importMemory&#x60; API consumes. The full format reference (an annotated example,
+     * memory item fields, per-type content, and &#x60;datamodel_sources&#x60; identification) is
+     * documented in the &#x60;importMemory&#x60; API&#39;s **File format** section. Exported files
+     * populate each source&#39;s &#x60;guid&#x60; and, if present, &#x60;obj_id&#x60; as well. ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have necessary permissions, or lacks read access
+     * on a referenced data-model, or the bearer token does not correspond to the data-model&#39;s
+     * org. | &gt; ###### Note: &gt; - To use this API, the user needs Spotter access (use/manage)
+     * and either edit or memory access on the data-model and they must use corresponding org
+     * related bearerToken where the data-model exists. &gt; - This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; -
+     * Available from version 26.8.0.cl and later. &gt; - This endpoint requires Spotter — please
+     * contact ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @param exportMemoryRequest (required)
+     * @return ExportMemoryResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ExportMemoryResponse exportMemory(ExportMemoryRequest exportMemoryRequest)
+            throws ApiException {
+        ApiResponse<ExportMemoryResponse> localVarResp =
+                exportMemoryWithHttpInfo(exportMemoryRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Exports memory entries (rules, recipes, and always-apply rules) for the specified data-models
+     * as a single YAML payload. The payload can be edited locally and re-submitted through
+     * &#x60;importMemory&#x60;. Requires Spotter access (use/manage) and either edit or memory
+     * access on corresponding data model sources. Version: 26.8.0.cl or later This API allows users
+     * to export data-model memories for a given list of data-models. This exported yaml file can
+     * then be modified and used as input to the import API in target env. This API enables
+     * customers to migrate memories from a source env to a target env. This improves memory
+     * adoption for Spotter by giving the users a chance to develop their memories in one env and
+     * replicate the same in another env. #### Usage guidelines To export memory for one or more
+     * data-models, the request may include: - &#x60;sources&#x60;: A list of typed scope groups
+     * identifying which data-models to export memory for. Each group contains: - &#x60;type&#x60;:
+     * The source object type for this group — &#x60;DATA_MODEL&#x60;. - &#x60;identifiers&#x60;: An
+     * array of GUIDs or human-readable &#x60;obj_id&#x60;s of the data-models to export memory for.
+     * obj_ids are resolved server-side before forwarding. The API returns a response object with: -
+     * &#x60;content&#x60;: The serialized memory payload (YAML) — exactly the shape that the
+     * &#x60;importMemory&#x60; API consumes. Edit it locally and pass it back through
+     * &#x60;importMemory&#x60; to apply changes. #### Source Type - **DATA_MODEL**: The
+     * &#x60;identifiers&#x60; are data-model GUIDs. This is the default source type for Spotter
+     * memory and covers the rules, recipes and always-apply rules attached directly to a
+     * data-model. #### File format The exported &#x60;content&#x60; is a YAML document with a
+     * single top-level &#x60;memories&#x60; key holding a list of memory items — exactly the format
+     * the &#x60;importMemory&#x60; API consumes. The full format reference (an annotated example,
+     * memory item fields, per-type content, and &#x60;datamodel_sources&#x60; identification) is
+     * documented in the &#x60;importMemory&#x60; API&#39;s **File format** section. Exported files
+     * populate each source&#39;s &#x60;guid&#x60; and, if present, &#x60;obj_id&#x60; as well. ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have necessary permissions, or lacks read access
+     * on a referenced data-model, or the bearer token does not correspond to the data-model&#39;s
+     * org. | &gt; ###### Note: &gt; - To use this API, the user needs Spotter access (use/manage)
+     * and either edit or memory access on the data-model and they must use corresponding org
+     * related bearerToken where the data-model exists. &gt; - This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; -
+     * Available from version 26.8.0.cl and later. &gt; - This endpoint requires Spotter — please
+     * contact ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @param exportMemoryRequest (required)
+     * @return ApiResponse&lt;ExportMemoryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<ExportMemoryResponse> exportMemoryWithHttpInfo(
+            ExportMemoryRequest exportMemoryRequest) throws ApiException {
+        okhttp3.Call localVarCall = exportMemoryValidateBeforeCall(exportMemoryRequest, null);
+        Type localVarReturnType = new TypeToken<ExportMemoryResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Exports memory entries (rules, recipes, and always-apply rules) for the
+     * specified data-models as a single YAML payload. The payload can be edited locally and
+     * re-submitted through &#x60;importMemory&#x60;. Requires Spotter access (use/manage) and
+     * either edit or memory access on corresponding data model sources. Version: 26.8.0.cl or later
+     * This API allows users to export data-model memories for a given list of data-models. This
+     * exported yaml file can then be modified and used as input to the import API in target env.
+     * This API enables customers to migrate memories from a source env to a target env. This
+     * improves memory adoption for Spotter by giving the users a chance to develop their memories
+     * in one env and replicate the same in another env. #### Usage guidelines To export memory for
+     * one or more data-models, the request may include: - &#x60;sources&#x60;: A list of typed
+     * scope groups identifying which data-models to export memory for. Each group contains: -
+     * &#x60;type&#x60;: The source object type for this group — &#x60;DATA_MODEL&#x60;. -
+     * &#x60;identifiers&#x60;: An array of GUIDs or human-readable &#x60;obj_id&#x60;s of the
+     * data-models to export memory for. obj_ids are resolved server-side before forwarding. The API
+     * returns a response object with: - &#x60;content&#x60;: The serialized memory payload (YAML) —
+     * exactly the shape that the &#x60;importMemory&#x60; API consumes. Edit it locally and pass it
+     * back through &#x60;importMemory&#x60; to apply changes. #### Source Type - **DATA_MODEL**:
+     * The &#x60;identifiers&#x60; are data-model GUIDs. This is the default source type for Spotter
+     * memory and covers the rules, recipes and always-apply rules attached directly to a
+     * data-model. #### File format The exported &#x60;content&#x60; is a YAML document with a
+     * single top-level &#x60;memories&#x60; key holding a list of memory items — exactly the format
+     * the &#x60;importMemory&#x60; API consumes. The full format reference (an annotated example,
+     * memory item fields, per-type content, and &#x60;datamodel_sources&#x60; identification) is
+     * documented in the &#x60;importMemory&#x60; API&#39;s **File format** section. Exported files
+     * populate each source&#39;s &#x60;guid&#x60; and, if present, &#x60;obj_id&#x60; as well. ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have necessary permissions, or lacks read access
+     * on a referenced data-model, or the bearer token does not correspond to the data-model&#39;s
+     * org. | &gt; ###### Note: &gt; - To use this API, the user needs Spotter access (use/manage)
+     * and either edit or memory access on the data-model and they must use corresponding org
+     * related bearerToken where the data-model exists. &gt; - This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; -
+     * Available from version 26.8.0.cl and later. &gt; - This endpoint requires Spotter — please
+     * contact ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @param exportMemoryRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call exportMemoryAsync(
+            ExportMemoryRequest exportMemoryRequest,
+            final ApiCallback<ExportMemoryResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall = exportMemoryValidateBeforeCall(exportMemoryRequest, _callback);
+        Type localVarReturnType = new TypeToken<ExportMemoryResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -2777,6 +3057,701 @@ public class AiApi {
         return localVarCall;
     }
     /**
+     * Build call for importMemory
+     *
+     * @param importMemoryRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call importMemoryCall(
+            ImportMemoryRequest importMemoryRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = importMemoryRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/memory/import";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call importMemoryValidateBeforeCall(
+            ImportMemoryRequest importMemoryRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'importMemoryRequest' is set
+        if (importMemoryRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'importMemoryRequest' when calling"
+                            + " importMemory(Async)");
+        }
+
+        return importMemoryCall(importMemoryRequest, _callback);
+    }
+
+    /**
+     * Imports memory entries (rules, recipes, and always-apply rules) from a YAML payload,
+     * typically a payload produced by &#x60;exportMemory&#x60; and edited locally. The imported
+     * entries replace the existing memory for the data-models referenced in the payload.
+     * &#x60;dry_run&#x60; is required. Pass &#x60;true&#x60; first to validate the payload and
+     * review the preview counts and any row-level failures without making changes, then re-run with
+     * &#x60;dry_run &#x3D; false&#x60; to apply the import. An import is not applied if any row
+     * fails validation. Requires Spotter access (use/manage) and either edit or memory access on
+     * corresponding data model sources. Version: 26.8.0.cl or later This API allows users to import
+     * data-model memories using a given yaml file. This yaml file can be obtained from the export
+     * memory API in source env and can be modified and used as input to the import API in target
+     * env. This API enables customers to migrate memories from a source env to a target env. This
+     * improves memory adoption for Spotter by giving the users a chance to develop their memories
+     * in one env and replicate the same in another env. #### Usage guidelines To import memory, the
+     * request must include: - &#x60;content&#x60;: The full serialized memory payload to import
+     * (YAML). Typically the &#x60;content&#x60; value returned by the &#x60;exportMemory&#x60; API,
+     * edited locally and re-submitted. The payload itself identifies which data-models the memory
+     * applies to, so no separate identifier list is required. - &#x60;dry_run&#x60;: Required. When
+     * &#x60;true&#x60;, validate the payload and return preview counts without writing anything;
+     * when &#x60;false&#x60;, apply the import. Always run with &#x60;dry_run &#x3D; true&#x60;
+     * first, then re-run with &#x60;dry_run &#x3D; false&#x60; once you are satisfied with the
+     * preview. The import replaces the existing global memories on the data-models referenced in
+     * the payload with the entries supplied in the payload. The API returns a response object with:
+     * - &#x60;status&#x60;: The terminal status of the import (&#x60;SUCCESS&#x60;,
+     * &#x60;VALIDATION_FAILED&#x60;, or &#x60;FAILED&#x60;). - &#x60;summary&#x60;: Per
+     * &#x60;(memory_type, source)&#x60; counts. In a dry run the
+     * &#x60;deleted_record_count&#x60;/&#x60;inserted_record_count&#x60; are previews; in a real
+     * import they are actuals. On &#x60;VALIDATION_FAILED&#x60;, &#x60;summary&#x60; is
+     * &#x60;null&#x60; when validation fails before any item is processed (e.g. an unresolved or
+     * inaccessible data-model source) and an empty list otherwise — treat both as \&quot;no counts
+     * available\&quot;. - &#x60;validation_failures&#x60;: Per-item validation failures, each with
+     * &#x60;line_number&#x60;, &#x60;reason&#x60;, &#x60;field_name&#x60;, and &#x60;message&#x60;
+     * for click-to-locate and inline highlighting. - &#x60;diagnostics&#x60;: Groups of diagnostic
+     * messages, each with a &#x60;sub_status&#x60; (&#x60;WARNING&#x60;, &#x60;FAILURE&#x60;,
+     * &#x60;ROLLED_BACK&#x60;, or &#x60;UNKNOWN&#x60;) and a &#x60;messages&#x60; list. This is the
+     * single channel for both non-fatal warnings (under &#x60;WARNING&#x60;, e.g. when some older
+     * memory entries could not be fully cleaned up) and fatal causes (e.g. the failure reason under
+     * &#x60;FAILURE&#x60;, or a &#x60;ROLLED_BACK&#x60; group when new entries were undone). -
+     * &#x60;operation_id&#x60;: A server-generated identifier for this import operation; include it
+     * when contacting support to help correlate server-side logs. Populated once the server
+     * registers the import operation; &#x60;null&#x60; when the request fails earlier (e.g. while
+     * parsing the payload or resolving its data-model sources). #### File format The payload is a
+     * YAML document with a single top-level &#x60;memories&#x60; key holding a list of memory
+     * items. Each item is self-contained: a &#x60;type&#x60;, a typed &#x60;content&#x60; block, a
+     * &#x60;datamodel_sources&#x60; list, and optional &#x60;tags&#x60;. Typically you don&#39;t
+     * hand-author this file — you obtain it from &#x60;exportMemory&#x60;, edit it, and submit it
+     * back through &#x60;importMemory&#x60;. &#x60;&#x60;&#x60;yaml memories: - type: RULE content:
+     * rule_definition: \&quot;Always filter revenue to closed-won deals.\&quot; datamodel_sources:
+     * - guid: 11111111-1111-1111-1111-111111111111 obj_id: sales_data_model tags: - finance - type:
+     * RULE content: rule_definition: \&quot;Exclude internal test accounts from all results.\&quot;
+     * datamodel_sources: - obj_id: sales_data_model - type: RECIPE content: user_query: \&quot;top
+     * accounts by revenue\&quot; recipe: | {\&quot;steps\&quot;: [...serialized recipe blob...]}
+     * datamodel_sources: - obj_id: sales_data_model - type: RECIPE content: user_query:
+     * \&quot;monthly new customer count\&quot; recipe: | {\&quot;steps\&quot;: [...serialized
+     * recipe blob...]} datamodel_sources: - obj_id: sales_data_model - type: ALWAYS_APPLY_RULES
+     * content: rules: - \&quot;Never show internal test accounts.\&quot; - \&quot;Round currency to
+     * whole dollars.\&quot; datamodel_sources: - guid: 22222222-2222-2222-2222-222222222222
+     * &#x60;&#x60;&#x60; A file can contain multiple &#x60;RULE&#x60; and multiple
+     * &#x60;RECIPE&#x60; items for a data-model, but at most one &#x60;ALWAYS_APPLY_RULES&#x60;
+     * item per data-model. ##### Memory item fields | Field | Required | Type | Description |
+     * |-------|----------|------|-------------| | &#x60;type&#x60; | Yes | String enum | One of
+     * &#x60;RULE&#x60;, &#x60;RECIPE&#x60;, or &#x60;ALWAYS_APPLY_RULES&#x60;. | |
+     * &#x60;content&#x60; | Yes | Mapping | Type-specific content block (see below). | |
+     * &#x60;datamodel_sources&#x60; | Yes | Non-empty list | The data-model(s) the memory attaches
+     * to. | | &#x60;tags&#x60; | No | List of strings | Free-form labels. | ##### Memory types and
+     * content | &#x60;type&#x60; | Content fields | Notes | |--------|----------------|-------| |
+     * &#x60;RULE&#x60; | &#x60;rule_definition&#x60; — required, non-empty string | A single
+     * semantic rule. | | &#x60;RECIPE&#x60; | &#x60;recipe&#x60; and &#x60;user_query&#x60; — both
+     * required, non-empty strings | &#x60;recipe&#x60; is an opaque serialized blob;
+     * &#x60;user_query&#x60; is the natural-language query it answers. | |
+     * &#x60;ALWAYS_APPLY_RULES&#x60; | &#x60;rules&#x60; — required, non-empty list of non-empty
+     * strings | Data-model-wide always-apply rules. At most one &#x60;ALWAYS_APPLY_RULES&#x60; item
+     * per data-model. | ##### Identifying data-models (&#x60;datamodel_sources&#x60;) Each item
+     * must list at least one source. Each entry identifies a data-model by at least one of: -
+     * &#x60;guid&#x60; — the data-model GUID. - &#x60;obj_id&#x60; — a stable object ID, resolved
+     * to a GUID server-side. If both are supplied, &#x60;obj_id&#x60; takes precedence and
+     * &#x60;guid&#x60; is ignored entirely; &#x60;guid&#x60; takes effect only when
+     * &#x60;obj_id&#x60; is absent. Exported files populate &#x60;guid&#x60; and, if present,
+     * &#x60;obj_id&#x60; as well. &gt; ⚠️ **Cross-environment import:** When &#x60;obj_id&#x60; is
+     * present it is &gt; authoritative — the accompanying &#x60;guid&#x60; is **not** used as a
+     * fallback. &gt; If an &#x60;obj_id&#x60; does not exist in the target environment, that item
+     * &gt; fails with &#x60;UNRESOLVED_SOURCE&#x60;. Remove or correct stale &#x60;obj_id&#x60;
+     * &gt; values before importing across environments. #### Validations reference The payload is
+     * fully validated before anything is written. This applies to &#x60;dry_run &#x3D; true&#x60;
+     * and &#x60;dry_run &#x3D; false&#x60; alike: if any item fails validation, the entire import
+     * is rejected — no partial writes — and all failures are returned together so you can fix them
+     * in one pass. ##### Limits Default limits (may be adjusted in future if the need arises): |
+     * Limit | Default | |-------|---------| | Uploaded file size | 10 MiB | | Total memory items |
+     * 10,000 | | &#x60;rule_definition&#x60; length | 1,000 characters | | &#x60;user_query&#x60;
+     * length | 1,000 characters | | &#x60;recipe&#x60; length | 2,000 characters | |
+     * &#x60;rules&#x60; combined length (&#x60;ALWAYS_APPLY_RULES&#x60;) | 2,000 characters | |
+     * Tags per item | 10 | | Characters per tag | 50 | The &#x60;rules&#x60; limit in
+     * &#x60;ALWAYS_APPLY_RULES&#x60; is a combined budget across all entries in the list, not per
+     * entry. ##### Structural rules - The document must be a mapping with a &#x60;memories&#x60;
+     * key whose value is a list. - Unknown keys — at the top level, within an item, or under
+     * &#x60;content&#x60; — are rejected. - Each item&#39;s &#x60;type&#x60; must be one of the
+     * three supported values, and &#x60;content&#x60; must match that type&#39;s shape. - Null,
+     * empty-string, or wrong-typed values in a required field are treated as missing. - Non-string
+     * or empty &#x60;tags&#x60; entries are dropped silently; certain tags reserved for internal
+     * use are stripped automatically before the item is stored. ##### Cross-item rules - A
+     * data-model referenced by more than one &#x60;ALWAYS_APPLY_RULES&#x60; item is rejected —
+     * combine them into a single item&#39;s &#x60;rules&#x60; list. ##### Failure reasons Each
+     * entry in &#x60;validation_failures&#x60; carries one of: | Reason | Meaning |
+     * |--------|---------| | &#x60;SCHEMA&#x60; | YAML structure is invalid or unsupported. | |
+     * &#x60;VALIDATION&#x60; | A required field is missing/empty, a count exceeds a limit, or a
+     * GUID is malformed. | | &#x60;CHAR_LIMIT&#x60; | A content field or tag exceeds its size
+     * limit. | | &#x60;UNRESOLVED_SOURCE&#x60; | A &#x60;guid&#x60; or &#x60;obj_id&#x60; could not
+     * be resolved to an existing data-model. | | &#x60;ACCESS_DENIED&#x60; | The caller lacks
+     * sufficient access on the referenced data-model. | #### Dry run &#x60;dry_run&#x60; is
+     * required and has no default, so the import is always a deliberate two-step flow: 1. **First,
+     * call with &#x60;dry_run &#x3D; true&#x60;.** This validates the payload and previews what
+     * would happen — the counts in &#x60;summary&#x60; and any &#x60;validation_failures&#x60; —
+     * without writing anything. 2. **Then, after reviewing a clean preview, call again with
+     * &#x60;dry_run &#x3D; false&#x60;** (same &#x60;content&#x60;). This applies the import. It
+     * refuses to write when any item fails validation, so fix the reported
+     * &#x60;validation_failures&#x60; and resubmit. &gt; ###### Important: &gt; Never call
+     * &#x60;dry_run &#x3D; false&#x60; without first inspecting a &#x60;dry_run &#x3D; true&#x60;
+     * preview. A real import deletes and replaces existing global memories on the referenced
+     * data-models. #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have the necessary Spotter permissions, or the
+     * bearer token does not correspond to the data-model&#39;s org. Per-data-model access failures
+     * do not use this code — they surface as &#x60;ACCESS_DENIED&#x60; validation failures with
+     * HTTP &#x60;200&#x60; (see Logical failures below). | #### Logical failures Validation and
+     * write failures are not returned in the error envelope. The call returns &#x60;200&#x60; with
+     * a terminal &#x60;status&#x60; of &#x60;VALIDATION_FAILED&#x60; or &#x60;FAILED&#x60;, and the
+     * details live in &#x60;validation_failures&#x60; / &#x60;diagnostics&#x60;: -
+     * **VALIDATION_FAILED** — one or more items failed schema/semantic validation; nothing was
+     * written. Inspect &#x60;validation_failures&#x60;, fix the items, and resubmit. - **FAILED** —
+     * the import did not complete. Inspect &#x60;diagnostics&#x60;: a &#x60;ROLLED_BACK&#x60; group
+     * means writing the new entries failed and any entries written before the failure were undone
+     * (existing memory is intact, no destructive change), while a &#x60;FAILURE&#x60; group carries
+     * another non-validation cause. Sample &#x60;VALIDATION_FAILED&#x60; responses (HTTP 200):
+     * **Invalid data-model (unresolved source):** &#x60;&#x60;&#x60;json { \&quot;status\&quot;:
+     * \&quot;VALIDATION_FAILED\&quot;, \&quot;summary\&quot;: null,
+     * \&quot;validation_failures\&quot;: [ { \&quot;line_number\&quot;: 2, \&quot;reason\&quot;:
+     * \&quot;UNRESOLVED_SOURCE\&quot;, \&quot;field_name\&quot;:
+     * \&quot;datamodel_sources[0].guid\&quot;, \&quot;message\&quot;: \&quot;unknown datamodel
+     * guid: 55555555-5555-5555-5555-555555555555\&quot; } ], \&quot;diagnostics\&quot;: [ {
+     * \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;, \&quot;messages\&quot;: [ \&quot;unknown
+     * datamodel guid: 55555555-5555-5555-5555-555555555555\&quot; ] } ],
+     * \&quot;operation_id\&quot;: null } &#x60;&#x60;&#x60; **Inaccessible data-models:**
+     * &#x60;&#x60;&#x60;json { \&quot;status\&quot;: \&quot;VALIDATION_FAILED\&quot;,
+     * \&quot;summary\&quot;: null, \&quot;validation_failures\&quot;: [ {
+     * \&quot;line_number\&quot;: 2, \&quot;reason\&quot;: \&quot;ACCESS_DENIED\&quot;,
+     * \&quot;field_name\&quot;: \&quot;datamodel_sources[0]\&quot;, \&quot;message\&quot;:
+     * \&quot;Insufficient permissions on datamodel
+     * &#39;44444444-4444-4444-4444-444444444444&#39;\&quot; }, { \&quot;line_number\&quot;: 8,
+     * \&quot;reason\&quot;: \&quot;ACCESS_DENIED\&quot;, \&quot;field_name\&quot;:
+     * \&quot;datamodel_sources[0]\&quot;, \&quot;message\&quot;: \&quot;Insufficient permissions on
+     * datamodel &#39;33333333-3333-3333-3333-333333333333&#39;\&quot; } ],
+     * \&quot;diagnostics\&quot;: [ { \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;,
+     * \&quot;messages\&quot;: [ \&quot;Memory import validation failed with 2 error(s):
+     * Insufficient permissions on datamodel &#39;44444444-4444-4444-4444-444444444444&#39;;
+     * Insufficient permissions on datamodel &#39;33333333-3333-3333-3333-333333333333&#39;\&quot; ]
+     * } ], \&quot;operation_id\&quot;: null } &#x60;&#x60;&#x60; **Character-limit validations:**
+     * &#x60;&#x60;&#x60;json { \&quot;status\&quot;: \&quot;VALIDATION_FAILED\&quot;,
+     * \&quot;summary\&quot;: [], \&quot;validation_failures\&quot;: [ { \&quot;line_number\&quot;:
+     * 3, \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.rule_definition\&quot;, \&quot;message\&quot;: \&quot;content.rule_definition
+     * is 1073 characters; max allowed is 1000\&quot; }, { \&quot;line_number\&quot;: 49,
+     * \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.user_query\&quot;, \&quot;message\&quot;: \&quot;content.user_query is 1150
+     * characters; max allowed is 1000\&quot; }, { \&quot;line_number\&quot;: 49,
+     * \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.recipe\&quot;, \&quot;message\&quot;: \&quot;content.recipe is 3574
+     * characters; max allowed is 2000\&quot; } ], \&quot;diagnostics\&quot;: [ {
+     * \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;, \&quot;messages\&quot;: [ \&quot;Validation
+     * failures present; fix them and re-run to see the DRY_RUN preview.\&quot; ] } ],
+     * \&quot;operation_id\&quot;: \&quot;66666666-6666-6666-6666-666666666666\&quot; }
+     * &#x60;&#x60;&#x60; &gt; ###### Note: &gt; - To use this API, the user needs Spotter access
+     * (use/manage) and either edit or memory access on the data-model and they must use
+     * corresponding org related bearerToken where the data-model exists. &gt; - This endpoint is
+     * currently in Beta. Breaking changes may be introduced before the endpoint is made Generally
+     * Available. &gt; - Available from version 26.8.0.cl and later. &gt; - This endpoint requires
+     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @param importMemoryRequest (required)
+     * @return ImportMemoryResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ImportMemoryResponse importMemory(ImportMemoryRequest importMemoryRequest)
+            throws ApiException {
+        ApiResponse<ImportMemoryResponse> localVarResp =
+                importMemoryWithHttpInfo(importMemoryRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Imports memory entries (rules, recipes, and always-apply rules) from a YAML payload,
+     * typically a payload produced by &#x60;exportMemory&#x60; and edited locally. The imported
+     * entries replace the existing memory for the data-models referenced in the payload.
+     * &#x60;dry_run&#x60; is required. Pass &#x60;true&#x60; first to validate the payload and
+     * review the preview counts and any row-level failures without making changes, then re-run with
+     * &#x60;dry_run &#x3D; false&#x60; to apply the import. An import is not applied if any row
+     * fails validation. Requires Spotter access (use/manage) and either edit or memory access on
+     * corresponding data model sources. Version: 26.8.0.cl or later This API allows users to import
+     * data-model memories using a given yaml file. This yaml file can be obtained from the export
+     * memory API in source env and can be modified and used as input to the import API in target
+     * env. This API enables customers to migrate memories from a source env to a target env. This
+     * improves memory adoption for Spotter by giving the users a chance to develop their memories
+     * in one env and replicate the same in another env. #### Usage guidelines To import memory, the
+     * request must include: - &#x60;content&#x60;: The full serialized memory payload to import
+     * (YAML). Typically the &#x60;content&#x60; value returned by the &#x60;exportMemory&#x60; API,
+     * edited locally and re-submitted. The payload itself identifies which data-models the memory
+     * applies to, so no separate identifier list is required. - &#x60;dry_run&#x60;: Required. When
+     * &#x60;true&#x60;, validate the payload and return preview counts without writing anything;
+     * when &#x60;false&#x60;, apply the import. Always run with &#x60;dry_run &#x3D; true&#x60;
+     * first, then re-run with &#x60;dry_run &#x3D; false&#x60; once you are satisfied with the
+     * preview. The import replaces the existing global memories on the data-models referenced in
+     * the payload with the entries supplied in the payload. The API returns a response object with:
+     * - &#x60;status&#x60;: The terminal status of the import (&#x60;SUCCESS&#x60;,
+     * &#x60;VALIDATION_FAILED&#x60;, or &#x60;FAILED&#x60;). - &#x60;summary&#x60;: Per
+     * &#x60;(memory_type, source)&#x60; counts. In a dry run the
+     * &#x60;deleted_record_count&#x60;/&#x60;inserted_record_count&#x60; are previews; in a real
+     * import they are actuals. On &#x60;VALIDATION_FAILED&#x60;, &#x60;summary&#x60; is
+     * &#x60;null&#x60; when validation fails before any item is processed (e.g. an unresolved or
+     * inaccessible data-model source) and an empty list otherwise — treat both as \&quot;no counts
+     * available\&quot;. - &#x60;validation_failures&#x60;: Per-item validation failures, each with
+     * &#x60;line_number&#x60;, &#x60;reason&#x60;, &#x60;field_name&#x60;, and &#x60;message&#x60;
+     * for click-to-locate and inline highlighting. - &#x60;diagnostics&#x60;: Groups of diagnostic
+     * messages, each with a &#x60;sub_status&#x60; (&#x60;WARNING&#x60;, &#x60;FAILURE&#x60;,
+     * &#x60;ROLLED_BACK&#x60;, or &#x60;UNKNOWN&#x60;) and a &#x60;messages&#x60; list. This is the
+     * single channel for both non-fatal warnings (under &#x60;WARNING&#x60;, e.g. when some older
+     * memory entries could not be fully cleaned up) and fatal causes (e.g. the failure reason under
+     * &#x60;FAILURE&#x60;, or a &#x60;ROLLED_BACK&#x60; group when new entries were undone). -
+     * &#x60;operation_id&#x60;: A server-generated identifier for this import operation; include it
+     * when contacting support to help correlate server-side logs. Populated once the server
+     * registers the import operation; &#x60;null&#x60; when the request fails earlier (e.g. while
+     * parsing the payload or resolving its data-model sources). #### File format The payload is a
+     * YAML document with a single top-level &#x60;memories&#x60; key holding a list of memory
+     * items. Each item is self-contained: a &#x60;type&#x60;, a typed &#x60;content&#x60; block, a
+     * &#x60;datamodel_sources&#x60; list, and optional &#x60;tags&#x60;. Typically you don&#39;t
+     * hand-author this file — you obtain it from &#x60;exportMemory&#x60;, edit it, and submit it
+     * back through &#x60;importMemory&#x60;. &#x60;&#x60;&#x60;yaml memories: - type: RULE content:
+     * rule_definition: \&quot;Always filter revenue to closed-won deals.\&quot; datamodel_sources:
+     * - guid: 11111111-1111-1111-1111-111111111111 obj_id: sales_data_model tags: - finance - type:
+     * RULE content: rule_definition: \&quot;Exclude internal test accounts from all results.\&quot;
+     * datamodel_sources: - obj_id: sales_data_model - type: RECIPE content: user_query: \&quot;top
+     * accounts by revenue\&quot; recipe: | {\&quot;steps\&quot;: [...serialized recipe blob...]}
+     * datamodel_sources: - obj_id: sales_data_model - type: RECIPE content: user_query:
+     * \&quot;monthly new customer count\&quot; recipe: | {\&quot;steps\&quot;: [...serialized
+     * recipe blob...]} datamodel_sources: - obj_id: sales_data_model - type: ALWAYS_APPLY_RULES
+     * content: rules: - \&quot;Never show internal test accounts.\&quot; - \&quot;Round currency to
+     * whole dollars.\&quot; datamodel_sources: - guid: 22222222-2222-2222-2222-222222222222
+     * &#x60;&#x60;&#x60; A file can contain multiple &#x60;RULE&#x60; and multiple
+     * &#x60;RECIPE&#x60; items for a data-model, but at most one &#x60;ALWAYS_APPLY_RULES&#x60;
+     * item per data-model. ##### Memory item fields | Field | Required | Type | Description |
+     * |-------|----------|------|-------------| | &#x60;type&#x60; | Yes | String enum | One of
+     * &#x60;RULE&#x60;, &#x60;RECIPE&#x60;, or &#x60;ALWAYS_APPLY_RULES&#x60;. | |
+     * &#x60;content&#x60; | Yes | Mapping | Type-specific content block (see below). | |
+     * &#x60;datamodel_sources&#x60; | Yes | Non-empty list | The data-model(s) the memory attaches
+     * to. | | &#x60;tags&#x60; | No | List of strings | Free-form labels. | ##### Memory types and
+     * content | &#x60;type&#x60; | Content fields | Notes | |--------|----------------|-------| |
+     * &#x60;RULE&#x60; | &#x60;rule_definition&#x60; — required, non-empty string | A single
+     * semantic rule. | | &#x60;RECIPE&#x60; | &#x60;recipe&#x60; and &#x60;user_query&#x60; — both
+     * required, non-empty strings | &#x60;recipe&#x60; is an opaque serialized blob;
+     * &#x60;user_query&#x60; is the natural-language query it answers. | |
+     * &#x60;ALWAYS_APPLY_RULES&#x60; | &#x60;rules&#x60; — required, non-empty list of non-empty
+     * strings | Data-model-wide always-apply rules. At most one &#x60;ALWAYS_APPLY_RULES&#x60; item
+     * per data-model. | ##### Identifying data-models (&#x60;datamodel_sources&#x60;) Each item
+     * must list at least one source. Each entry identifies a data-model by at least one of: -
+     * &#x60;guid&#x60; — the data-model GUID. - &#x60;obj_id&#x60; — a stable object ID, resolved
+     * to a GUID server-side. If both are supplied, &#x60;obj_id&#x60; takes precedence and
+     * &#x60;guid&#x60; is ignored entirely; &#x60;guid&#x60; takes effect only when
+     * &#x60;obj_id&#x60; is absent. Exported files populate &#x60;guid&#x60; and, if present,
+     * &#x60;obj_id&#x60; as well. &gt; ⚠️ **Cross-environment import:** When &#x60;obj_id&#x60; is
+     * present it is &gt; authoritative — the accompanying &#x60;guid&#x60; is **not** used as a
+     * fallback. &gt; If an &#x60;obj_id&#x60; does not exist in the target environment, that item
+     * &gt; fails with &#x60;UNRESOLVED_SOURCE&#x60;. Remove or correct stale &#x60;obj_id&#x60;
+     * &gt; values before importing across environments. #### Validations reference The payload is
+     * fully validated before anything is written. This applies to &#x60;dry_run &#x3D; true&#x60;
+     * and &#x60;dry_run &#x3D; false&#x60; alike: if any item fails validation, the entire import
+     * is rejected — no partial writes — and all failures are returned together so you can fix them
+     * in one pass. ##### Limits Default limits (may be adjusted in future if the need arises): |
+     * Limit | Default | |-------|---------| | Uploaded file size | 10 MiB | | Total memory items |
+     * 10,000 | | &#x60;rule_definition&#x60; length | 1,000 characters | | &#x60;user_query&#x60;
+     * length | 1,000 characters | | &#x60;recipe&#x60; length | 2,000 characters | |
+     * &#x60;rules&#x60; combined length (&#x60;ALWAYS_APPLY_RULES&#x60;) | 2,000 characters | |
+     * Tags per item | 10 | | Characters per tag | 50 | The &#x60;rules&#x60; limit in
+     * &#x60;ALWAYS_APPLY_RULES&#x60; is a combined budget across all entries in the list, not per
+     * entry. ##### Structural rules - The document must be a mapping with a &#x60;memories&#x60;
+     * key whose value is a list. - Unknown keys — at the top level, within an item, or under
+     * &#x60;content&#x60; — are rejected. - Each item&#39;s &#x60;type&#x60; must be one of the
+     * three supported values, and &#x60;content&#x60; must match that type&#39;s shape. - Null,
+     * empty-string, or wrong-typed values in a required field are treated as missing. - Non-string
+     * or empty &#x60;tags&#x60; entries are dropped silently; certain tags reserved for internal
+     * use are stripped automatically before the item is stored. ##### Cross-item rules - A
+     * data-model referenced by more than one &#x60;ALWAYS_APPLY_RULES&#x60; item is rejected —
+     * combine them into a single item&#39;s &#x60;rules&#x60; list. ##### Failure reasons Each
+     * entry in &#x60;validation_failures&#x60; carries one of: | Reason | Meaning |
+     * |--------|---------| | &#x60;SCHEMA&#x60; | YAML structure is invalid or unsupported. | |
+     * &#x60;VALIDATION&#x60; | A required field is missing/empty, a count exceeds a limit, or a
+     * GUID is malformed. | | &#x60;CHAR_LIMIT&#x60; | A content field or tag exceeds its size
+     * limit. | | &#x60;UNRESOLVED_SOURCE&#x60; | A &#x60;guid&#x60; or &#x60;obj_id&#x60; could not
+     * be resolved to an existing data-model. | | &#x60;ACCESS_DENIED&#x60; | The caller lacks
+     * sufficient access on the referenced data-model. | #### Dry run &#x60;dry_run&#x60; is
+     * required and has no default, so the import is always a deliberate two-step flow: 1. **First,
+     * call with &#x60;dry_run &#x3D; true&#x60;.** This validates the payload and previews what
+     * would happen — the counts in &#x60;summary&#x60; and any &#x60;validation_failures&#x60; —
+     * without writing anything. 2. **Then, after reviewing a clean preview, call again with
+     * &#x60;dry_run &#x3D; false&#x60;** (same &#x60;content&#x60;). This applies the import. It
+     * refuses to write when any item fails validation, so fix the reported
+     * &#x60;validation_failures&#x60; and resubmit. &gt; ###### Important: &gt; Never call
+     * &#x60;dry_run &#x3D; false&#x60; without first inspecting a &#x60;dry_run &#x3D; true&#x60;
+     * preview. A real import deletes and replaces existing global memories on the referenced
+     * data-models. #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have the necessary Spotter permissions, or the
+     * bearer token does not correspond to the data-model&#39;s org. Per-data-model access failures
+     * do not use this code — they surface as &#x60;ACCESS_DENIED&#x60; validation failures with
+     * HTTP &#x60;200&#x60; (see Logical failures below). | #### Logical failures Validation and
+     * write failures are not returned in the error envelope. The call returns &#x60;200&#x60; with
+     * a terminal &#x60;status&#x60; of &#x60;VALIDATION_FAILED&#x60; or &#x60;FAILED&#x60;, and the
+     * details live in &#x60;validation_failures&#x60; / &#x60;diagnostics&#x60;: -
+     * **VALIDATION_FAILED** — one or more items failed schema/semantic validation; nothing was
+     * written. Inspect &#x60;validation_failures&#x60;, fix the items, and resubmit. - **FAILED** —
+     * the import did not complete. Inspect &#x60;diagnostics&#x60;: a &#x60;ROLLED_BACK&#x60; group
+     * means writing the new entries failed and any entries written before the failure were undone
+     * (existing memory is intact, no destructive change), while a &#x60;FAILURE&#x60; group carries
+     * another non-validation cause. Sample &#x60;VALIDATION_FAILED&#x60; responses (HTTP 200):
+     * **Invalid data-model (unresolved source):** &#x60;&#x60;&#x60;json { \&quot;status\&quot;:
+     * \&quot;VALIDATION_FAILED\&quot;, \&quot;summary\&quot;: null,
+     * \&quot;validation_failures\&quot;: [ { \&quot;line_number\&quot;: 2, \&quot;reason\&quot;:
+     * \&quot;UNRESOLVED_SOURCE\&quot;, \&quot;field_name\&quot;:
+     * \&quot;datamodel_sources[0].guid\&quot;, \&quot;message\&quot;: \&quot;unknown datamodel
+     * guid: 55555555-5555-5555-5555-555555555555\&quot; } ], \&quot;diagnostics\&quot;: [ {
+     * \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;, \&quot;messages\&quot;: [ \&quot;unknown
+     * datamodel guid: 55555555-5555-5555-5555-555555555555\&quot; ] } ],
+     * \&quot;operation_id\&quot;: null } &#x60;&#x60;&#x60; **Inaccessible data-models:**
+     * &#x60;&#x60;&#x60;json { \&quot;status\&quot;: \&quot;VALIDATION_FAILED\&quot;,
+     * \&quot;summary\&quot;: null, \&quot;validation_failures\&quot;: [ {
+     * \&quot;line_number\&quot;: 2, \&quot;reason\&quot;: \&quot;ACCESS_DENIED\&quot;,
+     * \&quot;field_name\&quot;: \&quot;datamodel_sources[0]\&quot;, \&quot;message\&quot;:
+     * \&quot;Insufficient permissions on datamodel
+     * &#39;44444444-4444-4444-4444-444444444444&#39;\&quot; }, { \&quot;line_number\&quot;: 8,
+     * \&quot;reason\&quot;: \&quot;ACCESS_DENIED\&quot;, \&quot;field_name\&quot;:
+     * \&quot;datamodel_sources[0]\&quot;, \&quot;message\&quot;: \&quot;Insufficient permissions on
+     * datamodel &#39;33333333-3333-3333-3333-333333333333&#39;\&quot; } ],
+     * \&quot;diagnostics\&quot;: [ { \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;,
+     * \&quot;messages\&quot;: [ \&quot;Memory import validation failed with 2 error(s):
+     * Insufficient permissions on datamodel &#39;44444444-4444-4444-4444-444444444444&#39;;
+     * Insufficient permissions on datamodel &#39;33333333-3333-3333-3333-333333333333&#39;\&quot; ]
+     * } ], \&quot;operation_id\&quot;: null } &#x60;&#x60;&#x60; **Character-limit validations:**
+     * &#x60;&#x60;&#x60;json { \&quot;status\&quot;: \&quot;VALIDATION_FAILED\&quot;,
+     * \&quot;summary\&quot;: [], \&quot;validation_failures\&quot;: [ { \&quot;line_number\&quot;:
+     * 3, \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.rule_definition\&quot;, \&quot;message\&quot;: \&quot;content.rule_definition
+     * is 1073 characters; max allowed is 1000\&quot; }, { \&quot;line_number\&quot;: 49,
+     * \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.user_query\&quot;, \&quot;message\&quot;: \&quot;content.user_query is 1150
+     * characters; max allowed is 1000\&quot; }, { \&quot;line_number\&quot;: 49,
+     * \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.recipe\&quot;, \&quot;message\&quot;: \&quot;content.recipe is 3574
+     * characters; max allowed is 2000\&quot; } ], \&quot;diagnostics\&quot;: [ {
+     * \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;, \&quot;messages\&quot;: [ \&quot;Validation
+     * failures present; fix them and re-run to see the DRY_RUN preview.\&quot; ] } ],
+     * \&quot;operation_id\&quot;: \&quot;66666666-6666-6666-6666-666666666666\&quot; }
+     * &#x60;&#x60;&#x60; &gt; ###### Note: &gt; - To use this API, the user needs Spotter access
+     * (use/manage) and either edit or memory access on the data-model and they must use
+     * corresponding org related bearerToken where the data-model exists. &gt; - This endpoint is
+     * currently in Beta. Breaking changes may be introduced before the endpoint is made Generally
+     * Available. &gt; - Available from version 26.8.0.cl and later. &gt; - This endpoint requires
+     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @param importMemoryRequest (required)
+     * @return ApiResponse&lt;ImportMemoryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<ImportMemoryResponse> importMemoryWithHttpInfo(
+            ImportMemoryRequest importMemoryRequest) throws ApiException {
+        okhttp3.Call localVarCall = importMemoryValidateBeforeCall(importMemoryRequest, null);
+        Type localVarReturnType = new TypeToken<ImportMemoryResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Imports memory entries (rules, recipes, and always-apply rules) from a YAML
+     * payload, typically a payload produced by &#x60;exportMemory&#x60; and edited locally. The
+     * imported entries replace the existing memory for the data-models referenced in the payload.
+     * &#x60;dry_run&#x60; is required. Pass &#x60;true&#x60; first to validate the payload and
+     * review the preview counts and any row-level failures without making changes, then re-run with
+     * &#x60;dry_run &#x3D; false&#x60; to apply the import. An import is not applied if any row
+     * fails validation. Requires Spotter access (use/manage) and either edit or memory access on
+     * corresponding data model sources. Version: 26.8.0.cl or later This API allows users to import
+     * data-model memories using a given yaml file. This yaml file can be obtained from the export
+     * memory API in source env and can be modified and used as input to the import API in target
+     * env. This API enables customers to migrate memories from a source env to a target env. This
+     * improves memory adoption for Spotter by giving the users a chance to develop their memories
+     * in one env and replicate the same in another env. #### Usage guidelines To import memory, the
+     * request must include: - &#x60;content&#x60;: The full serialized memory payload to import
+     * (YAML). Typically the &#x60;content&#x60; value returned by the &#x60;exportMemory&#x60; API,
+     * edited locally and re-submitted. The payload itself identifies which data-models the memory
+     * applies to, so no separate identifier list is required. - &#x60;dry_run&#x60;: Required. When
+     * &#x60;true&#x60;, validate the payload and return preview counts without writing anything;
+     * when &#x60;false&#x60;, apply the import. Always run with &#x60;dry_run &#x3D; true&#x60;
+     * first, then re-run with &#x60;dry_run &#x3D; false&#x60; once you are satisfied with the
+     * preview. The import replaces the existing global memories on the data-models referenced in
+     * the payload with the entries supplied in the payload. The API returns a response object with:
+     * - &#x60;status&#x60;: The terminal status of the import (&#x60;SUCCESS&#x60;,
+     * &#x60;VALIDATION_FAILED&#x60;, or &#x60;FAILED&#x60;). - &#x60;summary&#x60;: Per
+     * &#x60;(memory_type, source)&#x60; counts. In a dry run the
+     * &#x60;deleted_record_count&#x60;/&#x60;inserted_record_count&#x60; are previews; in a real
+     * import they are actuals. On &#x60;VALIDATION_FAILED&#x60;, &#x60;summary&#x60; is
+     * &#x60;null&#x60; when validation fails before any item is processed (e.g. an unresolved or
+     * inaccessible data-model source) and an empty list otherwise — treat both as \&quot;no counts
+     * available\&quot;. - &#x60;validation_failures&#x60;: Per-item validation failures, each with
+     * &#x60;line_number&#x60;, &#x60;reason&#x60;, &#x60;field_name&#x60;, and &#x60;message&#x60;
+     * for click-to-locate and inline highlighting. - &#x60;diagnostics&#x60;: Groups of diagnostic
+     * messages, each with a &#x60;sub_status&#x60; (&#x60;WARNING&#x60;, &#x60;FAILURE&#x60;,
+     * &#x60;ROLLED_BACK&#x60;, or &#x60;UNKNOWN&#x60;) and a &#x60;messages&#x60; list. This is the
+     * single channel for both non-fatal warnings (under &#x60;WARNING&#x60;, e.g. when some older
+     * memory entries could not be fully cleaned up) and fatal causes (e.g. the failure reason under
+     * &#x60;FAILURE&#x60;, or a &#x60;ROLLED_BACK&#x60; group when new entries were undone). -
+     * &#x60;operation_id&#x60;: A server-generated identifier for this import operation; include it
+     * when contacting support to help correlate server-side logs. Populated once the server
+     * registers the import operation; &#x60;null&#x60; when the request fails earlier (e.g. while
+     * parsing the payload or resolving its data-model sources). #### File format The payload is a
+     * YAML document with a single top-level &#x60;memories&#x60; key holding a list of memory
+     * items. Each item is self-contained: a &#x60;type&#x60;, a typed &#x60;content&#x60; block, a
+     * &#x60;datamodel_sources&#x60; list, and optional &#x60;tags&#x60;. Typically you don&#39;t
+     * hand-author this file — you obtain it from &#x60;exportMemory&#x60;, edit it, and submit it
+     * back through &#x60;importMemory&#x60;. &#x60;&#x60;&#x60;yaml memories: - type: RULE content:
+     * rule_definition: \&quot;Always filter revenue to closed-won deals.\&quot; datamodel_sources:
+     * - guid: 11111111-1111-1111-1111-111111111111 obj_id: sales_data_model tags: - finance - type:
+     * RULE content: rule_definition: \&quot;Exclude internal test accounts from all results.\&quot;
+     * datamodel_sources: - obj_id: sales_data_model - type: RECIPE content: user_query: \&quot;top
+     * accounts by revenue\&quot; recipe: | {\&quot;steps\&quot;: [...serialized recipe blob...]}
+     * datamodel_sources: - obj_id: sales_data_model - type: RECIPE content: user_query:
+     * \&quot;monthly new customer count\&quot; recipe: | {\&quot;steps\&quot;: [...serialized
+     * recipe blob...]} datamodel_sources: - obj_id: sales_data_model - type: ALWAYS_APPLY_RULES
+     * content: rules: - \&quot;Never show internal test accounts.\&quot; - \&quot;Round currency to
+     * whole dollars.\&quot; datamodel_sources: - guid: 22222222-2222-2222-2222-222222222222
+     * &#x60;&#x60;&#x60; A file can contain multiple &#x60;RULE&#x60; and multiple
+     * &#x60;RECIPE&#x60; items for a data-model, but at most one &#x60;ALWAYS_APPLY_RULES&#x60;
+     * item per data-model. ##### Memory item fields | Field | Required | Type | Description |
+     * |-------|----------|------|-------------| | &#x60;type&#x60; | Yes | String enum | One of
+     * &#x60;RULE&#x60;, &#x60;RECIPE&#x60;, or &#x60;ALWAYS_APPLY_RULES&#x60;. | |
+     * &#x60;content&#x60; | Yes | Mapping | Type-specific content block (see below). | |
+     * &#x60;datamodel_sources&#x60; | Yes | Non-empty list | The data-model(s) the memory attaches
+     * to. | | &#x60;tags&#x60; | No | List of strings | Free-form labels. | ##### Memory types and
+     * content | &#x60;type&#x60; | Content fields | Notes | |--------|----------------|-------| |
+     * &#x60;RULE&#x60; | &#x60;rule_definition&#x60; — required, non-empty string | A single
+     * semantic rule. | | &#x60;RECIPE&#x60; | &#x60;recipe&#x60; and &#x60;user_query&#x60; — both
+     * required, non-empty strings | &#x60;recipe&#x60; is an opaque serialized blob;
+     * &#x60;user_query&#x60; is the natural-language query it answers. | |
+     * &#x60;ALWAYS_APPLY_RULES&#x60; | &#x60;rules&#x60; — required, non-empty list of non-empty
+     * strings | Data-model-wide always-apply rules. At most one &#x60;ALWAYS_APPLY_RULES&#x60; item
+     * per data-model. | ##### Identifying data-models (&#x60;datamodel_sources&#x60;) Each item
+     * must list at least one source. Each entry identifies a data-model by at least one of: -
+     * &#x60;guid&#x60; — the data-model GUID. - &#x60;obj_id&#x60; — a stable object ID, resolved
+     * to a GUID server-side. If both are supplied, &#x60;obj_id&#x60; takes precedence and
+     * &#x60;guid&#x60; is ignored entirely; &#x60;guid&#x60; takes effect only when
+     * &#x60;obj_id&#x60; is absent. Exported files populate &#x60;guid&#x60; and, if present,
+     * &#x60;obj_id&#x60; as well. &gt; ⚠️ **Cross-environment import:** When &#x60;obj_id&#x60; is
+     * present it is &gt; authoritative — the accompanying &#x60;guid&#x60; is **not** used as a
+     * fallback. &gt; If an &#x60;obj_id&#x60; does not exist in the target environment, that item
+     * &gt; fails with &#x60;UNRESOLVED_SOURCE&#x60;. Remove or correct stale &#x60;obj_id&#x60;
+     * &gt; values before importing across environments. #### Validations reference The payload is
+     * fully validated before anything is written. This applies to &#x60;dry_run &#x3D; true&#x60;
+     * and &#x60;dry_run &#x3D; false&#x60; alike: if any item fails validation, the entire import
+     * is rejected — no partial writes — and all failures are returned together so you can fix them
+     * in one pass. ##### Limits Default limits (may be adjusted in future if the need arises): |
+     * Limit | Default | |-------|---------| | Uploaded file size | 10 MiB | | Total memory items |
+     * 10,000 | | &#x60;rule_definition&#x60; length | 1,000 characters | | &#x60;user_query&#x60;
+     * length | 1,000 characters | | &#x60;recipe&#x60; length | 2,000 characters | |
+     * &#x60;rules&#x60; combined length (&#x60;ALWAYS_APPLY_RULES&#x60;) | 2,000 characters | |
+     * Tags per item | 10 | | Characters per tag | 50 | The &#x60;rules&#x60; limit in
+     * &#x60;ALWAYS_APPLY_RULES&#x60; is a combined budget across all entries in the list, not per
+     * entry. ##### Structural rules - The document must be a mapping with a &#x60;memories&#x60;
+     * key whose value is a list. - Unknown keys — at the top level, within an item, or under
+     * &#x60;content&#x60; — are rejected. - Each item&#39;s &#x60;type&#x60; must be one of the
+     * three supported values, and &#x60;content&#x60; must match that type&#39;s shape. - Null,
+     * empty-string, or wrong-typed values in a required field are treated as missing. - Non-string
+     * or empty &#x60;tags&#x60; entries are dropped silently; certain tags reserved for internal
+     * use are stripped automatically before the item is stored. ##### Cross-item rules - A
+     * data-model referenced by more than one &#x60;ALWAYS_APPLY_RULES&#x60; item is rejected —
+     * combine them into a single item&#39;s &#x60;rules&#x60; list. ##### Failure reasons Each
+     * entry in &#x60;validation_failures&#x60; carries one of: | Reason | Meaning |
+     * |--------|---------| | &#x60;SCHEMA&#x60; | YAML structure is invalid or unsupported. | |
+     * &#x60;VALIDATION&#x60; | A required field is missing/empty, a count exceeds a limit, or a
+     * GUID is malformed. | | &#x60;CHAR_LIMIT&#x60; | A content field or tag exceeds its size
+     * limit. | | &#x60;UNRESOLVED_SOURCE&#x60; | A &#x60;guid&#x60; or &#x60;obj_id&#x60; could not
+     * be resolved to an existing data-model. | | &#x60;ACCESS_DENIED&#x60; | The caller lacks
+     * sufficient access on the referenced data-model. | #### Dry run &#x60;dry_run&#x60; is
+     * required and has no default, so the import is always a deliberate two-step flow: 1. **First,
+     * call with &#x60;dry_run &#x3D; true&#x60;.** This validates the payload and previews what
+     * would happen — the counts in &#x60;summary&#x60; and any &#x60;validation_failures&#x60; —
+     * without writing anything. 2. **Then, after reviewing a clean preview, call again with
+     * &#x60;dry_run &#x3D; false&#x60;** (same &#x60;content&#x60;). This applies the import. It
+     * refuses to write when any item fails validation, so fix the reported
+     * &#x60;validation_failures&#x60; and resubmit. &gt; ###### Important: &gt; Never call
+     * &#x60;dry_run &#x3D; false&#x60; without first inspecting a &#x60;dry_run &#x3D; true&#x60;
+     * preview. A real import deletes and replaces existing global memories on the referenced
+     * data-models. #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have the necessary Spotter permissions, or the
+     * bearer token does not correspond to the data-model&#39;s org. Per-data-model access failures
+     * do not use this code — they surface as &#x60;ACCESS_DENIED&#x60; validation failures with
+     * HTTP &#x60;200&#x60; (see Logical failures below). | #### Logical failures Validation and
+     * write failures are not returned in the error envelope. The call returns &#x60;200&#x60; with
+     * a terminal &#x60;status&#x60; of &#x60;VALIDATION_FAILED&#x60; or &#x60;FAILED&#x60;, and the
+     * details live in &#x60;validation_failures&#x60; / &#x60;diagnostics&#x60;: -
+     * **VALIDATION_FAILED** — one or more items failed schema/semantic validation; nothing was
+     * written. Inspect &#x60;validation_failures&#x60;, fix the items, and resubmit. - **FAILED** —
+     * the import did not complete. Inspect &#x60;diagnostics&#x60;: a &#x60;ROLLED_BACK&#x60; group
+     * means writing the new entries failed and any entries written before the failure were undone
+     * (existing memory is intact, no destructive change), while a &#x60;FAILURE&#x60; group carries
+     * another non-validation cause. Sample &#x60;VALIDATION_FAILED&#x60; responses (HTTP 200):
+     * **Invalid data-model (unresolved source):** &#x60;&#x60;&#x60;json { \&quot;status\&quot;:
+     * \&quot;VALIDATION_FAILED\&quot;, \&quot;summary\&quot;: null,
+     * \&quot;validation_failures\&quot;: [ { \&quot;line_number\&quot;: 2, \&quot;reason\&quot;:
+     * \&quot;UNRESOLVED_SOURCE\&quot;, \&quot;field_name\&quot;:
+     * \&quot;datamodel_sources[0].guid\&quot;, \&quot;message\&quot;: \&quot;unknown datamodel
+     * guid: 55555555-5555-5555-5555-555555555555\&quot; } ], \&quot;diagnostics\&quot;: [ {
+     * \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;, \&quot;messages\&quot;: [ \&quot;unknown
+     * datamodel guid: 55555555-5555-5555-5555-555555555555\&quot; ] } ],
+     * \&quot;operation_id\&quot;: null } &#x60;&#x60;&#x60; **Inaccessible data-models:**
+     * &#x60;&#x60;&#x60;json { \&quot;status\&quot;: \&quot;VALIDATION_FAILED\&quot;,
+     * \&quot;summary\&quot;: null, \&quot;validation_failures\&quot;: [ {
+     * \&quot;line_number\&quot;: 2, \&quot;reason\&quot;: \&quot;ACCESS_DENIED\&quot;,
+     * \&quot;field_name\&quot;: \&quot;datamodel_sources[0]\&quot;, \&quot;message\&quot;:
+     * \&quot;Insufficient permissions on datamodel
+     * &#39;44444444-4444-4444-4444-444444444444&#39;\&quot; }, { \&quot;line_number\&quot;: 8,
+     * \&quot;reason\&quot;: \&quot;ACCESS_DENIED\&quot;, \&quot;field_name\&quot;:
+     * \&quot;datamodel_sources[0]\&quot;, \&quot;message\&quot;: \&quot;Insufficient permissions on
+     * datamodel &#39;33333333-3333-3333-3333-333333333333&#39;\&quot; } ],
+     * \&quot;diagnostics\&quot;: [ { \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;,
+     * \&quot;messages\&quot;: [ \&quot;Memory import validation failed with 2 error(s):
+     * Insufficient permissions on datamodel &#39;44444444-4444-4444-4444-444444444444&#39;;
+     * Insufficient permissions on datamodel &#39;33333333-3333-3333-3333-333333333333&#39;\&quot; ]
+     * } ], \&quot;operation_id\&quot;: null } &#x60;&#x60;&#x60; **Character-limit validations:**
+     * &#x60;&#x60;&#x60;json { \&quot;status\&quot;: \&quot;VALIDATION_FAILED\&quot;,
+     * \&quot;summary\&quot;: [], \&quot;validation_failures\&quot;: [ { \&quot;line_number\&quot;:
+     * 3, \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.rule_definition\&quot;, \&quot;message\&quot;: \&quot;content.rule_definition
+     * is 1073 characters; max allowed is 1000\&quot; }, { \&quot;line_number\&quot;: 49,
+     * \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.user_query\&quot;, \&quot;message\&quot;: \&quot;content.user_query is 1150
+     * characters; max allowed is 1000\&quot; }, { \&quot;line_number\&quot;: 49,
+     * \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.recipe\&quot;, \&quot;message\&quot;: \&quot;content.recipe is 3574
+     * characters; max allowed is 2000\&quot; } ], \&quot;diagnostics\&quot;: [ {
+     * \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;, \&quot;messages\&quot;: [ \&quot;Validation
+     * failures present; fix them and re-run to see the DRY_RUN preview.\&quot; ] } ],
+     * \&quot;operation_id\&quot;: \&quot;66666666-6666-6666-6666-666666666666\&quot; }
+     * &#x60;&#x60;&#x60; &gt; ###### Note: &gt; - To use this API, the user needs Spotter access
+     * (use/manage) and either edit or memory access on the data-model and they must use
+     * corresponding org related bearerToken where the data-model exists. &gt; - This endpoint is
+     * currently in Beta. Breaking changes may be introduced before the endpoint is made Generally
+     * Available. &gt; - Available from version 26.8.0.cl and later. &gt; - This endpoint requires
+     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @param importMemoryRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call importMemoryAsync(
+            ImportMemoryRequest importMemoryRequest,
+            final ApiCallback<ImportMemoryResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall = importMemoryValidateBeforeCall(importMemoryRequest, _callback);
+        Type localVarReturnType = new TypeToken<ImportMemoryResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for loadAnswer
      *
      * @param conversationIdentifier Unique identifier of the conversation. (required)
@@ -3855,15 +4830,15 @@ public class AiApi {
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
-    public SendAgentMessageResponse sendAgentConversationMessageStreaming(
+    public InputStream sendAgentConversationMessageStreaming(
             String conversationIdentifier,
             SendAgentConversationMessageStreamingRequest
                     sendAgentConversationMessageStreamingRequest)
             throws ApiException {
-        ApiResponse<SendAgentMessageResponse> localVarResp =
+        InputStream localVarResp =
                 sendAgentConversationMessageStreamingWithHttpInfo(
                         conversationIdentifier, sendAgentConversationMessageStreamingRequest);
-        return localVarResp.getData();
+        return localVarResp;
     }
 
     /**
@@ -3918,7 +4893,7 @@ public class AiApi {
      * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
      * </table>
      */
-    public ApiResponse<SendAgentMessageResponse> sendAgentConversationMessageStreamingWithHttpInfo(
+    public InputStream sendAgentConversationMessageStreamingWithHttpInfo(
             String conversationIdentifier,
             SendAgentConversationMessageStreamingRequest
                     sendAgentConversationMessageStreamingRequest)
@@ -3927,7 +4902,7 @@ public class AiApi {
                 sendAgentConversationMessageStreamingValidateBeforeCall(
                         conversationIdentifier, sendAgentConversationMessageStreamingRequest, null);
         Type localVarReturnType = new TypeToken<SendAgentMessageResponse>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.executeStream(localVarCall, localVarReturnType);
     }
 
     /**
@@ -4425,11 +5400,11 @@ public class AiApi {
      * @deprecated
      */
     @Deprecated
-    public SendAgentMessageResponse sendAgentMessageStreaming(
+    public InputStream sendAgentMessageStreaming(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
-        ApiResponse<SendAgentMessageResponse> localVarResp =
+        InputStream localVarResp =
                 sendAgentMessageStreamingWithHttpInfo(sendAgentMessageStreamingRequest);
-        return localVarResp.getData();
+        return localVarResp;
     }
 
     /**
@@ -4487,12 +5462,12 @@ public class AiApi {
      * @deprecated
      */
     @Deprecated
-    public ApiResponse<SendAgentMessageResponse> sendAgentMessageStreamingWithHttpInfo(
+    public InputStream sendAgentMessageStreamingWithHttpInfo(
             SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
         okhttp3.Call localVarCall =
                 sendAgentMessageStreamingValidateBeforeCall(sendAgentMessageStreamingRequest, null);
         Type localVarReturnType = new TypeToken<SendAgentMessageResponse>() {}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.executeStream(localVarCall, localVarReturnType);
     }
 
     /**

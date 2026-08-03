@@ -43,7 +43,8 @@ public class ExcludeMetadataListItemInput implements Serializable {
      * column of any data object such as table, worksheet or view 5. CONNECTION for connection
      * objects 6. TAG for tag objects 7. USER for user objects 8. USER_GROUP for group objects 9.
      * LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data
-     * object by using matching values. 10. INSIGHT_SPEC for SpotIQ objects
+     * object by using matching values. 10. INSIGHT_SPEC for SpotIQ objects 11. COLLECTION for
+     * collection objects
      */
     @JsonAdapter(TypeEnum.Adapter.class)
     public enum TypeEnum {
@@ -65,7 +66,9 @@ public class ExcludeMetadataListItemInput implements Serializable {
 
         LOGICAL_RELATIONSHIP("LOGICAL_RELATIONSHIP"),
 
-        INSIGHT_SPEC("INSIGHT_SPEC");
+        INSIGHT_SPEC("INSIGHT_SPEC"),
+
+        COLLECTION("COLLECTION");
 
         private String value;
 
@@ -150,7 +153,8 @@ public class ExcludeMetadataListItemInput implements Serializable {
      * column of any data object such as table, worksheet or view 5. CONNECTION for connection
      * objects 6. TAG for tag objects 7. USER for user objects 8. USER_GROUP for group objects 9.
      * LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data
-     * object by using matching values. 10. INSIGHT_SPEC for SpotIQ objects
+     * object by using matching values. 10. INSIGHT_SPEC for SpotIQ objects 11. COLLECTION for
+     * collection objects
      *
      * @return type
      */

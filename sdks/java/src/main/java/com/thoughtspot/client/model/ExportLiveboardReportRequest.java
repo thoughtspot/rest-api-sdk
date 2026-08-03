@@ -18,11 +18,13 @@ import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /** ExportLiveboardReportRequest */
 @javax.annotation.Generated(
@@ -128,19 +130,19 @@ public class ExportLiveboardReportRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_RUNTIME_FILTER)
     @javax.annotation.Nullable
-    private Object runtimeFilter;
+    private Object runtimeFilter = null;
 
     public static final String SERIALIZED_NAME_OVERRIDE_FILTERS = "override_filters";
 
     @SerializedName(SERIALIZED_NAME_OVERRIDE_FILTERS)
     @javax.annotation.Nullable
-    private Object overrideFilters;
+    private Object overrideFilters = null;
 
     public static final String SERIALIZED_NAME_RUNTIME_SORT = "runtime_sort";
 
     @SerializedName(SERIALIZED_NAME_RUNTIME_SORT)
     @javax.annotation.Nullable
-    private Object runtimeSort;
+    private Object runtimeSort = null;
 
     public static final String SERIALIZED_NAME_PDF_OPTIONS = "pdf_options";
 
@@ -158,7 +160,7 @@ public class ExportLiveboardReportRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE)
     @javax.annotation.Nullable
-    private Object runtimeParamOverride;
+    private Object runtimeParamOverride = null;
 
     public static final String SERIALIZED_NAME_REGIONAL_SETTINGS = "regional_settings";
 
@@ -551,6 +553,15 @@ public class ExportLiveboardReportRequest implements Serializable {
                         exportLiveboardReportRequest.additionalProperties);
     }
 
+    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+        return a == b
+                || (a != null
+                        && b != null
+                        && a.isPresent()
+                        && b.isPresent()
+                        && Objects.deepEquals(a.get(), b.get()));
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(
@@ -568,6 +579,13 @@ public class ExportLiveboardReportRequest implements Serializable {
                 runtimeParamOverride,
                 regionalSettings,
                 additionalProperties);
+    }
+
+    private static <T> int hashCodeNullable(JsonNullable<T> a) {
+        if (a == null) {
+            return 1;
+        }
+        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override

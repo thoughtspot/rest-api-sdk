@@ -36,7 +36,7 @@ public class PermissionOfPrincipalsResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_PRINCIPAL_PERMISSION_DETAILS)
     @javax.annotation.Nullable
-    private Object principalPermissionDetails;
+    private Object principalPermissionDetails = null;
 
     public PermissionOfPrincipalsResponse() {}
 

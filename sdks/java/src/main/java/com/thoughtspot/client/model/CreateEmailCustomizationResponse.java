@@ -50,8 +50,8 @@ public class CreateEmailCustomizationResponse implements Serializable {
     public static final String SERIALIZED_NAME_TEMPLATE_PROPERTIES = "template_properties";
 
     @SerializedName(SERIALIZED_NAME_TEMPLATE_PROPERTIES)
-    @javax.annotation.Nonnull
-    private Object templateProperties;
+    @javax.annotation.Nullable
+    private Object templateProperties = null;
 
     public CreateEmailCustomizationResponse() {}
 
@@ -113,7 +113,7 @@ public class CreateEmailCustomizationResponse implements Serializable {
     }
 
     public CreateEmailCustomizationResponse templateProperties(
-            @javax.annotation.Nonnull Object templateProperties) {
+            @javax.annotation.Nullable Object templateProperties) {
         this.templateProperties = templateProperties;
         return this;
     }
@@ -123,12 +123,12 @@ public class CreateEmailCustomizationResponse implements Serializable {
      *
      * @return templateProperties
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public Object getTemplateProperties() {
         return templateProperties;
     }
 
-    public void setTemplateProperties(@javax.annotation.Nonnull Object templateProperties) {
+    public void setTemplateProperties(@javax.annotation.Nullable Object templateProperties) {
         this.templateProperties = templateProperties;
     }
 

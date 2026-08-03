@@ -11,7 +11,7 @@
 |**defaultLiveboardIdentifiers** | **List&lt;String&gt;** | ID of the Liveboards to be assigned as default Liveboards to the users in the group. |  [optional] |
 |**description** | **String** | Description for the group. |  [optional] |
 |**displayName** | **String** | Display name of the group. |  [optional] |
-|**privileges** | [**List&lt;PrivilegesEnum&gt;**](#List&lt;PrivilegesEnum&gt;) | Privileges to assign to the group. |  [optional] |
+|**privileges** | [**List&lt;PrivilegesEnum&gt;**](#List&lt;PrivilegesEnum&gt;) | Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect. |  [optional] |
 |**subGroupIdentifiers** | **List&lt;String&gt;** | GUID or name of the sub groups. A subgroup is a group assigned to a parent group. |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) | Type of the group |  [optional] |
 |**userIdentifiers** | **List&lt;String&gt;** | GUID or name of the users to assign to the group. |  [optional] |

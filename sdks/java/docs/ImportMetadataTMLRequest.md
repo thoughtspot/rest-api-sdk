@@ -13,6 +13,7 @@
 |**allOrgsOverride** | **Boolean** | If import is happening from all orgs context. |  [optional] |
 |**skipDiffCheck** | **Boolean** | &lt;div&gt;Version: 10.6.0.cl or later &lt;/div&gt;  Boolean Flag to skip TML diff check before processing object TMLs. |  [optional] |
 |**enableLargeMetadataValidation** | **Boolean** | &lt;div&gt;Version: 10.5.0.cl or later &lt;/div&gt;  Boolean to indicate if the large metadata validation should be enabled. |  [optional] |
+|**enablePersonalizedViewUpsert** | **Boolean** | &lt;div&gt;Version: 26.8.0.cl or later &lt;/div&gt;  Boolean flag to enable update/insert of personalized views in liveboard. |  [optional] |
 
 
 

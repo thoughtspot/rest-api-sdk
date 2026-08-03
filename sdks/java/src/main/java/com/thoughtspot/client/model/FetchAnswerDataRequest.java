@@ -17,11 +17,13 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /** FetchAnswerDataRequest */
 @javax.annotation.Generated(
@@ -111,19 +113,19 @@ public class FetchAnswerDataRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_RUNTIME_FILTER)
     @javax.annotation.Nullable
-    private Object runtimeFilter;
+    private Object runtimeFilter = null;
 
     public static final String SERIALIZED_NAME_RUNTIME_SORT = "runtime_sort";
 
     @SerializedName(SERIALIZED_NAME_RUNTIME_SORT)
     @javax.annotation.Nullable
-    private Object runtimeSort;
+    private Object runtimeSort = null;
 
     public static final String SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE = "runtime_param_override";
 
     @SerializedName(SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE)
     @javax.annotation.Nullable
-    private Object runtimeParamOverride;
+    private Object runtimeParamOverride = null;
 
     public FetchAnswerDataRequest() {}
 
@@ -340,6 +342,15 @@ public class FetchAnswerDataRequest implements Serializable {
                         this.additionalProperties, fetchAnswerDataRequest.additionalProperties);
     }
 
+    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+        return a == b
+                || (a != null
+                        && b != null
+                        && a.isPresent()
+                        && b.isPresent()
+                        && Objects.deepEquals(a.get(), b.get()));
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(
@@ -351,6 +362,13 @@ public class FetchAnswerDataRequest implements Serializable {
                 runtimeSort,
                 runtimeParamOverride,
                 additionalProperties);
+    }
+
+    private static <T> int hashCodeNullable(JsonNullable<T> a) {
+        if (a == null) {
+            return 1;
+        }
+        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override
