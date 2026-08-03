@@ -30,7 +30,7 @@ export class GroupsImportListInput {
     */
     'description'?: string | null;
     /**
-    * Privileges that will be assigned to the group.
+    * Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.
     */
     'privileges'?: Array<GroupsImportListInputPrivilegesEnum> | null;
     /**

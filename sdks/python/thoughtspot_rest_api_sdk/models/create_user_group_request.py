@@ -29,7 +29,7 @@ class CreateUserGroupRequest(BaseModel):
     display_name: StrictStr = Field(description="Display name for the group.")
     default_liveboard_identifiers: Optional[List[StrictStr]] = Field(default=None, description="GUID of the Liveboards to assign as default Liveboards to the users in the group.")
     description: Optional[StrictStr] = Field(default=None, description="Description of the group")
-    privileges: Optional[List[StrictStr]] = Field(default=None, description="Privileges to assign to the group")
+    privileges: Optional[List[StrictStr]] = Field(default=None, description="Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.")
     sub_group_identifiers: Optional[List[StrictStr]] = Field(default=None, description="GUID or name of the sub groups. A subgroup is a group assigned to a parent group.")
     type: Optional[StrictStr] = Field(default='LOCAL_GROUP', description="Group type.")
     user_identifiers: Optional[List[StrictStr]] = Field(default=None, description="GUID or name of the users to assign to the group.")

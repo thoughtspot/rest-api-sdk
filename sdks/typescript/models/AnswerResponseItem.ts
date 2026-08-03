@@ -23,7 +23,7 @@ export class AnswerResponseItem {
     /**
     * Milliseconds since Unix epoch when this item was produced.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     /**
     * True when the item represents internal agent reasoning rather than user-facing output.
     */

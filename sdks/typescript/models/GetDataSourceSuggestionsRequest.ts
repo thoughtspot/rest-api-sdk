@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class GetDataSourceSuggestionsRequest {
     /**
-    * User query used to suggest data sources.
+    * User query used to suggest data sources. Must be a non-empty string.
     */
     'query': string;
 

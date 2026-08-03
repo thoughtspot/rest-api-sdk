@@ -31,8 +31,9 @@ class ImportMetadataTMLAsyncRequest(BaseModel):
     import_policy: Optional[StrictStr] = Field(default='PARTIAL_OBJECT', description="<div>Version: 10.5.0.cl or later </div>  Policy to be followed while importing the TML. Valid values are [PARTIAL_OBJECT, PARTIAL, VALIDATE_ONLY, ALL_OR_NONE]")
     skip_diff_check: Optional[StrictBool] = Field(default=False, description="<div>Version: 10.6.0.cl or later </div>  Boolean Flag to skip TML diff check before processing object TMLs.")
     enable_large_metadata_validation: Optional[StrictBool] = Field(default=False, description="<div>Version: 10.5.0.cl or later </div>  Boolean to indicate if the large metadata validation should be enabled.")
+    enable_personalized_view_upsert: Optional[StrictBool] = Field(default=False, description="<div>Version: 26.8.0.cl or later </div>  Boolean flag to enable update/insert of personalized views in liveboard.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["metadata_tmls", "create_new", "all_orgs_override", "import_policy", "skip_diff_check", "enable_large_metadata_validation"]
+    __properties: ClassVar[List[str]] = ["metadata_tmls", "create_new", "all_orgs_override", "import_policy", "skip_diff_check", "enable_large_metadata_validation", "enable_personalized_view_upsert"]
 
     @field_validator('import_policy')
     def import_policy_validate_enum(cls, value):
@@ -110,6 +111,11 @@ class ImportMetadataTMLAsyncRequest(BaseModel):
         if self.enable_large_metadata_validation is None and "enable_large_metadata_validation" in self.model_fields_set:
             _dict['enable_large_metadata_validation'] = None
 
+        # set to None if enable_personalized_view_upsert (nullable) is None
+        # and model_fields_set contains the field
+        if self.enable_personalized_view_upsert is None and "enable_personalized_view_upsert" in self.model_fields_set:
+            _dict['enable_personalized_view_upsert'] = None
+
         return _dict
 
     @classmethod
@@ -127,7 +133,8 @@ class ImportMetadataTMLAsyncRequest(BaseModel):
             "all_orgs_override": obj.get("all_orgs_override") if obj.get("all_orgs_override") is not None else False,
             "import_policy": obj.get("import_policy") if obj.get("import_policy") is not None else 'PARTIAL_OBJECT',
             "skip_diff_check": obj.get("skip_diff_check") if obj.get("skip_diff_check") is not None else False,
-            "enable_large_metadata_validation": obj.get("enable_large_metadata_validation") if obj.get("enable_large_metadata_validation") is not None else False
+            "enable_large_metadata_validation": obj.get("enable_large_metadata_validation") if obj.get("enable_large_metadata_validation") is not None else False,
+            "enable_personalized_view_upsert": obj.get("enable_personalized_view_upsert") if obj.get("enable_personalized_view_upsert") is not None else False
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

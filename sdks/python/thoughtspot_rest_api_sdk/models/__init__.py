@@ -24,6 +24,8 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.action_details_input import ActionDetailsInput
     from thoughtspot_rest_api_sdk.models.action_details_input_create import ActionDetailsInputCreate
     from thoughtspot_rest_api_sdk.models.activate_user_request import ActivateUserRequest
+    from thoughtspot_rest_api_sdk.models.advanced_chart_font_assignment_input import AdvancedChartFontAssignmentInput
+    from thoughtspot_rest_api_sdk.models.advanced_chart_visualization_font_record import AdvancedChartVisualizationFontRecord
     from thoughtspot_rest_api_sdk.models.agent_conversation import AgentConversation
     from thoughtspot_rest_api_sdk.models.agent_conversation_history_response import AgentConversationHistoryResponse
     from thoughtspot_rest_api_sdk.models.agent_conversation_list import AgentConversationList
@@ -115,6 +117,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest
     from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest
     from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse
+    from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest
     from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest
     from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest
     from thoughtspot_rest_api_sdk.models.create_schedule_request import CreateScheduleRequest
@@ -173,6 +176,8 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest
     from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest
     from thoughtspot_rest_api_sdk.models.export_manual_translations_request import ExportManualTranslationsRequest
+    from thoughtspot_rest_api_sdk.models.export_memory_request import ExportMemoryRequest
+    from thoughtspot_rest_api_sdk.models.export_memory_response import ExportMemoryResponse
     from thoughtspot_rest_api_sdk.models.export_metadata_tml_batched_request import ExportMetadataTMLBatchedRequest
     from thoughtspot_rest_api_sdk.models.export_metadata_tml_request import ExportMetadataTMLRequest
     from thoughtspot_rest_api_sdk.models.export_metadata_type_input import ExportMetadataTypeInput
@@ -216,16 +221,26 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.groups_import_list_input import GroupsImportListInput
     from thoughtspot_rest_api_sdk.models.header_attribute_input import HeaderAttributeInput
     from thoughtspot_rest_api_sdk.models.header_update_input import HeaderUpdateInput
+    from thoughtspot_rest_api_sdk.models.import_diagnostic import ImportDiagnostic
     from thoughtspot_rest_api_sdk.models.import_e_pack_async_task_status import ImportEPackAsyncTaskStatus
+    from thoughtspot_rest_api_sdk.models.import_failure import ImportFailure
+    from thoughtspot_rest_api_sdk.models.import_memory_request import ImportMemoryRequest
+    from thoughtspot_rest_api_sdk.models.import_memory_response import ImportMemoryResponse
     from thoughtspot_rest_api_sdk.models.import_metadata_tml_async_request import ImportMetadataTMLAsyncRequest
     from thoughtspot_rest_api_sdk.models.import_metadata_tml_request import ImportMetadataTMLRequest
+    from thoughtspot_rest_api_sdk.models.import_summary import ImportSummary
+    from thoughtspot_rest_api_sdk.models.import_target_source import ImportTargetSource
     from thoughtspot_rest_api_sdk.models.import_user import ImportUser
     from thoughtspot_rest_api_sdk.models.import_user_groups_request import ImportUserGroupsRequest
     from thoughtspot_rest_api_sdk.models.import_user_groups_response import ImportUserGroupsResponse
     from thoughtspot_rest_api_sdk.models.import_user_type import ImportUserType
     from thoughtspot_rest_api_sdk.models.import_users_request import ImportUsersRequest
     from thoughtspot_rest_api_sdk.models.import_users_response import ImportUsersResponse
+    from thoughtspot_rest_api_sdk.models.input_column_schema_input import InputColumnSchemaInput
     from thoughtspot_rest_api_sdk.models.input_eureka_nls_request import InputEurekaNLSRequest
+    from thoughtspot_rest_api_sdk.models.input_table_definition_input import InputTableDefinitionInput
+    from thoughtspot_rest_api_sdk.models.input_table_response import InputTableResponse
+    from thoughtspot_rest_api_sdk.models.input_table_update_response import InputTableUpdateResponse
     from thoughtspot_rest_api_sdk.models.jwt_metadata_object import JWTMetadataObject
     from thoughtspot_rest_api_sdk.models.jwt_parameter import JWTParameter
     from thoughtspot_rest_api_sdk.models.jwt_user_options import JWTUserOptions
@@ -239,6 +254,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.log_response import LogResponse
     from thoughtspot_rest_api_sdk.models.login_request import LoginRequest
     from thoughtspot_rest_api_sdk.models.manage_object_privilege_request import ManageObjectPrivilegeRequest
+    from thoughtspot_rest_api_sdk.models.memory_sources import MemorySources
     from thoughtspot_rest_api_sdk.models.metadata_association_item import MetadataAssociationItem
     from thoughtspot_rest_api_sdk.models.metadata_context import MetadataContext
     from thoughtspot_rest_api_sdk.models.metadata_input import MetadataInput
@@ -437,6 +453,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.update_conversation_request import UpdateConversationRequest
     from thoughtspot_rest_api_sdk.models.update_custom_action_request import UpdateCustomActionRequest
     from thoughtspot_rest_api_sdk.models.update_email_customization_request import UpdateEmailCustomizationRequest
+    from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest
     from thoughtspot_rest_api_sdk.models.update_obj_id_input import UpdateObjIdInput
@@ -515,6 +532,8 @@ from thoughtspot_rest_api_sdk.models.action_details import ActionDetails
 from thoughtspot_rest_api_sdk.models.action_details_input import ActionDetailsInput
 from thoughtspot_rest_api_sdk.models.action_details_input_create import ActionDetailsInputCreate
 from thoughtspot_rest_api_sdk.models.activate_user_request import ActivateUserRequest
+from thoughtspot_rest_api_sdk.models.advanced_chart_font_assignment_input import AdvancedChartFontAssignmentInput
+from thoughtspot_rest_api_sdk.models.advanced_chart_visualization_font_record import AdvancedChartVisualizationFontRecord
 from thoughtspot_rest_api_sdk.models.agent_conversation import AgentConversation
 from thoughtspot_rest_api_sdk.models.agent_conversation_history_response import AgentConversationHistoryResponse
 from thoughtspot_rest_api_sdk.models.agent_conversation_list import AgentConversationList
@@ -606,6 +625,7 @@ from thoughtspot_rest_api_sdk.models.create_conversation_request import CreateCo
 from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse
+from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest
 from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest
 from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest
 from thoughtspot_rest_api_sdk.models.create_schedule_request import CreateScheduleRequest
@@ -664,6 +684,8 @@ from thoughtspot_rest_api_sdk.models.exclude_metadata_list_item_input import Exc
 from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest
 from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest
 from thoughtspot_rest_api_sdk.models.export_manual_translations_request import ExportManualTranslationsRequest
+from thoughtspot_rest_api_sdk.models.export_memory_request import ExportMemoryRequest
+from thoughtspot_rest_api_sdk.models.export_memory_response import ExportMemoryResponse
 from thoughtspot_rest_api_sdk.models.export_metadata_tml_batched_request import ExportMetadataTMLBatchedRequest
 from thoughtspot_rest_api_sdk.models.export_metadata_tml_request import ExportMetadataTMLRequest
 from thoughtspot_rest_api_sdk.models.export_metadata_type_input import ExportMetadataTypeInput
@@ -707,16 +729,26 @@ from thoughtspot_rest_api_sdk.models.group_object import GroupObject
 from thoughtspot_rest_api_sdk.models.groups_import_list_input import GroupsImportListInput
 from thoughtspot_rest_api_sdk.models.header_attribute_input import HeaderAttributeInput
 from thoughtspot_rest_api_sdk.models.header_update_input import HeaderUpdateInput
+from thoughtspot_rest_api_sdk.models.import_diagnostic import ImportDiagnostic
 from thoughtspot_rest_api_sdk.models.import_e_pack_async_task_status import ImportEPackAsyncTaskStatus
+from thoughtspot_rest_api_sdk.models.import_failure import ImportFailure
+from thoughtspot_rest_api_sdk.models.import_memory_request import ImportMemoryRequest
+from thoughtspot_rest_api_sdk.models.import_memory_response import ImportMemoryResponse
 from thoughtspot_rest_api_sdk.models.import_metadata_tml_async_request import ImportMetadataTMLAsyncRequest
 from thoughtspot_rest_api_sdk.models.import_metadata_tml_request import ImportMetadataTMLRequest
+from thoughtspot_rest_api_sdk.models.import_summary import ImportSummary
+from thoughtspot_rest_api_sdk.models.import_target_source import ImportTargetSource
 from thoughtspot_rest_api_sdk.models.import_user import ImportUser
 from thoughtspot_rest_api_sdk.models.import_user_groups_request import ImportUserGroupsRequest
 from thoughtspot_rest_api_sdk.models.import_user_groups_response import ImportUserGroupsResponse
 from thoughtspot_rest_api_sdk.models.import_user_type import ImportUserType
 from thoughtspot_rest_api_sdk.models.import_users_request import ImportUsersRequest
 from thoughtspot_rest_api_sdk.models.import_users_response import ImportUsersResponse
+from thoughtspot_rest_api_sdk.models.input_column_schema_input import InputColumnSchemaInput
 from thoughtspot_rest_api_sdk.models.input_eureka_nls_request import InputEurekaNLSRequest
+from thoughtspot_rest_api_sdk.models.input_table_definition_input import InputTableDefinitionInput
+from thoughtspot_rest_api_sdk.models.input_table_response import InputTableResponse
+from thoughtspot_rest_api_sdk.models.input_table_update_response import InputTableUpdateResponse
 from thoughtspot_rest_api_sdk.models.jwt_metadata_object import JWTMetadataObject
 from thoughtspot_rest_api_sdk.models.jwt_parameter import JWTParameter
 from thoughtspot_rest_api_sdk.models.jwt_user_options import JWTUserOptions
@@ -730,6 +762,7 @@ from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerRespo
 from thoughtspot_rest_api_sdk.models.log_response import LogResponse
 from thoughtspot_rest_api_sdk.models.login_request import LoginRequest
 from thoughtspot_rest_api_sdk.models.manage_object_privilege_request import ManageObjectPrivilegeRequest
+from thoughtspot_rest_api_sdk.models.memory_sources import MemorySources
 from thoughtspot_rest_api_sdk.models.metadata_association_item import MetadataAssociationItem
 from thoughtspot_rest_api_sdk.models.metadata_context import MetadataContext
 from thoughtspot_rest_api_sdk.models.metadata_input import MetadataInput
@@ -928,6 +961,7 @@ from thoughtspot_rest_api_sdk.models.update_connection_v2_request import UpdateC
 from thoughtspot_rest_api_sdk.models.update_conversation_request import UpdateConversationRequest
 from thoughtspot_rest_api_sdk.models.update_custom_action_request import UpdateCustomActionRequest
 from thoughtspot_rest_api_sdk.models.update_email_customization_request import UpdateEmailCustomizationRequest
+from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest
 from thoughtspot_rest_api_sdk.models.update_obj_id_input import UpdateObjIdInput

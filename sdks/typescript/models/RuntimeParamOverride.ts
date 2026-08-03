@@ -19,7 +19,7 @@ export class RuntimeParamOverride {
     /**
     * Runtime param override type in JWT.
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

@@ -29,7 +29,7 @@ class GroupsImportListInput(BaseModel):
     group_identifier: StrictStr = Field(description="Unique ID or name of the group.")
     default_liveboard_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique ID of Liveboards that will be assigned as default Liveboards to the users in the group.")
     description: Optional[StrictStr] = Field(default=None, description="Description of the group.")
-    privileges: Optional[List[StrictStr]] = Field(default=None, description="Privileges that will be assigned to the group.")
+    privileges: Optional[List[StrictStr]] = Field(default=None, description="Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.")
     sub_group_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique ID or name of the sub-groups to add to the group.")
     type: Optional[StrictStr] = Field(default=None, description="Type of the group.")
     user_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique ID or name of the users to assign to the group.")

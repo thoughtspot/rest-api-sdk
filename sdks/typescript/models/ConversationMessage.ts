@@ -24,7 +24,7 @@ export class ConversationMessage {
     /**
     * Milliseconds since Unix epoch for the turn.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     'user_prompt'?: UserPrompt;
     /**
     * Agent-side output produced in response to this turn. Empty array for in-progress turns where the agent has not yet produced output.

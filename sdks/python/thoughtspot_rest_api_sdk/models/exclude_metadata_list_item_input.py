@@ -26,15 +26,15 @@ class ExcludeMetadataListItemInput(BaseModel):
     ExcludeMetadataListItemInput
     """ # noqa: E501
     identifier: StrictStr = Field(description="Unique ID or name of the metadata.")
-    type: StrictStr = Field(description="Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view 5. CONNECTION for connection objects 6. TAG for tag objects 7. USER for user objects 8. USER_GROUP for group objects 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values. 10. INSIGHT_SPEC for SpotIQ objects")
+    type: StrictStr = Field(description="Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view 5. CONNECTION for connection objects 6. TAG for tag objects 7. USER for user objects 8. USER_GROUP for group objects 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values. 10. INSIGHT_SPEC for SpotIQ objects 11. COLLECTION for collection objects")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["identifier", "type"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC']):
-            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC')")
+        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC', 'COLLECTION']):
+            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC', 'COLLECTION')")
         return value
 
     model_config = ConfigDict(

@@ -25,7 +25,7 @@ class GetDataSourceSuggestionsRequest(BaseModel):
     """
     GetDataSourceSuggestionsRequest
     """ # noqa: E501
-    query: StrictStr = Field(description="User query used to suggest data sources.")
+    query: StrictStr = Field(description="User query used to suggest data sources. Must be a non-empty string.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["query"]
 

@@ -12,6 +12,7 @@ apis/DBTApi.ts
 apis/DataApi.ts
 apis/EmailCustomizationApi.ts
 apis/GroupsApi.ts
+apis/InputTablesApi.ts
 apis/JobsApi.ts
 apis/LogApi.ts
 apis/ManualTranslationApi.ts
@@ -44,6 +45,7 @@ docs/DBTApi.md
 docs/DataApi.md
 docs/EmailCustomizationApi.md
 docs/GroupsApi.md
+docs/InputTablesApi.md
 docs/JobsApi.md
 docs/LogApi.md
 docs/ManualTranslationApi.md
@@ -78,6 +80,8 @@ models/ActionDetails.ts
 models/ActionDetailsInput.ts
 models/ActionDetailsInputCreate.ts
 models/ActivateUserRequest.ts
+models/AdvancedChartFontAssignmentInput.ts
+models/AdvancedChartVisualizationFontRecord.ts
 models/AgentConversation.ts
 models/AgentConversationHistoryResponse.ts
 models/AgentConversationList.ts
@@ -169,6 +173,7 @@ models/CreateConversationRequest.ts
 models/CreateCustomActionRequest.ts
 models/CreateEmailCustomizationRequest.ts
 models/CreateEmailCustomizationResponse.ts
+models/CreateInputTableRequest.ts
 models/CreateOrgRequest.ts
 models/CreateRoleRequest.ts
 models/CreateScheduleRequest.ts
@@ -227,6 +232,8 @@ models/ExcludeMetadataListItemInput.ts
 models/ExportAnswerReportRequest.ts
 models/ExportLiveboardReportRequest.ts
 models/ExportManualTranslationsRequest.ts
+models/ExportMemoryRequest.ts
+models/ExportMemoryResponse.ts
 models/ExportMetadataTMLBatchedRequest.ts
 models/ExportMetadataTMLRequest.ts
 models/ExportMetadataTypeInput.ts
@@ -270,16 +277,26 @@ models/GroupObject.ts
 models/GroupsImportListInput.ts
 models/HeaderAttributeInput.ts
 models/HeaderUpdateInput.ts
+models/ImportDiagnostic.ts
 models/ImportEPackAsyncTaskStatus.ts
+models/ImportFailure.ts
+models/ImportMemoryRequest.ts
+models/ImportMemoryResponse.ts
 models/ImportMetadataTMLAsyncRequest.ts
 models/ImportMetadataTMLRequest.ts
+models/ImportSummary.ts
+models/ImportTargetSource.ts
 models/ImportUser.ts
 models/ImportUserGroupsRequest.ts
 models/ImportUserGroupsResponse.ts
 models/ImportUserType.ts
 models/ImportUsersRequest.ts
 models/ImportUsersResponse.ts
+models/InputColumnSchemaInput.ts
 models/InputEurekaNLSRequest.ts
+models/InputTableDefinitionInput.ts
+models/InputTableResponse.ts
+models/InputTableUpdateResponse.ts
 models/JWTMetadataObject.ts
 models/JWTParameter.ts
 models/JWTUserOptions.ts
@@ -293,6 +310,7 @@ models/LoadAnswerResponse.ts
 models/LogResponse.ts
 models/LoginRequest.ts
 models/ManageObjectPrivilegeRequest.ts
+models/MemorySources.ts
 models/MetadataAssociationItem.ts
 models/MetadataContext.ts
 models/MetadataInput.ts
@@ -492,6 +510,7 @@ models/UpdateConnectionV2Request.ts
 models/UpdateConversationRequest.ts
 models/UpdateCustomActionRequest.ts
 models/UpdateEmailCustomizationRequest.ts
+models/UpdateInputTableRequest.ts
 models/UpdateMetadataHeaderRequest.ts
 models/UpdateMetadataObjIdRequest.ts
 models/UpdateObjIdInput.ts
@@ -565,6 +584,7 @@ tests/DBTApiTest.ts
 tests/DataApiTest.ts
 tests/EmailCustomizationApiTest.ts
 tests/GroupsApiTest.ts
+tests/InputTablesApiTest.ts
 tests/JobsApiTest.ts
 tests/LogApiTest.ts
 tests/ManualTranslationApiTest.ts

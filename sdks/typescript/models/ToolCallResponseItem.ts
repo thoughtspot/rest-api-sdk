@@ -23,7 +23,7 @@ export class ToolCallResponseItem {
     /**
     * Milliseconds since Unix epoch when this item was produced.
     */
-    'timestamp_in_millis': any;
+    'timestamp_in_millis': any | null;
     /**
     * True when the item represents internal agent reasoning rather than user-facing output.
     */
@@ -43,7 +43,7 @@ export class ToolCallResponseItem {
     /**
     * Input arguments passed to the tool. Shape depends on the tool.
     */
-    'arguments': any;
+    'arguments': any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

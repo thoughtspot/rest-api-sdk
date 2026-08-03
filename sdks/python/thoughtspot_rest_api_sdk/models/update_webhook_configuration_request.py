@@ -39,8 +39,9 @@ class UpdateWebhookConfigurationRequest(BaseModel):
     storage_destination: Optional[StorageDestinationInput] = Field(default=None, description="Configuration for storage destination. AWS S3 example: {\"storage_type\": \"AWS_S3\", \"storage_config\": {\"aws_s3_config\": {\"bucket_name\": \"my-webhook-files\", \"region\": \"us-west-2\", \"role_arn\": \"arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\", \"external_id\": \"ts-webhook-a1b2c3d4-7890\", \"path_prefix\": \"thoughtspot-webhooks/\"}}} GCP GCS example: {\"storage_type\": \"GCP_GCS\", \"storage_config\": {\"gcp_gcs_config\": {\"bucket_name\": \"my-webhook-files\", \"service_account_email\": \"my-sa@my-project.iam.gserviceaccount.com\", \"path_prefix\": \"webhooks/\"}}}    Version: 26.3.0.cl or later ")
     additional_headers: Optional[List[WebhookKeyValuePairInput]] = Field(default=None, description="Additional headers as an array of key-value pairs. Example: [{\"key\": \"X-Custom-Header\", \"value\": \"custom_value\"}]    Version: 26.4.0.cl or later ")
     status: Optional[StrictStr] = Field(default=None, description="Status of the webhook (ENABLED or DISABLED).    Version: 26.7.0.cl or later ")
+    reset_options: Optional[List[StrictStr]] = Field(default=None, description="List of optional configuration sections to clear. Each value removes the corresponding configuration entirely from the webhook: AUTHENTICATION removes the authentication config, SIGNATURE_VERIFICATION removes the signature verification config, STORAGE_DESTINATION removes the storage destination config.    Version: 26.7.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["name", "description", "url", "url_params", "events", "authentication", "signature_verification", "storage_destination", "additional_headers", "status"]
+    __properties: ClassVar[List[str]] = ["name", "description", "url", "url_params", "events", "authentication", "signature_verification", "storage_destination", "additional_headers", "status", "reset_options"]
 
     @field_validator('events')
     def events_validate_enum(cls, value):
@@ -61,6 +62,17 @@ class UpdateWebhookConfigurationRequest(BaseModel):
 
         if value not in set(['ENABLED', 'DISABLED']):
             raise ValueError("must be one of enum values ('ENABLED', 'DISABLED')")
+        return value
+
+    @field_validator('reset_options')
+    def reset_options_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['AUTHENTICATION', 'SIGNATURE_VERIFICATION', 'STORAGE_DESTINATION']):
+                raise ValueError("each list item must be one of ('AUTHENTICATION', 'SIGNATURE_VERIFICATION', 'STORAGE_DESTINATION')")
         return value
 
     model_config = ConfigDict(
@@ -151,7 +163,8 @@ class UpdateWebhookConfigurationRequest(BaseModel):
             "signature_verification": WebhookSignatureVerificationInput.from_dict(obj["signature_verification"]) if obj.get("signature_verification") is not None else None,
             "storage_destination": StorageDestinationInput.from_dict(obj["storage_destination"]) if obj.get("storage_destination") is not None else None,
             "additional_headers": [WebhookKeyValuePairInput.from_dict(_item) for _item in obj["additional_headers"]] if obj.get("additional_headers") is not None else None,
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "reset_options": obj.get("reset_options")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

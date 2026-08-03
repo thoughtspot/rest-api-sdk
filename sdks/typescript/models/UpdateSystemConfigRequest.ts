@@ -16,7 +16,7 @@ export class UpdateSystemConfigRequest {
     /**
     * Configuration JSON with the key-value pair of configuration attributes to be updated.
     */
-    'configuration': any;
+    'configuration': any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

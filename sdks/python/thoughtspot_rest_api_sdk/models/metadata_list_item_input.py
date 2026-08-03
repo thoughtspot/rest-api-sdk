@@ -28,7 +28,7 @@ class MetadataListItemInput(BaseModel):
     identifier: Optional[StrictStr] = Field(default=None, description="Unique ID or name of the metadata.")
     obj_identifier: Optional[StrictStr] = Field(default=None, description="CustomObjectId of the metadata.")
     name_pattern: Optional[StrictStr] = Field(default=None, description="A pattern to match the case-insensitive name of the metadata object. User % for a wildcard match.")
-    type: Optional[StrictStr] = Field(default=None, description="Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view. 5. CONNECTION for creating or modify data connections. 6. TAG for tag objects. 7. USER for user objects. 8. USER_GROUP for group objects. 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values 10. INSIGHT_SPEC for SpotIQ objects")
+    type: Optional[StrictStr] = Field(default=None, description="Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view. 5. CONNECTION for creating or modify data connections. 6. TAG for tag objects. 7. USER for user objects. 8. USER_GROUP for group objects. 9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values 10. INSIGHT_SPEC for SpotIQ objects 11. COLLECTION for collection objects")
     subtypes: Optional[List[StrictStr]] = Field(default=None, description="List of subtype of metadata. Applies for LOGICAL_TABLE type with the following valid values. 1. ONE_TO_ONE_LOGICAL 2. WORKSHEET 3. PRIVATE_WORKSHEET. 4. USER_DEFINED. 5. AGGR_WORKSHEET. 6. SQL_VIEW    Version: 10.11.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["identifier", "obj_identifier", "name_pattern", "type", "subtypes"]
@@ -39,8 +39,8 @@ class MetadataListItemInput(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC']):
-            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC')")
+        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC', 'COLLECTION']):
+            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC', 'COLLECTION')")
         return value
 
     @field_validator('subtypes')
