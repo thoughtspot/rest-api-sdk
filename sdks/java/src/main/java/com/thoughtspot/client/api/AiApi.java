@@ -44,6 +44,7 @@ import com.thoughtspot.client.model.SetAgentInstructionsRequest;
 import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.UpdateConversationRequest;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;

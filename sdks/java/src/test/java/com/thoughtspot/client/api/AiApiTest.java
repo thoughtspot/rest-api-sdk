@@ -36,6 +36,7 @@ import com.thoughtspot.client.model.SetAgentInstructionsRequest;
 import com.thoughtspot.client.model.SetNLInstructionsRequest;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.UpdateConversationRequest;
+import java.io.InputStream;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

@@ -235,6 +235,7 @@ import com.thoughtspot.client.model.WebhookResponse;
 import com.thoughtspot.client.model.WebhookSearchResponse;
 import com.thoughtspot.client.model.WebhookStorageConfigInfo;
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

@@ -243,6 +243,7 @@ import com.thoughtspot.client.model.WebhookResponse;
 import com.thoughtspot.client.model.WebhookSearchResponse;
 import com.thoughtspot.client.model.WebhookStorageConfigInfo;
 import java.io.File;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1161,6 +1161,30 @@ public class ApiClient {
     }
 
     /**
+     * Execute stream.
+     *
+     * @param call a {@link okhttp3.Call} object
+     * @param returnType a {@link java.lang.reflect.Type} object
+     * @return a {@link java.io.InputStream} object
+     * @throws com.thoughtspot.client.ApiException if any.
+     */
+    public InputStream executeStream(Call call, Type returnType) throws ApiException {
+        try {
+            Response response = call.execute();
+            if (!response.isSuccessful()) {
+                throw new ApiException(
+                        response.code(), response.message(), response.headers().toMultimap(), null);
+            }
+            if (response.body() == null) {
+                return null;
+            }
+            return response.body().byteStream();
+        } catch (IOException e) {
+            throw new ApiException(e);
+        }
+    }
+
+    /**
      * {@link #executeAsync(Call, Type, ApiCallback)}
      *
      * @param <T> Type
