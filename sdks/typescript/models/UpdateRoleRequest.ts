@@ -22,7 +22,7 @@ export class UpdateRoleRequest {
     */
     'description'?: string;
     /**
-    * Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.
+    * Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.
     */
     'privileges'?: Array<UpdateRoleRequestPrivilegesEnum>;
 

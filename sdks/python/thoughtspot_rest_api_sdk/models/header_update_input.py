@@ -39,8 +39,8 @@ class HeaderUpdateInput(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'LIVEBOARD', 'ACTION_OBJECT', 'DATA_SOURCE', 'USER', 'USER_GROUP']):
-            raise ValueError("must be one of enum values ('ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'LIVEBOARD', 'ACTION_OBJECT', 'DATA_SOURCE', 'USER', 'USER_GROUP')")
+        if value not in set(['ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'LIVEBOARD', 'ACTION_OBJECT', 'DATA_SOURCE', 'USER', 'USER_GROUP', 'COLLECTION']):
+            raise ValueError("must be one of enum values ('ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'LIVEBOARD', 'ACTION_OBJECT', 'DATA_SOURCE', 'USER', 'USER_GROUP', 'COLLECTION')")
         return value
 
     model_config = ConfigDict(

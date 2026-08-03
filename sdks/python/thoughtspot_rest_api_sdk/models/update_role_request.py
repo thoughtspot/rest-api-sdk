@@ -27,7 +27,7 @@ class UpdateRoleRequest(BaseModel):
     """ # noqa: E501
     name: StrictStr = Field(description="Name of the Role.")
     description: Optional[StrictStr] = Field(default=None, description="Description of the Role.")
-    privileges: Optional[List[StrictStr]] = Field(default=None, description="Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.")
+    privileges: Optional[List[StrictStr]] = Field(default=None, description="Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "description", "privileges"]
 

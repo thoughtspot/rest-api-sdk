@@ -9,6 +9,7 @@ import { ConversationSettingsInput } from './ConversationSettingsInput';
 import { ExternalTableInput } from './ExternalTableInput';
 import { FavoriteObjectOptionsInput } from './FavoriteObjectOptionsInput';
 import { FrequencyInput } from './FrequencyInput';
+import { InputTableDefinitionInput } from './InputTableDefinitionInput';
 import { LiveboardOptionsInput } from './LiveboardOptionsInput';
 import { MetadataContext } from './MetadataContext';
 import { MetadataSearchSortOptions } from './MetadataSearchSortOptions';
@@ -35,6 +36,7 @@ export type CreateAgentConversationRequestConversationSettings = ConversationSet
 export type CreateAgentConversationRequestMetadataContext = ContextPayloadV2Input;
 export type CreateCalendarRequestTableReference = ExternalTableInput;
 export type CreateConnectionConfigurationRequestPolicyProcessOptions = PolicyProcessOptionsInput;
+export type CreateInputTableRequestTableDefinition = InputTableDefinitionInput;
 export type CreateScheduleRequestFrequency = FrequencyInput;
 export type CreateScheduleRequestLiveboardOptions = LiveboardOptionsInput;
 export type CreateScheduleRequestPdfOptions = SchedulesPdfOptionsInput;

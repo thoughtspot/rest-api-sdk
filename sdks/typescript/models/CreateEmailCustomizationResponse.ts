@@ -26,7 +26,7 @@ export class CreateEmailCustomizationResponse {
     /**
     * Customization configuration for the email
     */
-    'template_properties': any;
+    'template_properties': any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

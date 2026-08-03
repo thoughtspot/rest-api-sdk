@@ -28,7 +28,7 @@ export class UpdateConnectionRequest {
     /**
     * Configuration of the data warehouse in JSON.
     */
-    'data_warehouse_config'?: any;
+    'data_warehouse_config'?: any | null;
     /**
     * Indicates whether to validate the connection details.
     */

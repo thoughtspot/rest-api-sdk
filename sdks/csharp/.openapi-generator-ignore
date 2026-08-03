@@ -1,0 +1,8 @@
+# # OpenAPI Generator Ignore
+
+# # Removed facades — ThoughtSpotRestApi is the sole entry point
+# src/ThoughtSpot.RestApi.Sdk/ThoughtSpotRestApi.cs
+# src/ThoughtSpot.RestApi.Sdk/ApiClientConfiguration.cs
+# src/ThoughtSpot.RestApi.Sdk/Api/ThoughtSpotRestApi.cs
+# # Test file references deleted facades
+# src/ThoughtSpot.RestApi.Sdk.Test/Api/ThoughtSpotRestApiTests.cs

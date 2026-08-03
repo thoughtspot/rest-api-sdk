@@ -118,6 +118,38 @@ describe('AIApi', function() {
         });     
       });
 
+      describe('exportMemory', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "exportMemory"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.exportMemory(
+                    // exportMemoryRequest ExportMemoryRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.exportMemory(
+                    // exportMemoryRequest ExportMemoryRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('getAgentInstructions', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -305,6 +337,38 @@ describe('AIApi', function() {
                 await expect(
                   instance.getRelevantQuestions(
                     // getRelevantQuestionsRequest GetRelevantQuestionsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('importMemory', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "importMemory"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.importMemory(
+                    // importMemoryRequest ImportMemoryRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.importMemory(
+                    // importMemoryRequest ImportMemoryRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

@@ -33,9 +33,9 @@ apiInstance.fetchAnswerData(
     data_format: "COMPACT",
     record_offset: 0,
     record_size: 10,
-    runtime_filter: {},
-    runtime_sort: {},
-    runtime_param_override: {},
+    runtime_filter: null,
+    runtime_sort: null,
+    runtime_param_override: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -105,9 +105,9 @@ apiInstance.fetchLiveboardData(
     data_format: "COMPACT",
     record_offset: 0,
     record_size: 10,
-    runtime_filter: {},
-    runtime_sort: {},
-    runtime_param_override: {},
+    runtime_filter: null,
+    runtime_sort: null,
+    runtime_param_override: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -174,9 +174,9 @@ apiInstance.searchData(
     data_format: "COMPACT",
     record_offset: 0,
     record_size: 10,
-    runtime_filter: {},
-    runtime_sort: {},
-    runtime_param_override: {},
+    runtime_filter: null,
+    runtime_sort: null,
+    runtime_param_override: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

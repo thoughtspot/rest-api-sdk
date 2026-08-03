@@ -642,7 +642,7 @@ class DBTApi:
         self,
         dbt_connection_identifier: Annotated[StrictStr, Field(description="Unique ID of the DBT connection.")],
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -664,7 +664,7 @@ class DBTApi:
         :type dbt_connection_identifier: str
         :param file_content: Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
         :type file_content: bytes
-        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.
         :type include_semantic_report: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -721,7 +721,7 @@ class DBTApi:
         self,
         dbt_connection_identifier: Annotated[StrictStr, Field(description="Unique ID of the DBT connection.")],
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -743,7 +743,7 @@ class DBTApi:
         :type dbt_connection_identifier: str
         :param file_content: Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
         :type file_content: bytes
-        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.
         :type include_semantic_report: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -800,7 +800,7 @@ class DBTApi:
         self,
         dbt_connection_identifier: Annotated[StrictStr, Field(description="Unique ID of the DBT connection.")],
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -822,7 +822,7 @@ class DBTApi:
         :type dbt_connection_identifier: str
         :param file_content: Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
         :type file_content: bytes
-        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.
         :type include_semantic_report: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -875,7 +875,7 @@ class DBTApi:
         self,
         dbt_connection_identifier: Annotated[StrictStr, Field(description="Unique ID of the DBT connection.")],
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -913,7 +913,7 @@ class DBTApi:
         self,
         dbt_connection_identifier: Annotated[StrictStr, Field(description="Unique ID of the DBT connection.")],
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -951,7 +951,7 @@ class DBTApi:
         self,
         dbt_connection_identifier: Annotated[StrictStr, Field(description="Unique ID of the DBT connection.")],
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1075,7 +1075,7 @@ class DBTApi:
         import_worksheets: Annotated[StrictStr, Field(description="Mention the worksheet tmls to import")],
         worksheets: Annotated[Optional[StrictStr], Field(description="List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\"worksheet_name\\\"]")] = None,
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1103,7 +1103,7 @@ class DBTApi:
         :type worksheets: str
         :param file_content: Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
         :type file_content: bytes
-        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.
         :type include_semantic_report: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1166,7 +1166,7 @@ class DBTApi:
         import_worksheets: Annotated[StrictStr, Field(description="Mention the worksheet tmls to import")],
         worksheets: Annotated[Optional[StrictStr], Field(description="List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\"worksheet_name\\\"]")] = None,
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1194,7 +1194,7 @@ class DBTApi:
         :type worksheets: str
         :param file_content: Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
         :type file_content: bytes
-        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.
         :type include_semantic_report: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1257,7 +1257,7 @@ class DBTApi:
         import_worksheets: Annotated[StrictStr, Field(description="Mention the worksheet tmls to import")],
         worksheets: Annotated[Optional[StrictStr], Field(description="List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\"worksheet_name\\\"]")] = None,
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1285,7 +1285,7 @@ class DBTApi:
         :type worksheets: str
         :param file_content: Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’
         :type file_content: bytes
-        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.
+        :param include_semantic_report: If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.
         :type include_semantic_report: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1344,7 +1344,7 @@ class DBTApi:
         import_worksheets: Annotated[StrictStr, Field(description="Mention the worksheet tmls to import")],
         worksheets: Annotated[Optional[StrictStr], Field(description="List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\"worksheet_name\\\"]")] = None,
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1388,7 +1388,7 @@ class DBTApi:
         import_worksheets: Annotated[StrictStr, Field(description="Mention the worksheet tmls to import")],
         worksheets: Annotated[Optional[StrictStr], Field(description="List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\"worksheet_name\\\"]")] = None,
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1432,7 +1432,7 @@ class DBTApi:
         import_worksheets: Annotated[StrictStr, Field(description="Mention the worksheet tmls to import")],
         worksheets: Annotated[Optional[StrictStr], Field(description="List of worksheets is mandatory when import_Worksheets is type SELECTED Example: [\\\"worksheet_name\\\"]")] = None,
         file_content: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="Upload DBT Manifest and Catalog artifact files as a ZIP file. This field is mandatory if the connection was created with import_type ‘ZIP_FILE’")] = None,
-        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.")] = None,
+        include_semantic_report: Annotated[Optional[StrictBool], Field(description="If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

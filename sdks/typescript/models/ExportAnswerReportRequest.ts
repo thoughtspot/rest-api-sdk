@@ -34,15 +34,15 @@ export class ExportAnswerReportRequest {
     /**
     * JSON string representing runtime filter. { col1:region, op1: EQ, val1: northeast }
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
     /**
     * JSON string representing runtime sort. { sortCol1: region, asc1 :true, sortCol2 : date }
     */
-    'runtime_sort'?: any;
+    'runtime_sort'?: any | null;
     /**
     * JSON object for setting values of parameters in runtime.
     */
-    'runtime_param_override'?: any;
+    'runtime_param_override'?: any | null;
     /**
     * Options for specific region specific overrides to support date/number/string/currency formatting.
     */

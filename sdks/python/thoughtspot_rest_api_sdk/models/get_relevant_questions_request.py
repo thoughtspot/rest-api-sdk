@@ -30,7 +30,7 @@ class GetRelevantQuestionsRequest(BaseModel):
     metadata_context: MetadataContext = Field(description="metadata for the query to enable generation of relevant sub-questions; at least one context identifier is required.")
     limit_relevant_questions: Optional[StrictInt] = Field(default=None, description="Maximum number of relevant questions that is allowed in the response, default = 5.")
     bypass_cache: Optional[StrictBool] = Field(default=None, description="If true, results are not returned from cache & calculated every time.")
-    query: StrictStr = Field(description="A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis.")
+    query: StrictStr = Field(description="A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis. Must be a non-empty string.")
     ai_context: Optional[AIContext] = Field(default=None, description="Additional context to guide the response.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["metadata_context", "limit_relevant_questions", "bypass_cache", "query", "ai_context"]

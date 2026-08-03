@@ -81,11 +81,11 @@ export class CreateUserRequest {
     /**
     * Properties for the user
     */
-    'extended_properties'?: any;
+    'extended_properties'?: any | null;
     /**
     * Preferences for the user
     */
-    'extended_preferences'?: any;
+    'extended_preferences'?: any | null;
     /**
     * Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.
     */

@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from thoughtspot_rest_api_sdk.models.advanced_chart_font_assignment_input import AdvancedChartFontAssignmentInput
 from thoughtspot_rest_api_sdk.models.chart_font_assignment_input import ChartFontAssignmentInput
 from thoughtspot_rest_api_sdk.models.table_font_assignment_input import TableFontAssignmentInput
 from typing import Optional, Set
@@ -29,8 +30,9 @@ class VisualizationFontsInput(BaseModel):
     """ # noqa: E501
     chart_visualization_fonts: Optional[List[ChartFontAssignmentInput]] = Field(default=None, description="Font assignments for chart visualization areas. Provide only the areas to update; omitted areas remain unchanged.")
     table_visualization_fonts: Optional[List[TableFontAssignmentInput]] = Field(default=None, description="Font assignments for table visualization areas. Provide only the areas to update; omitted areas remain unchanged.")
+    advanced_chart_visualization_fonts: Optional[List[AdvancedChartFontAssignmentInput]] = Field(default=None, description="Font assignments for advanced chart visualization areas. Provide only the areas to update; omitted areas remain unchanged.    Version: 26.7.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["chart_visualization_fonts", "table_visualization_fonts"]
+    __properties: ClassVar[List[str]] = ["chart_visualization_fonts", "table_visualization_fonts", "advanced_chart_visualization_fonts"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,6 +89,13 @@ class VisualizationFontsInput(BaseModel):
                 if _item_table_visualization_fonts:
                     _items.append(_item_table_visualization_fonts.to_dict())
             _dict['table_visualization_fonts'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in advanced_chart_visualization_fonts (list)
+        _items = []
+        if self.advanced_chart_visualization_fonts:
+            for _item_advanced_chart_visualization_fonts in self.advanced_chart_visualization_fonts:
+                if _item_advanced_chart_visualization_fonts:
+                    _items.append(_item_advanced_chart_visualization_fonts.to_dict())
+            _dict['advanced_chart_visualization_fonts'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -102,6 +111,11 @@ class VisualizationFontsInput(BaseModel):
         if self.table_visualization_fonts is None and "table_visualization_fonts" in self.model_fields_set:
             _dict['table_visualization_fonts'] = None
 
+        # set to None if advanced_chart_visualization_fonts (nullable) is None
+        # and model_fields_set contains the field
+        if self.advanced_chart_visualization_fonts is None and "advanced_chart_visualization_fonts" in self.model_fields_set:
+            _dict['advanced_chart_visualization_fonts'] = None
+
         return _dict
 
     @classmethod
@@ -115,7 +129,8 @@ class VisualizationFontsInput(BaseModel):
 
         _obj = cls.model_validate({
             "chart_visualization_fonts": [ChartFontAssignmentInput.from_dict(_item) for _item in obj["chart_visualization_fonts"]] if obj.get("chart_visualization_fonts") is not None else None,
-            "table_visualization_fonts": [TableFontAssignmentInput.from_dict(_item) for _item in obj["table_visualization_fonts"]] if obj.get("table_visualization_fonts") is not None else None
+            "table_visualization_fonts": [TableFontAssignmentInput.from_dict(_item) for _item in obj["table_visualization_fonts"]] if obj.get("table_visualization_fonts") is not None else None,
+            "advanced_chart_visualization_fonts": [AdvancedChartFontAssignmentInput.from_dict(_item) for _item in obj["advanced_chart_visualization_fonts"]] if obj.get("advanced_chart_visualization_fonts") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

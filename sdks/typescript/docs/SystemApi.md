@@ -493,7 +493,7 @@ const apiInstance = new SystemApi(configuration);
 apiInstance.updateSystemConfig(
   // UpdateSystemConfigRequest
   {
-    configuration: {},
+    configuration: null,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

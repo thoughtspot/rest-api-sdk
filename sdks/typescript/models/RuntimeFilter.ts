@@ -19,7 +19,7 @@ export class RuntimeFilter {
     /**
     * Runtime filter parameter type in JWT.
     */
-    'runtime_filter'?: any;
+    'runtime_filter'?: any | null;
 
     static readonly discriminator: string | undefined = undefined;
 

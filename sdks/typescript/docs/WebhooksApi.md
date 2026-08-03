@@ -34,7 +34,7 @@ apiInstance.createWebhookConfiguration(
     name: "name_example",
     description: "description_example",
     url: "url_example",
-    url_params: {},
+    url_params: null,
     events: [
       "LIVEBOARD_SCHEDULE",
     ],
@@ -300,7 +300,7 @@ apiInstance.updateWebhookConfiguration(
     name: "name_example",
     description: "description_example",
     url: "url_example",
-    url_params: {},
+    url_params: null,
     events: [
       "LIVEBOARD_SCHEDULE",
     ],
@@ -314,6 +314,9 @@ apiInstance.updateWebhookConfiguration(
       },
     ],
     status: "ENABLED",
+    reset_options: [
+      "AUTHENTICATION",
+    ],
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

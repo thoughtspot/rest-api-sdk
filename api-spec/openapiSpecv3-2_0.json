@@ -30,6 +30,14 @@
       "description": "Roles for version 26.7.0.cl"
     },
     {
+      "name": "26.8.0.cl",
+      "id": "26.8.0.cl",
+      "tags": [
+        "26.8.0.cl"
+      ],
+      "description": "Roles for version 26.8.0.cl"
+    },
+    {
       "name": "26.6.0.cl",
       "id": "26.6.0.cl",
       "tags": [
@@ -420,6 +428,103 @@
         "responses": {
           "204": {
             "description": "Successfully deleted the agent conversation."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/memory/export": {
+      "post": {
+        "operationId": "exportMemory",
+        "description": "\nExports memory entries (rules, recipes, and always-apply rules) for\nthe specified data-models as a single YAML payload. The payload can\nbe edited locally and re-submitted through `importMemory`.\nRequires Spotter access (use/manage) and either edit or memory\naccess on corresponding data model sources. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nThis API allows users to export data-model memories for a given list of data-models. This exported yaml file can then be modified and used as input to the import API in target env.\n\nThis API enables customers to migrate memories from a source env to a target env. This improves memory adoption for Spotter by giving the users a chance to develop their memories in one env and replicate the same in another env.\n\n#### Usage guidelines\n\nTo export memory for one or more data-models, the request may include:\n- `sources`: A list of typed scope groups identifying which data-models to export memory for. Each group contains:\n  - `type`: The source object type for this group — `DATA_MODEL`.\n  - `identifiers`: An array of GUIDs or human-readable `obj_id`s of the data-models to export memory for. obj_ids are resolved server-side before forwarding.\n\nThe API returns a response object with:\n- `content`: The serialized memory payload (YAML) — exactly the shape that the `importMemory` API consumes. Edit it locally and pass it back through `importMemory` to apply changes.\n\n#### Source Type\n\n- **DATA_MODEL**: The `identifiers` are data-model GUIDs. This is the default source type for Spotter memory and covers the rules, recipes and always-apply rules attached directly to a data-model.\n\n#### File format\n\nThe exported `content` is a YAML document with a single top-level `memories` key holding a list of memory items — exactly the format the `importMemory` API consumes. The full format reference (an annotated example, memory item fields, per-type content, and `datamodel_sources` identification) is documented in the `importMemory` API's **File format** section. Exported files populate each source's `guid` and, if present, `obj_id` as well.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                                                  |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                         |\n| 403  | Forbidden — the authenticated user does not have necessary permissions, or lacks read access on a referenced data-model, or the bearer token does not correspond to the data-model's org. |\n\n> ###### Note:\n> - To use this API, the user needs Spotter access (use/manage) and either edit or memory access on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - Available from version 26.8.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportMemoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportMemoryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Serialized YAML memory payload returned",
+                    "value": {
+                      "content": "memories:\n- type: RULE\n  content:\n    rule_definition: \"Earnings: total sales filtered to West region only.\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RULE\n  content:\n    rule_definition: \"Geographic data is organized in a three-level hierarchy from broadest to most specific: Region (highest level) → State (middle level) → County (lowest level). This hierarchical structure enables progressive drill-down analysis, where each level provides increasingly granular geographic segmentation for sales and quantity metrics.\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RULE\n  content:\n    rule_definition: \"Hot products: top 5 products by total sales (no region filter applied).\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: Calculate earnings for East region current year\n    recipe: \"{\\\"task\\\": \\\"Compute earnings by extracting sales and filtering to East region for the current year\\\", \\\"steps\\\": [{\\\"instruction\\\": \\\"Extract sales, then apply a filter for current year and a filter for East region.\\\", \\\"analytical_mappings\\\": {\\\"tml_tokens\\\": [\\\"[sales] [date] = 'this year' [region] = 'east'\\\"], \\\"formulas\\\": []}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: Total sales for East region current year\n    recipe: \"{\\\"task\\\": \\\"Compute total sales filtered to East region for the current year\\\", \\\"steps\\\": [{\\\"instruction\\\": \\\"Calculate total sales where region is East and date is current year.\\\", \\\"analytical_mappings\\\": {\\\"tml_tokens\\\": [\\\"[sales] [date] = 'this year' [region] = 'east'\\\"], \\\"formulas\\\": []}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: What is the total quantity purchased by city and region?\n    recipe: \"{\\\"task\\\":\\\"Calculate total quantity purchased grouped by city and region\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Sum the quantity purchased metric and group the results by city and region to show purchasing volumes across different geographic locations\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[quantity purchased] [city] [region]\\\"],\\\"formulas\\\":[]}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: What were total jacket sales in 2024?\n    recipe: \"{\\\"task\\\":\\\"Compute the aggregate 2024 jacket sales revenue.\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Shows the total sales revenue for jackets in 2024. This provides a high-level metric to understand overall jacket sales performance for the year.\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[sales] [item type] = [item type].\\\\\\\"jackets\\\\\\\" [date] = \\\\\\\"2024\\\\\\\"\\\"],\\\"formulas\\\":[]}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: How are monthly sales and quantity tracking by state?\n    recipe: \"{\\\"task\\\":\\\"Aggregate monthly sales and quantity by state for a state-level performance view.\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Shows monthly sales and quantity purchased metrics organized by state. Provides a state-wise view of sales performance with additional dimensional context.\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[sales] [quantity purchased] [state] [date]\\\"],\\\"formulas\\\":[]}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: \"What's the quarterly sales and quantity by region and state for the last 3 years, with yearly rollups?\"\n    recipe: \"{\\\"task\\\":\\\"Build a 3-year quarterly view of sales and quantity grouped by region and state, with quarterly and yearly aggregation.\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Displays quarterly performance metrics including sales and quantity purchased, broken down by region and state over the last 3 years. Enables analysis of regional and state-level trends with both quarterly and yearly views.\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[sales] [quantity purchased] [region] [state] [date].\\\\\\\"quarterly\\\\\\\" [date].\\\\\\\"last 3 years\\\\\\\" [date].\\\\\\\"yearly\\\\\\\"\\\"],\\\"formulas\\\":[]}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: How are we doing against quarterly sales and quantity targets per region?\n    recipe: \"{\\\"task\\\":\\\"Render bullet charts contrasting quarterly actual vs target sales and quantity per region.\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Compares actual quarterly sales and quantity metrics against targets by region using bullet charts. Provides a target vs actual performance view to track progress.\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[sales] [quantity purchased] [region] [date].\\\\\\\"quarterly\\\\\\\" [Target sales] [Target quantity]\\\"],\\\"formulas\\\":[\\\"{\\\\\\\"name\\\\\\\": \\\\\\\"Target sales\\\\\\\", \\\\\\\"expression\\\\\\\": \\\\\\\"random ( ) * sum ( sales ) * 2\\\\\\\"}\\\",\\\"{\\\\\\\"name\\\\\\\": \\\\\\\"Target quantity\\\\\\\", \\\\\\\"expression\\\\\\\": \\\\\\\"random ( ) * sum ( quantity purchased  ) * 2\\\\\\\"}\\\"]}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n"
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Serialized YAML memory payload returned",
+                    "value": {
+                      "content": "memories:\n- type: RULE\n  content:\n    rule_definition: \"Earnings: total sales filtered to West region only.\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RULE\n  content:\n    rule_definition: \"Hot products: top 5 products by total sales (no region filter applied).\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RULE\n  content:\n    rule_definition: \"Geographic data is organized in a three-level hierarchy from broadest to most specific: Region (highest level) → State (middle level) → County (lowest level). This hierarchical structure enables progressive drill-down analysis, where each level provides increasingly granular geographic segmentation for sales and quantity metrics.\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RULE\n  content:\n    rule_definition: \"When analyzing quantity purchased, apply a date filter for the last 3 years.\"\n  datamodel_sources:\n  - guid: 44444444-4444-4444-4444-444444444444\n    obj_id: sample-model\n  tags: []\n- type: RULE\n  content:\n    rule_definition:  User's total sales target is 1 million USD.\n  datamodel_sources:\n  - guid: 44444444-4444-4444-4444-444444444444\n    obj_id: sample-model\n  tags: []\n- type: RULE\n  content:\n    rule_definition:  Sales analyses must filter to east region only.\n  datamodel_sources:\n  - guid: 44444444-4444-4444-4444-444444444444\n    obj_id: sample-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: Calculate earnings for East region current year\n    recipe: \"{\\\"task\\\": \\\"Compute earnings by extracting sales and filtering to East region for the current year\\\", \\\"steps\\\": [{\\\"instruction\\\": \\\"Extract sales, then apply a filter for current year and a filter for East region.\\\", \\\"analytical_mappings\\\": {\\\"tml_tokens\\\": [\\\"[sales] [date] = 'this year' [region] = 'east'\\\"], \\\"formulas\\\": []}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: Total sales for East region current year\n    recipe: \"{\\\"task\\\": \\\"Compute total sales filtered to East region for the current year\\\", \\\"steps\\\": [{\\\"instruction\\\": \\\"Calculate total sales where region is East and date is current year.\\\", \\\"analytical_mappings\\\": {\\\"tml_tokens\\\": [\\\"[sales] [date] = 'this year' [region] = 'east'\\\"], \\\"formulas\\\": []}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: What is the total quantity purchased by city and region?\n    recipe: \"{\\\"task\\\":\\\"Calculate total quantity purchased grouped by city and region\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Sum the quantity purchased metric and group the results by city and region to show purchasing volumes across different geographic locations\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[quantity purchased] [city] [region]\\\"],\\\"formulas\\\":[]}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: \"What's the quarterly sales and quantity by region and state for the last 3 years, with yearly rollups?\"\n    recipe: \"{\\\"task\\\":\\\"Build a 3-year quarterly view of sales and quantity grouped by region and state, with quarterly and yearly aggregation.\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Displays quarterly performance metrics including sales and quantity purchased, broken down by region and state over the last 3 years. Enables analysis of regional and state-level trends with both quarterly and yearly views.\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[sales] [quantity purchased] [region] [state] [date].\\\\\\\"quarterly\\\\\\\" [date].\\\\\\\"last 3 years\\\\\\\" [date].\\\\\\\"yearly\\\\\\\"\\\"],\\\"formulas\\\":[]}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: How are we doing against quarterly sales and quantity targets per region?\n    recipe: \"{\\\"task\\\":\\\"Render bullet charts contrasting quarterly actual vs target sales and quantity per region.\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Compares actual quarterly sales and quantity metrics against targets by region using bullet charts. Provides a target vs actual performance view to track progress.\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[sales] [quantity purchased] [region] [date].\\\\\\\"quarterly\\\\\\\" [Target sales] [Target quantity]\\\"],\\\"formulas\\\":[\\\"{\\\\\\\"name\\\\\\\": \\\\\\\"Target sales\\\\\\\", \\\\\\\"expression\\\\\\\": \\\\\\\"random ( ) * sum ( sales ) * 2\\\\\\\"}\\\",\\\"{\\\\\\\"name\\\\\\\": \\\\\\\"Target quantity\\\\\\\", \\\\\\\"expression\\\\\\\": \\\\\\\"random ( ) * sum ( quantity purchased  ) * 2\\\\\\\"}\\\"]}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: How are monthly sales and quantity tracking by state?\n    recipe: \"{\\\"task\\\":\\\"Aggregate monthly sales and quantity by state for a state-level performance view.\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Shows monthly sales and quantity purchased metrics organized by state. Provides a state-wise view of sales performance with additional dimensional context.\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[sales] [quantity purchased] [state] [date]\\\"],\\\"formulas\\\":[]}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: What were total jacket sales in 2024?\n    recipe: \"{\\\"task\\\":\\\"Compute the aggregate 2024 jacket sales revenue.\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Shows the total sales revenue for jackets in 2024. This provides a high-level metric to understand overall jacket sales performance for the year.\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[sales] [item type] = [item type].\\\\\\\"jackets\\\\\\\" [date] = \\\\\\\"2024\\\\\\\"\\\"],\\\"formulas\\\":[]}}]}\"\n  datamodel_sources:\n  - guid: 33333333-3333-3333-3333-333333333333\n    obj_id: sales-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: What were jacket sales by region in 2024?\n    recipe: \"{\\\"task\\\":\\\"Break out 2024 jacket sales revenue by region to compare regional performance.\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Shows jacket sales revenue broken down by region for 2024. This helps identify which geographic regions are performing best in jacket sales and enables regional performance comparison.\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[sales] by [region] [item type] = [item type].\\\\\\\"jackets\\\\\\\" [date] = \\\\\\\"2024\\\\\\\"\\\"],\\\"formulas\\\":[]}}]}\"\n  datamodel_sources:\n  - guid: 44444444-4444-4444-4444-444444444444\n    obj_id: sample-model\n  tags: []\n- type: RECIPE\n  content:\n    user_query: \"Show me quarterly sales and quantity trends over the past 3 years, newest first.\"\n    recipe: \"{\\\"task\\\":\\\"Plot quarterly sales and quantity trends for the past 3 years in reverse chronological order.\\\",\\\"steps\\\":[{\\\"instruction\\\":\\\"Presents quarterly sales and quantity purchased trends over the last 3 years, sorted by most recent periods first. Enables time-based analysis of sales performance.\\\",\\\"analytical_mappings\\\":{\\\"tml_tokens\\\":[\\\"[sales] [quantity purchased] [date].\\\\\\\"quarterly\\\\\\\" [date].\\\\\\\"last 3 years\\\\\\\"\\\"],\\\"formulas\\\":[]}}]}\"\n  datamodel_sources:\n  - guid: 44444444-4444-4444-4444-444444444444\n    obj_id: sample-model\n  tags: []\n"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportMemoryResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Operation failed",
@@ -975,6 +1080,179 @@
         }
       }
     },
+    "/api/rest/2.0/ai/memory/import": {
+      "post": {
+        "operationId": "importMemory",
+        "description": "\nImports memory entries (rules, recipes, and always-apply rules) from\na YAML payload, typically a payload produced by `exportMemory` and\nedited locally. The imported entries replace the existing memory for\nthe data-models referenced in the payload.\n`dry_run` is required. Pass `true` first to validate the payload and\nreview the preview counts and any row-level failures without making\nchanges, then re-run with `dry_run = false` to apply the import. An\nimport is not applied if any row fails validation.\nRequires Spotter access (use/manage) and either edit or memory\naccess on corresponding data model sources. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nThis API allows users to import data-model memories using a given yaml file. This yaml file can be obtained from the export memory API in source env and can be modified and used as input to the import API in target env.\n\nThis API enables customers to migrate memories from a source env to a target env. This improves memory adoption for Spotter by giving the users a chance to develop their memories in one env and replicate the same in another env.\n\n#### Usage guidelines\n\nTo import memory, the request must include:\n- `content`: The full serialized memory payload to import (YAML). Typically the `content` value returned by the `exportMemory` API, edited locally and re-submitted. The payload itself identifies which data-models the memory applies to, so no separate identifier list is required.\n- `dry_run`: Required. When `true`, validate the payload and return preview counts without writing anything; when `false`, apply the import. Always run with `dry_run = true` first, then re-run with `dry_run = false` once you are satisfied with the preview.\n\nThe import replaces the existing global memories on the data-models referenced in the payload with the entries supplied in the payload.\n\nThe API returns a response object with:\n- `status`: The terminal status of the import (`SUCCESS`, `VALIDATION_FAILED`, or `FAILED`).\n- `summary`: Per `(memory_type, source)` counts. In a dry run the `deleted_record_count`/`inserted_record_count` are previews; in a real import they are actuals. On `VALIDATION_FAILED`, `summary` is `null` when validation fails before any item is processed (e.g. an unresolved or inaccessible data-model source) and an empty list otherwise — treat both as \"no counts available\".\n- `validation_failures`: Per-item validation failures, each with `line_number`, `reason`, `field_name`, and `message` for click-to-locate and inline highlighting.\n- `diagnostics`: Groups of diagnostic messages, each with a `sub_status` (`WARNING`, `FAILURE`, `ROLLED_BACK`, or `UNKNOWN`) and a `messages` list. This is the single channel for both non-fatal warnings (under `WARNING`, e.g. when some older memory entries could not be fully cleaned up) and fatal causes (e.g. the failure reason under `FAILURE`, or a `ROLLED_BACK` group when new entries were undone).\n- `operation_id`: A server-generated identifier for this import operation; include it when contacting support to help correlate server-side logs. Populated once the server registers the import operation; `null` when the request fails earlier (e.g. while parsing the payload or resolving its data-model sources).\n\n#### File format\n\nThe payload is a YAML document with a single top-level `memories` key holding a list of memory items. Each item is self-contained: a `type`, a typed `content` block, a `datamodel_sources` list, and optional `tags`. Typically you don't hand-author this file — you obtain it from `exportMemory`, edit it, and submit it back through `importMemory`.\n\n```yaml\nmemories:\n- type: RULE\n  content:\n    rule_definition: \"Always filter revenue to closed-won deals.\"\n  datamodel_sources:\n  - guid: 11111111-1111-1111-1111-111111111111\n    obj_id: sales_data_model\n  tags:\n  - finance\n- type: RULE\n  content:\n    rule_definition: \"Exclude internal test accounts from all results.\"\n  datamodel_sources:\n  - obj_id: sales_data_model\n- type: RECIPE\n  content:\n    user_query: \"top accounts by revenue\"\n    recipe: |\n      {\"steps\": [...serialized recipe blob...]}\n  datamodel_sources:\n  - obj_id: sales_data_model\n- type: RECIPE\n  content:\n    user_query: \"monthly new customer count\"\n    recipe: |\n      {\"steps\": [...serialized recipe blob...]}\n  datamodel_sources:\n  - obj_id: sales_data_model\n- type: ALWAYS_APPLY_RULES\n  content:\n    rules:\n    - \"Never show internal test accounts.\"\n    - \"Round currency to whole dollars.\"\n  datamodel_sources:\n  - guid: 22222222-2222-2222-2222-222222222222\n```\n\nA file can contain multiple `RULE` and multiple `RECIPE` items for a data-model, but at most one `ALWAYS_APPLY_RULES` item per data-model.\n\n##### Memory item fields\n\n| Field | Required | Type | Description |\n|-------|----------|------|-------------|\n| `type` | Yes | String enum | One of `RULE`, `RECIPE`, or `ALWAYS_APPLY_RULES`. |\n| `content` | Yes | Mapping | Type-specific content block (see below). |\n| `datamodel_sources` | Yes | Non-empty list | The data-model(s) the memory attaches to. |\n| `tags` | No | List of strings | Free-form labels. |\n\n##### Memory types and content\n\n| `type` | Content fields | Notes |\n|--------|----------------|-------|\n| `RULE` | `rule_definition` — required, non-empty string | A single semantic rule. |\n| `RECIPE` | `recipe` and `user_query` — both required, non-empty strings | `recipe` is an opaque serialized blob; `user_query` is the natural-language query it answers. |\n| `ALWAYS_APPLY_RULES` | `rules` — required, non-empty list of non-empty strings | Data-model-wide always-apply rules. At most one `ALWAYS_APPLY_RULES` item per data-model. |\n\n##### Identifying data-models (`datamodel_sources`)\n\nEach item must list at least one source. Each entry identifies a data-model by at least one of:\n- `guid` — the data-model GUID.\n- `obj_id` — a stable object ID, resolved to a GUID server-side.\n\nIf both are supplied, `obj_id` takes precedence and `guid` is ignored entirely; `guid` takes effect only when `obj_id` is absent. Exported files populate `guid` and, if present, `obj_id` as well.\n\n> ⚠️ **Cross-environment import:** When `obj_id` is present it is\n> authoritative — the accompanying `guid` is **not** used as a fallback.\n> If an `obj_id` does not exist in the target environment, that item\n> fails with `UNRESOLVED_SOURCE`. Remove or correct stale `obj_id`\n> values before importing across environments.\n\n#### Validations reference\n\nThe payload is fully validated before anything is written. This applies to `dry_run = true` and `dry_run = false` alike: if any item fails validation, the entire import is rejected — no partial writes — and all failures are returned together so you can fix them in one pass.\n\n##### Limits\n\nDefault limits (may be adjusted in future if the need arises):\n\n| Limit | Default |\n|-------|---------|\n| Uploaded file size | 10 MiB |\n| Total memory items | 10,000 |\n| `rule_definition` length | 1,000 characters |\n| `user_query` length | 1,000 characters |\n| `recipe` length | 2,000 characters |\n| `rules` combined length (`ALWAYS_APPLY_RULES`) | 2,000 characters |\n| Tags per item | 10 |\n| Characters per tag | 50 |\n\nThe `rules` limit in `ALWAYS_APPLY_RULES` is a combined budget across all entries in the list, not per entry.\n\n##### Structural rules\n\n- The document must be a mapping with a `memories` key whose value is a list.\n- Unknown keys — at the top level, within an item, or under `content` — are rejected.\n- Each item's `type` must be one of the three supported values, and `content` must match that type's shape.\n- Null, empty-string, or wrong-typed values in a required field are treated as missing.\n- Non-string or empty `tags` entries are dropped silently; certain tags reserved for internal use are stripped automatically before the item is stored.\n\n##### Cross-item rules\n\n- A data-model referenced by more than one `ALWAYS_APPLY_RULES` item is rejected — combine them into a single item's `rules` list.\n\n##### Failure reasons\n\nEach entry in `validation_failures` carries one of:\n\n| Reason | Meaning |\n|--------|---------|\n| `SCHEMA` | YAML structure is invalid or unsupported. |\n| `VALIDATION` | A required field is missing/empty, a count exceeds a limit, or a GUID is malformed. |\n| `CHAR_LIMIT` | A content field or tag exceeds its size limit. |\n| `UNRESOLVED_SOURCE` | A `guid` or `obj_id` could not be resolved to an existing data-model. |\n| `ACCESS_DENIED` | The caller lacks sufficient access on the referenced data-model. |\n\n#### Dry run\n\n`dry_run` is required and has no default, so the import is always a deliberate two-step flow:\n\n1. **First, call with `dry_run = true`.** This validates the payload and previews what would happen — the counts in `summary` and any `validation_failures` — without writing anything.\n2. **Then, after reviewing a clean preview, call again with `dry_run = false`** (same `content`). This applies the import. It refuses to write when any item fails validation, so fix the reported `validation_failures` and resubmit.\n\n> ###### Important:\n> Never call `dry_run = false` without first inspecting a `dry_run = true` preview. A real import deletes and replaces existing global memories on the referenced data-models.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                                                  |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                        |\n| 403  | Forbidden — the authenticated user does not have the necessary Spotter permissions, or the bearer token does not correspond to the data-model's org. Per-data-model access failures do not use this code — they surface as `ACCESS_DENIED` validation failures with HTTP `200` (see Logical failures below). |\n\n#### Logical failures\n\nValidation and write failures are not returned in the error envelope. The call returns `200` with a terminal `status` of `VALIDATION_FAILED` or `FAILED`, and the details live in `validation_failures` / `diagnostics`:\n\n- **VALIDATION_FAILED** — one or more items failed schema/semantic validation; nothing was written. Inspect `validation_failures`, fix the items, and resubmit.\n- **FAILED** — the import did not complete. Inspect `diagnostics`: a `ROLLED_BACK` group means writing the new entries failed and any entries written before the failure were undone (existing memory is intact, no destructive change), while a `FAILURE` group carries another non-validation cause.\n\nSample `VALIDATION_FAILED` responses (HTTP 200):\n\n**Invalid data-model (unresolved source):**\n\n```json\n{\n    \"status\": \"VALIDATION_FAILED\",\n    \"summary\": null,\n    \"validation_failures\": [\n        {\n            \"line_number\": 2,\n            \"reason\": \"UNRESOLVED_SOURCE\",\n            \"field_name\": \"datamodel_sources[0].guid\",\n            \"message\": \"unknown datamodel guid: 55555555-5555-5555-5555-555555555555\"\n        }\n    ],\n    \"diagnostics\": [\n        {\n            \"sub_status\": \"FAILURE\",\n            \"messages\": [\n                \"unknown datamodel guid: 55555555-5555-5555-5555-555555555555\"\n            ]\n        }\n    ],\n    \"operation_id\": null\n}\n```\n\n**Inaccessible data-models:**\n\n```json\n{\n    \"status\": \"VALIDATION_FAILED\",\n    \"summary\": null,\n    \"validation_failures\": [\n        {\n            \"line_number\": 2,\n            \"reason\": \"ACCESS_DENIED\",\n            \"field_name\": \"datamodel_sources[0]\",\n            \"message\": \"Insufficient permissions on datamodel '44444444-4444-4444-4444-444444444444'\"\n        },\n        {\n            \"line_number\": 8,\n            \"reason\": \"ACCESS_DENIED\",\n            \"field_name\": \"datamodel_sources[0]\",\n            \"message\": \"Insufficient permissions on datamodel '33333333-3333-3333-3333-333333333333'\"\n        }\n    ],\n    \"diagnostics\": [\n        {\n            \"sub_status\": \"FAILURE\",\n            \"messages\": [\n                \"Memory import validation failed with 2 error(s): Insufficient permissions on datamodel '44444444-4444-4444-4444-444444444444'; Insufficient permissions on datamodel '33333333-3333-3333-3333-333333333333'\"\n            ]\n        }\n    ],\n    \"operation_id\": null\n}\n```\n\n**Character-limit validations:**\n\n```json\n{\n    \"status\": \"VALIDATION_FAILED\",\n    \"summary\": [],\n    \"validation_failures\": [\n        {\n            \"line_number\": 3,\n            \"reason\": \"CHAR_LIMIT\",\n            \"field_name\": \"content.rule_definition\",\n            \"message\": \"content.rule_definition is 1073 characters; max allowed is 1000\"\n        },\n        {\n            \"line_number\": 49,\n            \"reason\": \"CHAR_LIMIT\",\n            \"field_name\": \"content.user_query\",\n            \"message\": \"content.user_query is 1150 characters; max allowed is 1000\"\n        },\n        {\n            \"line_number\": 49,\n            \"reason\": \"CHAR_LIMIT\",\n            \"field_name\": \"content.recipe\",\n            \"message\": \"content.recipe is 3574 characters; max allowed is 2000\"\n        }\n    ],\n    \"diagnostics\": [\n        {\n            \"sub_status\": \"FAILURE\",\n            \"messages\": [\n                \"Validation failures present; fix them and re-run to see the DRY_RUN preview.\"\n            ]\n        }\n    ],\n    \"operation_id\": \"66666666-6666-6666-6666-666666666666\"\n}\n```\n\n> ###### Note:\n> - To use this API, the user needs Spotter access (use/manage) and either edit or memory access on the data-model and they must use corresponding org related bearerToken where the data-model exists.\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - Available from version 26.8.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportMemoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportMemoryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Successful dry-run preview",
+                    "value": {
+                      "status": "SUCCESS",
+                      "summary": [
+                        {
+                          "memory_type": "RULES",
+                          "source": {
+                            "identifier": "33333333-3333-3333-3333-333333333333",
+                            "type": "DATA_MODEL"
+                          },
+                          "existing_record_count": 3,
+                          "deleted_record_count": 3,
+                          "inserted_record_count": 2,
+                          "failed_record_count": 0
+                        },
+                        {
+                          "memory_type": "RECIPES",
+                          "source": {
+                            "identifier": "33333333-3333-3333-3333-333333333333",
+                            "type": "DATA_MODEL"
+                          },
+                          "existing_record_count": 7,
+                          "deleted_record_count": 7,
+                          "inserted_record_count": 4,
+                          "failed_record_count": 0
+                        },
+                        {
+                          "memory_type": "ALWAYS_APPLY_RULES",
+                          "source": {
+                            "identifier": "33333333-3333-3333-3333-333333333333",
+                            "type": "DATA_MODEL"
+                          },
+                          "existing_record_count": 0,
+                          "deleted_record_count": 0,
+                          "inserted_record_count": 1,
+                          "failed_record_count": 0
+                        }
+                      ],
+                      "validation_failures": [],
+                      "diagnostics": [],
+                      "operation_id": "77777777-7777-7777-7777-777777777777"
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Successful import (dry_run=false)",
+                    "value": {
+                      "status": "SUCCESS",
+                      "summary": [
+                        {
+                          "memory_type": "RULES",
+                          "source": {
+                            "identifier": "33333333-3333-3333-3333-333333333333",
+                            "type": "DATA_MODEL"
+                          },
+                          "existing_record_count": 3,
+                          "deleted_record_count": 3,
+                          "inserted_record_count": 2,
+                          "failed_record_count": 0
+                        },
+                        {
+                          "memory_type": "RECIPES",
+                          "source": {
+                            "identifier": "33333333-3333-3333-3333-333333333333",
+                            "type": "DATA_MODEL"
+                          },
+                          "existing_record_count": 7,
+                          "deleted_record_count": 7,
+                          "inserted_record_count": 4,
+                          "failed_record_count": 0
+                        },
+                        {
+                          "memory_type": "ALWAYS_APPLY_RULES",
+                          "source": {
+                            "identifier": "33333333-3333-3333-3333-333333333333",
+                            "type": "DATA_MODEL"
+                          },
+                          "existing_record_count": 0,
+                          "deleted_record_count": 0,
+                          "inserted_record_count": 1,
+                          "failed_record_count": 0
+                        }
+                      ],
+                      "validation_failures": [],
+                      "diagnostics": [],
+                      "operation_id": "88888888-8888-8888-8888-888888888888"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportMemoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details": {
       "get": {
         "operationId": "loadAnswer",
@@ -1443,7 +1721,8 @@
               }
             }
           }
-        }
+        },
+        "x-streaming": true
       }
     },
     "/api/rest/2.0/ai/agent/{conversation_identifier}/converse": {
@@ -1621,7 +1900,8 @@
               }
             }
           }
-        }
+        },
+        "x-streaming": true
       }
     },
     "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse": {
@@ -2497,7 +2777,7 @@
     "/api/rest/2.0/auth/token/custom": {
       "post": {
         "operationId": "getCustomAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates an authentication token that provides values for the formula variables in the Row Level Security (RLS) rules for a given user. Recommended for use cases that require Attribute-based access control (ABAC) via RLS.\n\n#### Required privileges\n\nTo add a new user and assign privileges during auto-creation, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source are required.\n\nTo configure formula variables for all Orgs on your instance or the Primary Org, cluster administration privileges are required. Org administrators can configure formula variables for their respective Orgs. If Role-Based Access Control (RBAC) is enabled, users with the `CAN_MANAGE_VARIABLES` (**Can manage variables**) role privilege can also create and manage variables for their Org context.\n\n#### Usage guidelines\n\nYou can generate a token by providing a `username` and `password`, or by using a `secret_key`. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**:\n* When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n* If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username`  and `password` returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\nThe token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.\n\n#### ABAC via RLS\n\nTo implement ABAC via RLS and assign security entitlements to users during session creation, generate a token with custom variable values. The values set in the authentication token are applied to the formula variables referenced in RLS rules at the table level, which determines the data each user can access based on their entitlements.\n\nThe variable values can be configured to persist for a specific set of Models in user sessions initiated with the token, allowing different RLS rules to be set for different data models. Once defined, the rules are added to the user's `variable_values` object, after which all sessions will use the persisted values.\n\nFor more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/abac-via-rls-variables).\n\n##### Formula variables\nBefore defining variable values, ensure the variables are created and available on your instance. To create a formula variable, you can use the **Create variable** (`/api/rest/2.0/template/variables/create`) REST API endpoint, with the variable `type` set as `Formula_Variable` in the API request.\n\nThe API doesn't support `\"persist_option\": \"RESET\"` and `\"persist_option\": \"NONE\"` when `variable_values` are defined  in the request. If you are using `variable_values` for token generation, you must use other supported persist options such as `APPEND` or `REPLACE`.\n\nIf you want to use `RESET` or `NONE`, do not pass any `variable_values`. In such cases, `variable_values` will remain unaffected.\n\n#### Supported objects\n\nThe supported object type is `LOGICAL_TABLE`. When using `object_id` with `variable_values`, models are supported.\n\n#### Just-in-time provisioning\n\nFor [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `groups`\n\nSet `auto_create` to `true` if the username does not exist in ThoughtSpot. If the username already exists in ThoughtSpot and `auto_create` is set to `true`, user properties such as display name, email, Org and group entitlements will not be updated with new values. Setting `auto_create` to `true` does not create formula variables. Hence, this setting will not be applicable to `variable_values`.\n\n#### Important point to note\nAll options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as `APPEND` and `REPLACE` will persist `variable_values` on the user profile when the token is created.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.4.0.cl or later</span>\n\nCreates an authentication token that provides values for the formula variables in the Row Level Security (RLS) rules for a given user. Recommended for use cases that require Attribute-based access control (ABAC) via RLS.\n\n#### Required privileges\n\nTo add a new user and assign privileges during auto-creation, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege and edit access to the data source are required.\n\nTo configure formula variables for all Orgs on your instance or the Primary Org, cluster administration privileges are required. Org administrators can configure formula variables for their respective Orgs. If Role-Based Access Control (RBAC) is enabled, users with the `CAN_MANAGE_VARIABLES` (**Can manage variables**) role privilege can also create and manage variables for their Org context.\n\n#### Usage guidelines\n\nYou can generate a token by providing a `username` and `password`, or by using a `secret_key`. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**:\n* When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.\n* If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username`  and `password` returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.\n\nThe token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.\n\n#### ABAC via RLS\n\nTo implement ABAC via RLS and assign security entitlements to users during session creation, generate a token with custom variable values. The values set in the authentication token are applied to the formula variables referenced in RLS rules at the table level, which determines the data each user can access based on their entitlements.\n\nThe variable values can be configured to persist for a specific set of Models in user sessions initiated with the token, allowing different RLS rules to be set for different data models. Once defined, the rules are added to the user's `variable_values` object, after which all sessions will use the persisted values.\n\nFor more information, see [ABAC via tokens Documentation](https://developers.thoughtspot.com/docs/abac-via-rls-variables).\n\n##### Formula variables\nBefore defining variable values, ensure the variables are created and available on your instance. To create a formula variable, you can use the **Create variable** (`/api/rest/2.0/template/variables/create`) REST API endpoint, with the variable `type` set as `Formula_Variable` in the API request.\n\nThe API doesn't support `\"persist_option\": \"RESET\"` and `\"persist_option\": \"NONE\"` when `variable_values` are defined  in the request. If you are using `variable_values` for token generation, you must use other supported persist options such as `APPEND` or `REPLACE`.\n\nIf you want to use `RESET` or `NONE`, do not pass any `variable_values`. In such cases, `variable_values` will remain unaffected.\n\n#### Supported objects\n\nThe supported object type is `LOGICAL_TABLE`. When using `object_id` with `variable_values`, models are supported.\n\n#### Just-in-time provisioning\n\nFor [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `groups`\n\nSet `auto_create` to `true` if the username does not exist in ThoughtSpot. If the username already exists in ThoughtSpot and `auto_create` is set to `true`, user properties such as display name, email, Org and group entitlements will not be updated with new values. Setting `auto_create` to `true` does not create formula variables. Hence, this setting will not be applicable to `variable_values`.\n\n#### Important point to note\nAll options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, `auto_create:true` will create the user when the authentication token is created. Persist options such as `APPEND` and `REPLACE` will persist `variable_values` on the user profile when the token is created.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "10.4.0.cl"
@@ -2667,7 +2947,7 @@
     "/api/rest/2.0/auth/token/full": {
       "post": {
         "operationId": "getFullAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an authentication token for creating a full session in ThoughtSpot for a given user. Recommended for use cases that do not require Attribute-based access control (ABAC) via Row Level Security (RLS).\n\n#### Usage guidelines\n\nYou can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**:\n* When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n* If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with  `secret_key` or contact ThoughtSpot Support for assistance.\n\nThe token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.\n\n#### Just-in-time provisioning\n\nFor [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `true` if the username does not exist in ThoughtSpot. If the user already exists in ThoughtSpot and `auto_create` is set to `true`, user properties such as display name, email and group assignment will be updated.\n\nTo add a new user and assign privileges during auto-creation, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\nAll options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an authentication token for creating a full session in ThoughtSpot for a given user. Recommended for use cases that do not require Attribute-based access control (ABAC) via Row Level Security (RLS).\n\n#### Usage guidelines\n\nYou can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**:\n* When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.\n* If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with  `secret_key` or contact ThoughtSpot Support for assistance.\n\nThe token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.\n\n#### Just-in-time provisioning\n\nFor [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `true` if the username does not exist in ThoughtSpot. If the user already exists in ThoughtSpot and `auto_create` is set to `true`, user properties such as display name, email and group assignment will be updated.\n\nTo add a new user and assign privileges during auto-creation, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\nAll options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -2831,7 +3111,7 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).\n\n#### Usage guidelines\n\nYou can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**:\n* When both `password` and `secret_key` are included in the API request, `password` takes precedence.\n* If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with `secret_key` or contact ThoughtSpot Support for assistance.\n\nThe token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.\n\n#### Just-in-time provisioning\n\nFor [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, user properties such as display name, email, and group assignment will be updated.\n\nTo add a new user and assign privileges, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\n\nAll options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).\n\n#### Usage guidelines\n\nYou can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**:\n* When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.\n* If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with `secret_key` or contact ThoughtSpot Support for assistance.\n\nThe token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.\n\n#### Just-in-time provisioning\n\nFor [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, user properties such as display name, email, and group assignment will be updated.\n\nTo add a new user and assign privileges, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\n\nAll options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -3815,7 +4095,7 @@
     "/api/rest/2.0/collections/search": {
       "post": {
         "operationId": "searchCollections",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nGets a list of collections available in ThoughtSpot.\n\nTo get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.\n\n#### Search options\n\n* **name_pattern**: Use '%' as a wildcard character to match collection names\n* **collection_identifiers**: Search for specific collections by their GUIDs or names\n* **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response\n\n**NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nGets a list of collections available in ThoughtSpot.\n\nTo get details of a specific collection, specify the collection GUID or name. You can also filter the API response based on the collection name pattern, author, and other criteria.\n\n#### Search options\n\n* **name_pattern**: Use '%' as a wildcard character to match collection names\n* **collection_identifiers**: Search for specific collections by their GUIDs or names\n* **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response\n\n**NOTE**: In addition to the GUID and name, `collection_identifiers` accepts a Custom object ID if one is configured for the collection. The response also includes the `obj_id` field for each collection that has one set.\n\n**NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Collections",
           "26.4.0.cl"
@@ -4716,7 +4996,7 @@
     "/api/rest/2.0/connection/search": {
       "post": {
         "operationId": "searchConnection",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets connection objects.\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n- To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body.\n- To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`.\n- To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match.\n- To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`.\n- To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.\n  Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).\n\n```\n{\n  \"connections\": [\n    {\n      \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",\n      \"data_warehouse_objects\": [\n        {\n          \"database\": \"NEBULADEV\",\n          \"schema\": \"INFORMATION_SCHEMA\",\n          \"table\": \"APPLICABLE_ROLES\",\n          \"column\": \"ROLE_NAME\"\n        }\n      ]\n    }\n  ],\n  \"data_warehouse_object_type\": \"COLUMN\"\n}\n```\n\n- To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`.\n- To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:\n  - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.\n  - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.\n  - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.\n  - `EXTOAUTH`: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).\n  - `KEY_PAIR`: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.\n  - `OAUTH_WITH_PKCE`: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.\n  - `EXTOAUTH_WITH_PKCE`: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.\n  - `OAUTH_WITH_PEZ`: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.\n  - `OAUTH_WITH_SERVICE_PRINCIPAL`: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.\n  - `PERSONAL_ACCESS_TOKEN`: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.\n  - `OAUTH_CLIENT_CREDENTIALS`: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.\n- To include more details about connection objects in the API response, set `include_details` to `true`.\n- You can also sort the output by field names and filter connections by tags.\n\n**NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.2.0.cl or later</span>\n\nGets connection objects.\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) privilege is required.\n\n- To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body.\n- To get the connection objects for a specific type of data warehouse, specify the type in `data_warehouse_types`.\n- To fetch details of a connection object, specify the connection object GUID or name. The `name_pattern` attribute allows passing partial text with `%` for a wildcard match.\n- To get details of the database, schemas, tables, or columns from a data connection object, specify `data_warehouse_object_type`.\n- To get a specific database, schema, table, or column from a connection object, define the object type in `data_warehouse_object_type` and object properties in the `data_warehouse_objects` array. For example, to search for a column, you must pass the database, schema, and table names in the API request.\n  Note that in the following example, object properties are set in a hierarchical order (`database` > `schema` > `table` > `column`).\n\n```\n{\n  \"connections\": [\n    {\n      \"identifier\": \"b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\",\n      \"data_warehouse_objects\": [\n        {\n          \"database\": \"NEBULADEV\",\n          \"schema\": \"INFORMATION_SCHEMA\",\n          \"table\": \"APPLICABLE_ROLES\",\n          \"column\": \"ROLE_NAME\"\n        }\n      ]\n    }\n  ],\n  \"data_warehouse_object_type\": \"COLUMN\"\n}\n```\n\n- To fetch data by `configuration`, specify `data_warehouse_object_type`. For example, to fetch columns from the `DEVELOPMENT` database, specify the `data_warehouse_object_type` as `DATABASE` and define the `configuration` string as `{\"database\":\"DEVELOPMENT\"}`. To get column data for a specific table, specify the table, for example,`{\"database\":\"RETAILAPPAREL\",\"table\":\"PIPES\"}`.\n- To query connections by `authentication_type`, specify `data_warehouse_object_type`. Supported values for `authentication_type` are:\n  - `SERVICE_ACCOUNT`: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.\n  - `OAUTH`: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.\n  - `IAM`: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.\n  - `EXTOAUTH`: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).\n  - `KEY_PAIR`: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.\n  - `OAUTH_WITH_PKCE`: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.\n  - `EXTOAUTH_WITH_PKCE`: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.\n  - `OAUTH_WITH_PEZ`: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.\n  - `OAUTH_WITH_SERVICE_PRINCIPAL`: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.\n  - `PERSONAL_ACCESS_TOKEN`: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.\n  - `OAUTH_CLIENT_CREDENTIALS`: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.\n- To include more details about connection objects in the API response, set `include_details` to `true`.\n- You can also sort the output by field names and filter connections by tags.\n\n**NOTE**: In addition to the connection GUID and name, the `identifier` field on each entry in `connections` accepts a Custom object ID if one is configured for the connection. The response also includes the `obj_id` field for each connection that has one set.\n\n**NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "9.2.0.cl"
@@ -6395,7 +6675,7 @@
                     "format": "binary"
                   },
                   "include_semantic_report": {
-                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.",
+                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -6506,7 +6786,7 @@
                     "format": "binary"
                   },
                   "include_semantic_report": {
-                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula.",
+                    "description": "If true, includes a `semantic_report` per model showing which components were imported or skipped. Each component includes its name, type (such as dimension, measure, or metric), import status, SQL expression, and the corresponding generated ThoughtSpot formula. Note: supported only for Snowflake and Databricks connections.",
                     "type": "boolean",
                     "nullable": true
                   }
@@ -7415,7 +7695,7 @@
     "/api/rest/2.0/groups/search": {
       "post": {
         "operationId": "searchUserGroups",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets a list of user group objects from the ThoughtSpot system.\n\nTo get details of a specific user group, specify the user group GUID or name. You can also filter the API response based on User ID, Org ID, Role ID, type of group, sharing visibility, privileges assigned to the group, and the Liveboard IDs assigned to the users in the group.\n\nAvailable to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.\n\n**NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets a list of user group objects from the ThoughtSpot system.\n\nTo get details of a specific user group, specify the user group GUID or name. You can also filter the API response based on User ID, Org ID, Role ID, type of group, sharing visibility, privileges assigned to the group, and the Liveboard IDs assigned to the users in the group.\n\nAvailable to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.\n\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.\n\n**NOTE**: In addition to the GUID and name, `group_identifier` accepts a Custom object ID if one is configured for the group. The response also includes the `obj_id` field for each group that has one set.\n\n**NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Groups",
           "9.0.0.cl"
@@ -7553,6 +7833,264 @@
           },
           "500": {
             "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/create": {
+      "post": {
+        "operationId": "createInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nCreates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required.\n\n#### Usage guidelines\n\nTo create an input table, provide the following in the request body:\n\n* **`table_name`** — Physical name of the table to create in the external warehouse.\n* **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata.\n* **`table_definition`** — Describes the table schema:\n  * `referenced_columns` — List of column GUIDs from the linked model to include as read-only reference columns in the input table. These columns anchor the input data to existing model dimensions.\n  * `new_columns` — List of new editable columns to create. Each column requires:\n    * `name` — Column display name.\n    * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).\n    * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.\n\n**Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.\n\n#### Examples\n\nCreate an input table with one referenced model column and one new editable measure column:\n\n```json\n{\n  \"table_name\": \"Sales Region Targets\",\n  \"model_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"table_definition\": {\n    \"referenced_columns\": [\"c7d8e9f0-1234-5678-abcd-ef0987654321\"],\n    \"new_columns\": [\n      {\n        \"name\": \"target_revenue\",\n        \"data_type\": \"DOUBLE\",\n        \"type\": \"MEASURE\"\n      }\n    ]\n  }\n}\n```\n\nCreate an input table with multiple new editable columns and no referenced columns:\n\n```json\n{\n  \"table_name\": \"Budget Adjustments\",\n  \"model_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"table_definition\": {\n    \"referenced_columns\": [],\n    \"new_columns\": [\n      {\n        \"name\": \"region\",\n        \"data_type\": \"VARCHAR\",\n        \"type\": \"ATTRIBUTE\"\n      },\n      {\n        \"name\": \"adjustment_amount\",\n        \"data_type\": \"DOUBLE\",\n        \"type\": \"MEASURE\"\n      },\n      {\n        \"name\": \"effective_date\",\n        \"data_type\": \"DATE\",\n        \"type\": \"ATTRIBUTE\"\n      }\n    ]\n  }\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInputTableRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Input table created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputTableResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Input table created successfully",
+                    "value": {
+                      "input_table_identifier": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — invalid payload, no columns selected, or upload disabled on the connection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Model not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/delete": {
+      "post": {
+        "operationId": "deleteInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nDeletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required.\n\n#### Usage guidelines\n\nSpecify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.\n\n**Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.\n\n#### Example\n\nPass the input table GUID as a path parameter. This endpoint has no request body.\n\n```\nDELETE /api/rest/2.0/input-tables/a1b2c3d4-e5f6-7890-abcd-ef1234567890/delete\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.8.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the input table and dropped the physical CDW table."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/update": {
+      "post": {
+        "operationId": "updateInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span>\n\nWrites rows of data into an existing input table. The supplied rows replace the current contents of the table: each call serializes the provided values to CSV and loads them into the input table via DataManager, overwriting any previously stored rows.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:\n\n* **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. Only the listed columns are written; unlisted columns retain their existing values.\n* **`rows`** — List of rows to load. Each row is an array of string values in the same order as `columns`. All cell values must be passed as strings regardless of the column's underlying data type.\n\n**Note**: Each call fully replaces the previously loaded rows. To clear the table, send an empty `rows` array. Partial updates to individual rows are not supported; re-submit all rows on every write.\n\n#### Examples\n\nWrite two rows to an input table. Pass the input table GUID as the\n`input_table_identifier` path parameter:\n\n```\nPOST /api/rest/2.0/input-tables/{input_table_identifier}/update\n```\n\n```json\n{\n  \"columns\": [\"region\", \"target_revenue\", \"effective_date\"],\n  \"rows\": [\n    [\"West\", \"1500000\", \"2025-01-01\"],\n    [\"East\", \"2000000\", \"2025-01-01\"]\n  ]\n}\n```\n\nThe response returns the number of rows written:\n\n```json\n{ \"rows_loaded\": 2 }\n```\n\nClear all rows from an input table:\n\n```json\n{\n  \"columns\": [\"region\", \"target_revenue\"],\n  \"rows\": []\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.8.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInputTableRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rows loaded successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputTableUpdateResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Rows loaded successfully",
+                    "value": {
+                      "rows_loaded": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed request or unknown column name.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the input table.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Input table not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
             "content": {
               "application/json": {
                 "schema": {
@@ -9040,7 +9578,7 @@
     "/api/rest/2.0/metadata/search": {
       "post": {
         "operationId": "searchMetadata",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets a list of metadata objects available on the ThoughtSpot system.\n\nThis API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.\n\n#### Usage guidelines\n\n- To get all metadata objects, send the API request without any attributes.\n- To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`.\n- To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`.\n- To get a specific metadata object, specify the GUID.\n- To customize your search and filter the API response, you can use several parameters.\n  You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.\n  You can also define sorting options to sort the data retrieved in the API response.\n- To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.\n- For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1.\n- To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.\n\n**NOTE**: The following parameters support pagination of metadata records:\n\n- `tag_identifiers`\n- `type`\n- `subtypes`\n- `created_by_user_identifiers`\n- `modified_by_user_identifiers`\n- `owned_by_user_identifiers`\n- `exclude_objects`\n- `include_auto_created_objects`\n- `favorite_object_options`\n- `include_only_published_objects`\nIf you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGets a list of metadata objects available on the ThoughtSpot system.\n\nThis API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.\n\n#### Usage guidelines\n\n- To get all metadata objects, send the API request without any attributes.\n- To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`.\n- To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`.\n- To get a specific metadata object, specify the GUID.\n- To customize your search and filter the API response, you can use several parameters.\n  You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.\n  You can also define sorting options to sort the data retrieved in the API response.\n- To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.\n- For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1.\n- To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.\n\n**NOTE**: `obj_identifier` is supported for the following object types: `LIVEBOARD`, `ANSWER`, `LOGICAL_TABLE`, `LOGICAL_COLUMN`, `CONNECTION`, `USER_GROUP`, `COLLECTION`. The response includes the `metadata_obj_id` field for objects that have a Custom object ID set.\n\n**NOTE**: The following parameters support pagination of metadata records:\n\n- `tag_identifiers`\n- `type`\n- `subtypes`\n- `created_by_user_identifiers`\n- `modified_by_user_identifiers`\n- `owned_by_user_identifiers`\n- `exclude_objects`\n- `include_auto_created_objects`\n- `favorite_object_options`\n- `include_only_published_objects`\nIf you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "9.0.0.cl"
@@ -9913,7 +10451,7 @@
     "/api/rest/2.0/roles/search": {
       "post": {
         "operationId": "searchRoles",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nGets a list of Role objects from the ThoughtSpot system.\n\nAvailable if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\nTo get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.5.0.cl or later</span>\n\nGets a list of Role objects from the ThoughtSpot system.\n\nAvailable if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.\n\nTo get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.\n\n**NOTE**: In addition to the GUID and name, `role_identifiers` accepts a Custom object ID if one is configured for the role. The response also includes the `obj_id` field for each role that has one set.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Roles",
           "9.5.0.cl"
@@ -18709,9 +19247,10 @@
               "USER",
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
-              "INSIGHT_SPEC"
+              "INSIGHT_SPEC",
+              "COLLECTION"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values\n10. INSIGHT_SPEC for SpotIQ objects",
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects",
             "nullable": true
           },
           "subtypes": {
@@ -18778,9 +19317,10 @@
               "USER",
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
-              "INSIGHT_SPEC"
+              "INSIGHT_SPEC",
+              "COLLECTION"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.\n10. INSIGHT_SPEC for SpotIQ objects"
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects"
           }
         }
       },
@@ -18862,7 +19402,8 @@
               "USER",
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
-              "INSIGHT_SPEC"
+              "INSIGHT_SPEC",
+              "COLLECTION"
             ],
             "description": "Type of the metadata."
           },
@@ -21950,6 +22491,41 @@
           }
         }
       },
+      "MemorySources": {
+        "type": "object",
+        "required": [
+          "type",
+          "identifiers"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "DATA_MODEL"
+            ],
+            "description": "Source object type for this group. Must be `DATA_MODEL`."
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Data-models to export memory for. Each entry may be a GUID or a\nhuman-readable obj_id; obj_ids are resolved server-side."
+          }
+        },
+        "description": "A single typed scope group identifying objects whose memory entries\nshould be exported. One group binds a single `type` to a set of\n`identifiers`; pass one or more data-model identifiers in a group to\nscope the memory export to multiple data-models in one call."
+      },
+      "ExportMemoryResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "Serialized memory payload (YAML). This is the shape\nimportMemory consumes.",
+            "nullable": true
+          }
+        },
+        "description": "Response from exportMemory. Contains the serialized payload\nready for local editing and re-submission to importMemory."
+      },
       "VariableDetailInput": {
         "type": "object",
         "properties": {
@@ -23324,6 +23900,14 @@
             },
             "description": "Font assignments for table visualization areas.",
             "nullable": true
+          },
+          "advanced_chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvancedChartVisualizationFontRecord"
+            },
+            "description": "Font assignments for advanced chart visualization areas. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Effective font assignments per visualization type."
@@ -23395,6 +23979,35 @@
           }
         },
         "description": "Font assignment for a table visualization area in the response."
+      },
+      "AdvancedChartVisualizationFontRecord": {
+        "type": "object",
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "ADVANCED_CHART_LABELS"
+            ],
+            "description": "Advanced chart visualization area.",
+            "nullable": true
+          },
+          "font_id": {
+            "type": "string",
+            "description": "UUID of the font assigned to this area. Null when the system default font\nis active.",
+            "nullable": true
+          },
+          "font_name": {
+            "type": "string",
+            "description": "Display name of the font assigned to this area. Null when the system\ndefault font is active.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope, overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "Font assignment for an advanced chart visualization area in the response."
       },
       "StyleFontRecord": {
         "type": "object",
@@ -23491,7 +24104,8 @@
                 "CHART_COLUMN_DATA_LABELS",
                 "CHART_BAR_DATA_LABELS",
                 "CHART_AREA_DATA_LABELS",
-                "TABLE_VALUE_CELLS"
+                "TABLE_VALUE_CELLS",
+                "ADVANCED_CHART_LABELS"
               ]
             },
             "description": "Visualization areas using this font.",
@@ -24832,7 +25446,7 @@
                 "CAN_MANAGE_SPOTTER"
               ]
             },
-            "description": "Privileges that will be assigned to the group.",
+            "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
             "nullable": true
           },
           "sub_group_identifiers": {
@@ -25187,7 +25801,8 @@
               "ACTION_OBJECT",
               "DATA_SOURCE",
               "USER",
-              "USER_GROUP"
+              "USER_GROUP",
+              "COLLECTION"
             ],
             "description": "Optional type of the header object.",
             "nullable": true
@@ -25241,7 +25856,8 @@
               "ACTION_OBJECT",
               "DATA_SOURCE",
               "USER",
-              "USER_GROUP"
+              "USER_GROUP",
+              "COLLECTION"
             ],
             "description": "Type of metadata. Required if metadata_identifier is name of the object.",
             "nullable": true
@@ -25272,7 +25888,8 @@
               "USER",
               "USER_GROUP",
               "ROLE",
-              "FEEDBACK"
+              "FEEDBACK",
+              "COLLECTION"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -27061,6 +27678,177 @@
           }
         }
       },
+      "ImportMemoryResponse": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "VALIDATION_FAILED",
+              "FAILED"
+            ],
+            "description": "Terminal status of the import."
+          },
+          "summary": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportSummary"
+            },
+            "description": "Per (memory type, target source) result entries. Null when the\nimport failed before any record processing occurred.",
+            "nullable": true
+          },
+          "validation_failures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportFailure"
+            },
+            "description": "Per-item validation failure entries. Null when the import failed\nbefore item validation could run.",
+            "nullable": true
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportDiagnostic"
+            },
+            "description": "Diagnostic message groups (errors, rollbacks, and non-fatal\nwarnings), each keyed by a `sub_status`. Null when the import\nproduced no diagnostics.",
+            "nullable": true
+          },
+          "operation_id": {
+            "type": "string",
+            "description": "Server-generated identifier for this import operation. Include it in\nsupport tickets to help correlate server-side logs.",
+            "nullable": true
+          }
+        },
+        "description": "Response from importMemory. On `SUCCESS`, `summary` is fully\npopulated. `diagnostics` carries any fatal errors, rollbacks, and\nnon-fatal warnings produced during the import."
+      },
+      "ImportSummary": {
+        "type": "object",
+        "properties": {
+          "memory_type": {
+            "type": "string",
+            "enum": [
+              "RULES",
+              "RECIPES",
+              "ALWAYS_APPLY_RULES"
+            ],
+            "description": "The kind of memory (`RULES`, `RECIPES`, or `ALWAYS_APPLY_RULES`)\nthese counts apply to.",
+            "nullable": true
+          },
+          "source": {
+            "$ref": "#/components/schemas/ImportTargetSource",
+            "description": "The target object these counts apply to.",
+            "nullable": true
+          },
+          "existing_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of memory entries of this type that already existed on the\ntarget object before the import.",
+            "nullable": true
+          },
+          "deleted_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of existing entries that will be (DRY_RUN) or were\n(EXECUTE_IMPORT) deleted as part of the replacement.",
+            "nullable": true
+          },
+          "inserted_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of entries from the payload that will be (DRY_RUN) or were\n(EXECUTE_IMPORT) inserted.",
+            "nullable": true
+          },
+          "failed_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of records of this type that failed validation or processing.",
+            "nullable": true
+          }
+        },
+        "description": "Per (memory type, target source) summary of what importMemory did — or\nwould do, in DRY_RUN. `deleted_record_count` and `inserted_record_count`\nare previews in DRY_RUN and actuals in EXECUTE_IMPORT."
+      },
+      "ImportTargetSource": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Identifier (GUID) of the target object these counts apply to.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "DATA_MODEL"
+            ],
+            "description": "Source object kind (`DATA_MODEL`).",
+            "nullable": true
+          }
+        },
+        "description": "Identifies the target object a group of import counts applies to.\n`type` is the source kind (`DATA_MODEL`) and `identifier` is\nthe object's GUID."
+      },
+      "ImportFailure": {
+        "type": "object",
+        "properties": {
+          "line_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Best-effort line number of the offending item in the uploaded YAML. May be null when the line cannot be\ndetermined.",
+            "nullable": true
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "UNKNOWN_FAILURE_REASON",
+              "VALIDATION",
+              "UNRESOLVED_SOURCE",
+              "ACCESS_DENIED",
+              "CHAR_LIMIT",
+              "SCHEMA"
+            ],
+            "description": "Machine-readable category for the failure (e.g. `VALIDATION`,\n`ACCESS_DENIED`, `CHAR_LIMIT`).",
+            "nullable": true
+          },
+          "field_name": {
+            "type": "string",
+            "description": "Dotted path to the offending field within the item (e.g.\n`content.rule_definition`) for inline highlighting. Absent when the\nfailure is item-level rather than field-level.",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description of the failure.",
+            "nullable": true
+          }
+        },
+        "description": "One per-item import failure surfaced by importMemory. `line_number` is\nthe best-effort line number in the uploaded YAML; `field_name` is a\ndotted path within the item (e.g. `content.rule_definition`) for inline\nhighlighting; absent when the failure is item-level rather than field-level."
+      },
+      "ImportDiagnostic": {
+        "type": "object",
+        "properties": {
+          "sub_status": {
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "FAILURE",
+              "WARNING",
+              "ROLLED_BACK"
+            ],
+            "description": "Severity / disposition category these messages share (e.g.\n`WARNING`, `FAILURE`, `ROLLED_BACK`).",
+            "nullable": true
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Human-readable messages for this category (e.g. the details of a\n`WARNING`, or the failure cause for a `FAILURE`).",
+            "nullable": true
+          }
+        },
+        "description": "A group of importMemory diagnostic messages that share a severity /\ndisposition. This is the single, uniform channel for fatal errors,\nrollbacks, and non-fatal observations."
+      },
       "VariableUpdateAssignmentInput": {
         "type": "object",
         "required": [
@@ -27392,6 +28180,79 @@
             "description": "Name of the table. Table names may be case-sensitive depending on the database system."
           }
         }
+      },
+      "InputTableDefinitionInput": {
+        "type": "object",
+        "required": [
+          "new_columns",
+          "referenced_columns"
+        ],
+        "properties": {
+          "new_columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnSchemaInput"
+            },
+            "description": "New input-only columns to create in the table."
+          },
+          "referenced_columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Column IDs from the linked model to include in the table.\nPass an empty array to create an input table with no reference\ncolumns from the model."
+          }
+        },
+        "description": "Definition of the input table schema."
+      },
+      "InputColumnSchemaInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "data_type",
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the column."
+          },
+          "data_type": {
+            "type": "string",
+            "description": "Physical data type of the column as recognized by the connected\nwarehouse (for example, VARCHAR, INT64, DOUBLE, BOOL, DATE).\nThe accepted values depend on the underlying Cloud Data Warehouse."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ATTRIBUTE",
+              "MEASURE"
+            ],
+            "description": "Semantic role of the column in ThoughtSpot. Use ATTRIBUTE for\ndimensional data such as text, dates, and identifiers, and\nMEASURE for numeric or aggregatable values."
+          }
+        },
+        "description": "Schema definition for a single input column."
+      },
+      "InputTableResponse": {
+        "type": "object",
+        "properties": {
+          "input_table_identifier": {
+            "type": "string",
+            "description": "Unique ID of the newly created input table.",
+            "nullable": true
+          }
+        }
+      },
+      "InputTableUpdateResponse": {
+        "type": "object",
+        "properties": {
+          "rows_loaded": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of rows successfully written to the input table.",
+            "nullable": true
+          }
+        },
+        "description": "Response returned after successfully writing rows to an input table."
       },
       "PolicyProcessOptionsInput": {
         "type": "object",
@@ -27787,7 +28648,8 @@
                 "CHART_COLUMN_DATA_LABELS",
                 "CHART_BAR_DATA_LABELS",
                 "CHART_AREA_DATA_LABELS",
-                "TABLE_VALUE_CELLS"
+                "TABLE_VALUE_CELLS",
+                "ADVANCED_CHART_LABELS"
               ]
             },
             "description": "Visualization areas whose font assignments should revert to the system\ndefault font.",
@@ -27875,6 +28737,14 @@
             },
             "description": "Font assignments for table visualization areas. Provide only the areas to\nupdate; omitted areas remain unchanged.",
             "nullable": true
+          },
+          "advanced_chart_visualization_fonts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvancedChartFontAssignmentInput"
+            },
+            "description": "Font assignments for advanced chart visualization areas. Provide only the\nareas to update; omitted areas remain unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Font assignments grouped by visualization type."
@@ -27930,6 +28800,27 @@
           }
         },
         "description": "Font assignment for a single table visualization area."
+      },
+      "AdvancedChartFontAssignmentInput": {
+        "type": "object",
+        "required": [
+          "visualization_area",
+          "font_identifier"
+        ],
+        "properties": {
+          "visualization_area": {
+            "type": "string",
+            "enum": [
+              "ADVANCED_CHART_LABELS"
+            ],
+            "description": "Advanced chart visualization area to assign the font to. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>"
+          },
+          "font_identifier": {
+            "type": "string",
+            "description": "UUID or name of the font to assign to this area. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>"
+          }
+        },
+        "description": "Font assignment for a single advanced chart visualization area."
       },
       "StyleFontUploadData": {
         "type": "object",
@@ -27987,7 +28878,8 @@
                 "CHART_COLUMN_DATA_LABELS",
                 "CHART_BAR_DATA_LABELS",
                 "CHART_AREA_DATA_LABELS",
-                "TABLE_VALUE_CELLS"
+                "TABLE_VALUE_CELLS",
+                "ADVANCED_CHART_LABELS"
               ]
             },
             "description": "Visualization areas that used the deleted font and were automatically reset\nto the system default font.",
@@ -28067,11 +28959,26 @@
           "metadata_identifier"
         ]
       },
+      "ExportMemoryRequest": {
+        "type": "object",
+        "properties": {
+          "sources": {
+            "description": "List of typed scope groups selecting which data-models to export\nmemory for. Supply `DATA_MODEL` group to scope the\nexport to specific data-models.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemorySources"
+            }
+          }
+        },
+        "required": [
+          "sources"
+        ]
+      },
       "GetDataSourceSuggestionsRequest": {
         "type": "object",
         "properties": {
           "query": {
-            "description": "User query used to suggest data sources.",
+            "description": "User query used to suggest data sources. Must be a non-empty string.",
             "type": "string"
           }
         },
@@ -28113,7 +29020,7 @@
             "nullable": true
           },
           "query": {
-            "description": "A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis.",
+            "description": "A user query that requires breaking down into smaller, more manageable analytical questions to facilitate better understanding and analysis. Must be a non-empty string.",
             "type": "string"
           },
           "ai_context": {
@@ -28128,6 +29035,23 @@
         "required": [
           "metadata_context",
           "query"
+        ]
+      },
+      "ImportMemoryRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "description": "The full serialized memory payload to import (YAML) —\ntypically a previous `exportMemory` response's `content`, edited\nlocally and re-submitted.",
+            "type": "string"
+          },
+          "dry_run": {
+            "description": "Required. When `true`, validate the payload and return preview\ncounts and row failures without writing anything. Pass `false` to\napply the import. The caller must choose explicitly so\na real import is never triggered by omission.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "content",
+          "dry_run"
         ]
       },
       "QueryGetDecomposedQueryRequest": {
@@ -29953,7 +30877,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges to assign to the group",
+            "description": "Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
             "type": "array",
             "items": {
               "type": "string",
@@ -30252,7 +31176,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges to assign to the group.",
+            "description": "Privileges to assign to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
             "type": "array",
             "items": {
               "type": "string",
@@ -30346,6 +31270,58 @@
             ]
           }
         }
+      },
+      "CreateInputTableRequest": {
+        "type": "object",
+        "properties": {
+          "table_name": {
+            "description": "Physical table name to create in the external warehouse.",
+            "type": "string"
+          },
+          "model_identifier": {
+            "description": "Unique ID or name of the model (worksheet) to link the\ninput table to.",
+            "type": "string"
+          },
+          "table_definition": {
+            "description": "Definition of the input table, including new columns\nand referenced model columns.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputTableDefinitionInput"
+              }
+            ]
+          }
+        },
+        "required": [
+          "table_name",
+          "model_identifier",
+          "table_definition"
+        ]
+      },
+      "UpdateInputTableRequest": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "description": "Names of the columns being written, in the same order as\nthe values in each row.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rows": {
+            "description": "Rows to write into the input table. Each row is an array\nof string values aligned positionally with columns.",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "columns",
+          "rows"
+        ]
       },
       "SearchChannelHistoryRequest": {
         "type": "object",
@@ -30786,6 +31762,12 @@
             "default": false,
             "type": "boolean",
             "nullable": true
+          },
+          "enable_personalized_view_upsert": {
+            "description": "<div><span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span></div>\n\nBoolean flag to enable update/insert of personalized views in liveboard.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
           }
         },
         "required": [
@@ -30833,6 +31815,12 @@
           },
           "enable_large_metadata_validation": {
             "description": "<div><span class=\"since-beta-tag\">Version: 10.5.0.cl or later</span></div>\n\nBoolean to indicate if the large metadata validation should be enabled.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "enable_personalized_view_upsert": {
+            "description": "<div><span class=\"since-beta-tag\">Version: 26.8.0.cl or later</span></div>\n\nBoolean flag to enable update/insert of personalized views in liveboard.",
             "default": false,
             "type": "boolean",
             "nullable": true
@@ -31431,7 +32419,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+            "description": "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
             "type": "array",
             "items": {
               "type": "string",
@@ -31626,7 +32614,7 @@
             "type": "string"
           },
           "privileges": {
-            "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges.",
+            "description": "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for supported roles privileges. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
             "type": "array",
             "items": {
               "type": "string",
@@ -35090,6 +36078,18 @@
               "ENABLED",
               "DISABLED"
             ]
+          },
+          "reset_options": {
+            "description": "List of optional configuration sections to clear. Each value removes the\ncorresponding configuration entirely from the webhook: AUTHENTICATION\nremoves the authentication config, SIGNATURE_VERIFICATION removes the\nsignature verification config, STORAGE_DESTINATION removes the storage\ndestination config. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "AUTHENTICATION",
+                "SIGNATURE_VERIFICATION",
+                "STORAGE_DESTINATION"
+              ]
+            }
           }
         }
       }
