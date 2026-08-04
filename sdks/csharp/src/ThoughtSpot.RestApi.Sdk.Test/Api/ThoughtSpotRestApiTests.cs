@@ -288,18 +288,6 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Test CreateInputTable
-        /// </summary>
-        [Fact]
-        public void CreateInputTableTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //CreateInputTableRequest createInputTableRequest = null;
-            //var response = instance.CreateInputTable(createInputTableRequest);
-            //Assert.IsType<InputTableResponse>(response);
-        }
-
-        /// <summary>
         /// Test CreateOrg
         /// </summary>
         [Fact]
@@ -579,17 +567,6 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string templateIdentifier = null;
             //instance.DeleteEmailCustomization(templateIdentifier);
-        }
-
-        /// <summary>
-        /// Test DeleteInputTable
-        /// </summary>
-        [Fact]
-        public void DeleteInputTableTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string inputTableIdentifier = null;
-            //instance.DeleteInputTable(inputTableIdentifier);
         }
 
         /// <summary>
@@ -2003,19 +1980,6 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //UpdateEmailCustomizationRequest updateEmailCustomizationRequest = null;
             //instance.UpdateEmailCustomization(updateEmailCustomizationRequest);
-        }
-
-        /// <summary>
-        /// Test UpdateInputTable
-        /// </summary>
-        [Fact]
-        public void UpdateInputTableTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string inputTableIdentifier = null;
-            //UpdateInputTableRequest updateInputTableRequest = null;
-            //var response = instance.UpdateInputTable(inputTableIdentifier, updateInputTableRequest);
-            //Assert.IsType<InputTableUpdateResponse>(response);
         }
 
         /// <summary>
