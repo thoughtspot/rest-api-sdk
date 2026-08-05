@@ -35,19 +35,19 @@ public class JWTParameter implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_RUNTIME_FILTER)
     @javax.annotation.Nullable
-    private Object runtimeFilter;
+    private Object runtimeFilter = null;
 
     public static final String SERIALIZED_NAME_RUNTIME_SORT = "runtime_sort";
 
     @SerializedName(SERIALIZED_NAME_RUNTIME_SORT)
     @javax.annotation.Nullable
-    private Object runtimeSort;
+    private Object runtimeSort = null;
 
     public static final String SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE = "runtime_param_override";
 
     @SerializedName(SERIALIZED_NAME_RUNTIME_PARAM_OVERRIDE)
     @javax.annotation.Nullable
-    private Object runtimeParamOverride;
+    private Object runtimeParamOverride = null;
 
     public JWTParameter() {}
 

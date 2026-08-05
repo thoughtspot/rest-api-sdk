@@ -182,7 +182,7 @@ public class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("ThoughtSpot-Client/java/2.26.0");
+        setUserAgent("ThoughtSpot-Client/java/2.27.0");
 
         authentications = new HashMap<String, Authentication>();
     }
@@ -1155,6 +1155,30 @@ public class ApiClient {
             Response response = call.execute();
             T data = handleResponse(response, returnType);
             return new ApiResponse<T>(response.code(), response.headers().toMultimap(), data);
+        } catch (IOException e) {
+            throw new ApiException(e);
+        }
+    }
+
+    /**
+     * Execute stream.
+     *
+     * @param call a {@link okhttp3.Call} object
+     * @param returnType a {@link java.lang.reflect.Type} object
+     * @return a {@link java.io.InputStream} object
+     * @throws com.thoughtspot.client.ApiException if any.
+     */
+    public InputStream executeStream(Call call, Type returnType) throws ApiException {
+        try {
+            Response response = call.execute();
+            if (!response.isSuccessful()) {
+                throw new ApiException(
+                        response.code(), response.message(), response.headers().toMultimap(), null);
+            }
+            if (response.body() == null) {
+                return null;
+            }
+            return response.body().byteStream();
         } catch (IOException e) {
             throw new ApiException(e);
         }

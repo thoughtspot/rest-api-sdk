@@ -68,7 +68,7 @@ public class WebhookResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_URL_PARAMS)
     @javax.annotation.Nullable
-    private Object urlParams;
+    private Object urlParams = null;
 
     /** Gets or Sets events */
     @JsonAdapter(EventsEnum.Adapter.class)

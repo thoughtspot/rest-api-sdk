@@ -42,8 +42,8 @@ public class FileResponseItem implements Serializable {
     public static final String SERIALIZED_NAME_TIMESTAMP_IN_MILLIS = "timestamp_in_millis";
 
     @SerializedName(SERIALIZED_NAME_TIMESTAMP_IN_MILLIS)
-    @javax.annotation.Nonnull
-    private Object timestampInMillis;
+    @javax.annotation.Nullable
+    private Object timestampInMillis = null;
 
     public static final String SERIALIZED_NAME_IS_THINKING = "is_thinking";
 
@@ -84,7 +84,7 @@ public class FileResponseItem implements Serializable {
         this.type = type;
     }
 
-    public FileResponseItem timestampInMillis(@javax.annotation.Nonnull Object timestampInMillis) {
+    public FileResponseItem timestampInMillis(@javax.annotation.Nullable Object timestampInMillis) {
         this.timestampInMillis = timestampInMillis;
         return this;
     }
@@ -94,12 +94,12 @@ public class FileResponseItem implements Serializable {
      *
      * @return timestampInMillis
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public Object getTimestampInMillis() {
         return timestampInMillis;
     }
 
-    public void setTimestampInMillis(@javax.annotation.Nonnull Object timestampInMillis) {
+    public void setTimestampInMillis(@javax.annotation.Nullable Object timestampInMillis) {
         this.timestampInMillis = timestampInMillis;
     }
 

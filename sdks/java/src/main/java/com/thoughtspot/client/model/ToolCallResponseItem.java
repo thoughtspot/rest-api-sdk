@@ -40,8 +40,8 @@ public class ToolCallResponseItem implements Serializable {
     public static final String SERIALIZED_NAME_TIMESTAMP_IN_MILLIS = "timestamp_in_millis";
 
     @SerializedName(SERIALIZED_NAME_TIMESTAMP_IN_MILLIS)
-    @javax.annotation.Nonnull
-    private Object timestampInMillis;
+    @javax.annotation.Nullable
+    private Object timestampInMillis = null;
 
     public static final String SERIALIZED_NAME_IS_THINKING = "is_thinking";
 
@@ -70,8 +70,8 @@ public class ToolCallResponseItem implements Serializable {
     public static final String SERIALIZED_NAME_ARGUMENTS = "arguments";
 
     @SerializedName(SERIALIZED_NAME_ARGUMENTS)
-    @javax.annotation.Nonnull
-    private Object arguments;
+    @javax.annotation.Nullable
+    private Object arguments = null;
 
     public ToolCallResponseItem() {}
 
@@ -95,7 +95,7 @@ public class ToolCallResponseItem implements Serializable {
     }
 
     public ToolCallResponseItem timestampInMillis(
-            @javax.annotation.Nonnull Object timestampInMillis) {
+            @javax.annotation.Nullable Object timestampInMillis) {
         this.timestampInMillis = timestampInMillis;
         return this;
     }
@@ -105,12 +105,12 @@ public class ToolCallResponseItem implements Serializable {
      *
      * @return timestampInMillis
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public Object getTimestampInMillis() {
         return timestampInMillis;
     }
 
-    public void setTimestampInMillis(@javax.annotation.Nonnull Object timestampInMillis) {
+    public void setTimestampInMillis(@javax.annotation.Nullable Object timestampInMillis) {
         this.timestampInMillis = timestampInMillis;
     }
 
@@ -190,7 +190,7 @@ public class ToolCallResponseItem implements Serializable {
         this.toolName = toolName;
     }
 
-    public ToolCallResponseItem arguments(@javax.annotation.Nonnull Object arguments) {
+    public ToolCallResponseItem arguments(@javax.annotation.Nullable Object arguments) {
         this.arguments = arguments;
         return this;
     }
@@ -200,12 +200,12 @@ public class ToolCallResponseItem implements Serializable {
      *
      * @return arguments
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public Object getArguments() {
         return arguments;
     }
 
-    public void setArguments(@javax.annotation.Nonnull Object arguments) {
+    public void setArguments(@javax.annotation.Nullable Object arguments) {
         this.arguments = arguments;
     }
 

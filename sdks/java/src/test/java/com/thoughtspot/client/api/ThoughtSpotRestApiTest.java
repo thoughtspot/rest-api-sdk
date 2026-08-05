@@ -74,6 +74,8 @@ import com.thoughtspot.client.model.EurekaSetNLInstructionsResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
 import com.thoughtspot.client.model.ExportManualTranslationsRequest;
+import com.thoughtspot.client.model.ExportMemoryRequest;
+import com.thoughtspot.client.model.ExportMemoryResponse;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLRequest;
 import com.thoughtspot.client.model.ExportStyleLogosRequest;
@@ -99,6 +101,8 @@ import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.GetTokenResponse;
 import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
+import com.thoughtspot.client.model.ImportMemoryRequest;
+import com.thoughtspot.client.model.ImportMemoryResponse;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
 import com.thoughtspot.client.model.ImportMetadataTMLRequest;
 import com.thoughtspot.client.model.ImportUserGroupsRequest;
@@ -167,7 +171,6 @@ import com.thoughtspot.client.model.SecuritySettingsResponse;
 import com.thoughtspot.client.model.SendAgentConversationMessageRequest;
 import com.thoughtspot.client.model.SendAgentConversationMessageStreamingRequest;
 import com.thoughtspot.client.model.SendAgentMessageRequest;
-import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.SetAgentInstructionsRequest;
@@ -228,6 +231,7 @@ import com.thoughtspot.client.model.WebhookResponse;
 import com.thoughtspot.client.model.WebhookSearchResponse;
 import com.thoughtspot.client.model.WebhookStorageConfigInfo;
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -1708,6 +1712,53 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Exports memory entries (rules, recipes, and always-apply rules) for the specified data-models
+     * as a single YAML payload. The payload can be edited locally and re-submitted through
+     * &#x60;importMemory&#x60;. Requires Spotter access (use/manage) and either edit or memory
+     * access on corresponding data model sources. Version: 26.8.0.cl or later This API allows users
+     * to export data-model memories for a given list of data-models. This exported yaml file can
+     * then be modified and used as input to the import API in target env. This API enables
+     * customers to migrate memories from a source env to a target env. This improves memory
+     * adoption for Spotter by giving the users a chance to develop their memories in one env and
+     * replicate the same in another env. #### Usage guidelines To export memory for one or more
+     * data-models, the request may include: - &#x60;sources&#x60;: A list of typed scope groups
+     * identifying which data-models to export memory for. Each group contains: - &#x60;type&#x60;:
+     * The source object type for this group — &#x60;DATA_MODEL&#x60;. - &#x60;identifiers&#x60;: An
+     * array of GUIDs or human-readable &#x60;obj_id&#x60;s of the data-models to export memory for.
+     * obj_ids are resolved server-side before forwarding. The API returns a response object with: -
+     * &#x60;content&#x60;: The serialized memory payload (YAML) — exactly the shape that the
+     * &#x60;importMemory&#x60; API consumes. Edit it locally and pass it back through
+     * &#x60;importMemory&#x60; to apply changes. #### Source Type - **DATA_MODEL**: The
+     * &#x60;identifiers&#x60; are data-model GUIDs. This is the default source type for Spotter
+     * memory and covers the rules, recipes and always-apply rules attached directly to a
+     * data-model. #### File format The exported &#x60;content&#x60; is a YAML document with a
+     * single top-level &#x60;memories&#x60; key holding a list of memory items — exactly the format
+     * the &#x60;importMemory&#x60; API consumes. The full format reference (an annotated example,
+     * memory item fields, per-type content, and &#x60;datamodel_sources&#x60; identification) is
+     * documented in the &#x60;importMemory&#x60; API&#39;s **File format** section. Exported files
+     * populate each source&#39;s &#x60;guid&#x60; and, if present, &#x60;obj_id&#x60; as well. ####
+     * Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have necessary permissions, or lacks read access
+     * on a referenced data-model, or the bearer token does not correspond to the data-model&#39;s
+     * org. | &gt; ###### Note: &gt; - To use this API, the user needs Spotter access (use/manage)
+     * and either edit or memory access on the data-model and they must use corresponding org
+     * related bearerToken where the data-model exists. &gt; - This endpoint is currently in Beta.
+     * Breaking changes may be introduced before the endpoint is made Generally Available. &gt; -
+     * Available from version 26.8.0.cl and later. &gt; - This endpoint requires Spotter — please
+     * contact ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void exportMemoryTest() throws ApiException {
+        ExportMemoryRequest exportMemoryRequest = null;
+        ExportMemoryResponse response = api.exportMemory(exportMemoryRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml)
      * representation of metadata objects in JSON or YAML format. Requires
      * &#x60;DATADOWNLOADING&#x60; (**Can download Data**) and at least view access to the metadata
@@ -2480,7 +2531,7 @@ public class ThoughtSpotRestApiTest {
      * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
      * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
      * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication
      * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
      * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
      * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
@@ -2572,7 +2623,7 @@ public class ThoughtSpotRestApiTest {
      * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
      * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
      * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication
      * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
      * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
      * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
@@ -2668,7 +2719,7 @@ public class ThoughtSpotRestApiTest {
      * authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the
      * **Develop** &gt; **Customizations** &gt; **Security Settings** page. **Note**: * When both
      * &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request,
-     * &#x60;password&#x60; takes precedence. * If [Multi-Factor Authentication
+     * &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication
      * (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your
      * instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an
      * error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact
@@ -2828,6 +2879,193 @@ public class ThoughtSpotRestApiTest {
         File translationsFile = null;
         String scope = null;
         api.importManualTranslations(translationsFile, scope);
+        // TODO: test validations
+    }
+
+    /**
+     * Imports memory entries (rules, recipes, and always-apply rules) from a YAML payload,
+     * typically a payload produced by &#x60;exportMemory&#x60; and edited locally. The imported
+     * entries replace the existing memory for the data-models referenced in the payload.
+     * &#x60;dry_run&#x60; is required. Pass &#x60;true&#x60; first to validate the payload and
+     * review the preview counts and any row-level failures without making changes, then re-run with
+     * &#x60;dry_run &#x3D; false&#x60; to apply the import. An import is not applied if any row
+     * fails validation. Requires Spotter access (use/manage) and either edit or memory access on
+     * corresponding data model sources. Version: 26.8.0.cl or later This API allows users to import
+     * data-model memories using a given yaml file. This yaml file can be obtained from the export
+     * memory API in source env and can be modified and used as input to the import API in target
+     * env. This API enables customers to migrate memories from a source env to a target env. This
+     * improves memory adoption for Spotter by giving the users a chance to develop their memories
+     * in one env and replicate the same in another env. #### Usage guidelines To import memory, the
+     * request must include: - &#x60;content&#x60;: The full serialized memory payload to import
+     * (YAML). Typically the &#x60;content&#x60; value returned by the &#x60;exportMemory&#x60; API,
+     * edited locally and re-submitted. The payload itself identifies which data-models the memory
+     * applies to, so no separate identifier list is required. - &#x60;dry_run&#x60;: Required. When
+     * &#x60;true&#x60;, validate the payload and return preview counts without writing anything;
+     * when &#x60;false&#x60;, apply the import. Always run with &#x60;dry_run &#x3D; true&#x60;
+     * first, then re-run with &#x60;dry_run &#x3D; false&#x60; once you are satisfied with the
+     * preview. The import replaces the existing global memories on the data-models referenced in
+     * the payload with the entries supplied in the payload. The API returns a response object with:
+     * - &#x60;status&#x60;: The terminal status of the import (&#x60;SUCCESS&#x60;,
+     * &#x60;VALIDATION_FAILED&#x60;, or &#x60;FAILED&#x60;). - &#x60;summary&#x60;: Per
+     * &#x60;(memory_type, source)&#x60; counts. In a dry run the
+     * &#x60;deleted_record_count&#x60;/&#x60;inserted_record_count&#x60; are previews; in a real
+     * import they are actuals. On &#x60;VALIDATION_FAILED&#x60;, &#x60;summary&#x60; is
+     * &#x60;null&#x60; when validation fails before any item is processed (e.g. an unresolved or
+     * inaccessible data-model source) and an empty list otherwise — treat both as \&quot;no counts
+     * available\&quot;. - &#x60;validation_failures&#x60;: Per-item validation failures, each with
+     * &#x60;line_number&#x60;, &#x60;reason&#x60;, &#x60;field_name&#x60;, and &#x60;message&#x60;
+     * for click-to-locate and inline highlighting. - &#x60;diagnostics&#x60;: Groups of diagnostic
+     * messages, each with a &#x60;sub_status&#x60; (&#x60;WARNING&#x60;, &#x60;FAILURE&#x60;,
+     * &#x60;ROLLED_BACK&#x60;, or &#x60;UNKNOWN&#x60;) and a &#x60;messages&#x60; list. This is the
+     * single channel for both non-fatal warnings (under &#x60;WARNING&#x60;, e.g. when some older
+     * memory entries could not be fully cleaned up) and fatal causes (e.g. the failure reason under
+     * &#x60;FAILURE&#x60;, or a &#x60;ROLLED_BACK&#x60; group when new entries were undone). -
+     * &#x60;operation_id&#x60;: A server-generated identifier for this import operation; include it
+     * when contacting support to help correlate server-side logs. Populated once the server
+     * registers the import operation; &#x60;null&#x60; when the request fails earlier (e.g. while
+     * parsing the payload or resolving its data-model sources). #### File format The payload is a
+     * YAML document with a single top-level &#x60;memories&#x60; key holding a list of memory
+     * items. Each item is self-contained: a &#x60;type&#x60;, a typed &#x60;content&#x60; block, a
+     * &#x60;datamodel_sources&#x60; list, and optional &#x60;tags&#x60;. Typically you don&#39;t
+     * hand-author this file — you obtain it from &#x60;exportMemory&#x60;, edit it, and submit it
+     * back through &#x60;importMemory&#x60;. &#x60;&#x60;&#x60;yaml memories: - type: RULE content:
+     * rule_definition: \&quot;Always filter revenue to closed-won deals.\&quot; datamodel_sources:
+     * - guid: 11111111-1111-1111-1111-111111111111 obj_id: sales_data_model tags: - finance - type:
+     * RULE content: rule_definition: \&quot;Exclude internal test accounts from all results.\&quot;
+     * datamodel_sources: - obj_id: sales_data_model - type: RECIPE content: user_query: \&quot;top
+     * accounts by revenue\&quot; recipe: | {\&quot;steps\&quot;: [...serialized recipe blob...]}
+     * datamodel_sources: - obj_id: sales_data_model - type: RECIPE content: user_query:
+     * \&quot;monthly new customer count\&quot; recipe: | {\&quot;steps\&quot;: [...serialized
+     * recipe blob...]} datamodel_sources: - obj_id: sales_data_model - type: ALWAYS_APPLY_RULES
+     * content: rules: - \&quot;Never show internal test accounts.\&quot; - \&quot;Round currency to
+     * whole dollars.\&quot; datamodel_sources: - guid: 22222222-2222-2222-2222-222222222222
+     * &#x60;&#x60;&#x60; A file can contain multiple &#x60;RULE&#x60; and multiple
+     * &#x60;RECIPE&#x60; items for a data-model, but at most one &#x60;ALWAYS_APPLY_RULES&#x60;
+     * item per data-model. ##### Memory item fields | Field | Required | Type | Description |
+     * |-------|----------|------|-------------| | &#x60;type&#x60; | Yes | String enum | One of
+     * &#x60;RULE&#x60;, &#x60;RECIPE&#x60;, or &#x60;ALWAYS_APPLY_RULES&#x60;. | |
+     * &#x60;content&#x60; | Yes | Mapping | Type-specific content block (see below). | |
+     * &#x60;datamodel_sources&#x60; | Yes | Non-empty list | The data-model(s) the memory attaches
+     * to. | | &#x60;tags&#x60; | No | List of strings | Free-form labels. | ##### Memory types and
+     * content | &#x60;type&#x60; | Content fields | Notes | |--------|----------------|-------| |
+     * &#x60;RULE&#x60; | &#x60;rule_definition&#x60; — required, non-empty string | A single
+     * semantic rule. | | &#x60;RECIPE&#x60; | &#x60;recipe&#x60; and &#x60;user_query&#x60; — both
+     * required, non-empty strings | &#x60;recipe&#x60; is an opaque serialized blob;
+     * &#x60;user_query&#x60; is the natural-language query it answers. | |
+     * &#x60;ALWAYS_APPLY_RULES&#x60; | &#x60;rules&#x60; — required, non-empty list of non-empty
+     * strings | Data-model-wide always-apply rules. At most one &#x60;ALWAYS_APPLY_RULES&#x60; item
+     * per data-model. | ##### Identifying data-models (&#x60;datamodel_sources&#x60;) Each item
+     * must list at least one source. Each entry identifies a data-model by at least one of: -
+     * &#x60;guid&#x60; — the data-model GUID. - &#x60;obj_id&#x60; — a stable object ID, resolved
+     * to a GUID server-side. If both are supplied, &#x60;obj_id&#x60; takes precedence and
+     * &#x60;guid&#x60; is ignored entirely; &#x60;guid&#x60; takes effect only when
+     * &#x60;obj_id&#x60; is absent. Exported files populate &#x60;guid&#x60; and, if present,
+     * &#x60;obj_id&#x60; as well. &gt; ⚠️ **Cross-environment import:** When &#x60;obj_id&#x60; is
+     * present it is &gt; authoritative — the accompanying &#x60;guid&#x60; is **not** used as a
+     * fallback. &gt; If an &#x60;obj_id&#x60; does not exist in the target environment, that item
+     * &gt; fails with &#x60;UNRESOLVED_SOURCE&#x60;. Remove or correct stale &#x60;obj_id&#x60;
+     * &gt; values before importing across environments. #### Validations reference The payload is
+     * fully validated before anything is written. This applies to &#x60;dry_run &#x3D; true&#x60;
+     * and &#x60;dry_run &#x3D; false&#x60; alike: if any item fails validation, the entire import
+     * is rejected — no partial writes — and all failures are returned together so you can fix them
+     * in one pass. ##### Limits Default limits (may be adjusted in future if the need arises): |
+     * Limit | Default | |-------|---------| | Uploaded file size | 10 MiB | | Total memory items |
+     * 10,000 | | &#x60;rule_definition&#x60; length | 1,000 characters | | &#x60;user_query&#x60;
+     * length | 1,000 characters | | &#x60;recipe&#x60; length | 2,000 characters | |
+     * &#x60;rules&#x60; combined length (&#x60;ALWAYS_APPLY_RULES&#x60;) | 2,000 characters | |
+     * Tags per item | 10 | | Characters per tag | 50 | The &#x60;rules&#x60; limit in
+     * &#x60;ALWAYS_APPLY_RULES&#x60; is a combined budget across all entries in the list, not per
+     * entry. ##### Structural rules - The document must be a mapping with a &#x60;memories&#x60;
+     * key whose value is a list. - Unknown keys — at the top level, within an item, or under
+     * &#x60;content&#x60; — are rejected. - Each item&#39;s &#x60;type&#x60; must be one of the
+     * three supported values, and &#x60;content&#x60; must match that type&#39;s shape. - Null,
+     * empty-string, or wrong-typed values in a required field are treated as missing. - Non-string
+     * or empty &#x60;tags&#x60; entries are dropped silently; certain tags reserved for internal
+     * use are stripped automatically before the item is stored. ##### Cross-item rules - A
+     * data-model referenced by more than one &#x60;ALWAYS_APPLY_RULES&#x60; item is rejected —
+     * combine them into a single item&#39;s &#x60;rules&#x60; list. ##### Failure reasons Each
+     * entry in &#x60;validation_failures&#x60; carries one of: | Reason | Meaning |
+     * |--------|---------| | &#x60;SCHEMA&#x60; | YAML structure is invalid or unsupported. | |
+     * &#x60;VALIDATION&#x60; | A required field is missing/empty, a count exceeds a limit, or a
+     * GUID is malformed. | | &#x60;CHAR_LIMIT&#x60; | A content field or tag exceeds its size
+     * limit. | | &#x60;UNRESOLVED_SOURCE&#x60; | A &#x60;guid&#x60; or &#x60;obj_id&#x60; could not
+     * be resolved to an existing data-model. | | &#x60;ACCESS_DENIED&#x60; | The caller lacks
+     * sufficient access on the referenced data-model. | #### Dry run &#x60;dry_run&#x60; is
+     * required and has no default, so the import is always a deliberate two-step flow: 1. **First,
+     * call with &#x60;dry_run &#x3D; true&#x60;.** This validates the payload and previews what
+     * would happen — the counts in &#x60;summary&#x60; and any &#x60;validation_failures&#x60; —
+     * without writing anything. 2. **Then, after reviewing a clean preview, call again with
+     * &#x60;dry_run &#x3D; false&#x60;** (same &#x60;content&#x60;). This applies the import. It
+     * refuses to write when any item fails validation, so fix the reported
+     * &#x60;validation_failures&#x60; and resubmit. &gt; ###### Important: &gt; Never call
+     * &#x60;dry_run &#x3D; false&#x60; without first inspecting a &#x60;dry_run &#x3D; true&#x60;
+     * preview. A real import deletes and replaces existing global memories on the referenced
+     * data-models. #### Error responses | Code | Description |
+     * |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+     * | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * Forbidden — the authenticated user does not have the necessary Spotter permissions, or the
+     * bearer token does not correspond to the data-model&#39;s org. Per-data-model access failures
+     * do not use this code — they surface as &#x60;ACCESS_DENIED&#x60; validation failures with
+     * HTTP &#x60;200&#x60; (see Logical failures below). | #### Logical failures Validation and
+     * write failures are not returned in the error envelope. The call returns &#x60;200&#x60; with
+     * a terminal &#x60;status&#x60; of &#x60;VALIDATION_FAILED&#x60; or &#x60;FAILED&#x60;, and the
+     * details live in &#x60;validation_failures&#x60; / &#x60;diagnostics&#x60;: -
+     * **VALIDATION_FAILED** — one or more items failed schema/semantic validation; nothing was
+     * written. Inspect &#x60;validation_failures&#x60;, fix the items, and resubmit. - **FAILED** —
+     * the import did not complete. Inspect &#x60;diagnostics&#x60;: a &#x60;ROLLED_BACK&#x60; group
+     * means writing the new entries failed and any entries written before the failure were undone
+     * (existing memory is intact, no destructive change), while a &#x60;FAILURE&#x60; group carries
+     * another non-validation cause. Sample &#x60;VALIDATION_FAILED&#x60; responses (HTTP 200):
+     * **Invalid data-model (unresolved source):** &#x60;&#x60;&#x60;json { \&quot;status\&quot;:
+     * \&quot;VALIDATION_FAILED\&quot;, \&quot;summary\&quot;: null,
+     * \&quot;validation_failures\&quot;: [ { \&quot;line_number\&quot;: 2, \&quot;reason\&quot;:
+     * \&quot;UNRESOLVED_SOURCE\&quot;, \&quot;field_name\&quot;:
+     * \&quot;datamodel_sources[0].guid\&quot;, \&quot;message\&quot;: \&quot;unknown datamodel
+     * guid: 55555555-5555-5555-5555-555555555555\&quot; } ], \&quot;diagnostics\&quot;: [ {
+     * \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;, \&quot;messages\&quot;: [ \&quot;unknown
+     * datamodel guid: 55555555-5555-5555-5555-555555555555\&quot; ] } ],
+     * \&quot;operation_id\&quot;: null } &#x60;&#x60;&#x60; **Inaccessible data-models:**
+     * &#x60;&#x60;&#x60;json { \&quot;status\&quot;: \&quot;VALIDATION_FAILED\&quot;,
+     * \&quot;summary\&quot;: null, \&quot;validation_failures\&quot;: [ {
+     * \&quot;line_number\&quot;: 2, \&quot;reason\&quot;: \&quot;ACCESS_DENIED\&quot;,
+     * \&quot;field_name\&quot;: \&quot;datamodel_sources[0]\&quot;, \&quot;message\&quot;:
+     * \&quot;Insufficient permissions on datamodel
+     * &#39;44444444-4444-4444-4444-444444444444&#39;\&quot; }, { \&quot;line_number\&quot;: 8,
+     * \&quot;reason\&quot;: \&quot;ACCESS_DENIED\&quot;, \&quot;field_name\&quot;:
+     * \&quot;datamodel_sources[0]\&quot;, \&quot;message\&quot;: \&quot;Insufficient permissions on
+     * datamodel &#39;33333333-3333-3333-3333-333333333333&#39;\&quot; } ],
+     * \&quot;diagnostics\&quot;: [ { \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;,
+     * \&quot;messages\&quot;: [ \&quot;Memory import validation failed with 2 error(s):
+     * Insufficient permissions on datamodel &#39;44444444-4444-4444-4444-444444444444&#39;;
+     * Insufficient permissions on datamodel &#39;33333333-3333-3333-3333-333333333333&#39;\&quot; ]
+     * } ], \&quot;operation_id\&quot;: null } &#x60;&#x60;&#x60; **Character-limit validations:**
+     * &#x60;&#x60;&#x60;json { \&quot;status\&quot;: \&quot;VALIDATION_FAILED\&quot;,
+     * \&quot;summary\&quot;: [], \&quot;validation_failures\&quot;: [ { \&quot;line_number\&quot;:
+     * 3, \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.rule_definition\&quot;, \&quot;message\&quot;: \&quot;content.rule_definition
+     * is 1073 characters; max allowed is 1000\&quot; }, { \&quot;line_number\&quot;: 49,
+     * \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.user_query\&quot;, \&quot;message\&quot;: \&quot;content.user_query is 1150
+     * characters; max allowed is 1000\&quot; }, { \&quot;line_number\&quot;: 49,
+     * \&quot;reason\&quot;: \&quot;CHAR_LIMIT\&quot;, \&quot;field_name\&quot;:
+     * \&quot;content.recipe\&quot;, \&quot;message\&quot;: \&quot;content.recipe is 3574
+     * characters; max allowed is 2000\&quot; } ], \&quot;diagnostics\&quot;: [ {
+     * \&quot;sub_status\&quot;: \&quot;FAILURE\&quot;, \&quot;messages\&quot;: [ \&quot;Validation
+     * failures present; fix them and re-run to see the DRY_RUN preview.\&quot; ] } ],
+     * \&quot;operation_id\&quot;: \&quot;66666666-6666-6666-6666-666666666666\&quot; }
+     * &#x60;&#x60;&#x60; &gt; ###### Note: &gt; - To use this API, the user needs Spotter access
+     * (use/manage) and either edit or memory access on the data-model and they must use
+     * corresponding org related bearerToken where the data-model exists. &gt; - This endpoint is
+     * currently in Beta. Breaking changes may be introduced before the endpoint is made Generally
+     * Available. &gt; - Available from version 26.8.0.cl and later. &gt; - This endpoint requires
+     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void importMemoryTest() throws ApiException {
+        ImportMemoryRequest importMemoryRequest = null;
+        ImportMemoryResponse response = api.importMemory(importMemoryRequest);
         // TODO: test validations
     }
 
@@ -3377,9 +3615,12 @@ public class ThoughtSpotRestApiTest {
      * Search options * **name_pattern**: Use &#39;%&#39; as a wildcard character to match
      * collection names * **collection_identifiers**: Search for specific collections by their GUIDs
      * or names * **include_metadata**: When set to &#x60;true&#x60;, includes the metadata objects
-     * within each collection in the response **NOTE**: If the API returns an empty list, consider
-     * increasing the value of the &#x60;record_size&#x60; parameter. To search across all available
-     * collections, set &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     * within each collection in the response **NOTE**: In addition to the GUID and name,
+     * &#x60;collection_identifiers&#x60; accepts a Custom object ID if one is configured for the
+     * collection. The response also includes the &#x60;obj_id&#x60; field for each collection that
+     * has one set. **NOTE**: If the API returns an empty list, consider increasing the value of the
+     * &#x60;record_size&#x60; parameter. To search across all available collections, set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60;.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3510,10 +3751,14 @@ public class ThoughtSpotRestApiTest {
      * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
      * supported on Snowflake connections only. - To include more details about connection objects
      * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
-     * the output by field names and filter connections by tags. **NOTE**: When filtering connection
-     * records by parameters other than &#x60;data_warehouse_types&#x60; or
-     * &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60;
-     * and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.
+     * the output by field names and filter connections by tags. **NOTE**: In addition to the
+     * connection GUID and name, the &#x60;identifier&#x60; field on each entry in
+     * &#x60;connections&#x60; accepts a Custom object ID if one is configured for the connection.
+     * The response also includes the &#x60;obj_id&#x60; field for each connection that has one set.
+     * **NOTE**: When filtering connection records by parameters other than
+     * &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure that you set
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60; for
+     * precise results.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3607,14 +3852,18 @@ public class ThoughtSpotRestApiTest {
      * value is true. - For liveboard metadata type, to get the newer format, set the
      * &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects
      * that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value
-     * is false. **NOTE**: The following parameters support pagination of metadata records: -
-     * &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; -
-     * &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; -
-     * &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; -
-     * &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; -
-     * &#x60;include_only_published_objects&#x60; If you are using other parameters to search
-     * metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to
-     * &#x60;0&#x60;.
+     * is false. **NOTE**: &#x60;obj_identifier&#x60; is supported for the following object types:
+     * &#x60;LIVEBOARD&#x60;, &#x60;ANSWER&#x60;, &#x60;LOGICAL_TABLE&#x60;,
+     * &#x60;LOGICAL_COLUMN&#x60;, &#x60;CONNECTION&#x60;, &#x60;USER_GROUP&#x60;,
+     * &#x60;COLLECTION&#x60;. The response includes the &#x60;metadata_obj_id&#x60; field for
+     * objects that have a Custom object ID set. **NOTE**: The following parameters support
+     * pagination of metadata records: - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; -
+     * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
+     * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
+     * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
+     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
+     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3648,7 +3897,10 @@ public class ThoughtSpotRestApiTest {
      * enabled on your instance. To search for Roles, the &#x60;ROLE_ADMINISTRATION&#x60; (**Can
      * manage roles**) privilege is required. To get details of a specific Role object, specify the
      * GUID or name. You can also filter the API response based on user group and Org identifiers,
-     * privileges assigned to the Role, and deprecation status.
+     * privileges assigned to the Role, and deprecation status. **NOTE**: In addition to the GUID
+     * and name, &#x60;role_identifiers&#x60; accepts a Custom object ID if one is configured for
+     * the role. The response also includes the &#x60;obj_id&#x60; field for each role that has one
+     * set.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3763,9 +4015,11 @@ public class ThoughtSpotRestApiTest {
      * Available to all users. Users with &#x60;ADMINISTRATION&#x60; (**Can administer
      * ThoughtSpot**) privileges can view all users properties. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: If
-     * you do not get precise results, try setting &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: In
+     * addition to the GUID and name, &#x60;group_identifier&#x60; accepts a Custom object ID if one
+     * is configured for the group. The response also includes the &#x60;obj_id&#x60; field for each
+     * group that has one set. **NOTE**: If you do not get precise results, try setting
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3913,7 +4167,7 @@ public class ThoughtSpotRestApiTest {
         String conversationIdentifier = null;
         SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest =
                 null;
-        SendAgentMessageResponse response =
+        InputStream response =
                 api.sendAgentConversationMessageStreaming(
                         conversationIdentifier, sendAgentConversationMessageStreamingRequest);
         // TODO: test validations
@@ -3994,8 +4248,7 @@ public class ThoughtSpotRestApiTest {
     @Test
     public void sendAgentMessageStreamingTest() throws ApiException {
         SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest = null;
-        SendAgentMessageResponse response =
-                api.sendAgentMessageStreaming(sendAgentMessageStreamingRequest);
+        InputStream response = api.sendAgentMessageStreaming(sendAgentMessageStreamingRequest);
         // TODO: test validations
     }
 

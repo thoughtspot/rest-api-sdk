@@ -743,9 +743,11 @@ public class GroupsApi {
      * Available to all users. Users with &#x60;ADMINISTRATION&#x60; (**Can administer
      * ThoughtSpot**) privileges can view all users properties. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: If
-     * you do not get precise results, try setting &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: In
+     * addition to the GUID and name, &#x60;group_identifier&#x60; accepts a Custom object ID if one
+     * is configured for the group. The response also includes the &#x60;obj_id&#x60; field for each
+     * group that has one set. **NOTE**: If you do not get precise results, try setting
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchUserGroupsRequest (required)
      * @return List&lt;UserGroupResponse&gt;
@@ -777,9 +779,11 @@ public class GroupsApi {
      * Available to all users. Users with &#x60;ADMINISTRATION&#x60; (**Can administer
      * ThoughtSpot**) privileges can view all users properties. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: If
-     * you do not get precise results, try setting &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: In
+     * addition to the GUID and name, &#x60;group_identifier&#x60; accepts a Custom object ID if one
+     * is configured for the group. The response also includes the &#x60;obj_id&#x60; field for each
+     * group that has one set. **NOTE**: If you do not get precise results, try setting
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchUserGroupsRequest (required)
      * @return ApiResponse&lt;List&lt;UserGroupResponse&gt;&gt;
@@ -813,8 +817,10 @@ public class GroupsApi {
      * administer ThoughtSpot**) privileges can view all users properties. If [Role-Based Access
      * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
      * the &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**:
-     * If you do not get precise results, try setting &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * In addition to the GUID and name, &#x60;group_identifier&#x60; accepts a Custom object ID if
+     * one is configured for the group. The response also includes the &#x60;obj_id&#x60; field for
+     * each group that has one set. **NOTE**: If you do not get precise results, try setting
+     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
      *
      * @param searchUserGroupsRequest (required)
      * @param _callback The callback to be executed when the API call finishes

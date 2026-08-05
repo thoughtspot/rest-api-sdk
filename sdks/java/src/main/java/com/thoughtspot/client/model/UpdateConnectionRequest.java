@@ -53,7 +53,7 @@ public class UpdateConnectionRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_DATA_WAREHOUSE_CONFIG)
     @javax.annotation.Nullable
-    private Object dataWarehouseConfig;
+    private Object dataWarehouseConfig = null;
 
     public static final String SERIALIZED_NAME_VALIDATE = "validate";
 

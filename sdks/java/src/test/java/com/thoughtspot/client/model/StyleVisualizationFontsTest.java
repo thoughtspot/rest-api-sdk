@@ -27,4 +27,10 @@ public class StyleVisualizationFontsTest {
     public void tableVisualizationFontsTest() {
         // TODO: test tableVisualizationFonts
     }
+
+    /** Test the property 'advancedChartVisualizationFonts' */
+    @Test
+    public void advancedChartVisualizationFontsTest() {
+        // TODO: test advancedChartVisualizationFonts
+    }
 }

@@ -35,7 +35,7 @@ public class ErrorResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_ERROR)
     @javax.annotation.Nullable
-    private Object error;
+    private Object error = null;
 
     public ErrorResponse() {}
 

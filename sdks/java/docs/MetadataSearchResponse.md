@@ -35,6 +35,7 @@ Metadata Search Response Object.
 | USER_GROUP | &quot;USER_GROUP&quot; |
 | LOGICAL_RELATIONSHIP | &quot;LOGICAL_RELATIONSHIP&quot; |
 | INSIGHT_SPEC | &quot;INSIGHT_SPEC&quot; |
+| COLLECTION | &quot;COLLECTION&quot; |
 
 
 ## Implemented Interfaces

@@ -50,7 +50,7 @@ public class UserGroupResponse implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_CONTENT)
     @javax.annotation.Nullable
-    private Object content;
+    private Object content = null;
 
     public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
 

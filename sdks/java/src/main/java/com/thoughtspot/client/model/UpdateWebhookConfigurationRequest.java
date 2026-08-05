@@ -19,11 +19,13 @@ import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /** UpdateWebhookConfigurationRequest */
 @javax.annotation.Generated(
@@ -54,7 +56,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
 
     @SerializedName(SERIALIZED_NAME_URL_PARAMS)
     @javax.annotation.Nullable
-    private Object urlParams;
+    private Object urlParams = null;
 
     /** Gets or Sets events */
     @JsonAdapter(EventsEnum.Adapter.class)
@@ -191,6 +193,65 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
     @SerializedName(SERIALIZED_NAME_STATUS)
     @javax.annotation.Nullable
     private StatusEnum status;
+
+    /** Gets or Sets resetOptions */
+    @JsonAdapter(ResetOptionsEnum.Adapter.class)
+    public enum ResetOptionsEnum {
+        AUTHENTICATION("AUTHENTICATION"),
+
+        SIGNATURE_VERIFICATION("SIGNATURE_VERIFICATION"),
+
+        STORAGE_DESTINATION("STORAGE_DESTINATION");
+
+        private String value;
+
+        ResetOptionsEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static ResetOptionsEnum fromValue(String value) {
+            for (ResetOptionsEnum b : ResetOptionsEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<ResetOptionsEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final ResetOptionsEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public ResetOptionsEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return ResetOptionsEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            ResetOptionsEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_RESET_OPTIONS = "reset_options";
+
+    @SerializedName(SERIALIZED_NAME_RESET_OPTIONS)
+    @javax.annotation.Nullable
+    private List<ResetOptionsEnum> resetOptions;
 
     public UpdateWebhookConfigurationRequest() {}
 
@@ -424,6 +485,38 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         this.status = status;
     }
 
+    public UpdateWebhookConfigurationRequest resetOptions(
+            @javax.annotation.Nullable List<ResetOptionsEnum> resetOptions) {
+        this.resetOptions = resetOptions;
+        return this;
+    }
+
+    public UpdateWebhookConfigurationRequest addResetOptionsItem(
+            ResetOptionsEnum resetOptionsItem) {
+        if (this.resetOptions == null) {
+            this.resetOptions = new ArrayList<>();
+        }
+        this.resetOptions.add(resetOptionsItem);
+        return this;
+    }
+
+    /**
+     * List of optional configuration sections to clear. Each value removes the corresponding
+     * configuration entirely from the webhook: AUTHENTICATION removes the authentication config,
+     * SIGNATURE_VERIFICATION removes the signature verification config, STORAGE_DESTINATION removes
+     * the storage destination config. Version: 26.7.0.cl or later
+     *
+     * @return resetOptions
+     */
+    @javax.annotation.Nullable
+    public List<ResetOptionsEnum> getResetOptions() {
+        return resetOptions;
+    }
+
+    public void setResetOptions(@javax.annotation.Nullable List<ResetOptionsEnum> resetOptions) {
+        this.resetOptions = resetOptions;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -494,9 +587,19 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 && Objects.equals(
                         this.additionalHeaders, updateWebhookConfigurationRequest.additionalHeaders)
                 && Objects.equals(this.status, updateWebhookConfigurationRequest.status)
+                && Objects.equals(this.resetOptions, updateWebhookConfigurationRequest.resetOptions)
                 && Objects.equals(
                         this.additionalProperties,
                         updateWebhookConfigurationRequest.additionalProperties);
+    }
+
+    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+        return a == b
+                || (a != null
+                        && b != null
+                        && a.isPresent()
+                        && b.isPresent()
+                        && Objects.deepEquals(a.get(), b.get()));
     }
 
     @Override
@@ -512,7 +615,15 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 storageDestination,
                 additionalHeaders,
                 status,
+                resetOptions,
                 additionalProperties);
+    }
+
+    private static <T> int hashCodeNullable(JsonNullable<T> a) {
+        if (a == null) {
+            return 1;
+        }
+        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override
@@ -535,6 +646,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 .append(toIndentedString(additionalHeaders))
                 .append("\n");
         sb.append("    status: ").append(toIndentedString(status)).append("\n");
+        sb.append("    resetOptions: ").append(toIndentedString(resetOptions)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -569,6 +681,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         openapiFields.add("storage_destination");
         openapiFields.add("additional_headers");
         openapiFields.add("status");
+        openapiFields.add("reset_options");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -674,6 +787,16 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         // validate the optional field `status`
         if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
             StatusEnum.validateJsonElement(jsonObj.get("status"));
+        }
+        // ensure the optional json data is an array if present
+        if (jsonObj.get("reset_options") != null
+                && !jsonObj.get("reset_options").isJsonNull()
+                && !jsonObj.get("reset_options").isJsonArray()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `reset_options` to be an array in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("reset_options").toString()));
         }
     }
 

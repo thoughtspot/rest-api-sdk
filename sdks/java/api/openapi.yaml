@@ -286,6 +286,305 @@ paths:
       - ThoughtSpotRest
       x-accepts:
       - application/json
+  /api/rest/2.0/ai/memory/export:
+    post:
+      description: "\nExports memory entries (rules, recipes, and always-apply rules)\
+        \ for\nthe specified data-models as a single YAML payload. The payload can\n\
+        be edited locally and re-submitted through `importMemory`.\nRequires Spotter\
+        \ access (use/manage) and either edit or memory\naccess on corresponding data\
+        \ model sources. \n Version: 26.8.0.cl or later\n\n\nThis API allows users\
+        \ to export data-model memories for a given list of data-models. This exported\
+        \ yaml file can then be modified and used as input to the import API in target\
+        \ env.\n\nThis API enables customers to migrate memories from a source env\
+        \ to a target env. This improves memory adoption for Spotter by giving the\
+        \ users a chance to develop their memories in one env and replicate the same\
+        \ in another env.\n\n#### Usage guidelines\n\nTo export memory for one or\
+        \ more data-models, the request may include:\n- `sources`: A list of typed\
+        \ scope groups identifying which data-models to export memory for. Each group\
+        \ contains:\n  - `type`: The source object type for this group — `DATA_MODEL`.\n\
+        \  - `identifiers`: An array of GUIDs or human-readable `obj_id`s of the data-models\
+        \ to export memory for. obj_ids are resolved server-side before forwarding.\n\
+        \nThe API returns a response object with:\n- `content`: The serialized memory\
+        \ payload (YAML) — exactly the shape that the `importMemory` API consumes.\
+        \ Edit it locally and pass it back through `importMemory` to apply changes.\n\
+        \n#### Source Type\n\n- **DATA_MODEL**: The `identifiers` are data-model GUIDs.\
+        \ This is the default source type for Spotter memory and covers the rules,\
+        \ recipes and always-apply rules attached directly to a data-model.\n\n####\
+        \ File format\n\nThe exported `content` is a YAML document with a single top-level\
+        \ `memories` key holding a list of memory items — exactly the format the `importMemory`\
+        \ API consumes. The full format reference (an annotated example, memory item\
+        \ fields, per-type content, and `datamodel_sources` identification) is documented\
+        \ in the `importMemory` API's **File format** section. Exported files populate\
+        \ each source's `guid` and, if present, `obj_id` as well.\n\n#### Error responses\n\
+        \n| Code | Description                                                   \
+        \                                                                        \
+        \                                                       |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n\
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.\
+        \                                                                        \
+        \                                                 |\n| 403  | Forbidden —\
+        \ the authenticated user does not have necessary permissions, or lacks read\
+        \ access on a referenced data-model, or the bearer token does not correspond\
+        \ to the data-model's org. |\n\n> ###### Note:\n> - To use this API, the user\
+        \ needs Spotter access (use/manage) and either edit or memory access on the\
+        \ data-model and they must use corresponding org related bearerToken where\
+        \ the data-model exists.\n> - This endpoint is currently in Beta. Breaking\
+        \ changes may be introduced before the endpoint is made Generally Available.\n\
+        > - Available from version 26.8.0.cl and later.\n> - This endpoint requires\
+        \ Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\
+        \n\n\n\n\n"
+      operationId: exportMemory
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportMemoryRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Serialized YAML memory payload returned
+                  value:
+                    content: |
+                      memories:
+                      - type: RULE
+                        content:
+                          rule_definition: "Earnings: total sales filtered to West region only."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition: "Geographic data is organized in a three-level hierarchy from broadest to most specific: Region (highest level) → State (middle level) → County (lowest level). This hierarchical structure enables progressive drill-down analysis, where each level provides increasingly granular geographic segmentation for sales and quantity metrics."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition: "Hot products: top 5 products by total sales (no region filter applied)."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: Calculate earnings for East region current year
+                          recipe: "{\"task\": \"Compute earnings by extracting sales and filtering to East region for the current year\", \"steps\": [{\"instruction\": \"Extract sales, then apply a filter for current year and a filter for East region.\", \"analytical_mappings\": {\"tml_tokens\": [\"[sales] [date] = 'this year' [region] = 'east'\"], \"formulas\": []}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: Total sales for East region current year
+                          recipe: "{\"task\": \"Compute total sales filtered to East region for the current year\", \"steps\": [{\"instruction\": \"Calculate total sales where region is East and date is current year.\", \"analytical_mappings\": {\"tml_tokens\": [\"[sales] [date] = 'this year' [region] = 'east'\"], \"formulas\": []}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: What is the total quantity purchased by city and region?
+                          recipe: "{\"task\":\"Calculate total quantity purchased grouped by city and region\",\"steps\":[{\"instruction\":\"Sum the quantity purchased metric and group the results by city and region to show purchasing volumes across different geographic locations\",\"analytical_mappings\":{\"tml_tokens\":[\"[quantity purchased] [city] [region]\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: What were total jacket sales in 2024?
+                          recipe: "{\"task\":\"Compute the aggregate 2024 jacket sales revenue.\",\"steps\":[{\"instruction\":\"Shows the total sales revenue for jackets in 2024. This provides a high-level metric to understand overall jacket sales performance for the year.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [item type] = [item type].\\\"jackets\\\" [date] = \\\"2024\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: How are monthly sales and quantity tracking by state?
+                          recipe: "{\"task\":\"Aggregate monthly sales and quantity by state for a state-level performance view.\",\"steps\":[{\"instruction\":\"Shows monthly sales and quantity purchased metrics organized by state. Provides a state-wise view of sales performance with additional dimensional context.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [state] [date]\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: "What's the quarterly sales and quantity by region and state for the last 3 years, with yearly rollups?"
+                          recipe: "{\"task\":\"Build a 3-year quarterly view of sales and quantity grouped by region and state, with quarterly and yearly aggregation.\",\"steps\":[{\"instruction\":\"Displays quarterly performance metrics including sales and quantity purchased, broken down by region and state over the last 3 years. Enables analysis of regional and state-level trends with both quarterly and yearly views.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [region] [state] [date].\\\"quarterly\\\" [date].\\\"last 3 years\\\" [date].\\\"yearly\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: How are we doing against quarterly sales and quantity targets per region?
+                          recipe: "{\"task\":\"Render bullet charts contrasting quarterly actual vs target sales and quantity per region.\",\"steps\":[{\"instruction\":\"Compares actual quarterly sales and quantity metrics against targets by region using bullet charts. Provides a target vs actual performance view to track progress.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [region] [date].\\\"quarterly\\\" [Target sales] [Target quantity]\"],\"formulas\":[\"{\\\"name\\\": \\\"Target sales\\\", \\\"expression\\\": \\\"random ( ) * sum ( sales ) * 2\\\"}\",\"{\\\"name\\\": \\\"Target quantity\\\", \\\"expression\\\": \\\"random ( ) * sum ( quantity purchased  ) * 2\\\"}\"]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                example_2:
+                  summary: Serialized YAML memory payload returned
+                  value:
+                    content: |
+                      memories:
+                      - type: RULE
+                        content:
+                          rule_definition: "Earnings: total sales filtered to West region only."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition: "Hot products: top 5 products by total sales (no region filter applied)."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition: "Geographic data is organized in a three-level hierarchy from broadest to most specific: Region (highest level) → State (middle level) → County (lowest level). This hierarchical structure enables progressive drill-down analysis, where each level provides increasingly granular geographic segmentation for sales and quantity metrics."
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition: "When analyzing quantity purchased, apply a date filter for the last 3 years."
+                        datamodel_sources:
+                        - guid: 44444444-4444-4444-4444-444444444444
+                          obj_id: sample-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition:  User's total sales target is 1 million USD.
+                        datamodel_sources:
+                        - guid: 44444444-4444-4444-4444-444444444444
+                          obj_id: sample-model
+                        tags: []
+                      - type: RULE
+                        content:
+                          rule_definition:  Sales analyses must filter to east region only.
+                        datamodel_sources:
+                        - guid: 44444444-4444-4444-4444-444444444444
+                          obj_id: sample-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: Calculate earnings for East region current year
+                          recipe: "{\"task\": \"Compute earnings by extracting sales and filtering to East region for the current year\", \"steps\": [{\"instruction\": \"Extract sales, then apply a filter for current year and a filter for East region.\", \"analytical_mappings\": {\"tml_tokens\": [\"[sales] [date] = 'this year' [region] = 'east'\"], \"formulas\": []}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: Total sales for East region current year
+                          recipe: "{\"task\": \"Compute total sales filtered to East region for the current year\", \"steps\": [{\"instruction\": \"Calculate total sales where region is East and date is current year.\", \"analytical_mappings\": {\"tml_tokens\": [\"[sales] [date] = 'this year' [region] = 'east'\"], \"formulas\": []}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: What is the total quantity purchased by city and region?
+                          recipe: "{\"task\":\"Calculate total quantity purchased grouped by city and region\",\"steps\":[{\"instruction\":\"Sum the quantity purchased metric and group the results by city and region to show purchasing volumes across different geographic locations\",\"analytical_mappings\":{\"tml_tokens\":[\"[quantity purchased] [city] [region]\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: "What's the quarterly sales and quantity by region and state for the last 3 years, with yearly rollups?"
+                          recipe: "{\"task\":\"Build a 3-year quarterly view of sales and quantity grouped by region and state, with quarterly and yearly aggregation.\",\"steps\":[{\"instruction\":\"Displays quarterly performance metrics including sales and quantity purchased, broken down by region and state over the last 3 years. Enables analysis of regional and state-level trends with both quarterly and yearly views.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [region] [state] [date].\\\"quarterly\\\" [date].\\\"last 3 years\\\" [date].\\\"yearly\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: How are we doing against quarterly sales and quantity targets per region?
+                          recipe: "{\"task\":\"Render bullet charts contrasting quarterly actual vs target sales and quantity per region.\",\"steps\":[{\"instruction\":\"Compares actual quarterly sales and quantity metrics against targets by region using bullet charts. Provides a target vs actual performance view to track progress.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [region] [date].\\\"quarterly\\\" [Target sales] [Target quantity]\"],\"formulas\":[\"{\\\"name\\\": \\\"Target sales\\\", \\\"expression\\\": \\\"random ( ) * sum ( sales ) * 2\\\"}\",\"{\\\"name\\\": \\\"Target quantity\\\", \\\"expression\\\": \\\"random ( ) * sum ( quantity purchased  ) * 2\\\"}\"]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: How are monthly sales and quantity tracking by state?
+                          recipe: "{\"task\":\"Aggregate monthly sales and quantity by state for a state-level performance view.\",\"steps\":[{\"instruction\":\"Shows monthly sales and quantity purchased metrics organized by state. Provides a state-wise view of sales performance with additional dimensional context.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [state] [date]\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: What were total jacket sales in 2024?
+                          recipe: "{\"task\":\"Compute the aggregate 2024 jacket sales revenue.\",\"steps\":[{\"instruction\":\"Shows the total sales revenue for jackets in 2024. This provides a high-level metric to understand overall jacket sales performance for the year.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [item type] = [item type].\\\"jackets\\\" [date] = \\\"2024\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 33333333-3333-3333-3333-333333333333
+                          obj_id: sales-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: What were jacket sales by region in 2024?
+                          recipe: "{\"task\":\"Break out 2024 jacket sales revenue by region to compare regional performance.\",\"steps\":[{\"instruction\":\"Shows jacket sales revenue broken down by region for 2024. This helps identify which geographic regions are performing best in jacket sales and enables regional performance comparison.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] by [region] [item type] = [item type].\\\"jackets\\\" [date] = \\\"2024\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 44444444-4444-4444-4444-444444444444
+                          obj_id: sample-model
+                        tags: []
+                      - type: RECIPE
+                        content:
+                          user_query: "Show me quarterly sales and quantity trends over the past 3 years, newest first."
+                          recipe: "{\"task\":\"Plot quarterly sales and quantity trends for the past 3 years in reverse chronological order.\",\"steps\":[{\"instruction\":\"Presents quarterly sales and quantity purchased trends over the last 3 years, sorted by most recent periods first. Enables time-based analysis of sales performance.\",\"analytical_mappings\":{\"tml_tokens\":[\"[sales] [quantity purchased] [date].\\\"quarterly\\\" [date].\\\"last 3 years\\\"\"],\"formulas\":[]}}]}"
+                        datamodel_sources:
+                        - guid: 44444444-4444-4444-4444-444444444444
+                          obj_id: sample-model
+                        tags: []
+              schema:
+                $ref: '#/components/schemas/ExportMemoryResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportMemoryResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/agent/instructions/get:
     get:
       description: |2+
@@ -1024,6 +1323,312 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/ai/memory/import:
+    post:
+      description: "\nImports memory entries (rules, recipes, and always-apply rules)\
+        \ from\na YAML payload, typically a payload produced by `exportMemory` and\n\
+        edited locally. The imported entries replace the existing memory for\nthe\
+        \ data-models referenced in the payload.\n`dry_run` is required. Pass `true`\
+        \ first to validate the payload and\nreview the preview counts and any row-level\
+        \ failures without making\nchanges, then re-run with `dry_run = false` to\
+        \ apply the import. An\nimport is not applied if any row fails validation.\n\
+        Requires Spotter access (use/manage) and either edit or memory\naccess on\
+        \ corresponding data model sources. \n Version: 26.8.0.cl or later\n\n\nThis\
+        \ API allows users to import data-model memories using a given yaml file.\
+        \ This yaml file can be obtained from the export memory API in source env\
+        \ and can be modified and used as input to the import API in target env.\n\
+        \nThis API enables customers to migrate memories from a source env to a target\
+        \ env. This improves memory adoption for Spotter by giving the users a chance\
+        \ to develop their memories in one env and replicate the same in another env.\n\
+        \n#### Usage guidelines\n\nTo import memory, the request must include:\n-\
+        \ `content`: The full serialized memory payload to import (YAML). Typically\
+        \ the `content` value returned by the `exportMemory` API, edited locally and\
+        \ re-submitted. The payload itself identifies which data-models the memory\
+        \ applies to, so no separate identifier list is required.\n- `dry_run`: Required.\
+        \ When `true`, validate the payload and return preview counts without writing\
+        \ anything; when `false`, apply the import. Always run with `dry_run = true`\
+        \ first, then re-run with `dry_run = false` once you are satisfied with the\
+        \ preview.\n\nThe import replaces the existing global memories on the data-models\
+        \ referenced in the payload with the entries supplied in the payload.\n\n\
+        The API returns a response object with:\n- `status`: The terminal status of\
+        \ the import (`SUCCESS`, `VALIDATION_FAILED`, or `FAILED`).\n- `summary`:\
+        \ Per `(memory_type, source)` counts. In a dry run the `deleted_record_count`/`inserted_record_count`\
+        \ are previews; in a real import they are actuals. On `VALIDATION_FAILED`,\
+        \ `summary` is `null` when validation fails before any item is processed (e.g.\
+        \ an unresolved or inaccessible data-model source) and an empty list otherwise\
+        \ — treat both as \"no counts available\".\n- `validation_failures`: Per-item\
+        \ validation failures, each with `line_number`, `reason`, `field_name`, and\
+        \ `message` for click-to-locate and inline highlighting.\n- `diagnostics`:\
+        \ Groups of diagnostic messages, each with a `sub_status` (`WARNING`, `FAILURE`,\
+        \ `ROLLED_BACK`, or `UNKNOWN`) and a `messages` list. This is the single channel\
+        \ for both non-fatal warnings (under `WARNING`, e.g. when some older memory\
+        \ entries could not be fully cleaned up) and fatal causes (e.g. the failure\
+        \ reason under `FAILURE`, or a `ROLLED_BACK` group when new entries were undone).\n\
+        - `operation_id`: A server-generated identifier for this import operation;\
+        \ include it when contacting support to help correlate server-side logs. Populated\
+        \ once the server registers the import operation; `null` when the request\
+        \ fails earlier (e.g. while parsing the payload or resolving its data-model\
+        \ sources).\n\n#### File format\n\nThe payload is a YAML document with a single\
+        \ top-level `memories` key holding a list of memory items. Each item is self-contained:\
+        \ a `type`, a typed `content` block, a `datamodel_sources` list, and optional\
+        \ `tags`. Typically you don't hand-author this file — you obtain it from `exportMemory`,\
+        \ edit it, and submit it back through `importMemory`.\n\n```yaml\nmemories:\n\
+        - type: RULE\n  content:\n    rule_definition: \"Always filter revenue to\
+        \ closed-won deals.\"\n  datamodel_sources:\n  - guid: 11111111-1111-1111-1111-111111111111\n\
+        \    obj_id: sales_data_model\n  tags:\n  - finance\n- type: RULE\n  content:\n\
+        \    rule_definition: \"Exclude internal test accounts from all results.\"\
+        \n  datamodel_sources:\n  - obj_id: sales_data_model\n- type: RECIPE\n  content:\n\
+        \    user_query: \"top accounts by revenue\"\n    recipe: |\n      {\"steps\"\
+        : [...serialized recipe blob...]}\n  datamodel_sources:\n  - obj_id: sales_data_model\n\
+        - type: RECIPE\n  content:\n    user_query: \"monthly new customer count\"\
+        \n    recipe: |\n      {\"steps\": [...serialized recipe blob...]}\n  datamodel_sources:\n\
+        \  - obj_id: sales_data_model\n- type: ALWAYS_APPLY_RULES\n  content:\n  \
+        \  rules:\n    - \"Never show internal test accounts.\"\n    - \"Round currency\
+        \ to whole dollars.\"\n  datamodel_sources:\n  - guid: 22222222-2222-2222-2222-222222222222\n\
+        ```\n\nA file can contain multiple `RULE` and multiple `RECIPE` items for\
+        \ a data-model, but at most one `ALWAYS_APPLY_RULES` item per data-model.\n\
+        \n##### Memory item fields\n\n| Field | Required | Type | Description |\n\
+        |-------|----------|------|-------------|\n| `type` | Yes | String enum |\
+        \ One of `RULE`, `RECIPE`, or `ALWAYS_APPLY_RULES`. |\n| `content` | Yes |\
+        \ Mapping | Type-specific content block (see below). |\n| `datamodel_sources`\
+        \ | Yes | Non-empty list | The data-model(s) the memory attaches to. |\n|\
+        \ `tags` | No | List of strings | Free-form labels. |\n\n##### Memory types\
+        \ and content\n\n| `type` | Content fields | Notes |\n|--------|----------------|-------|\n\
+        | `RULE` | `rule_definition` — required, non-empty string | A single semantic\
+        \ rule. |\n| `RECIPE` | `recipe` and `user_query` — both required, non-empty\
+        \ strings | `recipe` is an opaque serialized blob; `user_query` is the natural-language\
+        \ query it answers. |\n| `ALWAYS_APPLY_RULES` | `rules` — required, non-empty\
+        \ list of non-empty strings | Data-model-wide always-apply rules. At most\
+        \ one `ALWAYS_APPLY_RULES` item per data-model. |\n\n##### Identifying data-models\
+        \ (`datamodel_sources`)\n\nEach item must list at least one source. Each entry\
+        \ identifies a data-model by at least one of:\n- `guid` — the data-model GUID.\n\
+        - `obj_id` — a stable object ID, resolved to a GUID server-side.\n\nIf both\
+        \ are supplied, `obj_id` takes precedence and `guid` is ignored entirely;\
+        \ `guid` takes effect only when `obj_id` is absent. Exported files populate\
+        \ `guid` and, if present, `obj_id` as well.\n\n> ⚠️ **Cross-environment import:**\
+        \ When `obj_id` is present it is\n> authoritative — the accompanying `guid`\
+        \ is **not** used as a fallback.\n> If an `obj_id` does not exist in the target\
+        \ environment, that item\n> fails with `UNRESOLVED_SOURCE`. Remove or correct\
+        \ stale `obj_id`\n> values before importing across environments.\n\n#### Validations\
+        \ reference\n\nThe payload is fully validated before anything is written.\
+        \ This applies to `dry_run = true` and `dry_run = false` alike: if any item\
+        \ fails validation, the entire import is rejected — no partial writes — and\
+        \ all failures are returned together so you can fix them in one pass.\n\n\
+        ##### Limits\n\nDefault limits (may be adjusted in future if the need arises):\n\
+        \n| Limit | Default |\n|-------|---------|\n| Uploaded file size | 10 MiB\
+        \ |\n| Total memory items | 10,000 |\n| `rule_definition` length | 1,000 characters\
+        \ |\n| `user_query` length | 1,000 characters |\n| `recipe` length | 2,000\
+        \ characters |\n| `rules` combined length (`ALWAYS_APPLY_RULES`) | 2,000 characters\
+        \ |\n| Tags per item | 10 |\n| Characters per tag | 50 |\n\nThe `rules` limit\
+        \ in `ALWAYS_APPLY_RULES` is a combined budget across all entries in the list,\
+        \ not per entry.\n\n##### Structural rules\n\n- The document must be a mapping\
+        \ with a `memories` key whose value is a list.\n- Unknown keys — at the top\
+        \ level, within an item, or under `content` — are rejected.\n- Each item's\
+        \ `type` must be one of the three supported values, and `content` must match\
+        \ that type's shape.\n- Null, empty-string, or wrong-typed values in a required\
+        \ field are treated as missing.\n- Non-string or empty `tags` entries are\
+        \ dropped silently; certain tags reserved for internal use are stripped automatically\
+        \ before the item is stored.\n\n##### Cross-item rules\n\n- A data-model referenced\
+        \ by more than one `ALWAYS_APPLY_RULES` item is rejected — combine them into\
+        \ a single item's `rules` list.\n\n##### Failure reasons\n\nEach entry in\
+        \ `validation_failures` carries one of:\n\n| Reason | Meaning |\n|--------|---------|\n\
+        | `SCHEMA` | YAML structure is invalid or unsupported. |\n| `VALIDATION` |\
+        \ A required field is missing/empty, a count exceeds a limit, or a GUID is\
+        \ malformed. |\n| `CHAR_LIMIT` | A content field or tag exceeds its size limit.\
+        \ |\n| `UNRESOLVED_SOURCE` | A `guid` or `obj_id` could not be resolved to\
+        \ an existing data-model. |\n| `ACCESS_DENIED` | The caller lacks sufficient\
+        \ access on the referenced data-model. |\n\n#### Dry run\n\n`dry_run` is required\
+        \ and has no default, so the import is always a deliberate two-step flow:\n\
+        \n1. **First, call with `dry_run = true`.** This validates the payload and\
+        \ previews what would happen — the counts in `summary` and any `validation_failures`\
+        \ — without writing anything.\n2. **Then, after reviewing a clean preview,\
+        \ call again with `dry_run = false`** (same `content`). This applies the import.\
+        \ It refuses to write when any item fails validation, so fix the reported\
+        \ `validation_failures` and resubmit.\n\n> ###### Important:\n> Never call\
+        \ `dry_run = false` without first inspecting a `dry_run = true` preview. A\
+        \ real import deletes and replaces existing global memories on the referenced\
+        \ data-models.\n\n#### Error responses\n\n| Code | Description           \
+        \                                                                        \
+        \                                                                        \
+        \                       |\n|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n\
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.\
+        \                                                                        \
+        \                                                |\n| 403  | Forbidden — the\
+        \ authenticated user does not have the necessary Spotter permissions, or the\
+        \ bearer token does not correspond to the data-model's org. Per-data-model\
+        \ access failures do not use this code — they surface as `ACCESS_DENIED` validation\
+        \ failures with HTTP `200` (see Logical failures below). |\n\n#### Logical\
+        \ failures\n\nValidation and write failures are not returned in the error\
+        \ envelope. The call returns `200` with a terminal `status` of `VALIDATION_FAILED`\
+        \ or `FAILED`, and the details live in `validation_failures` / `diagnostics`:\n\
+        \n- **VALIDATION_FAILED** — one or more items failed schema/semantic validation;\
+        \ nothing was written. Inspect `validation_failures`, fix the items, and resubmit.\n\
+        - **FAILED** — the import did not complete. Inspect `diagnostics`: a `ROLLED_BACK`\
+        \ group means writing the new entries failed and any entries written before\
+        \ the failure were undone (existing memory is intact, no destructive change),\
+        \ while a `FAILURE` group carries another non-validation cause.\n\nSample\
+        \ `VALIDATION_FAILED` responses (HTTP 200):\n\n**Invalid data-model (unresolved\
+        \ source):**\n\n```json\n{\n    \"status\": \"VALIDATION_FAILED\",\n    \"\
+        summary\": null,\n    \"validation_failures\": [\n        {\n            \"\
+        line_number\": 2,\n            \"reason\": \"UNRESOLVED_SOURCE\",\n      \
+        \      \"field_name\": \"datamodel_sources[0].guid\",\n            \"message\"\
+        : \"unknown datamodel guid: 55555555-5555-5555-5555-555555555555\"\n     \
+        \   }\n    ],\n    \"diagnostics\": [\n        {\n            \"sub_status\"\
+        : \"FAILURE\",\n            \"messages\": [\n                \"unknown datamodel\
+        \ guid: 55555555-5555-5555-5555-555555555555\"\n            ]\n        }\n\
+        \    ],\n    \"operation_id\": null\n}\n```\n\n**Inaccessible data-models:**\n\
+        \n```json\n{\n    \"status\": \"VALIDATION_FAILED\",\n    \"summary\": null,\n\
+        \    \"validation_failures\": [\n        {\n            \"line_number\": 2,\n\
+        \            \"reason\": \"ACCESS_DENIED\",\n            \"field_name\": \"\
+        datamodel_sources[0]\",\n            \"message\": \"Insufficient permissions\
+        \ on datamodel '44444444-4444-4444-4444-444444444444'\"\n        },\n    \
+        \    {\n            \"line_number\": 8,\n            \"reason\": \"ACCESS_DENIED\"\
+        ,\n            \"field_name\": \"datamodel_sources[0]\",\n            \"message\"\
+        : \"Insufficient permissions on datamodel '33333333-3333-3333-3333-333333333333'\"\
+        \n        }\n    ],\n    \"diagnostics\": [\n        {\n            \"sub_status\"\
+        : \"FAILURE\",\n            \"messages\": [\n                \"Memory import\
+        \ validation failed with 2 error(s): Insufficient permissions on datamodel\
+        \ '44444444-4444-4444-4444-444444444444'; Insufficient permissions on datamodel\
+        \ '33333333-3333-3333-3333-333333333333'\"\n            ]\n        }\n   \
+        \ ],\n    \"operation_id\": null\n}\n```\n\n**Character-limit validations:**\n\
+        \n```json\n{\n    \"status\": \"VALIDATION_FAILED\",\n    \"summary\": [],\n\
+        \    \"validation_failures\": [\n        {\n            \"line_number\": 3,\n\
+        \            \"reason\": \"CHAR_LIMIT\",\n            \"field_name\": \"content.rule_definition\"\
+        ,\n            \"message\": \"content.rule_definition is 1073 characters;\
+        \ max allowed is 1000\"\n        },\n        {\n            \"line_number\"\
+        : 49,\n            \"reason\": \"CHAR_LIMIT\",\n            \"field_name\"\
+        : \"content.user_query\",\n            \"message\": \"content.user_query is\
+        \ 1150 characters; max allowed is 1000\"\n        },\n        {\n        \
+        \    \"line_number\": 49,\n            \"reason\": \"CHAR_LIMIT\",\n     \
+        \       \"field_name\": \"content.recipe\",\n            \"message\": \"content.recipe\
+        \ is 3574 characters; max allowed is 2000\"\n        }\n    ],\n    \"diagnostics\"\
+        : [\n        {\n            \"sub_status\": \"FAILURE\",\n            \"messages\"\
+        : [\n                \"Validation failures present; fix them and re-run to\
+        \ see the DRY_RUN preview.\"\n            ]\n        }\n    ],\n    \"operation_id\"\
+        : \"66666666-6666-6666-6666-666666666666\"\n}\n```\n\n> ###### Note:\n> -\
+        \ To use this API, the user needs Spotter access (use/manage) and either edit\
+        \ or memory access on the data-model and they must use corresponding org related\
+        \ bearerToken where the data-model exists.\n> - This endpoint is currently\
+        \ in Beta. Breaking changes may be introduced before the endpoint is made\
+        \ Generally Available.\n> - Available from version 26.8.0.cl and later.\n\
+        > - This endpoint requires Spotter — please contact ThoughtSpot Support to\
+        \ enable Spotter on your cluster.\n\n\n\n\n\n"
+      operationId: importMemory
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportMemoryRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Successful dry-run preview
+                  value:
+                    status: SUCCESS
+                    summary:
+                    - memory_type: RULES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 3
+                      deleted_record_count: 3
+                      inserted_record_count: 2
+                      failed_record_count: 0
+                    - memory_type: RECIPES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 7
+                      deleted_record_count: 7
+                      inserted_record_count: 4
+                      failed_record_count: 0
+                    - memory_type: ALWAYS_APPLY_RULES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 0
+                      deleted_record_count: 0
+                      inserted_record_count: 1
+                      failed_record_count: 0
+                    validation_failures: []
+                    diagnostics: []
+                    operation_id: 77777777-7777-7777-7777-777777777777
+                example_2:
+                  summary: Successful import (dry_run=false)
+                  value:
+                    status: SUCCESS
+                    summary:
+                    - memory_type: RULES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 3
+                      deleted_record_count: 3
+                      inserted_record_count: 2
+                      failed_record_count: 0
+                    - memory_type: RECIPES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 7
+                      deleted_record_count: 7
+                      inserted_record_count: 4
+                      failed_record_count: 0
+                    - memory_type: ALWAYS_APPLY_RULES
+                      source:
+                        identifier: 33333333-3333-3333-3333-333333333333
+                        type: DATA_MODEL
+                      existing_record_count: 0
+                      deleted_record_count: 0
+                      inserted_record_count: 1
+                      failed_record_count: 0
+                    validation_failures: []
+                    diagnostics: []
+                    operation_id: 88888888-8888-8888-8888-888888888888
+              schema:
+                $ref: '#/components/schemas/ImportMemoryResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportMemoryResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details:
     get:
       description: "\nLoads the full answer payload for a specific answer item in\
@@ -1369,14 +1974,12 @@ paths:
 
                         The visualization shows the side-by-side comparison of total sales (in USD) between the two years, allowing you to see the year-over-year performance. You can see the sales figures for both 2024 and 2025, making it easy to identify growth or decline trends in your retail apparel business.
                       agent_context: ""
-              schema:
-                type: object
+              schema: {}
           description: Common successful response
         "201":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Common error response
         "400":
           content:
@@ -1544,6 +2147,7 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+      x-streaming: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1612,14 +2216,12 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Common successful response
         "201":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Common error response
         "400":
           content:
@@ -1748,6 +2350,7 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+      x-streaming: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2648,7 +3251,7 @@ paths:
         You can generate a token by providing a `username` and `password`, or by using a `secret_key`. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.
 
         **Note**:
-        * When both `password` and `secret_key` are included in the API request, `password` takes precedence.
+        * When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.
         * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username`  and `password` returns an error. You can switch to token-based authentication with  `secret_key`  or contact ThoughtSpot Support for assistance.
 
         The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.
@@ -2826,7 +3429,7 @@ paths:
         You can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.
 
         **Note**:
-        * When both `password` and `secret_key` are included in the API request, `password` takes precedence.
+        * When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.
         * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with  `secret_key` or contact ThoughtSpot Support for assistance.
 
         The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.
@@ -2979,7 +3582,7 @@ paths:
         You can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.
 
         **Note**:
-        * When both `password` and `secret_key` are included in the API request, `password` takes precedence.
+        * When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.
         * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with `secret_key` or contact ThoughtSpot Support for assistance.
 
         The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.
@@ -3809,6 +4412,8 @@ paths:
         * **name_pattern**: Use '%' as a wildcard character to match collection names
         * **collection_identifiers**: Search for specific collections by their GUIDs or names
         * **include_metadata**: When set to `true`, includes the metadata objects within each collection in the response
+
+        **NOTE**: In addition to the GUID and name, `collection_identifiers` accepts a Custom object ID if one is configured for the collection. The response also includes the `obj_id` field for each collection that has one set.
 
         **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.
 
@@ -4775,6 +5380,8 @@ paths:
           - `OAUTH_CLIENT_CREDENTIALS`: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.
         - To include more details about connection objects in the API response, set `include_details` to `true`.
         - You can also sort the output by field names and filter connections by tags.
+
+        **NOTE**: In addition to the connection GUID and name, the `identifier` field on each entry in `connections` accepts a Custom object ID if one is configured for the connection. The response also includes the `obj_id` field for each connection that has one set.
 
         **NOTE**: When filtering connection records by parameters other than `data_warehouse_types` or `tag_identifiers`, ensure that you set `record_size` to `-1` and `record_offset` to `0` for precise results.
 
@@ -5870,8 +6477,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: "Generate custom calendar data based on specifications, as\
             \ a CSV file."
         "400":
@@ -6277,8 +6883,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Succesfully created DBT Connection.
         "400":
           content:
@@ -6342,8 +6947,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Sync Table and Worksheet TML's are successfully generated.
         "400":
           content:
@@ -6410,8 +7014,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Required Table and Worksheet TML's are successfully generated.
         "400":
           content:
@@ -6603,8 +7206,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: DBT Connection successfully updated.
         "400":
           content:
@@ -7229,6 +7831,8 @@ paths:
 
         If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.
 
+        **NOTE**: In addition to the GUID and name, `group_identifier` accepts a Custom object ID if one is configured for the group. The response also includes the `obj_id` field for each group that has one set.
+
         **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.
 
 
@@ -7728,8 +8332,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Translation bundle retrieved successfully.
         "400":
           content:
@@ -8049,8 +8652,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  type: object
+                items: {}
                 type: array
           description: Export TMLs of specified metadata objects is successful.
         "400":
@@ -8122,8 +8724,7 @@ paths:
         "200":
           content:
             application/json:
-              schema:
-                type: object
+              schema: {}
           description: Export TMLs of specified metadata objects is successful.
         "400":
           content:
@@ -8410,8 +9011,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  type: object
+                items: {}
                 type: array
           description: Import metadata objects using specified TMLs is successful.
         "400":
@@ -8649,6 +9249,8 @@ paths:
         - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true.
         - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1.
         - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.
+
+        **NOTE**: `obj_identifier` is supported for the following object types: `LIVEBOARD`, `ANSWER`, `LOGICAL_TABLE`, `LOGICAL_COLUMN`, `CONNECTION`, `USER_GROUP`, `COLLECTION`. The response includes the `metadata_obj_id` field for objects that have a Custom object ID set.
 
         **NOTE**: The following parameters support pagination of metadata records:
 
@@ -9479,6 +10081,8 @@ paths:
         Available if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance. To search for Roles, the `ROLE_ADMINISTRATION` (**Can manage roles**) privilege is required.
 
         To get details of a specific Role object, specify the GUID or name. You can also filter the API response based on user group and Org identifiers, privileges assigned to the Role, and deprecation status.
+
+        **NOTE**: In addition to the GUID and name, `role_identifiers` accepts a Custom object ID if one is configured for the role. The response also includes the `obj_id` field for each role that has one set.
 
 
 
@@ -15668,11 +16272,10 @@ components:
   schemas:
     ErrorResponse:
       example:
-        error: "{}"
+        error: ""
       properties:
         error:
           nullable: true
-          type: object
       type: object
     GetTokenResponse:
       example:
@@ -15860,7 +16463,7 @@ components:
           id: 6
         owner_id: owner_id
         deprecated: true
-        access_control_properties: "{}"
+        access_control_properties: ""
         modification_time_in_millis: 2.302136
         account_status: ACTIVE
         home_liveboard:
@@ -15877,11 +16480,11 @@ components:
         super_user: true
         id: id
         system_user: true
-        incomplete_details: "{}"
-        extended_preferences: "{}"
+        incomplete_details: ""
+        extended_preferences: ""
         email: email
         welcome_email_sent: true
-        org_privileges: "{}"
+        org_privileges: ""
         visibility: SHARABLE
         display_name: display_name
         parent_type: USER
@@ -15895,10 +16498,10 @@ components:
         show_onboarding_experience: true
         is_first_login: true
         external: true
-        user_parameters: "{}"
+        user_parameters: ""
         deleted: true
-        extended_properties: "{}"
-        variable_values: "{}"
+        extended_properties: ""
+        variable_values: ""
         name: name
         modifier_id: modifier_id
         complete_detail: true
@@ -16017,7 +16620,6 @@ components:
         incomplete_details:
           description: Incomplete details of user if any present.
           nullable: true
-          type: object
         is_first_login:
           description: Indicates whether it is first login of the user.
           nullable: true
@@ -16104,7 +16706,6 @@ components:
         org_privileges:
           description: Privileges which are assigned to the user with org.
           nullable: true
-          type: object
         preferred_locale:
           description: Locale for the user.
           nullable: true
@@ -16119,24 +16720,19 @@ components:
         extended_properties:
           description: Properties for the user
           nullable: true
-          type: object
         extended_preferences:
           description: Preferences for the user
           nullable: true
-          type: object
         user_parameters:
           description: User Parameters which are specified for the user via JWToken
           nullable: true
-          type: object
         access_control_properties:
           description: Access Control Properties which are specified for the user
             via JWToken
           nullable: true
-          type: object
         variable_values:
           description: Formula Variables which are specified for the user via JWToken
           nullable: true
-          type: object
       required:
       - display_name
       - id
@@ -16386,11 +16982,10 @@ components:
       type: object
     SystemOverrideInfo:
       example:
-        config_override_info: "{}"
+        config_override_info: ""
       properties:
         config_override_info:
           nullable: true
-          type: object
       type: object
     OrgPreferenceSearchCriteriaInput:
       example:
@@ -16996,7 +17591,7 @@ components:
         description: description
         modification_time_in_millis: 2.302136
         type: LOCAL_GROUP
-        content: "{}"
+        content: ""
         index_version: 5
         sub_groups:
         - name: name
@@ -17044,7 +17639,6 @@ components:
         content:
           description: Content details of the group
           nullable: true
-          type: object
         creation_time_in_millis:
           description: Creation time of the group in milliseconds
           format: float
@@ -17237,6 +17831,7 @@ components:
             8. USER_GROUP for group objects.
             9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values
             10. INSIGHT_SPEC for SpotIQ objects
+            11. COLLECTION for collection objects
           enum:
           - LIVEBOARD
           - ANSWER
@@ -17248,6 +17843,7 @@ components:
           - USER_GROUP
           - LOGICAL_RELATIONSHIP
           - INSIGHT_SPEC
+          - COLLECTION
           nullable: true
           type: string
         subtypes:
@@ -17309,6 +17905,7 @@ components:
             8. USER_GROUP for group objects
             9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.
             10. INSIGHT_SPEC for SpotIQ objects
+            11. COLLECTION for collection objects
           enum:
           - LIVEBOARD
           - ANSWER
@@ -17320,6 +17917,7 @@ components:
           - USER_GROUP
           - LOGICAL_RELATIONSHIP
           - INSIGHT_SPEC
+          - COLLECTION
           type: string
       required:
       - identifier
@@ -17369,16 +17967,16 @@ components:
       description: Metadata Search Response Object.
       example:
         metadata_name: metadata_name
-        dependent_objects: "{}"
-        metadata_detail: "{}"
-        metadata_header: "{}"
+        dependent_objects: ""
+        metadata_detail: ""
+        metadata_header: ""
         visualization_headers:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         incomplete_objects:
-        - "{}"
-        - "{}"
-        stats: "{}"
+        - ""
+        - ""
+        stats: ""
         metadata_type: LIVEBOARD
         metadata_id: metadata_id
         metadata_obj_id: metadata_obj_id
@@ -17404,6 +18002,7 @@ components:
           - USER_GROUP
           - LOGICAL_RELATIONSHIP
           - INSIGHT_SPEC
+          - COLLECTION
           type: string
         metadata_obj_id:
           description: |-
@@ -17414,32 +18013,26 @@ components:
         dependent_objects:
           description: Details of dependent objects of the metadata objects.
           nullable: true
-          type: object
         incomplete_objects:
           description: Details of incomplete information of the metadata objects if
             any.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
         metadata_detail:
           description: Complete details of the metadata objects.
           nullable: true
-          type: object
         metadata_header:
           description: Header information of the metadata objects.
           nullable: true
-          type: object
         visualization_headers:
           description: Visualization header information of the metadata objects.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
         stats:
           description: "Stats of the metadata object. Includes views, favorites, last_accessed."
           nullable: true
-          type: object
       required:
       - metadata_type
       type: object
@@ -17457,7 +18050,7 @@ components:
           object_processed_count: 2
           completed_at: 5.962134
           org_id: 0
-          import_response: "{}"
+          import_response: ""
           author_id: author_id
           modified_at: 7.0614014
           author_display_name: author_display_name
@@ -17472,7 +18065,7 @@ components:
           object_processed_count: 2
           completed_at: 5.962134
           org_id: 0
-          import_response: "{}"
+          import_response: ""
           author_id: author_id
           modified_at: 7.0614014
           author_display_name: author_display_name
@@ -17501,7 +18094,7 @@ components:
         object_processed_count: 2
         completed_at: 5.962134
         org_id: 0
-        import_response: "{}"
+        import_response: ""
         author_id: author_id
         modified_at: 7.0614014
         author_display_name: author_display_name
@@ -17527,7 +18120,6 @@ components:
         import_response:
           description: Response of imported objects so far.
           nullable: true
-          type: object
         task_status:
           description: Current status of the task.
           enum:
@@ -18108,19 +18700,17 @@ components:
       type: object
     PermissionOfPrincipalsResponse:
       example:
-        principal_permission_details: "{}"
+        principal_permission_details: ""
       properties:
         principal_permission_details:
           nullable: true
-          type: object
       type: object
     PermissionOfMetadataResponse:
       example:
-        metadata_permission_details: "{}"
+        metadata_permission_details: ""
       properties:
         metadata_permission_details:
           nullable: true
-          type: object
       type: object
     ObjectPrivilegesMetadataInput:
       example:
@@ -18143,11 +18733,10 @@ components:
       type: object
     ObjectPrivilegesOfMetadataResponse:
       example:
-        metadata_object_privileges: "{}"
+        metadata_object_privileges: ""
       properties:
         metadata_object_privileges:
           nullable: true
-          type: object
       type: object
     PrincipalsInput:
       example:
@@ -18328,8 +18917,8 @@ components:
       example:
         contents:
         - data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18339,8 +18928,8 @@ components:
           returned_data_row_count: 5
           record_offset: 6
         - data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18361,8 +18950,8 @@ components:
     AnswerContent:
       example:
         data_rows:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         record_size: 1
         available_data_row_count: 0
         sampling_ratio: 5.637377
@@ -18383,8 +18972,7 @@ components:
           type: array
         data_rows:
           description: Rows of data set.
-          items:
-            type: object
+          items: {}
           type: array
         record_offset:
           description: The starting record number from where the records should be
@@ -18421,8 +19009,8 @@ components:
         contents:
         - visualization_id: visualization_id
           data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18434,8 +19022,8 @@ components:
           record_offset: 6
         - visualization_id: visualization_id
           data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18467,8 +19055,8 @@ components:
       example:
         visualization_id: visualization_id
         data_rows:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         record_size: 1
         available_data_row_count: 0
         sampling_ratio: 5.637377
@@ -18490,8 +19078,7 @@ components:
           type: array
         data_rows:
           description: Rows of data set.
-          items:
-            type: object
+          items: {}
           type: array
         record_offset:
           description: The starting record number from where the records should be
@@ -18536,8 +19123,8 @@ components:
         metadata_name: metadata_name
         contents:
         - data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18547,8 +19134,8 @@ components:
           returned_data_row_count: 5
           record_offset: 6
         - data_rows:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -18787,8 +19374,8 @@ components:
           - schemas:
             - tables:
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18808,8 +19395,8 @@ components:
                 selected: true
                 linked: true
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18831,8 +19418,8 @@ components:
               name: name
             - tables:
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18852,8 +19439,8 @@ components:
                 selected: true
                 linked: true
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18878,8 +19465,8 @@ components:
           - schemas:
             - tables:
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18899,8 +19486,8 @@ components:
                 selected: true
                 linked: true
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18922,8 +19509,8 @@ components:
               name: name
             - tables:
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18943,8 +19530,8 @@ components:
                 selected: true
                 linked: true
               - relationships:
-                - "{}"
-                - "{}"
+                - ""
+                - ""
                 columns:
                 - is_aggregate: is_aggregate
                   can_import: true
@@ -18968,7 +19555,7 @@ components:
             auto_created: true
         name: name
         description: description
-        details: "{}"
+        details: ""
         id: id
         data_warehouse_type: SNOWFLAKE
       properties:
@@ -19025,7 +19612,6 @@ components:
         details:
           description: Details of the connection.
           nullable: true
-          type: object
       required:
       - data_warehouse_type
       - id
@@ -19037,8 +19623,8 @@ components:
         - schemas:
           - tables:
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19058,8 +19644,8 @@ components:
               selected: true
               linked: true
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19081,8 +19667,8 @@ components:
             name: name
           - tables:
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19102,8 +19688,8 @@ components:
               selected: true
               linked: true
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19128,8 +19714,8 @@ components:
         - schemas:
           - tables:
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19149,8 +19735,8 @@ components:
               selected: true
               linked: true
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19172,8 +19758,8 @@ components:
             name: name
           - tables:
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19193,8 +19779,8 @@ components:
               selected: true
               linked: true
             - relationships:
-              - "{}"
-              - "{}"
+              - ""
+              - ""
               columns:
               - is_aggregate: is_aggregate
                 can_import: true
@@ -19230,8 +19816,8 @@ components:
         schemas:
         - tables:
           - relationships:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             columns:
             - is_aggregate: is_aggregate
               can_import: true
@@ -19251,8 +19837,8 @@ components:
             selected: true
             linked: true
           - relationships:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             columns:
             - is_aggregate: is_aggregate
               can_import: true
@@ -19274,8 +19860,8 @@ components:
           name: name
         - tables:
           - relationships:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             columns:
             - is_aggregate: is_aggregate
               can_import: true
@@ -19295,8 +19881,8 @@ components:
             selected: true
             linked: true
           - relationships:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             columns:
             - is_aggregate: is_aggregate
               can_import: true
@@ -19339,8 +19925,8 @@ components:
       example:
         tables:
         - relationships:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           columns:
           - is_aggregate: is_aggregate
             can_import: true
@@ -19360,8 +19946,8 @@ components:
           selected: true
           linked: true
         - relationships:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           columns:
           - is_aggregate: is_aggregate
             can_import: true
@@ -19397,8 +19983,8 @@ components:
     Table:
       example:
         relationships:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         columns:
         - is_aggregate: is_aggregate
           can_import: true
@@ -19445,8 +20031,7 @@ components:
           type: boolean
         relationships:
           description: List of relationships for the table
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
       required:
@@ -19495,7 +20080,7 @@ components:
         - UNKNOWN
         - UNKNOWN
         groups_assigned_count: 0
-        creation_time_in_millis: "{}"
+        creation_time_in_millis: ""
         hidden: true
         deprecated: true
         description: description
@@ -19505,7 +20090,7 @@ components:
         - name: name
           id: id
         permission: READ_ONLY
-        modification_time_in_millis: "{}"
+        modification_time_in_millis: ""
         external: true
         deleted: true
         name: name
@@ -19625,11 +20210,9 @@ components:
         creation_time_in_millis:
           description: Creation time of the role in milliseconds.
           nullable: true
-          type: object
         modification_time_in_millis:
           description: Last modified time of the role in milliseconds.
           nullable: true
-          type: object
         deleted:
           description: Indicates whether the role is deleted.
           nullable: true
@@ -20385,35 +20968,35 @@ components:
         - expired: true
           file_type: file_type
           file_id: file_id
-          created_time_in_millis: "{}"
+          created_time_in_millis: ""
           display_name: display_name
         - expired: true
           file_type: file_type
           file_id: file_id
-          created_time_in_millis: "{}"
+          created_time_in_millis: ""
           display_name: display_name
         messages:
         - response_items:
-          - "{}"
-          - "{}"
-          timestamp_in_millis: "{}"
+          - ""
+          - ""
+          timestamp_in_millis: ""
           message_id: message_id
           user_prompt:
             attachments:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             message:
               message_id: message_id
               content: content
         - response_items:
-          - "{}"
-          - "{}"
-          timestamp_in_millis: "{}"
+          - ""
+          - ""
+          timestamp_in_millis: ""
           message_id: message_id
           user_prompt:
             attachments:
-            - "{}"
-            - "{}"
+            - ""
+            - ""
             message:
               message_id: message_id
               content: content
@@ -20440,14 +21023,14 @@ components:
         followed by the agent's response items for that turn.
       example:
         response_items:
-        - "{}"
-        - "{}"
-        timestamp_in_millis: "{}"
+        - ""
+        - ""
+        timestamp_in_millis: ""
         message_id: message_id
         user_prompt:
           attachments:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           message:
             message_id: message_id
             content: content
@@ -20459,15 +21042,13 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch for the turn.
-          type: object
         user_prompt:
           $ref: '#/components/schemas/UserPrompt'
         response_items:
           description: |-
             Agent-side output produced in response to this turn. Empty array for
             in-progress turns where the agent has not yet produced output.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
       required:
@@ -20480,8 +21061,8 @@ components:
         files or connector resources attached to it.
       example:
         attachments:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         message:
           message_id: message_id
           content: content
@@ -20492,8 +21073,7 @@ components:
           description: |-
             Files or connector resources attached to the user message. Empty array when
             there are no attachments.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
       type: object
@@ -20523,7 +21103,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20562,7 +21141,6 @@ components:
         created_time_in_millis:
           description: Milliseconds since Unix epoch when the file was created.
           nullable: true
-          type: object
         size_bytes:
           description: File size in bytes.
           format: int32
@@ -20581,7 +21159,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20649,7 +21226,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20694,7 +21270,6 @@ components:
         created_time_in_millis:
           description: Milliseconds since Unix epoch when the file was created.
           nullable: true
-          type: object
       required:
       - file_id
       type: object
@@ -20706,7 +21281,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20727,7 +21301,6 @@ components:
           type: string
         arguments:
           description: Input arguments passed to the tool. Shape depends on the tool.
-          type: object
       required:
       - arguments
       - timestamp_in_millis
@@ -20741,7 +21314,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20793,7 +21365,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20827,7 +21398,6 @@ components:
           type: string
         timestamp_in_millis:
           description: Milliseconds since Unix epoch when this item was produced.
-          type: object
         is_thinking:
           description: True when the item represents internal agent reasoning rather
             than user-facing output.
@@ -20883,16 +21453,14 @@ components:
           description: |-
             Related liveboard visualizations for this data source. Open-ended JSON shape
             driven by the underlying proto.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
         related_answers:
           description: |-
             Related saved answers for this data source. Open-ended JSON shape driven by
             the underlying proto.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
         related_spotter_queries:
@@ -20967,7 +21535,7 @@ components:
         expired: true
         file_type: file_type
         file_id: file_id
-        created_time_in_millis: "{}"
+        created_time_in_millis: ""
         display_name: display_name
       properties:
         file_id:
@@ -20988,7 +21556,6 @@ components:
         created_time_in_millis:
           description: Milliseconds since Unix epoch when the file was created.
           nullable: true
-          type: object
         expired:
           description: True when the file is no longer downloadable (storage expired
             or evicted).
@@ -21018,8 +21585,8 @@ components:
           - parameters
           - parameters
           sub_queries:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
       properties:
         answer:
           $ref: '#/components/schemas/AnswerDetails'
@@ -21044,8 +21611,8 @@ components:
         - parameters
         - parameters
         sub_queries:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
       properties:
         title:
           description: Display title of the answer.
@@ -21095,8 +21662,7 @@ components:
           type: array
         sub_queries:
           description: List of sub-queries used in the answer.
-          items:
-            type: object
+          items: {}
           nullable: true
           type: array
         ac_state:
@@ -21126,6 +21692,48 @@ components:
       required:
       - name
       - type
+      type: object
+    MemorySources:
+      description: |-
+        A single typed scope group identifying objects whose memory entries
+        should be exported. One group binds a single `type` to a set of
+        `identifiers`; pass one or more data-model identifiers in a group to
+        scope the memory export to multiple data-models in one call.
+      example:
+        identifiers:
+        - identifiers
+        - identifiers
+        type: DATA_MODEL
+      properties:
+        type:
+          description: Source object type for this group. Must be `DATA_MODEL`.
+          enum:
+          - DATA_MODEL
+          type: string
+        identifiers:
+          description: |-
+            Data-models to export memory for. Each entry may be a GUID or a
+            human-readable obj_id; obj_ids are resolved server-side.
+          items:
+            type: string
+          type: array
+      required:
+      - identifiers
+      - type
+      type: object
+    ExportMemoryResponse:
+      description: |-
+        Response from exportMemory. Contains the serialized payload
+        ready for local editing and re-submission to importMemory.
+      example:
+        content: content
+      properties:
+        content:
+          description: |-
+            Serialized memory payload (YAML). This is the shape
+            importMemory consumes.
+          nullable: true
+          type: string
       type: object
     VariableDetailInput:
       description: Input for variable details in search
@@ -21382,7 +21990,7 @@ components:
         policy_process_options:
           impersonate_user: impersonate_user
         configuration_identifier: configuration_identifier
-        configuration: "{}"
+        configuration: ""
         name: name
         same_as_parent: true
         description: description
@@ -21410,7 +22018,6 @@ components:
           type: string
         configuration:
           nullable: true
-          type: object
         policy_principals:
           items:
             $ref: '#/components/schemas/UserPrincipal'
@@ -21513,7 +22120,7 @@ components:
           aws_account_id: aws_account_id
           gcp_service_account_id: gcp_service_account_id
           oidc_provider: oidc_provider
-          trust_policy_template: "{}"
+          trust_policy_template: ""
           config_type: AWS_TO_S3_STORAGE
           service_account_email: service_account_email
           setup_instructions:
@@ -21549,7 +22156,7 @@ components:
         aws_account_id: aws_account_id
         gcp_service_account_id: gcp_service_account_id
         oidc_provider: oidc_provider
-        trust_policy_template: "{}"
+        trust_policy_template: ""
         config_type: AWS_TO_S3_STORAGE
         service_account_email: service_account_email
         setup_instructions:
@@ -21583,7 +22190,6 @@ components:
           description: Sample IAM trust policy JSON. Populated for AWS_TO_S3_STORAGE
             and GCP_TO_S3_STORAGE.
           nullable: true
-          type: object
         service_account_email:
           description: GCP service account email of the platform. Populated for GCP_TO_GCS_STORAGE.
             Grant it roles/iam.serviceAccountTokenCreator on your service account.
@@ -21667,7 +22273,7 @@ components:
                 bucket_name: bucket_name
                 service_account_email: service_account_email
                 path_prefix: path_prefix
-          url_params: "{}"
+          url_params: ""
           name: name
           id: id
           events:
@@ -21722,7 +22328,7 @@ components:
                 bucket_name: bucket_name
                 service_account_email: service_account_email
                 path_prefix: path_prefix
-          url_params: "{}"
+          url_params: ""
           name: name
           id: id
           events:
@@ -21791,7 +22397,7 @@ components:
               bucket_name: bucket_name
               service_account_email: service_account_email
               path_prefix: path_prefix
-        url_params: "{}"
+        url_params: ""
         name: name
         id: id
         events:
@@ -21829,7 +22435,6 @@ components:
         url_params:
           description: Additional URL parameters as key-value pairs.
           nullable: true
-          type: object
         events:
           description: List of events this webhook subscribes to.
           items:
@@ -22547,6 +23152,15 @@ components:
             font_id: font_id
             visualization_area: TABLE_VALUE_CELLS
             font_name: font_name
+          advanced_chart_visualization_fonts:
+          - is_overridden: true
+            font_id: font_id
+            visualization_area: ADVANCED_CHART_LABELS
+            font_name: font_name
+          - is_overridden: true
+            font_id: font_id
+            visualization_area: ADVANCED_CHART_LABELS
+            font_name: font_name
           chart_visualization_fonts:
           - is_overridden: true
             font_id: font_id
@@ -22753,6 +23367,15 @@ components:
           font_id: font_id
           visualization_area: TABLE_VALUE_CELLS
           font_name: font_name
+        advanced_chart_visualization_fonts:
+        - is_overridden: true
+          font_id: font_id
+          visualization_area: ADVANCED_CHART_LABELS
+          font_name: font_name
+        - is_overridden: true
+          font_id: font_id
+          visualization_area: ADVANCED_CHART_LABELS
+          font_name: font_name
         chart_visualization_fonts:
         - is_overridden: true
           font_id: font_id
@@ -22773,6 +23396,13 @@ components:
           description: Font assignments for table visualization areas.
           items:
             $ref: '#/components/schemas/TableVisualizationFontRecord'
+          nullable: true
+          type: array
+        advanced_chart_visualization_fonts:
+          description: "Font assignments for advanced chart visualization areas. \n\
+            \  Version: 26.7.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/AdvancedChartVisualizationFontRecord'
           nullable: true
           type: array
       type: object
@@ -22830,6 +23460,39 @@ components:
           description: Table visualization area.
           enum:
           - TABLE_VALUE_CELLS
+          nullable: true
+          type: string
+        font_id:
+          description: |-
+            UUID of the font assigned to this area. Null when the system default font
+            is active.
+          nullable: true
+          type: string
+        font_name:
+          description: |-
+            Display name of the font assigned to this area. Null when the system
+            default font is active.
+          nullable: true
+          type: string
+        is_overridden:
+          description: "True if explicitly set at this scope, overriding any inherited\
+            \ value."
+          nullable: true
+          type: boolean
+      type: object
+    AdvancedChartVisualizationFontRecord:
+      description: Font assignment for an advanced chart visualization area in the
+        response.
+      example:
+        is_overridden: true
+        font_id: font_id
+        visualization_area: ADVANCED_CHART_LABELS
+        font_name: font_name
+      properties:
+        visualization_area:
+          description: Advanced chart visualization area.
+          enum:
+          - ADVANCED_CHART_LABELS
           nullable: true
           type: string
         font_id:
@@ -22958,6 +23621,7 @@ components:
             - CHART_BAR_DATA_LABELS
             - CHART_AREA_DATA_LABELS
             - TABLE_VALUE_CELLS
+            - ADVANCED_CHART_LABELS
             type: string
           nullable: true
           type: array
@@ -22994,8 +23658,7 @@ components:
         *Deprecated in 9.12.0.cl. Use user_parameters instead.*
       properties:
         parameters:
-          items:
-            type: object
+          items: {}
           type: array
         metadata:
           items:
@@ -23009,15 +23672,12 @@ components:
         runtime_filter:
           description: Runtime filter parameter type in JWT.
           nullable: true
-          type: object
         runtime_sort:
           description: Runtime sort parameter type in JWT.
           nullable: true
-          type: object
         runtime_param_override:
           description: Runtime param override type in JWT.
           nullable: true
-          type: object
       type: object
     JWT_Metadata_Object:
       description: Metadata objects.
@@ -23308,8 +23968,8 @@ components:
       description: Filter Rules to be applied on Objects.
       example:
         values:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         column_name: column_name
         operator: EQ
       properties:
@@ -23340,8 +24000,7 @@ components:
         values:
           description: "The values to filter on. To get all records, use TS_WILDCARD_ALL\
             \ as values."
-          items:
-            type: object
+          items: {}
           type: array
       required:
       - column_name
@@ -23352,8 +24011,8 @@ components:
       description: Filter Rules to be applied on Objects.
       example:
         values:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         name: name
       properties:
         name:
@@ -23361,8 +24020,7 @@ components:
           type: string
         values:
           description: The values to filter on. Only single value is supported currently.
-          items:
-            type: object
+          items: {}
           type: array
       required:
       - name
@@ -23372,8 +24030,8 @@ components:
       description: Variable values.
       example:
         values:
-        - "{}"
-        - "{}"
+        - ""
+        - ""
         name: name
       properties:
         name:
@@ -23381,8 +24039,7 @@ components:
           type: string
         values:
           description: The values to filter on.
-          items:
-            type: object
+          items: {}
           type: array
       required:
       - name
@@ -24179,7 +24836,8 @@ components:
           nullable: true
           type: string
         privileges:
-          description: Privileges that will be assigned to the group.
+          description: "Privileges that will be assigned to the group. Note: AUTHORING\
+            \ is a no-op — always inherited via ALL_GROUP, assigning it has no effect."
           items:
             enum:
             - ADMINISTRATION
@@ -24615,6 +25273,7 @@ components:
           - DATA_SOURCE
           - USER
           - USER_GROUP
+          - COLLECTION
           nullable: true
           type: string
         attributes:
@@ -24665,6 +25324,7 @@ components:
           - DATA_SOURCE
           - USER
           - USER_GROUP
+          - COLLECTION
           nullable: true
           type: string
         current_obj_id:
@@ -24699,6 +25359,7 @@ components:
           - USER_GROUP
           - ROLE
           - FEEDBACK
+          - COLLECTION
           nullable: true
           type: string
         identifier:
@@ -25109,7 +25770,7 @@ components:
     CreateConnectionResponse:
       example:
         name: name
-        details: "{}"
+        details: ""
         id: id
         data_warehouse_type: SNOWFLAKE
       properties:
@@ -25160,7 +25821,6 @@ components:
         details:
           description: Details of the connection.
           nullable: true
-          type: object
       required:
       - data_warehouse_type
       - id
@@ -25235,7 +25895,7 @@ components:
         - USERDATAUPLOADING
         - USERDATAUPLOADING
         groups_assigned_count: 0
-        creation_time_in_millis: "{}"
+        creation_time_in_millis: ""
         hidden: true
         deprecated: true
         description: description
@@ -25245,7 +25905,7 @@ components:
         - name: name
           id: id
         permission: READ_ONLY
-        modification_time_in_millis: "{}"
+        modification_time_in_millis: ""
         external: true
         deleted: true
         name: name
@@ -25353,11 +26013,9 @@ components:
         creation_time_in_millis:
           description: Creation time of the role in milliseconds.
           nullable: true
-          type: object
         modification_time_in_millis:
           description: Last modified time of the role in milliseconds.
           nullable: true
-          type: object
         deleted:
           description: Indicates whether the role is deleted.
           nullable: true
@@ -25512,7 +26170,7 @@ components:
           name: name
           id: id
           type: LIVEBOARD
-        creation_time_in_millis: "{}"
+        creation_time_in_millis: ""
         author:
           name: name
           id: id
@@ -25570,7 +26228,6 @@ components:
           $ref: '#/components/schemas/Author'
         creation_time_in_millis:
           description: Schedule creation time in milliseconds.
-          type: object
         description:
           description: Description of the job.
           nullable: true
@@ -26398,6 +27055,240 @@ components:
       required:
       - success
       type: object
+    ImportMemoryResponse:
+      description: |-
+        Response from importMemory. On `SUCCESS`, `summary` is fully
+        populated. `diagnostics` carries any fatal errors, rollbacks, and
+        non-fatal warnings produced during the import.
+      example:
+        summary:
+        - existing_record_count: 0
+          failed_record_count: 5
+          memory_type: RULES
+          inserted_record_count: 1
+          deleted_record_count: 6
+          source:
+            identifier: identifier
+            type: DATA_MODEL
+        - existing_record_count: 0
+          failed_record_count: 5
+          memory_type: RULES
+          inserted_record_count: 1
+          deleted_record_count: 6
+          source:
+            identifier: identifier
+            type: DATA_MODEL
+        validation_failures:
+        - reason: UNKNOWN_FAILURE_REASON
+          line_number: 5
+          message: message
+          field_name: field_name
+        - reason: UNKNOWN_FAILURE_REASON
+          line_number: 5
+          message: message
+          field_name: field_name
+        diagnostics:
+        - sub_status: UNKNOWN
+          messages:
+          - messages
+          - messages
+        - sub_status: UNKNOWN
+          messages:
+          - messages
+          - messages
+        operation_id: operation_id
+        status: SUCCESS
+      properties:
+        status:
+          description: Terminal status of the import.
+          enum:
+          - SUCCESS
+          - VALIDATION_FAILED
+          - FAILED
+          type: string
+        summary:
+          description: |-
+            Per (memory type, target source) result entries. Null when the
+            import failed before any record processing occurred.
+          items:
+            $ref: '#/components/schemas/ImportSummary'
+          nullable: true
+          type: array
+        validation_failures:
+          description: |-
+            Per-item validation failure entries. Null when the import failed
+            before item validation could run.
+          items:
+            $ref: '#/components/schemas/ImportFailure'
+          nullable: true
+          type: array
+        diagnostics:
+          description: |-
+            Diagnostic message groups (errors, rollbacks, and non-fatal
+            warnings), each keyed by a `sub_status`. Null when the import
+            produced no diagnostics.
+          items:
+            $ref: '#/components/schemas/ImportDiagnostic'
+          nullable: true
+          type: array
+        operation_id:
+          description: |-
+            Server-generated identifier for this import operation. Include it in
+            support tickets to help correlate server-side logs.
+          nullable: true
+          type: string
+      required:
+      - status
+      type: object
+    ImportSummary:
+      description: |-
+        Per (memory type, target source) summary of what importMemory did — or
+        would do, in DRY_RUN. `deleted_record_count` and `inserted_record_count`
+        are previews in DRY_RUN and actuals in EXECUTE_IMPORT.
+      example:
+        existing_record_count: 0
+        failed_record_count: 5
+        memory_type: RULES
+        inserted_record_count: 1
+        deleted_record_count: 6
+        source:
+          identifier: identifier
+          type: DATA_MODEL
+      properties:
+        memory_type:
+          description: |-
+            The kind of memory (`RULES`, `RECIPES`, or `ALWAYS_APPLY_RULES`)
+            these counts apply to.
+          enum:
+          - RULES
+          - RECIPES
+          - ALWAYS_APPLY_RULES
+          nullable: true
+          type: string
+        source:
+          $ref: '#/components/schemas/ImportTargetSource'
+        existing_record_count:
+          description: |-
+            Number of memory entries of this type that already existed on the
+            target object before the import.
+          format: int32
+          nullable: true
+          type: integer
+        deleted_record_count:
+          description: |-
+            Number of existing entries that will be (DRY_RUN) or were
+            (EXECUTE_IMPORT) deleted as part of the replacement.
+          format: int32
+          nullable: true
+          type: integer
+        inserted_record_count:
+          description: |-
+            Number of entries from the payload that will be (DRY_RUN) or were
+            (EXECUTE_IMPORT) inserted.
+          format: int32
+          nullable: true
+          type: integer
+        failed_record_count:
+          description: Number of records of this type that failed validation or processing.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    ImportTargetSource:
+      description: |-
+        Identifies the target object a group of import counts applies to.
+        `type` is the source kind (`DATA_MODEL`) and `identifier` is
+        the object's GUID.
+      example:
+        identifier: identifier
+        type: DATA_MODEL
+      properties:
+        identifier:
+          description: Identifier (GUID) of the target object these counts apply to.
+          nullable: true
+          type: string
+        type:
+          description: Source object kind (`DATA_MODEL`).
+          enum:
+          - DATA_MODEL
+          nullable: true
+          type: string
+      type: object
+    ImportFailure:
+      description: |-
+        One per-item import failure surfaced by importMemory. `line_number` is
+        the best-effort line number in the uploaded YAML; `field_name` is a
+        dotted path within the item (e.g. `content.rule_definition`) for inline
+        highlighting; absent when the failure is item-level rather than field-level.
+      example:
+        reason: UNKNOWN_FAILURE_REASON
+        line_number: 5
+        message: message
+        field_name: field_name
+      properties:
+        line_number:
+          description: |-
+            Best-effort line number of the offending item in the uploaded YAML. May be null when the line cannot be
+            determined.
+          format: int32
+          nullable: true
+          type: integer
+        reason:
+          description: |-
+            Machine-readable category for the failure (e.g. `VALIDATION`,
+            `ACCESS_DENIED`, `CHAR_LIMIT`).
+          enum:
+          - UNKNOWN_FAILURE_REASON
+          - VALIDATION
+          - UNRESOLVED_SOURCE
+          - ACCESS_DENIED
+          - CHAR_LIMIT
+          - SCHEMA
+          nullable: true
+          type: string
+        field_name:
+          description: |-
+            Dotted path to the offending field within the item (e.g.
+            `content.rule_definition`) for inline highlighting. Absent when the
+            failure is item-level rather than field-level.
+          nullable: true
+          type: string
+        message:
+          description: Human-readable description of the failure.
+          nullable: true
+          type: string
+      type: object
+    ImportDiagnostic:
+      description: |-
+        A group of importMemory diagnostic messages that share a severity /
+        disposition. This is the single, uniform channel for fatal errors,
+        rollbacks, and non-fatal observations.
+      example:
+        sub_status: UNKNOWN
+        messages:
+        - messages
+        - messages
+      properties:
+        sub_status:
+          description: |-
+            Severity / disposition category these messages share (e.g.
+            `WARNING`, `FAILURE`, `ROLLED_BACK`).
+          enum:
+          - UNKNOWN
+          - FAILURE
+          - WARNING
+          - ROLLED_BACK
+          nullable: true
+          type: string
+        messages:
+          description: |-
+            Human-readable messages for this category (e.g. the details of a
+            `WARNING`, or the failure cause for a `FAILURE`).
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
     VariableUpdateAssignmentInput:
       description: Input for variable value update in batch operations
       example:
@@ -26520,7 +27411,7 @@ components:
           name: name
           id: 0
         name: name
-        template_properties: "{}"
+        template_properties: ""
       properties:
         tenant_id:
           description: Tenant ID
@@ -26532,7 +27423,6 @@ components:
           type: string
         template_properties:
           description: Customization configuration for the email
-          type: object
       required:
       - name
       - org
@@ -26692,6 +27582,68 @@ components:
       required:
       - connection_identifier
       - table_name
+      type: object
+    InputTableDefinitionInput:
+      description: Definition of the input table schema.
+      properties:
+        new_columns:
+          description: New input-only columns to create in the table.
+          items:
+            $ref: '#/components/schemas/InputColumnSchemaInput'
+          type: array
+        referenced_columns:
+          description: |-
+            Column IDs from the linked model to include in the table.
+            Pass an empty array to create an input table with no reference
+            columns from the model.
+          items:
+            type: string
+          type: array
+      required:
+      - new_columns
+      - referenced_columns
+      type: object
+    InputColumnSchemaInput:
+      description: Schema definition for a single input column.
+      properties:
+        name:
+          description: Name of the column.
+          type: string
+        data_type:
+          description: |-
+            Physical data type of the column as recognized by the connected
+            warehouse (for example, VARCHAR, INT64, DOUBLE, BOOL, DATE).
+            The accepted values depend on the underlying Cloud Data Warehouse.
+          type: string
+        type:
+          description: |-
+            Semantic role of the column in ThoughtSpot. Use ATTRIBUTE for
+            dimensional data such as text, dates, and identifiers, and
+            MEASURE for numeric or aggregatable values.
+          enum:
+          - ATTRIBUTE
+          - MEASURE
+          type: string
+      required:
+      - data_type
+      - name
+      - type
+      type: object
+    InputTableResponse:
+      properties:
+        input_table_identifier:
+          description: Unique ID of the newly created input table.
+          nullable: true
+          type: string
+      type: object
+    InputTableUpdateResponse:
+      description: Response returned after successfully writing rows to an input table.
+      properties:
+        rows_loaded:
+          description: Number of rows successfully written to the input table.
+          format: int32
+          nullable: true
+          type: integer
       type: object
     PolicyProcessOptionsInput:
       properties:
@@ -26922,7 +27874,7 @@ components:
                 bucket_name: bucket_name
                 service_account_email: service_account_email
                 path_prefix: path_prefix
-          url_params: "{}"
+          url_params: ""
           name: name
           id: id
           events:
@@ -26977,7 +27929,7 @@ components:
                 bucket_name: bucket_name
                 service_account_email: service_account_email
                 path_prefix: path_prefix
-          url_params: "{}"
+          url_params: ""
           name: name
           id: id
           events:
@@ -27170,6 +28122,7 @@ components:
             - CHART_BAR_DATA_LABELS
             - CHART_AREA_DATA_LABELS
             - TABLE_VALUE_CELLS
+            - ADVANCED_CHART_LABELS
             type: string
           nullable: true
           type: array
@@ -27248,6 +28201,14 @@ components:
             $ref: '#/components/schemas/TableFontAssignmentInput'
           nullable: true
           type: array
+        advanced_chart_visualization_fonts:
+          description: "Font assignments for advanced chart visualization areas. Provide\
+            \ only the\nareas to update; omitted areas remain unchanged. \n  Version:\
+            \ 26.7.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/AdvancedChartFontAssignmentInput'
+          nullable: true
+          type: array
       type: object
     ChartFontAssignmentInput:
       description: Font assignment for a single chart visualization area.
@@ -27284,6 +28245,23 @@ components:
           type: string
         font_identifier:
           description: UUID or name of the font to assign to this area.
+          type: string
+      required:
+      - font_identifier
+      - visualization_area
+      type: object
+    AdvancedChartFontAssignmentInput:
+      description: Font assignment for a single advanced chart visualization area.
+      properties:
+        visualization_area:
+          description: "Advanced chart visualization area to assign the font to. \n\
+            \  Version: 26.7.0.cl or later\n"
+          enum:
+          - ADVANCED_CHART_LABELS
+          type: string
+        font_identifier:
+          description: "UUID or name of the font to assign to this area. \n  Version:\
+            \ 26.7.0.cl or later\n"
           type: string
       required:
       - font_identifier
@@ -27361,6 +28339,7 @@ components:
             - CHART_BAR_DATA_LABELS
             - CHART_AREA_DATA_LABELS
             - TABLE_VALUE_CELLS
+            - ADVANCED_CHART_LABELS
             type: string
           nullable: true
           type: array
@@ -27370,21 +28349,18 @@ components:
       properties:
         runtime_filter:
           description: Runtime filter parameter type in JWT.
-          type: object
       type: object
     Runtime_Sort:
       description: List of runtime parameters need to set during the session.
       properties:
         runtime_sort:
           description: Runtime sort parameter type in JWT.
-          type: object
       type: object
     Runtime_Param_Override:
       description: List of runtime parameters need to set during the session.
       properties:
         runtime_param_override:
           description: Runtime param override type in JWT.
-          type: object
       type: object
     CreateAgentConversationRequest:
       example:
@@ -27419,12 +28395,36 @@ components:
       required:
       - metadata_identifier
       type: object
+    ExportMemoryRequest:
+      example:
+        sources:
+        - identifiers:
+          - identifiers
+          - identifiers
+          type: DATA_MODEL
+        - identifiers:
+          - identifiers
+          - identifiers
+          type: DATA_MODEL
+      properties:
+        sources:
+          description: |-
+            List of typed scope groups selecting which data-models to export
+            memory for. Supply `DATA_MODEL` group to scope the
+            export to specific data-models.
+          items:
+            $ref: '#/components/schemas/MemorySources'
+          type: array
+      required:
+      - sources
+      type: object
     GetDataSourceSuggestionsRequest:
       example:
         query: query
       properties:
         query:
-          description: User query used to suggest data sources.
+          description: User query used to suggest data sources. Must be a non-empty
+            string.
           type: string
       required:
       - query
@@ -27466,7 +28466,7 @@ components:
         query:
           description: "A user query that requires breaking down into smaller, more\
             \ manageable analytical questions to facilitate better understanding and\
-            \ analysis."
+            \ analysis. Must be a non-empty string."
           type: string
         ai_context:
           allOf:
@@ -27475,6 +28475,28 @@ components:
       required:
       - metadata_context
       - query
+      type: object
+    ImportMemoryRequest:
+      example:
+        dry_run: true
+        content: content
+      properties:
+        content:
+          description: |-
+            The full serialized memory payload to import (YAML) —
+            typically a previous `exportMemory` response's `content`, edited
+            locally and re-submitted.
+          type: string
+        dry_run:
+          description: |-
+            Required. When `true`, validate the payload and return preview
+            counts and row failures without writing anything. Pass `false` to
+            apply the import. The caller must choose explicitly so
+            a real import is never triggered by omission.
+          type: boolean
+      required:
+      - content
+      - dry_run
       type: object
     QueryGetDecomposedQueryRequest:
       example:
@@ -27705,12 +28727,12 @@ components:
       example:
         parameter_values:
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           name: name
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           name: name
         org_identifier: org_identifier
         objects:
@@ -27727,23 +28749,23 @@ components:
         password: ""
         variable_values:
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           name: name
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           name: name
         validity_time_in_sec: 0
         filter_rules:
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           column_name: column_name
           operator: EQ
         - values:
-          - "{}"
-          - "{}"
+          - ""
+          - ""
           column_name: column_name
           operator: EQ
         email: email
@@ -28239,7 +29261,7 @@ components:
       example:
         policy_process_options: ""
         policy_type: NO_POLICY
-        configuration: "{}"
+        configuration: ""
         name: name
         same_as_parent: false
         description: description
@@ -28290,7 +29312,6 @@ components:
           type: string
         configuration:
           description: Configuration properties in JSON.
-          type: object
         policy_type:
           default: NO_POLICY
           description: Type of policy.
@@ -28337,7 +29358,7 @@ components:
       example:
         policy_process_options: ""
         policy_type: NO_POLICY
-        configuration: "{}"
+        configuration: ""
         disable: false
         name: name
         same_as_parent: false
@@ -28392,7 +29413,6 @@ components:
           type: string
         configuration:
           description: Configuration properties in JSON.
-          type: object
         policy_type:
           description: Type of policy.
           enum:
@@ -28424,7 +29444,7 @@ components:
       type: object
     CreateConnectionRequest:
       example:
-        data_warehouse_config: "{}"
+        data_warehouse_config: ""
         name: name
         description: description
         data_warehouse_type: SNOWFLAKE
@@ -28478,7 +29498,6 @@ components:
           description: "Connection configuration attributes in JSON format. To create\
             \ a connection with tables, include table attributes. See the documentation\
             \ above for sample JSON."
-          type: object
         validate:
           default: true
           description: "Validates the connection metadata if tables are included.\
@@ -28541,7 +29560,7 @@ components:
         tag_identifiers:
         - tag_identifiers
         - tag_identifiers
-        configuration: "{}"
+        configuration: ""
         record_size: 6
         data_warehouse_types:
         - SNOWFLAKE
@@ -28660,7 +29679,6 @@ components:
             \ config details to fetch specific details. Example input: {}, {\"warehouse\"\
             :\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when\
             \ data_warehouse_object_type is selected."
-          type: object
         authentication_type:
           default: SERVICE_ACCOUNT
           description: List of authentication types to fetch data_ware_house_objects
@@ -28691,7 +29709,7 @@ components:
       type: object
     SyncMetadataRequest:
       example:
-        tables: "{}"
+        tables: ""
         sync_attributes:
         - DESCRIPTION
         - DESCRIPTION
@@ -28704,7 +29722,6 @@ components:
             - Object: {tableId: [columnIds]} to sync specific
               columns.
             If not provided, syncs all tables in the connection.
-          type: object
         sync_attributes:
           default:
           - DESCRIPTION
@@ -28719,7 +29736,7 @@ components:
       type: object
     UpdateConnectionRequest:
       example:
-        data_warehouse_config: "{}"
+        data_warehouse_config: ""
         name: name
         description: description
         connection_identifier: connection_identifier
@@ -28736,7 +29753,6 @@ components:
           type: string
         data_warehouse_config:
           description: Configuration of the data warehouse in JSON.
-          type: object
         validate:
           default: true
           description: Indicates whether to validate the connection details.
@@ -28760,7 +29776,7 @@ components:
       type: object
     UpdateConnectionV2Request:
       example:
-        data_warehouse_config: "{}"
+        data_warehouse_config: ""
         name: name
         description: description
         validate: true
@@ -28773,7 +29789,6 @@ components:
           type: string
         data_warehouse_config:
           description: Configuration of the data warehouse in JSON.
-          type: object
         validate:
           default: true
           description: Indicates whether to validate the connection details.
@@ -29211,11 +30226,11 @@ components:
     FetchAnswerDataRequest:
       example:
         data_format: COMPACT
-        runtime_filter: "{}"
+        runtime_filter: ""
         metadata_identifier: metadata_identifier
         record_size: 6
-        runtime_sort: "{}"
-        runtime_param_override: "{}"
+        runtime_sort: ""
+        runtime_param_override: ""
         record_offset: 0
       properties:
         metadata_identifier:
@@ -29246,34 +30261,31 @@ components:
             EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing\
             \ the number at the end, for example, col2, op2, val2, and col3, op3,\
             \ val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters)."
-          type: object
         runtime_sort:
           description: "JSON object representing columns to sort data at runtime.\
             \ For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
-          type: object
         runtime_param_override:
           description: "JSON object for setting values of parameters at runtime. For\
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)."
-          type: object
       required:
       - metadata_identifier
       type: object
     FetchLiveboardDataRequest:
       example:
         data_format: COMPACT
-        runtime_filter: "{}"
+        runtime_filter: ""
         metadata_identifier: metadata_identifier
         record_size: 6
         visualization_identifiers:
         - visualization_identifiers
         - visualization_identifiers
-        runtime_sort: "{}"
+        runtime_sort: ""
         transient_content: transient_content
-        runtime_param_override: "{}"
+        runtime_param_override: ""
         record_offset: 0
       properties:
         metadata_identifier:
@@ -29312,30 +30324,27 @@ components:
             EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing\
             \ the number at the end, for example, col2, op2, val2, and col3, op3,\
             \ val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters)."
-          type: object
         runtime_sort:
           description: "JSON object representing columns to sort data at runtime.\
             \ For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
-          type: object
         runtime_param_override:
           description: "JSON object for setting values of parameters at runtime. For\
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)."
-          type: object
       required:
       - metadata_identifier
       type: object
     SearchDataRequest:
       example:
         data_format: COMPACT
-        runtime_filter: "{}"
+        runtime_filter: ""
         logical_table_identifier: logical_table_identifier
         record_size: 6
-        runtime_sort: "{}"
-        runtime_param_override: "{}"
+        runtime_sort: ""
+        runtime_param_override: ""
         query_string: query_string
         record_offset: 0
       properties:
@@ -29374,19 +30383,16 @@ components:
             EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing\
             \ the number at the end, for example, col2, op2, val2, and col3, op3,\
             \ val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters)."
-          type: object
         runtime_sort:
           description: "JSON object representing columns to sort data at runtime.\
             \ For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
-          type: object
         runtime_param_override:
           description: "JSON object for setting values of parameters at runtime. For\
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)."
-          type: object
       required:
       - logical_table_identifier
       - query_string
@@ -29484,7 +30490,8 @@ components:
           description: Description of the group
           type: string
         privileges:
-          description: Privileges to assign to the group
+          description: "Privileges to assign to the group. Note: AUTHORING is a no-op\
+            \ — always inherited via ALL_GROUP, assigning it has no effect."
           items:
             enum:
             - ADMINISTRATION
@@ -29836,7 +30843,8 @@ components:
           description: Display name of the group.
           type: string
         privileges:
-          description: Privileges to assign to the group.
+          description: "Privileges to assign to the group. Note: AUTHORING is a no-op\
+            \ — always inherited via ALL_GROUP, assigning it has no effect."
           items:
             enum:
             - ADMINISTRATION
@@ -29918,6 +30926,49 @@ components:
           - REMOVE
           - REPLACE
           type: string
+      type: object
+    CreateInputTableRequest:
+      properties:
+        table_name:
+          description: Physical table name to create in the external warehouse.
+          type: string
+        model_identifier:
+          description: |-
+            Unique ID or name of the model (worksheet) to link the
+            input table to.
+          type: string
+        table_definition:
+          allOf:
+          - $ref: '#/components/schemas/InputTableDefinitionInput'
+          description: |-
+            Definition of the input table, including new columns
+            and referenced model columns.
+      required:
+      - model_identifier
+      - table_definition
+      - table_name
+      type: object
+    UpdateInputTableRequest:
+      properties:
+        columns:
+          description: |-
+            Names of the columns being written, in the same order as
+            the values in each row.
+          items:
+            type: string
+          type: array
+        rows:
+          description: |-
+            Rows to write into the input table. Each row is an array
+            of string values aligned positionally with columns.
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+      required:
+      - columns
+      - rows
       type: object
     SearchChannelHistoryRequest:
       example:
@@ -30330,6 +31381,7 @@ components:
       example:
         all_orgs_override: false
         skip_diff_check: false
+        enable_personalized_view_upsert: false
         enable_large_metadata_validation: false
         import_policy: PARTIAL
         metadata_tmls:
@@ -30382,6 +31434,15 @@ components:
             Boolean to indicate if the large metadata validation should be enabled.
           nullable: true
           type: boolean
+        enable_personalized_view_upsert:
+          default: false
+          description: |-
+            <div>Version: 26.8.0.cl or later
+            </div>
+
+            Boolean flag to enable update/insert of personalized views in liveboard.
+          nullable: true
+          type: boolean
       required:
       - metadata_tmls
       type: object
@@ -30389,6 +31450,7 @@ components:
       example:
         all_orgs_override: false
         skip_diff_check: false
+        enable_personalized_view_upsert: false
         enable_large_metadata_validation: false
         import_policy: PARTIAL_OBJECT
         metadata_tmls:
@@ -30440,6 +31502,15 @@ components:
             </div>
 
             Boolean to indicate if the large metadata validation should be enabled.
+          nullable: true
+          type: boolean
+        enable_personalized_view_upsert:
+          default: false
+          description: |-
+            <div>Version: 26.8.0.cl or later
+            </div>
+
+            Boolean flag to enable update/insert of personalized views in liveboard.
           nullable: true
           type: boolean
       required:
@@ -30919,16 +31990,16 @@ components:
       type: object
     ExportAnswerReportRequest:
       example:
-        runtime_filter: "{}"
+        runtime_filter: ""
         regional_settings: ""
         png_options: ""
         metadata_identifier: metadata_identifier
         personalised_view_identifier: personalised_view_identifier
         session_identifier: session_identifier
-        runtime_sort: "{}"
+        runtime_sort: ""
         generation_number: 0
         type: SAVED
-        runtime_param_override: "{}"
+        runtime_param_override: ""
         file_format: CSV
       properties:
         metadata_identifier:
@@ -30954,15 +32025,12 @@ components:
           description: |-
             JSON string representing runtime filter.
             { col1:region, op1: EQ, val1: northeast }
-          type: object
         runtime_sort:
           description: |-
             JSON string representing runtime sort.
             { sortCol1: region, asc1 :true, sortCol2 : date }
-          type: object
         runtime_param_override:
           description: JSON object for setting values of parameters in runtime.
-          type: object
         regional_settings:
           allOf:
           - $ref: '#/components/schemas/RegionalSettingsInput'
@@ -30990,8 +32058,8 @@ components:
         regional_settings: ""
         pdf_options: ""
         transient_content: transient_content
-        runtime_param_override: "{}"
-        runtime_filter: "{}"
+        runtime_param_override: ""
+        runtime_filter: ""
         png_options: ""
         metadata_identifier: metadata_identifier
         tab_identifiers:
@@ -31001,8 +32069,8 @@ components:
         visualization_identifiers:
         - visualization_identifiers
         - visualization_identifiers
-        runtime_sort: "{}"
-        override_filters: "{}"
+        runtime_sort: ""
+        override_filters: ""
         file_format: PDF
       properties:
         metadata_identifier:
@@ -31043,7 +32111,6 @@ components:
             val1\": \"northeast\" }. You can add multiple keys by incrementing the\
             \ number at the end, for example, col2, op2, val2. For more information,\
             \ see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters)."
-          type: object
         override_filters:
           description: |-
             Applied to the liveboard and overrides any filters already applied on the same columns in liveboard.
@@ -31083,11 +32150,9 @@ components:
                 }
               ]
             }
-          type: object
         runtime_sort:
           description: "JSON string representing runtime sort. For example, {\"sortCol1\"\
             : \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
-          type: object
         pdf_options:
           allOf:
           - $ref: '#/components/schemas/PdfOptionsInput'
@@ -31101,7 +32166,6 @@ components:
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)."
-          type: object
         regional_settings:
           allOf:
           - $ref: '#/components/schemas/RegionalSettingsInput'
@@ -31127,7 +32191,8 @@ components:
           type: string
         privileges:
           description: "Privileges granted to the Role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for\
-            \ supported roles privileges."
+            \ supported roles privileges. Note: AUTHORING is a no-op — always inherited\
+            \ via ALL_GROUP, assigning it has no effect."
           items:
             enum:
             - USERDATAUPLOADING
@@ -31327,7 +32392,8 @@ components:
           type: string
         privileges:
           description: "Privileges granted to the role. See [Documentation](https://developers.thoughtspot.com/docs/rbac#_role_categories_and_privileges)for\
-            \ supported roles privileges."
+            \ supported roles privileges. Note: AUTHORING is a no-op — always inherited\
+            \ via ALL_GROUP, assigning it has no effect."
           items:
             enum:
             - USERDATAUPLOADING
@@ -33571,12 +34637,11 @@ components:
       type: object
     UpdateSystemConfigRequest:
       example:
-        configuration: "{}"
+        configuration: ""
       properties:
         configuration:
           description: Configuration JSON with the key-value pair of configuration
             attributes to be updated.
-          type: object
       required:
       - configuration
       type: object
@@ -33763,12 +34828,12 @@ components:
         group_identifiers:
         - group_identifiers
         - group_identifiers
-        extended_properties: "{}"
+        extended_properties: ""
         name: name
         org_identifiers:
         - org_identifiers
         - org_identifiers
-        extended_preferences: "{}"
+        extended_preferences: ""
         email: email
       properties:
         name:
@@ -33896,10 +34961,8 @@ components:
           type: boolean
         extended_properties:
           description: Properties for the user
-          type: object
         extended_preferences:
           description: Preferences for the user
-          type: object
         trigger_welcome_email:
           description: Flag to indicate whether welcome email should be sent to user.
             This parameter is applied only on clusters on which IAM is disabled.
@@ -34248,13 +35311,13 @@ components:
         group_identifiers:
         - group_identifiers
         - group_identifiers
-        extended_properties: "{}"
+        extended_properties: ""
         name: name
         org_identifiers:
         - org_identifiers
         - org_identifiers
         operation: REPLACE
-        extended_preferences: "{}"
+        extended_preferences: ""
         email: email
       properties:
         name:
@@ -34380,10 +35443,8 @@ components:
           type: boolean
         extended_properties:
           description: Properties for the user
-          type: object
         extended_preferences:
           description: Preferences for the user
-          type: object
       type: object
     CreateVariableRequest:
       example:
@@ -34871,7 +35932,7 @@ components:
       type: object
     CreateWebhookConfigurationRequest:
       example:
-        url_params: "{}"
+        url_params: ""
         additional_headers:
         - value: value
           key: key
@@ -34899,7 +35960,6 @@ components:
           type: string
         url_params:
           description: Additional URL parameters as key-value pairs.
-          type: object
         events:
           description: List of events to subscribe to.
           items:
@@ -35008,12 +36068,15 @@ components:
       type: object
     UpdateWebhookConfigurationRequest:
       example:
-        url_params: "{}"
+        url_params: ""
         additional_headers:
         - value: value
           key: key
         - value: value
           key: key
+        reset_options:
+        - AUTHENTICATION
+        - AUTHENTICATION
         signature_verification: ""
         name: name
         description: description
@@ -35036,7 +36099,6 @@ components:
           type: string
         url_params:
           description: Additional URL parameters as key-value pairs.
-          type: object
         events:
           description: List of events to subscribe to.
           items:
@@ -35078,6 +36140,19 @@ components:
           - ENABLED
           - DISABLED
           type: string
+        reset_options:
+          description: "List of optional configuration sections to clear. Each value\
+            \ removes the\ncorresponding configuration entirely from the webhook:\
+            \ AUTHENTICATION\nremoves the authentication config, SIGNATURE_VERIFICATION\
+            \ removes the\nsignature verification config, STORAGE_DESTINATION removes\
+            \ the storage\ndestination config. \n  Version: 26.7.0.cl or later\n"
+          items:
+            enum:
+            - AUTHENTICATION
+            - SIGNATURE_VERIFICATION
+            - STORAGE_DESTINATION
+            type: string
+          type: array
       type: object
     dbtConnection_request:
       properties:
@@ -35136,7 +36211,8 @@ components:
           description: "If true, includes a `semantic_report` per model showing which\
             \ components were imported or skipped. Each component includes its name,\
             \ type (such as dimension, measure, or metric), import status, SQL expression,\
-            \ and the corresponding generated ThoughtSpot formula."
+            \ and the corresponding generated ThoughtSpot formula. Note: supported\
+            \ only for Snowflake and Databricks connections."
           nullable: true
           type: boolean
       required:
@@ -35176,7 +36252,8 @@ components:
           description: "If true, includes a `semantic_report` per model showing which\
             \ components were imported or skipped. Each component includes its name,\
             \ type (such as dimension, measure, or metric), import status, SQL expression,\
-            \ and the corresponding generated ThoughtSpot formula."
+            \ and the corresponding generated ThoughtSpot formula. Note: supported\
+            \ only for Snowflake and Databricks connections."
           nullable: true
           type: boolean
       required:
@@ -35387,6 +36464,11 @@ x-roles:
   tags:
   - 26.7.0.cl
   description: Roles for version 26.7.0.cl
+- name: 26.8.0.cl
+  id: 26.8.0.cl
+  tags:
+  - 26.8.0.cl
+  description: Roles for version 26.8.0.cl
 - name: 26.6.0.cl
   id: 26.6.0.cl
   tags:
@@ -35457,6 +36539,11 @@ x-roles:
   tags:
   - 10.10.0.cl
   description: Roles for version 10.10.0.cl
+- name: 26.10.0.cl
+  id: 26.10.0.cl
+  tags:
+  - 26.10.0.cl
+  description: Roles for version 26.10.0.cl
 - name: 10.6.0.cl
   id: 10.6.0.cl
   tags:

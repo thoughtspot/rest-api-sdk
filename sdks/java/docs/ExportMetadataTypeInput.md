@@ -28,6 +28,7 @@ MetadataType InputType used in Export MetadataType API
 | USER_GROUP | &quot;USER_GROUP&quot; |
 | ROLE | &quot;ROLE&quot; |
 | FEEDBACK | &quot;FEEDBACK&quot; |
+| COLLECTION | &quot;COLLECTION&quot; |
 
 
 ## Implemented Interfaces

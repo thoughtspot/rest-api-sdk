@@ -125,6 +125,13 @@ public class ImportMetadataTMLRequest implements Serializable {
     @javax.annotation.Nullable
     private Boolean enableLargeMetadataValidation = false;
 
+    public static final String SERIALIZED_NAME_ENABLE_PERSONALIZED_VIEW_UPSERT =
+            "enable_personalized_view_upsert";
+
+    @SerializedName(SERIALIZED_NAME_ENABLE_PERSONALIZED_VIEW_UPSERT)
+    @javax.annotation.Nullable
+    private Boolean enablePersonalizedViewUpsert = false;
+
     public ImportMetadataTMLRequest() {}
 
     public ImportMetadataTMLRequest metadataTmls(
@@ -260,6 +267,28 @@ public class ImportMetadataTMLRequest implements Serializable {
         this.enableLargeMetadataValidation = enableLargeMetadataValidation;
     }
 
+    public ImportMetadataTMLRequest enablePersonalizedViewUpsert(
+            @javax.annotation.Nullable Boolean enablePersonalizedViewUpsert) {
+        this.enablePersonalizedViewUpsert = enablePersonalizedViewUpsert;
+        return this;
+    }
+
+    /**
+     * &lt;div&gt;Version: 26.8.0.cl or later &lt;/div&gt; Boolean flag to enable update/insert of
+     * personalized views in liveboard.
+     *
+     * @return enablePersonalizedViewUpsert
+     */
+    @javax.annotation.Nullable
+    public Boolean getEnablePersonalizedViewUpsert() {
+        return enablePersonalizedViewUpsert;
+    }
+
+    public void setEnablePersonalizedViewUpsert(
+            @javax.annotation.Nullable Boolean enablePersonalizedViewUpsert) {
+        this.enablePersonalizedViewUpsert = enablePersonalizedViewUpsert;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -322,6 +351,9 @@ public class ImportMetadataTMLRequest implements Serializable {
                         this.enableLargeMetadataValidation,
                         importMetadataTMLRequest.enableLargeMetadataValidation)
                 && Objects.equals(
+                        this.enablePersonalizedViewUpsert,
+                        importMetadataTMLRequest.enablePersonalizedViewUpsert)
+                && Objects.equals(
                         this.additionalProperties, importMetadataTMLRequest.additionalProperties);
     }
 
@@ -343,6 +375,7 @@ public class ImportMetadataTMLRequest implements Serializable {
                 allOrgsOverride,
                 skipDiffCheck,
                 enableLargeMetadataValidation,
+                enablePersonalizedViewUpsert,
                 additionalProperties);
     }
 
@@ -364,6 +397,9 @@ public class ImportMetadataTMLRequest implements Serializable {
         sb.append("    skipDiffCheck: ").append(toIndentedString(skipDiffCheck)).append("\n");
         sb.append("    enableLargeMetadataValidation: ")
                 .append(toIndentedString(enableLargeMetadataValidation))
+                .append("\n");
+        sb.append("    enablePersonalizedViewUpsert: ")
+                .append(toIndentedString(enablePersonalizedViewUpsert))
                 .append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
@@ -395,6 +431,7 @@ public class ImportMetadataTMLRequest implements Serializable {
         openapiFields.add("all_orgs_override");
         openapiFields.add("skip_diff_check");
         openapiFields.add("enable_large_metadata_validation");
+        openapiFields.add("enable_personalized_view_upsert");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
