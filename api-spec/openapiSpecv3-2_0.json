@@ -38749,8 +38749,7 @@
         "required": false,
         "description": "Per-request target Org selector (Org id or name) within the calling token's scope. Selects one Org from the token's authorized set for this request. Optional; not an authentication credential.",
         "schema": {
-          "type": "string",
-          "example": "sales"
+          "type": "string"
         }
       }
     }
