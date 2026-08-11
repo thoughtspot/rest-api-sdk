@@ -7301,7 +7301,7 @@ declare class CreateSemanticIntegrationRequest {
     }[];
     constructor();
 }
-type CreateSemanticIntegrationRequestTypeEnum = "RDBMS_SNOWFLAKE";
+type CreateSemanticIntegrationRequestTypeEnum = "RDBMS_SNOWFLAKE" | "RDBMS_DATABRICKS";
 
 /**
  * ThoughtSpot Public REST API
@@ -20093,7 +20093,7 @@ declare class SemanticIntegrationSearchResponse {
     constructor();
 }
 type SemanticIntegrationSearchResponseImportTypeEnum = "CDW" | "FILE";
-type SemanticIntegrationSearchResponseTypeEnum = "RDBMS_SNOWFLAKE";
+type SemanticIntegrationSearchResponseTypeEnum = "RDBMS_SNOWFLAKE" | "RDBMS_DATABRICKS";
 
 /**
  * ThoughtSpot Public REST API

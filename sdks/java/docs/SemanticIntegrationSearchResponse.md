@@ -39,6 +39,7 @@ Single semantic integration entry returned by search.
 | Name | Value |
 |---- | -----|
 | RDBMS_SNOWFLAKE | &quot;RDBMS_SNOWFLAKE&quot; |
+| RDBMS_DATABRICKS | &quot;RDBMS_DATABRICKS&quot; |
 
 
 ## Implemented Interfaces

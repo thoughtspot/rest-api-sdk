@@ -23318,6 +23318,7 @@ components:
           description: CDW connector type.
           enum:
           - RDBMS_SNOWFLAKE
+          - RDBMS_DATABRICKS
           nullable: true
           type: string
         connection_id:
@@ -34582,6 +34583,7 @@ components:
           description: CDW connector type.
           enum:
           - RDBMS_SNOWFLAKE
+          - RDBMS_DATABRICKS
           type: string
         description:
           description: Optional description of the semantic integration.
@@ -36811,6 +36813,11 @@ x-roles:
   tags:
   - 26.10.0.cl
   description: Roles for version 26.10.0.cl
+- name: 26.11.0.cl
+  id: 26.11.0.cl
+  tags:
+  - 26.11.0.cl
+  description: Roles for version 26.11.0.cl
 - name: 10.6.0.cl
   id: 10.6.0.cl
   tags:
