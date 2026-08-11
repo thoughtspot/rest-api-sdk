@@ -12540,7 +12540,7 @@
     "/api/rest/2.0/semantic-integrations/create": {
       "post": {
         "operationId": "createSemanticIntegration",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nCreates a new semantic integration in ThoughtSpot from a CDW semantic view.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About create semantic integration\n\nA semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.\n\n- `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required.\n- `name` must be unique across the user's organization. The integration's display name is also used as the generated model name.\n- Supported `type` values are listed in the `SemanticIntegrationType` enum (currently `RDBMS_SNOWFLAKE`).\n- The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.\n\n> **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nCreates a new semantic integration in ThoughtSpot from a CDW semantic view.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About create semantic integration\n\nA semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.\n\n- `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required.\n- `name` must be unique across the user's organization. The integration's display name is also used as the generated model name.\n- Supported `type` values are listed in the `SemanticIntegrationType` enum.\n- The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.\n\n> **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Semantic Integrations",
           "26.9.0.cl"
@@ -25500,7 +25500,8 @@
           "type": {
             "type": "string",
             "enum": [
-              "RDBMS_SNOWFLAKE"
+              "RDBMS_SNOWFLAKE",
+              "RDBMS_DATABRICKS"
             ],
             "description": "CDW connector type.",
             "nullable": true
@@ -36492,7 +36493,8 @@
             "description": "CDW connector type.",
             "type": "string",
             "enum": [
-              "RDBMS_SNOWFLAKE"
+              "RDBMS_SNOWFLAKE",
+              "RDBMS_DATABRICKS"
             ]
           },
           "description": {
