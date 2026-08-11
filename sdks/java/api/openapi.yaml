@@ -14638,7 +14638,10 @@ paths:
         \ set of values.\n* REMOVE - Removes any values which match the set of conditions\
         \ of the variables if this is a list type variable, else clears value.\n*\
         \ RESET - Removes all constraints for the given variable, scope is ignored\n\
-        \n\n\n\n\n"
+        \nRe-sending values that already match the stored values for the targeted\
+        \ scope is a no-op: the request succeeds without modifying any data. This\
+        \ does not apply to the RESET operation or to sensitive variables, which are\
+        \ always written.\n\n\n\n\n\n"
       operationId: putVariableValues
       parameters:
       - description: Unique ID or name of the variable
@@ -14821,7 +14824,10 @@ paths:
         \ all values of a given set of constraints with the current set of values.\n\
         * REMOVE - Removes any values which match the set of conditions of the variables\
         \ if this is a list type variable, else clears value.\n* RESET - Removes all\
-        \ constrains for a given variable, scope is ignored\n\n\n\n\n\n"
+        \ constrains for a given variable, scope is ignored\n\nRe-sending values that\
+        \ already match the stored values for the targeted scope is a no-op: the request\
+        \ succeeds without modifying any data. This does not apply to the RESET operation\
+        \ or to sensitive variables, which are always written.\n\n\n\n\n\n"
       operationId: updateVariableValues
       parameters: []
       requestBody:

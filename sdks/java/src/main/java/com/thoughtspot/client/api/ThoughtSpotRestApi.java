@@ -24026,7 +24026,9 @@ public class ThoughtSpotRestApi {
      * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
      * - Removes any values which match the set of conditions of the variables if this is a list
      * type variable, else clears value. * RESET - Removes all constraints for the given variable,
-     * scope is ignored
+     * scope is ignored Re-sending values that already match the stored values for the targeted
+     * scope is a no-op: the request succeeds without modifying any data. This does not apply to the
+     * RESET operation or to sensitive variables, which are always written.
      *
      * @param identifier Unique ID or name of the variable (required)
      * @param putVariableValuesRequest (required)
@@ -24061,7 +24063,9 @@ public class ThoughtSpotRestApi {
      * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
      * - Removes any values which match the set of conditions of the variables if this is a list
      * type variable, else clears value. * RESET - Removes all constraints for the given variable,
-     * scope is ignored
+     * scope is ignored Re-sending values that already match the stored values for the targeted
+     * scope is a no-op: the request succeeds without modifying any data. This does not apply to the
+     * RESET operation or to sensitive variables, which are always written.
      *
      * @param identifier Unique ID or name of the variable (required)
      * @param putVariableValuesRequest (required)
@@ -24099,7 +24103,10 @@ public class ThoughtSpotRestApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constraints for the given variable, scope is ignored
+     * constraints for the given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param identifier Unique ID or name of the variable (required)
      * @param putVariableValuesRequest (required)
@@ -39547,7 +39554,10 @@ public class ThoughtSpotRestApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constrains for a given variable, scope is ignored
+     * constrains for a given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param updateVariableValuesRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -39585,7 +39595,10 @@ public class ThoughtSpotRestApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constrains for a given variable, scope is ignored
+     * constrains for a given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param updateVariableValuesRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -39627,7 +39640,10 @@ public class ThoughtSpotRestApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constrains for a given variable, scope is ignored
+     * constrains for a given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param updateVariableValuesRequest (required)
      * @param _callback The callback to be executed when the API call finishes

@@ -3392,7 +3392,9 @@ public class ThoughtSpotRestApiTest {
      * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
      * - Removes any values which match the set of conditions of the variables if this is a list
      * type variable, else clears value. * RESET - Removes all constraints for the given variable,
-     * scope is ignored
+     * scope is ignored Re-sending values that already match the stored values for the targeted
+     * scope is a no-op: the request succeeds without modifying any data. This does not apply to the
+     * RESET operation or to sensitive variables, which are always written.
      *
      * @throws ApiException if the Api call fails
      */
@@ -5409,7 +5411,10 @@ public class ThoughtSpotRestApiTest {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constrains for a given variable, scope is ignored
+     * constrains for a given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @throws ApiException if the Api call fails
      */
