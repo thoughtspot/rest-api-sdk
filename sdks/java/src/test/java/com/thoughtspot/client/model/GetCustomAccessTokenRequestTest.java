@@ -46,6 +46,12 @@ public class GetCustomAccessTokenRequestTest {
         // TODO: test orgIdentifier
     }
 
+    /** Test the property 'scope' */
+    @Test
+    public void scopeTest() {
+        // TODO: test scope
+    }
+
     /** Test the property 'persistOption' */
     @Test
     public void persistOptionTest() {

@@ -7,6 +7,7 @@ import { AIContext } from '../models/AIContext';
 import { APIKey } from '../models/APIKey';
 import { APIKeyInput } from '../models/APIKeyInput';
 import { AccessToken } from '../models/AccessToken';
+import { AccessTokenScope } from '../models/AccessTokenScope';
 import { ActionConfig } from '../models/ActionConfig';
 import { ActionConfigInput } from '../models/ActionConfigInput';
 import { ActionConfigInputCreate } from '../models/ActionConfigInputCreate';
@@ -443,6 +444,7 @@ import { TemplatePropertiesInputCreate } from '../models/TemplatePropertiesInput
 import { TextResponseItem } from '../models/TextResponseItem';
 import { Token } from '../models/Token';
 import { TokenAccessScopeObject } from '../models/TokenAccessScopeObject';
+import { TokenScopeInput } from '../models/TokenScopeInput';
 import { TokenValidationResponse } from '../models/TokenValidationResponse';
 import { ToolCallResponseItem } from '../models/ToolCallResponseItem';
 import { ToolResultResponseItem } from '../models/ToolResultResponseItem';

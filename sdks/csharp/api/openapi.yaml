@@ -3265,6 +3265,27 @@ paths:
                       name: new_sales_user@example.com
                     creation_time_in_millis: 1724278000000
                     expiration_time_in_millis: 1724278300000
+                example_3:
+                  description: Org-scoped custom access token authorized for specific
+                    Orgs (Tenant Admin)
+                  value:
+                    id: 5c4b3a29-1807-4f6e-8d9c-abcdef012345
+                    token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_org_scoped_custom_token.signature
+                    org:
+                      id: 2
+                      name: sales-org
+                    user:
+                      id: 59481331-ee53-42be-a548-bd87be6ddd4a
+                      name: tsadmin
+                    creation_time_in_millis: 1724277430000
+                    expiration_time_in_millis: 1724277730000
+                    scope:
+                      org_scope: SPECIFIC_ORGS
+                      org_ids:
+                      - id: 2
+                        name: sales-org
+                      - id: 3
+                        name: marketing-org
               schema:
                 $ref: "#/components/schemas/AccessToken"
           description: ABAC token creation was successful.
@@ -3426,6 +3447,24 @@ paths:
                       org_id: 1
                     valid_for_user_id: b3d9e1f7-2a4c-4e8b-9d1f-6c5a3b8e7d2f
                     valid_for_username: jit_analyst@example.com
+                example_3:
+                  description: Org-scoped full-access token authorized for specific
+                    Orgs (Tenant Admin)
+                  value:
+                    token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_org_scoped_full_token.signature
+                    creation_time_in_millis: 1724277430000
+                    expiration_time_in_millis: 1724277730000
+                    scope:
+                      access_type: FULL
+                      org_id: 2
+                      org_scope: SPECIFIC_ORGS
+                      org_ids:
+                      - id: 2
+                        name: sales-org
+                      - id: 3
+                        name: marketing-org
+                    valid_for_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
+                    valid_for_username: tsadmin
               schema:
                 $ref: "#/components/schemas/Token"
           description: Bearer auth token creation successful.
@@ -3578,6 +3617,25 @@ paths:
                       metadata_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
                     valid_for_user_id: 7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c
                     valid_for_username: new_user@example.com
+                example_3:
+                  description: Org-scoped object access token authorized for specific
+                    Orgs (Tenant Admin)
+                  value:
+                    token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_org_scoped_object_token.signature
+                    creation_time_in_millis: 1724277430000
+                    expiration_time_in_millis: 1724277730000
+                    scope:
+                      access_type: REPORT_BOOK_VIEW
+                      org_id: 2
+                      metadata_id: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                      org_scope: SPECIFIC_ORGS
+                      org_ids:
+                      - id: 2
+                        name: sales-org
+                      - id: 3
+                        name: marketing-org
+                    valid_for_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
+                    valid_for_username: tsadmin
               schema:
                 $ref: "#/components/schemas/Token"
           description: Bearer auth token creation successful.
@@ -4092,6 +4150,23 @@ paths:
                       org_id: 0
                       metadata_id: f47ac10b-58cc-4372-a567-0e02b2c3d479
                     valid_for_user_id: 7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c
+                    token_type: BEARER
+                example_3:
+                  description: Valid org-scoped token authorized for specific Orgs
+                    (Tenant Admin)
+                  value:
+                    creation_time_in_millis: 1724277430000
+                    expiration_time_in_millis: 1724277730000
+                    scope:
+                      access_type: FULL
+                      org_id: 2
+                      org_scope: SPECIFIC_ORGS
+                      org_ids:
+                      - id: 2
+                        name: sales-org
+                      - id: 3
+                        name: marketing-org
+                    valid_for_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
                     token_type: BEARER
               schema:
                 $ref: "#/components/schemas/TokenValidationResponse"
@@ -23498,6 +23573,30 @@ components:
           nullable: true
           type: string
       type: object
+    TokenScopeInput:
+      description: "The set of Orgs a token is authorized to operate in, recorded\
+        \ at issuance. Only applicable to a Tenant Administrator."
+      properties:
+        org_scope:
+          description: "The set of Orgs this token is authorized to operate in. SPECIFIC_ORGS\
+            \ authorizes the token for the Orgs listed in org_identifiers; ALL_MEMBER_ORGS\
+            \ authorizes it for all Orgs the user is a member of. \n Version: 26.10.0.cl\
+            \ or later\n"
+          enum:
+          - SPECIFIC_ORGS
+          - ALL_MEMBER_ORGS
+          type: string
+        org_identifiers:
+          description: "ID or name of the Orgs the token is authorized for. Required\
+            \ when org_scope is SPECIFIC_ORGS; ignored when org_scope is ALL_MEMBER_ORGS.\
+            \ \n Version: 26.10.0.cl or later\n"
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - org_scope
+      type: object
     JWT_User_Options:
       description: |-
         JWT user options to create a JWT token given the payload.
@@ -23714,6 +23813,12 @@ components:
           access_type: access_type
           org_id: 1
           metadata_id: metadata_id
+          org_scope: SPECIFIC_ORGS
+          org_ids:
+          - id: 0
+            name: name
+          - id: 0
+            name: name
         valid_for_user_id: valid_for_user_id
         valid_for_username: valid_for_username
       properties:
@@ -23749,21 +23854,58 @@ components:
         access_type: access_type
         org_id: 1
         metadata_id: metadata_id
+        org_scope: SPECIFIC_ORGS
+        org_ids:
+        - id: 0
+          name: name
+        - id: 0
+          name: name
       properties:
         access_type:
           description: Object access scope type.
           type: string
         org_id:
-          description: Unique identifier of the metadata.
+          description: Unique identifier of the Org.
           format: int32
           nullable: true
           type: integer
         metadata_id:
-          description: Unique identifier of the Org.
+          description: Unique identifier of the metadata.
+          nullable: true
+          type: string
+        org_scope:
+          description: "Org scope the token is authorized for. Absent for a legacy\
+            \ single-org token. \n Version: 26.10.0.cl or later\n"
+          enum:
+          - SPECIFIC_ORGS
+          - ALL_MEMBER_ORGS
+          nullable: true
+          type: string
+        org_ids:
+          description: "Orgs the token is authorized for when org_scope is SPECIFIC_ORGS.\
+            \ \n Version: 26.10.0.cl or later\n"
+          items:
+            $ref: "#/components/schemas/OrgInfo"
+          nullable: true
+          type: array
+      required:
+      - access_type
+      type: object
+    OrgInfo:
+      example:
+        id: 0
+        name: name
+      properties:
+        id:
+          description: Id.
+          format: int32
+          type: integer
+        name:
+          description: Name.
           nullable: true
           type: string
       required:
-      - access_type
+      - id
       type: object
     JWT_User_Options_Full:
       description: |-
@@ -23786,6 +23928,12 @@ components:
           access_type: access_type
           org_id: 1
           metadata_id: metadata_id
+          org_scope: SPECIFIC_ORGS
+          org_ids:
+          - id: 0
+            name: name
+          - id: 0
+            name: name
         valid_for_user_id: valid_for_user_id
         token_type: token_type
       properties:
@@ -23936,6 +24084,13 @@ components:
           name: name
         creation_time_in_millis: 6.0274563
         expiration_time_in_millis: 1.4658129
+        scope:
+          org_scope: SPECIFIC_ORGS
+          org_ids:
+          - id: 0
+            name: name
+          - id: 0
+            name: name
       properties:
         id:
           description: GUID of the auth token.
@@ -23956,28 +24111,14 @@ components:
           description: Token expiration time in milliseconds.
           format: float
           type: number
+        scope:
+          $ref: "#/components/schemas/AccessTokenScope"
       required:
       - creation_time_in_millis
       - expiration_time_in_millis
       - org
       - token
       - user
-      type: object
-    OrgInfo:
-      example:
-        id: 0
-        name: name
-      properties:
-        id:
-          description: Id.
-          format: int32
-          type: integer
-        name:
-          description: Name.
-          nullable: true
-          type: string
-      required:
-      - id
       type: object
     UserInfo:
       example:
@@ -23993,6 +24134,33 @@ components:
           type: string
       required:
       - id
+      type: object
+    AccessTokenScope:
+      description: |-
+        The set of Orgs a token is authorized to operate in, recorded at issuance. Used for token
+        types (e.g. AccessToken) that have no other {@code scope} field of their own.
+      example:
+        org_scope: SPECIFIC_ORGS
+        org_ids:
+        - id: 0
+          name: name
+        - id: 0
+          name: name
+      properties:
+        org_scope:
+          description: "Org scope the token is authorized for: SPECIFIC_ORGS or ALL_MEMBER_ORGS."
+          enum:
+          - SPECIFIC_ORGS
+          - ALL_MEMBER_ORGS
+          type: string
+        org_ids:
+          description: Orgs the token is authorized for when org_scope is SPECIFIC_ORGS.
+          items:
+            $ref: "#/components/schemas/OrgInfo"
+          nullable: true
+          type: array
+      required:
+      - org_scope
       type: object
     AuthClusterPreferencesInput:
       description: Input for cluster-level auth configuration.
@@ -28793,6 +28961,7 @@ components:
         secret_key: ""
         validity_time_in_sec: 0
         org_identifier: org_identifier
+        scope: ""
         persist_option: REPLACE
         filter_rules:
         - column_name: column_name
@@ -28861,6 +29030,15 @@ components:
             \ Org ID/name nor the secret key is provided, the user will be logged\
             \ into the Org context from their previous login session."
           type: string
+        scope:
+          allOf:
+          - $ref: "#/components/schemas/TokenScopeInput"
+          description: "The set of Orgs this token is authorized to operate in, recorded\
+            \ at issuance. Only applicable to a Tenant Administrator. Only SPECIFIC_ORGS\
+            \ is supported for a custom (ABAC) token -- it authorizes the token for\
+            \ the Orgs listed in org_identifiers. Each subsequent request selects\
+            \ one Org from this set using the `X-Org-Selector` header. \n Version:\
+            \ 26.10.0.cl or later\n"
         persist_option:
           description: Indicates whether the specified attributes should be persisted
             or not. RESET and NONE are not applicable if you are setting variable_values.
@@ -28934,6 +29112,7 @@ components:
         secret_key: ""
         validity_time_in_sec: 0
         org_id: 6
+        scope: ""
         email: email
         display_name: display_name
         auto_create: false
@@ -28968,6 +29147,13 @@ components:
             \ be logged in to the Org context of their previous login session."
           format: int32
           type: integer
+        scope:
+          allOf:
+          - $ref: "#/components/schemas/TokenScopeInput"
+          description: "The set of Orgs this token is authorized to operate in, recorded\
+            \ at issuance. Only applicable to a Tenant Administrator. Each subsequent\
+            \ request selects one Org from this set using the `X-Org-Selector` header.\
+            \ \n Version: 26.10.0.cl or later\n"
         email:
           description: Email address of the user. Specify this attribute when creating
             a new user (just-in-time (JIT) provisioning).
@@ -29009,6 +29195,7 @@ components:
         secret_key: ""
         validity_time_in_sec: 0
         org_id: 6
+        scope: ""
         email: email
         display_name: display_name
         auto_create: false
@@ -29047,6 +29234,13 @@ components:
             \ be logged in to the Org context of their previous login session."
           format: int32
           type: integer
+        scope:
+          allOf:
+          - $ref: "#/components/schemas/TokenScopeInput"
+          description: "The set of Orgs this token is authorized to operate in, recorded\
+            \ at issuance. Only applicable to a Tenant Administrator. Each subsequent\
+            \ request selects one Org from this set using the `X-Org-Selector` header.\
+            \ \n Version: 26.10.0.cl or later\n"
         email:
           description: Email address of the user. Specify this attribute when creating
             a new user (just-in-time (JIT) provisioning).

@@ -3,6 +3,7 @@ export * from '../models/AIContext';
 export * from '../models/APIKey';
 export * from '../models/APIKeyInput';
 export * from '../models/AccessToken';
+export * from '../models/AccessTokenScope';
 export * from '../models/ActionConfig';
 export * from '../models/ActionConfigInput';
 export * from '../models/ActionConfigInputCreate';
@@ -439,6 +440,7 @@ export * from '../models/TemplatePropertiesInputCreate';
 export * from '../models/TextResponseItem';
 export * from '../models/Token';
 export * from '../models/TokenAccessScopeObject';
+export * from '../models/TokenScopeInput';
 export * from '../models/TokenValidationResponse';
 export * from '../models/ToolCallResponseItem';
 export * from '../models/ToolResultResponseItem';
@@ -526,6 +528,7 @@ import { AIContext } from '../models/AIContext';
 import { APIKey } from '../models/APIKey';
 import { APIKeyInput } from '../models/APIKeyInput';
 import { AccessToken } from '../models/AccessToken';
+import { AccessTokenScope, AccessTokenScopeOrgScopeEnum    } from '../models/AccessTokenScope';
 import { ActionConfig } from '../models/ActionConfig';
 import { ActionConfigInput, ActionConfigInputPositionEnum    } from '../models/ActionConfigInput';
 import { ActionConfigInputCreate, ActionConfigInputCreatePositionEnum    } from '../models/ActionConfigInputCreate';
@@ -726,7 +729,7 @@ import { GcpGcsConfigInput } from '../models/GcpGcsConfigInput';
 import { GenerateCSVRequest  , GenerateCSVRequestCalendarTypeEnum  , GenerateCSVRequestMonthOffsetEnum  , GenerateCSVRequestStartDayOfWeekEnum     } from '../models/GenerateCSVRequest';
 import { GenericInfo } from '../models/GenericInfo';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
-import { GetCustomAccessTokenRequest     , GetCustomAccessTokenRequestPersistOptionEnum           } from '../models/GetCustomAccessTokenRequest';
+import { GetCustomAccessTokenRequest      , GetCustomAccessTokenRequestPersistOptionEnum           } from '../models/GetCustomAccessTokenRequest';
 import { GetDataSourceSuggestionsRequest } from '../models/GetDataSourceSuggestionsRequest';
 import { GetFullAccessTokenRequest } from '../models/GetFullAccessTokenRequest';
 import { GetNLInstructionsRequest } from '../models/GetNLInstructionsRequest';
@@ -860,7 +863,7 @@ import { RuntimeSorts , RuntimeSortsOrderEnum     } from '../models/RuntimeSorts
 import { ScheduleHistoryRunsOptionsInput } from '../models/ScheduleHistoryRunsOptionsInput';
 import { SchedulesPdfOptionsInput       , SchedulesPdfOptionsInputPageSizeEnum    } from '../models/SchedulesPdfOptionsInput';
 import { SchemaObject } from '../models/SchemaObject';
-import { Scope } from '../models/Scope';
+import { Scope   , ScopeOrgScopeEnum    } from '../models/Scope';
 import { ScriptSrcUrls } from '../models/ScriptSrcUrls';
 import { ScriptSrcUrlsInput } from '../models/ScriptSrcUrlsInput';
 import { SearchAuthSettingsRequest, SearchAuthSettingsRequestAuthTypeEnum  , SearchAuthSettingsRequestScopeEnum   } from '../models/SearchAuthSettingsRequest';
@@ -962,6 +965,7 @@ import { TemplatePropertiesInputCreate } from '../models/TemplatePropertiesInput
 import { TextResponseItem     , TextResponseItemContentTypeEnum    } from '../models/TextResponseItem';
 import { Token } from '../models/Token';
 import { TokenAccessScopeObject, TokenAccessScopeObjectTypeEnum    } from '../models/TokenAccessScopeObject';
+import { TokenScopeInput, TokenScopeInputOrgScopeEnum    } from '../models/TokenScopeInput';
 import { TokenValidationResponse } from '../models/TokenValidationResponse';
 import { ToolCallResponseItem } from '../models/ToolCallResponseItem';
 import { ToolResultResponseItem       , ToolResultResponseItemContentTypeEnum    } from '../models/ToolResultResponseItem';
@@ -1057,6 +1061,7 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "AccessTokenScopeOrgScopeEnum",
     "ActionConfigInputPositionEnum",
     "ActionConfigInputCreatePositionEnum",
     "AdvancedChartFontAssignmentInputVisualizationAreaEnum",
@@ -1215,6 +1220,7 @@ let enumsMap: Set<string> = new Set<string>([
     "RuntimeFiltersOperatorEnum",
     "RuntimeSortsOrderEnum",
     "SchedulesPdfOptionsInputPageSizeEnum",
+    "ScopeOrgScopeEnum",
     "SearchAuthSettingsRequestAuthTypeEnum",
     "SearchAuthSettingsRequestScopeEnum",
     "SearchAuthSettingsResponseAuthTypeEnum",
@@ -1288,6 +1294,7 @@ let enumsMap: Set<string> = new Set<string>([
     "TagMetadataTypeInputTypeEnum",
     "TextResponseItemContentTypeEnum",
     "TokenAccessScopeObjectTypeEnum",
+    "TokenScopeInputOrgScopeEnum",
     "ToolResultResponseItemContentTypeEnum",
     "UnparameterizeMetadataRequestMetadataTypeEnum",
     "UnparameterizeMetadataRequestFieldTypeEnum",
@@ -1361,6 +1368,7 @@ let typeMap: {[index: string]: any} = {
     "APIKey": APIKey,
     "APIKeyInput": APIKeyInput,
     "AccessToken": AccessToken,
+    "AccessTokenScope": AccessTokenScope,
     "ActionConfig": ActionConfig,
     "ActionConfigInput": ActionConfigInput,
     "ActionConfigInputCreate": ActionConfigInputCreate,
@@ -1797,6 +1805,7 @@ let typeMap: {[index: string]: any} = {
     "TextResponseItem": TextResponseItem,
     "Token": Token,
     "TokenAccessScopeObject": TokenAccessScopeObject,
+    "TokenScopeInput": TokenScopeInput,
     "TokenValidationResponse": TokenValidationResponse,
     "ToolCallResponseItem": ToolCallResponseItem,
     "ToolResultResponseItem": ToolResultResponseItem,

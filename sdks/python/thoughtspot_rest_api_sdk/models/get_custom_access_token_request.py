@@ -21,6 +21,7 @@ from thoughtspot_rest_api_sdk.models.filter_rules import FilterRules
 from thoughtspot_rest_api_sdk.models.group_object import GroupObject
 from thoughtspot_rest_api_sdk.models.parameter_values import ParameterValues
 from thoughtspot_rest_api_sdk.models.token_access_scope_object import TokenAccessScopeObject
+from thoughtspot_rest_api_sdk.models.token_scope_input import TokenScopeInput
 from thoughtspot_rest_api_sdk.models.variable_values import VariableValues
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,6 +36,7 @@ class GetCustomAccessTokenRequest(BaseModel):
     secret_key: Optional[StrictStr] = Field(default='', description="The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates a secret key when Trusted authentication is enabled.")
     validity_time_in_sec: Optional[StrictInt] = Field(default=300, description="Token validity duration in seconds")
     org_identifier: Optional[StrictStr] = Field(default=None, description="ID or name of the Org context to log in to. If the Org ID or name is not specified but a secret key is provided, the user will be logged into the Org associated with the secret key. If neither the Org ID/name nor the secret key is provided, the user will be logged into the Org context from their previous login session.")
+    scope: Optional[TokenScopeInput] = Field(default=None, description="The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Only SPECIFIC_ORGS is supported for a custom (ABAC) token -- it authorizes the token for the Orgs listed in org_identifiers. Each subsequent request selects one Org from this set using the `X-Org-Selector` header.   Version: 26.10.0.cl or later ")
     persist_option: StrictStr = Field(description="Indicates whether the specified attributes should be persisted or not. RESET and NONE are not applicable if you are setting variable_values.")
     filter_rules: Optional[List[FilterRules]] = Field(default=None, description="Filter rules.")
     parameter_values: Optional[List[ParameterValues]] = Field(default=None, description="Allows developers to assign parameter values for existing parameters to a user at login. Note: Using parameter values for row level security use cases will ultimately be deprecated. Developers can still pass data security values via the Custom Access token via the variable_values field and create RLS rules based on custom variables. Please refer to the [ABAC via RLS documentation](https://developers.thoughtspot.com/docs/abac-user-parameters) for more details.")
@@ -45,7 +47,7 @@ class GetCustomAccessTokenRequest(BaseModel):
     groups: Optional[List[GroupObject]] = Field(default=None, description="(just-in-time (JIT) provisioning) ID or name of the groups to which the newly created user belongs. Specify this attribute when creating a new user.")
     auto_create: Optional[StrictBool] = Field(default=True, description="   Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required. New formula variables won't be created.     Version: 10.5.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["username", "password", "secret_key", "validity_time_in_sec", "org_identifier", "persist_option", "filter_rules", "parameter_values", "variable_values", "objects", "email", "display_name", "groups", "auto_create"]
+    __properties: ClassVar[List[str]] = ["username", "password", "secret_key", "validity_time_in_sec", "org_identifier", "scope", "persist_option", "filter_rules", "parameter_values", "variable_values", "objects", "email", "display_name", "groups", "auto_create"]
 
     @field_validator('persist_option')
     def persist_option_validate_enum(cls, value):
@@ -95,6 +97,9 @@ class GetCustomAccessTokenRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of scope
+        if self.scope:
+            _dict['scope'] = self.scope.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in filter_rules (list)
         _items = []
         if self.filter_rules:
@@ -157,6 +162,7 @@ class GetCustomAccessTokenRequest(BaseModel):
             "secret_key": obj.get("secret_key") if obj.get("secret_key") is not None else '',
             "validity_time_in_sec": obj.get("validity_time_in_sec") if obj.get("validity_time_in_sec") is not None else 300,
             "org_identifier": obj.get("org_identifier"),
+            "scope": TokenScopeInput.from_dict(obj["scope"]) if obj.get("scope") is not None else None,
             "persist_option": obj.get("persist_option"),
             "filter_rules": [FilterRules.from_dict(_item) for _item in obj["filter_rules"]] if obj.get("filter_rules") is not None else None,
             "parameter_values": [ParameterValues.from_dict(_item) for _item in obj["parameter_values"]] if obj.get("parameter_values") is not None else None,

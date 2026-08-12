@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **SecretKey** | **string** | The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates a secret key when Trusted authentication is enabled. | [optional] [default to ""]
 **ValidityTimeInSec** | **int** | Token validity duration in seconds | [optional] [default to 300]
 **OrgId** | **int** | ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session. | [optional] 
+**Scope** | [**TokenScopeInput**](TokenScopeInput.md) | The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the &#x60;X-Org-Selector&#x60; header.   Version: 26.10.0.cl or later  | [optional] 
 **Email** | **string** | Email address of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning). | [optional] 
 **DisplayName** | **string** | Display name of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning). | [optional] 
 **AutoCreate** | **bool?** |    Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required.  | [optional] [default to false]

@@ -49,7 +49,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="user">user (required).</param>
         /// <param name="creationTimeInMillis">Token creation time in milliseconds. (required).</param>
         /// <param name="expirationTimeInMillis">Token expiration time in milliseconds. (required).</param>
-        public AccessToken(string id = default, string token = default, OrgInfo org = default, UserInfo user = default, float creationTimeInMillis = default, float expirationTimeInMillis = default)
+        /// <param name="scope">scope.</param>
+        public AccessToken(string id = default, string token = default, OrgInfo org = default, UserInfo user = default, float creationTimeInMillis = default, float expirationTimeInMillis = default, AccessTokenScope scope = default)
         {
             // to ensure "token" is required (not null)
             if (token == null)
@@ -72,6 +73,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.CreationTimeInMillis = creationTimeInMillis;
             this.ExpirationTimeInMillis = expirationTimeInMillis;
             this.Id = id;
+            this.Scope = scope;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -116,6 +118,12 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public float ExpirationTimeInMillis { get; set; }
 
         /// <summary>
+        /// Gets or Sets Scope
+        /// </summary>
+        [DataMember(Name = "scope", EmitDefaultValue = false)]
+        public AccessTokenScope Scope { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -135,6 +143,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  User: ").Append(User).Append("\n");
             sb.Append("  CreationTimeInMillis: ").Append(CreationTimeInMillis).Append("\n");
             sb.Append("  ExpirationTimeInMillis: ").Append(ExpirationTimeInMillis).Append("\n");
+            sb.Append("  Scope: ").Append(Scope).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

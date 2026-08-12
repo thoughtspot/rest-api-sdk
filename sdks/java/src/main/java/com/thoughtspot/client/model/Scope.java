@@ -5,10 +5,12 @@
 package com.thoughtspot.client.model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -16,6 +18,7 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -49,6 +52,72 @@ public class Scope implements Serializable {
     @javax.annotation.Nullable
     private String metadataId;
 
+    /**
+     * Org scope the token is authorized for. Absent for a legacy single-org token. Version:
+     * 26.10.0.cl or later
+     */
+    @JsonAdapter(OrgScopeEnum.Adapter.class)
+    public enum OrgScopeEnum {
+        SPECIFIC_ORGS("SPECIFIC_ORGS"),
+
+        ALL_MEMBER_ORGS("ALL_MEMBER_ORGS");
+
+        private String value;
+
+        OrgScopeEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static OrgScopeEnum fromValue(String value) {
+            for (OrgScopeEnum b : OrgScopeEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            return null;
+        }
+
+        public static class Adapter extends TypeAdapter<OrgScopeEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final OrgScopeEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public OrgScopeEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return OrgScopeEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            OrgScopeEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_ORG_SCOPE = "org_scope";
+
+    @SerializedName(SERIALIZED_NAME_ORG_SCOPE)
+    @javax.annotation.Nullable
+    private OrgScopeEnum orgScope;
+
+    public static final String SERIALIZED_NAME_ORG_IDS = "org_ids";
+
+    @SerializedName(SERIALIZED_NAME_ORG_IDS)
+    @javax.annotation.Nullable
+    private List<OrgInfo> orgIds;
+
     public Scope() {}
 
     public Scope accessType(@javax.annotation.Nonnull String accessType) {
@@ -76,7 +145,7 @@ public class Scope implements Serializable {
     }
 
     /**
-     * Unique identifier of the metadata.
+     * Unique identifier of the Org.
      *
      * @return orgId
      */
@@ -95,7 +164,7 @@ public class Scope implements Serializable {
     }
 
     /**
-     * Unique identifier of the Org.
+     * Unique identifier of the metadata.
      *
      * @return metadataId
      */
@@ -106,6 +175,54 @@ public class Scope implements Serializable {
 
     public void setMetadataId(@javax.annotation.Nullable String metadataId) {
         this.metadataId = metadataId;
+    }
+
+    public Scope orgScope(@javax.annotation.Nullable OrgScopeEnum orgScope) {
+        this.orgScope = orgScope;
+        return this;
+    }
+
+    /**
+     * Org scope the token is authorized for. Absent for a legacy single-org token. Version:
+     * 26.10.0.cl or later
+     *
+     * @return orgScope
+     */
+    @javax.annotation.Nullable
+    public OrgScopeEnum getOrgScope() {
+        return orgScope;
+    }
+
+    public void setOrgScope(@javax.annotation.Nullable OrgScopeEnum orgScope) {
+        this.orgScope = orgScope;
+    }
+
+    public Scope orgIds(@javax.annotation.Nullable List<OrgInfo> orgIds) {
+        this.orgIds = orgIds;
+        return this;
+    }
+
+    public Scope addOrgIdsItem(OrgInfo orgIdsItem) {
+        if (this.orgIds == null) {
+            this.orgIds = new ArrayList<>();
+        }
+        this.orgIds.add(orgIdsItem);
+        return this;
+    }
+
+    /**
+     * Orgs the token is authorized for when org_scope is SPECIFIC_ORGS. Version: 26.10.0.cl or
+     * later
+     *
+     * @return orgIds
+     */
+    @javax.annotation.Nullable
+    public List<OrgInfo> getOrgIds() {
+        return orgIds;
+    }
+
+    public void setOrgIds(@javax.annotation.Nullable List<OrgInfo> orgIds) {
+        this.orgIds = orgIds;
     }
 
     /**
@@ -164,6 +281,8 @@ public class Scope implements Serializable {
         return Objects.equals(this.accessType, scope.accessType)
                 && Objects.equals(this.orgId, scope.orgId)
                 && Objects.equals(this.metadataId, scope.metadataId)
+                && Objects.equals(this.orgScope, scope.orgScope)
+                && Objects.equals(this.orgIds, scope.orgIds)
                 && Objects.equals(this.additionalProperties, scope.additionalProperties);
     }
 
@@ -178,7 +297,7 @@ public class Scope implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(accessType, orgId, metadataId, additionalProperties);
+        return Objects.hash(accessType, orgId, metadataId, orgScope, orgIds, additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -195,6 +314,8 @@ public class Scope implements Serializable {
         sb.append("    accessType: ").append(toIndentedString(accessType)).append("\n");
         sb.append("    orgId: ").append(toIndentedString(orgId)).append("\n");
         sb.append("    metadataId: ").append(toIndentedString(metadataId)).append("\n");
+        sb.append("    orgScope: ").append(toIndentedString(orgScope)).append("\n");
+        sb.append("    orgIds: ").append(toIndentedString(orgIds)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -222,6 +343,8 @@ public class Scope implements Serializable {
         openapiFields.add("access_type");
         openapiFields.add("org_id");
         openapiFields.add("metadata_id");
+        openapiFields.add("org_scope");
+        openapiFields.add("org_ids");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -270,6 +393,37 @@ public class Scope implements Serializable {
                             "Expected the field `metadata_id` to be a primitive type in the JSON"
                                     + " string but got `%s`",
                             jsonObj.get("metadata_id").toString()));
+        }
+        if ((jsonObj.get("org_scope") != null && !jsonObj.get("org_scope").isJsonNull())
+                && !jsonObj.get("org_scope").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `org_scope` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("org_scope").toString()));
+        }
+        // validate the optional field `org_scope`
+        if (jsonObj.get("org_scope") != null && !jsonObj.get("org_scope").isJsonNull()) {
+            OrgScopeEnum.validateJsonElement(jsonObj.get("org_scope"));
+        }
+        if (jsonObj.get("org_ids") != null && !jsonObj.get("org_ids").isJsonNull()) {
+            JsonArray jsonArrayorgIds = jsonObj.getAsJsonArray("org_ids");
+            if (jsonArrayorgIds != null) {
+                // ensure the json data is an array
+                if (!jsonObj.get("org_ids").isJsonArray()) {
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "Expected the field `org_ids` to be an array in the JSON"
+                                            + " string but got `%s`",
+                                    jsonObj.get("org_ids").toString()));
+                }
+
+                // validate the optional field `org_ids` (array)
+                for (int i = 0; i < jsonArrayorgIds.size(); i++) {
+                    OrgInfo.validateJsonElement(jsonArrayorgIds.get(i));
+                }
+                ;
+            }
         }
     }
 

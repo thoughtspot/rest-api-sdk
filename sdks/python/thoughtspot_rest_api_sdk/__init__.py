@@ -68,6 +68,7 @@ __all__ = [
     "APIKey",
     "APIKeyInput",
     "AccessToken",
+    "AccessTokenScope",
     "ActionConfig",
     "ActionConfigInput",
     "ActionConfigInputCreate",
@@ -504,6 +505,7 @@ __all__ = [
     "TextResponseItem",
     "Token",
     "TokenAccessScopeObject",
+    "TokenScopeInput",
     "TokenValidationResponse",
     "ToolCallResponseItem",
     "ToolResultResponseItem",
@@ -636,6 +638,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.api_key import APIKey as APIKey
     from thoughtspot_rest_api_sdk.models.api_key_input import APIKeyInput as APIKeyInput
     from thoughtspot_rest_api_sdk.models.access_token import AccessToken as AccessToken
+    from thoughtspot_rest_api_sdk.models.access_token_scope import AccessTokenScope as AccessTokenScope
     from thoughtspot_rest_api_sdk.models.action_config import ActionConfig as ActionConfig
     from thoughtspot_rest_api_sdk.models.action_config_input import ActionConfigInput as ActionConfigInput
     from thoughtspot_rest_api_sdk.models.action_config_input_create import ActionConfigInputCreate as ActionConfigInputCreate
@@ -1072,6 +1075,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.text_response_item import TextResponseItem as TextResponseItem
     from thoughtspot_rest_api_sdk.models.token import Token as Token
     from thoughtspot_rest_api_sdk.models.token_access_scope_object import TokenAccessScopeObject as TokenAccessScopeObject
+    from thoughtspot_rest_api_sdk.models.token_scope_input import TokenScopeInput as TokenScopeInput
     from thoughtspot_rest_api_sdk.models.token_validation_response import TokenValidationResponse as TokenValidationResponse
     from thoughtspot_rest_api_sdk.models.tool_call_response_item import ToolCallResponseItem as ToolCallResponseItem
     from thoughtspot_rest_api_sdk.models.tool_result_response_item import ToolResultResponseItem as ToolResultResponseItem
@@ -1210,6 +1214,7 @@ from thoughtspot_rest_api_sdk.models.ai_context import AIContext as AIContext
 from thoughtspot_rest_api_sdk.models.api_key import APIKey as APIKey
 from thoughtspot_rest_api_sdk.models.api_key_input import APIKeyInput as APIKeyInput
 from thoughtspot_rest_api_sdk.models.access_token import AccessToken as AccessToken
+from thoughtspot_rest_api_sdk.models.access_token_scope import AccessTokenScope as AccessTokenScope
 from thoughtspot_rest_api_sdk.models.action_config import ActionConfig as ActionConfig
 from thoughtspot_rest_api_sdk.models.action_config_input import ActionConfigInput as ActionConfigInput
 from thoughtspot_rest_api_sdk.models.action_config_input_create import ActionConfigInputCreate as ActionConfigInputCreate
@@ -1646,6 +1651,7 @@ from thoughtspot_rest_api_sdk.models.template_properties_input_create import Tem
 from thoughtspot_rest_api_sdk.models.text_response_item import TextResponseItem as TextResponseItem
 from thoughtspot_rest_api_sdk.models.token import Token as Token
 from thoughtspot_rest_api_sdk.models.token_access_scope_object import TokenAccessScopeObject as TokenAccessScopeObject
+from thoughtspot_rest_api_sdk.models.token_scope_input import TokenScopeInput as TokenScopeInput
 from thoughtspot_rest_api_sdk.models.token_validation_response import TokenValidationResponse as TokenValidationResponse
 from thoughtspot_rest_api_sdk.models.tool_call_response_item import ToolCallResponseItem as ToolCallResponseItem
 from thoughtspot_rest_api_sdk.models.tool_result_response_item import ToolResultResponseItem as ToolResultResponseItem

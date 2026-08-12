@@ -107,5 +107,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'ExpirationTimeInMillis'
         }
+
+        /// <summary>
+        /// Test the property 'Scope'
+        /// </summary>
+        [Fact]
+        public void ScopeTest()
+        {
+            // TODO unit test for the property 'Scope'
+        }
     }
 }
