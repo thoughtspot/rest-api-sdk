@@ -22331,8 +22331,7 @@
                 "CAN_CREATE_LIVEBOARD",
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
-                "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_ADMINISTER_SCHEDULES"
               ]
             },
             "description": "Privileges granted to the role."
@@ -27189,8 +27188,7 @@
                 "CAN_CREATE_LIVEBOARD",
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
-                "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_ADMINISTER_SCHEDULES"
               ]
             },
             "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
@@ -28263,8 +28261,7 @@
                 "CAN_CREATE_LIVEBOARD",
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
-                "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_ADMINISTER_SCHEDULES"
               ]
             },
             "description": "Privileges granted to the role."
@@ -33052,8 +33049,7 @@
                 "CAN_CREATE_LIVEBOARD",
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
-                "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_ADMINISTER_SCHEDULES"
               ]
             }
           },
@@ -33216,8 +33212,7 @@
                 "CAN_CREATE_LIVEBOARD",
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
-                "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_ADMINISTER_SCHEDULES"
               ]
             }
           },
@@ -33361,8 +33356,7 @@
                 "CAN_CREATE_LIVEBOARD",
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
-                "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_ADMINISTER_SCHEDULES"
               ]
             }
           },
@@ -34616,8 +34610,7 @@
                 "CAN_CREATE_LIVEBOARD",
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
-                "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_ADMINISTER_SCHEDULES"
               ]
             }
           },
@@ -34720,8 +34713,7 @@
                 "CAN_CREATE_LIVEBOARD",
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
-                "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_ADMINISTER_SCHEDULES"
               ]
             }
           },
@@ -34819,8 +34811,7 @@
                 "CAN_CREATE_LIVEBOARD",
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
-                "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_ADMINISTER_SCHEDULES"
               ]
             }
           }
@@ -37476,8 +37467,7 @@
                 "CAN_CREATE_LIVEBOARD",
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
-                "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_ADMINISTER_SCHEDULES"
               ]
             }
           },

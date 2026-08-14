@@ -139,9 +139,7 @@ public class GroupsImportListInput implements Serializable {
 
         CAN_ANALYZE_DATA("CAN_ANALYZE_DATA"),
 
-        CAN_ADMINISTER_SCHEDULES("CAN_ADMINISTER_SCHEDULES"),
-
-        CAN_CREATE_KPI_ALERTS("CAN_CREATE_KPI_ALERTS");
+        CAN_ADMINISTER_SCHEDULES("CAN_ADMINISTER_SCHEDULES");
 
         private String value;
 

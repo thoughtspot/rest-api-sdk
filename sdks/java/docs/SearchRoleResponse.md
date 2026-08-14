@@ -92,7 +92,6 @@ Response for search role api should handle hidden privileges as well.
 | CAN_CREATE_ANSWERS | &quot;CAN_CREATE_ANSWERS&quot; |
 | CAN_ANALYZE_DATA | &quot;CAN_ANALYZE_DATA&quot; |
 | CAN_ADMINISTER_SCHEDULES | &quot;CAN_ADMINISTER_SCHEDULES&quot; |
-| CAN_CREATE_KPI_ALERTS | &quot;CAN_CREATE_KPI_ALERTS&quot; |
 
 
 

@@ -318,13 +318,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum CANADMINISTERSCHEDULES for value: CAN_ADMINISTER_SCHEDULES
             /// </summary>
             [EnumMember(Value = "CAN_ADMINISTER_SCHEDULES")]
-            CANADMINISTERSCHEDULES = 47,
-
-            /// <summary>
-            /// Enum CANCREATEKPIALERTS for value: CAN_CREATE_KPI_ALERTS
-            /// </summary>
-            [EnumMember(Value = "CAN_CREATE_KPI_ALERTS")]
-            CANCREATEKPIALERTS = 48
+            CANADMINISTERSCHEDULES = 47
         }
 
         /// <summary>

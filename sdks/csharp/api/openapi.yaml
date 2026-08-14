@@ -19801,7 +19801,6 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
-            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         permission:
@@ -24924,7 +24923,6 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
-            - CAN_CREATE_KPI_ALERTS
             type: string
           nullable: true
           type: array
@@ -26046,7 +26044,6 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
-            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         permission:
@@ -30933,7 +30930,6 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
-            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         sub_group_identifiers:
@@ -31143,7 +31139,6 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
-            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         sub_group_identifiers:
@@ -31296,7 +31291,6 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
-            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         sub_group_identifiers:
@@ -32656,7 +32650,6 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
-            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         read_only:
@@ -32771,7 +32764,6 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
-            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         deprecated:
@@ -32865,7 +32857,6 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
-            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
       required:
@@ -35709,7 +35700,6 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
-            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         account_type:
