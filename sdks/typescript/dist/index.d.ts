@@ -9340,7 +9340,7 @@ type DeleteStyleFontsRequestScopeEnum = "CLUSTER" | "ORG";
  */
 declare class DeleteVariablesRequest {
     /**
-    * Unique id(s) or name(s) of the variable(s) to delete
+    * Unique id(s), name(s), or object id(s) of the variable(s) to delete
     */
     'identifiers': Array<string>;
     static readonly discriminator: string | undefined;
@@ -13266,7 +13266,7 @@ declare class HeaderUpdateInput {
     }[];
     constructor();
 }
-type HeaderUpdateInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "COLLECTION";
+type HeaderUpdateInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "COLLECTION" | "TEMPLATE_VARIABLE";
 
 /**
  * ThoughtSpot Public REST API
@@ -19499,7 +19499,7 @@ type ValueScopeInputPrincipalTypeEnum = "USER" | "USER_GROUP";
 */
 declare class VariableDetailInput {
     /**
-    * Unique ID or name of the variable
+    * Unique ID, name, or object ID of the variable
     */
     'identifier'?: string | null;
     /**
@@ -23399,7 +23399,7 @@ declare class UpdateObjIdInput {
     }[];
     constructor();
 }
-type UpdateObjIdInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "COLLECTION";
+type UpdateObjIdInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "COLLECTION" | "TEMPLATE_VARIABLE";
 
 /**
  * ThoughtSpot Public REST API
@@ -23984,7 +23984,7 @@ declare class UpdateVariableRequest {
 */
 declare class VariableUpdateAssignmentInput {
     /**
-    * ID or Name of the variable
+    * ID, name, or object ID of the variable
     */
     'variable_identifier': string;
     /**
@@ -24805,6 +24805,10 @@ declare class Variable {
     * Name of the variable
     */
     'name': string;
+    /**
+    * Custom object identifier (obj_id) of the variable    Version: 26.10.0.cl or later
+    */
+    'obj_id'?: string | null;
     /**
     * Type of the variable
     */
@@ -28273,7 +28277,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      * @deprecated
      *
      *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects
-     * @param identifier Unique id or name of the variable
+     * @param identifier Unique id, name, or object id of the variable
      */
     deleteVariable(identifier: string, _options?: Configuration): Promise<RequestContext>;
     /**
@@ -28920,7 +28924,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
     updateUserGroup(groupIdentifier: string, updateUserGroupRequest: UpdateUserGroupRequest, _options?: Configuration): Promise<RequestContext>;
     /**
      *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name
-     * @param identifier Unique id or name of the variable to update.
+     * @param identifier Unique id, name, or object id of the variable to update.
      * @param updateVariableRequest
      */
     updateVariable(identifier: string, updateVariableRequest: UpdateVariableRequest, _options?: Configuration): Promise<RequestContext>;
@@ -30570,7 +30574,7 @@ declare class VariableApiRequestFactory extends BaseAPIRequestFactory {
      * @deprecated
      *
      *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects
-     * @param identifier Unique id or name of the variable
+     * @param identifier Unique id, name, or object id of the variable
      */
     deleteVariable(identifier: string, _options?: Configuration): Promise<RequestContext>;
     /**
@@ -30591,7 +30595,7 @@ declare class VariableApiRequestFactory extends BaseAPIRequestFactory {
     searchVariables(searchVariablesRequest: SearchVariablesRequest, _options?: Configuration): Promise<RequestContext>;
     /**
      *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name
-     * @param identifier Unique id or name of the variable to update.
+     * @param identifier Unique id, name, or object id of the variable to update.
      * @param updateVariableRequest
      */
     updateVariable(identifier: string, updateVariableRequest: UpdateVariableRequest, _options?: Configuration): Promise<RequestContext>;
@@ -33149,12 +33153,12 @@ declare class PromiseThoughtSpotRestApi {
     deleteUserGroup(groupIdentifier: string, _options?: PromiseConfigurationOptions): Promise<void>;
     /**
      *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects
-     * @param identifier Unique id or name of the variable
+     * @param identifier Unique id, name, or object id of the variable
      */
     deleteVariableWithHttpInfo(identifier: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>>;
     /**
      *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects
-     * @param identifier Unique id or name of the variable
+     * @param identifier Unique id, name, or object id of the variable
      */
     deleteVariable(identifier: string, _options?: PromiseConfigurationOptions): Promise<void>;
     /**
@@ -34423,13 +34427,13 @@ declare class PromiseThoughtSpotRestApi {
     updateUserGroup(groupIdentifier: string, updateUserGroupRequest: UpdateUserGroupRequest, _options?: PromiseConfigurationOptions): Promise<void>;
     /**
      *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name
-     * @param identifier Unique id or name of the variable to update.
+     * @param identifier Unique id, name, or object id of the variable to update.
      * @param updateVariableRequest
      */
     updateVariableWithHttpInfo(identifier: string, updateVariableRequest: UpdateVariableRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>>;
     /**
      *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name
-     * @param identifier Unique id or name of the variable to update.
+     * @param identifier Unique id, name, or object id of the variable to update.
      * @param updateVariableRequest
      */
     updateVariable(identifier: string, updateVariableRequest: UpdateVariableRequest, _options?: PromiseConfigurationOptions): Promise<void>;
@@ -34637,12 +34641,12 @@ declare class PromiseVariableApi {
     createVariable(createVariableRequest: CreateVariableRequest, _options?: PromiseConfigurationOptions): Promise<Variable>;
     /**
      *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects
-     * @param identifier Unique id or name of the variable
+     * @param identifier Unique id, name, or object id of the variable
      */
     deleteVariableWithHttpInfo(identifier: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>>;
     /**
      *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects
-     * @param identifier Unique id or name of the variable
+     * @param identifier Unique id, name, or object id of the variable
      */
     deleteVariable(identifier: string, _options?: PromiseConfigurationOptions): Promise<void>;
     /**
@@ -34679,13 +34683,13 @@ declare class PromiseVariableApi {
     searchVariables(searchVariablesRequest: SearchVariablesRequest, _options?: PromiseConfigurationOptions): Promise<Array<Variable>>;
     /**
      *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name
-     * @param identifier Unique id or name of the variable to update.
+     * @param identifier Unique id, name, or object id of the variable to update.
      * @param updateVariableRequest
      */
     updateVariableWithHttpInfo(identifier: string, updateVariableRequest: UpdateVariableRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>>;
     /**
      *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name
-     * @param identifier Unique id or name of the variable to update.
+     * @param identifier Unique id, name, or object id of the variable to update.
      * @param updateVariableRequest
      */
     updateVariable(identifier: string, updateVariableRequest: UpdateVariableRequest, _options?: PromiseConfigurationOptions): Promise<void>;

@@ -82,7 +82,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableUpdateAssignmentInput" /> class.
         /// </summary>
-        /// <param name="variableIdentifier">ID or Name of the variable (required).</param>
+        /// <param name="variableIdentifier">ID, name, or object ID of the variable (required).</param>
         /// <param name="variableValues">Values of the variable (required).</param>
         /// <param name="operation">Operation to perform (required).</param>
         public VariableUpdateAssignmentInput(string variableIdentifier = default, List<string> variableValues = default, OperationEnum operation = default)
@@ -104,9 +104,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// ID or Name of the variable
+        /// ID, name, or object ID of the variable
         /// </summary>
-        /// <value>ID or Name of the variable</value>
+        /// <value>ID, name, or object ID of the variable</value>
         [DataMember(Name = "variable_identifier", IsRequired = true, EmitDefaultValue = true)]
         public string VariableIdentifier { get; set; }
 

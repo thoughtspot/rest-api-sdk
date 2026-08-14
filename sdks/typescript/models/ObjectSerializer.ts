@@ -1016,7 +1016,7 @@ import { ValidateCommunicationChannelRequest, ValidateCommunicationChannelReques
 import { ValidateMergeRequest } from '../models/ValidateMergeRequest';
 import { ValidateTokenRequest } from '../models/ValidateTokenRequest';
 import { ValueScopeInput , ValueScopeInputPrincipalTypeEnum     } from '../models/ValueScopeInput';
-import { Variable  , VariableVariableTypeEnum      } from '../models/Variable';
+import { Variable   , VariableVariableTypeEnum      } from '../models/Variable';
 import { VariableDetailInput , VariableDetailInputTypeEnum    } from '../models/VariableDetailInput';
 import { VariableOrgInfo } from '../models/VariableOrgInfo';
 import { VariablePutAssignmentInput  , VariablePutAssignmentInputPrincipalTypeEnum      } from '../models/VariablePutAssignmentInput';

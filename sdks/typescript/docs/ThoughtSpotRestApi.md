@@ -3751,7 +3751,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new ThoughtSpotRestApi(configuration);
 
 apiInstance.deleteVariable(
-  // string | Unique id or name of the variable
+  // string | Unique id, name, or object id of the variable
   "identifier_example" 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -3765,7 +3765,7 @@ apiInstance.deleteVariable(
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identifier** | [**string**] | Unique id or name of the variable | defaults to undefined
+ **identifier** | [**string**] | Unique id, name, or object id of the variable | defaults to undefined
 
 
 ### Return type
@@ -12148,7 +12148,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new ThoughtSpotRestApi(configuration);
 
 apiInstance.updateVariable(
-  // string | Unique id or name of the variable to update.
+  // string | Unique id, name, or object id of the variable to update.
   "identifier_example" , 
   // UpdateVariableRequest
   {
@@ -12167,7 +12167,7 @@ apiInstance.updateVariable(
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **updateVariableRequest** | **UpdateVariableRequest**|  |
- **identifier** | [**string**] | Unique id or name of the variable to update. | defaults to undefined
+ **identifier** | [**string**] | Unique id, name, or object id of the variable to update. | defaults to undefined
 
 
 ### Return type

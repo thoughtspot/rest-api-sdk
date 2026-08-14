@@ -17,7 +17,7 @@ import { HttpFile } from '../http/http';
 */
 export class VariableUpdateAssignmentInput {
     /**
-    * ID or Name of the variable
+    * ID, name, or object ID of the variable
     */
     'variable_identifier': string;
     /**

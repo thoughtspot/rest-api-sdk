@@ -28,6 +28,7 @@ Favorite object options.
 | USER | &quot;USER&quot; |
 | USER_GROUP | &quot;USER_GROUP&quot; |
 | COLLECTION | &quot;COLLECTION&quot; |
+| TEMPLATE_VARIABLE | &quot;TEMPLATE_VARIABLE&quot; |
 
 
 ## Implemented Interfaces

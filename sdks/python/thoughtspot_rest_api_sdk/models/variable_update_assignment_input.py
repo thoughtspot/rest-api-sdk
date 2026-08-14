@@ -25,7 +25,7 @@ class VariableUpdateAssignmentInput(BaseModel):
     """
     Input for variable value update in batch operations
     """ # noqa: E501
-    variable_identifier: StrictStr = Field(description="ID or Name of the variable")
+    variable_identifier: StrictStr = Field(description="ID, name, or object ID of the variable")
     variable_values: List[StrictStr] = Field(description="Values of the variable")
     operation: StrictStr = Field(description="Operation to perform")
     additional_properties: Dict[str, Any] = {}

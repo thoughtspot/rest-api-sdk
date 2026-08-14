@@ -14165,7 +14165,7 @@ paths:
         \ exist\n* The variable is being used by other objects \n\n\n\n\n"
       operationId: deleteVariable
       parameters:
-      - description: Unique id or name of the variable
+      - description: "Unique id, name, or object id of the variable"
         explode: false
         in: path
         name: identifier
@@ -14382,7 +14382,7 @@ paths:
         \ allows updating:\n* The variable name\n\n\n\n\n"
       operationId: updateVariable
       parameters:
-      - description: Unique id or name of the variable to update.
+      - description: "Unique id, name, or object id of the variable to update."
         explode: false
         in: path
         name: identifier
@@ -21473,7 +21473,7 @@ components:
         name_pattern: name_pattern
       properties:
         identifier:
-          description: Unique ID or name of the variable
+          description: "Unique ID, name, or object ID of the variable"
           nullable: true
           type: string
         type:
@@ -21528,6 +21528,7 @@ components:
       example:
         id: id
         name: name
+        obj_id: obj_id
         variable_type: CONNECTION_PROPERTY
         sensitive: true
         values:
@@ -21558,6 +21559,11 @@ components:
           type: string
         name:
           description: Name of the variable
+          type: string
+        obj_id:
+          description: "Custom object identifier (obj_id) of the variable \n  Version:\
+            \ 26.10.0.cl or later\n"
+          nullable: true
           type: string
         variable_type:
           description: Type of the variable
@@ -25321,6 +25327,7 @@ components:
           - USER
           - USER_GROUP
           - COLLECTION
+          - TEMPLATE_VARIABLE
           nullable: true
           type: string
         attributes:
@@ -25372,6 +25379,7 @@ components:
           - USER
           - USER_GROUP
           - COLLECTION
+          - TEMPLATE_VARIABLE
           nullable: true
           type: string
         current_obj_id:
@@ -27369,7 +27377,7 @@ components:
         operation: ADD
       properties:
         variable_identifier:
-          description: ID or Name of the variable
+          description: "ID, name, or object ID of the variable"
           type: string
         variable_values:
           description: Values of the variable
@@ -35980,7 +35988,8 @@ components:
         - identifiers
       properties:
         identifiers:
-          description: Unique id(s) or name(s) of the variable(s) to delete
+          description: "Unique id(s), name(s), or object id(s) of the variable(s)\
+            \ to delete"
           items:
             type: string
           type: array

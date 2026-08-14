@@ -5568,7 +5568,7 @@ export interface ThoughtSpotRestApiDeleteUserGroupRequest {
 
 export interface ThoughtSpotRestApiDeleteVariableRequest {
     /**
-     * Unique id or name of the variable
+     * Unique id, name, or object id of the variable
      * Defaults to: undefined
      * @type string
      * @memberof ThoughtSpotRestApideleteVariable
@@ -6926,7 +6926,7 @@ export interface ThoughtSpotRestApiUpdateUserGroupRequest {
 
 export interface ThoughtSpotRestApiUpdateVariableRequest {
     /**
-     * Unique id or name of the variable to update.
+     * Unique id, name, or object id of the variable to update.
      * Defaults to: undefined
      * @type string
      * @memberof ThoughtSpotRestApiupdateVariable
@@ -10229,7 +10229,7 @@ export interface VariableApiCreateVariableRequest {
 
 export interface VariableApiDeleteVariableRequest {
     /**
-     * Unique id or name of the variable
+     * Unique id, name, or object id of the variable
      * Defaults to: undefined
      * @type string
      * @memberof VariableApideleteVariable
@@ -10273,7 +10273,7 @@ export interface VariableApiSearchVariablesRequest {
 
 export interface VariableApiUpdateVariableRequest {
     /**
-     * Unique id or name of the variable to update.
+     * Unique id, name, or object id of the variable to update.
      * Defaults to: undefined
      * @type string
      * @memberof VariableApiupdateVariable

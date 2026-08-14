@@ -5,7 +5,7 @@ Input for variable value update in batch operations
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**VariableIdentifier** | **string** | ID or Name of the variable | 
+**VariableIdentifier** | **string** | ID, name, or object ID of the variable | 
 **VariableValues** | **List&lt;string&gt;** | Values of the variable | 
 **Operation** | **string** | Operation to perform | 
 

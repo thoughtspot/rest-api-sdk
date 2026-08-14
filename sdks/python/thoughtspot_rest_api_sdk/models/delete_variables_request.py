@@ -25,7 +25,7 @@ class DeleteVariablesRequest(BaseModel):
     """
     DeleteVariablesRequest
     """ # noqa: E501
-    identifiers: List[StrictStr] = Field(description="Unique id(s) or name(s) of the variable(s) to delete")
+    identifiers: List[StrictStr] = Field(description="Unique id(s), name(s), or object id(s) of the variable(s) to delete")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["identifiers"]
 

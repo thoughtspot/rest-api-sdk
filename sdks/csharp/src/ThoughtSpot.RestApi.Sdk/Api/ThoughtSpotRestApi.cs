@@ -1181,7 +1181,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <returns></returns>
         [Obsolete]
         void DeleteVariable(string identifier);
@@ -1193,7 +1193,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <returns>ApiResponse of Object(void)</returns>
         [Obsolete]
         ApiResponse<Object> DeleteVariableWithHttpInfo(string identifier);
@@ -3787,7 +3787,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <returns></returns>
         void UpdateVariable(string identifier, UpdateVariableRequest updateVariableRequest);
@@ -3799,7 +3799,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> UpdateVariableWithHttpInfo(string identifier, UpdateVariableRequest updateVariableRequest);
@@ -5231,7 +5231,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
         [Obsolete]
@@ -5244,7 +5244,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         [Obsolete]
@@ -8077,7 +8077,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -8090,7 +8090,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -15830,7 +15830,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <returns></returns>
         [Obsolete]
         public void DeleteVariable(string identifier)
@@ -15842,7 +15842,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <returns>ApiResponse of Object(void)</returns>
         [Obsolete]
         public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> DeleteVariableWithHttpInfo(string identifier)
@@ -15892,7 +15892,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
         [Obsolete]
@@ -15905,7 +15905,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         [Obsolete]
@@ -31920,7 +31920,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <returns></returns>
         public void UpdateVariable(string identifier, UpdateVariableRequest updateVariableRequest)
@@ -31932,7 +31932,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> UpdateVariableWithHttpInfo(string identifier, UpdateVariableRequest updateVariableRequest)
@@ -31988,7 +31988,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -32001,7 +32001,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>

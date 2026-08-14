@@ -144,7 +144,7 @@ namespace Example
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new VariableApi(httpClient, config, httpClientHandler);
-            var identifier = "identifier_example";  // string | Unique id or name of the variable
+            var identifier = "identifier_example";  // string | Unique id, name, or object id of the variable
 
             try
             {
@@ -181,7 +181,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **identifier** | **string** | Unique id or name of the variable |  |
+| **identifier** | **string** | Unique id, name, or object id of the variable |  |
 
 ### Return type
 
@@ -534,7 +534,7 @@ namespace Example
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new VariableApi(httpClient, config, httpClientHandler);
-            var identifier = "identifier_example";  // string | Unique id or name of the variable to update.
+            var identifier = "identifier_example";  // string | Unique id, name, or object id of the variable to update.
             var updateVariableRequest = new UpdateVariableRequest(); // UpdateVariableRequest | 
 
             try
@@ -572,7 +572,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **identifier** | **string** | Unique id or name of the variable to update. |  |
+| **identifier** | **string** | Unique id, name, or object id of the variable to update. |  |
 | **updateVariableRequest** | [**UpdateVariableRequest**](UpdateVariableRequest.md) |  |  |
 
 ### Return type

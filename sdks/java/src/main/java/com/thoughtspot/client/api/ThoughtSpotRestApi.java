@@ -11279,7 +11279,7 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for deleteVariable
      *
-     * @param identifier Unique id or name of the variable (required)
+     * @param identifier Unique id, name, or object id of the variable (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -11379,7 +11379,7 @@ public class ThoughtSpotRestApi {
      * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
      * exist * The variable is being used by other objects
      *
-     * @param identifier Unique id or name of the variable (required)
+     * @param identifier Unique id, name, or object id of the variable (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -11410,7 +11410,7 @@ public class ThoughtSpotRestApi {
      * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
      * exist * The variable is being used by other objects
      *
-     * @param identifier Unique id or name of the variable (required)
+     * @param identifier Unique id, name, or object id of the variable (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -11443,7 +11443,7 @@ public class ThoughtSpotRestApi {
      * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
      * exist * The variable is being used by other objects
      *
-     * @param identifier Unique id or name of the variable (required)
+     * @param identifier Unique id, name, or object id of the variable (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -39320,7 +39320,7 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for updateVariable
      *
-     * @param identifier Unique id or name of the variable to update. (required)
+     * @param identifier Unique id, name, or object id of the variable to update. (required)
      * @param updateVariableRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -39426,7 +39426,7 @@ public class ThoughtSpotRestApi {
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint allows updating: * The variable name
      *
-     * @param identifier Unique id or name of the variable to update. (required)
+     * @param identifier Unique id, name, or object id of the variable to update. (required)
      * @param updateVariableRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -39452,7 +39452,7 @@ public class ThoughtSpotRestApi {
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint allows updating: * The variable name
      *
-     * @param identifier Unique id or name of the variable to update. (required)
+     * @param identifier Unique id, name, or object id of the variable to update. (required)
      * @param updateVariableRequest (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -39481,7 +39481,7 @@ public class ThoughtSpotRestApi {
      * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
      * organization scope. The API endpoint allows updating: * The variable name
      *
-     * @param identifier Unique id or name of the variable to update. (required)
+     * @param identifier Unique id, name, or object id of the variable to update. (required)
      * @param updateVariableRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call

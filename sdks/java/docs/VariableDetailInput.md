@@ -8,7 +8,7 @@ Input for variable details in search
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**identifier** | **String** | Unique ID or name of the variable |  [optional] |
+|**identifier** | **String** | Unique ID, name, or object ID of the variable |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) | Type of variable |  [optional] |
 |**namePattern** | **String** | A pattern to match case-insensitive name of the variable. User % for a wildcard match |  [optional] |
 
