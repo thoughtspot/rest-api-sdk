@@ -27544,7 +27544,8 @@
               "DATA_SOURCE",
               "USER",
               "USER_GROUP",
-              "COLLECTION"
+              "COLLECTION",
+              "ROLE"
             ],
             "description": "Optional type of the header object.",
             "nullable": true
@@ -27599,7 +27600,8 @@
               "DATA_SOURCE",
               "USER",
               "USER_GROUP",
-              "COLLECTION"
+              "COLLECTION",
+              "ROLE"
             ],
             "description": "Type of metadata. Required if metadata_identifier is name of the object.",
             "nullable": true
