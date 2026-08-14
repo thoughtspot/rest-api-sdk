@@ -49,7 +49,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="updatedAt">ISO 8601 timestamp when the conversation was last updated..</param>
         /// <param name="dataSourceIdentifiers">Unique identifiers of the data sources associated with the conversation..</param>
         /// <param name="dataSourceNames">Data sources associated with the conversation, each with an &#x60;id&#x60; and &#x60;name&#x60;..</param>
-        public AgentConversationList(string conversationIdentifier = default, string conversationTitle = default, string createdAt = default, string updatedAt = default, List<string> dataSourceIdentifiers = default, List<DataSourceEntry> dataSourceNames = default)
+        /// <param name="isPinned">Whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list.    Version: 26.10.0.cl or later .</param>
+        public AgentConversationList(string conversationIdentifier = default, string conversationTitle = default, string createdAt = default, string updatedAt = default, List<string> dataSourceIdentifiers = default, List<DataSourceEntry> dataSourceNames = default, bool? isPinned = default)
         {
             // to ensure "conversationIdentifier" is required (not null)
             if (conversationIdentifier == null)
@@ -62,6 +63,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.UpdatedAt = updatedAt;
             this.DataSourceIdentifiers = dataSourceIdentifiers;
             this.DataSourceNames = dataSourceNames;
+            this.IsPinned = isPinned;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -108,6 +110,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public List<DataSourceEntry> DataSourceNames { get; set; }
 
         /// <summary>
+        /// Whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list.    Version: 26.10.0.cl or later 
+        /// </summary>
+        /// <value>Whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list.    Version: 26.10.0.cl or later </value>
+        [DataMember(Name = "is_pinned", EmitDefaultValue = true)]
+        public bool? IsPinned { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -127,6 +136,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  DataSourceIdentifiers: ").Append(DataSourceIdentifiers).Append("\n");
             sb.Append("  DataSourceNames: ").Append(DataSourceNames).Append("\n");
+            sb.Append("  IsPinned: ").Append(IsPinned).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

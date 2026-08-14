@@ -2129,8 +2129,10 @@ public class AiApi {
      * &#x60;updated_at&#x60;: ISO 8601 timestamp of the most recent update to the conversation -
      * &#x60;data_source_identifiers&#x60;: list of unique IDs of the data sources associated with
      * the conversation - &#x60;data_source_names&#x60;: array of &#x60;{ id, name }&#x60; objects
-     * for the data sources associated with the conversation #### Pagination Use &#x60;limit&#x60;
-     * and &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
+     * for the data sources associated with the conversation - &#x60;is_pinned&#x60;: whether the
+     * current user has pinned this conversation. Pinned conversations are surfaced first in the
+     * list. Available from version 26.10.0.cl. #### Pagination Use &#x60;limit&#x60; and
+     * &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
      * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 → first page GET
      * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second page
      * &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
@@ -2144,15 +2146,16 @@ public class AiApi {
      * \&quot;2026-03-01T10:00:00Z\&quot;, \&quot;updated_at\&quot;:
      * \&quot;2026-03-05T14:23:00Z\&quot;, \&quot;data_source_identifiers\&quot;:
      * [\&quot;ds-001\&quot;], \&quot;data_source_names\&quot;: [{ \&quot;id\&quot;:
-     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }] } ],
-     * \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; #### Error responses | Code | Description
-     * | |------|-------------| | 401 | Unauthorized — authentication token is missing, expired, or
-     * invalid. | | 403 | Forbidden — the authenticated user does not have
-     * &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; - Only conversations
-     * created with &#x60;enable_save_chat: true&#x60; appear in this list. Conversations created
-     * with &#x60;enable_save_chat: false&#x60; (the default) are not persisted and cannot be
-     * retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires
-     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }],
+     * \&quot;is_pinned\&quot;: true } ], \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; ####
+     * Error responses | Code | Description | |------|-------------| | 401 | Unauthorized —
+     * authentication token is missing, expired, or invalid. | | 403 | Forbidden — the authenticated
+     * user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; -
+     * Only conversations created with &#x60;enable_save_chat: true&#x60; appear in this list.
+     * Conversations created with &#x60;enable_save_chat: false&#x60; (the default) are not
+     * persisted and cannot be retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; -
+     * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
+     * cluster.
      *
      * @param limit Maximum number of conversations to return. Used for pagination. (optional,
      *     default to 30)
@@ -2203,8 +2206,10 @@ public class AiApi {
      * &#x60;updated_at&#x60;: ISO 8601 timestamp of the most recent update to the conversation -
      * &#x60;data_source_identifiers&#x60;: list of unique IDs of the data sources associated with
      * the conversation - &#x60;data_source_names&#x60;: array of &#x60;{ id, name }&#x60; objects
-     * for the data sources associated with the conversation #### Pagination Use &#x60;limit&#x60;
-     * and &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
+     * for the data sources associated with the conversation - &#x60;is_pinned&#x60;: whether the
+     * current user has pinned this conversation. Pinned conversations are surfaced first in the
+     * list. Available from version 26.10.0.cl. #### Pagination Use &#x60;limit&#x60; and
+     * &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
      * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 → first page GET
      * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second page
      * &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
@@ -2218,15 +2223,16 @@ public class AiApi {
      * \&quot;2026-03-01T10:00:00Z\&quot;, \&quot;updated_at\&quot;:
      * \&quot;2026-03-05T14:23:00Z\&quot;, \&quot;data_source_identifiers\&quot;:
      * [\&quot;ds-001\&quot;], \&quot;data_source_names\&quot;: [{ \&quot;id\&quot;:
-     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }] } ],
-     * \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; #### Error responses | Code | Description
-     * | |------|-------------| | 401 | Unauthorized — authentication token is missing, expired, or
-     * invalid. | | 403 | Forbidden — the authenticated user does not have
-     * &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; - Only conversations
-     * created with &#x60;enable_save_chat: true&#x60; appear in this list. Conversations created
-     * with &#x60;enable_save_chat: false&#x60; (the default) are not persisted and cannot be
-     * retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires
-     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }],
+     * \&quot;is_pinned\&quot;: true } ], \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; ####
+     * Error responses | Code | Description | |------|-------------| | 401 | Unauthorized —
+     * authentication token is missing, expired, or invalid. | | 403 | Forbidden — the authenticated
+     * user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; -
+     * Only conversations created with &#x60;enable_save_chat: true&#x60; appear in this list.
+     * Conversations created with &#x60;enable_save_chat: false&#x60; (the default) are not
+     * persisted and cannot be retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; -
+     * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
+     * cluster.
      *
      * @param limit Maximum number of conversations to return. Used for pagination. (optional,
      *     default to 30)
@@ -2278,8 +2284,10 @@ public class AiApi {
      * &#x60;updated_at&#x60;: ISO 8601 timestamp of the most recent update to the conversation -
      * &#x60;data_source_identifiers&#x60;: list of unique IDs of the data sources associated with
      * the conversation - &#x60;data_source_names&#x60;: array of &#x60;{ id, name }&#x60; objects
-     * for the data sources associated with the conversation #### Pagination Use &#x60;limit&#x60;
-     * and &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
+     * for the data sources associated with the conversation - &#x60;is_pinned&#x60;: whether the
+     * current user has pinned this conversation. Pinned conversations are surfaced first in the
+     * list. Available from version 26.10.0.cl. #### Pagination Use &#x60;limit&#x60; and
+     * &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
      * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 → first page GET
      * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second page
      * &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
@@ -2293,15 +2301,16 @@ public class AiApi {
      * \&quot;2026-03-01T10:00:00Z\&quot;, \&quot;updated_at\&quot;:
      * \&quot;2026-03-05T14:23:00Z\&quot;, \&quot;data_source_identifiers\&quot;:
      * [\&quot;ds-001\&quot;], \&quot;data_source_names\&quot;: [{ \&quot;id\&quot;:
-     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }] } ],
-     * \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; #### Error responses | Code | Description
-     * | |------|-------------| | 401 | Unauthorized — authentication token is missing, expired, or
-     * invalid. | | 403 | Forbidden — the authenticated user does not have
-     * &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; - Only conversations
-     * created with &#x60;enable_save_chat: true&#x60; appear in this list. Conversations created
-     * with &#x60;enable_save_chat: false&#x60; (the default) are not persisted and cannot be
-     * retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires
-     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }],
+     * \&quot;is_pinned\&quot;: true } ], \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; ####
+     * Error responses | Code | Description | |------|-------------| | 401 | Unauthorized —
+     * authentication token is missing, expired, or invalid. | | 403 | Forbidden — the authenticated
+     * user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; -
+     * Only conversations created with &#x60;enable_save_chat: true&#x60; appear in this list.
+     * Conversations created with &#x60;enable_save_chat: false&#x60; (the default) are not
+     * persisted and cannot be retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; -
+     * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
+     * cluster.
      *
      * @param limit Maximum number of conversations to return. Used for pagination. (optional,
      *     default to 30)
@@ -6870,35 +6879,52 @@ public class AiApi {
     }
 
     /**
-     * Updates attributes of an existing agent conversation. Currently only the display title can be
-     * updated; additional conversation attributes may be supported in future versions. At least one
-     * updatable attribute must be provided in the request body. Version: 26.7.0.cl or later Updates
-     * attributes of an existing saved agent conversation. Currently only the conversation&#39;s
-     * display &#x60;title&#x60; can be updated; additional updatable attributes may be supported in
-     * future versions. At least one updatable attribute must be supplied in the request body.
-     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being
-     * updated. #### Usage guidelines The request must include: -
-     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to
-     * update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60;
-     * - At least one updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the
-     * new display name for the conversation. When provided, must be a non-empty string. A
-     * successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes
-     * are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;. ####
-     * Example request &#x60;&#x60;&#x60;bash POST
+     * Updates attributes of an existing agent conversation. Supports updating the display title and
+     * the pinned state; additional conversation attributes may be supported in future versions. At
+     * least one updatable attribute must be provided in the request body. Each attribute is applied
+     * independently, so omitted attributes are left unchanged. Version: 26.7.0.cl or later Updates
+     * attributes of an existing saved agent conversation. Supports updating the conversation&#39;s
+     * display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable
+     * attributes may be supported in future versions. At least one updatable attribute must be
+     * supplied in the request body. Use this endpoint to rename a conversation, or to pin a
+     * conversation so that it is surfaced first in the conversation list for quick access. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated. ####
+     * Usage guidelines The request must include: - &#x60;conversation_identifier&#x60; *(path
+     * parameter)*: the unique ID of the conversation to update, as returned by
+     * &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one
+     * updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the new display
+     * name for the conversation. An empty or whitespace-only value is replaced with a default title
+     * rather than rejected. - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the
+     * conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl. Each
+     * attribute is applied independently: omitted attributes are left unchanged, so you can update
+     * the title and the pinned state in a single request or in separate requests. Updating
+     * &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an
+     * already-unpinned one, succeeds with no side effects. A successful request returns an empty
+     * &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in
+     * subsequent calls to &#x60;getConversationList&#x60;. #### Example request Rename a
+     * conversation: &#x60;&#x60;&#x60;bash POST
      * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
      * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; }
-     * &#x60;&#x60;&#x60; #### Error responses | Code | Description | |------|-------------| | 400 |
-     * Bad Request — the request body is empty or &#x60;title&#x60; is provided as an empty string.
-     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * &#x60;&#x60;&#x60; Pin a conversation: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; Update both attributes
+     * in a single request: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,
+     * \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; #### Error responses | Code | Description
+     * | |------|-------------| | 400 | Bad Request — the request body supplies neither
+     * &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | |
+     * 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
      * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
      * does not own the specified conversation. | | 404 | Not Found — no conversation exists with
      * the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422 |
      * Unprocessable Entity — the request body is malformed or contains an invalid field value. |
      * &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat:
      * true&#x60; can be updated. Unsaved conversations are not persisted and do not have a
-     * retrievable identifier. &gt; - Available from version 26.7.0.cl and later. &gt; - This
-     * endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
-     * cluster.
+     * retrievable identifier. &gt; - There is no limit on the number of conversations a user can
+     * pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute
+     * is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter —
+     * please contact ThoughtSpot Support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation to update. (required)
      * @param updateConversationRequest (required)
@@ -6922,35 +6948,52 @@ public class AiApi {
     }
 
     /**
-     * Updates attributes of an existing agent conversation. Currently only the display title can be
-     * updated; additional conversation attributes may be supported in future versions. At least one
-     * updatable attribute must be provided in the request body. Version: 26.7.0.cl or later Updates
-     * attributes of an existing saved agent conversation. Currently only the conversation&#39;s
-     * display &#x60;title&#x60; can be updated; additional updatable attributes may be supported in
-     * future versions. At least one updatable attribute must be supplied in the request body.
-     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being
-     * updated. #### Usage guidelines The request must include: -
-     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to
-     * update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60;
-     * - At least one updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the
-     * new display name for the conversation. When provided, must be a non-empty string. A
-     * successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes
-     * are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;. ####
-     * Example request &#x60;&#x60;&#x60;bash POST
+     * Updates attributes of an existing agent conversation. Supports updating the display title and
+     * the pinned state; additional conversation attributes may be supported in future versions. At
+     * least one updatable attribute must be provided in the request body. Each attribute is applied
+     * independently, so omitted attributes are left unchanged. Version: 26.7.0.cl or later Updates
+     * attributes of an existing saved agent conversation. Supports updating the conversation&#39;s
+     * display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable
+     * attributes may be supported in future versions. At least one updatable attribute must be
+     * supplied in the request body. Use this endpoint to rename a conversation, or to pin a
+     * conversation so that it is surfaced first in the conversation list for quick access. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated. ####
+     * Usage guidelines The request must include: - &#x60;conversation_identifier&#x60; *(path
+     * parameter)*: the unique ID of the conversation to update, as returned by
+     * &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one
+     * updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the new display
+     * name for the conversation. An empty or whitespace-only value is replaced with a default title
+     * rather than rejected. - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the
+     * conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl. Each
+     * attribute is applied independently: omitted attributes are left unchanged, so you can update
+     * the title and the pinned state in a single request or in separate requests. Updating
+     * &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an
+     * already-unpinned one, succeeds with no side effects. A successful request returns an empty
+     * &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in
+     * subsequent calls to &#x60;getConversationList&#x60;. #### Example request Rename a
+     * conversation: &#x60;&#x60;&#x60;bash POST
      * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
      * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; }
-     * &#x60;&#x60;&#x60; #### Error responses | Code | Description | |------|-------------| | 400 |
-     * Bad Request — the request body is empty or &#x60;title&#x60; is provided as an empty string.
-     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * &#x60;&#x60;&#x60; Pin a conversation: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; Update both attributes
+     * in a single request: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,
+     * \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; #### Error responses | Code | Description
+     * | |------|-------------| | 400 | Bad Request — the request body supplies neither
+     * &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | |
+     * 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
      * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
      * does not own the specified conversation. | | 404 | Not Found — no conversation exists with
      * the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422 |
      * Unprocessable Entity — the request body is malformed or contains an invalid field value. |
      * &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat:
      * true&#x60; can be updated. Unsaved conversations are not persisted and do not have a
-     * retrievable identifier. &gt; - Available from version 26.7.0.cl and later. &gt; - This
-     * endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
-     * cluster.
+     * retrievable identifier. &gt; - There is no limit on the number of conversations a user can
+     * pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute
+     * is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter —
+     * please contact ThoughtSpot Support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation to update. (required)
      * @param updateConversationRequest (required)
@@ -6978,35 +7021,52 @@ public class AiApi {
     }
 
     /**
-     * (asynchronously) Updates attributes of an existing agent conversation. Currently only the
-     * display title can be updated; additional conversation attributes may be supported in future
-     * versions. At least one updatable attribute must be provided in the request body. Version:
-     * 26.7.0.cl or later Updates attributes of an existing saved agent conversation. Currently only
-     * the conversation&#39;s display &#x60;title&#x60; can be updated; additional updatable
-     * attributes may be supported in future versions. At least one updatable attribute must be
-     * supplied in the request body. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of
-     * the conversation being updated. #### Usage guidelines The request must include: -
+     * (asynchronously) Updates attributes of an existing agent conversation. Supports updating the
+     * display title and the pinned state; additional conversation attributes may be supported in
+     * future versions. At least one updatable attribute must be provided in the request body. Each
+     * attribute is applied independently, so omitted attributes are left unchanged. Version:
+     * 26.7.0.cl or later Updates attributes of an existing saved agent conversation. Supports
+     * updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60;
+     * state; additional updatable attributes may be supported in future versions. At least one
+     * updatable attribute must be supplied in the request body. Use this endpoint to rename a
+     * conversation, or to pin a conversation so that it is surfaced first in the conversation list
+     * for quick access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the
+     * conversation being updated. #### Usage guidelines The request must include: -
      * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to
      * update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60;
      * - At least one updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the
-     * new display name for the conversation. When provided, must be a non-empty string. A
-     * successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes
-     * are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;. ####
-     * Example request &#x60;&#x60;&#x60;bash POST
+     * new display name for the conversation. An empty or whitespace-only value is replaced with a
+     * default title rather than rejected. - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to
+     * pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl. Each
+     * attribute is applied independently: omitted attributes are left unchanged, so you can update
+     * the title and the pinned state in a single request or in separate requests. Updating
+     * &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an
+     * already-unpinned one, succeeds with no side effects. A successful request returns an empty
+     * &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in
+     * subsequent calls to &#x60;getConversationList&#x60;. #### Example request Rename a
+     * conversation: &#x60;&#x60;&#x60;bash POST
      * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
      * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; }
-     * &#x60;&#x60;&#x60; #### Error responses | Code | Description | |------|-------------| | 400 |
-     * Bad Request — the request body is empty or &#x60;title&#x60; is provided as an empty string.
-     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * &#x60;&#x60;&#x60; Pin a conversation: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; Update both attributes
+     * in a single request: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,
+     * \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; #### Error responses | Code | Description
+     * | |------|-------------| | 400 | Bad Request — the request body supplies neither
+     * &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | |
+     * 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
      * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
      * does not own the specified conversation. | | 404 | Not Found — no conversation exists with
      * the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422 |
      * Unprocessable Entity — the request body is malformed or contains an invalid field value. |
      * &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat:
      * true&#x60; can be updated. Unsaved conversations are not persisted and do not have a
-     * retrievable identifier. &gt; - Available from version 26.7.0.cl and later. &gt; - This
-     * endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
-     * cluster.
+     * retrievable identifier. &gt; - There is no limit on the number of conversations a user can
+     * pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute
+     * is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter —
+     * please contact ThoughtSpot Support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation to update. (required)
      * @param updateConversationRequest (required)

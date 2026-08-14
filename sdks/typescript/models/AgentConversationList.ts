@@ -41,6 +41,10 @@ export class AgentConversationList {
     * Data sources associated with the conversation, each with an `id` and `name`.
     */
     'data_source_names'?: Array<DataSourceEntry> | null;
+    /**
+    * Whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list.    Version: 26.10.0.cl or later 
+    */
+    'is_pinned'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -81,6 +85,12 @@ export class AgentConversationList {
             "name": "data_source_names",
             "baseName": "data_source_names",
             "type": "Array<DataSourceEntry>",
+            "format": ""
+        },
+        {
+            "name": "is_pinned",
+            "baseName": "is_pinned",
+            "type": "boolean",
             "format": ""
         }    ];
 

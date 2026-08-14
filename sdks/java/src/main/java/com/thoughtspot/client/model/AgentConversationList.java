@@ -69,6 +69,12 @@ public class AgentConversationList implements Serializable {
     @javax.annotation.Nullable
     private List<DataSourceEntry> dataSourceNames;
 
+    public static final String SERIALIZED_NAME_IS_PINNED = "is_pinned";
+
+    @SerializedName(SERIALIZED_NAME_IS_PINNED)
+    @javax.annotation.Nullable
+    private Boolean isPinned;
+
     public AgentConversationList() {}
 
     public AgentConversationList conversationIdentifier(
@@ -208,6 +214,26 @@ public class AgentConversationList implements Serializable {
         this.dataSourceNames = dataSourceNames;
     }
 
+    public AgentConversationList isPinned(@javax.annotation.Nullable Boolean isPinned) {
+        this.isPinned = isPinned;
+        return this;
+    }
+
+    /**
+     * Whether the current user has pinned this conversation. Pinned conversations are surfaced
+     * first in the list. Version: 26.10.0.cl or later
+     *
+     * @return isPinned
+     */
+    @javax.annotation.Nullable
+    public Boolean getIsPinned() {
+        return isPinned;
+    }
+
+    public void setIsPinned(@javax.annotation.Nullable Boolean isPinned) {
+        this.isPinned = isPinned;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -269,6 +295,7 @@ public class AgentConversationList implements Serializable {
                 && Objects.equals(
                         this.dataSourceIdentifiers, agentConversationList.dataSourceIdentifiers)
                 && Objects.equals(this.dataSourceNames, agentConversationList.dataSourceNames)
+                && Objects.equals(this.isPinned, agentConversationList.isPinned)
                 && Objects.equals(
                         this.additionalProperties, agentConversationList.additionalProperties);
     }
@@ -291,6 +318,7 @@ public class AgentConversationList implements Serializable {
                 updatedAt,
                 dataSourceIdentifiers,
                 dataSourceNames,
+                isPinned,
                 additionalProperties);
     }
 
@@ -317,6 +345,7 @@ public class AgentConversationList implements Serializable {
                 .append(toIndentedString(dataSourceIdentifiers))
                 .append("\n");
         sb.append("    dataSourceNames: ").append(toIndentedString(dataSourceNames)).append("\n");
+        sb.append("    isPinned: ").append(toIndentedString(isPinned)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -347,6 +376,7 @@ public class AgentConversationList implements Serializable {
         openapiFields.add("updated_at");
         openapiFields.add("data_source_identifiers");
         openapiFields.add("data_source_names");
+        openapiFields.add("is_pinned");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

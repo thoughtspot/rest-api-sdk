@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from thoughtspot_rest_api_sdk.models.data_source_entry import DataSourceEntry
 from typing import Optional, Set
@@ -32,8 +32,9 @@ class AgentConversationList(BaseModel):
     updated_at: Optional[StrictStr] = Field(default=None, description="ISO 8601 timestamp when the conversation was last updated.")
     data_source_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique identifiers of the data sources associated with the conversation.")
     data_source_names: Optional[List[DataSourceEntry]] = Field(default=None, description="Data sources associated with the conversation, each with an `id` and `name`.")
+    is_pinned: Optional[StrictBool] = Field(default=None, description="Whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list.    Version: 26.10.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["conversation_identifier", "conversation_title", "created_at", "updated_at", "data_source_identifiers", "data_source_names"]
+    __properties: ClassVar[List[str]] = ["conversation_identifier", "conversation_title", "created_at", "updated_at", "data_source_identifiers", "data_source_names", "is_pinned"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -113,6 +114,11 @@ class AgentConversationList(BaseModel):
         if self.data_source_names is None and "data_source_names" in self.model_fields_set:
             _dict['data_source_names'] = None
 
+        # set to None if is_pinned (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_pinned is None and "is_pinned" in self.model_fields_set:
+            _dict['is_pinned'] = None
+
         return _dict
 
     @classmethod
@@ -130,7 +136,8 @@ class AgentConversationList(BaseModel):
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
             "data_source_identifiers": obj.get("data_source_identifiers"),
-            "data_source_names": [DataSourceEntry.from_dict(_item) for _item in obj["data_source_names"]] if obj.get("data_source_names") is not None else None
+            "data_source_names": [DataSourceEntry.from_dict(_item) for _item in obj["data_source_names"]] if obj.get("data_source_names") is not None else None,
+            "is_pinned": obj.get("is_pinned")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -939,8 +939,10 @@ paths:
         \ ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`:\
         \ list of unique IDs of the data sources associated with the conversation\n\
         - `data_source_names`: array of `{ id, name }` objects for the data sources\
-        \ associated with the conversation\n\n#### Pagination\n\nUse `limit` and `offset`\
-        \ to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0\
+        \ associated with the conversation\n- `is_pinned`: whether the current user\
+        \ has pinned this conversation. Pinned conversations are surfaced first in\
+        \ the list. Available from version 26.10.0.cl.\n\n#### Pagination\n\nUse `limit`\
+        \ and `offset` to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0\
         \   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20\
         \  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes\
         \ a `has_more: Boolean` field. When `true`, there are additional conversations\
@@ -952,9 +954,9 @@ paths:
         : \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\"\
         ,\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifiers\"\
         : [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\"\
-        : \"Retail Sales\" }]\n    }\n  ],\n  \"has_more\": false\n}\n```\n\n####\
-        \ Error responses\n\n| Code | Description |\n|------|-------------|\n| 401\
-        \  | Unauthorized — authentication token is missing, expired, or invalid.\
+        : \"Retail Sales\" }],\n      \"is_pinned\": true\n    }\n  ],\n  \"has_more\"\
+        : false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n\
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.\
         \ |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER`\
         \ privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat:\
         \ true` appear in this list. Conversations created with `enable_save_chat:\
@@ -2822,35 +2824,52 @@ paths:
       - application/json
   /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update:
     post:
-      description: "\nUpdates attributes of an existing agent conversation. Currently\
-        \ only the\ndisplay title can be updated; additional conversation attributes\
-        \ may be\nsupported in future versions. At least one updatable attribute must\
-        \ be\nprovided in the request body. \n  Version: 26.7.0.cl or later\n\n\n\
-        Updates attributes of an existing saved agent conversation. Currently only\
-        \ the conversation's display `title` can be updated; additional updatable\
-        \ attributes may be supported in future versions. At least one updatable attribute\
-        \ must be supplied in the request body.\n\nRequires `CAN_USE_SPOTTER` privilege\
-        \ and ownership of the conversation being updated.\n\n#### Usage guidelines\n\
-        \nThe request must include:\n\n- `conversation_identifier` *(path parameter)*:\
-        \ the unique ID of the conversation to update, as returned by `createAgentConversation`\
-        \ or `getConversationList`\n- At least one updatable attribute in the request\
-        \ body:\n    - `title` *(optional)*: the new display name for the conversation.\
-        \ When provided, must be a non-empty string.\n\nA successful request returns\
-        \ an empty `204 No Content` response. Updated attributes are reflected immediately\
+      description: "\nUpdates attributes of an existing agent conversation. Supports\
+        \ updating the\ndisplay title and the pinned state; additional conversation\
+        \ attributes may be\nsupported in future versions. At least one updatable\
+        \ attribute must be\nprovided in the request body. Each attribute is applied\
+        \ independently, so\nomitted attributes are left unchanged. \n  Version: 26.7.0.cl\
+        \ or later\n\n\nUpdates attributes of an existing saved agent conversation.\
+        \ Supports updating the conversation's display `title` and its `is_pinned`\
+        \ state; additional updatable attributes may be supported in future versions.\
+        \ At least one updatable attribute must be supplied in the request body.\n\
+        \nUse this endpoint to rename a conversation, or to pin a conversation so\
+        \ that it is surfaced first in the conversation list for quick access.\n\n\
+        Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being\
+        \ updated.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`\
+        \ *(path parameter)*: the unique ID of the conversation to update, as returned\
+        \ by `createAgentConversation` or `getConversationList`\n- At least one updatable\
+        \ attribute in the request body:\n    - `title` *(optional)*: the new display\
+        \ name for the conversation. An empty or whitespace-only value is replaced\
+        \ with a default title rather than rejected.\n    - `is_pinned` *(optional)*:\
+        \ `true` to pin the conversation, `false` to unpin it. Available from version\
+        \ 26.10.0.cl.\n\nEach attribute is applied independently: omitted attributes\
+        \ are left unchanged, so you can update the title and the pinned state in\
+        \ a single request or in separate requests. Updating `is_pinned` is idempotent\
+        \ — pinning an already-pinned conversation, or unpinning an already-unpinned\
+        \ one, succeeds with no side effects.\n\nA successful request returns an empty\
+        \ `204 No Content` response. Updated attributes are reflected immediately\
         \ in subsequent calls to `getConversationList`.\n\n#### Example request\n\n\
-        ```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\n\
+        Rename a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\n\
         Content-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product\
-        \ Line\"\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n\
-        | 400  | Bad Request — the request body is empty or `title` is provided as\
-        \ an empty string. |\n| 401  | Unauthorized — authentication token is missing,\
-        \ expired, or invalid. |\n| 403  | Forbidden — the authenticated user does\
-        \ not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation.\
-        \ |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier`\
-        \ for the authenticated user. |\n| 422  | Unprocessable Entity — the request\
-        \ body is malformed or contains an invalid field value. |\n\n> ###### Note:\n\
-        >\n> - Only conversations created with `enable_save_chat: true` can be updated.\
+        \ Line\"\n}\n```\n\nPin a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\n\
+        Content-Type: application/json\n\n{\n  \"is_pinned\": true\n}\n```\n\nUpdate\
+        \ both attributes in a single request:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\n\
+        Content-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product\
+        \ Line\",\n  \"is_pinned\": true\n}\n```\n\n#### Error responses\n\n| Code\
+        \ | Description |\n|------|-------------|\n| 400  | Bad Request — the request\
+        \ body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean.\
+        \ |\n| 401  | Unauthorized — authentication token is missing, expired, or\
+        \ invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER`\
+        \ privilege or does not own the specified conversation. |\n| 404  | Not Found\
+        \ — no conversation exists with the given `conversation_identifier` for the\
+        \ authenticated user. |\n| 422  | Unprocessable Entity — the request body\
+        \ is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n\
+        > - Only conversations created with `enable_save_chat: true` can be updated.\
         \ Unsaved conversations are not persisted and do not have a retrievable identifier.\n\
-        > - Available from version 26.7.0.cl and later.\n> - This endpoint requires\
+        > - There is no limit on the number of conversations a user can pin.\n> -\
+        \ Available from version 26.7.0.cl and later. The `is_pinned` attribute is\
+        \ available from version 26.10.0.cl and later.\n> - This endpoint requires\
         \ Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\
         \n\n\n\n\n"
       operationId: updateConversation
@@ -20984,6 +21003,7 @@ components:
             id: id
           - name: name
             id: id
+          is_pinned: true
         - updated_at: updated_at
           conversation_title: conversation_title
           created_at: created_at
@@ -20996,6 +21016,7 @@ components:
             id: id
           - name: name
             id: id
+          is_pinned: true
       properties:
         conversations:
           description: List of saved agent conversations for the current user.
@@ -21026,6 +21047,7 @@ components:
           id: id
         - name: name
           id: id
+        is_pinned: true
       properties:
         conversation_identifier:
           description: Unique identifier of the conversation.
@@ -21056,6 +21078,12 @@ components:
             $ref: '#/components/schemas/DataSourceEntry'
           nullable: true
           type: array
+        is_pinned:
+          description: "Whether the current user has pinned this conversation. Pinned\n\
+            conversations are surfaced first in the list. \n  Version: 26.10.0.cl\
+            \ or later\n"
+          nullable: true
+          type: boolean
       required:
       - conversation_identifier
       type: object
@@ -29435,12 +29463,23 @@ components:
     UpdateConversationRequest:
       example:
         title: title
+        is_pinned: true
       properties:
         title:
           description: |-
             New display title for the conversation. Omit to leave the title
-            unchanged.
+            unchanged. An empty or whitespace-only value is replaced with a default
+            title rather than rejected.
           type: string
+        is_pinned:
+          description: "Pinned state of the conversation for the current user. Pinning\
+            \ marks a\nconversation for quick access: pinned conversations are surfaced\
+            \ first in\n`getConversationList`. Set to `true` to pin the conversation,\
+            \ `false` to\nunpin it, or omit to leave the pinned state unchanged. Applying\
+            \ the state\nthe conversation is already in is a no-op success. \n  Version:\
+            \ 26.10.0.cl or later\n"
+          nullable: true
+          type: boolean
       type: object
     ConfigureAuthSettingsRequest:
       example:
