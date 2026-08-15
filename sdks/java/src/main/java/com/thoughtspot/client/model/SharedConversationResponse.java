@@ -54,11 +54,23 @@ public class SharedConversationResponse implements Serializable {
     @javax.annotation.Nullable
     private String conversationTitle;
 
+    public static final String SERIALIZED_NAME_CREATOR_USER_ID = "creator_user_id";
+
+    @SerializedName(SERIALIZED_NAME_CREATOR_USER_ID)
+    @javax.annotation.Nullable
+    private String creatorUserId;
+
     public static final String SERIALIZED_NAME_DATA_SOURCES = "data_sources";
 
     @SerializedName(SERIALIZED_NAME_DATA_SOURCES)
     @javax.annotation.Nonnull
     private List<DataSourceEntry> dataSources;
+
+    public static final String SERIALIZED_NAME_ANALYST_IDS = "analyst_ids";
+
+    @SerializedName(SERIALIZED_NAME_ANALYST_IDS)
+    @javax.annotation.Nonnull
+    private List<String> analystIds;
 
     public static final String SERIALIZED_NAME_MESSAGES = "messages";
 
@@ -135,6 +147,27 @@ public class SharedConversationResponse implements Serializable {
         this.conversationTitle = conversationTitle;
     }
 
+    public SharedConversationResponse creatorUserId(
+            @javax.annotation.Nullable String creatorUserId) {
+        this.creatorUserId = creatorUserId;
+        return this;
+    }
+
+    /**
+     * Identifier of the user who created the conversation and shared it. This is the original
+     * creator, not the caller retrieving the shared content.
+     *
+     * @return creatorUserId
+     */
+    @javax.annotation.Nullable
+    public String getCreatorUserId() {
+        return creatorUserId;
+    }
+
+    public void setCreatorUserId(@javax.annotation.Nullable String creatorUserId) {
+        this.creatorUserId = creatorUserId;
+    }
+
     public SharedConversationResponse dataSources(
             @javax.annotation.Nonnull List<DataSourceEntry> dataSources) {
         this.dataSources = dataSources;
@@ -161,6 +194,36 @@ public class SharedConversationResponse implements Serializable {
 
     public void setDataSources(@javax.annotation.Nonnull List<DataSourceEntry> dataSources) {
         this.dataSources = dataSources;
+    }
+
+    public SharedConversationResponse analystIds(
+            @javax.annotation.Nonnull List<String> analystIds) {
+        this.analystIds = analystIds;
+        return this;
+    }
+
+    public SharedConversationResponse addAnalystIdsItem(String analystIdsItem) {
+        if (this.analystIds == null) {
+            this.analystIds = new ArrayList<>();
+        }
+        this.analystIds.add(analystIdsItem);
+        return this;
+    }
+
+    /**
+     * Identifiers of the AI analysts the conversation ran against. An analyst is a purpose-built
+     * agent configured over a set of data sources, with its own instructions and access rules.
+     * Empty array when the conversation is not associated with any analyst; never null.
+     *
+     * @return analystIds
+     */
+    @javax.annotation.Nonnull
+    public List<String> getAnalystIds() {
+        return analystIds;
+    }
+
+    public void setAnalystIds(@javax.annotation.Nonnull List<String> analystIds) {
+        this.analystIds = analystIds;
     }
 
     public SharedConversationResponse messages(
@@ -282,7 +345,9 @@ public class SharedConversationResponse implements Serializable {
                         this.sharedConversationId, sharedConversationResponse.sharedConversationId)
                 && Objects.equals(
                         this.conversationTitle, sharedConversationResponse.conversationTitle)
+                && Objects.equals(this.creatorUserId, sharedConversationResponse.creatorUserId)
                 && Objects.equals(this.dataSources, sharedConversationResponse.dataSources)
+                && Objects.equals(this.analystIds, sharedConversationResponse.analystIds)
                 && Objects.equals(this.messages, sharedConversationResponse.messages)
                 && Objects.equals(
                         this.codeExecutionFiles, sharedConversationResponse.codeExecutionFiles)
@@ -305,7 +370,9 @@ public class SharedConversationResponse implements Serializable {
                 conversationId,
                 sharedConversationId,
                 conversationTitle,
+                creatorUserId,
                 dataSources,
+                analystIds,
                 messages,
                 codeExecutionFiles,
                 additionalProperties);
@@ -329,7 +396,9 @@ public class SharedConversationResponse implements Serializable {
         sb.append("    conversationTitle: ")
                 .append(toIndentedString(conversationTitle))
                 .append("\n");
+        sb.append("    creatorUserId: ").append(toIndentedString(creatorUserId)).append("\n");
         sb.append("    dataSources: ").append(toIndentedString(dataSources)).append("\n");
+        sb.append("    analystIds: ").append(toIndentedString(analystIds)).append("\n");
         sb.append("    messages: ").append(toIndentedString(messages)).append("\n");
         sb.append("    codeExecutionFiles: ")
                 .append(toIndentedString(codeExecutionFiles))
@@ -361,7 +430,9 @@ public class SharedConversationResponse implements Serializable {
         openapiFields.add("conversation_id");
         openapiFields.add("shared_conversation_id");
         openapiFields.add("conversation_title");
+        openapiFields.add("creator_user_id");
         openapiFields.add("data_sources");
+        openapiFields.add("analyst_ids");
         openapiFields.add("messages");
         openapiFields.add("code_execution_files");
 
@@ -370,6 +441,7 @@ public class SharedConversationResponse implements Serializable {
         openapiRequiredFields.add("conversation_id");
         openapiRequiredFields.add("shared_conversation_id");
         openapiRequiredFields.add("data_sources");
+        openapiRequiredFields.add("analyst_ids");
         openapiRequiredFields.add("messages");
         openapiRequiredFields.add("code_execution_files");
     }
@@ -425,6 +497,14 @@ public class SharedConversationResponse implements Serializable {
                                     + " JSON string but got `%s`",
                             jsonObj.get("conversation_title").toString()));
         }
+        if ((jsonObj.get("creator_user_id") != null && !jsonObj.get("creator_user_id").isJsonNull())
+                && !jsonObj.get("creator_user_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `creator_user_id` to be a primitive type in the"
+                                    + " JSON string but got `%s`",
+                            jsonObj.get("creator_user_id").toString()));
+        }
         // ensure the json data is an array
         if (!jsonObj.get("data_sources").isJsonArray()) {
             throw new IllegalArgumentException(
@@ -440,6 +520,18 @@ public class SharedConversationResponse implements Serializable {
             DataSourceEntry.validateJsonElement(jsonArraydataSources.get(i));
         }
         ;
+        // ensure the required json array is present
+        if (jsonObj.get("analyst_ids") == null) {
+            throw new IllegalArgumentException(
+                    "Expected the field `linkedContent` to be an array in the JSON string but got"
+                            + " `null`");
+        } else if (!jsonObj.get("analyst_ids").isJsonArray()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `analyst_ids` to be an array in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("analyst_ids").toString()));
+        }
         // ensure the json data is an array
         if (!jsonObj.get("messages").isJsonArray()) {
             throw new IllegalArgumentException(

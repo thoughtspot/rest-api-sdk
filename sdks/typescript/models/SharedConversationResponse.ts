@@ -32,9 +32,17 @@ export class SharedConversationResponse {
     */
     'conversation_title'?: string | null;
     /**
+    * Identifier of the user who created the conversation and shared it. This is the original creator, not the caller retrieving the shared content.
+    */
+    'creator_user_id'?: string | null;
+    /**
     * Data sources used by the conversation, each with an identifier and display name.
     */
     'data_sources': Array<DataSourceEntry>;
+    /**
+    * Identifiers of the AI analysts the conversation ran against. An analyst is a purpose-built agent configured over a set of data sources, with its own instructions and access rules. Empty array when the conversation is not associated with any analyst; never null.
+    */
+    'analyst_ids': Array<string>;
     /**
     * Ordered conversation messages, oldest to newest. Same structure as the `messages` field returned by `getConversation`. Empty array when the conversation has no messages; never null.
     */
@@ -68,9 +76,21 @@ export class SharedConversationResponse {
             "format": ""
         },
         {
+            "name": "creator_user_id",
+            "baseName": "creator_user_id",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "data_sources",
             "baseName": "data_sources",
             "type": "Array<DataSourceEntry>",
+            "format": ""
+        },
+        {
+            "name": "analyst_ids",
+            "baseName": "analyst_ids",
+            "type": "Array<string>",
             "format": ""
         },
         {

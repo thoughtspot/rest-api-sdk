@@ -82,12 +82,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'CreatorUserId'
+        /// </summary>
+        [Fact]
+        public void CreatorUserIdTest()
+        {
+            // TODO unit test for the property 'CreatorUserId'
+        }
+
+        /// <summary>
         /// Test the property 'DataSources'
         /// </summary>
         [Fact]
         public void DataSourcesTest()
         {
             // TODO unit test for the property 'DataSources'
+        }
+
+        /// <summary>
+        /// Test the property 'AnalystIds'
+        /// </summary>
+        [Fact]
+        public void AnalystIdsTest()
+        {
+            // TODO unit test for the property 'AnalystIds'
         }
 
         /// <summary>

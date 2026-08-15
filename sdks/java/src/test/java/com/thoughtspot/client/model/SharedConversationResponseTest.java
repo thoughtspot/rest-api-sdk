@@ -34,10 +34,22 @@ public class SharedConversationResponseTest {
         // TODO: test conversationTitle
     }
 
+    /** Test the property 'creatorUserId' */
+    @Test
+    public void creatorUserIdTest() {
+        // TODO: test creatorUserId
+    }
+
     /** Test the property 'dataSources' */
     @Test
     public void dataSourcesTest() {
         // TODO: test dataSources
+    }
+
+    /** Test the property 'analystIds' */
+    @Test
+    public void analystIdsTest() {
+        // TODO: test analystIds
     }
 
     /** Test the property 'messages' */

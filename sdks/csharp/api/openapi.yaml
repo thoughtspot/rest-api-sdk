@@ -21385,11 +21385,26 @@ components:
           description: Display title of the conversation.
           nullable: true
           type: string
+        creator_user_id:
+          description: |-
+            Identifier of the user who created the conversation and shared it. This is
+            the original creator, not the caller retrieving the shared content.
+          nullable: true
+          type: string
         data_sources:
           description: "Data sources used by the conversation, each with an identifier\
             \ and display name."
           items:
             $ref: "#/components/schemas/DataSourceEntry"
+          type: array
+        analyst_ids:
+          description: |-
+            Identifiers of the AI analysts the conversation ran against. An analyst is a
+            purpose-built agent configured over a set of data sources, with its own
+            instructions and access rules. Empty array when the conversation is not
+            associated with any analyst; never null.
+          items:
+            type: string
           type: array
         messages:
           description: |-
@@ -21407,6 +21422,7 @@ components:
             $ref: "#/components/schemas/CodeExecutionFileMetadata"
           type: array
       required:
+      - analyst_ids
       - code_execution_files
       - conversation_id
       - data_sources
