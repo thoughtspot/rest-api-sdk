@@ -9431,7 +9431,24 @@ paths:
         \nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`.\
         \ In this case, field_name specifies the exact property of the Connection\
         \ or Connection Config that needs to be unparameterized.\n\nFor Connection\
-        \ Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n\n"
+        \ Config, the only supported field name is:\n* impersonate_user\n\n## Restored\
+        \ value\n\nThe endpoint has two mutually exclusive modes, and the value that\
+        \ is restored differs per mode:\n\n* Single-field mode (`field_name` + `value`)\
+        \ restores the supplied `value`.\n* Bulk mode (`metadata_entries`) ignores\
+        \ `value` and restores the Primary org (`org_id=0`) value of the variable\
+        \ bound to the field, even when the request is made from a secondary org.\n\
+        \nIn bulk mode, a secret Connection field bound to a sensitive variable is\
+        \ restored from the variable's Primary-org secret.\n\nBulk mode has no partial\
+        \ success. The request fails with `400` and nothing is changed if any field:\n\
+        * is a non-secret field bound to a sensitive variable,\n* is bound to a per-principal\
+        \ variable, whose value is user-specific or group-specific,\n* has a variable\
+        \ that cannot be read, because it is deleted or not visible to you,\n* has\
+        \ no Primary-org value, or\n* is a secret field whose value is unavailable\
+        \ from the secure store, which includes the case where the Confidant Vault\
+        \ is disabled, since the restored secret could then not be stored securely.\n\
+        \nSuch a field can still be unparameterized individually in single-field mode\
+        \ with an explicit `value`. Duplicate entries for the same object and field\
+        \ are coalesced.\n\n\n\n\n\n"
       operationId: unparameterizeMetadata
       parameters: []
       requestBody:
