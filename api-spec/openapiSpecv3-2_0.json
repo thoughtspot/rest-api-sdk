@@ -27570,6 +27570,7 @@
               "USER",
               "USER_GROUP",
               "COLLECTION",
+              "ROLE",
               "TEMPLATE_VARIABLE"
             ],
             "description": "Optional type of the header object.",
@@ -27626,6 +27627,7 @@
               "USER",
               "USER_GROUP",
               "COLLECTION",
+              "ROLE",
               "TEMPLATE_VARIABLE"
             ],
             "description": "Type of metadata. Required if metadata_identifier is name of the object.",
