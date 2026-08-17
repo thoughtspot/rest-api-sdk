@@ -94,10 +94,16 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             COLLECTION = 9,
 
             /// <summary>
+            /// Enum ROLE for value: ROLE
+            /// </summary>
+            [EnumMember(Value = "ROLE")]
+            ROLE = 10,
+
+            /// <summary>
             /// Enum TEMPLATEVARIABLE for value: TEMPLATE_VARIABLE
             /// </summary>
             [EnumMember(Value = "TEMPLATE_VARIABLE")]
-            TEMPLATEVARIABLE = 10
+            TEMPLATEVARIABLE = 11
         }
 
 

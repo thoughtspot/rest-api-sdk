@@ -25861,6 +25861,7 @@ components:
           - USER
           - USER_GROUP
           - COLLECTION
+          - ROLE
           - TEMPLATE_VARIABLE
           nullable: true
           type: string
@@ -25913,6 +25914,7 @@ components:
           - USER
           - USER_GROUP
           - COLLECTION
+          - ROLE
           - TEMPLATE_VARIABLE
           nullable: true
           type: string

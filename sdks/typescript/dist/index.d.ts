@@ -13266,7 +13266,7 @@ declare class HeaderUpdateInput {
     }[];
     constructor();
 }
-type HeaderUpdateInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "COLLECTION" | "TEMPLATE_VARIABLE";
+type HeaderUpdateInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "COLLECTION" | "ROLE" | "TEMPLATE_VARIABLE";
 
 /**
  * ThoughtSpot Public REST API
@@ -23407,7 +23407,7 @@ declare class UpdateObjIdInput {
     }[];
     constructor();
 }
-type UpdateObjIdInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "COLLECTION" | "TEMPLATE_VARIABLE";
+type UpdateObjIdInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "COLLECTION" | "ROLE" | "TEMPLATE_VARIABLE";
 
 /**
  * ThoughtSpot Public REST API

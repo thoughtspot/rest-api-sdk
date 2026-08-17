@@ -71,5 +71,5 @@ export class UpdateObjIdInput {
     }
 }
 
-    export type UpdateObjIdInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "COLLECTION" | "TEMPLATE_VARIABLE" ;
+    export type UpdateObjIdInputTypeEnum = "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "LIVEBOARD" | "ACTION_OBJECT" | "DATA_SOURCE" | "USER" | "USER_GROUP" | "COLLECTION" | "ROLE" | "TEMPLATE_VARIABLE" ;
 
