@@ -96,3 +96,7 @@ strong {
 [role='main'] {
     border-top: none !important;
 }
+
+[data-testid='theme-toggle'] {
+    display: none !important;
+}
