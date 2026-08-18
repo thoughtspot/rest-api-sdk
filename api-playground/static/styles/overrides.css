@@ -93,3 +93,6 @@ strong {
     font-weight: normal;
     background: grey;
 }
+[role='main'] {
+    border-top: none !important;
+}
