@@ -10,6 +10,7 @@ import com.thoughtspot.client.model.AgentConversationHistoryResponse;
 import com.thoughtspot.client.model.AgentInstructions;
 import com.thoughtspot.client.model.Conversation;
 import com.thoughtspot.client.model.ConversationMessageResponse;
+import com.thoughtspot.client.model.ConversationShareStatusResponse;
 import com.thoughtspot.client.model.CreateAgentConversationRequest;
 import com.thoughtspot.client.model.CreateConversationRequest;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
@@ -34,6 +35,8 @@ import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.SetAgentInstructionsRequest;
 import com.thoughtspot.client.model.SetNLInstructionsRequest;
+import com.thoughtspot.client.model.ShareConversationRequest;
+import com.thoughtspot.client.model.SharedConversationResponse;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.UpdateConversationRequest;
 import java.io.InputStream;
@@ -51,24 +54,31 @@ public class AiApiTest {
      * Version: 26.2.0.cl or later Creates a new Spotter agent conversation based on the provided
      * context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl. Requires
      * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
-     * specified in the request. #### Usage guidelines The request must include the
-     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
-     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
-     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
-     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
-     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
-     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
-     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
-     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
-     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
-     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
-     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
-     * controls which Spotter capabilities are enabled for the conversation: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
-     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
-     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
-     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
-     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * specified in the request. #### Usage guidelines The conversation context is defined by
+     * exactly one of the following parameters: - &#x60;metadata_context&#x60;: defines the
+     * conversation context by data source. The context type can be one of: -
+     * &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific data source. Provide
+     * &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data
+     * source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated
+     * &#x60;guid&#x60; field is accepted for backwards compatibility. - &#x60;AUTO_MODE&#x60;
+     * *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets
+     * for the user&#39;s queries. - &#x60;analyst_identifier&#x60; *(available from 26.10.0.cl)*:
+     * unique identifier of a Spotter Analyst to start the conversation from. The conversation uses
+     * the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so
+     * &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author,
+     * have the analyst shared with them, or hold admin / Spotter-management privileges. Passing
+     * both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, is
+     * rejected. &gt; **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the
+     * lowercase &#x60;data_source&#x60; enum value with the &#x60;guid&#x60; field instead of the
+     * above. Example: &#x60;{ \&quot;type\&quot;: \&quot;data_source\&quot;,
+     * \&quot;data_source_context\&quot;: { \&quot;guid\&quot;: \&quot;&lt;worksheet-id&gt;\&quot; }
+     * }&#x60;. The &#x60;conversation_settings&#x60; parameter controls which Spotter capabilities
+     * are enabled for the conversation: - &#x60;enable_contextual_change_analysis&#x60; (default:
+     * &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this
+     * to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_natural_language_answer_generation&#x60; (default: &#x60;true&#x60;,
+     * **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to
+     * &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
      * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
      * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
      * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
@@ -78,19 +88,26 @@ public class AiApiTest {
      * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
      * to send messages within this conversation. The response also includes
      * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
-     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
-     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
-     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
-     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
-     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
-     * Description | | ---- |
+     * &#x60;conversation_identifier&#x60; for new integrations. When the conversation is started
+     * from an analyst, the response additionally carries the analyst&#39;s &#x60;analyst_id&#x60;;
+     * it is &#x60;null&#x60; otherwise. #### Example request &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_context\&quot;: { \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,
+     * \&quot;data_source_context\&quot;: { \&quot;data_source_identifier\&quot;:
+     * \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } }, \&quot;conversation_settings\&quot;:
+     * {} } &#x60;&#x60;&#x60; #### Error responses | Code | Description | | ---- |
      * ---------------------------------------------------------------------------------------------------------------------------------------
      * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
-     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
-     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
-     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
-     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
-     * enable Spotter on your cluster.
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view permission on the specified metadata object, or has no access to the analyst specified
+     * in &#x60;analyst_identifier&#x60;. | | 404 | Not found — no analyst with the given
+     * &#x60;analyst_identifier&#x60; exists in the caller&#39;s Org. | | 422 | Unprocessable entity
+     * — the request fails validation: both &#x60;analyst_identifier&#x60; and
+     * &#x60;metadata_context&#x60; were provided, neither was provided, or
+     * &#x60;metadata_context&#x60; is malformed (for example, &#x60;DATA_SOURCE&#x60; context
+     * without a data source identifier). | &gt; ###### Note: &gt; &gt; - This endpoint was in Beta
+     * from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl. &gt; -
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
      *
      * @throws ApiException if the Api call fails
      */
@@ -438,11 +455,15 @@ public class AiApiTest {
      * &#x60;updated_at&#x60;: ISO 8601 timestamp of the most recent update to the conversation -
      * &#x60;data_source_identifiers&#x60;: list of unique IDs of the data sources associated with
      * the conversation - &#x60;data_source_names&#x60;: array of &#x60;{ id, name }&#x60; objects
-     * for the data sources associated with the conversation #### Pagination Use &#x60;limit&#x60;
-     * and &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
-     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 → first page GET
-     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second page
-     * &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
+     * for the data sources associated with the conversation - &#x60;is_pinned&#x60;: whether the
+     * current user has pinned this conversation. Pinned conversations are surfaced first in the
+     * list. Available from version 26.10.0.cl. - &#x60;analyst_id&#x60;: unique identifier of the
+     * Spotter Analyst the conversation is associated with, or &#x60;null&#x60; when the
+     * conversation is not associated with an analyst. Available from version 26.10.0.cl. ####
+     * Pagination Use &#x60;limit&#x60; and &#x60;offset&#x60; to page through large result sets:
+     * &#x60;&#x60;&#x60; GET /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 →
+     * first page GET /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second
+     * page &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
      * &#x60;has_more: Boolean&#x60; field. When &#x60;true&#x60;, there are additional
      * conversations beyond the current page — increment &#x60;offset&#x60; by &#x60;limit&#x60; to
      * fetch the next page. When &#x60;has_more&#x60; is &#x60;false&#x60;, the current page is the
@@ -453,15 +474,16 @@ public class AiApiTest {
      * \&quot;2026-03-01T10:00:00Z\&quot;, \&quot;updated_at\&quot;:
      * \&quot;2026-03-05T14:23:00Z\&quot;, \&quot;data_source_identifiers\&quot;:
      * [\&quot;ds-001\&quot;], \&quot;data_source_names\&quot;: [{ \&quot;id\&quot;:
-     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }] } ],
-     * \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; #### Error responses | Code | Description
-     * | |------|-------------| | 401 | Unauthorized — authentication token is missing, expired, or
-     * invalid. | | 403 | Forbidden — the authenticated user does not have
-     * &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; - Only conversations
-     * created with &#x60;enable_save_chat: true&#x60; appear in this list. Conversations created
-     * with &#x60;enable_save_chat: false&#x60; (the default) are not persisted and cannot be
-     * retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires
-     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }],
+     * \&quot;is_pinned\&quot;: true } ], \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; ####
+     * Error responses | Code | Description | |------|-------------| | 401 | Unauthorized —
+     * authentication token is missing, expired, or invalid. | | 403 | Forbidden — the authenticated
+     * user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; -
+     * Only conversations created with &#x60;enable_save_chat: true&#x60; appear in this list.
+     * Conversations created with &#x60;enable_save_chat: false&#x60; (the default) are not
+     * persisted and cannot be retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; -
+     * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
+     * cluster.
      *
      * @throws ApiException if the Api call fails
      */
@@ -576,6 +598,36 @@ public class AiApiTest {
         GetRelevantQuestionsRequest getRelevantQuestionsRequest = null;
         EurekaGetRelevantQuestionsResponse response =
                 api.getRelevantQuestions(getRelevantQuestionsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Returns the current share state for a conversation the caller owns: whether the shared view
+     * is outdated relative to the latest conversation content, and the list of principals that
+     * currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the
+     * specified conversation. Version: 26.9.0.cl or later
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getShareInfoTest() throws ApiException {
+        String conversationIdentifier = null;
+        ConversationShareStatusResponse response = api.getShareInfo(conversationIdentifier);
+        // TODO: test validations
+    }
+
+    /**
+     * Returns the full read-only view of a shared conversation, including ordered messages and data
+     * source metadata. Accessible by the conversation owner and any principal (user or group) that
+     * has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege. Version: 26.9.0.cl
+     * or later
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getSharedContentTest() throws ApiException {
+        String conversationIdentifier = null;
+        SharedConversationResponse response = api.getSharedContent(conversationIdentifier);
         // TODO: test validations
     }
 
@@ -1151,6 +1203,23 @@ public class AiApiTest {
     }
 
     /**
+     * Grants or revokes access to a shared conversation for one or more principals (users or
+     * groups). When principals are added, a read-only shared view of the conversation is created
+     * from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view
+     * with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * ownership of the specified conversation. Version: 26.9.0.cl or later
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void shareConversationTest() throws ApiException {
+        String conversationIdentifier = null;
+        ShareConversationRequest shareConversationRequest = null;
+        api.shareConversation(conversationIdentifier, shareConversationRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 10.4.0.cl or later Processes a natural language query against a specified data model
      * and returns a single AI-generated answer without requiring a conversation session. Requires
      * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
@@ -1227,32 +1296,48 @@ public class AiApiTest {
      * Updates attributes of an existing agent conversation. Currently only the display title can be
      * updated; additional conversation attributes may be supported in future versions. At least one
      * updatable attribute must be provided in the request body. Version: 26.7.0.cl or later Updates
-     * attributes of an existing saved agent conversation. Currently only the conversation&#39;s
-     * display &#x60;title&#x60; can be updated; additional updatable attributes may be supported in
-     * future versions. At least one updatable attribute must be supplied in the request body.
-     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being
-     * updated. #### Usage guidelines The request must include: -
-     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to
-     * update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60;
-     * - At least one updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the
-     * new display name for the conversation. When provided, must be a non-empty string. A
-     * successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes
-     * are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;. ####
-     * Example request &#x60;&#x60;&#x60;bash POST
+     * attributes of an existing saved agent conversation. Supports updating the conversation&#39;s
+     * display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable
+     * attributes may be supported in future versions. At least one updatable attribute must be
+     * supplied in the request body. Use this endpoint to rename a conversation, or to pin a
+     * conversation so that it is surfaced first in the conversation list for quick access. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated. ####
+     * Usage guidelines The request must include: - &#x60;conversation_identifier&#x60; *(path
+     * parameter)*: the unique ID of the conversation to update, as returned by
+     * &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one
+     * updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the new display
+     * name for the conversation. An empty or whitespace-only value is replaced with a default title
+     * rather than rejected. - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the
+     * conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl. Each
+     * attribute is applied independently: omitted attributes are left unchanged, so you can update
+     * the title and the pinned state in a single request or in separate requests. Updating
+     * &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an
+     * already-unpinned one, succeeds with no side effects. A successful request returns an empty
+     * &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in
+     * subsequent calls to &#x60;getConversationList&#x60;. #### Example request Rename a
+     * conversation: &#x60;&#x60;&#x60;bash POST
      * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
      * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; }
-     * &#x60;&#x60;&#x60; #### Error responses | Code | Description | |------|-------------| | 400 |
-     * Bad Request — the request body is empty or &#x60;title&#x60; is provided as an empty string.
-     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * &#x60;&#x60;&#x60; Pin a conversation: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; Update both attributes
+     * in a single request: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,
+     * \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; #### Error responses | Code | Description
+     * | |------|-------------| | 400 | Bad Request — the request body supplies neither
+     * &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | |
+     * 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
      * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
      * does not own the specified conversation. | | 404 | Not Found — no conversation exists with
      * the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422 |
      * Unprocessable Entity — the request body is malformed or contains an invalid field value. |
      * &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat:
      * true&#x60; can be updated. Unsaved conversations are not persisted and do not have a
-     * retrievable identifier. &gt; - Available from version 26.7.0.cl and later. &gt; - This
-     * endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
-     * cluster.
+     * retrievable identifier. &gt; - There is no limit on the number of conversations a user can
+     * pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute
+     * is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter —
+     * please contact ThoughtSpot Support to enable Spotter on your cluster.
      *
      * @throws ApiException if the Api call fails
      */

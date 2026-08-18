@@ -45,6 +45,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// </summary>
         /// <param name="id">Unique identifier of the collection. (required).</param>
         /// <param name="name">Name of the collection. (required).</param>
+        /// <param name="objId">Custom object ID (obj_id) of the collection, if one is set.    Version: 26.9.0.cl or later .</param>
         /// <param name="description">Description of the collection..</param>
         /// <param name="metadata">Metadata objects in the collection..</param>
         /// <param name="createdAt">Creation timestamp in milliseconds..</param>
@@ -52,7 +53,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="authorName">Name of the author who created the collection..</param>
         /// <param name="authorId">Unique identifier of the author..</param>
         /// <param name="org">org.</param>
-        public Collection(string id = default, string name = default, string description = default, List<CollectionMetadataItem> metadata = default, string createdAt = default, string updatedAt = default, string authorName = default, string authorId = default, CollectionEntityIdentifier org = default)
+        public Collection(string id = default, string name = default, string objId = default, string description = default, List<CollectionMetadataItem> metadata = default, string createdAt = default, string updatedAt = default, string authorName = default, string authorId = default, CollectionEntityIdentifier org = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -66,6 +67,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
                 throw new ArgumentNullException("name is a required property for Collection and cannot be null");
             }
             this.Name = name;
+            this.ObjId = objId;
             this.Description = description;
             this.Metadata = metadata;
             this.CreatedAt = createdAt;
@@ -89,6 +91,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>Name of the collection.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Custom object ID (obj_id) of the collection, if one is set.    Version: 26.9.0.cl or later 
+        /// </summary>
+        /// <value>Custom object ID (obj_id) of the collection, if one is set.    Version: 26.9.0.cl or later </value>
+        [DataMember(Name = "obj_id", EmitDefaultValue = true)]
+        public string ObjId { get; set; }
 
         /// <summary>
         /// Description of the collection.
@@ -154,6 +163,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("class Collection {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  ObjId: ").Append(ObjId).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Metadata: ").Append(Metadata).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");

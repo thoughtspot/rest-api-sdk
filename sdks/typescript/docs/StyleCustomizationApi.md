@@ -442,7 +442,7 @@ const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
 const apiInstance = new StyleCustomizationApi(configuration);
 
 apiInstance.uploadStyleFont(
-  // string | Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists.
+  // string | Display name for the font (e.g. \\\"Acme Sans\\\").
   "name_example" , 
   // HttpFile | Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.
   { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' } , 
@@ -466,7 +466,7 @@ apiInstance.uploadStyleFont(
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | [**string**] | Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists. | defaults to undefined
+ **name** | [**string**] | Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). | defaults to undefined
  **fileContent** | [**HttpFile**] | Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload. | defaults to undefined
  **scope** | [**string**]**Array<&#39;CLUSTER&#39; &#124; &#39;ORG&#39;>** | Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user\\\&#39;s org library. Defaults to ORG if omitted. | (optional) defaults to 'ORG'
  **weight** | [**string**]**Array<&#39;NORMAL&#39; &#124; &#39;LIGHT&#39; &#124; &#39;BOLD&#39;>** | Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. | (optional) defaults to 'NORMAL'

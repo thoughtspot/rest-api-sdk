@@ -560,12 +560,17 @@ public class AuthenticationApi {
     }
 
     /**
-     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
-     * token provided in the request header. This API endpoint does not create a new token. Instead,
-     * it returns details about the token, including the token string, creation time, expiration
-     * time, and the associated user. Use this endpoint to introspect your current session token,
-     * debug authentication issues, or when a frontend application needs session token details. Any
-     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
+     * Version: 9.4.0.cl or later Generates a new bearer token from an existing authenticated
+     * session. #### Required privileges Any ThoughtSpot user with a valid bearer token can access
+     * this endpoint and send an API request. Requires no additional privileges. #### Usage
+     * guidelines This endpoint doesn&#39;t return the caller&#39;s existing session token. Instead,
+     * it issues a new token based on the current authenticated session and returns the new token
+     * string, its creation and expiration timestamps, and the associated user details in response.
+     * The token generated from this API request is valid for 24 hours. Use this endpoint when your
+     * application needs a new token without requiring the user to re-authenticate. If you need a
+     * token with a specific expiration or a different security scope, use &#x60;POST
+     * /api/rest/2.0/auth/token/full&#x60;, &#x60;POST /api/rest/2.0/auth/token/custom&#x60;, or
+     * &#x60;POST /api/rest/2.0/auth/token/object&#x60; instead.
      *
      * @return GetTokenResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -587,12 +592,17 @@ public class AuthenticationApi {
     }
 
     /**
-     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
-     * token provided in the request header. This API endpoint does not create a new token. Instead,
-     * it returns details about the token, including the token string, creation time, expiration
-     * time, and the associated user. Use this endpoint to introspect your current session token,
-     * debug authentication issues, or when a frontend application needs session token details. Any
-     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
+     * Version: 9.4.0.cl or later Generates a new bearer token from an existing authenticated
+     * session. #### Required privileges Any ThoughtSpot user with a valid bearer token can access
+     * this endpoint and send an API request. Requires no additional privileges. #### Usage
+     * guidelines This endpoint doesn&#39;t return the caller&#39;s existing session token. Instead,
+     * it issues a new token based on the current authenticated session and returns the new token
+     * string, its creation and expiration timestamps, and the associated user details in response.
+     * The token generated from this API request is valid for 24 hours. Use this endpoint when your
+     * application needs a new token without requiring the user to re-authenticate. If you need a
+     * token with a specific expiration or a different security scope, use &#x60;POST
+     * /api/rest/2.0/auth/token/full&#x60;, &#x60;POST /api/rest/2.0/auth/token/custom&#x60;, or
+     * &#x60;POST /api/rest/2.0/auth/token/object&#x60; instead.
      *
      * @return ApiResponse&lt;GetTokenResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -615,13 +625,18 @@ public class AuthenticationApi {
     }
 
     /**
-     * (asynchronously) Version: 9.4.0.cl or later Retrieves details of the current session token
-     * for the bearer token provided in the request header. This API endpoint does not create a new
-     * token. Instead, it returns details about the token, including the token string, creation
-     * time, expiration time, and the associated user. Use this endpoint to introspect your current
-     * session token, debug authentication issues, or when a frontend application needs session
-     * token details. Any ThoughtSpot user with a valid bearer token can access this endpoint and
-     * send an API request
+     * (asynchronously) Version: 9.4.0.cl or later Generates a new bearer token from an existing
+     * authenticated session. #### Required privileges Any ThoughtSpot user with a valid bearer
+     * token can access this endpoint and send an API request. Requires no additional privileges.
+     * #### Usage guidelines This endpoint doesn&#39;t return the caller&#39;s existing session
+     * token. Instead, it issues a new token based on the current authenticated session and returns
+     * the new token string, its creation and expiration timestamps, and the associated user details
+     * in response. The token generated from this API request is valid for 24 hours. Use this
+     * endpoint when your application needs a new token without requiring the user to
+     * re-authenticate. If you need a token with a specific expiration or a different security
+     * scope, use &#x60;POST /api/rest/2.0/auth/token/full&#x60;, &#x60;POST
+     * /api/rest/2.0/auth/token/custom&#x60;, or &#x60;POST /api/rest/2.0/auth/token/object&#x60;
+     * instead.
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -661,6 +676,7 @@ public class AuthenticationApi {
      * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
      * </table>
      */
@@ -806,6 +822,7 @@ public class AuthenticationApi {
      * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
      * </table>
      */
@@ -889,6 +906,7 @@ public class AuthenticationApi {
      * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
      * </table>
      */
@@ -974,6 +992,7 @@ public class AuthenticationApi {
      * <tr><td> 400 </td><td> Invalid request. This could be due to missing or incorrect parameters. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. The request could not be authenticated. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. The user does not have permission to access this resource. </td><td>  -  </td></tr>
+     * <tr><td> 409 </td><td> Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. </td><td>  -  </td></tr>
      * <tr><td> 500 </td><td> An unexpected error occurred on the server. </td><td>  -  </td></tr>
      * </table>
      */

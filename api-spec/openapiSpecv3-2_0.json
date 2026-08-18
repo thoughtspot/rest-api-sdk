@@ -62,6 +62,14 @@
       "description": "Roles for version 10.13.0.cl"
     },
     {
+      "name": "26.9.0.cl",
+      "id": "26.9.0.cl",
+      "tags": [
+        "26.9.0.cl"
+      ],
+      "description": "Roles for version 26.9.0.cl"
+    },
+    {
       "name": "10.7.0.cl",
       "id": "10.7.0.cl",
       "tags": [
@@ -235,7 +243,7 @@
     "/api/rest/2.0/ai/agent/conversation/create": {
       "post": {
         "operationId": "createAgentConversation",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nCreates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe request must include the `metadata_context` parameter to define the conversation context. The context type can be one of:\n\n- `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.\n- `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.\n\n> **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ \"type\": \"data_source\", \"data_source_context\": { \"guid\": \"<worksheet-id>\" } }`.\n\nThe `conversation_settings` parameter controls which Spotter capabilities are enabled for the conversation:\n\n- `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history\n\nIf the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations.\n\n#### Example request\n\n```json\n{\n  \"metadata_context\": {\n    \"type\": \"DATA_SOURCE\",\n    \"data_source_context\": {\n      \"data_source_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"\n    }\n  },\n  \"conversation_settings\": {}\n}\n```\n\n#### Error responses\n\n| Code | Description                                                                                                                             |\n| ---- | --------------------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |\n\n> ###### Note:\n>\n> - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nCreates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe conversation context is defined by exactly one of the following parameters:\n\n- `metadata_context`: defines the conversation context by data source. The context type can be one of:\n  - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.\n  - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.\n- `analyst_identifier` *(available from 26.10.0.cl)*: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst's configuration — its data sources, agent instructions, and connectors — so `metadata_context` must be omitted. The caller must be the analyst's author, have the analyst shared with them, or hold admin / Spotter-management privileges.\n\nPassing both `analyst_identifier` and `metadata_context`, or neither, is rejected.\n\n> **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ \"type\": \"data_source\", \"data_source_context\": { \"guid\": \"<worksheet-id>\" } }`.\n\nThe `conversation_settings` parameter controls which Spotter capabilities are enabled for the conversation:\n\n- `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history\n\nIf the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations. When the conversation is started from an analyst, the response additionally carries the analyst's `analyst_id`; it is `null` otherwise.\n\n#### Example request\n\n```json\n{\n  \"metadata_context\": {\n    \"type\": \"DATA_SOURCE\",\n    \"data_source_context\": {\n      \"data_source_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"\n    }\n  },\n  \"conversation_settings\": {}\n}\n```\n\n#### Error responses\n\n| Code | Description                                                                                                                             |\n| ---- | --------------------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks view permission on the specified metadata object, or has no access to the analyst specified in `analyst_identifier`. |\n| 404  | Not found — no analyst with the given `analyst_identifier` exists in the caller's Org.                                                          |\n| 422  | Unprocessable entity — the request fails validation: both `analyst_identifier` and `metadata_context` were provided, neither was provided, or `metadata_context` is malformed (for example, `DATA_SOURCE` context without a data source identifier). |\n\n> ###### Note:\n>\n> - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.2.0.cl"
@@ -272,6 +280,14 @@
                     "value": {
                       "conversation_id": "aaHQ5j8O8dQC",
                       "conversation_identifier": "aaHQ5j8O8dQC"
+                    }
+                  },
+                  "example_3": {
+                    "summary": "Create a conversation from a Spotter Analyst",
+                    "value": {
+                      "conversation_id": "bbHQ5j8O8dQC",
+                      "conversation_identifier": "bbHQ5j8O8dQC",
+                      "analyst_id": "9f8e7d6c-5b4a-3210-fedc-ba9876543210"
                     }
                   }
                 }
@@ -736,7 +752,7 @@
     "/api/rest/2.0/ai/agent/conversations": {
       "get": {
         "operationId": "getConversationList",
-        "description": "\nRetrieves the list of saved agent conversations for the currently authenticated user.\nOnly conversations created with `enable_save_chat: true` are returned. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves a paginated list of saved agent conversations for the currently authenticated user. Only conversations that were created with `enable_save_chat: true` in `createAgentConversation` are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Usage guidelines\n\nThe request supports the following optional query parameters:\n\n- `limit`: maximum number of conversations to return. Use this together with `offset` for pagination.\n- `offset`: number of conversations to skip before returning results. Defaults to `0`.\n- `skip_empty`: when `true` (default), conversations with no messages are excluded from the results. Set to `false` to include empty conversations.\n\nIf the request is successful, the response includes a `conversations` array. Each entry contains:\n\n- `conversation_identifier`: the unique ID of the conversation, used as input to `sendAgentConversationMessage`, `updateConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer`\n- `conversation_title`: the display name of the conversation\n- `created_at`: ISO 8601 timestamp of when the conversation was created\n- `updated_at`: ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`: list of unique IDs of the data sources associated with the conversation\n- `data_source_names`: array of `{ id, name }` objects for the data sources associated with the conversation\n\n#### Pagination\n\nUse `limit` and `offset` to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes a `has_more: Boolean` field. When `true`, there are additional conversations beyond the current page — increment `offset` by `limit` to fetch the next page. When `has_more` is `false`, the current page is the last. Note that `total_count` is not returned; use `has_more` to drive paging controls.\n\n#### Example response\n\n```json\n{\n  \"conversations\": [\n    {\n      \"conversation_identifier\": \"abc123\",\n      \"conversation_title\": \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\",\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifiers\": [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\": \"Retail Sales\" }]\n    }\n  ],\n  \"has_more\": false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` appear in this list. Conversations created with `enable_save_chat: false` (the default) are not persisted and cannot be retrieved.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nRetrieves the list of saved agent conversations for the currently authenticated user.\nOnly conversations created with `enable_save_chat: true` are returned. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves a paginated list of saved agent conversations for the currently authenticated user. Only conversations that were created with `enable_save_chat: true` in `createAgentConversation` are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Usage guidelines\n\nThe request supports the following optional query parameters:\n\n- `limit`: maximum number of conversations to return. Use this together with `offset` for pagination.\n- `offset`: number of conversations to skip before returning results. Defaults to `0`.\n- `skip_empty`: when `true` (default), conversations with no messages are excluded from the results. Set to `false` to include empty conversations.\n\nIf the request is successful, the response includes a `conversations` array. Each entry contains:\n\n- `conversation_identifier`: the unique ID of the conversation, used as input to `sendAgentConversationMessage`, `updateConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer`\n- `conversation_title`: the display name of the conversation\n- `created_at`: ISO 8601 timestamp of when the conversation was created\n- `updated_at`: ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`: list of unique IDs of the data sources associated with the conversation\n- `data_source_names`: array of `{ id, name }` objects for the data sources associated with the conversation\n- `is_pinned`: whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list. Available from version 26.10.0.cl.\n- `analyst_id`: unique identifier of the Spotter Analyst the conversation is associated with, or `null` when the conversation is not associated with an analyst. Available from version 26.10.0.cl.\n\n#### Pagination\n\nUse `limit` and `offset` to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes a `has_more: Boolean` field. When `true`, there are additional conversations beyond the current page — increment `offset` by `limit` to fetch the next page. When `has_more` is `false`, the current page is the last. Note that `total_count` is not returned; use `has_more` to drive paging controls.\n\n#### Example response\n\n```json\n{\n  \"conversations\": [\n    {\n      \"conversation_identifier\": \"abc123\",\n      \"conversation_title\": \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\",\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifiers\": [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\": \"Retail Sales\" }],\n      \"is_pinned\": true\n    }\n  ],\n  \"has_more\": false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` appear in this list. Conversations created with `enable_save_chat: false` (the default) are not persisted and cannot be retrieved.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.7.0.cl"
@@ -1041,6 +1057,283 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/eureka_GetRelevantQuestionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content": {
+      "get": {
+        "operationId": "getSharedContent",
+        "description": "\nReturns the full read-only view of a shared conversation, including ordered\nmessages and data source metadata. Accessible by the conversation owner and\nany principal (user or group) that has been granted access.\nRequires `CAN_USE_SPOTTER` privilege. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nReturns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access via `shareConversation`.\n\nUse this endpoint to render a shared conversation in a UI or to retrieve its content for post-processing. The full answer payload is not embedded in messages — fetch it separately via `loadAnswer` using the `shared_conversation_id` from this response as the `conversation_identifier` parameter, along with the `answer_id` from each `answer` response item.\n\n> **Important**: `shared_conversation_id` is not the same as `conversation_id`. It identifies the shared snapshot, which is a separate internal object from the source conversation. You must use the `shared_conversation_id` value — not `conversation_id` — as the `conversation_identifier` parameter when calling `loadAnswer` to hydrate answers from a shared view.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` _(query parameter)_: the unique ID of the source conversation.\n\n#### Response fields\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `conversation_id` | `String` | Echoes the request parameter. |\n| `shared_conversation_id` | `String` | Identifier for the shared snapshot. **This is not the same as `conversation_id`.** Pass this value as the `conversation_identifier` parameter in `loadAnswer` calls. It changes each time the snapshot is refreshed via `shareConversation` with `refresh_shared_content: true` — re-fetch this response to get the current value before calling `loadAnswer`. |\n| `conversation_title` | `String` | Display title of the conversation. `null` if no title was set. |\n| `creator_user_id` | `String` | Identifier of the user who created the conversation and shared it. This is the original creator, not the caller retrieving the shared content. |\n| `data_sources` | `DataSourceEntry[]` | Data sources used by the conversation, each with an `id` and display `name`. |\n| `analyst_ids` | `String[]` | Identifiers of the AI analysts the conversation ran against. An analyst is a purpose-built agent configured over a set of data sources, with its own instructions and access rules. Empty when the conversation is not associated with any analyst. |\n| `messages` | `ConversationMessage[]` | Ordered conversation messages, oldest to newest. Same structure as returned by `getConversation`. Empty when the conversation has no messages. |\n| `code_execution_files` | `CodeExecutionFileMetadata[]` | Sanitized metadata for files generated by the code-execution tool. Empty when there are none. |\n\n#### DataSourceEntry fields\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `id` | `String` | Unique identifier of the data source. |\n| `name` | `String` | Display name of the data source. |\n\n#### CodeExecutionFileMetadata fields\n\nEach entry in the `code_execution_files` array contains:\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `file_id` | `String` | Unique identifier of the file. |\n| `display_name` | `String` | Human-readable file name. |\n| `file_type` | `String` | File type such as `csv`, `pdf`, or `png`. |\n| `created_time_in_millis` | `Long` | Milliseconds since Unix epoch when the file was created. |\n| `expired` | `Boolean` | When `true`, the underlying file is no longer retrievable from code-execution storage; UIs should disable download and preview. |\n\n#### Loading answer payloads\n\nEach `answer` response item in `messages[].response_items` contains an `answer_id` field. To retrieve the full answer payload (TML tokens, visualization metadata, chart config), call `loadAnswer` with:\n\n- `conversation_identifier`: the `shared_conversation_id` from **this** response (not `conversation_id`)\n- `answer_identifier`: the `answer_id` from the `answer` item\n\nIf the snapshot has been refreshed since you last called `getSharedContent`, the `shared_conversation_id` will have changed. Always use the `shared_conversation_id` from the most recent `getSharedContent` response; stale values return 404.\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content\n```\n\n#### Example response\n\n```json\n{\n  \"conversation_id\": \"conv-abc-123\",\n  \"shared_conversation_id\": \"snap-xyz-456\",\n  \"conversation_title\": \"Sales by Region Q1\",\n  \"creator_user_id\": \"5d3e6cc7-2f4a-4b0e-9a1c-8f2b6d4e7a10\",\n  \"data_sources\": [{ \"id\": \"ds-001\", \"name\": \"Retail Sales\" }],\n  \"analyst_ids\": [\"spot-7f2a\"],\n  \"messages\": [\n    {\n      \"message_id\": \"node-u-01\",\n      \"timestamp_in_millis\": 1744000000000,\n      \"user_prompt\": {\n        \"message\": {\n          \"message_id\": \"msg-u-01\",\n          \"content\": \"Show me revenue by region.\"\n        },\n        \"attachments\": []\n      },\n      \"response_items\": [\n        {\n          \"type\": \"tool_call\",\n          \"tool_call_id\": \"toolu-01\",\n          \"tool_name\": \"search_datasets\",\n          \"step_title\": \"Searching datasets\",\n          \"arguments\": { \"query\": \"revenue by region\" },\n          \"timestamp_in_millis\": 1744000001000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"ans-01\",\n          \"tool_call_id\": \"toolu-02\",\n          \"tool_name\": \"fetch_and_visualize\",\n          \"step_title\": \"Visualizing\",\n          \"timestamp_in_millis\": 1744000004000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"text\",\n          \"content\": \"Revenue is highest in APAC.\",\n          \"content_type\": \"TEXT_MARKDOWN\",\n          \"timestamp_in_millis\": 1744000005000,\n          \"is_thinking\": false,\n          \"step_title\": null,\n          \"file_reference\": null\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": [\n    {\n      \"file_id\": \"revenue_by_region.csv\",\n      \"display_name\": \"revenue_by_region.csv\",\n      \"file_type\": \"csv\",\n      \"created_time_in_millis\": 1744027200000,\n      \"expired\": false\n    }\n  ]\n}\n```\n\nFor the `ConversationMessage` field structure, see `getConversation`.\n\n#### Error responses\n\n| Code | Description |\n| --- | --- |\n| 401 | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403 | Forbidden — the caller is neither the conversation owner nor a principal with access, or does not have `CAN_USE_SPOTTER` privilege. |\n| 404 | Not Found — no active shared view exists for the given conversation identifier. |\n\n> ###### Note:\n>\n> - The shared view is a point-in-time copy of the conversation. It may not reflect edits made after sharing. Check `is_shared_content_outdated` via `getShareInfo` and use `shareConversation` with `refresh_shared_content: true` to update.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n<span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the source conversation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharedConversationResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Shared conversation with one message and an answer",
+                    "value": {
+                      "conversation_id": "conv-abc-123",
+                      "shared_conversation_id": "snap-xyz-456",
+                      "conversation_title": "Sales by Region Q1",
+                      "creator_user_id": "5d3e6cc7-2f4a-4b0e-9a1c-8f2b6d4e7a10",
+                      "data_sources": [
+                        {
+                          "id": "ds-001",
+                          "name": "Retail Sales"
+                        }
+                      ],
+                      "analyst_ids": [
+                        "spot-7f2a"
+                      ],
+                      "messages": [
+                        {
+                          "message_id": "node-u-01",
+                          "timestamp_in_millis": 1744000000000,
+                          "user_prompt": {
+                            "message": {
+                              "message_id": "msg-u-01",
+                              "content": "Show me revenue by region."
+                            },
+                            "attachments": []
+                          },
+                          "response_items": [
+                            {
+                              "type": "answer",
+                              "answer_id": "ans-01",
+                              "tool_call_id": "toolu-01",
+                              "tool_name": "fetch_and_visualize",
+                              "step_title": "Visualizing",
+                              "timestamp_in_millis": 1744000004000,
+                              "is_thinking": false
+                            },
+                            {
+                              "type": "text",
+                              "content": "Revenue is highest in APAC at $4.2M.",
+                              "content_type": "TEXT_MARKDOWN",
+                              "timestamp_in_millis": 1744000005000,
+                              "is_thinking": false,
+                              "step_title": null,
+                              "file_reference": null
+                            }
+                          ]
+                        }
+                      ],
+                      "code_execution_files": [
+                        {
+                          "file_id": "revenue_by_region.csv",
+                          "display_name": "revenue_by_region.csv",
+                          "file_type": "csv",
+                          "created_time_in_millis": 1744027200000,
+                          "expired": false
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharedConversationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info": {
+      "get": {
+        "operationId": "getShareInfo",
+        "description": "\nReturns the current share state for a conversation the caller owns: whether\nthe shared view is outdated relative to the latest conversation content, and\nthe list of principals that currently have access.\nRequires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nReturns the current share state for a conversation the caller owns: whether the shared view reflects the latest conversation content, and the list of principals that currently have access.\n\nUse this endpoint to render a share management UI, audit who has access to a conversation, or determine whether the shared view needs to be refreshed before sending a link.\n\nRequires ownership of the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` _(query parameter)_: the unique ID of the conversation, as returned by `createAgentConversation` or `getConversationList`.\n\n#### Response fields\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `conversation_id` | `String` | Echoes the request parameter. |\n| `is_shared_content_outdated` | `Boolean` | `true` when the shared view was generated before the last edit to the conversation and does not reflect the latest content. `false` when the shared view is current. `null` when the conversation has never been shared. |\n| `principals` | `ConversationPrincipalInfo[]` | List of principals with access. Empty when no access has been granted. The conversation owner is never included. |\n\n#### ConversationPrincipalInfo fields\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `id` | `String` | Unique identifier of the user or group. |\n| `type` | `Principals` | `USER` for individual users, `USER_GROUP` for groups. |\n| `display_name` | `String` | Display name as shown in the ThoughtSpot UI. |\n| `name` | `String` | Internal name of the user or group. |\n| `permission` | `String` | Access level. Always `READ_ONLY` for shared conversations. |\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info\n```\n\n#### Example response — conversation shared and current\n\n```json\n{\n  \"conversation_id\": \"conv-abc-123\",\n  \"is_shared_content_outdated\": false,\n  \"principals\": [\n    {\n      \"id\": \"user-001\",\n      \"type\": \"USER\",\n      \"display_name\": \"Alice Example\",\n      \"name\": \"alice.example\",\n      \"permission\": \"READ_ONLY\"\n    },\n    {\n      \"id\": \"group-001\",\n      \"type\": \"USER_GROUP\",\n      \"display_name\": \"Sales Team\",\n      \"name\": \"sales-team\",\n      \"permission\": \"READ_ONLY\"\n    }\n  ]\n}\n```\n\n#### Example response — conversation never shared\n\n```json\n{\n  \"conversation_id\": \"conv-abc-123\",\n  \"is_shared_content_outdated\": null,\n  \"principals\": []\n}\n```\n\n#### Example response — shared view outdated\n\n```json\n{\n  \"conversation_id\": \"conv-abc-123\",\n  \"is_shared_content_outdated\": true,\n  \"principals\": [\n    {\n      \"id\": \"user-001\",\n      \"type\": \"USER\",\n      \"display_name\": \"Alice Example\",\n      \"name\": \"alice.example\",\n      \"permission\": \"READ_ONLY\"\n    }\n  ]\n}\n```\n\nWhen `is_shared_content_outdated` is `true`, call `shareConversation` with `refresh_shared_content: true` to update the shared view with the latest conversation content.\n\n#### Error responses\n\n| Code | Description |\n| --- | --- |\n| 401 | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403 | Forbidden — the caller does not own the specified conversation, or does not have `CAN_USE_SPOTTER` privilege. |\n| 404 | Not Found — no conversation exists with the given identifier for the authenticated user. |\n\n> ###### Note:\n>\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n<span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationShareStatusResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Conversation shared with two principals, content is current",
+                    "value": {
+                      "conversation_id": "conv-abc-123",
+                      "is_shared_content_outdated": false,
+                      "principals": [
+                        {
+                          "id": "user-001",
+                          "type": "USER",
+                          "display_name": "Alice Example",
+                          "name": "alice.example",
+                          "permission": "READ_ONLY"
+                        },
+                        {
+                          "id": "group-001",
+                          "type": "USER_GROUP",
+                          "display_name": "Sales Team",
+                          "name": "sales-team",
+                          "permission": "READ_ONLY"
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Conversation never shared",
+                    "value": {
+                      "conversation_id": "conv-abc-123",
+                      "is_shared_content_outdated": null,
+                      "principals": []
+                    }
+                  },
+                  "example_3": {
+                    "summary": "Shared view is outdated — conversation was edited after sharing",
+                    "value": {
+                      "conversation_id": "conv-abc-123",
+                      "is_shared_content_outdated": true,
+                      "principals": [
+                        {
+                          "id": "user-001",
+                          "type": "USER",
+                          "display_name": "Alice Example",
+                          "name": "alice.example",
+                          "permission": "READ_ONLY"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationShareStatusResponse"
                 }
               }
             }
@@ -2177,6 +2470,82 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share": {
+      "post": {
+        "operationId": "shareConversation",
+        "description": "\nGrants or revokes access to a shared conversation for one or more principals\n(users or groups). When principals are added, a read-only shared view of the\nconversation is created from its current state. Use `refresh_shared_content`\nto regenerate the shared view with the latest conversation content.\nRequires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nGrants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. The shared view is a point-in-time copy — use `refresh_shared_content` to regenerate it with the latest conversation content.\n\nRequires ownership of the specified conversation. Only the user who created the conversation can manage its share access.\n\n#### Usage guidelines\n\nThe conversation to share is identified by the `{conversation_identifier}` URL path parameter. At least one of the following must be true: `grant` is non-empty, `revoke` is non-empty, or `refresh_shared_content` is `true`. A principal cannot appear in both lists in the same request.\n\n| Field | Type | Default | Description |\n| --- | --- | --- | --- |\n| `refresh_shared_content` | `Boolean` | `false` | When `true`, always regenerates the shared view from the latest conversation state, even if a shared view already exists. When `false`, reuses the existing shared view. |\n| `grant` | `PrincipalRefInput[]` | `[]` | Principals to grant read-only access. |\n| `revoke` | `PrincipalRefInput[]` | `[]` | Principals to revoke access from. |\n| `notify_on_share` | `Boolean` | `true` | *(available from 26.10.0.cl)* When `true`, newly granted principals are notified of the share. When `false`, access is granted without sending a notification. Has no effect on principals passed in `revoke`, and does not re-notify a principal who already had access. |\n\n#### PrincipalRefInput fields\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `principal_identifier` | `String` | Unique identifier of the user or group. |\n| `principal_type` | `Principals` | `USER` for individual users, `USER_GROUP` for groups. |\n\n#### Example request — granting access\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share\n```\n\n```json\n{\n  \"refresh_shared_content\": false,\n  \"grant\": [\n    { \"principal_identifier\": \"user-001\", \"principal_type\": \"USER\" },\n    { \"principal_identifier\": \"group-001\", \"principal_type\": \"USER_GROUP\" }\n  ],\n  \"revoke\": [],\n  \"notify_on_share\": true\n}\n```\n\n#### Example request — revoking access\n\n```json\n{\n  \"refresh_shared_content\": false,\n  \"grant\": [],\n  \"revoke\": [\n    { \"principal_identifier\": \"user-001\", \"principal_type\": \"USER\" }\n  ]\n}\n```\n\nSet `refresh_shared_content: true` with empty `grant` and `revoke` to regenerate the shared snapshot for existing recipients without changing access. Combine with non-empty `grant` or `revoke` to update access and refresh the snapshot in a single call.\n\n#### Error responses\n\n| Code | Description |\n| --- | --- |\n| 401 | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403 | Forbidden — the caller does not own the specified conversation, or does not have `CAN_USE_SPOTTER` privilege. |\n| 404 | Not Found — no conversation exists with the given identifier for the authenticated user. |\n| 422 | Unprocessable — `refresh_shared_content` is `false` and both `grant` and `revoke` are empty, or a principal appears in both lists. |\n\n> ###### Note:\n>\n> - The shared view is a read-only snapshot of the conversation at the time of sharing. Recipients cannot send messages or modify the conversation.\n> - Use `getShareInfo` to check whether the shared view is outdated relative to the current conversation state.\n> - `notify_on_share: false` only suppresses the share notification; access is still granted.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n<span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShareConversationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to share."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully updated the share access for the conversation."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/answer/create": {
       "post": {
         "operationId": "singleAnswer",
@@ -2329,7 +2698,7 @@
     "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update": {
       "post": {
         "operationId": "updateConversation",
-        "description": "\nUpdates attributes of an existing agent conversation. Currently only the\ndisplay title can be updated; additional conversation attributes may be\nsupported in future versions. At least one updatable attribute must be\nprovided in the request body. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates attributes of an existing saved agent conversation. Currently only the conversation's display `title` can be updated; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList`\n- At least one updatable attribute in the request body:\n    - `title` *(optional)*: the new display name for the conversation. When provided, must be a non-empty string.\n\nA successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\"\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad Request — the request body is empty or `title` is provided as an empty string. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n| 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdates attributes of an existing agent conversation. Currently only the\ndisplay title can be updated; additional conversation attributes may be\nsupported in future versions. At least one updatable attribute must be\nprovided in the request body. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates attributes of an existing saved agent conversation. Supports updating the conversation's display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.\n\nUse this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList`\n- At least one updatable attribute in the request body:\n    - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.\n    - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.\n\nEach attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.\n\nA successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.\n\n#### Example request\n\nRename a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\"\n}\n```\n\nPin a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"is_pinned\": true\n}\n```\n\nUpdate both attributes in a single request:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\",\n  \"is_pinned\": true\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n| 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier.\n> - There is no limit on the number of conversations a user can pin.\n> - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.7.0.cl"
@@ -2670,7 +3039,7 @@
     "/api/rest/2.0/auth/session/token": {
       "get": {
         "operationId": "getCurrentUserToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nRetrieves details of the current session token for the bearer token provided in the request header.\n\nThis API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.\n\nUse this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.\n\nAny ThoughtSpot user with a valid bearer token can access this endpoint and send an API request\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.4.0.cl or later</span>\n\nGenerates a new bearer token from an existing authenticated session.\n\n#### Required privileges\nAny ThoughtSpot user with a valid bearer token can access this endpoint and send an API request. Requires no additional privileges.\n\n#### Usage guidelines\nThis endpoint doesn't return the caller's existing session token. Instead, it issues a new token based on the current authenticated session and returns the new token string, its creation and expiration timestamps, and the associated user details in response. The token generated from this API request is valid for 24 hours.\n\nUse this endpoint when your application needs a new token without requiring the user to re-authenticate. If you need a token with a specific expiration or a different security scope, use `POST /api/rest/2.0/auth/token/full`, `POST /api/rest/2.0/auth/token/custom`, or `POST /api/rest/2.0/auth/token/object` instead.\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.4.0.cl"
@@ -2843,6 +3212,36 @@
                       "creation_time_in_millis": 1724278000000,
                       "expiration_time_in_millis": 1724278300000
                     }
+                  },
+                  "example_3": {
+                    "description": "Org-scoped custom access token authorized for specific Orgs (Tenant Admin)",
+                    "value": {
+                      "id": "5c4b3a29-1807-4f6e-8d9c-abcdef012345",
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_org_scoped_custom_token.signature",
+                      "org": {
+                        "id": 2,
+                        "name": "sales-org"
+                      },
+                      "user": {
+                        "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                        "name": "tsadmin"
+                      },
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "org_scope": "SPECIFIC_ORGS",
+                        "org_ids": [
+                          {
+                            "id": 2,
+                            "name": "sales-org"
+                          },
+                          {
+                            "id": 3,
+                            "name": "marketing-org"
+                          }
+                        ]
+                      }
+                    }
                   }
                 }
               }
@@ -2919,6 +3318,16 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3006,6 +3415,31 @@
                       },
                       "valid_for_user_id": "b3d9e1f7-2a4c-4e8b-9d1f-6c5a3b8e7d2f",
                       "valid_for_username": "jit_analyst@example.com"
+                    }
+                  },
+                  "example_3": {
+                    "description": "Org-scoped full-access token authorized for specific Orgs (Tenant Admin)",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_org_scoped_full_token.signature",
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "access_type": "FULL",
+                        "org_id": 2,
+                        "org_scope": "SPECIFIC_ORGS",
+                        "org_ids": [
+                          {
+                            "id": 2,
+                            "name": "sales-org"
+                          },
+                          {
+                            "id": 3,
+                            "name": "marketing-org"
+                          }
+                        ]
+                      },
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "valid_for_username": "tsadmin"
                     }
                   }
                 }
@@ -3172,6 +3606,32 @@
                       },
                       "valid_for_user_id": "7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c",
                       "valid_for_username": "new_user@example.com"
+                    }
+                  },
+                  "example_3": {
+                    "description": "Org-scoped object access token authorized for specific Orgs (Tenant Admin)",
+                    "value": {
+                      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_org_scoped_object_token.signature",
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "access_type": "REPORT_BOOK_VIEW",
+                        "org_id": 2,
+                        "metadata_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                        "org_scope": "SPECIFIC_ORGS",
+                        "org_ids": [
+                          {
+                            "id": 2,
+                            "name": "sales-org"
+                          },
+                          {
+                            "id": 3,
+                            "name": "marketing-org"
+                          }
+                        ]
+                      },
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "valid_for_username": "tsadmin"
                     }
                   }
                 }
@@ -3834,6 +4294,30 @@
                         "metadata_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
                       },
                       "valid_for_user_id": "7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c",
+                      "token_type": "BEARER"
+                    }
+                  },
+                  "example_3": {
+                    "description": "Valid org-scoped token authorized for specific Orgs (Tenant Admin)",
+                    "value": {
+                      "creation_time_in_millis": 1724277430000,
+                      "expiration_time_in_millis": 1724277730000,
+                      "scope": {
+                        "access_type": "FULL",
+                        "org_id": 2,
+                        "org_scope": "SPECIFIC_ORGS",
+                        "org_ids": [
+                          {
+                            "id": 2,
+                            "name": "sales-org"
+                          },
+                          {
+                            "id": 3,
+                            "name": "marketing-org"
+                          }
+                        ]
+                      },
+                      "valid_for_user_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
                       "token_type": "BEARER"
                     }
                   }
@@ -9662,7 +10146,7 @@
     "/api/rest/2.0/metadata/unparameterize": {
       "post": {
         "operationId": "unparameterizeMetadata",
-        "description": "\nRemove parameterization from fields in metadata objects. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nAllows removing parameterization from fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows unparameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.\n\nFor Connection Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nRemove parameterization from fields in metadata objects. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nAllows removing parameterization from fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions to modify the metadata object.\n\nThe API endpoint allows unparameterizing the following types of metadata objects:\n* Logical Tables\n* Connections\n* Connection Configs\n\nFor a Logical Table the field type must be `ATTRIBUTE` and field name can be one of:\n* databaseName\n* schemaName\n* tableName\n\nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.\n\nFor Connection Config, the only supported field name is:\n* impersonate_user\n\n## Restored value\n\nThe endpoint has two mutually exclusive modes, and the value that is restored differs per mode:\n\n* Single-field mode (`field_name` + `value`) restores the supplied `value`.\n* Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.\n\nIn bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable's Primary-org secret.\n\nBulk mode has no partial success. The request fails with `400` and nothing is changed if any field:\n* is a non-secret field bound to a sensitive variable,\n* is bound to a per-principal variable, whose value is user-specific or group-specific,\n* has a variable that cannot be read, because it is deleted or not visible to you,\n* has no Primary-org value, or\n* is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.\n\nSuch a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "26.5.0.cl"
@@ -11689,6 +12173,324 @@
         }
       }
     },
+    "/api/rest/2.0/semantic-integrations/create": {
+      "post": {
+        "operationId": "createSemanticIntegration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nCreates a new semantic integration in ThoughtSpot from a CDW semantic view.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About create semantic integration\n\nA semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.\n\n- `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required.\n- `name` must be unique across the user's organization. The integration's display name is also used as the generated model name.\n- Supported `type` values are listed in the `SemanticIntegrationType` enum.\n- The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.\n\n> **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSemanticIntegrationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Semantic integration created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticIntegrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Connection not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Duplicate integration name.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete": {
+      "post": {
+        "operationId": "deleteSemanticIntegration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nDeletes a semantic integration and its associated ThoughtSpot model.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About delete semantic integration\n\nRemoves the specified semantic integration and its generated ThoughtSpot model from the system.\n\n- `semantic_integration_identifier` is the GUID or name of the integration to delete.\n- Deletions cannot be undone. Re-import the integration with `createSemanticIntegration` if needed.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "semantic_integration_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the semantic integration to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Semantic integration deleted successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import": {
+      "post": {
+        "operationId": "importSemanticIntegration",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nImports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About import semantic integration\n\nRe-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.\n\n- `semantic_integration_identifier` is the GUID or name of the integration to import updates for.\n- Import preserves the integration's GUID, name, and `model_id`; only the underlying formula set is refreshed.\n- The response includes the same `semantic_report` as create, with an additional `change_status` per formula indicating whether each formula is `NEW`, `UPDATED`, or `UNCHANGED` since the previous import.\n\n> **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "semantic_integration_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID or name of the semantic integration to import updates for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Semantic integration imported successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticIntegrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Semantic integration not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/semantic-integrations/search": {
+      "post": {
+        "operationId": "searchSemanticIntegrations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>\n\nSearches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- **Can manage data models**\n\n#### About search semantic integrations\n\nReturns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.\n\n- `pattern` matches the integration name as a case-insensitive substring.\n- `author_identifiers` and `connection_identifiers` accept either GUIDs or names.\n- `sort_options.field_name` defaults to `MODIFIED_TIME`; set `sort_options.order` to `ASC` or `DESC` to control sort direction.\n- `record_offset` and `record_size` control pagination. Use `record_size: 0` to return all matching records in a single response.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Semantic Integrations",
+          "26.9.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchSemanticIntegrationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Semantic integrations retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SemanticIntegrationSearchResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/customization/styles/fonts/delete": {
       "post": {
         "operationId": "deleteStyleFonts",
@@ -12900,7 +13702,7 @@
                     ]
                   },
                   "name": {
-                    "description": "Display name for the font (e.g. \"Acme Sans\"). Must be unique within the\ntarget scope; returns an error if a font with this name already exists.",
+                    "description": "Display name for the font (e.g. \"Acme Sans\").",
                     "type": "string"
                   },
                   "weight": {
@@ -15789,7 +16591,7 @@
     "/api/rest/2.0/template/variables/{identifier}/update-values": {
       "post": {
         "operationId": "putVariableValues",
-        "description": "\nUpdate values for a variable <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows updating values for a specific variable in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to the variable\n* Replacing existing values\n* Deleting values from the variable\n* Resetting all values\n\nWhen updating variable values, you need to specify:\n* The variable identifier (ID or name)\n* The values to add/replace/remove\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constraints for the given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate values for a variable <br/>  <span class=\"since-beta-tag\">Version: 26.4.0.cl or later</span>\n\nAllows updating values for a specific variable in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to the variable\n* Replacing existing values\n* Deleting values from the variable\n* Resetting all values\n\nWhen updating variable values, you need to specify:\n* The variable identifier (ID or name)\n* The values to add/replace/remove\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constraints for the given variable, scope is ignored\n\nRe-sending values that already match the stored values for the targeted scope is a no-op: the request succeeds without modifying any data. This does not apply to the RESET operation or to sensitive variables, which are always written.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Variable",
           "26.4.0.cl"
@@ -16017,7 +16819,7 @@
     "/api/rest/2.0/template/variables/update-values": {
       "post": {
         "operationId": "updateVariableValues",
-        "description": "\nUpdate values for multiple variables <br/>  <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values) instead.\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constrains for a given variable, scope is ignored\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdate values for multiple variables <br/>  <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/{identifier}/update-values](/api/rest/2.0/template/variables/%7Bidentifier%7D/update-values) instead.\n\nAllows updating values for multiple variables in ThoughtSpot.\n\nRequires ADMINISTRATION role.\nThe CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.\n\nThe API endpoint allows:\n* Adding new values to variables\n* Replacing existing values\n* Deleting values from variables\n\nWhen updating variable values, you need to specify:\n* The variable identifiers\n* The values to add/replace/remove for each variable\n* The operation to perform (ADD, REPLACE, REMOVE, RESET)\n\nBehaviour based on operation type:\n* ADD - Adds values to the variable if this is a list type variable, else same as replace.\n* REPLACE - Replaces all values of a given set of constraints with the current set of values.\n* REMOVE - Removes any values which match the set of conditions of the variables if this is a list type variable, else clears value.\n* RESET - Removes all constrains for a given variable, scope is ignored\n\nRe-sending values that already match the stored values for the targeted scope is a no-op: the request succeeds without modifying any data. This does not apply to the RESET operation or to sensitive variables, which are always written.\n\n\n\n\n#### Endpoint URL\n",
         "deprecated": true,
         "tags": [
           "Variable",
@@ -19021,6 +19823,11 @@
           "visibility"
         ],
         "properties": {
+          "obj_id": {
+            "type": "string",
+            "description": "Custom object ID (obj_id) of the group, if one is set. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>",
+            "nullable": true
+          },
           "author_id": {
             "type": "string",
             "description": "The unique identifier of the object",
@@ -20729,6 +21536,11 @@
             "type": "string",
             "description": "Name of the connection."
           },
+          "obj_id": {
+            "type": "string",
+            "description": "Custom object ID (obj_id) of the connection, if one is set. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>",
+            "nullable": true
+          },
           "description": {
             "type": "string",
             "description": "Description of the connection.",
@@ -20948,6 +21760,11 @@
             "type": "string",
             "description": "Name of the role"
           },
+          "obj_id": {
+            "type": "string",
+            "description": "Custom object ID (obj_id) of the role, if one is set. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>",
+            "nullable": true
+          },
           "description": {
             "type": "string",
             "description": "Description of the role"
@@ -21033,7 +21850,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -21127,6 +21949,11 @@
           "id": {
             "type": "string",
             "description": "Unique Id of the custom action."
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "Custom object ID (obj_id) of the custom action, if one is set. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>",
+            "nullable": true
           },
           "metadata_association": {
             "type": "array",
@@ -22484,6 +23311,121 @@
           }
         }
       },
+      "ConversationShareStatusResponse": {
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "principals"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "Unique identifier of the source conversation."
+          },
+          "is_shared_content_outdated": {
+            "type": "boolean",
+            "description": "`true` when the shared view was generated before the last edit to the\nconversation and does not reflect the latest content. `null` when the\nconversation has never been shared.",
+            "nullable": true
+          },
+          "principals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationPrincipalInfo"
+            },
+            "description": "List of principals that currently have access to this shared conversation.\nEmpty when no principals have been granted access."
+          }
+        },
+        "description": "Response returned by getShareInfo."
+      },
+      "ConversationPrincipalInfo": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "display_name",
+          "name",
+          "permission"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the user or group."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Whether the principal is an individual user or a group."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Display name of the principal as shown in the UI."
+          },
+          "name": {
+            "type": "string",
+            "description": "Internal name of the principal."
+          },
+          "permission": {
+            "type": "string",
+            "enum": [
+              "READ_ONLY",
+              "MODIFY",
+              "NO_ACCESS"
+            ],
+            "description": "Access level granted to the principal. Always `READ_ONLY` for shared conversations."
+          }
+        },
+        "description": "A principal that has been granted access to a shared conversation."
+      },
+      "SharedConversationResponse": {
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "shared_conversation_id",
+          "data_sources",
+          "messages",
+          "code_execution_files"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "Unique identifier of the source conversation (echoes the request parameter)."
+          },
+          "shared_conversation_id": {
+            "type": "string",
+            "description": "Identifier for the shared view. Use this as `conversation_identifier` in\nfollow-up `loadAnswer` calls to hydrate answer items in the messages."
+          },
+          "conversation_title": {
+            "type": "string",
+            "description": "Display title of the conversation.",
+            "nullable": true
+          },
+          "data_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataSourceEntry"
+            },
+            "description": "Data sources used by the conversation, each with an identifier and display name."
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationMessage"
+            },
+            "description": "Ordered conversation messages, oldest to newest. Same structure as the\n`messages` field returned by `getConversation`. Empty array when the\nconversation has no messages; never null."
+          },
+          "code_execution_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodeExecutionFileMetadata"
+            },
+            "description": "Sanitized metadata for files generated by the code-execution tool during\nthis conversation. Empty when there are no such files."
+          }
+        },
+        "description": "Response returned by getSharedContent. Contains the full read-only view\nof the shared conversation including messages and data source metadata."
+      },
       "RiseGQLArgWrapper": {
         "type": "object",
         "required": [
@@ -22809,7 +23751,8 @@
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             },
             "nullable": true
@@ -23481,6 +24424,11 @@
             "type": "string",
             "description": "Name of the collection."
           },
+          "obj_id": {
+            "type": "string",
+            "description": "Custom object ID (obj_id) of the collection, if one is set. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>",
+            "nullable": true
+          },
           "description": {
             "type": "string",
             "description": "Description of the collection.",
@@ -24121,6 +25069,136 @@
           }
         },
         "description": "Visualization areas assigned to a font, grouped by org context."
+      },
+      "SemanticIntegrationSortOptions": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "enum": [
+              "NAME",
+              "AUTHOR",
+              "CREATED_TIME",
+              "MODIFIED_TIME"
+            ],
+            "description": "Name of the field to apply the sort on.",
+            "nullable": true
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Sort order: `ASC` for ascending, `DESC` for descending.",
+            "nullable": true
+          }
+        },
+        "description": "Sort options for semantic integration search."
+      },
+      "SemanticIntegrationSearchResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the semantic integration.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the semantic integration.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of the semantic integration.",
+            "nullable": true
+          },
+          "model_id": {
+            "type": "string",
+            "description": "GUID of the associated ThoughtSpot model generated for this integration.",
+            "nullable": true
+          },
+          "model_name": {
+            "type": "string",
+            "description": "Name of the associated ThoughtSpot model.",
+            "nullable": true
+          },
+          "import_type": {
+            "type": "string",
+            "enum": [
+              "CDW",
+              "FILE"
+            ],
+            "description": "How the semantic definition was sourced.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "RDBMS_SNOWFLAKE"
+            ],
+            "description": "CDW connector type.",
+            "nullable": true
+          },
+          "connection_id": {
+            "type": "string",
+            "description": "GUID of the CDW connection backing the integration.",
+            "nullable": true
+          },
+          "connection_name": {
+            "type": "string",
+            "description": "Display name of the CDW connection backing the integration.",
+            "nullable": true
+          },
+          "author_id": {
+            "type": "string",
+            "description": "GUID of the user who created the integration.",
+            "nullable": true
+          },
+          "author_name": {
+            "type": "string",
+            "description": "Username of the user who created the integration.",
+            "nullable": true
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Creation time in Unix epoch milliseconds.",
+            "nullable": true
+          },
+          "modification_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Last modification time in Unix epoch milliseconds.",
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SemanticIntegrationTagReference"
+            },
+            "description": "Tags associated with the integration.",
+            "nullable": true
+          }
+        },
+        "description": "Single semantic integration entry returned by search."
+      },
+      "SemanticIntegrationTagReference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the tag.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the tag.",
+            "nullable": true
+          }
+        },
+        "description": "Tag reference associated with a semantic integration."
       },
       "GenericInfo": {
         "type": "object",
@@ -25451,7 +26529,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
@@ -26519,7 +27602,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -27686,6 +28774,28 @@
           }
         }
       },
+      "PrincipalRefInput": {
+        "type": "object",
+        "required": [
+          "principal_identifier",
+          "principal_type"
+        ],
+        "properties": {
+          "principal_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the user or group."
+          },
+          "principal_type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP"
+            ],
+            "description": "Whether the principal is an individual user or a group."
+          }
+        },
+        "description": "Input reference to a principal (user or group) used when granting or revoking\naccess to a shared resource."
+      },
       "ImportMemoryResponse": {
         "type": "object",
         "required": [
@@ -28236,6 +29346,14 @@
               "MEASURE"
             ],
             "description": "Semantic role of the column in ThoughtSpot. Use ATTRIBUTE for\ndimensional data such as text, dates, and identifiers, and\nMEASURE for numeric or aggregatable values."
+          },
+          "allowed_values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional list of permitted values for the column. When provided,\ndata written to this column is restricted to these values. Omit\nor leave empty to allow any value supported by the data type. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "Schema definition for a single input column."
@@ -28896,6 +30014,137 @@
         },
         "description": "A visualization area assignment affected by a font deletion."
       },
+      "SemanticIntegrationResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the semantic integration.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the semantic integration.",
+            "nullable": true
+          },
+          "model_id": {
+            "type": "string",
+            "description": "Model GUID generated for this integration.",
+            "nullable": true
+          },
+          "model_name": {
+            "type": "string",
+            "description": "Model name generated for this integration.",
+            "nullable": true
+          },
+          "semantic_report": {
+            "$ref": "#/components/schemas/SemanticIntegrationReport",
+            "description": "Per-formula import report.",
+            "nullable": true
+          }
+        },
+        "description": "Response object for a semantic integration."
+      },
+      "SemanticIntegrationReport": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/SemanticIntegrationReportSummary",
+            "description": "Summary of formula import counts.",
+            "nullable": true
+          },
+          "formulas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SemanticIntegrationFormulaReport"
+            },
+            "description": "Formula import details.",
+            "nullable": true
+          }
+        },
+        "description": "Per-formula import report for a semantic integration."
+      },
+      "SemanticIntegrationReportSummary": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of formulas.",
+            "nullable": true
+          },
+          "imported": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of successfully imported formulas.",
+            "nullable": true
+          },
+          "failed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of failed formula imports.",
+            "nullable": true
+          },
+          "skipped": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of skipped formulas.",
+            "nullable": true
+          }
+        },
+        "description": "Formula import counts summary."
+      },
+      "SemanticIntegrationFormulaReport": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Formula ID in the model.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Formula name.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Formula description.",
+            "nullable": true
+          },
+          "source_expression": {
+            "type": "string",
+            "description": "CDW source expression.",
+            "nullable": true
+          },
+          "translated_formula": {
+            "type": "string",
+            "description": "ThoughtSpot formula equivalent.",
+            "nullable": true
+          },
+          "import_status": {
+            "type": "string",
+            "enum": [
+              "IMPORTED",
+              "FAILED",
+              "SKIPPED"
+            ],
+            "description": "Import status.",
+            "nullable": true
+          },
+          "change_status": {
+            "type": "string",
+            "enum": [
+              "NEW",
+              "UPDATED",
+              "UNCHANGED"
+            ],
+            "description": "Change status since last import. Null on initial create.",
+            "nullable": true
+          }
+        },
+        "description": "Import details for a single formula."
+      },
       "Runtime_Filter": {
         "type": "object",
         "properties": {
@@ -29224,6 +30473,37 @@
         "required": [
           "data_source_identifier",
           "nl_instructions_info"
+        ]
+      },
+      "ShareConversationRequest": {
+        "type": "object",
+        "properties": {
+          "refresh_shared_content": {
+            "description": "When `true`, always regenerates the shared view from the latest conversation\nstate, even if one already exists. When `false` (default), reuses the\nexisting shared view.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "grant": {
+            "description": "Principals to grant read-only access to the conversation.",
+            "default": [],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrincipalRefInput"
+            }
+          },
+          "revoke": {
+            "description": "Principals to revoke access from the conversation.",
+            "default": [],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrincipalRefInput"
+            }
+          }
+        },
+        "required": [
+          "grant",
+          "revoke"
         ]
       },
       "SingleAnswerRequest": {
@@ -29762,7 +31042,8 @@
               "KEY_PAIR",
               "PERSONAL_ACCESS_TOKEN",
               "OAUTH_WITH_SERVICE_PRINCIPAL",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "configuration": {
@@ -29787,13 +31068,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           }
@@ -29862,7 +31144,8 @@
               "EXTOAUTH_WITH_PKCE",
               "OAUTH_WITH_PKCE",
               "PERSONAL_ACCESS_TOKEN",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "configuration": {
@@ -29886,13 +31169,14 @@
             }
           },
           "policy_processes": {
-            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.",
+            "description": "Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "SAGE_INDEXING",
-                "ROW_COUNT_STATS"
+                "ROW_COUNT_STATS",
+                "SCHEDULED_LIVEBOARDS"
               ]
             }
           },
@@ -30127,7 +31411,8 @@
               "OAUTH_WITH_PKCE",
               "EXTOAUTH_WITH_PKCE",
               "OAUTH_WITH_PEZ",
-              "OAUTH_CLIENT_CREDENTIALS"
+              "OAUTH_CLIENT_CREDENTIALS",
+              "OAUTH_CLIENT_CREDENTIALS_WITH_X509"
             ]
           },
           "show_resolved_parameters": {
@@ -30925,7 +32210,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -31084,7 +32374,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -31224,7 +32519,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -32474,7 +33774,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -32573,7 +33878,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },
@@ -32667,7 +33977,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           }
@@ -34532,6 +35847,93 @@
           "column_security_rules"
         ]
       },
+      "CreateSemanticIntegrationRequest": {
+        "type": "object",
+        "properties": {
+          "connection_identifier": {
+            "description": "ID or name of the CDW connection.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the semantic integration. Must be unique.",
+            "type": "string"
+          },
+          "database_name": {
+            "description": "Database name in the CDW.",
+            "type": "string"
+          },
+          "schema_name": {
+            "description": "Schema name in the CDW.",
+            "type": "string"
+          },
+          "semantic_view_name": {
+            "description": "Semantic view name in the CDW.",
+            "type": "string"
+          },
+          "type": {
+            "description": "CDW connector type.",
+            "type": "string",
+            "enum": [
+              "RDBMS_SNOWFLAKE"
+            ]
+          },
+          "description": {
+            "description": "Optional description of the semantic integration.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "connection_identifier",
+          "name",
+          "database_name",
+          "schema_name",
+          "semantic_view_name",
+          "type"
+        ]
+      },
+      "SearchSemanticIntegrationsRequest": {
+        "type": "object",
+        "properties": {
+          "sort_options": {
+            "description": "Sort options for the search results.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SemanticIntegrationSortOptions"
+              }
+            ]
+          },
+          "record_offset": {
+            "description": "Number of records to skip for pagination. Minimum value is 0.",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "record_size": {
+            "description": "Maximum number of records to return. Use 0 to return all records (no pagination).",
+            "default": 10,
+            "type": "integer",
+            "format": "int32"
+          },
+          "pattern": {
+            "description": "Name filter substring to narrow search results.",
+            "type": "string"
+          },
+          "author_identifiers": {
+            "description": "Filter by author IDs or names who created the integrations.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "connection_identifiers": {
+            "description": "Filter by connection IDs or names associated with the integrations.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "DeleteStyleFontsRequest": {
         "type": "object",
         "properties": {
@@ -34629,7 +36031,7 @@
             ]
           },
           "name": {
-            "description": "New display name for the font. Must be unique within the target scope.",
+            "description": "New display name for the font.",
             "type": "string"
           },
           "weight": {
@@ -35231,7 +36633,12 @@
                 "CAN_DOWNLOAD_VISUALS",
                 "CAN_DOWNLOAD_DETAILED_DATA",
                 "CAN_USE_SPOTTER",
-                "CAN_MANAGE_SPOTTER"
+                "CAN_MANAGE_SPOTTER",
+                "CAN_CREATE_LIVEBOARD",
+                "CAN_CREATE_ANSWERS",
+                "CAN_ANALYZE_DATA",
+                "CAN_ADMINISTER_SCHEDULES",
+                "CAN_CREATE_KPI_ALERTS"
               ]
             }
           },

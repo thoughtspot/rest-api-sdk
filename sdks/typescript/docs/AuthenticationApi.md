@@ -143,7 +143,7 @@ This endpoint does not need any parameter.
 # **getCurrentUserToken**
 > GetTokenResponse getCurrentUserToken()
 
-  Version: 9.4.0.cl or later   Retrieves details of the current session token for the bearer token provided in the request header.  This API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.  Use this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.  Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request      
+  Version: 9.4.0.cl or later   Generates a new bearer token from an existing authenticated session.  #### Required privileges Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request. Requires no additional privileges.  #### Usage guidelines This endpoint doesn\'t return the caller\'s existing session token. Instead, it issues a new token based on the current authenticated session and returns the new token string, its creation and expiration timestamps, and the associated user details in response. The token generated from this API request is valid for 24 hours.  Use this endpoint when your application needs a new token without requiring the user to re-authenticate. If you need a token with a specific expiration or a different security scope, use `POST /api/rest/2.0/auth/token/full`, `POST /api/rest/2.0/auth/token/custom`, or `POST /api/rest/2.0/auth/token/object` instead.     
 
 ### Example
 
@@ -296,6 +296,7 @@ No authorization required
 **400** | Invalid request. This could be due to missing or incorrect parameters. |  -  |
 **401** | Unauthorized access. The request could not be authenticated. |  -  |
 **403** | Forbidden access. The user does not have permission to access this resource. |  -  |
+**409** | Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. |  -  |
 **500** | An unexpected error occurred on the server. |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)

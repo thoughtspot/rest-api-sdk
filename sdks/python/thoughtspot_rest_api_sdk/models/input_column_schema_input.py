@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,8 +28,9 @@ class InputColumnSchemaInput(BaseModel):
     name: StrictStr = Field(description="Name of the column.")
     data_type: StrictStr = Field(description="Physical data type of the column as recognized by the connected warehouse (for example, VARCHAR, INT64, DOUBLE, BOOL, DATE). The accepted values depend on the underlying Cloud Data Warehouse.")
     type: StrictStr = Field(description="Semantic role of the column in ThoughtSpot. Use ATTRIBUTE for dimensional data such as text, dates, and identifiers, and MEASURE for numeric or aggregatable values.")
+    allowed_values: Optional[List[StrictStr]] = Field(default=None, description="Optional list of permitted values for the column. When provided, data written to this column is restricted to these values. Omit or leave empty to allow any value supported by the data type.    Version: 26.9.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["name", "data_type", "type"]
+    __properties: ClassVar[List[str]] = ["name", "data_type", "type", "allowed_values"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -84,6 +85,11 @@ class InputColumnSchemaInput(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if allowed_values (nullable) is None
+        # and model_fields_set contains the field
+        if self.allowed_values is None and "allowed_values" in self.model_fields_set:
+            _dict['allowed_values'] = None
+
         return _dict
 
     @classmethod
@@ -98,7 +104,8 @@ class InputColumnSchemaInput(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "data_type": obj.get("data_type"),
-            "type": obj.get("type")
+            "type": obj.get("type"),
+            "allowed_values": obj.get("allowed_values")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

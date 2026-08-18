@@ -264,11 +264,12 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// </summary>
         /// <param name="id">Unique ID of the connection. (required).</param>
         /// <param name="name">Name of the connection. (required).</param>
+        /// <param name="objId">Custom object ID (obj_id) of the connection, if one is set.    Version: 26.9.0.cl or later .</param>
         /// <param name="description">Description of the connection..</param>
         /// <param name="dataWarehouseType">Type of data warehouse. (required).</param>
         /// <param name="dataWarehouseObjects">dataWarehouseObjects.</param>
         /// <param name="details">Details of the connection..</param>
-        public SearchConnectionResponse(string id = default, string name = default, string description = default, DataWarehouseTypeEnum dataWarehouseType = default, DataWarehouseObjects dataWarehouseObjects = default, Object details = default)
+        public SearchConnectionResponse(string id = default, string name = default, string objId = default, string description = default, DataWarehouseTypeEnum dataWarehouseType = default, DataWarehouseObjects dataWarehouseObjects = default, Object details = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -283,6 +284,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             }
             this.Name = name;
             this.DataWarehouseType = dataWarehouseType;
+            this.ObjId = objId;
             this.Description = description;
             this.DataWarehouseObjects = dataWarehouseObjects;
             this.Details = details;
@@ -302,6 +304,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>Name of the connection.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Custom object ID (obj_id) of the connection, if one is set.    Version: 26.9.0.cl or later 
+        /// </summary>
+        /// <value>Custom object ID (obj_id) of the connection, if one is set.    Version: 26.9.0.cl or later </value>
+        [DataMember(Name = "obj_id", EmitDefaultValue = true)]
+        public string ObjId { get; set; }
 
         /// <summary>
         /// Description of the connection.
@@ -339,6 +348,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("class SearchConnectionResponse {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  ObjId: ").Append(ObjId).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  DataWarehouseType: ").Append(DataWarehouseType).Append("\n");
             sb.Append("  DataWarehouseObjects: ").Append(DataWarehouseObjects).Append("\n");

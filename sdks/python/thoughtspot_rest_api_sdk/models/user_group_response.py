@@ -27,6 +27,7 @@ class UserGroupResponse(BaseModel):
     """
     UserGroupResponse
     """ # noqa: E501
+    obj_id: Optional[StrictStr] = Field(default=None, description="Custom object ID (obj_id) of the group, if one is set.    Version: 26.9.0.cl or later ")
     author_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the object")
     complete_detail: Optional[StrictBool] = Field(default=None, description="Indicates whether the response has complete detail of the group.")
     content: Optional[Any] = Field(default=None, description="Content details of the group")
@@ -58,7 +59,7 @@ class UserGroupResponse(BaseModel):
     visibility: StrictStr = Field(description="Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects.")
     roles: Optional[List[Role]] = Field(default=None, description="List of roles assgined to the user")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["author_id", "complete_detail", "content", "creation_time_in_millis", "default_liveboards", "deleted", "deprecated", "description", "display_name", "external", "generation_number", "hidden", "id", "index", "index_version", "metadata_version", "modification_time_in_millis", "modifier_id", "name", "orgs", "owner_id", "parent_type", "privileges", "sub_groups", "system_group", "tags", "type", "users", "visibility", "roles"]
+    __properties: ClassVar[List[str]] = ["obj_id", "author_id", "complete_detail", "content", "creation_time_in_millis", "default_liveboards", "deleted", "deprecated", "description", "display_name", "external", "generation_number", "hidden", "id", "index", "index_version", "metadata_version", "modification_time_in_millis", "modifier_id", "name", "orgs", "owner_id", "parent_type", "privileges", "sub_groups", "system_group", "tags", "type", "users", "visibility", "roles"]
 
     @field_validator('parent_type')
     def parent_type_validate_enum(cls, value):
@@ -174,6 +175,11 @@ class UserGroupResponse(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if obj_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.obj_id is None and "obj_id" in self.model_fields_set:
+            _dict['obj_id'] = None
 
         # set to None if author_id (nullable) is None
         # and model_fields_set contains the field
@@ -317,6 +323,7 @@ class UserGroupResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "obj_id": obj.get("obj_id"),
             "author_id": obj.get("author_id"),
             "complete_detail": obj.get("complete_detail"),
             "content": obj.get("content"),

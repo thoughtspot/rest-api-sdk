@@ -27,6 +27,7 @@
 |---- | -----|
 | SAGE_INDEXING | &quot;SAGE_INDEXING&quot; |
 | ROW_COUNT_STATS | &quot;ROW_COUNT_STATS&quot; |
+| SCHEDULED_LIVEBOARDS | &quot;SCHEDULED_LIVEBOARDS&quot; |
 
 
 

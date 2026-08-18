@@ -48,7 +48,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum ROWCOUNTSTATS for value: ROW_COUNT_STATS
             /// </summary>
             [EnumMember(Value = "ROW_COUNT_STATS")]
-            ROWCOUNTSTATS = 2
+            ROWCOUNTSTATS = 2,
+
+            /// <summary>
+            /// Enum SCHEDULEDLIVEBOARDS for value: SCHEDULED_LIVEBOARDS
+            /// </summary>
+            [EnumMember(Value = "SCHEDULED_LIVEBOARDS")]
+            SCHEDULEDLIVEBOARDS = 3
         }
 
         /// <summary>

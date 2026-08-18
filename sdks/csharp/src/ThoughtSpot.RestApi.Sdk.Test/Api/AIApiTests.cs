@@ -174,6 +174,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test GetShareInfo
+        /// </summary>
+        [Fact]
+        public void GetShareInfoTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //var response = instance.GetShareInfo(conversationIdentifier);
+            //Assert.IsType<ConversationShareStatusResponse>(response);
+        }
+
+        /// <summary>
+        /// Test GetSharedContent
+        /// </summary>
+        [Fact]
+        public void GetSharedContentTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //var response = instance.GetSharedContent(conversationIdentifier);
+            //Assert.IsType<SharedConversationResponse>(response);
+        }
+
+        /// <summary>
         /// Test ImportMemory
         /// </summary>
         [Fact]
@@ -296,6 +320,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //SetNLInstructionsRequest setNLInstructionsRequest = null;
             //var response = instance.SetNLInstructions(setNLInstructionsRequest);
             //Assert.IsType<EurekaSetNLInstructionsResponse>(response);
+        }
+
+        /// <summary>
+        /// Test ShareConversation
+        /// </summary>
+        [Fact]
+        public void ShareConversationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //ShareConversationRequest shareConversationRequest = null;
+            //instance.ShareConversation(conversationIdentifier, shareConversationRequest);
         }
 
         /// <summary>

@@ -48,8 +48,8 @@ class ConnectionConfigurationResponse(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['SAGE_INDEXING', 'ROW_COUNT_STATS']):
-                raise ValueError("each list item must be one of ('SAGE_INDEXING', 'ROW_COUNT_STATS')")
+            if i not in set(['SAGE_INDEXING', 'ROW_COUNT_STATS', 'SCHEDULED_LIVEBOARDS']):
+                raise ValueError("each list item must be one of ('SAGE_INDEXING', 'ROW_COUNT_STATS', 'SCHEDULED_LIVEBOARDS')")
         return value
 
     @field_validator('data_warehouse_type')

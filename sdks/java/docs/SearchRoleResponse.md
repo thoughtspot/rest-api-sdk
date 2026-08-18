@@ -10,6 +10,7 @@ Response for search role api should handle hidden privileges as well.
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** | Unique Id of the role. |  |
 |**name** | **String** | Name of the role |  |
+|**objId** | **String** | Custom object ID (obj_id) of the role, if one is set.    Version: 26.9.0.cl or later  |  [optional] |
 |**description** | **String** | Description of the role |  |
 |**groupsAssignedCount** | **Integer** | number of groups assigned with this role |  [optional] |
 |**orgs** | [**List&lt;GenericInfo&gt;**](GenericInfo.md) | Orgs in which role exists. |  [optional] |
@@ -87,6 +88,11 @@ Response for search role api should handle hidden privileges as well.
 | CAN_DOWNLOAD_DETAILED_DATA | &quot;CAN_DOWNLOAD_DETAILED_DATA&quot; |
 | CAN_USE_SPOTTER | &quot;CAN_USE_SPOTTER&quot; |
 | CAN_MANAGE_SPOTTER | &quot;CAN_MANAGE_SPOTTER&quot; |
+| CAN_CREATE_LIVEBOARD | &quot;CAN_CREATE_LIVEBOARD&quot; |
+| CAN_CREATE_ANSWERS | &quot;CAN_CREATE_ANSWERS&quot; |
+| CAN_ANALYZE_DATA | &quot;CAN_ANALYZE_DATA&quot; |
+| CAN_ADMINISTER_SCHEDULES | &quot;CAN_ADMINISTER_SCHEDULES&quot; |
+| CAN_CREATE_KPI_ALERTS | &quot;CAN_CREATE_KPI_ALERTS&quot; |
 
 
 

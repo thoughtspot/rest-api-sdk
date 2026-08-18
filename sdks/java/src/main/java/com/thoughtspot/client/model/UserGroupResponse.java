@@ -34,6 +34,12 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class UserGroupResponse implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static final String SERIALIZED_NAME_OBJ_ID = "obj_id";
+
+    @SerializedName(SERIALIZED_NAME_OBJ_ID)
+    @javax.annotation.Nullable
+    private String objId;
+
     public static final String SERIALIZED_NAME_AUTHOR_ID = "author_id";
 
     @SerializedName(SERIALIZED_NAME_AUTHOR_ID)
@@ -376,6 +382,25 @@ public class UserGroupResponse implements Serializable {
     private List<Role> roles;
 
     public UserGroupResponse() {}
+
+    public UserGroupResponse objId(@javax.annotation.Nullable String objId) {
+        this.objId = objId;
+        return this;
+    }
+
+    /**
+     * Custom object ID (obj_id) of the group, if one is set. Version: 26.9.0.cl or later
+     *
+     * @return objId
+     */
+    @javax.annotation.Nullable
+    public String getObjId() {
+        return objId;
+    }
+
+    public void setObjId(@javax.annotation.Nullable String objId) {
+        this.objId = objId;
+    }
 
     public UserGroupResponse authorId(@javax.annotation.Nullable String authorId) {
         this.authorId = authorId;
@@ -1061,7 +1086,8 @@ public class UserGroupResponse implements Serializable {
             return false;
         }
         UserGroupResponse userGroupResponse = (UserGroupResponse) o;
-        return Objects.equals(this.authorId, userGroupResponse.authorId)
+        return Objects.equals(this.objId, userGroupResponse.objId)
+                && Objects.equals(this.authorId, userGroupResponse.authorId)
                 && Objects.equals(this.completeDetail, userGroupResponse.completeDetail)
                 && Objects.equals(this.content, userGroupResponse.content)
                 && Objects.equals(this.creationTimeInMillis, userGroupResponse.creationTimeInMillis)
@@ -1108,6 +1134,7 @@ public class UserGroupResponse implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(
+                objId,
                 authorId,
                 completeDetail,
                 content,
@@ -1152,6 +1179,7 @@ public class UserGroupResponse implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class UserGroupResponse {\n");
+        sb.append("    objId: ").append(toIndentedString(objId)).append("\n");
         sb.append("    authorId: ").append(toIndentedString(authorId)).append("\n");
         sb.append("    completeDetail: ").append(toIndentedString(completeDetail)).append("\n");
         sb.append("    content: ").append(toIndentedString(content)).append("\n");
@@ -1212,6 +1240,7 @@ public class UserGroupResponse implements Serializable {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
+        openapiFields.add("obj_id");
         openapiFields.add("author_id");
         openapiFields.add("complete_detail");
         openapiFields.add("content");
@@ -1279,6 +1308,14 @@ public class UserGroupResponse implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+        if ((jsonObj.get("obj_id") != null && !jsonObj.get("obj_id").isJsonNull())
+                && !jsonObj.get("obj_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `obj_id` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("obj_id").toString()));
+        }
         if ((jsonObj.get("author_id") != null && !jsonObj.get("author_id").isJsonNull())
                 && !jsonObj.get("author_id").isJsonPrimitive()) {
             throw new IllegalArgumentException(

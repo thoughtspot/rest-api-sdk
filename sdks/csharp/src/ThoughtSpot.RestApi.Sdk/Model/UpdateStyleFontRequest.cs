@@ -129,7 +129,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="UpdateStyleFontRequest" /> class.
         /// </summary>
         /// <param name="scope">Scope of the font library containing this font. CLUSTER targets the cluster-level library. ORG targets the authenticated user&#39;s org library. Defaults to ORG if omitted. (default to ScopeEnum.ORG).</param>
-        /// <param name="name">New display name for the font. Must be unique within the target scope..</param>
+        /// <param name="name">New display name for the font..</param>
         /// <param name="weight">New weight for the font. Supported values: NORMAL, LIGHT, BOLD..</param>
         /// <param name="style">New style for the font. Supported values: NORMAL, ITALIC, OBLIQUE..</param>
         /// <param name="color">New color for the font as a 6-digit hex string (e.g. \&quot;#333333\&quot;). Returns an error if the value is malformed..</param>
@@ -144,9 +144,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// New display name for the font. Must be unique within the target scope.
+        /// New display name for the font.
         /// </summary>
-        /// <value>New display name for the font. Must be unique within the target scope.</value>
+        /// <value>New display name for the font.</value>
         [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 

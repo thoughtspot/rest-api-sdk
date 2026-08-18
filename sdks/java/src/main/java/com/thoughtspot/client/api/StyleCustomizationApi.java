@@ -1559,9 +1559,7 @@ public class StyleCustomizationApi {
     /**
      * Build call for uploadStyleFont
      *
-     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique
-     *     within the target scope; returns an error if a font with this name already exists.
-     *     (required)
+     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). (required)
      * @param fileContent Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are
      *     accepted; TTF and OTF are rejected. The file is validated on upload. (required)
      * @param scope Scope of the font library to upload to. CLUSTER uploads to the cluster-level
@@ -1716,9 +1714,7 @@ public class StyleCustomizationApi {
      * &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the
      * &#x60;updateStyleCustomization&#x60; endpoint.
      *
-     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique
-     *     within the target scope; returns an error if a font with this name already exists.
-     *     (required)
+     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). (required)
      * @param fileContent Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are
      *     accepted; TTF and OTF are rejected. The file is validated on upload. (required)
      * @param scope Scope of the font library to upload to. CLUSTER uploads to the cluster-level
@@ -1770,9 +1766,7 @@ public class StyleCustomizationApi {
      * &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the
      * &#x60;updateStyleCustomization&#x60; endpoint.
      *
-     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique
-     *     within the target scope; returns an error if a font with this name already exists.
-     *     (required)
+     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). (required)
      * @param fileContent Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are
      *     accepted; TTF and OTF are rejected. The file is validated on upload. (required)
      * @param scope Scope of the font library to upload to. CLUSTER uploads to the cluster-level
@@ -1826,9 +1820,7 @@ public class StyleCustomizationApi {
      * &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the
      * &#x60;updateStyleCustomization&#x60; endpoint.
      *
-     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique
-     *     within the target scope; returns an error if a font with this name already exists.
-     *     (required)
+     * @param name Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). (required)
      * @param fileContent Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are
      *     accepted; TTF and OTF are rejected. The file is validated on upload. (required)
      * @param scope Scope of the font library to upload to. CLUSTER uploads to the cluster-level

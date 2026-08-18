@@ -46,10 +46,11 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="actionDetails">actionDetails (required).</param>
         /// <param name="defaultActionConfig">defaultActionConfig (required).</param>
         /// <param name="id">Unique Id of the custom action. (required).</param>
+        /// <param name="objId">Custom object ID (obj_id) of the custom action, if one is set.    Version: 26.9.0.cl or later .</param>
         /// <param name="metadataAssociation">Metadata objects to assign the the custom action to..</param>
         /// <param name="name">Unique name of the custom action. (required).</param>
         /// <param name="userGroups">Unique ID or name of the User groups which are associated with the custom action..</param>
-        public ResponseCustomAction(ActionDetails actionDetails = default, DefaultActionConfig defaultActionConfig = default, string id = default, List<MetadataAssociationItem> metadataAssociation = default, string name = default, List<ObjectIDAndName> userGroups = default)
+        public ResponseCustomAction(ActionDetails actionDetails = default, DefaultActionConfig defaultActionConfig = default, string id = default, string objId = default, List<MetadataAssociationItem> metadataAssociation = default, string name = default, List<ObjectIDAndName> userGroups = default)
         {
             // to ensure "actionDetails" is required (not null)
             if (actionDetails == null)
@@ -75,6 +76,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
                 throw new ArgumentNullException("name is a required property for ResponseCustomAction and cannot be null");
             }
             this.Name = name;
+            this.ObjId = objId;
             this.MetadataAssociation = metadataAssociation;
             this.UserGroups = userGroups;
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -98,6 +100,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>Unique Id of the custom action.</value>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
         public string Id { get; set; }
+
+        /// <summary>
+        /// Custom object ID (obj_id) of the custom action, if one is set.    Version: 26.9.0.cl or later 
+        /// </summary>
+        /// <value>Custom object ID (obj_id) of the custom action, if one is set.    Version: 26.9.0.cl or later </value>
+        [DataMember(Name = "obj_id", EmitDefaultValue = true)]
+        public string ObjId { get; set; }
 
         /// <summary>
         /// Metadata objects to assign the the custom action to.
@@ -137,6 +146,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  ActionDetails: ").Append(ActionDetails).Append("\n");
             sb.Append("  DefaultActionConfig: ").Append(DefaultActionConfig).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  ObjId: ").Append(ObjId).Append("\n");
             sb.Append("  MetadataAssociation: ").Append(MetadataAssociation).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  UserGroups: ").Append(UserGroups).Append("\n");

@@ -16,6 +16,10 @@ import { HttpFile } from '../http/http';
 
 export class UserGroupResponse {
     /**
+    * Custom object ID (obj_id) of the group, if one is set.    Version: 26.9.0.cl or later 
+    */
+    'obj_id'?: string | null;
+    /**
     * The unique identifier of the object
     */
     'author_id'?: string | null;
@@ -141,6 +145,12 @@ export class UserGroupResponse {
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "obj_id",
+            "baseName": "obj_id",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "author_id",
             "baseName": "author_id",

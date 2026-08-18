@@ -23,6 +23,10 @@ export class SearchConnectionResponse {
     */
     'name': string;
     /**
+    * Custom object ID (obj_id) of the connection, if one is set.    Version: 26.9.0.cl or later 
+    */
+    'obj_id'?: string | null;
+    /**
     * Description of the connection.
     */
     'description'?: string | null;
@@ -50,6 +54,12 @@ export class SearchConnectionResponse {
         {
             "name": "name",
             "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "obj_id",
+            "baseName": "obj_id",
             "type": "string",
             "format": ""
         },

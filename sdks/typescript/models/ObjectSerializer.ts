@@ -89,7 +89,9 @@ export * from '../models/ContextPayloadV2Input';
 export * from '../models/Conversation';
 export * from '../models/ConversationMessage';
 export * from '../models/ConversationMessageResponse';
+export * from '../models/ConversationPrincipalInfo';
 export * from '../models/ConversationSettingsInput';
+export * from '../models/ConversationShareStatusResponse';
 export * from '../models/ConvertWorksheetToModelRequest';
 export * from '../models/CopyObjectRequest';
 export * from '../models/CreateAgentConversationRequest';
@@ -107,6 +109,7 @@ export * from '../models/CreateInputTableRequest';
 export * from '../models/CreateOrgRequest';
 export * from '../models/CreateRoleRequest';
 export * from '../models/CreateScheduleRequest';
+export * from '../models/CreateSemanticIntegrationRequest';
 export * from '../models/CreateTagRequest';
 export * from '../models/CreateUserGroupRequest';
 export * from '../models/CreateUserRequest';
@@ -280,6 +283,7 @@ export * from '../models/PermissionsMetadataTypeInput';
 export * from '../models/PngOptionsInput';
 export * from '../models/PolicyProcessOptions';
 export * from '../models/PolicyProcessOptionsInput';
+export * from '../models/PrincipalRefInput';
 export * from '../models/PrincipalsInput';
 export * from '../models/PrincipalsListItem';
 export * from '../models/PrincipalsListItemInput';
@@ -353,6 +357,7 @@ export * from '../models/SearchRoleResponse';
 export * from '../models/SearchRolesRequest';
 export * from '../models/SearchSchedulesRequest';
 export * from '../models/SearchSecuritySettingsRequest';
+export * from '../models/SearchSemanticIntegrationsRequest';
 export * from '../models/SearchStyleCustomizationsRequest';
 export * from '../models/SearchStyleFontsRequest';
 export * from '../models/SearchTagsRequest';
@@ -366,6 +371,13 @@ export * from '../models/SecuritySettingsOrgDetails';
 export * from '../models/SecuritySettingsOrgPreferences';
 export * from '../models/SecuritySettingsOrgPreferencesInput';
 export * from '../models/SecuritySettingsResponse';
+export * from '../models/SemanticIntegrationFormulaReport';
+export * from '../models/SemanticIntegrationReport';
+export * from '../models/SemanticIntegrationReportSummary';
+export * from '../models/SemanticIntegrationResponse';
+export * from '../models/SemanticIntegrationSearchResponse';
+export * from '../models/SemanticIntegrationSortOptions';
+export * from '../models/SemanticIntegrationTagReference';
 export * from '../models/SendAgentConversationMessageRequest';
 export * from '../models/SendAgentConversationMessageStreamingRequest';
 export * from '../models/SendAgentMessageRequest';
@@ -374,9 +386,11 @@ export * from '../models/SendAgentMessageStreamingRequest';
 export * from '../models/SendMessageRequest';
 export * from '../models/SetAgentInstructionsRequest';
 export * from '../models/SetNLInstructionsRequest';
+export * from '../models/ShareConversationRequest';
 export * from '../models/ShareMetadataRequest';
 export * from '../models/ShareMetadataTypeInput';
 export * from '../models/SharePermissionsInput';
+export * from '../models/SharedConversationResponse';
 export * from '../models/SingleAnswerRequest';
 export * from '../models/SortOption';
 export * from '../models/SortOptionInput';
@@ -590,7 +604,9 @@ import { ContextPayloadV2Input, ContextPayloadV2InputTypeEnum    } from '../mode
 import { Conversation } from '../models/Conversation';
 import { ConversationMessage } from '../models/ConversationMessage';
 import { ConversationMessageResponse } from '../models/ConversationMessageResponse';
+import { ConversationPrincipalInfo , ConversationPrincipalInfoTypeEnum    , ConversationPrincipalInfoPermissionEnum   } from '../models/ConversationPrincipalInfo';
 import { ConversationSettingsInput } from '../models/ConversationSettingsInput';
+import { ConversationShareStatusResponse } from '../models/ConversationShareStatusResponse';
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest  , CopyObjectRequestTypeEnum    } from '../models/CopyObjectRequest';
 import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
@@ -608,6 +624,7 @@ import { CreateInputTableRequest } from '../models/CreateInputTableRequest';
 import { CreateOrgRequest } from '../models/CreateOrgRequest';
 import { CreateRoleRequest  , CreateRoleRequestPrivilegesEnum    } from '../models/CreateRoleRequest';
 import { CreateScheduleRequest  , CreateScheduleRequestMetadataTypeEnum   , CreateScheduleRequestFileFormatEnum    , CreateScheduleRequestTimeZoneEnum      } from '../models/CreateScheduleRequest';
+import { CreateSemanticIntegrationRequest     , CreateSemanticIntegrationRequestTypeEnum    } from '../models/CreateSemanticIntegrationRequest';
 import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest    , CreateUserGroupRequestPrivilegesEnum   , CreateUserGroupRequestTypeEnum   , CreateUserGroupRequestVisibilityEnum    } from '../models/CreateUserGroupRequest';
 import { CreateUserRequest    , CreateUserRequestAccountTypeEnum  , CreateUserRequestAccountStatusEnum    , CreateUserRequestVisibilityEnum       , CreateUserRequestPreferredLocaleEnum        } from '../models/CreateUserRequest';
@@ -723,7 +740,7 @@ import { ImportUserGroupsResponse } from '../models/ImportUserGroupsResponse';
 import { ImportUserType } from '../models/ImportUserType';
 import { ImportUsersRequest } from '../models/ImportUsersRequest';
 import { ImportUsersResponse } from '../models/ImportUsersResponse';
-import { InputColumnSchemaInput  , InputColumnSchemaInputTypeEnum   } from '../models/InputColumnSchemaInput';
+import { InputColumnSchemaInput  , InputColumnSchemaInputTypeEnum    } from '../models/InputColumnSchemaInput';
 import { InputEurekaNLSRequest } from '../models/InputEurekaNLSRequest';
 import { InputTableDefinitionInput } from '../models/InputTableDefinitionInput';
 import { InputTableResponse } from '../models/InputTableResponse';
@@ -781,6 +798,7 @@ import { PermissionsMetadataTypeInput, PermissionsMetadataTypeInputTypeEnum    }
 import { PngOptionsInput } from '../models/PngOptionsInput';
 import { PolicyProcessOptions } from '../models/PolicyProcessOptions';
 import { PolicyProcessOptionsInput } from '../models/PolicyProcessOptionsInput';
+import { PrincipalRefInput , PrincipalRefInputPrincipalTypeEnum   } from '../models/PrincipalRefInput';
 import { PrincipalsInput , PrincipalsInputTypeEnum   } from '../models/PrincipalsInput';
 import { PrincipalsListItem } from '../models/PrincipalsListItem';
 import { PrincipalsListItemInput } from '../models/PrincipalsListItemInput';
@@ -842,7 +860,7 @@ import { SearchCommitsRequest , SearchCommitsRequestMetadataTypeEnum      } from
 import { SearchCommunicationChannelPreferencesRequest, SearchCommunicationChannelPreferencesRequestClusterPreferencesEnum    } from '../models/SearchCommunicationChannelPreferencesRequest';
 import { SearchConfigRequest } from '../models/SearchConfigRequest';
 import { SearchConnectionRequest , SearchConnectionRequestDataWarehouseTypesEnum     , SearchConnectionRequestDataWarehouseObjectTypeEnum     , SearchConnectionRequestAuthenticationTypeEnum    } from '../models/SearchConnectionRequest';
-import { SearchConnectionResponse   , SearchConnectionResponseDataWarehouseTypeEnum     } from '../models/SearchConnectionResponse';
+import { SearchConnectionResponse    , SearchConnectionResponseDataWarehouseTypeEnum     } from '../models/SearchConnectionResponse';
 import { SearchCustomActionsRequest      , SearchCustomActionsRequestTypeEnum   } from '../models/SearchCustomActionsRequest';
 import { SearchDataRequest  , SearchDataRequestDataFormatEnum        } from '../models/SearchDataRequest';
 import { SearchDataResponse } from '../models/SearchDataResponse';
@@ -850,10 +868,11 @@ import { SearchDatasetsResponseItem } from '../models/SearchDatasetsResponseItem
 import { SearchEmailCustomizationRequest } from '../models/SearchEmailCustomizationRequest';
 import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                      , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
 import { SearchOrgsRequest  , SearchOrgsRequestVisibilityEnum  , SearchOrgsRequestStatusEnum    } from '../models/SearchOrgsRequest';
-import { SearchRoleResponse      , SearchRoleResponsePrivilegesEnum  , SearchRoleResponsePermissionEnum            } from '../models/SearchRoleResponse';
+import { SearchRoleResponse       , SearchRoleResponsePrivilegesEnum  , SearchRoleResponsePermissionEnum            } from '../models/SearchRoleResponse';
 import { SearchRolesRequest   , SearchRolesRequestPrivilegesEnum     , SearchRolesRequestPermissionsEnum   } from '../models/SearchRolesRequest';
 import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
 import { SearchSecuritySettingsRequest, SearchSecuritySettingsRequestScopeEnum   } from '../models/SearchSecuritySettingsRequest';
+import { SearchSemanticIntegrationsRequest } from '../models/SearchSemanticIntegrationsRequest';
 import { SearchStyleCustomizationsRequest, SearchStyleCustomizationsRequestScopeEnum   } from '../models/SearchStyleCustomizationsRequest';
 import { SearchStyleFontsRequest, SearchStyleFontsRequestScopeEnum      } from '../models/SearchStyleFontsRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
@@ -867,6 +886,13 @@ import { SecuritySettingsOrgDetails } from '../models/SecuritySettingsOrgDetails
 import { SecuritySettingsOrgPreferences   , SecuritySettingsOrgPreferencesTrustedAuthStatusEnum   } from '../models/SecuritySettingsOrgPreferences';
 import { SecuritySettingsOrgPreferencesInput } from '../models/SecuritySettingsOrgPreferencesInput';
 import { SecuritySettingsResponse } from '../models/SecuritySettingsResponse';
+import { SemanticIntegrationFormulaReport     , SemanticIntegrationFormulaReportImportStatusEnum  , SemanticIntegrationFormulaReportChangeStatusEnum   } from '../models/SemanticIntegrationFormulaReport';
+import { SemanticIntegrationReport } from '../models/SemanticIntegrationReport';
+import { SemanticIntegrationReportSummary } from '../models/SemanticIntegrationReportSummary';
+import { SemanticIntegrationResponse } from '../models/SemanticIntegrationResponse';
+import { SemanticIntegrationSearchResponse     , SemanticIntegrationSearchResponseImportTypeEnum  , SemanticIntegrationSearchResponseTypeEnum          } from '../models/SemanticIntegrationSearchResponse';
+import { SemanticIntegrationSortOptions, SemanticIntegrationSortOptionsFieldNameEnum  , SemanticIntegrationSortOptionsOrderEnum   } from '../models/SemanticIntegrationSortOptions';
+import { SemanticIntegrationTagReference } from '../models/SemanticIntegrationTagReference';
 import { SendAgentConversationMessageRequest } from '../models/SendAgentConversationMessageRequest';
 import { SendAgentConversationMessageStreamingRequest } from '../models/SendAgentConversationMessageStreamingRequest';
 import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
@@ -875,9 +901,11 @@ import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStre
 import { SendMessageRequest } from '../models/SendMessageRequest';
 import { SetAgentInstructionsRequest } from '../models/SetAgentInstructionsRequest';
 import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
+import { ShareConversationRequest } from '../models/ShareConversationRequest';
 import { ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum            } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum    } from '../models/ShareMetadataTypeInput';
 import { SharePermissionsInput , SharePermissionsInputShareModeEnum  , SharePermissionsInputContentShareModeEnum   } from '../models/SharePermissionsInput';
+import { SharedConversationResponse } from '../models/SharedConversationResponse';
 import { SingleAnswerRequest } from '../models/SingleAnswerRequest';
 import { SortOption, SortOptionFieldNameEnum  , SortOptionOrderEnum   } from '../models/SortOption';
 import { SortOptionInput, SortOptionInputFieldNameEnum  , SortOptionInputOrderEnum   } from '../models/SortOptionInput';
@@ -957,7 +985,7 @@ import { UpdateVariableValuesRequest } from '../models/UpdateVariableValuesReque
 import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum      , UpdateWebhookConfigurationRequestStatusEnum  , UpdateWebhookConfigurationRequestResetOptionsEnum   } from '../models/UpdateWebhookConfigurationRequest';
 import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                    } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
-import { UserGroupResponse                     , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
+import { UserGroupResponse                      , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
 import { UserInfo } from '../models/UserInfo';
 import { UserMessage } from '../models/UserMessage';
 import { UserObject, UserObjectTypeEnum    } from '../models/UserObject';
@@ -1043,6 +1071,8 @@ let enumsMap: Set<string> = new Set<string>([
     "ConnectionConfigurationResponsePolicyTypeEnum",
     "ConnectionConfigurationSearchRequestPolicyTypeEnum",
     "ContextPayloadV2InputTypeEnum",
+    "ConversationPrincipalInfoTypeEnum",
+    "ConversationPrincipalInfoPermissionEnum",
     "CopyObjectRequestTypeEnum",
     "CreateCalendarRequestCreationMethodEnum",
     "CreateCalendarRequestCalendarTypeEnum",
@@ -1057,6 +1087,7 @@ let enumsMap: Set<string> = new Set<string>([
     "CreateScheduleRequestMetadataTypeEnum",
     "CreateScheduleRequestFileFormatEnum",
     "CreateScheduleRequestTimeZoneEnum",
+    "CreateSemanticIntegrationRequestTypeEnum",
     "CreateUserGroupRequestPrivilegesEnum",
     "CreateUserGroupRequestTypeEnum",
     "CreateUserGroupRequestVisibilityEnum",
@@ -1151,6 +1182,7 @@ let enumsMap: Set<string> = new Set<string>([
     "PdfOptionsInputPageOrientationEnum",
     "PermissionInputShareModeEnum",
     "PermissionsMetadataTypeInputTypeEnum",
+    "PrincipalRefInputPrincipalTypeEnum",
     "PrincipalsInputTypeEnum",
     "PublishMetadataListItemTypeEnum",
     "PutVariableValuesRequestOperationEnum",
@@ -1203,6 +1235,12 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchWebhookConfigurationsRequestStatusEnum",
     "SecuritySettingsClusterPreferencesTrustedAuthStatusEnum",
     "SecuritySettingsOrgPreferencesTrustedAuthStatusEnum",
+    "SemanticIntegrationFormulaReportImportStatusEnum",
+    "SemanticIntegrationFormulaReportChangeStatusEnum",
+    "SemanticIntegrationSearchResponseImportTypeEnum",
+    "SemanticIntegrationSearchResponseTypeEnum",
+    "SemanticIntegrationSortOptionsFieldNameEnum",
+    "SemanticIntegrationSortOptionsOrderEnum",
     "ShareMetadataRequestMetadataTypeEnum",
     "ShareMetadataTypeInputTypeEnum",
     "SharePermissionsInputShareModeEnum",
@@ -1389,7 +1427,9 @@ let typeMap: {[index: string]: any} = {
     "Conversation": Conversation,
     "ConversationMessage": ConversationMessage,
     "ConversationMessageResponse": ConversationMessageResponse,
+    "ConversationPrincipalInfo": ConversationPrincipalInfo,
     "ConversationSettingsInput": ConversationSettingsInput,
+    "ConversationShareStatusResponse": ConversationShareStatusResponse,
     "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
     "CopyObjectRequest": CopyObjectRequest,
     "CreateAgentConversationRequest": CreateAgentConversationRequest,
@@ -1407,6 +1447,7 @@ let typeMap: {[index: string]: any} = {
     "CreateOrgRequest": CreateOrgRequest,
     "CreateRoleRequest": CreateRoleRequest,
     "CreateScheduleRequest": CreateScheduleRequest,
+    "CreateSemanticIntegrationRequest": CreateSemanticIntegrationRequest,
     "CreateTagRequest": CreateTagRequest,
     "CreateUserGroupRequest": CreateUserGroupRequest,
     "CreateUserRequest": CreateUserRequest,
@@ -1580,6 +1621,7 @@ let typeMap: {[index: string]: any} = {
     "PngOptionsInput": PngOptionsInput,
     "PolicyProcessOptions": PolicyProcessOptions,
     "PolicyProcessOptionsInput": PolicyProcessOptionsInput,
+    "PrincipalRefInput": PrincipalRefInput,
     "PrincipalsInput": PrincipalsInput,
     "PrincipalsListItem": PrincipalsListItem,
     "PrincipalsListItemInput": PrincipalsListItemInput,
@@ -1653,6 +1695,7 @@ let typeMap: {[index: string]: any} = {
     "SearchRolesRequest": SearchRolesRequest,
     "SearchSchedulesRequest": SearchSchedulesRequest,
     "SearchSecuritySettingsRequest": SearchSecuritySettingsRequest,
+    "SearchSemanticIntegrationsRequest": SearchSemanticIntegrationsRequest,
     "SearchStyleCustomizationsRequest": SearchStyleCustomizationsRequest,
     "SearchStyleFontsRequest": SearchStyleFontsRequest,
     "SearchTagsRequest": SearchTagsRequest,
@@ -1666,6 +1709,13 @@ let typeMap: {[index: string]: any} = {
     "SecuritySettingsOrgPreferences": SecuritySettingsOrgPreferences,
     "SecuritySettingsOrgPreferencesInput": SecuritySettingsOrgPreferencesInput,
     "SecuritySettingsResponse": SecuritySettingsResponse,
+    "SemanticIntegrationFormulaReport": SemanticIntegrationFormulaReport,
+    "SemanticIntegrationReport": SemanticIntegrationReport,
+    "SemanticIntegrationReportSummary": SemanticIntegrationReportSummary,
+    "SemanticIntegrationResponse": SemanticIntegrationResponse,
+    "SemanticIntegrationSearchResponse": SemanticIntegrationSearchResponse,
+    "SemanticIntegrationSortOptions": SemanticIntegrationSortOptions,
+    "SemanticIntegrationTagReference": SemanticIntegrationTagReference,
     "SendAgentConversationMessageRequest": SendAgentConversationMessageRequest,
     "SendAgentConversationMessageStreamingRequest": SendAgentConversationMessageStreamingRequest,
     "SendAgentMessageRequest": SendAgentMessageRequest,
@@ -1674,9 +1724,11 @@ let typeMap: {[index: string]: any} = {
     "SendMessageRequest": SendMessageRequest,
     "SetAgentInstructionsRequest": SetAgentInstructionsRequest,
     "SetNLInstructionsRequest": SetNLInstructionsRequest,
+    "ShareConversationRequest": ShareConversationRequest,
     "ShareMetadataRequest": ShareMetadataRequest,
     "ShareMetadataTypeInput": ShareMetadataTypeInput,
     "SharePermissionsInput": SharePermissionsInput,
+    "SharedConversationResponse": SharedConversationResponse,
     "SingleAnswerRequest": SingleAnswerRequest,
     "SortOption": SortOption,
     "SortOptionInput": SortOptionInput,

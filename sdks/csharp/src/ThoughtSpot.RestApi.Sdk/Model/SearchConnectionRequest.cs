@@ -353,7 +353,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum OAUTHCLIENTCREDENTIALS for value: OAUTH_CLIENT_CREDENTIALS
             /// </summary>
             [EnumMember(Value = "OAUTH_CLIENT_CREDENTIALS")]
-            OAUTHCLIENTCREDENTIALS = 11
+            OAUTHCLIENTCREDENTIALS = 11,
+
+            /// <summary>
+            /// Enum OAUTHCLIENTCREDENTIALSWITHX509 for value: OAUTH_CLIENT_CREDENTIALS_WITH_X509
+            /// </summary>
+            [EnumMember(Value = "OAUTH_CLIENT_CREDENTIALS_WITH_X509")]
+            OAUTHCLIENTCREDENTIALSWITHX509 = 12
         }
 
 

@@ -7,6 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+|**objId** | **String** | Custom object ID (obj_id) of the group, if one is set.    Version: 26.9.0.cl or later  |  [optional] |
 |**authorId** | **String** | The unique identifier of the object |  [optional] |
 |**completeDetail** | **Boolean** | Indicates whether the response has complete detail of the group. |  [optional] |
 |**content** | **Object** | Content details of the group |  [optional] |

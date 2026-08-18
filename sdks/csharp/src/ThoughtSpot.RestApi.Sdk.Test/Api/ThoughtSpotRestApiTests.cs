@@ -324,6 +324,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test CreateSemanticIntegration
+        /// </summary>
+        [Fact]
+        public void CreateSemanticIntegrationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateSemanticIntegrationRequest createSemanticIntegrationRequest = null;
+            //var response = instance.CreateSemanticIntegration(createSemanticIntegrationRequest);
+            //Assert.IsType<SemanticIntegrationResponse>(response);
+        }
+
+        /// <summary>
         /// Test CreateTag
         /// </summary>
         [Fact]
@@ -633,6 +645,17 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string scheduleIdentifier = null;
             //instance.DeleteSchedule(scheduleIdentifier);
+        }
+
+        /// <summary>
+        /// Test DeleteSemanticIntegration
+        /// </summary>
+        [Fact]
+        public void DeleteSemanticIntegrationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string semanticIntegrationIdentifier = null;
+            //instance.DeleteSemanticIntegration(semanticIntegrationIdentifier);
         }
 
         /// <summary>
@@ -1122,6 +1145,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test GetShareInfo
+        /// </summary>
+        [Fact]
+        public void GetShareInfoTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //var response = instance.GetShareInfo(conversationIdentifier);
+            //Assert.IsType<ConversationShareStatusResponse>(response);
+        }
+
+        /// <summary>
+        /// Test GetSharedContent
+        /// </summary>
+        [Fact]
+        public void GetSharedContentTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //var response = instance.GetSharedContent(conversationIdentifier);
+            //Assert.IsType<SharedConversationResponse>(response);
+        }
+
+        /// <summary>
         /// Test GetSystemConfig
         /// </summary>
         [Fact]
@@ -1211,6 +1258,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //ImportMetadataTMLAsyncRequest importMetadataTMLAsyncRequest = null;
             //var response = instance.ImportMetadataTMLAsync(importMetadataTMLAsyncRequest);
             //Assert.IsType<ImportEPackAsyncTaskStatus>(response);
+        }
+
+        /// <summary>
+        /// Test ImportSemanticIntegration
+        /// </summary>
+        [Fact]
+        public void ImportSemanticIntegrationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string semanticIntegrationIdentifier = null;
+            //var response = instance.ImportSemanticIntegration(semanticIntegrationIdentifier);
+            //Assert.IsType<SemanticIntegrationResponse>(response);
         }
 
         /// <summary>
@@ -1580,6 +1639,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test SearchSemanticIntegrations
+        /// </summary>
+        [Fact]
+        public void SearchSemanticIntegrationsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest = null;
+            //var response = instance.SearchSemanticIntegrations(searchSemanticIntegrationsRequest);
+            //Assert.IsType<List<SemanticIntegrationSearchResponse>>(response);
+        }
+
+        /// <summary>
         /// Test SearchStyleCustomizations
         /// </summary>
         [Fact]
@@ -1749,6 +1820,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //SetNLInstructionsRequest setNLInstructionsRequest = null;
             //var response = instance.SetNLInstructions(setNLInstructionsRequest);
             //Assert.IsType<EurekaSetNLInstructionsResponse>(response);
+        }
+
+        /// <summary>
+        /// Test ShareConversation
+        /// </summary>
+        [Fact]
+        public void ShareConversationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //ShareConversationRequest shareConversationRequest = null;
+            //instance.ShareConversation(conversationIdentifier, shareConversationRequest);
         }
 
         /// <summary>

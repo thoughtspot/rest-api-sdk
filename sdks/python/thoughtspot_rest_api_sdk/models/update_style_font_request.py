@@ -26,7 +26,7 @@ class UpdateStyleFontRequest(BaseModel):
     UpdateStyleFontRequest
     """ # noqa: E501
     scope: Optional[StrictStr] = Field(default='ORG', description="Scope of the font library containing this font. CLUSTER targets the cluster-level library. ORG targets the authenticated user's org library. Defaults to ORG if omitted.")
-    name: Optional[StrictStr] = Field(default=None, description="New display name for the font. Must be unique within the target scope.")
+    name: Optional[StrictStr] = Field(default=None, description="New display name for the font.")
     weight: Optional[StrictStr] = Field(default=None, description="New weight for the font. Supported values: NORMAL, LIGHT, BOLD.")
     style: Optional[StrictStr] = Field(default=None, description="New style for the font. Supported values: NORMAL, ITALIC, OBLIQUE.")
     color: Optional[StrictStr] = Field(default=None, description="New color for the font as a 6-digit hex string (e.g. \"#333333\"). Returns an error if the value is malformed.")

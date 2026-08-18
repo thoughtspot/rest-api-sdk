@@ -73,7 +73,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="name">Name of the column. (required).</param>
         /// <param name="dataType">Physical data type of the column as recognized by the connected warehouse (for example, VARCHAR, INT64, DOUBLE, BOOL, DATE). The accepted values depend on the underlying Cloud Data Warehouse. (required).</param>
         /// <param name="type">Semantic role of the column in ThoughtSpot. Use ATTRIBUTE for dimensional data such as text, dates, and identifiers, and MEASURE for numeric or aggregatable values. (required).</param>
-        public InputColumnSchemaInput(string name = default, string dataType = default, TypeEnum type = default)
+        /// <param name="allowedValues">Optional list of permitted values for the column. When provided, data written to this column is restricted to these values. Omit or leave empty to allow any value supported by the data type.    Version: 26.9.0.cl or later .</param>
+        public InputColumnSchemaInput(string name = default, string dataType = default, TypeEnum type = default, List<string> allowedValues = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -88,6 +89,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             }
             this.DataType = dataType;
             this.Type = type;
+            this.AllowedValues = allowedValues;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -106,6 +108,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string DataType { get; set; }
 
         /// <summary>
+        /// Optional list of permitted values for the column. When provided, data written to this column is restricted to these values. Omit or leave empty to allow any value supported by the data type.    Version: 26.9.0.cl or later 
+        /// </summary>
+        /// <value>Optional list of permitted values for the column. When provided, data written to this column is restricted to these values. Omit or leave empty to allow any value supported by the data type.    Version: 26.9.0.cl or later </value>
+        [DataMember(Name = "allowed_values", EmitDefaultValue = true)]
+        public List<string> AllowedValues { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -122,6 +131,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  DataType: ").Append(DataType).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  AllowedValues: ").Append(AllowedValues).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

@@ -55,6 +55,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'ObjId'
+        /// </summary>
+        [Fact]
+        public void ObjIdTest()
+        {
+            // TODO unit test for the property 'ObjId'
+        }
+
+        /// <summary>
         /// Test the property 'AuthorId'
         /// </summary>
         [Fact]

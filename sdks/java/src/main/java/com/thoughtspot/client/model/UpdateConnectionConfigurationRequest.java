@@ -82,7 +82,9 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
 
         PERSONAL_ACCESS_TOKEN("PERSONAL_ACCESS_TOKEN"),
 
-        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS");
+        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS"),
+
+        OAUTH_CLIENT_CREDENTIALS_WITH_X509("OAUTH_CLIENT_CREDENTIALS_WITH_X509");
 
         private String value;
 
@@ -210,7 +212,9 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
     public enum PolicyProcessesEnum {
         SAGE_INDEXING("SAGE_INDEXING"),
 
-        ROW_COUNT_STATS("ROW_COUNT_STATS");
+        ROW_COUNT_STATS("ROW_COUNT_STATS"),
+
+        SCHEDULED_LIVEBOARDS("SCHEDULED_LIVEBOARDS");
 
         private String value;
 
@@ -481,8 +485,8 @@ public class UpdateConnectionConfigurationRequest implements Serializable {
     }
 
     /**
-     * Action that the query performed on the data warehouse, such as SAGE_INDEXING and
-     * ROW_COUNT_STATS.
+     * Action that the query performed on the data warehouse, such as SAGE_INDEXING,
+     * ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.
      *
      * @return policyProcesses
      */

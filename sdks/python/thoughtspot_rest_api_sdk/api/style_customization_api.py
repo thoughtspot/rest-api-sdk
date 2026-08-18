@@ -2610,7 +2610,7 @@ class StyleCustomizationApi:
     @validate_call
     async def upload_style_font(
         self,
-        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists.")],
+        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\").")],
         file_content: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.")],
         scope: Annotated[Optional[StrictStr], Field(description="Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user's org library. Defaults to ORG if omitted.")] = None,
         weight: Annotated[Optional[StrictStr], Field(description="Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted.")] = None,
@@ -2633,7 +2633,7 @@ class StyleCustomizationApi:
 
           Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library. - `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`. - `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`. - `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`). - The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.      
 
-        :param name: Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists. (required)
+        :param name: Display name for the font (e.g. \\\"Acme Sans\\\"). (required)
         :type name: str
         :param file_content: Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload. (required)
         :type file_content: bytes
@@ -2701,7 +2701,7 @@ class StyleCustomizationApi:
     @validate_call
     async def upload_style_font_with_http_info(
         self,
-        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists.")],
+        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\").")],
         file_content: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.")],
         scope: Annotated[Optional[StrictStr], Field(description="Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user's org library. Defaults to ORG if omitted.")] = None,
         weight: Annotated[Optional[StrictStr], Field(description="Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted.")] = None,
@@ -2724,7 +2724,7 @@ class StyleCustomizationApi:
 
           Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library. - `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`. - `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`. - `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`). - The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.      
 
-        :param name: Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists. (required)
+        :param name: Display name for the font (e.g. \\\"Acme Sans\\\"). (required)
         :type name: str
         :param file_content: Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload. (required)
         :type file_content: bytes
@@ -2792,7 +2792,7 @@ class StyleCustomizationApi:
     @validate_call
     async def upload_style_font_without_preload_content(
         self,
-        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists.")],
+        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\").")],
         file_content: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.")],
         scope: Annotated[Optional[StrictStr], Field(description="Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user's org library. Defaults to ORG if omitted.")] = None,
         weight: Annotated[Optional[StrictStr], Field(description="Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted.")] = None,
@@ -2815,7 +2815,7 @@ class StyleCustomizationApi:
 
           Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set `scope` to `CLUSTER` to upload to the cluster-level library. Set `scope` to `ORG` (default) to upload to the authenticated user's org library. - `weight` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `LIGHT`, `BOLD`. - `style` defaults to `NORMAL` if omitted. Supported values: `NORMAL`, `ITALIC`, `OBLIQUE`. - `color` defaults to `#000000` (black) if omitted. Provide as a 6-digit hex string (e.g. `#333333`). - The uploaded font can be assigned to visualization areas using the `updateStyleCustomization` endpoint.      
 
-        :param name: Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists. (required)
+        :param name: Display name for the font (e.g. \\\"Acme Sans\\\"). (required)
         :type name: str
         :param file_content: Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload. (required)
         :type file_content: bytes
@@ -2879,7 +2879,7 @@ class StyleCustomizationApi:
     @validate_call
     def upload_style_font_sync(
         self,
-        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists.")],
+        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\").")],
         file_content: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.")],
         scope: Annotated[Optional[StrictStr], Field(description="Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user's org library. Defaults to ORG if omitted.")] = None,
         weight: Annotated[Optional[StrictStr], Field(description="Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted.")] = None,
@@ -2923,7 +2923,7 @@ class StyleCustomizationApi:
     @validate_call
     def upload_style_font_sync_with_http_info(
         self,
-        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists.")],
+        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\").")],
         file_content: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.")],
         scope: Annotated[Optional[StrictStr], Field(description="Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user's org library. Defaults to ORG if omitted.")] = None,
         weight: Annotated[Optional[StrictStr], Field(description="Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted.")] = None,
@@ -2967,7 +2967,7 @@ class StyleCustomizationApi:
     @validate_call
     def upload_style_font_sync_without_preload_content(
         self,
-        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists.")],
+        name: Annotated[StrictStr, Field(description="Display name for the font (e.g. \\\"Acme Sans\\\").")],
         file_content: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.")],
         scope: Annotated[Optional[StrictStr], Field(description="Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user's org library. Defaults to ORG if omitted.")] = None,
         weight: Annotated[Optional[StrictStr], Field(description="Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted.")] = None,

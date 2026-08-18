@@ -17,11 +17,14 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /** Schema definition for a single input column. */
 @javax.annotation.Generated(
@@ -102,6 +105,12 @@ public class InputColumnSchemaInput implements Serializable {
     @javax.annotation.Nonnull
     private TypeEnum type;
 
+    public static final String SERIALIZED_NAME_ALLOWED_VALUES = "allowed_values";
+
+    @SerializedName(SERIALIZED_NAME_ALLOWED_VALUES)
+    @javax.annotation.Nullable
+    private List<String> allowedValues;
+
     public InputColumnSchemaInput() {}
 
     public InputColumnSchemaInput name(@javax.annotation.Nonnull String name) {
@@ -164,6 +173,36 @@ public class InputColumnSchemaInput implements Serializable {
         this.type = type;
     }
 
+    public InputColumnSchemaInput allowedValues(
+            @javax.annotation.Nullable List<String> allowedValues) {
+        this.allowedValues = allowedValues;
+        return this;
+    }
+
+    public InputColumnSchemaInput addAllowedValuesItem(String allowedValuesItem) {
+        if (this.allowedValues == null) {
+            this.allowedValues = new ArrayList<>();
+        }
+        this.allowedValues.add(allowedValuesItem);
+        return this;
+    }
+
+    /**
+     * Optional list of permitted values for the column. When provided, data written to this column
+     * is restricted to these values. Omit or leave empty to allow any value supported by the data
+     * type. Version: 26.9.0.cl or later
+     *
+     * @return allowedValues
+     */
+    @javax.annotation.Nullable
+    public List<String> getAllowedValues() {
+        return allowedValues;
+    }
+
+    public void setAllowedValues(@javax.annotation.Nullable List<String> allowedValues) {
+        this.allowedValues = allowedValues;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -220,13 +259,30 @@ public class InputColumnSchemaInput implements Serializable {
         return Objects.equals(this.name, inputColumnSchemaInput.name)
                 && Objects.equals(this.dataType, inputColumnSchemaInput.dataType)
                 && Objects.equals(this.type, inputColumnSchemaInput.type)
+                && Objects.equals(this.allowedValues, inputColumnSchemaInput.allowedValues)
                 && Objects.equals(
                         this.additionalProperties, inputColumnSchemaInput.additionalProperties);
     }
 
+    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+        return a == b
+                || (a != null
+                        && b != null
+                        && a.isPresent()
+                        && b.isPresent()
+                        && Objects.deepEquals(a.get(), b.get()));
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(name, dataType, type, additionalProperties);
+        return Objects.hash(name, dataType, type, allowedValues, additionalProperties);
+    }
+
+    private static <T> int hashCodeNullable(JsonNullable<T> a) {
+        if (a == null) {
+            return 1;
+        }
+        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override
@@ -236,6 +292,7 @@ public class InputColumnSchemaInput implements Serializable {
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("    dataType: ").append(toIndentedString(dataType)).append("\n");
         sb.append("    type: ").append(toIndentedString(type)).append("\n");
+        sb.append("    allowedValues: ").append(toIndentedString(allowedValues)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -263,6 +320,7 @@ public class InputColumnSchemaInput implements Serializable {
         openapiFields.add("name");
         openapiFields.add("data_type");
         openapiFields.add("type");
+        openapiFields.add("allowed_values");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -322,6 +380,16 @@ public class InputColumnSchemaInput implements Serializable {
         }
         // validate the required field `type`
         TypeEnum.validateJsonElement(jsonObj.get("type"));
+        // ensure the optional json data is an array if present
+        if (jsonObj.get("allowed_values") != null
+                && !jsonObj.get("allowed_values").isJsonNull()
+                && !jsonObj.get("allowed_values").isJsonArray()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `allowed_values` to be an array in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("allowed_values").toString()));
+        }
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

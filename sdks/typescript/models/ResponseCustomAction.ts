@@ -27,6 +27,10 @@ export class ResponseCustomAction {
     */
     'id': string;
     /**
+    * Custom object ID (obj_id) of the custom action, if one is set.    Version: 26.9.0.cl or later 
+    */
+    'obj_id'?: string | null;
+    /**
     * Metadata objects to assign the the custom action to.
     */
     'metadata_association'?: Array<MetadataAssociationItem> | null;
@@ -59,6 +63,12 @@ export class ResponseCustomAction {
         {
             "name": "id",
             "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "obj_id",
+            "baseName": "obj_id",
             "type": "string",
             "format": ""
         },
