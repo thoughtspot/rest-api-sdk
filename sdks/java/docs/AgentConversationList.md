@@ -15,6 +15,7 @@ A saved agent conversation item returned in list responses.
 |**dataSourceIdentifiers** | **List&lt;String&gt;** | Unique identifiers of the data sources associated with the conversation. |  [optional] |
 |**dataSourceNames** | [**List&lt;DataSourceEntry&gt;**](DataSourceEntry.md) | Data sources associated with the conversation, each with an &#x60;id&#x60; and &#x60;name&#x60;. |  [optional] |
 |**isPinned** | **Boolean** | Whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list.    Version: 26.10.0.cl or later  |  [optional] |
+|**analystId** | **String** | Unique identifier of the Spotter Analyst the conversation is associated with. Null when the conversation is not associated with an analyst.    Version: 26.10.0.cl or later  |  [optional] |
 
 
 ## Implemented Interfaces

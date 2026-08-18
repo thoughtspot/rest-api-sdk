@@ -57,4 +57,10 @@ public class AgentConversationListTest {
     public void isPinnedTest() {
         // TODO: test isPinned
     }
+
+    /** Test the property 'analystId' */
+    @Test
+    public void analystIdTest() {
+        // TODO: test analystId
+    }
 }

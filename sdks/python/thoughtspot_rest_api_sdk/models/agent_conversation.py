@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,8 +27,9 @@ class AgentConversation(BaseModel):
     """ # noqa: E501
     conversation_id: StrictStr = Field(description="Unique identifier of the conversation.")
     conversation_identifier: StrictStr = Field(description="Unique identifier of the conversation.    Version: 26.5.0.cl or later ")
+    analyst_id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the Spotter Analyst the conversation was started from. Null when the conversation was not started from an analyst.    Version: 26.10.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["conversation_id", "conversation_identifier"]
+    __properties: ClassVar[List[str]] = ["conversation_id", "conversation_identifier", "analyst_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -76,6 +77,11 @@ class AgentConversation(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if analyst_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.analyst_id is None and "analyst_id" in self.model_fields_set:
+            _dict['analyst_id'] = None
+
         return _dict
 
     @classmethod
@@ -89,7 +95,8 @@ class AgentConversation(BaseModel):
 
         _obj = cls.model_validate({
             "conversation_id": obj.get("conversation_id"),
-            "conversation_identifier": obj.get("conversation_identifier")
+            "conversation_identifier": obj.get("conversation_identifier"),
+            "analyst_id": obj.get("analyst_id")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

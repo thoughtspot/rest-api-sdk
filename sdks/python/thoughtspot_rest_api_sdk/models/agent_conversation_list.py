@@ -33,8 +33,9 @@ class AgentConversationList(BaseModel):
     data_source_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique identifiers of the data sources associated with the conversation.")
     data_source_names: Optional[List[DataSourceEntry]] = Field(default=None, description="Data sources associated with the conversation, each with an `id` and `name`.")
     is_pinned: Optional[StrictBool] = Field(default=None, description="Whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list.    Version: 26.10.0.cl or later ")
+    analyst_id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the Spotter Analyst the conversation is associated with. Null when the conversation is not associated with an analyst.    Version: 26.10.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["conversation_identifier", "conversation_title", "created_at", "updated_at", "data_source_identifiers", "data_source_names", "is_pinned"]
+    __properties: ClassVar[List[str]] = ["conversation_identifier", "conversation_title", "created_at", "updated_at", "data_source_identifiers", "data_source_names", "is_pinned", "analyst_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -119,6 +120,11 @@ class AgentConversationList(BaseModel):
         if self.is_pinned is None and "is_pinned" in self.model_fields_set:
             _dict['is_pinned'] = None
 
+        # set to None if analyst_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.analyst_id is None and "analyst_id" in self.model_fields_set:
+            _dict['analyst_id'] = None
+
         return _dict
 
     @classmethod
@@ -137,7 +143,8 @@ class AgentConversationList(BaseModel):
             "updated_at": obj.get("updated_at"),
             "data_source_identifiers": obj.get("data_source_identifiers"),
             "data_source_names": [DataSourceEntry.from_dict(_item) for _item in obj["data_source_names"]] if obj.get("data_source_names") is not None else None,
-            "is_pinned": obj.get("is_pinned")
+            "is_pinned": obj.get("is_pinned"),
+            "analyst_id": obj.get("analyst_id")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

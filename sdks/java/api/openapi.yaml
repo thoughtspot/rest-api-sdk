@@ -23,10 +23,14 @@ paths:
 
         #### Usage guidelines
 
-        The request must include the `metadata_context` parameter to define the conversation context. The context type can be one of:
+        The conversation context is defined by exactly one of the following parameters:
 
-        - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.
-        - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.
+        - `metadata_context`: defines the conversation context by data source. The context type can be one of:
+          - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.
+          - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.
+        - `analyst_identifier` *(available from 26.10.0.cl)*: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst's configuration — its data sources, agent instructions, and connectors — so `metadata_context` must be omitted. The caller must be the analyst's author, have the analyst shared with them, or hold admin / Spotter-management privileges.
+
+        Passing both `analyst_identifier` and `metadata_context`, or neither, is rejected.
 
         > **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ "type": "data_source", "data_source_context": { "guid": "<worksheet-id>" } }`.
 
@@ -37,7 +41,7 @@ paths:
         - `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl
         - `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history
 
-        If the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations.
+        If the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations. When the conversation is started from an analyst, the response additionally carries the analyst's `analyst_id`; it is `null` otherwise.
 
         #### Example request
 
@@ -58,7 +62,9 @@ paths:
         | Code | Description                                                                                                                             |
         | ---- | --------------------------------------------------------------------------------------------------------------------------------------- |
         | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |
-        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks view permission on the specified metadata object, or has no access to the analyst specified in `analyst_identifier`. |
+        | 404  | Not found — no analyst with the given `analyst_identifier` exists in the caller's Org.                                                          |
+        | 422  | Unprocessable entity — the request fails validation: both `analyst_identifier` and `metadata_context` were provided, neither was provided, or `metadata_context` is malformed (for example, `DATA_SOURCE` context without a data source identifier). |
 
         > ###### Note:
         >
@@ -94,6 +100,12 @@ paths:
                   value:
                     conversation_id: aaHQ5j8O8dQC
                     conversation_identifier: aaHQ5j8O8dQC
+                example_3:
+                  summary: Create a conversation from a Spotter Analyst
+                  value:
+                    conversation_id: bbHQ5j8O8dQC
+                    conversation_identifier: bbHQ5j8O8dQC
+                    analyst_id: 9f8e7d6c-5b4a-3210-fedc-ba9876543210
               schema:
                 $ref: '#/components/schemas/AgentConversation'
           description: Common successful response
@@ -941,8 +953,11 @@ paths:
         - `data_source_names`: array of `{ id, name }` objects for the data sources\
         \ associated with the conversation\n- `is_pinned`: whether the current user\
         \ has pinned this conversation. Pinned conversations are surfaced first in\
-        \ the list. Available from version 26.10.0.cl.\n\n#### Pagination\n\nUse `limit`\
-        \ and `offset` to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0\
+        \ the list. Available from version 26.10.0.cl.\n- `analyst_id`: unique identifier\
+        \ of the Spotter Analyst the conversation is associated with, or `null` when\
+        \ the conversation is not associated with an analyst. Available from version\
+        \ 26.10.0.cl.\n\n#### Pagination\n\nUse `limit` and `offset` to page through\
+        \ large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0\
         \   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20\
         \  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes\
         \ a `has_more: Boolean` field. When `true`, there are additional conversations\
@@ -3161,14 +3176,15 @@ paths:
          Version: 9.4.0.cl or later
 
 
-        Retrieves details of the current session token for the bearer token provided in the request header.
+        Generates a new bearer token from an existing authenticated session.
 
-        This API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.
+        #### Required privileges
+        Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request. Requires no additional privileges.
 
-        Use this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.
+        #### Usage guidelines
+        This endpoint doesn't return the caller's existing session token. Instead, it issues a new token based on the current authenticated session and returns the new token string, its creation and expiration timestamps, and the associated user details in response. The token generated from this API request is valid for 24 hours.
 
-        Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
-
+        Use this endpoint when your application needs a new token without requiring the user to re-authenticate. If you need a token with a specific expiration or a different security scope, use `POST /api/rest/2.0/auth/token/full`, `POST /api/rest/2.0/auth/token/custom`, or `POST /api/rest/2.0/auth/token/object` instead.
 
 
 
@@ -21011,6 +21027,7 @@ components:
           conversation_title: conversation_title
           created_at: created_at
           conversation_identifier: conversation_identifier
+          analyst_id: analyst_id
           data_source_identifiers:
           - data_source_identifiers
           - data_source_identifiers
@@ -21024,6 +21041,7 @@ components:
           conversation_title: conversation_title
           created_at: created_at
           conversation_identifier: conversation_identifier
+          analyst_id: analyst_id
           data_source_identifiers:
           - data_source_identifiers
           - data_source_identifiers
@@ -21055,6 +21073,7 @@ components:
         conversation_title: conversation_title
         created_at: created_at
         conversation_identifier: conversation_identifier
+        analyst_id: analyst_id
         data_source_identifiers:
         - data_source_identifiers
         - data_source_identifiers
@@ -21100,6 +21119,12 @@ components:
             \ or later\n"
           nullable: true
           type: boolean
+        analyst_id:
+          description: "Unique identifier of the Spotter Analyst the conversation\
+            \ is associated\nwith. Null when the conversation is not associated with\
+            \ an analyst. \n  Version: 26.10.0.cl or later\n"
+          nullable: true
+          type: string
       required:
       - conversation_identifier
       type: object
@@ -27608,6 +27633,7 @@ components:
       example:
         conversation_id: conversation_id
         conversation_identifier: conversation_identifier
+        analyst_id: analyst_id
       properties:
         conversation_id:
           description: Unique identifier of the conversation.
@@ -27615,6 +27641,12 @@ components:
         conversation_identifier:
           description: "Unique identifier of the conversation. \n  Version: 26.5.0.cl\
             \ or later\n"
+          type: string
+        analyst_id:
+          description: "Unique identifier of the Spotter Analyst the conversation\
+            \ was started\nfrom. Null when the conversation was not started from an\
+            \ analyst. \n  Version: 26.10.0.cl or later\n"
+          nullable: true
           type: string
       required:
       - conversation_id
@@ -27667,6 +27699,283 @@ components:
           type: boolean
       required:
       - success
+      type: object
+    AnalystSourceInput:
+      description: A data source to attach to a Spotter Analyst.
+      properties:
+        identifier:
+          description: Unique identifier of the data source.
+          type: string
+        name:
+          description: Display name of the data source.
+          nullable: true
+          type: string
+        type:
+          description: Type of the data source.
+          enum:
+          - MODEL
+          - ANSWER
+          - LIVEBOARD
+          - CONVERSATION
+          type: string
+      required:
+      - identifier
+      - type
+      type: object
+    Analyst:
+      description: |-
+        A Spotter Analyst: a configured agent with a name, description, agent
+        instructions, data sources, MCP connectors, and starter prompts.
+      properties:
+        id:
+          description: Unique identifier of the analyst.
+          type: string
+        name:
+          description: Display name of the analyst.
+          nullable: true
+          type: string
+        description:
+          description: Description of the analyst.
+          nullable: true
+          type: string
+        instructions:
+          description: |-
+            Natural-language instructions that guide the agent's behavior for this
+            analyst.
+          nullable: true
+          type: string
+        sources:
+          description: Data sources the analyst can query.
+          items:
+            $ref: '#/components/schemas/AnalystSource'
+          type: array
+        mcp_connectors:
+          description: IDs of MCP connectors linked to this analyst.
+          items:
+            type: string
+          type: array
+        starter_prompts:
+          description: "User-defined starter prompts, in display order."
+          items:
+            $ref: '#/components/schemas/AnalystStarterPrompt'
+          type: array
+        updated_time_in_millis:
+          description: Epoch milliseconds of the last update.
+          nullable: true
+        created_by:
+          description: ID of the user who created the analyst.
+          nullable: true
+          type: string
+        updated_by:
+          description: ID of the user who last updated the analyst.
+          nullable: true
+          type: string
+      required:
+      - id
+      - mcp_connectors
+      - sources
+      - starter_prompts
+      type: object
+    AnalystSource:
+      description: A data source attached to a Spotter Analyst.
+      properties:
+        id:
+          description: Unique identifier of the data source.
+          type: string
+        type:
+          description: Type of the data source.
+          enum:
+          - MODEL
+          - ANSWER
+          - LIVEBOARD
+          - CONVERSATION
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    AnalystStarterPrompt:
+      description: A user-defined starter prompt shown on the Analyst landing page.
+      properties:
+        label:
+          description: Short display label shown in the UI.
+          type: string
+        text:
+          description: Full prompt text sent to the agent.
+          type: string
+        order:
+          description: Display order within the list.
+          format: int32
+          type: integer
+        is_ai_generated:
+          description: Whether this prompt was AI-generated.
+          type: boolean
+      required:
+      - is_ai_generated
+      - label
+      - order
+      - text
+      type: object
+    AnalystDeleteResponse:
+      description: Response returned after deleting a Spotter Analyst.
+      properties:
+        id:
+          description: Unique identifier of the deleted analyst.
+          type: string
+      required:
+      - id
+      type: object
+    AnalystSearchResponse:
+      description: Response returned by analyst search.
+      properties:
+        analysts:
+          description: Page of analysts matching the request.
+          items:
+            $ref: '#/components/schemas/AnalystItem'
+          type: array
+        total_size:
+          description: Total number of matches before pagination.
+          format: int32
+          type: integer
+      required:
+      - analysts
+      - total_size
+      type: object
+    AnalystItem:
+      description: A Spotter Analyst as returned in search results.
+      properties:
+        id:
+          description: Unique identifier of the analyst.
+          type: string
+        name:
+          description: Display name of the analyst.
+          nullable: true
+          type: string
+        description:
+          description: Description of the analyst.
+          nullable: true
+          type: string
+        instructions:
+          description: |-
+            Natural-language instructions that guide the agent's behavior for this
+            analyst.
+          nullable: true
+          type: string
+        sources:
+          description: Data sources the analyst can query.
+          items:
+            $ref: '#/components/schemas/AnalystItemSource'
+          type: array
+        mcp_connectors:
+          description: MCP connectors linked to this analyst.
+          items:
+            $ref: '#/components/schemas/AnalystMcpConnector'
+          type: array
+        icon_id:
+          description: Icon identifier. Empty string means the default icon.
+          type: string
+        starter_prompts:
+          description: "Starter prompts in display order, including the fixed prompt."
+          items:
+            $ref: '#/components/schemas/AnalystItemStarterPrompt'
+          type: array
+        updated_time_in_millis:
+          description: Epoch milliseconds of the last update.
+          nullable: true
+        last_accessed_time_in_millis:
+          description: Epoch milliseconds of the caller's last interaction with the
+            analyst.
+          nullable: true
+        created_by:
+          $ref: '#/components/schemas/AnalystUser'
+        updated_by:
+          $ref: '#/components/schemas/AnalystUser'
+      required:
+      - icon_id
+      - id
+      - mcp_connectors
+      - sources
+      - starter_prompts
+      type: object
+    AnalystItemSource:
+      description: A data source returned in analyst search results.
+      properties:
+        id:
+          description: Unique identifier of the data source.
+          type: string
+        type:
+          description: Type of the data source.
+          enum:
+          - MODEL
+          - ANSWER
+          - LIVEBOARD
+          - CONVERSATION
+          type: string
+        name:
+          description: Display name of the data source.
+          nullable: true
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    AnalystMcpConnector:
+      description: An MCP connector returned in analyst search results.
+      properties:
+        id:
+          description: Unique identifier of the MCP connector.
+          type: string
+        name:
+          description: Name of the MCP connector.
+          nullable: true
+          type: string
+        icon_url:
+          description: Icon URL of the MCP connector.
+          nullable: true
+          type: string
+      required:
+      - id
+      type: object
+    AnalystItemStarterPrompt:
+      description: |-
+        A starter prompt returned in analyst search results. Includes the
+        server-managed fixed prompt (`is_fixed: true`, order 0).
+      properties:
+        label:
+          description: Short display label shown in the UI.
+          type: string
+        text:
+          description: Full prompt text sent to the agent.
+          type: string
+        order:
+          description: Display order within the list.
+          format: int32
+          type: integer
+        is_fixed:
+          description: Whether this is the server-managed fixed prompt.
+          type: boolean
+      required:
+      - is_fixed
+      - label
+      - order
+      - text
+      type: object
+    AnalystUser:
+      description: A user reference returned in analyst search results.
+      properties:
+        id:
+          description: Unique identifier of the user.
+          type: string
+        name:
+          description: Username of the user.
+          type: string
+        display_name:
+          description: Display name of the user.
+          type: string
+      required:
+      - display_name
+      - id
+      - name
       type: object
     PrincipalRefInput:
       description: |-
@@ -29147,19 +29456,66 @@ components:
     CreateAgentConversationRequest:
       example:
         metadata_context: ""
+        analyst_identifier: analyst_identifier
         conversation_settings: ""
       properties:
         metadata_context:
           allOf:
           - $ref: '#/components/schemas/ContextPayloadV2Input'
-          description: Context for the conversation.
+          description: |-
+            Context for the conversation. Required unless `analyst_identifier` is
+            provided; do not pass both.
         conversation_settings:
           allOf:
           - $ref: '#/components/schemas/ConversationSettingsInput'
           description: Conversation settings.
+        analyst_identifier:
+          description: "Unique identifier of the Spotter Analyst to start the conversation\
+            \ from.\nWhen provided, the conversation uses the analyst's configuration\
+            \ (data\nsources, agent instructions, and connectors), and `metadata_context`\n\
+            must be omitted. \n  Version: 26.10.0.cl or later\n"
+          type: string
       required:
       - conversation_settings
-      - metadata_context
+      type: object
+    CreateAnalystRequest:
+      properties:
+        name:
+          description: Display name of the analyst.
+          type: string
+        description:
+          description: Description of the analyst. Maximum 200 characters.
+          type: string
+        instructions:
+          description: |-
+            Natural-language instructions that guide the agent's behavior for this
+            analyst.
+          type: string
+        sources:
+          description: |-
+            Data sources the analyst can query. At least one is required, and the
+            caller must have view access to every referenced source.
+          items:
+            $ref: '#/components/schemas/AnalystSourceInput'
+          type: array
+        mcp_connector_identifiers:
+          default: []
+          description: Identifiers of MCP connectors to link to this analyst.
+          items:
+            type: string
+          type: array
+        starter_prompts:
+          default: []
+          description: |-
+            Plain-text starter prompts shown on the analyst landing page. Maximum 4,
+            each between 10 and 250 characters; display order follows list position.
+          items:
+            type: string
+          type: array
+      required:
+      - description
+      - name
+      - sources
       type: object
     CreateConversationRequest:
       example:
@@ -29336,6 +29692,41 @@ components:
             type: string
           type: array
       type: object
+    SearchAnalystsRequest:
+      properties:
+        analyst_identifier:
+          description: |-
+            Unique identifier of an analyst. When provided, fetch mode: the response
+            contains exactly that analyst and the other filters are ignored.
+          type: string
+        record_size:
+          default: 50
+          description: "List mode: number of records per page. Default 50, maximum\
+            \ 500."
+          format: int32
+          type: integer
+        record_offset:
+          default: 0
+          description: |-
+            List mode: zero-based index of the first record to return.
+            Maximum 10000.
+          format: int32
+          type: integer
+        query:
+          description: "List mode: case-insensitive substring match on the analyst\
+            \ name."
+          type: string
+        type:
+          default: ALL
+          description: |-
+            List mode: ownership filter — ALL (created by or shared with me),
+            CREATED_BY_ME, or SHARED_TO_ME.
+          enum:
+          - ALL
+          - CREATED_BY_ME
+          - SHARED_TO_ME
+          type: string
+      type: object
     SendAgentConversationMessageRequest:
       example:
         messages:
@@ -29449,6 +29840,19 @@ components:
       - data_source_identifier
       - nl_instructions_info
       type: object
+    ShareAnalystRequest:
+      properties:
+        permissions:
+          description: |-
+            Access changes to apply, one entry per principal. `principal.type` is
+            required for analyst sharing, and `content_share_mode` does not apply
+            to analysts and is ignored.
+          items:
+            $ref: '#/components/schemas/SharePermissionsInput'
+          type: array
+      required:
+      - permissions
+      type: object
     ShareConversationRequest:
       properties:
         refresh_shared_content:
@@ -29499,6 +29903,49 @@ components:
       required:
       - metadata_identifier
       - query
+      type: object
+    UpdateAnalystRequest:
+      properties:
+        name:
+          description: Display name of the analyst.
+          type: string
+        description:
+          description: Description of the analyst. Maximum 200 characters.
+          type: string
+        instructions:
+          description: |-
+            Natural-language instructions that guide the agent's behavior for this
+            analyst. Omitting this field clears any existing instructions.
+          type: string
+        sources:
+          description: |-
+            Data sources the analyst can query. At least one is required, and the
+            caller must have view access to every referenced source. Replaces the
+            existing list in full.
+          items:
+            $ref: '#/components/schemas/AnalystSourceInput'
+          type: array
+        mcp_connector_identifiers:
+          default: []
+          description: |-
+            Identifiers of MCP connectors linked to this analyst. Replaces the
+            existing list in full; omit or pass an empty array to clear.
+          items:
+            type: string
+          type: array
+        starter_prompts:
+          default: []
+          description: |-
+            Plain-text starter prompts (max 4, each between 10 and 250 characters;
+            display order follows list position). Replaces the existing list in
+            full; omit or pass an empty array to clear.
+          items:
+            type: string
+          type: array
+      required:
+      - description
+      - name
+      - sources
       type: object
     UpdateConversationRequest:
       example:
@@ -37503,6 +37950,11 @@ x-roles:
   tags:
   - 26.2.0.cl
   description: Roles for version 26.2.0.cl
+- name: 26.10.0.cl
+  id: 26.10.0.cl
+  tags:
+  - 26.10.0.cl
+  description: Roles for version 26.10.0.cl
 - name: 10.4.0.cl
   id: 10.4.0.cl
   tags:
@@ -37593,11 +38045,6 @@ x-roles:
   tags:
   - 10.10.0.cl
   description: Roles for version 10.10.0.cl
-- name: 26.10.0.cl
-  id: 26.10.0.cl
-  tags:
-  - 26.10.0.cl
-  description: Roles for version 26.10.0.cl
 - name: 26.11.0.cl
   id: 26.11.0.cl
   tags:

@@ -45,6 +45,10 @@ export class AgentConversationList {
     * Whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list.    Version: 26.10.0.cl or later 
     */
     'is_pinned'?: boolean | null;
+    /**
+    * Unique identifier of the Spotter Analyst the conversation is associated with. Null when the conversation is not associated with an analyst.    Version: 26.10.0.cl or later 
+    */
+    'analyst_id'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -91,6 +95,12 @@ export class AgentConversationList {
             "name": "is_pinned",
             "baseName": "is_pinned",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "analyst_id",
+            "baseName": "analyst_id",
+            "type": "string",
             "format": ""
         }    ];
 

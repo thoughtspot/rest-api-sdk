@@ -17,6 +17,17 @@ export * from '../models/AgentConversation';
 export * from '../models/AgentConversationHistoryResponse';
 export * from '../models/AgentConversationList';
 export * from '../models/AgentInstructions';
+export * from '../models/Analyst';
+export * from '../models/AnalystDeleteResponse';
+export * from '../models/AnalystItem';
+export * from '../models/AnalystItemSource';
+export * from '../models/AnalystItemStarterPrompt';
+export * from '../models/AnalystMcpConnector';
+export * from '../models/AnalystSearchResponse';
+export * from '../models/AnalystSource';
+export * from '../models/AnalystSourceInput';
+export * from '../models/AnalystStarterPrompt';
+export * from '../models/AnalystUser';
 export * from '../models/AnswerContent';
 export * from '../models/AnswerDataResponse';
 export * from '../models/AnswerDetails';
@@ -96,6 +107,7 @@ export * from '../models/ConversationShareStatusResponse';
 export * from '../models/ConvertWorksheetToModelRequest';
 export * from '../models/CopyObjectRequest';
 export * from '../models/CreateAgentConversationRequest';
+export * from '../models/CreateAnalystRequest';
 export * from '../models/CreateCalendarRequest';
 export * from '../models/CreateCollectionRequest';
 export * from '../models/CreateConfigRequest';
@@ -341,6 +353,7 @@ export * from '../models/SchemaObject';
 export * from '../models/Scope';
 export * from '../models/ScriptSrcUrls';
 export * from '../models/ScriptSrcUrlsInput';
+export * from '../models/SearchAnalystsRequest';
 export * from '../models/SearchAuthSettingsRequest';
 export * from '../models/SearchAuthSettingsResponse';
 export * from '../models/SearchCalendarsRequest';
@@ -393,6 +406,7 @@ export * from '../models/SendAgentMessageStreamingRequest';
 export * from '../models/SendMessageRequest';
 export * from '../models/SetAgentInstructionsRequest';
 export * from '../models/SetNLInstructionsRequest';
+export * from '../models/ShareAnalystRequest';
 export * from '../models/ShareConversationRequest';
 export * from '../models/ShareMetadataRequest';
 export * from '../models/ShareMetadataTypeInput';
@@ -450,6 +464,7 @@ export * from '../models/URLInputMandatory';
 export * from '../models/UnassignTagRequest';
 export * from '../models/UnparameterizeMetadataRequest';
 export * from '../models/UnpublishMetadataRequest';
+export * from '../models/UpdateAnalystRequest';
 export * from '../models/UpdateCalendarRequest';
 export * from '../models/UpdateCollectionRequest';
 export * from '../models/UpdateColumnSecurityRulesRequest';
@@ -542,6 +557,17 @@ import { AgentConversation } from '../models/AgentConversation';
 import { AgentConversationHistoryResponse } from '../models/AgentConversationHistoryResponse';
 import { AgentConversationList } from '../models/AgentConversationList';
 import { AgentInstructions } from '../models/AgentInstructions';
+import { Analyst } from '../models/Analyst';
+import { AnalystDeleteResponse } from '../models/AnalystDeleteResponse';
+import { AnalystItem } from '../models/AnalystItem';
+import { AnalystItemSource , AnalystItemSourceTypeEnum    } from '../models/AnalystItemSource';
+import { AnalystItemStarterPrompt } from '../models/AnalystItemStarterPrompt';
+import { AnalystMcpConnector } from '../models/AnalystMcpConnector';
+import { AnalystSearchResponse } from '../models/AnalystSearchResponse';
+import { AnalystSource , AnalystSourceTypeEnum   } from '../models/AnalystSource';
+import { AnalystSourceInput  , AnalystSourceInputTypeEnum   } from '../models/AnalystSourceInput';
+import { AnalystStarterPrompt } from '../models/AnalystStarterPrompt';
+import { AnalystUser } from '../models/AnalystUser';
 import { AnswerContent } from '../models/AnswerContent';
 import { AnswerDataResponse } from '../models/AnswerDataResponse';
 import { AnswerDetails     , AnswerDetailsVisualizationTypeEnum       } from '../models/AnswerDetails';
@@ -621,6 +647,7 @@ import { ConversationShareStatusResponse } from '../models/ConversationShareStat
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest  , CopyObjectRequestTypeEnum    } from '../models/CopyObjectRequest';
 import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
+import { CreateAnalystRequest } from '../models/CreateAnalystRequest';
 import { CreateCalendarRequest , CreateCalendarRequestCreationMethodEnum     , CreateCalendarRequestCalendarTypeEnum  , CreateCalendarRequestMonthOffsetEnum  , CreateCalendarRequestStartDayOfWeekEnum     } from '../models/CreateCalendarRequest';
 import { CreateCollectionRequest } from '../models/CreateCollectionRequest';
 import { CreateConfigRequest } from '../models/CreateConfigRequest';
@@ -866,6 +893,7 @@ import { SchemaObject } from '../models/SchemaObject';
 import { Scope   , ScopeOrgScopeEnum    } from '../models/Scope';
 import { ScriptSrcUrls } from '../models/ScriptSrcUrls';
 import { ScriptSrcUrlsInput } from '../models/ScriptSrcUrlsInput';
+import { SearchAnalystsRequest    , SearchAnalystsRequestTypeEnum   } from '../models/SearchAnalystsRequest';
 import { SearchAuthSettingsRequest, SearchAuthSettingsRequestAuthTypeEnum  , SearchAuthSettingsRequestScopeEnum   } from '../models/SearchAuthSettingsRequest';
 import { SearchAuthSettingsResponse, SearchAuthSettingsResponseAuthTypeEnum     } from '../models/SearchAuthSettingsResponse';
 import { SearchCalendarsRequest } from '../models/SearchCalendarsRequest';
@@ -918,6 +946,7 @@ import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStre
 import { SendMessageRequest } from '../models/SendMessageRequest';
 import { SetAgentInstructionsRequest } from '../models/SetAgentInstructionsRequest';
 import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
+import { ShareAnalystRequest } from '../models/ShareAnalystRequest';
 import { ShareConversationRequest } from '../models/ShareConversationRequest';
 import { ShareMetadataRequest, ShareMetadataRequestMetadataTypeEnum            } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput, ShareMetadataTypeInputTypeEnum    } from '../models/ShareMetadataTypeInput';
@@ -975,6 +1004,7 @@ import { URLInputMandatory } from '../models/URLInputMandatory';
 import { UnassignTagRequest } from '../models/UnassignTagRequest';
 import { UnparameterizeMetadataRequest, UnparameterizeMetadataRequestMetadataTypeEnum   , UnparameterizeMetadataRequestFieldTypeEnum     } from '../models/UnparameterizeMetadataRequest';
 import { UnpublishMetadataRequest } from '../models/UnpublishMetadataRequest';
+import { UpdateAnalystRequest } from '../models/UpdateAnalystRequest';
 import { UpdateCalendarRequest, UpdateCalendarRequestUpdateMethodEnum     , UpdateCalendarRequestCalendarTypeEnum  , UpdateCalendarRequestMonthOffsetEnum  , UpdateCalendarRequestStartDayOfWeekEnum     } from '../models/UpdateCalendarRequest';
 import { UpdateCollectionRequest   , UpdateCollectionRequestOperationEnum   } from '../models/UpdateCollectionRequest';
 import { UpdateColumnSecurityRulesRequest } from '../models/UpdateColumnSecurityRulesRequest';
@@ -1066,6 +1096,9 @@ let enumsMap: Set<string> = new Set<string>([
     "ActionConfigInputCreatePositionEnum",
     "AdvancedChartFontAssignmentInputVisualizationAreaEnum",
     "AdvancedChartVisualizationFontRecordVisualizationAreaEnum",
+    "AnalystItemSourceTypeEnum",
+    "AnalystSourceTypeEnum",
+    "AnalystSourceInputTypeEnum",
     "AnswerDetailsVisualizationTypeEnum",
     "AssociateMetadataInputTypeEnum",
     "AssociateMetadataInputCreateTypeEnum",
@@ -1221,6 +1254,7 @@ let enumsMap: Set<string> = new Set<string>([
     "RuntimeSortsOrderEnum",
     "SchedulesPdfOptionsInputPageSizeEnum",
     "ScopeOrgScopeEnum",
+    "SearchAnalystsRequestTypeEnum",
     "SearchAuthSettingsRequestAuthTypeEnum",
     "SearchAuthSettingsRequestScopeEnum",
     "SearchAuthSettingsResponseAuthTypeEnum",
@@ -1382,6 +1416,17 @@ let typeMap: {[index: string]: any} = {
     "AgentConversationHistoryResponse": AgentConversationHistoryResponse,
     "AgentConversationList": AgentConversationList,
     "AgentInstructions": AgentInstructions,
+    "Analyst": Analyst,
+    "AnalystDeleteResponse": AnalystDeleteResponse,
+    "AnalystItem": AnalystItem,
+    "AnalystItemSource": AnalystItemSource,
+    "AnalystItemStarterPrompt": AnalystItemStarterPrompt,
+    "AnalystMcpConnector": AnalystMcpConnector,
+    "AnalystSearchResponse": AnalystSearchResponse,
+    "AnalystSource": AnalystSource,
+    "AnalystSourceInput": AnalystSourceInput,
+    "AnalystStarterPrompt": AnalystStarterPrompt,
+    "AnalystUser": AnalystUser,
     "AnswerContent": AnswerContent,
     "AnswerDataResponse": AnswerDataResponse,
     "AnswerDetails": AnswerDetails,
@@ -1461,6 +1506,7 @@ let typeMap: {[index: string]: any} = {
     "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
     "CopyObjectRequest": CopyObjectRequest,
     "CreateAgentConversationRequest": CreateAgentConversationRequest,
+    "CreateAnalystRequest": CreateAnalystRequest,
     "CreateCalendarRequest": CreateCalendarRequest,
     "CreateCollectionRequest": CreateCollectionRequest,
     "CreateConfigRequest": CreateConfigRequest,
@@ -1706,6 +1752,7 @@ let typeMap: {[index: string]: any} = {
     "Scope": Scope,
     "ScriptSrcUrls": ScriptSrcUrls,
     "ScriptSrcUrlsInput": ScriptSrcUrlsInput,
+    "SearchAnalystsRequest": SearchAnalystsRequest,
     "SearchAuthSettingsRequest": SearchAuthSettingsRequest,
     "SearchAuthSettingsResponse": SearchAuthSettingsResponse,
     "SearchCalendarsRequest": SearchCalendarsRequest,
@@ -1758,6 +1805,7 @@ let typeMap: {[index: string]: any} = {
     "SendMessageRequest": SendMessageRequest,
     "SetAgentInstructionsRequest": SetAgentInstructionsRequest,
     "SetNLInstructionsRequest": SetNLInstructionsRequest,
+    "ShareAnalystRequest": ShareAnalystRequest,
     "ShareConversationRequest": ShareConversationRequest,
     "ShareMetadataRequest": ShareMetadataRequest,
     "ShareMetadataTypeInput": ShareMetadataTypeInput,
@@ -1815,6 +1863,7 @@ let typeMap: {[index: string]: any} = {
     "UnassignTagRequest": UnassignTagRequest,
     "UnparameterizeMetadataRequest": UnparameterizeMetadataRequest,
     "UnpublishMetadataRequest": UnpublishMetadataRequest,
+    "UpdateAnalystRequest": UpdateAnalystRequest,
     "UpdateCalendarRequest": UpdateCalendarRequest,
     "UpdateCollectionRequest": UpdateCollectionRequest,
     "UpdateColumnSecurityRulesRequest": UpdateColumnSecurityRulesRequest,

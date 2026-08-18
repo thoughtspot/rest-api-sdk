@@ -32,7 +32,7 @@ public class CreateAgentConversationRequest implements Serializable {
     public static final String SERIALIZED_NAME_METADATA_CONTEXT = "metadata_context";
 
     @SerializedName(SERIALIZED_NAME_METADATA_CONTEXT)
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     private ContextPayloadV2Input metadataContext;
 
     public static final String SERIALIZED_NAME_CONVERSATION_SETTINGS = "conversation_settings";
@@ -41,26 +41,33 @@ public class CreateAgentConversationRequest implements Serializable {
     @javax.annotation.Nonnull
     private ConversationSettingsInput conversationSettings;
 
+    public static final String SERIALIZED_NAME_ANALYST_IDENTIFIER = "analyst_identifier";
+
+    @SerializedName(SERIALIZED_NAME_ANALYST_IDENTIFIER)
+    @javax.annotation.Nullable
+    private String analystIdentifier;
+
     public CreateAgentConversationRequest() {}
 
     public CreateAgentConversationRequest metadataContext(
-            @javax.annotation.Nonnull ContextPayloadV2Input metadataContext) {
+            @javax.annotation.Nullable ContextPayloadV2Input metadataContext) {
         this.metadataContext = metadataContext;
         return this;
     }
 
     /**
-     * Context for the conversation.
+     * Context for the conversation. Required unless &#x60;analyst_identifier&#x60; is provided; do
+     * not pass both.
      *
      * @return metadataContext
      */
-    @javax.annotation.Nonnull
+    @javax.annotation.Nullable
     public ContextPayloadV2Input getMetadataContext() {
         return metadataContext;
     }
 
     public void setMetadataContext(
-            @javax.annotation.Nonnull ContextPayloadV2Input metadataContext) {
+            @javax.annotation.Nullable ContextPayloadV2Input metadataContext) {
         this.metadataContext = metadataContext;
     }
 
@@ -83,6 +90,28 @@ public class CreateAgentConversationRequest implements Serializable {
     public void setConversationSettings(
             @javax.annotation.Nonnull ConversationSettingsInput conversationSettings) {
         this.conversationSettings = conversationSettings;
+    }
+
+    public CreateAgentConversationRequest analystIdentifier(
+            @javax.annotation.Nullable String analystIdentifier) {
+        this.analystIdentifier = analystIdentifier;
+        return this;
+    }
+
+    /**
+     * Unique identifier of the Spotter Analyst to start the conversation from. When provided, the
+     * conversation uses the analyst&#39;s configuration (data sources, agent instructions, and
+     * connectors), and &#x60;metadata_context&#x60; must be omitted. Version: 26.10.0.cl or later
+     *
+     * @return analystIdentifier
+     */
+    @javax.annotation.Nullable
+    public String getAnalystIdentifier() {
+        return analystIdentifier;
+    }
+
+    public void setAnalystIdentifier(@javax.annotation.Nullable String analystIdentifier) {
+        this.analystIdentifier = analystIdentifier;
     }
 
     /**
@@ -144,13 +173,16 @@ public class CreateAgentConversationRequest implements Serializable {
                         this.conversationSettings,
                         createAgentConversationRequest.conversationSettings)
                 && Objects.equals(
+                        this.analystIdentifier, createAgentConversationRequest.analystIdentifier)
+                && Objects.equals(
                         this.additionalProperties,
                         createAgentConversationRequest.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(metadataContext, conversationSettings, additionalProperties);
+        return Objects.hash(
+                metadataContext, conversationSettings, analystIdentifier, additionalProperties);
     }
 
     @Override
@@ -160,6 +192,9 @@ public class CreateAgentConversationRequest implements Serializable {
         sb.append("    metadataContext: ").append(toIndentedString(metadataContext)).append("\n");
         sb.append("    conversationSettings: ")
                 .append(toIndentedString(conversationSettings))
+                .append("\n");
+        sb.append("    analystIdentifier: ")
+                .append(toIndentedString(analystIdentifier))
                 .append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
@@ -187,10 +222,10 @@ public class CreateAgentConversationRequest implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("metadata_context");
         openapiFields.add("conversation_settings");
+        openapiFields.add("analyst_identifier");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("metadata_context");
         openapiRequiredFields.add("conversation_settings");
     }
 
@@ -223,10 +258,22 @@ public class CreateAgentConversationRequest implements Serializable {
             }
         }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        // validate the required field `metadata_context`
-        ContextPayloadV2Input.validateJsonElement(jsonObj.get("metadata_context"));
+        // validate the optional field `metadata_context`
+        if (jsonObj.get("metadata_context") != null
+                && !jsonObj.get("metadata_context").isJsonNull()) {
+            ContextPayloadV2Input.validateJsonElement(jsonObj.get("metadata_context"));
+        }
         // validate the required field `conversation_settings`
         ConversationSettingsInput.validateJsonElement(jsonObj.get("conversation_settings"));
+        if ((jsonObj.get("analyst_identifier") != null
+                        && !jsonObj.get("analyst_identifier").isJsonNull())
+                && !jsonObj.get("analyst_identifier").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `analyst_identifier` to be a primitive type in the"
+                                    + " JSON string but got `%s`",
+                            jsonObj.get("analyst_identifier").toString()));
+        }
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

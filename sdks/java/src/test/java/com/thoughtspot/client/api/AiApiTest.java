@@ -51,24 +51,31 @@ public class AiApiTest {
      * Version: 26.2.0.cl or later Creates a new Spotter agent conversation based on the provided
      * context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl. Requires
      * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
-     * specified in the request. #### Usage guidelines The request must include the
-     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
-     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
-     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
-     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
-     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
-     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
-     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
-     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
-     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
-     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
-     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
-     * controls which Spotter capabilities are enabled for the conversation: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
-     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
-     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
-     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
-     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * specified in the request. #### Usage guidelines The conversation context is defined by
+     * exactly one of the following parameters: - &#x60;metadata_context&#x60;: defines the
+     * conversation context by data source. The context type can be one of: -
+     * &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific data source. Provide
+     * &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data
+     * source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated
+     * &#x60;guid&#x60; field is accepted for backwards compatibility. - &#x60;AUTO_MODE&#x60;
+     * *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets
+     * for the user&#39;s queries. - &#x60;analyst_identifier&#x60; *(available from 26.10.0.cl)*:
+     * unique identifier of a Spotter Analyst to start the conversation from. The conversation uses
+     * the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so
+     * &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author,
+     * have the analyst shared with them, or hold admin / Spotter-management privileges. Passing
+     * both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, is
+     * rejected. &gt; **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the
+     * lowercase &#x60;data_source&#x60; enum value with the &#x60;guid&#x60; field instead of the
+     * above. Example: &#x60;{ \&quot;type\&quot;: \&quot;data_source\&quot;,
+     * \&quot;data_source_context\&quot;: { \&quot;guid\&quot;: \&quot;&lt;worksheet-id&gt;\&quot; }
+     * }&#x60;. The &#x60;conversation_settings&#x60; parameter controls which Spotter capabilities
+     * are enabled for the conversation: - &#x60;enable_contextual_change_analysis&#x60; (default:
+     * &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this
+     * to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_natural_language_answer_generation&#x60; (default: &#x60;true&#x60;,
+     * **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to
+     * &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
      * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
      * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
      * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
@@ -78,19 +85,26 @@ public class AiApiTest {
      * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
      * to send messages within this conversation. The response also includes
      * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
-     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
-     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
-     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
-     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
-     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
-     * Description | | ---- |
+     * &#x60;conversation_identifier&#x60; for new integrations. When the conversation is started
+     * from an analyst, the response additionally carries the analyst&#39;s &#x60;analyst_id&#x60;;
+     * it is &#x60;null&#x60; otherwise. #### Example request &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_context\&quot;: { \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,
+     * \&quot;data_source_context\&quot;: { \&quot;data_source_identifier\&quot;:
+     * \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } }, \&quot;conversation_settings\&quot;:
+     * {} } &#x60;&#x60;&#x60; #### Error responses | Code | Description | | ---- |
      * ---------------------------------------------------------------------------------------------------------------------------------------
      * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
-     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
-     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
-     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
-     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
-     * enable Spotter on your cluster.
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view permission on the specified metadata object, or has no access to the analyst specified
+     * in &#x60;analyst_identifier&#x60;. | | 404 | Not found — no analyst with the given
+     * &#x60;analyst_identifier&#x60; exists in the caller&#39;s Org. | | 422 | Unprocessable entity
+     * — the request fails validation: both &#x60;analyst_identifier&#x60; and
+     * &#x60;metadata_context&#x60; were provided, neither was provided, or
+     * &#x60;metadata_context&#x60; is malformed (for example, &#x60;DATA_SOURCE&#x60; context
+     * without a data source identifier). | &gt; ###### Note: &gt; &gt; - This endpoint was in Beta
+     * from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl. &gt; -
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
      *
      * @throws ApiException if the Api call fails
      */
@@ -440,11 +454,13 @@ public class AiApiTest {
      * the conversation - &#x60;data_source_names&#x60;: array of &#x60;{ id, name }&#x60; objects
      * for the data sources associated with the conversation - &#x60;is_pinned&#x60;: whether the
      * current user has pinned this conversation. Pinned conversations are surfaced first in the
-     * list. Available from version 26.10.0.cl. #### Pagination Use &#x60;limit&#x60; and
-     * &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
-     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 → first page GET
-     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second page
-     * &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
+     * list. Available from version 26.10.0.cl. - &#x60;analyst_id&#x60;: unique identifier of the
+     * Spotter Analyst the conversation is associated with, or &#x60;null&#x60; when the
+     * conversation is not associated with an analyst. Available from version 26.10.0.cl. ####
+     * Pagination Use &#x60;limit&#x60; and &#x60;offset&#x60; to page through large result sets:
+     * &#x60;&#x60;&#x60; GET /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 →
+     * first page GET /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second
+     * page &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
      * &#x60;has_more: Boolean&#x60; field. When &#x60;true&#x60;, there are additional
      * conversations beyond the current page — increment &#x60;offset&#x60; by &#x60;limit&#x60; to
      * fetch the next page. When &#x60;has_more&#x60; is &#x60;false&#x60;, the current page is the

@@ -82,6 +82,17 @@ __all__ = [
     "AgentConversationHistoryResponse",
     "AgentConversationList",
     "AgentInstructions",
+    "Analyst",
+    "AnalystDeleteResponse",
+    "AnalystItem",
+    "AnalystItemSource",
+    "AnalystItemStarterPrompt",
+    "AnalystMcpConnector",
+    "AnalystSearchResponse",
+    "AnalystSource",
+    "AnalystSourceInput",
+    "AnalystStarterPrompt",
+    "AnalystUser",
     "AnswerContent",
     "AnswerDataResponse",
     "AnswerDetails",
@@ -161,6 +172,7 @@ __all__ = [
     "ConvertWorksheetToModelRequest",
     "CopyObjectRequest",
     "CreateAgentConversationRequest",
+    "CreateAnalystRequest",
     "CreateCalendarRequest",
     "CreateCollectionRequest",
     "CreateConfigRequest",
@@ -406,6 +418,7 @@ __all__ = [
     "Scope",
     "ScriptSrcUrls",
     "ScriptSrcUrlsInput",
+    "SearchAnalystsRequest",
     "SearchAuthSettingsRequest",
     "SearchAuthSettingsResponse",
     "SearchCalendarsRequest",
@@ -458,6 +471,7 @@ __all__ = [
     "SendMessageRequest",
     "SetAgentInstructionsRequest",
     "SetNLInstructionsRequest",
+    "ShareAnalystRequest",
     "ShareConversationRequest",
     "ShareMetadataRequest",
     "ShareMetadataTypeInput",
@@ -515,6 +529,7 @@ __all__ = [
     "UnassignTagRequest",
     "UnparameterizeMetadataRequest",
     "UnpublishMetadataRequest",
+    "UpdateAnalystRequest",
     "UpdateCalendarRequest",
     "UpdateCollectionRequest",
     "UpdateColumnSecurityRulesRequest",
@@ -652,6 +667,17 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.agent_conversation_history_response import AgentConversationHistoryResponse as AgentConversationHistoryResponse
     from thoughtspot_rest_api_sdk.models.agent_conversation_list import AgentConversationList as AgentConversationList
     from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions as AgentInstructions
+    from thoughtspot_rest_api_sdk.models.analyst import Analyst as Analyst
+    from thoughtspot_rest_api_sdk.models.analyst_delete_response import AnalystDeleteResponse as AnalystDeleteResponse
+    from thoughtspot_rest_api_sdk.models.analyst_item import AnalystItem as AnalystItem
+    from thoughtspot_rest_api_sdk.models.analyst_item_source import AnalystItemSource as AnalystItemSource
+    from thoughtspot_rest_api_sdk.models.analyst_item_starter_prompt import AnalystItemStarterPrompt as AnalystItemStarterPrompt
+    from thoughtspot_rest_api_sdk.models.analyst_mcp_connector import AnalystMcpConnector as AnalystMcpConnector
+    from thoughtspot_rest_api_sdk.models.analyst_search_response import AnalystSearchResponse as AnalystSearchResponse
+    from thoughtspot_rest_api_sdk.models.analyst_source import AnalystSource as AnalystSource
+    from thoughtspot_rest_api_sdk.models.analyst_source_input import AnalystSourceInput as AnalystSourceInput
+    from thoughtspot_rest_api_sdk.models.analyst_starter_prompt import AnalystStarterPrompt as AnalystStarterPrompt
+    from thoughtspot_rest_api_sdk.models.analyst_user import AnalystUser as AnalystUser
     from thoughtspot_rest_api_sdk.models.answer_content import AnswerContent as AnswerContent
     from thoughtspot_rest_api_sdk.models.answer_data_response import AnswerDataResponse as AnswerDataResponse
     from thoughtspot_rest_api_sdk.models.answer_details import AnswerDetails as AnswerDetails
@@ -731,6 +757,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest as ConvertWorksheetToModelRequest
     from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest as CopyObjectRequest
     from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest as CreateAgentConversationRequest
+    from thoughtspot_rest_api_sdk.models.create_analyst_request import CreateAnalystRequest as CreateAnalystRequest
     from thoughtspot_rest_api_sdk.models.create_calendar_request import CreateCalendarRequest as CreateCalendarRequest
     from thoughtspot_rest_api_sdk.models.create_collection_request import CreateCollectionRequest as CreateCollectionRequest
     from thoughtspot_rest_api_sdk.models.create_config_request import CreateConfigRequest as CreateConfigRequest
@@ -976,6 +1003,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.scope import Scope as Scope
     from thoughtspot_rest_api_sdk.models.script_src_urls import ScriptSrcUrls as ScriptSrcUrls
     from thoughtspot_rest_api_sdk.models.script_src_urls_input import ScriptSrcUrlsInput as ScriptSrcUrlsInput
+    from thoughtspot_rest_api_sdk.models.search_analysts_request import SearchAnalystsRequest as SearchAnalystsRequest
     from thoughtspot_rest_api_sdk.models.search_auth_settings_request import SearchAuthSettingsRequest as SearchAuthSettingsRequest
     from thoughtspot_rest_api_sdk.models.search_auth_settings_response import SearchAuthSettingsResponse as SearchAuthSettingsResponse
     from thoughtspot_rest_api_sdk.models.search_calendars_request import SearchCalendarsRequest as SearchCalendarsRequest
@@ -1028,6 +1056,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.send_message_request import SendMessageRequest as SendMessageRequest
     from thoughtspot_rest_api_sdk.models.set_agent_instructions_request import SetAgentInstructionsRequest as SetAgentInstructionsRequest
     from thoughtspot_rest_api_sdk.models.set_nl_instructions_request import SetNLInstructionsRequest as SetNLInstructionsRequest
+    from thoughtspot_rest_api_sdk.models.share_analyst_request import ShareAnalystRequest as ShareAnalystRequest
     from thoughtspot_rest_api_sdk.models.share_conversation_request import ShareConversationRequest as ShareConversationRequest
     from thoughtspot_rest_api_sdk.models.share_metadata_request import ShareMetadataRequest as ShareMetadataRequest
     from thoughtspot_rest_api_sdk.models.share_metadata_type_input import ShareMetadataTypeInput as ShareMetadataTypeInput
@@ -1085,6 +1114,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.unassign_tag_request import UnassignTagRequest as UnassignTagRequest
     from thoughtspot_rest_api_sdk.models.unparameterize_metadata_request import UnparameterizeMetadataRequest as UnparameterizeMetadataRequest
     from thoughtspot_rest_api_sdk.models.unpublish_metadata_request import UnpublishMetadataRequest as UnpublishMetadataRequest
+    from thoughtspot_rest_api_sdk.models.update_analyst_request import UpdateAnalystRequest as UpdateAnalystRequest
     from thoughtspot_rest_api_sdk.models.update_calendar_request import UpdateCalendarRequest as UpdateCalendarRequest
     from thoughtspot_rest_api_sdk.models.update_collection_request import UpdateCollectionRequest as UpdateCollectionRequest
     from thoughtspot_rest_api_sdk.models.update_column_security_rules_request import UpdateColumnSecurityRulesRequest as UpdateColumnSecurityRulesRequest
@@ -1228,6 +1258,17 @@ from thoughtspot_rest_api_sdk.models.agent_conversation import AgentConversation
 from thoughtspot_rest_api_sdk.models.agent_conversation_history_response import AgentConversationHistoryResponse as AgentConversationHistoryResponse
 from thoughtspot_rest_api_sdk.models.agent_conversation_list import AgentConversationList as AgentConversationList
 from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions as AgentInstructions
+from thoughtspot_rest_api_sdk.models.analyst import Analyst as Analyst
+from thoughtspot_rest_api_sdk.models.analyst_delete_response import AnalystDeleteResponse as AnalystDeleteResponse
+from thoughtspot_rest_api_sdk.models.analyst_item import AnalystItem as AnalystItem
+from thoughtspot_rest_api_sdk.models.analyst_item_source import AnalystItemSource as AnalystItemSource
+from thoughtspot_rest_api_sdk.models.analyst_item_starter_prompt import AnalystItemStarterPrompt as AnalystItemStarterPrompt
+from thoughtspot_rest_api_sdk.models.analyst_mcp_connector import AnalystMcpConnector as AnalystMcpConnector
+from thoughtspot_rest_api_sdk.models.analyst_search_response import AnalystSearchResponse as AnalystSearchResponse
+from thoughtspot_rest_api_sdk.models.analyst_source import AnalystSource as AnalystSource
+from thoughtspot_rest_api_sdk.models.analyst_source_input import AnalystSourceInput as AnalystSourceInput
+from thoughtspot_rest_api_sdk.models.analyst_starter_prompt import AnalystStarterPrompt as AnalystStarterPrompt
+from thoughtspot_rest_api_sdk.models.analyst_user import AnalystUser as AnalystUser
 from thoughtspot_rest_api_sdk.models.answer_content import AnswerContent as AnswerContent
 from thoughtspot_rest_api_sdk.models.answer_data_response import AnswerDataResponse as AnswerDataResponse
 from thoughtspot_rest_api_sdk.models.answer_details import AnswerDetails as AnswerDetails
@@ -1307,6 +1348,7 @@ from thoughtspot_rest_api_sdk.models.conversation_share_status_response import C
 from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest as ConvertWorksheetToModelRequest
 from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest as CopyObjectRequest
 from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest as CreateAgentConversationRequest
+from thoughtspot_rest_api_sdk.models.create_analyst_request import CreateAnalystRequest as CreateAnalystRequest
 from thoughtspot_rest_api_sdk.models.create_calendar_request import CreateCalendarRequest as CreateCalendarRequest
 from thoughtspot_rest_api_sdk.models.create_collection_request import CreateCollectionRequest as CreateCollectionRequest
 from thoughtspot_rest_api_sdk.models.create_config_request import CreateConfigRequest as CreateConfigRequest
@@ -1552,6 +1594,7 @@ from thoughtspot_rest_api_sdk.models.schema_object import SchemaObject as Schema
 from thoughtspot_rest_api_sdk.models.scope import Scope as Scope
 from thoughtspot_rest_api_sdk.models.script_src_urls import ScriptSrcUrls as ScriptSrcUrls
 from thoughtspot_rest_api_sdk.models.script_src_urls_input import ScriptSrcUrlsInput as ScriptSrcUrlsInput
+from thoughtspot_rest_api_sdk.models.search_analysts_request import SearchAnalystsRequest as SearchAnalystsRequest
 from thoughtspot_rest_api_sdk.models.search_auth_settings_request import SearchAuthSettingsRequest as SearchAuthSettingsRequest
 from thoughtspot_rest_api_sdk.models.search_auth_settings_response import SearchAuthSettingsResponse as SearchAuthSettingsResponse
 from thoughtspot_rest_api_sdk.models.search_calendars_request import SearchCalendarsRequest as SearchCalendarsRequest
@@ -1604,6 +1647,7 @@ from thoughtspot_rest_api_sdk.models.send_agent_message_streaming_request import
 from thoughtspot_rest_api_sdk.models.send_message_request import SendMessageRequest as SendMessageRequest
 from thoughtspot_rest_api_sdk.models.set_agent_instructions_request import SetAgentInstructionsRequest as SetAgentInstructionsRequest
 from thoughtspot_rest_api_sdk.models.set_nl_instructions_request import SetNLInstructionsRequest as SetNLInstructionsRequest
+from thoughtspot_rest_api_sdk.models.share_analyst_request import ShareAnalystRequest as ShareAnalystRequest
 from thoughtspot_rest_api_sdk.models.share_conversation_request import ShareConversationRequest as ShareConversationRequest
 from thoughtspot_rest_api_sdk.models.share_metadata_request import ShareMetadataRequest as ShareMetadataRequest
 from thoughtspot_rest_api_sdk.models.share_metadata_type_input import ShareMetadataTypeInput as ShareMetadataTypeInput
@@ -1661,6 +1705,7 @@ from thoughtspot_rest_api_sdk.models.url_input_mandatory import URLInputMandator
 from thoughtspot_rest_api_sdk.models.unassign_tag_request import UnassignTagRequest as UnassignTagRequest
 from thoughtspot_rest_api_sdk.models.unparameterize_metadata_request import UnparameterizeMetadataRequest as UnparameterizeMetadataRequest
 from thoughtspot_rest_api_sdk.models.unpublish_metadata_request import UnpublishMetadataRequest as UnpublishMetadataRequest
+from thoughtspot_rest_api_sdk.models.update_analyst_request import UpdateAnalystRequest as UpdateAnalystRequest
 from thoughtspot_rest_api_sdk.models.update_calendar_request import UpdateCalendarRequest as UpdateCalendarRequest
 from thoughtspot_rest_api_sdk.models.update_collection_request import UpdateCollectionRequest as UpdateCollectionRequest
 from thoughtspot_rest_api_sdk.models.update_column_security_rules_request import UpdateColumnSecurityRulesRequest as UpdateColumnSecurityRulesRequest

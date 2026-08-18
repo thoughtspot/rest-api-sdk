@@ -43,30 +43,27 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAgentConversationRequest" /> class.
         /// </summary>
-        /// <param name="metadataContext">Context for the conversation. (required).</param>
+        /// <param name="metadataContext">Context for the conversation. Required unless &#x60;analyst_identifier&#x60; is provided; do not pass both..</param>
         /// <param name="conversationSettings">Conversation settings. (required).</param>
-        public CreateAgentConversationRequest(ContextPayloadV2Input metadataContext = default, ConversationSettingsInput conversationSettings = default)
+        /// <param name="analystIdentifier">Unique identifier of the Spotter Analyst to start the conversation from. When provided, the conversation uses the analyst&#39;s configuration (data sources, agent instructions, and connectors), and &#x60;metadata_context&#x60; must be omitted.    Version: 26.10.0.cl or later .</param>
+        public CreateAgentConversationRequest(ContextPayloadV2Input metadataContext = default, ConversationSettingsInput conversationSettings = default, string analystIdentifier = default)
         {
-            // to ensure "metadataContext" is required (not null)
-            if (metadataContext == null)
-            {
-                throw new ArgumentNullException("metadataContext is a required property for CreateAgentConversationRequest and cannot be null");
-            }
-            this.MetadataContext = metadataContext;
             // to ensure "conversationSettings" is required (not null)
             if (conversationSettings == null)
             {
                 throw new ArgumentNullException("conversationSettings is a required property for CreateAgentConversationRequest and cannot be null");
             }
             this.ConversationSettings = conversationSettings;
+            this.MetadataContext = metadataContext;
+            this.AnalystIdentifier = analystIdentifier;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Context for the conversation.
+        /// Context for the conversation. Required unless &#x60;analyst_identifier&#x60; is provided; do not pass both.
         /// </summary>
-        /// <value>Context for the conversation.</value>
-        [DataMember(Name = "metadata_context", IsRequired = true, EmitDefaultValue = true)]
+        /// <value>Context for the conversation. Required unless &#x60;analyst_identifier&#x60; is provided; do not pass both.</value>
+        [DataMember(Name = "metadata_context", EmitDefaultValue = false)]
         public ContextPayloadV2Input MetadataContext { get; set; }
 
         /// <summary>
@@ -75,6 +72,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>Conversation settings.</value>
         [DataMember(Name = "conversation_settings", IsRequired = true, EmitDefaultValue = true)]
         public ConversationSettingsInput ConversationSettings { get; set; }
+
+        /// <summary>
+        /// Unique identifier of the Spotter Analyst to start the conversation from. When provided, the conversation uses the analyst&#39;s configuration (data sources, agent instructions, and connectors), and &#x60;metadata_context&#x60; must be omitted.    Version: 26.10.0.cl or later 
+        /// </summary>
+        /// <value>Unique identifier of the Spotter Analyst to start the conversation from. When provided, the conversation uses the analyst&#39;s configuration (data sources, agent instructions, and connectors), and &#x60;metadata_context&#x60; must be omitted.    Version: 26.10.0.cl or later </value>
+        [DataMember(Name = "analyst_identifier", EmitDefaultValue = false)]
+        public string AnalystIdentifier { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -92,6 +96,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("class CreateAgentConversationRequest {\n");
             sb.Append("  MetadataContext: ").Append(MetadataContext).Append("\n");
             sb.Append("  ConversationSettings: ").Append(ConversationSettings).Append("\n");
+            sb.Append("  AnalystIdentifier: ").Append(AnalystIdentifier).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
