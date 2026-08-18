@@ -91,8 +91,10 @@ public class GroupsApiTest {
      * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: In
      * addition to the GUID and name, &#x60;group_identifier&#x60; accepts a Custom object ID if one
      * is configured for the group. The response also includes the &#x60;obj_id&#x60; field for each
-     * group that has one set. **NOTE**: If you do not get precise results, try setting
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * group that has one set. **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On
+     * ThoughtSpot instances with a large number of objects or users, this can lead to slow
+     * responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @throws ApiException if the Api call fails
      */

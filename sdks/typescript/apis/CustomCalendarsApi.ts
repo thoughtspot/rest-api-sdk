@@ -39,8 +39,8 @@ export class CustomCalendarsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -89,8 +89,8 @@ export class CustomCalendarsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -127,8 +127,8 @@ export class CustomCalendarsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -158,7 +158,7 @@ export class CustomCalendarsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 10.12.0.cl or later   Gets a list of [custom calendars](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR` (**Can manage custom calendars**) privilege is required.  #### Usage guidelines  By default, the API returns a list of custom calendars for all connection objects. To retrieve custom calendar details for a particular connection, specify the connection ID. You can also use other search parameters such as `name_pattern` and `sort_options` as search filters.  The `name_pattern` parameter filters and returns only those objects that match the specified pattern. Use `%` as a wildcard for pattern matching.      
+     *   Version: 10.12.0.cl or later   Gets a list of [custom calendars](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR` (**Can manage custom calendars**) privilege is required.  #### Usage guidelines  By default, the API returns a list of custom calendars for all connection objects. To retrieve custom calendar details for a particular connection, specify the connection ID. You can also use other search parameters such as `name_pattern` and `sort_options` as search filters.  The `name_pattern` parameter filters and returns only those objects that match the specified pattern. Use `%` as a wildcard for pattern matching.  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
      * @param searchCalendarsRequest 
      */
     public async searchCalendars(searchCalendarsRequest: SearchCalendarsRequest, _options?: Configuration): Promise<RequestContext> {
@@ -176,8 +176,8 @@ export class CustomCalendarsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -233,8 +233,8 @@ export class CustomCalendarsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params

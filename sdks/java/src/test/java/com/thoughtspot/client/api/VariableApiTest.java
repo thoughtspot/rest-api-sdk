@@ -115,7 +115,10 @@ public class VariableApiTest {
      * (case-insensitive, supports % for wildcard) The search results can be formatted in three
      * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
      * variable metadata and values The values can be filtered by scope: * org_identifier *
-     * principal_identifier * model_identifier
+     * principal_identifier * model_identifier **Warning**: Do not set &#x60;record_size&#x60; to
+     * &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can
+     * lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @throws ApiException if the Api call fails
      */

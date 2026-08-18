@@ -872,7 +872,11 @@ public class CustomCalendarsApi {
      * connection, specify the connection ID. You can also use other search parameters such as
      * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
      * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
+     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching. **Warning**: Do not
+     * set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchCalendarsRequest (required)
      * @return List&lt;CalendarResponse&gt;
@@ -908,7 +912,11 @@ public class CustomCalendarsApi {
      * connection, specify the connection ID. You can also use other search parameters such as
      * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
      * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
+     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching. **Warning**: Do not
+     * set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchCalendarsRequest (required)
      * @return ApiResponse&lt;List&lt;CalendarResponse&gt;&gt;
@@ -944,7 +952,11 @@ public class CustomCalendarsApi {
      * connection, specify the connection ID. You can also use other search parameters such as
      * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
      * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
+     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching. **Warning**: Do not
+     * set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchCalendarsRequest (required)
      * @param _callback The callback to be executed when the API call finishes

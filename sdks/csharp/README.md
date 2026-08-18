@@ -9,13 +9,13 @@ The SDK ships both synchronous and asynchronous variants of every method, and ta
 Install the package using the .NET CLI:
 
 ```
-dotnet add package ThoughtSpot.RestApi.Sdk --version 2.28.0
+dotnet add package ThoughtSpot.RestApi.Sdk --version 2.29.0
 ```
 
 Or using the NuGet Package Manager:
 
 ```
-Install-Package ThoughtSpot.RestApi.Sdk -Version 2.28.0
+Install-Package ThoughtSpot.RestApi.Sdk -Version 2.29.0
 ```
 
 ## Usage

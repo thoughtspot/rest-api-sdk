@@ -32,8 +32,8 @@ internal sealed class TokenInjectingHandler(
 
         request.Headers.TryAddWithoutValidation("Accept", "application/json");
         ///request.Headers.TryAddWithoutValidation("Accept", "application/json, */*");
-        request.Headers.TryAddWithoutValidation("User-Agent", "ThoughtSpot-Client/csharp/2.28.0");
-        request.Headers.TryAddWithoutValidation("X-ThoughtSpot-Client", "ThoughtSpot-csharp-client/2.28.0");
+        request.Headers.TryAddWithoutValidation("User-Agent", "ThoughtSpot-Client/csharp/2.29.0");
+        request.Headers.TryAddWithoutValidation("X-ThoughtSpot-Client", "ThoughtSpot-csharp-client/2.29.0");
 
         return await base.SendAsync(request, cancellationToken);
     }

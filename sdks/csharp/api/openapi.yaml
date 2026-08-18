@@ -4434,7 +4434,7 @@ paths:
 
         **NOTE**: In addition to the GUID and name, `collection_identifiers` accepts a Custom object ID if one is configured for the collection. The response also includes the `obj_id` field for each collection that has one set.
 
-        **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
 
 
 
@@ -6479,6 +6479,8 @@ paths:
 
         The `name_pattern` parameter filters and returns only those objects that match the specified pattern. Use `%` as a wildcard for pattern matching.
 
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
+
 
 
 
@@ -7729,7 +7731,7 @@ paths:
 
         **NOTE**: In addition to the GUID and name, `group_identifier` accepts a Custom object ID if one is configured for the group. The response also includes the `obj_id` field for each group that has one set.
 
-        **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
 
 
 
@@ -9100,7 +9102,8 @@ paths:
         - `include_auto_created_objects`
         - `favorite_object_options`
         - `include_only_published_objects`
-        If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.
+
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
 
 
 
@@ -10498,7 +10501,13 @@ paths:
         \ and GUID or name of the principal.\n* To get permission details for a specific\
         \ object, add the `type` and GUID or name of the metadata object to your API\
         \ request.\n\nUpon successful execution, the API returns a list of metadata\
-        \ objects and permission details for each object.  \n\n\n\n\n\n"
+        \ objects and permission details for each object.  \n\n**Warning**: This API\
+        \ sets `record_size` to `-1` by default, which fetches all records in a single\
+        \ response. On ThoughtSpot instances with a large number of objects or users,\
+        \ this can lead to slow responses, excessive logging, and out-of-memory failures.\
+        \ If the object or principal count is high, set `record_size` to a smaller\
+        \ value and iterate through pages programmatically instead of relying on the\
+        \ default.\n\n\n\n\n\n"
       operationId: fetchPermissionsOfPrincipals
       parameters: []
       requestBody:
@@ -10580,6 +10589,9 @@ paths:
         * To get permission details for a specific user or group, add `type` and GUID or name of the principal object to your API request.
 
         Upon successful execution, the API returns permission details and principal information for the object specified in the API request.
+
+
+        **Warning**: This API sets `record_size` to `-1` by default, which fetches all records in a single response. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. If the object or principal count is high, set `record_size` to a smaller value and iterate through pages programmatically instead of relying on the default.
 
 
 
@@ -14011,7 +14023,7 @@ paths:
 
         Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
-        **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
 
 
 
@@ -14361,7 +14373,11 @@ paths:
         \ can be formatted in three ways:\n* METADATA - Returns only variable metadata\
         \ (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n\
         \nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n\
-        * model_identifier\n\n\n\n\n\n"
+        * model_identifier\n\n\n**Warning**: Do not set `record_size` to `-1`. On\
+        \ ThoughtSpot instances with a large number of objects or users, this can\
+        \ lead to slow responses, excessive logging, and out-of-memory failures. Specify\
+        \ an explicit `record_size` and iterate through pages programmatically.\n\n\
+        \n\n\n\n"
       operationId: searchVariables
       parameters: []
       requestBody:

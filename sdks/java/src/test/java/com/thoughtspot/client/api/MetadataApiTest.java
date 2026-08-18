@@ -399,9 +399,11 @@ public class MetadataApiTest {
      * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
      * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
      * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
-     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; **Warning**:
+     * Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @throws ApiException if the Api call fails
      */

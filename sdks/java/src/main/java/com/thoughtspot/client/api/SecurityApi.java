@@ -953,7 +953,12 @@ public class SecurityApi {
      * &#x60;type&#x60; and GUID or name of the principal. * To get permission details for a
      * specific object, add the &#x60;type&#x60; and GUID or name of the metadata object to your API
      * request. Upon successful execution, the API returns a list of metadata objects and permission
-     * details for each object.
+     * details for each object. **Warning**: This API sets &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * by default, which fetches all records in a single response. On ThoughtSpot instances with a
+     * large number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. If the object or principal count is high, set &#x60;record_size&#x60;
+     * to a smaller value and iterate through pages programmatically instead of relying on the
+     * default.
      *
      * @param fetchPermissionsOfPrincipalsRequest (required)
      * @return PermissionOfPrincipalsResponse
@@ -985,7 +990,12 @@ public class SecurityApi {
      * &#x60;type&#x60; and GUID or name of the principal. * To get permission details for a
      * specific object, add the &#x60;type&#x60; and GUID or name of the metadata object to your API
      * request. Upon successful execution, the API returns a list of metadata objects and permission
-     * details for each object.
+     * details for each object. **Warning**: This API sets &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * by default, which fetches all records in a single response. On ThoughtSpot instances with a
+     * large number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. If the object or principal count is high, set &#x60;record_size&#x60;
+     * to a smaller value and iterate through pages programmatically instead of relying on the
+     * default.
      *
      * @param fetchPermissionsOfPrincipalsRequest (required)
      * @return ApiResponse&lt;PermissionOfPrincipalsResponse&gt;
@@ -1019,7 +1029,12 @@ public class SecurityApi {
      * specify the &#x60;type&#x60; and GUID or name of the principal. * To get permission details
      * for a specific object, add the &#x60;type&#x60; and GUID or name of the metadata object to
      * your API request. Upon successful execution, the API returns a list of metadata objects and
-     * permission details for each object.
+     * permission details for each object. **Warning**: This API sets &#x60;record_size&#x60; to
+     * &#x60;-1&#x60; by default, which fetches all records in a single response. On ThoughtSpot
+     * instances with a large number of objects or users, this can lead to slow responses, excessive
+     * logging, and out-of-memory failures. If the object or principal count is high, set
+     * &#x60;record_size&#x60; to a smaller value and iterate through pages programmatically instead
+     * of relying on the default.
      *
      * @param fetchPermissionsOfPrincipalsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1145,7 +1160,11 @@ public class SecurityApi {
      * object. * To get permission details for a specific user or group, add &#x60;type&#x60; and
      * GUID or name of the principal object to your API request. Upon successful execution, the API
      * returns permission details and principal information for the object specified in the API
-     * request.
+     * request. **Warning**: This API sets &#x60;record_size&#x60; to &#x60;-1&#x60; by default,
+     * which fetches all records in a single response. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. If the object or principal count is high, set &#x60;record_size&#x60; to a smaller
+     * value and iterate through pages programmatically instead of relying on the default.
      *
      * @param fetchPermissionsOnMetadataRequest (required)
      * @return PermissionOfMetadataResponse
@@ -1177,7 +1196,11 @@ public class SecurityApi {
      * object. * To get permission details for a specific user or group, add &#x60;type&#x60; and
      * GUID or name of the principal object to your API request. Upon successful execution, the API
      * returns permission details and principal information for the object specified in the API
-     * request.
+     * request. **Warning**: This API sets &#x60;record_size&#x60; to &#x60;-1&#x60; by default,
+     * which fetches all records in a single response. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. If the object or principal count is high, set &#x60;record_size&#x60; to a smaller
+     * value and iterate through pages programmatically instead of relying on the default.
      *
      * @param fetchPermissionsOnMetadataRequest (required)
      * @return ApiResponse&lt;PermissionOfMetadataResponse&gt;
@@ -1211,7 +1234,12 @@ public class SecurityApi {
      * metadata object. * To get permission details for a specific user or group, add
      * &#x60;type&#x60; and GUID or name of the principal object to your API request. Upon
      * successful execution, the API returns permission details and principal information for the
-     * object specified in the API request.
+     * object specified in the API request. **Warning**: This API sets &#x60;record_size&#x60; to
+     * &#x60;-1&#x60; by default, which fetches all records in a single response. On ThoughtSpot
+     * instances with a large number of objects or users, this can lead to slow responses, excessive
+     * logging, and out-of-memory failures. If the object or principal count is high, set
+     * &#x60;record_size&#x60; to a smaller value and iterate through pages programmatically instead
+     * of relying on the default.
      *
      * @param fetchPermissionsOnMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes

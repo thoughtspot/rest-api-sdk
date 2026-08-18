@@ -2152,7 +2152,12 @@ public class ThoughtSpotRestApiTest {
      * &#x60;type&#x60; and GUID or name of the principal. * To get permission details for a
      * specific object, add the &#x60;type&#x60; and GUID or name of the metadata object to your API
      * request. Upon successful execution, the API returns a list of metadata objects and permission
-     * details for each object.
+     * details for each object. **Warning**: This API sets &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * by default, which fetches all records in a single response. On ThoughtSpot instances with a
+     * large number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. If the object or principal count is high, set &#x60;record_size&#x60;
+     * to a smaller value and iterate through pages programmatically instead of relying on the
+     * default.
      *
      * @throws ApiException if the Api call fails
      */
@@ -2171,7 +2176,11 @@ public class ThoughtSpotRestApiTest {
      * object. * To get permission details for a specific user or group, add &#x60;type&#x60; and
      * GUID or name of the principal object to your API request. Upon successful execution, the API
      * returns permission details and principal information for the object specified in the API
-     * request.
+     * request. **Warning**: This API sets &#x60;record_size&#x60; to &#x60;-1&#x60; by default,
+     * which fetches all records in a single response. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. If the object or principal count is high, set &#x60;record_size&#x60; to a smaller
+     * value and iterate through pages programmatically instead of relying on the default.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3596,7 +3605,11 @@ public class ThoughtSpotRestApiTest {
      * connection, specify the connection ID. You can also use other search parameters such as
      * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
      * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
+     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching. **Warning**: Do not
+     * set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3644,9 +3657,10 @@ public class ThoughtSpotRestApiTest {
      * within each collection in the response **NOTE**: In addition to the GUID and name,
      * &#x60;collection_identifiers&#x60; accepts a Custom object ID if one is configured for the
      * collection. The response also includes the &#x60;obj_id&#x60; field for each collection that
-     * has one set. **NOTE**: If the API returns an empty list, consider increasing the value of the
-     * &#x60;record_size&#x60; parameter. To search across all available collections, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     * has one set. **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On
+     * ThoughtSpot instances with a large number of objects or users, this can lead to slow
+     * responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @throws ApiException if the Api call fails
      */
@@ -3887,9 +3901,11 @@ public class ThoughtSpotRestApiTest {
      * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
      * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
      * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
-     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; **Warning**:
+     * Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @throws ApiException if the Api call fails
      */
@@ -4044,8 +4060,10 @@ public class ThoughtSpotRestApiTest {
      * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: In
      * addition to the GUID and name, &#x60;group_identifier&#x60; accepts a Custom object ID if one
      * is configured for the group. The response also includes the &#x60;obj_id&#x60; field for each
-     * group that has one set. **NOTE**: If you do not get precise results, try setting
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * group that has one set. **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On
+     * ThoughtSpot instances with a large number of objects or users, this can lead to slow
+     * responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @throws ApiException if the Api call fails
      */
@@ -4064,10 +4082,11 @@ public class ThoughtSpotRestApiTest {
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view all users
      * properties. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required. **NOTE**: If
-     * the API returns an empty list, consider increasing the value of the &#x60;record_size&#x60;
-     * parameter. To search across all available users, set &#x60;record_size&#x60; to
-     * &#x60;-1&#x60;.
+     * &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required. **Warning**: Do
+     * not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @throws ApiException if the Api call fails
      */
@@ -4086,7 +4105,10 @@ public class ThoughtSpotRestApiTest {
      * (case-insensitive, supports % for wildcard) The search results can be formatted in three
      * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
      * variable metadata and values The values can be filtered by scope: * org_identifier *
-     * principal_identifier * model_identifier
+     * principal_identifier * model_identifier **Warning**: Do not set &#x60;record_size&#x60; to
+     * &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can
+     * lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @throws ApiException if the Api call fails
      */

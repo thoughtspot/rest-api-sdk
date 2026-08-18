@@ -41,8 +41,8 @@ export class VariableApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -93,8 +93,8 @@ export class VariableApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -131,8 +131,8 @@ export class VariableApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -188,8 +188,8 @@ export class VariableApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -219,7 +219,7 @@ export class VariableApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *  Search variables    Version: 26.4.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values  The values can be filtered by scope: * org_identifier * principal_identifier * model_identifier      
+     *  Search variables    Version: 26.4.0.cl or later   Allows searching for variables in ThoughtSpot.  Requires ADMINISTRATION role. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint supports searching variables by: * Variable identifier (ID or name) * Variable type * Name pattern (case-insensitive, supports % for wildcard)  The search results can be formatted in three ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns variable metadata and values  The values can be filtered by scope: * org_identifier * principal_identifier * model_identifier   **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
      * @param searchVariablesRequest 
      */
     public async searchVariables(searchVariablesRequest: SearchVariablesRequest, _options?: Configuration): Promise<RequestContext> {
@@ -237,8 +237,8 @@ export class VariableApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -294,8 +294,8 @@ export class VariableApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -345,8 +345,8 @@ export class VariableApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params

@@ -40,8 +40,8 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -90,8 +90,8 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -128,8 +128,8 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -159,7 +159,7 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 9.0.0.cl or later   Gets a list of user group objects from the ThoughtSpot system.  To get details of a specific user group, specify the user group GUID or name. You can also filter the API response based on User ID, Org ID, Role ID, type of group, sharing visibility, privileges assigned to the group, and the Liveboard IDs assigned to the users in the group.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.  **NOTE**: In addition to the GUID and name, `group_identifier` accepts a Custom object ID if one is configured for the group. The response also includes the `obj_id` field for each group that has one set.  **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.      
+     *   Version: 9.0.0.cl or later   Gets a list of user group objects from the ThoughtSpot system.  To get details of a specific user group, specify the user group GUID or name. You can also filter the API response based on User ID, Org ID, Role ID, type of group, sharing visibility, privileges assigned to the group, and the Liveboard IDs assigned to the users in the group.  Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `GROUP_ADMINISTRATION` (**Can manage groups**) privilege is required.  **NOTE**: In addition to the GUID and name, `group_identifier` accepts a Custom object ID if one is configured for the group. The response also includes the `obj_id` field for each group that has one set.  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
      * @param searchUserGroupsRequest 
      */
     public async searchUserGroups(searchUserGroupsRequest: SearchUserGroupsRequest, _options?: Configuration): Promise<RequestContext> {
@@ -177,8 +177,8 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
@@ -234,8 +234,8 @@ export class GroupsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
 
 
         // Body Params
