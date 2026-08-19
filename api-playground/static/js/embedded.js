@@ -67,10 +67,27 @@ function getElementByIdAsync(id) {
 
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
+const getRequestedThemeMode = () => {
+  const [beforeHash] = window.location.href.split('#');
+  const pairs = beforeHash.split(/[?&]/).slice(1).join('&');
+  const isDarkMode = new URLSearchParams(pairs).get('isDarkMode');
+  if (isDarkMode === 'true') return 'dark';
+  if (isDarkMode === 'false') return 'light';
+  return null;
+};
+const applyRequestedThemeMode = () => {
+  const themeMode = getRequestedThemeMode();
+  if (!themeMode) return;
+  if (window.APIMaticDevPortal && window.APIMaticDevPortal.setThemeMode) {
+    window.APIMaticDevPortal.setThemeMode(themeMode);
+  }
+};
+
 const setAPIMaticPortalConfig = () => {
   APIMaticDevPortal.ready(({ setConfig }) => {
     isApiMaticPortalReady = true;
     _setConfig = setConfig;
+    applyRequestedThemeMode();
     window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
       channel.port2,
     ]);
@@ -124,3 +141,17 @@ window.addEventListener('message', (event) => {
 window.test = (config) => {
   setPlaygroundConfig(playgroundConfig);
 };
+
+// Start the "API Configurations" panel collapsed (still user-expandable).
+// Its open/closed state is React-controlled, so CSS can't set the initial
+// state — we click the toggle once on first render. The dataset flag means we
+// never re-collapse a section the user has chosen to open.
+new MutationObserver(() => {
+  const toggle = document.querySelector(
+    '[data-testid="config-section"] [aria-label="Toggle section"][aria-expanded="true"]',
+  );
+  if (toggle && !toggle.dataset.tsCollapsed) {
+    toggle.dataset.tsCollapsed = '1';
+    toggle.click();
+  }
+}).observe(document.documentElement, { childList: true, subtree: true });

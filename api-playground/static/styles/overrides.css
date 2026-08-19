@@ -93,3 +93,22 @@ strong {
     font-weight: normal;
     background: grey;
 }
+
+[role='main'] {
+    border-top: none !important;
+}
+
+[data-testid='theme-toggle'] {
+    display: none !important;
+}
+
+body {
+    opacity: 0;
+    animation: ts-reveal-body 0.1s linear 0.5s forwards;
+}
+
+@keyframes ts-reveal-body {
+    to {
+        opacity: 1;
+    }
+}
