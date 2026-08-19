@@ -68,9 +68,11 @@ function getElementByIdAsync(id) {
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
 const getRequestedThemeMode = () => {
-  const url = window.location.href;
-  if (url.includes('isDarkMode=true')) return 'dark';
-  if (url.includes('isDarkMode=false')) return 'light';
+  const [beforeHash] = window.location.href.split('#');
+  const pairs = beforeHash.split(/[?&]/).slice(1).join('&');
+  const isDarkMode = new URLSearchParams(pairs).get('isDarkMode');
+  if (isDarkMode === 'true') return 'dark';
+  if (isDarkMode === 'false') return 'light';
   return null;
 };
 const applyRequestedThemeMode = () => {
