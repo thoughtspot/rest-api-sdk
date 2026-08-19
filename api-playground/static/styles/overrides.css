@@ -103,6 +103,7 @@ strong {
 
 body {
     opacity: 0;
+    transition: opacity 0.1s linear;
 }
 
 html[data-rest-api-playground-ready] body {
