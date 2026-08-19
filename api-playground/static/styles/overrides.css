@@ -103,11 +103,8 @@ strong {
 
 body {
     opacity: 0;
-    animation: ts-reveal-body 0.1s linear 0.5s forwards;
 }
 
-@keyframes ts-reveal-body {
-    to {
-        opacity: 1;
-    }
+html[data-rest-api-playground-ready] body {
+    opacity: 1;
 }
