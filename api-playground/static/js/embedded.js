@@ -67,10 +67,28 @@ function getElementByIdAsync(id) {
 
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
+const getRequestedThemeMode = () => {
+  const [beforeHash] = window.location.href.split('#');
+  const pairs = beforeHash.split(/[?&]/).slice(1).join('&');
+  const isDarkMode = new URLSearchParams(pairs).get('isDarkMode');
+  if (isDarkMode === 'true') return 'dark';
+  if (isDarkMode === 'false') return 'light';
+  return null;
+};
+const applyRequestedThemeMode = () => {
+  const themeMode = getRequestedThemeMode();
+  if (!themeMode) return;
+  if (window.APIMaticDevPortal && window.APIMaticDevPortal.setThemeMode) {
+    window.APIMaticDevPortal.setThemeMode(themeMode);
+  }
+};
+
 const setAPIMaticPortalConfig = () => {
   APIMaticDevPortal.ready(({ setConfig }) => {
     isApiMaticPortalReady = true;
     _setConfig = setConfig;
+    applyRequestedThemeMode();
+    document.documentElement.dataset.restApiPlaygroundReady = '1';
     window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
       channel.port2,
     ]);

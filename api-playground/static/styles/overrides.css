@@ -93,3 +93,19 @@ strong {
     font-weight: normal;
     background: grey;
 }
+[role='main'] {
+    border-top: none !important;
+}
+
+[data-testid='theme-toggle'] {
+    display: none !important;
+}
+
+body {
+    opacity: 0;
+    transition: opacity 0.1s linear;
+}
+
+html[data-rest-api-playground-ready] body {
+    opacity: 1;
+}
