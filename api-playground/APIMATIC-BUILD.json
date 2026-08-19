@@ -10,6 +10,23 @@
     "headIncludes": "<link rel=\"icon\" type=\"image/svg+xml\" href='static/images/favicon.svg' /><link rel=\"stylesheet\" href=\"./static/styles/overrides.css\">",
     "tailIncludes": "<script defer id=\"ts-playground-snippet\" src=\"./static/js/embedded.js\"></script>",
     "portalSettings": {
+      "theme": {
+        "baseTheme": "standard",
+        "colors": {
+          "primaryColor": {
+            "light": "#2770ef",
+            "dark": "#71a1f4"
+          },
+          "linkColor": {
+            "light": "#2770ef",
+            "dark": "#71a1f4"
+          }
+        },
+        "colorMode": {
+          "defaultMode": "light",
+          "disableSwitch": false
+        }
+      },
       "themeOverrides": {
         "themeType": "cool",
         "palette": {
@@ -26,7 +43,7 @@
             "C700": "#606E8A",
             "C800": "#1D232F",
             "C900": "#1C2029",
-            "C1000": "#1D2236",
+            "C1000": "#1D2236"
           }
         },
         "fontSource": [],
