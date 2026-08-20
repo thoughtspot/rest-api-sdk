@@ -21,7 +21,7 @@ _ts_warnings.filterwarnings(
 """  # noqa: E501
 
 
-__version__ = "2.27.0"
+__version__ = "2.27.1"
 
 # Define package exports
 __all__ = [
@@ -168,7 +168,6 @@ __all__ = [
     "CreateCustomActionRequest",
     "CreateEmailCustomizationRequest",
     "CreateEmailCustomizationResponse",
-    "CreateInputTableRequest",
     "CreateOrgRequest",
     "CreateRoleRequest",
     "CreateScheduleRequest",
@@ -504,7 +503,6 @@ __all__ = [
     "UpdateConversationRequest",
     "UpdateCustomActionRequest",
     "UpdateEmailCustomizationRequest",
-    "UpdateInputTableRequest",
     "UpdateMetadataHeaderRequest",
     "UpdateMetadataObjIdRequest",
     "UpdateObjIdInput",
@@ -714,7 +712,6 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest as CreateCustomActionRequest
     from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest as CreateEmailCustomizationRequest
     from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse as CreateEmailCustomizationResponse
-    from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest as CreateInputTableRequest
     from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest as CreateOrgRequest
     from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest as CreateRoleRequest
     from thoughtspot_rest_api_sdk.models.create_schedule_request import CreateScheduleRequest as CreateScheduleRequest
@@ -1050,7 +1047,6 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.update_conversation_request import UpdateConversationRequest as UpdateConversationRequest
     from thoughtspot_rest_api_sdk.models.update_custom_action_request import UpdateCustomActionRequest as UpdateCustomActionRequest
     from thoughtspot_rest_api_sdk.models.update_email_customization_request import UpdateEmailCustomizationRequest as UpdateEmailCustomizationRequest
-    from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest as UpdateInputTableRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest as UpdateMetadataHeaderRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest as UpdateMetadataObjIdRequest
     from thoughtspot_rest_api_sdk.models.update_obj_id_input import UpdateObjIdInput as UpdateObjIdInput
@@ -1266,7 +1262,6 @@ from thoughtspot_rest_api_sdk.models.create_conversation_request import CreateCo
 from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest as CreateCustomActionRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest as CreateEmailCustomizationRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse as CreateEmailCustomizationResponse
-from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest as CreateInputTableRequest
 from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest as CreateOrgRequest
 from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest as CreateRoleRequest
 from thoughtspot_rest_api_sdk.models.create_schedule_request import CreateScheduleRequest as CreateScheduleRequest
@@ -1602,7 +1597,6 @@ from thoughtspot_rest_api_sdk.models.update_connection_v2_request import UpdateC
 from thoughtspot_rest_api_sdk.models.update_conversation_request import UpdateConversationRequest as UpdateConversationRequest
 from thoughtspot_rest_api_sdk.models.update_custom_action_request import UpdateCustomActionRequest as UpdateCustomActionRequest
 from thoughtspot_rest_api_sdk.models.update_email_customization_request import UpdateEmailCustomizationRequest as UpdateEmailCustomizationRequest
-from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest as UpdateInputTableRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest as UpdateMetadataHeaderRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest as UpdateMetadataObjIdRequest
 from thoughtspot_rest_api_sdk.models.update_obj_id_input import UpdateObjIdInput as UpdateObjIdInput

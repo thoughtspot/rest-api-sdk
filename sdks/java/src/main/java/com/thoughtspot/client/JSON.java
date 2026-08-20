@@ -346,9 +346,6 @@ public class JSON {
                 new com.thoughtspot.client.model.CreateEmailCustomizationResponse
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.CreateInputTableRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.CreateOrgRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.CreateRoleRequest.CustomTypeAdapterFactory());
@@ -1151,9 +1148,6 @@ public class JSON {
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.UpdateEmailCustomizationRequest
-                        .CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(
-                new com.thoughtspot.client.model.UpdateInputTableRequest
                         .CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(
                 new com.thoughtspot.client.model.UpdateMetadataHeaderRequest

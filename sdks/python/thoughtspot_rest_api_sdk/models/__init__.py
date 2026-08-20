@@ -117,7 +117,6 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest
     from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest
     from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse
-    from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest
     from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest
     from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest
     from thoughtspot_rest_api_sdk.models.create_schedule_request import CreateScheduleRequest
@@ -453,7 +452,6 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.update_conversation_request import UpdateConversationRequest
     from thoughtspot_rest_api_sdk.models.update_custom_action_request import UpdateCustomActionRequest
     from thoughtspot_rest_api_sdk.models.update_email_customization_request import UpdateEmailCustomizationRequest
-    from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest
     from thoughtspot_rest_api_sdk.models.update_obj_id_input import UpdateObjIdInput
@@ -625,7 +623,6 @@ from thoughtspot_rest_api_sdk.models.create_conversation_request import CreateCo
 from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse
-from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest
 from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest
 from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest
 from thoughtspot_rest_api_sdk.models.create_schedule_request import CreateScheduleRequest
@@ -961,7 +958,6 @@ from thoughtspot_rest_api_sdk.models.update_connection_v2_request import UpdateC
 from thoughtspot_rest_api_sdk.models.update_conversation_request import UpdateConversationRequest
 from thoughtspot_rest_api_sdk.models.update_custom_action_request import UpdateCustomActionRequest
 from thoughtspot_rest_api_sdk.models.update_email_customization_request import UpdateEmailCustomizationRequest
-from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest
 from thoughtspot_rest_api_sdk.models.update_obj_id_input import UpdateObjIdInput

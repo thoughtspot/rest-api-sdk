@@ -766,7 +766,9 @@ public class VariableApi {
      * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
      * - Removes any values which match the set of conditions of the variables if this is a list
      * type variable, else clears value. * RESET - Removes all constraints for the given variable,
-     * scope is ignored
+     * scope is ignored Re-sending values that already match the stored values for the targeted
+     * scope is a no-op: the request succeeds without modifying any data. This does not apply to the
+     * RESET operation or to sensitive variables, which are always written.
      *
      * @param identifier Unique ID or name of the variable (required)
      * @param putVariableValuesRequest (required)
@@ -801,7 +803,9 @@ public class VariableApi {
      * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
      * - Removes any values which match the set of conditions of the variables if this is a list
      * type variable, else clears value. * RESET - Removes all constraints for the given variable,
-     * scope is ignored
+     * scope is ignored Re-sending values that already match the stored values for the targeted
+     * scope is a no-op: the request succeeds without modifying any data. This does not apply to the
+     * RESET operation or to sensitive variables, which are always written.
      *
      * @param identifier Unique ID or name of the variable (required)
      * @param putVariableValuesRequest (required)
@@ -839,7 +843,10 @@ public class VariableApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constraints for the given variable, scope is ignored
+     * constraints for the given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param identifier Unique ID or name of the variable (required)
      * @param putVariableValuesRequest (required)
@@ -965,7 +972,10 @@ public class VariableApi {
      * (case-insensitive, supports % for wildcard) The search results can be formatted in three
      * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
      * variable metadata and values The values can be filtered by scope: * org_identifier *
-     * principal_identifier * model_identifier
+     * principal_identifier * model_identifier **Warning**: Do not set &#x60;record_size&#x60; to
+     * &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can
+     * lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchVariablesRequest (required)
      * @return List&lt;Variable&gt;
@@ -997,7 +1007,10 @@ public class VariableApi {
      * (case-insensitive, supports % for wildcard) The search results can be formatted in three
      * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
      * variable metadata and values The values can be filtered by scope: * org_identifier *
-     * principal_identifier * model_identifier
+     * principal_identifier * model_identifier **Warning**: Do not set &#x60;record_size&#x60; to
+     * &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can
+     * lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchVariablesRequest (required)
      * @return ApiResponse&lt;List&lt;Variable&gt;&gt;
@@ -1029,7 +1042,10 @@ public class VariableApi {
      * (case-insensitive, supports % for wildcard) The search results can be formatted in three
      * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
      * variable metadata and values The values can be filtered by scope: * org_identifier *
-     * principal_identifier * model_identifier
+     * principal_identifier * model_identifier **Warning**: Do not set &#x60;record_size&#x60; to
+     * &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can
+     * lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchVariablesRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1355,7 +1371,10 @@ public class VariableApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constrains for a given variable, scope is ignored
+     * constrains for a given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param updateVariableValuesRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -1393,7 +1412,10 @@ public class VariableApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constrains for a given variable, scope is ignored
+     * constrains for a given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param updateVariableValuesRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -1435,7 +1457,10 @@ public class VariableApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constrains for a given variable, scope is ignored
+     * constrains for a given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param updateVariableValuesRequest (required)
      * @param _callback The callback to be executed when the API call finishes

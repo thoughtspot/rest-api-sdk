@@ -12,7 +12,7 @@
     <Description>Official ThoughtSpot REST API SDK for .NET</Description>
     <Copyright>No Copyright</Copyright>
     <RootNamespace>ThoughtSpot.RestApi.Sdk</RootNamespace>
-    <Version>2.27.0</Version>
+    <Version>2.27.1</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ThoughtSpot.RestApi.Sdk.xml</DocumentationFile>
     <RepositoryUrl>https://github.com/GIT_USER_ID/GIT_REPO_ID.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -40,13 +40,17 @@
          renders as the generator's unfilled
          https://github.com/GIT_USER_ID/GIT_REPO_ID.git placeholder, since
          gitUserId/gitRepoId are not set in config.yaml. -->
-    <RepositoryUrl>https://github.com/thoughtspot/rest-api-sdk/tree/release/sdks</RepositoryUrl>
+    <RepositoryUrl>https://github.com/thoughtspot/rest-api-sdk/tree/release/sdks/csharp</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="" />
+    <!-- README lives at the outputDir root (sdks/csharp/README.md), two dirs
+         above this .csproj; Include is resolved relative to the .csproj.
+         PackagePath="" packs it to the nupkg root as README.md, matching
+         <PackageReadmeFile>README.md</PackageReadmeFile>. -->
+    <None Include="../../README.md" Pack="true" PackagePath="" />
     <None Include="LICENSE.md" Pack="true" PackagePath="" />
   </ItemGroup>
 </Project>

@@ -23,10 +23,14 @@ paths:
 
         #### Usage guidelines
 
-        The request must include the `metadata_context` parameter to define the conversation context. The context type can be one of:
+        The conversation context is defined by exactly one of the following parameters:
 
-        - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.
-        - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.
+        - `metadata_context`: defines the conversation context by data source. The context type can be one of:
+          - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.
+          - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.
+        - `analyst_identifier` *(available from 26.10.0.cl)*: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst's configuration — its data sources, agent instructions, and connectors — so `metadata_context` must be omitted. The caller must be the analyst's author, have the analyst shared with them, or hold admin / Spotter-management privileges.
+
+        Passing both `analyst_identifier` and `metadata_context`, or neither, is rejected.
 
         > **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ "type": "data_source", "data_source_context": { "guid": "<worksheet-id>" } }`.
 
@@ -37,7 +41,7 @@ paths:
         - `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl
         - `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history
 
-        If the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations.
+        If the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations. When the conversation is started from an analyst, the response additionally carries the analyst's `analyst_id`; it is `null` otherwise.
 
         #### Example request
 
@@ -58,7 +62,9 @@ paths:
         | Code | Description                                                                                                                             |
         | ---- | --------------------------------------------------------------------------------------------------------------------------------------- |
         | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |
-        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks view permission on the specified metadata object, or has no access to the analyst specified in `analyst_identifier`. |
+        | 404  | Not found — no analyst with the given `analyst_identifier` exists in the caller's Org.                                                          |
+        | 422  | Unprocessable entity — the request fails validation: both `analyst_identifier` and `metadata_context` were provided, neither was provided, or `metadata_context` is malformed (for example, `DATA_SOURCE` context without a data source identifier). |
 
         > ###### Note:
         >
@@ -94,6 +100,12 @@ paths:
                   value:
                     conversation_id: aaHQ5j8O8dQC
                     conversation_identifier: aaHQ5j8O8dQC
+                example_3:
+                  summary: Create a conversation from a Spotter Analyst
+                  value:
+                    conversation_id: bbHQ5j8O8dQC
+                    conversation_identifier: bbHQ5j8O8dQC
+                    analyst_id: 9f8e7d6c-5b4a-3210-fedc-ba9876543210
               schema:
                 $ref: "#/components/schemas/AgentConversation"
           description: Common successful response
@@ -924,8 +936,13 @@ paths:
         \ ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`:\
         \ list of unique IDs of the data sources associated with the conversation\n\
         - `data_source_names`: array of `{ id, name }` objects for the data sources\
-        \ associated with the conversation\n\n#### Pagination\n\nUse `limit` and `offset`\
-        \ to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0\
+        \ associated with the conversation\n- `is_pinned`: whether the current user\
+        \ has pinned this conversation. Pinned conversations are surfaced first in\
+        \ the list. Available from version 26.10.0.cl.\n- `analyst_id`: unique identifier\
+        \ of the Spotter Analyst the conversation is associated with, or `null` when\
+        \ the conversation is not associated with an analyst. Available from version\
+        \ 26.10.0.cl.\n\n#### Pagination\n\nUse `limit` and `offset` to page through\
+        \ large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0\
         \   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20\
         \  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes\
         \ a `has_more: Boolean` field. When `true`, there are additional conversations\
@@ -937,9 +954,9 @@ paths:
         : \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\"\
         ,\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifiers\"\
         : [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\"\
-        : \"Retail Sales\" }]\n    }\n  ],\n  \"has_more\": false\n}\n```\n\n####\
-        \ Error responses\n\n| Code | Description |\n|------|-------------|\n| 401\
-        \  | Unauthorized — authentication token is missing, expired, or invalid.\
+        : \"Retail Sales\" }],\n      \"is_pinned\": true\n    }\n  ],\n  \"has_more\"\
+        : false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n\
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.\
         \ |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER`\
         \ privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat:\
         \ true` appear in this list. Conversations created with `enable_save_chat:\
@@ -2766,31 +2783,47 @@ paths:
         \ only the\ndisplay title can be updated; additional conversation attributes\
         \ may be\nsupported in future versions. At least one updatable attribute must\
         \ be\nprovided in the request body. \n  Version: 26.7.0.cl or later\n\n\n\
-        Updates attributes of an existing saved agent conversation. Currently only\
-        \ the conversation's display `title` can be updated; additional updatable\
-        \ attributes may be supported in future versions. At least one updatable attribute\
-        \ must be supplied in the request body.\n\nRequires `CAN_USE_SPOTTER` privilege\
-        \ and ownership of the conversation being updated.\n\n#### Usage guidelines\n\
-        \nThe request must include:\n\n- `conversation_identifier` *(path parameter)*:\
-        \ the unique ID of the conversation to update, as returned by `createAgentConversation`\
-        \ or `getConversationList`\n- At least one updatable attribute in the request\
-        \ body:\n    - `title` *(optional)*: the new display name for the conversation.\
-        \ When provided, must be a non-empty string.\n\nA successful request returns\
-        \ an empty `204 No Content` response. Updated attributes are reflected immediately\
+        Updates attributes of an existing saved agent conversation. Supports updating\
+        \ the conversation's display `title` and its `is_pinned` state; additional\
+        \ updatable attributes may be supported in future versions. At least one updatable\
+        \ attribute must be supplied in the request body.\n\nUse this endpoint to\
+        \ rename a conversation, or to pin a conversation so that it is surfaced first\
+        \ in the conversation list for quick access.\n\nRequires `CAN_USE_SPOTTER`\
+        \ privilege and ownership of the conversation being updated.\n\n#### Usage\
+        \ guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path\
+        \ parameter)*: the unique ID of the conversation to update, as returned by\
+        \ `createAgentConversation` or `getConversationList`\n- At least one updatable\
+        \ attribute in the request body:\n    - `title` *(optional)*: the new display\
+        \ name for the conversation. An empty or whitespace-only value is replaced\
+        \ with a default title rather than rejected.\n    - `is_pinned` *(optional)*:\
+        \ `true` to pin the conversation, `false` to unpin it. Available from version\
+        \ 26.10.0.cl.\n\nEach attribute is applied independently: omitted attributes\
+        \ are left unchanged, so you can update the title and the pinned state in\
+        \ a single request or in separate requests. Updating `is_pinned` is idempotent\
+        \ — pinning an already-pinned conversation, or unpinning an already-unpinned\
+        \ one, succeeds with no side effects.\n\nA successful request returns an empty\
+        \ `204 No Content` response. Updated attributes are reflected immediately\
         \ in subsequent calls to `getConversationList`.\n\n#### Example request\n\n\
-        ```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\n\
+        Rename a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\n\
         Content-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product\
-        \ Line\"\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n\
-        | 400  | Bad Request — the request body is empty or `title` is provided as\
-        \ an empty string. |\n| 401  | Unauthorized — authentication token is missing,\
-        \ expired, or invalid. |\n| 403  | Forbidden — the authenticated user does\
-        \ not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation.\
-        \ |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier`\
-        \ for the authenticated user. |\n| 422  | Unprocessable Entity — the request\
-        \ body is malformed or contains an invalid field value. |\n\n> ###### Note:\n\
-        >\n> - Only conversations created with `enable_save_chat: true` can be updated.\
+        \ Line\"\n}\n```\n\nPin a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\n\
+        Content-Type: application/json\n\n{\n  \"is_pinned\": true\n}\n```\n\nUpdate\
+        \ both attributes in a single request:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\n\
+        Content-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product\
+        \ Line\",\n  \"is_pinned\": true\n}\n```\n\n#### Error responses\n\n| Code\
+        \ | Description |\n|------|-------------|\n| 400  | Bad Request — the request\
+        \ body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean.\
+        \ |\n| 401  | Unauthorized — authentication token is missing, expired, or\
+        \ invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER`\
+        \ privilege or does not own the specified conversation. |\n| 404  | Not Found\
+        \ — no conversation exists with the given `conversation_identifier` for the\
+        \ authenticated user. |\n| 422  | Unprocessable Entity — the request body\
+        \ is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n\
+        > - Only conversations created with `enable_save_chat: true` can be updated.\
         \ Unsaved conversations are not persisted and do not have a retrievable identifier.\n\
-        > - Available from version 26.7.0.cl and later.\n> - This endpoint requires\
+        > - There is no limit on the number of conversations a user can pin.\n> -\
+        \ Available from version 26.7.0.cl and later. The `is_pinned` attribute is\
+        \ available from version 26.10.0.cl and later.\n> - This endpoint requires\
         \ Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\
         \n\n\n\n\n"
       operationId: updateConversation
@@ -3074,14 +3107,15 @@ paths:
          Version: 9.4.0.cl or later
 
 
-        Retrieves details of the current session token for the bearer token provided in the request header.
+        Generates a new bearer token from an existing authenticated session.
 
-        This API endpoint does not create a new token. Instead, it returns details about the token, including the token string, creation time, expiration time, and the associated user.
+        #### Required privileges
+        Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request. Requires no additional privileges.
 
-        Use this endpoint to introspect your current session token, debug authentication issues, or when a frontend application needs session token details.
+        #### Usage guidelines
+        This endpoint doesn't return the caller's existing session token. Instead, it issues a new token based on the current authenticated session and returns the new token string, its creation and expiration timestamps, and the associated user details in response. The token generated from this API request is valid for 24 hours.
 
-        Any ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
-
+        Use this endpoint when your application needs a new token without requiring the user to re-authenticate. If you need a token with a specific expiration or a different security scope, use `POST /api/rest/2.0/auth/token/full`, `POST /api/rest/2.0/auth/token/custom`, or `POST /api/rest/2.0/auth/token/object` instead.
 
 
 
@@ -3265,6 +3299,27 @@ paths:
                       name: new_sales_user@example.com
                     creation_time_in_millis: 1724278000000
                     expiration_time_in_millis: 1724278300000
+                example_3:
+                  description: Org-scoped custom access token authorized for specific
+                    Orgs (Tenant Admin)
+                  value:
+                    id: 5c4b3a29-1807-4f6e-8d9c-abcdef012345
+                    token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_org_scoped_custom_token.signature
+                    org:
+                      id: 2
+                      name: sales-org
+                    user:
+                      id: 59481331-ee53-42be-a548-bd87be6ddd4a
+                      name: tsadmin
+                    creation_time_in_millis: 1724277430000
+                    expiration_time_in_millis: 1724277730000
+                    scope:
+                      org_scope: SPECIFIC_ORGS
+                      org_ids:
+                      - id: 2
+                        name: sales-org
+                      - id: 3
+                        name: marketing-org
               schema:
                 $ref: "#/components/schemas/AccessToken"
           description: ABAC token creation was successful.
@@ -3418,6 +3473,24 @@ paths:
                       org_id: 1
                     valid_for_user_id: b3d9e1f7-2a4c-4e8b-9d1f-6c5a3b8e7d2f
                     valid_for_username: jit_analyst@example.com
+                example_3:
+                  description: Org-scoped full-access token authorized for specific
+                    Orgs (Tenant Admin)
+                  value:
+                    token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_org_scoped_full_token.signature
+                    creation_time_in_millis: 1724277430000
+                    expiration_time_in_millis: 1724277730000
+                    scope:
+                      access_type: FULL
+                      org_id: 2
+                      org_scope: SPECIFIC_ORGS
+                      org_ids:
+                      - id: 2
+                        name: sales-org
+                      - id: 3
+                        name: marketing-org
+                    valid_for_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
+                    valid_for_username: tsadmin
               schema:
                 $ref: "#/components/schemas/Token"
           description: Bearer auth token creation successful.
@@ -3570,6 +3643,25 @@ paths:
                       metadata_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
                     valid_for_user_id: 7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c
                     valid_for_username: new_user@example.com
+                example_3:
+                  description: Org-scoped object access token authorized for specific
+                    Orgs (Tenant Admin)
+                  value:
+                    token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_org_scoped_object_token.signature
+                    creation_time_in_millis: 1724277430000
+                    expiration_time_in_millis: 1724277730000
+                    scope:
+                      access_type: REPORT_BOOK_VIEW
+                      org_id: 2
+                      metadata_id: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                      org_scope: SPECIFIC_ORGS
+                      org_ids:
+                      - id: 2
+                        name: sales-org
+                      - id: 3
+                        name: marketing-org
+                    valid_for_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
+                    valid_for_username: tsadmin
               schema:
                 $ref: "#/components/schemas/Token"
           description: Bearer auth token creation successful.
@@ -4085,6 +4177,23 @@ paths:
                       metadata_id: f47ac10b-58cc-4372-a567-0e02b2c3d479
                     valid_for_user_id: 7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c
                     token_type: BEARER
+                example_3:
+                  description: Valid org-scoped token authorized for specific Orgs
+                    (Tenant Admin)
+                  value:
+                    creation_time_in_millis: 1724277430000
+                    expiration_time_in_millis: 1724277730000
+                    scope:
+                      access_type: FULL
+                      org_id: 2
+                      org_scope: SPECIFIC_ORGS
+                      org_ids:
+                      - id: 2
+                        name: sales-org
+                      - id: 3
+                        name: marketing-org
+                    valid_for_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
+                    token_type: BEARER
               schema:
                 $ref: "#/components/schemas/TokenValidationResponse"
           description: Token validation successful.
@@ -4316,7 +4425,7 @@ paths:
 
         **NOTE**: In addition to the GUID and name, `collection_identifiers` accepts a Custom object ID if one is configured for the collection. The response also includes the `obj_id` field for each collection that has one set.
 
-        **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available collections, set `record_size` to `-1`.
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
 
 
 
@@ -6361,6 +6470,8 @@ paths:
 
         The `name_pattern` parameter filters and returns only those objects that match the specified pattern. Use `%` as a wildcard for pattern matching.
 
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
+
 
 
 
@@ -7611,7 +7722,7 @@ paths:
 
         **NOTE**: In addition to the GUID and name, `group_identifier` accepts a Custom object ID if one is configured for the group. The response also includes the `obj_id` field for each group that has one set.
 
-        **NOTE**: If you do not get precise results, try setting `record_size` to `-1` and `record_offset` to `0`.
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
 
 
 
@@ -8982,7 +9093,8 @@ paths:
         - `include_auto_created_objects`
         - `favorite_object_options`
         - `include_only_published_objects`
-        If you are using other parameters to search metadata, set `record_size` to `-1` and `record_offset` to `0`.
+
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
 
 
 
@@ -9044,7 +9156,24 @@ paths:
         \nFor a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`.\
         \ In this case, field_name specifies the exact property of the Connection\
         \ or Connection Config that needs to be unparameterized.\n\nFor Connection\
-        \ Config, the only supported field name is:\n* impersonate_user\n\n\n\n\n\n"
+        \ Config, the only supported field name is:\n* impersonate_user\n\n## Restored\
+        \ value\n\nThe endpoint has two mutually exclusive modes, and the value that\
+        \ is restored differs per mode:\n\n* Single-field mode (`field_name` + `value`)\
+        \ restores the supplied `value`.\n* Bulk mode (`metadata_entries`) ignores\
+        \ `value` and restores the Primary org (`org_id=0`) value of the variable\
+        \ bound to the field, even when the request is made from a secondary org.\n\
+        \nIn bulk mode, a secret Connection field bound to a sensitive variable is\
+        \ restored from the variable's Primary-org secret.\n\nBulk mode has no partial\
+        \ success. The request fails with `400` and nothing is changed if any field:\n\
+        * is a non-secret field bound to a sensitive variable,\n* is bound to a per-principal\
+        \ variable, whose value is user-specific or group-specific,\n* has a variable\
+        \ that cannot be read, because it is deleted or not visible to you,\n* has\
+        \ no Primary-org value, or\n* is a secret field whose value is unavailable\
+        \ from the secure store, which includes the case where the Confidant Vault\
+        \ is disabled, since the restored secret could then not be stored securely.\n\
+        \nSuch a field can still be unparameterized individually in single-field mode\
+        \ with an explicit `value`. Duplicate entries for the same object and field\
+        \ are coalesced.\n\n\n\n\n\n"
       operationId: unparameterizeMetadata
       parameters: []
       requestBody:
@@ -10363,7 +10492,13 @@ paths:
         \ and GUID or name of the principal.\n* To get permission details for a specific\
         \ object, add the `type` and GUID or name of the metadata object to your API\
         \ request.\n\nUpon successful execution, the API returns a list of metadata\
-        \ objects and permission details for each object.  \n\n\n\n\n\n"
+        \ objects and permission details for each object.  \n\n**Warning**: This API\
+        \ sets `record_size` to `-1` by default, which fetches all records in a single\
+        \ response. On ThoughtSpot instances with a large number of objects or users,\
+        \ this can lead to slow responses, excessive logging, and out-of-memory failures.\
+        \ If the object or principal count is high, set `record_size` to a smaller\
+        \ value and iterate through pages programmatically instead of relying on the\
+        \ default.\n\n\n\n\n\n"
       operationId: fetchPermissionsOfPrincipals
       parameters: []
       requestBody:
@@ -10445,6 +10580,9 @@ paths:
         * To get permission details for a specific user or group, add `type` and GUID or name of the principal object to your API request.
 
         Upon successful execution, the API returns permission details and principal information for the object specified in the API request.
+
+
+        **Warning**: This API sets `record_size` to `-1` by default, which fetches all records in a single response. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. If the object or principal count is high, set `record_size` to a smaller value and iterate through pages programmatically instead of relying on the default.
 
 
 
@@ -13876,7 +14014,7 @@ paths:
 
         Available to all users. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view all users properties. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege is required.
 
-        **NOTE**: If the API returns an empty list, consider increasing the value of the `record_size` parameter. To search across all available users, set `record_size` to `-1`.
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
 
 
 
@@ -14165,7 +14303,10 @@ paths:
         \ set of values.\n* REMOVE - Removes any values which match the set of conditions\
         \ of the variables if this is a list type variable, else clears value.\n*\
         \ RESET - Removes all constraints for the given variable, scope is ignored\n\
-        \n\n\n\n\n"
+        \nRe-sending values that already match the stored values for the targeted\
+        \ scope is a no-op: the request succeeds without modifying any data. This\
+        \ does not apply to the RESET operation or to sensitive variables, which are\
+        \ always written.\n\n\n\n\n\n"
       operationId: putVariableValues
       parameters:
       - description: Unique ID or name of the variable
@@ -14223,7 +14364,11 @@ paths:
         \ can be formatted in three ways:\n* METADATA - Returns only variable metadata\
         \ (default)\n* METADATA_AND_VALUES - Returns variable metadata and values\n\
         \nThe values can be filtered by scope:\n* org_identifier\n* principal_identifier\n\
-        * model_identifier\n\n\n\n\n\n"
+        * model_identifier\n\n\n**Warning**: Do not set `record_size` to `-1`. On\
+        \ ThoughtSpot instances with a large number of objects or users, this can\
+        \ lead to slow responses, excessive logging, and out-of-memory failures. Specify\
+        \ an explicit `record_size` and iterate through pages programmatically.\n\n\
+        \n\n\n\n"
       operationId: searchVariables
       parameters: []
       requestBody:
@@ -14339,7 +14484,10 @@ paths:
         \ all values of a given set of constraints with the current set of values.\n\
         * REMOVE - Removes any values which match the set of conditions of the variables\
         \ if this is a list type variable, else clears value.\n* RESET - Removes all\
-        \ constrains for a given variable, scope is ignored\n\n\n\n\n\n"
+        \ constrains for a given variable, scope is ignored\n\nRe-sending values that\
+        \ already match the stored values for the targeted scope is a no-op: the request\
+        \ succeeds without modifying any data. This does not apply to the RESET operation\
+        \ or to sensitive variables, which are always written.\n\n\n\n\n\n"
       operationId: updateVariableValues
       parameters: []
       requestBody:
@@ -30409,49 +30557,6 @@ components:
           - REPLACE
           type: string
       type: object
-    CreateInputTableRequest:
-      properties:
-        table_name:
-          description: Physical table name to create in the external warehouse.
-          type: string
-        model_identifier:
-          description: |-
-            Unique ID or name of the model (worksheet) to link the
-            input table to.
-          type: string
-        table_definition:
-          allOf:
-          - $ref: "#/components/schemas/InputTableDefinitionInput"
-          description: |-
-            Definition of the input table, including new columns
-            and referenced model columns.
-      required:
-      - model_identifier
-      - table_definition
-      - table_name
-      type: object
-    UpdateInputTableRequest:
-      properties:
-        columns:
-          description: |-
-            Names of the columns being written, in the same order as
-            the values in each row.
-          items:
-            type: string
-          type: array
-        rows:
-          description: |-
-            Rows to write into the input table. Each row is an array
-            of string values aligned positionally with columns.
-          items:
-            items:
-              type: string
-            type: array
-          type: array
-      required:
-      - columns
-      - rows
-      type: object
     SearchChannelHistoryRequest:
       example:
         channel_type: WEBHOOK
@@ -36021,11 +36126,6 @@ x-roles:
   tags:
   - 10.10.0.cl
   description: Roles for version 10.10.0.cl
-- name: 26.10.0.cl
-  id: 26.10.0.cl
-  tags:
-  - 26.10.0.cl
-  description: Roles for version 26.10.0.cl
 - name: 10.6.0.cl
   id: 10.6.0.cl
   tags:

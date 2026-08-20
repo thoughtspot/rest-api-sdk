@@ -103,7 +103,6 @@ export * from '../models/CreateConversationRequest';
 export * from '../models/CreateCustomActionRequest';
 export * from '../models/CreateEmailCustomizationRequest';
 export * from '../models/CreateEmailCustomizationResponse';
-export * from '../models/CreateInputTableRequest';
 export * from '../models/CreateOrgRequest';
 export * from '../models/CreateRoleRequest';
 export * from '../models/CreateScheduleRequest';
@@ -439,7 +438,6 @@ export * from '../models/UpdateConnectionV2Request';
 export * from '../models/UpdateConversationRequest';
 export * from '../models/UpdateCustomActionRequest';
 export * from '../models/UpdateEmailCustomizationRequest';
-export * from '../models/UpdateInputTableRequest';
 export * from '../models/UpdateMetadataHeaderRequest';
 export * from '../models/UpdateMetadataObjIdRequest';
 export * from '../models/UpdateObjIdInput';
@@ -604,7 +602,6 @@ import { CreateConversationRequest } from '../models/CreateConversationRequest';
 import { CreateCustomActionRequest } from '../models/CreateCustomActionRequest';
 import { CreateEmailCustomizationRequest } from '../models/CreateEmailCustomizationRequest';
 import { CreateEmailCustomizationResponse } from '../models/CreateEmailCustomizationResponse';
-import { CreateInputTableRequest } from '../models/CreateInputTableRequest';
 import { CreateOrgRequest } from '../models/CreateOrgRequest';
 import { CreateRoleRequest  , CreateRoleRequestPrivilegesEnum    } from '../models/CreateRoleRequest';
 import { CreateScheduleRequest  , CreateScheduleRequestMetadataTypeEnum   , CreateScheduleRequestFileFormatEnum    , CreateScheduleRequestTimeZoneEnum      } from '../models/CreateScheduleRequest';
@@ -940,7 +937,6 @@ import { UpdateConnectionV2Request } from '../models/UpdateConnectionV2Request';
 import { UpdateConversationRequest } from '../models/UpdateConversationRequest';
 import { UpdateCustomActionRequest     , UpdateCustomActionRequestOperationEnum   } from '../models/UpdateCustomActionRequest';
 import { UpdateEmailCustomizationRequest } from '../models/UpdateEmailCustomizationRequest';
-import { UpdateInputTableRequest } from '../models/UpdateInputTableRequest';
 import { UpdateMetadataHeaderRequest } from '../models/UpdateMetadataHeaderRequest';
 import { UpdateMetadataObjIdRequest } from '../models/UpdateMetadataObjIdRequest';
 import { UpdateObjIdInput , UpdateObjIdInputTypeEnum     } from '../models/UpdateObjIdInput';
@@ -1403,7 +1399,6 @@ let typeMap: {[index: string]: any} = {
     "CreateCustomActionRequest": CreateCustomActionRequest,
     "CreateEmailCustomizationRequest": CreateEmailCustomizationRequest,
     "CreateEmailCustomizationResponse": CreateEmailCustomizationResponse,
-    "CreateInputTableRequest": CreateInputTableRequest,
     "CreateOrgRequest": CreateOrgRequest,
     "CreateRoleRequest": CreateRoleRequest,
     "CreateScheduleRequest": CreateScheduleRequest,
@@ -1739,7 +1734,6 @@ let typeMap: {[index: string]: any} = {
     "UpdateConversationRequest": UpdateConversationRequest,
     "UpdateCustomActionRequest": UpdateCustomActionRequest,
     "UpdateEmailCustomizationRequest": UpdateEmailCustomizationRequest,
-    "UpdateInputTableRequest": UpdateInputTableRequest,
     "UpdateMetadataHeaderRequest": UpdateMetadataHeaderRequest,
     "UpdateMetadataObjIdRequest": UpdateMetadataObjIdRequest,
     "UpdateObjIdInput": UpdateObjIdInput,

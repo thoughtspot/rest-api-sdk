@@ -187,10 +187,11 @@ public class UsersApiTest {
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view all users
      * properties. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required. **NOTE**: If
-     * the API returns an empty list, consider increasing the value of the &#x60;record_size&#x60;
-     * parameter. To search across all available users, set &#x60;record_size&#x60; to
-     * &#x60;-1&#x60;.
+     * &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required. **Warning**: Do
+     * not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @throws ApiException if the Api call fails
      */
