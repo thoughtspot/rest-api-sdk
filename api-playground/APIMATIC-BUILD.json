@@ -17,6 +17,10 @@
             "light": "#2770ef",
             "dark": "#71a1f4"
           },
+          "secondaryColor": {
+            "light": "#CAF55C",
+            "dark": "#CAF55C"
+          },
           "linkColor": {
             "light": "#2770ef",
             "dark": "#71a1f4"
