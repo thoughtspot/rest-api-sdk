@@ -115,7 +115,6 @@ docs/CreateConversationRequest.md
 docs/CreateCustomActionRequest.md
 docs/CreateEmailCustomizationRequest.md
 docs/CreateEmailCustomizationResponse.md
-docs/CreateInputTableRequest.md
 docs/CreateOrgRequest.md
 docs/CreateRoleRequest.md
 docs/CreateScheduleRequest.md
@@ -245,7 +244,6 @@ docs/InputEurekaNLSRequest.md
 docs/InputTableDefinitionInput.md
 docs/InputTableResponse.md
 docs/InputTableUpdateResponse.md
-docs/InputTablesApi.md
 docs/JWTMetadataObject.md
 docs/JWTParameter.md
 docs/JWTUserOptions.md
@@ -471,7 +469,6 @@ docs/UpdateConnectionV2Request.md
 docs/UpdateConversationRequest.md
 docs/UpdateCustomActionRequest.md
 docs/UpdateEmailCustomizationRequest.md
-docs/UpdateInputTableRequest.md
 docs/UpdateMetadataHeaderRequest.md
 docs/UpdateMetadataObjIdRequest.md
 docs/UpdateObjIdInput.md
@@ -573,7 +570,6 @@ src/main/java/com/thoughtspot/client/api/DataApi.java
 src/main/java/com/thoughtspot/client/api/DbtApi.java
 src/main/java/com/thoughtspot/client/api/EmailCustomizationApi.java
 src/main/java/com/thoughtspot/client/api/GroupsApi.java
-src/main/java/com/thoughtspot/client/api/InputTablesApi.java
 src/main/java/com/thoughtspot/client/api/JobsApi.java
 src/main/java/com/thoughtspot/client/api/LogApi.java
 src/main/java/com/thoughtspot/client/api/ManualTranslationApi.java
@@ -701,7 +697,6 @@ src/main/java/com/thoughtspot/client/model/CreateConversationRequest.java
 src/main/java/com/thoughtspot/client/model/CreateCustomActionRequest.java
 src/main/java/com/thoughtspot/client/model/CreateEmailCustomizationRequest.java
 src/main/java/com/thoughtspot/client/model/CreateEmailCustomizationResponse.java
-src/main/java/com/thoughtspot/client/model/CreateInputTableRequest.java
 src/main/java/com/thoughtspot/client/model/CreateOrgRequest.java
 src/main/java/com/thoughtspot/client/model/CreateRoleRequest.java
 src/main/java/com/thoughtspot/client/model/CreateScheduleRequest.java
@@ -1037,7 +1032,6 @@ src/main/java/com/thoughtspot/client/model/UpdateConnectionV2Request.java
 src/main/java/com/thoughtspot/client/model/UpdateConversationRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateCustomActionRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateEmailCustomizationRequest.java
-src/main/java/com/thoughtspot/client/model/UpdateInputTableRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateMetadataHeaderRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateMetadataObjIdRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateObjIdInput.java
@@ -1107,7 +1101,6 @@ src/test/java/com/thoughtspot/client/api/DataApiTest.java
 src/test/java/com/thoughtspot/client/api/DbtApiTest.java
 src/test/java/com/thoughtspot/client/api/EmailCustomizationApiTest.java
 src/test/java/com/thoughtspot/client/api/GroupsApiTest.java
-src/test/java/com/thoughtspot/client/api/InputTablesApiTest.java
 src/test/java/com/thoughtspot/client/api/JobsApiTest.java
 src/test/java/com/thoughtspot/client/api/LogApiTest.java
 src/test/java/com/thoughtspot/client/api/ManualTranslationApiTest.java
@@ -1230,7 +1223,6 @@ src/test/java/com/thoughtspot/client/model/CreateConversationRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateCustomActionRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateEmailCustomizationRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateEmailCustomizationResponseTest.java
-src/test/java/com/thoughtspot/client/model/CreateInputTableRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateOrgRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateRoleRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateScheduleRequestTest.java
@@ -1566,7 +1558,6 @@ src/test/java/com/thoughtspot/client/model/UpdateConnectionV2RequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateConversationRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateCustomActionRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateEmailCustomizationRequestTest.java
-src/test/java/com/thoughtspot/client/model/UpdateInputTableRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateMetadataHeaderRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateMetadataObjIdRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateObjIdInputTest.java

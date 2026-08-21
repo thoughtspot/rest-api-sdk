@@ -1,4 +1,5 @@
 .gitignore
+README.md
 ThoughtSpot.RestApi.Sdk.sln
 api/openapi.yaml
 appveyor.yml
@@ -112,7 +113,6 @@ docs/CreateConversationRequest.md
 docs/CreateCustomActionRequest.md
 docs/CreateEmailCustomizationRequest.md
 docs/CreateEmailCustomizationResponse.md
-docs/CreateInputTableRequest.md
 docs/CreateOrgRequest.md
 docs/CreateRoleRequest.md
 docs/CreateScheduleRequest.md
@@ -242,7 +242,6 @@ docs/InputEurekaNLSRequest.md
 docs/InputTableDefinitionInput.md
 docs/InputTableResponse.md
 docs/InputTableUpdateResponse.md
-docs/InputTablesApi.md
 docs/JWTMetadataObject.md
 docs/JWTParameter.md
 docs/JWTUserOptions.md
@@ -468,7 +467,6 @@ docs/UpdateConnectionV2Request.md
 docs/UpdateConversationRequest.md
 docs/UpdateCustomActionRequest.md
 docs/UpdateEmailCustomizationRequest.md
-docs/UpdateInputTableRequest.md
 docs/UpdateMetadataHeaderRequest.md
 docs/UpdateMetadataObjIdRequest.md
 docs/UpdateObjIdInput.md
@@ -543,7 +541,6 @@ src/ThoughtSpot.RestApi.Sdk.Test/Api/DBTApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/DataApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/EmailCustomizationApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/GroupsApiTests.cs
-src/ThoughtSpot.RestApi.Sdk.Test/Api/InputTablesApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/JobsApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/LogApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/ManualTranslationApiTests.cs
@@ -666,7 +663,6 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateConversationRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateCustomActionRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateEmailCustomizationRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateEmailCustomizationResponseTests.cs
-src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateInputTableRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateOrgRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateRoleRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateScheduleRequestTests.cs
@@ -1002,7 +998,6 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateConnectionV2RequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateConversationRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateCustomActionRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateEmailCustomizationRequestTests.cs
-src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateInputTableRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateMetadataHeaderRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateMetadataObjIdRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateObjIdInputTests.cs
@@ -1073,7 +1068,6 @@ src/ThoughtSpot.RestApi.Sdk/Api/DBTApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/DataApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/EmailCustomizationApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/GroupsApi.cs
-src/ThoughtSpot.RestApi.Sdk/Api/InputTablesApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/JobsApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/LogApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/ManualTranslationApi.cs
@@ -1217,7 +1211,6 @@ src/ThoughtSpot.RestApi.Sdk/Model/CreateConversationRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateCustomActionRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateEmailCustomizationRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateEmailCustomizationResponse.cs
-src/ThoughtSpot.RestApi.Sdk/Model/CreateInputTableRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateOrgRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateRoleRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateScheduleRequest.cs
@@ -1553,7 +1546,6 @@ src/ThoughtSpot.RestApi.Sdk/Model/UpdateConnectionV2Request.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateConversationRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateCustomActionRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateEmailCustomizationRequest.cs
-src/ThoughtSpot.RestApi.Sdk/Model/UpdateInputTableRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateMetadataHeaderRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateMetadataObjIdRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateObjIdInput.cs
@@ -1612,5 +1604,4 @@ src/ThoughtSpot.RestApi.Sdk/Model/WebhookSortOptionsInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/WebhookStorageConfigInfo.cs
 src/ThoughtSpot.RestApi.Sdk/Model/WebhookStorageSetupConfig.cs
 src/ThoughtSpot.RestApi.Sdk/Model/WebhookUser.cs
-src/ThoughtSpot.RestApi.Sdk/README.md
 src/ThoughtSpot.RestApi.Sdk/ThoughtSpot.RestApi.Sdk.csproj

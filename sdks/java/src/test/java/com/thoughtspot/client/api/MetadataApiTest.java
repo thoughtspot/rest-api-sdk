@@ -399,9 +399,11 @@ public class MetadataApiTest {
      * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
      * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
      * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
-     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; **Warning**:
+     * Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @throws ApiException if the Api call fails
      */
@@ -422,6 +424,21 @@ public class MetadataApiTest {
      * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
      * specifies the exact property of the Connection or Connection Config that needs to be
      * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
+     * ## Restored value The endpoint has two mutually exclusive modes, and the value that is
+     * restored differs per mode: * Single-field mode (&#x60;field_name&#x60; + &#x60;value&#x60;)
+     * restores the supplied &#x60;value&#x60;. * Bulk mode (&#x60;metadata_entries&#x60;) ignores
+     * &#x60;value&#x60; and restores the Primary org (&#x60;org_id&#x3D;0&#x60;) value of the
+     * variable bound to the field, even when the request is made from a secondary org. In bulk
+     * mode, a secret Connection field bound to a sensitive variable is restored from the
+     * variable&#39;s Primary-org secret. Bulk mode has no partial success. The request fails with
+     * &#x60;400&#x60; and nothing is changed if any field: * is a non-secret field bound to a
+     * sensitive variable, * is bound to a per-principal variable, whose value is user-specific or
+     * group-specific, * has a variable that cannot be read, because it is deleted or not visible to
+     * you, * has no Primary-org value, or * is a secret field whose value is unavailable from the
+     * secure store, which includes the case where the Confidant Vault is disabled, since the
+     * restored secret could then not be stored securely. Such a field can still be unparameterized
+     * individually in single-field mode with an explicit &#x60;value&#x60;. Duplicate entries for
+     * the same object and field are coalesced.
      *
      * @throws ApiException if the Api call fails
      */

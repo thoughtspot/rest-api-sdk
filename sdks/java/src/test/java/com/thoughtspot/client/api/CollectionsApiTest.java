@@ -68,9 +68,10 @@ public class CollectionsApiTest {
      * within each collection in the response **NOTE**: In addition to the GUID and name,
      * &#x60;collection_identifiers&#x60; accepts a Custom object ID if one is configured for the
      * collection. The response also includes the &#x60;obj_id&#x60; field for each collection that
-     * has one set. **NOTE**: If the API returns an empty list, consider increasing the value of the
-     * &#x60;record_size&#x60; parameter. To search across all available collections, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     * has one set. **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On
+     * ThoughtSpot instances with a large number of objects or users, this can lead to slow
+     * responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @throws ApiException if the Api call fails
      */

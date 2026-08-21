@@ -12,7 +12,6 @@ apis/DBTApi.ts
 apis/DataApi.ts
 apis/EmailCustomizationApi.ts
 apis/GroupsApi.ts
-apis/InputTablesApi.ts
 apis/JobsApi.ts
 apis/LogApi.ts
 apis/ManualTranslationApi.ts
@@ -45,7 +44,6 @@ docs/DBTApi.md
 docs/DataApi.md
 docs/EmailCustomizationApi.md
 docs/GroupsApi.md
-docs/InputTablesApi.md
 docs/JobsApi.md
 docs/LogApi.md
 docs/ManualTranslationApi.md
@@ -173,7 +171,6 @@ models/CreateConversationRequest.ts
 models/CreateCustomActionRequest.ts
 models/CreateEmailCustomizationRequest.ts
 models/CreateEmailCustomizationResponse.ts
-models/CreateInputTableRequest.ts
 models/CreateOrgRequest.ts
 models/CreateRoleRequest.ts
 models/CreateScheduleRequest.ts
@@ -510,7 +507,6 @@ models/UpdateConnectionV2Request.ts
 models/UpdateConversationRequest.ts
 models/UpdateCustomActionRequest.ts
 models/UpdateEmailCustomizationRequest.ts
-models/UpdateInputTableRequest.ts
 models/UpdateMetadataHeaderRequest.ts
 models/UpdateMetadataObjIdRequest.ts
 models/UpdateObjIdInput.ts
@@ -584,7 +580,6 @@ tests/DBTApiTest.ts
 tests/DataApiTest.ts
 tests/EmailCustomizationApiTest.ts
 tests/GroupsApiTest.ts
-tests/InputTablesApiTest.ts
 tests/JobsApiTest.ts
 tests/LogApiTest.ts
 tests/ManualTranslationApiTest.ts

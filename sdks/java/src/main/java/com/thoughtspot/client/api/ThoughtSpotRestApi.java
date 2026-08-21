@@ -2538,24 +2538,31 @@ public class ThoughtSpotRestApi {
      * Version: 26.2.0.cl or later Creates a new Spotter agent conversation based on the provided
      * context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl. Requires
      * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
-     * specified in the request. #### Usage guidelines The request must include the
-     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
-     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
-     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
-     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
-     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
-     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
-     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
-     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
-     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
-     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
-     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
-     * controls which Spotter capabilities are enabled for the conversation: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
-     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
-     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
-     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
-     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * specified in the request. #### Usage guidelines The conversation context is defined by
+     * exactly one of the following parameters: - &#x60;metadata_context&#x60;: defines the
+     * conversation context by data source. The context type can be one of: -
+     * &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific data source. Provide
+     * &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data
+     * source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated
+     * &#x60;guid&#x60; field is accepted for backwards compatibility. - &#x60;AUTO_MODE&#x60;
+     * *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets
+     * for the user&#39;s queries. - &#x60;analyst_identifier&#x60; *(available from 26.10.0.cl)*:
+     * unique identifier of a Spotter Analyst to start the conversation from. The conversation uses
+     * the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so
+     * &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author,
+     * have the analyst shared with them, or hold admin / Spotter-management privileges. Passing
+     * both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, is
+     * rejected. &gt; **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the
+     * lowercase &#x60;data_source&#x60; enum value with the &#x60;guid&#x60; field instead of the
+     * above. Example: &#x60;{ \&quot;type\&quot;: \&quot;data_source\&quot;,
+     * \&quot;data_source_context\&quot;: { \&quot;guid\&quot;: \&quot;&lt;worksheet-id&gt;\&quot; }
+     * }&#x60;. The &#x60;conversation_settings&#x60; parameter controls which Spotter capabilities
+     * are enabled for the conversation: - &#x60;enable_contextual_change_analysis&#x60; (default:
+     * &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this
+     * to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_natural_language_answer_generation&#x60; (default: &#x60;true&#x60;,
+     * **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to
+     * &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
      * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
      * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
      * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
@@ -2565,19 +2572,26 @@ public class ThoughtSpotRestApi {
      * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
      * to send messages within this conversation. The response also includes
      * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
-     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
-     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
-     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
-     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
-     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
-     * Description | | ---- |
+     * &#x60;conversation_identifier&#x60; for new integrations. When the conversation is started
+     * from an analyst, the response additionally carries the analyst&#39;s &#x60;analyst_id&#x60;;
+     * it is &#x60;null&#x60; otherwise. #### Example request &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_context\&quot;: { \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,
+     * \&quot;data_source_context\&quot;: { \&quot;data_source_identifier\&quot;:
+     * \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } }, \&quot;conversation_settings\&quot;:
+     * {} } &#x60;&#x60;&#x60; #### Error responses | Code | Description | | ---- |
      * ---------------------------------------------------------------------------------------------------------------------------------------
      * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
-     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
-     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
-     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
-     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
-     * enable Spotter on your cluster.
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view permission on the specified metadata object, or has no access to the analyst specified
+     * in &#x60;analyst_identifier&#x60;. | | 404 | Not found — no analyst with the given
+     * &#x60;analyst_identifier&#x60; exists in the caller&#39;s Org. | | 422 | Unprocessable entity
+     * — the request fails validation: both &#x60;analyst_identifier&#x60; and
+     * &#x60;metadata_context&#x60; were provided, neither was provided, or
+     * &#x60;metadata_context&#x60; is malformed (for example, &#x60;DATA_SOURCE&#x60; context
+     * without a data source identifier). | &gt; ###### Note: &gt; &gt; - This endpoint was in Beta
+     * from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl. &gt; -
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
      *
      * @param createAgentConversationRequest (required)
      * @return AgentConversation
@@ -2606,24 +2620,31 @@ public class ThoughtSpotRestApi {
      * Version: 26.2.0.cl or later Creates a new Spotter agent conversation based on the provided
      * context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl. Requires
      * &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object
-     * specified in the request. #### Usage guidelines The request must include the
-     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
-     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
-     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
-     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
-     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
-     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
-     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
-     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
-     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
-     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
-     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
-     * controls which Spotter capabilities are enabled for the conversation: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
-     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
-     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
-     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
-     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * specified in the request. #### Usage guidelines The conversation context is defined by
+     * exactly one of the following parameters: - &#x60;metadata_context&#x60;: defines the
+     * conversation context by data source. The context type can be one of: -
+     * &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific data source. Provide
+     * &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data
+     * source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated
+     * &#x60;guid&#x60; field is accepted for backwards compatibility. - &#x60;AUTO_MODE&#x60;
+     * *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets
+     * for the user&#39;s queries. - &#x60;analyst_identifier&#x60; *(available from 26.10.0.cl)*:
+     * unique identifier of a Spotter Analyst to start the conversation from. The conversation uses
+     * the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so
+     * &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author,
+     * have the analyst shared with them, or hold admin / Spotter-management privileges. Passing
+     * both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, is
+     * rejected. &gt; **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the
+     * lowercase &#x60;data_source&#x60; enum value with the &#x60;guid&#x60; field instead of the
+     * above. Example: &#x60;{ \&quot;type\&quot;: \&quot;data_source\&quot;,
+     * \&quot;data_source_context\&quot;: { \&quot;guid\&quot;: \&quot;&lt;worksheet-id&gt;\&quot; }
+     * }&#x60;. The &#x60;conversation_settings&#x60; parameter controls which Spotter capabilities
+     * are enabled for the conversation: - &#x60;enable_contextual_change_analysis&#x60; (default:
+     * &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this
+     * to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_natural_language_answer_generation&#x60; (default: &#x60;true&#x60;,
+     * **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to
+     * &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
      * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
      * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
      * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
@@ -2633,19 +2654,26 @@ public class ThoughtSpotRestApi {
      * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
      * to send messages within this conversation. The response also includes
      * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
-     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
-     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
-     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
-     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
-     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
-     * Description | | ---- |
+     * &#x60;conversation_identifier&#x60; for new integrations. When the conversation is started
+     * from an analyst, the response additionally carries the analyst&#39;s &#x60;analyst_id&#x60;;
+     * it is &#x60;null&#x60; otherwise. #### Example request &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_context\&quot;: { \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,
+     * \&quot;data_source_context\&quot;: { \&quot;data_source_identifier\&quot;:
+     * \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } }, \&quot;conversation_settings\&quot;:
+     * {} } &#x60;&#x60;&#x60; #### Error responses | Code | Description | | ---- |
      * ---------------------------------------------------------------------------------------------------------------------------------------
      * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
-     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
-     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
-     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
-     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
-     * enable Spotter on your cluster.
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view permission on the specified metadata object, or has no access to the analyst specified
+     * in &#x60;analyst_identifier&#x60;. | | 404 | Not found — no analyst with the given
+     * &#x60;analyst_identifier&#x60; exists in the caller&#39;s Org. | | 422 | Unprocessable entity
+     * — the request fails validation: both &#x60;analyst_identifier&#x60; and
+     * &#x60;metadata_context&#x60; were provided, neither was provided, or
+     * &#x60;metadata_context&#x60; is malformed (for example, &#x60;DATA_SOURCE&#x60; context
+     * without a data source identifier). | &gt; ###### Note: &gt; &gt; - This endpoint was in Beta
+     * from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl. &gt; -
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
      *
      * @param createAgentConversationRequest (required)
      * @return ApiResponse&lt;AgentConversation&gt;
@@ -2675,24 +2703,31 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Version: 26.2.0.cl or later Creates a new Spotter agent conversation based
      * on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through
      * 26.4.0.cl. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the
-     * metadata object specified in the request. #### Usage guidelines The request must include the
-     * &#x60;metadata_context&#x60; parameter to define the conversation context. The context type
-     * can be one of: - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific
-     * data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60;
-     * for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source
-     * context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility. -
-     * &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the
-     * most relevant datasets for the user&#39;s queries. &gt; **Note for callers on versions
-     * 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the
-     * &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;:
-     * \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;:
-     * \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;. The &#x60;conversation_settings&#x60; parameter
-     * controls which Spotter capabilities are enabled for the conversation: -
-     * &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from
-     * 26.2.0.cl**) — always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect
-     * on versions &gt;&#x3D; 26.2.0.cl - &#x60;enable_natural_language_answer_generation&#x60;
-     * (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3;
-     * setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * metadata object specified in the request. #### Usage guidelines The conversation context is
+     * defined by exactly one of the following parameters: - &#x60;metadata_context&#x60;: defines
+     * the conversation context by data source. The context type can be one of: -
+     * &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific data source. Provide
+     * &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data
+     * source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated
+     * &#x60;guid&#x60; field is accepted for backwards compatibility. - &#x60;AUTO_MODE&#x60;
+     * *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets
+     * for the user&#39;s queries. - &#x60;analyst_identifier&#x60; *(available from 26.10.0.cl)*:
+     * unique identifier of a Spotter Analyst to start the conversation from. The conversation uses
+     * the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so
+     * &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author,
+     * have the analyst shared with them, or hold admin / Spotter-management privileges. Passing
+     * both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, is
+     * rejected. &gt; **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the
+     * lowercase &#x60;data_source&#x60; enum value with the &#x60;guid&#x60; field instead of the
+     * above. Example: &#x60;{ \&quot;type\&quot;: \&quot;data_source\&quot;,
+     * \&quot;data_source_context\&quot;: { \&quot;guid\&quot;: \&quot;&lt;worksheet-id&gt;\&quot; }
+     * }&#x60;. The &#x60;conversation_settings&#x60; parameter controls which Spotter capabilities
+     * are enabled for the conversation: - &#x60;enable_contextual_change_analysis&#x60; (default:
+     * &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this
+     * to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
+     * &#x60;enable_natural_language_answer_generation&#x60; (default: &#x60;true&#x60;,
+     * **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to
+     * &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl -
      * &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) —
      * always enabled in Spotter 3; setting this to &#x60;false&#x60; has no effect on versions
      * &gt;&#x3D; 26.2.0.cl - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available
@@ -2702,19 +2737,26 @@ public class ThoughtSpotRestApi {
      * &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;
      * to send messages within this conversation. The response also includes
      * &#x60;conversation_id&#x60; with the same value for backwards compatibility; use
-     * &#x60;conversation_identifier&#x60; for new integrations. #### Example request
-     * &#x60;&#x60;&#x60;json { \&quot;metadata_context\&quot;: { \&quot;type\&quot;:
-     * \&quot;DATA_SOURCE\&quot;, \&quot;data_source_context\&quot;: {
-     * \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } },
-     * \&quot;conversation_settings\&quot;: {} } &#x60;&#x60;&#x60; #### Error responses | Code |
-     * Description | | ---- |
+     * &#x60;conversation_identifier&#x60; for new integrations. When the conversation is started
+     * from an analyst, the response additionally carries the analyst&#39;s &#x60;analyst_id&#x60;;
+     * it is &#x60;null&#x60; otherwise. #### Example request &#x60;&#x60;&#x60;json {
+     * \&quot;metadata_context\&quot;: { \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,
+     * \&quot;data_source_context\&quot;: { \&quot;data_source_identifier\&quot;:
+     * \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot; } }, \&quot;conversation_settings\&quot;:
+     * {} } &#x60;&#x60;&#x60; #### Error responses | Code | Description | | ---- |
      * ---------------------------------------------------------------------------------------------------------------------------------------
      * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
-     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
-     * lacks view permission on the specified metadata object. | &gt; ###### Note: &gt; &gt; - This
-     * endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version
-     * 26.5.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to
-     * enable Spotter on your cluster.
+     * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks
+     * view permission on the specified metadata object, or has no access to the analyst specified
+     * in &#x60;analyst_identifier&#x60;. | | 404 | Not found — no analyst with the given
+     * &#x60;analyst_identifier&#x60; exists in the caller&#39;s Org. | | 422 | Unprocessable entity
+     * — the request fails validation: both &#x60;analyst_identifier&#x60; and
+     * &#x60;metadata_context&#x60; were provided, neither was provided, or
+     * &#x60;metadata_context&#x60; is malformed (for example, &#x60;DATA_SOURCE&#x60; context
+     * without a data source identifier). | &gt; ###### Note: &gt; &gt; - This endpoint was in Beta
+     * from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl. &gt; -
+     * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your
+     * cluster.
      *
      * @param createAgentConversationRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -15981,7 +16023,12 @@ public class ThoughtSpotRestApi {
      * &#x60;type&#x60; and GUID or name of the principal. * To get permission details for a
      * specific object, add the &#x60;type&#x60; and GUID or name of the metadata object to your API
      * request. Upon successful execution, the API returns a list of metadata objects and permission
-     * details for each object.
+     * details for each object. **Warning**: This API sets &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * by default, which fetches all records in a single response. On ThoughtSpot instances with a
+     * large number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. If the object or principal count is high, set &#x60;record_size&#x60;
+     * to a smaller value and iterate through pages programmatically instead of relying on the
+     * default.
      *
      * @param fetchPermissionsOfPrincipalsRequest (required)
      * @return PermissionOfPrincipalsResponse
@@ -16013,7 +16060,12 @@ public class ThoughtSpotRestApi {
      * &#x60;type&#x60; and GUID or name of the principal. * To get permission details for a
      * specific object, add the &#x60;type&#x60; and GUID or name of the metadata object to your API
      * request. Upon successful execution, the API returns a list of metadata objects and permission
-     * details for each object.
+     * details for each object. **Warning**: This API sets &#x60;record_size&#x60; to &#x60;-1&#x60;
+     * by default, which fetches all records in a single response. On ThoughtSpot instances with a
+     * large number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. If the object or principal count is high, set &#x60;record_size&#x60;
+     * to a smaller value and iterate through pages programmatically instead of relying on the
+     * default.
      *
      * @param fetchPermissionsOfPrincipalsRequest (required)
      * @return ApiResponse&lt;PermissionOfPrincipalsResponse&gt;
@@ -16047,7 +16099,12 @@ public class ThoughtSpotRestApi {
      * specify the &#x60;type&#x60; and GUID or name of the principal. * To get permission details
      * for a specific object, add the &#x60;type&#x60; and GUID or name of the metadata object to
      * your API request. Upon successful execution, the API returns a list of metadata objects and
-     * permission details for each object.
+     * permission details for each object. **Warning**: This API sets &#x60;record_size&#x60; to
+     * &#x60;-1&#x60; by default, which fetches all records in a single response. On ThoughtSpot
+     * instances with a large number of objects or users, this can lead to slow responses, excessive
+     * logging, and out-of-memory failures. If the object or principal count is high, set
+     * &#x60;record_size&#x60; to a smaller value and iterate through pages programmatically instead
+     * of relying on the default.
      *
      * @param fetchPermissionsOfPrincipalsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -16173,7 +16230,11 @@ public class ThoughtSpotRestApi {
      * object. * To get permission details for a specific user or group, add &#x60;type&#x60; and
      * GUID or name of the principal object to your API request. Upon successful execution, the API
      * returns permission details and principal information for the object specified in the API
-     * request.
+     * request. **Warning**: This API sets &#x60;record_size&#x60; to &#x60;-1&#x60; by default,
+     * which fetches all records in a single response. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. If the object or principal count is high, set &#x60;record_size&#x60; to a smaller
+     * value and iterate through pages programmatically instead of relying on the default.
      *
      * @param fetchPermissionsOnMetadataRequest (required)
      * @return PermissionOfMetadataResponse
@@ -16205,7 +16266,11 @@ public class ThoughtSpotRestApi {
      * object. * To get permission details for a specific user or group, add &#x60;type&#x60; and
      * GUID or name of the principal object to your API request. Upon successful execution, the API
      * returns permission details and principal information for the object specified in the API
-     * request.
+     * request. **Warning**: This API sets &#x60;record_size&#x60; to &#x60;-1&#x60; by default,
+     * which fetches all records in a single response. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. If the object or principal count is high, set &#x60;record_size&#x60; to a smaller
+     * value and iterate through pages programmatically instead of relying on the default.
      *
      * @param fetchPermissionsOnMetadataRequest (required)
      * @return ApiResponse&lt;PermissionOfMetadataResponse&gt;
@@ -16239,7 +16304,12 @@ public class ThoughtSpotRestApi {
      * metadata object. * To get permission details for a specific user or group, add
      * &#x60;type&#x60; and GUID or name of the principal object to your API request. Upon
      * successful execution, the API returns permission details and principal information for the
-     * object specified in the API request.
+     * object specified in the API request. **Warning**: This API sets &#x60;record_size&#x60; to
+     * &#x60;-1&#x60; by default, which fetches all records in a single response. On ThoughtSpot
+     * instances with a large number of objects or users, this can lead to slow responses, excessive
+     * logging, and out-of-memory failures. If the object or principal count is high, set
+     * &#x60;record_size&#x60; to a smaller value and iterate through pages programmatically instead
+     * of relying on the default.
      *
      * @param fetchPermissionsOnMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -17648,11 +17718,15 @@ public class ThoughtSpotRestApi {
      * &#x60;updated_at&#x60;: ISO 8601 timestamp of the most recent update to the conversation -
      * &#x60;data_source_identifiers&#x60;: list of unique IDs of the data sources associated with
      * the conversation - &#x60;data_source_names&#x60;: array of &#x60;{ id, name }&#x60; objects
-     * for the data sources associated with the conversation #### Pagination Use &#x60;limit&#x60;
-     * and &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
-     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 → first page GET
-     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second page
-     * &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
+     * for the data sources associated with the conversation - &#x60;is_pinned&#x60;: whether the
+     * current user has pinned this conversation. Pinned conversations are surfaced first in the
+     * list. Available from version 26.10.0.cl. - &#x60;analyst_id&#x60;: unique identifier of the
+     * Spotter Analyst the conversation is associated with, or &#x60;null&#x60; when the
+     * conversation is not associated with an analyst. Available from version 26.10.0.cl. ####
+     * Pagination Use &#x60;limit&#x60; and &#x60;offset&#x60; to page through large result sets:
+     * &#x60;&#x60;&#x60; GET /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 →
+     * first page GET /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second
+     * page &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
      * &#x60;has_more: Boolean&#x60; field. When &#x60;true&#x60;, there are additional
      * conversations beyond the current page — increment &#x60;offset&#x60; by &#x60;limit&#x60; to
      * fetch the next page. When &#x60;has_more&#x60; is &#x60;false&#x60;, the current page is the
@@ -17663,15 +17737,16 @@ public class ThoughtSpotRestApi {
      * \&quot;2026-03-01T10:00:00Z\&quot;, \&quot;updated_at\&quot;:
      * \&quot;2026-03-05T14:23:00Z\&quot;, \&quot;data_source_identifiers\&quot;:
      * [\&quot;ds-001\&quot;], \&quot;data_source_names\&quot;: [{ \&quot;id\&quot;:
-     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }] } ],
-     * \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; #### Error responses | Code | Description
-     * | |------|-------------| | 401 | Unauthorized — authentication token is missing, expired, or
-     * invalid. | | 403 | Forbidden — the authenticated user does not have
-     * &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; - Only conversations
-     * created with &#x60;enable_save_chat: true&#x60; appear in this list. Conversations created
-     * with &#x60;enable_save_chat: false&#x60; (the default) are not persisted and cannot be
-     * retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires
-     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }],
+     * \&quot;is_pinned\&quot;: true } ], \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; ####
+     * Error responses | Code | Description | |------|-------------| | 401 | Unauthorized —
+     * authentication token is missing, expired, or invalid. | | 403 | Forbidden — the authenticated
+     * user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; -
+     * Only conversations created with &#x60;enable_save_chat: true&#x60; appear in this list.
+     * Conversations created with &#x60;enable_save_chat: false&#x60; (the default) are not
+     * persisted and cannot be retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; -
+     * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
+     * cluster.
      *
      * @param limit Maximum number of conversations to return. Used for pagination. (optional,
      *     default to 30)
@@ -17722,11 +17797,15 @@ public class ThoughtSpotRestApi {
      * &#x60;updated_at&#x60;: ISO 8601 timestamp of the most recent update to the conversation -
      * &#x60;data_source_identifiers&#x60;: list of unique IDs of the data sources associated with
      * the conversation - &#x60;data_source_names&#x60;: array of &#x60;{ id, name }&#x60; objects
-     * for the data sources associated with the conversation #### Pagination Use &#x60;limit&#x60;
-     * and &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
-     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 → first page GET
-     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second page
-     * &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
+     * for the data sources associated with the conversation - &#x60;is_pinned&#x60;: whether the
+     * current user has pinned this conversation. Pinned conversations are surfaced first in the
+     * list. Available from version 26.10.0.cl. - &#x60;analyst_id&#x60;: unique identifier of the
+     * Spotter Analyst the conversation is associated with, or &#x60;null&#x60; when the
+     * conversation is not associated with an analyst. Available from version 26.10.0.cl. ####
+     * Pagination Use &#x60;limit&#x60; and &#x60;offset&#x60; to page through large result sets:
+     * &#x60;&#x60;&#x60; GET /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 →
+     * first page GET /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second
+     * page &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
      * &#x60;has_more: Boolean&#x60; field. When &#x60;true&#x60;, there are additional
      * conversations beyond the current page — increment &#x60;offset&#x60; by &#x60;limit&#x60; to
      * fetch the next page. When &#x60;has_more&#x60; is &#x60;false&#x60;, the current page is the
@@ -17737,15 +17816,16 @@ public class ThoughtSpotRestApi {
      * \&quot;2026-03-01T10:00:00Z\&quot;, \&quot;updated_at\&quot;:
      * \&quot;2026-03-05T14:23:00Z\&quot;, \&quot;data_source_identifiers\&quot;:
      * [\&quot;ds-001\&quot;], \&quot;data_source_names\&quot;: [{ \&quot;id\&quot;:
-     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }] } ],
-     * \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; #### Error responses | Code | Description
-     * | |------|-------------| | 401 | Unauthorized — authentication token is missing, expired, or
-     * invalid. | | 403 | Forbidden — the authenticated user does not have
-     * &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; - Only conversations
-     * created with &#x60;enable_save_chat: true&#x60; appear in this list. Conversations created
-     * with &#x60;enable_save_chat: false&#x60; (the default) are not persisted and cannot be
-     * retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires
-     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }],
+     * \&quot;is_pinned\&quot;: true } ], \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; ####
+     * Error responses | Code | Description | |------|-------------| | 401 | Unauthorized —
+     * authentication token is missing, expired, or invalid. | | 403 | Forbidden — the authenticated
+     * user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; -
+     * Only conversations created with &#x60;enable_save_chat: true&#x60; appear in this list.
+     * Conversations created with &#x60;enable_save_chat: false&#x60; (the default) are not
+     * persisted and cannot be retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; -
+     * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
+     * cluster.
      *
      * @param limit Maximum number of conversations to return. Used for pagination. (optional,
      *     default to 30)
@@ -17797,11 +17877,15 @@ public class ThoughtSpotRestApi {
      * &#x60;updated_at&#x60;: ISO 8601 timestamp of the most recent update to the conversation -
      * &#x60;data_source_identifiers&#x60;: list of unique IDs of the data sources associated with
      * the conversation - &#x60;data_source_names&#x60;: array of &#x60;{ id, name }&#x60; objects
-     * for the data sources associated with the conversation #### Pagination Use &#x60;limit&#x60;
-     * and &#x60;offset&#x60; to page through large result sets: &#x60;&#x60;&#x60; GET
-     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 → first page GET
-     * /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second page
-     * &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
+     * for the data sources associated with the conversation - &#x60;is_pinned&#x60;: whether the
+     * current user has pinned this conversation. Pinned conversations are surfaced first in the
+     * list. Available from version 26.10.0.cl. - &#x60;analyst_id&#x60;: unique identifier of the
+     * Spotter Analyst the conversation is associated with, or &#x60;null&#x60; when the
+     * conversation is not associated with an analyst. Available from version 26.10.0.cl. ####
+     * Pagination Use &#x60;limit&#x60; and &#x60;offset&#x60; to page through large result sets:
+     * &#x60;&#x60;&#x60; GET /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;0 →
+     * first page GET /api/rest/2.0/ai/agent/conversations?limit&#x3D;20&amp;offset&#x3D;20 → second
+     * page &#x60;&#x60;&#x60; #### Pagination and &#x60;has_more&#x60; The response includes a
      * &#x60;has_more: Boolean&#x60; field. When &#x60;true&#x60;, there are additional
      * conversations beyond the current page — increment &#x60;offset&#x60; by &#x60;limit&#x60; to
      * fetch the next page. When &#x60;has_more&#x60; is &#x60;false&#x60;, the current page is the
@@ -17812,15 +17896,16 @@ public class ThoughtSpotRestApi {
      * \&quot;2026-03-01T10:00:00Z\&quot;, \&quot;updated_at\&quot;:
      * \&quot;2026-03-05T14:23:00Z\&quot;, \&quot;data_source_identifiers\&quot;:
      * [\&quot;ds-001\&quot;], \&quot;data_source_names\&quot;: [{ \&quot;id\&quot;:
-     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }] } ],
-     * \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; #### Error responses | Code | Description
-     * | |------|-------------| | 401 | Unauthorized — authentication token is missing, expired, or
-     * invalid. | | 403 | Forbidden — the authenticated user does not have
-     * &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; - Only conversations
-     * created with &#x60;enable_save_chat: true&#x60; appear in this list. Conversations created
-     * with &#x60;enable_save_chat: false&#x60; (the default) are not persisted and cannot be
-     * retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires
-     * Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.
+     * \&quot;ds-001\&quot;, \&quot;name\&quot;: \&quot;Retail Sales\&quot; }],
+     * \&quot;is_pinned\&quot;: true } ], \&quot;has_more\&quot;: false } &#x60;&#x60;&#x60; ####
+     * Error responses | Code | Description | |------|-------------| | 401 | Unauthorized —
+     * authentication token is missing, expired, or invalid. | | 403 | Forbidden — the authenticated
+     * user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege. | &gt; ###### Note: &gt; &gt; -
+     * Only conversations created with &#x60;enable_save_chat: true&#x60; appear in this list.
+     * Conversations created with &#x60;enable_save_chat: false&#x60; (the default) are not
+     * persisted and cannot be retrieved. &gt; - Available from version 26.7.0.cl and later. &gt; -
+     * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
+     * cluster.
      *
      * @param limit Maximum number of conversations to return. Used for pagination. (optional,
      *     default to 30)
@@ -18103,12 +18188,17 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
-     * token provided in the request header. This API endpoint does not create a new token. Instead,
-     * it returns details about the token, including the token string, creation time, expiration
-     * time, and the associated user. Use this endpoint to introspect your current session token,
-     * debug authentication issues, or when a frontend application needs session token details. Any
-     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
+     * Version: 9.4.0.cl or later Generates a new bearer token from an existing authenticated
+     * session. #### Required privileges Any ThoughtSpot user with a valid bearer token can access
+     * this endpoint and send an API request. Requires no additional privileges. #### Usage
+     * guidelines This endpoint doesn&#39;t return the caller&#39;s existing session token. Instead,
+     * it issues a new token based on the current authenticated session and returns the new token
+     * string, its creation and expiration timestamps, and the associated user details in response.
+     * The token generated from this API request is valid for 24 hours. Use this endpoint when your
+     * application needs a new token without requiring the user to re-authenticate. If you need a
+     * token with a specific expiration or a different security scope, use &#x60;POST
+     * /api/rest/2.0/auth/token/full&#x60;, &#x60;POST /api/rest/2.0/auth/token/custom&#x60;, or
+     * &#x60;POST /api/rest/2.0/auth/token/object&#x60; instead.
      *
      * @return GetTokenResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -18130,12 +18220,17 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.4.0.cl or later Retrieves details of the current session token for the bearer
-     * token provided in the request header. This API endpoint does not create a new token. Instead,
-     * it returns details about the token, including the token string, creation time, expiration
-     * time, and the associated user. Use this endpoint to introspect your current session token,
-     * debug authentication issues, or when a frontend application needs session token details. Any
-     * ThoughtSpot user with a valid bearer token can access this endpoint and send an API request
+     * Version: 9.4.0.cl or later Generates a new bearer token from an existing authenticated
+     * session. #### Required privileges Any ThoughtSpot user with a valid bearer token can access
+     * this endpoint and send an API request. Requires no additional privileges. #### Usage
+     * guidelines This endpoint doesn&#39;t return the caller&#39;s existing session token. Instead,
+     * it issues a new token based on the current authenticated session and returns the new token
+     * string, its creation and expiration timestamps, and the associated user details in response.
+     * The token generated from this API request is valid for 24 hours. Use this endpoint when your
+     * application needs a new token without requiring the user to re-authenticate. If you need a
+     * token with a specific expiration or a different security scope, use &#x60;POST
+     * /api/rest/2.0/auth/token/full&#x60;, &#x60;POST /api/rest/2.0/auth/token/custom&#x60;, or
+     * &#x60;POST /api/rest/2.0/auth/token/object&#x60; instead.
      *
      * @return ApiResponse&lt;GetTokenResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -18158,13 +18253,18 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.4.0.cl or later Retrieves details of the current session token
-     * for the bearer token provided in the request header. This API endpoint does not create a new
-     * token. Instead, it returns details about the token, including the token string, creation
-     * time, expiration time, and the associated user. Use this endpoint to introspect your current
-     * session token, debug authentication issues, or when a frontend application needs session
-     * token details. Any ThoughtSpot user with a valid bearer token can access this endpoint and
-     * send an API request
+     * (asynchronously) Version: 9.4.0.cl or later Generates a new bearer token from an existing
+     * authenticated session. #### Required privileges Any ThoughtSpot user with a valid bearer
+     * token can access this endpoint and send an API request. Requires no additional privileges.
+     * #### Usage guidelines This endpoint doesn&#39;t return the caller&#39;s existing session
+     * token. Instead, it issues a new token based on the current authenticated session and returns
+     * the new token string, its creation and expiration timestamps, and the associated user details
+     * in response. The token generated from this API request is valid for 24 hours. Use this
+     * endpoint when your application needs a new token without requiring the user to
+     * re-authenticate. If you need a token with a specific expiration or a different security
+     * scope, use &#x60;POST /api/rest/2.0/auth/token/full&#x60;, &#x60;POST
+     * /api/rest/2.0/auth/token/custom&#x60;, or &#x60;POST /api/rest/2.0/auth/token/object&#x60;
+     * instead.
      *
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -24022,7 +24122,9 @@ public class ThoughtSpotRestApi {
      * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
      * - Removes any values which match the set of conditions of the variables if this is a list
      * type variable, else clears value. * RESET - Removes all constraints for the given variable,
-     * scope is ignored
+     * scope is ignored Re-sending values that already match the stored values for the targeted
+     * scope is a no-op: the request succeeds without modifying any data. This does not apply to the
+     * RESET operation or to sensitive variables, which are always written.
      *
      * @param identifier Unique ID or name of the variable (required)
      * @param putVariableValuesRequest (required)
@@ -24057,7 +24159,9 @@ public class ThoughtSpotRestApi {
      * - Replaces all values of a given set of constraints with the current set of values. * REMOVE
      * - Removes any values which match the set of conditions of the variables if this is a list
      * type variable, else clears value. * RESET - Removes all constraints for the given variable,
-     * scope is ignored
+     * scope is ignored Re-sending values that already match the stored values for the targeted
+     * scope is a no-op: the request succeeds without modifying any data. This does not apply to the
+     * RESET operation or to sensitive variables, which are always written.
      *
      * @param identifier Unique ID or name of the variable (required)
      * @param putVariableValuesRequest (required)
@@ -24095,7 +24199,10 @@ public class ThoughtSpotRestApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constraints for the given variable, scope is ignored
+     * constraints for the given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param identifier Unique ID or name of the variable (required)
      * @param putVariableValuesRequest (required)
@@ -25527,7 +25634,11 @@ public class ThoughtSpotRestApi {
      * connection, specify the connection ID. You can also use other search parameters such as
      * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
      * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
+     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching. **Warning**: Do not
+     * set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchCalendarsRequest (required)
      * @return List&lt;CalendarResponse&gt;
@@ -25563,7 +25674,11 @@ public class ThoughtSpotRestApi {
      * connection, specify the connection ID. You can also use other search parameters such as
      * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
      * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
+     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching. **Warning**: Do not
+     * set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchCalendarsRequest (required)
      * @return ApiResponse&lt;List&lt;CalendarResponse&gt;&gt;
@@ -25599,7 +25714,11 @@ public class ThoughtSpotRestApi {
      * connection, specify the connection ID. You can also use other search parameters such as
      * &#x60;name_pattern&#x60; and &#x60;sort_options&#x60; as search filters. The
      * &#x60;name_pattern&#x60; parameter filters and returns only those objects that match the
-     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching.
+     * specified pattern. Use &#x60;%&#x60; as a wildcard for pattern matching. **Warning**: Do not
+     * set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number
+     * of objects or users, this can lead to slow responses, excessive logging, and out-of-memory
+     * failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchCalendarsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -25935,9 +26054,10 @@ public class ThoughtSpotRestApi {
      * within each collection in the response **NOTE**: In addition to the GUID and name,
      * &#x60;collection_identifiers&#x60; accepts a Custom object ID if one is configured for the
      * collection. The response also includes the &#x60;obj_id&#x60; field for each collection that
-     * has one set. **NOTE**: If the API returns an empty list, consider increasing the value of the
-     * &#x60;record_size&#x60; parameter. To search across all available collections, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     * has one set. **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On
+     * ThoughtSpot instances with a large number of objects or users, this can lead to slow
+     * responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchCollectionsRequest (required)
      * @return CollectionSearchResponse
@@ -25971,9 +26091,10 @@ public class ThoughtSpotRestApi {
      * within each collection in the response **NOTE**: In addition to the GUID and name,
      * &#x60;collection_identifiers&#x60; accepts a Custom object ID if one is configured for the
      * collection. The response also includes the &#x60;obj_id&#x60; field for each collection that
-     * has one set. **NOTE**: If the API returns an empty list, consider increasing the value of the
-     * &#x60;record_size&#x60; parameter. To search across all available collections, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     * has one set. **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On
+     * ThoughtSpot instances with a large number of objects or users, this can lead to slow
+     * responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchCollectionsRequest (required)
      * @return ApiResponse&lt;CollectionSearchResponse&gt;
@@ -26008,9 +26129,10 @@ public class ThoughtSpotRestApi {
      * objects within each collection in the response **NOTE**: In addition to the GUID and name,
      * &#x60;collection_identifiers&#x60; accepts a Custom object ID if one is configured for the
      * collection. The response also includes the &#x60;obj_id&#x60; field for each collection that
-     * has one set. **NOTE**: If the API returns an empty list, consider increasing the value of the
-     * &#x60;record_size&#x60; parameter. To search across all available collections, set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60;.
+     * has one set. **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On
+     * ThoughtSpot instances with a large number of objects or users, this can lead to slow
+     * responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchCollectionsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -27676,9 +27798,11 @@ public class ThoughtSpotRestApi {
      * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
      * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
      * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
-     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; **Warning**:
+     * Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchMetadataRequest (required)
      * @return List&lt;MetadataSearchResponse&gt;
@@ -27732,9 +27856,11 @@ public class ThoughtSpotRestApi {
      * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
      * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
      * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
-     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; **Warning**:
+     * Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchMetadataRequest (required)
      * @return ApiResponse&lt;List&lt;MetadataSearchResponse&gt;&gt;
@@ -27788,9 +27914,11 @@ public class ThoughtSpotRestApi {
      * &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; -
      * &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; -
      * &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; -
-     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; If you are
-     * using other parameters to search metadata, set &#x60;record_size&#x60; to &#x60;-1&#x60; and
-     * &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60; **Warning**:
+     * Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -29224,8 +29352,10 @@ public class ThoughtSpotRestApi {
      * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: In
      * addition to the GUID and name, &#x60;group_identifier&#x60; accepts a Custom object ID if one
      * is configured for the group. The response also includes the &#x60;obj_id&#x60; field for each
-     * group that has one set. **NOTE**: If you do not get precise results, try setting
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * group that has one set. **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On
+     * ThoughtSpot instances with a large number of objects or users, this can lead to slow
+     * responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchUserGroupsRequest (required)
      * @return List&lt;UserGroupResponse&gt;
@@ -29260,8 +29390,10 @@ public class ThoughtSpotRestApi {
      * &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**: In
      * addition to the GUID and name, &#x60;group_identifier&#x60; accepts a Custom object ID if one
      * is configured for the group. The response also includes the &#x60;obj_id&#x60; field for each
-     * group that has one set. **NOTE**: If you do not get precise results, try setting
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * group that has one set. **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On
+     * ThoughtSpot instances with a large number of objects or users, this can lead to slow
+     * responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchUserGroupsRequest (required)
      * @return ApiResponse&lt;List&lt;UserGroupResponse&gt;&gt;
@@ -29297,8 +29429,10 @@ public class ThoughtSpotRestApi {
      * the &#x60;GROUP_ADMINISTRATION&#x60; (**Can manage groups**) privilege is required. **NOTE**:
      * In addition to the GUID and name, &#x60;group_identifier&#x60; accepts a Custom object ID if
      * one is configured for the group. The response also includes the &#x60;obj_id&#x60; field for
-     * each group that has one set. **NOTE**: If you do not get precise results, try setting
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60;.
+     * each group that has one set. **Warning**: Do not set &#x60;record_size&#x60; to
+     * &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can
+     * lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchUserGroupsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -29422,10 +29556,11 @@ public class ThoughtSpotRestApi {
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view all users
      * properties. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required. **NOTE**: If
-     * the API returns an empty list, consider increasing the value of the &#x60;record_size&#x60;
-     * parameter. To search across all available users, set &#x60;record_size&#x60; to
-     * &#x60;-1&#x60;.
+     * &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required. **Warning**: Do
+     * not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchUsersRequest (required)
      * @return List&lt;User&gt;
@@ -29455,10 +29590,11 @@ public class ThoughtSpotRestApi {
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view all users
      * properties. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required. **NOTE**: If
-     * the API returns an empty list, consider increasing the value of the &#x60;record_size&#x60;
-     * parameter. To search across all available users, set &#x60;record_size&#x60; to
-     * &#x60;-1&#x60;.
+     * &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required. **Warning**: Do
+     * not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchUsersRequest (required)
      * @return ApiResponse&lt;List&lt;User&gt;&gt;
@@ -29490,10 +29626,11 @@ public class ThoughtSpotRestApi {
      * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view all users
      * properties. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required. **NOTE**: If
-     * the API returns an empty list, consider increasing the value of the &#x60;record_size&#x60;
-     * parameter. To search across all available users, set &#x60;record_size&#x60; to
-     * &#x60;-1&#x60;.
+     * &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required. **Warning**: Do
+     * not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large
+     * number of objects or users, this can lead to slow responses, excessive logging, and
+     * out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages
+     * programmatically.
      *
      * @param searchUsersRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -29615,7 +29752,10 @@ public class ThoughtSpotRestApi {
      * (case-insensitive, supports % for wildcard) The search results can be formatted in three
      * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
      * variable metadata and values The values can be filtered by scope: * org_identifier *
-     * principal_identifier * model_identifier
+     * principal_identifier * model_identifier **Warning**: Do not set &#x60;record_size&#x60; to
+     * &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can
+     * lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchVariablesRequest (required)
      * @return List&lt;Variable&gt;
@@ -29647,7 +29787,10 @@ public class ThoughtSpotRestApi {
      * (case-insensitive, supports % for wildcard) The search results can be formatted in three
      * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
      * variable metadata and values The values can be filtered by scope: * org_identifier *
-     * principal_identifier * model_identifier
+     * principal_identifier * model_identifier **Warning**: Do not set &#x60;record_size&#x60; to
+     * &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can
+     * lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchVariablesRequest (required)
      * @return ApiResponse&lt;List&lt;Variable&gt;&gt;
@@ -29679,7 +29822,10 @@ public class ThoughtSpotRestApi {
      * (case-insensitive, supports % for wildcard) The search results can be formatted in three
      * ways: * METADATA - Returns only variable metadata (default) * METADATA_AND_VALUES - Returns
      * variable metadata and values The values can be filtered by scope: * org_identifier *
-     * principal_identifier * model_identifier
+     * principal_identifier * model_identifier **Warning**: Do not set &#x60;record_size&#x60; to
+     * &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can
+     * lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit
+     * &#x60;record_size&#x60; and iterate through pages programmatically.
      *
      * @param searchVariablesRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -33168,6 +33314,21 @@ public class ThoughtSpotRestApi {
      * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
      * specifies the exact property of the Connection or Connection Config that needs to be
      * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
+     * ## Restored value The endpoint has two mutually exclusive modes, and the value that is
+     * restored differs per mode: * Single-field mode (&#x60;field_name&#x60; + &#x60;value&#x60;)
+     * restores the supplied &#x60;value&#x60;. * Bulk mode (&#x60;metadata_entries&#x60;) ignores
+     * &#x60;value&#x60; and restores the Primary org (&#x60;org_id&#x3D;0&#x60;) value of the
+     * variable bound to the field, even when the request is made from a secondary org. In bulk
+     * mode, a secret Connection field bound to a sensitive variable is restored from the
+     * variable&#39;s Primary-org secret. Bulk mode has no partial success. The request fails with
+     * &#x60;400&#x60; and nothing is changed if any field: * is a non-secret field bound to a
+     * sensitive variable, * is bound to a per-principal variable, whose value is user-specific or
+     * group-specific, * has a variable that cannot be read, because it is deleted or not visible to
+     * you, * has no Primary-org value, or * is a secret field whose value is unavailable from the
+     * secure store, which includes the case where the Confidant Vault is disabled, since the
+     * restored secret could then not be stored securely. Such a field can still be unparameterized
+     * individually in single-field mode with an explicit &#x60;value&#x60;. Duplicate entries for
+     * the same object and field are coalesced.
      *
      * @param unparameterizeMetadataRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -33198,6 +33359,21 @@ public class ThoughtSpotRestApi {
      * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
      * specifies the exact property of the Connection or Connection Config that needs to be
      * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
+     * ## Restored value The endpoint has two mutually exclusive modes, and the value that is
+     * restored differs per mode: * Single-field mode (&#x60;field_name&#x60; + &#x60;value&#x60;)
+     * restores the supplied &#x60;value&#x60;. * Bulk mode (&#x60;metadata_entries&#x60;) ignores
+     * &#x60;value&#x60; and restores the Primary org (&#x60;org_id&#x3D;0&#x60;) value of the
+     * variable bound to the field, even when the request is made from a secondary org. In bulk
+     * mode, a secret Connection field bound to a sensitive variable is restored from the
+     * variable&#39;s Primary-org secret. Bulk mode has no partial success. The request fails with
+     * &#x60;400&#x60; and nothing is changed if any field: * is a non-secret field bound to a
+     * sensitive variable, * is bound to a per-principal variable, whose value is user-specific or
+     * group-specific, * has a variable that cannot be read, because it is deleted or not visible to
+     * you, * has no Primary-org value, or * is a secret field whose value is unavailable from the
+     * secure store, which includes the case where the Confidant Vault is disabled, since the
+     * restored secret could then not be stored securely. Such a field can still be unparameterized
+     * individually in single-field mode with an explicit &#x60;value&#x60;. Duplicate entries for
+     * the same object and field are coalesced.
      *
      * @param unparameterizeMetadataRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -33231,6 +33407,21 @@ public class ThoughtSpotRestApi {
      * Config, the field type is always &#x60;CONNECTION_PROPERTY&#x60;. In this case, field_name
      * specifies the exact property of the Connection or Connection Config that needs to be
      * unparameterized. For Connection Config, the only supported field name is: * impersonate_user
+     * ## Restored value The endpoint has two mutually exclusive modes, and the value that is
+     * restored differs per mode: * Single-field mode (&#x60;field_name&#x60; + &#x60;value&#x60;)
+     * restores the supplied &#x60;value&#x60;. * Bulk mode (&#x60;metadata_entries&#x60;) ignores
+     * &#x60;value&#x60; and restores the Primary org (&#x60;org_id&#x3D;0&#x60;) value of the
+     * variable bound to the field, even when the request is made from a secondary org. In bulk
+     * mode, a secret Connection field bound to a sensitive variable is restored from the
+     * variable&#39;s Primary-org secret. Bulk mode has no partial success. The request fails with
+     * &#x60;400&#x60; and nothing is changed if any field: * is a non-secret field bound to a
+     * sensitive variable, * is bound to a per-principal variable, whose value is user-specific or
+     * group-specific, * has a variable that cannot be read, because it is deleted or not visible to
+     * you, * has no Primary-org value, or * is a secret field whose value is unavailable from the
+     * secure store, which includes the case where the Confidant Vault is disabled, since the
+     * restored secret could then not be stored securely. Such a field can still be unparameterized
+     * individually in single-field mode with an explicit &#x60;value&#x60;. Duplicate entries for
+     * the same object and field are coalesced.
      *
      * @param unparameterizeMetadataRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -35670,32 +35861,48 @@ public class ThoughtSpotRestApi {
      * Updates attributes of an existing agent conversation. Currently only the display title can be
      * updated; additional conversation attributes may be supported in future versions. At least one
      * updatable attribute must be provided in the request body. Version: 26.7.0.cl or later Updates
-     * attributes of an existing saved agent conversation. Currently only the conversation&#39;s
-     * display &#x60;title&#x60; can be updated; additional updatable attributes may be supported in
-     * future versions. At least one updatable attribute must be supplied in the request body.
-     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being
-     * updated. #### Usage guidelines The request must include: -
-     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to
-     * update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60;
-     * - At least one updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the
-     * new display name for the conversation. When provided, must be a non-empty string. A
-     * successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes
-     * are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;. ####
-     * Example request &#x60;&#x60;&#x60;bash POST
+     * attributes of an existing saved agent conversation. Supports updating the conversation&#39;s
+     * display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable
+     * attributes may be supported in future versions. At least one updatable attribute must be
+     * supplied in the request body. Use this endpoint to rename a conversation, or to pin a
+     * conversation so that it is surfaced first in the conversation list for quick access. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated. ####
+     * Usage guidelines The request must include: - &#x60;conversation_identifier&#x60; *(path
+     * parameter)*: the unique ID of the conversation to update, as returned by
+     * &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one
+     * updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the new display
+     * name for the conversation. An empty or whitespace-only value is replaced with a default title
+     * rather than rejected. - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the
+     * conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl. Each
+     * attribute is applied independently: omitted attributes are left unchanged, so you can update
+     * the title and the pinned state in a single request or in separate requests. Updating
+     * &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an
+     * already-unpinned one, succeeds with no side effects. A successful request returns an empty
+     * &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in
+     * subsequent calls to &#x60;getConversationList&#x60;. #### Example request Rename a
+     * conversation: &#x60;&#x60;&#x60;bash POST
      * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
      * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; }
-     * &#x60;&#x60;&#x60; #### Error responses | Code | Description | |------|-------------| | 400 |
-     * Bad Request — the request body is empty or &#x60;title&#x60; is provided as an empty string.
-     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * &#x60;&#x60;&#x60; Pin a conversation: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; Update both attributes
+     * in a single request: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,
+     * \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; #### Error responses | Code | Description
+     * | |------|-------------| | 400 | Bad Request — the request body supplies neither
+     * &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | |
+     * 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
      * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
      * does not own the specified conversation. | | 404 | Not Found — no conversation exists with
      * the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422 |
      * Unprocessable Entity — the request body is malformed or contains an invalid field value. |
      * &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat:
      * true&#x60; can be updated. Unsaved conversations are not persisted and do not have a
-     * retrievable identifier. &gt; - Available from version 26.7.0.cl and later. &gt; - This
-     * endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
-     * cluster.
+     * retrievable identifier. &gt; - There is no limit on the number of conversations a user can
+     * pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute
+     * is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter —
+     * please contact ThoughtSpot Support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation to update. (required)
      * @param updateConversationRequest (required)
@@ -35722,32 +35929,48 @@ public class ThoughtSpotRestApi {
      * Updates attributes of an existing agent conversation. Currently only the display title can be
      * updated; additional conversation attributes may be supported in future versions. At least one
      * updatable attribute must be provided in the request body. Version: 26.7.0.cl or later Updates
-     * attributes of an existing saved agent conversation. Currently only the conversation&#39;s
-     * display &#x60;title&#x60; can be updated; additional updatable attributes may be supported in
-     * future versions. At least one updatable attribute must be supplied in the request body.
-     * Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being
-     * updated. #### Usage guidelines The request must include: -
-     * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to
-     * update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60;
-     * - At least one updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the
-     * new display name for the conversation. When provided, must be a non-empty string. A
-     * successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes
-     * are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;. ####
-     * Example request &#x60;&#x60;&#x60;bash POST
+     * attributes of an existing saved agent conversation. Supports updating the conversation&#39;s
+     * display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable
+     * attributes may be supported in future versions. At least one updatable attribute must be
+     * supplied in the request body. Use this endpoint to rename a conversation, or to pin a
+     * conversation so that it is surfaced first in the conversation list for quick access. Requires
+     * &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated. ####
+     * Usage guidelines The request must include: - &#x60;conversation_identifier&#x60; *(path
+     * parameter)*: the unique ID of the conversation to update, as returned by
+     * &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one
+     * updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the new display
+     * name for the conversation. An empty or whitespace-only value is replaced with a default title
+     * rather than rejected. - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the
+     * conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl. Each
+     * attribute is applied independently: omitted attributes are left unchanged, so you can update
+     * the title and the pinned state in a single request or in separate requests. Updating
+     * &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an
+     * already-unpinned one, succeeds with no side effects. A successful request returns an empty
+     * &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in
+     * subsequent calls to &#x60;getConversationList&#x60;. #### Example request Rename a
+     * conversation: &#x60;&#x60;&#x60;bash POST
      * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
      * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; }
-     * &#x60;&#x60;&#x60; #### Error responses | Code | Description | |------|-------------| | 400 |
-     * Bad Request — the request body is empty or &#x60;title&#x60; is provided as an empty string.
-     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * &#x60;&#x60;&#x60; Pin a conversation: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; Update both attributes
+     * in a single request: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,
+     * \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; #### Error responses | Code | Description
+     * | |------|-------------| | 400 | Bad Request — the request body supplies neither
+     * &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | |
+     * 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
      * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
      * does not own the specified conversation. | | 404 | Not Found — no conversation exists with
      * the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422 |
      * Unprocessable Entity — the request body is malformed or contains an invalid field value. |
      * &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat:
      * true&#x60; can be updated. Unsaved conversations are not persisted and do not have a
-     * retrievable identifier. &gt; - Available from version 26.7.0.cl and later. &gt; - This
-     * endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
-     * cluster.
+     * retrievable identifier. &gt; - There is no limit on the number of conversations a user can
+     * pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute
+     * is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter —
+     * please contact ThoughtSpot Support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation to update. (required)
      * @param updateConversationRequest (required)
@@ -35778,32 +36001,48 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Updates attributes of an existing agent conversation. Currently only the
      * display title can be updated; additional conversation attributes may be supported in future
      * versions. At least one updatable attribute must be provided in the request body. Version:
-     * 26.7.0.cl or later Updates attributes of an existing saved agent conversation. Currently only
-     * the conversation&#39;s display &#x60;title&#x60; can be updated; additional updatable
-     * attributes may be supported in future versions. At least one updatable attribute must be
-     * supplied in the request body. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of
-     * the conversation being updated. #### Usage guidelines The request must include: -
+     * 26.7.0.cl or later Updates attributes of an existing saved agent conversation. Supports
+     * updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60;
+     * state; additional updatable attributes may be supported in future versions. At least one
+     * updatable attribute must be supplied in the request body. Use this endpoint to rename a
+     * conversation, or to pin a conversation so that it is surfaced first in the conversation list
+     * for quick access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the
+     * conversation being updated. #### Usage guidelines The request must include: -
      * &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to
      * update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60;
      * - At least one updatable attribute in the request body: - &#x60;title&#x60; *(optional)*: the
-     * new display name for the conversation. When provided, must be a non-empty string. A
-     * successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes
-     * are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;. ####
-     * Example request &#x60;&#x60;&#x60;bash POST
+     * new display name for the conversation. An empty or whitespace-only value is replaced with a
+     * default title rather than rejected. - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to
+     * pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl. Each
+     * attribute is applied independently: omitted attributes are left unchanged, so you can update
+     * the title and the pinned state in a single request or in separate requests. Updating
+     * &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an
+     * already-unpinned one, succeeds with no side effects. A successful request returns an empty
+     * &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in
+     * subsequent calls to &#x60;getConversationList&#x60;. #### Example request Rename a
+     * conversation: &#x60;&#x60;&#x60;bash POST
      * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
      * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; }
-     * &#x60;&#x60;&#x60; #### Error responses | Code | Description | |------|-------------| | 400 |
-     * Bad Request — the request body is empty or &#x60;title&#x60; is provided as an empty string.
-     * | | 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
+     * &#x60;&#x60;&#x60; Pin a conversation: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; Update both attributes
+     * in a single request: &#x60;&#x60;&#x60;bash POST
+     * /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type:
+     * application/json { \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,
+     * \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60; #### Error responses | Code | Description
+     * | |------|-------------| | 400 | Bad Request — the request body supplies neither
+     * &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | |
+     * 401 | Unauthorized — authentication token is missing, expired, or invalid. | | 403 |
      * Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or
      * does not own the specified conversation. | | 404 | Not Found — no conversation exists with
      * the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422 |
      * Unprocessable Entity — the request body is malformed or contains an invalid field value. |
      * &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat:
      * true&#x60; can be updated. Unsaved conversations are not persisted and do not have a
-     * retrievable identifier. &gt; - Available from version 26.7.0.cl and later. &gt; - This
-     * endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your
-     * cluster.
+     * retrievable identifier. &gt; - There is no limit on the number of conversations a user can
+     * pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute
+     * is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter —
+     * please contact ThoughtSpot Support to enable Spotter on your cluster.
      *
      * @param conversationIdentifier Unique identifier of the conversation to update. (required)
      * @param updateConversationRequest (required)
@@ -39543,7 +39782,10 @@ public class ThoughtSpotRestApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constrains for a given variable, scope is ignored
+     * constrains for a given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param updateVariableValuesRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -39581,7 +39823,10 @@ public class ThoughtSpotRestApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constrains for a given variable, scope is ignored
+     * constrains for a given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param updateVariableValuesRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -39623,7 +39868,10 @@ public class ThoughtSpotRestApi {
      * same as replace. * REPLACE - Replaces all values of a given set of constraints with the
      * current set of values. * REMOVE - Removes any values which match the set of conditions of the
      * variables if this is a list type variable, else clears value. * RESET - Removes all
-     * constrains for a given variable, scope is ignored
+     * constrains for a given variable, scope is ignored Re-sending values that already match the
+     * stored values for the targeted scope is a no-op: the request succeeds without modifying any
+     * data. This does not apply to the RESET operation or to sensitive variables, which are always
+     * written.
      *
      * @param updateVariableValuesRequest (required)
      * @param _callback The callback to be executed when the API call finishes
