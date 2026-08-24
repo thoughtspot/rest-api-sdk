@@ -504,7 +504,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
      * List of optional configuration sections to clear. Each value removes the corresponding
      * configuration entirely from the webhook: AUTHENTICATION removes the authentication config,
      * SIGNATURE_VERIFICATION removes the signature verification config, STORAGE_DESTINATION removes
-     * the storage destination config. Version: 26.7.0.cl or later
+     * the storage destination config. Version: 26.11.0.cl or later
      *
      * @return resetOptions
      */
