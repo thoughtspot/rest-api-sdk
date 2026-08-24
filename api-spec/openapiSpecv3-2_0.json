@@ -39311,7 +39311,7 @@
             ]
           },
           "reset_options": {
-            "description": "List of optional configuration sections to clear. Each value removes the\ncorresponding configuration entirely from the webhook: AUTHENTICATION\nremoves the authentication config, SIGNATURE_VERIFICATION removes the\nsignature verification config, STORAGE_DESTINATION removes the storage\ndestination config. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "description": "List of optional configuration sections to clear. Each value removes the\ncorresponding configuration entirely from the webhook: AUTHENTICATION\nremoves the authentication config, SIGNATURE_VERIFICATION removes the\nsignature verification config, STORAGE_DESTINATION removes the storage\ndestination config. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
             "type": "array",
             "items": {
               "type": "string",
