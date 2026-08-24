@@ -145,6 +145,93 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/ai/agent/analysts/create:
+    post:
+      description: "\nCreates a Spotter Analyst: a configured agent with a name, description,\n\
+        at least one data source, and optional agent instructions, MCP\nconnectors,\
+        \ and starter prompts. Analysts created via API use the default\nicon until\
+        \ one is set in the UI.\nRequires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`,\
+        \ or\n`CAN_USE_SPOTTER` privileges, plus view access to every data source\n\
+        referenced in `sources`. \n Version: 26.10.0.cl or later\n\n\nCreates a Spotter\
+        \ Analyst: a configured agent with a name, description, data sources, and\
+        \ optional agent instructions, MCP connectors, and starter prompts that your\
+        \ users converse with in Spotter.\n\nRequires at least one of `ADMINISTRATION`,\
+        \ `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access\
+        \ to every data source referenced in `sources`. Use a bearer token for the\
+        \ Org in which the analyst should be created.\n\n#### Usage guidelines\n\n\
+        The request body is flat — all fields are top-level:\n\n- `name` (required):\
+        \ display name of the analyst.\n- `description` (required): up to 200 characters.\n\
+        - `instructions` (optional): natural-language instructions that guide the\
+        \ agent's behavior for this analyst. Instructions that conflict with system\
+        \ guardrails are rejected with `409`.\n- `sources` (required): at least one\
+        \ data source the analyst can query, each with an `identifier`, an optional\
+        \ `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`).\
+        \ The caller must have view access to every referenced source.\n- `mcp_connector_identifiers`\
+        \ (optional): identifiers of MCP connectors to link to the analyst.\n- `starter_prompts`\
+        \ (optional): up to 4 plain-text prompts shown on the analyst landing page,\
+        \ each between 10 and 250 characters. Display order follows list position.\n\
+        \nIf the request is successful, the response contains the created analyst,\
+        \ including the server-assigned `id`. In responses, sources are returned with\
+        \ `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts\
+        \ as structured objects (`label`, `text`, `order`, `is_ai_generated`), the\
+        \ last-update time as `updated_time_in_millis` (epoch milliseconds), and the\
+        \ `created_by` and `updated_by` users.\n\n#### Error conditions\n\n- `403`\
+        \ — missing privileges, or no view access to a referenced data source.\n-\
+        \ `409` — `instructions` conflict with system guardrails.\n- `422` — validation\
+        \ failure, such as a missing required field (`name`, `description`, or `sources`),\
+        \ an empty `sources` list, too many starter prompts, or field-length violations.\n\
+        - `429` — rate limit exceeded.\n\n\n\n\n\n"
+      operationId: createAnalyst
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnalystRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analyst'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analyst'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/conversation/create:
     post:
       description: |2+
@@ -230,6 +317,76 @@ paths:
       - AI
       - ThoughtSpotRest
       x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete:
+    post:
+      description: "\nPermanently deletes a Spotter Analyst. This operation is irreversible\
+        \ —\ndeleted analysts cannot be recovered. The request has no body; the\n\
+        response contains the `id` of the deleted analyst.\nRequires ownership of\
+        \ the analyst, or `ADMINISTRATION` or\n`CAN_MANAGE_SPOTTER` privileges. \n\
+        \ Version: 26.10.0.cl or later\n\n\nPermanently deletes a Spotter Analyst.\
+        \ This operation is irreversible — deleted analysts cannot be recovered.\n\
+        \nRequires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER`\
+        \ privileges. Users the analyst is shared with cannot delete it. Use a bearer\
+        \ token for the Org in which the analyst exists.\n\n#### Usage guidelines\n\
+        \nThe request has no body — the analyst to delete is identified by the `analyst_identifier`\
+        \ path parameter, as returned by the create analyst API.\n\nA successful request\
+        \ returns the `id` of the deleted analyst.\n\n#### Error conditions\n\n- `400`\
+        \ — malformed analyst identifier.\n- `403` — the caller is not the analyst's\
+        \ author and lacks admin / Spotter-management privileges.\n- `404` — no analyst\
+        \ with the given identifier exists in the caller's Org.\n- `429` — rate limit\
+        \ exceeded.\n\n\n\n\n\n"
+      operationId: deleteAnalyst
+      parameters:
+      - description: Unique identifier of the analyst to delete.
+        explode: false
+        in: path
+        name: analyst_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalystDeleteResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalystDeleteResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
       x-accepts:
       - application/json
   /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete:
@@ -1340,6 +1497,201 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content:
+    get:
+      description: "\nReturns the full read-only view of a shared conversation, including\
+        \ ordered\nmessages and data source metadata. Accessible by the conversation\
+        \ owner and\nany principal (user or group) that has been granted access.\n\
+        Requires `CAN_USE_SPOTTER` privilege. \n  Version: 26.9.0.cl or later\n\n\n\
+        \n\n\n\n"
+      operationId: getSharedContent
+      parameters:
+      - description: Unique identifier of the source conversation.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Shared conversation with one message and an answer
+                  value:
+                    conversation_id: conv-abc-123
+                    shared_conversation_id: snap-xyz-456
+                    conversation_title: Sales by Region Q1
+                    creator_user_id: 5d3e6cc7-2f4a-4b0e-9a1c-8f2b6d4e7a10
+                    data_sources:
+                    - id: ds-001
+                      name: Retail Sales
+                    analyst_ids:
+                    - spot-7f2a
+                    messages:
+                    - message_id: node-u-01
+                      timestamp_in_millis: 1744000000000
+                      user_prompt:
+                        message:
+                          message_id: msg-u-01
+                          content: Show me revenue by region.
+                        attachments: []
+                      response_items:
+                      - type: answer
+                        answer_id: ans-01
+                        tool_call_id: toolu-01
+                        tool_name: fetch_and_visualize
+                        step_title: Visualizing
+                        timestamp_in_millis: 1744000004000
+                        is_thinking: false
+                      - type: text
+                        content: Revenue is highest in APAC at $4.2M.
+                        content_type: TEXT_MARKDOWN
+                        timestamp_in_millis: 1744000005000
+                        is_thinking: false
+                        step_title: null
+                        file_reference: null
+                    code_execution_files:
+                    - file_id: revenue_by_region.csv
+                      display_name: revenue_by_region.csv
+                      file_type: csv
+                      created_time_in_millis: 1744027200000
+                      expired: false
+              schema:
+                $ref: '#/components/schemas/SharedConversationResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedConversationResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info:
+    get:
+      description: "\nReturns the current share state for a conversation the caller\
+        \ owns: whether\nthe shared view is outdated relative to the latest conversation\
+        \ content, and\nthe list of principals that currently have access.\nRequires\
+        \ `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.\
+        \ \n  Version: 26.9.0.cl or later\n\n\n\n\n\n\n"
+      operationId: getShareInfo
+      parameters:
+      - description: Unique identifier of the conversation.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: "Conversation shared with two principals, content is current"
+                  value:
+                    conversation_id: conv-abc-123
+                    is_shared_content_outdated: false
+                    principals:
+                    - id: user-001
+                      type: USER
+                      display_name: Alice Example
+                      name: alice.example
+                      permission: READ_ONLY
+                    - id: group-001
+                      type: USER_GROUP
+                      display_name: Sales Team
+                      name: sales-team
+                      permission: READ_ONLY
+                example_2:
+                  summary: Conversation never shared
+                  value:
+                    conversation_id: conv-abc-123
+                    is_shared_content_outdated: null
+                    principals: []
+                example_3:
+                  summary: Shared view is outdated — conversation was edited after
+                    sharing
+                  value:
+                    conversation_id: conv-abc-123
+                    is_shared_content_outdated: true
+                    principals:
+                    - id: user-001
+                      type: USER
+                      display_name: Alice Example
+                      name: alice.example
+                      permission: READ_ONLY
+              schema:
+                $ref: '#/components/schemas/ConversationShareStatusResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationShareStatusResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/memory/import:
     post:
       description: "\nImports memory entries (rules, recipes, and always-apply rules)\
@@ -1840,6 +2192,94 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/eureka_DecomposeQueryResponse'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/analysts/search:
+    post:
+      description: "\nSearches Spotter Analysts. Two modes:\n- Fetch mode: when `analyst_identifier`\
+        \ is provided, the response contains\n  exactly that analyst and all other\
+        \ filters are ignored.\n- List mode: returns a paginated list of analysts\
+        \ visible to the caller,\n  optionally filtered by a case-insensitive substring\
+        \ match on the\n  analyst name (`query`) and by ownership (`type`). Results\
+        \ are ordered\n  by most recently accessed.\nRequires at least one of `ADMINISTRATION`,\
+        \ `CAN_MANAGE_SPOTTER`, or\n`CAN_USE_SPOTTER` privileges. \n Version: 26.10.0.cl\
+        \ or later\n\n\nSearches Spotter Analysts. Use this endpoint to page through\
+        \ the analysts visible to you, or to fetch a single analyst by its identifier.\n\
+        \nRequires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER`\
+        \ privileges. Use a bearer token for the Org whose analysts should be searched.\n\
+        \n#### Usage guidelines\n\nThe endpoint operates in one of two modes:\n\n\
+        **Fetch mode** — when `analyst_identifier` is provided, the response contains\
+        \ exactly that analyst (`total_size` is 1) and all other filters are ignored.\
+        \ The caller must have access to the analyst (owner, shared with, or admin/Spotter-management\
+        \ privileges).\n\n**List mode** — when `analyst_identifier` is omitted, the\
+        \ response is a paginated list of analysts the caller can see, ordered by\
+        \ most recently accessed:\n\n- `record_size` (optional): number of records\
+        \ per page. Default 50, between 1 and 500.\n- `record_offset` (optional):\
+        \ zero-based index of the first record. Default 0, maximum 10000.\n- `query`\
+        \ (optional): case-insensitive substring match applied to the analyst **name\
+        \ only**.\n- `type` (optional): ownership filter — `ALL` (default; created\
+        \ by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.\n\nThe response\
+        \ contains `analysts` — the page of matching analysts — and `total_size`,\
+        \ the total number of matches before pagination. Each analyst includes its\
+        \ `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`,\
+        \ and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`),\
+        \ `icon_id`, `starter_prompts` (including the server-managed fixed prompt,\
+        \ marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis`\
+        \ (epoch milliseconds), and `created_by` / `updated_by` user references (with\
+        \ `id`, `name`, and `display_name`).\n\n#### Error conditions\n\n- `403` —\
+        \ missing privileges, or (fetch mode) no access to the requested analyst.\n\
+        - `404` — (fetch mode) no analyst with the given identifier exists in the\
+        \ caller's Org.\n- `422` — validation failure, such as `record_size` or `record_offset`\
+        \ out of range.\n\n\n\n\n\n"
+      operationId: searchAnalysts
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchAnalystsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalystSearchResponse'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalystSearchResponse'
           description: Common error response
         "400":
           content:
@@ -2671,6 +3111,148 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share:
+    post:
+      description: "\nUpdates share permissions on a Spotter Analyst, one entry per\
+        \ principal\n(user or group). `READ_ONLY` and `MODIFY` grant or change the\
+        \ principal's\naccess; `NO_ACCESS` revokes it. Granting access also shares\
+        \ the analyst's\ndata sources with the principal so the analyst keeps working\
+        \ for them.\nA successful share returns an empty `204 No Content` response.\n\
+        Requires ownership of the analyst, or `ADMINISTRATION` or\n`CAN_MANAGE_SPOTTER`\
+        \ privileges. \n Version: 26.10.0.cl or later\n\n\nUpdates share permissions\
+        \ on a Spotter Analyst for one or more principals (users or groups).\n\nRequires\
+        \ ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.\
+        \ Use a bearer token for the Org in which the analyst exists.\n\n#### Usage\
+        \ guidelines\n\nThe analyst is identified by the `analyst_identifier` path\
+        \ parameter. The request body contains a `permissions` array with one entry\
+        \ per principal:\n\n- `principal.identifier` (required): unique identifier\
+        \ of the user or group.\n- `principal.type` (required): `USER` or `USER_GROUP`.\n\
+        - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the\
+        \ principal's access; `NO_ACCESS` revokes it.\n\nA principal may appear at\
+        \ most once per request. When access is granted, the analyst's data sources\
+        \ are automatically shared with the principal as well, so the analyst keeps\
+        \ working for them.\n\nA successful request returns an empty `204 No Content`\
+        \ response.\n\n#### Error conditions\n\n- `400` — malformed analyst identifier.\n\
+        - `403` — the caller is not the analyst's author and lacks admin / Spotter-management\
+        \ privileges.\n- `404` — no analyst with the given identifier exists in the\
+        \ caller's Org.\n- `422` — validation failure, such as an empty `permissions`\
+        \ array, a duplicate principal, or a missing field.\n- `429` — rate limit\
+        \ exceeded.\n\n\n\n\n\n"
+      operationId: shareAnalyst
+      parameters:
+      - description: Unique identifier of the analyst to share.
+        explode: false
+        in: path
+        name: analyst_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareAnalystRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: {}
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema: {}
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share:
+    post:
+      description: "\nGrants or revokes access to a shared conversation for one or\
+        \ more principals\n(users or groups). When principals are added, a read-only\
+        \ shared view of the\nconversation is created from its current state. Use\
+        \ `refresh_shared_content`\nto regenerate the shared view with the latest\
+        \ conversation content.\nRequires `CAN_USE_SPOTTER` privilege and ownership\
+        \ of the specified conversation. \n  Version: 26.9.0.cl or later\n\n\n\n\n\
+        \n\n"
+      operationId: shareConversation
+      parameters:
+      - description: Unique identifier of the conversation to share.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareConversationRequest'
+        required: true
+      responses:
+        "204":
+          description: Successfully updated the share access for the conversation.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/ai/answer/create:
     post:
       description: |2+
@@ -2835,6 +3417,106 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update:
+    post:
+      description: "\nUpdates a Spotter Analyst. The request body is identical to\n\
+        `createAnalyst` and the update is a full replace: the analyst is\nrewritten\
+        \ from the request, and optional fields omitted from the request\nare reset\
+        \ (no instructions, no MCP connectors, no starter prompts).\nRequires ownership\
+        \ of the analyst, or `ADMINISTRATION` or\n`CAN_MANAGE_SPOTTER` privileges.\
+        \ Users the analyst is shared with cannot\nedit it. \n Version: 26.10.0.cl\
+        \ or later\n\n\nUpdates a Spotter Analyst. The request body is identical to\
+        \ the create analyst API, and the update is a full replace: the analyst is\
+        \ rewritten from the request, and optional fields omitted from the request\
+        \ are reset.\n\nRequires ownership of the analyst, or `ADMINISTRATION` or\
+        \ `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use\
+        \ it but cannot edit it. Use a bearer token for the Org in which the analyst\
+        \ exists.\n\n#### Usage guidelines\n\nThe request body is flat — all fields\
+        \ are top-level:\n\n- `name` (required): display name of the analyst.\n- `description`\
+        \ (required): up to 200 characters.\n- `instructions` (optional): natural-language\
+        \ instructions that guide the agent's behavior. Instructions that conflict\
+        \ with system guardrails are rejected with `409`. Omitting this field clears\
+        \ any existing instructions.\n- `sources` (required): at least one data source\
+        \ the analyst can query, each with an `identifier`, an optional `name`, and\
+        \ a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the\
+        \ existing list in full. When new sources are added, they are automatically\
+        \ shared with users the analyst was previously shared with, so those users\
+        \ keep a working analyst.\n- `mcp_connector_identifiers` (optional): identifiers\
+        \ of MCP connectors. Replaces the existing list in full; omit or pass an empty\
+        \ array to clear.\n- `starter_prompts` (optional): up to 4 plain-text prompts,\
+        \ each between 10 and 250 characters; display order follows list position.\
+        \ Replaces the existing list in full; omit or pass an empty array to clear.\n\
+        \nIf the request is successful, the response contains the updated analyst,\
+        \ including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds)\
+        \ and `updated_by` user. In responses, sources are returned with `id` and\
+        \ `type`, connector identifiers as `mcp_connectors`, and starter prompts as\
+        \ structured objects (`label`, `text`, `order`, `is_ai_generated`).\n\n####\
+        \ Error conditions\n\n- `400` — malformed analyst identifier.\n- `403` — the\
+        \ caller is not the analyst's author and lacks admin / Spotter-management\
+        \ privileges.\n- `404` — no analyst with the given identifier exists in the\
+        \ caller's Org.\n- `409` — `instructions` conflict with system guardrails.\n\
+        - `422` — validation failure, such as a missing required field (`name`, `description`,\
+        \ or `sources`), an empty `sources` list, too many starter prompts, or field-length\
+        \ violations.\n- `429` — rate limit exceeded.\n\n\n\n\n\n"
+      operationId: updateAnalyst
+      parameters:
+      - description: Unique identifier of the analyst to update.
+        explode: false
+        in: path
+        name: analyst_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAnalystRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analyst'
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analyst'
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+      x-content-type: application/json
       x-accepts:
       - application/json
   /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update:
@@ -7735,6 +8417,463 @@ paths:
       - ThoughtSpotRest
       x-accepts:
       - application/json
+  /api/rest/2.0/configurations/features/search:
+    post:
+      description: |2+
+
+         Version: 26.10.0.cl or later
+
+
+        Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.
+
+        #### Pre-requisites
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.
+
+        #### Usage guidelines
+
+        To retrieve feature configurations, pass these parameters in your API request:
+
+        - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org).
+        - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.
+        - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.
+
+        The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.
+
+        The following example retrieves the general-access features for the cluster-admin view:
+
+        ```
+        {
+          "scope": "CLUSTER",
+          "category": "GENERAL_ACCESS"
+        }
+        ```
+
+        For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):
+
+        ```
+        {
+          "scope": "ORG",
+          "org_identifier": 1,
+          "category": "GENERAL_ACCESS"
+        }
+        ```
+
+
+
+
+
+      operationId: searchFeatures
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchFeaturesRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  description: Cluster-admin view (scope=CLUSTER) — org-aware feature
+                    with assignments
+                  value:
+                  - feature_group: search
+                    docs_url: null
+                    features:
+                    - feature_id: orion.embraceConfig.doIndexing
+                      feature_name: index_columns
+                      assigned_orgs:
+                      - org_id: 0
+                        org_name: Primary
+                      is_org_aware: true
+                      feature_value: null
+                      docs_url: null
+                example_2:
+                  description: "Org-admin view (scope=ORG) — element type, config,\
+                    \ and current value for the org"
+                  value:
+                  - feature_group: search
+                    docs_url: null
+                    features:
+                    - feature_id: orion.embraceConfig.doIndexing
+                      feature_name: index_columns
+                      element_type: toggle
+                      element_config:
+                        label: Index columns
+                      element_value: "true"
+                      docs_url: null
+                example_3:
+                  description: Empty result — no features match the requested category
+                  value: []
+              schema:
+                items:
+                  $ref: '#/components/schemas/FeatureGroup'
+                type: array
+          description: Feature groups returned.
+        "400":
+          content:
+            application/json:
+              examples:
+                missing_org_identifier:
+                  summary: Bad Request — org_identifier is required when scope is
+                    ORG
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: org_identifier is required when scope=ORG.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden — ADMINISTRATION privilege required
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: Insufficient privileges.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Insufficient privileges.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Feature management not enabled.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error.
+      tags:
+      - Feature Management
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/configurations/features/assignments/update:
+    post:
+      description: |2+
+
+         Version: 26.10.0.cl or later
+
+
+        Updates the Org assignments for a feature. Available to cluster admins only.
+
+        #### Pre-requisites
+
+        Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.
+
+        #### Usage guidelines
+
+        To update the Org assignments for a feature, pass these parameters in your API request:
+
+        - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update.
+        - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature.
+        - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.
+
+        The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:
+
+        ```
+        {
+          "feature_identifier": "index_columns",
+          "org_identifiers": [1, 2],
+          "operation": "ADD"
+        }
+        ```
+
+        Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):
+
+        ```
+        {
+          "feature_identifier": "index_columns",
+          "org_identifiers": [],
+          "operation": "REPLACE"
+        }
+        ```
+
+
+
+
+
+      operationId: updateFeatureAssignments
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFeatureAssignmentsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  description: Assign Orgs 1 and 2 to the feature (operation ADD)
+                  value:
+                    feature_id: orion.embraceConfig.doIndexing
+                    feature_name: index_columns
+                    assigned_orgs:
+                    - org_id: 1
+                      org_name: Acme
+                    - org_id: 2
+                      org_name: Beta
+                example_2:
+                  description: Clear all Org assignments (operation REPLACE with an
+                    empty org_identifiers array); assigned_orgs comes back empty
+                  value:
+                    feature_id: orion.embraceConfig.doIndexing
+                    feature_name: index_columns
+                    assigned_orgs: []
+              schema:
+                $ref: '#/components/schemas/FeatureAssignmentResponse'
+          description: Assignments updated.
+        "400":
+          content:
+            application/json:
+              examples:
+                missing_org_identifiers:
+                  summary: Bad Request — org_identifiers is required
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: org_identifiers is required.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden — ADMINISTRATION privilege required
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: Insufficient privileges.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Insufficient privileges.
+        "404":
+          content:
+            application/json:
+              examples:
+                feature_not_found:
+                  summary: Not Found — feature_identifier does not match any known
+                    feature
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: Feature 'orion.__does_not_exist__' not found in config.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Feature not found or feature management not enabled.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error.
+      tags:
+      - Feature Management
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/configurations/features/values/update:
+    post:
+      description: |2+
+
+         Version: 26.10.0.cl or later
+
+
+        Sets the value of a feature at the cluster or Org scope.
+
+        #### Pre-requisites
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.
+
+        #### Usage guidelines
+
+        To set a feature value, pass these parameters in your API request:
+
+        - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override.
+        - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.
+        - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set.
+        - `feature_value` — New value to set for the feature.
+        - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.
+
+        The following example sets a per-Org value override for Org `1`:
+
+        ```
+        {
+          "scope": "ORG",
+          "org_identifier": 1,
+          "feature_identifier": "index_columns",
+          "feature_value": "true"
+        }
+        ```
+
+        Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:
+
+        ```
+        {
+          "scope": "CLUSTER",
+          "feature_identifier": "index_columns",
+          "feature_value": "true",
+          "reset_org_overrides": true
+        }
+        ```
+
+
+
+
+
+      operationId: updateFeatureValue
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFeatureValueRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  description: Set a per-Org value override (scope=ORG)
+                  value:
+                    feature_id: orion.embraceConfig.doIndexing
+                    feature_name: index_columns
+                    feature_value: "true"
+                example_2:
+                  description: "Set the cluster-level value and clear per-Org overrides\
+                    \ (scope=CLUSTER, reset_org_overrides=true)"
+                  value:
+                    feature_id: orion.embraceConfig.doIndexing
+                    feature_name: index_columns
+                    feature_value: "true"
+              schema:
+                $ref: '#/components/schemas/FeatureValueResponse'
+          description: Value updated.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_reset_org_overrides:
+                  summary: Bad Request — reset_org_overrides is not allowed when scope
+                    is ORG
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: reset_org_overrides is only valid for scope=CLUSTER.
+                missing_org_identifier:
+                  summary: Bad Request — org_identifier is required when scope is
+                    ORG
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: org_identifier is required when scope=ORG.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden — ADMINISTRATION privilege required
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: Insufficient privileges.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Insufficient privileges or org not assigned to feature.
+        "404":
+          content:
+            application/json:
+              examples:
+                feature_not_found:
+                  summary: Not Found — feature_identifier does not match any known
+                    feature
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: Feature 'orion.__does_not_exist__' not found in config.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Feature not found or feature management not enabled.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error.
+      tags:
+      - Feature Management
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/groups/create:
     post:
       description: |2+
@@ -11527,6 +12666,319 @@ paths:
           description: Internal server error
       tags:
       - Security
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/semantic-integrations/create:
+    post:
+      description: |2+
+
+         Version: 26.9.0.cl or later
+
+
+        Creates a new semantic integration in ThoughtSpot from a CDW semantic view.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - **Can manage data models**
+
+        #### About create semantic integration
+
+        A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.
+
+        - `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required.
+        - `name` must be unique across the user's organization. The integration's display name is also used as the generated model name.
+        - Supported `type` values are listed in the `SemanticIntegrationType` enum.
+        - The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.
+
+        > **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.
+
+
+
+
+
+      operationId: createSemanticIntegration
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSemanticIntegrationRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SemanticIntegrationResponse'
+          description: Semantic integration created successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Connection not found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicate integration name.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Semantic Integrations
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete:
+    post:
+      description: |2+
+
+         Version: 26.9.0.cl or later
+
+
+        Deletes a semantic integration and its associated ThoughtSpot model.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - **Can manage data models**
+
+        #### About delete semantic integration
+
+        Removes the specified semantic integration and its generated ThoughtSpot model from the system.
+
+        - `semantic_integration_identifier` is the GUID or name of the integration to delete.
+        - Deletions cannot be undone. Re-import the integration with `createSemanticIntegration` if needed.
+
+
+
+
+
+      operationId: deleteSemanticIntegration
+      parameters:
+      - description: ID or name of the semantic integration to delete.
+        explode: false
+        in: path
+        name: semantic_integration_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Semantic integration deleted successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Semantic Integrations
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import:
+    post:
+      description: |2+
+
+         Version: 26.9.0.cl or later
+
+
+        Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - **Can manage data models**
+
+        #### About import semantic integration
+
+        Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.
+
+        - `semantic_integration_identifier` is the GUID or name of the integration to import updates for.
+        - Import preserves the integration's GUID, name, and `model_id`; only the underlying formula set is refreshed.
+        - The response includes the same `semantic_report` as create, with an additional `change_status` per formula indicating whether each formula is `NEW`, `UPDATED`, or `UNCHANGED` since the previous import.
+
+        > **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.
+
+
+
+
+
+      operationId: importSemanticIntegration
+      parameters:
+      - description: ID or name of the semantic integration to import updates for.
+        explode: false
+        in: path
+        name: semantic_integration_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SemanticIntegrationResponse'
+          description: Semantic integration imported successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Semantic integration not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Semantic Integrations
+      - ThoughtSpotRest
+      x-accepts:
+      - application/json
+  /api/rest/2.0/semantic-integrations/search:
+    post:
+      description: |2+
+
+         Version: 26.9.0.cl or later
+
+
+        Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - **Can manage data models**
+
+        #### About search semantic integrations
+
+        Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.
+
+        - `pattern` matches the integration name as a case-insensitive substring.
+        - `author_identifiers` and `connection_identifiers` accept either GUIDs or names.
+        - `sort_options.field_name` defaults to `MODIFIED_TIME`; set `sort_options.order` to `ASC` or `DESC` to control sort direction.
+        - `record_offset` and `record_size` control pagination. Use `record_size: 0` to return all matching records in a single response.
+
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
+
+
+
+
+
+      operationId: searchSemanticIntegrations
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchSemanticIntegrationsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SemanticIntegrationSearchResponse'
+                type: array
+          description: Semantic integrations retrieved successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Semantic Integrations
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts:
@@ -21888,6 +23340,20 @@ components:
       type: object
     ConversationShareStatusResponse:
       description: Response returned by getShareInfo.
+      example:
+        conversation_id: conversation_id
+        is_shared_content_outdated: true
+        principals:
+        - name: name
+          permission: READ_ONLY
+          id: id
+          type: USER
+          display_name: display_name
+        - name: name
+          permission: READ_ONLY
+          id: id
+          type: USER
+          display_name: display_name
       properties:
         conversation_id:
           description: Unique identifier of the source conversation.
@@ -21912,6 +23378,12 @@ components:
       type: object
     ConversationPrincipalInfo:
       description: A principal that has been granted access to a shared conversation.
+      example:
+        name: name
+        permission: READ_ONLY
+        id: id
+        type: USER
+        display_name: display_name
       properties:
         id:
           description: Unique identifier of the user or group.
@@ -21947,6 +23419,55 @@ components:
       description: |-
         Response returned by getSharedContent. Contains the full read-only view
         of the shared conversation including messages and data source metadata.
+      example:
+        creator_user_id: creator_user_id
+        code_execution_files:
+        - expired: true
+          file_type: file_type
+          file_id: file_id
+          created_time_in_millis: ""
+          display_name: display_name
+        - expired: true
+          file_type: file_type
+          file_id: file_id
+          created_time_in_millis: ""
+          display_name: display_name
+        conversation_title: conversation_title
+        conversation_id: conversation_id
+        shared_conversation_id: shared_conversation_id
+        analyst_ids:
+        - analyst_ids
+        - analyst_ids
+        messages:
+        - response_items:
+          - ""
+          - ""
+          timestamp_in_millis: ""
+          message_id: message_id
+          user_prompt:
+            attachments:
+            - ""
+            - ""
+            message:
+              message_id: message_id
+              content: content
+        - response_items:
+          - ""
+          - ""
+          timestamp_in_millis: ""
+          message_id: message_id
+          user_prompt:
+            attachments:
+            - ""
+            - ""
+            message:
+              message_id: message_id
+              content: content
+        data_sources:
+        - name: name
+          id: id
+        - name: name
+          id: id
       properties:
         conversation_id:
           description: Unique identifier of the source conversation (echoes the request
@@ -23985,6 +25506,25 @@ components:
       type: object
     SemanticIntegrationSearchResponse:
       description: Single semantic integration entry returned by search.
+      example:
+        author_name: author_name
+        creation_time_in_millis: 0.8008282
+        description: description
+        modification_time_in_millis: 6.0274563
+        model_id: model_id
+        type: RDBMS_SNOWFLAKE
+        tags:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        connection_name: connection_name
+        model_name: model_name
+        connection_id: connection_id
+        name: name
+        id: id
+        import_type: CDW
+        author_id: author_id
       properties:
         id:
           description: Unique identifier of the semantic integration.
@@ -24056,6 +25596,9 @@ components:
       type: object
     SemanticIntegrationTagReference:
       description: Tag reference associated with a semantic integration.
+      example:
+        name: name
+        id: id
       properties:
         id:
           description: Unique identifier of the tag.
@@ -24070,6 +25613,36 @@ components:
       description: |-
         A named group of related features. Returned by searchFeatures; the contents of
         features depend on the requested scope (cluster-admin vs. org-admin view).
+      example:
+        docs_url: docs_url
+        features:
+        - feature_id: feature_id
+          assigned_orgs:
+          - org_id: 0
+            org_name: org_name
+          - org_id: 0
+            org_name: org_name
+          element_value: element_value
+          docs_url: docs_url
+          element_config: ""
+          feature_name: feature_name
+          is_org_aware: true
+          element_type: element_type
+          feature_value: feature_value
+        - feature_id: feature_id
+          assigned_orgs:
+          - org_id: 0
+            org_name: org_name
+          - org_id: 0
+            org_name: org_name
+          element_value: element_value
+          docs_url: docs_url
+          element_config: ""
+          feature_name: feature_name
+          is_org_aware: true
+          element_type: element_type
+          feature_value: feature_value
+        feature_group: feature_group
       properties:
         feature_group:
           description: Display name of the feature group.
@@ -24096,6 +25669,20 @@ components:
         search: cluster-admin (CLUSTER) responses populate assigned_orgs, is_org_aware,
         and (for non-org-aware features) feature_value; org-admin (ORG) responses
         populate element_type, element_config, and element_value.
+      example:
+        feature_id: feature_id
+        assigned_orgs:
+        - org_id: 0
+          org_name: org_name
+        - org_id: 0
+          org_name: org_name
+        element_value: element_value
+        docs_url: docs_url
+        element_config: ""
+        feature_name: feature_name
+        is_org_aware: true
+        element_type: element_type
+        feature_value: feature_value
       properties:
         feature_id:
           description: |-
@@ -24162,6 +25749,9 @@ components:
         name used by the shared Org type: they are the literal wire keys emitted by
         the Callosum backend, so they are load-bearing for Prism's response field
         mapping and cannot be renamed without a backend change.
+      example:
+        org_id: 0
+        org_name: org_name
       properties:
         org_id:
           description: Numeric ID of the Org.
@@ -27718,6 +29308,10 @@ components:
       type: object
     AnalystSourceInput:
       description: A data source to attach to a Spotter Analyst.
+      example:
+        identifier: identifier
+        name: name
+        type: MODEL
       properties:
         identifier:
           description: Unique identifier of the data source.
@@ -27742,6 +29336,31 @@ components:
       description: |-
         A Spotter Analyst: a configured agent with a name, description, agent
         instructions, data sources, MCP connectors, and starter prompts.
+      example:
+        instructions: instructions
+        sources:
+        - id: id
+          type: MODEL
+        - id: id
+          type: MODEL
+        name: name
+        updated_by: updated_by
+        description: description
+        starter_prompts:
+        - is_ai_generated: true
+          label: label
+          text: text
+          order: 0
+        - is_ai_generated: true
+          label: label
+          text: text
+          order: 0
+        id: id
+        updated_time_in_millis: ""
+        created_by: created_by
+        mcp_connectors:
+        - mcp_connectors
+        - mcp_connectors
       properties:
         id:
           description: Unique identifier of the analyst.
@@ -27794,6 +29413,9 @@ components:
       type: object
     AnalystSource:
       description: A data source attached to a Spotter Analyst.
+      example:
+        id: id
+        type: MODEL
       properties:
         id:
           description: Unique identifier of the data source.
@@ -27812,6 +29434,11 @@ components:
       type: object
     AnalystStarterPrompt:
       description: A user-defined starter prompt shown on the Analyst landing page.
+      example:
+        is_ai_generated: true
+        label: label
+        text: text
+        order: 0
       properties:
         label:
           description: Short display label shown in the UI.
@@ -27834,6 +29461,8 @@ components:
       type: object
     AnalystDeleteResponse:
       description: Response returned after deleting a Spotter Analyst.
+      example:
+        id: id
       properties:
         id:
           description: Unique identifier of the deleted analyst.
@@ -27843,6 +29472,85 @@ components:
       type: object
     AnalystSearchResponse:
       description: Response returned by analyst search.
+      example:
+        analysts:
+        - instructions: instructions
+          sources:
+          - name: name
+            id: id
+            type: MODEL
+          - name: name
+            id: id
+            type: MODEL
+          last_accessed_time_in_millis: ""
+          name: name
+          updated_by:
+            name: name
+            id: id
+            display_name: display_name
+          description: description
+          starter_prompts:
+          - label: label
+            text: text
+            is_fixed: true
+            order: 0
+          - label: label
+            text: text
+            is_fixed: true
+            order: 0
+          id: id
+          icon_id: icon_id
+          updated_time_in_millis: ""
+          created_by:
+            name: name
+            id: id
+            display_name: display_name
+          mcp_connectors:
+          - icon_url: icon_url
+            name: name
+            id: id
+          - icon_url: icon_url
+            name: name
+            id: id
+        - instructions: instructions
+          sources:
+          - name: name
+            id: id
+            type: MODEL
+          - name: name
+            id: id
+            type: MODEL
+          last_accessed_time_in_millis: ""
+          name: name
+          updated_by:
+            name: name
+            id: id
+            display_name: display_name
+          description: description
+          starter_prompts:
+          - label: label
+            text: text
+            is_fixed: true
+            order: 0
+          - label: label
+            text: text
+            is_fixed: true
+            order: 0
+          id: id
+          icon_id: icon_id
+          updated_time_in_millis: ""
+          created_by:
+            name: name
+            id: id
+            display_name: display_name
+          mcp_connectors:
+          - icon_url: icon_url
+            name: name
+            id: id
+          - icon_url: icon_url
+            name: name
+            id: id
+        total_size: 6
       properties:
         analysts:
           description: Page of analysts matching the request.
@@ -27859,6 +29567,45 @@ components:
       type: object
     AnalystItem:
       description: A Spotter Analyst as returned in search results.
+      example:
+        instructions: instructions
+        sources:
+        - name: name
+          id: id
+          type: MODEL
+        - name: name
+          id: id
+          type: MODEL
+        last_accessed_time_in_millis: ""
+        name: name
+        updated_by:
+          name: name
+          id: id
+          display_name: display_name
+        description: description
+        starter_prompts:
+        - label: label
+          text: text
+          is_fixed: true
+          order: 0
+        - label: label
+          text: text
+          is_fixed: true
+          order: 0
+        id: id
+        icon_id: icon_id
+        updated_time_in_millis: ""
+        created_by:
+          name: name
+          id: id
+          display_name: display_name
+        mcp_connectors:
+        - icon_url: icon_url
+          name: name
+          id: id
+        - icon_url: icon_url
+          name: name
+          id: id
       properties:
         id:
           description: Unique identifier of the analyst.
@@ -27915,6 +29662,10 @@ components:
       type: object
     AnalystItemSource:
       description: A data source returned in analyst search results.
+      example:
+        name: name
+        id: id
+        type: MODEL
       properties:
         id:
           description: Unique identifier of the data source.
@@ -27937,6 +29688,10 @@ components:
       type: object
     AnalystMcpConnector:
       description: An MCP connector returned in analyst search results.
+      example:
+        icon_url: icon_url
+        name: name
+        id: id
       properties:
         id:
           description: Unique identifier of the MCP connector.
@@ -27956,6 +29711,11 @@ components:
       description: |-
         A starter prompt returned in analyst search results. Includes the
         server-managed fixed prompt (`is_fixed: true`, order 0).
+      example:
+        label: label
+        text: text
+        is_fixed: true
+        order: 0
       properties:
         label:
           description: Short display label shown in the UI.
@@ -27978,6 +29738,10 @@ components:
       type: object
     AnalystUser:
       description: A user reference returned in analyst search results.
+      example:
+        name: name
+        id: id
+        display_name: display_name
       properties:
         id:
           description: Unique identifier of the user.
@@ -27997,6 +29761,9 @@ components:
       description: |-
         Input reference to a principal (user or group) used when granting or revoking
         access to a shared resource.
+      example:
+        principal_identifier: principal_identifier
+        principal_type: USER
       properties:
         principal_identifier:
           description: Unique identifier of the user or group.
@@ -29311,6 +31078,32 @@ components:
       type: object
     SemanticIntegrationResponse:
       description: Response object for a semantic integration.
+      example:
+        model_name: model_name
+        semantic_report:
+          summary:
+            total: 0
+            imported: 6
+            failed: 1
+            skipped: 5
+          formulas:
+          - translated_formula: translated_formula
+            name: name
+            source_expression: source_expression
+            description: description
+            import_status: IMPORTED
+            id: id
+            change_status: NEW
+          - translated_formula: translated_formula
+            name: name
+            source_expression: source_expression
+            description: description
+            import_status: IMPORTED
+            id: id
+            change_status: NEW
+        name: name
+        id: id
+        model_id: model_id
       properties:
         id:
           description: Unique identifier of the semantic integration.
@@ -29333,6 +31126,27 @@ components:
       type: object
     SemanticIntegrationReport:
       description: Per-formula import report for a semantic integration.
+      example:
+        summary:
+          total: 0
+          imported: 6
+          failed: 1
+          skipped: 5
+        formulas:
+        - translated_formula: translated_formula
+          name: name
+          source_expression: source_expression
+          description: description
+          import_status: IMPORTED
+          id: id
+          change_status: NEW
+        - translated_formula: translated_formula
+          name: name
+          source_expression: source_expression
+          description: description
+          import_status: IMPORTED
+          id: id
+          change_status: NEW
       properties:
         summary:
           $ref: '#/components/schemas/SemanticIntegrationReportSummary'
@@ -29345,6 +31159,11 @@ components:
       type: object
     SemanticIntegrationReportSummary:
       description: Formula import counts summary.
+      example:
+        total: 0
+        imported: 6
+        failed: 1
+        skipped: 5
       properties:
         total:
           description: Total number of formulas.
@@ -29369,6 +31188,14 @@ components:
       type: object
     SemanticIntegrationFormulaReport:
       description: Import details for a single formula.
+      example:
+        translated_formula: translated_formula
+        name: name
+        source_expression: source_expression
+        description: description
+        import_status: IMPORTED
+        id: id
+        change_status: NEW
       properties:
         id:
           description: Formula ID in the model.
@@ -29409,6 +31236,14 @@ components:
       type: object
     FeatureAssignmentResponse:
       description: Response returned when a feature's Org assignments are updated.
+      example:
+        feature_id: feature_id
+        assigned_orgs:
+        - org_id: 0
+          org_name: org_name
+        - org_id: 0
+          org_name: org_name
+        feature_name: feature_name
       properties:
         feature_id:
           description: |-
@@ -29432,6 +31267,10 @@ components:
       type: object
     FeatureValueResponse:
       description: Response returned when a feature's value is set.
+      example:
+        feature_id: feature_id
+        feature_name: feature_name
+        feature_value: feature_value
       properties:
         feature_id:
           description: |-
@@ -29495,6 +31334,23 @@ components:
       - conversation_settings
       type: object
     CreateAnalystRequest:
+      example:
+        instructions: instructions
+        sources:
+        - identifier: identifier
+          name: name
+          type: MODEL
+        - identifier: identifier
+          name: name
+          type: MODEL
+        name: name
+        description: description
+        starter_prompts:
+        - starter_prompts
+        - starter_prompts
+        mcp_connector_identifiers:
+        - mcp_connector_identifiers
+        - mcp_connector_identifiers
       properties:
         name:
           description: Display name of the analyst.
@@ -29709,6 +31565,12 @@ components:
           type: array
       type: object
     SearchAnalystsRequest:
+      example:
+        analyst_identifier: analyst_identifier
+        query: query
+        record_size: 0
+        type: ALL
+        record_offset: 6
       properties:
         analyst_identifier:
           description: |-
@@ -29857,6 +31719,18 @@ components:
       - nl_instructions_info
       type: object
     ShareAnalystRequest:
+      example:
+        permissions:
+        - principal:
+            identifier: identifier
+            type: USER
+          share_mode: READ_ONLY
+          content_share_mode: READ_ONLY
+        - principal:
+            identifier: identifier
+            type: USER
+          share_mode: READ_ONLY
+          content_share_mode: READ_ONLY
       properties:
         permissions:
           description: |-
@@ -29870,6 +31744,19 @@ components:
       - permissions
       type: object
     ShareConversationRequest:
+      example:
+        refresh_shared_content: false
+        revoke:
+        - principal_identifier: principal_identifier
+          principal_type: USER
+        - principal_identifier: principal_identifier
+          principal_type: USER
+        grant:
+        - principal_identifier: principal_identifier
+          principal_type: USER
+        - principal_identifier: principal_identifier
+          principal_type: USER
+        notify_on_share: true
       properties:
         refresh_shared_content:
           default: false
@@ -29921,6 +31808,23 @@ components:
       - query
       type: object
     UpdateAnalystRequest:
+      example:
+        instructions: instructions
+        sources:
+        - identifier: identifier
+          name: name
+          type: MODEL
+        - identifier: identifier
+          name: name
+          type: MODEL
+        name: name
+        description: description
+        starter_prompts:
+        - starter_prompts
+        - starter_prompts
+        mcp_connector_identifiers:
+        - mcp_connector_identifiers
+        - mcp_connector_identifiers
       properties:
         name:
           description: Display name of the analyst.
@@ -31774,6 +33678,10 @@ components:
       - template_properties
       type: object
     SearchFeaturesRequest:
+      example:
+        scope: CLUSTER
+        org_identifier: 0
+        category: GENERAL_ACCESS
       properties:
         scope:
           description: |-
@@ -31805,6 +33713,12 @@ components:
       - scope
       type: object
     UpdateFeatureAssignmentsRequest:
+      example:
+        org_identifiers:
+        - 0
+        - 0
+        feature_identifier: feature_identifier
+        operation: REPLACE
       properties:
         feature_identifier:
           description: |-
@@ -31835,6 +33749,12 @@ components:
       - org_identifiers
       type: object
     UpdateFeatureValueRequest:
+      example:
+        reset_org_overrides: true
+        scope: CLUSTER
+        org_identifier: 0
+        feature_identifier: feature_identifier
+        feature_value: feature_value
       properties:
         scope:
           description: |-
@@ -35811,6 +37731,14 @@ components:
       - column_security_rules
       type: object
     CreateSemanticIntegrationRequest:
+      example:
+        database_name: database_name
+        name: name
+        description: description
+        schema_name: schema_name
+        type: RDBMS_SNOWFLAKE
+        semantic_view_name: semantic_view_name
+        connection_identifier: connection_identifier
       properties:
         connection_identifier:
           description: ID or name of the CDW connection.
@@ -35845,6 +37773,17 @@ components:
       - type
       type: object
     SearchSemanticIntegrationsRequest:
+      example:
+        author_identifiers:
+        - author_identifiers
+        - author_identifiers
+        pattern: pattern
+        record_size: 6
+        connection_identifiers:
+        - connection_identifiers
+        - connection_identifiers
+        sort_options: ""
+        record_offset: 0
       properties:
         sort_options:
           allOf:

@@ -21,7 +21,7 @@ _ts_warnings.filterwarnings(
 """  # noqa: E501
 
 
-__version__ = "2.29.0"
+__version__ = "2.30.0"
 
 # Define package exports
 __all__ = [
@@ -36,6 +36,7 @@ __all__ = [
     "DBTApi",
     "DataApi",
     "EmailCustomizationApi",
+    "FeatureManagementApi",
     "GroupsApi",
     "JobsApi",
     "LogApi",
@@ -46,6 +47,7 @@ __all__ = [
     "RolesApi",
     "SchedulesApi",
     "SecurityApi",
+    "SemanticIntegrationsApi",
     "StyleCustomizationApi",
     "SystemApi",
     "TagsApi",
@@ -617,6 +619,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.dbt_api import DBTApi as DBTApi
     from thoughtspot_rest_api_sdk.api.data_api import DataApi as DataApi
     from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi as EmailCustomizationApi
+    from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi as FeatureManagementApi
     from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi as GroupsApi
     from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi as JobsApi
     from thoughtspot_rest_api_sdk.api.log_api import LogApi as LogApi
@@ -627,6 +630,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.roles_api import RolesApi as RolesApi
     from thoughtspot_rest_api_sdk.api.schedules_api import SchedulesApi as SchedulesApi
     from thoughtspot_rest_api_sdk.api.security_api import SecurityApi as SecurityApi
+    from thoughtspot_rest_api_sdk.api.semantic_integrations_api import SemanticIntegrationsApi as SemanticIntegrationsApi
     from thoughtspot_rest_api_sdk.api.style_customization_api import StyleCustomizationApi as StyleCustomizationApi
     from thoughtspot_rest_api_sdk.api.system_api import SystemApi as SystemApi
     from thoughtspot_rest_api_sdk.api.tags_api import TagsApi as TagsApi
@@ -1208,6 +1212,7 @@ from thoughtspot_rest_api_sdk.api.custom_calendars_api import CustomCalendarsApi
 from thoughtspot_rest_api_sdk.api.dbt_api import DBTApi as DBTApi
 from thoughtspot_rest_api_sdk.api.data_api import DataApi as DataApi
 from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi as EmailCustomizationApi
+from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi as FeatureManagementApi
 from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi as GroupsApi
 from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi as JobsApi
 from thoughtspot_rest_api_sdk.api.log_api import LogApi as LogApi
@@ -1218,6 +1223,7 @@ from thoughtspot_rest_api_sdk.api.reports_api import ReportsApi as ReportsApi
 from thoughtspot_rest_api_sdk.api.roles_api import RolesApi as RolesApi
 from thoughtspot_rest_api_sdk.api.schedules_api import SchedulesApi as SchedulesApi
 from thoughtspot_rest_api_sdk.api.security_api import SecurityApi as SecurityApi
+from thoughtspot_rest_api_sdk.api.semantic_integrations_api import SemanticIntegrationsApi as SemanticIntegrationsApi
 from thoughtspot_rest_api_sdk.api.style_customization_api import StyleCustomizationApi as StyleCustomizationApi
 from thoughtspot_rest_api_sdk.api.system_api import SystemApi as SystemApi
 from thoughtspot_rest_api_sdk.api.tags_api import TagsApi as TagsApi

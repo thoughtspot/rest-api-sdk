@@ -12,6 +12,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.dbt_api import DBTApi
     from thoughtspot_rest_api_sdk.api.data_api import DataApi
     from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi
+    from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi
     from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi
     from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi
     from thoughtspot_rest_api_sdk.api.log_api import LogApi
@@ -22,6 +23,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.roles_api import RolesApi
     from thoughtspot_rest_api_sdk.api.schedules_api import SchedulesApi
     from thoughtspot_rest_api_sdk.api.security_api import SecurityApi
+    from thoughtspot_rest_api_sdk.api.semantic_integrations_api import SemanticIntegrationsApi
     from thoughtspot_rest_api_sdk.api.style_customization_api import StyleCustomizationApi
     from thoughtspot_rest_api_sdk.api.system_api import SystemApi
     from thoughtspot_rest_api_sdk.api.tags_api import TagsApi
@@ -48,6 +50,7 @@ from thoughtspot_rest_api_sdk.api.custom_calendars_api import CustomCalendarsApi
 from thoughtspot_rest_api_sdk.api.dbt_api import DBTApi
 from thoughtspot_rest_api_sdk.api.data_api import DataApi
 from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi
+from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi
 from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi
 from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi
 from thoughtspot_rest_api_sdk.api.log_api import LogApi
@@ -58,6 +61,7 @@ from thoughtspot_rest_api_sdk.api.reports_api import ReportsApi
 from thoughtspot_rest_api_sdk.api.roles_api import RolesApi
 from thoughtspot_rest_api_sdk.api.schedules_api import SchedulesApi
 from thoughtspot_rest_api_sdk.api.security_api import SecurityApi
+from thoughtspot_rest_api_sdk.api.semantic_integrations_api import SemanticIntegrationsApi
 from thoughtspot_rest_api_sdk.api.style_customization_api import StyleCustomizationApi
 from thoughtspot_rest_api_sdk.api.system_api import SystemApi
 from thoughtspot_rest_api_sdk.api.tags_api import TagsApi

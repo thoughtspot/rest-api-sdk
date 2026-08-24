@@ -66,6 +66,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test CreateAnalyst
+        /// </summary>
+        [Fact]
+        public void CreateAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateAnalystRequest createAnalystRequest = null;
+            //var response = instance.CreateAnalyst(createAnalystRequest);
+            //Assert.IsType<Analyst>(response);
+        }
+
+        /// <summary>
         /// Test CreateConversation
         /// </summary>
         [Fact]
@@ -75,6 +87,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //CreateConversationRequest createConversationRequest = null;
             //var response = instance.CreateConversation(createConversationRequest);
             //Assert.IsType<Conversation>(response);
+        }
+
+        /// <summary>
+        /// Test DeleteAnalyst
+        /// </summary>
+        [Fact]
+        public void DeleteAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string analystIdentifier = null;
+            //var response = instance.DeleteAnalyst(analystIdentifier);
+            //Assert.IsType<AnalystDeleteResponse>(response);
         }
 
         /// <summary>
@@ -174,6 +198,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test GetShareInfo
+        /// </summary>
+        [Fact]
+        public void GetShareInfoTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //var response = instance.GetShareInfo(conversationIdentifier);
+            //Assert.IsType<ConversationShareStatusResponse>(response);
+        }
+
+        /// <summary>
+        /// Test GetSharedContent
+        /// </summary>
+        [Fact]
+        public void GetSharedContentTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //var response = instance.GetSharedContent(conversationIdentifier);
+            //Assert.IsType<SharedConversationResponse>(response);
+        }
+
+        /// <summary>
         /// Test ImportMemory
         /// </summary>
         [Fact]
@@ -208,6 +256,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest = null;
             //var response = instance.QueryGetDecomposedQuery(queryGetDecomposedQueryRequest);
             //Assert.IsType<EurekaDecomposeQueryResponse>(response);
+        }
+
+        /// <summary>
+        /// Test SearchAnalysts
+        /// </summary>
+        [Fact]
+        public void SearchAnalystsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchAnalystsRequest searchAnalystsRequest = null;
+            //var response = instance.SearchAnalysts(searchAnalystsRequest);
+            //Assert.IsType<AnalystSearchResponse>(response);
         }
 
         /// <summary>
@@ -299,6 +359,31 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test ShareAnalyst
+        /// </summary>
+        [Fact]
+        public void ShareAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string analystIdentifier = null;
+            //ShareAnalystRequest shareAnalystRequest = null;
+            //var response = instance.ShareAnalyst(analystIdentifier, shareAnalystRequest);
+            //Assert.IsType<Object>(response);
+        }
+
+        /// <summary>
+        /// Test ShareConversation
+        /// </summary>
+        [Fact]
+        public void ShareConversationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //ShareConversationRequest shareConversationRequest = null;
+            //instance.ShareConversation(conversationIdentifier, shareConversationRequest);
+        }
+
+        /// <summary>
         /// Test SingleAnswer
         /// </summary>
         [Fact]
@@ -319,6 +404,19 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string conversationIdentifier = null;
             //instance.StopConversation(conversationIdentifier);
+        }
+
+        /// <summary>
+        /// Test UpdateAnalyst
+        /// </summary>
+        [Fact]
+        public void UpdateAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string analystIdentifier = null;
+            //UpdateAnalystRequest updateAnalystRequest = null;
+            //var response = instance.UpdateAnalyst(analystIdentifier, updateAnalystRequest);
+            //Assert.IsType<Analyst>(response);
         }
 
         /// <summary>
