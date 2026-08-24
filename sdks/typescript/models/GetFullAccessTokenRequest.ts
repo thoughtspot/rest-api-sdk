@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { TokenScopeInput } from '../models/TokenScopeInput';
 import { UserParameterOptions } from '../models/UserParameterOptions';
 import { HttpFile } from '../http/http';
 
@@ -34,6 +35,10 @@ export class GetFullAccessTokenRequest {
     * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.
     */
     'org_id'?: number;
+    /**
+    * The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the `X-Org-Selector` header.   Version: 26.10.0.cl or later 
+    */
+    'scope'?: TokenScopeInput;
     /**
     * Email address of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning).
     */
@@ -89,6 +94,12 @@ export class GetFullAccessTokenRequest {
             "baseName": "org_id",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "scope",
+            "baseName": "scope",
+            "type": "TokenScopeInput",
+            "format": ""
         },
         {
             "name": "email",

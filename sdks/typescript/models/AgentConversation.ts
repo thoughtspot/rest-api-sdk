@@ -21,6 +21,10 @@ export class AgentConversation {
     * Unique identifier of the conversation.    Version: 26.5.0.cl or later 
     */
     'conversation_identifier': string;
+    /**
+    * Unique identifier of the Spotter Analyst the conversation was started from. Null when the conversation was not started from an analyst.    Version: 26.10.0.cl or later 
+    */
+    'analyst_id'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -36,6 +40,12 @@ export class AgentConversation {
         {
             "name": "conversation_identifier",
             "baseName": "conversation_identifier",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "analyst_id",
+            "baseName": "analyst_id",
             "type": "string",
             "format": ""
         }    ];

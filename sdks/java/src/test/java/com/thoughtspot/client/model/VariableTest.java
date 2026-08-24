@@ -28,6 +28,12 @@ public class VariableTest {
         // TODO: test name
     }
 
+    /** Test the property 'objId' */
+    @Test
+    public void objIdTest() {
+        // TODO: test objId
+    }
+
     /** Test the property 'variableType' */
     @Test
     public void variableTypeTest() {

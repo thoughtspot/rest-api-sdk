@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from thoughtspot_rest_api_sdk.models.access_token_scope import AccessTokenScope
 from thoughtspot_rest_api_sdk.models.org_info import OrgInfo
 from thoughtspot_rest_api_sdk.models.user_info import UserInfo
 from typing import Optional, Set
@@ -33,8 +34,9 @@ class AccessToken(BaseModel):
     user: UserInfo
     creation_time_in_millis: Union[StrictFloat, StrictInt] = Field(description="Token creation time in milliseconds.")
     expiration_time_in_millis: Union[StrictFloat, StrictInt] = Field(description="Token expiration time in milliseconds.")
+    scope: Optional[AccessTokenScope] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "token", "org", "user", "creation_time_in_millis", "expiration_time_in_millis"]
+    __properties: ClassVar[List[str]] = ["id", "token", "org", "user", "creation_time_in_millis", "expiration_time_in_millis", "scope"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -83,6 +85,9 @@ class AccessToken(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of user
         if self.user:
             _dict['user'] = self.user.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of scope
+        if self.scope:
+            _dict['scope'] = self.scope.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -110,7 +115,8 @@ class AccessToken(BaseModel):
             "org": OrgInfo.from_dict(obj["org"]) if obj.get("org") is not None else None,
             "user": UserInfo.from_dict(obj["user"]) if obj.get("user") is not None else None,
             "creation_time_in_millis": obj.get("creation_time_in_millis"),
-            "expiration_time_in_millis": obj.get("expiration_time_in_millis")
+            "expiration_time_in_millis": obj.get("expiration_time_in_millis"),
+            "scope": AccessTokenScope.from_dict(obj["scope"]) if obj.get("scope") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

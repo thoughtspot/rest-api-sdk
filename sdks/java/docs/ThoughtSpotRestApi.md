@@ -16,6 +16,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**convertWorksheetToModel**](ThoughtSpotRestApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert |
 | [**copyObject**](ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject |
 | [**createAgentConversation**](ThoughtSpotRestApi.md#createAgentConversation) | **POST** /api/rest/2.0/ai/agent/conversation/create |
+| [**createAnalyst**](ThoughtSpotRestApi.md#createAnalyst) | **POST** /api/rest/2.0/ai/agent/analysts/create |
 | [**createCalendar**](ThoughtSpotRestApi.md#createCalendar) | **POST** /api/rest/2.0/calendars/create |
 | [**createCollection**](ThoughtSpotRestApi.md#createCollection) | **POST** /api/rest/2.0/collections/create |
 | [**createConfig**](ThoughtSpotRestApi.md#createConfig) | **POST** /api/rest/2.0/vcs/git/config/create |
@@ -27,6 +28,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**createOrg**](ThoughtSpotRestApi.md#createOrg) | **POST** /api/rest/2.0/orgs/create |
 | [**createRole**](ThoughtSpotRestApi.md#createRole) | **POST** /api/rest/2.0/roles/create |
 | [**createSchedule**](ThoughtSpotRestApi.md#createSchedule) | **POST** /api/rest/2.0/schedules/create |
+| [**createSemanticIntegration**](ThoughtSpotRestApi.md#createSemanticIntegration) | **POST** /api/rest/2.0/semantic-integrations/create |
 | [**createTag**](ThoughtSpotRestApi.md#createTag) | **POST** /api/rest/2.0/tags/create |
 | [**createUser**](ThoughtSpotRestApi.md#createUser) | **POST** /api/rest/2.0/users/create |
 | [**createUserGroup**](ThoughtSpotRestApi.md#createUserGroup) | **POST** /api/rest/2.0/groups/create |
@@ -37,6 +39,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**dbtGenerateTml**](ThoughtSpotRestApi.md#dbtGenerateTml) | **POST** /api/rest/2.0/dbt/generate-tml |
 | [**dbtSearch**](ThoughtSpotRestApi.md#dbtSearch) | **POST** /api/rest/2.0/dbt/search |
 | [**deactivateUser**](ThoughtSpotRestApi.md#deactivateUser) | **POST** /api/rest/2.0/users/deactivate |
+| [**deleteAnalyst**](ThoughtSpotRestApi.md#deleteAnalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete |
 | [**deleteCalendar**](ThoughtSpotRestApi.md#deleteCalendar) | **POST** /api/rest/2.0/calendars/{calendar_identifier}/delete |
 | [**deleteCollection**](ThoughtSpotRestApi.md#deleteCollection) | **POST** /api/rest/2.0/collections/delete |
 | [**deleteConfig**](ThoughtSpotRestApi.md#deleteConfig) | **POST** /api/rest/2.0/vcs/git/config/delete |
@@ -53,6 +56,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**deleteOrgEmailCustomization**](ThoughtSpotRestApi.md#deleteOrgEmailCustomization) | **POST** /api/rest/2.0/customization/email/delete |
 | [**deleteRole**](ThoughtSpotRestApi.md#deleteRole) | **POST** /api/rest/2.0/roles/{role_identifier}/delete |
 | [**deleteSchedule**](ThoughtSpotRestApi.md#deleteSchedule) | **POST** /api/rest/2.0/schedules/{schedule_identifier}/delete |
+| [**deleteSemanticIntegration**](ThoughtSpotRestApi.md#deleteSemanticIntegration) | **POST** /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete |
 | [**deleteStyleFonts**](ThoughtSpotRestApi.md#deleteStyleFonts) | **POST** /api/rest/2.0/customization/styles/fonts/delete |
 | [**deleteTag**](ThoughtSpotRestApi.md#deleteTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/delete |
 | [**deleteUser**](ThoughtSpotRestApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete |
@@ -94,6 +98,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**getNLInstructions**](ThoughtSpotRestApi.md#getNLInstructions) | **POST** /api/rest/2.0/ai/instructions/get |
 | [**getObjectAccessToken**](ThoughtSpotRestApi.md#getObjectAccessToken) | **POST** /api/rest/2.0/auth/token/object |
 | [**getRelevantQuestions**](ThoughtSpotRestApi.md#getRelevantQuestions) | **POST** /api/rest/2.0/ai/relevant-questions/ |
+| [**getShareInfo**](ThoughtSpotRestApi.md#getShareInfo) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info |
+| [**getSharedContent**](ThoughtSpotRestApi.md#getSharedContent) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content |
 | [**getSystemConfig**](ThoughtSpotRestApi.md#getSystemConfig) | **GET** /api/rest/2.0/system/config |
 | [**getSystemInformation**](ThoughtSpotRestApi.md#getSystemInformation) | **GET** /api/rest/2.0/system |
 | [**getSystemOverrideInfo**](ThoughtSpotRestApi.md#getSystemOverrideInfo) | **GET** /api/rest/2.0/system/config-overrides |
@@ -102,6 +108,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**importMemory**](ThoughtSpotRestApi.md#importMemory) | **POST** /api/rest/2.0/ai/memory/import |
 | [**importMetadataTML**](ThoughtSpotRestApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import |
 | [**importMetadataTMLAsync**](ThoughtSpotRestApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import |
+| [**importSemanticIntegration**](ThoughtSpotRestApi.md#importSemanticIntegration) | **POST** /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import |
 | [**importUserGroups**](ThoughtSpotRestApi.md#importUserGroups) | **POST** /api/rest/2.0/groups/import |
 | [**importUsers**](ThoughtSpotRestApi.md#importUsers) | **POST** /api/rest/2.0/users/import |
 | [**loadAnswer**](ThoughtSpotRestApi.md#loadAnswer) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details |
@@ -117,6 +124,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**revertCommit**](ThoughtSpotRestApi.md#revertCommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert |
 | [**revokeRefreshTokens**](ThoughtSpotRestApi.md#revokeRefreshTokens) | **POST** /api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens |
 | [**revokeToken**](ThoughtSpotRestApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke |
+| [**searchAnalysts**](ThoughtSpotRestApi.md#searchAnalysts) | **POST** /api/rest/2.0/ai/agent/analysts/search |
 | [**searchAuthSettings**](ThoughtSpotRestApi.md#searchAuthSettings) | **POST** /api/rest/2.0/auth/search |
 | [**searchCalendars**](ThoughtSpotRestApi.md#searchCalendars) | **POST** /api/rest/2.0/calendars/search |
 | [**searchChannelHistory**](ThoughtSpotRestApi.md#searchChannelHistory) | **POST** /api/rest/2.0/jobs/history/communication-channels/search |
@@ -128,11 +136,13 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchCustomActions**](ThoughtSpotRestApi.md#searchCustomActions) | **POST** /api/rest/2.0/customization/custom-actions/search |
 | [**searchData**](ThoughtSpotRestApi.md#searchData) | **POST** /api/rest/2.0/searchdata |
 | [**searchEmailCustomization**](ThoughtSpotRestApi.md#searchEmailCustomization) | **POST** /api/rest/2.0/customization/email/search |
+| [**searchFeatures**](ThoughtSpotRestApi.md#searchFeatures) | **POST** /api/rest/2.0/configurations/features/search |
 | [**searchMetadata**](ThoughtSpotRestApi.md#searchMetadata) | **POST** /api/rest/2.0/metadata/search |
 | [**searchOrgs**](ThoughtSpotRestApi.md#searchOrgs) | **POST** /api/rest/2.0/orgs/search |
 | [**searchRoles**](ThoughtSpotRestApi.md#searchRoles) | **POST** /api/rest/2.0/roles/search |
 | [**searchSchedules**](ThoughtSpotRestApi.md#searchSchedules) | **POST** /api/rest/2.0/schedules/search |
 | [**searchSecuritySettings**](ThoughtSpotRestApi.md#searchSecuritySettings) | **POST** /api/rest/2.0/system/security-settings/search |
+| [**searchSemanticIntegrations**](ThoughtSpotRestApi.md#searchSemanticIntegrations) | **POST** /api/rest/2.0/semantic-integrations/search |
 | [**searchStyleCustomizations**](ThoughtSpotRestApi.md#searchStyleCustomizations) | **POST** /api/rest/2.0/customization/styles/search |
 | [**searchStyleFonts**](ThoughtSpotRestApi.md#searchStyleFonts) | **POST** /api/rest/2.0/customization/styles/fonts/search |
 | [**searchTags**](ThoughtSpotRestApi.md#searchTags) | **POST** /api/rest/2.0/tags/search |
@@ -147,6 +157,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**sendMessage**](ThoughtSpotRestApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
 | [**setAgentInstructions**](ThoughtSpotRestApi.md#setAgentInstructions) | **PUT** /api/rest/2.0/ai/agent/instructions/set |
 | [**setNLInstructions**](ThoughtSpotRestApi.md#setNLInstructions) | **POST** /api/rest/2.0/ai/instructions/set |
+| [**shareAnalyst**](ThoughtSpotRestApi.md#shareAnalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share |
+| [**shareConversation**](ThoughtSpotRestApi.md#shareConversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share |
 | [**shareMetadata**](ThoughtSpotRestApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share |
 | [**singleAnswer**](ThoughtSpotRestApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create |
 | [**stopConversation**](ThoughtSpotRestApi.md#stopConversation) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response |
@@ -154,6 +166,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**unassignTag**](ThoughtSpotRestApi.md#unassignTag) | **POST** /api/rest/2.0/tags/unassign |
 | [**unparameterizeMetadata**](ThoughtSpotRestApi.md#unparameterizeMetadata) | **POST** /api/rest/2.0/metadata/unparameterize |
 | [**unpublishMetadata**](ThoughtSpotRestApi.md#unpublishMetadata) | **POST** /api/rest/2.0/security/metadata/unpublish |
+| [**updateAnalyst**](ThoughtSpotRestApi.md#updateAnalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update |
 | [**updateCalendar**](ThoughtSpotRestApi.md#updateCalendar) | **POST** /api/rest/2.0/calendars/{calendar_identifier}/update |
 | [**updateCollection**](ThoughtSpotRestApi.md#updateCollection) | **POST** /api/rest/2.0/collections/{collection_identifier}/update |
 | [**updateColumnSecurityRules**](ThoughtSpotRestApi.md#updateColumnSecurityRules) | **POST** /api/rest/2.0/security/column/rules/update |
@@ -166,6 +179,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**updateCustomAction**](ThoughtSpotRestApi.md#updateCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update |
 | [**updateDbtConnection**](ThoughtSpotRestApi.md#updateDbtConnection) | **POST** /api/rest/2.0/dbt/update-dbt-connection |
 | [**updateEmailCustomization**](ThoughtSpotRestApi.md#updateEmailCustomization) | **POST** /api/rest/2.0/customization/email/update |
+| [**updateFeatureAssignments**](ThoughtSpotRestApi.md#updateFeatureAssignments) | **POST** /api/rest/2.0/configurations/features/assignments/update |
+| [**updateFeatureValue**](ThoughtSpotRestApi.md#updateFeatureValue) | **POST** /api/rest/2.0/configurations/features/values/update |
 | [**updateMetadataHeader**](ThoughtSpotRestApi.md#updateMetadataHeader) | **POST** /api/rest/2.0/metadata/headers/update |
 | [**updateMetadataObjId**](ThoughtSpotRestApi.md#updateMetadataObjId) | **POST** /api/rest/2.0/metadata/update-obj-id |
 | [**updateOrg**](ThoughtSpotRestApi.md#updateOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update |
@@ -621,6 +636,43 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Operation failed |  -  |
 
+<a id="createAnalyst"></a>
+# **createAnalyst**
+> Analyst createAnalyst(createAnalystRequest)
+
+
+
+ Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior for this analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). The caller must have view access to every referenced source. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60; (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users.  #### Error conditions  - &#x60;403&#x60; — missing privileges, or no view access to a referenced data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createAnalystRequest** | [**CreateAnalystRequest**](CreateAnalystRequest.md)
+
+### Return type
+
+[**Analyst**](Analyst.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
 <a id="createCalendar"></a>
 # **createCalendar**
 > CalendarResponse createCalendar(createCalendarRequest)
@@ -1017,6 +1069,44 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="createSemanticIntegration"></a>
+# **createSemanticIntegration**
+> SemanticIntegrationResponse createSemanticIntegration(createSemanticIntegrationRequest)
+
+
+
+  Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createSemanticIntegrationRequest** | [**CreateSemanticIntegrationRequest**](CreateSemanticIntegrationRequest.md)
+
+### Return type
+
+[**SemanticIntegrationResponse**](SemanticIntegrationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Semantic integration created successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Connection not found. |  -  |
+| **409** | Duplicate integration name. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="createTag"></a>
 # **createTag**
 > Tag createTag(createTagRequest)
@@ -1389,6 +1479,43 @@ This endpoint does not need any parameter.
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+<a id="deleteAnalyst"></a>
+# **deleteAnalyst**
+> AnalystDeleteResponse deleteAnalyst(analystIdentifier)
+
+
+
+ Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path parameter, as returned by the create analyst API.  A successful request returns the &#x60;id&#x60; of the deleted analyst.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **analystIdentifier** | **String**
+
+### Return type
+
+[**AnalystDeleteResponse**](AnalystDeleteResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 <a id="deleteCalendar"></a>
 # **deleteCalendar**
@@ -1961,6 +2088,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Schedule successfully deleted. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="deleteSemanticIntegration"></a>
+# **deleteSemanticIntegration**
+> deleteSemanticIntegration(semanticIntegrationIdentifier)
+
+
+
+  Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **semanticIntegrationIdentifier** | **String**
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Semantic integration deleted successfully. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -3223,6 +3386,7 @@ No authorization required
 | **400** | Invalid request. This could be due to missing or incorrect parameters. |  -  |
 | **401** | Unauthorized access. The request could not be authenticated. |  -  |
 | **403** | Forbidden access. The user does not have permission to access this resource. |  -  |
+| **409** | Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. |  -  |
 | **500** | An unexpected error occurred on the server. |  -  |
 
 <a id="getDataSourceSuggestions"></a>
@@ -3433,6 +3597,80 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="getShareInfo"></a>
+# **getShareInfo**
+> ConversationShareStatusResponse getShareInfo(conversationIdentifier)
+
+
+
+ Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+
+### Return type
+
+[**ConversationShareStatusResponse**](ConversationShareStatusResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="getSharedContent"></a>
+# **getSharedContent**
+> SharedConversationResponse getSharedContent(conversationIdentifier)
+
+
+
+ Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+
+### Return type
+
+[**SharedConversationResponse**](SharedConversationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
@@ -3721,6 +3959,43 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="importSemanticIntegration"></a>
+# **importSemanticIntegration**
+> SemanticIntegrationResponse importSemanticIntegration(semanticIntegrationIdentifier)
+
+
+
+  Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **semanticIntegrationIdentifier** | **String**
+
+### Return type
+
+[**SemanticIntegrationResponse**](SemanticIntegrationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Semantic integration imported successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Semantic integration not found. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="importUserGroups"></a>
@@ -4268,6 +4543,43 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="searchAnalysts"></a>
+# **searchAnalysts**
+> AnalystSearchResponse searchAnalysts(searchAnalystsRequest)
+
+
+
+ Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (&#x60;query&#x60;) and by ownership (&#x60;type&#x60;). Results are ordered   by most recently accessed. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - &#x60;record_size&#x60; (optional): number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60; (optional): zero-based index of the first record. Default 0, maximum 10000. - &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;.  The response contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;, the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;, &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60; (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;), &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt, marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; / &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;display_name&#x60;).  #### Error conditions  - &#x60;403&#x60; — missing privileges, or (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchAnalystsRequest** | [**SearchAnalystsRequest**](SearchAnalystsRequest.md)
+
+### Return type
+
+[**AnalystSearchResponse**](AnalystSearchResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
 <a id="searchAuthSettings"></a>
 # **searchAuthSettings**
 > SearchAuthSettingsResponse searchAuthSettings(searchAuthSettingsRequest)
@@ -4663,6 +4975,43 @@ null (empty response body)
 | **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="searchFeatures"></a>
+# **searchFeatures**
+> List&lt;FeatureGroup&gt; searchFeatures(searchFeaturesRequest)
+
+
+
+  Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the org-admin view (returns the current value of each feature for a single Org). - &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;category&#x60; — Availability category of the features to return. &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60; returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;.  The response fields populated depend on the requested scope. In the cluster-admin view (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;, &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;, &#x60;element_config&#x60;, and &#x60;element_value&#x60;.  The following example retrieves the general-access features for the cluster-admin view:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;  For the org-admin view, set &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is &#x60;ORG&#x60;; omitting it returns a 400 error):  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchFeaturesRequest** | [**SearchFeaturesRequest**](SearchFeaturesRequest.md)
+
+### Return type
+
+[**List&lt;FeatureGroup&gt;**](FeatureGroup.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Feature groups returned. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Insufficient privileges. |  -  |
+| **404** | Feature management not enabled. |  -  |
+| **500** | Unexpected error. |  -  |
+
 <a id="searchMetadata"></a>
 # **searchMetadata**
 > List&lt;MetadataSearchResponse&gt; searchMetadata(searchMetadataRequest)
@@ -4838,6 +5187,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successfully retrieved the list of security settings. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="searchSemanticIntegrations"></a>
+# **searchSemanticIntegrations**
+> List&lt;SemanticIntegrationSearchResponse&gt; searchSemanticIntegrations(searchSemanticIntegrationsRequest)
+
+
+
+  Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchSemanticIntegrationsRequest** | [**SearchSemanticIntegrationsRequest**](SearchSemanticIntegrationsRequest.md)
+
+### Return type
+
+[**List&lt;SemanticIntegrationSearchResponse&gt;**](SemanticIntegrationSearchResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Semantic integrations retrieved successfully. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -5358,6 +5743,81 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Operation failed |  -  |
 
+<a id="shareAnalyst"></a>
+# **shareAnalyst**
+> Object shareAnalyst(analystIdentifier, shareAnalystRequest)
+
+
+
+ Updates share permissions on a Spotter Analyst, one entry per principal (user or group). &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources with the principal so the analyst keeps working for them. A successful share returns an empty &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the &#x60;analyst_identifier&#x60; path parameter. The request body contains a &#x60;permissions&#x60; array with one entry per principal:  - &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. - &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. - &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it.  A principal may appear at most once per request. When access is granted, the analyst&#39;s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty &#x60;204 No Content&#x60; response.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **analystIdentifier** | **String**
+| **shareAnalystRequest** | [**ShareAnalystRequest**](ShareAnalystRequest.md)
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="shareConversation"></a>
+# **shareConversation**
+> shareConversation(conversationIdentifier, shareConversationRequest)
+
+
+
+ Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+| **shareConversationRequest** | [**ShareConversationRequest**](ShareConversationRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully updated the share access for the conversation. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
 <a id="shareMetadata"></a>
 # **shareMetadata**
 > shareMetadata(shareMetadataRequest)
@@ -5612,6 +6072,44 @@ null (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+<a id="updateAnalyst"></a>
+# **updateAnalyst**
+> Analyst updateAnalyst(analystIdentifier, updateAnalystRequest)
+
+
+
+ Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;).  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **analystIdentifier** | **String**
+| **updateAnalystRequest** | [**UpdateAnalystRequest**](UpdateAnalystRequest.md)
+
+### Return type
+
+[**Analyst**](Analyst.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 <a id="updateCalendar"></a>
 # **updateCalendar**
@@ -5914,7 +6412,7 @@ null (empty response body)
 
 
 
- Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+ Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
 
 ### Parameters
 
@@ -6063,6 +6561,80 @@ null (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
+
+<a id="updateFeatureAssignments"></a>
+# **updateFeatureAssignments**
+> FeatureAssignmentResponse updateFeatureAssignments(updateFeatureAssignmentsRequest)
+
+
+
+  Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org assignments for this feature. - &#x60;operation&#x60; — Type of update to apply. &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60; unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs. Defaults to &#x60;REPLACE&#x60;.  The following example assigns Orgs &#x60;1&#x60; and &#x60;2&#x60; to a feature, in addition to any Orgs already assigned:  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [1, 2],   \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60;  Clear all Org assignments for a feature by sending an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once):  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [],   \&quot;operation\&quot;: \&quot;REPLACE\&quot; } &#x60;&#x60;&#x60;      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **updateFeatureAssignmentsRequest** | [**UpdateFeatureAssignmentsRequest**](UpdateFeatureAssignmentsRequest.md)
+
+### Return type
+
+[**FeatureAssignmentResponse**](FeatureAssignmentResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Assignments updated. |  -  |
+| **400** | Invalid request parameters. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Insufficient privileges. |  -  |
+| **404** | Feature not found or feature management not enabled. |  -  |
+| **500** | Unexpected error. |  -  |
+
+<a id="updateFeatureValue"></a>
+# **updateFeatureValue**
+> FeatureValueResponse updateFeatureValue(updateFeatureValueRequest)
+
+
+
+  Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60; to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. - &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set. - &#x60;feature_value&#x60; — New value to set for the feature. - &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400 error.  The following example sets a per-Org value override for Org &#x60;1&#x60;:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot; } &#x60;&#x60;&#x60;  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides: true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot;,   \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **updateFeatureValueRequest** | [**UpdateFeatureValueRequest**](UpdateFeatureValueRequest.md)
+
+### Return type
+
+[**FeatureValueResponse**](FeatureValueResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Value updated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Insufficient privileges or org not assigned to feature. |  -  |
+| **404** | Feature not found or feature management not enabled. |  -  |
+| **500** | Unexpected error. |  -  |
 
 <a id="updateMetadataHeader"></a>
 # **updateMetadataHeader**

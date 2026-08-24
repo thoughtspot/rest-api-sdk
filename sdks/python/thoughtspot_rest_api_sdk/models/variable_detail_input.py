@@ -25,7 +25,7 @@ class VariableDetailInput(BaseModel):
     """
     Input for variable details in search
     """ # noqa: E501
-    identifier: Optional[StrictStr] = Field(default=None, description="Unique ID or name of the variable")
+    identifier: Optional[StrictStr] = Field(default=None, description="Unique ID, name, or object ID of the variable")
     type: Optional[StrictStr] = Field(default=None, description="Type of variable")
     name_pattern: Optional[StrictStr] = Field(default=None, description="A pattern to match case-insensitive name of the variable. User % for a wildcard match")
     additional_properties: Dict[str, Any] = {}

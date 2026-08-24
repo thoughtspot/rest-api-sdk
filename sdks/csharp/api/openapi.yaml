@@ -142,6 +142,90 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+  /api/rest/2.0/ai/agent/analysts/create:
+    post:
+      description: "\nCreates a Spotter Analyst: a configured agent with a name, description,\n\
+        at least one data source, and optional agent instructions, MCP\nconnectors,\
+        \ and starter prompts. Analysts created via API use the default\nicon until\
+        \ one is set in the UI.\nRequires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`,\
+        \ or\n`CAN_USE_SPOTTER` privileges, plus view access to every data source\n\
+        referenced in `sources`. \n Version: 26.10.0.cl or later\n\n\nCreates a Spotter\
+        \ Analyst: a configured agent with a name, description, data sources, and\
+        \ optional agent instructions, MCP connectors, and starter prompts that your\
+        \ users converse with in Spotter.\n\nRequires at least one of `ADMINISTRATION`,\
+        \ `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access\
+        \ to every data source referenced in `sources`. Use a bearer token for the\
+        \ Org in which the analyst should be created.\n\n#### Usage guidelines\n\n\
+        The request body is flat — all fields are top-level:\n\n- `name` (required):\
+        \ display name of the analyst.\n- `description` (required): up to 200 characters.\n\
+        - `instructions` (optional): natural-language instructions that guide the\
+        \ agent's behavior for this analyst. Instructions that conflict with system\
+        \ guardrails are rejected with `409`.\n- `sources` (required): at least one\
+        \ data source the analyst can query, each with an `identifier`, an optional\
+        \ `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`).\
+        \ The caller must have view access to every referenced source.\n- `mcp_connector_identifiers`\
+        \ (optional): identifiers of MCP connectors to link to the analyst.\n- `starter_prompts`\
+        \ (optional): up to 4 plain-text prompts shown on the analyst landing page,\
+        \ each between 10 and 250 characters. Display order follows list position.\n\
+        \nIf the request is successful, the response contains the created analyst,\
+        \ including the server-assigned `id`. In responses, sources are returned with\
+        \ `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts\
+        \ as structured objects (`label`, `text`, `order`, `is_ai_generated`), the\
+        \ last-update time as `updated_time_in_millis` (epoch milliseconds), and the\
+        \ `created_by` and `updated_by` users.\n\n#### Error conditions\n\n- `403`\
+        \ — missing privileges, or no view access to a referenced data source.\n-\
+        \ `409` — `instructions` conflict with system guardrails.\n- `422` — validation\
+        \ failure, such as a missing required field (`name`, `description`, or `sources`),\
+        \ an empty `sources` list, too many starter prompts, or field-length violations.\n\
+        - `429` — rate limit exceeded.\n\n\n\n\n\n"
+      operationId: createAnalyst
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAnalystRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Analyst"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Analyst"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
   /api/rest/2.0/ai/conversation/create:
     post:
       description: |2+
@@ -198,6 +282,74 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Conversation"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+  /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete:
+    post:
+      description: "\nPermanently deletes a Spotter Analyst. This operation is irreversible\
+        \ —\ndeleted analysts cannot be recovered. The request has no body; the\n\
+        response contains the `id` of the deleted analyst.\nRequires ownership of\
+        \ the analyst, or `ADMINISTRATION` or\n`CAN_MANAGE_SPOTTER` privileges. \n\
+        \ Version: 26.10.0.cl or later\n\n\nPermanently deletes a Spotter Analyst.\
+        \ This operation is irreversible — deleted analysts cannot be recovered.\n\
+        \nRequires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER`\
+        \ privileges. Users the analyst is shared with cannot delete it. Use a bearer\
+        \ token for the Org in which the analyst exists.\n\n#### Usage guidelines\n\
+        \nThe request has no body — the analyst to delete is identified by the `analyst_identifier`\
+        \ path parameter, as returned by the create analyst API.\n\nA successful request\
+        \ returns the `id` of the deleted analyst.\n\n#### Error conditions\n\n- `400`\
+        \ — malformed analyst identifier.\n- `403` — the caller is not the analyst's\
+        \ author and lacks admin / Spotter-management privileges.\n- `404` — no analyst\
+        \ with the given identifier exists in the caller's Org.\n- `429` — rate limit\
+        \ exceeded.\n\n\n\n\n\n"
+      operationId: deleteAnalyst
+      parameters:
+      - description: Unique identifier of the analyst to delete.
+        explode: false
+        in: path
+        name: analyst_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalystDeleteResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalystDeleteResponse"
           description: Common error response
         "400":
           content:
@@ -1314,6 +1466,197 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+  /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content:
+    get:
+      description: "\nReturns the full read-only view of a shared conversation, including\
+        \ ordered\nmessages and data source metadata. Accessible by the conversation\
+        \ owner and\nany principal (user or group) that has been granted access.\n\
+        Requires `CAN_USE_SPOTTER` privilege. \n  Version: 26.9.0.cl or later\n\n\n\
+        \n\n\n\n"
+      operationId: getSharedContent
+      parameters:
+      - description: Unique identifier of the source conversation.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Shared conversation with one message and an answer
+                  value:
+                    conversation_id: conv-abc-123
+                    shared_conversation_id: snap-xyz-456
+                    conversation_title: Sales by Region Q1
+                    creator_user_id: 5d3e6cc7-2f4a-4b0e-9a1c-8f2b6d4e7a10
+                    data_sources:
+                    - id: ds-001
+                      name: Retail Sales
+                    analyst_ids:
+                    - spot-7f2a
+                    messages:
+                    - message_id: node-u-01
+                      timestamp_in_millis: 1744000000000
+                      user_prompt:
+                        message:
+                          message_id: msg-u-01
+                          content: Show me revenue by region.
+                        attachments: []
+                      response_items:
+                      - type: answer
+                        answer_id: ans-01
+                        tool_call_id: toolu-01
+                        tool_name: fetch_and_visualize
+                        step_title: Visualizing
+                        timestamp_in_millis: 1744000004000
+                        is_thinking: false
+                      - type: text
+                        content: Revenue is highest in APAC at $4.2M.
+                        content_type: TEXT_MARKDOWN
+                        timestamp_in_millis: 1744000005000
+                        is_thinking: false
+                        step_title: null
+                        file_reference: null
+                    code_execution_files:
+                    - file_id: revenue_by_region.csv
+                      display_name: revenue_by_region.csv
+                      file_type: csv
+                      created_time_in_millis: 1744027200000
+                      expired: false
+              schema:
+                $ref: "#/components/schemas/SharedConversationResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SharedConversationResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+  /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info:
+    get:
+      description: "\nReturns the current share state for a conversation the caller\
+        \ owns: whether\nthe shared view is outdated relative to the latest conversation\
+        \ content, and\nthe list of principals that currently have access.\nRequires\
+        \ `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.\
+        \ \n  Version: 26.9.0.cl or later\n\n\n\n\n\n\n"
+      operationId: getShareInfo
+      parameters:
+      - description: Unique identifier of the conversation.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: "Conversation shared with two principals, content is current"
+                  value:
+                    conversation_id: conv-abc-123
+                    is_shared_content_outdated: false
+                    principals:
+                    - id: user-001
+                      type: USER
+                      display_name: Alice Example
+                      name: alice.example
+                      permission: READ_ONLY
+                    - id: group-001
+                      type: USER_GROUP
+                      display_name: Sales Team
+                      name: sales-team
+                      permission: READ_ONLY
+                example_2:
+                  summary: Conversation never shared
+                  value:
+                    conversation_id: conv-abc-123
+                    is_shared_content_outdated: null
+                    principals: []
+                example_3:
+                  summary: Shared view is outdated — conversation was edited after
+                    sharing
+                  value:
+                    conversation_id: conv-abc-123
+                    is_shared_content_outdated: true
+                    principals:
+                    - id: user-001
+                      type: USER
+                      display_name: Alice Example
+                      name: alice.example
+                      permission: READ_ONLY
+              schema:
+                $ref: "#/components/schemas/ConversationShareStatusResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationShareStatusResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
   /api/rest/2.0/ai/memory/import:
     post:
       description: "\nImports memory entries (rules, recipes, and always-apply rules)\
@@ -1809,6 +2152,91 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/eureka_DecomposeQueryResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+  /api/rest/2.0/ai/agent/analysts/search:
+    post:
+      description: "\nSearches Spotter Analysts. Two modes:\n- Fetch mode: when `analyst_identifier`\
+        \ is provided, the response contains\n  exactly that analyst and all other\
+        \ filters are ignored.\n- List mode: returns a paginated list of analysts\
+        \ visible to the caller,\n  optionally filtered by a case-insensitive substring\
+        \ match on the\n  analyst name (`query`) and by ownership (`type`). Results\
+        \ are ordered\n  by most recently accessed.\nRequires at least one of `ADMINISTRATION`,\
+        \ `CAN_MANAGE_SPOTTER`, or\n`CAN_USE_SPOTTER` privileges. \n Version: 26.10.0.cl\
+        \ or later\n\n\nSearches Spotter Analysts. Use this endpoint to page through\
+        \ the analysts visible to you, or to fetch a single analyst by its identifier.\n\
+        \nRequires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER`\
+        \ privileges. Use a bearer token for the Org whose analysts should be searched.\n\
+        \n#### Usage guidelines\n\nThe endpoint operates in one of two modes:\n\n\
+        **Fetch mode** — when `analyst_identifier` is provided, the response contains\
+        \ exactly that analyst (`total_size` is 1) and all other filters are ignored.\
+        \ The caller must have access to the analyst (owner, shared with, or admin/Spotter-management\
+        \ privileges).\n\n**List mode** — when `analyst_identifier` is omitted, the\
+        \ response is a paginated list of analysts the caller can see, ordered by\
+        \ most recently accessed:\n\n- `record_size` (optional): number of records\
+        \ per page. Default 50, between 1 and 500.\n- `record_offset` (optional):\
+        \ zero-based index of the first record. Default 0, maximum 10000.\n- `query`\
+        \ (optional): case-insensitive substring match applied to the analyst **name\
+        \ only**.\n- `type` (optional): ownership filter — `ALL` (default; created\
+        \ by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.\n\nThe response\
+        \ contains `analysts` — the page of matching analysts — and `total_size`,\
+        \ the total number of matches before pagination. Each analyst includes its\
+        \ `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`,\
+        \ and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`),\
+        \ `icon_id`, `starter_prompts` (including the server-managed fixed prompt,\
+        \ marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis`\
+        \ (epoch milliseconds), and `created_by` / `updated_by` user references (with\
+        \ `id`, `name`, and `display_name`).\n\n#### Error conditions\n\n- `403` —\
+        \ missing privileges, or (fetch mode) no access to the requested analyst.\n\
+        - `404` — (fetch mode) no analyst with the given identifier exists in the\
+        \ caller's Org.\n- `422` — validation failure, such as `record_size` or `record_offset`\
+        \ out of range.\n\n\n\n\n\n"
+      operationId: searchAnalysts
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchAnalystsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalystSearchResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalystSearchResponse"
           description: Common error response
         "400":
           content:
@@ -2616,6 +3044,142 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+  /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share:
+    post:
+      description: "\nUpdates share permissions on a Spotter Analyst, one entry per\
+        \ principal\n(user or group). `READ_ONLY` and `MODIFY` grant or change the\
+        \ principal's\naccess; `NO_ACCESS` revokes it. Granting access also shares\
+        \ the analyst's\ndata sources with the principal so the analyst keeps working\
+        \ for them.\nA successful share returns an empty `204 No Content` response.\n\
+        Requires ownership of the analyst, or `ADMINISTRATION` or\n`CAN_MANAGE_SPOTTER`\
+        \ privileges. \n Version: 26.10.0.cl or later\n\n\nUpdates share permissions\
+        \ on a Spotter Analyst for one or more principals (users or groups).\n\nRequires\
+        \ ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.\
+        \ Use a bearer token for the Org in which the analyst exists.\n\n#### Usage\
+        \ guidelines\n\nThe analyst is identified by the `analyst_identifier` path\
+        \ parameter. The request body contains a `permissions` array with one entry\
+        \ per principal:\n\n- `principal.identifier` (required): unique identifier\
+        \ of the user or group.\n- `principal.type` (required): `USER` or `USER_GROUP`.\n\
+        - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the\
+        \ principal's access; `NO_ACCESS` revokes it.\n\nA principal may appear at\
+        \ most once per request. When access is granted, the analyst's data sources\
+        \ are automatically shared with the principal as well, so the analyst keeps\
+        \ working for them.\n\nA successful request returns an empty `204 No Content`\
+        \ response.\n\n#### Error conditions\n\n- `400` — malformed analyst identifier.\n\
+        - `403` — the caller is not the analyst's author and lacks admin / Spotter-management\
+        \ privileges.\n- `404` — no analyst with the given identifier exists in the\
+        \ caller's Org.\n- `422` — validation failure, such as an empty `permissions`\
+        \ array, a duplicate principal, or a missing field.\n- `429` — rate limit\
+        \ exceeded.\n\n\n\n\n\n"
+      operationId: shareAnalyst
+      parameters:
+      - description: Unique identifier of the analyst to share.
+        explode: false
+        in: path
+        name: analyst_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShareAnalystRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: {}
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema: {}
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+  /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share:
+    post:
+      description: "\nGrants or revokes access to a shared conversation for one or\
+        \ more principals\n(users or groups). When principals are added, a read-only\
+        \ shared view of the\nconversation is created from its current state. Use\
+        \ `refresh_shared_content`\nto regenerate the shared view with the latest\
+        \ conversation content.\nRequires `CAN_USE_SPOTTER` privilege and ownership\
+        \ of the specified conversation. \n  Version: 26.9.0.cl or later\n\n\n\n\n\
+        \n\n"
+      operationId: shareConversation
+      parameters:
+      - description: Unique identifier of the conversation to share.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShareConversationRequest"
+        required: true
+      responses:
+        "204":
+          description: Successfully updated the share access for the conversation.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
   /api/rest/2.0/ai/answer/create:
     post:
       description: |2+
@@ -2777,22 +3341,120 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+  /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update:
+    post:
+      description: "\nUpdates a Spotter Analyst. The request body is identical to\n\
+        `createAnalyst` and the update is a full replace: the analyst is\nrewritten\
+        \ from the request, and optional fields omitted from the request\nare reset\
+        \ (no instructions, no MCP connectors, no starter prompts).\nRequires ownership\
+        \ of the analyst, or `ADMINISTRATION` or\n`CAN_MANAGE_SPOTTER` privileges.\
+        \ Users the analyst is shared with cannot\nedit it. \n Version: 26.10.0.cl\
+        \ or later\n\n\nUpdates a Spotter Analyst. The request body is identical to\
+        \ the create analyst API, and the update is a full replace: the analyst is\
+        \ rewritten from the request, and optional fields omitted from the request\
+        \ are reset.\n\nRequires ownership of the analyst, or `ADMINISTRATION` or\
+        \ `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use\
+        \ it but cannot edit it. Use a bearer token for the Org in which the analyst\
+        \ exists.\n\n#### Usage guidelines\n\nThe request body is flat — all fields\
+        \ are top-level:\n\n- `name` (required): display name of the analyst.\n- `description`\
+        \ (required): up to 200 characters.\n- `instructions` (optional): natural-language\
+        \ instructions that guide the agent's behavior. Instructions that conflict\
+        \ with system guardrails are rejected with `409`. Omitting this field clears\
+        \ any existing instructions.\n- `sources` (required): at least one data source\
+        \ the analyst can query, each with an `identifier`, an optional `name`, and\
+        \ a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the\
+        \ existing list in full. When new sources are added, they are automatically\
+        \ shared with users the analyst was previously shared with, so those users\
+        \ keep a working analyst.\n- `mcp_connector_identifiers` (optional): identifiers\
+        \ of MCP connectors. Replaces the existing list in full; omit or pass an empty\
+        \ array to clear.\n- `starter_prompts` (optional): up to 4 plain-text prompts,\
+        \ each between 10 and 250 characters; display order follows list position.\
+        \ Replaces the existing list in full; omit or pass an empty array to clear.\n\
+        \nIf the request is successful, the response contains the updated analyst,\
+        \ including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds)\
+        \ and `updated_by` user. In responses, sources are returned with `id` and\
+        \ `type`, connector identifiers as `mcp_connectors`, and starter prompts as\
+        \ structured objects (`label`, `text`, `order`, `is_ai_generated`).\n\n####\
+        \ Error conditions\n\n- `400` — malformed analyst identifier.\n- `403` — the\
+        \ caller is not the analyst's author and lacks admin / Spotter-management\
+        \ privileges.\n- `404` — no analyst with the given identifier exists in the\
+        \ caller's Org.\n- `409` — `instructions` conflict with system guardrails.\n\
+        - `422` — validation failure, such as a missing required field (`name`, `description`,\
+        \ or `sources`), an empty `sources` list, too many starter prompts, or field-length\
+        \ violations.\n- `429` — rate limit exceeded.\n\n\n\n\n\n"
+      operationId: updateAnalyst
+      parameters:
+      - description: Unique identifier of the analyst to update.
+        explode: false
+        in: path
+        name: analyst_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAnalystRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Analyst"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Analyst"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
   /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update:
     post:
-      description: "\nUpdates attributes of an existing agent conversation. Currently\
-        \ only the\ndisplay title can be updated; additional conversation attributes\
-        \ may be\nsupported in future versions. At least one updatable attribute must\
-        \ be\nprovided in the request body. \n  Version: 26.7.0.cl or later\n\n\n\
-        Updates attributes of an existing saved agent conversation. Supports updating\
-        \ the conversation's display `title` and its `is_pinned` state; additional\
-        \ updatable attributes may be supported in future versions. At least one updatable\
-        \ attribute must be supplied in the request body.\n\nUse this endpoint to\
-        \ rename a conversation, or to pin a conversation so that it is surfaced first\
-        \ in the conversation list for quick access.\n\nRequires `CAN_USE_SPOTTER`\
-        \ privilege and ownership of the conversation being updated.\n\n#### Usage\
-        \ guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path\
-        \ parameter)*: the unique ID of the conversation to update, as returned by\
-        \ `createAgentConversation` or `getConversationList`\n- At least one updatable\
+      description: "\nUpdates attributes of an existing agent conversation. Supports\
+        \ updating the\ndisplay title and the pinned state; additional conversation\
+        \ attributes may be\nsupported in future versions. At least one updatable\
+        \ attribute must be\nprovided in the request body. Each attribute is applied\
+        \ independently, so\nomitted attributes are left unchanged. \n  Version: 26.7.0.cl\
+        \ or later\n\n\nUpdates attributes of an existing saved agent conversation.\
+        \ Supports updating the conversation's display `title` and its `is_pinned`\
+        \ state; additional updatable attributes may be supported in future versions.\
+        \ At least one updatable attribute must be supplied in the request body.\n\
+        \nUse this endpoint to rename a conversation, or to pin a conversation so\
+        \ that it is surfaced first in the conversation list for quick access.\n\n\
+        Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being\
+        \ updated.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`\
+        \ *(path parameter)*: the unique ID of the conversation to update, as returned\
+        \ by `createAgentConversation` or `getConversationList`\n- At least one updatable\
         \ attribute in the request body:\n    - `title` *(optional)*: the new display\
         \ name for the conversation. An empty or whitespace-only value is replaced\
         \ with a default title rather than rejected.\n    - `is_pinned` *(optional)*:\
@@ -3376,6 +4038,14 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Forbidden access. The user does not have permission to access
             this resource.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Conflict. A concurrent update to the same template variable
+            was detected and the request could not be applied. Retry the request after
+            serializing concurrent variable updates.
         "500":
           content:
             application/json:
@@ -7512,6 +8182,454 @@ paths:
       tags:
       - Email Customization
       - ThoughtSpotRest
+  /api/rest/2.0/configurations/features/search:
+    post:
+      description: |2+
+
+         Version: 26.10.0.cl or later
+
+
+        Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.
+
+        #### Pre-requisites
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.
+
+        #### Usage guidelines
+
+        To retrieve feature configurations, pass these parameters in your API request:
+
+        - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org).
+        - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.
+        - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.
+
+        The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.
+
+        The following example retrieves the general-access features for the cluster-admin view:
+
+        ```
+        {
+          "scope": "CLUSTER",
+          "category": "GENERAL_ACCESS"
+        }
+        ```
+
+        For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):
+
+        ```
+        {
+          "scope": "ORG",
+          "org_identifier": 1,
+          "category": "GENERAL_ACCESS"
+        }
+        ```
+
+
+
+
+
+      operationId: searchFeatures
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchFeaturesRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  description: Cluster-admin view (scope=CLUSTER) — org-aware feature
+                    with assignments
+                  value:
+                  - feature_group: search
+                    docs_url: null
+                    features:
+                    - feature_id: orion.embraceConfig.doIndexing
+                      feature_name: index_columns
+                      assigned_orgs:
+                      - org_id: 0
+                        org_name: Primary
+                      is_org_aware: true
+                      feature_value: null
+                      docs_url: null
+                example_2:
+                  description: "Org-admin view (scope=ORG) — element type, config,\
+                    \ and current value for the org"
+                  value:
+                  - feature_group: search
+                    docs_url: null
+                    features:
+                    - feature_id: orion.embraceConfig.doIndexing
+                      feature_name: index_columns
+                      element_type: toggle
+                      element_config:
+                        label: Index columns
+                      element_value: "true"
+                      docs_url: null
+                example_3:
+                  description: Empty result — no features match the requested category
+                  value: []
+              schema:
+                items:
+                  $ref: "#/components/schemas/FeatureGroup"
+                type: array
+          description: Feature groups returned.
+        "400":
+          content:
+            application/json:
+              examples:
+                missing_org_identifier:
+                  summary: Bad Request — org_identifier is required when scope is
+                    ORG
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: org_identifier is required when scope=ORG.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden — ADMINISTRATION privilege required
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: Insufficient privileges.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Insufficient privileges.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Feature management not enabled.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error.
+      tags:
+      - Feature Management
+      - ThoughtSpotRest
+  /api/rest/2.0/configurations/features/assignments/update:
+    post:
+      description: |2+
+
+         Version: 26.10.0.cl or later
+
+
+        Updates the Org assignments for a feature. Available to cluster admins only.
+
+        #### Pre-requisites
+
+        Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.
+
+        #### Usage guidelines
+
+        To update the Org assignments for a feature, pass these parameters in your API request:
+
+        - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update.
+        - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature.
+        - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.
+
+        The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:
+
+        ```
+        {
+          "feature_identifier": "index_columns",
+          "org_identifiers": [1, 2],
+          "operation": "ADD"
+        }
+        ```
+
+        Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):
+
+        ```
+        {
+          "feature_identifier": "index_columns",
+          "org_identifiers": [],
+          "operation": "REPLACE"
+        }
+        ```
+
+
+
+
+
+      operationId: updateFeatureAssignments
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateFeatureAssignmentsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  description: Assign Orgs 1 and 2 to the feature (operation ADD)
+                  value:
+                    feature_id: orion.embraceConfig.doIndexing
+                    feature_name: index_columns
+                    assigned_orgs:
+                    - org_id: 1
+                      org_name: Acme
+                    - org_id: 2
+                      org_name: Beta
+                example_2:
+                  description: Clear all Org assignments (operation REPLACE with an
+                    empty org_identifiers array); assigned_orgs comes back empty
+                  value:
+                    feature_id: orion.embraceConfig.doIndexing
+                    feature_name: index_columns
+                    assigned_orgs: []
+              schema:
+                $ref: "#/components/schemas/FeatureAssignmentResponse"
+          description: Assignments updated.
+        "400":
+          content:
+            application/json:
+              examples:
+                missing_org_identifiers:
+                  summary: Bad Request — org_identifiers is required
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: org_identifiers is required.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden — ADMINISTRATION privilege required
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: Insufficient privileges.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Insufficient privileges.
+        "404":
+          content:
+            application/json:
+              examples:
+                feature_not_found:
+                  summary: Not Found — feature_identifier does not match any known
+                    feature
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: Feature 'orion.__does_not_exist__' not found in config.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Feature not found or feature management not enabled.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error.
+      tags:
+      - Feature Management
+      - ThoughtSpotRest
+  /api/rest/2.0/configurations/features/values/update:
+    post:
+      description: |2+
+
+         Version: 26.10.0.cl or later
+
+
+        Sets the value of a feature at the cluster or Org scope.
+
+        #### Pre-requisites
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.
+
+        #### Usage guidelines
+
+        To set a feature value, pass these parameters in your API request:
+
+        - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override.
+        - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.
+        - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set.
+        - `feature_value` — New value to set for the feature.
+        - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.
+
+        The following example sets a per-Org value override for Org `1`:
+
+        ```
+        {
+          "scope": "ORG",
+          "org_identifier": 1,
+          "feature_identifier": "index_columns",
+          "feature_value": "true"
+        }
+        ```
+
+        Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:
+
+        ```
+        {
+          "scope": "CLUSTER",
+          "feature_identifier": "index_columns",
+          "feature_value": "true",
+          "reset_org_overrides": true
+        }
+        ```
+
+
+
+
+
+      operationId: updateFeatureValue
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateFeatureValueRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  description: Set a per-Org value override (scope=ORG)
+                  value:
+                    feature_id: orion.embraceConfig.doIndexing
+                    feature_name: index_columns
+                    feature_value: "true"
+                example_2:
+                  description: "Set the cluster-level value and clear per-Org overrides\
+                    \ (scope=CLUSTER, reset_org_overrides=true)"
+                  value:
+                    feature_id: orion.embraceConfig.doIndexing
+                    feature_name: index_columns
+                    feature_value: "true"
+              schema:
+                $ref: "#/components/schemas/FeatureValueResponse"
+          description: Value updated.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_reset_org_overrides:
+                  summary: Bad Request — reset_org_overrides is not allowed when scope
+                    is ORG
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: reset_org_overrides is only valid for scope=CLUSTER.
+                missing_org_identifier:
+                  summary: Bad Request — org_identifier is required when scope is
+                    ORG
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: org_identifier is required when scope=ORG.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden — ADMINISTRATION privilege required
+                  value:
+                    error:
+                      message:
+                        code: 10023
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: Insufficient privileges.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Insufficient privileges or org not assigned to feature.
+        "404":
+          content:
+            application/json:
+              examples:
+                feature_not_found:
+                  summary: Not Found — feature_identifier does not match any known
+                    feature
+                  value:
+                    error:
+                      message:
+                        code: 10000
+                        incident_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        trace_id_guid: 0d2f9f6e-0000-0000-0000-000000000000
+                        debug: Feature 'orion.__does_not_exist__' not found in config.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Feature not found or feature management not enabled.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error.
+      tags:
+      - Feature Management
+      - ThoughtSpotRest
   /api/rest/2.0/groups/create:
     post:
       description: |2+
@@ -11157,6 +12275,309 @@ paths:
       tags:
       - Security
       - ThoughtSpotRest
+  /api/rest/2.0/semantic-integrations/create:
+    post:
+      description: |2+
+
+         Version: 26.9.0.cl or later
+
+
+        Creates a new semantic integration in ThoughtSpot from a CDW semantic view.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - **Can manage data models**
+
+        #### About create semantic integration
+
+        A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.
+
+        - `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required.
+        - `name` must be unique across the user's organization. The integration's display name is also used as the generated model name.
+        - Supported `type` values are listed in the `SemanticIntegrationType` enum.
+        - The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.
+
+        > **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.
+
+
+
+
+
+      operationId: createSemanticIntegration
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSemanticIntegrationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SemanticIntegrationResponse"
+          description: Semantic integration created successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Connection not found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Duplicate integration name.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error
+      tags:
+      - Semantic Integrations
+      - ThoughtSpotRest
+  /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete:
+    post:
+      description: |2+
+
+         Version: 26.9.0.cl or later
+
+
+        Deletes a semantic integration and its associated ThoughtSpot model.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - **Can manage data models**
+
+        #### About delete semantic integration
+
+        Removes the specified semantic integration and its generated ThoughtSpot model from the system.
+
+        - `semantic_integration_identifier` is the GUID or name of the integration to delete.
+        - Deletions cannot be undone. Re-import the integration with `createSemanticIntegration` if needed.
+
+
+
+
+
+      operationId: deleteSemanticIntegration
+      parameters:
+      - description: ID or name of the semantic integration to delete.
+        explode: false
+        in: path
+        name: semantic_integration_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Semantic integration deleted successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error
+      tags:
+      - Semantic Integrations
+      - ThoughtSpotRest
+  /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import:
+    post:
+      description: |2+
+
+         Version: 26.9.0.cl or later
+
+
+        Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - **Can manage data models**
+
+        #### About import semantic integration
+
+        Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.
+
+        - `semantic_integration_identifier` is the GUID or name of the integration to import updates for.
+        - Import preserves the integration's GUID, name, and `model_id`; only the underlying formula set is refreshed.
+        - The response includes the same `semantic_report` as create, with an additional `change_status` per formula indicating whether each formula is `NEW`, `UPDATED`, or `UNCHANGED` since the previous import.
+
+        > **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.
+
+
+
+
+
+      operationId: importSemanticIntegration
+      parameters:
+      - description: ID or name of the semantic integration to import updates for.
+        explode: false
+        in: path
+        name: semantic_integration_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SemanticIntegrationResponse"
+          description: Semantic integration imported successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Semantic integration not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error
+      tags:
+      - Semantic Integrations
+      - ThoughtSpotRest
+  /api/rest/2.0/semantic-integrations/search:
+    post:
+      description: |2+
+
+         Version: 26.9.0.cl or later
+
+
+        Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
+
+        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
+        - **Can manage data models**
+
+        #### About search semantic integrations
+
+        Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.
+
+        - `pattern` matches the integration name as a case-insensitive substring.
+        - `author_identifiers` and `connection_identifiers` accept either GUIDs or names.
+        - `sort_options.field_name` defaults to `MODIFIED_TIME`; set `sort_options.order` to `ASC` or `DESC` to control sort direction.
+        - `record_offset` and `record_size` control pagination. Use `record_size: 0` to return all matching records in a single response.
+
+        **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.
+
+
+
+
+
+      operationId: searchSemanticIntegrations
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchSemanticIntegrationsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SemanticIntegrationSearchResponse"
+                type: array
+          description: Semantic integrations retrieved successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error
+      tags:
+      - Semantic Integrations
+      - ThoughtSpotRest
   /api/rest/2.0/customization/styles/fonts/delete:
     post:
       description: |2+
@@ -14201,7 +15622,7 @@ paths:
         \ exist\n* The variable is being used by other objects \n\n\n\n\n"
       operationId: deleteVariable
       parameters:
-      - description: Unique id or name of the variable
+      - description: "Unique id, name, or object id of the variable"
         explode: false
         in: path
         name: identifier
@@ -14422,7 +15843,7 @@ paths:
         \ allows updating:\n* The variable name\n\n\n\n\n"
       operationId: updateVariable
       parameters:
-      - description: Unique id or name of the variable to update.
+      - description: "Unique id, name, or object id of the variable to update."
         explode: false
         in: path
         name: identifier
@@ -17201,6 +18622,7 @@ components:
       type: object
     UserGroupResponse:
       example:
+        obj_id: obj_id
         author_id: author_id
         complete_detail: true
         content: ""
@@ -17258,6 +18680,11 @@ components:
         - id: id
           name: name
       properties:
+        obj_id:
+          description: "Custom object ID (obj_id) of the group, if one is set. \n\
+            \  Version: 26.9.0.cl or later\n"
+          nullable: true
+          type: string
         author_id:
           description: The unique identifier of the object
           nullable: true
@@ -19001,6 +20428,7 @@ components:
       example:
         id: id
         name: name
+        obj_id: obj_id
         description: description
         data_warehouse_type: SNOWFLAKE
         data_warehouse_objects:
@@ -19194,6 +20622,11 @@ components:
           type: string
         name:
           description: Name of the connection.
+          type: string
+        obj_id:
+          description: "Custom object ID (obj_id) of the connection, if one is set.\
+            \ \n  Version: 26.9.0.cl or later\n"
+          nullable: true
           type: string
         description:
           description: Description of the connection.
@@ -19708,6 +21141,7 @@ components:
       example:
         id: id
         name: name
+        obj_id: obj_id
         description: description
         groups_assigned_count: 0
         orgs:
@@ -19739,6 +21173,11 @@ components:
           type: string
         name:
           description: Name of the role
+          type: string
+        obj_id:
+          description: "Custom object ID (obj_id) of the role, if one is set. \n \
+            \ Version: 26.9.0.cl or later\n"
+          nullable: true
           type: string
         description:
           description: Description of the role
@@ -19819,6 +21258,10 @@ components:
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
             - CAN_MANAGE_SPOTTER
+            - CAN_CREATE_LIVEBOARD
+            - CAN_CREATE_ANSWERS
+            - CAN_ANALYZE_DATA
+            - CAN_ADMINISTER_SCHEDULES
             type: string
           type: array
         permission:
@@ -19907,6 +21350,7 @@ components:
         default_action_config:
           visibility: true
         id: id
+        obj_id: obj_id
         metadata_association:
         - action_config:
             position: position
@@ -19931,6 +21375,11 @@ components:
           $ref: "#/components/schemas/Default_action_config"
         id:
           description: Unique Id of the custom action.
+          type: string
+        obj_id:
+          description: "Custom object ID (obj_id) of the custom action, if one is\
+            \ set. \n  Version: 26.9.0.cl or later\n"
+          nullable: true
           type: string
         metadata_association:
           description: Metadata objects to assign the the custom action to.
@@ -20495,6 +21944,8 @@ components:
             name: name
           - id: id
             name: name
+          is_pinned: true
+          analyst_id: analyst_id
         - conversation_identifier: conversation_identifier
           conversation_title: conversation_title
           created_at: created_at
@@ -20507,6 +21958,8 @@ components:
             name: name
           - id: id
             name: name
+          is_pinned: true
+          analyst_id: analyst_id
         has_more: true
       properties:
         conversations:
@@ -20538,6 +21991,8 @@ components:
           name: name
         - id: id
           name: name
+        is_pinned: true
+        analyst_id: analyst_id
       properties:
         conversation_identifier:
           description: Unique identifier of the conversation.
@@ -20568,6 +22023,18 @@ components:
             $ref: "#/components/schemas/DataSourceEntry"
           nullable: true
           type: array
+        is_pinned:
+          description: "Whether the current user has pinned this conversation. Pinned\n\
+            conversations are surfaced first in the list. \n  Version: 26.10.0.cl\
+            \ or later\n"
+          nullable: true
+          type: boolean
+        analyst_id:
+          description: "Unique identifier of the Spotter Analyst the conversation\
+            \ is associated\nwith. Null when the conversation is not associated with\
+            \ an analyst. \n  Version: 26.10.0.cl or later\n"
+          nullable: true
+          type: string
       required:
       - conversation_identifier
       type: object
@@ -21313,6 +22780,194 @@ components:
           nullable: true
           type: integer
       type: object
+    ConversationShareStatusResponse:
+      description: Response returned by getShareInfo.
+      example:
+        conversation_id: conversation_id
+        is_shared_content_outdated: true
+        principals:
+        - id: id
+          type: USER
+          display_name: display_name
+          name: name
+          permission: READ_ONLY
+        - id: id
+          type: USER
+          display_name: display_name
+          name: name
+          permission: READ_ONLY
+      properties:
+        conversation_id:
+          description: Unique identifier of the source conversation.
+          type: string
+        is_shared_content_outdated:
+          description: |-
+            `true` when the shared view was generated before the last edit to the
+            conversation and does not reflect the latest content. `null` when the
+            conversation has never been shared.
+          nullable: true
+          type: boolean
+        principals:
+          description: |-
+            List of principals that currently have access to this shared conversation.
+            Empty when no principals have been granted access.
+          items:
+            $ref: "#/components/schemas/ConversationPrincipalInfo"
+          type: array
+      required:
+      - conversation_id
+      - principals
+      type: object
+    ConversationPrincipalInfo:
+      description: A principal that has been granted access to a shared conversation.
+      example:
+        id: id
+        type: USER
+        display_name: display_name
+        name: name
+        permission: READ_ONLY
+      properties:
+        id:
+          description: Unique identifier of the user or group.
+          type: string
+        type:
+          description: Whether the principal is an individual user or a group.
+          enum:
+          - USER
+          - USER_GROUP
+          type: string
+        display_name:
+          description: Display name of the principal as shown in the UI.
+          type: string
+        name:
+          description: Internal name of the principal.
+          type: string
+        permission:
+          description: Access level granted to the principal. Always `READ_ONLY` for
+            shared conversations.
+          enum:
+          - READ_ONLY
+          - MODIFY
+          - NO_ACCESS
+          type: string
+      required:
+      - display_name
+      - id
+      - name
+      - permission
+      - type
+      type: object
+    SharedConversationResponse:
+      description: |-
+        Response returned by getSharedContent. Contains the full read-only view
+        of the shared conversation including messages and data source metadata.
+      example:
+        conversation_id: conversation_id
+        shared_conversation_id: shared_conversation_id
+        conversation_title: conversation_title
+        creator_user_id: creator_user_id
+        data_sources:
+        - id: id
+          name: name
+        - id: id
+          name: name
+        analyst_ids:
+        - analyst_ids
+        - analyst_ids
+        messages:
+        - message_id: message_id
+          timestamp_in_millis: ""
+          user_prompt:
+            message:
+              message_id: message_id
+              content: content
+            attachments:
+            - ""
+            - ""
+          response_items:
+          - ""
+          - ""
+        - message_id: message_id
+          timestamp_in_millis: ""
+          user_prompt:
+            message:
+              message_id: message_id
+              content: content
+            attachments:
+            - ""
+            - ""
+          response_items:
+          - ""
+          - ""
+        code_execution_files:
+        - file_id: file_id
+          display_name: display_name
+          file_type: file_type
+          created_time_in_millis: ""
+          expired: true
+        - file_id: file_id
+          display_name: display_name
+          file_type: file_type
+          created_time_in_millis: ""
+          expired: true
+      properties:
+        conversation_id:
+          description: Unique identifier of the source conversation (echoes the request
+            parameter).
+          type: string
+        shared_conversation_id:
+          description: |-
+            Identifier for the shared view. Use this as `conversation_identifier` in
+            follow-up `loadAnswer` calls to hydrate answer items in the messages.
+          type: string
+        conversation_title:
+          description: Display title of the conversation.
+          nullable: true
+          type: string
+        creator_user_id:
+          description: |-
+            Identifier of the user who created the conversation and shared it. This is
+            the original creator, not the caller retrieving the shared content.
+          nullable: true
+          type: string
+        data_sources:
+          description: "Data sources used by the conversation, each with an identifier\
+            \ and display name."
+          items:
+            $ref: "#/components/schemas/DataSourceEntry"
+          type: array
+        analyst_ids:
+          description: |-
+            Identifiers of the AI analysts the conversation ran against. An analyst is a
+            purpose-built agent configured over a set of data sources, with its own
+            instructions and access rules. Empty array when the conversation is not
+            associated with any analyst; never null.
+          items:
+            type: string
+          type: array
+        messages:
+          description: |-
+            Ordered conversation messages, oldest to newest. Same structure as the
+            `messages` field returned by `getConversation`. Empty array when the
+            conversation has no messages; never null.
+          items:
+            $ref: "#/components/schemas/ConversationMessage"
+          type: array
+        code_execution_files:
+          description: |-
+            Sanitized metadata for files generated by the code-execution tool during
+            this conversation. Empty when there are no such files.
+          items:
+            $ref: "#/components/schemas/CodeExecutionFileMetadata"
+          type: array
+      required:
+      - analyst_ids
+      - code_execution_files
+      - conversation_id
+      - data_sources
+      - messages
+      - shared_conversation_id
+      type: object
     RiseGQLArgWrapper:
       properties:
         name:
@@ -21373,7 +23028,7 @@ components:
         name_pattern: name_pattern
       properties:
         identifier:
-          description: Unique ID or name of the variable
+          description: "Unique ID, name, or object ID of the variable"
           nullable: true
           type: string
         type:
@@ -21428,6 +23083,7 @@ components:
       example:
         id: id
         name: name
+        obj_id: obj_id
         variable_type: CONNECTION_PROPERTY
         sensitive: true
         values:
@@ -21458,6 +23114,11 @@ components:
           type: string
         name:
           description: Name of the variable
+          type: string
+        obj_id:
+          description: "Custom object identifier (obj_id) of the variable \n  Version:\
+            \ 26.10.0.cl or later\n"
+          nullable: true
           type: string
         variable_type:
           description: Type of the variable
@@ -21658,6 +23319,7 @@ components:
             enum:
             - SAGE_INDEXING
             - ROW_COUNT_STATS
+            - SCHEDULED_LIVEBOARDS
             type: string
           nullable: true
           type: array
@@ -22398,6 +24060,7 @@ components:
         collections:
         - id: id
           name: name
+          obj_id: obj_id
           description: description
           metadata:
           - type: type
@@ -22421,6 +24084,7 @@ components:
             name: name
         - id: id
           name: name
+          obj_id: obj_id
           description: description
           metadata:
           - type: type
@@ -22479,6 +24143,7 @@ components:
       example:
         id: id
         name: name
+        obj_id: obj_id
         description: description
         metadata:
         - type: type
@@ -22506,6 +24171,11 @@ components:
           type: string
         name:
           description: Name of the collection.
+          type: string
+        obj_id:
+          description: "Custom object ID (obj_id) of the collection, if one is set.\
+            \ \n  Version: 26.9.0.cl or later\n"
+          nullable: true
           type: string
         description:
           description: Description of the collection.
@@ -23256,6 +24926,286 @@ components:
           nullable: true
           type: array
       type: object
+    SemanticIntegrationSortOptions:
+      description: Sort options for semantic integration search.
+      properties:
+        field_name:
+          description: Name of the field to apply the sort on.
+          enum:
+          - NAME
+          - AUTHOR
+          - CREATED_TIME
+          - MODIFIED_TIME
+          nullable: true
+          type: string
+        order:
+          description: "Sort order: `ASC` for ascending, `DESC` for descending."
+          enum:
+          - ASC
+          - DESC
+          nullable: true
+          type: string
+      type: object
+    SemanticIntegrationSearchResponse:
+      description: Single semantic integration entry returned by search.
+      example:
+        id: id
+        name: name
+        description: description
+        model_id: model_id
+        model_name: model_name
+        import_type: CDW
+        type: RDBMS_SNOWFLAKE
+        connection_id: connection_id
+        connection_name: connection_name
+        author_id: author_id
+        author_name: author_name
+        creation_time_in_millis: 0.8008282
+        modification_time_in_millis: 6.0274563
+        tags:
+        - id: id
+          name: name
+        - id: id
+          name: name
+      properties:
+        id:
+          description: Unique identifier of the semantic integration.
+          nullable: true
+          type: string
+        name:
+          description: Name of the semantic integration.
+          nullable: true
+          type: string
+        description:
+          description: Optional description of the semantic integration.
+          nullable: true
+          type: string
+        model_id:
+          description: GUID of the associated ThoughtSpot model generated for this
+            integration.
+          nullable: true
+          type: string
+        model_name:
+          description: Name of the associated ThoughtSpot model.
+          nullable: true
+          type: string
+        import_type:
+          description: How the semantic definition was sourced.
+          enum:
+          - CDW
+          - FILE
+          nullable: true
+          type: string
+        type:
+          description: CDW connector type.
+          enum:
+          - RDBMS_SNOWFLAKE
+          - RDBMS_DATABRICKS
+          nullable: true
+          type: string
+        connection_id:
+          description: GUID of the CDW connection backing the integration.
+          nullable: true
+          type: string
+        connection_name:
+          description: Display name of the CDW connection backing the integration.
+          nullable: true
+          type: string
+        author_id:
+          description: GUID of the user who created the integration.
+          nullable: true
+          type: string
+        author_name:
+          description: Username of the user who created the integration.
+          nullable: true
+          type: string
+        creation_time_in_millis:
+          description: Creation time in Unix epoch milliseconds.
+          format: float
+          nullable: true
+          type: number
+        modification_time_in_millis:
+          description: Last modification time in Unix epoch milliseconds.
+          format: float
+          nullable: true
+          type: number
+        tags:
+          description: Tags associated with the integration.
+          items:
+            $ref: "#/components/schemas/SemanticIntegrationTagReference"
+          nullable: true
+          type: array
+      type: object
+    SemanticIntegrationTagReference:
+      description: Tag reference associated with a semantic integration.
+      example:
+        id: id
+        name: name
+      properties:
+        id:
+          description: Unique identifier of the tag.
+          nullable: true
+          type: string
+        name:
+          description: Name of the tag.
+          nullable: true
+          type: string
+      type: object
+    FeatureGroup:
+      description: |-
+        A named group of related features. Returned by searchFeatures; the contents of
+        features depend on the requested scope (cluster-admin vs. org-admin view).
+      example:
+        feature_group: feature_group
+        docs_url: docs_url
+        features:
+        - feature_id: feature_id
+          feature_name: feature_name
+          assigned_orgs:
+          - org_id: 0
+            org_name: org_name
+          - org_id: 0
+            org_name: org_name
+          is_org_aware: true
+          feature_value: feature_value
+          element_type: element_type
+          element_config: ""
+          element_value: element_value
+          docs_url: docs_url
+        - feature_id: feature_id
+          feature_name: feature_name
+          assigned_orgs:
+          - org_id: 0
+            org_name: org_name
+          - org_id: 0
+            org_name: org_name
+          is_org_aware: true
+          feature_value: feature_value
+          element_type: element_type
+          element_config: ""
+          element_value: element_value
+          docs_url: docs_url
+      properties:
+        feature_group:
+          description: Display name of the feature group.
+          nullable: true
+          type: string
+        docs_url:
+          description: "Documentation URL for the feature group, when available."
+          nullable: true
+          type: string
+        features:
+          description: |-
+            Feature details within this group. Each entry contains the fields relevant to
+            the requested scope; org-admin-only and cluster-admin-only fields are null in
+            the other view.
+          items:
+            $ref: "#/components/schemas/FeatureDetail"
+          type: array
+      required:
+      - features
+      type: object
+    FeatureDetail:
+      description: |-
+        Detail for a single feature. Fields are populated according to the scope of the
+        search: cluster-admin (CLUSTER) responses populate assigned_orgs, is_org_aware,
+        and (for non-org-aware features) feature_value; org-admin (ORG) responses
+        populate element_type, element_config, and element_value.
+      example:
+        feature_id: feature_id
+        feature_name: feature_name
+        assigned_orgs:
+        - org_id: 0
+          org_name: org_name
+        - org_id: 0
+          org_name: org_name
+        is_org_aware: true
+        feature_value: feature_value
+        element_type: element_type
+        element_config: ""
+        element_value: element_value
+        docs_url: docs_url
+      properties:
+        feature_id:
+          description: |-
+            Underlying unique feature ID. The dotted-path format (for example,
+            `orion.embraceConfig.doIndexing`) is internal and subject to change without
+            notice; use `feature_name` as the stable display identifier where possible.
+          type: string
+        feature_name:
+          description: User-friendly feature name. Present when the feature declares
+            one.
+          nullable: true
+          type: string
+        assigned_orgs:
+          description: Orgs currently assigned to this feature. Populated in the cluster-admin
+            view.
+          items:
+            $ref: "#/components/schemas/FeatureOrgInfo"
+          nullable: true
+          type: array
+        is_org_aware:
+          description: |-
+            Whether the feature is Org-aware. Org-aware features are managed via per-Org
+            assignment; non-org-aware features are cluster-level toggles. Populated in the
+            cluster-admin view.
+          nullable: true
+          type: boolean
+        feature_value:
+          description: |-
+            Current cluster-level value of the feature. Populated in the cluster-admin
+            view for non-org-aware features; null for Org-aware features. Values are
+            always returned as strings; for boolean toggles this is `"true"` or
+            `"false"`.
+          nullable: true
+          type: string
+        element_type:
+          description: UI element type hint for the feature. Populated in the org-admin
+            view.
+          nullable: true
+          type: string
+        element_config:
+          description: |-
+            UI element configuration for the feature. Populated in the org-admin view.
+            An opaque blob whose structure varies by `element_type`; a `label` string is
+            the common envelope field.
+          nullable: true
+        element_value:
+          description: |-
+            Current value of the feature for the requested Org. Populated in the
+            org-admin view.
+          nullable: true
+          type: string
+        docs_url:
+          description: "Per-feature documentation URL, when available."
+          nullable: true
+          type: string
+      required:
+      - feature_id
+      type: object
+    FeatureOrgInfo:
+      description: |-
+        Lightweight Org identifier and display name, as returned in feature
+        assignment responses.
+        The field names org_id / org_name intentionally deviate from the bare id /
+        name used by the shared Org type: they are the literal wire keys emitted by
+        the Callosum backend, so they are load-bearing for Prism's response field
+        mapping and cannot be renamed without a backend change.
+      example:
+        org_id: 0
+        org_name: org_name
+      properties:
+        org_id:
+          description: Numeric ID of the Org.
+          format: int32
+          type: integer
+        org_name:
+          description: Display name of the Org.
+          type: string
+      required:
+      - org_id
+      - org_name
+      type: object
     GenericInfo:
       example:
         id: id
@@ -23279,6 +25229,30 @@ components:
         name:
           nullable: true
           type: string
+      type: object
+    TokenScopeInput:
+      description: "The set of Orgs a token is authorized to operate in, recorded\
+        \ at issuance. Only applicable to a Tenant Administrator."
+      properties:
+        org_scope:
+          description: "The set of Orgs this token is authorized to operate in. SPECIFIC_ORGS\
+            \ authorizes the token for the Orgs listed in org_identifiers; ALL_MEMBER_ORGS\
+            \ authorizes it for all Orgs the user is a member of. \n Version: 26.10.0.cl\
+            \ or later\n"
+          enum:
+          - SPECIFIC_ORGS
+          - ALL_MEMBER_ORGS
+          type: string
+        org_identifiers:
+          description: "ID or name of the Orgs the token is authorized for. Required\
+            \ when org_scope is SPECIFIC_ORGS; ignored when org_scope is ALL_MEMBER_ORGS.\
+            \ \n Version: 26.10.0.cl or later\n"
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - org_scope
       type: object
     JWT_User_Options:
       description: |-
@@ -23496,6 +25470,12 @@ components:
           access_type: access_type
           org_id: 1
           metadata_id: metadata_id
+          org_scope: SPECIFIC_ORGS
+          org_ids:
+          - id: 0
+            name: name
+          - id: 0
+            name: name
         valid_for_user_id: valid_for_user_id
         valid_for_username: valid_for_username
       properties:
@@ -23531,21 +25511,58 @@ components:
         access_type: access_type
         org_id: 1
         metadata_id: metadata_id
+        org_scope: SPECIFIC_ORGS
+        org_ids:
+        - id: 0
+          name: name
+        - id: 0
+          name: name
       properties:
         access_type:
           description: Object access scope type.
           type: string
         org_id:
-          description: Unique identifier of the metadata.
+          description: Unique identifier of the Org.
           format: int32
           nullable: true
           type: integer
         metadata_id:
-          description: Unique identifier of the Org.
+          description: Unique identifier of the metadata.
+          nullable: true
+          type: string
+        org_scope:
+          description: "Org scope the token is authorized for. Absent for a legacy\
+            \ single-org token. \n Version: 26.10.0.cl or later\n"
+          enum:
+          - SPECIFIC_ORGS
+          - ALL_MEMBER_ORGS
+          nullable: true
+          type: string
+        org_ids:
+          description: "Orgs the token is authorized for when org_scope is SPECIFIC_ORGS.\
+            \ \n Version: 26.10.0.cl or later\n"
+          items:
+            $ref: "#/components/schemas/OrgInfo"
+          nullable: true
+          type: array
+      required:
+      - access_type
+      type: object
+    OrgInfo:
+      example:
+        id: 0
+        name: name
+      properties:
+        id:
+          description: Id.
+          format: int32
+          type: integer
+        name:
+          description: Name.
           nullable: true
           type: string
       required:
-      - access_type
+      - id
       type: object
     JWT_User_Options_Full:
       description: |-
@@ -23568,6 +25585,12 @@ components:
           access_type: access_type
           org_id: 1
           metadata_id: metadata_id
+          org_scope: SPECIFIC_ORGS
+          org_ids:
+          - id: 0
+            name: name
+          - id: 0
+            name: name
         valid_for_user_id: valid_for_user_id
         token_type: token_type
       properties:
@@ -23718,6 +25741,13 @@ components:
           name: name
         creation_time_in_millis: 6.0274563
         expiration_time_in_millis: 1.4658129
+        scope:
+          org_scope: SPECIFIC_ORGS
+          org_ids:
+          - id: 0
+            name: name
+          - id: 0
+            name: name
       properties:
         id:
           description: GUID of the auth token.
@@ -23738,28 +25768,14 @@ components:
           description: Token expiration time in milliseconds.
           format: float
           type: number
+        scope:
+          $ref: "#/components/schemas/AccessTokenScope"
       required:
       - creation_time_in_millis
       - expiration_time_in_millis
       - org
       - token
       - user
-      type: object
-    OrgInfo:
-      example:
-        id: 0
-        name: name
-      properties:
-        id:
-          description: Id.
-          format: int32
-          type: integer
-        name:
-          description: Name.
-          nullable: true
-          type: string
-      required:
-      - id
       type: object
     UserInfo:
       example:
@@ -23775,6 +25791,33 @@ components:
           type: string
       required:
       - id
+      type: object
+    AccessTokenScope:
+      description: |-
+        The set of Orgs a token is authorized to operate in, recorded at issuance. Used for token
+        types (e.g. AccessToken) that have no other {@code scope} field of their own.
+      example:
+        org_scope: SPECIFIC_ORGS
+        org_ids:
+        - id: 0
+          name: name
+        - id: 0
+          name: name
+      properties:
+        org_scope:
+          description: "Org scope the token is authorized for: SPECIFIC_ORGS or ALL_MEMBER_ORGS."
+          enum:
+          - SPECIFIC_ORGS
+          - ALL_MEMBER_ORGS
+          type: string
+        org_ids:
+          description: Orgs the token is authorized for when org_scope is SPECIFIC_ORGS.
+          items:
+            $ref: "#/components/schemas/OrgInfo"
+          nullable: true
+          type: array
+      required:
+      - org_scope
       type: object
     AuthClusterPreferencesInput:
       description: Input for cluster-level auth configuration.
@@ -24506,6 +26549,10 @@ components:
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
             - CAN_MANAGE_SPOTTER
+            - CAN_CREATE_LIVEBOARD
+            - CAN_CREATE_ANSWERS
+            - CAN_ANALYZE_DATA
+            - CAN_ADMINISTER_SCHEDULES
             type: string
           nullable: true
           type: array
@@ -24904,6 +26951,8 @@ components:
           - USER
           - USER_GROUP
           - COLLECTION
+          - ROLE
+          - TEMPLATE_VARIABLE
           nullable: true
           type: string
         attributes:
@@ -24955,6 +27004,8 @@ components:
           - USER
           - USER_GROUP
           - COLLECTION
+          - ROLE
+          - TEMPLATE_VARIABLE
           nullable: true
           type: string
         current_obj_id:
@@ -24990,6 +27041,7 @@ components:
           - ROLE
           - FEEDBACK
           - COLLECTION
+          - TEMPLATE_VARIABLE
           nullable: true
           type: string
         identifier:
@@ -25622,6 +27674,10 @@ components:
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
             - CAN_MANAGE_SPOTTER
+            - CAN_CREATE_LIVEBOARD
+            - CAN_CREATE_ANSWERS
+            - CAN_ANALYZE_DATA
+            - CAN_ADMINISTER_SCHEDULES
             type: string
           type: array
         permission:
@@ -26625,6 +28681,7 @@ components:
       example:
         conversation_id: conversation_id
         conversation_identifier: conversation_identifier
+        analyst_id: analyst_id
       properties:
         conversation_id:
           description: Unique identifier of the conversation.
@@ -26632,6 +28689,12 @@ components:
         conversation_identifier:
           description: "Unique identifier of the conversation. \n  Version: 26.5.0.cl\
             \ or later\n"
+          type: string
+        analyst_id:
+          description: "Unique identifier of the Spotter Analyst the conversation\
+            \ was started\nfrom. Null when the conversation was not started from an\
+            \ analyst. \n  Version: 26.10.0.cl or later\n"
+          nullable: true
           type: string
       required:
       - conversation_id
@@ -26684,6 +28747,478 @@ components:
           type: boolean
       required:
       - success
+      type: object
+    AnalystSourceInput:
+      description: A data source to attach to a Spotter Analyst.
+      example:
+        identifier: identifier
+        name: name
+        type: MODEL
+      properties:
+        identifier:
+          description: Unique identifier of the data source.
+          type: string
+        name:
+          description: Display name of the data source.
+          nullable: true
+          type: string
+        type:
+          description: Type of the data source.
+          enum:
+          - MODEL
+          - ANSWER
+          - LIVEBOARD
+          - CONVERSATION
+          type: string
+      required:
+      - identifier
+      - type
+      type: object
+    Analyst:
+      description: |-
+        A Spotter Analyst: a configured agent with a name, description, agent
+        instructions, data sources, MCP connectors, and starter prompts.
+      example:
+        id: id
+        name: name
+        description: description
+        instructions: instructions
+        sources:
+        - id: id
+          type: MODEL
+        - id: id
+          type: MODEL
+        mcp_connectors:
+        - mcp_connectors
+        - mcp_connectors
+        starter_prompts:
+        - label: label
+          text: text
+          order: 0
+          is_ai_generated: true
+        - label: label
+          text: text
+          order: 0
+          is_ai_generated: true
+        updated_time_in_millis: ""
+        created_by: created_by
+        updated_by: updated_by
+      properties:
+        id:
+          description: Unique identifier of the analyst.
+          type: string
+        name:
+          description: Display name of the analyst.
+          nullable: true
+          type: string
+        description:
+          description: Description of the analyst.
+          nullable: true
+          type: string
+        instructions:
+          description: |-
+            Natural-language instructions that guide the agent's behavior for this
+            analyst.
+          nullable: true
+          type: string
+        sources:
+          description: Data sources the analyst can query.
+          items:
+            $ref: "#/components/schemas/AnalystSource"
+          type: array
+        mcp_connectors:
+          description: IDs of MCP connectors linked to this analyst.
+          items:
+            type: string
+          type: array
+        starter_prompts:
+          description: "User-defined starter prompts, in display order."
+          items:
+            $ref: "#/components/schemas/AnalystStarterPrompt"
+          type: array
+        updated_time_in_millis:
+          description: Epoch milliseconds of the last update.
+          nullable: true
+        created_by:
+          description: ID of the user who created the analyst.
+          nullable: true
+          type: string
+        updated_by:
+          description: ID of the user who last updated the analyst.
+          nullable: true
+          type: string
+      required:
+      - id
+      - mcp_connectors
+      - sources
+      - starter_prompts
+      type: object
+    AnalystSource:
+      description: A data source attached to a Spotter Analyst.
+      example:
+        id: id
+        type: MODEL
+      properties:
+        id:
+          description: Unique identifier of the data source.
+          type: string
+        type:
+          description: Type of the data source.
+          enum:
+          - MODEL
+          - ANSWER
+          - LIVEBOARD
+          - CONVERSATION
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    AnalystStarterPrompt:
+      description: A user-defined starter prompt shown on the Analyst landing page.
+      example:
+        label: label
+        text: text
+        order: 0
+        is_ai_generated: true
+      properties:
+        label:
+          description: Short display label shown in the UI.
+          type: string
+        text:
+          description: Full prompt text sent to the agent.
+          type: string
+        order:
+          description: Display order within the list.
+          format: int32
+          type: integer
+        is_ai_generated:
+          description: Whether this prompt was AI-generated.
+          type: boolean
+      required:
+      - is_ai_generated
+      - label
+      - order
+      - text
+      type: object
+    AnalystDeleteResponse:
+      description: Response returned after deleting a Spotter Analyst.
+      example:
+        id: id
+      properties:
+        id:
+          description: Unique identifier of the deleted analyst.
+          type: string
+      required:
+      - id
+      type: object
+    AnalystSearchResponse:
+      description: Response returned by analyst search.
+      example:
+        analysts:
+        - id: id
+          name: name
+          description: description
+          instructions: instructions
+          sources:
+          - id: id
+            type: MODEL
+            name: name
+          - id: id
+            type: MODEL
+            name: name
+          mcp_connectors:
+          - id: id
+            name: name
+            icon_url: icon_url
+          - id: id
+            name: name
+            icon_url: icon_url
+          icon_id: icon_id
+          starter_prompts:
+          - label: label
+            text: text
+            order: 0
+            is_fixed: true
+          - label: label
+            text: text
+            order: 0
+            is_fixed: true
+          updated_time_in_millis: ""
+          last_accessed_time_in_millis: ""
+          created_by:
+            id: id
+            name: name
+            display_name: display_name
+          updated_by:
+            id: id
+            name: name
+            display_name: display_name
+        - id: id
+          name: name
+          description: description
+          instructions: instructions
+          sources:
+          - id: id
+            type: MODEL
+            name: name
+          - id: id
+            type: MODEL
+            name: name
+          mcp_connectors:
+          - id: id
+            name: name
+            icon_url: icon_url
+          - id: id
+            name: name
+            icon_url: icon_url
+          icon_id: icon_id
+          starter_prompts:
+          - label: label
+            text: text
+            order: 0
+            is_fixed: true
+          - label: label
+            text: text
+            order: 0
+            is_fixed: true
+          updated_time_in_millis: ""
+          last_accessed_time_in_millis: ""
+          created_by:
+            id: id
+            name: name
+            display_name: display_name
+          updated_by:
+            id: id
+            name: name
+            display_name: display_name
+        total_size: 6
+      properties:
+        analysts:
+          description: Page of analysts matching the request.
+          items:
+            $ref: "#/components/schemas/AnalystItem"
+          type: array
+        total_size:
+          description: Total number of matches before pagination.
+          format: int32
+          type: integer
+      required:
+      - analysts
+      - total_size
+      type: object
+    AnalystItem:
+      description: A Spotter Analyst as returned in search results.
+      example:
+        id: id
+        name: name
+        description: description
+        instructions: instructions
+        sources:
+        - id: id
+          type: MODEL
+          name: name
+        - id: id
+          type: MODEL
+          name: name
+        mcp_connectors:
+        - id: id
+          name: name
+          icon_url: icon_url
+        - id: id
+          name: name
+          icon_url: icon_url
+        icon_id: icon_id
+        starter_prompts:
+        - label: label
+          text: text
+          order: 0
+          is_fixed: true
+        - label: label
+          text: text
+          order: 0
+          is_fixed: true
+        updated_time_in_millis: ""
+        last_accessed_time_in_millis: ""
+        created_by:
+          id: id
+          name: name
+          display_name: display_name
+        updated_by:
+          id: id
+          name: name
+          display_name: display_name
+      properties:
+        id:
+          description: Unique identifier of the analyst.
+          type: string
+        name:
+          description: Display name of the analyst.
+          nullable: true
+          type: string
+        description:
+          description: Description of the analyst.
+          nullable: true
+          type: string
+        instructions:
+          description: |-
+            Natural-language instructions that guide the agent's behavior for this
+            analyst.
+          nullable: true
+          type: string
+        sources:
+          description: Data sources the analyst can query.
+          items:
+            $ref: "#/components/schemas/AnalystItemSource"
+          type: array
+        mcp_connectors:
+          description: MCP connectors linked to this analyst.
+          items:
+            $ref: "#/components/schemas/AnalystMcpConnector"
+          type: array
+        icon_id:
+          description: Icon identifier. Empty string means the default icon.
+          type: string
+        starter_prompts:
+          description: "Starter prompts in display order, including the fixed prompt."
+          items:
+            $ref: "#/components/schemas/AnalystItemStarterPrompt"
+          type: array
+        updated_time_in_millis:
+          description: Epoch milliseconds of the last update.
+          nullable: true
+        last_accessed_time_in_millis:
+          description: Epoch milliseconds of the caller's last interaction with the
+            analyst.
+          nullable: true
+        created_by:
+          $ref: "#/components/schemas/AnalystUser"
+        updated_by:
+          $ref: "#/components/schemas/AnalystUser"
+      required:
+      - icon_id
+      - id
+      - mcp_connectors
+      - sources
+      - starter_prompts
+      type: object
+    AnalystItemSource:
+      description: A data source returned in analyst search results.
+      example:
+        id: id
+        type: MODEL
+        name: name
+      properties:
+        id:
+          description: Unique identifier of the data source.
+          type: string
+        type:
+          description: Type of the data source.
+          enum:
+          - MODEL
+          - ANSWER
+          - LIVEBOARD
+          - CONVERSATION
+          type: string
+        name:
+          description: Display name of the data source.
+          nullable: true
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    AnalystMcpConnector:
+      description: An MCP connector returned in analyst search results.
+      example:
+        id: id
+        name: name
+        icon_url: icon_url
+      properties:
+        id:
+          description: Unique identifier of the MCP connector.
+          type: string
+        name:
+          description: Name of the MCP connector.
+          nullable: true
+          type: string
+        icon_url:
+          description: Icon URL of the MCP connector.
+          nullable: true
+          type: string
+      required:
+      - id
+      type: object
+    AnalystItemStarterPrompt:
+      description: |-
+        A starter prompt returned in analyst search results. Includes the
+        server-managed fixed prompt (`is_fixed: true`, order 0).
+      example:
+        label: label
+        text: text
+        order: 0
+        is_fixed: true
+      properties:
+        label:
+          description: Short display label shown in the UI.
+          type: string
+        text:
+          description: Full prompt text sent to the agent.
+          type: string
+        order:
+          description: Display order within the list.
+          format: int32
+          type: integer
+        is_fixed:
+          description: Whether this is the server-managed fixed prompt.
+          type: boolean
+      required:
+      - is_fixed
+      - label
+      - order
+      - text
+      type: object
+    AnalystUser:
+      description: A user reference returned in analyst search results.
+      example:
+        id: id
+        name: name
+        display_name: display_name
+      properties:
+        id:
+          description: Unique identifier of the user.
+          type: string
+        name:
+          description: Username of the user.
+          type: string
+        display_name:
+          description: Display name of the user.
+          type: string
+      required:
+      - display_name
+      - id
+      - name
+      type: object
+    PrincipalRefInput:
+      description: |-
+        Input reference to a principal (user or group) used when granting or revoking
+        access to a shared resource.
+      example:
+        principal_identifier: principal_identifier
+        principal_type: USER
+      properties:
+        principal_identifier:
+          description: Unique identifier of the user or group.
+          type: string
+        principal_type:
+          description: Whether the principal is an individual user or a group.
+          enum:
+          - USER
+          - USER_GROUP
+          type: string
+      required:
+      - principal_identifier
+      - principal_type
       type: object
     ImportMemoryResponse:
       description: |-
@@ -26929,7 +29464,7 @@ components:
         operation: ADD
       properties:
         variable_identifier:
-          description: ID or Name of the variable
+          description: "ID, name, or object ID of the variable"
           type: string
         variable_values:
           description: Values of the variable
@@ -27254,6 +29789,15 @@ components:
           - ATTRIBUTE
           - MEASURE
           type: string
+        allowed_values:
+          description: "Optional list of permitted values for the column. When provided,\n\
+            data written to this column is restricted to these values. Omit\nor leave\
+            \ empty to allow any value supported by the data type. \n  Version: 26.9.0.cl\
+            \ or later\n"
+          items:
+            type: string
+          nullable: true
+          type: array
       required:
       - data_type
       - name
@@ -27974,6 +30518,220 @@ components:
           nullable: true
           type: array
       type: object
+    SemanticIntegrationResponse:
+      description: Response object for a semantic integration.
+      example:
+        id: id
+        name: name
+        model_id: model_id
+        model_name: model_name
+        semantic_report:
+          summary:
+            total: 0
+            imported: 6
+            failed: 1
+            skipped: 5
+          formulas:
+          - id: id
+            name: name
+            description: description
+            source_expression: source_expression
+            translated_formula: translated_formula
+            import_status: IMPORTED
+            change_status: NEW
+          - id: id
+            name: name
+            description: description
+            source_expression: source_expression
+            translated_formula: translated_formula
+            import_status: IMPORTED
+            change_status: NEW
+      properties:
+        id:
+          description: Unique identifier of the semantic integration.
+          nullable: true
+          type: string
+        name:
+          description: Name of the semantic integration.
+          nullable: true
+          type: string
+        model_id:
+          description: Model GUID generated for this integration.
+          nullable: true
+          type: string
+        model_name:
+          description: Model name generated for this integration.
+          nullable: true
+          type: string
+        semantic_report:
+          $ref: "#/components/schemas/SemanticIntegrationReport"
+      type: object
+    SemanticIntegrationReport:
+      description: Per-formula import report for a semantic integration.
+      example:
+        summary:
+          total: 0
+          imported: 6
+          failed: 1
+          skipped: 5
+        formulas:
+        - id: id
+          name: name
+          description: description
+          source_expression: source_expression
+          translated_formula: translated_formula
+          import_status: IMPORTED
+          change_status: NEW
+        - id: id
+          name: name
+          description: description
+          source_expression: source_expression
+          translated_formula: translated_formula
+          import_status: IMPORTED
+          change_status: NEW
+      properties:
+        summary:
+          $ref: "#/components/schemas/SemanticIntegrationReportSummary"
+        formulas:
+          description: Formula import details.
+          items:
+            $ref: "#/components/schemas/SemanticIntegrationFormulaReport"
+          nullable: true
+          type: array
+      type: object
+    SemanticIntegrationReportSummary:
+      description: Formula import counts summary.
+      example:
+        total: 0
+        imported: 6
+        failed: 1
+        skipped: 5
+      properties:
+        total:
+          description: Total number of formulas.
+          format: int32
+          nullable: true
+          type: integer
+        imported:
+          description: Number of successfully imported formulas.
+          format: int32
+          nullable: true
+          type: integer
+        failed:
+          description: Number of failed formula imports.
+          format: int32
+          nullable: true
+          type: integer
+        skipped:
+          description: Number of skipped formulas.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    SemanticIntegrationFormulaReport:
+      description: Import details for a single formula.
+      example:
+        id: id
+        name: name
+        description: description
+        source_expression: source_expression
+        translated_formula: translated_formula
+        import_status: IMPORTED
+        change_status: NEW
+      properties:
+        id:
+          description: Formula ID in the model.
+          nullable: true
+          type: string
+        name:
+          description: Formula name.
+          nullable: true
+          type: string
+        description:
+          description: Formula description.
+          nullable: true
+          type: string
+        source_expression:
+          description: CDW source expression.
+          nullable: true
+          type: string
+        translated_formula:
+          description: ThoughtSpot formula equivalent.
+          nullable: true
+          type: string
+        import_status:
+          description: Import status.
+          enum:
+          - IMPORTED
+          - FAILED
+          - SKIPPED
+          nullable: true
+          type: string
+        change_status:
+          description: Change status since last import. Null on initial create.
+          enum:
+          - NEW
+          - UPDATED
+          - UNCHANGED
+          nullable: true
+          type: string
+      type: object
+    FeatureAssignmentResponse:
+      description: Response returned when a feature's Org assignments are updated.
+      example:
+        feature_id: feature_id
+        feature_name: feature_name
+        assigned_orgs:
+        - org_id: 0
+          org_name: org_name
+        - org_id: 0
+          org_name: org_name
+      properties:
+        feature_id:
+          description: |-
+            Underlying unique feature ID. The dotted-path format (for example,
+            `orion.embraceConfig.doIndexing`) is internal and subject to change without
+            notice; use `feature_name` as the stable display identifier where possible.
+          type: string
+        feature_name:
+          description: User-friendly feature name. Present when the feature declares
+            one.
+          nullable: true
+          type: string
+        assigned_orgs:
+          description: Updated set of Orgs assigned to the feature.
+          items:
+            $ref: "#/components/schemas/FeatureOrgInfo"
+          type: array
+      required:
+      - assigned_orgs
+      - feature_id
+      type: object
+    FeatureValueResponse:
+      description: Response returned when a feature's value is set.
+      example:
+        feature_id: feature_id
+        feature_name: feature_name
+        feature_value: feature_value
+      properties:
+        feature_id:
+          description: |-
+            Underlying unique feature ID. The dotted-path format (for example,
+            `orion.embraceConfig.doIndexing`) is internal and subject to change without
+            notice; use `feature_name` as the stable display identifier where possible.
+          type: string
+        feature_name:
+          description: User-friendly feature name. Present when the feature declares
+            one.
+          nullable: true
+          type: string
+        feature_value:
+          description: The value that was written.
+          type: string
+      required:
+      - feature_id
+      - feature_value
+      type: object
     Runtime_Filter:
       description: List of runtime parameters need to set during the session.
       properties:
@@ -27996,18 +30754,82 @@ components:
       example:
         metadata_context: ""
         conversation_settings: ""
+        analyst_identifier: analyst_identifier
       properties:
         metadata_context:
           allOf:
           - $ref: "#/components/schemas/ContextPayloadV2Input"
-          description: Context for the conversation.
+          description: |-
+            Context for the conversation. Required unless `analyst_identifier` is
+            provided; do not pass both.
         conversation_settings:
           allOf:
           - $ref: "#/components/schemas/ConversationSettingsInput"
           description: Conversation settings.
+        analyst_identifier:
+          description: "Unique identifier of the Spotter Analyst to start the conversation\
+            \ from.\nWhen provided, the conversation uses the analyst's configuration\
+            \ (data\nsources, agent instructions, and connectors), and `metadata_context`\n\
+            must be omitted. \n  Version: 26.10.0.cl or later\n"
+          type: string
       required:
       - conversation_settings
-      - metadata_context
+      type: object
+    CreateAnalystRequest:
+      example:
+        name: name
+        description: description
+        instructions: instructions
+        sources:
+        - identifier: identifier
+          name: name
+          type: MODEL
+        - identifier: identifier
+          name: name
+          type: MODEL
+        mcp_connector_identifiers:
+        - mcp_connector_identifiers
+        - mcp_connector_identifiers
+        starter_prompts:
+        - starter_prompts
+        - starter_prompts
+      properties:
+        name:
+          description: Display name of the analyst.
+          type: string
+        description:
+          description: Description of the analyst. Maximum 200 characters.
+          type: string
+        instructions:
+          description: |-
+            Natural-language instructions that guide the agent's behavior for this
+            analyst.
+          type: string
+        sources:
+          description: |-
+            Data sources the analyst can query. At least one is required, and the
+            caller must have view access to every referenced source.
+          items:
+            $ref: "#/components/schemas/AnalystSourceInput"
+          type: array
+        mcp_connector_identifiers:
+          default: []
+          description: Identifiers of MCP connectors to link to this analyst.
+          items:
+            type: string
+          type: array
+        starter_prompts:
+          default: []
+          description: |-
+            Plain-text starter prompts shown on the analyst landing page. Maximum 4,
+            each between 10 and 250 characters; display order follows list position.
+          items:
+            type: string
+          type: array
+      required:
+      - description
+      - name
+      - sources
       type: object
     CreateConversationRequest:
       example:
@@ -28184,6 +31006,47 @@ components:
             type: string
           type: array
       type: object
+    SearchAnalystsRequest:
+      example:
+        analyst_identifier: analyst_identifier
+        record_size: 0
+        record_offset: 6
+        query: query
+        type: ALL
+      properties:
+        analyst_identifier:
+          description: |-
+            Unique identifier of an analyst. When provided, fetch mode: the response
+            contains exactly that analyst and the other filters are ignored.
+          type: string
+        record_size:
+          default: 50
+          description: "List mode: number of records per page. Default 50, maximum\
+            \ 500."
+          format: int32
+          type: integer
+        record_offset:
+          default: 0
+          description: |-
+            List mode: zero-based index of the first record to return.
+            Maximum 10000.
+          format: int32
+          type: integer
+        query:
+          description: "List mode: case-insensitive substring match on the analyst\
+            \ name."
+          type: string
+        type:
+          default: ALL
+          description: |-
+            List mode: ownership filter — ALL (created by or shared with me),
+            CREATED_BY_ME, or SHARED_TO_ME.
+          enum:
+          - ALL
+          - CREATED_BY_ME
+          - SHARED_TO_ME
+          type: string
+      type: object
     SendAgentConversationMessageRequest:
       example:
         messages:
@@ -28297,6 +31160,79 @@ components:
       - data_source_identifier
       - nl_instructions_info
       type: object
+    ShareAnalystRequest:
+      example:
+        permissions:
+        - principal:
+            identifier: identifier
+            type: USER
+          share_mode: READ_ONLY
+          content_share_mode: READ_ONLY
+        - principal:
+            identifier: identifier
+            type: USER
+          share_mode: READ_ONLY
+          content_share_mode: READ_ONLY
+      properties:
+        permissions:
+          description: |-
+            Access changes to apply, one entry per principal. `principal.type` is
+            required for analyst sharing, and `content_share_mode` does not apply
+            to analysts and is ignored.
+          items:
+            $ref: "#/components/schemas/SharePermissionsInput"
+          type: array
+      required:
+      - permissions
+      type: object
+    ShareConversationRequest:
+      example:
+        refresh_shared_content: false
+        grant:
+        - principal_identifier: principal_identifier
+          principal_type: USER
+        - principal_identifier: principal_identifier
+          principal_type: USER
+        revoke:
+        - principal_identifier: principal_identifier
+          principal_type: USER
+        - principal_identifier: principal_identifier
+          principal_type: USER
+        notify_on_share: true
+      properties:
+        refresh_shared_content:
+          default: false
+          description: |-
+            When `true`, always regenerates the shared view from the latest conversation
+            state, even if one already exists. When `false` (default), reuses the
+            existing shared view.
+          nullable: true
+          type: boolean
+        grant:
+          default: []
+          description: Principals to grant read-only access to the conversation.
+          items:
+            $ref: "#/components/schemas/PrincipalRefInput"
+          type: array
+        revoke:
+          default: []
+          description: Principals to revoke access from the conversation.
+          items:
+            $ref: "#/components/schemas/PrincipalRefInput"
+          type: array
+        notify_on_share:
+          default: true
+          description: |-
+            <div>Version: 26.10.0.cl or later
+            </div>
+
+            When `true` (default), newly granted principals are notified of the share. When `false`, access is granted without sending a notification. Has no effect on principals passed in `revoke`. Does not re-notify a principal who already had access.
+          nullable: true
+          type: boolean
+      required:
+      - grant
+      - revoke
+      type: object
     SingleAnswerRequest:
       example:
         query: query
@@ -28313,15 +31249,86 @@ components:
       - metadata_identifier
       - query
       type: object
+    UpdateAnalystRequest:
+      example:
+        name: name
+        description: description
+        instructions: instructions
+        sources:
+        - identifier: identifier
+          name: name
+          type: MODEL
+        - identifier: identifier
+          name: name
+          type: MODEL
+        mcp_connector_identifiers:
+        - mcp_connector_identifiers
+        - mcp_connector_identifiers
+        starter_prompts:
+        - starter_prompts
+        - starter_prompts
+      properties:
+        name:
+          description: Display name of the analyst.
+          type: string
+        description:
+          description: Description of the analyst. Maximum 200 characters.
+          type: string
+        instructions:
+          description: |-
+            Natural-language instructions that guide the agent's behavior for this
+            analyst. Omitting this field clears any existing instructions.
+          type: string
+        sources:
+          description: |-
+            Data sources the analyst can query. At least one is required, and the
+            caller must have view access to every referenced source. Replaces the
+            existing list in full.
+          items:
+            $ref: "#/components/schemas/AnalystSourceInput"
+          type: array
+        mcp_connector_identifiers:
+          default: []
+          description: |-
+            Identifiers of MCP connectors linked to this analyst. Replaces the
+            existing list in full; omit or pass an empty array to clear.
+          items:
+            type: string
+          type: array
+        starter_prompts:
+          default: []
+          description: |-
+            Plain-text starter prompts (max 4, each between 10 and 250 characters;
+            display order follows list position). Replaces the existing list in
+            full; omit or pass an empty array to clear.
+          items:
+            type: string
+          type: array
+      required:
+      - description
+      - name
+      - sources
+      type: object
     UpdateConversationRequest:
       example:
         title: title
+        is_pinned: true
       properties:
         title:
           description: |-
             New display title for the conversation. Omit to leave the title
-            unchanged.
+            unchanged. An empty or whitespace-only value is replaced with a default
+            title rather than rejected.
           type: string
+        is_pinned:
+          description: "Pinned state of the conversation for the current user. Pinning\
+            \ marks a\nconversation for quick access: pinned conversations are surfaced\
+            \ first in\n`getConversationList`. Set to `true` to pin the conversation,\
+            \ `false` to\nunpin it, or omit to leave the pinned state unchanged. Applying\
+            \ the state\nthe conversation is already in is a no-op success. \n  Version:\
+            \ 26.10.0.cl or later\n"
+          nullable: true
+          type: boolean
       type: object
     ConfigureAuthSettingsRequest:
       example:
@@ -28360,6 +31367,7 @@ components:
         secret_key: ""
         validity_time_in_sec: 0
         org_identifier: org_identifier
+        scope: ""
         persist_option: REPLACE
         filter_rules:
         - column_name: column_name
@@ -28428,6 +31436,15 @@ components:
             \ Org ID/name nor the secret key is provided, the user will be logged\
             \ into the Org context from their previous login session."
           type: string
+        scope:
+          allOf:
+          - $ref: "#/components/schemas/TokenScopeInput"
+          description: "The set of Orgs this token is authorized to operate in, recorded\
+            \ at issuance. Only applicable to a Tenant Administrator. Only SPECIFIC_ORGS\
+            \ is supported for a custom (ABAC) token -- it authorizes the token for\
+            \ the Orgs listed in org_identifiers. Each subsequent request selects\
+            \ one Org from this set using the `X-Org-Selector` header. \n Version:\
+            \ 26.10.0.cl or later\n"
         persist_option:
           description: Indicates whether the specified attributes should be persisted
             or not. RESET and NONE are not applicable if you are setting variable_values.
@@ -28501,6 +31518,7 @@ components:
         secret_key: ""
         validity_time_in_sec: 0
         org_id: 6
+        scope: ""
         email: email
         display_name: display_name
         auto_create: false
@@ -28535,6 +31553,13 @@ components:
             \ be logged in to the Org context of their previous login session."
           format: int32
           type: integer
+        scope:
+          allOf:
+          - $ref: "#/components/schemas/TokenScopeInput"
+          description: "The set of Orgs this token is authorized to operate in, recorded\
+            \ at issuance. Only applicable to a Tenant Administrator. Each subsequent\
+            \ request selects one Org from this set using the `X-Org-Selector` header.\
+            \ \n Version: 26.10.0.cl or later\n"
         email:
           description: Email address of the user. Specify this attribute when creating
             a new user (just-in-time (JIT) provisioning).
@@ -28576,6 +31601,7 @@ components:
         secret_key: ""
         validity_time_in_sec: 0
         org_id: 6
+        scope: ""
         email: email
         display_name: display_name
         auto_create: false
@@ -28614,6 +31640,13 @@ components:
             \ be logged in to the Org context of their previous login session."
           format: int32
           type: integer
+        scope:
+          allOf:
+          - $ref: "#/components/schemas/TokenScopeInput"
+          description: "The set of Orgs this token is authorized to operate in, recorded\
+            \ at issuance. Only applicable to a Tenant Administrator. Each subsequent\
+            \ request selects one Org from this set using the `X-Org-Selector` header.\
+            \ \n Version: 26.10.0.cl or later\n"
         email:
           description: Email address of the user. Specify this attribute when creating
             a new user (just-in-time (JIT) provisioning).
@@ -28939,6 +31972,7 @@ components:
           - PERSONAL_ACCESS_TOKEN
           - OAUTH_WITH_SERVICE_PRINCIPAL
           - OAUTH_CLIENT_CREDENTIALS
+          - OAUTH_CLIENT_CREDENTIALS_WITH_X509
           type: string
         configuration:
           description: Configuration properties in JSON.
@@ -28957,11 +31991,12 @@ components:
           type: array
         policy_processes:
           description: "Action that the query performed on the data warehouse, such\
-            \ as SAGE_INDEXING and ROW_COUNT_STATS."
+            \ as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS."
           items:
             enum:
             - SAGE_INDEXING
             - ROW_COUNT_STATS
+            - SCHEDULED_LIVEBOARDS
             type: string
           type: array
       required:
@@ -29040,6 +32075,7 @@ components:
           - OAUTH_WITH_PKCE
           - PERSONAL_ACCESS_TOKEN
           - OAUTH_CLIENT_CREDENTIALS
+          - OAUTH_CLIENT_CREDENTIALS_WITH_X509
           type: string
         configuration:
           description: Configuration properties in JSON.
@@ -29057,11 +32093,12 @@ components:
           type: array
         policy_processes:
           description: "Action that the query performed on the data warehouse, such\
-            \ as SAGE_INDEXING and ROW_COUNT_STATS."
+            \ as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS."
           items:
             enum:
             - SAGE_INDEXING
             - ROW_COUNT_STATS
+            - SCHEDULED_LIVEBOARDS
             type: string
           type: array
         disable:
@@ -29326,6 +32363,7 @@ components:
           - EXTOAUTH_WITH_PKCE
           - OAUTH_WITH_PEZ
           - OAUTH_CLIENT_CREDENTIALS
+          - OAUTH_CLIENT_CREDENTIALS_WITH_X509
           type: string
         show_resolved_parameters:
           default: false
@@ -30081,6 +33119,120 @@ components:
       required:
       - template_properties
       type: object
+    SearchFeaturesRequest:
+      example:
+        scope: CLUSTER
+        org_identifier: 0
+        category: GENERAL_ACCESS
+      properties:
+        scope:
+          description: |-
+            Determines the administrative view for the search.
+            Use CLUSTER for the cluster-admin view (returns org assignments per feature);
+            use ORG for the org-admin view (returns the current value of each feature
+            assigned to the org).
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+        org_identifier:
+          description: |-
+            Numeric ID of the Org to scope the search to. Required when scope is ORG;
+            ignored when scope is CLUSTER.
+          format: int32
+          type: integer
+        category:
+          default: GENERAL_ACCESS
+          description: |-
+            Category of features to return. GENERAL_ACCESS returns features that are
+            generally available; EARLY_ACCESS returns features still in early access.
+            Defaults to GENERAL_ACCESS.
+          enum:
+          - GENERAL_ACCESS
+          - EARLY_ACCESS
+          type: string
+      required:
+      - scope
+      type: object
+    UpdateFeatureAssignmentsRequest:
+      example:
+        feature_identifier: feature_identifier
+        org_identifiers:
+        - 0
+        - 0
+        operation: REPLACE
+      properties:
+        feature_identifier:
+          description: |-
+            User-friendly feature name (feature_name) or the underlying feature ID
+            (feature_id) of the feature whose Org assignments should be updated.
+          type: string
+        org_identifiers:
+          description: |-
+            Numeric IDs of the Orgs to assign to the feature. Send an empty array with
+            operation REPLACE to clear all Org assignments for this feature.
+          items:
+            format: int32
+            type: integer
+          type: array
+        operation:
+          default: REPLACE
+          description: |-
+            Type of update to apply to the Org assignments. ADD assigns the given Orgs
+            in addition to existing ones; REMOVE unassigns the given Orgs; REPLACE sets
+            the assignment to exactly the given Orgs. Defaults to REPLACE.
+          enum:
+          - ADD
+          - REMOVE
+          - REPLACE
+          type: string
+      required:
+      - feature_identifier
+      - org_identifiers
+      type: object
+    UpdateFeatureValueRequest:
+      example:
+        scope: CLUSTER
+        org_identifier: 0
+        feature_identifier: feature_identifier
+        feature_value: feature_value
+        reset_org_overrides: true
+      properties:
+        scope:
+          description: |-
+            Determines the scope at which the value is set. Use CLUSTER to set the
+            cluster-level value; use ORG to set a per-Org value override.
+          enum:
+          - CLUSTER
+          - ORG
+          type: string
+        org_identifier:
+          description: |-
+            Numeric ID of the Org for which to set the value. Required when scope is
+            ORG; ignored when scope is CLUSTER.
+          format: int32
+          type: integer
+        feature_identifier:
+          description: |-
+            User-friendly feature name (feature_name) or the underlying feature ID
+            (feature_id) of the feature whose value should be set.
+          type: string
+        feature_value:
+          description: New value to set for the feature.
+          type: string
+        reset_org_overrides:
+          description: "Applicable only when `scope` is `CLUSTER`. When `true`, any\
+            \ existing per-Org value overrides for this feature are removed so that\
+            \ all Orgs inherit the new cluster-level value. Required when `scope`\
+            \ is `CLUSTER` for an org-aware feature. Must be omitted when `scope`\
+            \ is `ORG`; passing it at `ORG` scope returns a 400 error."
+          nullable: true
+          type: boolean
+      required:
+      - feature_identifier
+      - feature_value
+      - scope
+      type: object
     CreateUserGroupRequest:
       example:
         name: name
@@ -30160,6 +33312,10 @@ components:
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
             - CAN_MANAGE_SPOTTER
+            - CAN_CREATE_LIVEBOARD
+            - CAN_CREATE_ANSWERS
+            - CAN_ANALYZE_DATA
+            - CAN_ADMINISTER_SCHEDULES
             type: string
           type: array
         sub_group_identifiers:
@@ -30365,6 +33521,10 @@ components:
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
             - CAN_MANAGE_SPOTTER
+            - CAN_CREATE_LIVEBOARD
+            - CAN_CREATE_ANSWERS
+            - CAN_ANALYZE_DATA
+            - CAN_ADMINISTER_SCHEDULES
             type: string
           type: array
         sub_group_identifiers:
@@ -30513,6 +33673,10 @@ components:
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
             - CAN_MANAGE_SPOTTER
+            - CAN_CREATE_LIVEBOARD
+            - CAN_CREATE_ANSWERS
+            - CAN_ANALYZE_DATA
+            - CAN_ADMINISTER_SCHEDULES
             type: string
           type: array
         sub_group_identifiers:
@@ -31825,6 +34989,10 @@ components:
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
             - CAN_MANAGE_SPOTTER
+            - CAN_CREATE_LIVEBOARD
+            - CAN_CREATE_ANSWERS
+            - CAN_ANALYZE_DATA
+            - CAN_ADMINISTER_SCHEDULES
             type: string
           type: array
         read_only:
@@ -31935,6 +35103,10 @@ components:
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
             - CAN_MANAGE_SPOTTER
+            - CAN_CREATE_LIVEBOARD
+            - CAN_CREATE_ANSWERS
+            - CAN_ANALYZE_DATA
+            - CAN_ADMINISTER_SCHEDULES
             type: string
           type: array
         deprecated:
@@ -32024,6 +35196,10 @@ components:
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
             - CAN_MANAGE_SPOTTER
+            - CAN_CREATE_LIVEBOARD
+            - CAN_CREATE_ANSWERS
+            - CAN_ANALYZE_DATA
+            - CAN_ADMINISTER_SCHEDULES
             type: string
           type: array
       required:
@@ -33953,6 +37129,91 @@ components:
       required:
       - column_security_rules
       type: object
+    CreateSemanticIntegrationRequest:
+      example:
+        connection_identifier: connection_identifier
+        name: name
+        database_name: database_name
+        schema_name: schema_name
+        semantic_view_name: semantic_view_name
+        type: RDBMS_SNOWFLAKE
+        description: description
+      properties:
+        connection_identifier:
+          description: ID or name of the CDW connection.
+          type: string
+        name:
+          description: Name of the semantic integration. Must be unique.
+          type: string
+        database_name:
+          description: Database name in the CDW.
+          type: string
+        schema_name:
+          description: Schema name in the CDW.
+          type: string
+        semantic_view_name:
+          description: Semantic view name in the CDW.
+          type: string
+        type:
+          description: CDW connector type.
+          enum:
+          - RDBMS_SNOWFLAKE
+          - RDBMS_DATABRICKS
+          type: string
+        description:
+          description: Optional description of the semantic integration.
+          type: string
+      required:
+      - connection_identifier
+      - database_name
+      - name
+      - schema_name
+      - semantic_view_name
+      - type
+      type: object
+    SearchSemanticIntegrationsRequest:
+      example:
+        sort_options: ""
+        record_offset: 0
+        record_size: 6
+        pattern: pattern
+        author_identifiers:
+        - author_identifiers
+        - author_identifiers
+        connection_identifiers:
+        - connection_identifiers
+        - connection_identifiers
+      properties:
+        sort_options:
+          allOf:
+          - $ref: "#/components/schemas/SemanticIntegrationSortOptions"
+          description: Sort options for the search results.
+        record_offset:
+          default: 0
+          description: Number of records to skip for pagination. Minimum value is
+            0.
+          format: int32
+          type: integer
+        record_size:
+          default: 10
+          description: Maximum number of records to return. Use 0 to return all records
+            (no pagination).
+          format: int32
+          type: integer
+        pattern:
+          description: Name filter substring to narrow search results.
+          type: string
+        author_identifiers:
+          description: Filter by author IDs or names who created the integrations.
+          items:
+            type: string
+          type: array
+        connection_identifiers:
+          description: Filter by connection IDs or names associated with the integrations.
+          items:
+            type: string
+          type: array
+      type: object
     DeleteStyleFontsRequest:
       example:
         scope: ORG
@@ -34070,8 +37331,7 @@ components:
           - ORG
           type: string
         name:
-          description: New display name for the font. Must be unique within the target
-            scope.
+          description: New display name for the font.
           type: string
         weight:
           description: "New weight for the font. Supported values: NORMAL, LIGHT,\
@@ -34798,6 +38058,10 @@ components:
             - CAN_DOWNLOAD_DETAILED_DATA
             - CAN_USE_SPOTTER
             - CAN_MANAGE_SPOTTER
+            - CAN_CREATE_LIVEBOARD
+            - CAN_CREATE_ANSWERS
+            - CAN_ANALYZE_DATA
+            - CAN_ADMINISTER_SCHEDULES
             type: string
           type: array
         account_type:
@@ -35078,7 +38342,8 @@ components:
         - identifiers
       properties:
         identifiers:
-          description: Unique id(s) or name(s) of the variable(s) to delete
+          description: "Unique id(s), name(s), or object id(s) of the variable(s)\
+            \ to delete"
           items:
             type: string
           type: array
@@ -35992,9 +39257,7 @@ components:
           - ORG
           type: string
         name:
-          description: |-
-            Display name for the font (e.g. "Acme Sans"). Must be unique within the
-            target scope; returns an error if a font with this name already exists.
+          description: Display name for the font (e.g. "Acme Sans").
           type: string
         weight:
           default: NORMAL
@@ -36041,6 +39304,11 @@ x-roles:
   tags:
   - 26.2.0.cl
   description: Roles for version 26.2.0.cl
+- name: 26.10.0.cl
+  id: 26.10.0.cl
+  tags:
+  - 26.10.0.cl
+  description: Roles for version 26.10.0.cl
 - name: 10.4.0.cl
   id: 10.4.0.cl
   tags:
@@ -36071,6 +39339,11 @@ x-roles:
   tags:
   - 10.13.0.cl
   description: Roles for version 10.13.0.cl
+- name: 26.9.0.cl
+  id: 26.9.0.cl
+  tags:
+  - 26.9.0.cl
+  description: Roles for version 26.9.0.cl
 - name: 10.7.0.cl
   id: 10.7.0.cl
   tags:

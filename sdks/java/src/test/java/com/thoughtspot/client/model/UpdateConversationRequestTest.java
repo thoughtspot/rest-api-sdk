@@ -21,4 +21,10 @@ public class UpdateConversationRequestTest {
     public void titleTest() {
         // TODO: test title
     }
+
+    /** Test the property 'isPinned' */
+    @Test
+    public void isPinnedTest() {
+        // TODO: test isPinned
+    }
 }

@@ -16,11 +16,13 @@ import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /** AgentConversation */
 @javax.annotation.Generated(
@@ -40,6 +42,12 @@ public class AgentConversation implements Serializable {
     @SerializedName(SERIALIZED_NAME_CONVERSATION_IDENTIFIER)
     @javax.annotation.Nonnull
     private String conversationIdentifier;
+
+    public static final String SERIALIZED_NAME_ANALYST_ID = "analyst_id";
+
+    @SerializedName(SERIALIZED_NAME_ANALYST_ID)
+    @javax.annotation.Nullable
+    private String analystId;
 
     public AgentConversation() {}
 
@@ -80,6 +88,26 @@ public class AgentConversation implements Serializable {
 
     public void setConversationIdentifier(@javax.annotation.Nonnull String conversationIdentifier) {
         this.conversationIdentifier = conversationIdentifier;
+    }
+
+    public AgentConversation analystId(@javax.annotation.Nullable String analystId) {
+        this.analystId = analystId;
+        return this;
+    }
+
+    /**
+     * Unique identifier of the Spotter Analyst the conversation was started from. Null when the
+     * conversation was not started from an analyst. Version: 26.10.0.cl or later
+     *
+     * @return analystId
+     */
+    @javax.annotation.Nullable
+    public String getAnalystId() {
+        return analystId;
+    }
+
+    public void setAnalystId(@javax.annotation.Nullable String analystId) {
+        this.analystId = analystId;
     }
 
     /**
@@ -138,13 +166,31 @@ public class AgentConversation implements Serializable {
         return Objects.equals(this.conversationId, agentConversation.conversationId)
                 && Objects.equals(
                         this.conversationIdentifier, agentConversation.conversationIdentifier)
+                && Objects.equals(this.analystId, agentConversation.analystId)
                 && Objects.equals(
                         this.additionalProperties, agentConversation.additionalProperties);
     }
 
+    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+        return a == b
+                || (a != null
+                        && b != null
+                        && a.isPresent()
+                        && b.isPresent()
+                        && Objects.deepEquals(a.get(), b.get()));
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(conversationId, conversationIdentifier, additionalProperties);
+        return Objects.hash(
+                conversationId, conversationIdentifier, analystId, additionalProperties);
+    }
+
+    private static <T> int hashCodeNullable(JsonNullable<T> a) {
+        if (a == null) {
+            return 1;
+        }
+        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override
@@ -155,6 +201,7 @@ public class AgentConversation implements Serializable {
         sb.append("    conversationIdentifier: ")
                 .append(toIndentedString(conversationIdentifier))
                 .append("\n");
+        sb.append("    analystId: ").append(toIndentedString(analystId)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -181,6 +228,7 @@ public class AgentConversation implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("conversation_id");
         openapiFields.add("conversation_identifier");
+        openapiFields.add("analyst_id");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -229,6 +277,14 @@ public class AgentConversation implements Serializable {
                             "Expected the field `conversation_identifier` to be a primitive type"
                                     + " in the JSON string but got `%s`",
                             jsonObj.get("conversation_identifier").toString()));
+        }
+        if ((jsonObj.get("analyst_id") != null && !jsonObj.get("analyst_id").isJsonNull())
+                && !jsonObj.get("analyst_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `analyst_id` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("analyst_id").toString()));
         }
     }
 

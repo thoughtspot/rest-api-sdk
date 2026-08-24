@@ -13,6 +13,7 @@
 |**user** | [**UserInfo**](UserInfo.md) |  |  |
 |**creationTimeInMillis** | **Float** | Token creation time in milliseconds. |  |
 |**expirationTimeInMillis** | **Float** | Token expiration time in milliseconds. |  |
+|**scope** | [**AccessTokenScope**](AccessTokenScope.md) |  |  [optional] |
 
 
 ## Implemented Interfaces

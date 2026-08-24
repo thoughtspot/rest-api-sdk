@@ -14,6 +14,7 @@ import { FilterRules } from '../models/FilterRules';
 import { GroupObject } from '../models/GroupObject';
 import { ParameterValues } from '../models/ParameterValues';
 import { TokenAccessScopeObject } from '../models/TokenAccessScopeObject';
+import { TokenScopeInput } from '../models/TokenScopeInput';
 import { VariableValues } from '../models/VariableValues';
 import { HttpFile } from '../http/http';
 
@@ -38,6 +39,10 @@ export class GetCustomAccessTokenRequest {
     * ID or name of the Org context to log in to. If the Org ID or name is not specified but a secret key is provided, the user will be logged into the Org associated with the secret key. If neither the Org ID/name nor the secret key is provided, the user will be logged into the Org context from their previous login session.
     */
     'org_identifier'?: string;
+    /**
+    * The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Only SPECIFIC_ORGS is supported for a custom (ABAC) token -- it authorizes the token for the Orgs listed in org_identifiers. Each subsequent request selects one Org from this set using the `X-Org-Selector` header.   Version: 26.10.0.cl or later 
+    */
+    'scope'?: TokenScopeInput;
     /**
     * Indicates whether the specified attributes should be persisted or not. RESET and NONE are not applicable if you are setting variable_values.
     */
@@ -108,6 +113,12 @@ export class GetCustomAccessTokenRequest {
             "name": "org_identifier",
             "baseName": "org_identifier",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "scope",
+            "baseName": "scope",
+            "type": "TokenScopeInput",
             "format": ""
         },
         {

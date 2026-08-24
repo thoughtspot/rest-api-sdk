@@ -115,7 +115,7 @@ public class VariableDetailInput implements Serializable {
     }
 
     /**
-     * Unique ID or name of the variable
+     * Unique ID, name, or object ID of the variable
      *
      * @return identifier
      */

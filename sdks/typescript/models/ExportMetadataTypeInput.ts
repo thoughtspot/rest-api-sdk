@@ -71,5 +71,5 @@ export class ExportMetadataTypeInput {
     }
 }
 
-    export type ExportMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "CUSTOM_ACTION" | "USER" | "USER_GROUP" | "ROLE" | "FEEDBACK" | "COLLECTION" ;
+    export type ExportMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "CUSTOM_ACTION" | "USER" | "USER_GROUP" | "ROLE" | "FEEDBACK" | "COLLECTION" | "TEMPLATE_VARIABLE" ;
 

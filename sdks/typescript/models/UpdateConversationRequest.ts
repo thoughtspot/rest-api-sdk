@@ -14,9 +14,13 @@ import { HttpFile } from '../http/http';
 
 export class UpdateConversationRequest {
     /**
-    * New display title for the conversation. Omit to leave the title unchanged.
+    * New display title for the conversation. Omit to leave the title unchanged. An empty or whitespace-only value is replaced with a default title rather than rejected.
     */
     'title'?: string;
+    /**
+    * Pinned state of the conversation for the current user. Pinning marks a conversation for quick access: pinned conversations are surfaced first in `getConversationList`. Set to `true` to pin the conversation, `false` to unpin it, or omit to leave the pinned state unchanged. Applying the state the conversation is already in is a no-op success.    Version: 26.10.0.cl or later 
+    */
+    'is_pinned'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,6 +31,12 @@ export class UpdateConversationRequest {
             "name": "title",
             "baseName": "title",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "is_pinned",
+            "baseName": "is_pinned",
+            "type": "boolean",
             "format": ""
         }    ];
 

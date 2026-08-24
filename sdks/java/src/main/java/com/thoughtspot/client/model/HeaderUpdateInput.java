@@ -65,7 +65,11 @@ public class HeaderUpdateInput implements Serializable {
 
         USER_GROUP("USER_GROUP"),
 
-        COLLECTION("COLLECTION");
+        COLLECTION("COLLECTION"),
+
+        ROLE("ROLE"),
+
+        TEMPLATE_VARIABLE("TEMPLATE_VARIABLE");
 
         private String value;
 

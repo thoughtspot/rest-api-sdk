@@ -219,6 +219,7 @@ apiInstance.getCustomAccessToken(
     secret_key: "",
     validity_time_in_sec: 300,
     org_identifier: "org_identifier_example",
+    scope: null,
     persist_option: "REPLACE",
     filter_rules: [
       {
@@ -296,6 +297,7 @@ No authorization required
 **400** | Invalid request. This could be due to missing or incorrect parameters. |  -  |
 **401** | Unauthorized access. The request could not be authenticated. |  -  |
 **403** | Forbidden access. The user does not have permission to access this resource. |  -  |
+**409** | Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. |  -  |
 **500** | An unexpected error occurred on the server. |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -325,6 +327,7 @@ apiInstance.getFullAccessToken(
     secret_key: "",
     validity_time_in_sec: 300,
     org_id: 1,
+    scope: null,
     email: "email_example",
     display_name: "display_name_example",
     auto_create: false,
@@ -399,6 +402,7 @@ apiInstance.getObjectAccessToken(
     secret_key: "",
     validity_time_in_sec: 300,
     org_id: 1,
+    scope: null,
     email: "email_example",
     display_name: "display_name_example",
     auto_create: false,

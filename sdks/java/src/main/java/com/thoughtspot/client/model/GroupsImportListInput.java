@@ -131,7 +131,15 @@ public class GroupsImportListInput implements Serializable {
 
         CAN_USE_SPOTTER("CAN_USE_SPOTTER"),
 
-        CAN_MANAGE_SPOTTER("CAN_MANAGE_SPOTTER");
+        CAN_MANAGE_SPOTTER("CAN_MANAGE_SPOTTER"),
+
+        CAN_CREATE_LIVEBOARD("CAN_CREATE_LIVEBOARD"),
+
+        CAN_CREATE_ANSWERS("CAN_CREATE_ANSWERS"),
+
+        CAN_ANALYZE_DATA("CAN_ANALYZE_DATA"),
+
+        CAN_ADMINISTER_SCHEDULES("CAN_ADMINISTER_SCHEDULES");
 
         private String value;
 

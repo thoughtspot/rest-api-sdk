@@ -45,6 +45,12 @@ public class Collection implements Serializable {
     @javax.annotation.Nonnull
     private String name;
 
+    public static final String SERIALIZED_NAME_OBJ_ID = "obj_id";
+
+    @SerializedName(SERIALIZED_NAME_OBJ_ID)
+    @javax.annotation.Nullable
+    private String objId;
+
     public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
     @SerializedName(SERIALIZED_NAME_DESCRIPTION)
@@ -125,6 +131,25 @@ public class Collection implements Serializable {
 
     public void setName(@javax.annotation.Nonnull String name) {
         this.name = name;
+    }
+
+    public Collection objId(@javax.annotation.Nullable String objId) {
+        this.objId = objId;
+        return this;
+    }
+
+    /**
+     * Custom object ID (obj_id) of the collection, if one is set. Version: 26.9.0.cl or later
+     *
+     * @return objId
+     */
+    @javax.annotation.Nullable
+    public String getObjId() {
+        return objId;
+    }
+
+    public void setObjId(@javax.annotation.Nullable String objId) {
+        this.objId = objId;
     }
 
     public Collection description(@javax.annotation.Nullable String description) {
@@ -323,6 +348,7 @@ public class Collection implements Serializable {
         Collection collection = (Collection) o;
         return Objects.equals(this.id, collection.id)
                 && Objects.equals(this.name, collection.name)
+                && Objects.equals(this.objId, collection.objId)
                 && Objects.equals(this.description, collection.description)
                 && Objects.equals(this.metadata, collection.metadata)
                 && Objects.equals(this.createdAt, collection.createdAt)
@@ -347,6 +373,7 @@ public class Collection implements Serializable {
         return Objects.hash(
                 id,
                 name,
+                objId,
                 description,
                 metadata,
                 createdAt,
@@ -370,6 +397,7 @@ public class Collection implements Serializable {
         sb.append("class Collection {\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
+        sb.append("    objId: ").append(toIndentedString(objId)).append("\n");
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
         sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
         sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
@@ -403,6 +431,7 @@ public class Collection implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("id");
         openapiFields.add("name");
+        openapiFields.add("obj_id");
         openapiFields.add("description");
         openapiFields.add("metadata");
         openapiFields.add("created_at");
@@ -458,6 +487,14 @@ public class Collection implements Serializable {
                             "Expected the field `name` to be a primitive type in the JSON string"
                                     + " but got `%s`",
                             jsonObj.get("name").toString()));
+        }
+        if ((jsonObj.get("obj_id") != null && !jsonObj.get("obj_id").isJsonNull())
+                && !jsonObj.get("obj_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `obj_id` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("obj_id").toString()));
         }
         if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull())
                 && !jsonObj.get("description").isJsonPrimitive()) {

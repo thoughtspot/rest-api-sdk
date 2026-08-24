@@ -16,7 +16,7 @@
 |**_configuration** | **Object** | Configuration properties in JSON. |  |
 |**policyType** | [**PolicyTypeEnum**](#PolicyTypeEnum) | Type of policy. |  [optional] |
 |**policyPrincipals** | **List&lt;String&gt;** | Unique ID or name of the User and User Groups. |  [optional] |
-|**policyProcesses** | [**List&lt;PolicyProcessesEnum&gt;**](#List&lt;PolicyProcessesEnum&gt;) | Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS. |  [optional] |
+|**policyProcesses** | [**List&lt;PolicyProcessesEnum&gt;**](#List&lt;PolicyProcessesEnum&gt;) | Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS. |  [optional] |
 
 
 
@@ -29,6 +29,7 @@
 | PERSONAL_ACCESS_TOKEN | &quot;PERSONAL_ACCESS_TOKEN&quot; |
 | OAUTH_WITH_SERVICE_PRINCIPAL | &quot;OAUTH_WITH_SERVICE_PRINCIPAL&quot; |
 | OAUTH_CLIENT_CREDENTIALS | &quot;OAUTH_CLIENT_CREDENTIALS&quot; |
+| OAUTH_CLIENT_CREDENTIALS_WITH_X509 | &quot;OAUTH_CLIENT_CREDENTIALS_WITH_X509&quot; |
 
 
 
@@ -48,6 +49,7 @@
 |---- | -----|
 | SAGE_INDEXING | &quot;SAGE_INDEXING&quot; |
 | ROW_COUNT_STATS | &quot;ROW_COUNT_STATS&quot; |
+| SCHEDULED_LIVEBOARDS | &quot;SCHEDULED_LIVEBOARDS&quot; |
 
 
 ## Implemented Interfaces

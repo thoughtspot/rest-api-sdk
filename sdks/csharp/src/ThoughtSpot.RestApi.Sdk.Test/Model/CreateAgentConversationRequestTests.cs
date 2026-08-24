@@ -71,5 +71,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'ConversationSettings'
         }
+
+        /// <summary>
+        /// Test the property 'AnalystIdentifier'
+        /// </summary>
+        [Fact]
+        public void AnalystIdentifierTest()
+        {
+            // TODO unit test for the property 'AnalystIdentifier'
+        }
     }
 }

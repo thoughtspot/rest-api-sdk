@@ -27,6 +27,10 @@ export class Variable {
     */
     'name': string;
     /**
+    * Custom object identifier (obj_id) of the variable    Version: 26.10.0.cl or later 
+    */
+    'obj_id'?: string | null;
+    /**
     * Type of the variable
     */
     'variable_type'?: VariableVariableTypeEnum | null;
@@ -54,6 +58,12 @@ export class Variable {
         {
             "name": "name",
             "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "obj_id",
+            "baseName": "obj_id",
             "type": "string",
             "format": ""
         },

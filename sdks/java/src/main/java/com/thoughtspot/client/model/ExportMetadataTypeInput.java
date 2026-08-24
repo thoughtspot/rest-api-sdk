@@ -56,7 +56,9 @@ public class ExportMetadataTypeInput implements Serializable {
 
         FEEDBACK("FEEDBACK"),
 
-        COLLECTION("COLLECTION");
+        COLLECTION("COLLECTION"),
+
+        TEMPLATE_VARIABLE("TEMPLATE_VARIABLE");
 
         private String value;
 

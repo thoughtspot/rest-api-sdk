@@ -80,5 +80,23 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'MetadataId'
         }
+
+        /// <summary>
+        /// Test the property 'OrgScope'
+        /// </summary>
+        [Fact]
+        public void OrgScopeTest()
+        {
+            // TODO unit test for the property 'OrgScope'
+        }
+
+        /// <summary>
+        /// Test the property 'OrgIds'
+        /// </summary>
+        [Fact]
+        public void OrgIdsTest()
+        {
+            // TODO unit test for the property 'OrgIds'
+        }
     }
 }

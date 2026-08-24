@@ -136,6 +136,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UserGroupResponse" /> class.
         /// </summary>
+        /// <param name="objId">Custom object ID (obj_id) of the group, if one is set.    Version: 26.9.0.cl or later .</param>
         /// <param name="authorId">The unique identifier of the object.</param>
         /// <param name="completeDetail">Indicates whether the response has complete detail of the group..</param>
         /// <param name="content">Content details of the group.</param>
@@ -166,7 +167,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="users">Users who are part of the group..</param>
         /// <param name="visibility">Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects. (required).</param>
         /// <param name="roles">List of roles assgined to the user.</param>
-        public UserGroupResponse(string authorId = default, bool? completeDetail = default, Object content = default, float? creationTimeInMillis = default, List<UserGroup> defaultLiveboards = default, bool? deleted = default, bool? deprecated = default, string description = default, string displayName = default, bool? external = default, int? generationNumber = default, bool? hidden = default, string id = default, int? index = default, int? indexVersion = default, int? metadataVersion = default, float? modificationTimeInMillis = default, string modifierId = default, string name = default, List<UserGroup> orgs = default, string ownerId = default, ParentTypeEnum? parentType = default, List<string> privileges = default, List<UserGroup> subGroups = default, bool? systemGroup = default, List<UserGroup> tags = default, TypeEnum? type = default, List<UserGroup> users = default, VisibilityEnum visibility = default, List<Role> roles = default)
+        public UserGroupResponse(string objId = default, string authorId = default, bool? completeDetail = default, Object content = default, float? creationTimeInMillis = default, List<UserGroup> defaultLiveboards = default, bool? deleted = default, bool? deprecated = default, string description = default, string displayName = default, bool? external = default, int? generationNumber = default, bool? hidden = default, string id = default, int? index = default, int? indexVersion = default, int? metadataVersion = default, float? modificationTimeInMillis = default, string modifierId = default, string name = default, List<UserGroup> orgs = default, string ownerId = default, ParentTypeEnum? parentType = default, List<string> privileges = default, List<UserGroup> subGroups = default, bool? systemGroup = default, List<UserGroup> tags = default, TypeEnum? type = default, List<UserGroup> users = default, VisibilityEnum visibility = default, List<Role> roles = default)
         {
             // to ensure "displayName" is required (not null)
             if (displayName == null)
@@ -187,6 +188,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             }
             this.Name = name;
             this.Visibility = visibility;
+            this.ObjId = objId;
             this.AuthorId = authorId;
             this.CompleteDetail = completeDetail;
             this.Content = content;
@@ -215,6 +217,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.Roles = roles;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
+
+        /// <summary>
+        /// Custom object ID (obj_id) of the group, if one is set.    Version: 26.9.0.cl or later 
+        /// </summary>
+        /// <value>Custom object ID (obj_id) of the group, if one is set.    Version: 26.9.0.cl or later </value>
+        [DataMember(Name = "obj_id", EmitDefaultValue = true)]
+        public string ObjId { get; set; }
 
         /// <summary>
         /// The unique identifier of the object
@@ -419,6 +428,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class UserGroupResponse {\n");
+            sb.Append("  ObjId: ").Append(ObjId).Append("\n");
             sb.Append("  AuthorId: ").Append(AuthorId).Append("\n");
             sb.Append("  CompleteDetail: ").Append(CompleteDetail).Append("\n");
             sb.Append("  Content: ").Append(Content).Append("\n");

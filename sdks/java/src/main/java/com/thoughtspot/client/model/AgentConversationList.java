@@ -69,6 +69,18 @@ public class AgentConversationList implements Serializable {
     @javax.annotation.Nullable
     private List<DataSourceEntry> dataSourceNames;
 
+    public static final String SERIALIZED_NAME_IS_PINNED = "is_pinned";
+
+    @SerializedName(SERIALIZED_NAME_IS_PINNED)
+    @javax.annotation.Nullable
+    private Boolean isPinned;
+
+    public static final String SERIALIZED_NAME_ANALYST_ID = "analyst_id";
+
+    @SerializedName(SERIALIZED_NAME_ANALYST_ID)
+    @javax.annotation.Nullable
+    private String analystId;
+
     public AgentConversationList() {}
 
     public AgentConversationList conversationIdentifier(
@@ -208,6 +220,46 @@ public class AgentConversationList implements Serializable {
         this.dataSourceNames = dataSourceNames;
     }
 
+    public AgentConversationList isPinned(@javax.annotation.Nullable Boolean isPinned) {
+        this.isPinned = isPinned;
+        return this;
+    }
+
+    /**
+     * Whether the current user has pinned this conversation. Pinned conversations are surfaced
+     * first in the list. Version: 26.10.0.cl or later
+     *
+     * @return isPinned
+     */
+    @javax.annotation.Nullable
+    public Boolean getIsPinned() {
+        return isPinned;
+    }
+
+    public void setIsPinned(@javax.annotation.Nullable Boolean isPinned) {
+        this.isPinned = isPinned;
+    }
+
+    public AgentConversationList analystId(@javax.annotation.Nullable String analystId) {
+        this.analystId = analystId;
+        return this;
+    }
+
+    /**
+     * Unique identifier of the Spotter Analyst the conversation is associated with. Null when the
+     * conversation is not associated with an analyst. Version: 26.10.0.cl or later
+     *
+     * @return analystId
+     */
+    @javax.annotation.Nullable
+    public String getAnalystId() {
+        return analystId;
+    }
+
+    public void setAnalystId(@javax.annotation.Nullable String analystId) {
+        this.analystId = analystId;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -269,6 +321,8 @@ public class AgentConversationList implements Serializable {
                 && Objects.equals(
                         this.dataSourceIdentifiers, agentConversationList.dataSourceIdentifiers)
                 && Objects.equals(this.dataSourceNames, agentConversationList.dataSourceNames)
+                && Objects.equals(this.isPinned, agentConversationList.isPinned)
+                && Objects.equals(this.analystId, agentConversationList.analystId)
                 && Objects.equals(
                         this.additionalProperties, agentConversationList.additionalProperties);
     }
@@ -291,6 +345,8 @@ public class AgentConversationList implements Serializable {
                 updatedAt,
                 dataSourceIdentifiers,
                 dataSourceNames,
+                isPinned,
+                analystId,
                 additionalProperties);
     }
 
@@ -317,6 +373,8 @@ public class AgentConversationList implements Serializable {
                 .append(toIndentedString(dataSourceIdentifiers))
                 .append("\n");
         sb.append("    dataSourceNames: ").append(toIndentedString(dataSourceNames)).append("\n");
+        sb.append("    isPinned: ").append(toIndentedString(isPinned)).append("\n");
+        sb.append("    analystId: ").append(toIndentedString(analystId)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -347,6 +405,8 @@ public class AgentConversationList implements Serializable {
         openapiFields.add("updated_at");
         openapiFields.add("data_source_identifiers");
         openapiFields.add("data_source_names");
+        openapiFields.add("is_pinned");
+        openapiFields.add("analyst_id");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -442,6 +502,14 @@ public class AgentConversationList implements Serializable {
                 }
                 ;
             }
+        }
+        if ((jsonObj.get("analyst_id") != null && !jsonObj.get("analyst_id").isJsonNull())
+                && !jsonObj.get("analyst_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `analyst_id` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("analyst_id").toString()));
         }
     }
 

@@ -33,4 +33,10 @@ public class InputColumnSchemaInputTest {
     public void typeTest() {
         // TODO: test type
     }
+
+    /** Test the property 'allowedValues' */
+    @Test
+    public void allowedValuesTest() {
+        // TODO: test allowedValues
+    }
 }

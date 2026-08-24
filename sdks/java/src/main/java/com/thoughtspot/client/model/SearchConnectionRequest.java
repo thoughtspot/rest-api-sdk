@@ -287,7 +287,9 @@ public class SearchConnectionRequest implements Serializable {
 
         OAUTH_WITH_PEZ("OAUTH_WITH_PEZ"),
 
-        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS");
+        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS"),
+
+        OAUTH_CLIENT_CREDENTIALS_WITH_X509("OAUTH_CLIENT_CREDENTIALS_WITH_X509");
 
         private String value;
 

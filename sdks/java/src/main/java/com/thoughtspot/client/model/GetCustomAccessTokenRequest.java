@@ -64,6 +64,12 @@ public class GetCustomAccessTokenRequest implements Serializable {
     @javax.annotation.Nullable
     private String orgIdentifier;
 
+    public static final String SERIALIZED_NAME_SCOPE = "scope";
+
+    @SerializedName(SERIALIZED_NAME_SCOPE)
+    @javax.annotation.Nullable
+    private TokenScopeInput scope;
+
     /**
      * Indicates whether the specified attributes should be persisted or not. RESET and NONE are not
      * applicable if you are setting variable_values.
@@ -278,6 +284,29 @@ public class GetCustomAccessTokenRequest implements Serializable {
 
     public void setOrgIdentifier(@javax.annotation.Nullable String orgIdentifier) {
         this.orgIdentifier = orgIdentifier;
+    }
+
+    public GetCustomAccessTokenRequest scope(@javax.annotation.Nullable TokenScopeInput scope) {
+        this.scope = scope;
+        return this;
+    }
+
+    /**
+     * The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable
+     * to a Tenant Administrator. Only SPECIFIC_ORGS is supported for a custom (ABAC) token -- it
+     * authorizes the token for the Orgs listed in org_identifiers. Each subsequent request selects
+     * one Org from this set using the &#x60;X-Org-Selector&#x60; header. Version: 26.10.0.cl or
+     * later
+     *
+     * @return scope
+     */
+    @javax.annotation.Nullable
+    public TokenScopeInput getScope() {
+        return scope;
+    }
+
+    public void setScope(@javax.annotation.Nullable TokenScopeInput scope) {
+        this.scope = scope;
     }
 
     public GetCustomAccessTokenRequest persistOption(
@@ -569,6 +598,7 @@ public class GetCustomAccessTokenRequest implements Serializable {
                 && Objects.equals(
                         this.validityTimeInSec, getCustomAccessTokenRequest.validityTimeInSec)
                 && Objects.equals(this.orgIdentifier, getCustomAccessTokenRequest.orgIdentifier)
+                && Objects.equals(this.scope, getCustomAccessTokenRequest.scope)
                 && Objects.equals(this.persistOption, getCustomAccessTokenRequest.persistOption)
                 && Objects.equals(this.filterRules, getCustomAccessTokenRequest.filterRules)
                 && Objects.equals(this.parameterValues, getCustomAccessTokenRequest.parameterValues)
@@ -600,6 +630,7 @@ public class GetCustomAccessTokenRequest implements Serializable {
                 secretKey,
                 validityTimeInSec,
                 orgIdentifier,
+                scope,
                 persistOption,
                 filterRules,
                 parameterValues,
@@ -630,6 +661,7 @@ public class GetCustomAccessTokenRequest implements Serializable {
                 .append(toIndentedString(validityTimeInSec))
                 .append("\n");
         sb.append("    orgIdentifier: ").append(toIndentedString(orgIdentifier)).append("\n");
+        sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
         sb.append("    persistOption: ").append(toIndentedString(persistOption)).append("\n");
         sb.append("    filterRules: ").append(toIndentedString(filterRules)).append("\n");
         sb.append("    parameterValues: ").append(toIndentedString(parameterValues)).append("\n");
@@ -668,6 +700,7 @@ public class GetCustomAccessTokenRequest implements Serializable {
         openapiFields.add("secret_key");
         openapiFields.add("validity_time_in_sec");
         openapiFields.add("org_identifier");
+        openapiFields.add("scope");
         openapiFields.add("persist_option");
         openapiFields.add("filter_rules");
         openapiFields.add("parameter_values");
@@ -743,6 +776,10 @@ public class GetCustomAccessTokenRequest implements Serializable {
                             "Expected the field `org_identifier` to be a primitive type in the"
                                     + " JSON string but got `%s`",
                             jsonObj.get("org_identifier").toString()));
+        }
+        // validate the optional field `scope`
+        if (jsonObj.get("scope") != null && !jsonObj.get("scope").isJsonNull()) {
+            TokenScopeInput.validateJsonElement(jsonObj.get("scope"));
         }
         if (!jsonObj.get("persist_option").isJsonPrimitive()) {
             throw new IllegalArgumentException(

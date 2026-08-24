@@ -9,6 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** | Unique ID of the connection. |  |
 |**name** | **String** | Name of the connection. |  |
+|**objId** | **String** | Custom object ID (obj_id) of the connection, if one is set.    Version: 26.9.0.cl or later  |  [optional] |
 |**description** | **String** | Description of the connection. |  [optional] |
 |**dataWarehouseType** | [**DataWarehouseTypeEnum**](#DataWarehouseTypeEnum) | Type of data warehouse. |  |
 |**dataWarehouseObjects** | [**DataWarehouseObjects**](DataWarehouseObjects.md) |  |  [optional] |

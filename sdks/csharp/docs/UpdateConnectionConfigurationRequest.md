@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **VarConfiguration** | **Object** | Configuration properties in JSON. | [optional] 
 **PolicyType** | **string** | Type of policy. | [optional] 
 **PolicyPrincipals** | **List&lt;string&gt;** | Unique ID or name of the User and User Groups. | [optional] 
-**PolicyProcesses** | **List&lt;UpdateConnectionConfigurationRequest.PolicyProcessesEnum&gt;** | Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS. | [optional] 
+**PolicyProcesses** | **List&lt;UpdateConnectionConfigurationRequest.PolicyProcessesEnum&gt;** | Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS. | [optional] 
 **Disable** | **bool?** | Indicates whether the configuration enable/disable. | [optional] [default to false]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

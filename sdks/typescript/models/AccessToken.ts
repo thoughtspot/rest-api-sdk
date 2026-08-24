@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { AccessTokenScope } from '../models/AccessTokenScope';
 import { OrgInfo } from '../models/OrgInfo';
 import { UserInfo } from '../models/UserInfo';
 import { HttpFile } from '../http/http';
@@ -33,6 +34,7 @@ export class AccessToken {
     * Token expiration time in milliseconds.
     */
     'expiration_time_in_millis': number;
+    'scope'?: AccessTokenScope;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -74,6 +76,12 @@ export class AccessToken {
             "baseName": "expiration_time_in_millis",
             "type": "number",
             "format": "float"
+        },
+        {
+            "name": "scope",
+            "baseName": "scope",
+            "type": "AccessTokenScope",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

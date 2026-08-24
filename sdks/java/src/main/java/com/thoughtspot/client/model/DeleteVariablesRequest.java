@@ -52,7 +52,7 @@ public class DeleteVariablesRequest implements Serializable {
     }
 
     /**
-     * Unique id(s) or name(s) of the variable(s) to delete
+     * Unique id(s), name(s), or object id(s) of the variable(s) to delete
      *
      * @return identifiers
      */

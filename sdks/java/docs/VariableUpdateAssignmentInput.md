@@ -8,7 +8,7 @@ Input for variable value update in batch operations
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**variableIdentifier** | **String** | ID or Name of the variable |  |
+|**variableIdentifier** | **String** | ID, name, or object ID of the variable |  |
 |**variableValues** | **List&lt;String&gt;** | Values of the variable |  |
 |**operation** | [**OperationEnum**](#OperationEnum) | Operation to perform |  |
 

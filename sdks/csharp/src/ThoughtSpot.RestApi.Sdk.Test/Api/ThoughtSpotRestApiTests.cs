@@ -192,6 +192,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test CreateAnalyst
+        /// </summary>
+        [Fact]
+        public void CreateAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateAnalystRequest createAnalystRequest = null;
+            //var response = instance.CreateAnalyst(createAnalystRequest);
+            //Assert.IsType<Analyst>(response);
+        }
+
+        /// <summary>
         /// Test CreateCalendar
         /// </summary>
         [Fact]
@@ -321,6 +333,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //CreateScheduleRequest createScheduleRequest = null;
             //var response = instance.CreateSchedule(createScheduleRequest);
             //Assert.IsType<ResponseSchedule>(response);
+        }
+
+        /// <summary>
+        /// Test CreateSemanticIntegration
+        /// </summary>
+        [Fact]
+        public void CreateSemanticIntegrationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateSemanticIntegrationRequest createSemanticIntegrationRequest = null;
+            //var response = instance.CreateSemanticIntegration(createSemanticIntegrationRequest);
+            //Assert.IsType<SemanticIntegrationResponse>(response);
         }
 
         /// <summary>
@@ -456,6 +480,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //DeactivateUserRequest deactivateUserRequest = null;
             //var response = instance.DeactivateUser(deactivateUserRequest);
             //Assert.IsType<ResponseActivationURL>(response);
+        }
+
+        /// <summary>
+        /// Test DeleteAnalyst
+        /// </summary>
+        [Fact]
+        public void DeleteAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string analystIdentifier = null;
+            //var response = instance.DeleteAnalyst(analystIdentifier);
+            //Assert.IsType<AnalystDeleteResponse>(response);
         }
 
         /// <summary>
@@ -633,6 +669,17 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string scheduleIdentifier = null;
             //instance.DeleteSchedule(scheduleIdentifier);
+        }
+
+        /// <summary>
+        /// Test DeleteSemanticIntegration
+        /// </summary>
+        [Fact]
+        public void DeleteSemanticIntegrationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string semanticIntegrationIdentifier = null;
+            //instance.DeleteSemanticIntegration(semanticIntegrationIdentifier);
         }
 
         /// <summary>
@@ -1122,6 +1169,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test GetShareInfo
+        /// </summary>
+        [Fact]
+        public void GetShareInfoTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //var response = instance.GetShareInfo(conversationIdentifier);
+            //Assert.IsType<ConversationShareStatusResponse>(response);
+        }
+
+        /// <summary>
+        /// Test GetSharedContent
+        /// </summary>
+        [Fact]
+        public void GetSharedContentTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //var response = instance.GetSharedContent(conversationIdentifier);
+            //Assert.IsType<SharedConversationResponse>(response);
+        }
+
+        /// <summary>
         /// Test GetSystemConfig
         /// </summary>
         [Fact]
@@ -1211,6 +1282,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //ImportMetadataTMLAsyncRequest importMetadataTMLAsyncRequest = null;
             //var response = instance.ImportMetadataTMLAsync(importMetadataTMLAsyncRequest);
             //Assert.IsType<ImportEPackAsyncTaskStatus>(response);
+        }
+
+        /// <summary>
+        /// Test ImportSemanticIntegration
+        /// </summary>
+        [Fact]
+        public void ImportSemanticIntegrationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string semanticIntegrationIdentifier = null;
+            //var response = instance.ImportSemanticIntegration(semanticIntegrationIdentifier);
+            //Assert.IsType<SemanticIntegrationResponse>(response);
         }
 
         /// <summary>
@@ -1388,6 +1471,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test SearchAnalysts
+        /// </summary>
+        [Fact]
+        public void SearchAnalystsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchAnalystsRequest searchAnalystsRequest = null;
+            //var response = instance.SearchAnalysts(searchAnalystsRequest);
+            //Assert.IsType<AnalystSearchResponse>(response);
+        }
+
+        /// <summary>
         /// Test SearchAuthSettings
         /// </summary>
         [Fact]
@@ -1520,6 +1615,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test SearchFeatures
+        /// </summary>
+        [Fact]
+        public void SearchFeaturesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchFeaturesRequest searchFeaturesRequest = null;
+            //var response = instance.SearchFeatures(searchFeaturesRequest);
+            //Assert.IsType<List<FeatureGroup>>(response);
+        }
+
+        /// <summary>
         /// Test SearchMetadata
         /// </summary>
         [Fact]
@@ -1577,6 +1684,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //SearchSecuritySettingsRequest searchSecuritySettingsRequest = null;
             //var response = instance.SearchSecuritySettings(searchSecuritySettingsRequest);
             //Assert.IsType<SecuritySettingsResponse>(response);
+        }
+
+        /// <summary>
+        /// Test SearchSemanticIntegrations
+        /// </summary>
+        [Fact]
+        public void SearchSemanticIntegrationsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest = null;
+            //var response = instance.SearchSemanticIntegrations(searchSemanticIntegrationsRequest);
+            //Assert.IsType<List<SemanticIntegrationSearchResponse>>(response);
         }
 
         /// <summary>
@@ -1752,6 +1871,31 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test ShareAnalyst
+        /// </summary>
+        [Fact]
+        public void ShareAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string analystIdentifier = null;
+            //ShareAnalystRequest shareAnalystRequest = null;
+            //var response = instance.ShareAnalyst(analystIdentifier, shareAnalystRequest);
+            //Assert.IsType<Object>(response);
+        }
+
+        /// <summary>
+        /// Test ShareConversation
+        /// </summary>
+        [Fact]
+        public void ShareConversationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string conversationIdentifier = null;
+            //ShareConversationRequest shareConversationRequest = null;
+            //instance.ShareConversation(conversationIdentifier, shareConversationRequest);
+        }
+
+        /// <summary>
         /// Test ShareMetadata
         /// </summary>
         [Fact]
@@ -1829,6 +1973,19 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //UnpublishMetadataRequest unpublishMetadataRequest = null;
             //instance.UnpublishMetadata(unpublishMetadataRequest);
+        }
+
+        /// <summary>
+        /// Test UpdateAnalyst
+        /// </summary>
+        [Fact]
+        public void UpdateAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string analystIdentifier = null;
+            //UpdateAnalystRequest updateAnalystRequest = null;
+            //var response = instance.UpdateAnalyst(analystIdentifier, updateAnalystRequest);
+            //Assert.IsType<Analyst>(response);
         }
 
         /// <summary>
@@ -1980,6 +2137,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //UpdateEmailCustomizationRequest updateEmailCustomizationRequest = null;
             //instance.UpdateEmailCustomization(updateEmailCustomizationRequest);
+        }
+
+        /// <summary>
+        /// Test UpdateFeatureAssignments
+        /// </summary>
+        [Fact]
+        public void UpdateFeatureAssignmentsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest = null;
+            //var response = instance.UpdateFeatureAssignments(updateFeatureAssignmentsRequest);
+            //Assert.IsType<FeatureAssignmentResponse>(response);
+        }
+
+        /// <summary>
+        /// Test UpdateFeatureValue
+        /// </summary>
+        [Fact]
+        public void UpdateFeatureValueTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateFeatureValueRequest updateFeatureValueRequest = null;
+            //var response = instance.UpdateFeatureValue(updateFeatureValueRequest);
+            //Assert.IsType<FeatureValueResponse>(response);
         }
 
         /// <summary>

@@ -17,7 +17,7 @@ import { HttpFile } from '../http/http';
 */
 export class VariableDetailInput {
     /**
-    * Unique ID or name of the variable
+    * Unique ID, name, or object ID of the variable
     */
     'identifier'?: string | null;
     /**

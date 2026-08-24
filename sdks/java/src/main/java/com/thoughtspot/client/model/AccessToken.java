@@ -68,6 +68,12 @@ public class AccessToken implements Serializable {
     @javax.annotation.Nonnull
     private Float expirationTimeInMillis;
 
+    public static final String SERIALIZED_NAME_SCOPE = "scope";
+
+    @SerializedName(SERIALIZED_NAME_SCOPE)
+    @javax.annotation.Nullable
+    private AccessTokenScope scope;
+
     public AccessToken() {}
 
     public AccessToken id(@javax.annotation.Nullable String id) {
@@ -185,6 +191,25 @@ public class AccessToken implements Serializable {
         this.expirationTimeInMillis = expirationTimeInMillis;
     }
 
+    public AccessToken scope(@javax.annotation.Nullable AccessTokenScope scope) {
+        this.scope = scope;
+        return this;
+    }
+
+    /**
+     * Get scope
+     *
+     * @return scope
+     */
+    @javax.annotation.Nullable
+    public AccessTokenScope getScope() {
+        return scope;
+    }
+
+    public void setScope(@javax.annotation.Nullable AccessTokenScope scope) {
+        this.scope = scope;
+    }
+
     /**
      * A container for additional, undeclared properties. This is a holder for any undeclared
      * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -244,6 +269,7 @@ public class AccessToken implements Serializable {
                 && Objects.equals(this.user, accessToken.user)
                 && Objects.equals(this.creationTimeInMillis, accessToken.creationTimeInMillis)
                 && Objects.equals(this.expirationTimeInMillis, accessToken.expirationTimeInMillis)
+                && Objects.equals(this.scope, accessToken.scope)
                 && Objects.equals(this.additionalProperties, accessToken.additionalProperties);
     }
 
@@ -265,6 +291,7 @@ public class AccessToken implements Serializable {
                 user,
                 creationTimeInMillis,
                 expirationTimeInMillis,
+                scope,
                 additionalProperties);
     }
 
@@ -289,6 +316,7 @@ public class AccessToken implements Serializable {
         sb.append("    expirationTimeInMillis: ")
                 .append(toIndentedString(expirationTimeInMillis))
                 .append("\n");
+        sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -319,6 +347,7 @@ public class AccessToken implements Serializable {
         openapiFields.add("user");
         openapiFields.add("creation_time_in_millis");
         openapiFields.add("expiration_time_in_millis");
+        openapiFields.add("scope");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
@@ -376,6 +405,10 @@ public class AccessToken implements Serializable {
         OrgInfo.validateJsonElement(jsonObj.get("org"));
         // validate the required field `user`
         UserInfo.validateJsonElement(jsonObj.get("user"));
+        // validate the optional field `scope`
+        if (jsonObj.get("scope") != null && !jsonObj.get("scope").isJsonNull()) {
+            AccessTokenScope.validateJsonElement(jsonObj.get("scope"));
+        }
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

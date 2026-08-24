@@ -62,5 +62,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'Title'
         }
+
+        /// <summary>
+        /// Test the property 'IsPinned'
+        /// </summary>
+        [Fact]
+        public void IsPinnedTest()
+        {
+            // TODO unit test for the property 'IsPinned'
+        }
     }
 }

@@ -46,6 +46,12 @@ public class Variable implements Serializable {
     @javax.annotation.Nonnull
     private String name;
 
+    public static final String SERIALIZED_NAME_OBJ_ID = "obj_id";
+
+    @SerializedName(SERIALIZED_NAME_OBJ_ID)
+    @javax.annotation.Nullable
+    private String objId;
+
     /** Type of the variable */
     @JsonAdapter(VariableTypeEnum.Adapter.class)
     public enum VariableTypeEnum {
@@ -165,6 +171,25 @@ public class Variable implements Serializable {
 
     public void setName(@javax.annotation.Nonnull String name) {
         this.name = name;
+    }
+
+    public Variable objId(@javax.annotation.Nullable String objId) {
+        this.objId = objId;
+        return this;
+    }
+
+    /**
+     * Custom object identifier (obj_id) of the variable Version: 26.10.0.cl or later
+     *
+     * @return objId
+     */
+    @javax.annotation.Nullable
+    public String getObjId() {
+        return objId;
+    }
+
+    public void setObjId(@javax.annotation.Nullable String objId) {
+        this.objId = objId;
     }
 
     public Variable variableType(@javax.annotation.Nullable VariableTypeEnum variableType) {
@@ -306,6 +331,7 @@ public class Variable implements Serializable {
         Variable variable = (Variable) o;
         return Objects.equals(this.id, variable.id)
                 && Objects.equals(this.name, variable.name)
+                && Objects.equals(this.objId, variable.objId)
                 && Objects.equals(this.variableType, variable.variableType)
                 && Objects.equals(this.sensitive, variable.sensitive)
                 && Objects.equals(this.values, variable.values)
@@ -324,7 +350,8 @@ public class Variable implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, variableType, sensitive, values, org, additionalProperties);
+        return Objects.hash(
+                id, name, objId, variableType, sensitive, values, org, additionalProperties);
     }
 
     private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -340,6 +367,7 @@ public class Variable implements Serializable {
         sb.append("class Variable {\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
+        sb.append("    objId: ").append(toIndentedString(objId)).append("\n");
         sb.append("    variableType: ").append(toIndentedString(variableType)).append("\n");
         sb.append("    sensitive: ").append(toIndentedString(sensitive)).append("\n");
         sb.append("    values: ").append(toIndentedString(values)).append("\n");
@@ -370,6 +398,7 @@ public class Variable implements Serializable {
         openapiFields = new HashSet<String>();
         openapiFields.add("id");
         openapiFields.add("name");
+        openapiFields.add("obj_id");
         openapiFields.add("variable_type");
         openapiFields.add("sensitive");
         openapiFields.add("values");
@@ -422,6 +451,14 @@ public class Variable implements Serializable {
                             "Expected the field `name` to be a primitive type in the JSON string"
                                     + " but got `%s`",
                             jsonObj.get("name").toString()));
+        }
+        if ((jsonObj.get("obj_id") != null && !jsonObj.get("obj_id").isJsonNull())
+                && !jsonObj.get("obj_id").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `obj_id` to be a primitive type in the JSON string"
+                                    + " but got `%s`",
+                            jsonObj.get("obj_id").toString()));
         }
         if ((jsonObj.get("variable_type") != null && !jsonObj.get("variable_type").isJsonNull())
                 && !jsonObj.get("variable_type").isJsonPrimitive()) {

@@ -283,6 +283,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior for this analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). The caller must have view access to every referenced source. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60; (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users.  #### Error conditions  - &#x60;403&#x60; — missing privileges, or no view access to a referenced data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createAnalystRequest"></param>
+        /// <returns>Analyst</returns>
+        Analyst CreateAnalyst(CreateAnalystRequest createAnalystRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior for this analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). The caller must have view access to every referenced source. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60; (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users.  #### Error conditions  - &#x60;403&#x60; — missing privileges, or no view access to a referenced data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createAnalystRequest"></param>
+        /// <returns>ApiResponse of Analyst</returns>
+        ApiResponse<Analyst> CreateAnalystWithHttpInfo(CreateAnalystRequest createAnalystRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 10.12.0.cl or later   Creates a new [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**) privilege is required.   #### Usage guidelines  You can create a custom calendar from scratch or an existing Table in ThoughtSpot. For both methods of calendar creation, the following parameters are required:  * Name of the custom calendar. * Calendar creation method. To create a calendar from an existing table, specify the method:   - &#x60;FROM_EXISTING_TABLE&#x60; - Creates calendar from the table reference provided in the API request.  - &#x60;FROM_INPUT_PARAMS&#x60; - Creates a calendar from the parameters defined in the API request.  * Connection ID and Table name * Database and schema name attributes:   For most Cloud Data Warehouse (CDW) connectors, both &#x60;database_name&#x60; and &#x60;schema_name&#x60; attributes are required.     However, the attribute requirements are conditional and vary based on the connector type and its metadata structure. For example, for connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL, the &#x60;schema_name&#x60; is required, whereas the &#x60;database_name&#x60; attribute is not.   Similarly, connectors such as ClickHouse require you to specify the &#x60;database_name&#x60; and the schema specification in such cases is optional.  **NOTE**: If you are creating a calendar from an existing table, ensure that the referenced table matches the required DDL for custom calendars. If the schema does not match, the API returns an error.  ##### Calendar type The API allows you to create the following types of calendars:  * &#x60;MONTH_OFFSET&#x60;. The default calendar type. A &#x60;MONTH_OFFSET&#x60; calendar is offset by a few months from the standard calendar months (January to December) and the year begins with the month defined in the request. For example, if the &#x60;month_offset&#x60; value is set as &#x60;April&#x60;, the calendar year begins in April.  * &#x60;4-4-5&#x60;. Each quarter in the calendar will include two 4-week months followed by one 5-week month. * &#x60;4-5-4&#x60;. Each quarter in the calendar will include two 4-week months with a 5-week month between. * &#x60;5-4-4&#x60;. Each quarter begins with a 5-week month, followed by two 4-week months.  To start and end the calendar on a specific date, specify the dates in the &#x60;MM/DD/YYYY&#x60; format. For &#x60;MONTH_OFFSET&#x60; calendars, ensure that the &#x60;start_date&#x60; matches the month specified in the &#x60;month_offset&#x60; attribute.  You can also set the starting day of the week and customize the prefixes for year and quarter labels.  #### Examples  To create a calendar from an existing table:  &#x60;&#x60;&#x60; {   \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;,   \&quot;table_reference\&quot;: {     \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,     \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;,     \&quot;database_name\&quot;: \&quot;RETAILAPPAREL\&quot;,     \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot;   },   \&quot;creation_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;, } &#x60;&#x60;&#x60;  To create a calendar from scratch:  &#x60;&#x60;&#x60; {   \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;,   \&quot;table_reference\&quot;: {     \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,     \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;,     \&quot;database_name\&quot;: \&quot;RETAILAPPAREL\&quot;,     \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot;   },   \&quot;creation_method\&quot;: \&quot;FROM_INPUT_PARAMS\&quot;,   \&quot;calendar_type\&quot;: \&quot;MONTH_OFFSET\&quot;,   \&quot;month_offset\&quot;: \&quot;April\&quot;,   \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;,   \&quot;quarter_name_prefix\&quot;: \&quot;Q\&quot;,   \&quot;year_name_prefix\&quot;: \&quot;FY\&quot;,   \&quot;start_date\&quot;: \&quot;04/01/2025\&quot;,   \&quot;end_date\&quot;: \&quot;04/31/2025\&quot; } &#x60;&#x60;&#x60;      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -510,6 +531,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="createScheduleRequest"></param>
         /// <returns>ApiResponse of ResponseSchedule</returns>
         ApiResponse<ResponseSchedule> CreateScheduleWithHttpInfo(CreateScheduleRequest createScheduleRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <returns>SemanticIntegrationResponse</returns>
+        SemanticIntegrationResponse CreateSemanticIntegration(CreateSemanticIntegrationRequest createSemanticIntegrationRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <returns>ApiResponse of SemanticIntegrationResponse</returns>
+        ApiResponse<SemanticIntegrationResponse> CreateSemanticIntegrationWithHttpInfo(CreateSemanticIntegrationRequest createSemanticIntegrationRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -750,6 +792,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="deactivateUserRequest"></param>
         /// <returns>ApiResponse of ResponseActivationURL</returns>
         ApiResponse<ResponseActivationURL> DeactivateUserWithHttpInfo(DeactivateUserRequest deactivateUserRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path parameter, as returned by the create analyst API.  A successful request returns the &#x60;id&#x60; of the deleted analyst.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to delete.</param>
+        /// <returns>AnalystDeleteResponse</returns>
+        AnalystDeleteResponse DeleteAnalyst(string analystIdentifier);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path parameter, as returned by the create analyst API.  A successful request returns the &#x60;id&#x60; of the deleted analyst.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to delete.</param>
+        /// <returns>ApiResponse of AnalystDeleteResponse</returns>
+        ApiResponse<AnalystDeleteResponse> DeleteAnalystWithHttpInfo(string analystIdentifier);
         /// <summary>
         /// 
         /// </summary>
@@ -1094,6 +1157,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <returns></returns>
+        void DeleteSemanticIntegration(string semanticIntegrationIdentifier);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteSemanticIntegrationWithHttpInfo(string semanticIntegrationIdentifier);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 26.7.0.cl or later   Deletes one or more custom fonts from the cluster-level or org-level font library. If a deleted font is assigned to visualization areas, those assignments automatically fallback to the cluster/system default font. The response lists all affected areas where the font was explicitly set. Note: dry_run defaults to true. To actually delete fonts, you must explicitly pass dry_run: false.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Provide one or more font UUIDs or names in &#x60;font_identifiers&#x60;. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to delete from the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to delete from the authenticated user&#39;s org library. - Use &#x60;dry_run: true&#x60; to preview which visualization areas would be affected without actually deleting the font. The response lists affected assignments; no changes are applied. - Deletions cannot be undone. Re-upload the font file using &#x60;uploadStyleFont&#x60; if needed.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1181,7 +1265,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <returns></returns>
         [Obsolete]
         void DeleteVariable(string identifier);
@@ -1193,7 +1277,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <returns>ApiResponse of Object(void)</returns>
         [Obsolete]
         ApiResponse<Object> DeleteVariableWithHttpInfo(string identifier);
@@ -1957,6 +2041,48 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <returns>ConversationShareStatusResponse</returns>
+        ConversationShareStatusResponse GetShareInfo(string conversationIdentifier);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <returns>ApiResponse of ConversationShareStatusResponse</returns>
+        ApiResponse<ConversationShareStatusResponse> GetShareInfoWithHttpInfo(string conversationIdentifier);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <returns>SharedConversationResponse</returns>
+        SharedConversationResponse GetSharedContent(string conversationIdentifier);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <returns>ApiResponse of SharedConversationResponse</returns>
+        ApiResponse<SharedConversationResponse> GetSharedContentWithHttpInfo(string conversationIdentifier);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Retrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.  Requires &#x60;ADMINISTRATION&#x60;(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;SYSTEM_INFO_ADMINISTRATION&#x60; (**Can view system activities**) privilege is required.  This API does not require any parameters to be passed in the request.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -2115,6 +2241,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="importMetadataTMLAsyncRequest"></param>
         /// <returns>ApiResponse of ImportEPackAsyncTaskStatus</returns>
         ApiResponse<ImportEPackAsyncTaskStatus> ImportMetadataTMLAsyncWithHttpInfo(ImportMetadataTMLAsyncRequest importMetadataTMLAsyncRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <returns>SemanticIntegrationResponse</returns>
+        SemanticIntegrationResponse ImportSemanticIntegration(string semanticIntegrationIdentifier);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <returns>ApiResponse of SemanticIntegrationResponse</returns>
+        ApiResponse<SemanticIntegrationResponse> ImportSemanticIntegrationWithHttpInfo(string semanticIntegrationIdentifier);
         /// <summary>
         /// 
         /// </summary>
@@ -2444,6 +2591,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (&#x60;query&#x60;) and by ownership (&#x60;type&#x60;). Results are ordered   by most recently accessed. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - &#x60;record_size&#x60; (optional): number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60; (optional): zero-based index of the first record. Default 0, maximum 10000. - &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;.  The response contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;, the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;, &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60; (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;), &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt, marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; / &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;display_name&#x60;).  #### Error conditions  - &#x60;403&#x60; — missing privileges, or (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchAnalystsRequest"></param>
+        /// <returns>AnalystSearchResponse</returns>
+        AnalystSearchResponse SearchAnalysts(SearchAnalystsRequest searchAnalystsRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (&#x60;query&#x60;) and by ownership (&#x60;type&#x60;). Results are ordered   by most recently accessed. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - &#x60;record_size&#x60; (optional): number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60; (optional): zero-based index of the first record. Default 0, maximum 10000. - &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;.  The response contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;, the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;, &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60; (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;), &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt, marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; / &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;display_name&#x60;).  #### Error conditions  - &#x60;403&#x60; — missing privileges, or (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchAnalystsRequest"></param>
+        /// <returns>ApiResponse of AnalystSearchResponse</returns>
+        ApiResponse<AnalystSearchResponse> SearchAnalystsWithHttpInfo(SearchAnalystsRequest searchAnalystsRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 26.6.0.cl or later   Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports &#x60;TRUSTED_AUTH&#x60;.  #### Required privileges  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required.  #### Usage guidelines  Use &#x60;scope&#x60; to control which level of settings are returned: - &#x60;CLUSTER&#x60; — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org. - &#x60;ORG&#x60; — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance. - If &#x60;scope&#x60; is omitted, both cluster and org-level settings are returned based on the caller&#39;s org context and feature availability.  The &#x60;access_tokens&#x60; array in &#x60;cluster_preferences&#x60; or &#x60;org_preferences&#x60; is omitted when no token is configured at that level.  **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -2675,6 +2843,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the org-admin view (returns the current value of each feature for a single Org). - &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;category&#x60; — Availability category of the features to return. &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60; returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;.  The response fields populated depend on the requested scope. In the cluster-admin view (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;, &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;, &#x60;element_config&#x60;, and &#x60;element_value&#x60;.  The following example retrieves the general-access features for the cluster-admin view:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;  For the org-admin view, set &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is &#x60;ORG&#x60;; omitting it returns a 400 error):  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchFeaturesRequest"></param>
+        /// <returns>List&lt;FeatureGroup&gt;</returns>
+        List<FeatureGroup> SearchFeatures(SearchFeaturesRequest searchFeaturesRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the org-admin view (returns the current value of each feature for a single Org). - &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;category&#x60; — Availability category of the features to return. &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60; returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;.  The response fields populated depend on the requested scope. In the cluster-admin view (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;, &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;, &#x60;element_config&#x60;, and &#x60;element_value&#x60;.  The following example retrieves the general-access features for the cluster-admin view:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;  For the org-admin view, set &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is &#x60;ORG&#x60;; omitting it returns a 400 error):  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchFeaturesRequest"></param>
+        /// <returns>ApiResponse of List&lt;FeatureGroup&gt;</returns>
+        ApiResponse<List<FeatureGroup>> SearchFeaturesWithHttpInfo(SearchFeaturesRequest searchFeaturesRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value is false.  **NOTE**: &#x60;obj_identifier&#x60; is supported for the following object types: &#x60;LIVEBOARD&#x60;, &#x60;ANSWER&#x60;, &#x60;LOGICAL_TABLE&#x60;, &#x60;LOGICAL_COLUMN&#x60;, &#x60;CONNECTION&#x60;, &#x60;USER_GROUP&#x60;, &#x60;COLLECTION&#x60;. The response includes the &#x60;metadata_obj_id&#x60; field for objects that have a Custom object ID set.  **NOTE**: The following parameters support pagination of metadata records:  - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60;  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -2776,6 +2965,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="searchSecuritySettingsRequest"></param>
         /// <returns>ApiResponse of SecuritySettingsResponse</returns>
         ApiResponse<SecuritySettingsResponse> SearchSecuritySettingsWithHttpInfo(SearchSecuritySettingsRequest searchSecuritySettingsRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <returns>List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        List<SemanticIntegrationSearchResponse> SearchSemanticIntegrations(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <returns>ApiResponse of List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        ApiResponse<List<SemanticIntegrationSearchResponse>> SearchSemanticIntegrationsWithHttpInfo(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -3086,6 +3296,52 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources with the principal so the analyst keeps working for them. A successful share returns an empty &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the &#x60;analyst_identifier&#x60; path parameter. The request body contains a &#x60;permissions&#x60; array with one entry per principal:  - &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. - &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. - &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it.  A principal may appear at most once per request. When access is granted, the analyst&#39;s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty &#x60;204 No Content&#x60; response.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to share.</param>
+        /// <param name="shareAnalystRequest"></param>
+        /// <returns>Object</returns>
+        Object ShareAnalyst(string analystIdentifier, ShareAnalystRequest shareAnalystRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources with the principal so the analyst keeps working for them. A successful share returns an empty &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the &#x60;analyst_identifier&#x60; path parameter. The request body contains a &#x60;permissions&#x60; array with one entry per principal:  - &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. - &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. - &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it.  A principal may appear at most once per request. When access is granted, the analyst&#39;s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty &#x60;204 No Content&#x60; response.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to share.</param>
+        /// <param name="shareAnalystRequest"></param>
+        /// <returns>ApiResponse of Object</returns>
+        ApiResponse<Object> ShareAnalystWithHttpInfo(string analystIdentifier, ShareAnalystRequest shareAnalystRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <returns></returns>
+        void ShareConversation(string conversationIdentifier, ShareConversationRequest shareConversationRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> ShareConversationWithHttpInfo(string conversationIdentifier, ShareConversationRequest shareConversationRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  #### Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views * Connections * Collections  #### Object permissions  You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing an object with another user or group. The &#x60;READ_ONLY&#x60; permission grants view access to the shared object, whereas &#x60;MODIFY&#x60; provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;.  #### Sharing a visualization  * Sharing a visualization implicitly shares the entire Liveboard with the recipient. * Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI. * If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.  #### Sharing a collection  Collections support **dual permissions** that provide fine-grained control:  * **Collection permissions** (&#x60;share_mode&#x60;) - controls access to the collection itself (view, edit, delete the collection) * **Content permissions** (&#x60;content_share_mode&#x60;) - controls access to objects within the collection (view, edit objects inside)  **Default Behavior:** - If only &#x60;share_mode&#x60; is specified, the content permissions default to &#x60;READ_ONLY&#x60; (except when &#x60;share_mode&#x60; is &#x60;NO_ACCESS&#x60;, then content also gets &#x60;NO_ACCESS&#x60;) - To give users edit access to collection contents, explicitly set &#x60;content_share_mode: \&quot;MODIFY\&quot;&#x60;  ## Examples  The following JSON examples can be copy-pasted as request bodies for the REST v2 API endpoint:  &#x60;&#x60;&#x60;bash POST /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded &#x60;&#x60;&#x60;  ### Basic collection sharing Share a collection with read-only access:  &#x60;&#x60;&#x60;json {   \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,   \&quot;metadata_identifiers\&quot;: [\&quot;Sales Reports Collection\&quot;],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;alice@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;   }],   \&quot;notification\&quot;: {     \&quot;message\&quot;: \&quot;I&#39;ve shared the Sales Reports collection with you\&quot;,     \&quot;notify_on_share\&quot;: true   } } &#x60;&#x60;&#x60;  ### Collection sharing with dual permissions Share a collection with different permissions for the collection vs. its contents:  &#x60;&#x60;&#x60;json {   \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,   \&quot;metadata_identifiers\&quot;: [\&quot;Marketing Analytics\&quot;],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;bob@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;,     \&quot;content_share_mode\&quot;: \&quot;READ_ONLY\&quot;   }, {     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER_GROUP\&quot;,       \&quot;identifier\&quot;: \&quot;Marketing Team\&quot;     },     \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,     \&quot;content_share_mode\&quot;: \&quot;READ_ONLY\&quot;   }],   \&quot;notification\&quot;: {     \&quot;emails\&quot;: [\&quot;bob@company.com\&quot;],     \&quot;message\&quot;: \&quot;You can edit the collection but content is read-only\&quot;,     \&quot;enable_custom_url\&quot;: false,     \&quot;notify_on_share\&quot;: true   },   \&quot;has_lenient_discoverability\&quot;: false } &#x60;&#x60;&#x60;  ### Multiple collections sharing Share multiple collections with different users:  &#x60;&#x60;&#x60;json {   \&quot;metadata\&quot;: [     {       \&quot;type\&quot;: \&quot;COLLECTION\&quot;,       \&quot;identifier\&quot;: \&quot;Q4 Reports\&quot;     },     {       \&quot;type\&quot;: \&quot;COLLECTION\&quot;,       \&quot;identifier\&quot;: \&quot;Executive Dashboard Collection\&quot;     }   ],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER_GROUP\&quot;,       \&quot;identifier\&quot;: \&quot;Executives\&quot;     },     \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;   }, {     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;manager@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,     \&quot;content_share_mode\&quot;: \&quot;MODIFY\&quot;   }],   \&quot;notification\&quot;: {     \&quot;message\&quot;: \&quot;Sharing quarterly collections with leadership team\&quot;,     \&quot;notify_on_share\&quot;: true   } } &#x60;&#x60;&#x60;  ### Remove collection access Remove access to a collection by setting share_mode to NO_ACCESS:  &#x60;&#x60;&#x60;json {   \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,   \&quot;metadata_identifiers\&quot;: [\&quot;Confidential Reports\&quot;],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;former-employee@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;NO_ACCESS\&quot;   }],   \&quot;notification\&quot;: {     \&quot;notify_on_share\&quot;: false   } } &#x60;&#x60;&#x60;  ### Collection Permission Scenarios  **Scenario 1: Collection Admin** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Full control over collection and its contents  **Scenario 2: Collection Curator** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; Can manage collection structure but not edit contents  **Scenario 3: Content Editor** - &#x60;share_mode: READ_ONLY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Can edit objects within collection but can&#39;t change collection itself  **Scenario 4: Viewer** - &#x60;share_mode: READ_ONLY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; View-only access to collection and contents      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -3231,6 +3487,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="unpublishMetadataRequest"></param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> UnpublishMetadataWithHttpInfo(UnpublishMetadataRequest unpublishMetadataRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;).  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to update.</param>
+        /// <param name="updateAnalystRequest"></param>
+        /// <returns>Analyst</returns>
+        Analyst UpdateAnalyst(string analystIdentifier, UpdateAnalystRequest updateAnalystRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;).  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to update.</param>
+        /// <param name="updateAnalystRequest"></param>
+        /// <returns>ApiResponse of Analyst</returns>
+        ApiResponse<Analyst> UpdateAnalystWithHttpInfo(string analystIdentifier, UpdateAnalystRequest updateAnalystRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -3415,7 +3694,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+        ///  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversationIdentifier">Unique identifier of the conversation to update.</param>
@@ -3427,7 +3706,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+        ///  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversationIdentifier">Unique identifier of the conversation to update.</param>
@@ -3519,6 +3798,48 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="updateEmailCustomizationRequest"></param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> UpdateEmailCustomizationWithHttpInfo(UpdateEmailCustomizationRequest updateEmailCustomizationRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org assignments for this feature. - &#x60;operation&#x60; — Type of update to apply. &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60; unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs. Defaults to &#x60;REPLACE&#x60;.  The following example assigns Orgs &#x60;1&#x60; and &#x60;2&#x60; to a feature, in addition to any Orgs already assigned:  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [1, 2],   \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60;  Clear all Org assignments for a feature by sending an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once):  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [],   \&quot;operation\&quot;: \&quot;REPLACE\&quot; } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureAssignmentsRequest"></param>
+        /// <returns>FeatureAssignmentResponse</returns>
+        FeatureAssignmentResponse UpdateFeatureAssignments(UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org assignments for this feature. - &#x60;operation&#x60; — Type of update to apply. &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60; unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs. Defaults to &#x60;REPLACE&#x60;.  The following example assigns Orgs &#x60;1&#x60; and &#x60;2&#x60; to a feature, in addition to any Orgs already assigned:  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [1, 2],   \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60;  Clear all Org assignments for a feature by sending an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once):  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [],   \&quot;operation\&quot;: \&quot;REPLACE\&quot; } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureAssignmentsRequest"></param>
+        /// <returns>ApiResponse of FeatureAssignmentResponse</returns>
+        ApiResponse<FeatureAssignmentResponse> UpdateFeatureAssignmentsWithHttpInfo(UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60; to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. - &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set. - &#x60;feature_value&#x60; — New value to set for the feature. - &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400 error.  The following example sets a per-Org value override for Org &#x60;1&#x60;:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot; } &#x60;&#x60;&#x60;  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides: true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot;,   \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureValueRequest"></param>
+        /// <returns>FeatureValueResponse</returns>
+        FeatureValueResponse UpdateFeatureValue(UpdateFeatureValueRequest updateFeatureValueRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60; to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. - &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set. - &#x60;feature_value&#x60; — New value to set for the feature. - &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400 error.  The following example sets a per-Org value override for Org &#x60;1&#x60;:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot; } &#x60;&#x60;&#x60;  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides: true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot;,   \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureValueRequest"></param>
+        /// <returns>ApiResponse of FeatureValueResponse</returns>
+        ApiResponse<FeatureValueResponse> UpdateFeatureValueWithHttpInfo(UpdateFeatureValueRequest updateFeatureValueRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -3787,7 +4108,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <returns></returns>
         void UpdateVariable(string identifier, UpdateVariableRequest updateVariableRequest);
@@ -3799,7 +4120,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> UpdateVariableWithHttpInfo(string identifier, UpdateVariableRequest updateVariableRequest);
@@ -3856,7 +4177,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -3872,7 +4193,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -4251,6 +4572,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior for this analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). The caller must have view access to every referenced source. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60; (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users.  #### Error conditions  - &#x60;403&#x60; — missing privileges, or no view access to a referenced data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Analyst</returns>
+        System.Threading.Tasks.Task<Analyst> CreateAnalystAsync(CreateAnalystRequest createAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior for this analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). The caller must have view access to every referenced source. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60; (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users.  #### Error conditions  - &#x60;403&#x60; — missing privileges, or no view access to a referenced data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Analyst)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Analyst>> CreateAnalystWithHttpInfoAsync(CreateAnalystRequest createAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 10.12.0.cl or later   Creates a new [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**) privilege is required.   #### Usage guidelines  You can create a custom calendar from scratch or an existing Table in ThoughtSpot. For both methods of calendar creation, the following parameters are required:  * Name of the custom calendar. * Calendar creation method. To create a calendar from an existing table, specify the method:   - &#x60;FROM_EXISTING_TABLE&#x60; - Creates calendar from the table reference provided in the API request.  - &#x60;FROM_INPUT_PARAMS&#x60; - Creates a calendar from the parameters defined in the API request.  * Connection ID and Table name * Database and schema name attributes:   For most Cloud Data Warehouse (CDW) connectors, both &#x60;database_name&#x60; and &#x60;schema_name&#x60; attributes are required.     However, the attribute requirements are conditional and vary based on the connector type and its metadata structure. For example, for connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL, the &#x60;schema_name&#x60; is required, whereas the &#x60;database_name&#x60; attribute is not.   Similarly, connectors such as ClickHouse require you to specify the &#x60;database_name&#x60; and the schema specification in such cases is optional.  **NOTE**: If you are creating a calendar from an existing table, ensure that the referenced table matches the required DDL for custom calendars. If the schema does not match, the API returns an error.  ##### Calendar type The API allows you to create the following types of calendars:  * &#x60;MONTH_OFFSET&#x60;. The default calendar type. A &#x60;MONTH_OFFSET&#x60; calendar is offset by a few months from the standard calendar months (January to December) and the year begins with the month defined in the request. For example, if the &#x60;month_offset&#x60; value is set as &#x60;April&#x60;, the calendar year begins in April.  * &#x60;4-4-5&#x60;. Each quarter in the calendar will include two 4-week months followed by one 5-week month. * &#x60;4-5-4&#x60;. Each quarter in the calendar will include two 4-week months with a 5-week month between. * &#x60;5-4-4&#x60;. Each quarter begins with a 5-week month, followed by two 4-week months.  To start and end the calendar on a specific date, specify the dates in the &#x60;MM/DD/YYYY&#x60; format. For &#x60;MONTH_OFFSET&#x60; calendars, ensure that the &#x60;start_date&#x60; matches the month specified in the &#x60;month_offset&#x60; attribute.  You can also set the starting day of the week and customize the prefixes for year and quarter labels.  #### Examples  To create a calendar from an existing table:  &#x60;&#x60;&#x60; {   \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;,   \&quot;table_reference\&quot;: {     \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,     \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;,     \&quot;database_name\&quot;: \&quot;RETAILAPPAREL\&quot;,     \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot;   },   \&quot;creation_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;, } &#x60;&#x60;&#x60;  To create a calendar from scratch:  &#x60;&#x60;&#x60; {   \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;,   \&quot;table_reference\&quot;: {     \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,     \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;,     \&quot;database_name\&quot;: \&quot;RETAILAPPAREL\&quot;,     \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot;   },   \&quot;creation_method\&quot;: \&quot;FROM_INPUT_PARAMS\&quot;,   \&quot;calendar_type\&quot;: \&quot;MONTH_OFFSET\&quot;,   \&quot;month_offset\&quot;: \&quot;April\&quot;,   \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;,   \&quot;quarter_name_prefix\&quot;: \&quot;Q\&quot;,   \&quot;year_name_prefix\&quot;: \&quot;FY\&quot;,   \&quot;start_date\&quot;: \&quot;04/01/2025\&quot;,   \&quot;end_date\&quot;: \&quot;04/31/2025\&quot; } &#x60;&#x60;&#x60;      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -4500,6 +4844,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ResponseSchedule)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResponseSchedule>> CreateScheduleWithHttpInfoAsync(CreateScheduleRequest createScheduleRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SemanticIntegrationResponse</returns>
+        System.Threading.Tasks.Task<SemanticIntegrationResponse> CreateSemanticIntegrationAsync(CreateSemanticIntegrationRequest createSemanticIntegrationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SemanticIntegrationResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SemanticIntegrationResponse>> CreateSemanticIntegrationWithHttpInfoAsync(CreateSemanticIntegrationRequest createSemanticIntegrationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -4760,6 +5127,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ResponseActivationURL)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResponseActivationURL>> DeactivateUserWithHttpInfoAsync(DeactivateUserRequest deactivateUserRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path parameter, as returned by the create analyst API.  A successful request returns the &#x60;id&#x60; of the deleted analyst.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AnalystDeleteResponse</returns>
+        System.Threading.Tasks.Task<AnalystDeleteResponse> DeleteAnalystAsync(string analystIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path parameter, as returned by the create analyst API.  A successful request returns the &#x60;id&#x60; of the deleted analyst.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AnalystDeleteResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<AnalystDeleteResponse>> DeleteAnalystWithHttpInfoAsync(string analystIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -5136,6 +5526,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteSemanticIntegrationAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSemanticIntegrationWithHttpInfoAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 26.7.0.cl or later   Deletes one or more custom fonts from the cluster-level or org-level font library. If a deleted font is assigned to visualization areas, those assignments automatically fallback to the cluster/system default font. The response lists all affected areas where the font was explicitly set. Note: dry_run defaults to true. To actually delete fonts, you must explicitly pass dry_run: false.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Provide one or more font UUIDs or names in &#x60;font_identifiers&#x60;. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to delete from the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to delete from the authenticated user&#39;s org library. - Use &#x60;dry_run: true&#x60; to preview which visualization areas would be affected without actually deleting the font. The response lists affected assignments; no changes are applied. - Deletions cannot be undone. Re-upload the font file using &#x60;uploadStyleFont&#x60; if needed.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -5231,7 +5644,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
         [Obsolete]
@@ -5244,7 +5657,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         [Obsolete]
@@ -6081,6 +6494,52 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ConversationShareStatusResponse</returns>
+        System.Threading.Tasks.Task<ConversationShareStatusResponse> GetShareInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ConversationShareStatusResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ConversationShareStatusResponse>> GetShareInfoWithHttpInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SharedConversationResponse</returns>
+        System.Threading.Tasks.Task<SharedConversationResponse> GetSharedContentAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SharedConversationResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SharedConversationResponse>> GetSharedContentWithHttpInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Retrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.  Requires &#x60;ADMINISTRATION&#x60;(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;SYSTEM_INFO_ADMINISTRATION&#x60; (**Can view system activities**) privilege is required.  This API does not require any parameters to be passed in the request.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -6255,6 +6714,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ImportEPackAsyncTaskStatus)</returns>
         System.Threading.Tasks.Task<ApiResponse<ImportEPackAsyncTaskStatus>> ImportMetadataTMLAsyncWithHttpInfoAsync(ImportMetadataTMLAsyncRequest importMetadataTMLAsyncRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SemanticIntegrationResponse</returns>
+        System.Threading.Tasks.Task<SemanticIntegrationResponse> ImportSemanticIntegrationAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SemanticIntegrationResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SemanticIntegrationResponse>> ImportSemanticIntegrationWithHttpInfoAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -6614,6 +7096,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (&#x60;query&#x60;) and by ownership (&#x60;type&#x60;). Results are ordered   by most recently accessed. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - &#x60;record_size&#x60; (optional): number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60; (optional): zero-based index of the first record. Default 0, maximum 10000. - &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;.  The response contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;, the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;, &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60; (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;), &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt, marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; / &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;display_name&#x60;).  #### Error conditions  - &#x60;403&#x60; — missing privileges, or (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchAnalystsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AnalystSearchResponse</returns>
+        System.Threading.Tasks.Task<AnalystSearchResponse> SearchAnalystsAsync(SearchAnalystsRequest searchAnalystsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (&#x60;query&#x60;) and by ownership (&#x60;type&#x60;). Results are ordered   by most recently accessed. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - &#x60;record_size&#x60; (optional): number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60; (optional): zero-based index of the first record. Default 0, maximum 10000. - &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;.  The response contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;, the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;, &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60; (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;), &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt, marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; / &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;display_name&#x60;).  #### Error conditions  - &#x60;403&#x60; — missing privileges, or (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchAnalystsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AnalystSearchResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<AnalystSearchResponse>> SearchAnalystsWithHttpInfoAsync(SearchAnalystsRequest searchAnalystsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 26.6.0.cl or later   Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports &#x60;TRUSTED_AUTH&#x60;.  #### Required privileges  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required.  #### Usage guidelines  Use &#x60;scope&#x60; to control which level of settings are returned: - &#x60;CLUSTER&#x60; — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org. - &#x60;ORG&#x60; — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance. - If &#x60;scope&#x60; is omitted, both cluster and org-level settings are returned based on the caller&#39;s org context and feature availability.  The &#x60;access_tokens&#x60; array in &#x60;cluster_preferences&#x60; or &#x60;org_preferences&#x60; is omitted when no token is configured at that level.  **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -6867,6 +7372,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the org-admin view (returns the current value of each feature for a single Org). - &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;category&#x60; — Availability category of the features to return. &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60; returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;.  The response fields populated depend on the requested scope. In the cluster-admin view (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;, &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;, &#x60;element_config&#x60;, and &#x60;element_value&#x60;.  The following example retrieves the general-access features for the cluster-admin view:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;  For the org-admin view, set &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is &#x60;ORG&#x60;; omitting it returns a 400 error):  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchFeaturesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;FeatureGroup&gt;</returns>
+        System.Threading.Tasks.Task<List<FeatureGroup>> SearchFeaturesAsync(SearchFeaturesRequest searchFeaturesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the org-admin view (returns the current value of each feature for a single Org). - &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;category&#x60; — Availability category of the features to return. &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60; returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;.  The response fields populated depend on the requested scope. In the cluster-admin view (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;, &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;, &#x60;element_config&#x60;, and &#x60;element_value&#x60;.  The following example retrieves the general-access features for the cluster-admin view:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;  For the org-admin view, set &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is &#x60;ORG&#x60;; omitting it returns a 400 error):  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchFeaturesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;FeatureGroup&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<FeatureGroup>>> SearchFeaturesWithHttpInfoAsync(SearchFeaturesRequest searchFeaturesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value is false.  **NOTE**: &#x60;obj_identifier&#x60; is supported for the following object types: &#x60;LIVEBOARD&#x60;, &#x60;ANSWER&#x60;, &#x60;LOGICAL_TABLE&#x60;, &#x60;LOGICAL_COLUMN&#x60;, &#x60;CONNECTION&#x60;, &#x60;USER_GROUP&#x60;, &#x60;COLLECTION&#x60;. The response includes the &#x60;metadata_obj_id&#x60; field for objects that have a Custom object ID set.  **NOTE**: The following parameters support pagination of metadata records:  - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60;  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -6978,6 +7506,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SecuritySettingsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<SecuritySettingsResponse>> SearchSecuritySettingsWithHttpInfoAsync(SearchSecuritySettingsRequest searchSecuritySettingsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        System.Threading.Tasks.Task<List<SemanticIntegrationSearchResponse>> SearchSemanticIntegrationsAsync(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;SemanticIntegrationSearchResponse&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<SemanticIntegrationSearchResponse>>> SearchSemanticIntegrationsWithHttpInfoAsync(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -7316,6 +7867,56 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources with the principal so the analyst keeps working for them. A successful share returns an empty &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the &#x60;analyst_identifier&#x60; path parameter. The request body contains a &#x60;permissions&#x60; array with one entry per principal:  - &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. - &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. - &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it.  A principal may appear at most once per request. When access is granted, the analyst&#39;s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty &#x60;204 No Content&#x60; response.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to share.</param>
+        /// <param name="shareAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Object</returns>
+        System.Threading.Tasks.Task<Object> ShareAnalystAsync(string analystIdentifier, ShareAnalystRequest shareAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources with the principal so the analyst keeps working for them. A successful share returns an empty &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the &#x60;analyst_identifier&#x60; path parameter. The request body contains a &#x60;permissions&#x60; array with one entry per principal:  - &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. - &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. - &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it.  A principal may appear at most once per request. When access is granted, the analyst&#39;s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty &#x60;204 No Content&#x60; response.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to share.</param>
+        /// <param name="shareAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> ShareAnalystWithHttpInfoAsync(string analystIdentifier, ShareAnalystRequest shareAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task ShareConversationAsync(string conversationIdentifier, ShareConversationRequest shareConversationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> ShareConversationWithHttpInfoAsync(string conversationIdentifier, ShareConversationRequest shareConversationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  #### Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views * Connections * Collections  #### Object permissions  You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing an object with another user or group. The &#x60;READ_ONLY&#x60; permission grants view access to the shared object, whereas &#x60;MODIFY&#x60; provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;.  #### Sharing a visualization  * Sharing a visualization implicitly shares the entire Liveboard with the recipient. * Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI. * If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.  #### Sharing a collection  Collections support **dual permissions** that provide fine-grained control:  * **Collection permissions** (&#x60;share_mode&#x60;) - controls access to the collection itself (view, edit, delete the collection) * **Content permissions** (&#x60;content_share_mode&#x60;) - controls access to objects within the collection (view, edit objects inside)  **Default Behavior:** - If only &#x60;share_mode&#x60; is specified, the content permissions default to &#x60;READ_ONLY&#x60; (except when &#x60;share_mode&#x60; is &#x60;NO_ACCESS&#x60;, then content also gets &#x60;NO_ACCESS&#x60;) - To give users edit access to collection contents, explicitly set &#x60;content_share_mode: \&quot;MODIFY\&quot;&#x60;  ## Examples  The following JSON examples can be copy-pasted as request bodies for the REST v2 API endpoint:  &#x60;&#x60;&#x60;bash POST /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded &#x60;&#x60;&#x60;  ### Basic collection sharing Share a collection with read-only access:  &#x60;&#x60;&#x60;json {   \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,   \&quot;metadata_identifiers\&quot;: [\&quot;Sales Reports Collection\&quot;],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;alice@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;   }],   \&quot;notification\&quot;: {     \&quot;message\&quot;: \&quot;I&#39;ve shared the Sales Reports collection with you\&quot;,     \&quot;notify_on_share\&quot;: true   } } &#x60;&#x60;&#x60;  ### Collection sharing with dual permissions Share a collection with different permissions for the collection vs. its contents:  &#x60;&#x60;&#x60;json {   \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,   \&quot;metadata_identifiers\&quot;: [\&quot;Marketing Analytics\&quot;],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;bob@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;,     \&quot;content_share_mode\&quot;: \&quot;READ_ONLY\&quot;   }, {     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER_GROUP\&quot;,       \&quot;identifier\&quot;: \&quot;Marketing Team\&quot;     },     \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,     \&quot;content_share_mode\&quot;: \&quot;READ_ONLY\&quot;   }],   \&quot;notification\&quot;: {     \&quot;emails\&quot;: [\&quot;bob@company.com\&quot;],     \&quot;message\&quot;: \&quot;You can edit the collection but content is read-only\&quot;,     \&quot;enable_custom_url\&quot;: false,     \&quot;notify_on_share\&quot;: true   },   \&quot;has_lenient_discoverability\&quot;: false } &#x60;&#x60;&#x60;  ### Multiple collections sharing Share multiple collections with different users:  &#x60;&#x60;&#x60;json {   \&quot;metadata\&quot;: [     {       \&quot;type\&quot;: \&quot;COLLECTION\&quot;,       \&quot;identifier\&quot;: \&quot;Q4 Reports\&quot;     },     {       \&quot;type\&quot;: \&quot;COLLECTION\&quot;,       \&quot;identifier\&quot;: \&quot;Executive Dashboard Collection\&quot;     }   ],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER_GROUP\&quot;,       \&quot;identifier\&quot;: \&quot;Executives\&quot;     },     \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;   }, {     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;manager@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,     \&quot;content_share_mode\&quot;: \&quot;MODIFY\&quot;   }],   \&quot;notification\&quot;: {     \&quot;message\&quot;: \&quot;Sharing quarterly collections with leadership team\&quot;,     \&quot;notify_on_share\&quot;: true   } } &#x60;&#x60;&#x60;  ### Remove collection access Remove access to a collection by setting share_mode to NO_ACCESS:  &#x60;&#x60;&#x60;json {   \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,   \&quot;metadata_identifiers\&quot;: [\&quot;Confidential Reports\&quot;],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;former-employee@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;NO_ACCESS\&quot;   }],   \&quot;notification\&quot;: {     \&quot;notify_on_share\&quot;: false   } } &#x60;&#x60;&#x60;  ### Collection Permission Scenarios  **Scenario 1: Collection Admin** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Full control over collection and its contents  **Scenario 2: Collection Curator** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; Can manage collection structure but not edit contents  **Scenario 3: Content Editor** - &#x60;share_mode: READ_ONLY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Can edit objects within collection but can&#39;t change collection itself  **Scenario 4: Viewer** - &#x60;share_mode: READ_ONLY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; View-only access to collection and contents      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -7475,6 +8076,31 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> UnpublishMetadataWithHttpInfoAsync(UnpublishMetadataRequest unpublishMetadataRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;).  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to update.</param>
+        /// <param name="updateAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Analyst</returns>
+        System.Threading.Tasks.Task<Analyst> UpdateAnalystAsync(string analystIdentifier, UpdateAnalystRequest updateAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;).  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to update.</param>
+        /// <param name="updateAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Analyst)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Analyst>> UpdateAnalystWithHttpInfoAsync(string analystIdentifier, UpdateAnalystRequest updateAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -7675,7 +8301,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+        ///  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversationIdentifier">Unique identifier of the conversation to update.</param>
@@ -7688,7 +8314,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+        ///  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversationIdentifier">Unique identifier of the conversation to update.</param>
@@ -7787,6 +8413,52 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> UpdateEmailCustomizationWithHttpInfoAsync(UpdateEmailCustomizationRequest updateEmailCustomizationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org assignments for this feature. - &#x60;operation&#x60; — Type of update to apply. &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60; unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs. Defaults to &#x60;REPLACE&#x60;.  The following example assigns Orgs &#x60;1&#x60; and &#x60;2&#x60; to a feature, in addition to any Orgs already assigned:  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [1, 2],   \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60;  Clear all Org assignments for a feature by sending an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once):  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [],   \&quot;operation\&quot;: \&quot;REPLACE\&quot; } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureAssignmentsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of FeatureAssignmentResponse</returns>
+        System.Threading.Tasks.Task<FeatureAssignmentResponse> UpdateFeatureAssignmentsAsync(UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org assignments for this feature. - &#x60;operation&#x60; — Type of update to apply. &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60; unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs. Defaults to &#x60;REPLACE&#x60;.  The following example assigns Orgs &#x60;1&#x60; and &#x60;2&#x60; to a feature, in addition to any Orgs already assigned:  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [1, 2],   \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60;  Clear all Org assignments for a feature by sending an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once):  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [],   \&quot;operation\&quot;: \&quot;REPLACE\&quot; } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureAssignmentsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (FeatureAssignmentResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<FeatureAssignmentResponse>> UpdateFeatureAssignmentsWithHttpInfoAsync(UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60; to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. - &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set. - &#x60;feature_value&#x60; — New value to set for the feature. - &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400 error.  The following example sets a per-Org value override for Org &#x60;1&#x60;:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot; } &#x60;&#x60;&#x60;  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides: true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot;,   \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureValueRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of FeatureValueResponse</returns>
+        System.Threading.Tasks.Task<FeatureValueResponse> UpdateFeatureValueAsync(UpdateFeatureValueRequest updateFeatureValueRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60; to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. - &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set. - &#x60;feature_value&#x60; — New value to set for the feature. - &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400 error.  The following example sets a per-Org value override for Org &#x60;1&#x60;:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot; } &#x60;&#x60;&#x60;  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides: true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot;,   \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureValueRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (FeatureValueResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<FeatureValueResponse>> UpdateFeatureValueWithHttpInfoAsync(UpdateFeatureValueRequest updateFeatureValueRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -8077,7 +8749,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -8090,7 +8762,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///  Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -8152,7 +8824,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -8169,7 +8841,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -10367,6 +11039,136 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
+        ///   Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior for this analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). The caller must have view access to every referenced source. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60; (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users.  #### Error conditions  - &#x60;403&#x60; — missing privileges, or no view access to a referenced data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createAnalystRequest"></param>
+        /// <returns>Analyst</returns>
+        public Analyst CreateAnalyst(CreateAnalystRequest createAnalystRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Analyst> localVarResponse = CreateAnalystWithHttpInfo(createAnalystRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior for this analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). The caller must have view access to every referenced source. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60; (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users.  #### Error conditions  - &#x60;403&#x60; — missing privileges, or no view access to a referenced data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createAnalystRequest"></param>
+        /// <returns>ApiResponse of Analyst</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Analyst> CreateAnalystWithHttpInfo(CreateAnalystRequest createAnalystRequest)
+        {
+            // verify the required parameter 'createAnalystRequest' is set
+            if (createAnalystRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'createAnalystRequest' when calling ThoughtSpotRestApi->CreateAnalyst");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = createAnalystRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Analyst>("/api/rest/2.0/ai/agent/analysts/create", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CreateAnalyst", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior for this analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). The caller must have view access to every referenced source. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60; (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users.  #### Error conditions  - &#x60;403&#x60; — missing privileges, or no view access to a referenced data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Analyst</returns>
+        public async System.Threading.Tasks.Task<Analyst> CreateAnalystAsync(CreateAnalystRequest createAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Analyst> localVarResponse = await CreateAnalystWithHttpInfoAsync(createAnalystRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior for this analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). The caller must have view access to every referenced source. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60; (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users.  #### Error conditions  - &#x60;403&#x60; — missing privileges, or no view access to a referenced data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Analyst)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Analyst>> CreateAnalystWithHttpInfoAsync(CreateAnalystRequest createAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'createAnalystRequest' is set
+            if (createAnalystRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'createAnalystRequest' when calling ThoughtSpotRestApi->CreateAnalyst");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = createAnalystRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Analyst>("/api/rest/2.0/ai/agent/analysts/create", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CreateAnalyst", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
         ///    Version: 10.12.0.cl or later   Creates a new [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60; (**Can manage custom calendars**) privilege is required.   #### Usage guidelines  You can create a custom calendar from scratch or an existing Table in ThoughtSpot. For both methods of calendar creation, the following parameters are required:  * Name of the custom calendar. * Calendar creation method. To create a calendar from an existing table, specify the method:   - &#x60;FROM_EXISTING_TABLE&#x60; - Creates calendar from the table reference provided in the API request.  - &#x60;FROM_INPUT_PARAMS&#x60; - Creates a calendar from the parameters defined in the API request.  * Connection ID and Table name * Database and schema name attributes:   For most Cloud Data Warehouse (CDW) connectors, both &#x60;database_name&#x60; and &#x60;schema_name&#x60; attributes are required.     However, the attribute requirements are conditional and vary based on the connector type and its metadata structure. For example, for connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL, the &#x60;schema_name&#x60; is required, whereas the &#x60;database_name&#x60; attribute is not.   Similarly, connectors such as ClickHouse require you to specify the &#x60;database_name&#x60; and the schema specification in such cases is optional.  **NOTE**: If you are creating a calendar from an existing table, ensure that the referenced table matches the required DDL for custom calendars. If the schema does not match, the API returns an error.  ##### Calendar type The API allows you to create the following types of calendars:  * &#x60;MONTH_OFFSET&#x60;. The default calendar type. A &#x60;MONTH_OFFSET&#x60; calendar is offset by a few months from the standard calendar months (January to December) and the year begins with the month defined in the request. For example, if the &#x60;month_offset&#x60; value is set as &#x60;April&#x60;, the calendar year begins in April.  * &#x60;4-4-5&#x60;. Each quarter in the calendar will include two 4-week months followed by one 5-week month. * &#x60;4-5-4&#x60;. Each quarter in the calendar will include two 4-week months with a 5-week month between. * &#x60;5-4-4&#x60;. Each quarter begins with a 5-week month, followed by two 4-week months.  To start and end the calendar on a specific date, specify the dates in the &#x60;MM/DD/YYYY&#x60; format. For &#x60;MONTH_OFFSET&#x60; calendars, ensure that the &#x60;start_date&#x60; matches the month specified in the &#x60;month_offset&#x60; attribute.  You can also set the starting day of the week and customize the prefixes for year and quarter labels.  #### Examples  To create a calendar from an existing table:  &#x60;&#x60;&#x60; {   \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;,   \&quot;table_reference\&quot;: {     \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,     \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;,     \&quot;database_name\&quot;: \&quot;RETAILAPPAREL\&quot;,     \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot;   },   \&quot;creation_method\&quot;: \&quot;FROM_EXISTING_TABLE\&quot;, } &#x60;&#x60;&#x60;  To create a calendar from scratch:  &#x60;&#x60;&#x60; {   \&quot;name\&quot;: \&quot;MyCustomCalendar1\&quot;,   \&quot;table_reference\&quot;: {     \&quot;connection_identifier\&quot;: \&quot;4db8ea22-2ff4-4224-b05a-26674717e468\&quot;,     \&quot;table_name\&quot;: \&quot;MyCalendarTable\&quot;,     \&quot;database_name\&quot;: \&quot;RETAILAPPAREL\&quot;,     \&quot;schema_name\&quot;: \&quot;PUBLIC\&quot;   },   \&quot;creation_method\&quot;: \&quot;FROM_INPUT_PARAMS\&quot;,   \&quot;calendar_type\&quot;: \&quot;MONTH_OFFSET\&quot;,   \&quot;month_offset\&quot;: \&quot;April\&quot;,   \&quot;start_day_of_week\&quot;: \&quot;Monday\&quot;,   \&quot;quarter_name_prefix\&quot;: \&quot;Q\&quot;,   \&quot;year_name_prefix\&quot;: \&quot;FY\&quot;,   \&quot;start_date\&quot;: \&quot;04/01/2025\&quot;,   \&quot;end_date\&quot;: \&quot;04/31/2025\&quot; } &#x60;&#x60;&#x60;      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -11789,6 +12591,136 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("CreateSchedule", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <returns>SemanticIntegrationResponse</returns>
+        public SemanticIntegrationResponse CreateSemanticIntegration(CreateSemanticIntegrationRequest createSemanticIntegrationRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> localVarResponse = CreateSemanticIntegrationWithHttpInfo(createSemanticIntegrationRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <returns>ApiResponse of SemanticIntegrationResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> CreateSemanticIntegrationWithHttpInfo(CreateSemanticIntegrationRequest createSemanticIntegrationRequest)
+        {
+            // verify the required parameter 'createSemanticIntegrationRequest' is set
+            if (createSemanticIntegrationRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'createSemanticIntegrationRequest' when calling ThoughtSpotRestApi->CreateSemanticIntegration");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = createSemanticIntegrationRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<SemanticIntegrationResponse>("/api/rest/2.0/semantic-integrations/create", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CreateSemanticIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SemanticIntegrationResponse</returns>
+        public async System.Threading.Tasks.Task<SemanticIntegrationResponse> CreateSemanticIntegrationAsync(CreateSemanticIntegrationRequest createSemanticIntegrationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> localVarResponse = await CreateSemanticIntegrationWithHttpInfoAsync(createSemanticIntegrationRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SemanticIntegrationResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse>> CreateSemanticIntegrationWithHttpInfoAsync(CreateSemanticIntegrationRequest createSemanticIntegrationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'createSemanticIntegrationRequest' is set
+            if (createSemanticIntegrationRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'createSemanticIntegrationRequest' when calling ThoughtSpotRestApi->CreateSemanticIntegration");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = createSemanticIntegrationRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<SemanticIntegrationResponse>("/api/rest/2.0/semantic-integrations/create", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CreateSemanticIntegration", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -13271,6 +14203,134 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("DeactivateUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path parameter, as returned by the create analyst API.  A successful request returns the &#x60;id&#x60; of the deleted analyst.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to delete.</param>
+        /// <returns>AnalystDeleteResponse</returns>
+        public AnalystDeleteResponse DeleteAnalyst(string analystIdentifier)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<AnalystDeleteResponse> localVarResponse = DeleteAnalystWithHttpInfo(analystIdentifier);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path parameter, as returned by the create analyst API.  A successful request returns the &#x60;id&#x60; of the deleted analyst.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to delete.</param>
+        /// <returns>ApiResponse of AnalystDeleteResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<AnalystDeleteResponse> DeleteAnalystWithHttpInfo(string analystIdentifier)
+        {
+            // verify the required parameter 'analystIdentifier' is set
+            if (analystIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'analystIdentifier' when calling ThoughtSpotRestApi->DeleteAnalyst");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("analyst_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(analystIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<AnalystDeleteResponse>("/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteAnalyst", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path parameter, as returned by the create analyst API.  A successful request returns the &#x60;id&#x60; of the deleted analyst.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AnalystDeleteResponse</returns>
+        public async System.Threading.Tasks.Task<AnalystDeleteResponse> DeleteAnalystAsync(string analystIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<AnalystDeleteResponse> localVarResponse = await DeleteAnalystWithHttpInfoAsync(analystIdentifier, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path parameter, as returned by the create analyst API.  A successful request returns the &#x60;id&#x60; of the deleted analyst.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AnalystDeleteResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<AnalystDeleteResponse>> DeleteAnalystWithHttpInfoAsync(string analystIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'analystIdentifier' is set
+            if (analystIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'analystIdentifier' when calling ThoughtSpotRestApi->DeleteAnalyst");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("analyst_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(analystIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<AnalystDeleteResponse>("/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteAnalyst", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -15319,6 +16379,132 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
+        ///    Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <returns></returns>
+        public void DeleteSemanticIntegration(string semanticIntegrationIdentifier)
+        {
+            DeleteSemanticIntegrationWithHttpInfo(semanticIntegrationIdentifier);
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> DeleteSemanticIntegrationWithHttpInfo(string semanticIntegrationIdentifier)
+        {
+            // verify the required parameter 'semanticIntegrationIdentifier' is set
+            if (semanticIntegrationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'semanticIntegrationIdentifier' when calling ThoughtSpotRestApi->DeleteSemanticIntegration");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("semantic_integration_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(semanticIntegrationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteSemanticIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteSemanticIntegrationAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            await DeleteSemanticIntegrationWithHttpInfoAsync(semanticIntegrationIdentifier, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> DeleteSemanticIntegrationWithHttpInfoAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'semanticIntegrationIdentifier' is set
+            if (semanticIntegrationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'semanticIntegrationIdentifier' when calling ThoughtSpotRestApi->DeleteSemanticIntegration");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("semantic_integration_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(semanticIntegrationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteSemanticIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
         ///    Version: 26.7.0.cl or later   Deletes one or more custom fonts from the cluster-level or org-level font library. If a deleted font is assigned to visualization areas, those assignments automatically fallback to the cluster/system default font. The response lists all affected areas where the font was explicitly set. Note: dry_run defaults to true. To actually delete fonts, you must explicitly pass dry_run: false.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Provide one or more font UUIDs or names in &#x60;font_identifiers&#x60;. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to delete from the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to delete from the authenticated user&#39;s org library. - Use &#x60;dry_run: true&#x60; to preview which visualization areas would be affected without actually deleting the font. The response lists affected assignments; no changes are applied. - Deletions cannot be undone. Re-upload the font file using &#x60;uploadStyleFont&#x60; if needed.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -15830,7 +17016,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <returns></returns>
         [Obsolete]
         public void DeleteVariable(string identifier)
@@ -15842,7 +17028,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <returns>ApiResponse of Object(void)</returns>
         [Obsolete]
         public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> DeleteVariableWithHttpInfo(string identifier)
@@ -15892,7 +17078,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
         [Obsolete]
@@ -15905,7 +17091,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn&#39;t exist * The variable is being used by other objects      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         [Obsolete]
@@ -20583,6 +21769,262 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
+        ///   Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <returns>ConversationShareStatusResponse</returns>
+        public ConversationShareStatusResponse GetShareInfo(string conversationIdentifier)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ConversationShareStatusResponse> localVarResponse = GetShareInfoWithHttpInfo(conversationIdentifier);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <returns>ApiResponse of ConversationShareStatusResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ConversationShareStatusResponse> GetShareInfoWithHttpInfo(string conversationIdentifier)
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->GetShareInfo");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<ConversationShareStatusResponse>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetShareInfo", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ConversationShareStatusResponse</returns>
+        public async System.Threading.Tasks.Task<ConversationShareStatusResponse> GetShareInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ConversationShareStatusResponse> localVarResponse = await GetShareInfoWithHttpInfoAsync(conversationIdentifier, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ConversationShareStatusResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ConversationShareStatusResponse>> GetShareInfoWithHttpInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->GetShareInfo");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<ConversationShareStatusResponse>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetShareInfo", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///   Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <returns>SharedConversationResponse</returns>
+        public SharedConversationResponse GetSharedContent(string conversationIdentifier)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SharedConversationResponse> localVarResponse = GetSharedContentWithHttpInfo(conversationIdentifier);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <returns>ApiResponse of SharedConversationResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SharedConversationResponse> GetSharedContentWithHttpInfo(string conversationIdentifier)
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->GetSharedContent");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<SharedConversationResponse>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetSharedContent", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SharedConversationResponse</returns>
+        public async System.Threading.Tasks.Task<SharedConversationResponse> GetSharedContentAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SharedConversationResponse> localVarResponse = await GetSharedContentWithHttpInfoAsync(conversationIdentifier, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SharedConversationResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SharedConversationResponse>> GetSharedContentWithHttpInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->GetSharedContent");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<SharedConversationResponse>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetSharedContent", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
         ///    Version: 9.0.0.cl or later   Retrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.  Requires &#x60;ADMINISTRATION&#x60;(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;SYSTEM_INFO_ADMINISTRATION&#x60; (**Can view system activities**) privilege is required.  This API does not require any parameters to be passed in the request.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -21561,6 +23003,134 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ImportMetadataTMLAsync", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <returns>SemanticIntegrationResponse</returns>
+        public SemanticIntegrationResponse ImportSemanticIntegration(string semanticIntegrationIdentifier)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> localVarResponse = ImportSemanticIntegrationWithHttpInfo(semanticIntegrationIdentifier);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <returns>ApiResponse of SemanticIntegrationResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> ImportSemanticIntegrationWithHttpInfo(string semanticIntegrationIdentifier)
+        {
+            // verify the required parameter 'semanticIntegrationIdentifier' is set
+            if (semanticIntegrationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'semanticIntegrationIdentifier' when calling ThoughtSpotRestApi->ImportSemanticIntegration");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("semantic_integration_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(semanticIntegrationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<SemanticIntegrationResponse>("/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ImportSemanticIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SemanticIntegrationResponse</returns>
+        public async System.Threading.Tasks.Task<SemanticIntegrationResponse> ImportSemanticIntegrationAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> localVarResponse = await ImportSemanticIntegrationWithHttpInfoAsync(semanticIntegrationIdentifier, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SemanticIntegrationResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse>> ImportSemanticIntegrationWithHttpInfoAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'semanticIntegrationIdentifier' is set
+            if (semanticIntegrationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'semanticIntegrationIdentifier' when calling ThoughtSpotRestApi->ImportSemanticIntegration");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("semantic_integration_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(semanticIntegrationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<SemanticIntegrationResponse>("/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ImportSemanticIntegration", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -23547,6 +25117,136 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
+        ///   Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (&#x60;query&#x60;) and by ownership (&#x60;type&#x60;). Results are ordered   by most recently accessed. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - &#x60;record_size&#x60; (optional): number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60; (optional): zero-based index of the first record. Default 0, maximum 10000. - &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;.  The response contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;, the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;, &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60; (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;), &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt, marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; / &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;display_name&#x60;).  #### Error conditions  - &#x60;403&#x60; — missing privileges, or (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchAnalystsRequest"></param>
+        /// <returns>AnalystSearchResponse</returns>
+        public AnalystSearchResponse SearchAnalysts(SearchAnalystsRequest searchAnalystsRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<AnalystSearchResponse> localVarResponse = SearchAnalystsWithHttpInfo(searchAnalystsRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (&#x60;query&#x60;) and by ownership (&#x60;type&#x60;). Results are ordered   by most recently accessed. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - &#x60;record_size&#x60; (optional): number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60; (optional): zero-based index of the first record. Default 0, maximum 10000. - &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;.  The response contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;, the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;, &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60; (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;), &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt, marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; / &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;display_name&#x60;).  #### Error conditions  - &#x60;403&#x60; — missing privileges, or (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchAnalystsRequest"></param>
+        /// <returns>ApiResponse of AnalystSearchResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<AnalystSearchResponse> SearchAnalystsWithHttpInfo(SearchAnalystsRequest searchAnalystsRequest)
+        {
+            // verify the required parameter 'searchAnalystsRequest' is set
+            if (searchAnalystsRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchAnalystsRequest' when calling ThoughtSpotRestApi->SearchAnalysts");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = searchAnalystsRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<AnalystSearchResponse>("/api/rest/2.0/ai/agent/analysts/search", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchAnalysts", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (&#x60;query&#x60;) and by ownership (&#x60;type&#x60;). Results are ordered   by most recently accessed. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - &#x60;record_size&#x60; (optional): number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60; (optional): zero-based index of the first record. Default 0, maximum 10000. - &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;.  The response contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;, the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;, &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60; (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;), &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt, marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; / &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;display_name&#x60;).  #### Error conditions  - &#x60;403&#x60; — missing privileges, or (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchAnalystsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AnalystSearchResponse</returns>
+        public async System.Threading.Tasks.Task<AnalystSearchResponse> SearchAnalystsAsync(SearchAnalystsRequest searchAnalystsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<AnalystSearchResponse> localVarResponse = await SearchAnalystsWithHttpInfoAsync(searchAnalystsRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (&#x60;query&#x60;) and by ownership (&#x60;type&#x60;). Results are ordered   by most recently accessed. Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - &#x60;record_size&#x60; (optional): number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60; (optional): zero-based index of the first record. Default 0, maximum 10000. - &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;.  The response contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;, the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;, &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60; (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;), &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt, marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; / &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;display_name&#x60;).  #### Error conditions  - &#x60;403&#x60; — missing privileges, or (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchAnalystsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AnalystSearchResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<AnalystSearchResponse>> SearchAnalystsWithHttpInfoAsync(SearchAnalystsRequest searchAnalystsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'searchAnalystsRequest' is set
+            if (searchAnalystsRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchAnalystsRequest' when calling ThoughtSpotRestApi->SearchAnalysts");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = searchAnalystsRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<AnalystSearchResponse>("/api/rest/2.0/ai/agent/analysts/search", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchAnalysts", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
         ///    Version: 26.6.0.cl or later   Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports &#x60;TRUSTED_AUTH&#x60;.  #### Required privileges  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;CONTROL_TRUSTED_AUTH&#x60; (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60; privilege is required.  #### Usage guidelines  Use &#x60;scope&#x60; to control which level of settings are returned: - &#x60;CLUSTER&#x60; — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org. - &#x60;ORG&#x60; — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance. - If &#x60;scope&#x60; is omitted, both cluster and org-level settings are returned based on the caller&#39;s org context and feature availability.  The &#x60;access_tokens&#x60; array in &#x60;cluster_preferences&#x60; or &#x60;org_preferences&#x60; is omitted when no token is configured at that level.  **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -24977,6 +26677,136 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
+        ///    Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the org-admin view (returns the current value of each feature for a single Org). - &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;category&#x60; — Availability category of the features to return. &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60; returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;.  The response fields populated depend on the requested scope. In the cluster-admin view (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;, &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;, &#x60;element_config&#x60;, and &#x60;element_value&#x60;.  The following example retrieves the general-access features for the cluster-admin view:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;  For the org-admin view, set &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is &#x60;ORG&#x60;; omitting it returns a 400 error):  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchFeaturesRequest"></param>
+        /// <returns>List&lt;FeatureGroup&gt;</returns>
+        public List<FeatureGroup> SearchFeatures(SearchFeaturesRequest searchFeaturesRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<FeatureGroup>> localVarResponse = SearchFeaturesWithHttpInfo(searchFeaturesRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the org-admin view (returns the current value of each feature for a single Org). - &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;category&#x60; — Availability category of the features to return. &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60; returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;.  The response fields populated depend on the requested scope. In the cluster-admin view (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;, &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;, &#x60;element_config&#x60;, and &#x60;element_value&#x60;.  The following example retrieves the general-access features for the cluster-admin view:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;  For the org-admin view, set &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is &#x60;ORG&#x60;; omitting it returns a 400 error):  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchFeaturesRequest"></param>
+        /// <returns>ApiResponse of List&lt;FeatureGroup&gt;</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<FeatureGroup>> SearchFeaturesWithHttpInfo(SearchFeaturesRequest searchFeaturesRequest)
+        {
+            // verify the required parameter 'searchFeaturesRequest' is set
+            if (searchFeaturesRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchFeaturesRequest' when calling ThoughtSpotRestApi->SearchFeatures");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = searchFeaturesRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<List<FeatureGroup>>("/api/rest/2.0/configurations/features/search", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchFeatures", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the org-admin view (returns the current value of each feature for a single Org). - &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;category&#x60; — Availability category of the features to return. &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60; returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;.  The response fields populated depend on the requested scope. In the cluster-admin view (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;, &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;, &#x60;element_config&#x60;, and &#x60;element_value&#x60;.  The following example retrieves the general-access features for the cluster-admin view:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;  For the org-admin view, set &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is &#x60;ORG&#x60;; omitting it returns a 400 error):  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchFeaturesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;FeatureGroup&gt;</returns>
+        public async System.Threading.Tasks.Task<List<FeatureGroup>> SearchFeaturesAsync(SearchFeaturesRequest searchFeaturesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<FeatureGroup>> localVarResponse = await SearchFeaturesWithHttpInfoAsync(searchFeaturesRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the org-admin view (returns the current value of each feature for a single Org). - &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;category&#x60; — Availability category of the features to return. &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60; returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;.  The response fields populated depend on the requested scope. In the cluster-admin view (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;, &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;, &#x60;element_config&#x60;, and &#x60;element_value&#x60;.  The following example retrieves the general-access features for the cluster-admin view:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;  For the org-admin view, set &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is &#x60;ORG&#x60;; omitting it returns a 400 error):  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchFeaturesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;FeatureGroup&gt;)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<FeatureGroup>>> SearchFeaturesWithHttpInfoAsync(SearchFeaturesRequest searchFeaturesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'searchFeaturesRequest' is set
+            if (searchFeaturesRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchFeaturesRequest' when calling ThoughtSpotRestApi->SearchFeatures");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = searchFeaturesRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<List<FeatureGroup>>("/api/rest/2.0/configurations/features/search", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchFeatures", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
         ///    Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the &#x60;type&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60;. - To filter metadata objects within type &#x60;LOGICAL_TABLE&#x60;, set the &#x60;subtypes&#x60; attribute. For example, to fetch a Worksheet, set the type as &#x60;LOGICAL_TABLE&#x60; &amp; subtypes as &#x60;[WORKSHEET]&#x60;. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like &#x60;include_auto_created_objects&#x60;, &#x60;include_dependent_objects&#x60;, &#x60;include_headers&#x60;, &#x60;include_incomplete_objects&#x60;, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use &#x60;include_discoverable_objects&#x60; as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the &#x60;liveboard_response_format&#x60; as V2. Default value is V1. - To retrieve only objects that are published, set the &#x60;include_only_published_objects&#x60; as true. Default value is false.  **NOTE**: &#x60;obj_identifier&#x60; is supported for the following object types: &#x60;LIVEBOARD&#x60;, &#x60;ANSWER&#x60;, &#x60;LOGICAL_TABLE&#x60;, &#x60;LOGICAL_COLUMN&#x60;, &#x60;CONNECTION&#x60;, &#x60;USER_GROUP&#x60;, &#x60;COLLECTION&#x60;. The response includes the &#x60;metadata_obj_id&#x60; field for objects that have a Custom object ID set.  **NOTE**: The following parameters support pagination of metadata records:  - &#x60;tag_identifiers&#x60; - &#x60;type&#x60; - &#x60;subtypes&#x60; - &#x60;created_by_user_identifiers&#x60; - &#x60;modified_by_user_identifiers&#x60; - &#x60;owned_by_user_identifiers&#x60; - &#x60;exclude_objects&#x60; - &#x60;include_auto_created_objects&#x60; - &#x60;favorite_object_options&#x60; - &#x60;include_only_published_objects&#x60;  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -25619,6 +27449,136 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("SearchSecuritySettings", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <returns>List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        public List<SemanticIntegrationSearchResponse> SearchSemanticIntegrations(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<SemanticIntegrationSearchResponse>> localVarResponse = SearchSemanticIntegrationsWithHttpInfo(searchSemanticIntegrationsRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <returns>ApiResponse of List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<SemanticIntegrationSearchResponse>> SearchSemanticIntegrationsWithHttpInfo(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest)
+        {
+            // verify the required parameter 'searchSemanticIntegrationsRequest' is set
+            if (searchSemanticIntegrationsRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchSemanticIntegrationsRequest' when calling ThoughtSpotRestApi->SearchSemanticIntegrations");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = searchSemanticIntegrationsRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<List<SemanticIntegrationSearchResponse>>("/api/rest/2.0/semantic-integrations/search", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchSemanticIntegrations", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        public async System.Threading.Tasks.Task<List<SemanticIntegrationSearchResponse>> SearchSemanticIntegrationsAsync(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<SemanticIntegrationSearchResponse>> localVarResponse = await SearchSemanticIntegrationsWithHttpInfoAsync(searchSemanticIntegrationsRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;SemanticIntegrationSearchResponse&gt;)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<SemanticIntegrationSearchResponse>>> SearchSemanticIntegrationsWithHttpInfoAsync(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'searchSemanticIntegrationsRequest' is set
+            if (searchSemanticIntegrationsRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchSemanticIntegrationsRequest' when calling ThoughtSpotRestApi->SearchSemanticIntegrations");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = searchSemanticIntegrationsRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<List<SemanticIntegrationSearchResponse>>("/api/rest/2.0/semantic-integrations/search", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchSemanticIntegrations", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -27639,6 +29599,292 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
+        ///   Updates share permissions on a Spotter Analyst, one entry per principal (user or group). &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources with the principal so the analyst keeps working for them. A successful share returns an empty &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the &#x60;analyst_identifier&#x60; path parameter. The request body contains a &#x60;permissions&#x60; array with one entry per principal:  - &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. - &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. - &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it.  A principal may appear at most once per request. When access is granted, the analyst&#39;s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty &#x60;204 No Content&#x60; response.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to share.</param>
+        /// <param name="shareAnalystRequest"></param>
+        /// <returns>Object</returns>
+        public Object ShareAnalyst(string analystIdentifier, ShareAnalystRequest shareAnalystRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> localVarResponse = ShareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Updates share permissions on a Spotter Analyst, one entry per principal (user or group). &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources with the principal so the analyst keeps working for them. A successful share returns an empty &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the &#x60;analyst_identifier&#x60; path parameter. The request body contains a &#x60;permissions&#x60; array with one entry per principal:  - &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. - &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. - &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it.  A principal may appear at most once per request. When access is granted, the analyst&#39;s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty &#x60;204 No Content&#x60; response.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to share.</param>
+        /// <param name="shareAnalystRequest"></param>
+        /// <returns>ApiResponse of Object</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> ShareAnalystWithHttpInfo(string analystIdentifier, ShareAnalystRequest shareAnalystRequest)
+        {
+            // verify the required parameter 'analystIdentifier' is set
+            if (analystIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'analystIdentifier' when calling ThoughtSpotRestApi->ShareAnalyst");
+
+            // verify the required parameter 'shareAnalystRequest' is set
+            if (shareAnalystRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'shareAnalystRequest' when calling ThoughtSpotRestApi->ShareAnalyst");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("analyst_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(analystIdentifier)); // path parameter
+            localVarRequestOptions.Data = shareAnalystRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ShareAnalyst", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Updates share permissions on a Spotter Analyst, one entry per principal (user or group). &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources with the principal so the analyst keeps working for them. A successful share returns an empty &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the &#x60;analyst_identifier&#x60; path parameter. The request body contains a &#x60;permissions&#x60; array with one entry per principal:  - &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. - &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. - &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it.  A principal may appear at most once per request. When access is granted, the analyst&#39;s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty &#x60;204 No Content&#x60; response.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to share.</param>
+        /// <param name="shareAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Object</returns>
+        public async System.Threading.Tasks.Task<Object> ShareAnalystAsync(string analystIdentifier, ShareAnalystRequest shareAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> localVarResponse = await ShareAnalystWithHttpInfoAsync(analystIdentifier, shareAnalystRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Updates share permissions on a Spotter Analyst, one entry per principal (user or group). &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources with the principal so the analyst keeps working for them. A successful share returns an empty &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the &#x60;analyst_identifier&#x60; path parameter. The request body contains a &#x60;permissions&#x60; array with one entry per principal:  - &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. - &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. - &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it.  A principal may appear at most once per request. When access is granted, the analyst&#39;s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty &#x60;204 No Content&#x60; response.  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to share.</param>
+        /// <param name="shareAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> ShareAnalystWithHttpInfoAsync(string analystIdentifier, ShareAnalystRequest shareAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'analystIdentifier' is set
+            if (analystIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'analystIdentifier' when calling ThoughtSpotRestApi->ShareAnalyst");
+
+            // verify the required parameter 'shareAnalystRequest' is set
+            if (shareAnalystRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'shareAnalystRequest' when calling ThoughtSpotRestApi->ShareAnalyst");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("analyst_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(analystIdentifier)); // path parameter
+            localVarRequestOptions.Data = shareAnalystRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ShareAnalyst", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///   Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <returns></returns>
+        public void ShareConversation(string conversationIdentifier, ShareConversationRequest shareConversationRequest)
+        {
+            ShareConversationWithHttpInfo(conversationIdentifier, shareConversationRequest);
+        }
+
+        /// <summary>
+        ///   Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> ShareConversationWithHttpInfo(string conversationIdentifier, ShareConversationRequest shareConversationRequest)
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->ShareConversation");
+
+            // verify the required parameter 'shareConversationRequest' is set
+            if (shareConversationRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'shareConversationRequest' when calling ThoughtSpotRestApi->ShareConversation");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+            localVarRequestOptions.Data = shareConversationRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ShareConversation", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task ShareConversationAsync(string conversationIdentifier, ShareConversationRequest shareConversationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            await ShareConversationWithHttpInfoAsync(conversationIdentifier, shareConversationRequest, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///   Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> ShareConversationWithHttpInfoAsync(string conversationIdentifier, ShareConversationRequest shareConversationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->ShareConversation");
+
+            // verify the required parameter 'shareConversationRequest' is set
+            if (shareConversationRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'shareConversationRequest' when calling ThoughtSpotRestApi->ShareConversation");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+            localVarRequestOptions.Data = shareConversationRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ShareConversation", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
         ///    Version: 9.0.0.cl or later   Allows sharing one or several metadata objects with users and groups in ThoughtSpot.  Requires edit access to the metadata object.  #### Supported metadata objects: * Liveboards * Visualizations * Answers * Models * Views * Connections * Collections  #### Object permissions  You can provide &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; access when sharing an object with another user or group. The &#x60;READ_ONLY&#x60; permission grants view access to the shared object, whereas &#x60;MODIFY&#x60; provides edit access.  To prevent a user or group from accessing the shared object, specify the GUID or name of the principal and set &#x60;shareMode&#x60; to &#x60;NO_ACCESS&#x60;.  #### Sharing a visualization  * Sharing a visualization implicitly shares the entire Liveboard with the recipient. * Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI. * If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.  #### Sharing a collection  Collections support **dual permissions** that provide fine-grained control:  * **Collection permissions** (&#x60;share_mode&#x60;) - controls access to the collection itself (view, edit, delete the collection) * **Content permissions** (&#x60;content_share_mode&#x60;) - controls access to objects within the collection (view, edit objects inside)  **Default Behavior:** - If only &#x60;share_mode&#x60; is specified, the content permissions default to &#x60;READ_ONLY&#x60; (except when &#x60;share_mode&#x60; is &#x60;NO_ACCESS&#x60;, then content also gets &#x60;NO_ACCESS&#x60;) - To give users edit access to collection contents, explicitly set &#x60;content_share_mode: \&quot;MODIFY\&quot;&#x60;  ## Examples  The following JSON examples can be copy-pasted as request bodies for the REST v2 API endpoint:  &#x60;&#x60;&#x60;bash POST /callosum/v1/v2/security/metadata/share Content-Type: application/x-www-form-urlencoded &#x60;&#x60;&#x60;  ### Basic collection sharing Share a collection with read-only access:  &#x60;&#x60;&#x60;json {   \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,   \&quot;metadata_identifiers\&quot;: [\&quot;Sales Reports Collection\&quot;],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;alice@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;   }],   \&quot;notification\&quot;: {     \&quot;message\&quot;: \&quot;I&#39;ve shared the Sales Reports collection with you\&quot;,     \&quot;notify_on_share\&quot;: true   } } &#x60;&#x60;&#x60;  ### Collection sharing with dual permissions Share a collection with different permissions for the collection vs. its contents:  &#x60;&#x60;&#x60;json {   \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,   \&quot;metadata_identifiers\&quot;: [\&quot;Marketing Analytics\&quot;],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;bob@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;,     \&quot;content_share_mode\&quot;: \&quot;READ_ONLY\&quot;   }, {     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER_GROUP\&quot;,       \&quot;identifier\&quot;: \&quot;Marketing Team\&quot;     },     \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,     \&quot;content_share_mode\&quot;: \&quot;READ_ONLY\&quot;   }],   \&quot;notification\&quot;: {     \&quot;emails\&quot;: [\&quot;bob@company.com\&quot;],     \&quot;message\&quot;: \&quot;You can edit the collection but content is read-only\&quot;,     \&quot;enable_custom_url\&quot;: false,     \&quot;notify_on_share\&quot;: true   },   \&quot;has_lenient_discoverability\&quot;: false } &#x60;&#x60;&#x60;  ### Multiple collections sharing Share multiple collections with different users:  &#x60;&#x60;&#x60;json {   \&quot;metadata\&quot;: [     {       \&quot;type\&quot;: \&quot;COLLECTION\&quot;,       \&quot;identifier\&quot;: \&quot;Q4 Reports\&quot;     },     {       \&quot;type\&quot;: \&quot;COLLECTION\&quot;,       \&quot;identifier\&quot;: \&quot;Executive Dashboard Collection\&quot;     }   ],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER_GROUP\&quot;,       \&quot;identifier\&quot;: \&quot;Executives\&quot;     },     \&quot;share_mode\&quot;: \&quot;MODIFY\&quot;   }, {     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;manager@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;READ_ONLY\&quot;,     \&quot;content_share_mode\&quot;: \&quot;MODIFY\&quot;   }],   \&quot;notification\&quot;: {     \&quot;message\&quot;: \&quot;Sharing quarterly collections with leadership team\&quot;,     \&quot;notify_on_share\&quot;: true   } } &#x60;&#x60;&#x60;  ### Remove collection access Remove access to a collection by setting share_mode to NO_ACCESS:  &#x60;&#x60;&#x60;json {   \&quot;metadata_type\&quot;: \&quot;COLLECTION\&quot;,   \&quot;metadata_identifiers\&quot;: [\&quot;Confidential Reports\&quot;],   \&quot;permissions\&quot;: [{     \&quot;principal\&quot;: {       \&quot;type\&quot;: \&quot;USER\&quot;,       \&quot;identifier\&quot;: \&quot;former-employee@company.com\&quot;     },     \&quot;share_mode\&quot;: \&quot;NO_ACCESS\&quot;   }],   \&quot;notification\&quot;: {     \&quot;notify_on_share\&quot;: false   } } &#x60;&#x60;&#x60;  ### Collection Permission Scenarios  **Scenario 1: Collection Admin** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Full control over collection and its contents  **Scenario 2: Collection Curator** - &#x60;share_mode: MODIFY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; Can manage collection structure but not edit contents  **Scenario 3: Content Editor** - &#x60;share_mode: READ_ONLY&#x60; + &#x60;content_share_mode: MODIFY&#x60; &#x3D; Can edit objects within collection but can&#39;t change collection itself  **Scenario 4: Viewer** - &#x60;share_mode: READ_ONLY&#x60; + &#x60;content_share_mode: READ_ONLY&#x60; &#x3D; View-only access to collection and contents      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -28543,6 +30789,150 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("UnpublishMetadata", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///   Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;).  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to update.</param>
+        /// <param name="updateAnalystRequest"></param>
+        /// <returns>Analyst</returns>
+        public Analyst UpdateAnalyst(string analystIdentifier, UpdateAnalystRequest updateAnalystRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Analyst> localVarResponse = UpdateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;).  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to update.</param>
+        /// <param name="updateAnalystRequest"></param>
+        /// <returns>ApiResponse of Analyst</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Analyst> UpdateAnalystWithHttpInfo(string analystIdentifier, UpdateAnalystRequest updateAnalystRequest)
+        {
+            // verify the required parameter 'analystIdentifier' is set
+            if (analystIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'analystIdentifier' when calling ThoughtSpotRestApi->UpdateAnalyst");
+
+            // verify the required parameter 'updateAnalystRequest' is set
+            if (updateAnalystRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateAnalystRequest' when calling ThoughtSpotRestApi->UpdateAnalyst");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("analyst_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(analystIdentifier)); // path parameter
+            localVarRequestOptions.Data = updateAnalystRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Analyst>("/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateAnalyst", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;).  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to update.</param>
+        /// <param name="updateAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Analyst</returns>
+        public async System.Threading.Tasks.Task<Analyst> UpdateAnalystAsync(string analystIdentifier, UpdateAnalystRequest updateAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Analyst> localVarResponse = await UpdateAnalystWithHttpInfoAsync(analystIdentifier, updateAnalystRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - &#x60;name&#x60; (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;, &#x60;is_ai_generated&#x60;).  #### Error conditions  - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="analystIdentifier">Unique identifier of the analyst to update.</param>
+        /// <param name="updateAnalystRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Analyst)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Analyst>> UpdateAnalystWithHttpInfoAsync(string analystIdentifier, UpdateAnalystRequest updateAnalystRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'analystIdentifier' is set
+            if (analystIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'analystIdentifier' when calling ThoughtSpotRestApi->UpdateAnalyst");
+
+            // verify the required parameter 'updateAnalystRequest' is set
+            if (updateAnalystRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateAnalystRequest' when calling ThoughtSpotRestApi->UpdateAnalyst");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("analyst_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(analystIdentifier)); // path parameter
+            localVarRequestOptions.Data = updateAnalystRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Analyst>("/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateAnalyst", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -29651,7 +32041,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
-        ///   Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+        ///   Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversationIdentifier">Unique identifier of the conversation to update.</param>
@@ -29663,7 +32053,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///   Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+        ///   Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversationIdentifier">Unique identifier of the conversation to update.</param>
@@ -29719,7 +32109,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///   Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+        ///   Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversationIdentifier">Unique identifier of the conversation to update.</param>
@@ -29732,7 +32122,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///   Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+        ///   Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation to update, as returned by &#x60;createAgentConversation&#x60; or &#x60;getConversationList&#x60; - At least one updatable attribute in the request body:     - &#x60;title&#x60; *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - &#x60;is_pinned&#x60; *(optional)*: &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating &#x60;is_pinned&#x60; is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty &#x60;204 No Content&#x60; response. Updated attributes are reflected immediately in subsequent calls to &#x60;getConversationList&#x60;.  #### Example request  Rename a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot; } &#x60;&#x60;&#x60;  Pin a conversation:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  Update both attributes in a single request:  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \&quot;title\&quot;: \&quot;Revenue Breakdown by Product Line\&quot;,   \&quot;is_pinned\&quot;: true } &#x60;&#x60;&#x60;  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither &#x60;title&#x60; nor &#x60;is_pinned&#x60;, or &#x60;is_pinned&#x60; is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given &#x60;conversation_identifier&#x60; for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  &gt; ###### Note: &gt; &gt; - Only conversations created with &#x60;enable_save_chat: true&#x60; can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. &gt; - There is no limit on the number of conversations a user can pin. &gt; - Available from version 26.7.0.cl and later. The &#x60;is_pinned&#x60; attribute is available from version 26.10.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversationIdentifier">Unique identifier of the conversation to update.</param>
@@ -30305,6 +32695,266 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("UpdateEmailCustomization", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org assignments for this feature. - &#x60;operation&#x60; — Type of update to apply. &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60; unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs. Defaults to &#x60;REPLACE&#x60;.  The following example assigns Orgs &#x60;1&#x60; and &#x60;2&#x60; to a feature, in addition to any Orgs already assigned:  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [1, 2],   \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60;  Clear all Org assignments for a feature by sending an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once):  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [],   \&quot;operation\&quot;: \&quot;REPLACE\&quot; } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureAssignmentsRequest"></param>
+        /// <returns>FeatureAssignmentResponse</returns>
+        public FeatureAssignmentResponse UpdateFeatureAssignments(UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<FeatureAssignmentResponse> localVarResponse = UpdateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org assignments for this feature. - &#x60;operation&#x60; — Type of update to apply. &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60; unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs. Defaults to &#x60;REPLACE&#x60;.  The following example assigns Orgs &#x60;1&#x60; and &#x60;2&#x60; to a feature, in addition to any Orgs already assigned:  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [1, 2],   \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60;  Clear all Org assignments for a feature by sending an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once):  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [],   \&quot;operation\&quot;: \&quot;REPLACE\&quot; } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureAssignmentsRequest"></param>
+        /// <returns>ApiResponse of FeatureAssignmentResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<FeatureAssignmentResponse> UpdateFeatureAssignmentsWithHttpInfo(UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest)
+        {
+            // verify the required parameter 'updateFeatureAssignmentsRequest' is set
+            if (updateFeatureAssignmentsRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureAssignmentsRequest' when calling ThoughtSpotRestApi->UpdateFeatureAssignments");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = updateFeatureAssignmentsRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<FeatureAssignmentResponse>("/api/rest/2.0/configurations/features/assignments/update", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateFeatureAssignments", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org assignments for this feature. - &#x60;operation&#x60; — Type of update to apply. &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60; unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs. Defaults to &#x60;REPLACE&#x60;.  The following example assigns Orgs &#x60;1&#x60; and &#x60;2&#x60; to a feature, in addition to any Orgs already assigned:  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [1, 2],   \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60;  Clear all Org assignments for a feature by sending an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once):  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [],   \&quot;operation\&quot;: \&quot;REPLACE\&quot; } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureAssignmentsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of FeatureAssignmentResponse</returns>
+        public async System.Threading.Tasks.Task<FeatureAssignmentResponse> UpdateFeatureAssignmentsAsync(UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<FeatureAssignmentResponse> localVarResponse = await UpdateFeatureAssignmentsWithHttpInfoAsync(updateFeatureAssignmentsRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org assignments for this feature. - &#x60;operation&#x60; — Type of update to apply. &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60; unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs. Defaults to &#x60;REPLACE&#x60;.  The following example assigns Orgs &#x60;1&#x60; and &#x60;2&#x60; to a feature, in addition to any Orgs already assigned:  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [1, 2],   \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60;  Clear all Org assignments for a feature by sending an empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once):  &#x60;&#x60;&#x60; {   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;org_identifiers\&quot;: [],   \&quot;operation\&quot;: \&quot;REPLACE\&quot; } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureAssignmentsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (FeatureAssignmentResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<FeatureAssignmentResponse>> UpdateFeatureAssignmentsWithHttpInfoAsync(UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'updateFeatureAssignmentsRequest' is set
+            if (updateFeatureAssignmentsRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureAssignmentsRequest' when calling ThoughtSpotRestApi->UpdateFeatureAssignments");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = updateFeatureAssignmentsRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<FeatureAssignmentResponse>("/api/rest/2.0/configurations/features/assignments/update", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateFeatureAssignments", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60; to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. - &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set. - &#x60;feature_value&#x60; — New value to set for the feature. - &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400 error.  The following example sets a per-Org value override for Org &#x60;1&#x60;:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot; } &#x60;&#x60;&#x60;  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides: true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot;,   \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureValueRequest"></param>
+        /// <returns>FeatureValueResponse</returns>
+        public FeatureValueResponse UpdateFeatureValue(UpdateFeatureValueRequest updateFeatureValueRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<FeatureValueResponse> localVarResponse = UpdateFeatureValueWithHttpInfo(updateFeatureValueRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60; to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. - &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set. - &#x60;feature_value&#x60; — New value to set for the feature. - &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400 error.  The following example sets a per-Org value override for Org &#x60;1&#x60;:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot; } &#x60;&#x60;&#x60;  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides: true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot;,   \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureValueRequest"></param>
+        /// <returns>ApiResponse of FeatureValueResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<FeatureValueResponse> UpdateFeatureValueWithHttpInfo(UpdateFeatureValueRequest updateFeatureValueRequest)
+        {
+            // verify the required parameter 'updateFeatureValueRequest' is set
+            if (updateFeatureValueRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureValueRequest' when calling ThoughtSpotRestApi->UpdateFeatureValue");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = updateFeatureValueRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<FeatureValueResponse>("/api/rest/2.0/configurations/features/values/update", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateFeatureValue", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60; to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. - &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set. - &#x60;feature_value&#x60; — New value to set for the feature. - &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400 error.  The following example sets a per-Org value override for Org &#x60;1&#x60;:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot; } &#x60;&#x60;&#x60;  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides: true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot;,   \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureValueRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of FeatureValueResponse</returns>
+        public async System.Threading.Tasks.Task<FeatureValueResponse> UpdateFeatureValueAsync(UpdateFeatureValueRequest updateFeatureValueRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<FeatureValueResponse> localVarResponse = await UpdateFeatureValueWithHttpInfoAsync(updateFeatureValueRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60; to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. - &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set. - &#x60;feature_value&#x60; — New value to set for the feature. - &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400 error.  The following example sets a per-Org value override for Org &#x60;1&#x60;:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot; } &#x60;&#x60;&#x60;  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides: true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,   \&quot;feature_value\&quot;: \&quot;true\&quot;,   \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="updateFeatureValueRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (FeatureValueResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<FeatureValueResponse>> UpdateFeatureValueWithHttpInfoAsync(UpdateFeatureValueRequest updateFeatureValueRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'updateFeatureValueRequest' is set
+            if (updateFeatureValueRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureValueRequest' when calling ThoughtSpotRestApi->UpdateFeatureValue");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = updateFeatureValueRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<FeatureValueResponse>("/api/rest/2.0/configurations/features/values/update", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateFeatureValue", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -31920,7 +34570,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <returns></returns>
         public void UpdateVariable(string identifier, UpdateVariableRequest updateVariableRequest)
@@ -31932,7 +34582,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> UpdateVariableWithHttpInfo(string identifier, UpdateVariableRequest updateVariableRequest)
@@ -31988,7 +34638,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -32001,7 +34651,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Update a variable&#39;s name    Version: 26.4.0.cl or later   Allows updating a variable&#39;s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="identifier">Unique id or name of the variable to update.</param>
+        /// <param name="identifier">Unique id, name, or object id of the variable to update.</param>
         /// <param name="updateVariableRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -32336,7 +34986,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///    Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -32353,7 +35003,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///    Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -32429,7 +35079,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///    Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -32447,7 +35097,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///    Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
