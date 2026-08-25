@@ -18,13 +18,11 @@ import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 /** Recipient configuration which includes email address, ID or name of the users and groups. */
 @javax.annotation.Generated(
@@ -160,25 +158,9 @@ public class RecipientDetails implements Serializable {
                 && Objects.equals(this.additionalProperties, recipientDetails.additionalProperties);
     }
 
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(emails, principals, additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override

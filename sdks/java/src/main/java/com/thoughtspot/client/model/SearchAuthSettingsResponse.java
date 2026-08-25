@@ -19,13 +19,11 @@ import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 /** Response for searchAuthSettings. Contains auth type and cluster/org-level preferences. */
 @javax.annotation.Generated(
@@ -234,25 +232,9 @@ public class SearchAuthSettingsResponse implements Serializable {
                         this.additionalProperties, searchAuthSettingsResponse.additionalProperties);
     }
 
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(authType, clusterPreferences, orgPreferences, additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override
