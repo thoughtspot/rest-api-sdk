@@ -19,13 +19,11 @@ import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * Response from importMemory. On &#x60;SUCCESS&#x60;, &#x60;summary&#x60; is fully populated.
@@ -311,15 +309,6 @@ public class ImportMemoryResponse implements Serializable {
                         this.additionalProperties, importMemoryResponse.additionalProperties);
     }
 
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(
@@ -329,13 +318,6 @@ public class ImportMemoryResponse implements Serializable {
                 diagnostics,
                 operationId,
                 additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override

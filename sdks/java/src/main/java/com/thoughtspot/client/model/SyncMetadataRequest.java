@@ -24,7 +24,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 /** SyncMetadataRequest */
 @javax.annotation.Generated(
@@ -206,25 +205,9 @@ public class SyncMetadataRequest implements Serializable {
                         this.additionalProperties, syncMetadataRequest.additionalProperties);
     }
 
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(tables, syncAttributes, additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override

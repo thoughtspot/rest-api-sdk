@@ -102,18 +102,6 @@
 - :warning: removed the enum value `CAN_CREATE_KPI_ALERTS` of the request property `privileges/items/`
 
 
-### POST /api/rest/2.0/input-tables/create
-- :warning: api path removed without deprecation
-
-
-### POST /api/rest/2.0/input-tables/{input_table_identifier}/delete
-- :warning: api path removed without deprecation
-
-
-### POST /api/rest/2.0/input-tables/{input_table_identifier}/update
-- :warning: api path removed without deprecation
-
-
 ### POST /api/rest/2.0/metadata/headers/update
 -  added the new `ROLE` enum value to the request property `headers_update/items/type`
 -  added the new `TEMPLATE_VARIABLE` enum value to the request property `headers_update/items/type`
@@ -163,11 +151,6 @@
 - :warning: removed the enum value `CAN_CREATE_KPI_ALERTS` of the request property `privileges/items/`
 
 
-
-
-## Components
--  removed the schema `CreateInputTableRequest`
--  removed the schema `UpdateInputTableRequest`
 
 
 

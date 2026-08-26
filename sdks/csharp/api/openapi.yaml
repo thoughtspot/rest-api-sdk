@@ -38997,7 +38997,7 @@ components:
             \ removes the\ncorresponding configuration entirely from the webhook:\
             \ AUTHENTICATION\nremoves the authentication config, SIGNATURE_VERIFICATION\
             \ removes the\nsignature verification config, STORAGE_DESTINATION removes\
-            \ the storage\ndestination config. \n  Version: 26.7.0.cl or later\n"
+            \ the storage\ndestination config. \n  Version: 26.11.0.cl or later\n"
           items:
             enum:
             - AUTHENTICATION
