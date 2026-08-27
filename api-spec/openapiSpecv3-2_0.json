@@ -19433,7 +19433,7 @@
     "/api/rest/2.0/webhooks/{webhook_identifier}/update": {
       "post": {
         "operationId": "updateWebhookConfiguration",
-        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nUpdates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 10.14.0.cl or later</span>\n\nUpdates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.\n\nUse the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Webhooks",
           "10.14.0.cl"
@@ -39320,8 +39320,17 @@
               "DISABLED"
             ]
           },
+          "operation": {
+            "description": "Operation to perform. REPLACE (default) updates the provided fields. RESET\nclears the sections in reset_options and accepts no other field. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "default": "REPLACE",
+            "type": "string",
+            "enum": [
+              "REPLACE",
+              "RESET"
+            ]
+          },
           "reset_options": {
-            "description": "List of optional configuration sections to clear. Each value removes the\ncorresponding configuration entirely from the webhook: AUTHENTICATION\nremoves the authentication config, SIGNATURE_VERIFICATION removes the\nsignature verification config, STORAGE_DESTINATION removes the storage\ndestination config. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "description": "Sections to clear when operation is RESET. Each value removes that\nconfiguration from the webhook entirely. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
             "type": "array",
             "items": {
               "type": "string",
