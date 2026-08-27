@@ -19165,6 +19165,12 @@ _UpdateWebhookConfigurationRequest.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "UpdateWebhookConfigurationRequestOperationEnum",
+    "format": ""
+  },
+  {
     "name": "reset_options",
     "baseName": "reset_options",
     "type": "Array<UpdateWebhookConfigurationRequestResetOptionsEnum>",
@@ -21549,6 +21555,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateUserRequestPreferredLocaleEnum",
   "UpdateWebhookConfigurationRequestEventsEnum",
   "UpdateWebhookConfigurationRequestStatusEnum",
+  "UpdateWebhookConfigurationRequestOperationEnum",
   "UpdateWebhookConfigurationRequestResetOptionsEnum",
   "UserVisibilityEnum",
   "UserAccountTypeEnum",
@@ -44389,7 +44396,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param webhookIdentifier Unique ID or name of the webhook configuration.
    * @param updateWebhookConfigurationRequest 
    */
@@ -58647,7 +58654,7 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param webhookIdentifier Unique ID or name of the webhook configuration.
    * @param updateWebhookConfigurationRequest 
    */
@@ -68617,7 +68624,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.updateVariableValuesWithHttpInfo(updateVariableValuesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param webhookIdentifier Unique ID or name of the webhook configuration.
    * @param updateWebhookConfigurationRequest
    */
@@ -68637,7 +68644,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param webhookIdentifier Unique ID or name of the webhook configuration.
    * @param updateWebhookConfigurationRequest
    */
@@ -69597,7 +69604,7 @@ var ObservableWebhooksApi = class {
     return this.searchWebhookConfigurationsWithHttpInfo(searchWebhookConfigurationsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param webhookIdentifier Unique ID or name of the webhook configuration.
    * @param updateWebhookConfigurationRequest
    */
@@ -69617,7 +69624,7 @@ var ObservableWebhooksApi = class {
     }));
   }
   /**
-   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param webhookIdentifier Unique ID or name of the webhook configuration.
    * @param updateWebhookConfigurationRequest
    */
@@ -76373,7 +76380,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param webhookIdentifier Unique ID or name of the webhook configuration.
    * @param updateWebhookConfigurationRequest
    */
@@ -76383,7 +76390,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param webhookIdentifier Unique ID or name of the webhook configuration.
    * @param updateWebhookConfigurationRequest
    */
@@ -77057,7 +77064,7 @@ var PromiseWebhooksApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param webhookIdentifier Unique ID or name of the webhook configuration.
    * @param updateWebhookConfigurationRequest
    */
@@ -77067,7 +77074,7 @@ var PromiseWebhooksApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+   *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
    * @param webhookIdentifier Unique ID or name of the webhook configuration.
    * @param updateWebhookConfigurationRequest
    */

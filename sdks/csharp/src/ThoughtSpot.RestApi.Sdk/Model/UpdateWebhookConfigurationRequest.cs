@@ -73,6 +73,33 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public StatusEnum? Status { get; set; }
         /// <summary>
+        /// Operation to perform. REPLACE (default) updates the provided fields. RESET clears the sections in reset_options and accepts no other field.    Version: 26.11.0.cl or later 
+        /// </summary>
+        /// <value>Operation to perform. REPLACE (default) updates the provided fields. RESET clears the sections in reset_options and accepts no other field.    Version: 26.11.0.cl or later </value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OperationEnum
+        {
+            /// <summary>
+            /// Enum REPLACE for value: REPLACE
+            /// </summary>
+            [EnumMember(Value = "REPLACE")]
+            REPLACE = 1,
+
+            /// <summary>
+            /// Enum RESET for value: RESET
+            /// </summary>
+            [EnumMember(Value = "RESET")]
+            RESET = 2
+        }
+
+
+        /// <summary>
+        /// Operation to perform. REPLACE (default) updates the provided fields. RESET clears the sections in reset_options and accepts no other field.    Version: 26.11.0.cl or later 
+        /// </summary>
+        /// <value>Operation to perform. REPLACE (default) updates the provided fields. RESET clears the sections in reset_options and accepts no other field.    Version: 26.11.0.cl or later </value>
+        [DataMember(Name = "operation", EmitDefaultValue = false)]
+        public OperationEnum? Operation { get; set; }
+        /// <summary>
         /// Defines ResetOptions
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -110,8 +137,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="storageDestination">Configuration for storage destination. AWS S3 example: {\&quot;storage_type\&quot;: \&quot;AWS_S3\&quot;, \&quot;storage_config\&quot;: {\&quot;aws_s3_config\&quot;: {\&quot;bucket_name\&quot;: \&quot;my-webhook-files\&quot;, \&quot;region\&quot;: \&quot;us-west-2\&quot;, \&quot;role_arn\&quot;: \&quot;arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole\&quot;, \&quot;external_id\&quot;: \&quot;ts-webhook-a1b2c3d4-7890\&quot;, \&quot;path_prefix\&quot;: \&quot;thoughtspot-webhooks/\&quot;}}} GCP GCS example: {\&quot;storage_type\&quot;: \&quot;GCP_GCS\&quot;, \&quot;storage_config\&quot;: {\&quot;gcp_gcs_config\&quot;: {\&quot;bucket_name\&quot;: \&quot;my-webhook-files\&quot;, \&quot;service_account_email\&quot;: \&quot;my-sa@my-project.iam.gserviceaccount.com\&quot;, \&quot;path_prefix\&quot;: \&quot;webhooks/\&quot;}}}    Version: 26.3.0.cl or later .</param>
         /// <param name="additionalHeaders">Additional headers as an array of key-value pairs. Example: [{\&quot;key\&quot;: \&quot;X-Custom-Header\&quot;, \&quot;value\&quot;: \&quot;custom_value\&quot;}]    Version: 26.4.0.cl or later .</param>
         /// <param name="status">Status of the webhook (ENABLED or DISABLED).    Version: 26.7.0.cl or later .</param>
-        /// <param name="resetOptions">List of optional configuration sections to clear. Each value removes the corresponding configuration entirely from the webhook: AUTHENTICATION removes the authentication config, SIGNATURE_VERIFICATION removes the signature verification config, STORAGE_DESTINATION removes the storage destination config.    Version: 26.11.0.cl or later .</param>
-        public UpdateWebhookConfigurationRequest(string name = default, string description = default, string url = default, Object urlParams = default, List<EventsEnum> events = default, WebhookAuthenticationInput authentication = default, WebhookSignatureVerificationInput signatureVerification = default, StorageDestinationInput storageDestination = default, List<WebhookKeyValuePairInput> additionalHeaders = default, StatusEnum? status = default, List<ResetOptionsEnum> resetOptions = default)
+        /// <param name="operation">Operation to perform. REPLACE (default) updates the provided fields. RESET clears the sections in reset_options and accepts no other field.    Version: 26.11.0.cl or later  (default to OperationEnum.REPLACE).</param>
+        /// <param name="resetOptions">Sections to clear when operation is RESET. Each value removes that configuration from the webhook entirely.    Version: 26.11.0.cl or later .</param>
+        public UpdateWebhookConfigurationRequest(string name = default, string description = default, string url = default, Object urlParams = default, List<EventsEnum> events = default, WebhookAuthenticationInput authentication = default, WebhookSignatureVerificationInput signatureVerification = default, StorageDestinationInput storageDestination = default, List<WebhookKeyValuePairInput> additionalHeaders = default, StatusEnum? status = default, OperationEnum? operation = OperationEnum.REPLACE, List<ResetOptionsEnum> resetOptions = default)
         {
             this.Name = name;
             this.Description = description;
@@ -123,6 +151,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.StorageDestination = storageDestination;
             this.AdditionalHeaders = additionalHeaders;
             this.Status = status;
+            this.Operation = operation;
             this.ResetOptions = resetOptions;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -191,9 +220,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public List<WebhookKeyValuePairInput> AdditionalHeaders { get; set; }
 
         /// <summary>
-        /// List of optional configuration sections to clear. Each value removes the corresponding configuration entirely from the webhook: AUTHENTICATION removes the authentication config, SIGNATURE_VERIFICATION removes the signature verification config, STORAGE_DESTINATION removes the storage destination config.    Version: 26.11.0.cl or later 
+        /// Sections to clear when operation is RESET. Each value removes that configuration from the webhook entirely.    Version: 26.11.0.cl or later 
         /// </summary>
-        /// <value>List of optional configuration sections to clear. Each value removes the corresponding configuration entirely from the webhook: AUTHENTICATION removes the authentication config, SIGNATURE_VERIFICATION removes the signature verification config, STORAGE_DESTINATION removes the storage destination config.    Version: 26.11.0.cl or later </value>
+        /// <value>Sections to clear when operation is RESET. Each value removes that configuration from the webhook entirely.    Version: 26.11.0.cl or later </value>
         [DataMember(Name = "reset_options", EmitDefaultValue = false)]
         public List<UpdateWebhookConfigurationRequest.ResetOptionsEnum> ResetOptions { get; set; }
 
@@ -221,6 +250,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  StorageDestination: ").Append(StorageDestination).Append("\n");
             sb.Append("  AdditionalHeaders: ").Append(AdditionalHeaders).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  Operation: ").Append(Operation).Append("\n");
             sb.Append("  ResetOptions: ").Append(ResetOptions).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");

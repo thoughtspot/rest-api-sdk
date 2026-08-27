@@ -76,6 +76,12 @@ public class UpdateWebhookConfigurationRequestTest {
         // TODO: test status
     }
 
+    /** Test the property 'operation' */
+    @Test
+    public void operationTest() {
+        // TODO: test operation
+    }
+
     /** Test the property 'resetOptions' */
     @Test
     public void resetOptionsTest() {

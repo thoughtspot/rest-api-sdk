@@ -17224,7 +17224,9 @@ paths:
          Version: 10.14.0.cl or later
 
 
-        Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.
+        Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.
+
+        Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.
 
@@ -38989,6 +38991,7 @@ components:
         - key: key
           value: value
         status: ENABLED
+        operation: REPLACE
         reset_options:
         - AUTHENTICATION
         - AUTHENTICATION
@@ -39045,12 +39048,19 @@ components:
           - ENABLED
           - DISABLED
           type: string
+        operation:
+          default: REPLACE
+          description: "Operation to perform. REPLACE (default) updates the provided\
+            \ fields. RESET\nclears the sections in reset_options and accepts no other\
+            \ field. \n  Version: 26.11.0.cl or later\n"
+          enum:
+          - REPLACE
+          - RESET
+          type: string
         reset_options:
-          description: "List of optional configuration sections to clear. Each value\
-            \ removes the\ncorresponding configuration entirely from the webhook:\
-            \ AUTHENTICATION\nremoves the authentication config, SIGNATURE_VERIFICATION\
-            \ removes the\nsignature verification config, STORAGE_DESTINATION removes\
-            \ the storage\ndestination config. \n  Version: 26.11.0.cl or later\n"
+          description: "Sections to clear when operation is RESET. Each value removes\
+            \ that\nconfiguration from the webhook entirely. \n  Version: 26.11.0.cl\
+            \ or later\n"
           items:
             enum:
             - AUTHENTICATION

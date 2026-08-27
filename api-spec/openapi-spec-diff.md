@@ -50,6 +50,10 @@
 -  added the new `CAN_CREATE_KPI_ALERTS` enum value to the request property `privileges/items/`
 
 
+### POST /api/rest/2.0/webhooks/{webhook_identifier}/update
+-  added the new optional request property `operation`
+
+
 
 
 

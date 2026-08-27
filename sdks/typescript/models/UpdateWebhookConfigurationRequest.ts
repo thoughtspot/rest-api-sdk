@@ -58,7 +58,11 @@ export class UpdateWebhookConfigurationRequest {
     */
     'status'?: UpdateWebhookConfigurationRequestStatusEnum;
     /**
-    * List of optional configuration sections to clear. Each value removes the corresponding configuration entirely from the webhook: AUTHENTICATION removes the authentication config, SIGNATURE_VERIFICATION removes the signature verification config, STORAGE_DESTINATION removes the storage destination config.    Version: 26.11.0.cl or later 
+    * Operation to perform. REPLACE (default) updates the provided fields. RESET clears the sections in reset_options and accepts no other field.    Version: 26.11.0.cl or later 
+    */
+    'operation'?: UpdateWebhookConfigurationRequestOperationEnum;
+    /**
+    * Sections to clear when operation is RESET. Each value removes that configuration from the webhook entirely.    Version: 26.11.0.cl or later 
     */
     'reset_options'?: Array<UpdateWebhookConfigurationRequestResetOptionsEnum>;
 
@@ -128,6 +132,12 @@ export class UpdateWebhookConfigurationRequest {
             "format": ""
         },
         {
+            "name": "operation",
+            "baseName": "operation",
+            "type": "UpdateWebhookConfigurationRequestOperationEnum",
+            "format": ""
+        },
+        {
             "name": "reset_options",
             "baseName": "reset_options",
             "type": "Array<UpdateWebhookConfigurationRequestResetOptionsEnum>",
@@ -144,5 +154,6 @@ export class UpdateWebhookConfigurationRequest {
 
     export type UpdateWebhookConfigurationRequestEventsEnum = "LIVEBOARD_SCHEDULE" ;
     export type UpdateWebhookConfigurationRequestStatusEnum = "ENABLED" | "DISABLED" ;
+    export type UpdateWebhookConfigurationRequestOperationEnum = "REPLACE" | "RESET" ;
     export type UpdateWebhookConfigurationRequestResetOptionsEnum = "AUTHENTICATION" | "SIGNATURE_VERIFICATION" | "STORAGE_DESTINATION" ;
 

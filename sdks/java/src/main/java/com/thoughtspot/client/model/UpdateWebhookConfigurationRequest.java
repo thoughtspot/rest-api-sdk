@@ -192,6 +192,66 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
     @javax.annotation.Nullable
     private StatusEnum status;
 
+    /**
+     * Operation to perform. REPLACE (default) updates the provided fields. RESET clears the
+     * sections in reset_options and accepts no other field. Version: 26.11.0.cl or later
+     */
+    @JsonAdapter(OperationEnum.Adapter.class)
+    public enum OperationEnum {
+        REPLACE("REPLACE"),
+
+        RESET("RESET");
+
+        private String value;
+
+        OperationEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static OperationEnum fromValue(String value) {
+            for (OperationEnum b : OperationEnum.values()) {
+                if (b.value.equals(value)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + value + "'");
+        }
+
+        public static class Adapter extends TypeAdapter<OperationEnum> {
+            @Override
+            public void write(final JsonWriter jsonWriter, final OperationEnum enumeration)
+                    throws IOException {
+                jsonWriter.value(enumeration.getValue());
+            }
+
+            @Override
+            public OperationEnum read(final JsonReader jsonReader) throws IOException {
+                String value = jsonReader.nextString();
+                return OperationEnum.fromValue(value);
+            }
+        }
+
+        public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+            String value = jsonElement.getAsString();
+            OperationEnum.fromValue(value);
+        }
+    }
+
+    public static final String SERIALIZED_NAME_OPERATION = "operation";
+
+    @SerializedName(SERIALIZED_NAME_OPERATION)
+    @javax.annotation.Nullable
+    private OperationEnum operation = OperationEnum.REPLACE;
+
     /** Gets or Sets resetOptions */
     @JsonAdapter(ResetOptionsEnum.Adapter.class)
     public enum ResetOptionsEnum {
@@ -483,6 +543,27 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         this.status = status;
     }
 
+    public UpdateWebhookConfigurationRequest operation(
+            @javax.annotation.Nullable OperationEnum operation) {
+        this.operation = operation;
+        return this;
+    }
+
+    /**
+     * Operation to perform. REPLACE (default) updates the provided fields. RESET clears the
+     * sections in reset_options and accepts no other field. Version: 26.11.0.cl or later
+     *
+     * @return operation
+     */
+    @javax.annotation.Nullable
+    public OperationEnum getOperation() {
+        return operation;
+    }
+
+    public void setOperation(@javax.annotation.Nullable OperationEnum operation) {
+        this.operation = operation;
+    }
+
     public UpdateWebhookConfigurationRequest resetOptions(
             @javax.annotation.Nullable List<ResetOptionsEnum> resetOptions) {
         this.resetOptions = resetOptions;
@@ -499,10 +580,8 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
     }
 
     /**
-     * List of optional configuration sections to clear. Each value removes the corresponding
-     * configuration entirely from the webhook: AUTHENTICATION removes the authentication config,
-     * SIGNATURE_VERIFICATION removes the signature verification config, STORAGE_DESTINATION removes
-     * the storage destination config. Version: 26.11.0.cl or later
+     * Sections to clear when operation is RESET. Each value removes that configuration from the
+     * webhook entirely. Version: 26.11.0.cl or later
      *
      * @return resetOptions
      */
@@ -585,6 +664,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 && Objects.equals(
                         this.additionalHeaders, updateWebhookConfigurationRequest.additionalHeaders)
                 && Objects.equals(this.status, updateWebhookConfigurationRequest.status)
+                && Objects.equals(this.operation, updateWebhookConfigurationRequest.operation)
                 && Objects.equals(this.resetOptions, updateWebhookConfigurationRequest.resetOptions)
                 && Objects.equals(
                         this.additionalProperties,
@@ -604,6 +684,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 storageDestination,
                 additionalHeaders,
                 status,
+                operation,
                 resetOptions,
                 additionalProperties);
     }
@@ -628,6 +709,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
                 .append(toIndentedString(additionalHeaders))
                 .append("\n");
         sb.append("    status: ").append(toIndentedString(status)).append("\n");
+        sb.append("    operation: ").append(toIndentedString(operation)).append("\n");
         sb.append("    resetOptions: ").append(toIndentedString(resetOptions)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
@@ -663,6 +745,7 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         openapiFields.add("storage_destination");
         openapiFields.add("additional_headers");
         openapiFields.add("status");
+        openapiFields.add("operation");
         openapiFields.add("reset_options");
 
         // a set of required properties/fields (JSON key names)
@@ -769,6 +852,18 @@ public class UpdateWebhookConfigurationRequest implements Serializable {
         // validate the optional field `status`
         if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
             StatusEnum.validateJsonElement(jsonObj.get("status"));
+        }
+        if ((jsonObj.get("operation") != null && !jsonObj.get("operation").isJsonNull())
+                && !jsonObj.get("operation").isJsonPrimitive()) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Expected the field `operation` to be a primitive type in the JSON"
+                                    + " string but got `%s`",
+                            jsonObj.get("operation").toString()));
+        }
+        // validate the optional field `operation`
+        if (jsonObj.get("operation") != null && !jsonObj.get("operation").isJsonNull()) {
+            OperationEnum.validateJsonElement(jsonObj.get("operation"));
         }
         // ensure the optional json data is an array if present
         if (jsonObj.get("reset_options") != null
