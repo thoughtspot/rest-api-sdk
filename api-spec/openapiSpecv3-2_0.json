@@ -2151,6 +2151,7 @@
           "AI",
           "26.5.0.cl"
         ],
+        "x-streaming": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -2176,7 +2177,7 @@
           "200": {
             "description": "Common successful response",
             "content": {
-              "application/json": {
+              "text/event-stream": {
                 "schema": {
                   "$ref": "#/components/schemas/SendAgentMessageResponse"
                 },
