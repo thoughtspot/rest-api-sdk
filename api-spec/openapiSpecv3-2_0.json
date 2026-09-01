@@ -35124,6 +35124,11 @@
             "default": false,
             "type": "boolean",
             "nullable": true
+          },
+           "last_login_time_in_millis": {
+            "description": "Timestamp of the last login session of the user in milliseconds.",
+            "type": "number",
+            "format": "float"
           }
         }
       },
