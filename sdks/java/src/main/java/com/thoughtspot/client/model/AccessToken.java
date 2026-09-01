@@ -4,499 +4,466 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import java.util.Objects;
 import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.thoughtspot.client.JSON;
+import com.thoughtspot.client.model.AccessTokenScope;
+import com.thoughtspot.client.model.OrgInfo;
+import com.thoughtspot.client.model.UserInfo;
 import java.io.IOException;
+import java.util.Arrays;
 import java.io.Serializable;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Set;
 
-/** AccessToken */
-@javax.annotation.Generated(
-        value = "org.openapitools.codegen.languages.JavaClientCodegen",
-        comments = "Generator version: 7.12.0")
+import com.thoughtspot.client.JSON;
+
+/**
+ * AccessToken
+ */
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class AccessToken implements Serializable {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
+  @javax.annotation.Nullable
+  private String id;
 
-    @SerializedName(SERIALIZED_NAME_ID)
-    @javax.annotation.Nullable
-    private String id;
+  public static final String SERIALIZED_NAME_TOKEN = "token";
+  @SerializedName(SERIALIZED_NAME_TOKEN)
+  @javax.annotation.Nonnull
+  private String token;
 
-    public static final String SERIALIZED_NAME_TOKEN = "token";
+  public static final String SERIALIZED_NAME_ORG = "org";
+  @SerializedName(SERIALIZED_NAME_ORG)
+  @javax.annotation.Nonnull
+  private OrgInfo org;
 
-    @SerializedName(SERIALIZED_NAME_TOKEN)
-    @javax.annotation.Nonnull
-    private String token;
+  public static final String SERIALIZED_NAME_USER = "user";
+  @SerializedName(SERIALIZED_NAME_USER)
+  @javax.annotation.Nonnull
+  private UserInfo user;
 
-    public static final String SERIALIZED_NAME_ORG = "org";
+  public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
+  @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
+  @javax.annotation.Nonnull
+  private Float creationTimeInMillis;
 
-    @SerializedName(SERIALIZED_NAME_ORG)
-    @javax.annotation.Nonnull
-    private OrgInfo org;
+  public static final String SERIALIZED_NAME_EXPIRATION_TIME_IN_MILLIS = "expiration_time_in_millis";
+  @SerializedName(SERIALIZED_NAME_EXPIRATION_TIME_IN_MILLIS)
+  @javax.annotation.Nonnull
+  private Float expirationTimeInMillis;
 
-    public static final String SERIALIZED_NAME_USER = "user";
+  public static final String SERIALIZED_NAME_SCOPE = "scope";
+  @SerializedName(SERIALIZED_NAME_SCOPE)
+  @javax.annotation.Nullable
+  private AccessTokenScope scope;
 
-    @SerializedName(SERIALIZED_NAME_USER)
-    @javax.annotation.Nonnull
-    private UserInfo user;
+  public AccessToken() {
+  }
 
-    public static final String SERIALIZED_NAME_CREATION_TIME_IN_MILLIS = "creation_time_in_millis";
+  public AccessToken id(@javax.annotation.Nullable String id) {
+    this.id = id;
+    return this;
+  }
 
-    @SerializedName(SERIALIZED_NAME_CREATION_TIME_IN_MILLIS)
-    @javax.annotation.Nonnull
-    private Float creationTimeInMillis;
+  /**
+   * GUID of the auth token.
+   * @return id
+   */
+  @javax.annotation.Nullable
+  public String getId() {
+    return id;
+  }
 
-    public static final String SERIALIZED_NAME_EXPIRATION_TIME_IN_MILLIS =
-            "expiration_time_in_millis";
+  public void setId(@javax.annotation.Nullable String id) {
+    this.id = id;
+  }
 
-    @SerializedName(SERIALIZED_NAME_EXPIRATION_TIME_IN_MILLIS)
-    @javax.annotation.Nonnull
-    private Float expirationTimeInMillis;
 
-    public static final String SERIALIZED_NAME_SCOPE = "scope";
+  public AccessToken token(@javax.annotation.Nonnull String token) {
+    this.token = token;
+    return this;
+  }
 
-    @SerializedName(SERIALIZED_NAME_SCOPE)
-    @javax.annotation.Nullable
-    private AccessTokenScope scope;
+  /**
+   * Bearer auth token.
+   * @return token
+   */
+  @javax.annotation.Nonnull
+  public String getToken() {
+    return token;
+  }
 
-    public AccessToken() {}
+  public void setToken(@javax.annotation.Nonnull String token) {
+    this.token = token;
+  }
 
-    public AccessToken id(@javax.annotation.Nullable String id) {
-        this.id = id;
-        return this;
+
+  public AccessToken org(@javax.annotation.Nonnull OrgInfo org) {
+    this.org = org;
+    return this;
+  }
+
+  /**
+   * Get org
+   * @return org
+   */
+  @javax.annotation.Nonnull
+  public OrgInfo getOrg() {
+    return org;
+  }
+
+  public void setOrg(@javax.annotation.Nonnull OrgInfo org) {
+    this.org = org;
+  }
+
+
+  public AccessToken user(@javax.annotation.Nonnull UserInfo user) {
+    this.user = user;
+    return this;
+  }
+
+  /**
+   * Get user
+   * @return user
+   */
+  @javax.annotation.Nonnull
+  public UserInfo getUser() {
+    return user;
+  }
+
+  public void setUser(@javax.annotation.Nonnull UserInfo user) {
+    this.user = user;
+  }
+
+
+  public AccessToken creationTimeInMillis(@javax.annotation.Nonnull Float creationTimeInMillis) {
+    this.creationTimeInMillis = creationTimeInMillis;
+    return this;
+  }
+
+  /**
+   * Token creation time in milliseconds.
+   * @return creationTimeInMillis
+   */
+  @javax.annotation.Nonnull
+  public Float getCreationTimeInMillis() {
+    return creationTimeInMillis;
+  }
+
+  public void setCreationTimeInMillis(@javax.annotation.Nonnull Float creationTimeInMillis) {
+    this.creationTimeInMillis = creationTimeInMillis;
+  }
+
+
+  public AccessToken expirationTimeInMillis(@javax.annotation.Nonnull Float expirationTimeInMillis) {
+    this.expirationTimeInMillis = expirationTimeInMillis;
+    return this;
+  }
+
+  /**
+   * Token expiration time in milliseconds.
+   * @return expirationTimeInMillis
+   */
+  @javax.annotation.Nonnull
+  public Float getExpirationTimeInMillis() {
+    return expirationTimeInMillis;
+  }
+
+  public void setExpirationTimeInMillis(@javax.annotation.Nonnull Float expirationTimeInMillis) {
+    this.expirationTimeInMillis = expirationTimeInMillis;
+  }
+
+
+  public AccessToken scope(@javax.annotation.Nullable AccessTokenScope scope) {
+    this.scope = scope;
+    return this;
+  }
+
+  /**
+   * Get scope
+   * @return scope
+   */
+  @javax.annotation.Nullable
+  public AccessTokenScope getScope() {
+    return scope;
+  }
+
+  public void setScope(@javax.annotation.Nullable AccessTokenScope scope) {
+    this.scope = scope;
+  }
+
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   *
+   * @param key name of the property
+   * @param value value of the property
+   * @return the AccessToken instance itself
+   */
+  public AccessToken putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
     }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
 
-    /**
-     * GUID of the auth token.
-     *
-     * @return id
-     */
-    @javax.annotation.Nullable
-    public String getId() {
-        return id;
+  /**
+   * Return the additional (undeclared) property.
+   *
+   * @return a map of objects
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   *
+   * @param key name of the property
+   * @return an object
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
     }
+    return this.additionalProperties.get(key);
+  }
 
-    public void setId(@javax.annotation.Nullable String id) {
-        this.id = id;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-
-    public AccessToken token(@javax.annotation.Nonnull String token) {
-        this.token = token;
-        return this;
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
+    AccessToken accessToken = (AccessToken) o;
+    return Objects.equals(this.id, accessToken.id) &&
+        Objects.equals(this.token, accessToken.token) &&
+        Objects.equals(this.org, accessToken.org) &&
+        Objects.equals(this.user, accessToken.user) &&
+        Objects.equals(this.creationTimeInMillis, accessToken.creationTimeInMillis) &&
+        Objects.equals(this.expirationTimeInMillis, accessToken.expirationTimeInMillis) &&
+        Objects.equals(this.scope, accessToken.scope)&&
+        Objects.equals(this.additionalProperties, accessToken.additionalProperties);
+  }
 
-    /**
-     * Bearer auth token.
-     *
-     * @return token
-     */
-    @javax.annotation.Nonnull
-    public String getToken() {
-        return token;
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, token, org, user, creationTimeInMillis, expirationTimeInMillis, scope, additionalProperties);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class AccessToken {\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    token: ").append(toIndentedString(token)).append("\n");
+    sb.append("    org: ").append(toIndentedString(org)).append("\n");
+    sb.append("    user: ").append(toIndentedString(user)).append("\n");
+    sb.append("    creationTimeInMillis: ").append(toIndentedString(creationTimeInMillis)).append("\n");
+    sb.append("    expirationTimeInMillis: ").append(toIndentedString(expirationTimeInMillis)).append("\n");
+    sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
     }
+    return o.toString().replace("\n", "\n    ");
+  }
 
-    public void setToken(@javax.annotation.Nonnull String token) {
-        this.token = token;
-    }
 
-    public AccessToken org(@javax.annotation.Nonnull OrgInfo org) {
-        this.org = org;
-        return this;
-    }
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
 
-    /**
-     * Get org
-     *
-     * @return org
-     */
-    @javax.annotation.Nonnull
-    public OrgInfo getOrg() {
-        return org;
-    }
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("id");
+    openapiFields.add("token");
+    openapiFields.add("org");
+    openapiFields.add("user");
+    openapiFields.add("creation_time_in_millis");
+    openapiFields.add("expiration_time_in_millis");
+    openapiFields.add("scope");
 
-    public void setOrg(@javax.annotation.Nonnull OrgInfo org) {
-        this.org = org;
-    }
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("token");
+    openapiRequiredFields.add("org");
+    openapiRequiredFields.add("user");
+    openapiRequiredFields.add("creation_time_in_millis");
+    openapiRequiredFields.add("expiration_time_in_millis");
+  }
 
-    public AccessToken user(@javax.annotation.Nonnull UserInfo user) {
-        this.user = user;
-        return this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return user
-     */
-    @javax.annotation.Nonnull
-    public UserInfo getUser() {
-        return user;
-    }
-
-    public void setUser(@javax.annotation.Nonnull UserInfo user) {
-        this.user = user;
-    }
-
-    public AccessToken creationTimeInMillis(@javax.annotation.Nonnull Float creationTimeInMillis) {
-        this.creationTimeInMillis = creationTimeInMillis;
-        return this;
-    }
-
-    /**
-     * Token creation time in milliseconds.
-     *
-     * @return creationTimeInMillis
-     */
-    @javax.annotation.Nonnull
-    public Float getCreationTimeInMillis() {
-        return creationTimeInMillis;
-    }
-
-    public void setCreationTimeInMillis(@javax.annotation.Nonnull Float creationTimeInMillis) {
-        this.creationTimeInMillis = creationTimeInMillis;
-    }
-
-    public AccessToken expirationTimeInMillis(
-            @javax.annotation.Nonnull Float expirationTimeInMillis) {
-        this.expirationTimeInMillis = expirationTimeInMillis;
-        return this;
-    }
-
-    /**
-     * Token expiration time in milliseconds.
-     *
-     * @return expirationTimeInMillis
-     */
-    @javax.annotation.Nonnull
-    public Float getExpirationTimeInMillis() {
-        return expirationTimeInMillis;
-    }
-
-    public void setExpirationTimeInMillis(@javax.annotation.Nonnull Float expirationTimeInMillis) {
-        this.expirationTimeInMillis = expirationTimeInMillis;
-    }
-
-    public AccessToken scope(@javax.annotation.Nullable AccessTokenScope scope) {
-        this.scope = scope;
-        return this;
-    }
-
-    /**
-     * Get scope
-     *
-     * @return scope
-     */
-    @javax.annotation.Nullable
-    public AccessTokenScope getScope() {
-        return scope;
-    }
-
-    public void setScope(@javax.annotation.Nullable AccessTokenScope scope) {
-        this.scope = scope;
-    }
-
-    /**
-     * A container for additional, undeclared properties. This is a holder for any undeclared
-     * properties as specified with the 'additionalProperties' keyword in the OAS document.
-     */
-    private Map<String, Object> additionalProperties;
-
-    /**
-     * Set the additional (undeclared) property with the specified name and value. If the property
-     * does not already exist, create it otherwise replace it.
-     *
-     * @param key name of the property
-     * @param value value of the property
-     * @return the AccessToken instance itself
-     */
-    public AccessToken putAdditionalProperty(String key, Object value) {
-        if (this.additionalProperties == null) {
-            this.additionalProperties = new HashMap<String, Object>();
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to AccessToken
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!AccessToken.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in AccessToken is not found in the empty JSON string", AccessToken.openapiRequiredFields.toString()));
         }
-        this.additionalProperties.put(key, value);
-        return this;
-    }
+      }
 
-    /**
-     * Return the additional (undeclared) property.
-     *
-     * @return a map of objects
-     */
-    public Map<String, Object> getAdditionalProperties() {
-        return additionalProperties;
-    }
-
-    /**
-     * Return the additional (undeclared) property with the specified name.
-     *
-     * @param key name of the property
-     * @return an object
-     */
-    public Object getAdditionalProperty(String key) {
-        if (this.additionalProperties == null) {
-            return null;
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : AccessToken.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
-        return this.additionalProperties.get(key);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        AccessToken accessToken = (AccessToken) o;
-        return Objects.equals(this.id, accessToken.id)
-                && Objects.equals(this.token, accessToken.token)
-                && Objects.equals(this.org, accessToken.org)
-                && Objects.equals(this.user, accessToken.user)
-                && Objects.equals(this.creationTimeInMillis, accessToken.creationTimeInMillis)
-                && Objects.equals(this.expirationTimeInMillis, accessToken.expirationTimeInMillis)
-                && Objects.equals(this.scope, accessToken.scope)
-                && Objects.equals(this.additionalProperties, accessToken.additionalProperties);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-                id,
-                token,
-                org,
-                user,
-                creationTimeInMillis,
-                expirationTimeInMillis,
-                scope,
-                additionalProperties);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class AccessToken {\n");
-        sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    token: ").append(toIndentedString(token)).append("\n");
-        sb.append("    org: ").append(toIndentedString(org)).append("\n");
-        sb.append("    user: ").append(toIndentedString(user)).append("\n");
-        sb.append("    creationTimeInMillis: ")
-                .append(toIndentedString(creationTimeInMillis))
-                .append("\n");
-        sb.append("    expirationTimeInMillis: ")
-                .append(toIndentedString(expirationTimeInMillis))
-                .append("\n");
-        sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
-        sb.append("    additionalProperties: ")
-                .append(toIndentedString(additionalProperties))
-                .append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces (except the first
-     * line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
-
-    public static HashSet<String> openapiFields;
-    public static HashSet<String> openapiRequiredFields;
-
-    static {
-        // a set of all properties/fields (JSON key names)
-        openapiFields = new HashSet<String>();
-        openapiFields.add("id");
-        openapiFields.add("token");
-        openapiFields.add("org");
-        openapiFields.add("user");
-        openapiFields.add("creation_time_in_millis");
-        openapiFields.add("expiration_time_in_millis");
-        openapiFields.add("scope");
-
-        // a set of required properties/fields (JSON key names)
-        openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("token");
-        openapiRequiredFields.add("org");
-        openapiRequiredFields.add("user");
-        openapiRequiredFields.add("creation_time_in_millis");
-        openapiRequiredFields.add("expiration_time_in_millis");
-    }
-
-    /**
-     * Validates the JSON Element and throws an exception if issues found
-     *
-     * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to AccessToken
-     */
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-        if (jsonElement == null) {
-            if (!AccessToken.openapiRequiredFields
-                    .isEmpty()) { // has required fields but JSON element is null
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field(s) %s in AccessToken is not found in the empty"
-                                        + " JSON string",
-                                AccessToken.openapiRequiredFields.toString()));
-            }
-        }
-
-        // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : AccessToken.openapiRequiredFields) {
-            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field `%s` is not found in the JSON string: %s",
-                                requiredField, jsonElement.toString()));
-            }
-        }
+      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull())
-                && !jsonObj.get("id").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `id` to be a primitive type in the JSON string but"
-                                    + " got `%s`",
-                            jsonObj.get("id").toString()));
-        }
-        if (!jsonObj.get("token").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `token` to be a primitive type in the JSON string"
-                                    + " but got `%s`",
-                            jsonObj.get("token").toString()));
-        }
-        // validate the required field `org`
-        OrgInfo.validateJsonElement(jsonObj.get("org"));
-        // validate the required field `user`
-        UserInfo.validateJsonElement(jsonObj.get("user"));
-        // validate the optional field `scope`
-        if (jsonObj.get("scope") != null && !jsonObj.get("scope").isJsonNull()) {
-            AccessTokenScope.validateJsonElement(jsonObj.get("scope"));
-        }
+      if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      }
+      if (!jsonObj.get("token").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `token` to be a primitive type in the JSON string but got `%s`", jsonObj.get("token").toString()));
+      }
+      // validate the required field `org`
+      OrgInfo.validateJsonElement(jsonObj.get("org"));
+      // validate the required field `user`
+      UserInfo.validateJsonElement(jsonObj.get("user"));
+      // validate the optional field `scope`
+      if (jsonObj.get("scope") != null && !jsonObj.get("scope").isJsonNull()) {
+        AccessTokenScope.validateJsonElement(jsonObj.get("scope"));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!AccessToken.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'AccessToken' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<AccessToken> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(AccessToken.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<AccessToken>() {
+           @Override
+           public void write(JsonWriter out, AccessToken value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additional properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                   if (jsonElement.isJsonArray()) {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                   } else {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                   }
+                 }
+               }
+             }
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public AccessToken read(JsonReader in) throws IOException {
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             // store additional fields in the deserialized instance
+             AccessToken instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else if (entry.getValue().isJsonArray()) {
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), List.class));
+                 } else { // JSON object
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), HashMap.class));
+                 }
+               }
+             }
+             return instance;
+           }
+
+       }.nullSafe();
     }
+  }
 
-    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-        @SuppressWarnings("unchecked")
-        @Override
-        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!AccessToken.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'AccessToken' and its subtypes
-            }
-            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<AccessToken> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(AccessToken.class));
+  /**
+   * Create an instance of AccessToken given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of AccessToken
+   * @throws IOException if the JSON string is invalid with respect to AccessToken
+   */
+  public static AccessToken fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, AccessToken.class);
+  }
 
-            return (TypeAdapter<T>)
-                    new TypeAdapter<AccessToken>() {
-                        @Override
-                        public void write(JsonWriter out, AccessToken value) throws IOException {
-                            JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-                            obj.remove("additionalProperties");
-                            // serialize additional properties
-                            if (value.getAdditionalProperties() != null) {
-                                for (Map.Entry<String, Object> entry :
-                                        value.getAdditionalProperties().entrySet()) {
-                                    if (entry.getValue() instanceof String)
-                                        obj.addProperty(entry.getKey(), (String) entry.getValue());
-                                    else if (entry.getValue() instanceof Number)
-                                        obj.addProperty(entry.getKey(), (Number) entry.getValue());
-                                    else if (entry.getValue() instanceof Boolean)
-                                        obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
-                                    else if (entry.getValue() instanceof Character)
-                                        obj.addProperty(
-                                                entry.getKey(), (Character) entry.getValue());
-                                    else {
-                                        JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-                                        if (jsonElement.isJsonArray()) {
-                                            obj.add(entry.getKey(), jsonElement.getAsJsonArray());
-                                        } else {
-                                            obj.add(entry.getKey(), jsonElement.getAsJsonObject());
-                                        }
-                                    }
-                                }
-                            }
-                            elementAdapter.write(out, obj);
-                        }
-
-                        @Override
-                        public AccessToken read(JsonReader in) throws IOException {
-                            JsonElement jsonElement = elementAdapter.read(in);
-                            validateJsonElement(jsonElement);
-                            JsonObject jsonObj = jsonElement.getAsJsonObject();
-                            // store additional fields in the deserialized instance
-                            AccessToken instance = thisAdapter.fromJsonTree(jsonObj);
-                            for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
-                                if (!openapiFields.contains(entry.getKey())) {
-                                    if (entry.getValue().isJsonPrimitive()) { // primitive type
-                                        if (entry.getValue().getAsJsonPrimitive().isString())
-                                            instance.putAdditionalProperty(
-                                                    entry.getKey(), entry.getValue().getAsString());
-                                        else if (entry.getValue().getAsJsonPrimitive().isNumber())
-                                            instance.putAdditionalProperty(
-                                                    entry.getKey(), entry.getValue().getAsNumber());
-                                        else if (entry.getValue().getAsJsonPrimitive().isBoolean())
-                                            instance.putAdditionalProperty(
-                                                    entry.getKey(),
-                                                    entry.getValue().getAsBoolean());
-                                        else
-                                            throw new IllegalArgumentException(
-                                                    String.format(
-                                                            "The field `%s` has unknown primitive"
-                                                                    + " type. Value: %s",
-                                                            entry.getKey(),
-                                                            entry.getValue().toString()));
-                                    } else if (entry.getValue().isJsonArray()) {
-                                        instance.putAdditionalProperty(
-                                                entry.getKey(),
-                                                gson.fromJson(entry.getValue(), List.class));
-                                    } else { // JSON object
-                                        instance.putAdditionalProperty(
-                                                entry.getKey(),
-                                                gson.fromJson(entry.getValue(), HashMap.class));
-                                    }
-                                }
-                            }
-                            return instance;
-                        }
-                    }.nullSafe();
-        }
-    }
-
-    /**
-     * Create an instance of AccessToken given an JSON string
-     *
-     * @param jsonString JSON string
-     * @return An instance of AccessToken
-     * @throws IOException if the JSON string is invalid with respect to AccessToken
-     */
-    public static AccessToken fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, AccessToken.class);
-    }
-
-    /**
-     * Convert an instance of AccessToken to an JSON string
-     *
-     * @return JSON string
-     */
-    public String toJson() {
-        return JSON.getGson().toJson(this);
-    }
+  /**
+   * Convert an instance of AccessToken to an JSON string
+   *
+   * @return JSON string
+   */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
+

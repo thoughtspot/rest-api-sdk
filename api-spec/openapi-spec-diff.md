@@ -86,22 +86,6 @@
 -  endpoint added
 
 
-### POST /api/rest/2.0/groups/create
-- :warning: removed the enum value `CAN_CREATE_KPI_ALERTS` of the request property `privileges/items/`
-
-
-### POST /api/rest/2.0/groups/import
-- :warning: removed the enum value `CAN_CREATE_KPI_ALERTS` of the request property `groups/items/privileges/items/`
-
-
-### POST /api/rest/2.0/groups/search
-- :warning: removed the enum value `CAN_CREATE_KPI_ALERTS` of the request property `privileges/items/`
-
-
-### POST /api/rest/2.0/groups/{group_identifier}/update
-- :warning: removed the enum value `CAN_CREATE_KPI_ALERTS` of the request property `privileges/items/`
-
-
 ### POST /api/rest/2.0/metadata/headers/update
 -  added the new `ROLE` enum value to the request property `headers_update/items/type`
 -  added the new `TEMPLATE_VARIABLE` enum value to the request property `headers_update/items/type`
@@ -114,21 +98,6 @@
 ### POST /api/rest/2.0/metadata/update-obj-id
 -  added the new `ROLE` enum value to the request property `metadata/items/type`
 -  added the new `TEMPLATE_VARIABLE` enum value to the request property `metadata/items/type`
-
-
-### POST /api/rest/2.0/roles/create
-- :warning: removed the enum value `CAN_CREATE_KPI_ALERTS` of the request property `privileges/items/`
--  removed the `CAN_CREATE_KPI_ALERTS` enum value from the `privileges/items/` response property for the response status `200`
-
-
-### POST /api/rest/2.0/roles/search
-- :warning: removed the enum value `CAN_CREATE_KPI_ALERTS` of the request property `privileges/items/`
--  removed the `CAN_CREATE_KPI_ALERTS` enum value from the `items/privileges/items/` response property for the response status `200`
-
-
-### POST /api/rest/2.0/roles/{role_identifier}/update
-- :warning: removed the enum value `CAN_CREATE_KPI_ALERTS` of the request property `privileges/items/`
--  removed the `CAN_CREATE_KPI_ALERTS` enum value from the `privileges/items/` response property for the response status `200`
 
 
 ### POST /api/rest/2.0/semantic-integrations/create
@@ -145,10 +114,6 @@
 
 ### POST /api/rest/2.0/template/variables/search
 -  added the optional property `items/obj_id` to the response with the `200` status
-
-
-### POST /api/rest/2.0/users/search
-- :warning: removed the enum value `CAN_CREATE_KPI_ALERTS` of the request property `privileges/items/`
 
 
 

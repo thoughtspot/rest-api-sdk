@@ -4,7 +4,6 @@
 
 package com.thoughtspot.client.api;
 
-import com.google.gson.reflect.TypeToken;
 import com.thoughtspot.client.ApiCallback;
 import com.thoughtspot.client.ApiClient;
 import com.thoughtspot.client.ApiClientConfiguration;
@@ -12,18 +11,27 @@ import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.ApiResponse;
 import com.thoughtspot.client.Configuration;
 import com.thoughtspot.client.Pair;
+import com.thoughtspot.client.ProgressRequestBody;
+import com.thoughtspot.client.ProgressResponseBody;
+
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+
+
+import com.thoughtspot.client.model.ErrorResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
 import java.io.File;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.InputStream;
 
-@javax.annotation.Generated(
-        value = "org.openapitools.codegen.languages.JavaClientCodegen",
-        comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class ReportsApi {
     private ApiClient localVarApiClient;
     private ApiClientConfiguration localVarApiClientConfiguration;
@@ -82,33 +90,30 @@ public class ReportsApi {
 
     /**
      * Build call for exportAnswerReport
-     *
-     * @param exportAnswerReportRequest (required)
+     * @param exportAnswerReportRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
      */
-    public okhttp3.Call exportAnswerReportCall(
-            ExportAnswerReportRequest exportAnswerReportRequest, final ApiCallback _callback)
-            throws ApiException {
+    public okhttp3.Call exportAnswerReportCall(ExportAnswerReportRequest exportAnswerReportRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {};
+        String[] localBasePaths = new String[] {  };
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
+        if (localCustomBaseUrl != null){
             basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
+        } else if ( localBasePaths.length > 0 ) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -125,214 +130,134 @@ public class ReportsApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {"application/octet-stream", "application/json"};
+        final String[] localVarAccepts = {
+            "application/octet-stream",
+            "application/json"
+        };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call exportAnswerReportValidateBeforeCall(
-            ExportAnswerReportRequest exportAnswerReportRequest, final ApiCallback _callback)
-            throws ApiException {
+    private okhttp3.Call exportAnswerReportValidateBeforeCall(ExportAnswerReportRequest exportAnswerReportRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'exportAnswerReportRequest' is set
         if (exportAnswerReportRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'exportAnswerReportRequest' when calling"
-                            + " exportAnswerReport(Async)");
+            throw new ApiException("Missing the required parameter 'exportAnswerReportRequest' when calling exportAnswerReport(Async)");
         }
 
         return exportAnswerReportCall(exportAnswerReportRequest, _callback);
+
     }
 
     /**
-     * Version: 9.0.0.cl or later Exports an Answer in the given file format. You can download the
-     * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not
-     * enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If
-     * RBAC is enabled, the required download privilege depends on the selected
-     * &#x60;file_format&#x60;: &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;PDF&#x60; require the
-     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and
-     * &#x60;PNG&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**)
-     * privilege. For an Answer, the &#x60;PDF&#x60; export is a table PDF, which is why it falls
-     * under &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; rather than &#x60;CAN_DOWNLOAD_VISUALS&#x60;.
-     * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
-     * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
-     * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
-     * pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using
-     * &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id. **NOTE**: *
-     * The downloadable file returned in API response file is extensionless. Please rename the
-     * downloaded file by typing in the relevant extension. * HTML rendering is not supported for
-     * PDF exports of Answers with tables. Optionally, you can define [runtime
-     * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data.
-     *
-     * @param exportAnswerReportRequest (required)
+     * 
+     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is enabled, the required download privilege depends on the selected &#x60;file_format&#x60;: &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;PDF&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and &#x60;PNG&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege. For an Answer, the &#x60;PDF&#x60; export is a table PDF, which is why it falls under &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; rather than &#x60;CAN_DOWNLOAD_VISUALS&#x60;.  #### Usage guidelines  In the request body, specify the GUID or name of the Answer and set &#x60;file_format&#x60;. The default file format is CSV.  Use the &#x60;type&#x60; parameter to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.       
+     * @param exportAnswerReportRequest  (required)
      * @return File
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
      */
-    public File exportAnswerReport(ExportAnswerReportRequest exportAnswerReportRequest)
-            throws ApiException {
+    public File exportAnswerReport(ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
         ApiResponse<File> localVarResp = exportAnswerReportWithHttpInfo(exportAnswerReportRequest);
         return localVarResp.getData();
     }
 
     /**
-     * Version: 9.0.0.cl or later Exports an Answer in the given file format. You can download the
-     * Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access to the Answer. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not
-     * enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If
-     * RBAC is enabled, the required download privilege depends on the selected
-     * &#x60;file_format&#x60;: &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;PDF&#x60; require the
-     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and
-     * &#x60;PNG&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**)
-     * privilege. For an Answer, the &#x60;PDF&#x60; export is a table PDF, which is why it falls
-     * under &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; rather than &#x60;CAN_DOWNLOAD_VISUALS&#x60;.
-     * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
-     * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
-     * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
-     * pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using
-     * &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id. **NOTE**: *
-     * The downloadable file returned in API response file is extensionless. Please rename the
-     * downloaded file by typing in the relevant extension. * HTML rendering is not supported for
-     * PDF exports of Answers with tables. Optionally, you can define [runtime
-     * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data.
-     *
-     * @param exportAnswerReportRequest (required)
+     * 
+     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is enabled, the required download privilege depends on the selected &#x60;file_format&#x60;: &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;PDF&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and &#x60;PNG&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege. For an Answer, the &#x60;PDF&#x60; export is a table PDF, which is why it falls under &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; rather than &#x60;CAN_DOWNLOAD_VISUALS&#x60;.  #### Usage guidelines  In the request body, specify the GUID or name of the Answer and set &#x60;file_format&#x60;. The default file format is CSV.  Use the &#x60;type&#x60; parameter to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.       
+     * @param exportAnswerReportRequest  (required)
      * @return ApiResponse&lt;File&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
      */
-    public ApiResponse<File> exportAnswerReportWithHttpInfo(
-            ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                exportAnswerReportValidateBeforeCall(exportAnswerReportRequest, null);
-        Type localVarReturnType = new TypeToken<File>() {}.getType();
+    public ApiResponse<File> exportAnswerReportWithHttpInfo(ExportAnswerReportRequest exportAnswerReportRequest) throws ApiException {
+        okhttp3.Call localVarCall = exportAnswerReportValidateBeforeCall(exportAnswerReportRequest, null);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Exports an Answer in the given file format. You
-     * can download the Answer data as a PDF, PNG, CSV, or XLSX file. Requires at least view access
-     * to the Answer. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the
-     * &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is
-     * enabled, the required download privilege depends on the selected &#x60;file_format&#x60;:
-     * &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;PDF&#x60; require the
-     * &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and
-     * &#x60;PNG&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**)
-     * privilege. For an Answer, the &#x60;PDF&#x60; export is a table PDF, which is why it falls
-     * under &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; rather than &#x60;CAN_DOWNLOAD_VISUALS&#x60;.
-     * #### Usage guidelines In the request body, specify the GUID or name of the Answer and set
-     * &#x60;file_format&#x60;. The default file format is CSV. Use the &#x60;type&#x60; parameter
-     * to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a
-     * pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using
-     * &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id. **NOTE**: *
-     * The downloadable file returned in API response file is extensionless. Please rename the
-     * downloaded file by typing in the relevant extension. * HTML rendering is not supported for
-     * PDF exports of Answers with tables. Optionally, you can define [runtime
-     * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data.
-     *
-     * @param exportAnswerReportRequest (required)
+     *  (asynchronously)
+     *   Version: 9.0.0.cl or later   Exports an Answer in the given file format. You can download the Answer data as a PDF, PNG, CSV, or XLSX file.  Requires at least view access to the Answer. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is enabled, the required download privilege depends on the selected &#x60;file_format&#x60;: &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;PDF&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and &#x60;PNG&#x60; requires the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege. For an Answer, the &#x60;PDF&#x60; export is a table PDF, which is why it falls under &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; rather than &#x60;CAN_DOWNLOAD_VISUALS&#x60;.  #### Usage guidelines  In the request body, specify the GUID or name of the Answer and set &#x60;file_format&#x60;. The default file format is CSV.  Use the &#x60;type&#x60; parameter to specify whether the Answer being exported is a saved Answer (&#x60;SAVED&#x60;) or a pinned Answer on a Liveboard (&#x60;PINNED&#x60;). Defaults to &#x60;SAVED&#x60;. When using &#x60;PINNED&#x60;, the &#x60;metadata_identifier&#x60; must be the container id.  **NOTE**: * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension. * HTML rendering is not supported for PDF exports of Answers with tables.  Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.       
+     * @param exportAnswerReportRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
      */
-    public okhttp3.Call exportAnswerReportAsync(
-            ExportAnswerReportRequest exportAnswerReportRequest, final ApiCallback<File> _callback)
-            throws ApiException {
+    public okhttp3.Call exportAnswerReportAsync(ExportAnswerReportRequest exportAnswerReportRequest, final ApiCallback<File> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall =
-                exportAnswerReportValidateBeforeCall(exportAnswerReportRequest, _callback);
-        Type localVarReturnType = new TypeToken<File>() {}.getType();
+        okhttp3.Call localVarCall = exportAnswerReportValidateBeforeCall(exportAnswerReportRequest, _callback);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for exportLiveboardReport
-     *
-     * @param exportLiveboardReportRequest (required)
+     * @param exportLiveboardReportRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
      */
-    public okhttp3.Call exportLiveboardReportCall(
-            ExportLiveboardReportRequest exportLiveboardReportRequest, final ApiCallback _callback)
-            throws ApiException {
+    public okhttp3.Call exportLiveboardReportCall(ExportLiveboardReportRequest exportLiveboardReportRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
-        String[] localBasePaths = new String[] {};
+        String[] localBasePaths = new String[] {  };
 
         // Determine Base Path to Use
-        if (localCustomBaseUrl != null) {
+        if (localCustomBaseUrl != null){
             basePath = localCustomBaseUrl;
-        } else if (localBasePaths.length > 0) {
+        } else if ( localBasePaths.length > 0 ) {
             basePath = localBasePaths[localHostIndex];
         } else {
             basePath = null;
@@ -349,222 +274,105 @@ public class ReportsApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        final String[] localVarAccepts = {"application/octet-stream", "application/json"};
+        final String[] localVarAccepts = {
+            "application/octet-stream",
+            "application/json"
+        };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
-        final String[] localVarContentTypes = {"application/json"};
-        final String localVarContentType =
-                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {"bearerAuth"};
-        return localVarApiClient.buildCall(
-                basePath,
-                localVarPath,
-                "POST",
-                localVarQueryParams,
-                localVarCollectionQueryParams,
-                localVarPostBody,
-                localVarHeaderParams,
-                localVarCookieParams,
-                localVarFormParams,
-                localVarAuthNames,
-                _callback);
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call exportLiveboardReportValidateBeforeCall(
-            ExportLiveboardReportRequest exportLiveboardReportRequest, final ApiCallback _callback)
-            throws ApiException {
+    private okhttp3.Call exportLiveboardReportValidateBeforeCall(ExportLiveboardReportRequest exportLiveboardReportRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'exportLiveboardReportRequest' is set
         if (exportLiveboardReportRequest == null) {
-            throw new ApiException(
-                    "Missing the required parameter 'exportLiveboardReportRequest' when calling"
-                            + " exportLiveboardReport(Async)");
+            throw new ApiException("Missing the required parameter 'exportLiveboardReportRequest' when calling exportLiveboardReport(Async)");
         }
 
         return exportLiveboardReportCall(exportLiveboardReportRequest, _callback);
+
     }
 
     /**
-     * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
-     * XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at least view access
-     * to the Liveboard. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the
-     * &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is
-     * enabled, the required download privilege depends on the selected &#x60;file_format&#x60;:
-     * &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60;
-     * (**Can download detailed data**) privilege, and &#x60;PNG&#x60; and &#x60;PDF&#x60; require
-     * the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege. #### Usage
-     * guidelines In the request body, specify the GUID or name of the Liveboard. To generate a
-     * Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
-     * **NOTE**: * The downloadable file returned in API response file is extensionless. Please
-     * rename the downloaded file by typing in the relevant extension. * Optionally, you can define
-     * [runtime
-     * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. * To include unsaved changes in the report, pass the
-     * &#x60;transient_pinboard_content&#x60; script generated from the
-     * &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon
-     * successful execution, the API returns the report with unsaved changes, including ad hoc
-     * changes to visualizations. For more information, see [Liveboard Report
-     * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG
-     * format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot
-     * support. When this feature is enabled, the options
-     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports. * Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, * Liveboards can be exported in CSV format. * All
-     * visualizations within a Liveboard can be exported as individual CSV files. * When exporting
-     * multiple visualizations or the entire Liveboard, the system returns the report as a
-     * compressed ZIP file containing the separate CSV files for each visualization. * Liveboards
-     * can also be exported in XLSX format. * All selected visualizations are consolidated into a
-     * single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). *
-     * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.
-     *
-     * @param exportLiveboardReportRequest (required)
+     * 
+     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF, PNG, CSV, or XLSX file format. The default &#x60;file_format&#x60; is CSV.  Requires at least view access to the Liveboard. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is enabled, the required download privilege depends on the selected &#x60;file_format&#x60;: &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and &#x60;PNG&#x60; and &#x60;PDF&#x60; require the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  **NOTE**:   * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  * Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  * To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).   * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the &#x60;png_options&#x60; will not be available for PNG exports.  * Starting with the ThoughtSpot Cloud 26.2.0.cl release,    * Liveboards can be exported in CSV format.      * All visualizations within a Liveboard can be exported as individual CSV files.      * When exporting multiple visualizations or the entire Liveboard, the system returns the report as a compressed ZIP file containing the separate CSV files for each visualization.    * Liveboards can also be exported in XLSX format.      * All selected visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab).      * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.     
+     * @param exportLiveboardReportRequest  (required)
      * @return File
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
      */
-    public File exportLiveboardReport(ExportLiveboardReportRequest exportLiveboardReportRequest)
-            throws ApiException {
-        ApiResponse<File> localVarResp =
-                exportLiveboardReportWithHttpInfo(exportLiveboardReportRequest);
+    public File exportLiveboardReport(ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
+        ApiResponse<File> localVarResp = exportLiveboardReportWithHttpInfo(exportLiveboardReportRequest);
         return localVarResp.getData();
     }
 
     /**
-     * Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in PDF, PNG, CSV, or
-     * XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at least view access
-     * to the Liveboard. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the
-     * &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is
-     * enabled, the required download privilege depends on the selected &#x60;file_format&#x60;:
-     * &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60;
-     * (**Can download detailed data**) privilege, and &#x60;PNG&#x60; and &#x60;PDF&#x60; require
-     * the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege. #### Usage
-     * guidelines In the request body, specify the GUID or name of the Liveboard. To generate a
-     * Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
-     * **NOTE**: * The downloadable file returned in API response file is extensionless. Please
-     * rename the downloaded file by typing in the relevant extension. * Optionally, you can define
-     * [runtime
-     * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. * To include unsaved changes in the report, pass the
-     * &#x60;transient_pinboard_content&#x60; script generated from the
-     * &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon
-     * successful execution, the API returns the report with unsaved changes, including ad hoc
-     * changes to visualizations. For more information, see [Liveboard Report
-     * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG
-     * format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot
-     * support. When this feature is enabled, the options
-     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports. * Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, * Liveboards can be exported in CSV format. * All
-     * visualizations within a Liveboard can be exported as individual CSV files. * When exporting
-     * multiple visualizations or the entire Liveboard, the system returns the report as a
-     * compressed ZIP file containing the separate CSV files for each visualization. * Liveboards
-     * can also be exported in XLSX format. * All selected visualizations are consolidated into a
-     * single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). *
-     * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.
-     *
-     * @param exportLiveboardReportRequest (required)
+     * 
+     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF, PNG, CSV, or XLSX file format. The default &#x60;file_format&#x60; is CSV.  Requires at least view access to the Liveboard. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is enabled, the required download privilege depends on the selected &#x60;file_format&#x60;: &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and &#x60;PNG&#x60; and &#x60;PDF&#x60; require the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  **NOTE**:   * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  * Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  * To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).   * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the &#x60;png_options&#x60; will not be available for PNG exports.  * Starting with the ThoughtSpot Cloud 26.2.0.cl release,    * Liveboards can be exported in CSV format.      * All visualizations within a Liveboard can be exported as individual CSV files.      * When exporting multiple visualizations or the entire Liveboard, the system returns the report as a compressed ZIP file containing the separate CSV files for each visualization.    * Liveboards can also be exported in XLSX format.      * All selected visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab).      * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.     
+     * @param exportLiveboardReportRequest  (required)
      * @return ApiResponse&lt;File&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
-     *     response body
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
      */
-    public ApiResponse<File> exportLiveboardReportWithHttpInfo(
-            ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
-        okhttp3.Call localVarCall =
-                exportLiveboardReportValidateBeforeCall(exportLiveboardReportRequest, null);
-        Type localVarReturnType = new TypeToken<File>() {}.getType();
+    public ApiResponse<File> exportLiveboardReportWithHttpInfo(ExportLiveboardReportRequest exportLiveboardReportRequest) throws ApiException {
+        okhttp3.Call localVarCall = exportLiveboardReportValidateBeforeCall(exportLiveboardReportRequest, null);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * (asynchronously) Version: 9.0.0.cl or later Exports a Liveboard and its visualizations in
-     * PDF, PNG, CSV, or XLSX file format. The default &#x60;file_format&#x60; is CSV. Requires at
-     * least view access to the Liveboard. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the
-     * &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is
-     * enabled, the required download privilege depends on the selected &#x60;file_format&#x60;:
-     * &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60;
-     * (**Can download detailed data**) privilege, and &#x60;PNG&#x60; and &#x60;PDF&#x60; require
-     * the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege. #### Usage
-     * guidelines In the request body, specify the GUID or name of the Liveboard. To generate a
-     * Liveboard report with specific visualizations, add GUIDs or names of the visualizations.
-     * **NOTE**: * The downloadable file returned in API response file is extensionless. Please
-     * rename the downloaded file by typing in the relevant extension. * Optionally, you can define
-     * [runtime
-     * overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides)
-     * to apply to the Answer data. * To include unsaved changes in the report, pass the
-     * &#x60;transient_pinboard_content&#x60; script generated from the
-     * &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon
-     * successful execution, the API returns the report with unsaved changes, including ad hoc
-     * changes to visualizations. For more information, see [Liveboard Report
-     * API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).
-     * * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG
-     * format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot
-     * support. When this feature is enabled, the options
-     * &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the
-     * &#x60;png_options&#x60; will not be available for PNG exports. * Starting with the
-     * ThoughtSpot Cloud 26.2.0.cl release, * Liveboards can be exported in CSV format. * All
-     * visualizations within a Liveboard can be exported as individual CSV files. * When exporting
-     * multiple visualizations or the entire Liveboard, the system returns the report as a
-     * compressed ZIP file containing the separate CSV files for each visualization. * Liveboards
-     * can also be exported in XLSX format. * All selected visualizations are consolidated into a
-     * single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab). *
-     * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.
-     *
-     * @param exportLiveboardReportRequest (required)
+     *  (asynchronously)
+     *   Version: 9.0.0.cl or later   Exports a Liveboard and its visualizations in PDF, PNG, CSV, or XLSX file format. The default &#x60;file_format&#x60; is CSV.  Requires at least view access to the Liveboard. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is not enabled, the &#x60;DATADOWNLOADING&#x60; (**Can download Data**) privilege is required. If RBAC is enabled, the required download privilege depends on the selected &#x60;file_format&#x60;: &#x60;CSV&#x60; and &#x60;XLSX&#x60; require the &#x60;CAN_DOWNLOAD_DETAILED_DATA&#x60; (**Can download detailed data**) privilege, and &#x60;PNG&#x60; and &#x60;PDF&#x60; require the &#x60;CAN_DOWNLOAD_VISUALS&#x60; (**Can download visuals**) privilege.  #### Usage guidelines  In the request body, specify the GUID or name of the Liveboard. To generate a Liveboard report with specific visualizations, add GUIDs or names of the visualizations.  **NOTE**:   * The downloadable file returned in API response file is extensionless. Please rename the downloaded file by typing in the relevant extension.  * Optionally, you can define [runtime overrides](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_overrides) to apply to the Answer data.  * To include unsaved changes in the report, pass the &#x60;transient_pinboard_content&#x60; script generated from the &#x60;getExportRequestForCurrentPinboard&#x60; method in the Visual Embed SDK. Upon successful execution, the API returns the report with unsaved changes, including ad hoc changes to visualizations. For more information, see [Liveboard Report API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_liveboard_report_api).   * Starting with ThoughtSpot Cloud 10.9.0.cl release, the Liveboard can be exported in the PNG format in the resolution of your choice. To enable this on your instance, contact ThoughtSpot support. When this feature is enabled, the options &#x60;include_cover_page&#x60;,&#x60;include_filter_page&#x60; within the &#x60;png_options&#x60; will not be available for PNG exports.  * Starting with the ThoughtSpot Cloud 26.2.0.cl release,    * Liveboards can be exported in CSV format.      * All visualizations within a Liveboard can be exported as individual CSV files.      * When exporting multiple visualizations or the entire Liveboard, the system returns the report as a compressed ZIP file containing the separate CSV files for each visualization.    * Liveboards can also be exported in XLSX format.      * All selected visualizations are consolidated into a single Excel workbook (.xlsx), with each visualization placed in its own worksheet (tab).      * XLSX exports are limited to a maximum of 255 worksheets (tabs) per workbook.     
+     * @param exportLiveboardReportRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body
-     *     object
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
-     *     <table border="1">
-     * <caption>Response Details</caption>
-     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
-     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
-     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-     * <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     * </table>
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Export report file of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
      */
-    public okhttp3.Call exportLiveboardReportAsync(
-            ExportLiveboardReportRequest exportLiveboardReportRequest,
-            final ApiCallback<File> _callback)
-            throws ApiException {
+    public okhttp3.Call exportLiveboardReportAsync(ExportLiveboardReportRequest exportLiveboardReportRequest, final ApiCallback<File> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall =
-                exportLiveboardReportValidateBeforeCall(exportLiveboardReportRequest, _callback);
-        Type localVarReturnType = new TypeToken<File>() {}.getType();
+        okhttp3.Call localVarCall = exportLiveboardReportValidateBeforeCall(exportLiveboardReportRequest, _callback);
+        Type localVarReturnType = new TypeToken<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

@@ -17224,7 +17224,9 @@ paths:
          Version: 10.14.0.cl or later
 
 
-        Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.
+        Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.
+
+        Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.
 
@@ -21262,6 +21264,7 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
+            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         permission:
@@ -26553,6 +26556,7 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
+            - CAN_CREATE_KPI_ALERTS
             type: string
           nullable: true
           type: array
@@ -27678,6 +27682,7 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
+            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         permission:
@@ -33316,6 +33321,7 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
+            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         sub_group_identifiers:
@@ -33525,6 +33531,7 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
+            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         sub_group_identifiers:
@@ -33677,6 +33684,7 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
+            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         sub_group_identifiers:
@@ -34993,6 +35001,7 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
+            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         read_only:
@@ -35107,6 +35116,7 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
+            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         deprecated:
@@ -35200,6 +35210,7 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
+            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
       required:
@@ -38062,6 +38073,7 @@ components:
             - CAN_CREATE_ANSWERS
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
+            - CAN_CREATE_KPI_ALERTS
             type: string
           type: array
         account_type:

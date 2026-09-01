@@ -4,27 +4,47 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.OrgInfo;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for AccessTokenScope */
+/**
+ * Model tests for AccessTokenScope
+ */
 public class AccessTokenScopeTest {
     private final AccessTokenScope model = new AccessTokenScope();
 
-    /** Model tests for AccessTokenScope */
+    /**
+     * Model tests for AccessTokenScope
+     */
     @Test
     public void testAccessTokenScope() {
         // TODO: test AccessTokenScope
     }
 
-    /** Test the property 'orgScope' */
+    /**
+     * Test the property 'orgScope'
+     */
     @Test
     public void orgScopeTest() {
         // TODO: test orgScope
     }
 
-    /** Test the property 'orgIds' */
+    /**
+     * Test the property 'orgIds'
+     */
     @Test
     public void orgIdsTest() {
         // TODO: test orgIds
     }
+
 }

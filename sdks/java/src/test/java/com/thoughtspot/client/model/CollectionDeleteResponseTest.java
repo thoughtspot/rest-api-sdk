@@ -4,27 +4,47 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.CollectionDeleteTypeIdentifiers;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for CollectionDeleteResponse */
+/**
+ * Model tests for CollectionDeleteResponse
+ */
 public class CollectionDeleteResponseTest {
     private final CollectionDeleteResponse model = new CollectionDeleteResponse();
 
-    /** Model tests for CollectionDeleteResponse */
+    /**
+     * Model tests for CollectionDeleteResponse
+     */
     @Test
     public void testCollectionDeleteResponse() {
         // TODO: test CollectionDeleteResponse
     }
 
-    /** Test the property 'metadataDeleted' */
+    /**
+     * Test the property 'metadataDeleted'
+     */
     @Test
     public void metadataDeletedTest() {
         // TODO: test metadataDeleted
     }
 
-    /** Test the property 'metadataSkipped' */
+    /**
+     * Test the property 'metadataSkipped'
+     */
     @Test
     public void metadataSkippedTest() {
         // TODO: test metadataSkipped
     }
+
 }
