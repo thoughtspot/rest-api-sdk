@@ -8,7 +8,9 @@ import com.thoughtspot.client.ApiException;
 import com.thoughtspot.client.model.CreateConnectionRequest;
 import com.thoughtspot.client.model.CreateConnectionResponse;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
+import com.thoughtspot.client.model.ErrorResponse;
 import com.thoughtspot.client.model.FetchConnectionDiffStatusResponse;
+import java.io.File;
 import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
 import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.SearchConnectionRequest;
@@ -18,78 +20,25 @@ import com.thoughtspot.client.model.SyncMetadataResponse;
 import com.thoughtspot.client.model.UpdateConnectionRequest;
 import com.thoughtspot.client.model.UpdateConnectionStatusRequest;
 import com.thoughtspot.client.model.UpdateConnectionV2Request;
-import java.io.File;
-import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** API tests for ConnectionsApi */
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.io.InputStream;
+
+/**
+ * API tests for ConnectionsApi
+ */
 @Disabled
 public class ConnectionsApiTest {
 
     private final ConnectionsApi api = new ConnectionsApi();
 
     /**
-     * Version: 9.2.0.cl or later Creates a connection to a data warehouse for live query services.
-     * Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60;
-     * (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
-     * required. #### Create a connection without tables To create a connection without tables: 1.
-     * Pass these parameters in your API request. * Name of the connection. * Type of the data
-     * warehouse to connect to. * A JSON map of configuration attributes in
-     * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
-     * for a SnowFlake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
-     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
-     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
-     * [\&quot;DB1\&quot;, \&quot;DB2\&quot;], \&quot;externalDatabases\&quot;:[ ] }
-     * &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to &#x60;false&#x60;. **NOTE:** If the
-     * &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly
-     * provide the authenticationType property in the payload. If you do not specify
-     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. ####
-     * Create a connection with tables If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and
-     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
-     * required. To create a connection with tables: 1. Pass these parameters in your API request. *
-     * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of
-     * configuration attributes, database details, and table properties in
-     * &#x60;data_warehouse_config&#x60; as shown in the following example: &#x60;&#x60;&#x60; {
-     * \&quot;configuration\&quot;:{ \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
-     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
-     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
-     * [\&quot;DB1\&quot;, \&quot;DB2\&quot;, \&quot;AllDatatypes\&quot;],
-     * \&quot;externalDatabases\&quot;:[ { \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,
-     * \&quot;isAutoCreated\&quot;:false, \&quot;schemas\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;alldatatypes\&quot;, \&quot;tables\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;allDatatypes\&quot;, \&quot;type\&quot;:\&quot;TABLE\&quot;,
-     * \&quot;description\&quot;:\&quot;\&quot;, \&quot;selected\&quot;:true,
-     * \&quot;linked\&quot;:true, \&quot;columns\&quot;:[ {
-     * \&quot;name\&quot;:\&quot;CNUMBER\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; }, {
-     * \&quot;name\&quot;:\&quot;CDECIMAL\&quot;, \&quot;type\&quot;:\&quot;INT64\&quot;,
-     * \&quot;canImport\&quot;:true, \&quot;selected\&quot;:true, \&quot;isLinkedActive\&quot;:true,
-     * \&quot;isImported\&quot;:false, \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,
-     * \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,
-     * \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot; } ] } ] } ] } ] } &#x60;&#x60;&#x60; 2. Set
-     * &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is
-     * anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType
-     * property in the payload. If you do not specify authenticationType, the API will default to
-     * SERVICE_ACCOUNT as the authentication type. The optional &#x60;databases&#x60; property in
-     * &#x60;data_warehouse_config&#x60; accepts a list of database names. When specified,
-     * ThoughtSpot persists this list on the connection and uses it to scope metadata fetching to
-     * only the specified databases in subsequent table add and remove operations. If omitted, all
-     * databases in the data warehouse are accessible for metadata operations. The
-     * &#x60;databases&#x60; and &#x60;externalDatabases&#x60; serve different purposes.
-     * &#x60;databases&#x60; is a flat list of database names that controls which databases are
-     * scanned during metadata operations. &#x60;externalDatabases&#x60; defines the full table
-     * hierarchy and determines which tables are linked into ThoughtSpot.
+     *   Version: 9.2.0.cl or later   Creates a connection to a data warehouse for live query services.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  #### Create a connection without tables  To create a connection without tables:  1. Pass these parameters in your API request.  * Name of the connection.  * Type of the data warehouse to connect to.  * A JSON map of configuration attributes in &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes for a SnowFlake connection:   &#x60;&#x60;&#x60;   {      \&quot;configuration\&quot;:{         \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,         \&quot;user\&quot;:\&quot;tsadmin\&quot;,         \&quot;password\&quot;:\&quot;TestConn123\&quot;,         \&quot;role\&quot;:\&quot;sysadmin\&quot;,         \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;      },      \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,      \&quot;databases\&quot;: [\&quot;DB1\&quot;, \&quot;DB2\&quot;],      \&quot;externalDatabases\&quot;:[       ]   }   &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to &#x60;false&#x60;.  **NOTE:** If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  #### Create a connection with tables  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) and &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is required.  To create a connection with tables:  1. Pass these parameters in your API request. * Name of the connection. * Type of the data warehouse to connect to. * A JSON map of configuration attributes, database details, and table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:   &#x60;&#x60;&#x60;   {      \&quot;configuration\&quot;:{         \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,         \&quot;user\&quot;:\&quot;tsadmin\&quot;,         \&quot;password\&quot;:\&quot;TestConn123\&quot;,         \&quot;role\&quot;:\&quot;sysadmin\&quot;,         \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;      },      \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,      \&quot;databases\&quot;: [\&quot;DB1\&quot;, \&quot;DB2\&quot;, \&quot;AllDatatypes\&quot;],      \&quot;externalDatabases\&quot;:[         {            \&quot;name\&quot;:\&quot;AllDatatypes\&quot;,            \&quot;isAutoCreated\&quot;:false,            \&quot;schemas\&quot;:[               {                  \&quot;name\&quot;:\&quot;alldatatypes\&quot;,                  \&quot;tables\&quot;:[                     {                        \&quot;name\&quot;:\&quot;allDatatypes\&quot;,                        \&quot;type\&quot;:\&quot;TABLE\&quot;,                        \&quot;description\&quot;:\&quot;\&quot;,                        \&quot;selected\&quot;:true,                        \&quot;linked\&quot;:true,                        \&quot;columns\&quot;:[                           {                              \&quot;name\&quot;:\&quot;CNUMBER\&quot;,                              \&quot;type\&quot;:\&quot;INT64\&quot;,                              \&quot;canImport\&quot;:true,                              \&quot;selected\&quot;:true,                              \&quot;isLinkedActive\&quot;:true,                              \&quot;isImported\&quot;:false,                              \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,                              \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,                              \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot;                           },                           {                              \&quot;name\&quot;:\&quot;CDECIMAL\&quot;,                              \&quot;type\&quot;:\&quot;INT64\&quot;,                              \&quot;canImport\&quot;:true,                              \&quot;selected\&quot;:true,                              \&quot;isLinkedActive\&quot;:true,                              \&quot;isImported\&quot;:false,                              \&quot;tableName\&quot;:\&quot;allDatatypes\&quot;,                              \&quot;schemaName\&quot;:\&quot;alldatatypes\&quot;,                              \&quot;dbName\&quot;:\&quot;AllDatatypes\&quot;                           }                        ]                     }                  ]               }            ]         }      ]   }   &#x60;&#x60;&#x60; 2. Set &#x60;validate&#x60; to &#x60;true&#x60;.  **NOTE:** If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.  The optional &#x60;databases&#x60; property in &#x60;data_warehouse_config&#x60; accepts a list of database names. When specified, ThoughtSpot persists this list on the connection and uses it to scope metadata fetching to only the specified databases in subsequent table add and remove operations. If omitted, all databases in the data warehouse are accessible for metadata operations.  The &#x60;databases&#x60; and &#x60;externalDatabases&#x60; serve different purposes. &#x60;databases&#x60; is a flat list of database names that controls which databases are scanned during metadata operations. &#x60;externalDatabases&#x60; defines the full table hierarchy and determines which tables are linked into ThoughtSpot.      
      *
      * @throws ApiException if the Api call fails
      */
@@ -101,16 +50,7 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Version: 9.2.0.cl or later **Important**: This endpoint is deprecated and will be removed
-     * from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Delete
-     * Connection V2](#/http/api-endpoints/connections/delete-connection-v2) endpoint to delete your
-     * connection objects. #### Usage guidelines Deletes a connection object. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. **Note**: If a connection has dependent objects, make
-     * sure you remove its associations before the delete operation.
+     *   Version: 9.2.0.cl or later    **Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Delete Connection V2](#/http/api-endpoints/connections/delete-connection-v2) endpoint to delete your connection objects.    #### Usage guidelines  Deletes a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.     
      *
      * @throws ApiException if the Api call fails
      */
@@ -122,13 +62,7 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Version: 10.4.0.cl or later Deletes a connection object. **Note**: If a connection has
-     * dependent objects, make sure you remove its associations before the delete operation.
-     * Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the
-     * connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.
-     * If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
-     * enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required.
+     *   Version: 10.4.0.cl or later   Deletes a connection object.  **Note**: If a connection has dependent objects, make sure you remove its associations before the delete operation.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.      
      *
      * @throws ApiException if the Api call fails
      */
@@ -140,15 +74,7 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Version: 9.9.0.cl or later Exports the difference in connection metadata between CDW and
-     * ThoughtSpot Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the following Data control privileges may be required: -
-     * &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) -
-     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
-     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) To download the
-     * connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as
-     * &#x60;connection_identifier&#x60; in the API request.
+     *   Version: 9.9.0.cl or later   Exports the difference in connection metadata between CDW and ThoughtSpot  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:   - &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)  To download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as &#x60;connection_identifier&#x60; in the API request.      
      *
      * @throws ApiException if the Api call fails
      */
@@ -160,52 +86,19 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Version: 9.9.0.cl or later Validates the difference in connection metadata between CDW and
-     * ThoughtSpot. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the following Data control privileges may be required: -
-     * &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) -
-     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) -
-     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) Returns a boolean
-     * indicating whether there is any difference between the connection metadata at ThoughtSpot and
-     * CDW. To get the connection metadata difference status, pass the connection GUID as
-     * &#x60;connection_identifier&#x60; in the API request.
+     *   Version: 9.9.0.cl or later   Validates the difference in connection metadata between CDW and ThoughtSpot.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_MANAGE_CUSTOM_CALENDAR&#x60;(**Can manage custom calendars**) - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**)  Returns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.  To get the connection metadata difference status, pass the connection GUID as &#x60;connection_identifier&#x60; in the API request.      
      *
      * @throws ApiException if the Api call fails
      */
     @Test
     public void fetchConnectionDiffStatusTest() throws ApiException {
         String connectionIdentifier = null;
-        FetchConnectionDiffStatusResponse response =
-                api.fetchConnectionDiffStatus(connectionIdentifier);
+        FetchConnectionDiffStatusResponse response = api.fetchConnectionDiffStatus(connectionIdentifier);
         // TODO: test validations
     }
 
     /**
-     * Version: 26.2.0.cl or later Revokes OAuth refresh tokens for users who no longer require
-     * access to a data warehouse connection. When a token is revoked, the affected user&#39;s
-     * session for that connection is terminated, and they must re-authenticate to regain access.
-     * Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance,
-     * users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**)
-     * privilege can also make API requests to revoke tokens for connection users. #### Usage
-     * guidelines You can specify different combinations of identifiers to control which refresh
-     * tokens are revoked. - **connection_identifier**: Revokes refresh tokens for all users of the
-     * connection, except the connection author. - **connection_identifier** and
-     * **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If
-     * the name or ID of the connection author is included in the request, their token will also be
-     * revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh
-     * tokens for all users on the specified configurations, except the configuration author. -
-     * **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes
-     * refresh tokens for the specified users on the specified configurations. -
-     * **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified
-     * Orgs. Applicable only for published connections. - **connection_identifier**,
-     * **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users
-     * in the specified Orgs. Applicable only for published connections. **NOTE**: The
-     * &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using
-     * this parameter for unpublished connections will result in an error. Ensure that the
-     * connections are published before making the API request.
+     *   Version: 26.2.0.cl or later   Revokes OAuth refresh tokens for users who no longer require access to a data warehouse connection. When a token is revoked, the affected user&#39;s session for that connection is terminated, and they must re-authenticate to regain access.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on the ThoughtSpot instance, users with &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege can also make API requests to revoke tokens for connection users.  #### Usage guidelines  You can specify different combinations of identifiers to control which refresh tokens are revoked.  - **connection_identifier**: Revokes refresh tokens for all users of the connection, except the connection author. - **connection_identifier** and **user_identifiers**: Revokes refresh tokens only for the users specified in the request. If the name or ID of the connection author is included in the request, their token will also be revoked. - **connection_identifier** and **configuration_identifiers**: Revokes refresh tokens for all users on the specified configurations, except the configuration author. - **connection_identifier**, **configuration_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users on the specified configurations. - **connection_identifier** and **org_identifiers**: Revokes refresh tokens for the specified Orgs. Applicable only for published connections. - **connection_identifier**, **org_identifiers**, and **user_identifiers**: Revokes refresh tokens for the specified users in the specified Orgs. Applicable only for published connections.  **NOTE**: The &#x60;org_identifiers&#x60; parameter is only applicable for published connections. Using this parameter for unpublished connections will result in an error. Ensure that the connections are published before making the API request.      
      *
      * @throws ApiException if the Api call fails
      */
@@ -213,83 +106,12 @@ public class ConnectionsApiTest {
     public void revokeRefreshTokensTest() throws ApiException {
         String connectionIdentifier = null;
         RevokeRefreshTokensRequest revokeRefreshTokensRequest = null;
-        RevokeRefreshTokensResponse response =
-                api.revokeRefreshTokens(connectionIdentifier, revokeRefreshTokensRequest);
+        RevokeRefreshTokensResponse response = api.revokeRefreshTokens(connectionIdentifier, revokeRefreshTokensRequest);
         // TODO: test validations
     }
 
     /**
-     * Version: 9.2.0.cl or later Gets connection objects. Requires &#x60;DATAMANAGEMENT&#x60;
-     * (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
-     * privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
-     * required. - To get a list of all connections available in the ThoughtSpot system, send the
-     * API request without any attributes in the request body. - To get the connection objects for a
-     * specific type of data warehouse, specify the type in &#x60;data_warehouse_types&#x60;. - To
-     * fetch details of a connection object, specify the connection object GUID or name. The
-     * &#x60;name_pattern&#x60; attribute allows passing partial text with &#x60;%&#x60; for a
-     * wildcard match. - To get details of the database, schemas, tables, or columns from a data
-     * connection object, specify &#x60;data_warehouse_object_type&#x60;. - To get a specific
-     * database, schema, table, or column from a connection object, define the object type in
-     * &#x60;data_warehouse_object_type&#x60; and object properties in the
-     * &#x60;data_warehouse_objects&#x60; array. For example, to search for a column, you must pass
-     * the database, schema, and table names in the API request. Note that in the following example,
-     * object properties are set in a hierarchical order (&#x60;database&#x60; &gt;
-     * &#x60;schema&#x60; &gt; &#x60;table&#x60; &gt; &#x60;column&#x60;). &#x60;&#x60;&#x60; {
-     * \&quot;connections\&quot;: [ { \&quot;identifier\&quot;:
-     * \&quot;b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\&quot;, \&quot;data_warehouse_objects\&quot;: [ {
-     * \&quot;database\&quot;: \&quot;NEBULADEV\&quot;, \&quot;schema\&quot;:
-     * \&quot;INFORMATION_SCHEMA\&quot;, \&quot;table\&quot;: \&quot;APPLICABLE_ROLES\&quot;,
-     * \&quot;column\&quot;: \&quot;ROLE_NAME\&quot; } ] } ],
-     * \&quot;data_warehouse_object_type\&quot;: \&quot;COLUMN\&quot; } &#x60;&#x60;&#x60; - To
-     * fetch data by &#x60;configuration&#x60;, specify &#x60;data_warehouse_object_type&#x60;. For
-     * example, to fetch columns from the &#x60;DEVELOPMENT&#x60; database, specify the
-     * &#x60;data_warehouse_object_type&#x60; as &#x60;DATABASE&#x60; and define the
-     * &#x60;configuration&#x60; string as
-     * &#x60;{\&quot;database\&quot;:\&quot;DEVELOPMENT\&quot;}&#x60;. To get column data for a
-     * specific table, specify the table, for
-     * example,&#x60;{\&quot;database\&quot;:\&quot;RETAILAPPAREL\&quot;,\&quot;table\&quot;:\&quot;PIPES\&quot;}&#x60;.
-     * - To query connections by &#x60;authentication_type&#x60;, specify
-     * &#x60;data_warehouse_object_type&#x60;. Supported values for &#x60;authentication_type&#x60;
-     * are: - &#x60;SERVICE_ACCOUNT&#x60;: For connections that require service account credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. - &#x60;OAUTH&#x60;: For
-     * connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and
-     * fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth
-     * authentication type. - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This
-     * authentication type is supported on Amazon Redshift connections only. - &#x60;EXTOAUTH&#x60;:
-     * For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with
-     * Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/
-     * connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data
-     * connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth). -
-     * &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to
-     * authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that
-     * require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and
-     * fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo
-     * connections only. - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External
-     * OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch
-     * data. This authentication type is supported on Snowflake connections only. -
-     * &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Amazon Redshift connections only. - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;:
-     * For connections that require OAuth With Service Principal account credentials to authenticate
-     * to the Cloud Data Warehouse and fetch data. This authentication type is supported on
-     * Databricks connections only. - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that
-     * require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse
-     * and fetch data. This authentication type is supported on Databricks connections only. -
-     * &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials
-     * to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is
-     * supported on Snowflake connections only. - To include more details about connection objects
-     * in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort
-     * the output by field names and filter connections by tags. **NOTE**: In addition to the
-     * connection GUID and name, the &#x60;identifier&#x60; field on each entry in
-     * &#x60;connections&#x60; accepts a Custom object ID if one is configured for the connection.
-     * The response also includes the &#x60;obj_id&#x60; field for each connection that has one set.
-     * **NOTE**: When filtering connection records by parameters other than
-     * &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure that you set
-     * &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60; for
-     * precise results.
+     *   Version: 9.2.0.cl or later   Gets connection objects. Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  - To get a list of all connections available in the ThoughtSpot system, send the API request without any attributes in the request body. - To get the connection objects for a specific type of data warehouse, specify the type in &#x60;data_warehouse_types&#x60;. - To fetch details of a connection object, specify the connection object GUID or name. The &#x60;name_pattern&#x60; attribute allows passing partial text with &#x60;%&#x60; for a wildcard match. - To get details of the database, schemas, tables, or columns from a data connection object, specify &#x60;data_warehouse_object_type&#x60;. - To get a specific database, schema, table, or column from a connection object, define the object type in &#x60;data_warehouse_object_type&#x60; and object properties in the &#x60;data_warehouse_objects&#x60; array. For example, to search for a column, you must pass the database, schema, and table names in the API request.   Note that in the following example, object properties are set in a hierarchical order (&#x60;database&#x60; &gt; &#x60;schema&#x60; &gt; &#x60;table&#x60; &gt; &#x60;column&#x60;).  &#x60;&#x60;&#x60; {   \&quot;connections\&quot;: [     {       \&quot;identifier\&quot;: \&quot;b9d1f2ef-fa65-4a4b-994e-30fa2d57b0c2\&quot;,       \&quot;data_warehouse_objects\&quot;: [         {           \&quot;database\&quot;: \&quot;NEBULADEV\&quot;,           \&quot;schema\&quot;: \&quot;INFORMATION_SCHEMA\&quot;,           \&quot;table\&quot;: \&quot;APPLICABLE_ROLES\&quot;,           \&quot;column\&quot;: \&quot;ROLE_NAME\&quot;         }       ]     }   ],   \&quot;data_warehouse_object_type\&quot;: \&quot;COLUMN\&quot; } &#x60;&#x60;&#x60;  - To fetch data by &#x60;configuration&#x60;, specify &#x60;data_warehouse_object_type&#x60;. For example, to fetch columns from the &#x60;DEVELOPMENT&#x60; database, specify the &#x60;data_warehouse_object_type&#x60; as &#x60;DATABASE&#x60; and define the &#x60;configuration&#x60; string as &#x60;{\&quot;database\&quot;:\&quot;DEVELOPMENT\&quot;}&#x60;. To get column data for a specific table, specify the table, for example,&#x60;{\&quot;database\&quot;:\&quot;RETAILAPPAREL\&quot;,\&quot;table\&quot;:\&quot;PIPES\&quot;}&#x60;. - To query connections by &#x60;authentication_type&#x60;, specify &#x60;data_warehouse_object_type&#x60;. Supported values for &#x60;authentication_type&#x60; are:   - &#x60;SERVICE_ACCOUNT&#x60;: For connections that require service account credentials to authenticate to the Cloud Data Warehouse and fetch data.   - &#x60;OAUTH&#x60;: For connections that require OAuth credentials to authenticate to the Cloud Data Warehouse and fetch data. Teradata, Oracle, and Presto Cloud Data Warehouses do not support the OAuth authentication type.   - &#x60;IAM&#x60;: For connections that have the IAM OAuth set up. This authentication type is supported on Amazon Redshift connections only.   - &#x60;EXTOAUTH&#x60;: For connections that have External OAuth set up. ThoughtSpot supports external [OAuth with Microsoft Azure Active Directory (AD)](https://docs.thoughtspot.com/cloud/latest/ connections-snowflake-azure-ad-oauth) and [Okta for Snowflake data connections](https://docs.thoughtspot.com/cloud/latest/connections-snowflake-okta-oauth).   - &#x60;KEY_PAIR&#x60;: For connections that require Key Pair account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - &#x60;OAUTH_WITH_PKCE&#x60;: For connections that require OAuth with PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake, Starburst, Databricks, Denodo  connections only.   - &#x60;EXTOAUTH_WITH_PKCE&#x60;: For connections that require External OAuth With PKCE account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only.   - &#x60;OAUTH_WITH_PEZ&#x60;: For connections that require OAuth With PEZ account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Amazon Redshift connections only.   - &#x60;OAUTH_WITH_SERVICE_PRINCIPAL&#x60;: For connections that require OAuth With Service Principal account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - &#x60;PERSONAL_ACCESS_TOKEN&#x60;: For connections that require Personal Access Token account credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Databricks connections only.   - &#x60;OAUTH_CLIENT_CREDENTIALS&#x60;: For connections that require OAuth Client Credentials to authenticate to the Cloud Data Warehouse and fetch data. This authentication type is supported on Snowflake connections only. - To include more details about connection objects in the API response, set &#x60;include_details&#x60; to &#x60;true&#x60;. - You can also sort the output by field names and filter connections by tags.  **NOTE**: In addition to the connection GUID and name, the &#x60;identifier&#x60; field on each entry in &#x60;connections&#x60; accepts a Custom object ID if one is configured for the connection. The response also includes the &#x60;obj_id&#x60; field for each connection that has one set.  **NOTE**: When filtering connection records by parameters other than &#x60;data_warehouse_types&#x60; or &#x60;tag_identifiers&#x60;, ensure that you set &#x60;record_size&#x60; to &#x60;-1&#x60; and &#x60;record_offset&#x60; to &#x60;0&#x60; for precise results.      
      *
      * @throws ApiException if the Api call fails
      */
@@ -301,32 +123,7 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Version: 26.5.0.cl or later Synchronizes connection metadata attributes from your Cloud Data
-     * Warehouse (CDW) with ThoughtSpot. Requires the &#x60;DATAMANAGEMENT&#x60; (**Can manage
-     * data**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is
-     * required. #### Usage guidelines To synchronize attributes from a CDW, specify the connection
-     * GUID or name in the &#x60;connection_identifier&#x60; path parameter and
-     * &#x60;sync_attributes&#x60; in the request body. Default attribute is
-     * &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;. ##### Hierarchical schema * Connection: The
-     * connection object for the sync operation. * Tables: Tables for the sync operation. When no
-     * table is specified, all tables are synchronized. * Columns: If the table is specified, you
-     * can add the columns for the sync operation. If no columns are specified, all columns in the
-     * specified table are considered for the sync operation. To set the scope for the sync
-     * operation: * Connection-level: To sync all tables and columns, pass an empty request body, or
-     * only the attributes in the request body. * Table-level: To synchronize specific tables and
-     * their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level:
-     * To synchronize specific columns, specify the table identifier as the key and column
-     * identifiers as the value in the &#x60;tables&#x60; array. &#x60;&#x60;&#x60; {
-     * \&quot;tables\&quot;: [ {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;,
-     * \&quot;column-guid-2\&quot;]}, \&quot;table-guid-2\&quot; ], \&quot;sync_attributes\&quot;:
-     * [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60; ##### API response If the sync operation is
-     * successful, the API returns the following information: * Status of the sync operation. For
-     * example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number
-     * of tables and columns that were updated. * Number of tables and columns with the sync failed
-     * status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating
-     * the sync results.
+     *   Version: 26.5.0.cl or later   Synchronizes connection metadata attributes from your Cloud Data Warehouse (CDW) with ThoughtSpot.  Requires the  &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (**Can manage data models**) privilege is required.  #### Usage guidelines  To synchronize attributes from a CDW, specify the connection GUID or name in the &#x60;connection_identifier&#x60; path parameter and  &#x60;sync_attributes&#x60; in the request body. Default attribute is &#x60;[\&quot;DESCRIPTION\&quot;]&#x60;.  ##### Hierarchical schema  * Connection: The connection object for the sync operation. * Tables: Tables for the sync operation. When no table is specified, all tables are synchronized. * Columns: If the table is specified, you can add the columns for the sync operation. If no columns are specified, all columns in the specified table are considered for the sync operation.  To set the scope for the sync operation:  * Connection-level: To sync all tables and columns, pass an empty request body, or only the attributes in the request body. * Table-level: To synchronize specific tables and their columns, specify the table identifiers in the &#x60;tables&#x60; array. * Column-level: To synchronize specific columns, specify the table identifier as the key and column identifiers as the value in the &#x60;tables&#x60; array.  &#x60;&#x60;&#x60; {   \&quot;tables\&quot;: [     {\&quot;table-guid-1\&quot;: [\&quot;column-guid-1\&quot;, \&quot;column-guid-2\&quot;]},     \&quot;table-guid-2\&quot;   ],   \&quot;sync_attributes\&quot;: [\&quot;DESCRIPTION\&quot;] } &#x60;&#x60;&#x60;  ##### API response  If the sync operation is successful, the API returns the following information:  * Status of the sync operation. For example, &#x60;SUCCESS&#x60;, &#x60;PARTIAL_SUCCESS&#x60;, or &#x60;NO_UPDATE&#x60;. * Number of tables and columns that were updated. * Number of tables and columns with the sync failed status when the overall sync status is &#x60;PARTIAL_SUCCESS&#x60;. * Message text indicating the sync results.      
      *
      * @throws ApiException if the Api call fails
      */
@@ -339,20 +136,7 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Version: 9.2.0.cl or later **Important**: This endpoint is deprecated and will be removed
-     * from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Update
-     * connection V2](#/http/api-endpoints/connections/update-connection-v2) endpoint to update your
-     * connection objects. #### Usage guidelines Updates a connection object. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection
-     * object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit
-     * Connections**) privilege is required. To update a connection object, pass these parameters in
-     * your API request: 1. GUID of the connection object. 2. If you are updating tables or database
-     * schema of a connection object: a. Add the updated JSON map of metadata with database, schema,
-     * and tables in &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to
-     * &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or
-     * description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.
+     *   Version: 9.2.0.cl or later   **Important**: This endpoint is deprecated and will be removed from ThoughtSpot in September 2025. ThoughtSpot strongly recommends using the [Update connection V2](#/http/api-endpoints/connections/update-connection-v2) endpoint to update your connection objects.  #### Usage guidelines  Updates a connection object.    Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;. 3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.      
      *
      * @throws ApiException if the Api call fails
      */
@@ -364,19 +148,7 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Version: 26.6.0.cl or later Activates or deactivates a connection. A deactivated connection
-     * cannot be used for queries or operations until it is activated again. Requires
-     * &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
-     * required. Only the connection owner or an administrator can perform this operation. ####
-     * Usage guidelines To update the status of a connection, specify the connection GUID or name in
-     * the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in
-     * the request body. - **ACTIVATED**: Enables the connection. Queries and operations can resume
-     * on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove
-     * the connection metadata, but only makes the connection unavailable for queries and
-     * operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;:
-     * \&quot;ACTIVATED\&quot;.
+     *   Version: 26.6.0.cl or later   Activates or deactivates a connection. A deactivated connection cannot be used for queries or operations until it is activated again.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required. Only the connection owner or an administrator can perform this operation.  #### Usage guidelines  To update the status of a connection, specify the connection GUID or name in the &#x60;connection_identifier&#x60; path parameter and the desired &#x60;status&#x60; in the request body.  - **ACTIVATED**: Enables the connection. Queries and operations can resume on an activated connection. - **DEACTIVATED**: Disables the connection. It does not remove the connection metadata, but only makes the connection unavailable for queries and operations. You can reactivate a deactivated connection by setting \&quot;status\&quot;: \&quot;ACTIVATED\&quot;.       
      *
      * @throws ApiException if the Api call fails
      */
@@ -389,101 +161,7 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Version: 10.4.0.cl or later Updates a connection object. Requires &#x60;DATAMANAGEMENT&#x60;
-     * (**Can manage data**) and edit permissions to the connection object, or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is
-     * required. To update a connection object, pass these parameters in your API request: 1. GUID
-     * of the connection object. 2. If you are updating tables or database schema of a connection
-     * object: a. Add the updated JSON map of metadata with database, schema, and tables in
-     * &#x60;data_warehouse_config&#x60;. b. Set &#x60;validate&#x60; to &#x60;true&#x60;. **NOTE:**
-     * If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must
-     * explicitly provide the authenticationType property in the payload. If you do not specify
-     * authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type. * A
-     * JSON map of configuration attributes, database details, and table properties in
-     * &#x60;data_warehouse_config&#x60; as shown in the following example: * This is an example of
-     * updating a single table in a empty connection: &#x60;&#x60;&#x60; {
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
-     * [\&quot;DB2\&quot;, \&quot;DB3\&quot;, \&quot;DEVELOPMENT\&quot;],
-     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
-     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
-     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
-     * \&quot;DEMORENAME\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
-     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
-     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
-     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
-     * \&quot;columns\&quot;: [ { \&quot;name\&quot;: \&quot;Col1\&quot;, \&quot;type\&quot;:
-     * \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true, \&quot;selected\&quot;: true,
-     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;isLinkedActive\&quot;: true,
-     * \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;: \&quot;Col2\&quot;,
-     * \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
-     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
-     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
-     * \&quot;Col3\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
-     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
-     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
-     * \&quot;Col312\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;:
-     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
-     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
-     * \&quot;Col4\&quot;, \&quot;type\&quot;: \&quot;VARCHAR\&quot;, \&quot;canImport\&quot;: true,
-     * \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
-     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
-     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
-     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
-     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
-     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
-     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; * This is an example of
-     * updating a single table in an existing connection with tables: &#x60;&#x60;&#x60; {
-     * \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;, \&quot;databases\&quot;:
-     * [\&quot;DB2\&quot;, \&quot;DB3\&quot;, \&quot;DEVELOPMENT\&quot;],
-     * \&quot;externalDatabases\&quot;: [ { \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,
-     * \&quot;isAutoCreated\&quot;: false, \&quot;schemas\&quot;: [ { \&quot;name\&quot;:
-     * \&quot;TS_dataset\&quot;, \&quot;tables\&quot;: [ { \&quot;name\&quot;:
-     * \&quot;CUSTOMER\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;, \&quot;description\&quot;:
-     * \&quot;\&quot;, \&quot;selected\&quot;: true, \&quot;linked\&quot;: true, \&quot;gid\&quot;:
-     * 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;, \&quot;subType\&quot;: \&quot;\&quot;,
-     * \&quot;reportId\&quot;: \&quot;\&quot;, \&quot;viewId\&quot;: \&quot;\&quot;,
-     * \&quot;columns\&quot;: [], \&quot;relationships\&quot;: [] }, { \&quot;name\&quot;:
-     * \&quot;tpch5k_falcon_default_schema_users\&quot;, \&quot;type\&quot;: \&quot;TABLE\&quot;,
-     * \&quot;description\&quot;: \&quot;\&quot;, \&quot;selected\&quot;: true,
-     * \&quot;linked\&quot;: true, \&quot;gid\&quot;: 0, \&quot;datasetId\&quot;: \&quot;-1\&quot;,
-     * \&quot;subType\&quot;: \&quot;\&quot;, \&quot;reportId\&quot;: \&quot;\&quot;,
-     * \&quot;viewId\&quot;: \&quot;\&quot;, \&quot;columns\&quot;: [ { \&quot;name\&quot;:
-     * \&quot;user_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
-     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
-     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
-     * \&quot;product_id\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
-     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
-     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false }, { \&quot;name\&quot;:
-     * \&quot;user_cost\&quot;, \&quot;type\&quot;: \&quot;INT64\&quot;, \&quot;canImport\&quot;:
-     * true, \&quot;selected\&quot;: true, \&quot;description\&quot;: \&quot;\&quot;,
-     * \&quot;isLinkedActive\&quot;: true, \&quot;isAggregate\&quot;: false } ],
-     * \&quot;relationships\&quot;: [] } ] } ] } ], \&quot;configuration\&quot;: {
-     * \&quot;password\&quot;: \&quot;\&quot;, \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,
-     * \&quot;role\&quot;: \&quot;DEV\&quot;, \&quot;accountName\&quot;:
-     * \&quot;thoughtspot_partner\&quot;, \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,
-     * \&quot;user\&quot;: \&quot;DEV_USER\&quot; } } &#x60;&#x60;&#x60; 3. If you are updating a
-     * configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to
-     * &#x60;false&#x60;. **NOTE:** If the &#x60;authentication_type&#x60; is anything other than
-     * SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload.
-     * If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the
-     * authentication type. * A JSON map of configuration attributes in
-     * &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes
-     * for a Snowflake connection: &#x60;&#x60;&#x60; { \&quot;configuration\&quot;:{
-     * \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,
-     * \&quot;user\&quot;:\&quot;tsadmin\&quot;, \&quot;password\&quot;:\&quot;TestConn123\&quot;,
-     * \&quot;role\&quot;:\&quot;sysadmin\&quot;, \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot; },
-     * \&quot;databases\&quot;:[\&quot;DB1\&quot;, \&quot;DB2\&quot;],
-     * \&quot;externalDatabases\&quot;:[ ] } &#x60;&#x60;&#x60; The optional &#x60;databases&#x60;
-     * property in &#x60;data_warehouse_config&#x60; accepts a list of database names. When
-     * specified, ThoughtSpot persists this list on the connection and uses it to scope metadata
-     * fetching to only the specified databases in subsequent table add and remove operations. If
-     * omitted, all databases in the data warehouse are accessible for metadata operations. The
-     * &#x60;databases&#x60; and &#x60;externalDatabases&#x60; serve different purposes.
-     * &#x60;databases&#x60; is a flat list of database names that controls which databases are
-     * scanned during metadata operations. &#x60;externalDatabases&#x60; defines the full table
-     * hierarchy and determines which tables are linked into ThoughtSpot.
+     *   Version: 10.4.0.cl or later   Updates a connection object.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) and edit permissions to the connection object, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) privilege is required.  To update a connection object, pass these parameters in your API request:  1. GUID of the connection object. 2. If you are updating tables or database schema of a connection object:    a. Add the updated JSON map of metadata with database, schema, and tables in &#x60;data_warehouse_config&#x60;.    b. Set &#x60;validate&#x60; to &#x60;true&#x60;.        **NOTE:** If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.     * A JSON map of configuration attributes, database details, and table properties in &#x60;data_warehouse_config&#x60; as shown in the following example:    * This is an example of updating a single table in a empty connection:           &#x60;&#x60;&#x60;       {         \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,         \&quot;databases\&quot;: [\&quot;DB2\&quot;, \&quot;DB3\&quot;, \&quot;DEVELOPMENT\&quot;],         \&quot;externalDatabases\&quot;: [           {             \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,             \&quot;isAutoCreated\&quot;: false,             \&quot;schemas\&quot;: [               {                 \&quot;name\&quot;: \&quot;TS_dataset\&quot;,                 \&quot;tables\&quot;: [                   {                     \&quot;name\&quot;: \&quot;DEMORENAME\&quot;,                     \&quot;type\&quot;: \&quot;TABLE\&quot;,                     \&quot;description\&quot;: \&quot;\&quot;,                     \&quot;selected\&quot;: true,                     \&quot;linked\&quot;: true,                     \&quot;gid\&quot;: 0,                     \&quot;datasetId\&quot;: \&quot;-1\&quot;,                     \&quot;subType\&quot;: \&quot;\&quot;,                     \&quot;reportId\&quot;: \&quot;\&quot;,                     \&quot;viewId\&quot;: \&quot;\&quot;,                     \&quot;columns\&quot;: [                       {                         \&quot;name\&quot;: \&quot;Col1\&quot;,                         \&quot;type\&quot;: \&quot;VARCHAR\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;Col2\&quot;,                         \&quot;type\&quot;: \&quot;VARCHAR\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;Col3\&quot;,                         \&quot;type\&quot;: \&quot;VARCHAR\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;Col312\&quot;,                         \&quot;type\&quot;: \&quot;VARCHAR\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;Col4\&quot;,                         \&quot;type\&quot;: \&quot;VARCHAR\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       }                     ],                     \&quot;relationships\&quot;: []                   }                 ]               }             ]           }         ],         \&quot;configuration\&quot;: {           \&quot;password\&quot;: \&quot;\&quot;,           \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,           \&quot;role\&quot;: \&quot;DEV\&quot;,           \&quot;accountName\&quot;: \&quot;thoughtspot_partner\&quot;,           \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,           \&quot;user\&quot;: \&quot;DEV_USER\&quot;         }       }       &#x60;&#x60;&#x60;        * This is an example of updating a single table in an existing connection with tables:            &#x60;&#x60;&#x60;       {         \&quot;authenticationType\&quot;: \&quot;SERVICE_ACCOUNT\&quot;,         \&quot;databases\&quot;: [\&quot;DB2\&quot;, \&quot;DB3\&quot;, \&quot;DEVELOPMENT\&quot;],         \&quot;externalDatabases\&quot;: [           {             \&quot;name\&quot;: \&quot;DEVELOPMENT\&quot;,             \&quot;isAutoCreated\&quot;: false,             \&quot;schemas\&quot;: [               {                 \&quot;name\&quot;: \&quot;TS_dataset\&quot;,                 \&quot;tables\&quot;: [                   {                     \&quot;name\&quot;: \&quot;CUSTOMER\&quot;,                     \&quot;type\&quot;: \&quot;TABLE\&quot;,                     \&quot;description\&quot;: \&quot;\&quot;,                     \&quot;selected\&quot;: true,                     \&quot;linked\&quot;: true,                     \&quot;gid\&quot;: 0,                     \&quot;datasetId\&quot;: \&quot;-1\&quot;,                     \&quot;subType\&quot;: \&quot;\&quot;,                     \&quot;reportId\&quot;: \&quot;\&quot;,                     \&quot;viewId\&quot;: \&quot;\&quot;,                     \&quot;columns\&quot;: [],                     \&quot;relationships\&quot;: []                   },                   {                     \&quot;name\&quot;: \&quot;tpch5k_falcon_default_schema_users\&quot;,                     \&quot;type\&quot;: \&quot;TABLE\&quot;,                     \&quot;description\&quot;: \&quot;\&quot;,                     \&quot;selected\&quot;: true,                     \&quot;linked\&quot;: true,                     \&quot;gid\&quot;: 0,                     \&quot;datasetId\&quot;: \&quot;-1\&quot;,                     \&quot;subType\&quot;: \&quot;\&quot;,                     \&quot;reportId\&quot;: \&quot;\&quot;,                     \&quot;viewId\&quot;: \&quot;\&quot;,                     \&quot;columns\&quot;: [                       {                         \&quot;name\&quot;: \&quot;user_id\&quot;,                         \&quot;type\&quot;: \&quot;INT64\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;product_id\&quot;,                         \&quot;type\&quot;: \&quot;INT64\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       },                       {                         \&quot;name\&quot;: \&quot;user_cost\&quot;,                         \&quot;type\&quot;: \&quot;INT64\&quot;,                         \&quot;canImport\&quot;: true,                         \&quot;selected\&quot;: true,                         \&quot;description\&quot;: \&quot;\&quot;,                         \&quot;isLinkedActive\&quot;: true,                         \&quot;isAggregate\&quot;: false                       }                     ],                     \&quot;relationships\&quot;: []                   }                 ]               }             ]           }         ],         \&quot;configuration\&quot;: {           \&quot;password\&quot;: \&quot;\&quot;,           \&quot;database\&quot;: \&quot;DEVELOPMENT\&quot;,           \&quot;role\&quot;: \&quot;DEV\&quot;,           \&quot;accountName\&quot;: \&quot;thoughtspot_partner\&quot;,           \&quot;warehouse\&quot;: \&quot;DEMO_WH\&quot;,           \&quot;user\&quot;: \&quot;DEV_USER\&quot;         }       }       &#x60;&#x60;&#x60;  3. If you are updating a configuration attribute, connection name, or description, you can set &#x60;validate&#x60; to &#x60;false&#x60;.    **NOTE:** If the &#x60;authentication_type&#x60; is anything other than SERVICE_ACCOUNT, you must explicitly provide the authenticationType property in the payload. If you do not  specify authenticationType, the API will default to SERVICE_ACCOUNT as the authentication type.    * A JSON map of configuration attributes in &#x60;data_warehouse_config&#x60;. The following example shows the configuration attributes for a Snowflake connection:    &#x60;&#x60;&#x60;    {       \&quot;configuration\&quot;:{          \&quot;accountName\&quot;:\&quot;thoughtspot_partner\&quot;,          \&quot;user\&quot;:\&quot;tsadmin\&quot;,          \&quot;password\&quot;:\&quot;TestConn123\&quot;,          \&quot;role\&quot;:\&quot;sysadmin\&quot;,          \&quot;warehouse\&quot;:\&quot;MEDIUM_WH\&quot;       },       \&quot;databases\&quot;:[\&quot;DB1\&quot;, \&quot;DB2\&quot;],       \&quot;externalDatabases\&quot;:[        ]    }    &#x60;&#x60;&#x60;  The optional &#x60;databases&#x60; property in &#x60;data_warehouse_config&#x60; accepts a list of database names. When specified, ThoughtSpot persists this list on the connection and uses it to scope metadata fetching to only the specified databases in subsequent table add and remove operations. If omitted, all databases in the data warehouse are accessible for metadata operations.  The &#x60;databases&#x60; and &#x60;externalDatabases&#x60; serve different purposes. &#x60;databases&#x60; is a flat list of database names that controls which databases are scanned during metadata operations. &#x60;externalDatabases&#x60; defines the full table hierarchy and determines which tables are linked into ThoughtSpot.       
      *
      * @throws ApiException if the Api call fails
      */
@@ -494,4 +172,5 @@ public class ConnectionsApiTest {
         api.updateConnectionV2(connectionIdentifier, updateConnectionV2Request);
         // TODO: test validations
     }
+
 }

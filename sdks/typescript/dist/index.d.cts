@@ -8221,7 +8221,7 @@ declare class CreateUserRequest {
     */
     'extended_preferences'?: any | null;
     /**
-    * Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled.
+    * Flag to indicate whether a welcome email should be sent to the user. This parameter applies only on clusters where IAMv2 is not enabled. If the flag details are not specified, then it defaults to true. However, a welcome email is sent only when welcome email notifications are enabled on the cluster and the user has a valid email address.
     */
     'trigger_welcome_email'?: boolean | null;
     /**

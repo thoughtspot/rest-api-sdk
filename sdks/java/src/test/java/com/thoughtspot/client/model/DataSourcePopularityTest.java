@@ -4,33 +4,52 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for DataSourcePopularity */
+/**
+ * Model tests for DataSourcePopularity
+ */
 public class DataSourcePopularityTest {
     private final DataSourcePopularity model = new DataSourcePopularity();
 
-    /** Model tests for DataSourcePopularity */
+    /**
+     * Model tests for DataSourcePopularity
+     */
     @Test
     public void testDataSourcePopularity() {
         // TODO: test DataSourcePopularity
     }
 
-    /** Test the property 'totalSpotterQueries' */
+    /**
+     * Test the property 'totalSpotterQueries'
+     */
     @Test
     public void totalSpotterQueriesTest() {
         // TODO: test totalSpotterQueries
     }
 
-    /** Test the property 'totalAnswers' */
+    /**
+     * Test the property 'totalAnswers'
+     */
     @Test
     public void totalAnswersTest() {
         // TODO: test totalAnswers
     }
 
-    /** Test the property 'totalAnswerImpressions' */
+    /**
+     * Test the property 'totalAnswerImpressions'
+     */
     @Test
     public void totalAnswerImpressionsTest() {
         // TODO: test totalAnswerImpressions
     }
+
 }

@@ -4,75 +4,112 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.CollectionEntityIdentifier;
+import com.thoughtspot.client.model.CollectionMetadataItem;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for Collection */
+/**
+ * Model tests for Collection
+ */
 public class CollectionTest {
     private final Collection model = new Collection();
 
-    /** Model tests for Collection */
+    /**
+     * Model tests for Collection
+     */
     @Test
     public void testCollection() {
         // TODO: test Collection
     }
 
-    /** Test the property 'id' */
+    /**
+     * Test the property 'id'
+     */
     @Test
     public void idTest() {
         // TODO: test id
     }
 
-    /** Test the property 'name' */
+    /**
+     * Test the property 'name'
+     */
     @Test
     public void nameTest() {
         // TODO: test name
     }
 
-    /** Test the property 'objId' */
+    /**
+     * Test the property 'objId'
+     */
     @Test
     public void objIdTest() {
         // TODO: test objId
     }
 
-    /** Test the property 'description' */
+    /**
+     * Test the property 'description'
+     */
     @Test
     public void descriptionTest() {
         // TODO: test description
     }
 
-    /** Test the property 'metadata' */
+    /**
+     * Test the property 'metadata'
+     */
     @Test
     public void metadataTest() {
         // TODO: test metadata
     }
 
-    /** Test the property 'createdAt' */
+    /**
+     * Test the property 'createdAt'
+     */
     @Test
     public void createdAtTest() {
         // TODO: test createdAt
     }
 
-    /** Test the property 'updatedAt' */
+    /**
+     * Test the property 'updatedAt'
+     */
     @Test
     public void updatedAtTest() {
         // TODO: test updatedAt
     }
 
-    /** Test the property 'authorName' */
+    /**
+     * Test the property 'authorName'
+     */
     @Test
     public void authorNameTest() {
         // TODO: test authorName
     }
 
-    /** Test the property 'authorId' */
+    /**
+     * Test the property 'authorId'
+     */
     @Test
     public void authorIdTest() {
         // TODO: test authorId
     }
 
-    /** Test the property 'org' */
+    /**
+     * Test the property 'org'
+     */
     @Test
     public void orgTest() {
         // TODO: test org
     }
+
 }

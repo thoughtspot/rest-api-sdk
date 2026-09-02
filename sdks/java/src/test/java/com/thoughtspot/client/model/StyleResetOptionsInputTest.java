@@ -4,27 +4,46 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for StyleResetOptionsInput */
+/**
+ * Model tests for StyleResetOptionsInput
+ */
 public class StyleResetOptionsInputTest {
     private final StyleResetOptionsInput model = new StyleResetOptionsInput();
 
-    /** Model tests for StyleResetOptionsInput */
+    /**
+     * Model tests for StyleResetOptionsInput
+     */
     @Test
     public void testStyleResetOptionsInput() {
         // TODO: test StyleResetOptionsInput
     }
 
-    /** Test the property 'style' */
+    /**
+     * Test the property 'style'
+     */
     @Test
     public void styleTest() {
         // TODO: test style
     }
 
-    /** Test the property 'visualizationAreas' */
+    /**
+     * Test the property 'visualizationAreas'
+     */
     @Test
     public void visualizationAreasTest() {
         // TODO: test visualizationAreas
     }
+
 }

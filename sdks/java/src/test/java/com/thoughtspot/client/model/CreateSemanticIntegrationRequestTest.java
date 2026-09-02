@@ -4,57 +4,84 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for CreateSemanticIntegrationRequest */
+/**
+ * Model tests for CreateSemanticIntegrationRequest
+ */
 public class CreateSemanticIntegrationRequestTest {
     private final CreateSemanticIntegrationRequest model = new CreateSemanticIntegrationRequest();
 
-    /** Model tests for CreateSemanticIntegrationRequest */
+    /**
+     * Model tests for CreateSemanticIntegrationRequest
+     */
     @Test
     public void testCreateSemanticIntegrationRequest() {
         // TODO: test CreateSemanticIntegrationRequest
     }
 
-    /** Test the property 'connectionIdentifier' */
+    /**
+     * Test the property 'connectionIdentifier'
+     */
     @Test
     public void connectionIdentifierTest() {
         // TODO: test connectionIdentifier
     }
 
-    /** Test the property 'name' */
+    /**
+     * Test the property 'name'
+     */
     @Test
     public void nameTest() {
         // TODO: test name
     }
 
-    /** Test the property 'databaseName' */
+    /**
+     * Test the property 'databaseName'
+     */
     @Test
     public void databaseNameTest() {
         // TODO: test databaseName
     }
 
-    /** Test the property 'schemaName' */
+    /**
+     * Test the property 'schemaName'
+     */
     @Test
     public void schemaNameTest() {
         // TODO: test schemaName
     }
 
-    /** Test the property 'semanticViewName' */
+    /**
+     * Test the property 'semanticViewName'
+     */
     @Test
     public void semanticViewNameTest() {
         // TODO: test semanticViewName
     }
 
-    /** Test the property 'type' */
+    /**
+     * Test the property 'type'
+     */
     @Test
     public void typeTest() {
         // TODO: test type
     }
 
-    /** Test the property 'description' */
+    /**
+     * Test the property 'description'
+     */
     @Test
     public void descriptionTest() {
         // TODO: test description
     }
+
 }
