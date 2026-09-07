@@ -37522,7 +37522,7 @@
             }
           },
           "skip_validation": {
-            "description": "Skip validations of objects to be published.",
+            "description": "Skip parameterization validation. By default publishing requires an underlying\nLOGICAL_TABLE or DATA_SOURCE to carry a template variable with a value for every\ntarget org, so each org resolves its own data. Without parameterization every target\norg reads the owner org's data through the owner org's connection. Set this to true\nonly when that is intended.",
             "type": "boolean",
             "nullable": true
           }
