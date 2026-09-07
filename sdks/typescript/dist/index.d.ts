@@ -16335,7 +16335,7 @@ declare class PublishMetadataRequest {
     */
     'org_identifiers': Array<string>;
     /**
-    * Skip validations of objects to be published.
+    * Skip parameterization validation. By default publishing requires an underlying LOGICAL_TABLE or DATA_SOURCE to carry a template variable with a value for every target org, so each org resolves its own data. Without parameterization every target org reads the owner org\'s data through the owner org\'s connection. Set this to true only when that is intended.
     */
     'skip_validation'?: boolean | null;
     static readonly discriminator: string | undefined;

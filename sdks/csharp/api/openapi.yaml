@@ -36988,7 +36988,12 @@ components:
             type: string
           type: array
         skip_validation:
-          description: Skip validations of objects to be published.
+          description: |-
+            Skip parameterization validation. By default publishing requires an underlying
+            LOGICAL_TABLE or DATA_SOURCE to carry a template variable with a value for every
+            target org, so each org resolves its own data. Without parameterization every target
+            org reads the owner org's data through the owner org's connection. Set this to true
+            only when that is intended.
           nullable: true
           type: boolean
       required:
