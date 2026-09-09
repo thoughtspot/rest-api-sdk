@@ -2,7 +2,7 @@ lazy val root = (project in file(".")).
   settings(
     organization := "com.thoughtspot",
     name := "rest-api-sdk",
-    version := "2.27.1",
+    version := "2.28.0",
     scalaVersion := "2.11.4",
     scalacOptions ++= Seq("-feature"),
     javacOptions in compile ++= Seq("-Xlint:deprecation"),
@@ -13,9 +13,7 @@ lazy val root = (project in file(".")).
       "com.squareup.okhttp3" % "okhttp" % "4.12.0",
       "com.squareup.okhttp3" % "logging-interceptor" % "4.12.0",
       "com.google.code.gson" % "gson" % "2.9.1",
-      "org.apache.commons" % "commons-lang3" % "3.17.0",
       "jakarta.ws.rs" % "jakarta.ws.rs-api" % "2.1.6",
-      "org.openapitools" % "jackson-databind-nullable" % "0.2.6",
       "io.gsonfire" % "gson-fire" % "1.9.0" % "compile",
       "jakarta.annotation" % "jakarta.annotation-api" % "1.3.5" % "compile",
       "com.google.code.findbugs" % "jsr305" % "3.0.2" % "compile",

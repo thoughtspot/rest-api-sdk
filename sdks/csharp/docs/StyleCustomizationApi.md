@@ -656,7 +656,7 @@ namespace Example
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new StyleCustomizationApi(httpClient, config, httpClientHandler);
-            var name = "name_example";  // string | Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists.
+            var name = "name_example";  // string | Display name for the font (e.g. \\\"Acme Sans\\\").
             var fileContent = new System.IO.MemoryStream(System.IO.File.ReadAllBytes("/path/to/file.txt"));  // FileParameter | Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.
             var scope = "CLUSTER";  // string? | Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user's org library. Defaults to ORG if omitted. (optional)  (default to ORG)
             var weight = "NORMAL";  // string? | Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional)  (default to NORMAL)
@@ -702,7 +702,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **name** | **string** | Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists. |  |
+| **name** | **string** | Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). |  |
 | **fileContent** | **FileParameter****FileParameter** | Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload. |  |
 | **scope** | **string?** | Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. | [optional] [default to ORG] |
 | **weight** | **string?** | Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. | [optional] [default to NORMAL] |

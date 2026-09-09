@@ -366,7 +366,37 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum CANMANAGESPOTTER for value: CAN_MANAGE_SPOTTER
             /// </summary>
             [EnumMember(Value = "CAN_MANAGE_SPOTTER")]
-            CANMANAGESPOTTER = 55
+            CANMANAGESPOTTER = 55,
+
+            /// <summary>
+            /// Enum CANCREATELIVEBOARD for value: CAN_CREATE_LIVEBOARD
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_LIVEBOARD")]
+            CANCREATELIVEBOARD = 56,
+
+            /// <summary>
+            /// Enum CANCREATEANSWERS for value: CAN_CREATE_ANSWERS
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_ANSWERS")]
+            CANCREATEANSWERS = 57,
+
+            /// <summary>
+            /// Enum CANANALYZEDATA for value: CAN_ANALYZE_DATA
+            /// </summary>
+            [EnumMember(Value = "CAN_ANALYZE_DATA")]
+            CANANALYZEDATA = 58,
+
+            /// <summary>
+            /// Enum CANADMINISTERSCHEDULES for value: CAN_ADMINISTER_SCHEDULES
+            /// </summary>
+            [EnumMember(Value = "CAN_ADMINISTER_SCHEDULES")]
+            CANADMINISTERSCHEDULES = 59,
+
+            /// <summary>
+            /// Enum CANCREATEKPIALERTS for value: CAN_CREATE_KPI_ALERTS
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_KPI_ALERTS")]
+            CANCREATEKPIALERTS = 60
         }
 
         /// <summary>

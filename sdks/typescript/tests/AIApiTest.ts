@@ -346,6 +346,70 @@ describe('AIApi', function() {
         });     
       });
 
+      describe('getShareInfo', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getShareInfo"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getShareInfo(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getShareInfo(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('getSharedContent', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getSharedContent"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getSharedContent(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getSharedContent(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('importMemory', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -677,6 +741,42 @@ describe('AIApi', function() {
                 await expect(
                   instance.setNLInstructions(
                     // setNLInstructionsRequest SetNLInstructionsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('shareConversation', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "shareConversation"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.shareConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier     , 
+                    // shareConversationRequest ShareConversationRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.shareConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier     , 
+                    // shareConversationRequest ShareConversationRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

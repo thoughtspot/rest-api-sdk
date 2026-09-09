@@ -29,6 +29,7 @@ class Collection(BaseModel):
     """ # noqa: E501
     id: StrictStr = Field(description="Unique identifier of the collection.")
     name: StrictStr = Field(description="Name of the collection.")
+    obj_id: Optional[StrictStr] = Field(default=None, description="Custom object ID (obj_id) of the collection, if one is set.    Version: 26.9.0.cl or later ")
     description: Optional[StrictStr] = Field(default=None, description="Description of the collection.")
     metadata: Optional[List[CollectionMetadataItem]] = Field(default=None, description="Metadata objects in the collection.")
     created_at: Optional[StrictStr] = Field(default=None, description="Creation timestamp in milliseconds.")
@@ -37,7 +38,7 @@ class Collection(BaseModel):
     author_id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the author.")
     org: Optional[CollectionEntityIdentifier] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "description", "metadata", "created_at", "updated_at", "author_name", "author_id", "org"]
+    __properties: ClassVar[List[str]] = ["id", "name", "obj_id", "description", "metadata", "created_at", "updated_at", "author_name", "author_id", "org"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -95,6 +96,11 @@ class Collection(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if obj_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.obj_id is None and "obj_id" in self.model_fields_set:
+            _dict['obj_id'] = None
+
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
@@ -139,6 +145,7 @@ class Collection(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
+            "obj_id": obj.get("obj_id"),
             "description": obj.get("description"),
             "metadata": [CollectionMetadataItem.from_dict(_item) for _item in obj["metadata"]] if obj.get("metadata") is not None else None,
             "created_at": obj.get("created_at"),

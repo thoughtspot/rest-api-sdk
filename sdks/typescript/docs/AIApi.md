@@ -14,6 +14,8 @@ Method | HTTP request | Description
 [**getDataSourceSuggestions**](AIApi.md#getDataSourceSuggestions) | **POST** /api/rest/2.0/ai/data-source-suggestions | 
 [**getNLInstructions**](AIApi.md#getNLInstructions) | **POST** /api/rest/2.0/ai/instructions/get | 
 [**getRelevantQuestions**](AIApi.md#getRelevantQuestions) | **POST** /api/rest/2.0/ai/relevant-questions/ | 
+[**getShareInfo**](AIApi.md#getShareInfo) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info | 
+[**getSharedContent**](AIApi.md#getSharedContent) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content | 
 [**importMemory**](AIApi.md#importMemory) | **POST** /api/rest/2.0/ai/memory/import | 
 [**loadAnswer**](AIApi.md#loadAnswer) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details | 
 [**queryGetDecomposedQuery**](AIApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions | 
@@ -24,6 +26,7 @@ Method | HTTP request | Description
 [**sendMessage**](AIApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse | 
 [**setAgentInstructions**](AIApi.md#setAgentInstructions) | **PUT** /api/rest/2.0/ai/agent/instructions/set | 
 [**setNLInstructions**](AIApi.md#setNLInstructions) | **POST** /api/rest/2.0/ai/instructions/set | 
+[**shareConversation**](AIApi.md#shareConversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share | 
 [**singleAnswer**](AIApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create | 
 [**stopConversation**](AIApi.md#stopConversation) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response | 
 [**updateConversation**](AIApi.md#updateConversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update | 
@@ -648,6 +651,128 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Common successful response |  -  |
+**201** | Common error response |  -  |
+**400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **getShareInfo**
+> ConversationShareStatusResponse getShareInfo()
+
+ Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, AIApi, GetShareInfoRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new AIApi(configuration);
+
+apiInstance.getShareInfo(
+  // string | Unique identifier of the conversation.
+  "conversation_identifier_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **conversationIdentifier** | [**string**] | Unique identifier of the conversation. | defaults to undefined
+
+
+### Return type
+
+**ConversationShareStatusResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Common successful response |  -  |
+**201** | Common error response |  -  |
+**400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **getSharedContent**
+> SharedConversationResponse getSharedContent()
+
+ Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires `CAN_USE_SPOTTER` privilege.    Version: 26.9.0.cl or later       
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, AIApi, GetSharedContentRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new AIApi(configuration);
+
+apiInstance.getSharedContent(
+  // string | Unique identifier of the source conversation.
+  "conversation_identifier_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **conversationIdentifier** | [**string**] | Unique identifier of the source conversation. | defaults to undefined
+
+
+### Return type
+
+**SharedConversationResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -1332,6 +1457,83 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Common successful response |  -  |
 **201** | Common error response |  -  |
+**400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **shareConversation**
+> void shareConversation(shareConversationRequest)
+
+ Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, AIApi, ShareConversationRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new AIApi(configuration);
+
+apiInstance.shareConversation(
+  // string | Unique identifier of the conversation to share.
+  "conversation_identifier_example" , 
+  // ShareConversationRequest
+  {
+    refresh_shared_content: false,
+    grant: [
+      {
+        principal_identifier: "principal_identifier_example",
+        principal_type: "USER",
+      },
+    ],
+    revoke: [
+      {
+        principal_identifier: "principal_identifier_example",
+        principal_type: "USER",
+      },
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **shareConversationRequest** | **ShareConversationRequest**|  |
+ **conversationIdentifier** | [**string**] | Unique identifier of the conversation to share. | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successfully updated the share access for the conversation. |  -  |
 **400** | Operation failed |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Unique identifier of the collection. | 
 **Name** | **string** | Name of the collection. | 
+**ObjId** | **string** | Custom object ID (obj_id) of the collection, if one is set.    Version: 26.9.0.cl or later  | [optional] 
 **Description** | **string** | Description of the collection. | [optional] 
 **Metadata** | [**List&lt;CollectionMetadataItem&gt;**](CollectionMetadataItem.md) | Metadata objects in the collection. | [optional] 
 **CreatedAt** | **string** | Creation timestamp in milliseconds. | [optional] 

@@ -27,6 +27,7 @@ All URIs are relative to *https://localhost:443*
 | [**CreateOrg**](ThoughtSpotRestApi.md#createorg) | **POST** /api/rest/2.0/orgs/create |  |
 | [**CreateRole**](ThoughtSpotRestApi.md#createrole) | **POST** /api/rest/2.0/roles/create |  |
 | [**CreateSchedule**](ThoughtSpotRestApi.md#createschedule) | **POST** /api/rest/2.0/schedules/create |  |
+| [**CreateSemanticIntegration**](ThoughtSpotRestApi.md#createsemanticintegration) | **POST** /api/rest/2.0/semantic-integrations/create |  |
 | [**CreateTag**](ThoughtSpotRestApi.md#createtag) | **POST** /api/rest/2.0/tags/create |  |
 | [**CreateUser**](ThoughtSpotRestApi.md#createuser) | **POST** /api/rest/2.0/users/create |  |
 | [**CreateUserGroup**](ThoughtSpotRestApi.md#createusergroup) | **POST** /api/rest/2.0/groups/create |  |
@@ -53,6 +54,7 @@ All URIs are relative to *https://localhost:443*
 | [**DeleteOrgEmailCustomization**](ThoughtSpotRestApi.md#deleteorgemailcustomization) | **POST** /api/rest/2.0/customization/email/delete |  |
 | [**DeleteRole**](ThoughtSpotRestApi.md#deleterole) | **POST** /api/rest/2.0/roles/{role_identifier}/delete |  |
 | [**DeleteSchedule**](ThoughtSpotRestApi.md#deleteschedule) | **POST** /api/rest/2.0/schedules/{schedule_identifier}/delete |  |
+| [**DeleteSemanticIntegration**](ThoughtSpotRestApi.md#deletesemanticintegration) | **POST** /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete |  |
 | [**DeleteStyleFonts**](ThoughtSpotRestApi.md#deletestylefonts) | **POST** /api/rest/2.0/customization/styles/fonts/delete |  |
 | [**DeleteTag**](ThoughtSpotRestApi.md#deletetag) | **POST** /api/rest/2.0/tags/{tag_identifier}/delete |  |
 | [**DeleteUser**](ThoughtSpotRestApi.md#deleteuser) | **POST** /api/rest/2.0/users/{user_identifier}/delete |  |
@@ -94,6 +96,8 @@ All URIs are relative to *https://localhost:443*
 | [**GetNLInstructions**](ThoughtSpotRestApi.md#getnlinstructions) | **POST** /api/rest/2.0/ai/instructions/get |  |
 | [**GetObjectAccessToken**](ThoughtSpotRestApi.md#getobjectaccesstoken) | **POST** /api/rest/2.0/auth/token/object |  |
 | [**GetRelevantQuestions**](ThoughtSpotRestApi.md#getrelevantquestions) | **POST** /api/rest/2.0/ai/relevant-questions/ |  |
+| [**GetShareInfo**](ThoughtSpotRestApi.md#getshareinfo) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info |  |
+| [**GetSharedContent**](ThoughtSpotRestApi.md#getsharedcontent) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content |  |
 | [**GetSystemConfig**](ThoughtSpotRestApi.md#getsystemconfig) | **GET** /api/rest/2.0/system/config |  |
 | [**GetSystemInformation**](ThoughtSpotRestApi.md#getsysteminformation) | **GET** /api/rest/2.0/system |  |
 | [**GetSystemOverrideInfo**](ThoughtSpotRestApi.md#getsystemoverrideinfo) | **GET** /api/rest/2.0/system/config-overrides |  |
@@ -102,6 +106,7 @@ All URIs are relative to *https://localhost:443*
 | [**ImportMemory**](ThoughtSpotRestApi.md#importmemory) | **POST** /api/rest/2.0/ai/memory/import |  |
 | [**ImportMetadataTML**](ThoughtSpotRestApi.md#importmetadatatml) | **POST** /api/rest/2.0/metadata/tml/import |  |
 | [**ImportMetadataTMLAsync**](ThoughtSpotRestApi.md#importmetadatatmlasync) | **POST** /api/rest/2.0/metadata/tml/async/import |  |
+| [**ImportSemanticIntegration**](ThoughtSpotRestApi.md#importsemanticintegration) | **POST** /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import |  |
 | [**ImportUserGroups**](ThoughtSpotRestApi.md#importusergroups) | **POST** /api/rest/2.0/groups/import |  |
 | [**ImportUsers**](ThoughtSpotRestApi.md#importusers) | **POST** /api/rest/2.0/users/import |  |
 | [**LoadAnswer**](ThoughtSpotRestApi.md#loadanswer) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details |  |
@@ -133,6 +138,7 @@ All URIs are relative to *https://localhost:443*
 | [**SearchRoles**](ThoughtSpotRestApi.md#searchroles) | **POST** /api/rest/2.0/roles/search |  |
 | [**SearchSchedules**](ThoughtSpotRestApi.md#searchschedules) | **POST** /api/rest/2.0/schedules/search |  |
 | [**SearchSecuritySettings**](ThoughtSpotRestApi.md#searchsecuritysettings) | **POST** /api/rest/2.0/system/security-settings/search |  |
+| [**SearchSemanticIntegrations**](ThoughtSpotRestApi.md#searchsemanticintegrations) | **POST** /api/rest/2.0/semantic-integrations/search |  |
 | [**SearchStyleCustomizations**](ThoughtSpotRestApi.md#searchstylecustomizations) | **POST** /api/rest/2.0/customization/styles/search |  |
 | [**SearchStyleFonts**](ThoughtSpotRestApi.md#searchstylefonts) | **POST** /api/rest/2.0/customization/styles/fonts/search |  |
 | [**SearchTags**](ThoughtSpotRestApi.md#searchtags) | **POST** /api/rest/2.0/tags/search |  |
@@ -147,6 +153,7 @@ All URIs are relative to *https://localhost:443*
 | [**SendMessage**](ThoughtSpotRestApi.md#sendmessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |  |
 | [**SetAgentInstructions**](ThoughtSpotRestApi.md#setagentinstructions) | **PUT** /api/rest/2.0/ai/agent/instructions/set |  |
 | [**SetNLInstructions**](ThoughtSpotRestApi.md#setnlinstructions) | **POST** /api/rest/2.0/ai/instructions/set |  |
+| [**ShareConversation**](ThoughtSpotRestApi.md#shareconversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share |  |
 | [**ShareMetadata**](ThoughtSpotRestApi.md#sharemetadata) | **POST** /api/rest/2.0/security/metadata/share |  |
 | [**SingleAnswer**](ThoughtSpotRestApi.md#singleanswer) | **POST** /api/rest/2.0/ai/answer/create |  |
 | [**StopConversation**](ThoughtSpotRestApi.md#stopconversation) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response |  |
@@ -2460,6 +2467,108 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="createsemanticintegration"></a>
+# **CreateSemanticIntegration**
+> SemanticIntegrationResponse CreateSemanticIntegration (CreateSemanticIntegrationRequest createSemanticIntegrationRequest)
+
+
+
+  Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.  - `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required. - `name` must be unique across the user's organization. The integration's display name is also used as the generated model name. - Supported `type` values are listed in the `SemanticIntegrationType` enum. - The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.  > **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateSemanticIntegrationExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var createSemanticIntegrationRequest = new CreateSemanticIntegrationRequest(); // CreateSemanticIntegrationRequest | 
+
+            try
+            {
+                SemanticIntegrationResponse result = apiInstance.CreateSemanticIntegration(createSemanticIntegrationRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateSemanticIntegration: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateSemanticIntegrationWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<SemanticIntegrationResponse> response = apiInstance.CreateSemanticIntegrationWithHttpInfo(createSemanticIntegrationRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateSemanticIntegrationWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **createSemanticIntegrationRequest** | [**CreateSemanticIntegrationRequest**](CreateSemanticIntegrationRequest.md) |  |  |
+
+### Return type
+
+[**SemanticIntegrationResponse**](SemanticIntegrationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Semantic integration created successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Connection not found. |  -  |
+| **409** | Duplicate integration name. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -5024,6 +5133,102 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Schedule successfully deleted. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="deletesemanticintegration"></a>
+# **DeleteSemanticIntegration**
+> void DeleteSemanticIntegration (string semanticIntegrationIdentifier)
+
+
+
+  Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - `semantic_integration_identifier` is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with `createSemanticIntegration` if needed.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteSemanticIntegrationExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var semanticIntegrationIdentifier = "semanticIntegrationIdentifier_example";  // string | ID or name of the semantic integration to delete.
+
+            try
+            {
+                apiInstance.DeleteSemanticIntegration(semanticIntegrationIdentifier);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteSemanticIntegration: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteSemanticIntegrationWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.DeleteSemanticIntegrationWithHttpInfo(semanticIntegrationIdentifier);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteSemanticIntegrationWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **semanticIntegrationIdentifier** | **string** | ID or name of the semantic integration to delete. |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Semantic integration deleted successfully. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -8496,6 +8701,7 @@ No authorization required
 | **400** | Invalid request. This could be due to missing or incorrect parameters. |  -  |
 | **401** | Unauthorized access. The request could not be authenticated. |  -  |
 | **403** | Forbidden access. The user does not have permission to access this resource. |  -  |
+| **409** | Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. |  -  |
 | **500** | An unexpected error occurred on the server. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9083,6 +9289,208 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="getshareinfo"></a>
+# **GetShareInfo**
+> ConversationShareStatusResponse GetShareInfo (string conversationIdentifier)
+
+
+
+ Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class GetShareInfoExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier of the conversation.
+
+            try
+            {
+                ConversationShareStatusResponse result = apiInstance.GetShareInfo(conversationIdentifier);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.GetShareInfo: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetShareInfoWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<ConversationShareStatusResponse> response = apiInstance.GetShareInfoWithHttpInfo(conversationIdentifier);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.GetShareInfoWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **conversationIdentifier** | **string** | Unique identifier of the conversation. |  |
+
+### Return type
+
+[**ConversationShareStatusResponse**](ConversationShareStatusResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="getsharedcontent"></a>
+# **GetSharedContent**
+> SharedConversationResponse GetSharedContent (string conversationIdentifier)
+
+
+
+ Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires `CAN_USE_SPOTTER` privilege.    Version: 26.9.0.cl or later       
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class GetSharedContentExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier of the source conversation.
+
+            try
+            {
+                SharedConversationResponse result = apiInstance.GetSharedContent(conversationIdentifier);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.GetSharedContent: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetSharedContentWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<SharedConversationResponse> response = apiInstance.GetSharedContentWithHttpInfo(conversationIdentifier);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.GetSharedContentWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **conversationIdentifier** | **string** | Unique identifier of the source conversation. |  |
+
+### Return type
+
+[**SharedConversationResponse**](SharedConversationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -9873,6 +10281,107 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="importsemanticintegration"></a>
+# **ImportSemanticIntegration**
+> SemanticIntegrationResponse ImportSemanticIntegration (string semanticIntegrationIdentifier)
+
+
+
+  Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - `semantic_integration_identifier` is the GUID or name of the integration to import updates for. - Import preserves the integration's GUID, name, and `model_id`; only the underlying formula set is refreshed. - The response includes the same `semantic_report` as create, with an additional `change_status` per formula indicating whether each formula is `NEW`, `UPDATED`, or `UNCHANGED` since the previous import.  > **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class ImportSemanticIntegrationExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var semanticIntegrationIdentifier = "semanticIntegrationIdentifier_example";  // string | ID or name of the semantic integration to import updates for.
+
+            try
+            {
+                SemanticIntegrationResponse result = apiInstance.ImportSemanticIntegration(semanticIntegrationIdentifier);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.ImportSemanticIntegration: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ImportSemanticIntegrationWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<SemanticIntegrationResponse> response = apiInstance.ImportSemanticIntegrationWithHttpInfo(semanticIntegrationIdentifier);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.ImportSemanticIntegrationWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **semanticIntegrationIdentifier** | **string** | ID or name of the semantic integration to import updates for. |  |
+
+### Return type
+
+[**SemanticIntegrationResponse**](SemanticIntegrationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Semantic integration imported successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Semantic integration not found. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12947,6 +13456,106 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="searchsemanticintegrations"></a>
+# **SearchSemanticIntegrations**
+> List&lt;SemanticIntegrationSearchResponse&gt; SearchSemanticIntegrations (SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest)
+
+
+
+  Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - `pattern` matches the integration name as a case-insensitive substring. - `author_identifiers` and `connection_identifiers` accept either GUIDs or names. - `sort_options.field_name` defaults to `MODIFIED_TIME`; set `sort_options.order` to `ASC` or `DESC` to control sort direction. - `record_offset` and `record_size` control pagination. Use `record_size: 0` to return all matching records in a single response.  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchSemanticIntegrationsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var searchSemanticIntegrationsRequest = new SearchSemanticIntegrationsRequest(); // SearchSemanticIntegrationsRequest | 
+
+            try
+            {
+                List<SemanticIntegrationSearchResponse> result = apiInstance.SearchSemanticIntegrations(searchSemanticIntegrationsRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SearchSemanticIntegrations: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchSemanticIntegrationsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<List<SemanticIntegrationSearchResponse>> response = apiInstance.SearchSemanticIntegrationsWithHttpInfo(searchSemanticIntegrationsRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SearchSemanticIntegrationsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **searchSemanticIntegrationsRequest** | [**SearchSemanticIntegrationsRequest**](SearchSemanticIntegrationsRequest.md) |  |  |
+
+### Return type
+
+[**List&lt;SemanticIntegrationSearchResponse&gt;**](SemanticIntegrationSearchResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Semantic integrations retrieved successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="searchstylecustomizations"></a>
 # **SearchStyleCustomizations**
 > List&lt;StylePreference&gt; SearchStyleCustomizations (SearchStyleCustomizationsRequest searchStyleCustomizationsRequest)
@@ -14355,6 +14964,104 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | Common successful response |  -  |
 | **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="shareconversation"></a>
+# **ShareConversation**
+> void ShareConversation (string conversationIdentifier, ShareConversationRequest shareConversationRequest)
+
+
+
+ Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class ShareConversationExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier of the conversation to share.
+            var shareConversationRequest = new ShareConversationRequest(); // ShareConversationRequest | 
+
+            try
+            {
+                apiInstance.ShareConversation(conversationIdentifier, shareConversationRequest);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.ShareConversation: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ShareConversationWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.ShareConversationWithHttpInfo(conversationIdentifier, shareConversationRequest);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.ShareConversationWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **conversationIdentifier** | **string** | Unique identifier of the conversation to share. |  |
+| **shareConversationRequest** | [**ShareConversationRequest**](ShareConversationRequest.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully updated the share access for the conversation. |  -  |
 | **400** | Operation failed |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -17532,7 +18239,7 @@ void (empty response body)
 
 
 
-  Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+  Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
 
 ### Example
 ```csharp
@@ -17656,7 +18363,7 @@ namespace Example
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
-            var name = "name_example";  // string | Display name for the font (e.g. \\\"Acme Sans\\\"). Must be unique within the target scope; returns an error if a font with this name already exists.
+            var name = "name_example";  // string | Display name for the font (e.g. \\\"Acme Sans\\\").
             var fileContent = new System.IO.MemoryStream(System.IO.File.ReadAllBytes("/path/to/file.txt"));  // FileParameter | Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.
             var scope = "CLUSTER";  // string? | Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user's org library. Defaults to ORG if omitted. (optional)  (default to ORG)
             var weight = "NORMAL";  // string? | Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional)  (default to NORMAL)
@@ -17702,7 +18409,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **name** | **string** | Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists. |  |
+| **name** | **string** | Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). |  |
 | **fileContent** | **FileParameter****FileParameter** | Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload. |  |
 | **scope** | **string?** | Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. | [optional] [default to ORG] |
 | **weight** | **string?** | Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. | [optional] [default to NORMAL] |

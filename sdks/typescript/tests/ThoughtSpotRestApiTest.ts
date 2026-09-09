@@ -758,6 +758,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('createSemanticIntegration', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "createSemanticIntegration"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.createSemanticIntegration(
+                    // createSemanticIntegrationRequest CreateSemanticIntegrationRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.createSemanticIntegration(
+                    // createSemanticIntegrationRequest CreateSemanticIntegrationRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('createTag', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -1642,6 +1674,38 @@ describe('ThoughtSpotRestApi', function() {
                   instance.deleteSchedule(
                     // scheduleIdentifier schedule_identifier
                     test.Path_Variables.schedule_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('deleteSemanticIntegration', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "deleteSemanticIntegration"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.deleteSemanticIntegration(
+                    // semanticIntegrationIdentifier semantic_integration_identifier
+                    test.Path_Variables.semantic_integration_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.deleteSemanticIntegration(
+                    // semanticIntegrationIdentifier semantic_integration_identifier
+                    test.Path_Variables.semantic_integration_identifier    
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -2962,6 +3026,70 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('getShareInfo', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getShareInfo"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getShareInfo(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getShareInfo(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('getSharedContent', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getSharedContent"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getSharedContent(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getSharedContent(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('getSystemConfig', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -3198,6 +3326,38 @@ describe('ThoughtSpotRestApi', function() {
                   instance.importMetadataTMLAsync(
                     // importMetadataTMLAsyncRequest ImportMetadataTMLAsyncRequest
                      test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('importSemanticIntegration', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "importSemanticIntegration"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.importSemanticIntegration(
+                    // semanticIntegrationIdentifier semantic_integration_identifier
+                    test.Path_Variables.semantic_integration_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.importSemanticIntegration(
+                    // semanticIntegrationIdentifier semantic_integration_identifier
+                    test.Path_Variables.semantic_integration_identifier    
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -4210,6 +4370,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('searchSemanticIntegrations', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchSemanticIntegrations"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchSemanticIntegrations(
+                    // searchSemanticIntegrationsRequest SearchSemanticIntegrationsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchSemanticIntegrations(
+                    // searchSemanticIntegrationsRequest SearchSemanticIntegrationsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('searchStyleCustomizations', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -4665,6 +4857,42 @@ describe('ThoughtSpotRestApi', function() {
                 await expect(
                   instance.setNLInstructions(
                     // setNLInstructionsRequest SetNLInstructionsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('shareConversation', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "shareConversation"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.shareConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier     , 
+                    // shareConversationRequest ShareConversationRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.shareConversation(
+                    // conversationIdentifier conversation_identifier
+                    test.Path_Variables.conversation_identifier     , 
+                    // shareConversationRequest ShareConversationRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

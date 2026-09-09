@@ -14,6 +14,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**getDataSourceSuggestions**](AiApi.md#getDataSourceSuggestions) | **POST** /api/rest/2.0/ai/data-source-suggestions |
 | [**getNLInstructions**](AiApi.md#getNLInstructions) | **POST** /api/rest/2.0/ai/instructions/get |
 | [**getRelevantQuestions**](AiApi.md#getRelevantQuestions) | **POST** /api/rest/2.0/ai/relevant-questions/ |
+| [**getShareInfo**](AiApi.md#getShareInfo) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info |
+| [**getSharedContent**](AiApi.md#getSharedContent) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content |
 | [**importMemory**](AiApi.md#importMemory) | **POST** /api/rest/2.0/ai/memory/import |
 | [**loadAnswer**](AiApi.md#loadAnswer) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details |
 | [**queryGetDecomposedQuery**](AiApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions |
@@ -24,6 +26,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**sendMessage**](AiApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
 | [**setAgentInstructions**](AiApi.md#setAgentInstructions) | **PUT** /api/rest/2.0/ai/agent/instructions/set |
 | [**setNLInstructions**](AiApi.md#setNLInstructions) | **POST** /api/rest/2.0/ai/instructions/set |
+| [**shareConversation**](AiApi.md#shareConversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share |
 | [**singleAnswer**](AiApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create |
 | [**stopConversation**](AiApi.md#stopConversation) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response |
 | [**updateConversation**](AiApi.md#updateConversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update |
@@ -385,6 +388,80 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="getShareInfo"></a>
+# **getShareInfo**
+> ConversationShareStatusResponse getShareInfo(conversationIdentifier)
+
+
+
+ Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+
+### Return type
+
+[**ConversationShareStatusResponse**](ConversationShareStatusResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="getSharedContent"></a>
+# **getSharedContent**
+> SharedConversationResponse getSharedContent(conversationIdentifier)
+
+
+
+ Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+
+### Return type
+
+[**SharedConversationResponse**](SharedConversationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
@@ -767,6 +844,43 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 | **200** | Common successful response |  -  |
 | **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="shareConversation"></a>
+# **shareConversation**
+> shareConversation(conversationIdentifier, shareConversationRequest)
+
+
+
+ Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+| **shareConversationRequest** | [**ShareConversationRequest**](ShareConversationRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully updated the share access for the conversation. |  -  |
 | **400** | Operation failed |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

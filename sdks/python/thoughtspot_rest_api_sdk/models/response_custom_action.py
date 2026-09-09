@@ -32,11 +32,12 @@ class ResponseCustomAction(BaseModel):
     action_details: ActionDetails
     default_action_config: DefaultActionConfig
     id: StrictStr = Field(description="Unique Id of the custom action.")
+    obj_id: Optional[StrictStr] = Field(default=None, description="Custom object ID (obj_id) of the custom action, if one is set.    Version: 26.9.0.cl or later ")
     metadata_association: Optional[List[MetadataAssociationItem]] = Field(default=None, description="Metadata objects to assign the the custom action to.")
     name: StrictStr = Field(description="Unique name of the custom action.")
     user_groups: Optional[List[ObjectIDAndName]] = Field(default=None, description="Unique ID or name of the User groups which are associated with the custom action.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["action_details", "default_action_config", "id", "metadata_association", "name", "user_groups"]
+    __properties: ClassVar[List[str]] = ["action_details", "default_action_config", "id", "obj_id", "metadata_association", "name", "user_groups"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -104,6 +105,11 @@ class ResponseCustomAction(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if obj_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.obj_id is None and "obj_id" in self.model_fields_set:
+            _dict['obj_id'] = None
+
         # set to None if metadata_association (nullable) is None
         # and model_fields_set contains the field
         if self.metadata_association is None and "metadata_association" in self.model_fields_set:
@@ -129,6 +135,7 @@ class ResponseCustomAction(BaseModel):
             "action_details": ActionDetails.from_dict(obj["action_details"]) if obj.get("action_details") is not None else None,
             "default_action_config": DefaultActionConfig.from_dict(obj["default_action_config"]) if obj.get("default_action_config") is not None else None,
             "id": obj.get("id"),
+            "obj_id": obj.get("obj_id"),
             "metadata_association": [MetadataAssociationItem.from_dict(_item) for _item in obj["metadata_association"]] if obj.get("metadata_association") is not None else None,
             "name": obj.get("name"),
             "user_groups": [ObjectIDAndName.from_dict(_item) for _item in obj["user_groups"]] if obj.get("user_groups") is not None else None

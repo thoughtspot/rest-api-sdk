@@ -80,5 +80,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
+        /// <summary>
+        /// Test the property 'AllowedValues'
+        /// </summary>
+        [Fact]
+        public void AllowedValuesTest()
+        {
+            // TODO unit test for the property 'AllowedValues'
+        }
     }
 }

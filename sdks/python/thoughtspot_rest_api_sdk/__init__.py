@@ -21,7 +21,7 @@ _ts_warnings.filterwarnings(
 """  # noqa: E501
 
 
-__version__ = "2.27.1"
+__version__ = "2.28.0"
 
 # Define package exports
 __all__ = [
@@ -46,6 +46,7 @@ __all__ = [
     "RolesApi",
     "SchedulesApi",
     "SecurityApi",
+    "SemanticIntegrationsApi",
     "StyleCustomizationApi",
     "SystemApi",
     "TagsApi",
@@ -154,7 +155,9 @@ __all__ = [
     "Conversation",
     "ConversationMessage",
     "ConversationMessageResponse",
+    "ConversationPrincipalInfo",
     "ConversationSettingsInput",
+    "ConversationShareStatusResponse",
     "ConvertWorksheetToModelRequest",
     "CopyObjectRequest",
     "CreateAgentConversationRequest",
@@ -171,6 +174,7 @@ __all__ = [
     "CreateOrgRequest",
     "CreateRoleRequest",
     "CreateScheduleRequest",
+    "CreateSemanticIntegrationRequest",
     "CreateTagRequest",
     "CreateUserGroupRequest",
     "CreateUserRequest",
@@ -344,6 +348,7 @@ __all__ = [
     "PngOptionsInput",
     "PolicyProcessOptions",
     "PolicyProcessOptionsInput",
+    "PrincipalRefInput",
     "PrincipalsInput",
     "PrincipalsListItem",
     "PrincipalsListItemInput",
@@ -417,6 +422,7 @@ __all__ = [
     "SearchRolesRequest",
     "SearchSchedulesRequest",
     "SearchSecuritySettingsRequest",
+    "SearchSemanticIntegrationsRequest",
     "SearchStyleCustomizationsRequest",
     "SearchStyleFontsRequest",
     "SearchTagsRequest",
@@ -430,6 +436,13 @@ __all__ = [
     "SecuritySettingsOrgPreferences",
     "SecuritySettingsOrgPreferencesInput",
     "SecuritySettingsResponse",
+    "SemanticIntegrationFormulaReport",
+    "SemanticIntegrationReport",
+    "SemanticIntegrationReportSummary",
+    "SemanticIntegrationResponse",
+    "SemanticIntegrationSearchResponse",
+    "SemanticIntegrationSortOptions",
+    "SemanticIntegrationTagReference",
     "SendAgentConversationMessageRequest",
     "SendAgentConversationMessageStreamingRequest",
     "SendAgentMessageRequest",
@@ -438,9 +451,11 @@ __all__ = [
     "SendMessageRequest",
     "SetAgentInstructionsRequest",
     "SetNLInstructionsRequest",
+    "ShareConversationRequest",
     "ShareMetadataRequest",
     "ShareMetadataTypeInput",
     "SharePermissionsInput",
+    "SharedConversationResponse",
     "SingleAnswerRequest",
     "SortOption",
     "SortOptionInput",
@@ -586,6 +601,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.roles_api import RolesApi as RolesApi
     from thoughtspot_rest_api_sdk.api.schedules_api import SchedulesApi as SchedulesApi
     from thoughtspot_rest_api_sdk.api.security_api import SecurityApi as SecurityApi
+    from thoughtspot_rest_api_sdk.api.semantic_integrations_api import SemanticIntegrationsApi as SemanticIntegrationsApi
     from thoughtspot_rest_api_sdk.api.style_customization_api import StyleCustomizationApi as StyleCustomizationApi
     from thoughtspot_rest_api_sdk.api.system_api import SystemApi as SystemApi
     from thoughtspot_rest_api_sdk.api.tags_api import TagsApi as TagsApi
@@ -698,7 +714,9 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.conversation import Conversation as Conversation
     from thoughtspot_rest_api_sdk.models.conversation_message import ConversationMessage as ConversationMessage
     from thoughtspot_rest_api_sdk.models.conversation_message_response import ConversationMessageResponse as ConversationMessageResponse
+    from thoughtspot_rest_api_sdk.models.conversation_principal_info import ConversationPrincipalInfo as ConversationPrincipalInfo
     from thoughtspot_rest_api_sdk.models.conversation_settings_input import ConversationSettingsInput as ConversationSettingsInput
+    from thoughtspot_rest_api_sdk.models.conversation_share_status_response import ConversationShareStatusResponse as ConversationShareStatusResponse
     from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest as ConvertWorksheetToModelRequest
     from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest as CopyObjectRequest
     from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest as CreateAgentConversationRequest
@@ -715,6 +733,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest as CreateOrgRequest
     from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest as CreateRoleRequest
     from thoughtspot_rest_api_sdk.models.create_schedule_request import CreateScheduleRequest as CreateScheduleRequest
+    from thoughtspot_rest_api_sdk.models.create_semantic_integration_request import CreateSemanticIntegrationRequest as CreateSemanticIntegrationRequest
     from thoughtspot_rest_api_sdk.models.create_tag_request import CreateTagRequest as CreateTagRequest
     from thoughtspot_rest_api_sdk.models.create_user_group_request import CreateUserGroupRequest as CreateUserGroupRequest
     from thoughtspot_rest_api_sdk.models.create_user_request import CreateUserRequest as CreateUserRequest
@@ -888,6 +907,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.png_options_input import PngOptionsInput as PngOptionsInput
     from thoughtspot_rest_api_sdk.models.policy_process_options import PolicyProcessOptions as PolicyProcessOptions
     from thoughtspot_rest_api_sdk.models.policy_process_options_input import PolicyProcessOptionsInput as PolicyProcessOptionsInput
+    from thoughtspot_rest_api_sdk.models.principal_ref_input import PrincipalRefInput as PrincipalRefInput
     from thoughtspot_rest_api_sdk.models.principals_input import PrincipalsInput as PrincipalsInput
     from thoughtspot_rest_api_sdk.models.principals_list_item import PrincipalsListItem as PrincipalsListItem
     from thoughtspot_rest_api_sdk.models.principals_list_item_input import PrincipalsListItemInput as PrincipalsListItemInput
@@ -961,6 +981,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.search_roles_request import SearchRolesRequest as SearchRolesRequest
     from thoughtspot_rest_api_sdk.models.search_schedules_request import SearchSchedulesRequest as SearchSchedulesRequest
     from thoughtspot_rest_api_sdk.models.search_security_settings_request import SearchSecuritySettingsRequest as SearchSecuritySettingsRequest
+    from thoughtspot_rest_api_sdk.models.search_semantic_integrations_request import SearchSemanticIntegrationsRequest as SearchSemanticIntegrationsRequest
     from thoughtspot_rest_api_sdk.models.search_style_customizations_request import SearchStyleCustomizationsRequest as SearchStyleCustomizationsRequest
     from thoughtspot_rest_api_sdk.models.search_style_fonts_request import SearchStyleFontsRequest as SearchStyleFontsRequest
     from thoughtspot_rest_api_sdk.models.search_tags_request import SearchTagsRequest as SearchTagsRequest
@@ -974,6 +995,13 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.security_settings_org_preferences import SecuritySettingsOrgPreferences as SecuritySettingsOrgPreferences
     from thoughtspot_rest_api_sdk.models.security_settings_org_preferences_input import SecuritySettingsOrgPreferencesInput as SecuritySettingsOrgPreferencesInput
     from thoughtspot_rest_api_sdk.models.security_settings_response import SecuritySettingsResponse as SecuritySettingsResponse
+    from thoughtspot_rest_api_sdk.models.semantic_integration_formula_report import SemanticIntegrationFormulaReport as SemanticIntegrationFormulaReport
+    from thoughtspot_rest_api_sdk.models.semantic_integration_report import SemanticIntegrationReport as SemanticIntegrationReport
+    from thoughtspot_rest_api_sdk.models.semantic_integration_report_summary import SemanticIntegrationReportSummary as SemanticIntegrationReportSummary
+    from thoughtspot_rest_api_sdk.models.semantic_integration_response import SemanticIntegrationResponse as SemanticIntegrationResponse
+    from thoughtspot_rest_api_sdk.models.semantic_integration_search_response import SemanticIntegrationSearchResponse as SemanticIntegrationSearchResponse
+    from thoughtspot_rest_api_sdk.models.semantic_integration_sort_options import SemanticIntegrationSortOptions as SemanticIntegrationSortOptions
+    from thoughtspot_rest_api_sdk.models.semantic_integration_tag_reference import SemanticIntegrationTagReference as SemanticIntegrationTagReference
     from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_request import SendAgentConversationMessageRequest as SendAgentConversationMessageRequest
     from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_request import SendAgentConversationMessageStreamingRequest as SendAgentConversationMessageStreamingRequest
     from thoughtspot_rest_api_sdk.models.send_agent_message_request import SendAgentMessageRequest as SendAgentMessageRequest
@@ -982,9 +1010,11 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.send_message_request import SendMessageRequest as SendMessageRequest
     from thoughtspot_rest_api_sdk.models.set_agent_instructions_request import SetAgentInstructionsRequest as SetAgentInstructionsRequest
     from thoughtspot_rest_api_sdk.models.set_nl_instructions_request import SetNLInstructionsRequest as SetNLInstructionsRequest
+    from thoughtspot_rest_api_sdk.models.share_conversation_request import ShareConversationRequest as ShareConversationRequest
     from thoughtspot_rest_api_sdk.models.share_metadata_request import ShareMetadataRequest as ShareMetadataRequest
     from thoughtspot_rest_api_sdk.models.share_metadata_type_input import ShareMetadataTypeInput as ShareMetadataTypeInput
     from thoughtspot_rest_api_sdk.models.share_permissions_input import SharePermissionsInput as SharePermissionsInput
+    from thoughtspot_rest_api_sdk.models.shared_conversation_response import SharedConversationResponse as SharedConversationResponse
     from thoughtspot_rest_api_sdk.models.single_answer_request import SingleAnswerRequest as SingleAnswerRequest
     from thoughtspot_rest_api_sdk.models.sort_option import SortOption as SortOption
     from thoughtspot_rest_api_sdk.models.sort_option_input import SortOptionInput as SortOptionInput
@@ -1136,6 +1166,7 @@ from thoughtspot_rest_api_sdk.api.reports_api import ReportsApi as ReportsApi
 from thoughtspot_rest_api_sdk.api.roles_api import RolesApi as RolesApi
 from thoughtspot_rest_api_sdk.api.schedules_api import SchedulesApi as SchedulesApi
 from thoughtspot_rest_api_sdk.api.security_api import SecurityApi as SecurityApi
+from thoughtspot_rest_api_sdk.api.semantic_integrations_api import SemanticIntegrationsApi as SemanticIntegrationsApi
 from thoughtspot_rest_api_sdk.api.style_customization_api import StyleCustomizationApi as StyleCustomizationApi
 from thoughtspot_rest_api_sdk.api.system_api import SystemApi as SystemApi
 from thoughtspot_rest_api_sdk.api.tags_api import TagsApi as TagsApi
@@ -1248,7 +1279,9 @@ from thoughtspot_rest_api_sdk.models.context_payload_v2_input import ContextPayl
 from thoughtspot_rest_api_sdk.models.conversation import Conversation as Conversation
 from thoughtspot_rest_api_sdk.models.conversation_message import ConversationMessage as ConversationMessage
 from thoughtspot_rest_api_sdk.models.conversation_message_response import ConversationMessageResponse as ConversationMessageResponse
+from thoughtspot_rest_api_sdk.models.conversation_principal_info import ConversationPrincipalInfo as ConversationPrincipalInfo
 from thoughtspot_rest_api_sdk.models.conversation_settings_input import ConversationSettingsInput as ConversationSettingsInput
+from thoughtspot_rest_api_sdk.models.conversation_share_status_response import ConversationShareStatusResponse as ConversationShareStatusResponse
 from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest as ConvertWorksheetToModelRequest
 from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest as CopyObjectRequest
 from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest as CreateAgentConversationRequest
@@ -1265,6 +1298,7 @@ from thoughtspot_rest_api_sdk.models.create_email_customization_response import 
 from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest as CreateOrgRequest
 from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest as CreateRoleRequest
 from thoughtspot_rest_api_sdk.models.create_schedule_request import CreateScheduleRequest as CreateScheduleRequest
+from thoughtspot_rest_api_sdk.models.create_semantic_integration_request import CreateSemanticIntegrationRequest as CreateSemanticIntegrationRequest
 from thoughtspot_rest_api_sdk.models.create_tag_request import CreateTagRequest as CreateTagRequest
 from thoughtspot_rest_api_sdk.models.create_user_group_request import CreateUserGroupRequest as CreateUserGroupRequest
 from thoughtspot_rest_api_sdk.models.create_user_request import CreateUserRequest as CreateUserRequest
@@ -1438,6 +1472,7 @@ from thoughtspot_rest_api_sdk.models.permissions_metadata_type_input import Perm
 from thoughtspot_rest_api_sdk.models.png_options_input import PngOptionsInput as PngOptionsInput
 from thoughtspot_rest_api_sdk.models.policy_process_options import PolicyProcessOptions as PolicyProcessOptions
 from thoughtspot_rest_api_sdk.models.policy_process_options_input import PolicyProcessOptionsInput as PolicyProcessOptionsInput
+from thoughtspot_rest_api_sdk.models.principal_ref_input import PrincipalRefInput as PrincipalRefInput
 from thoughtspot_rest_api_sdk.models.principals_input import PrincipalsInput as PrincipalsInput
 from thoughtspot_rest_api_sdk.models.principals_list_item import PrincipalsListItem as PrincipalsListItem
 from thoughtspot_rest_api_sdk.models.principals_list_item_input import PrincipalsListItemInput as PrincipalsListItemInput
@@ -1511,6 +1546,7 @@ from thoughtspot_rest_api_sdk.models.search_role_response import SearchRoleRespo
 from thoughtspot_rest_api_sdk.models.search_roles_request import SearchRolesRequest as SearchRolesRequest
 from thoughtspot_rest_api_sdk.models.search_schedules_request import SearchSchedulesRequest as SearchSchedulesRequest
 from thoughtspot_rest_api_sdk.models.search_security_settings_request import SearchSecuritySettingsRequest as SearchSecuritySettingsRequest
+from thoughtspot_rest_api_sdk.models.search_semantic_integrations_request import SearchSemanticIntegrationsRequest as SearchSemanticIntegrationsRequest
 from thoughtspot_rest_api_sdk.models.search_style_customizations_request import SearchStyleCustomizationsRequest as SearchStyleCustomizationsRequest
 from thoughtspot_rest_api_sdk.models.search_style_fonts_request import SearchStyleFontsRequest as SearchStyleFontsRequest
 from thoughtspot_rest_api_sdk.models.search_tags_request import SearchTagsRequest as SearchTagsRequest
@@ -1524,6 +1560,13 @@ from thoughtspot_rest_api_sdk.models.security_settings_org_details import Securi
 from thoughtspot_rest_api_sdk.models.security_settings_org_preferences import SecuritySettingsOrgPreferences as SecuritySettingsOrgPreferences
 from thoughtspot_rest_api_sdk.models.security_settings_org_preferences_input import SecuritySettingsOrgPreferencesInput as SecuritySettingsOrgPreferencesInput
 from thoughtspot_rest_api_sdk.models.security_settings_response import SecuritySettingsResponse as SecuritySettingsResponse
+from thoughtspot_rest_api_sdk.models.semantic_integration_formula_report import SemanticIntegrationFormulaReport as SemanticIntegrationFormulaReport
+from thoughtspot_rest_api_sdk.models.semantic_integration_report import SemanticIntegrationReport as SemanticIntegrationReport
+from thoughtspot_rest_api_sdk.models.semantic_integration_report_summary import SemanticIntegrationReportSummary as SemanticIntegrationReportSummary
+from thoughtspot_rest_api_sdk.models.semantic_integration_response import SemanticIntegrationResponse as SemanticIntegrationResponse
+from thoughtspot_rest_api_sdk.models.semantic_integration_search_response import SemanticIntegrationSearchResponse as SemanticIntegrationSearchResponse
+from thoughtspot_rest_api_sdk.models.semantic_integration_sort_options import SemanticIntegrationSortOptions as SemanticIntegrationSortOptions
+from thoughtspot_rest_api_sdk.models.semantic_integration_tag_reference import SemanticIntegrationTagReference as SemanticIntegrationTagReference
 from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_request import SendAgentConversationMessageRequest as SendAgentConversationMessageRequest
 from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_request import SendAgentConversationMessageStreamingRequest as SendAgentConversationMessageStreamingRequest
 from thoughtspot_rest_api_sdk.models.send_agent_message_request import SendAgentMessageRequest as SendAgentMessageRequest
@@ -1532,9 +1575,11 @@ from thoughtspot_rest_api_sdk.models.send_agent_message_streaming_request import
 from thoughtspot_rest_api_sdk.models.send_message_request import SendMessageRequest as SendMessageRequest
 from thoughtspot_rest_api_sdk.models.set_agent_instructions_request import SetAgentInstructionsRequest as SetAgentInstructionsRequest
 from thoughtspot_rest_api_sdk.models.set_nl_instructions_request import SetNLInstructionsRequest as SetNLInstructionsRequest
+from thoughtspot_rest_api_sdk.models.share_conversation_request import ShareConversationRequest as ShareConversationRequest
 from thoughtspot_rest_api_sdk.models.share_metadata_request import ShareMetadataRequest as ShareMetadataRequest
 from thoughtspot_rest_api_sdk.models.share_metadata_type_input import ShareMetadataTypeInput as ShareMetadataTypeInput
 from thoughtspot_rest_api_sdk.models.share_permissions_input import SharePermissionsInput as SharePermissionsInput
+from thoughtspot_rest_api_sdk.models.shared_conversation_response import SharedConversationResponse as SharedConversationResponse
 from thoughtspot_rest_api_sdk.models.single_answer_request import SingleAnswerRequest as SingleAnswerRequest
 from thoughtspot_rest_api_sdk.models.sort_option import SortOption as SortOption
 from thoughtspot_rest_api_sdk.models.sort_option_input import SortOptionInput as SortOptionInput

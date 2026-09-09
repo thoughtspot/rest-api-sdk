@@ -99,7 +99,9 @@ docs/ContextPayloadV2Input.md
 docs/Conversation.md
 docs/ConversationMessage.md
 docs/ConversationMessageResponse.md
+docs/ConversationPrincipalInfo.md
 docs/ConversationSettingsInput.md
+docs/ConversationShareStatusResponse.md
 docs/ConvertWorksheetToModelRequest.md
 docs/CopyObjectRequest.md
 docs/CreateAgentConversationRequest.md
@@ -116,6 +118,7 @@ docs/CreateEmailCustomizationResponse.md
 docs/CreateOrgRequest.md
 docs/CreateRoleRequest.md
 docs/CreateScheduleRequest.md
+docs/CreateSemanticIntegrationRequest.md
 docs/CreateTagRequest.md
 docs/CreateUserGroupRequest.md
 docs/CreateUserRequest.md
@@ -300,6 +303,7 @@ docs/PermissionsMetadataTypeInput.md
 docs/PngOptionsInput.md
 docs/PolicyProcessOptions.md
 docs/PolicyProcessOptionsInput.md
+docs/PrincipalRefInput.md
 docs/PrincipalsInput.md
 docs/PrincipalsListItem.md
 docs/PrincipalsListItemInput.md
@@ -376,6 +380,7 @@ docs/SearchRoleResponse.md
 docs/SearchRolesRequest.md
 docs/SearchSchedulesRequest.md
 docs/SearchSecuritySettingsRequest.md
+docs/SearchSemanticIntegrationsRequest.md
 docs/SearchStyleCustomizationsRequest.md
 docs/SearchStyleFontsRequest.md
 docs/SearchTagsRequest.md
@@ -390,6 +395,14 @@ docs/SecuritySettingsOrgDetails.md
 docs/SecuritySettingsOrgPreferences.md
 docs/SecuritySettingsOrgPreferencesInput.md
 docs/SecuritySettingsResponse.md
+docs/SemanticIntegrationFormulaReport.md
+docs/SemanticIntegrationReport.md
+docs/SemanticIntegrationReportSummary.md
+docs/SemanticIntegrationResponse.md
+docs/SemanticIntegrationSearchResponse.md
+docs/SemanticIntegrationSortOptions.md
+docs/SemanticIntegrationTagReference.md
+docs/SemanticIntegrationsApi.md
 docs/SendAgentConversationMessageRequest.md
 docs/SendAgentConversationMessageStreamingRequest.md
 docs/SendAgentMessageRequest.md
@@ -398,9 +411,11 @@ docs/SendAgentMessageStreamingRequest.md
 docs/SendMessageRequest.md
 docs/SetAgentInstructionsRequest.md
 docs/SetNLInstructionsRequest.md
+docs/ShareConversationRequest.md
 docs/ShareMetadataRequest.md
 docs/ShareMetadataTypeInput.md
 docs/SharePermissionsInput.md
+docs/SharedConversationResponse.md
 docs/SingleAnswerRequest.md
 docs/SortOption.md
 docs/SortOptionInput.md
@@ -550,6 +565,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Api/ReportsApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/RolesApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/SchedulesApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/SecurityApiTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Api/SemanticIntegrationsApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/StyleCustomizationApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/SystemApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/TagsApiTests.cs
@@ -648,7 +664,9 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/ConnectionInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ContextPayloadV2InputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ConversationMessageResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ConversationMessageTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/ConversationPrincipalInfoTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ConversationSettingsInputTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/ConversationShareStatusResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ConversationTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ConvertWorksheetToModelRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CopyObjectRequestTests.cs
@@ -666,6 +684,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateEmailCustomizationResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateOrgRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateRoleRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateScheduleRequestTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateSemanticIntegrationRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateTagRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateUserGroupRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateUserRequestTests.cs
@@ -839,6 +858,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/PermissionsMetadataTypeInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/PngOptionsInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/PolicyProcessOptionsInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/PolicyProcessOptionsTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/PrincipalRefInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/PrincipalsInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/PrincipalsListItemInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/PrincipalsListItemTests.cs
@@ -912,6 +932,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchRoleResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchRolesRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchSchedulesRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchSecuritySettingsRequestTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchSemanticIntegrationsRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchStyleCustomizationsRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchStyleFontsRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchTagsRequestTests.cs
@@ -925,6 +946,13 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/SecuritySettingsOrgDetailsTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SecuritySettingsOrgPreferencesInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SecuritySettingsOrgPreferencesTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SecuritySettingsResponseTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SemanticIntegrationFormulaReportTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SemanticIntegrationReportSummaryTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SemanticIntegrationReportTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SemanticIntegrationResponseTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SemanticIntegrationSearchResponseTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SemanticIntegrationSortOptionsTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SemanticIntegrationTagReferenceTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SendAgentConversationMessageRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SendAgentConversationMessageStreamingRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SendAgentMessageRequestTests.cs
@@ -933,9 +961,11 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/SendAgentMessageStreamingRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SendMessageRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SetAgentInstructionsRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SetNLInstructionsRequestTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/ShareConversationRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ShareMetadataRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ShareMetadataTypeInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SharePermissionsInputTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SharedConversationResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SingleAnswerRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SortOptionInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SortOptionTests.cs
@@ -1077,6 +1107,7 @@ src/ThoughtSpot.RestApi.Sdk/Api/ReportsApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/RolesApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/SchedulesApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/SecurityApi.cs
+src/ThoughtSpot.RestApi.Sdk/Api/SemanticIntegrationsApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/StyleCustomizationApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/SystemApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/TagsApi.cs
@@ -1197,7 +1228,9 @@ src/ThoughtSpot.RestApi.Sdk/Model/ContextPayloadV2Input.cs
 src/ThoughtSpot.RestApi.Sdk/Model/Conversation.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ConversationMessage.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ConversationMessageResponse.cs
+src/ThoughtSpot.RestApi.Sdk/Model/ConversationPrincipalInfo.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ConversationSettingsInput.cs
+src/ThoughtSpot.RestApi.Sdk/Model/ConversationShareStatusResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ConvertWorksheetToModelRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CopyObjectRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateAgentConversationRequest.cs
@@ -1214,6 +1247,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/CreateEmailCustomizationResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateOrgRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateRoleRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateScheduleRequest.cs
+src/ThoughtSpot.RestApi.Sdk/Model/CreateSemanticIntegrationRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateTagRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateUserGroupRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateUserRequest.cs
@@ -1387,6 +1421,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/PermissionsMetadataTypeInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/PngOptionsInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/PolicyProcessOptions.cs
 src/ThoughtSpot.RestApi.Sdk/Model/PolicyProcessOptionsInput.cs
+src/ThoughtSpot.RestApi.Sdk/Model/PrincipalRefInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/PrincipalsInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/PrincipalsListItem.cs
 src/ThoughtSpot.RestApi.Sdk/Model/PrincipalsListItemInput.cs
@@ -1460,6 +1495,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/SearchRoleResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchRolesRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchSchedulesRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchSecuritySettingsRequest.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SearchSemanticIntegrationsRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchStyleCustomizationsRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchStyleFontsRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchTagsRequest.cs
@@ -1473,6 +1509,13 @@ src/ThoughtSpot.RestApi.Sdk/Model/SecuritySettingsOrgDetails.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SecuritySettingsOrgPreferences.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SecuritySettingsOrgPreferencesInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SecuritySettingsResponse.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SemanticIntegrationFormulaReport.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SemanticIntegrationReport.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SemanticIntegrationReportSummary.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SemanticIntegrationResponse.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SemanticIntegrationSearchResponse.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SemanticIntegrationSortOptions.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SemanticIntegrationTagReference.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SendAgentConversationMessageRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SendAgentConversationMessageStreamingRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SendAgentMessageRequest.cs
@@ -1481,9 +1524,11 @@ src/ThoughtSpot.RestApi.Sdk/Model/SendAgentMessageStreamingRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SendMessageRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SetAgentInstructionsRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SetNLInstructionsRequest.cs
+src/ThoughtSpot.RestApi.Sdk/Model/ShareConversationRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ShareMetadataRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ShareMetadataTypeInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SharePermissionsInput.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SharedConversationResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SingleAnswerRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SortOption.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SortOptionInput.cs

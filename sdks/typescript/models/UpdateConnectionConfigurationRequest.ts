@@ -51,7 +51,7 @@ export class UpdateConnectionConfigurationRequest {
     */
     'policy_principals'?: Array<string>;
     /**
-    * Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.
+    * Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.
     */
     'policy_processes'?: Array<UpdateConnectionConfigurationRequestPolicyProcessesEnum>;
     /**
@@ -139,7 +139,7 @@ export class UpdateConnectionConfigurationRequest {
     }
 }
 
-    export type UpdateConnectionConfigurationRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "EXTOAUTH" | "KEY_PAIR" | "EXTOAUTH_WITH_PKCE" | "OAUTH_WITH_PKCE" | "PERSONAL_ACCESS_TOKEN" | "OAUTH_CLIENT_CREDENTIALS" ;
+    export type UpdateConnectionConfigurationRequestAuthenticationTypeEnum = "SERVICE_ACCOUNT" | "OAUTH" | "OAUTH_WITH_SERVICE_PRINCIPAL" | "EXTOAUTH" | "KEY_PAIR" | "EXTOAUTH_WITH_PKCE" | "OAUTH_WITH_PKCE" | "PERSONAL_ACCESS_TOKEN" | "OAUTH_CLIENT_CREDENTIALS" | "OAUTH_CLIENT_CREDENTIALS_WITH_X509" ;
     export type UpdateConnectionConfigurationRequestPolicyTypeEnum = "NO_POLICY" | "PRINCIPALS" | "PROCESSES" ;
-    export type UpdateConnectionConfigurationRequestPolicyProcessesEnum = "SAGE_INDEXING" | "ROW_COUNT_STATS" ;
+    export type UpdateConnectionConfigurationRequestPolicyProcessesEnum = "SAGE_INDEXING" | "ROW_COUNT_STATS" | "SCHEDULED_LIVEBOARDS" ;
 

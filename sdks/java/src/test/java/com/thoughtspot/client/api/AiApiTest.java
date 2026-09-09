@@ -10,6 +10,7 @@ import com.thoughtspot.client.model.AgentConversationHistoryResponse;
 import com.thoughtspot.client.model.AgentInstructions;
 import com.thoughtspot.client.model.Conversation;
 import com.thoughtspot.client.model.ConversationMessageResponse;
+import com.thoughtspot.client.model.ConversationShareStatusResponse;
 import com.thoughtspot.client.model.CreateAgentConversationRequest;
 import com.thoughtspot.client.model.CreateConversationRequest;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
@@ -34,6 +35,8 @@ import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.SetAgentInstructionsRequest;
 import com.thoughtspot.client.model.SetNLInstructionsRequest;
+import com.thoughtspot.client.model.ShareConversationRequest;
+import com.thoughtspot.client.model.SharedConversationResponse;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.UpdateConversationRequest;
 import java.io.InputStream;
@@ -595,6 +598,36 @@ public class AiApiTest {
         GetRelevantQuestionsRequest getRelevantQuestionsRequest = null;
         EurekaGetRelevantQuestionsResponse response =
                 api.getRelevantQuestions(getRelevantQuestionsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Returns the current share state for a conversation the caller owns: whether the shared view
+     * is outdated relative to the latest conversation content, and the list of principals that
+     * currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the
+     * specified conversation. Version: 26.9.0.cl or later
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getShareInfoTest() throws ApiException {
+        String conversationIdentifier = null;
+        ConversationShareStatusResponse response = api.getShareInfo(conversationIdentifier);
+        // TODO: test validations
+    }
+
+    /**
+     * Returns the full read-only view of a shared conversation, including ordered messages and data
+     * source metadata. Accessible by the conversation owner and any principal (user or group) that
+     * has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege. Version: 26.9.0.cl
+     * or later
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getSharedContentTest() throws ApiException {
+        String conversationIdentifier = null;
+        SharedConversationResponse response = api.getSharedContent(conversationIdentifier);
         // TODO: test validations
     }
 
@@ -1166,6 +1199,23 @@ public class AiApiTest {
     public void setNLInstructionsTest() throws ApiException {
         SetNLInstructionsRequest setNLInstructionsRequest = null;
         EurekaSetNLInstructionsResponse response = api.setNLInstructions(setNLInstructionsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Grants or revokes access to a shared conversation for one or more principals (users or
+     * groups). When principals are added, a read-only shared view of the conversation is created
+     * from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view
+     * with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * ownership of the specified conversation. Version: 26.9.0.cl or later
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void shareConversationTest() throws ApiException {
+        String conversationIdentifier = null;
+        ShareConversationRequest shareConversationRequest = null;
+        api.shareConversation(conversationIdentifier, shareConversationRequest);
         // TODO: test validations
     }
 

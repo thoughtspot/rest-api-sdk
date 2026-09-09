@@ -93,7 +93,9 @@ import { ContextPayloadV2Input } from '../models/ContextPayloadV2Input';
 import { Conversation } from '../models/Conversation';
 import { ConversationMessage } from '../models/ConversationMessage';
 import { ConversationMessageResponse } from '../models/ConversationMessageResponse';
+import { ConversationPrincipalInfo } from '../models/ConversationPrincipalInfo';
 import { ConversationSettingsInput } from '../models/ConversationSettingsInput';
+import { ConversationShareStatusResponse } from '../models/ConversationShareStatusResponse';
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest } from '../models/CopyObjectRequest';
 import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
@@ -110,6 +112,7 @@ import { CreateEmailCustomizationResponse } from '../models/CreateEmailCustomiza
 import { CreateOrgRequest } from '../models/CreateOrgRequest';
 import { CreateRoleRequest } from '../models/CreateRoleRequest';
 import { CreateScheduleRequest } from '../models/CreateScheduleRequest';
+import { CreateSemanticIntegrationRequest } from '../models/CreateSemanticIntegrationRequest';
 import { CreateTagRequest } from '../models/CreateTagRequest';
 import { CreateUserGroupRequest } from '../models/CreateUserGroupRequest';
 import { CreateUserRequest } from '../models/CreateUserRequest';
@@ -283,6 +286,7 @@ import { PermissionsMetadataTypeInput } from '../models/PermissionsMetadataTypeI
 import { PngOptionsInput } from '../models/PngOptionsInput';
 import { PolicyProcessOptions } from '../models/PolicyProcessOptions';
 import { PolicyProcessOptionsInput } from '../models/PolicyProcessOptionsInput';
+import { PrincipalRefInput } from '../models/PrincipalRefInput';
 import { PrincipalsInput } from '../models/PrincipalsInput';
 import { PrincipalsListItem } from '../models/PrincipalsListItem';
 import { PrincipalsListItemInput } from '../models/PrincipalsListItemInput';
@@ -356,6 +360,7 @@ import { SearchRoleResponse } from '../models/SearchRoleResponse';
 import { SearchRolesRequest } from '../models/SearchRolesRequest';
 import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
 import { SearchSecuritySettingsRequest } from '../models/SearchSecuritySettingsRequest';
+import { SearchSemanticIntegrationsRequest } from '../models/SearchSemanticIntegrationsRequest';
 import { SearchStyleCustomizationsRequest } from '../models/SearchStyleCustomizationsRequest';
 import { SearchStyleFontsRequest } from '../models/SearchStyleFontsRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
@@ -369,6 +374,13 @@ import { SecuritySettingsOrgDetails } from '../models/SecuritySettingsOrgDetails
 import { SecuritySettingsOrgPreferences } from '../models/SecuritySettingsOrgPreferences';
 import { SecuritySettingsOrgPreferencesInput } from '../models/SecuritySettingsOrgPreferencesInput';
 import { SecuritySettingsResponse } from '../models/SecuritySettingsResponse';
+import { SemanticIntegrationFormulaReport } from '../models/SemanticIntegrationFormulaReport';
+import { SemanticIntegrationReport } from '../models/SemanticIntegrationReport';
+import { SemanticIntegrationReportSummary } from '../models/SemanticIntegrationReportSummary';
+import { SemanticIntegrationResponse } from '../models/SemanticIntegrationResponse';
+import { SemanticIntegrationSearchResponse } from '../models/SemanticIntegrationSearchResponse';
+import { SemanticIntegrationSortOptions } from '../models/SemanticIntegrationSortOptions';
+import { SemanticIntegrationTagReference } from '../models/SemanticIntegrationTagReference';
 import { SendAgentConversationMessageRequest } from '../models/SendAgentConversationMessageRequest';
 import { SendAgentConversationMessageStreamingRequest } from '../models/SendAgentConversationMessageStreamingRequest';
 import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
@@ -377,9 +389,11 @@ import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStre
 import { SendMessageRequest } from '../models/SendMessageRequest';
 import { SetAgentInstructionsRequest } from '../models/SetAgentInstructionsRequest';
 import { SetNLInstructionsRequest } from '../models/SetNLInstructionsRequest';
+import { ShareConversationRequest } from '../models/ShareConversationRequest';
 import { ShareMetadataRequest } from '../models/ShareMetadataRequest';
 import { ShareMetadataTypeInput } from '../models/ShareMetadataTypeInput';
 import { SharePermissionsInput } from '../models/SharePermissionsInput';
+import { SharedConversationResponse } from '../models/SharedConversationResponse';
 import { SingleAnswerRequest } from '../models/SingleAnswerRequest';
 import { SortOption } from '../models/SortOption';
 import { SortOptionInput } from '../models/SortOptionInput';
@@ -605,6 +619,26 @@ export interface AIApiGetRelevantQuestionsRequest {
     getRelevantQuestionsRequest: GetRelevantQuestionsRequest
 }
 
+export interface AIApiGetShareInfoRequest {
+    /**
+     * Unique identifier of the conversation.
+     * Defaults to: undefined
+     * @type string
+     * @memberof AIApigetShareInfo
+     */
+    conversationIdentifier: string
+}
+
+export interface AIApiGetSharedContentRequest {
+    /**
+     * Unique identifier of the source conversation.
+     * Defaults to: undefined
+     * @type string
+     * @memberof AIApigetSharedContent
+     */
+    conversationIdentifier: string
+}
+
 export interface AIApiImportMemoryRequest {
     /**
      * 
@@ -729,6 +763,22 @@ export interface AIApiSetNLInstructionsRequest {
      * @memberof AIApisetNLInstructions
      */
     setNLInstructionsRequest: SetNLInstructionsRequest
+}
+
+export interface AIApiShareConversationRequest {
+    /**
+     * Unique identifier of the conversation to share.
+     * Defaults to: undefined
+     * @type string
+     * @memberof AIApishareConversation
+     */
+    conversationIdentifier: string
+    /**
+     * 
+     * @type ShareConversationRequest
+     * @memberof AIApishareConversation
+     */
+    shareConversationRequest: ShareConversationRequest
 }
 
 export interface AIApiSingleAnswerRequest {
@@ -934,6 +984,38 @@ export class ObjectAIApi {
     }
 
     /**
+     *  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public getShareInfoWithHttpInfo(param: AIApiGetShareInfoRequest, options?: ConfigurationOptions): Promise<HttpInfo<ConversationShareStatusResponse>> {
+        return this.api.getShareInfoWithHttpInfo(param.conversationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public getShareInfo(param: AIApiGetShareInfoRequest, options?: ConfigurationOptions): Promise<ConversationShareStatusResponse> {
+        return this.api.getShareInfo(param.conversationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires `CAN_USE_SPOTTER` privilege.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public getSharedContentWithHttpInfo(param: AIApiGetSharedContentRequest, options?: ConfigurationOptions): Promise<HttpInfo<SharedConversationResponse>> {
+        return this.api.getSharedContentWithHttpInfo(param.conversationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires `CAN_USE_SPOTTER` privilege.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public getSharedContent(param: AIApiGetSharedContentRequest, options?: ConfigurationOptions): Promise<SharedConversationResponse> {
+        return this.api.getSharedContent(param.conversationIdentifier,  options).toPromise();
+    }
+
+    /**
      *  Imports memory entries (rules, recipes, and always-apply rules) from a YAML payload, typically a payload produced by `exportMemory` and edited locally. The imported entries replace the existing memory for the data-models referenced in the payload. `dry_run` is required. Pass `true` first to validate the payload and review the preview counts and any row-level failures without making changes, then re-run with `dry_run = false` to apply the import. An import is not applied if any row fails validation. Requires Spotter access (use/manage) and either edit or memory access on corresponding data model sources.   Version: 26.8.0.cl or later   This API allows users to import data-model memories using a given yaml file. This yaml file can be obtained from the export memory API in source env and can be modified and used as input to the import API in target env.  This API enables customers to migrate memories from a source env to a target env. This improves memory adoption for Spotter by giving the users a chance to develop their memories in one env and replicate the same in another env.  #### Usage guidelines  To import memory, the request must include: - `content`: The full serialized memory payload to import (YAML). Typically the `content` value returned by the `exportMemory` API, edited locally and re-submitted. The payload itself identifies which data-models the memory applies to, so no separate identifier list is required. - `dry_run`: Required. When `true`, validate the payload and return preview counts without writing anything; when `false`, apply the import. Always run with `dry_run = true` first, then re-run with `dry_run = false` once you are satisfied with the preview.  The import replaces the existing global memories on the data-models referenced in the payload with the entries supplied in the payload.  The API returns a response object with: - `status`: The terminal status of the import (`SUCCESS`, `VALIDATION_FAILED`, or `FAILED`). - `summary`: Per `(memory_type, source)` counts. In a dry run the `deleted_record_count`/`inserted_record_count` are previews; in a real import they are actuals. On `VALIDATION_FAILED`, `summary` is `null` when validation fails before any item is processed (e.g. an unresolved or inaccessible data-model source) and an empty list otherwise — treat both as \"no counts available\". - `validation_failures`: Per-item validation failures, each with `line_number`, `reason`, `field_name`, and `message` for click-to-locate and inline highlighting. - `diagnostics`: Groups of diagnostic messages, each with a `sub_status` (`WARNING`, `FAILURE`, `ROLLED_BACK`, or `UNKNOWN`) and a `messages` list. This is the single channel for both non-fatal warnings (under `WARNING`, e.g. when some older memory entries could not be fully cleaned up) and fatal causes (e.g. the failure reason under `FAILURE`, or a `ROLLED_BACK` group when new entries were undone). - `operation_id`: A server-generated identifier for this import operation; include it when contacting support to help correlate server-side logs. Populated once the server registers the import operation; `null` when the request fails earlier (e.g. while parsing the payload or resolving its data-model sources).  #### File format  The payload is a YAML document with a single top-level `memories` key holding a list of memory items. Each item is self-contained: a `type`, a typed `content` block, a `datamodel_sources` list, and optional `tags`. Typically you don\'t hand-author this file — you obtain it from `exportMemory`, edit it, and submit it back through `importMemory`.  ```yaml memories: - type: RULE   content:     rule_definition: \"Always filter revenue to closed-won deals.\"   datamodel_sources:   - guid: 11111111-1111-1111-1111-111111111111     obj_id: sales_data_model   tags:   - finance - type: RULE   content:     rule_definition: \"Exclude internal test accounts from all results.\"   datamodel_sources:   - obj_id: sales_data_model - type: RECIPE   content:     user_query: \"top accounts by revenue\"     recipe: |       {\"steps\": [...serialized recipe blob...]}   datamodel_sources:   - obj_id: sales_data_model - type: RECIPE   content:     user_query: \"monthly new customer count\"     recipe: |       {\"steps\": [...serialized recipe blob...]}   datamodel_sources:   - obj_id: sales_data_model - type: ALWAYS_APPLY_RULES   content:     rules:     - \"Never show internal test accounts.\"     - \"Round currency to whole dollars.\"   datamodel_sources:   - guid: 22222222-2222-2222-2222-222222222222 ```  A file can contain multiple `RULE` and multiple `RECIPE` items for a data-model, but at most one `ALWAYS_APPLY_RULES` item per data-model.  ##### Memory item fields  | Field | Required | Type | Description | |-------|----------|------|-------------| | `type` | Yes | String enum | One of `RULE`, `RECIPE`, or `ALWAYS_APPLY_RULES`. | | `content` | Yes | Mapping | Type-specific content block (see below). | | `datamodel_sources` | Yes | Non-empty list | The data-model(s) the memory attaches to. | | `tags` | No | List of strings | Free-form labels. |  ##### Memory types and content  | `type` | Content fields | Notes | |--------|----------------|-------| | `RULE` | `rule_definition` — required, non-empty string | A single semantic rule. | | `RECIPE` | `recipe` and `user_query` — both required, non-empty strings | `recipe` is an opaque serialized blob; `user_query` is the natural-language query it answers. | | `ALWAYS_APPLY_RULES` | `rules` — required, non-empty list of non-empty strings | Data-model-wide always-apply rules. At most one `ALWAYS_APPLY_RULES` item per data-model. |  ##### Identifying data-models (`datamodel_sources`)  Each item must list at least one source. Each entry identifies a data-model by at least one of: - `guid` — the data-model GUID. - `obj_id` — a stable object ID, resolved to a GUID server-side.  If both are supplied, `obj_id` takes precedence and `guid` is ignored entirely; `guid` takes effect only when `obj_id` is absent. Exported files populate `guid` and, if present, `obj_id` as well.  > ⚠️ **Cross-environment import:** When `obj_id` is present it is > authoritative — the accompanying `guid` is **not** used as a fallback. > If an `obj_id` does not exist in the target environment, that item > fails with `UNRESOLVED_SOURCE`. Remove or correct stale `obj_id` > values before importing across environments.  #### Validations reference  The payload is fully validated before anything is written. This applies to `dry_run = true` and `dry_run = false` alike: if any item fails validation, the entire import is rejected — no partial writes — and all failures are returned together so you can fix them in one pass.  ##### Limits  Default limits (may be adjusted in future if the need arises):  | Limit | Default | |-------|---------| | Uploaded file size | 10 MiB | | Total memory items | 10,000 | | `rule_definition` length | 1,000 characters | | `user_query` length | 1,000 characters | | `recipe` length | 2,000 characters | | `rules` combined length (`ALWAYS_APPLY_RULES`) | 2,000 characters | | Tags per item | 10 | | Characters per tag | 50 |  The `rules` limit in `ALWAYS_APPLY_RULES` is a combined budget across all entries in the list, not per entry.  ##### Structural rules  - The document must be a mapping with a `memories` key whose value is a list. - Unknown keys — at the top level, within an item, or under `content` — are rejected. - Each item\'s `type` must be one of the three supported values, and `content` must match that type\'s shape. - Null, empty-string, or wrong-typed values in a required field are treated as missing. - Non-string or empty `tags` entries are dropped silently; certain tags reserved for internal use are stripped automatically before the item is stored.  ##### Cross-item rules  - A data-model referenced by more than one `ALWAYS_APPLY_RULES` item is rejected — combine them into a single item\'s `rules` list.  ##### Failure reasons  Each entry in `validation_failures` carries one of:  | Reason | Meaning | |--------|---------| | `SCHEMA` | YAML structure is invalid or unsupported. | | `VALIDATION` | A required field is missing/empty, a count exceeds a limit, or a GUID is malformed. | | `CHAR_LIMIT` | A content field or tag exceeds its size limit. | | `UNRESOLVED_SOURCE` | A `guid` or `obj_id` could not be resolved to an existing data-model. | | `ACCESS_DENIED` | The caller lacks sufficient access on the referenced data-model. |  #### Dry run  `dry_run` is required and has no default, so the import is always a deliberate two-step flow:  1. **First, call with `dry_run = true`.** This validates the payload and previews what would happen — the counts in `summary` and any `validation_failures` — without writing anything. 2. **Then, after reviewing a clean preview, call again with `dry_run = false`** (same `content`). This applies the import. It refuses to write when any item fails validation, so fix the reported `validation_failures` and resubmit.  > ###### Important: > Never call `dry_run = false` without first inspecting a `dry_run = true` preview. A real import deletes and replaces existing global memories on the referenced data-models.  #### Error responses  | Code | Description                                                                                                                                                                                  | |------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                        | | 403  | Forbidden — the authenticated user does not have the necessary Spotter permissions, or the bearer token does not correspond to the data-model\'s org. Per-data-model access failures do not use this code — they surface as `ACCESS_DENIED` validation failures with HTTP `200` (see Logical failures below). |  #### Logical failures  Validation and write failures are not returned in the error envelope. The call returns `200` with a terminal `status` of `VALIDATION_FAILED` or `FAILED`, and the details live in `validation_failures` / `diagnostics`:  - **VALIDATION_FAILED** — one or more items failed schema/semantic validation; nothing was written. Inspect `validation_failures`, fix the items, and resubmit. - **FAILED** — the import did not complete. Inspect `diagnostics`: a `ROLLED_BACK` group means writing the new entries failed and any entries written before the failure were undone (existing memory is intact, no destructive change), while a `FAILURE` group carries another non-validation cause.  Sample `VALIDATION_FAILED` responses (HTTP 200):  **Invalid data-model (unresolved source):**  ```json {     \"status\": \"VALIDATION_FAILED\",     \"summary\": null,     \"validation_failures\": [         {             \"line_number\": 2,             \"reason\": \"UNRESOLVED_SOURCE\",             \"field_name\": \"datamodel_sources[0].guid\",             \"message\": \"unknown datamodel guid: 55555555-5555-5555-5555-555555555555\"         }     ],     \"diagnostics\": [         {             \"sub_status\": \"FAILURE\",             \"messages\": [                 \"unknown datamodel guid: 55555555-5555-5555-5555-555555555555\"             ]         }     ],     \"operation_id\": null } ```  **Inaccessible data-models:**  ```json {     \"status\": \"VALIDATION_FAILED\",     \"summary\": null,     \"validation_failures\": [         {             \"line_number\": 2,             \"reason\": \"ACCESS_DENIED\",             \"field_name\": \"datamodel_sources[0]\",             \"message\": \"Insufficient permissions on datamodel \'44444444-4444-4444-4444-444444444444\'\"         },         {             \"line_number\": 8,             \"reason\": \"ACCESS_DENIED\",             \"field_name\": \"datamodel_sources[0]\",             \"message\": \"Insufficient permissions on datamodel \'33333333-3333-3333-3333-333333333333\'\"         }     ],     \"diagnostics\": [         {             \"sub_status\": \"FAILURE\",             \"messages\": [                 \"Memory import validation failed with 2 error(s): Insufficient permissions on datamodel \'44444444-4444-4444-4444-444444444444\'; Insufficient permissions on datamodel \'33333333-3333-3333-3333-333333333333\'\"             ]         }     ],     \"operation_id\": null } ```  **Character-limit validations:**  ```json {     \"status\": \"VALIDATION_FAILED\",     \"summary\": [],     \"validation_failures\": [         {             \"line_number\": 3,             \"reason\": \"CHAR_LIMIT\",             \"field_name\": \"content.rule_definition\",             \"message\": \"content.rule_definition is 1073 characters; max allowed is 1000\"         },         {             \"line_number\": 49,             \"reason\": \"CHAR_LIMIT\",             \"field_name\": \"content.user_query\",             \"message\": \"content.user_query is 1150 characters; max allowed is 1000\"         },         {             \"line_number\": 49,             \"reason\": \"CHAR_LIMIT\",             \"field_name\": \"content.recipe\",             \"message\": \"content.recipe is 3574 characters; max allowed is 2000\"         }     ],     \"diagnostics\": [         {             \"sub_status\": \"FAILURE\",             \"messages\": [                 \"Validation failures present; fix them and re-run to see the DRY_RUN preview.\"             ]         }     ],     \"operation_id\": \"66666666-6666-6666-6666-666666666666\" } ```  > ###### Note: > - To use this API, the user needs Spotter access (use/manage) and either edit or memory access on the data-model and they must use corresponding org related bearerToken where the data-model exists. > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > - Available from version 26.8.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
      * @param param the request object
      */
@@ -1091,6 +1173,22 @@ export class ObjectAIApi {
      */
     public setNLInstructions(param: AIApiSetNLInstructionsRequest, options?: ConfigurationOptions): Promise<EurekaSetNLInstructionsResponse> {
         return this.api.setNLInstructions(param.setNLInstructionsRequest,  options).toPromise();
+    }
+
+    /**
+     *  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public shareConversationWithHttpInfo(param: AIApiShareConversationRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.shareConversationWithHttpInfo(param.conversationIdentifier, param.shareConversationRequest,  options).toPromise();
+    }
+
+    /**
+     *  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public shareConversation(param: AIApiShareConversationRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.shareConversation(param.conversationIdentifier, param.shareConversationRequest,  options).toPromise();
     }
 
     /**
@@ -4256,6 +4354,120 @@ export class ObjectSecurityApi {
 
 }
 
+import { ObservableSemanticIntegrationsApi } from "./ObservableAPI";
+import { SemanticIntegrationsApiRequestFactory, SemanticIntegrationsApiResponseProcessor} from "../apis/SemanticIntegrationsApi";
+
+export interface SemanticIntegrationsApiCreateSemanticIntegrationRequest {
+    /**
+     * 
+     * @type CreateSemanticIntegrationRequest
+     * @memberof SemanticIntegrationsApicreateSemanticIntegration
+     */
+    createSemanticIntegrationRequest: CreateSemanticIntegrationRequest
+}
+
+export interface SemanticIntegrationsApiDeleteSemanticIntegrationRequest {
+    /**
+     * ID or name of the semantic integration to delete.
+     * Defaults to: undefined
+     * @type string
+     * @memberof SemanticIntegrationsApideleteSemanticIntegration
+     */
+    semanticIntegrationIdentifier: string
+}
+
+export interface SemanticIntegrationsApiImportSemanticIntegrationRequest {
+    /**
+     * ID or name of the semantic integration to import updates for.
+     * Defaults to: undefined
+     * @type string
+     * @memberof SemanticIntegrationsApiimportSemanticIntegration
+     */
+    semanticIntegrationIdentifier: string
+}
+
+export interface SemanticIntegrationsApiSearchSemanticIntegrationsRequest {
+    /**
+     * 
+     * @type SearchSemanticIntegrationsRequest
+     * @memberof SemanticIntegrationsApisearchSemanticIntegrations
+     */
+    searchSemanticIntegrationsRequest: SearchSemanticIntegrationsRequest
+}
+
+export class ObjectSemanticIntegrationsApi {
+    private api: ObservableSemanticIntegrationsApi
+
+    public constructor(configuration: Configuration, requestFactory?: SemanticIntegrationsApiRequestFactory, responseProcessor?: SemanticIntegrationsApiResponseProcessor) {
+        this.api = new ObservableSemanticIntegrationsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.  - `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required. - `name` must be unique across the user\'s organization. The integration\'s display name is also used as the generated model name. - Supported `type` values are listed in the `SemanticIntegrationType` enum. - The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.  > **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+     * @param param the request object
+     */
+    public createSemanticIntegrationWithHttpInfo(param: SemanticIntegrationsApiCreateSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<HttpInfo<SemanticIntegrationResponse>> {
+        return this.api.createSemanticIntegrationWithHttpInfo(param.createSemanticIntegrationRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.  - `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required. - `name` must be unique across the user\'s organization. The integration\'s display name is also used as the generated model name. - Supported `type` values are listed in the `SemanticIntegrationType` enum. - The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.  > **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+     * @param param the request object
+     */
+    public createSemanticIntegration(param: SemanticIntegrationsApiCreateSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<SemanticIntegrationResponse> {
+        return this.api.createSemanticIntegration(param.createSemanticIntegrationRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - `semantic_integration_identifier` is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with `createSemanticIntegration` if needed.      
+     * @param param the request object
+     */
+    public deleteSemanticIntegrationWithHttpInfo(param: SemanticIntegrationsApiDeleteSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.deleteSemanticIntegrationWithHttpInfo(param.semanticIntegrationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - `semantic_integration_identifier` is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with `createSemanticIntegration` if needed.      
+     * @param param the request object
+     */
+    public deleteSemanticIntegration(param: SemanticIntegrationsApiDeleteSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.deleteSemanticIntegration(param.semanticIntegrationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - `semantic_integration_identifier` is the GUID or name of the integration to import updates for. - Import preserves the integration\'s GUID, name, and `model_id`; only the underlying formula set is refreshed. - The response includes the same `semantic_report` as create, with an additional `change_status` per formula indicating whether each formula is `NEW`, `UPDATED`, or `UNCHANGED` since the previous import.  > **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+     * @param param the request object
+     */
+    public importSemanticIntegrationWithHttpInfo(param: SemanticIntegrationsApiImportSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<HttpInfo<SemanticIntegrationResponse>> {
+        return this.api.importSemanticIntegrationWithHttpInfo(param.semanticIntegrationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - `semantic_integration_identifier` is the GUID or name of the integration to import updates for. - Import preserves the integration\'s GUID, name, and `model_id`; only the underlying formula set is refreshed. - The response includes the same `semantic_report` as create, with an additional `change_status` per formula indicating whether each formula is `NEW`, `UPDATED`, or `UNCHANGED` since the previous import.  > **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+     * @param param the request object
+     */
+    public importSemanticIntegration(param: SemanticIntegrationsApiImportSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<SemanticIntegrationResponse> {
+        return this.api.importSemanticIntegration(param.semanticIntegrationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - `pattern` matches the integration name as a case-insensitive substring. - `author_identifiers` and `connection_identifiers` accept either GUIDs or names. - `sort_options.field_name` defaults to `MODIFIED_TIME`; set `sort_options.order` to `ASC` or `DESC` to control sort direction. - `record_offset` and `record_size` control pagination. Use `record_size: 0` to return all matching records in a single response.  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
+     * @param param the request object
+     */
+    public searchSemanticIntegrationsWithHttpInfo(param: SemanticIntegrationsApiSearchSemanticIntegrationsRequest, options?: ConfigurationOptions): Promise<HttpInfo<Array<SemanticIntegrationSearchResponse>>> {
+        return this.api.searchSemanticIntegrationsWithHttpInfo(param.searchSemanticIntegrationsRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - `pattern` matches the integration name as a case-insensitive substring. - `author_identifiers` and `connection_identifiers` accept either GUIDs or names. - `sort_options.field_name` defaults to `MODIFIED_TIME`; set `sort_options.order` to `ASC` or `DESC` to control sort direction. - `record_offset` and `record_size` control pagination. Use `record_size: 0` to return all matching records in a single response.  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
+     * @param param the request object
+     */
+    public searchSemanticIntegrations(param: SemanticIntegrationsApiSearchSemanticIntegrationsRequest, options?: ConfigurationOptions): Promise<Array<SemanticIntegrationSearchResponse>> {
+        return this.api.searchSemanticIntegrations(param.searchSemanticIntegrationsRequest,  options).toPromise();
+    }
+
+}
+
 import { ObservableStyleCustomizationApi } from "./ObservableAPI";
 import { StyleCustomizationApiRequestFactory, StyleCustomizationApiResponseProcessor} from "../apis/StyleCustomizationApi";
 
@@ -4386,7 +4598,7 @@ export interface StyleCustomizationApiUpdateStyleFontRequest {
 
 export interface StyleCustomizationApiUploadStyleFontRequest {
     /**
-     * Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.
+     * Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).
      * Defaults to: undefined
      * @type string
      * @memberof StyleCustomizationApiuploadStyleFont
@@ -5149,6 +5361,15 @@ export interface ThoughtSpotRestApiCreateScheduleRequest {
     createScheduleRequest: CreateScheduleRequest
 }
 
+export interface ThoughtSpotRestApiCreateSemanticIntegrationRequest {
+    /**
+     * 
+     * @type CreateSemanticIntegrationRequest
+     * @memberof ThoughtSpotRestApicreateSemanticIntegration
+     */
+    createSemanticIntegrationRequest: CreateSemanticIntegrationRequest
+}
+
 export interface ThoughtSpotRestApiCreateTagRequest {
     /**
      * 
@@ -5499,6 +5720,16 @@ export interface ThoughtSpotRestApiDeleteScheduleRequest {
      * @memberof ThoughtSpotRestApideleteSchedule
      */
     scheduleIdentifier: string
+}
+
+export interface ThoughtSpotRestApiDeleteSemanticIntegrationRequest {
+    /**
+     * ID or name of the semantic integration to delete.
+     * Defaults to: undefined
+     * @type string
+     * @memberof ThoughtSpotRestApideleteSemanticIntegration
+     */
+    semanticIntegrationIdentifier: string
 }
 
 export interface ThoughtSpotRestApiDeleteStyleFontsRequest {
@@ -5882,6 +6113,26 @@ export interface ThoughtSpotRestApiGetRelevantQuestionsRequest {
     getRelevantQuestionsRequest: GetRelevantQuestionsRequest
 }
 
+export interface ThoughtSpotRestApiGetShareInfoRequest {
+    /**
+     * Unique identifier of the conversation.
+     * Defaults to: undefined
+     * @type string
+     * @memberof ThoughtSpotRestApigetShareInfo
+     */
+    conversationIdentifier: string
+}
+
+export interface ThoughtSpotRestApiGetSharedContentRequest {
+    /**
+     * Unique identifier of the source conversation.
+     * Defaults to: undefined
+     * @type string
+     * @memberof ThoughtSpotRestApigetSharedContent
+     */
+    conversationIdentifier: string
+}
+
 export interface ThoughtSpotRestApiGetSystemConfigRequest {
 }
 
@@ -5936,6 +6187,16 @@ export interface ThoughtSpotRestApiImportMetadataTMLAsyncRequest {
      * @memberof ThoughtSpotRestApiimportMetadataTMLAsync
      */
     importMetadataTMLAsyncRequest: ImportMetadataTMLAsyncRequest
+}
+
+export interface ThoughtSpotRestApiImportSemanticIntegrationRequest {
+    /**
+     * ID or name of the semantic integration to import updates for.
+     * Defaults to: undefined
+     * @type string
+     * @memberof ThoughtSpotRestApiimportSemanticIntegration
+     */
+    semanticIntegrationIdentifier: string
 }
 
 export interface ThoughtSpotRestApiImportUserGroupsRequest {
@@ -6240,6 +6501,15 @@ export interface ThoughtSpotRestApiSearchSecuritySettingsRequest {
     searchSecuritySettingsRequest: SearchSecuritySettingsRequest
 }
 
+export interface ThoughtSpotRestApiSearchSemanticIntegrationsRequest {
+    /**
+     * 
+     * @type SearchSemanticIntegrationsRequest
+     * @memberof ThoughtSpotRestApisearchSemanticIntegrations
+     */
+    searchSemanticIntegrationsRequest: SearchSemanticIntegrationsRequest
+}
+
 export interface ThoughtSpotRestApiSearchStyleCustomizationsRequest {
     /**
      * 
@@ -6392,6 +6662,22 @@ export interface ThoughtSpotRestApiSetNLInstructionsRequest {
      * @memberof ThoughtSpotRestApisetNLInstructions
      */
     setNLInstructionsRequest: SetNLInstructionsRequest
+}
+
+export interface ThoughtSpotRestApiShareConversationRequest {
+    /**
+     * Unique identifier of the conversation to share.
+     * Defaults to: undefined
+     * @type string
+     * @memberof ThoughtSpotRestApishareConversation
+     */
+    conversationIdentifier: string
+    /**
+     * 
+     * @type ShareConversationRequest
+     * @memberof ThoughtSpotRestApishareConversation
+     */
+    shareConversationRequest: ShareConversationRequest
 }
 
 export interface ThoughtSpotRestApiShareMetadataRequest {
@@ -6941,7 +7227,7 @@ export interface ThoughtSpotRestApiUpdateWebhookConfigurationRequest {
 
 export interface ThoughtSpotRestApiUploadStyleFontRequest {
     /**
-     * Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.
+     * Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).
      * Defaults to: undefined
      * @type string
      * @memberof ThoughtSpotRestApiuploadStyleFont
@@ -7390,6 +7676,22 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.  - `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required. - `name` must be unique across the user\'s organization. The integration\'s display name is also used as the generated model name. - Supported `type` values are listed in the `SemanticIntegrationType` enum. - The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.  > **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+     * @param param the request object
+     */
+    public createSemanticIntegrationWithHttpInfo(param: ThoughtSpotRestApiCreateSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<HttpInfo<SemanticIntegrationResponse>> {
+        return this.api.createSemanticIntegrationWithHttpInfo(param.createSemanticIntegrationRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified `connection_identifier`, `database_name`, `schema_name`, and `semantic_view_name`, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (`semantic_report`) summarizing how many formulas were successfully imported, failed, or skipped.  - `connection_identifier`, `name`, `database_name`, `schema_name`, `semantic_view_name`, and `type` are required. - `name` must be unique across the user\'s organization. The integration\'s display name is also used as the generated model name. - Supported `type` values are listed in the `SemanticIntegrationType` enum. - The response includes a `semantic_report.summary` with `total`, `imported`, `failed`, and `skipped` counts, and a `formulas` array with the per-formula translation details.  > **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+     * @param param the request object
+     */
+    public createSemanticIntegration(param: ThoughtSpotRestApiCreateSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<SemanticIntegrationResponse> {
+        return this.api.createSemanticIntegration(param.createSemanticIntegrationRequest,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `TAGMANAGEMENT` (**Can manage tags**) privilege is required to create, edit, and delete tags.      
      * @param param the request object
      */
@@ -7803,6 +8105,22 @@ export class ObjectThoughtSpotRestApi {
      */
     public deleteSchedule(param: ThoughtSpotRestApiDeleteScheduleRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.deleteSchedule(param.scheduleIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - `semantic_integration_identifier` is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with `createSemanticIntegration` if needed.      
+     * @param param the request object
+     */
+    public deleteSemanticIntegrationWithHttpInfo(param: ThoughtSpotRestApiDeleteSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.deleteSemanticIntegrationWithHttpInfo(param.semanticIntegrationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - `semantic_integration_identifier` is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with `createSemanticIntegration` if needed.      
+     * @param param the request object
+     */
+    public deleteSemanticIntegration(param: ThoughtSpotRestApiDeleteSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.deleteSemanticIntegration(param.semanticIntegrationIdentifier,  options).toPromise();
     }
 
     /**
@@ -8462,6 +8780,38 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public getShareInfoWithHttpInfo(param: ThoughtSpotRestApiGetShareInfoRequest, options?: ConfigurationOptions): Promise<HttpInfo<ConversationShareStatusResponse>> {
+        return this.api.getShareInfoWithHttpInfo(param.conversationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public getShareInfo(param: ThoughtSpotRestApiGetShareInfoRequest, options?: ConfigurationOptions): Promise<ConversationShareStatusResponse> {
+        return this.api.getShareInfo(param.conversationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires `CAN_USE_SPOTTER` privilege.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public getSharedContentWithHttpInfo(param: ThoughtSpotRestApiGetSharedContentRequest, options?: ConfigurationOptions): Promise<HttpInfo<SharedConversationResponse>> {
+        return this.api.getSharedContentWithHttpInfo(param.conversationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires `CAN_USE_SPOTTER` privilege.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public getSharedContent(param: ThoughtSpotRestApiGetSharedContentRequest, options?: ConfigurationOptions): Promise<SharedConversationResponse> {
+        return this.api.getSharedContent(param.conversationIdentifier,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.0.0.cl or later   Retrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.  Requires `ADMINISTRATION`(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `SYSTEM_INFO_ADMINISTRATION` (**Can view system activities**) privilege is required.  This API does not require any parameters to be passed in the request.      
      * @param param the request object
      */
@@ -8587,6 +8937,22 @@ export class ObjectThoughtSpotRestApi {
      */
     public importMetadataTMLAsync(param: ThoughtSpotRestApiImportMetadataTMLAsyncRequest, options?: ConfigurationOptions): Promise<ImportEPackAsyncTaskStatus> {
         return this.api.importMetadataTMLAsync(param.importMetadataTMLAsyncRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - `semantic_integration_identifier` is the GUID or name of the integration to import updates for. - Import preserves the integration\'s GUID, name, and `model_id`; only the underlying formula set is refreshed. - The response includes the same `semantic_report` as create, with an additional `change_status` per formula indicating whether each formula is `NEW`, `UPDATED`, or `UNCHANGED` since the previous import.  > **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+     * @param param the request object
+     */
+    public importSemanticIntegrationWithHttpInfo(param: ThoughtSpotRestApiImportSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<HttpInfo<SemanticIntegrationResponse>> {
+        return this.api.importSemanticIntegrationWithHttpInfo(param.semanticIntegrationIdentifier,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - `semantic_integration_identifier` is the GUID or name of the integration to import updates for. - Import preserves the integration\'s GUID, name, and `model_id`; only the underlying formula set is refreshed. - The response includes the same `semantic_report` as create, with an additional `change_status` per formula indicating whether each formula is `NEW`, `UPDATED`, or `UNCHANGED` since the previous import.  > **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+     * @param param the request object
+     */
+    public importSemanticIntegration(param: ThoughtSpotRestApiImportSemanticIntegrationRequest, options?: ConfigurationOptions): Promise<SemanticIntegrationResponse> {
+        return this.api.importSemanticIntegration(param.semanticIntegrationIdentifier,  options).toPromise();
     }
 
     /**
@@ -9086,6 +9452,22 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - `pattern` matches the integration name as a case-insensitive substring. - `author_identifiers` and `connection_identifiers` accept either GUIDs or names. - `sort_options.field_name` defaults to `MODIFIED_TIME`; set `sort_options.order` to `ASC` or `DESC` to control sort direction. - `record_offset` and `record_size` control pagination. Use `record_size: 0` to return all matching records in a single response.  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
+     * @param param the request object
+     */
+    public searchSemanticIntegrationsWithHttpInfo(param: ThoughtSpotRestApiSearchSemanticIntegrationsRequest, options?: ConfigurationOptions): Promise<HttpInfo<Array<SemanticIntegrationSearchResponse>>> {
+        return this.api.searchSemanticIntegrationsWithHttpInfo(param.searchSemanticIntegrationsRequest,  options).toPromise();
+    }
+
+    /**
+     *   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege or `DATAMANAGEMENT` (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - `pattern` matches the integration name as a case-insensitive substring. - `author_identifiers` and `connection_identifiers` accept either GUIDs or names. - `sort_options.field_name` defaults to `MODIFIED_TIME`; set `sort_options.order` to `ASC` or `DESC` to control sort direction. - `record_offset` and `record_size` control pagination. Use `record_size: 0` to return all matching records in a single response.  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
+     * @param param the request object
+     */
+    public searchSemanticIntegrations(param: ThoughtSpotRestApiSearchSemanticIntegrationsRequest, options?: ConfigurationOptions): Promise<Array<SemanticIntegrationSearchResponse>> {
+        return this.api.searchSemanticIntegrations(param.searchSemanticIntegrationsRequest,  options).toPromise();
+    }
+
+    /**
      *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
      * @param param the request object
      */
@@ -9307,6 +9689,22 @@ export class ObjectThoughtSpotRestApi {
      */
     public setNLInstructions(param: ThoughtSpotRestApiSetNLInstructionsRequest, options?: ConfigurationOptions): Promise<EurekaSetNLInstructionsResponse> {
         return this.api.setNLInstructions(param.setNLInstructionsRequest,  options).toPromise();
+    }
+
+    /**
+     *  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public shareConversationWithHttpInfo(param: ThoughtSpotRestApiShareConversationRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.shareConversationWithHttpInfo(param.conversationIdentifier, param.shareConversationRequest,  options).toPromise();
+    }
+
+    /**
+     *  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+     * @param param the request object
+     */
+    public shareConversation(param: ThoughtSpotRestApiShareConversationRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.shareConversation(param.conversationIdentifier, param.shareConversationRequest,  options).toPromise();
     }
 
     /**
@@ -9822,7 +10220,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+     *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
      * @param param the request object
      */
     public updateWebhookConfigurationWithHttpInfo(param: ThoughtSpotRestApiUpdateWebhookConfigurationRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
@@ -9830,7 +10228,7 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+     *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
      * @param param the request object
      */
     public updateWebhookConfiguration(param: ThoughtSpotRestApiUpdateWebhookConfigurationRequest, options?: ConfigurationOptions): Promise<void> {
@@ -10756,7 +11154,7 @@ export class ObjectWebhooksApi {
     }
 
     /**
-     *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+     *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
      * @param param the request object
      */
     public updateWebhookConfigurationWithHttpInfo(param: WebhooksApiUpdateWebhookConfigurationRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
@@ -10764,7 +11162,7 @@ export class ObjectWebhooksApi {
     }
 
     /**
-     *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
+     *   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.  Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
      * @param param the request object
      */
     public updateWebhookConfiguration(param: WebhooksApiUpdateWebhookConfigurationRequest, options?: ConfigurationOptions): Promise<void> {

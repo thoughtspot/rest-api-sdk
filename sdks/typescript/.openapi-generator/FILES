@@ -21,6 +21,7 @@ apis/ReportsApi.ts
 apis/RolesApi.ts
 apis/SchedulesApi.ts
 apis/SecurityApi.ts
+apis/SemanticIntegrationsApi.ts
 apis/StyleCustomizationApi.ts
 apis/SystemApi.ts
 apis/TagsApi.ts
@@ -53,6 +54,7 @@ docs/ReportsApi.md
 docs/RolesApi.md
 docs/SchedulesApi.md
 docs/SecurityApi.md
+docs/SemanticIntegrationsApi.md
 docs/StyleCustomizationApi.md
 docs/SystemApi.md
 docs/TagsApi.md
@@ -157,7 +159,9 @@ models/ContextPayloadV2Input.ts
 models/Conversation.ts
 models/ConversationMessage.ts
 models/ConversationMessageResponse.ts
+models/ConversationPrincipalInfo.ts
 models/ConversationSettingsInput.ts
+models/ConversationShareStatusResponse.ts
 models/ConvertWorksheetToModelRequest.ts
 models/CopyObjectRequest.ts
 models/CreateAgentConversationRequest.ts
@@ -174,6 +178,7 @@ models/CreateEmailCustomizationResponse.ts
 models/CreateOrgRequest.ts
 models/CreateRoleRequest.ts
 models/CreateScheduleRequest.ts
+models/CreateSemanticIntegrationRequest.ts
 models/CreateTagRequest.ts
 models/CreateUserGroupRequest.ts
 models/CreateUserRequest.ts
@@ -348,6 +353,7 @@ models/PermissionsMetadataTypeInput.ts
 models/PngOptionsInput.ts
 models/PolicyProcessOptions.ts
 models/PolicyProcessOptionsInput.ts
+models/PrincipalRefInput.ts
 models/PrincipalsInput.ts
 models/PrincipalsListItem.ts
 models/PrincipalsListItemInput.ts
@@ -421,6 +427,7 @@ models/SearchRoleResponse.ts
 models/SearchRolesRequest.ts
 models/SearchSchedulesRequest.ts
 models/SearchSecuritySettingsRequest.ts
+models/SearchSemanticIntegrationsRequest.ts
 models/SearchStyleCustomizationsRequest.ts
 models/SearchStyleFontsRequest.ts
 models/SearchTagsRequest.ts
@@ -434,6 +441,13 @@ models/SecuritySettingsOrgDetails.ts
 models/SecuritySettingsOrgPreferences.ts
 models/SecuritySettingsOrgPreferencesInput.ts
 models/SecuritySettingsResponse.ts
+models/SemanticIntegrationFormulaReport.ts
+models/SemanticIntegrationReport.ts
+models/SemanticIntegrationReportSummary.ts
+models/SemanticIntegrationResponse.ts
+models/SemanticIntegrationSearchResponse.ts
+models/SemanticIntegrationSortOptions.ts
+models/SemanticIntegrationTagReference.ts
 models/SendAgentConversationMessageRequest.ts
 models/SendAgentConversationMessageStreamingRequest.ts
 models/SendAgentMessageRequest.ts
@@ -442,9 +456,11 @@ models/SendAgentMessageStreamingRequest.ts
 models/SendMessageRequest.ts
 models/SetAgentInstructionsRequest.ts
 models/SetNLInstructionsRequest.ts
+models/ShareConversationRequest.ts
 models/ShareMetadataRequest.ts
 models/ShareMetadataTypeInput.ts
 models/SharePermissionsInput.ts
+models/SharedConversationResponse.ts
 models/SingleAnswerRequest.ts
 models/SortOption.ts
 models/SortOptionInput.ts
@@ -589,6 +605,7 @@ tests/ReportsApiTest.ts
 tests/RolesApiTest.ts
 tests/SchedulesApiTest.ts
 tests/SecurityApiTest.ts
+tests/SemanticIntegrationsApiTest.ts
 tests/StyleCustomizationApiTest.ts
 tests/SystemApiTest.ts
 tests/TagsApiTest.ts

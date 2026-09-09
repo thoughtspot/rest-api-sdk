@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ObjId** | **string** | Custom object ID (obj_id) of the group, if one is set.    Version: 26.9.0.cl or later  | [optional] 
 **AuthorId** | **string** | The unique identifier of the object | [optional] 
 **CompleteDetail** | **bool?** | Indicates whether the response has complete detail of the group. | [optional] 
 **Content** | **Object** | Content details of the group | [optional] 
