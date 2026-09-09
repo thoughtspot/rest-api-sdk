@@ -11,6 +11,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.model.InputColumnSchemaInput;
+import com.thoughtspot.client.model.ReferencedColumnTimeDimension;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,6 +58,11 @@ public class InputTableDefinitionInput implements Serializable {
   @javax.annotation.Nonnull
   private List<String> referencedColumns;
 
+  public static final String SERIALIZED_NAME_REFERENCED_COLUMN_TIME_DIMENSIONS = "referenced_column_time_dimensions";
+  @SerializedName(SERIALIZED_NAME_REFERENCED_COLUMN_TIME_DIMENSIONS)
+  @javax.annotation.Nullable
+  private List<ReferencedColumnTimeDimension> referencedColumnTimeDimensions;
+
   public InputTableDefinitionInput() {
   }
 
@@ -101,7 +107,7 @@ public class InputTableDefinitionInput implements Serializable {
   }
 
   /**
-   * Column IDs from the linked model to include in the table. Pass an empty array to create an input table with no reference columns from the model.
+   * Names of the columns on the linked model to include in the table, as they appear on the model. These become the input table&#39;s key columns: they are what the input table is joined to the model on, and what rows are matched on by updateInputTable. At least one is required — an empty array is rejected. A name must match exactly one visible model column; a name matching none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.
    * @return referencedColumns
    */
   @javax.annotation.Nonnull
@@ -111,6 +117,33 @@ public class InputTableDefinitionInput implements Serializable {
 
   public void setReferencedColumns(@javax.annotation.Nonnull List<String> referencedColumns) {
     this.referencedColumns = referencedColumns;
+  }
+
+
+  public InputTableDefinitionInput referencedColumnTimeDimensions(@javax.annotation.Nullable List<ReferencedColumnTimeDimension> referencedColumnTimeDimensions) {
+    this.referencedColumnTimeDimensions = referencedColumnTimeDimensions;
+    return this;
+  }
+
+  public InputTableDefinitionInput addReferencedColumnTimeDimensionsItem(ReferencedColumnTimeDimension referencedColumnTimeDimensionsItem) {
+    if (this.referencedColumnTimeDimensions == null) {
+      this.referencedColumnTimeDimensions = new ArrayList<>();
+    }
+    this.referencedColumnTimeDimensions.add(referencedColumnTimeDimensionsItem);
+    return this;
+  }
+
+  /**
+   * Optional per-column time dimension to persist at creation. Provide one entry per referenced date column that should open — and stay locked — at a specific grain. Columns without an entry apply no bucketing (detailed). Applies to referenced model columns only; a column created through new_columns always starts detailed.
+   * @return referencedColumnTimeDimensions
+   */
+  @javax.annotation.Nullable
+  public List<ReferencedColumnTimeDimension> getReferencedColumnTimeDimensions() {
+    return referencedColumnTimeDimensions;
+  }
+
+  public void setReferencedColumnTimeDimensions(@javax.annotation.Nullable List<ReferencedColumnTimeDimension> referencedColumnTimeDimensions) {
+    this.referencedColumnTimeDimensions = referencedColumnTimeDimensions;
   }
 
   /**
@@ -169,13 +202,14 @@ public class InputTableDefinitionInput implements Serializable {
     }
     InputTableDefinitionInput inputTableDefinitionInput = (InputTableDefinitionInput) o;
     return Objects.equals(this.newColumns, inputTableDefinitionInput.newColumns) &&
-        Objects.equals(this.referencedColumns, inputTableDefinitionInput.referencedColumns)&&
+        Objects.equals(this.referencedColumns, inputTableDefinitionInput.referencedColumns) &&
+        Objects.equals(this.referencedColumnTimeDimensions, inputTableDefinitionInput.referencedColumnTimeDimensions)&&
         Objects.equals(this.additionalProperties, inputTableDefinitionInput.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(newColumns, referencedColumns, additionalProperties);
+    return Objects.hash(newColumns, referencedColumns, referencedColumnTimeDimensions, additionalProperties);
   }
 
   @Override
@@ -184,6 +218,7 @@ public class InputTableDefinitionInput implements Serializable {
     sb.append("class InputTableDefinitionInput {\n");
     sb.append("    newColumns: ").append(toIndentedString(newColumns)).append("\n");
     sb.append("    referencedColumns: ").append(toIndentedString(referencedColumns)).append("\n");
+    sb.append("    referencedColumnTimeDimensions: ").append(toIndentedString(referencedColumnTimeDimensions)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -209,6 +244,7 @@ public class InputTableDefinitionInput implements Serializable {
     openapiFields = new HashSet<String>();
     openapiFields.add("new_columns");
     openapiFields.add("referenced_columns");
+    openapiFields.add("referenced_column_time_dimensions");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -251,6 +287,20 @@ public class InputTableDefinitionInput implements Serializable {
         throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
       } else if (!jsonObj.get("referenced_columns").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `referenced_columns` to be an array in the JSON string but got `%s`", jsonObj.get("referenced_columns").toString()));
+      }
+      if (jsonObj.get("referenced_column_time_dimensions") != null && !jsonObj.get("referenced_column_time_dimensions").isJsonNull()) {
+        JsonArray jsonArrayreferencedColumnTimeDimensions = jsonObj.getAsJsonArray("referenced_column_time_dimensions");
+        if (jsonArrayreferencedColumnTimeDimensions != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("referenced_column_time_dimensions").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `referenced_column_time_dimensions` to be an array in the JSON string but got `%s`", jsonObj.get("referenced_column_time_dimensions").toString()));
+          }
+
+          // validate the optional field `referenced_column_time_dimensions` (array)
+          for (int i = 0; i < jsonArrayreferencedColumnTimeDimensions.size(); i++) {
+            ReferencedColumnTimeDimension.validateJsonElement(jsonArrayreferencedColumnTimeDimensions.get(i));
+          };
+        }
       }
   }
 

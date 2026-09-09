@@ -192,7 +192,7 @@ public class InputColumnSchemaInput implements Serializable {
   }
 
   /**
-   * Optional list of permitted values for the column. When provided, data written to this column is restricted to these values. Omit or leave empty to allow any value supported by the data type.    Version: 26.9.0.cl or later 
+   * Optional list of permitted values for the column, at most 500, which makes it a fixed-choice column. Every non-empty value written into the column by updateInputTable must then be an exact member of the list, and the API rejects a write that is not. Each value must be non-empty, at most 8192 characters, and representable as the column&#39;s data_type — a number for the numeric types, true or false for BOOL, and an epoch integer for DATE, DATE_TIME, and TIME. Omit or leave empty to allow any value supported by the data type.
    * @return allowedValues
    */
   @javax.annotation.Nullable

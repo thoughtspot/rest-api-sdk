@@ -147,6 +147,7 @@ __export(typescript_exports, {
   CreateCustomActionRequest: () => CreateCustomActionRequest,
   CreateEmailCustomizationRequest: () => CreateEmailCustomizationRequest,
   CreateEmailCustomizationResponse: () => CreateEmailCustomizationResponse,
+  CreateInputTableColumnRequest: () => CreateInputTableColumnRequest,
   CreateInputTableRequest: () => CreateInputTableRequest,
   CreateOrgRequest: () => CreateOrgRequest,
   CreateRoleRequest: () => CreateRoleRequest,
@@ -282,6 +283,9 @@ __export(typescript_exports, {
   ImportUserType: () => ImportUserType,
   ImportUsersRequest: () => ImportUsersRequest,
   ImportUsersResponse: () => ImportUsersResponse,
+  InputColumnDefinitionInput: () => InputColumnDefinitionInput,
+  InputColumnInfo: () => InputColumnInfo,
+  InputColumnResponse: () => InputColumnResponse,
   InputColumnSchemaInput: () => InputColumnSchemaInput,
   InputEurekaNLSRequest: () => InputEurekaNLSRequest,
   InputTableDefinitionInput: () => InputTableDefinitionInput,
@@ -357,6 +361,7 @@ __export(typescript_exports, {
   QueryGetDecomposedQueryRequest: () => QueryGetDecomposedQueryRequest,
   RecipientDetails: () => RecipientDetails,
   RecipientDetailsInput: () => RecipientDetailsInput,
+  ReferencedColumnTimeDimension: () => ReferencedColumnTimeDimension,
   RegionalSettingsInput: () => RegionalSettingsInput,
   RepoConfigObject: () => RepoConfigObject,
   ReportsApi: () => PromiseReportsApi,
@@ -5175,6 +5180,26 @@ _CreateEmailCustomizationResponse.attributeTypeMap = [
 ];
 var CreateEmailCustomizationResponse = _CreateEmailCustomizationResponse;
 
+// models/CreateInputTableColumnRequest.ts
+var _CreateInputTableColumnRequest = class _CreateInputTableColumnRequest {
+  static getAttributeTypeMap() {
+    return _CreateInputTableColumnRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateInputTableColumnRequest.discriminator = void 0;
+_CreateInputTableColumnRequest.mapping = void 0;
+_CreateInputTableColumnRequest.attributeTypeMap = [
+  {
+    "name": "column_definition",
+    "baseName": "column_definition",
+    "type": "InputColumnDefinitionInput",
+    "format": ""
+  }
+];
+var CreateInputTableColumnRequest = _CreateInputTableColumnRequest;
+
 // models/CreateInputTableRequest.ts
 var _CreateInputTableRequest = class _CreateInputTableRequest {
   static getAttributeTypeMap() {
@@ -9967,6 +9992,78 @@ _ImportUsersResponse.attributeTypeMap = [
 ];
 var ImportUsersResponse = _ImportUsersResponse;
 
+// models/InputColumnDefinitionInput.ts
+var _InputColumnDefinitionInput = class _InputColumnDefinitionInput {
+  static getAttributeTypeMap() {
+    return _InputColumnDefinitionInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_InputColumnDefinitionInput.discriminator = void 0;
+_InputColumnDefinitionInput.mapping = void 0;
+_InputColumnDefinitionInput.attributeTypeMap = [
+  {
+    "name": "columns",
+    "baseName": "columns",
+    "type": "Array<InputColumnSchemaInput>",
+    "format": ""
+  }
+];
+var InputColumnDefinitionInput = _InputColumnDefinitionInput;
+
+// models/InputColumnInfo.ts
+var _InputColumnInfo = class _InputColumnInfo {
+  static getAttributeTypeMap() {
+    return _InputColumnInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_InputColumnInfo.discriminator = void 0;
+_InputColumnInfo.mapping = void 0;
+_InputColumnInfo.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "mapped_column_id",
+    "baseName": "mapped_column_id",
+    "type": "string",
+    "format": ""
+  }
+];
+var InputColumnInfo = _InputColumnInfo;
+
+// models/InputColumnResponse.ts
+var _InputColumnResponse = class _InputColumnResponse {
+  static getAttributeTypeMap() {
+    return _InputColumnResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_InputColumnResponse.discriminator = void 0;
+_InputColumnResponse.mapping = void 0;
+_InputColumnResponse.attributeTypeMap = [
+  {
+    "name": "columns",
+    "baseName": "columns",
+    "type": "Array<InputColumnInfo>",
+    "format": ""
+  }
+];
+var InputColumnResponse = _InputColumnResponse;
+
 // models/InputColumnSchemaInput.ts
 var _InputColumnSchemaInput = class _InputColumnSchemaInput {
   static getAttributeTypeMap() {
@@ -10065,6 +10162,12 @@ _InputTableDefinitionInput.attributeTypeMap = [
     "baseName": "referenced_columns",
     "type": "Array<string>",
     "format": ""
+  },
+  {
+    "name": "referenced_column_time_dimensions",
+    "baseName": "referenced_column_time_dimensions",
+    "type": "Array<ReferencedColumnTimeDimension>",
+    "format": ""
   }
 ];
 var InputTableDefinitionInput = _InputTableDefinitionInput;
@@ -10081,8 +10184,20 @@ _InputTableResponse.discriminator = void 0;
 _InputTableResponse.mapping = void 0;
 _InputTableResponse.attributeTypeMap = [
   {
-    "name": "input_table_identifier",
-    "baseName": "input_table_identifier",
+    "name": "input_table_id",
+    "baseName": "input_table_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "input_columns",
+    "baseName": "input_columns",
+    "type": "Array<InputColumnInfo>",
+    "format": ""
+  },
+  {
+    "name": "message_info",
+    "baseName": "message_info",
     "type": "string",
     "format": ""
   }
@@ -12138,6 +12253,32 @@ _RecipientDetailsInput.attributeTypeMap = [
   }
 ];
 var RecipientDetailsInput = _RecipientDetailsInput;
+
+// models/ReferencedColumnTimeDimension.ts
+var _ReferencedColumnTimeDimension = class _ReferencedColumnTimeDimension {
+  static getAttributeTypeMap() {
+    return _ReferencedColumnTimeDimension.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ReferencedColumnTimeDimension.discriminator = void 0;
+_ReferencedColumnTimeDimension.mapping = void 0;
+_ReferencedColumnTimeDimension.attributeTypeMap = [
+  {
+    "name": "column_identifier",
+    "baseName": "column_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "time_dimension",
+    "baseName": "time_dimension",
+    "type": "ReferencedColumnTimeDimensionTimeDimensionEnum",
+    "format": ""
+  }
+];
+var ReferencedColumnTimeDimension = _ReferencedColumnTimeDimension;
 
 // models/RegionalSettingsInput.ts
 var _RegionalSettingsInput = class _RegionalSettingsInput {
@@ -22042,6 +22183,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "PrincipalsInputTypeEnum",
   "PublishMetadataListItemTypeEnum",
   "PutVariableValuesRequestOperationEnum",
+  "ReferencedColumnTimeDimensionTimeDimensionEnum",
   "RegionalSettingsInputCurrencyFormatEnum",
   "RegionalSettingsInputUserLocaleEnum",
   "RegionalSettingsInputNumberFormatLocaleEnum",
@@ -22319,6 +22461,7 @@ var typeMap = {
   "CreateCustomActionRequest": CreateCustomActionRequest,
   "CreateEmailCustomizationRequest": CreateEmailCustomizationRequest,
   "CreateEmailCustomizationResponse": CreateEmailCustomizationResponse,
+  "CreateInputTableColumnRequest": CreateInputTableColumnRequest,
   "CreateInputTableRequest": CreateInputTableRequest,
   "CreateOrgRequest": CreateOrgRequest,
   "CreateRoleRequest": CreateRoleRequest,
@@ -22444,6 +22587,9 @@ var typeMap = {
   "ImportUserType": ImportUserType,
   "ImportUsersRequest": ImportUsersRequest,
   "ImportUsersResponse": ImportUsersResponse,
+  "InputColumnDefinitionInput": InputColumnDefinitionInput,
+  "InputColumnInfo": InputColumnInfo,
+  "InputColumnResponse": InputColumnResponse,
   "InputColumnSchemaInput": InputColumnSchemaInput,
   "InputEurekaNLSRequest": InputEurekaNLSRequest,
   "InputTableDefinitionInput": InputTableDefinitionInput,
@@ -22513,6 +22659,7 @@ var typeMap = {
   "QueryGetDecomposedQueryRequest": QueryGetDecomposedQueryRequest,
   "RecipientDetails": RecipientDetails,
   "RecipientDetailsInput": RecipientDetailsInput,
+  "ReferencedColumnTimeDimension": ReferencedColumnTimeDimension,
   "RegionalSettingsInput": RegionalSettingsInput,
   "RepoConfigObject": RepoConfigObject,
   "ResetUserPasswordRequest": ResetUserPasswordRequest,
@@ -77901,6 +78048,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   CreateCustomActionRequest,
   CreateEmailCustomizationRequest,
   CreateEmailCustomizationResponse,
+  CreateInputTableColumnRequest,
   CreateInputTableRequest,
   CreateOrgRequest,
   CreateRoleRequest,
@@ -78036,6 +78184,9 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   ImportUserType,
   ImportUsersRequest,
   ImportUsersResponse,
+  InputColumnDefinitionInput,
+  InputColumnInfo,
+  InputColumnResponse,
   InputColumnSchemaInput,
   InputEurekaNLSRequest,
   InputTableDefinitionInput,
@@ -78111,6 +78262,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   QueryGetDecomposedQueryRequest,
   RecipientDetails,
   RecipientDetailsInput,
+  ReferencedColumnTimeDimension,
   RegionalSettingsInput,
   RepoConfigObject,
   ReportsApi,

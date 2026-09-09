@@ -185,6 +185,7 @@ __all__ = [
     "CreateCustomActionRequest",
     "CreateEmailCustomizationRequest",
     "CreateEmailCustomizationResponse",
+    "CreateInputTableColumnRequest",
     "CreateInputTableRequest",
     "CreateOrgRequest",
     "CreateRoleRequest",
@@ -310,6 +311,9 @@ __all__ = [
     "ImportUserType",
     "ImportUsersRequest",
     "ImportUsersResponse",
+    "InputColumnDefinitionInput",
+    "InputColumnInfo",
+    "InputColumnResponse",
     "InputColumnSchemaInput",
     "InputEurekaNLSRequest",
     "InputTableDefinitionInput",
@@ -379,6 +383,7 @@ __all__ = [
     "QueryGetDecomposedQueryRequest",
     "RecipientDetails",
     "RecipientDetailsInput",
+    "ReferencedColumnTimeDimension",
     "RegionalSettingsInput",
     "RepoConfigObject",
     "ResetUserPasswordRequest",
@@ -772,6 +777,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest as CreateCustomActionRequest
     from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest as CreateEmailCustomizationRequest
     from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse as CreateEmailCustomizationResponse
+    from thoughtspot_rest_api_sdk.models.create_input_table_column_request import CreateInputTableColumnRequest as CreateInputTableColumnRequest
     from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest as CreateInputTableRequest
     from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest as CreateOrgRequest
     from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest as CreateRoleRequest
@@ -897,6 +903,9 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.import_user_type import ImportUserType as ImportUserType
     from thoughtspot_rest_api_sdk.models.import_users_request import ImportUsersRequest as ImportUsersRequest
     from thoughtspot_rest_api_sdk.models.import_users_response import ImportUsersResponse as ImportUsersResponse
+    from thoughtspot_rest_api_sdk.models.input_column_definition_input import InputColumnDefinitionInput as InputColumnDefinitionInput
+    from thoughtspot_rest_api_sdk.models.input_column_info import InputColumnInfo as InputColumnInfo
+    from thoughtspot_rest_api_sdk.models.input_column_response import InputColumnResponse as InputColumnResponse
     from thoughtspot_rest_api_sdk.models.input_column_schema_input import InputColumnSchemaInput as InputColumnSchemaInput
     from thoughtspot_rest_api_sdk.models.input_eureka_nls_request import InputEurekaNLSRequest as InputEurekaNLSRequest
     from thoughtspot_rest_api_sdk.models.input_table_definition_input import InputTableDefinitionInput as InputTableDefinitionInput
@@ -966,6 +975,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.query_get_decomposed_query_request import QueryGetDecomposedQueryRequest as QueryGetDecomposedQueryRequest
     from thoughtspot_rest_api_sdk.models.recipient_details import RecipientDetails as RecipientDetails
     from thoughtspot_rest_api_sdk.models.recipient_details_input import RecipientDetailsInput as RecipientDetailsInput
+    from thoughtspot_rest_api_sdk.models.referenced_column_time_dimension import ReferencedColumnTimeDimension as ReferencedColumnTimeDimension
     from thoughtspot_rest_api_sdk.models.regional_settings_input import RegionalSettingsInput as RegionalSettingsInput
     from thoughtspot_rest_api_sdk.models.repo_config_object import RepoConfigObject as RepoConfigObject
     from thoughtspot_rest_api_sdk.models.reset_user_password_request import ResetUserPasswordRequest as ResetUserPasswordRequest
@@ -1365,6 +1375,7 @@ from thoughtspot_rest_api_sdk.models.create_conversation_request import CreateCo
 from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest as CreateCustomActionRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest as CreateEmailCustomizationRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse as CreateEmailCustomizationResponse
+from thoughtspot_rest_api_sdk.models.create_input_table_column_request import CreateInputTableColumnRequest as CreateInputTableColumnRequest
 from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest as CreateInputTableRequest
 from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest as CreateOrgRequest
 from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest as CreateRoleRequest
@@ -1490,6 +1501,9 @@ from thoughtspot_rest_api_sdk.models.import_user_groups_response import ImportUs
 from thoughtspot_rest_api_sdk.models.import_user_type import ImportUserType as ImportUserType
 from thoughtspot_rest_api_sdk.models.import_users_request import ImportUsersRequest as ImportUsersRequest
 from thoughtspot_rest_api_sdk.models.import_users_response import ImportUsersResponse as ImportUsersResponse
+from thoughtspot_rest_api_sdk.models.input_column_definition_input import InputColumnDefinitionInput as InputColumnDefinitionInput
+from thoughtspot_rest_api_sdk.models.input_column_info import InputColumnInfo as InputColumnInfo
+from thoughtspot_rest_api_sdk.models.input_column_response import InputColumnResponse as InputColumnResponse
 from thoughtspot_rest_api_sdk.models.input_column_schema_input import InputColumnSchemaInput as InputColumnSchemaInput
 from thoughtspot_rest_api_sdk.models.input_eureka_nls_request import InputEurekaNLSRequest as InputEurekaNLSRequest
 from thoughtspot_rest_api_sdk.models.input_table_definition_input import InputTableDefinitionInput as InputTableDefinitionInput
@@ -1559,6 +1573,7 @@ from thoughtspot_rest_api_sdk.models.put_variable_values_request import PutVaria
 from thoughtspot_rest_api_sdk.models.query_get_decomposed_query_request import QueryGetDecomposedQueryRequest as QueryGetDecomposedQueryRequest
 from thoughtspot_rest_api_sdk.models.recipient_details import RecipientDetails as RecipientDetails
 from thoughtspot_rest_api_sdk.models.recipient_details_input import RecipientDetailsInput as RecipientDetailsInput
+from thoughtspot_rest_api_sdk.models.referenced_column_time_dimension import ReferencedColumnTimeDimension as ReferencedColumnTimeDimension
 from thoughtspot_rest_api_sdk.models.regional_settings_input import RegionalSettingsInput as RegionalSettingsInput
 from thoughtspot_rest_api_sdk.models.repo_config_object import RepoConfigObject as RepoConfigObject
 from thoughtspot_rest_api_sdk.models.reset_user_password_request import ResetUserPasswordRequest as ResetUserPasswordRequest

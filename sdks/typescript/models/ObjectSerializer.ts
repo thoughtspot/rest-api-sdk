@@ -118,6 +118,7 @@ export * from '../models/CreateConversationRequest';
 export * from '../models/CreateCustomActionRequest';
 export * from '../models/CreateEmailCustomizationRequest';
 export * from '../models/CreateEmailCustomizationResponse';
+export * from '../models/CreateInputTableColumnRequest';
 export * from '../models/CreateInputTableRequest';
 export * from '../models/CreateOrgRequest';
 export * from '../models/CreateRoleRequest';
@@ -243,6 +244,9 @@ export * from '../models/ImportUserGroupsResponse';
 export * from '../models/ImportUserType';
 export * from '../models/ImportUsersRequest';
 export * from '../models/ImportUsersResponse';
+export * from '../models/InputColumnDefinitionInput';
+export * from '../models/InputColumnInfo';
+export * from '../models/InputColumnResponse';
 export * from '../models/InputColumnSchemaInput';
 export * from '../models/InputEurekaNLSRequest';
 export * from '../models/InputTableDefinitionInput';
@@ -312,6 +316,7 @@ export * from '../models/PutVariableValuesRequest';
 export * from '../models/QueryGetDecomposedQueryRequest';
 export * from '../models/RecipientDetails';
 export * from '../models/RecipientDetailsInput';
+export * from '../models/ReferencedColumnTimeDimension';
 export * from '../models/RegionalSettingsInput';
 export * from '../models/RepoConfigObject';
 export * from '../models/ResetUserPasswordRequest';
@@ -658,6 +663,7 @@ import { CreateConversationRequest } from '../models/CreateConversationRequest';
 import { CreateCustomActionRequest } from '../models/CreateCustomActionRequest';
 import { CreateEmailCustomizationRequest } from '../models/CreateEmailCustomizationRequest';
 import { CreateEmailCustomizationResponse } from '../models/CreateEmailCustomizationResponse';
+import { CreateInputTableColumnRequest } from '../models/CreateInputTableColumnRequest';
 import { CreateInputTableRequest } from '../models/CreateInputTableRequest';
 import { CreateOrgRequest } from '../models/CreateOrgRequest';
 import { CreateRoleRequest  , CreateRoleRequestPrivilegesEnum    } from '../models/CreateRoleRequest';
@@ -783,6 +789,9 @@ import { ImportUserGroupsResponse } from '../models/ImportUserGroupsResponse';
 import { ImportUserType } from '../models/ImportUserType';
 import { ImportUsersRequest } from '../models/ImportUsersRequest';
 import { ImportUsersResponse } from '../models/ImportUsersResponse';
+import { InputColumnDefinitionInput } from '../models/InputColumnDefinitionInput';
+import { InputColumnInfo } from '../models/InputColumnInfo';
+import { InputColumnResponse } from '../models/InputColumnResponse';
 import { InputColumnSchemaInput  , InputColumnSchemaInputTypeEnum    } from '../models/InputColumnSchemaInput';
 import { InputEurekaNLSRequest } from '../models/InputEurekaNLSRequest';
 import { InputTableDefinitionInput } from '../models/InputTableDefinitionInput';
@@ -852,6 +861,7 @@ import { PutVariableValuesRequest, PutVariableValuesRequestOperationEnum    } fr
 import { QueryGetDecomposedQueryRequest } from '../models/QueryGetDecomposedQueryRequest';
 import { RecipientDetails } from '../models/RecipientDetails';
 import { RecipientDetailsInput } from '../models/RecipientDetailsInput';
+import { ReferencedColumnTimeDimension , ReferencedColumnTimeDimensionTimeDimensionEnum   } from '../models/ReferencedColumnTimeDimension';
 import { RegionalSettingsInput, RegionalSettingsInputCurrencyFormatEnum  , RegionalSettingsInputUserLocaleEnum  , RegionalSettingsInputNumberFormatLocaleEnum  , RegionalSettingsInputDateFormatLocaleEnum   } from '../models/RegionalSettingsInput';
 import { RepoConfigObject } from '../models/RepoConfigObject';
 import { ResetUserPasswordRequest } from '../models/ResetUserPasswordRequest';
@@ -1240,6 +1250,7 @@ let enumsMap: Set<string> = new Set<string>([
     "PrincipalsInputTypeEnum",
     "PublishMetadataListItemTypeEnum",
     "PutVariableValuesRequestOperationEnum",
+    "ReferencedColumnTimeDimensionTimeDimensionEnum",
     "RegionalSettingsInputCurrencyFormatEnum",
     "RegionalSettingsInputUserLocaleEnum",
     "RegionalSettingsInputNumberFormatLocaleEnum",
@@ -1518,6 +1529,7 @@ let typeMap: {[index: string]: any} = {
     "CreateCustomActionRequest": CreateCustomActionRequest,
     "CreateEmailCustomizationRequest": CreateEmailCustomizationRequest,
     "CreateEmailCustomizationResponse": CreateEmailCustomizationResponse,
+    "CreateInputTableColumnRequest": CreateInputTableColumnRequest,
     "CreateInputTableRequest": CreateInputTableRequest,
     "CreateOrgRequest": CreateOrgRequest,
     "CreateRoleRequest": CreateRoleRequest,
@@ -1643,6 +1655,9 @@ let typeMap: {[index: string]: any} = {
     "ImportUserType": ImportUserType,
     "ImportUsersRequest": ImportUsersRequest,
     "ImportUsersResponse": ImportUsersResponse,
+    "InputColumnDefinitionInput": InputColumnDefinitionInput,
+    "InputColumnInfo": InputColumnInfo,
+    "InputColumnResponse": InputColumnResponse,
     "InputColumnSchemaInput": InputColumnSchemaInput,
     "InputEurekaNLSRequest": InputEurekaNLSRequest,
     "InputTableDefinitionInput": InputTableDefinitionInput,
@@ -1712,6 +1727,7 @@ let typeMap: {[index: string]: any} = {
     "QueryGetDecomposedQueryRequest": QueryGetDecomposedQueryRequest,
     "RecipientDetails": RecipientDetails,
     "RecipientDetailsInput": RecipientDetailsInput,
+    "ReferencedColumnTimeDimension": ReferencedColumnTimeDimension,
     "RegionalSettingsInput": RegionalSettingsInput,
     "RepoConfigObject": RepoConfigObject,
     "ResetUserPasswordRequest": ResetUserPasswordRequest,

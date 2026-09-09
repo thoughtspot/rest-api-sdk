@@ -43,8 +43,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateInputTableRequest" /> class.
         /// </summary>
-        /// <param name="columns">Names of the columns being written, in the same order as the values in each row. (required).</param>
-        /// <param name="rows">Rows to write into the input table. Each row is an array of string values aligned positionally with columns. (required).</param>
+        /// <param name="columns">Names of the columns being written, in the same order as the values in each row. Must name every key column (the columns mapped from the linked model), since rows are matched on those, and at least one non-key column, since key columns are matched on but never assigned to. (required).</param>
+        /// <param name="rows">Rows to write into the input table. Each row is an array of string values aligned positionally with columns. A DATE cell takes an ISO calendar date (yyyy-MM-dd), which is stored with no time-zone conversion; an epoch number is also accepted, but a single column must use the same form in every row. DATE_TIME and TIME cells take an epoch number only. (required).</param>
         public UpdateInputTableRequest(List<string> columns = default, List<List<string>> rows = default)
         {
             // to ensure "columns" is required (not null)
@@ -63,16 +63,16 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Names of the columns being written, in the same order as the values in each row.
+        /// Names of the columns being written, in the same order as the values in each row. Must name every key column (the columns mapped from the linked model), since rows are matched on those, and at least one non-key column, since key columns are matched on but never assigned to.
         /// </summary>
-        /// <value>Names of the columns being written, in the same order as the values in each row.</value>
+        /// <value>Names of the columns being written, in the same order as the values in each row. Must name every key column (the columns mapped from the linked model), since rows are matched on those, and at least one non-key column, since key columns are matched on but never assigned to.</value>
         [DataMember(Name = "columns", IsRequired = true, EmitDefaultValue = true)]
         public List<string> Columns { get; set; }
 
         /// <summary>
-        /// Rows to write into the input table. Each row is an array of string values aligned positionally with columns.
+        /// Rows to write into the input table. Each row is an array of string values aligned positionally with columns. A DATE cell takes an ISO calendar date (yyyy-MM-dd), which is stored with no time-zone conversion; an epoch number is also accepted, but a single column must use the same form in every row. DATE_TIME and TIME cells take an epoch number only.
         /// </summary>
-        /// <value>Rows to write into the input table. Each row is an array of string values aligned positionally with columns.</value>
+        /// <value>Rows to write into the input table. Each row is an array of string values aligned positionally with columns. A DATE cell takes an ISO calendar date (yyyy-MM-dd), which is stored with no time-zone conversion; an epoch number is also accepted, but a single column must use the same form in every row. DATE_TIME and TIME cells take an epoch number only.</value>
         [DataMember(Name = "rows", IsRequired = true, EmitDefaultValue = true)]
         public List<List<string>> Rows { get; set; }
 

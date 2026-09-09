@@ -7,6 +7,14 @@
 -  endpoint added
 
 
+### POST /api/rest/2.0/input-tables/{input_table_identifier}/columns/create
+-  endpoint added
+
+
+### POST /api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete
+-  endpoint added
+
+
 ### POST /api/rest/2.0/input-tables/{input_table_identifier}/delete
 -  endpoint added
 

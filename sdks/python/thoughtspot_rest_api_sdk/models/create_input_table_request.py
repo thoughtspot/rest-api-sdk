@@ -26,7 +26,7 @@ class CreateInputTableRequest(BaseModel):
     """
     CreateInputTableRequest
     """ # noqa: E501
-    table_name: StrictStr = Field(description="Physical table name to create in the external warehouse.")
+    table_name: StrictStr = Field(description="Physical table name to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters.")
     model_identifier: StrictStr = Field(description="Unique ID or name of the model (worksheet) to link the input table to.")
     table_definition: InputTableDefinitionInput = Field(description="Definition of the input table, including new columns and referenced model columns.")
     additional_properties: Dict[str, Any] = {}

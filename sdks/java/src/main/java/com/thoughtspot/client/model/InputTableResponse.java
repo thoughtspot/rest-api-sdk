@@ -10,8 +10,11 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.InputColumnInfo;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.io.Serializable;
 
 import com.google.gson.Gson;
@@ -44,30 +47,86 @@ import com.thoughtspot.client.JSON;
 public class InputTableResponse implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  public static final String SERIALIZED_NAME_INPUT_TABLE_IDENTIFIER = "input_table_identifier";
-  @SerializedName(SERIALIZED_NAME_INPUT_TABLE_IDENTIFIER)
+  public static final String SERIALIZED_NAME_INPUT_TABLE_ID = "input_table_id";
+  @SerializedName(SERIALIZED_NAME_INPUT_TABLE_ID)
   @javax.annotation.Nullable
-  private String inputTableIdentifier;
+  private String inputTableId;
+
+  public static final String SERIALIZED_NAME_INPUT_COLUMNS = "input_columns";
+  @SerializedName(SERIALIZED_NAME_INPUT_COLUMNS)
+  @javax.annotation.Nullable
+  private List<InputColumnInfo> inputColumns;
+
+  public static final String SERIALIZED_NAME_MESSAGE_INFO = "message_info";
+  @SerializedName(SERIALIZED_NAME_MESSAGE_INFO)
+  @javax.annotation.Nullable
+  private String messageInfo;
 
   public InputTableResponse() {
   }
 
-  public InputTableResponse inputTableIdentifier(@javax.annotation.Nullable String inputTableIdentifier) {
-    this.inputTableIdentifier = inputTableIdentifier;
+  public InputTableResponse inputTableId(@javax.annotation.Nullable String inputTableId) {
+    this.inputTableId = inputTableId;
     return this;
   }
 
   /**
-   * Unique ID of the newly created input table.
-   * @return inputTableIdentifier
+   * Unique ID of the newly created input table. Pass it as the input_table_identifier path parameter of the other input-table operations.
+   * @return inputTableId
    */
   @javax.annotation.Nullable
-  public String getInputTableIdentifier() {
-    return inputTableIdentifier;
+  public String getInputTableId() {
+    return inputTableId;
   }
 
-  public void setInputTableIdentifier(@javax.annotation.Nullable String inputTableIdentifier) {
-    this.inputTableIdentifier = inputTableIdentifier;
+  public void setInputTableId(@javax.annotation.Nullable String inputTableId) {
+    this.inputTableId = inputTableId;
+  }
+
+
+  public InputTableResponse inputColumns(@javax.annotation.Nullable List<InputColumnInfo> inputColumns) {
+    this.inputColumns = inputColumns;
+    return this;
+  }
+
+  public InputTableResponse addInputColumnsItem(InputColumnInfo inputColumnsItem) {
+    if (this.inputColumns == null) {
+      this.inputColumns = new ArrayList<>();
+    }
+    this.inputColumns.add(inputColumnsItem);
+    return this;
+  }
+
+  /**
+   * Columns of the newly created input table, each with its name and unique ID. Use these IDs to reference specific columns in follow-up calls (for example, the column identifiers written by updateInputTable). Returned so callers do not need a separate lookup to resolve a column name to its ID.
+   * @return inputColumns
+   */
+  @javax.annotation.Nullable
+  public List<InputColumnInfo> getInputColumns() {
+    return inputColumns;
+  }
+
+  public void setInputColumns(@javax.annotation.Nullable List<InputColumnInfo> inputColumns) {
+    this.inputColumns = inputColumns;
+  }
+
+
+  public InputTableResponse messageInfo(@javax.annotation.Nullable String messageInfo) {
+    this.messageInfo = messageInfo;
+    return this;
+  }
+
+  /**
+   * Note set when a referenced column had to be renamed to keep the input table&#39;s column names unique — a model column name that occurs in more than one base table is prefixed with its base table name. Absent when no column was renamed. Read it to learn the final name of a renamed column, or read the name off input_columns.
+   * @return messageInfo
+   */
+  @javax.annotation.Nullable
+  public String getMessageInfo() {
+    return messageInfo;
+  }
+
+  public void setMessageInfo(@javax.annotation.Nullable String messageInfo) {
+    this.messageInfo = messageInfo;
   }
 
   /**
@@ -125,20 +184,24 @@ public class InputTableResponse implements Serializable {
       return false;
     }
     InputTableResponse inputTableResponse = (InputTableResponse) o;
-    return Objects.equals(this.inputTableIdentifier, inputTableResponse.inputTableIdentifier)&&
+    return Objects.equals(this.inputTableId, inputTableResponse.inputTableId) &&
+        Objects.equals(this.inputColumns, inputTableResponse.inputColumns) &&
+        Objects.equals(this.messageInfo, inputTableResponse.messageInfo)&&
         Objects.equals(this.additionalProperties, inputTableResponse.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(inputTableIdentifier, additionalProperties);
+    return Objects.hash(inputTableId, inputColumns, messageInfo, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class InputTableResponse {\n");
-    sb.append("    inputTableIdentifier: ").append(toIndentedString(inputTableIdentifier)).append("\n");
+    sb.append("    inputTableId: ").append(toIndentedString(inputTableId)).append("\n");
+    sb.append("    inputColumns: ").append(toIndentedString(inputColumns)).append("\n");
+    sb.append("    messageInfo: ").append(toIndentedString(messageInfo)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -162,7 +225,9 @@ public class InputTableResponse implements Serializable {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("input_table_identifier");
+    openapiFields.add("input_table_id");
+    openapiFields.add("input_columns");
+    openapiFields.add("message_info");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -181,8 +246,25 @@ public class InputTableResponse implements Serializable {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("input_table_identifier") != null && !jsonObj.get("input_table_identifier").isJsonNull()) && !jsonObj.get("input_table_identifier").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `input_table_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("input_table_identifier").toString()));
+      if ((jsonObj.get("input_table_id") != null && !jsonObj.get("input_table_id").isJsonNull()) && !jsonObj.get("input_table_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `input_table_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("input_table_id").toString()));
+      }
+      if (jsonObj.get("input_columns") != null && !jsonObj.get("input_columns").isJsonNull()) {
+        JsonArray jsonArrayinputColumns = jsonObj.getAsJsonArray("input_columns");
+        if (jsonArrayinputColumns != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("input_columns").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `input_columns` to be an array in the JSON string but got `%s`", jsonObj.get("input_columns").toString()));
+          }
+
+          // validate the optional field `input_columns` (array)
+          for (int i = 0; i < jsonArrayinputColumns.size(); i++) {
+            InputColumnInfo.validateJsonElement(jsonArrayinputColumns.get(i));
+          };
+        }
+      }
+      if ((jsonObj.get("message_info") != null && !jsonObj.get("message_info").isJsonNull()) && !jsonObj.get("message_info").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `message_info` to be a primitive type in the JSON string but got `%s`", jsonObj.get("message_info").toString()));
       }
   }
 

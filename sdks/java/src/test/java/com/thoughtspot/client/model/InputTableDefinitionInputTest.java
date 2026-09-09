@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.model.InputColumnSchemaInput;
+import com.thoughtspot.client.model.ReferencedColumnTimeDimension;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +46,14 @@ public class InputTableDefinitionInputTest {
     @Test
     public void referencedColumnsTest() {
         // TODO: test referencedColumns
+    }
+
+    /**
+     * Test the property 'referencedColumnTimeDimensions'
+     */
+    @Test
+    public void referencedColumnTimeDimensionsTest() {
+        // TODO: test referencedColumnTimeDimensions
     }
 
 }

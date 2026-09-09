@@ -10,13 +10,22 @@
  * Do not edit the class manually.
  */
 
+import { InputColumnInfo } from '../models/InputColumnInfo';
 import { HttpFile } from '../http/http';
 
 export class InputTableResponse {
     /**
-    * Unique ID of the newly created input table.
+    * Unique ID of the newly created input table. Pass it as the input_table_identifier path parameter of the other input-table operations.
     */
-    'input_table_identifier'?: string | null;
+    'input_table_id'?: string | null;
+    /**
+    * Columns of the newly created input table, each with its name and unique ID. Use these IDs to reference specific columns in follow-up calls (for example, the column identifiers written by updateInputTable). Returned so callers do not need a separate lookup to resolve a column name to its ID.
+    */
+    'input_columns'?: Array<InputColumnInfo> | null;
+    /**
+    * Note set when a referenced column had to be renamed to keep the input table\'s column names unique — a model column name that occurs in more than one base table is prefixed with its base table name. Absent when no column was renamed. Read it to learn the final name of a renamed column, or read the name off input_columns.
+    */
+    'message_info'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,8 +33,20 @@ export class InputTableResponse {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "input_table_identifier",
-            "baseName": "input_table_identifier",
+            "name": "input_table_id",
+            "baseName": "input_table_id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "input_columns",
+            "baseName": "input_columns",
+            "type": "Array<InputColumnInfo>",
+            "format": ""
+        },
+        {
+            "name": "message_info",
+            "baseName": "message_info",
             "type": "string",
             "format": ""
         }    ];

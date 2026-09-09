@@ -43,7 +43,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInputTableRequest" /> class.
         /// </summary>
-        /// <param name="tableName">Physical table name to create in the external warehouse. (required).</param>
+        /// <param name="tableName">Physical table name to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. (required).</param>
         /// <param name="modelIdentifier">Unique ID or name of the model (worksheet) to link the input table to. (required).</param>
         /// <param name="tableDefinition">Definition of the input table, including new columns and referenced model columns. (required).</param>
         public CreateInputTableRequest(string tableName = default, string modelIdentifier = default, InputTableDefinitionInput tableDefinition = default)
@@ -70,9 +70,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Physical table name to create in the external warehouse.
+        /// Physical table name to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters.
         /// </summary>
-        /// <value>Physical table name to create in the external warehouse.</value>
+        /// <value>Physical table name to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters.</value>
         [DataMember(Name = "table_name", IsRequired = true, EmitDefaultValue = true)]
         public string TableName { get; set; }
 

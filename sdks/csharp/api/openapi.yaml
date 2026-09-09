@@ -29763,11 +29763,28 @@ components:
           type: array
         referenced_columns:
           description: |-
-            Column IDs from the linked model to include in the table.
-            Pass an empty array to create an input table with no reference
-            columns from the model.
+            Names of the columns on the linked model to include in the table,
+            as they appear on the model. These become the input table's key
+            columns: they are what the input table is joined to the model on,
+            and what rows are matched on by updateInputTable. At least one is
+            required — an empty array is rejected. A name must match exactly
+            one visible model column; a name matching none, or more than one,
+            is rejected. Each must also resolve to exactly one physical base
+            column, so a formula, cohort, or constant model column cannot be
+            referenced.
           items:
             type: string
+          type: array
+        referenced_column_time_dimensions:
+          description: |-
+            Optional per-column time dimension to persist at creation. Provide one
+            entry per referenced date column that should open — and stay locked — at a
+            specific grain. Columns without an entry apply no bucketing (detailed).
+            Applies to referenced model columns only; a column created through
+            new_columns always starts detailed.
+          items:
+            $ref: "#/components/schemas/ReferencedColumnTimeDimension"
+          nullable: true
           type: array
       required:
       - new_columns
@@ -29795,10 +29812,15 @@ components:
           - MEASURE
           type: string
         allowed_values:
-          description: "Optional list of permitted values for the column. When provided,\n\
-            data written to this column is restricted to these values. Omit\nor leave\
-            \ empty to allow any value supported by the data type. \n  Version: 26.9.0.cl\
-            \ or later\n"
+          description: |-
+            Optional list of permitted values for the column, at most 500, which
+            makes it a fixed-choice column. Every non-empty value written into
+            the column by updateInputTable must then be an exact member of the
+            list, and the API rejects a write that is not. Each value must be
+            non-empty, at most 8192 characters, and representable as the column's
+            data_type — a number for the numeric types, true or false for BOOL,
+            and an epoch integer for DATE, DATE_TIME, and TIME. Omit or leave
+            empty to allow any value supported by the data type.
           items:
             type: string
           nullable: true
@@ -29808,12 +29830,86 @@ components:
       - name
       - type
       type: object
+    ReferencedColumnTimeDimension:
+      description: |-
+        Pins a referenced model date column to a specific time dimension (grain) in
+        the created input table.
+      properties:
+        column_identifier:
+          description: |-
+            The referenced model column to restrict, named exactly as it is in
+            referenced_columns.
+          type: string
+        time_dimension:
+          description: |-
+            Time dimension (grain) to lock the column to. Applies to DATE and
+            DATE_TIME columns; a grain on a TIME (time-of-day) column has no
+            meaning and is not supported. HOURLY needs a DATE_TIME column — on
+            a plain DATE column it is ignored and the column stays detailed.
+          enum:
+          - HOURLY
+          - DAILY
+          - WEEKLY
+          - MONTHLY
+          - QUARTERLY
+          - YEARLY
+          type: string
+      required:
+      - column_identifier
+      - time_dimension
+      type: object
     InputTableResponse:
       properties:
-        input_table_identifier:
-          description: Unique ID of the newly created input table.
+        input_table_id:
+          description: |-
+            Unique ID of the newly created input table. Pass it as the
+            input_table_identifier path parameter of the other input-table
+            operations.
           nullable: true
           type: string
+        input_columns:
+          description: |-
+            Columns of the newly created input table, each with its name and unique
+            ID. Use these IDs to reference specific columns in follow-up calls (for
+            example, the column identifiers written by updateInputTable). Returned so
+            callers do not need a separate lookup to resolve a column name to its ID.
+          items:
+            $ref: "#/components/schemas/InputColumnInfo"
+          nullable: true
+          type: array
+        message_info:
+          description: |-
+            Note set when a referenced column had to be renamed to keep the input
+            table's column names unique — a model column name that occurs in more
+            than one base table is prefixed with its base table name. Absent when
+            no column was renamed. Read it to learn the final name of a renamed
+            column, or read the name off input_columns.
+          nullable: true
+          type: string
+      type: object
+    InputColumnInfo:
+      description: |-
+        A single input table column, with its display name and unique ID. Returned
+        by both createInputTable (all columns of the new table) and
+        createInputTableColumn
+        (the columns just added).
+      properties:
+        name:
+          description: Display name of the column.
+          type: string
+        id:
+          description: Unique ID of the column.
+          type: string
+        mapped_column_id:
+          description: |-
+            Unique ID of the model column this input column maps to (its join-key
+            source in the linked model). Empty for brand-new columns that do not map
+            to any model column.
+          nullable: true
+          type: string
+      required:
+      - id
+      - name
       type: object
     InputTableUpdateResponse:
       description: Response returned after successfully writing rows to an input table.
@@ -29823,6 +29919,28 @@ components:
           format: int32
           nullable: true
           type: integer
+      type: object
+    InputColumnDefinitionInput:
+      description: Definition of the new columns to add to an existing input table.
+      properties:
+        columns:
+          description: New columns to create on the input table.
+          items:
+            $ref: "#/components/schemas/InputColumnSchemaInput"
+          type: array
+      required:
+      - columns
+      type: object
+    InputColumnResponse:
+      description: Response returned after adding columns to an input table.
+      properties:
+        columns:
+          description: Columns that were added to the input table.
+          items:
+            $ref: "#/components/schemas/InputColumnInfo"
+          type: array
+      required:
+      - columns
       type: object
     PolicyProcessOptionsInput:
       properties:
@@ -33732,7 +33850,11 @@ components:
     CreateInputTableRequest:
       properties:
         table_name:
-          description: Physical table name to create in the external warehouse.
+          description: |-
+            Physical table name to create in the external warehouse.
+            Must start with a letter or an underscore and contain only
+            letters, digits, and underscores — no spaces or other
+            punctuation — and be at most 128 characters.
           type: string
         model_identifier:
           description: |-
@@ -33750,19 +33872,36 @@ components:
       - table_definition
       - table_name
       type: object
+    CreateInputTableColumnRequest:
+      properties:
+        column_definition:
+          allOf:
+          - $ref: "#/components/schemas/InputColumnDefinitionInput"
+          description: Definition of the new columns to add to the input table.
+      required:
+      - column_definition
+      type: object
     UpdateInputTableRequest:
       properties:
         columns:
           description: |-
             Names of the columns being written, in the same order as
-            the values in each row.
+            the values in each row. Must name every key column (the
+            columns mapped from the linked model), since rows are
+            matched on those, and at least one non-key column, since
+            key columns are matched on but never assigned to.
           items:
             type: string
           type: array
         rows:
           description: |-
             Rows to write into the input table. Each row is an array
-            of string values aligned positionally with columns.
+            of string values aligned positionally with columns. A DATE
+            cell takes an ISO calendar date (yyyy-MM-dd), which is
+            stored with no time-zone conversion; an epoch number is
+            also accepted, but a single column must use the same form
+            in every row. DATE_TIME and TIME cells take an epoch
+            number only.
           items:
             items:
               type: string

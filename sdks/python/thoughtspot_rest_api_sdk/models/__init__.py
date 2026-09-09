@@ -132,6 +132,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest
     from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest
     from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse
+    from thoughtspot_rest_api_sdk.models.create_input_table_column_request import CreateInputTableColumnRequest
     from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest
     from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest
     from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest
@@ -257,6 +258,9 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.import_user_type import ImportUserType
     from thoughtspot_rest_api_sdk.models.import_users_request import ImportUsersRequest
     from thoughtspot_rest_api_sdk.models.import_users_response import ImportUsersResponse
+    from thoughtspot_rest_api_sdk.models.input_column_definition_input import InputColumnDefinitionInput
+    from thoughtspot_rest_api_sdk.models.input_column_info import InputColumnInfo
+    from thoughtspot_rest_api_sdk.models.input_column_response import InputColumnResponse
     from thoughtspot_rest_api_sdk.models.input_column_schema_input import InputColumnSchemaInput
     from thoughtspot_rest_api_sdk.models.input_eureka_nls_request import InputEurekaNLSRequest
     from thoughtspot_rest_api_sdk.models.input_table_definition_input import InputTableDefinitionInput
@@ -326,6 +330,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.query_get_decomposed_query_request import QueryGetDecomposedQueryRequest
     from thoughtspot_rest_api_sdk.models.recipient_details import RecipientDetails
     from thoughtspot_rest_api_sdk.models.recipient_details_input import RecipientDetailsInput
+    from thoughtspot_rest_api_sdk.models.referenced_column_time_dimension import ReferencedColumnTimeDimension
     from thoughtspot_rest_api_sdk.models.regional_settings_input import RegionalSettingsInput
     from thoughtspot_rest_api_sdk.models.repo_config_object import RepoConfigObject
     from thoughtspot_rest_api_sdk.models.reset_user_password_request import ResetUserPasswordRequest
@@ -679,6 +684,7 @@ from thoughtspot_rest_api_sdk.models.create_conversation_request import CreateCo
 from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse
+from thoughtspot_rest_api_sdk.models.create_input_table_column_request import CreateInputTableColumnRequest
 from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest
 from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest
 from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest
@@ -804,6 +810,9 @@ from thoughtspot_rest_api_sdk.models.import_user_groups_response import ImportUs
 from thoughtspot_rest_api_sdk.models.import_user_type import ImportUserType
 from thoughtspot_rest_api_sdk.models.import_users_request import ImportUsersRequest
 from thoughtspot_rest_api_sdk.models.import_users_response import ImportUsersResponse
+from thoughtspot_rest_api_sdk.models.input_column_definition_input import InputColumnDefinitionInput
+from thoughtspot_rest_api_sdk.models.input_column_info import InputColumnInfo
+from thoughtspot_rest_api_sdk.models.input_column_response import InputColumnResponse
 from thoughtspot_rest_api_sdk.models.input_column_schema_input import InputColumnSchemaInput
 from thoughtspot_rest_api_sdk.models.input_eureka_nls_request import InputEurekaNLSRequest
 from thoughtspot_rest_api_sdk.models.input_table_definition_input import InputTableDefinitionInput
@@ -873,6 +882,7 @@ from thoughtspot_rest_api_sdk.models.put_variable_values_request import PutVaria
 from thoughtspot_rest_api_sdk.models.query_get_decomposed_query_request import QueryGetDecomposedQueryRequest
 from thoughtspot_rest_api_sdk.models.recipient_details import RecipientDetails
 from thoughtspot_rest_api_sdk.models.recipient_details_input import RecipientDetailsInput
+from thoughtspot_rest_api_sdk.models.referenced_column_time_dimension import ReferencedColumnTimeDimension
 from thoughtspot_rest_api_sdk.models.regional_settings_input import RegionalSettingsInput
 from thoughtspot_rest_api_sdk.models.repo_config_object import RepoConfigObject
 from thoughtspot_rest_api_sdk.models.reset_user_password_request import ResetUserPasswordRequest
