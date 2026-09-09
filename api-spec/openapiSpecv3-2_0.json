@@ -9263,7 +9263,7 @@
     "/api/rest/2.0/input-tables/create": {
       "post": {
         "operationId": "createInputTable",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nCreates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required.\n\n#### Usage guidelines\n\nTo create an input table, provide the following in the request body:\n\n* **`table_name`** — Physical name of the table to create in the external warehouse.\n* **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata.\n* **`table_definition`** — Describes the table schema:\n  * `referenced_columns` — List of column GUIDs from the linked model to include as read-only reference columns in the input table. These columns anchor the input data to existing model dimensions.\n  * `new_columns` — List of new editable columns to create. Each column requires:\n    * `name` — Column display name.\n    * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).\n    * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.\n\n**Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.\n\n#### Examples\n\nCreate an input table with one referenced model column and one new editable measure column:\n\n```json\n{\n  \"table_name\": \"Sales Region Targets\",\n  \"model_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"table_definition\": {\n    \"referenced_columns\": [\"c7d8e9f0-1234-5678-abcd-ef0987654321\"],\n    \"new_columns\": [\n      {\n        \"name\": \"target_revenue\",\n        \"data_type\": \"DOUBLE\",\n        \"type\": \"MEASURE\"\n      }\n    ]\n  }\n}\n```\n\nCreate an input table with multiple new editable columns and no referenced columns:\n\n```json\n{\n  \"table_name\": \"Budget Adjustments\",\n  \"model_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"table_definition\": {\n    \"referenced_columns\": [],\n    \"new_columns\": [\n      {\n        \"name\": \"region\",\n        \"data_type\": \"VARCHAR\",\n        \"type\": \"ATTRIBUTE\"\n      },\n      {\n        \"name\": \"adjustment_amount\",\n        \"data_type\": \"DOUBLE\",\n        \"type\": \"MEASURE\"\n      },\n      {\n        \"name\": \"effective_date\",\n        \"data_type\": \"DATE\",\n        \"type\": \"ATTRIBUTE\"\n      }\n    ]\n  }\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nCreates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.\n\n#### Usage guidelines\n\nTo create an input table, provide the following in the request body:\n\n* **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters.\n* **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata.\n* **`table_definition`** — Describes the table schema:\n  * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table's key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.\n  * `new_columns` — List of new editable columns to create. Each column requires:\n    * `name` — Column display name.\n    * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).\n    * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.\n    * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.\n  * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.\n\n**Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.\n\n#### Response\n\nThe response returns the new input table's GUID and the list of its columns,\neach with its name and unique ID:\n\n* **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations.\n* **`input_columns`** — Every column on the new table. Each entry has a `name`,\n  an `id` (the column's GUID), and `mapped_column_id` (the GUID of the model\n  column it is mapped from, present only for referenced columns). Use these IDs\n  to address specific columns in follow-up calls without a separate lookup.\n* **`message_info`** — Note set when a referenced column had to be renamed to\n  keep the input table's column names unique: a model column name that occurs\n  in more than one base table is prefixed with its base table name. Absent when\n  no column was renamed. The renamed column's final name is also its `name` in\n  `input_columns`, which is what `updateInputTable` matches on.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Input Tables",
           "26.11.0.cl"
@@ -9291,7 +9291,36 @@
                   "example_1": {
                     "summary": "Input table created successfully",
                     "value": {
-                      "input_table_identifier": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                      "input_table_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                      "input_columns": [
+                        {
+                          "name": "Region",
+                          "id": "b1c2d3e4-0000-1111-2222-333344445555",
+                          "mapped_column_id": "c7d8e9f0-1234-5678-abcd-ef0987654321"
+                        },
+                        {
+                          "name": "target_revenue",
+                          "id": "a9b8c7d6-9999-8888-7777-666655554444"
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Input table created; a referenced column was renamed to keep names unique",
+                    "value": {
+                      "input_table_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                      "input_columns": [
+                        {
+                          "name": "sales_Region",
+                          "id": "b1c2d3e4-0000-1111-2222-333344445555",
+                          "mapped_column_id": "c7d8e9f0-1234-5678-abcd-ef0987654321"
+                        },
+                        {
+                          "name": "target_revenue",
+                          "id": "a9b8c7d6-9999-8888-7777-666655554444"
+                        }
+                      ],
+                      "message_info": "The column Region appears in both sales and returns. Input Table columns must be unique, so it has been renamed to sales_Region."
                     }
                   }
                 }
@@ -9351,10 +9380,131 @@
         }
       }
     },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/columns/create": {
+      "post": {
+        "operationId": "createInputTableColumn",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nAdds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table's ThoughtSpot metadata so the new columns are exposed on the linked model.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:\n\n* **`column_definition.columns`** — List of new editable columns to create. Each column requires:\n  * `name` — Column display name. Must not collide with an existing column on the table.\n  * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).\n  * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.\n  * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.\n\nUnlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.\n\n**Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInputTableColumnRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to add columns to."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Columns added successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputColumnResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Columns added successfully",
+                    "value": {
+                      "columns": [
+                        {
+                          "name": "forecast_revenue",
+                          "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                        },
+                        {
+                          "name": "forecast_quarter",
+                          "id": "6b3a8f21-9c4d-4e77-bf2a-1d5e7c9a0b34"
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Fixed-choice column added successfully",
+                    "value": {
+                      "columns": [
+                        {
+                          "name": "approval_status",
+                          "id": "2c9f1e04-7b6d-4a11-9c8e-5f3b7d210a46"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — invalid payload or no columns supplied.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the input table.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Input table not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/input-tables/{input_table_identifier}/delete": {
       "post": {
         "operationId": "deleteInputTable",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nDeletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required.\n\n#### Usage guidelines\n\nSpecify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.\n\n**Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.\n\n#### Example\n\nPass the input table GUID as a path parameter. This endpoint has no request body.\n\n```\nDELETE /api/rest/2.0/input-tables/a1b2c3d4-e5f6-7890-abcd-ef1234567890/delete\n```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nDeletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.\n\n**Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Input Tables",
           "26.11.0.cl"
@@ -9380,6 +9530,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -9390,6 +9555,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -9400,6 +9580,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -9410,6 +9605,156 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete": {
+      "post": {
+        "operationId": "deleteInputTableColumn",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nDeletes a single editable column from an input table. This removes the column from the input table's ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.\n\nOnly columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:\n\n* the column is a referenced (model-projected) column, or\n* the column is still referenced by an existing Answer or Liveboard.\n\nThis endpoint has no request body.\n\n**Note on obtaining `column_identifier`**: Use the `id` field returned for the\ncolumn by `createInputTableColumn` (in `columns`) or by `createInputTable` (in\n`input_columns`) as the `column_identifier`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table that owns the column."
+          },
+          {
+            "in": "path",
+            "name": "column_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the column to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the input table column and dropped the physical CDW column."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -9420,7 +9765,7 @@
     "/api/rest/2.0/input-tables/{input_table_identifier}/update": {
       "post": {
         "operationId": "updateInputTable",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nWrites rows of data into an existing input table. The supplied rows replace the current contents of the table: each call serializes the provided values to CSV and loads them into the input table via DataManager, overwriting any previously stored rows.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:\n\n* **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. Only the listed columns are written; unlisted columns retain their existing values.\n* **`rows`** — List of rows to load. Each row is an array of string values in the same order as `columns`. All cell values must be passed as strings regardless of the column's underlying data type.\n\n**Note**: Each call fully replaces the previously loaded rows. To clear the table, send an empty `rows` array. Partial updates to individual rows are not supported; re-submit all rows on every write.\n\n#### Examples\n\nWrite two rows to an input table. Pass the input table GUID as the\n`input_table_identifier` path parameter:\n\n```\nPOST /api/rest/2.0/input-tables/{input_table_identifier}/update\n```\n\n```json\n{\n  \"columns\": [\"region\", \"target_revenue\", \"effective_date\"],\n  \"rows\": [\n    [\"West\", \"1500000\", \"2025-01-01\"],\n    [\"East\", \"2000000\", \"2025-01-01\"]\n  ]\n}\n```\n\nThe response returns the number of rows written:\n\n```json\n{ \"rows_loaded\": 2 }\n```\n\nClear all rows from an input table:\n\n```json\n{\n  \"columns\": [\"region\", \"target_revenue\"],\n  \"rows\": []\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nWrites rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:\n\n* **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns.\n* **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.\n\n#### Date values\n\nPass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.\n\nAn epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.\n\nThe date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.\n\nThe ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.\n\nA date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.\n\n#### Write semantics\n\n* **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite.\n* **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`.\n* This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched.\n* The `rows` array must contain at least one row; an empty `rows` array is rejected.\n\nThe request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).\n\n#### Response\n\nThe response returns `rows_loaded` — the number of rows actually written, the\nsum of rows updated (matched) and rows inserted (new).\n\n`rows_loaded` is the count the warehouse itself reports, so it reflects what\nwas written rather than what was submitted. If the warehouse completes the load\nbut reports no count, the call fails with `500` rather than returning a count it\ncannot stand behind. The write is a MERGE keyed on the input table's key\ncolumns, so it is idempotent — retrying the same payload is safe.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Input Tables",
           "26.11.0.cl"
@@ -30819,7 +31164,15 @@
             "items": {
               "type": "string"
             },
-            "description": "Column IDs from the linked model to include in the table.\nPass an empty array to create an input table with no reference\ncolumns from the model."
+            "description": "Names of the columns on the linked model to include in the table,\nas they appear on the model. These become the input table's key\ncolumns: they are what the input table is joined to the model on,\nand what rows are matched on by updateInputTable. At least one is\nrequired — an empty array is rejected. A name must match exactly\none visible model column; a name matching none, or more than one,\nis rejected. Each must also resolve to exactly one physical base\ncolumn, so a formula, cohort, or constant model column cannot be\nreferenced."
+          },
+          "referenced_column_time_dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferencedColumnTimeDimension"
+            },
+            "description": "Optional per-column time dimension to persist at creation. Provide one\nentry per referenced date column that should open — and stay locked — at a\nspecific grain. Columns without an entry apply no bucketing (detailed).\nApplies to referenced model columns only; a column created through\nnew_columns always starts detailed.",
+            "nullable": true
           }
         },
         "description": "Definition of the input table schema."
@@ -30853,21 +31206,83 @@
             "items": {
               "type": "string"
             },
-            "description": "Optional list of permitted values for the column. When provided,\ndata written to this column is restricted to these values. Omit\nor leave empty to allow any value supported by the data type. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>",
+            "description": "Optional list of permitted values for the column, at most 500, which\nmakes it a fixed-choice column. Every non-empty value written into\nthe column by updateInputTable must then be an exact member of the\nlist, and the API rejects a write that is not. Each value must be\nnon-empty, at most 8192 characters, and representable as the column's\ndata_type — a number for the numeric types, true or false for BOOL,\nand an epoch integer for DATE, DATE_TIME, and TIME. Omit or leave\nempty to allow any value supported by the data type.",
             "nullable": true
           }
         },
         "description": "Schema definition for a single input column."
       },
+      "ReferencedColumnTimeDimension": {
+        "type": "object",
+        "required": [
+          "column_identifier",
+          "time_dimension"
+        ],
+        "properties": {
+          "column_identifier": {
+            "type": "string",
+            "description": "The referenced model column to restrict, named exactly as it is in\nreferenced_columns."
+          },
+          "time_dimension": {
+            "type": "string",
+            "enum": [
+              "HOURLY",
+              "DAILY",
+              "WEEKLY",
+              "MONTHLY",
+              "QUARTERLY",
+              "YEARLY"
+            ],
+            "description": "Time dimension (grain) to lock the column to. Applies to DATE and\nDATE_TIME columns; a grain on a TIME (time-of-day) column has no\nmeaning and is not supported. HOURLY needs a DATE_TIME column — on\na plain DATE column it is ignored and the column stays detailed."
+          }
+        },
+        "description": "Pins a referenced model date column to a specific time dimension (grain) in\nthe created input table."
+      },
       "InputTableResponse": {
         "type": "object",
         "properties": {
-          "input_table_identifier": {
+          "input_table_id": {
             "type": "string",
-            "description": "Unique ID of the newly created input table.",
+            "description": "Unique ID of the newly created input table. Pass it as the\ninput_table_identifier path parameter of the other input-table\noperations.",
+            "nullable": true
+          },
+          "input_columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnInfo"
+            },
+            "description": "Columns of the newly created input table, each with its name and unique\nID. Use these IDs to reference specific columns in follow-up calls (for\nexample, the column identifiers written by updateInputTable). Returned so\ncallers do not need a separate lookup to resolve a column name to its ID.",
+            "nullable": true
+          },
+          "message_info": {
+            "type": "string",
+            "description": "Note set when a referenced column had to be renamed to keep the input\ntable's column names unique — a model column name that occurs in more\nthan one base table is prefixed with its base table name. Absent when\nno column was renamed. Read it to learn the final name of a renamed\ncolumn, or read the name off input_columns.",
             "nullable": true
           }
         }
+      },
+      "InputColumnInfo": {
+        "type": "object",
+        "required": [
+          "name",
+          "id"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Display name of the column."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the column."
+          },
+          "mapped_column_id": {
+            "type": "string",
+            "description": "Unique ID of the model column this input column maps to (its join-key\nsource in the linked model). Empty for brand-new columns that do not map\nto any model column.",
+            "nullable": true
+          }
+        },
+        "description": "A single input table column, with its display name and unique ID. Returned\nby both createInputTable (all columns of the new table) and\ncreateInputTableColumn\n(the columns just added)."
       },
       "InputTableUpdateResponse": {
         "type": "object",
@@ -30880,6 +31295,38 @@
           }
         },
         "description": "Response returned after successfully writing rows to an input table."
+      },
+      "InputColumnDefinitionInput": {
+        "type": "object",
+        "required": [
+          "columns"
+        ],
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnSchemaInput"
+            },
+            "description": "New columns to create on the input table."
+          }
+        },
+        "description": "Definition of the new columns to add to an existing input table."
+      },
+      "InputColumnResponse": {
+        "type": "object",
+        "required": [
+          "columns"
+        ],
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnInfo"
+            },
+            "description": "Columns that were added to the input table."
+          }
+        },
+        "description": "Response returned after adding columns to an input table."
       },
       "PolicyProcessOptionsInput": {
         "type": "object",
@@ -34408,7 +34855,7 @@
         "type": "object",
         "properties": {
           "table_name": {
-            "description": "Physical table name to create in the external warehouse.",
+            "description": "Physical table name to create in the external warehouse.\nMust start with a letter or an underscore and contain only\nletters, digits, and underscores — no spaces or other\npunctuation — and be at most 128 characters.",
             "type": "string"
           },
           "model_identifier": {
@@ -34430,18 +34877,34 @@
           "table_definition"
         ]
       },
+      "CreateInputTableColumnRequest": {
+        "type": "object",
+        "properties": {
+          "column_definition": {
+            "description": "Definition of the new columns to add to the input table.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputColumnDefinitionInput"
+              }
+            ]
+          }
+        },
+        "required": [
+          "column_definition"
+        ]
+      },
       "UpdateInputTableRequest": {
         "type": "object",
         "properties": {
           "columns": {
-            "description": "Names of the columns being written, in the same order as\nthe values in each row.",
+            "description": "Names of the columns being written, in the same order as\nthe values in each row. Must name every key column (the\ncolumns mapped from the linked model), since rows are\nmatched on those, and at least one non-key column, since\nkey columns are matched on but never assigned to.",
             "type": "array",
             "items": {
               "type": "string"
             }
           },
           "rows": {
-            "description": "Rows to write into the input table. Each row is an array\nof string values aligned positionally with columns.",
+            "description": "Rows to write into the input table. Each row is an array\nof string values aligned positionally with columns. A DATE\ncell takes an ISO calendar date (yyyy-MM-dd), which is\nstored with no time-zone conversion; an epoch number is\nalso accepted, but a single column must use the same form\nin every row. DATE_TIME and TIME cells take an epoch\nnumber only.",
             "type": "array",
             "items": {
               "type": "array",
