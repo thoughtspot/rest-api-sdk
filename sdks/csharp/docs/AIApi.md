@@ -14,6 +14,8 @@ All URIs are relative to *https://localhost:443*
 | [**GetDataSourceSuggestions**](AIApi.md#getdatasourcesuggestions) | **POST** /api/rest/2.0/ai/data-source-suggestions |  |
 | [**GetNLInstructions**](AIApi.md#getnlinstructions) | **POST** /api/rest/2.0/ai/instructions/get |  |
 | [**GetRelevantQuestions**](AIApi.md#getrelevantquestions) | **POST** /api/rest/2.0/ai/relevant-questions/ |  |
+| [**GetShareInfo**](AIApi.md#getshareinfo) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info |  |
+| [**GetSharedContent**](AIApi.md#getsharedcontent) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content |  |
 | [**ImportMemory**](AIApi.md#importmemory) | **POST** /api/rest/2.0/ai/memory/import |  |
 | [**LoadAnswer**](AIApi.md#loadanswer) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details |  |
 | [**QueryGetDecomposedQuery**](AIApi.md#querygetdecomposedquery) | **POST** /api/rest/2.0/ai/analytical-questions |  |
@@ -24,6 +26,7 @@ All URIs are relative to *https://localhost:443*
 | [**SendMessage**](AIApi.md#sendmessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |  |
 | [**SetAgentInstructions**](AIApi.md#setagentinstructions) | **PUT** /api/rest/2.0/ai/agent/instructions/set |  |
 | [**SetNLInstructions**](AIApi.md#setnlinstructions) | **POST** /api/rest/2.0/ai/instructions/set |  |
+| [**ShareConversation**](AIApi.md#shareconversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share |  |
 | [**SingleAnswer**](AIApi.md#singleanswer) | **POST** /api/rest/2.0/ai/answer/create |  |
 | [**StopConversation**](AIApi.md#stopconversation) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response |  |
 | [**UpdateConversation**](AIApi.md#updateconversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update |  |
@@ -1017,6 +1020,208 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="getshareinfo"></a>
+# **GetShareInfo**
+> ConversationShareStatusResponse GetShareInfo (string conversationIdentifier)
+
+
+
+ Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class GetShareInfoExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier of the conversation.
+
+            try
+            {
+                ConversationShareStatusResponse result = apiInstance.GetShareInfo(conversationIdentifier);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.GetShareInfo: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetShareInfoWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<ConversationShareStatusResponse> response = apiInstance.GetShareInfoWithHttpInfo(conversationIdentifier);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.GetShareInfoWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **conversationIdentifier** | **string** | Unique identifier of the conversation. |  |
+
+### Return type
+
+[**ConversationShareStatusResponse**](ConversationShareStatusResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="getsharedcontent"></a>
+# **GetSharedContent**
+> SharedConversationResponse GetSharedContent (string conversationIdentifier)
+
+
+
+ Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires `CAN_USE_SPOTTER` privilege.    Version: 26.9.0.cl or later       
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class GetSharedContentExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier of the source conversation.
+
+            try
+            {
+                SharedConversationResponse result = apiInstance.GetSharedContent(conversationIdentifier);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.GetSharedContent: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetSharedContentWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<SharedConversationResponse> response = apiInstance.GetSharedContentWithHttpInfo(conversationIdentifier);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.GetSharedContentWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **conversationIdentifier** | **string** | Unique identifier of the source conversation. |  |
+
+### Return type
+
+[**SharedConversationResponse**](SharedConversationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -2045,6 +2250,104 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | Common successful response |  -  |
 | **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="shareconversation"></a>
+# **ShareConversation**
+> void ShareConversation (string conversationIdentifier, ShareConversationRequest shareConversationRequest)
+
+
+
+ Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class ShareConversationExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier of the conversation to share.
+            var shareConversationRequest = new ShareConversationRequest(); // ShareConversationRequest | 
+
+            try
+            {
+                apiInstance.ShareConversation(conversationIdentifier, shareConversationRequest);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.ShareConversation: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ShareConversationWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.ShareConversationWithHttpInfo(conversationIdentifier, shareConversationRequest);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.ShareConversationWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **conversationIdentifier** | **string** | Unique identifier of the conversation to share. |  |
+| **shareConversationRequest** | [**ShareConversationRequest**](ShareConversationRequest.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully updated the share access for the conversation. |  -  |
 | **400** | Operation failed |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

@@ -19,13 +19,11 @@ import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 /** SearchUsersRequest */
 @javax.annotation.Generated(
@@ -214,7 +212,17 @@ public class SearchUsersRequest implements Serializable {
 
         CAN_USE_SPOTTER("CAN_USE_SPOTTER"),
 
-        CAN_MANAGE_SPOTTER("CAN_MANAGE_SPOTTER");
+        CAN_MANAGE_SPOTTER("CAN_MANAGE_SPOTTER"),
+
+        CAN_CREATE_LIVEBOARD("CAN_CREATE_LIVEBOARD"),
+
+        CAN_CREATE_ANSWERS("CAN_CREATE_ANSWERS"),
+
+        CAN_ANALYZE_DATA("CAN_ANALYZE_DATA"),
+
+        CAN_ADMINISTER_SCHEDULES("CAN_ADMINISTER_SCHEDULES"),
+
+        CAN_CREATE_KPI_ALERTS("CAN_CREATE_KPI_ALERTS");
 
         private String value;
 
@@ -1012,15 +1020,6 @@ public class SearchUsersRequest implements Serializable {
                         this.additionalProperties, searchUsersRequest.additionalProperties);
     }
 
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(
@@ -1046,13 +1045,6 @@ public class SearchUsersRequest implements Serializable {
                 includeFavoriteMetadata,
                 includeVariableValues,
                 additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override

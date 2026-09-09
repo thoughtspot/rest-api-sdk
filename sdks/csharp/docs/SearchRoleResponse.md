@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Unique Id of the role. | 
 **Name** | **string** | Name of the role | 
+**ObjId** | **string** | Custom object ID (obj_id) of the role, if one is set.    Version: 26.9.0.cl or later  | [optional] 
 **Description** | **string** | Description of the role | 
 **GroupsAssignedCount** | **int?** | number of groups assigned with this role | [optional] 
 **Orgs** | [**List&lt;GenericInfo&gt;**](GenericInfo.md) | Orgs in which role exists. | [optional] 

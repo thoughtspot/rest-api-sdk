@@ -27,6 +27,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**createOrg**](ThoughtSpotRestApi.md#createOrg) | **POST** /api/rest/2.0/orgs/create |
 | [**createRole**](ThoughtSpotRestApi.md#createRole) | **POST** /api/rest/2.0/roles/create |
 | [**createSchedule**](ThoughtSpotRestApi.md#createSchedule) | **POST** /api/rest/2.0/schedules/create |
+| [**createSemanticIntegration**](ThoughtSpotRestApi.md#createSemanticIntegration) | **POST** /api/rest/2.0/semantic-integrations/create |
 | [**createTag**](ThoughtSpotRestApi.md#createTag) | **POST** /api/rest/2.0/tags/create |
 | [**createUser**](ThoughtSpotRestApi.md#createUser) | **POST** /api/rest/2.0/users/create |
 | [**createUserGroup**](ThoughtSpotRestApi.md#createUserGroup) | **POST** /api/rest/2.0/groups/create |
@@ -53,6 +54,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**deleteOrgEmailCustomization**](ThoughtSpotRestApi.md#deleteOrgEmailCustomization) | **POST** /api/rest/2.0/customization/email/delete |
 | [**deleteRole**](ThoughtSpotRestApi.md#deleteRole) | **POST** /api/rest/2.0/roles/{role_identifier}/delete |
 | [**deleteSchedule**](ThoughtSpotRestApi.md#deleteSchedule) | **POST** /api/rest/2.0/schedules/{schedule_identifier}/delete |
+| [**deleteSemanticIntegration**](ThoughtSpotRestApi.md#deleteSemanticIntegration) | **POST** /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete |
 | [**deleteStyleFonts**](ThoughtSpotRestApi.md#deleteStyleFonts) | **POST** /api/rest/2.0/customization/styles/fonts/delete |
 | [**deleteTag**](ThoughtSpotRestApi.md#deleteTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/delete |
 | [**deleteUser**](ThoughtSpotRestApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete |
@@ -94,6 +96,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**getNLInstructions**](ThoughtSpotRestApi.md#getNLInstructions) | **POST** /api/rest/2.0/ai/instructions/get |
 | [**getObjectAccessToken**](ThoughtSpotRestApi.md#getObjectAccessToken) | **POST** /api/rest/2.0/auth/token/object |
 | [**getRelevantQuestions**](ThoughtSpotRestApi.md#getRelevantQuestions) | **POST** /api/rest/2.0/ai/relevant-questions/ |
+| [**getShareInfo**](ThoughtSpotRestApi.md#getShareInfo) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info |
+| [**getSharedContent**](ThoughtSpotRestApi.md#getSharedContent) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content |
 | [**getSystemConfig**](ThoughtSpotRestApi.md#getSystemConfig) | **GET** /api/rest/2.0/system/config |
 | [**getSystemInformation**](ThoughtSpotRestApi.md#getSystemInformation) | **GET** /api/rest/2.0/system |
 | [**getSystemOverrideInfo**](ThoughtSpotRestApi.md#getSystemOverrideInfo) | **GET** /api/rest/2.0/system/config-overrides |
@@ -102,6 +106,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**importMemory**](ThoughtSpotRestApi.md#importMemory) | **POST** /api/rest/2.0/ai/memory/import |
 | [**importMetadataTML**](ThoughtSpotRestApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import |
 | [**importMetadataTMLAsync**](ThoughtSpotRestApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import |
+| [**importSemanticIntegration**](ThoughtSpotRestApi.md#importSemanticIntegration) | **POST** /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import |
 | [**importUserGroups**](ThoughtSpotRestApi.md#importUserGroups) | **POST** /api/rest/2.0/groups/import |
 | [**importUsers**](ThoughtSpotRestApi.md#importUsers) | **POST** /api/rest/2.0/users/import |
 | [**loadAnswer**](ThoughtSpotRestApi.md#loadAnswer) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details |
@@ -133,6 +138,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchRoles**](ThoughtSpotRestApi.md#searchRoles) | **POST** /api/rest/2.0/roles/search |
 | [**searchSchedules**](ThoughtSpotRestApi.md#searchSchedules) | **POST** /api/rest/2.0/schedules/search |
 | [**searchSecuritySettings**](ThoughtSpotRestApi.md#searchSecuritySettings) | **POST** /api/rest/2.0/system/security-settings/search |
+| [**searchSemanticIntegrations**](ThoughtSpotRestApi.md#searchSemanticIntegrations) | **POST** /api/rest/2.0/semantic-integrations/search |
 | [**searchStyleCustomizations**](ThoughtSpotRestApi.md#searchStyleCustomizations) | **POST** /api/rest/2.0/customization/styles/search |
 | [**searchStyleFonts**](ThoughtSpotRestApi.md#searchStyleFonts) | **POST** /api/rest/2.0/customization/styles/fonts/search |
 | [**searchTags**](ThoughtSpotRestApi.md#searchTags) | **POST** /api/rest/2.0/tags/search |
@@ -147,6 +153,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**sendMessage**](ThoughtSpotRestApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
 | [**setAgentInstructions**](ThoughtSpotRestApi.md#setAgentInstructions) | **PUT** /api/rest/2.0/ai/agent/instructions/set |
 | [**setNLInstructions**](ThoughtSpotRestApi.md#setNLInstructions) | **POST** /api/rest/2.0/ai/instructions/set |
+| [**shareConversation**](ThoughtSpotRestApi.md#shareConversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share |
 | [**shareMetadata**](ThoughtSpotRestApi.md#shareMetadata) | **POST** /api/rest/2.0/security/metadata/share |
 | [**singleAnswer**](ThoughtSpotRestApi.md#singleAnswer) | **POST** /api/rest/2.0/ai/answer/create |
 | [**stopConversation**](ThoughtSpotRestApi.md#stopConversation) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response |
@@ -1015,6 +1022,44 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="createSemanticIntegration"></a>
+# **createSemanticIntegration**
+> SemanticIntegrationResponse createSemanticIntegration(createSemanticIntegrationRequest)
+
+
+
+  Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createSemanticIntegrationRequest** | [**CreateSemanticIntegrationRequest**](CreateSemanticIntegrationRequest.md)
+
+### Return type
+
+[**SemanticIntegrationResponse**](SemanticIntegrationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Semantic integration created successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Connection not found. |  -  |
+| **409** | Duplicate integration name. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="createTag"></a>
@@ -1961,6 +2006,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Schedule successfully deleted. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="deleteSemanticIntegration"></a>
+# **deleteSemanticIntegration**
+> deleteSemanticIntegration(semanticIntegrationIdentifier)
+
+
+
+  Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **semanticIntegrationIdentifier** | **String**
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Semantic integration deleted successfully. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -3223,6 +3304,7 @@ No authorization required
 | **400** | Invalid request. This could be due to missing or incorrect parameters. |  -  |
 | **401** | Unauthorized access. The request could not be authenticated. |  -  |
 | **403** | Forbidden access. The user does not have permission to access this resource. |  -  |
+| **409** | Conflict. A concurrent update to the same template variable was detected and the request could not be applied. Retry the request after serializing concurrent variable updates. |  -  |
 | **500** | An unexpected error occurred on the server. |  -  |
 
 <a id="getDataSourceSuggestions"></a>
@@ -3433,6 +3515,80 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="getShareInfo"></a>
+# **getShareInfo**
+> ConversationShareStatusResponse getShareInfo(conversationIdentifier)
+
+
+
+ Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+
+### Return type
+
+[**ConversationShareStatusResponse**](ConversationShareStatusResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="getSharedContent"></a>
+# **getSharedContent**
+> SharedConversationResponse getSharedContent(conversationIdentifier)
+
+
+
+ Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+
+### Return type
+
+[**SharedConversationResponse**](SharedConversationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
@@ -3721,6 +3877,43 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="importSemanticIntegration"></a>
+# **importSemanticIntegration**
+> SemanticIntegrationResponse importSemanticIntegration(semanticIntegrationIdentifier)
+
+
+
+  Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **semanticIntegrationIdentifier** | **String**
+
+### Return type
+
+[**SemanticIntegrationResponse**](SemanticIntegrationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Semantic integration imported successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | Semantic integration not found. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="importUserGroups"></a>
@@ -4843,6 +5036,42 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="searchSemanticIntegrations"></a>
+# **searchSemanticIntegrations**
+> List&lt;SemanticIntegrationSearchResponse&gt; searchSemanticIntegrations(searchSemanticIntegrationsRequest)
+
+
+
+  Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchSemanticIntegrationsRequest** | [**SearchSemanticIntegrationsRequest**](SearchSemanticIntegrationsRequest.md)
+
+### Return type
+
+[**List&lt;SemanticIntegrationSearchResponse&gt;**](SemanticIntegrationSearchResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Semantic integrations retrieved successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="searchStyleCustomizations"></a>
 # **searchStyleCustomizations**
 > List&lt;StylePreference&gt; searchStyleCustomizations(searchStyleCustomizationsRequest)
@@ -5353,6 +5582,43 @@ null (empty response body)
 |-------------|-------------|------------------|
 | **200** | Common successful response |  -  |
 | **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="shareConversation"></a>
+# **shareConversation**
+> shareConversation(conversationIdentifier, shareConversationRequest)
+
+
+
+ Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **conversationIdentifier** | **String**
+| **shareConversationRequest** | [**ShareConversationRequest**](ShareConversationRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully updated the share access for the conversation. |  -  |
 | **400** | Operation failed |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -6554,7 +6820,7 @@ null (empty response body)
 
 
 
-  Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+  Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.  Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60; request cannot carry any other field.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
 
 ### Parameters
 

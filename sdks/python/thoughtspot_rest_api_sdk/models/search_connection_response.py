@@ -28,12 +28,13 @@ class SearchConnectionResponse(BaseModel):
     """ # noqa: E501
     id: StrictStr = Field(description="Unique ID of the connection.")
     name: StrictStr = Field(description="Name of the connection.")
+    obj_id: Optional[StrictStr] = Field(default=None, description="Custom object ID (obj_id) of the connection, if one is set.    Version: 26.9.0.cl or later ")
     description: Optional[StrictStr] = Field(default=None, description="Description of the connection.")
     data_warehouse_type: StrictStr = Field(description="Type of data warehouse.")
     data_warehouse_objects: Optional[DataWarehouseObjects] = None
     details: Optional[Any] = Field(default=None, description="Details of the connection.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "description", "data_warehouse_type", "data_warehouse_objects", "details"]
+    __properties: ClassVar[List[str]] = ["id", "name", "obj_id", "description", "data_warehouse_type", "data_warehouse_objects", "details"]
 
     @field_validator('data_warehouse_type')
     def data_warehouse_type_validate_enum(cls, value):
@@ -91,6 +92,11 @@ class SearchConnectionResponse(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if obj_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.obj_id is None and "obj_id" in self.model_fields_set:
+            _dict['obj_id'] = None
+
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
@@ -115,6 +121,7 @@ class SearchConnectionResponse(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
+            "obj_id": obj.get("obj_id"),
             "description": obj.get("description"),
             "data_warehouse_type": obj.get("data_warehouse_type"),
             "data_warehouse_objects": DataWarehouseObjects.from_dict(obj["data_warehouse_objects"]) if obj.get("data_warehouse_objects") is not None else None,

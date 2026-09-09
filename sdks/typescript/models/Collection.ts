@@ -27,6 +27,10 @@ export class Collection {
     */
     'name': string;
     /**
+    * Custom object ID (obj_id) of the collection, if one is set.    Version: 26.9.0.cl or later 
+    */
+    'obj_id'?: string | null;
+    /**
     * Description of the collection.
     */
     'description'?: string | null;
@@ -66,6 +70,12 @@ export class Collection {
         {
             "name": "name",
             "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "obj_id",
+            "baseName": "obj_id",
             "type": "string",
             "format": ""
         },

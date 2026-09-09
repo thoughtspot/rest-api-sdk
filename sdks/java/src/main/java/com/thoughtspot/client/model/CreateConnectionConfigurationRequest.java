@@ -18,13 +18,11 @@ import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 /** CreateConnectionConfigurationRequest */
 @javax.annotation.Generated(
@@ -74,7 +72,9 @@ public class CreateConnectionConfigurationRequest implements Serializable {
 
         OAUTH_WITH_SERVICE_PRINCIPAL("OAUTH_WITH_SERVICE_PRINCIPAL"),
 
-        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS");
+        OAUTH_CLIENT_CREDENTIALS("OAUTH_CLIENT_CREDENTIALS"),
+
+        OAUTH_CLIENT_CREDENTIALS_WITH_X509("OAUTH_CLIENT_CREDENTIALS_WITH_X509");
 
         private String value;
 
@@ -202,7 +202,9 @@ public class CreateConnectionConfigurationRequest implements Serializable {
     public enum PolicyProcessesEnum {
         SAGE_INDEXING("SAGE_INDEXING"),
 
-        ROW_COUNT_STATS("ROW_COUNT_STATS");
+        ROW_COUNT_STATS("ROW_COUNT_STATS"),
+
+        SCHEDULED_LIVEBOARDS("SCHEDULED_LIVEBOARDS");
 
         private String value;
 
@@ -467,8 +469,8 @@ public class CreateConnectionConfigurationRequest implements Serializable {
     }
 
     /**
-     * Action that the query performed on the data warehouse, such as SAGE_INDEXING and
-     * ROW_COUNT_STATS.
+     * Action that the query performed on the data warehouse, such as SAGE_INDEXING,
+     * ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.
      *
      * @return policyProcesses
      */
@@ -563,15 +565,6 @@ public class CreateConnectionConfigurationRequest implements Serializable {
                         createConnectionConfigurationRequest.additionalProperties);
     }
 
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(
@@ -586,13 +579,6 @@ public class CreateConnectionConfigurationRequest implements Serializable {
                 policyPrincipals,
                 policyProcesses,
                 additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override

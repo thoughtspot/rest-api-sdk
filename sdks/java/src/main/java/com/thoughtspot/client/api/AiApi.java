@@ -17,6 +17,7 @@ import com.thoughtspot.client.model.AgentConversationHistoryResponse;
 import com.thoughtspot.client.model.AgentInstructions;
 import com.thoughtspot.client.model.Conversation;
 import com.thoughtspot.client.model.ConversationMessageResponse;
+import com.thoughtspot.client.model.ConversationShareStatusResponse;
 import com.thoughtspot.client.model.CreateAgentConversationRequest;
 import com.thoughtspot.client.model.CreateConversationRequest;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
@@ -42,6 +43,8 @@ import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.SetAgentInstructionsRequest;
 import com.thoughtspot.client.model.SetNLInstructionsRequest;
+import com.thoughtspot.client.model.ShareConversationRequest;
+import com.thoughtspot.client.model.SharedConversationResponse;
 import com.thoughtspot.client.model.SingleAnswerRequest;
 import com.thoughtspot.client.model.UpdateConversationRequest;
 import java.io.InputStream;
@@ -3110,6 +3113,370 @@ public class AiApi {
         okhttp3.Call localVarCall =
                 getRelevantQuestionsValidateBeforeCall(getRelevantQuestionsRequest, _callback);
         Type localVarReturnType = new TypeToken<EurekaGetRelevantQuestionsResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getShareInfo
+     *
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call getShareInfoCall(String conversationIdentifier, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "GET",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getShareInfoValidateBeforeCall(
+            String conversationIdentifier, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " getShareInfo(Async)");
+        }
+
+        return getShareInfoCall(conversationIdentifier, _callback);
+    }
+
+    /**
+     * Returns the current share state for a conversation the caller owns: whether the shared view
+     * is outdated relative to the latest conversation content, and the list of principals that
+     * currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the
+     * specified conversation. Version: 26.9.0.cl or later
+     *
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @return ConversationShareStatusResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ConversationShareStatusResponse getShareInfo(String conversationIdentifier)
+            throws ApiException {
+        ApiResponse<ConversationShareStatusResponse> localVarResp =
+                getShareInfoWithHttpInfo(conversationIdentifier);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Returns the current share state for a conversation the caller owns: whether the shared view
+     * is outdated relative to the latest conversation content, and the list of principals that
+     * currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the
+     * specified conversation. Version: 26.9.0.cl or later
+     *
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @return ApiResponse&lt;ConversationShareStatusResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<ConversationShareStatusResponse> getShareInfoWithHttpInfo(
+            String conversationIdentifier) throws ApiException {
+        okhttp3.Call localVarCall = getShareInfoValidateBeforeCall(conversationIdentifier, null);
+        Type localVarReturnType = new TypeToken<ConversationShareStatusResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Returns the current share state for a conversation the caller owns: whether
+     * the shared view is outdated relative to the latest conversation content, and the list of
+     * principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * ownership of the specified conversation. Version: 26.9.0.cl or later
+     *
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call getShareInfoAsync(
+            String conversationIdentifier,
+            final ApiCallback<ConversationShareStatusResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                getShareInfoValidateBeforeCall(conversationIdentifier, _callback);
+        Type localVarReturnType = new TypeToken<ConversationShareStatusResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getSharedContent
+     *
+     * @param conversationIdentifier Unique identifier of the source conversation. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call getSharedContentCall(
+            String conversationIdentifier, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "GET",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getSharedContentValidateBeforeCall(
+            String conversationIdentifier, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " getSharedContent(Async)");
+        }
+
+        return getSharedContentCall(conversationIdentifier, _callback);
+    }
+
+    /**
+     * Returns the full read-only view of a shared conversation, including ordered messages and data
+     * source metadata. Accessible by the conversation owner and any principal (user or group) that
+     * has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege. Version: 26.9.0.cl
+     * or later
+     *
+     * @param conversationIdentifier Unique identifier of the source conversation. (required)
+     * @return SharedConversationResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public SharedConversationResponse getSharedContent(String conversationIdentifier)
+            throws ApiException {
+        ApiResponse<SharedConversationResponse> localVarResp =
+                getSharedContentWithHttpInfo(conversationIdentifier);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Returns the full read-only view of a shared conversation, including ordered messages and data
+     * source metadata. Accessible by the conversation owner and any principal (user or group) that
+     * has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege. Version: 26.9.0.cl
+     * or later
+     *
+     * @param conversationIdentifier Unique identifier of the source conversation. (required)
+     * @return ApiResponse&lt;SharedConversationResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<SharedConversationResponse> getSharedContentWithHttpInfo(
+            String conversationIdentifier) throws ApiException {
+        okhttp3.Call localVarCall =
+                getSharedContentValidateBeforeCall(conversationIdentifier, null);
+        Type localVarReturnType = new TypeToken<SharedConversationResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Returns the full read-only view of a shared conversation, including ordered
+     * messages and data source metadata. Accessible by the conversation owner and any principal
+     * (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.
+     * Version: 26.9.0.cl or later
+     *
+     * @param conversationIdentifier Unique identifier of the source conversation. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call getSharedContentAsync(
+            String conversationIdentifier, final ApiCallback<SharedConversationResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                getSharedContentValidateBeforeCall(conversationIdentifier, _callback);
+        Type localVarReturnType = new TypeToken<SharedConversationResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -6344,6 +6711,205 @@ public class AiApi {
                 setNLInstructionsValidateBeforeCall(setNLInstructionsRequest, _callback);
         Type localVarReturnType = new TypeToken<EurekaSetNLInstructionsResponse>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for shareConversation
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to share. (required)
+     * @param shareConversationRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully updated the share access for the conversation. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call shareConversationCall(
+            String conversationIdentifier,
+            ShareConversationRequest shareConversationRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = shareConversationRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share"
+                        .replace(
+                                "{" + "conversation_identifier" + "}",
+                                localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call shareConversationValidateBeforeCall(
+            String conversationIdentifier,
+            ShareConversationRequest shareConversationRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'conversationIdentifier' when calling"
+                            + " shareConversation(Async)");
+        }
+
+        // verify the required parameter 'shareConversationRequest' is set
+        if (shareConversationRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'shareConversationRequest' when calling"
+                            + " shareConversation(Async)");
+        }
+
+        return shareConversationCall(conversationIdentifier, shareConversationRequest, _callback);
+    }
+
+    /**
+     * Grants or revokes access to a shared conversation for one or more principals (users or
+     * groups). When principals are added, a read-only shared view of the conversation is created
+     * from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view
+     * with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * ownership of the specified conversation. Version: 26.9.0.cl or later
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to share. (required)
+     * @param shareConversationRequest (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully updated the share access for the conversation. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public void shareConversation(
+            String conversationIdentifier, ShareConversationRequest shareConversationRequest)
+            throws ApiException {
+        shareConversationWithHttpInfo(conversationIdentifier, shareConversationRequest);
+    }
+
+    /**
+     * Grants or revokes access to a shared conversation for one or more principals (users or
+     * groups). When principals are added, a read-only shared view of the conversation is created
+     * from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view
+     * with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and
+     * ownership of the specified conversation. Version: 26.9.0.cl or later
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to share. (required)
+     * @param shareConversationRequest (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully updated the share access for the conversation. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Void> shareConversationWithHttpInfo(
+            String conversationIdentifier, ShareConversationRequest shareConversationRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                shareConversationValidateBeforeCall(
+                        conversationIdentifier, shareConversationRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * (asynchronously) Grants or revokes access to a shared conversation for one or more principals
+     * (users or groups). When principals are added, a read-only shared view of the conversation is
+     * created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the
+     * shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60;
+     * privilege and ownership of the specified conversation. Version: 26.9.0.cl or later
+     *
+     * @param conversationIdentifier Unique identifier of the conversation to share. (required)
+     * @param shareConversationRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 204 </td><td> Successfully updated the share access for the conversation. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call shareConversationAsync(
+            String conversationIdentifier,
+            ShareConversationRequest shareConversationRequest,
+            final ApiCallback<Void> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                shareConversationValidateBeforeCall(
+                        conversationIdentifier, shareConversationRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**

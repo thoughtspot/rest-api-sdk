@@ -91,7 +91,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum OAUTHCLIENTCREDENTIALS for value: OAUTH_CLIENT_CREDENTIALS
             /// </summary>
             [EnumMember(Value = "OAUTH_CLIENT_CREDENTIALS")]
-            OAUTHCLIENTCREDENTIALS = 9
+            OAUTHCLIENTCREDENTIALS = 9,
+
+            /// <summary>
+            /// Enum OAUTHCLIENTCREDENTIALSWITHX509 for value: OAUTH_CLIENT_CREDENTIALS_WITH_X509
+            /// </summary>
+            [EnumMember(Value = "OAUTH_CLIENT_CREDENTIALS_WITH_X509")]
+            OAUTHCLIENTCREDENTIALSWITHX509 = 10
         }
 
 
@@ -150,7 +156,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum ROWCOUNTSTATS for value: ROW_COUNT_STATS
             /// </summary>
             [EnumMember(Value = "ROW_COUNT_STATS")]
-            ROWCOUNTSTATS = 2
+            ROWCOUNTSTATS = 2,
+
+            /// <summary>
+            /// Enum SCHEDULEDLIVEBOARDS for value: SCHEDULED_LIVEBOARDS
+            /// </summary>
+            [EnumMember(Value = "SCHEDULED_LIVEBOARDS")]
+            SCHEDULEDLIVEBOARDS = 3
         }
 
         /// <summary>
@@ -173,7 +185,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="varConfiguration">Configuration properties in JSON..</param>
         /// <param name="policyType">Type of policy..</param>
         /// <param name="policyPrincipals">Unique ID or name of the User and User Groups..</param>
-        /// <param name="policyProcesses">Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS..</param>
+        /// <param name="policyProcesses">Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS..</param>
         /// <param name="disable">Indicates whether the configuration enable/disable. (default to false).</param>
         public UpdateConnectionConfigurationRequest(string connectionIdentifier = default, string name = default, string description = default, bool? sameAsParent = false, PolicyProcessOptionsInput policyProcessOptions = default, AuthenticationTypeEnum? authenticationType = default, Object varConfiguration = default, PolicyTypeEnum? policyType = default, List<string> policyPrincipals = default, List<PolicyProcessesEnum> policyProcesses = default, bool? disable = false)
         {
@@ -248,9 +260,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public List<string> PolicyPrincipals { get; set; }
 
         /// <summary>
-        /// Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.
+        /// Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.
         /// </summary>
-        /// <value>Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.</value>
+        /// <value>Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.</value>
         [DataMember(Name = "policy_processes", EmitDefaultValue = false)]
         public List<UpdateConnectionConfigurationRequest.PolicyProcessesEnum> PolicyProcesses { get; set; }
 

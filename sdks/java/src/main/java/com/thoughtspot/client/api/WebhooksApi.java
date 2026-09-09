@@ -948,11 +948,14 @@ public class WebhooksApi {
 
     /**
      * Version: 10.14.0.cl or later Updates an existing webhook configuration by its unique id or
-     * name. Only the provided fields will be updated. Requires &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
-     * If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
-     * enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage
-     * webhooks**) privilege are also authorized to perform this action.
+     * name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.
+     * Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional
+     * configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60;
+     * request cannot carry any other field. Requires &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**)
+     * privilege are also authorized to perform this action.
      *
      * @param webhookIdentifier Unique ID or name of the webhook configuration. (required)
      * @param updateWebhookConfigurationRequest (required)
@@ -979,11 +982,14 @@ public class WebhooksApi {
 
     /**
      * Version: 10.14.0.cl or later Updates an existing webhook configuration by its unique id or
-     * name. Only the provided fields will be updated. Requires &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.
-     * If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is
-     * enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage
-     * webhooks**) privilege are also authorized to perform this action.
+     * name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.
+     * Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional
+     * configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60;
+     * request cannot carry any other field. Requires &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**)
+     * privilege are also authorized to perform this action.
      *
      * @param webhookIdentifier Unique ID or name of the webhook configuration. (required)
      * @param updateWebhookConfigurationRequest (required)
@@ -1013,9 +1019,12 @@ public class WebhooksApi {
 
     /**
      * (asynchronously) Version: 10.14.0.cl or later Updates an existing webhook configuration by
-     * its unique id or name. Only the provided fields will be updated. Requires
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has
-     * developer privilege**) privilege. If [Role-Based Access Control
+     * its unique id or name. With the default &#x60;REPLACE&#x60; operation, only the provided
+     * fields are updated. Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to
+     * clear an optional configuration section, such as authentication or the storage destination. A
+     * &#x60;RESET&#x60; request cannot carry any other field. Requires &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**)
+     * privilege. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with
      * &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to
      * perform this action.

@@ -19,13 +19,11 @@ import com.thoughtspot.client.JSON;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 /** CreateUserRequest */
 @javax.annotation.Generated(
@@ -835,8 +833,10 @@ public class CreateUserRequest implements Serializable {
     }
 
     /**
-     * Flag to indicate whether welcome email should be sent to user. This parameter is applied only
-     * on clusters on which IAM is disabled.
+     * Flag to indicate whether a welcome email should be sent to the user. This parameter applies
+     * only on clusters where IAMv2 is not enabled. If the flag details are not specified, then it
+     * defaults to true. However, a welcome email is sent only when welcome email notifications are
+     * enabled on the cluster and the user has a valid email address.
      *
      * @return triggerWelcomeEmail
      */
@@ -954,15 +954,6 @@ public class CreateUserRequest implements Serializable {
                         this.additionalProperties, createUserRequest.additionalProperties);
     }
 
-    private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-        return a == b
-                || (a != null
-                        && b != null
-                        && a.isPresent()
-                        && b.isPresent()
-                        && Objects.deepEquals(a.get(), b.get()));
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(
@@ -987,13 +978,6 @@ public class CreateUserRequest implements Serializable {
                 triggerWelcomeEmail,
                 triggerActivationEmail,
                 additionalProperties);
-    }
-
-    private static <T> int hashCodeNullable(JsonNullable<T> a) {
-        if (a == null) {
-            return 1;
-        }
-        return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
     }
 
     @Override

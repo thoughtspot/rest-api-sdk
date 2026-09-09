@@ -35,7 +35,7 @@ class CreateConnectionConfigurationRequest(BaseModel):
     configuration: Optional[Any] = Field(description="Configuration properties in JSON.")
     policy_type: Optional[StrictStr] = Field(default='NO_POLICY', description="Type of policy.")
     policy_principals: Optional[List[StrictStr]] = Field(default=None, description="Unique ID or name of the User and User Groups.")
-    policy_processes: Optional[List[StrictStr]] = Field(default=None, description="Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.")
+    policy_processes: Optional[List[StrictStr]] = Field(default=None, description="Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "description", "connection_identifier", "same_as_parent", "policy_process_options", "authentication_type", "configuration", "policy_type", "policy_principals", "policy_processes"]
 
@@ -45,8 +45,8 @@ class CreateConnectionConfigurationRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['SERVICE_ACCOUNT', 'KEY_PAIR', 'PERSONAL_ACCESS_TOKEN', 'OAUTH_WITH_SERVICE_PRINCIPAL', 'OAUTH_CLIENT_CREDENTIALS']):
-            raise ValueError("must be one of enum values ('SERVICE_ACCOUNT', 'KEY_PAIR', 'PERSONAL_ACCESS_TOKEN', 'OAUTH_WITH_SERVICE_PRINCIPAL', 'OAUTH_CLIENT_CREDENTIALS')")
+        if value not in set(['SERVICE_ACCOUNT', 'KEY_PAIR', 'PERSONAL_ACCESS_TOKEN', 'OAUTH_WITH_SERVICE_PRINCIPAL', 'OAUTH_CLIENT_CREDENTIALS', 'OAUTH_CLIENT_CREDENTIALS_WITH_X509']):
+            raise ValueError("must be one of enum values ('SERVICE_ACCOUNT', 'KEY_PAIR', 'PERSONAL_ACCESS_TOKEN', 'OAUTH_WITH_SERVICE_PRINCIPAL', 'OAUTH_CLIENT_CREDENTIALS', 'OAUTH_CLIENT_CREDENTIALS_WITH_X509')")
         return value
 
     @field_validator('policy_type')
@@ -66,8 +66,8 @@ class CreateConnectionConfigurationRequest(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['SAGE_INDEXING', 'ROW_COUNT_STATS']):
-                raise ValueError("each list item must be one of ('SAGE_INDEXING', 'ROW_COUNT_STATS')")
+            if i not in set(['SAGE_INDEXING', 'ROW_COUNT_STATS', 'SCHEDULED_LIVEBOARDS']):
+                raise ValueError("each list item must be one of ('SAGE_INDEXING', 'ROW_COUNT_STATS', 'SCHEDULED_LIVEBOARDS')")
         return value
 
     model_config = ConfigDict(

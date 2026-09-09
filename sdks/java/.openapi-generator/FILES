@@ -101,7 +101,9 @@ docs/ContextPayloadV2Input.md
 docs/Conversation.md
 docs/ConversationMessage.md
 docs/ConversationMessageResponse.md
+docs/ConversationPrincipalInfo.md
 docs/ConversationSettingsInput.md
+docs/ConversationShareStatusResponse.md
 docs/ConvertWorksheetToModelRequest.md
 docs/CopyObjectRequest.md
 docs/CreateAgentConversationRequest.md
@@ -118,6 +120,7 @@ docs/CreateEmailCustomizationResponse.md
 docs/CreateOrgRequest.md
 docs/CreateRoleRequest.md
 docs/CreateScheduleRequest.md
+docs/CreateSemanticIntegrationRequest.md
 docs/CreateTagRequest.md
 docs/CreateUserGroupRequest.md
 docs/CreateUserRequest.md
@@ -302,6 +305,7 @@ docs/PermissionsMetadataTypeInput.md
 docs/PngOptionsInput.md
 docs/PolicyProcessOptions.md
 docs/PolicyProcessOptionsInput.md
+docs/PrincipalRefInput.md
 docs/PrincipalsInput.md
 docs/PrincipalsListItem.md
 docs/PrincipalsListItemInput.md
@@ -378,6 +382,7 @@ docs/SearchRoleResponse.md
 docs/SearchRolesRequest.md
 docs/SearchSchedulesRequest.md
 docs/SearchSecuritySettingsRequest.md
+docs/SearchSemanticIntegrationsRequest.md
 docs/SearchStyleCustomizationsRequest.md
 docs/SearchStyleFontsRequest.md
 docs/SearchTagsRequest.md
@@ -392,6 +397,14 @@ docs/SecuritySettingsOrgDetails.md
 docs/SecuritySettingsOrgPreferences.md
 docs/SecuritySettingsOrgPreferencesInput.md
 docs/SecuritySettingsResponse.md
+docs/SemanticIntegrationFormulaReport.md
+docs/SemanticIntegrationReport.md
+docs/SemanticIntegrationReportSummary.md
+docs/SemanticIntegrationResponse.md
+docs/SemanticIntegrationSearchResponse.md
+docs/SemanticIntegrationSortOptions.md
+docs/SemanticIntegrationTagReference.md
+docs/SemanticIntegrationsApi.md
 docs/SendAgentConversationMessageRequest.md
 docs/SendAgentConversationMessageStreamingRequest.md
 docs/SendAgentMessageRequest.md
@@ -400,9 +413,11 @@ docs/SendAgentMessageStreamingRequest.md
 docs/SendMessageRequest.md
 docs/SetAgentInstructionsRequest.md
 docs/SetNLInstructionsRequest.md
+docs/ShareConversationRequest.md
 docs/ShareMetadataRequest.md
 docs/ShareMetadataTypeInput.md
 docs/SharePermissionsInput.md
+docs/SharedConversationResponse.md
 docs/SingleAnswerRequest.md
 docs/SortOption.md
 docs/SortOptionInput.md
@@ -579,6 +594,7 @@ src/main/java/com/thoughtspot/client/api/ReportsApi.java
 src/main/java/com/thoughtspot/client/api/RolesApi.java
 src/main/java/com/thoughtspot/client/api/SchedulesApi.java
 src/main/java/com/thoughtspot/client/api/SecurityApi.java
+src/main/java/com/thoughtspot/client/api/SemanticIntegrationsApi.java
 src/main/java/com/thoughtspot/client/api/StyleCustomizationApi.java
 src/main/java/com/thoughtspot/client/api/SystemApi.java
 src/main/java/com/thoughtspot/client/api/TagsApi.java
@@ -683,7 +699,9 @@ src/main/java/com/thoughtspot/client/model/ContextPayloadV2Input.java
 src/main/java/com/thoughtspot/client/model/Conversation.java
 src/main/java/com/thoughtspot/client/model/ConversationMessage.java
 src/main/java/com/thoughtspot/client/model/ConversationMessageResponse.java
+src/main/java/com/thoughtspot/client/model/ConversationPrincipalInfo.java
 src/main/java/com/thoughtspot/client/model/ConversationSettingsInput.java
+src/main/java/com/thoughtspot/client/model/ConversationShareStatusResponse.java
 src/main/java/com/thoughtspot/client/model/ConvertWorksheetToModelRequest.java
 src/main/java/com/thoughtspot/client/model/CopyObjectRequest.java
 src/main/java/com/thoughtspot/client/model/CreateAgentConversationRequest.java
@@ -700,6 +718,7 @@ src/main/java/com/thoughtspot/client/model/CreateEmailCustomizationResponse.java
 src/main/java/com/thoughtspot/client/model/CreateOrgRequest.java
 src/main/java/com/thoughtspot/client/model/CreateRoleRequest.java
 src/main/java/com/thoughtspot/client/model/CreateScheduleRequest.java
+src/main/java/com/thoughtspot/client/model/CreateSemanticIntegrationRequest.java
 src/main/java/com/thoughtspot/client/model/CreateTagRequest.java
 src/main/java/com/thoughtspot/client/model/CreateUserGroupRequest.java
 src/main/java/com/thoughtspot/client/model/CreateUserRequest.java
@@ -873,6 +892,7 @@ src/main/java/com/thoughtspot/client/model/PermissionsMetadataTypeInput.java
 src/main/java/com/thoughtspot/client/model/PngOptionsInput.java
 src/main/java/com/thoughtspot/client/model/PolicyProcessOptions.java
 src/main/java/com/thoughtspot/client/model/PolicyProcessOptionsInput.java
+src/main/java/com/thoughtspot/client/model/PrincipalRefInput.java
 src/main/java/com/thoughtspot/client/model/PrincipalsInput.java
 src/main/java/com/thoughtspot/client/model/PrincipalsListItem.java
 src/main/java/com/thoughtspot/client/model/PrincipalsListItemInput.java
@@ -946,6 +966,7 @@ src/main/java/com/thoughtspot/client/model/SearchRoleResponse.java
 src/main/java/com/thoughtspot/client/model/SearchRolesRequest.java
 src/main/java/com/thoughtspot/client/model/SearchSchedulesRequest.java
 src/main/java/com/thoughtspot/client/model/SearchSecuritySettingsRequest.java
+src/main/java/com/thoughtspot/client/model/SearchSemanticIntegrationsRequest.java
 src/main/java/com/thoughtspot/client/model/SearchStyleCustomizationsRequest.java
 src/main/java/com/thoughtspot/client/model/SearchStyleFontsRequest.java
 src/main/java/com/thoughtspot/client/model/SearchTagsRequest.java
@@ -959,6 +980,13 @@ src/main/java/com/thoughtspot/client/model/SecuritySettingsOrgDetails.java
 src/main/java/com/thoughtspot/client/model/SecuritySettingsOrgPreferences.java
 src/main/java/com/thoughtspot/client/model/SecuritySettingsOrgPreferencesInput.java
 src/main/java/com/thoughtspot/client/model/SecuritySettingsResponse.java
+src/main/java/com/thoughtspot/client/model/SemanticIntegrationFormulaReport.java
+src/main/java/com/thoughtspot/client/model/SemanticIntegrationReport.java
+src/main/java/com/thoughtspot/client/model/SemanticIntegrationReportSummary.java
+src/main/java/com/thoughtspot/client/model/SemanticIntegrationResponse.java
+src/main/java/com/thoughtspot/client/model/SemanticIntegrationSearchResponse.java
+src/main/java/com/thoughtspot/client/model/SemanticIntegrationSortOptions.java
+src/main/java/com/thoughtspot/client/model/SemanticIntegrationTagReference.java
 src/main/java/com/thoughtspot/client/model/SendAgentConversationMessageRequest.java
 src/main/java/com/thoughtspot/client/model/SendAgentConversationMessageStreamingRequest.java
 src/main/java/com/thoughtspot/client/model/SendAgentMessageRequest.java
@@ -967,9 +995,11 @@ src/main/java/com/thoughtspot/client/model/SendAgentMessageStreamingRequest.java
 src/main/java/com/thoughtspot/client/model/SendMessageRequest.java
 src/main/java/com/thoughtspot/client/model/SetAgentInstructionsRequest.java
 src/main/java/com/thoughtspot/client/model/SetNLInstructionsRequest.java
+src/main/java/com/thoughtspot/client/model/ShareConversationRequest.java
 src/main/java/com/thoughtspot/client/model/ShareMetadataRequest.java
 src/main/java/com/thoughtspot/client/model/ShareMetadataTypeInput.java
 src/main/java/com/thoughtspot/client/model/SharePermissionsInput.java
+src/main/java/com/thoughtspot/client/model/SharedConversationResponse.java
 src/main/java/com/thoughtspot/client/model/SingleAnswerRequest.java
 src/main/java/com/thoughtspot/client/model/SortOption.java
 src/main/java/com/thoughtspot/client/model/SortOptionInput.java
@@ -1110,6 +1140,7 @@ src/test/java/com/thoughtspot/client/api/ReportsApiTest.java
 src/test/java/com/thoughtspot/client/api/RolesApiTest.java
 src/test/java/com/thoughtspot/client/api/SchedulesApiTest.java
 src/test/java/com/thoughtspot/client/api/SecurityApiTest.java
+src/test/java/com/thoughtspot/client/api/SemanticIntegrationsApiTest.java
 src/test/java/com/thoughtspot/client/api/StyleCustomizationApiTest.java
 src/test/java/com/thoughtspot/client/api/SystemApiTest.java
 src/test/java/com/thoughtspot/client/api/TagsApiTest.java
@@ -1208,7 +1239,9 @@ src/test/java/com/thoughtspot/client/model/ConnectionInputTest.java
 src/test/java/com/thoughtspot/client/model/ContextPayloadV2InputTest.java
 src/test/java/com/thoughtspot/client/model/ConversationMessageResponseTest.java
 src/test/java/com/thoughtspot/client/model/ConversationMessageTest.java
+src/test/java/com/thoughtspot/client/model/ConversationPrincipalInfoTest.java
 src/test/java/com/thoughtspot/client/model/ConversationSettingsInputTest.java
+src/test/java/com/thoughtspot/client/model/ConversationShareStatusResponseTest.java
 src/test/java/com/thoughtspot/client/model/ConversationTest.java
 src/test/java/com/thoughtspot/client/model/ConvertWorksheetToModelRequestTest.java
 src/test/java/com/thoughtspot/client/model/CopyObjectRequestTest.java
@@ -1226,6 +1259,7 @@ src/test/java/com/thoughtspot/client/model/CreateEmailCustomizationResponseTest.
 src/test/java/com/thoughtspot/client/model/CreateOrgRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateRoleRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateScheduleRequestTest.java
+src/test/java/com/thoughtspot/client/model/CreateSemanticIntegrationRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateTagRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateUserGroupRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateUserRequestTest.java
@@ -1399,6 +1433,7 @@ src/test/java/com/thoughtspot/client/model/PermissionsMetadataTypeInputTest.java
 src/test/java/com/thoughtspot/client/model/PngOptionsInputTest.java
 src/test/java/com/thoughtspot/client/model/PolicyProcessOptionsInputTest.java
 src/test/java/com/thoughtspot/client/model/PolicyProcessOptionsTest.java
+src/test/java/com/thoughtspot/client/model/PrincipalRefInputTest.java
 src/test/java/com/thoughtspot/client/model/PrincipalsInputTest.java
 src/test/java/com/thoughtspot/client/model/PrincipalsListItemInputTest.java
 src/test/java/com/thoughtspot/client/model/PrincipalsListItemTest.java
@@ -1472,6 +1507,7 @@ src/test/java/com/thoughtspot/client/model/SearchRoleResponseTest.java
 src/test/java/com/thoughtspot/client/model/SearchRolesRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchSchedulesRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchSecuritySettingsRequestTest.java
+src/test/java/com/thoughtspot/client/model/SearchSemanticIntegrationsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchStyleCustomizationsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchStyleFontsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchTagsRequestTest.java
@@ -1485,6 +1521,13 @@ src/test/java/com/thoughtspot/client/model/SecuritySettingsOrgDetailsTest.java
 src/test/java/com/thoughtspot/client/model/SecuritySettingsOrgPreferencesInputTest.java
 src/test/java/com/thoughtspot/client/model/SecuritySettingsOrgPreferencesTest.java
 src/test/java/com/thoughtspot/client/model/SecuritySettingsResponseTest.java
+src/test/java/com/thoughtspot/client/model/SemanticIntegrationFormulaReportTest.java
+src/test/java/com/thoughtspot/client/model/SemanticIntegrationReportSummaryTest.java
+src/test/java/com/thoughtspot/client/model/SemanticIntegrationReportTest.java
+src/test/java/com/thoughtspot/client/model/SemanticIntegrationResponseTest.java
+src/test/java/com/thoughtspot/client/model/SemanticIntegrationSearchResponseTest.java
+src/test/java/com/thoughtspot/client/model/SemanticIntegrationSortOptionsTest.java
+src/test/java/com/thoughtspot/client/model/SemanticIntegrationTagReferenceTest.java
 src/test/java/com/thoughtspot/client/model/SendAgentConversationMessageRequestTest.java
 src/test/java/com/thoughtspot/client/model/SendAgentConversationMessageStreamingRequestTest.java
 src/test/java/com/thoughtspot/client/model/SendAgentMessageRequestTest.java
@@ -1493,9 +1536,11 @@ src/test/java/com/thoughtspot/client/model/SendAgentMessageStreamingRequestTest.
 src/test/java/com/thoughtspot/client/model/SendMessageRequestTest.java
 src/test/java/com/thoughtspot/client/model/SetAgentInstructionsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SetNLInstructionsRequestTest.java
+src/test/java/com/thoughtspot/client/model/ShareConversationRequestTest.java
 src/test/java/com/thoughtspot/client/model/ShareMetadataRequestTest.java
 src/test/java/com/thoughtspot/client/model/ShareMetadataTypeInputTest.java
 src/test/java/com/thoughtspot/client/model/SharePermissionsInputTest.java
+src/test/java/com/thoughtspot/client/model/SharedConversationResponseTest.java
 src/test/java/com/thoughtspot/client/model/SingleAnswerRequestTest.java
 src/test/java/com/thoughtspot/client/model/SortOptionInputTest.java
 src/test/java/com/thoughtspot/client/model/SortOptionTest.java

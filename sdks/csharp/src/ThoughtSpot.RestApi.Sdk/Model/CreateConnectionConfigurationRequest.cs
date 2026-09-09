@@ -67,7 +67,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum OAUTHCLIENTCREDENTIALS for value: OAUTH_CLIENT_CREDENTIALS
             /// </summary>
             [EnumMember(Value = "OAUTH_CLIENT_CREDENTIALS")]
-            OAUTHCLIENTCREDENTIALS = 5
+            OAUTHCLIENTCREDENTIALS = 5,
+
+            /// <summary>
+            /// Enum OAUTHCLIENTCREDENTIALSWITHX509 for value: OAUTH_CLIENT_CREDENTIALS_WITH_X509
+            /// </summary>
+            [EnumMember(Value = "OAUTH_CLIENT_CREDENTIALS_WITH_X509")]
+            OAUTHCLIENTCREDENTIALSWITHX509 = 6
         }
 
 
@@ -126,7 +132,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum ROWCOUNTSTATS for value: ROW_COUNT_STATS
             /// </summary>
             [EnumMember(Value = "ROW_COUNT_STATS")]
-            ROWCOUNTSTATS = 2
+            ROWCOUNTSTATS = 2,
+
+            /// <summary>
+            /// Enum SCHEDULEDLIVEBOARDS for value: SCHEDULED_LIVEBOARDS
+            /// </summary>
+            [EnumMember(Value = "SCHEDULED_LIVEBOARDS")]
+            SCHEDULEDLIVEBOARDS = 3
         }
 
         /// <summary>
@@ -149,7 +161,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="varConfiguration">Configuration properties in JSON. (required).</param>
         /// <param name="policyType">Type of policy. (default to PolicyTypeEnum.NOPOLICY).</param>
         /// <param name="policyPrincipals">Unique ID or name of the User and User Groups..</param>
-        /// <param name="policyProcesses">Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS..</param>
+        /// <param name="policyProcesses">Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS..</param>
         public CreateConnectionConfigurationRequest(string name = default, string description = default, string connectionIdentifier = default, bool? sameAsParent = false, PolicyProcessOptionsInput policyProcessOptions = default, AuthenticationTypeEnum? authenticationType = AuthenticationTypeEnum.SERVICEACCOUNT, Object varConfiguration = default, PolicyTypeEnum? policyType = PolicyTypeEnum.NOPOLICY, List<string> policyPrincipals = default, List<PolicyProcessesEnum> policyProcesses = default)
         {
             // to ensure "name" is required (not null)
@@ -231,9 +243,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public List<string> PolicyPrincipals { get; set; }
 
         /// <summary>
-        /// Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.
+        /// Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.
         /// </summary>
-        /// <value>Action that the query performed on the data warehouse, such as SAGE_INDEXING and ROW_COUNT_STATS.</value>
+        /// <value>Action that the query performed on the data warehouse, such as SAGE_INDEXING, ROW_COUNT_STATS, and SCHEDULED_LIVEBOARDS.</value>
         [DataMember(Name = "policy_processes", EmitDefaultValue = false)]
         public List<CreateConnectionConfigurationRequest.PolicyProcessesEnum> PolicyProcesses { get; set; }
 

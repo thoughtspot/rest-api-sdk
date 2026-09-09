@@ -366,7 +366,37 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum CANMANAGESPOTTER for value: CAN_MANAGE_SPOTTER
             /// </summary>
             [EnumMember(Value = "CAN_MANAGE_SPOTTER")]
-            CANMANAGESPOTTER = 55
+            CANMANAGESPOTTER = 55,
+
+            /// <summary>
+            /// Enum CANCREATELIVEBOARD for value: CAN_CREATE_LIVEBOARD
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_LIVEBOARD")]
+            CANCREATELIVEBOARD = 56,
+
+            /// <summary>
+            /// Enum CANCREATEANSWERS for value: CAN_CREATE_ANSWERS
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_ANSWERS")]
+            CANCREATEANSWERS = 57,
+
+            /// <summary>
+            /// Enum CANANALYZEDATA for value: CAN_ANALYZE_DATA
+            /// </summary>
+            [EnumMember(Value = "CAN_ANALYZE_DATA")]
+            CANANALYZEDATA = 58,
+
+            /// <summary>
+            /// Enum CANADMINISTERSCHEDULES for value: CAN_ADMINISTER_SCHEDULES
+            /// </summary>
+            [EnumMember(Value = "CAN_ADMINISTER_SCHEDULES")]
+            CANADMINISTERSCHEDULES = 59,
+
+            /// <summary>
+            /// Enum CANCREATEKPIALERTS for value: CAN_CREATE_KPI_ALERTS
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_KPI_ALERTS")]
+            CANCREATEKPIALERTS = 60
         }
 
         /// <summary>
@@ -415,6 +445,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// </summary>
         /// <param name="id">Unique Id of the role. (required).</param>
         /// <param name="name">Name of the role (required).</param>
+        /// <param name="objId">Custom object ID (obj_id) of the role, if one is set.    Version: 26.9.0.cl or later .</param>
         /// <param name="description">Description of the role (required).</param>
         /// <param name="groupsAssignedCount">number of groups assigned with this role.</param>
         /// <param name="orgs">Orgs in which role exists..</param>
@@ -430,7 +461,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="external">Indicates whether the role is external..</param>
         /// <param name="hidden">Indicates whether the role is hidden..</param>
         /// <param name="sharedViaConnection">Indicates whether the role is shared via connection.</param>
-        public SearchRoleResponse(string id = default, string name = default, string description = default, int? groupsAssignedCount = default, List<GenericInfo> orgs = default, List<GenericInfo> groups = default, List<PrivilegesEnum> privileges = default, PermissionEnum? permission = default, string authorId = default, string modifierId = default, Object creationTimeInMillis = default, Object modificationTimeInMillis = default, bool? deleted = default, bool? deprecated = default, bool? external = default, bool? hidden = default, bool? sharedViaConnection = default)
+        public SearchRoleResponse(string id = default, string name = default, string objId = default, string description = default, int? groupsAssignedCount = default, List<GenericInfo> orgs = default, List<GenericInfo> groups = default, List<PrivilegesEnum> privileges = default, PermissionEnum? permission = default, string authorId = default, string modifierId = default, Object creationTimeInMillis = default, Object modificationTimeInMillis = default, bool? deleted = default, bool? deprecated = default, bool? external = default, bool? hidden = default, bool? sharedViaConnection = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -456,6 +487,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
                 throw new ArgumentNullException("privileges is a required property for SearchRoleResponse and cannot be null");
             }
             this.Privileges = privileges;
+            this.ObjId = objId;
             this.GroupsAssignedCount = groupsAssignedCount;
             this.Orgs = orgs;
             this.Groups = groups;
@@ -485,6 +517,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>Name of the role</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Custom object ID (obj_id) of the role, if one is set.    Version: 26.9.0.cl or later 
+        /// </summary>
+        /// <value>Custom object ID (obj_id) of the role, if one is set.    Version: 26.9.0.cl or later </value>
+        [DataMember(Name = "obj_id", EmitDefaultValue = true)]
+        public string ObjId { get; set; }
 
         /// <summary>
         /// Description of the role
@@ -600,6 +639,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("class SearchRoleResponse {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  ObjId: ").Append(ObjId).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  GroupsAssignedCount: ").Append(GroupsAssignedCount).Append("\n");
             sb.Append("  Orgs: ").Append(Orgs).Append("\n");

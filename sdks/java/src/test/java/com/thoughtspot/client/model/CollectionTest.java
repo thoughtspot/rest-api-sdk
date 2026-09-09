@@ -28,6 +28,12 @@ public class CollectionTest {
         // TODO: test name
     }
 
+    /** Test the property 'objId' */
+    @Test
+    public void objIdTest() {
+        // TODO: test objId
+    }
+
     /** Test the property 'description' */
     @Test
     public void descriptionTest() {

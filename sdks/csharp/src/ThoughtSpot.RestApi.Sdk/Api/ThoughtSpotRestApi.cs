@@ -514,6 +514,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <returns>SemanticIntegrationResponse</returns>
+        SemanticIntegrationResponse CreateSemanticIntegration(CreateSemanticIntegrationRequest createSemanticIntegrationRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <returns>ApiResponse of SemanticIntegrationResponse</returns>
+        ApiResponse<SemanticIntegrationResponse> CreateSemanticIntegrationWithHttpInfo(CreateSemanticIntegrationRequest createSemanticIntegrationRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1090,6 +1111,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="scheduleIdentifier">Unique ID or name of the scheduled job.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteScheduleWithHttpInfo(string scheduleIdentifier);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <returns></returns>
+        void DeleteSemanticIntegration(string semanticIntegrationIdentifier);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteSemanticIntegrationWithHttpInfo(string semanticIntegrationIdentifier);
         /// <summary>
         /// 
         /// </summary>
@@ -1957,6 +1999,48 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <returns>ConversationShareStatusResponse</returns>
+        ConversationShareStatusResponse GetShareInfo(string conversationIdentifier);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <returns>ApiResponse of ConversationShareStatusResponse</returns>
+        ApiResponse<ConversationShareStatusResponse> GetShareInfoWithHttpInfo(string conversationIdentifier);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <returns>SharedConversationResponse</returns>
+        SharedConversationResponse GetSharedContent(string conversationIdentifier);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <returns>ApiResponse of SharedConversationResponse</returns>
+        ApiResponse<SharedConversationResponse> GetSharedContentWithHttpInfo(string conversationIdentifier);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Retrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.  Requires &#x60;ADMINISTRATION&#x60;(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;SYSTEM_INFO_ADMINISTRATION&#x60; (**Can view system activities**) privilege is required.  This API does not require any parameters to be passed in the request.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -2115,6 +2199,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="importMetadataTMLAsyncRequest"></param>
         /// <returns>ApiResponse of ImportEPackAsyncTaskStatus</returns>
         ApiResponse<ImportEPackAsyncTaskStatus> ImportMetadataTMLAsyncWithHttpInfo(ImportMetadataTMLAsyncRequest importMetadataTMLAsyncRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <returns>SemanticIntegrationResponse</returns>
+        SemanticIntegrationResponse ImportSemanticIntegration(string semanticIntegrationIdentifier);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <returns>ApiResponse of SemanticIntegrationResponse</returns>
+        ApiResponse<SemanticIntegrationResponse> ImportSemanticIntegrationWithHttpInfo(string semanticIntegrationIdentifier);
         /// <summary>
         /// 
         /// </summary>
@@ -2780,6 +2885,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <returns>List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        List<SemanticIntegrationSearchResponse> SearchSemanticIntegrations(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <returns>ApiResponse of List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        ApiResponse<List<SemanticIntegrationSearchResponse>> SearchSemanticIntegrationsWithHttpInfo(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user&#39;s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to retrieve cluster-level style defaults. - Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to retrieve preferences for the authenticated user&#39;s org. - Each field in the response includes an &#x60;is_overridden&#x60; flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -3082,6 +3208,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="setNLInstructionsRequest"></param>
         /// <returns>ApiResponse of EurekaSetNLInstructionsResponse</returns>
         ApiResponse<EurekaSetNLInstructionsResponse> SetNLInstructionsWithHttpInfo(SetNLInstructionsRequest setNLInstructionsRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <returns></returns>
+        void ShareConversation(string conversationIdentifier, ShareConversationRequest shareConversationRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> ShareConversationWithHttpInfo(string conversationIdentifier, ShareConversationRequest shareConversationRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -3830,7 +3979,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+        ///   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.  Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60; request cannot carry any other field.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="webhookIdentifier">Unique ID or name of the webhook configuration.</param>
@@ -3842,7 +3991,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+        ///   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.  Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60; request cannot carry any other field.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="webhookIdentifier">Unique ID or name of the webhook configuration.</param>
@@ -3856,7 +4005,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -3872,7 +4021,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -4500,6 +4649,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ResponseSchedule)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResponseSchedule>> CreateScheduleWithHttpInfoAsync(CreateScheduleRequest createScheduleRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SemanticIntegrationResponse</returns>
+        System.Threading.Tasks.Task<SemanticIntegrationResponse> CreateSemanticIntegrationAsync(CreateSemanticIntegrationRequest createSemanticIntegrationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SemanticIntegrationResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SemanticIntegrationResponse>> CreateSemanticIntegrationWithHttpInfoAsync(CreateSemanticIntegrationRequest createSemanticIntegrationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -5132,6 +5304,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScheduleWithHttpInfoAsync(string scheduleIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteSemanticIntegrationAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSemanticIntegrationWithHttpInfoAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -6081,6 +6276,52 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ConversationShareStatusResponse</returns>
+        System.Threading.Tasks.Task<ConversationShareStatusResponse> GetShareInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ConversationShareStatusResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ConversationShareStatusResponse>> GetShareInfoWithHttpInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SharedConversationResponse</returns>
+        System.Threading.Tasks.Task<SharedConversationResponse> GetSharedContentAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SharedConversationResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SharedConversationResponse>> GetSharedContentWithHttpInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Retrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.  Requires &#x60;ADMINISTRATION&#x60;(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;SYSTEM_INFO_ADMINISTRATION&#x60; (**Can view system activities**) privilege is required.  This API does not require any parameters to be passed in the request.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -6255,6 +6496,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ImportEPackAsyncTaskStatus)</returns>
         System.Threading.Tasks.Task<ApiResponse<ImportEPackAsyncTaskStatus>> ImportMetadataTMLAsyncWithHttpInfoAsync(ImportMetadataTMLAsyncRequest importMetadataTMLAsyncRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SemanticIntegrationResponse</returns>
+        System.Threading.Tasks.Task<SemanticIntegrationResponse> ImportSemanticIntegrationAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SemanticIntegrationResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SemanticIntegrationResponse>> ImportSemanticIntegrationWithHttpInfoAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -6982,6 +7246,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        System.Threading.Tasks.Task<List<SemanticIntegrationSearchResponse>> SearchSemanticIntegrationsAsync(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;SemanticIntegrationSearchResponse&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<SemanticIntegrationSearchResponse>>> SearchSemanticIntegrationsWithHttpInfoAsync(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user&#39;s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to retrieve cluster-level style defaults. - Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to retrieve preferences for the authenticated user&#39;s org. - Each field in the response includes an &#x60;is_overridden&#x60; flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -7312,6 +7599,31 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (EurekaSetNLInstructionsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<EurekaSetNLInstructionsResponse>> SetNLInstructionsWithHttpInfoAsync(SetNLInstructionsRequest setNLInstructionsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task ShareConversationAsync(string conversationIdentifier, ShareConversationRequest shareConversationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> ShareConversationWithHttpInfoAsync(string conversationIdentifier, ShareConversationRequest shareConversationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -8124,7 +8436,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+        ///   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.  Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60; request cannot carry any other field.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="webhookIdentifier">Unique ID or name of the webhook configuration.</param>
@@ -8137,7 +8449,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+        ///   Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.  Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60; request cannot carry any other field.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="webhookIdentifier">Unique ID or name of the webhook configuration.</param>
@@ -8152,7 +8464,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -8169,7 +8481,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///   Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -11797,6 +12109,136 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
+        ///    Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <returns>SemanticIntegrationResponse</returns>
+        public SemanticIntegrationResponse CreateSemanticIntegration(CreateSemanticIntegrationRequest createSemanticIntegrationRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> localVarResponse = CreateSemanticIntegrationWithHttpInfo(createSemanticIntegrationRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <returns>ApiResponse of SemanticIntegrationResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> CreateSemanticIntegrationWithHttpInfo(CreateSemanticIntegrationRequest createSemanticIntegrationRequest)
+        {
+            // verify the required parameter 'createSemanticIntegrationRequest' is set
+            if (createSemanticIntegrationRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'createSemanticIntegrationRequest' when calling ThoughtSpotRestApi->CreateSemanticIntegration");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = createSemanticIntegrationRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<SemanticIntegrationResponse>("/api/rest/2.0/semantic-integrations/create", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CreateSemanticIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SemanticIntegrationResponse</returns>
+        public async System.Threading.Tasks.Task<SemanticIntegrationResponse> CreateSemanticIntegrationAsync(CreateSemanticIntegrationRequest createSemanticIntegrationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> localVarResponse = await CreateSemanticIntegrationWithHttpInfoAsync(createSemanticIntegrationRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Creates a new semantic integration in ThoughtSpot from a CDW semantic view.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About create semantic integration  A semantic integration imports an externally defined semantic view from a Cloud Data Warehouse (CDW) into ThoughtSpot. The API resolves the source semantic view from the specified &#x60;connection_identifier&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, and &#x60;semantic_view_name&#x60;, generates a ThoughtSpot model from it, and returns the model GUID along with a per-formula import report (&#x60;semantic_report&#x60;) summarizing how many formulas were successfully imported, failed, or skipped.  - &#x60;connection_identifier&#x60;, &#x60;name&#x60;, &#x60;database_name&#x60;, &#x60;schema_name&#x60;, &#x60;semantic_view_name&#x60;, and &#x60;type&#x60; are required. - &#x60;name&#x60; must be unique across the user&#39;s organization. The integration&#39;s display name is also used as the generated model name. - Supported &#x60;type&#x60; values are listed in the &#x60;SemanticIntegrationType&#x60; enum. - The response includes a &#x60;semantic_report.summary&#x60; with &#x60;total&#x60;, &#x60;imported&#x60;, &#x60;failed&#x60;, and &#x60;skipped&#x60; counts, and a &#x60;formulas&#x60; array with the per-formula translation details.  &gt; **Note:** Creating a semantic integration using a YAML file upload is not supported through the public API.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createSemanticIntegrationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SemanticIntegrationResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse>> CreateSemanticIntegrationWithHttpInfoAsync(CreateSemanticIntegrationRequest createSemanticIntegrationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'createSemanticIntegrationRequest' is set
+            if (createSemanticIntegrationRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'createSemanticIntegrationRequest' when calling ThoughtSpotRestApi->CreateSemanticIntegration");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = createSemanticIntegrationRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<SemanticIntegrationResponse>("/api/rest/2.0/semantic-integrations/create", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CreateSemanticIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
         ///    Version: 9.0.0.cl or later   Creates a tag object.  Tags are labels that identify a metadata object. For example, you can create a tag to designate subject areas, such as sales, HR, marketing, and finance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;TAGMANAGEMENT&#x60; (**Can manage tags**) privilege is required to create, edit, and delete tags.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -15311,6 +15753,132 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("DeleteSchedule", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <returns></returns>
+        public void DeleteSemanticIntegration(string semanticIntegrationIdentifier)
+        {
+            DeleteSemanticIntegrationWithHttpInfo(semanticIntegrationIdentifier);
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> DeleteSemanticIntegrationWithHttpInfo(string semanticIntegrationIdentifier)
+        {
+            // verify the required parameter 'semanticIntegrationIdentifier' is set
+            if (semanticIntegrationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'semanticIntegrationIdentifier' when calling ThoughtSpotRestApi->DeleteSemanticIntegration");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("semantic_integration_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(semanticIntegrationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteSemanticIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteSemanticIntegrationAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            await DeleteSemanticIntegrationWithHttpInfoAsync(semanticIntegrationIdentifier, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Deletes a semantic integration and its associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About delete semantic integration  Removes the specified semantic integration and its generated ThoughtSpot model from the system.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to delete. - Deletions cannot be undone. Re-import the integration with &#x60;createSemanticIntegration&#x60; if needed.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to delete.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> DeleteSemanticIntegrationWithHttpInfoAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'semanticIntegrationIdentifier' is set
+            if (semanticIntegrationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'semanticIntegrationIdentifier' when calling ThoughtSpotRestApi->DeleteSemanticIntegration");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("semantic_integration_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(semanticIntegrationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteSemanticIntegration", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -20583,6 +21151,262 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
+        ///   Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <returns>ConversationShareStatusResponse</returns>
+        public ConversationShareStatusResponse GetShareInfo(string conversationIdentifier)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ConversationShareStatusResponse> localVarResponse = GetShareInfoWithHttpInfo(conversationIdentifier);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <returns>ApiResponse of ConversationShareStatusResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ConversationShareStatusResponse> GetShareInfoWithHttpInfo(string conversationIdentifier)
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->GetShareInfo");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<ConversationShareStatusResponse>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetShareInfo", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ConversationShareStatusResponse</returns>
+        public async System.Threading.Tasks.Task<ConversationShareStatusResponse> GetShareInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ConversationShareStatusResponse> localVarResponse = await GetShareInfoWithHttpInfoAsync(conversationIdentifier, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Returns the current share state for a conversation the caller owns: whether the shared view is outdated relative to the latest conversation content, and the list of principals that currently have access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ConversationShareStatusResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ConversationShareStatusResponse>> GetShareInfoWithHttpInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->GetShareInfo");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<ConversationShareStatusResponse>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetShareInfo", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///   Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <returns>SharedConversationResponse</returns>
+        public SharedConversationResponse GetSharedContent(string conversationIdentifier)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SharedConversationResponse> localVarResponse = GetSharedContentWithHttpInfo(conversationIdentifier);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <returns>ApiResponse of SharedConversationResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SharedConversationResponse> GetSharedContentWithHttpInfo(string conversationIdentifier)
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->GetSharedContent");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<SharedConversationResponse>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetSharedContent", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SharedConversationResponse</returns>
+        public async System.Threading.Tasks.Task<SharedConversationResponse> GetSharedContentAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SharedConversationResponse> localVarResponse = await GetSharedContentWithHttpInfoAsync(conversationIdentifier, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///   Returns the full read-only view of a shared conversation, including ordered messages and data source metadata. Accessible by the conversation owner and any principal (user or group) that has been granted access. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the source conversation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SharedConversationResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SharedConversationResponse>> GetSharedContentWithHttpInfoAsync(string conversationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->GetSharedContent");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<SharedConversationResponse>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetSharedContent", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
         ///    Version: 9.0.0.cl or later   Retrieves the current configuration details of the cluster. If the request is successful, the API returns a list configuration settings applied on the cluster.  Requires &#x60;ADMINISTRATION&#x60;(**Can administer ThoughtSpot**) privilege to view these complete configuration settings of the cluster. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;SYSTEM_INFO_ADMINISTRATION&#x60; (**Can view system activities**) privilege is required.  This API does not require any parameters to be passed in the request.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -21561,6 +22385,134 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ImportMetadataTMLAsync", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <returns>SemanticIntegrationResponse</returns>
+        public SemanticIntegrationResponse ImportSemanticIntegration(string semanticIntegrationIdentifier)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> localVarResponse = ImportSemanticIntegrationWithHttpInfo(semanticIntegrationIdentifier);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <returns>ApiResponse of SemanticIntegrationResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> ImportSemanticIntegrationWithHttpInfo(string semanticIntegrationIdentifier)
+        {
+            // verify the required parameter 'semanticIntegrationIdentifier' is set
+            if (semanticIntegrationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'semanticIntegrationIdentifier' when calling ThoughtSpotRestApi->ImportSemanticIntegration");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("semantic_integration_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(semanticIntegrationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<SemanticIntegrationResponse>("/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ImportSemanticIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SemanticIntegrationResponse</returns>
+        public async System.Threading.Tasks.Task<SemanticIntegrationResponse> ImportSemanticIntegrationAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse> localVarResponse = await ImportSemanticIntegrationWithHttpInfoAsync(semanticIntegrationIdentifier, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Imports semantic updates for an existing semantic integration from its CDW source and refreshes the associated ThoughtSpot model.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About import semantic integration  Re-imports the semantic view from the CDW for the specified integration and rebuilds the corresponding ThoughtSpot model. Use this after the source semantic view has been updated in the CDW (added, removed, or modified formulas, dimensions, or measures) to bring the ThoughtSpot model back in line.  - &#x60;semantic_integration_identifier&#x60; is the GUID or name of the integration to import updates for. - Import preserves the integration&#39;s GUID, name, and &#x60;model_id&#x60;; only the underlying formula set is refreshed. - The response includes the same &#x60;semantic_report&#x60; as create, with an additional &#x60;change_status&#x60; per formula indicating whether each formula is &#x60;NEW&#x60;, &#x60;UPDATED&#x60;, or &#x60;UNCHANGED&#x60; since the previous import.  &gt; **Note:** Importing updates for a semantic integration that was created using the file upload option in the ThoughtSpot UI is not supported. To refresh a file-upload-based integration, use the ThoughtSpot UI.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="semanticIntegrationIdentifier">ID or name of the semantic integration to import updates for.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SemanticIntegrationResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SemanticIntegrationResponse>> ImportSemanticIntegrationWithHttpInfoAsync(string semanticIntegrationIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'semanticIntegrationIdentifier' is set
+            if (semanticIntegrationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'semanticIntegrationIdentifier' when calling ThoughtSpotRestApi->ImportSemanticIntegration");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("semantic_integration_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(semanticIntegrationIdentifier)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<SemanticIntegrationResponse>("/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ImportSemanticIntegration", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -25627,6 +26579,136 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
+        ///    Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <returns>List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        public List<SemanticIntegrationSearchResponse> SearchSemanticIntegrations(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<SemanticIntegrationSearchResponse>> localVarResponse = SearchSemanticIntegrationsWithHttpInfo(searchSemanticIntegrationsRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <returns>ApiResponse of List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<SemanticIntegrationSearchResponse>> SearchSemanticIntegrationsWithHttpInfo(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest)
+        {
+            // verify the required parameter 'searchSemanticIntegrationsRequest' is set
+            if (searchSemanticIntegrationsRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchSemanticIntegrationsRequest' when calling ThoughtSpotRestApi->SearchSemanticIntegrations");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = searchSemanticIntegrationsRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<List<SemanticIntegrationSearchResponse>>("/api/rest/2.0/semantic-integrations/search", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchSemanticIntegrations", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;SemanticIntegrationSearchResponse&gt;</returns>
+        public async System.Threading.Tasks.Task<List<SemanticIntegrationSearchResponse>> SearchSemanticIntegrationsAsync(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<SemanticIntegrationSearchResponse>> localVarResponse = await SearchSemanticIntegrationsWithHttpInfoAsync(searchSemanticIntegrationsRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 26.9.0.cl or later   Searches and lists semantic integrations available to the authenticated user in the current organization, with optional filters, sort, and pagination.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege or &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  - &#x60;CAN_CREATE_OR_EDIT_CONNECTIONS&#x60; (**Can create/edit Connections**) - **Can manage data models**  #### About search semantic integrations  Returns a paginated batch of semantic integrations, each with its identifier, name, description, source connection, generated model identifier, author, creation/modification timestamps, and associated tags. Use the filters to narrow results by author, connection, tag, or name pattern.  - &#x60;pattern&#x60; matches the integration name as a case-insensitive substring. - &#x60;author_identifiers&#x60; and &#x60;connection_identifiers&#x60; accept either GUIDs or names. - &#x60;sort_options.field_name&#x60; defaults to &#x60;MODIFIED_TIME&#x60;; set &#x60;sort_options.order&#x60; to &#x60;ASC&#x60; or &#x60;DESC&#x60; to control sort direction. - &#x60;record_offset&#x60; and &#x60;record_size&#x60; control pagination. Use &#x60;record_size: 0&#x60; to return all matching records in a single response.  **Warning**: Do not set &#x60;record_size&#x60; to &#x60;-1&#x60;. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit &#x60;record_size&#x60; and iterate through pages programmatically.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="searchSemanticIntegrationsRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;SemanticIntegrationSearchResponse&gt;)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<SemanticIntegrationSearchResponse>>> SearchSemanticIntegrationsWithHttpInfoAsync(SearchSemanticIntegrationsRequest searchSemanticIntegrationsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'searchSemanticIntegrationsRequest' is set
+            if (searchSemanticIntegrationsRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchSemanticIntegrationsRequest' when calling ThoughtSpotRestApi->SearchSemanticIntegrations");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = searchSemanticIntegrationsRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<List<SemanticIntegrationSearchResponse>>("/api/rest/2.0/semantic-integrations/search", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchSemanticIntegrations", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
         ///    Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user&#39;s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to retrieve cluster-level style defaults. - Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to retrieve preferences for the authenticated user&#39;s org. - Each field in the response includes an &#x60;is_overridden&#x60; flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -27631,6 +28713,148 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("SetNLInstructions", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///   Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <returns></returns>
+        public void ShareConversation(string conversationIdentifier, ShareConversationRequest shareConversationRequest)
+        {
+            ShareConversationWithHttpInfo(conversationIdentifier, shareConversationRequest);
+        }
+
+        /// <summary>
+        ///   Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> ShareConversationWithHttpInfo(string conversationIdentifier, ShareConversationRequest shareConversationRequest)
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->ShareConversation");
+
+            // verify the required parameter 'shareConversationRequest' is set
+            if (shareConversationRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'shareConversationRequest' when calling ThoughtSpotRestApi->ShareConversation");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+            localVarRequestOptions.Data = shareConversationRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ShareConversation", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task ShareConversationAsync(string conversationIdentifier, ShareConversationRequest shareConversationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            await ShareConversationWithHttpInfoAsync(conversationIdentifier, shareConversationRequest, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///   Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view with the latest conversation content. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversationIdentifier">Unique identifier of the conversation to share.</param>
+        /// <param name="shareConversationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> ShareConversationWithHttpInfoAsync(string conversationIdentifier, ShareConversationRequest shareConversationRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'conversationIdentifier' is set
+            if (conversationIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'conversationIdentifier' when calling ThoughtSpotRestApi->ShareConversation");
+
+            // verify the required parameter 'shareConversationRequest' is set
+            if (shareConversationRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'shareConversationRequest' when calling ThoughtSpotRestApi->ShareConversation");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("conversation_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(conversationIdentifier)); // path parameter
+            localVarRequestOptions.Data = shareConversationRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ShareConversation", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -32191,7 +33415,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
-        ///    Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+        ///    Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.  Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60; request cannot carry any other field.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="webhookIdentifier">Unique ID or name of the webhook configuration.</param>
@@ -32203,7 +33427,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///    Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+        ///    Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.  Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60; request cannot carry any other field.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="webhookIdentifier">Unique ID or name of the webhook configuration.</param>
@@ -32259,7 +33483,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///    Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+        ///    Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.  Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60; request cannot carry any other field.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="webhookIdentifier">Unique ID or name of the webhook configuration.</param>
@@ -32272,7 +33496,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///    Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
+        ///    Version: 10.14.0.cl or later   Updates an existing webhook configuration by its unique id or name. With the default &#x60;REPLACE&#x60; operation, only the provided fields are updated.  Use the &#x60;RESET&#x60; operation with &#x60;reset_options&#x60; to clear an optional configuration section, such as authentication or the storage destination. A &#x60;RESET&#x60; request cannot carry any other field.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="webhookIdentifier">Unique ID or name of the webhook configuration.</param>
@@ -32336,7 +33560,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///    Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -32353,7 +33577,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///    Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -32429,7 +33653,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///    Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
@@ -32447,7 +33671,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         ///    Version: 26.7.0.cl or later   Uploads a custom font to the cluster-level or org-level font library. Cluster-level fonts are available as defaults for all orgs. Org-level fonts are only available within that org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - Only **WOFF** and **WOFF2** font formats are accepted. TTF and OTF files are rejected with an error. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload to the cluster-level library. Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to upload to the authenticated user&#39;s org library. - &#x60;weight&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;LIGHT&#x60;, &#x60;BOLD&#x60;. - &#x60;style&#x60; defaults to &#x60;NORMAL&#x60; if omitted. Supported values: &#x60;NORMAL&#x60;, &#x60;ITALIC&#x60;, &#x60;OBLIQUE&#x60;. - &#x60;color&#x60; defaults to &#x60;#000000&#x60; (black) if omitted. Provide as a 6-digit hex string (e.g. &#x60;#333333&#x60;). - The uploaded font can be assigned to visualization areas using the &#x60;updateStyleCustomization&#x60; endpoint.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;). Must be unique within the target scope; returns an error if a font with this name already exists.</param>
+        /// <param name="name">Display name for the font (e.g. \\\&quot;Acme Sans\\\&quot;).</param>
         /// <param name="fileContent">Binary WOFF or WOFF2 font file to upload. Only WOFF and WOFF2 formats are accepted; TTF and OTF are rejected. The file is validated on upload.</param>
         /// <param name="scope">Scope of the font library to upload to. CLUSTER uploads to the cluster-level library, making the font available as a default for all orgs. ORG uploads to the authenticated user&#39;s org library. Defaults to ORG if omitted. (optional, default to ORG)</param>
         /// <param name="weight">Weight of the font. Supported values: NORMAL, LIGHT, BOLD. Defaults to NORMAL if omitted. (optional, default to NORMAL)</param>
