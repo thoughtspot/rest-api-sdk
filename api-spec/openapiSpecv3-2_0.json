@@ -20603,8 +20603,54 @@
             "format": "int32",
             "description": "The version number of logical model of the cluster.",
             "nullable": true
+          },
+          "maintenance_schedule": {
+            "$ref": "#/components/schemas/MaintenanceScheduleInfo",
+            "description": "Details of the next maintenance window scheduled for the cluster. Absent when no maintenance is scheduled. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "nullable": true
           }
         }
+      },
+      "MaintenanceScheduleInfo": {
+        "type": "object",
+        "properties": {
+          "start_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Start time of the maintenance window, in milliseconds since epoch.",
+            "nullable": true
+          },
+          "duration_in_seconds": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Expected duration of the maintenance window, in seconds.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SCHEDULED",
+              "AD_HOC"
+            ],
+            "description": "Status of the maintenance event.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "UPGRADE",
+              "PATCH"
+            ],
+            "description": "Type of the maintenance event.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the maintenance event.",
+            "nullable": true
+          }
+        },
+        "description": "Details of a maintenance window scheduled for the cluster."
       },
       "SystemConfig": {
         "type": "object",
@@ -28014,6 +28060,14 @@
               ]
             },
             "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
+            "nullable": true
+          },
+          "role_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the roles that will be assigned to the group. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
             "nullable": true
           },
           "sub_group_identifiers": {
