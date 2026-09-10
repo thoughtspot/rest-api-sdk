@@ -331,6 +331,7 @@ __all__ = [
     "LoadAnswerResponse",
     "LogResponse",
     "LoginRequest",
+    "MaintenanceScheduleInfo",
     "ManageObjectPrivilegeRequest",
     "MemorySources",
     "MetadataAssociationItem",
@@ -923,6 +924,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse as LoadAnswerResponse
     from thoughtspot_rest_api_sdk.models.log_response import LogResponse as LogResponse
     from thoughtspot_rest_api_sdk.models.login_request import LoginRequest as LoginRequest
+    from thoughtspot_rest_api_sdk.models.maintenance_schedule_info import MaintenanceScheduleInfo as MaintenanceScheduleInfo
     from thoughtspot_rest_api_sdk.models.manage_object_privilege_request import ManageObjectPrivilegeRequest as ManageObjectPrivilegeRequest
     from thoughtspot_rest_api_sdk.models.memory_sources import MemorySources as MemorySources
     from thoughtspot_rest_api_sdk.models.metadata_association_item import MetadataAssociationItem as MetadataAssociationItem
@@ -1521,6 +1523,7 @@ from thoughtspot_rest_api_sdk.models.liveboard_options_input import LiveboardOpt
 from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse as LoadAnswerResponse
 from thoughtspot_rest_api_sdk.models.log_response import LogResponse as LogResponse
 from thoughtspot_rest_api_sdk.models.login_request import LoginRequest as LoginRequest
+from thoughtspot_rest_api_sdk.models.maintenance_schedule_info import MaintenanceScheduleInfo as MaintenanceScheduleInfo
 from thoughtspot_rest_api_sdk.models.manage_object_privilege_request import ManageObjectPrivilegeRequest as ManageObjectPrivilegeRequest
 from thoughtspot_rest_api_sdk.models.memory_sources import MemorySources as MemorySources
 from thoughtspot_rest_api_sdk.models.metadata_association_item import MetadataAssociationItem as MetadataAssociationItem

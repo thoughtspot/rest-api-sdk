@@ -260,5 +260,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'LogicalModelVersion'
         }
+
+        /// <summary>
+        /// Test the property 'MaintenanceSchedule'
+        /// </summary>
+        [Fact]
+        public void MaintenanceScheduleTest()
+        {
+            // TODO unit test for the property 'MaintenanceSchedule'
+        }
     }
 }

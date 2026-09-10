@@ -7208,6 +7208,9 @@ apiInstance.importUserGroups(
         privileges: [
           "ADMINISTRATION",
         ],
+        role_identifiers: [
+          "role_identifiers_example",
+        ],
         sub_group_identifiers: [
           "sub_group_identifiers_example",
         ],

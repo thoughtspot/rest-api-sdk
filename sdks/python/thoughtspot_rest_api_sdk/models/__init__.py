@@ -278,6 +278,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse
     from thoughtspot_rest_api_sdk.models.log_response import LogResponse
     from thoughtspot_rest_api_sdk.models.login_request import LoginRequest
+    from thoughtspot_rest_api_sdk.models.maintenance_schedule_info import MaintenanceScheduleInfo
     from thoughtspot_rest_api_sdk.models.manage_object_privilege_request import ManageObjectPrivilegeRequest
     from thoughtspot_rest_api_sdk.models.memory_sources import MemorySources
     from thoughtspot_rest_api_sdk.models.metadata_association_item import MetadataAssociationItem
@@ -830,6 +831,7 @@ from thoughtspot_rest_api_sdk.models.liveboard_options_input import LiveboardOpt
 from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse
 from thoughtspot_rest_api_sdk.models.log_response import LogResponse
 from thoughtspot_rest_api_sdk.models.login_request import LoginRequest
+from thoughtspot_rest_api_sdk.models.maintenance_schedule_info import MaintenanceScheduleInfo
 from thoughtspot_rest_api_sdk.models.manage_object_privilege_request import ManageObjectPrivilegeRequest
 from thoughtspot_rest_api_sdk.models.memory_sources import MemorySources
 from thoughtspot_rest_api_sdk.models.metadata_association_item import MetadataAssociationItem

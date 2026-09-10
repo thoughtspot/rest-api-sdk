@@ -3,6 +3,10 @@
 
 ## API Changes
 
+### POST /api/rest/2.0/groups/import
+-  added the new optional request property `groups/items/role_identifiers`
+
+
 ### POST /api/rest/2.0/input-tables/create
 -  endpoint added
 
@@ -26,6 +30,10 @@
 ### POST /api/rest/2.0/metadata/search
 -  added the new optional request property `dependent_objects_record_offset`
 -  added the optional property `items/dependent_objects_is_last_batch` to the response with the `200` status
+
+
+### GET /api/rest/2.0/system
+-  added the optional property `maintenance_schedule` to the response with the `200` status
 
 
 ### POST /api/rest/2.0/webhooks/{webhook_identifier}/update

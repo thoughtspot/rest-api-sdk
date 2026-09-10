@@ -201,6 +201,11 @@ public class GroupsImportListInput implements Serializable {
   @javax.annotation.Nullable
   private List<PrivilegesEnum> privileges;
 
+  public static final String SERIALIZED_NAME_ROLE_IDENTIFIERS = "role_identifiers";
+  @SerializedName(SERIALIZED_NAME_ROLE_IDENTIFIERS)
+  @javax.annotation.Nullable
+  private List<String> roleIdentifiers;
+
   public static final String SERIALIZED_NAME_SUB_GROUP_IDENTIFIERS = "sub_group_identifiers";
   @SerializedName(SERIALIZED_NAME_SUB_GROUP_IDENTIFIERS)
   @javax.annotation.Nullable
@@ -443,6 +448,33 @@ public class GroupsImportListInput implements Serializable {
   }
 
 
+  public GroupsImportListInput roleIdentifiers(@javax.annotation.Nullable List<String> roleIdentifiers) {
+    this.roleIdentifiers = roleIdentifiers;
+    return this;
+  }
+
+  public GroupsImportListInput addRoleIdentifiersItem(String roleIdentifiersItem) {
+    if (this.roleIdentifiers == null) {
+      this.roleIdentifiers = new ArrayList<>();
+    }
+    this.roleIdentifiers.add(roleIdentifiersItem);
+    return this;
+  }
+
+  /**
+   * Unique ID or name of the roles that will be assigned to the group.    Version: 26.11.0.cl or later 
+   * @return roleIdentifiers
+   */
+  @javax.annotation.Nullable
+  public List<String> getRoleIdentifiers() {
+    return roleIdentifiers;
+  }
+
+  public void setRoleIdentifiers(@javax.annotation.Nullable List<String> roleIdentifiers) {
+    this.roleIdentifiers = roleIdentifiers;
+  }
+
+
   public GroupsImportListInput subGroupIdentifiers(@javax.annotation.Nullable List<String> subGroupIdentifiers) {
     this.subGroupIdentifiers = subGroupIdentifiers;
     return this;
@@ -594,6 +626,7 @@ public class GroupsImportListInput implements Serializable {
         Objects.equals(this.defaultLiveboardIdentifiers, groupsImportListInput.defaultLiveboardIdentifiers) &&
         Objects.equals(this.description, groupsImportListInput.description) &&
         Objects.equals(this.privileges, groupsImportListInput.privileges) &&
+        Objects.equals(this.roleIdentifiers, groupsImportListInput.roleIdentifiers) &&
         Objects.equals(this.subGroupIdentifiers, groupsImportListInput.subGroupIdentifiers) &&
         Objects.equals(this.type, groupsImportListInput.type) &&
         Objects.equals(this.userIdentifiers, groupsImportListInput.userIdentifiers) &&
@@ -603,7 +636,7 @@ public class GroupsImportListInput implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(displayName, groupIdentifier, defaultLiveboardIdentifiers, description, privileges, subGroupIdentifiers, type, userIdentifiers, visibility, additionalProperties);
+    return Objects.hash(displayName, groupIdentifier, defaultLiveboardIdentifiers, description, privileges, roleIdentifiers, subGroupIdentifiers, type, userIdentifiers, visibility, additionalProperties);
   }
 
   @Override
@@ -615,6 +648,7 @@ public class GroupsImportListInput implements Serializable {
     sb.append("    defaultLiveboardIdentifiers: ").append(toIndentedString(defaultLiveboardIdentifiers)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    privileges: ").append(toIndentedString(privileges)).append("\n");
+    sb.append("    roleIdentifiers: ").append(toIndentedString(roleIdentifiers)).append("\n");
     sb.append("    subGroupIdentifiers: ").append(toIndentedString(subGroupIdentifiers)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    userIdentifiers: ").append(toIndentedString(userIdentifiers)).append("\n");
@@ -647,6 +681,7 @@ public class GroupsImportListInput implements Serializable {
     openapiFields.add("default_liveboard_identifiers");
     openapiFields.add("description");
     openapiFields.add("privileges");
+    openapiFields.add("role_identifiers");
     openapiFields.add("sub_group_identifiers");
     openapiFields.add("type");
     openapiFields.add("user_identifiers");
@@ -694,6 +729,10 @@ public class GroupsImportListInput implements Serializable {
       // ensure the optional json data is an array if present
       if (jsonObj.get("privileges") != null && !jsonObj.get("privileges").isJsonNull() && !jsonObj.get("privileges").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `privileges` to be an array in the JSON string but got `%s`", jsonObj.get("privileges").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("role_identifiers") != null && !jsonObj.get("role_identifiers").isJsonNull() && !jsonObj.get("role_identifiers").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `role_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("role_identifiers").toString()));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("sub_group_identifiers") != null && !jsonObj.get("sub_group_identifiers").isJsonNull() && !jsonObj.get("sub_group_identifiers").isJsonArray()) {

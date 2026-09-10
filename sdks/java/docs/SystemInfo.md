@@ -30,6 +30,7 @@
 |**acceptLanguage** | **String** | The supported accept language by the cluster. |  [optional] |
 |**allUserGroupMemberUserCount** | **Integer** | The count of users of ALL group. |  [optional] |
 |**logicalModelVersion** | **Integer** | The version number of logical model of the cluster. |  [optional] |
+|**maintenanceSchedule** | [**MaintenanceScheduleInfo**](MaintenanceScheduleInfo.md) |  |  [optional] |
 
 
 ## Implemented Interfaces

@@ -18470,6 +18470,12 @@ components:
         all_tables_connection_id: all_tables_connection_id
         license: license
         environment: environment
+        maintenance_schedule:
+          description: description
+          start_time_in_millis: 1.4658129
+          type: UPGRADE
+          duration_in_seconds: 5
+          status: SCHEDULED
         super_user_id: super_user_id
         name: name
         system_group_id: system_group_id
@@ -18574,6 +18580,47 @@ components:
           format: int32
           nullable: true
           type: integer
+        maintenance_schedule:
+          $ref: '#/components/schemas/MaintenanceScheduleInfo'
+      type: object
+    MaintenanceScheduleInfo:
+      description: Details of a maintenance window scheduled for the cluster.
+      example:
+        description: description
+        start_time_in_millis: 1.4658129
+        type: UPGRADE
+        duration_in_seconds: 5
+        status: SCHEDULED
+      properties:
+        start_time_in_millis:
+          description: "Start time of the maintenance window, in milliseconds since\
+            \ epoch."
+          format: float
+          nullable: true
+          type: number
+        duration_in_seconds:
+          description: "Expected duration of the maintenance window, in seconds."
+          format: int32
+          nullable: true
+          type: integer
+        status:
+          description: Status of the maintenance event.
+          enum:
+          - SCHEDULED
+          - AD_HOC
+          nullable: true
+          type: string
+        type:
+          description: Type of the maintenance event.
+          enum:
+          - UPGRADE
+          - PATCH
+          nullable: true
+          type: string
+        description:
+          description: Description of the maintenance event.
+          nullable: true
+          type: string
       type: object
     SystemConfig:
       example:
@@ -27046,6 +27093,9 @@ components:
         privileges:
         - ADMINISTRATION
         - ADMINISTRATION
+        role_identifiers:
+        - role_identifiers
+        - role_identifiers
         visibility: SHARABLE
         group_identifier: group_identifier
         sub_group_identifiers:
@@ -27124,6 +27174,13 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            type: string
+          nullable: true
+          type: array
+        role_identifiers:
+          description: "Unique ID or name of the roles that will be assigned to the\
+            \ group. \n  Version: 26.11.0.cl or later\n"
+          items:
             type: string
           nullable: true
           type: array
@@ -34055,6 +34112,9 @@ components:
         - privileges:
           - ADMINISTRATION
           - ADMINISTRATION
+          role_identifiers:
+          - role_identifiers
+          - role_identifiers
           visibility: SHARABLE
           group_identifier: group_identifier
           sub_group_identifiers:
@@ -34072,6 +34132,9 @@ components:
         - privileges:
           - ADMINISTRATION
           - ADMINISTRATION
+          role_identifiers:
+          - role_identifiers
+          - role_identifiers
           visibility: SHARABLE
           group_identifier: group_identifier
           sub_group_identifiers:

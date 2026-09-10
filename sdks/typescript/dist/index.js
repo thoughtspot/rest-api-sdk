@@ -8589,6 +8589,12 @@ _GroupsImportListInput.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "role_identifiers",
+    "baseName": "role_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
     "name": "sub_group_identifiers",
     "baseName": "sub_group_identifiers",
     "type": "Array<string>",
@@ -9972,6 +9978,50 @@ _LoginRequest.attributeTypeMap = [
   }
 ];
 var LoginRequest = _LoginRequest;
+
+// models/MaintenanceScheduleInfo.ts
+var _MaintenanceScheduleInfo = class _MaintenanceScheduleInfo {
+  static getAttributeTypeMap() {
+    return _MaintenanceScheduleInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_MaintenanceScheduleInfo.discriminator = void 0;
+_MaintenanceScheduleInfo.mapping = void 0;
+_MaintenanceScheduleInfo.attributeTypeMap = [
+  {
+    "name": "start_time_in_millis",
+    "baseName": "start_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "duration_in_seconds",
+    "baseName": "duration_in_seconds",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "MaintenanceScheduleInfoStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "MaintenanceScheduleInfoTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  }
+];
+var MaintenanceScheduleInfo = _MaintenanceScheduleInfo;
 
 // models/ManageObjectPrivilegeRequest.ts
 var _ManageObjectPrivilegeRequest = class _ManageObjectPrivilegeRequest {
@@ -17035,6 +17085,12 @@ _SystemInfo.attributeTypeMap = [
     "baseName": "logical_model_version",
     "type": "number",
     "format": "int32"
+  },
+  {
+    "name": "maintenance_schedule",
+    "baseName": "maintenance_schedule",
+    "type": "MaintenanceScheduleInfo",
+    "format": ""
   }
 ];
 var SystemInfo = _SystemInfo;
@@ -21544,6 +21600,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "InputColumnSchemaInputTypeEnum",
   "JWTMetadataObjectTypeEnum",
   "JobRecipientTypeEnum",
+  "MaintenanceScheduleInfoStatusEnum",
+  "MaintenanceScheduleInfoTypeEnum",
   "ManageObjectPrivilegeRequestOperationEnum",
   "ManageObjectPrivilegeRequestMetadataTypeEnum",
   "ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum",
@@ -22002,6 +22060,7 @@ var typeMap = {
   "LoadAnswerResponse": LoadAnswerResponse,
   "LogResponse": LogResponse,
   "LoginRequest": LoginRequest,
+  "MaintenanceScheduleInfo": MaintenanceScheduleInfo,
   "ManageObjectPrivilegeRequest": ManageObjectPrivilegeRequest,
   "MemorySources": MemorySources,
   "MetadataAssociationItem": MetadataAssociationItem,
@@ -77601,6 +77660,7 @@ export {
   PromiseLogApi as LogApi,
   LogResponse,
   LoginRequest,
+  MaintenanceScheduleInfo,
   ManageObjectPrivilegeRequest,
   PromiseManualTranslationApi as ManualTranslationApi,
   MemorySources,

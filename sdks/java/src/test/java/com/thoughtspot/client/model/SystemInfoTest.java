@@ -9,6 +9,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.MaintenanceScheduleInfo;
 import java.io.IOException;
 import java.util.Arrays;
 import org.junit.jupiter.api.Disabled;
@@ -210,6 +211,14 @@ public class SystemInfoTest {
     @Test
     public void logicalModelVersionTest() {
         // TODO: test logicalModelVersion
+    }
+
+    /**
+     * Test the property 'maintenanceSchedule'
+     */
+    @Test
+    public void maintenanceScheduleTest() {
+        // TODO: test maintenanceSchedule
     }
 
 }

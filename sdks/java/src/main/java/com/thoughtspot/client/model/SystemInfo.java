@@ -10,6 +10,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.MaintenanceScheduleInfo;
 import java.io.IOException;
 import java.util.Arrays;
 import java.io.Serializable;
@@ -158,6 +159,11 @@ public class SystemInfo implements Serializable {
   @SerializedName(SERIALIZED_NAME_LOGICAL_MODEL_VERSION)
   @javax.annotation.Nullable
   private Integer logicalModelVersion;
+
+  public static final String SERIALIZED_NAME_MAINTENANCE_SCHEDULE = "maintenance_schedule";
+  @SerializedName(SERIALIZED_NAME_MAINTENANCE_SCHEDULE)
+  @javax.annotation.Nullable
+  private MaintenanceScheduleInfo maintenanceSchedule;
 
   public SystemInfo() {
   }
@@ -598,6 +604,25 @@ public class SystemInfo implements Serializable {
     this.logicalModelVersion = logicalModelVersion;
   }
 
+
+  public SystemInfo maintenanceSchedule(@javax.annotation.Nullable MaintenanceScheduleInfo maintenanceSchedule) {
+    this.maintenanceSchedule = maintenanceSchedule;
+    return this;
+  }
+
+  /**
+   * Get maintenanceSchedule
+   * @return maintenanceSchedule
+   */
+  @javax.annotation.Nullable
+  public MaintenanceScheduleInfo getMaintenanceSchedule() {
+    return maintenanceSchedule;
+  }
+
+  public void setMaintenanceSchedule(@javax.annotation.Nullable MaintenanceScheduleInfo maintenanceSchedule) {
+    this.maintenanceSchedule = maintenanceSchedule;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -675,13 +700,14 @@ public class SystemInfo implements Serializable {
         Objects.equals(this.allUserGroupId, systemInfo.allUserGroupId) &&
         Objects.equals(this.acceptLanguage, systemInfo.acceptLanguage) &&
         Objects.equals(this.allUserGroupMemberUserCount, systemInfo.allUserGroupMemberUserCount) &&
-        Objects.equals(this.logicalModelVersion, systemInfo.logicalModelVersion)&&
+        Objects.equals(this.logicalModelVersion, systemInfo.logicalModelVersion) &&
+        Objects.equals(this.maintenanceSchedule, systemInfo.maintenanceSchedule)&&
         Objects.equals(this.additionalProperties, systemInfo.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, releaseVersion, timeZone, locale, dateFormat, apiVersion, type, environment, license, dateTimeFormat, timeFormat, systemUserId, superUserId, hiddenObjectId, systemGroupId, tsadminUserId, adminGroupId, allTablesConnectionId, allUserGroupId, acceptLanguage, allUserGroupMemberUserCount, logicalModelVersion, additionalProperties);
+    return Objects.hash(id, name, releaseVersion, timeZone, locale, dateFormat, apiVersion, type, environment, license, dateTimeFormat, timeFormat, systemUserId, superUserId, hiddenObjectId, systemGroupId, tsadminUserId, adminGroupId, allTablesConnectionId, allUserGroupId, acceptLanguage, allUserGroupMemberUserCount, logicalModelVersion, maintenanceSchedule, additionalProperties);
   }
 
   @Override
@@ -711,6 +737,7 @@ public class SystemInfo implements Serializable {
     sb.append("    acceptLanguage: ").append(toIndentedString(acceptLanguage)).append("\n");
     sb.append("    allUserGroupMemberUserCount: ").append(toIndentedString(allUserGroupMemberUserCount)).append("\n");
     sb.append("    logicalModelVersion: ").append(toIndentedString(logicalModelVersion)).append("\n");
+    sb.append("    maintenanceSchedule: ").append(toIndentedString(maintenanceSchedule)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -757,6 +784,7 @@ public class SystemInfo implements Serializable {
     openapiFields.add("accept_language");
     openapiFields.add("all_user_group_member_user_count");
     openapiFields.add("logical_model_version");
+    openapiFields.add("maintenance_schedule");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -837,6 +865,10 @@ public class SystemInfo implements Serializable {
       }
       if ((jsonObj.get("accept_language") != null && !jsonObj.get("accept_language").isJsonNull()) && !jsonObj.get("accept_language").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `accept_language` to be a primitive type in the JSON string but got `%s`", jsonObj.get("accept_language").toString()));
+      }
+      // validate the optional field `maintenance_schedule`
+      if (jsonObj.get("maintenance_schedule") != null && !jsonObj.get("maintenance_schedule").isJsonNull()) {
+        MaintenanceScheduleInfo.validateJsonElement(jsonObj.get("maintenance_schedule"));
       }
   }
 

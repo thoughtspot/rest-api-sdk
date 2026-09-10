@@ -269,6 +269,7 @@ import { LiveboardOptionsInput } from '../models/LiveboardOptionsInput';
 import { LoadAnswerResponse } from '../models/LoadAnswerResponse';
 import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
+import { MaintenanceScheduleInfo } from '../models/MaintenanceScheduleInfo';
 import { ManageObjectPrivilegeRequest } from '../models/ManageObjectPrivilegeRequest';
 import { MemorySources } from '../models/MemorySources';
 import { MetadataAssociationItem } from '../models/MetadataAssociationItem';

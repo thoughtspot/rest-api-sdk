@@ -264,6 +264,7 @@ export * from '../models/LiveboardOptionsInput';
 export * from '../models/LoadAnswerResponse';
 export * from '../models/LogResponse';
 export * from '../models/LoginRequest';
+export * from '../models/MaintenanceScheduleInfo';
 export * from '../models/ManageObjectPrivilegeRequest';
 export * from '../models/MemorySources';
 export * from '../models/MetadataAssociationItem';
@@ -771,7 +772,7 @@ import { GetRelevantQuestionsRequest } from '../models/GetRelevantQuestionsReque
 import { GetTokenResponse } from '../models/GetTokenResponse';
 import { GroupInfo } from '../models/GroupInfo';
 import { GroupObject } from '../models/GroupObject';
-import { GroupsImportListInput    , GroupsImportListInputPrivilegesEnum   , GroupsImportListInputTypeEnum   , GroupsImportListInputVisibilityEnum   } from '../models/GroupsImportListInput';
+import { GroupsImportListInput    , GroupsImportListInputPrivilegesEnum    , GroupsImportListInputTypeEnum   , GroupsImportListInputVisibilityEnum   } from '../models/GroupsImportListInput';
 import { HeaderAttributeInput } from '../models/HeaderAttributeInput';
 import { HeaderUpdateInput  , HeaderUpdateInputTypeEnum    } from '../models/HeaderUpdateInput';
 import { ImportDiagnostic, ImportDiagnosticSubStatusEnum    } from '../models/ImportDiagnostic';
@@ -809,6 +810,7 @@ import { LiveboardOptionsInput } from '../models/LiveboardOptionsInput';
 import { LoadAnswerResponse } from '../models/LoadAnswerResponse';
 import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
+import { MaintenanceScheduleInfo  , MaintenanceScheduleInfoStatusEnum  , MaintenanceScheduleInfoTypeEnum    } from '../models/MaintenanceScheduleInfo';
 import { ManageObjectPrivilegeRequest, ManageObjectPrivilegeRequestOperationEnum  , ManageObjectPrivilegeRequestMetadataTypeEnum  , ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum     } from '../models/ManageObjectPrivilegeRequest';
 import { MemorySources, MemorySourcesTypeEnum    } from '../models/MemorySources';
 import { MetadataAssociationItem } from '../models/MetadataAssociationItem';
@@ -1216,6 +1218,8 @@ let enumsMap: Set<string> = new Set<string>([
     "InputColumnSchemaInputTypeEnum",
     "JWTMetadataObjectTypeEnum",
     "JobRecipientTypeEnum",
+    "MaintenanceScheduleInfoStatusEnum",
+    "MaintenanceScheduleInfoTypeEnum",
     "ManageObjectPrivilegeRequestOperationEnum",
     "ManageObjectPrivilegeRequestMetadataTypeEnum",
     "ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum",
@@ -1675,6 +1679,7 @@ let typeMap: {[index: string]: any} = {
     "LoadAnswerResponse": LoadAnswerResponse,
     "LogResponse": LogResponse,
     "LoginRequest": LoginRequest,
+    "MaintenanceScheduleInfo": MaintenanceScheduleInfo,
     "ManageObjectPrivilegeRequest": ManageObjectPrivilegeRequest,
     "MemorySources": MemorySources,
     "MetadataAssociationItem": MetadataAssociationItem,

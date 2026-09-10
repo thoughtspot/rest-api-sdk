@@ -71,6 +71,14 @@ public class GroupsImportListInputTest {
     }
 
     /**
+     * Test the property 'roleIdentifiers'
+     */
+    @Test
+    public void roleIdentifiersTest() {
+        // TODO: test roleIdentifiers
+    }
+
+    /**
      * Test the property 'subGroupIdentifiers'
      */
     @Test
