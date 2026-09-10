@@ -136,6 +136,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'DependentObjectsRecordOffset'
+        /// </summary>
+        [Fact]
+        public void DependentObjectsRecordOffsetTest()
+        {
+            // TODO unit test for the property 'DependentObjectsRecordOffset'
+        }
+
+        /// <summary>
         /// Test the property 'IncludeDetails'
         /// </summary>
         [Fact]

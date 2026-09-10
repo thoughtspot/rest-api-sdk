@@ -148,6 +148,11 @@ public class SearchMetadataRequest implements Serializable {
   @javax.annotation.Nullable
   private Integer dependentObjectsRecordSize = 50;
 
+  public static final String SERIALIZED_NAME_DEPENDENT_OBJECTS_RECORD_OFFSET = "dependent_objects_record_offset";
+  @SerializedName(SERIALIZED_NAME_DEPENDENT_OBJECTS_RECORD_OFFSET)
+  @javax.annotation.Nullable
+  private Integer dependentObjectsRecordOffset;
+
   public static final String SERIALIZED_NAME_INCLUDE_DETAILS = "include_details";
   @SerializedName(SERIALIZED_NAME_INCLUDE_DETAILS)
   @javax.annotation.Nullable
@@ -488,6 +493,25 @@ public class SearchMetadataRequest implements Serializable {
 
   public void setDependentObjectsRecordSize(@javax.annotation.Nullable Integer dependentObjectsRecordSize) {
     this.dependentObjectsRecordSize = dependentObjectsRecordSize;
+  }
+
+
+  public SearchMetadataRequest dependentObjectsRecordOffset(@javax.annotation.Nullable Integer dependentObjectsRecordOffset) {
+    this.dependentObjectsRecordOffset = dependentObjectsRecordOffset;
+    return this;
+  }
+
+  /**
+   * Optional. The number of dependents to skip per metadata object before collecting them, so that dependents can be fetched in bounded pages. Combine with dependent_objects_record_size as the page size, and keep requesting pages until dependent_objects_is_last_batch is true. When this offset is supplied, a dependent_objects_record_size of 0 means the cluster default page size. Omit it to keep the pre-paging behaviour. A negative value is rejected.    Version: 26.11.0.cl or later 
+   * @return dependentObjectsRecordOffset
+   */
+  @javax.annotation.Nullable
+  public Integer getDependentObjectsRecordOffset() {
+    return dependentObjectsRecordOffset;
+  }
+
+  public void setDependentObjectsRecordOffset(@javax.annotation.Nullable Integer dependentObjectsRecordOffset) {
+    this.dependentObjectsRecordOffset = dependentObjectsRecordOffset;
   }
 
 
@@ -893,6 +917,7 @@ public class SearchMetadataRequest implements Serializable {
         Objects.equals(this.includeAutoCreatedObjects, searchMetadataRequest.includeAutoCreatedObjects) &&
         Objects.equals(this.includeDependentObjects, searchMetadataRequest.includeDependentObjects) &&
         Objects.equals(this.dependentObjectsRecordSize, searchMetadataRequest.dependentObjectsRecordSize) &&
+        Objects.equals(this.dependentObjectsRecordOffset, searchMetadataRequest.dependentObjectsRecordOffset) &&
         Objects.equals(this.includeDetails, searchMetadataRequest.includeDetails) &&
         Objects.equals(this.includePersonalisedViews, searchMetadataRequest.includePersonalisedViews) &&
         Objects.equals(this.includeHeaders, searchMetadataRequest.includeHeaders) &&
@@ -915,7 +940,7 @@ public class SearchMetadataRequest implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadata, permissions, createdByUserIdentifiers, dependentObjectVersion, excludeObjects, favoriteObjectOptions, includeAutoCreatedObjects, includeDependentObjects, dependentObjectsRecordSize, includeDetails, includePersonalisedViews, includeHeaders, includeHiddenObjects, includeIncompleteObjects, includeVisualizationHeaders, includeWorksheetSearchAssistData, modifiedByUserIdentifiers, recordOffset, recordSize, sortOptions, tagIdentifiers, includeStats, includeDiscoverableObjects, showResolvedParameters, liveboardResponseVersion, includeOnlyPublishedObjects, additionalProperties);
+    return Objects.hash(metadata, permissions, createdByUserIdentifiers, dependentObjectVersion, excludeObjects, favoriteObjectOptions, includeAutoCreatedObjects, includeDependentObjects, dependentObjectsRecordSize, dependentObjectsRecordOffset, includeDetails, includePersonalisedViews, includeHeaders, includeHiddenObjects, includeIncompleteObjects, includeVisualizationHeaders, includeWorksheetSearchAssistData, modifiedByUserIdentifiers, recordOffset, recordSize, sortOptions, tagIdentifiers, includeStats, includeDiscoverableObjects, showResolvedParameters, liveboardResponseVersion, includeOnlyPublishedObjects, additionalProperties);
   }
 
   @Override
@@ -931,6 +956,7 @@ public class SearchMetadataRequest implements Serializable {
     sb.append("    includeAutoCreatedObjects: ").append(toIndentedString(includeAutoCreatedObjects)).append("\n");
     sb.append("    includeDependentObjects: ").append(toIndentedString(includeDependentObjects)).append("\n");
     sb.append("    dependentObjectsRecordSize: ").append(toIndentedString(dependentObjectsRecordSize)).append("\n");
+    sb.append("    dependentObjectsRecordOffset: ").append(toIndentedString(dependentObjectsRecordOffset)).append("\n");
     sb.append("    includeDetails: ").append(toIndentedString(includeDetails)).append("\n");
     sb.append("    includePersonalisedViews: ").append(toIndentedString(includePersonalisedViews)).append("\n");
     sb.append("    includeHeaders: ").append(toIndentedString(includeHeaders)).append("\n");
@@ -980,6 +1006,7 @@ public class SearchMetadataRequest implements Serializable {
     openapiFields.add("include_auto_created_objects");
     openapiFields.add("include_dependent_objects");
     openapiFields.add("dependent_objects_record_size");
+    openapiFields.add("dependent_objects_record_offset");
     openapiFields.add("include_details");
     openapiFields.add("include_personalised_views");
     openapiFields.add("include_headers");

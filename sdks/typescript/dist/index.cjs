@@ -10900,6 +10900,12 @@ _MetadataSearchResponse.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "dependent_objects_is_last_batch",
+    "baseName": "dependent_objects_is_last_batch",
+    "type": "boolean",
+    "format": ""
+  },
+  {
     "name": "incomplete_objects",
     "baseName": "incomplete_objects",
     "type": "Array<any>",
@@ -14686,6 +14692,12 @@ _SearchMetadataRequest.attributeTypeMap = [
   {
     "name": "dependent_objects_record_size",
     "baseName": "dependent_objects_record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "dependent_objects_record_offset",
+    "baseName": "dependent_objects_record_offset",
     "type": "number",
     "format": "int32"
   },

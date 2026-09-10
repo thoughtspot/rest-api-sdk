@@ -129,18 +129,20 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="metadataType">Type of the metadata. (required).</param>
         /// <param name="metadataObjId">Custom identifier of the metadata. (Available from 10.8.0.cl onwards).</param>
         /// <param name="dependentObjects">Details of dependent objects of the metadata objects..</param>
+        /// <param name="dependentObjectsIsLastBatch">Whether the returned dependent_objects page is the last one for this object. True when the page came back short of the effective page size. A full page reports false even when it happens to be the final one, so a caller pages until it sees true and may pay one final empty page.    Version: 26.11.0.cl or later .</param>
         /// <param name="incompleteObjects">Details of incomplete information of the metadata objects if any..</param>
         /// <param name="metadataDetail">Complete details of the metadata objects..</param>
         /// <param name="metadataHeader">Header information of the metadata objects..</param>
         /// <param name="visualizationHeaders">Visualization header information of the metadata objects..</param>
         /// <param name="stats">Stats of the metadata object. Includes views, favorites, last_accessed..</param>
-        public MetadataSearchResponse(string metadataId = default, string metadataName = default, MetadataTypeEnum metadataType = default, string metadataObjId = default, Object dependentObjects = default, List<Object> incompleteObjects = default, Object metadataDetail = default, Object metadataHeader = default, List<Object> visualizationHeaders = default, Object stats = default)
+        public MetadataSearchResponse(string metadataId = default, string metadataName = default, MetadataTypeEnum metadataType = default, string metadataObjId = default, Object dependentObjects = default, bool? dependentObjectsIsLastBatch = default, List<Object> incompleteObjects = default, Object metadataDetail = default, Object metadataHeader = default, List<Object> visualizationHeaders = default, Object stats = default)
         {
             this.MetadataType = metadataType;
             this.MetadataId = metadataId;
             this.MetadataName = metadataName;
             this.MetadataObjId = metadataObjId;
             this.DependentObjects = dependentObjects;
+            this.DependentObjectsIsLastBatch = dependentObjectsIsLastBatch;
             this.IncompleteObjects = incompleteObjects;
             this.MetadataDetail = metadataDetail;
             this.MetadataHeader = metadataHeader;
@@ -176,6 +178,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>Details of dependent objects of the metadata objects.</value>
         [DataMember(Name = "dependent_objects", EmitDefaultValue = true)]
         public Object DependentObjects { get; set; }
+
+        /// <summary>
+        /// Whether the returned dependent_objects page is the last one for this object. True when the page came back short of the effective page size. A full page reports false even when it happens to be the final one, so a caller pages until it sees true and may pay one final empty page.    Version: 26.11.0.cl or later 
+        /// </summary>
+        /// <value>Whether the returned dependent_objects page is the last one for this object. True when the page came back short of the effective page size. A full page reports false even when it happens to be the final one, so a caller pages until it sees true and may pay one final empty page.    Version: 26.11.0.cl or later </value>
+        [DataMember(Name = "dependent_objects_is_last_batch", EmitDefaultValue = true)]
+        public bool? DependentObjectsIsLastBatch { get; set; }
 
         /// <summary>
         /// Details of incomplete information of the metadata objects if any.
@@ -231,6 +240,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  MetadataType: ").Append(MetadataType).Append("\n");
             sb.Append("  MetadataObjId: ").Append(MetadataObjId).Append("\n");
             sb.Append("  DependentObjects: ").Append(DependentObjects).Append("\n");
+            sb.Append("  DependentObjectsIsLastBatch: ").Append(DependentObjectsIsLastBatch).Append("\n");
             sb.Append("  IncompleteObjects: ").Append(IncompleteObjects).Append("\n");
             sb.Append("  MetadataDetail: ").Append(MetadataDetail).Append("\n");
             sb.Append("  MetadataHeader: ").Append(MetadataHeader).Append("\n");

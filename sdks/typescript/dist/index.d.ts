@@ -15664,6 +15664,10 @@ declare class MetadataSearchResponse {
     */
     'dependent_objects'?: any | null;
     /**
+    * Whether the returned dependent_objects page is the last one for this object. True when the page came back short of the effective page size. A full page reports false even when it happens to be the final one, so a caller pages until it sees true and may pay one final empty page.    Version: 26.11.0.cl or later
+    */
+    'dependent_objects_is_last_batch'?: boolean | null;
+    /**
     * Details of incomplete information of the metadata objects if any.
     */
     'incomplete_objects'?: Array<any> | null;
@@ -19426,6 +19430,10 @@ declare class SearchMetadataRequest {
     * The maximum number of dependents to include per metadata object.
     */
     'dependent_objects_record_size'?: number;
+    /**
+    * Optional. The number of dependents to skip per metadata object before collecting them, so that dependents can be fetched in bounded pages. Combine with dependent_objects_record_size as the page size, and keep requesting pages until dependent_objects_is_last_batch is true. When this offset is supplied, a dependent_objects_record_size of 0 means the cluster default page size. Omit it to keep the pre-paging behaviour. A negative value is rejected.    Version: 26.11.0.cl or later
+    */
+    'dependent_objects_record_offset'?: number;
     /**
     * Includes complete details of the metadata objects.
     */

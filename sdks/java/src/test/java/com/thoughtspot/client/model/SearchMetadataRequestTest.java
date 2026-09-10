@@ -108,6 +108,14 @@ public class SearchMetadataRequestTest {
     }
 
     /**
+     * Test the property 'dependentObjectsRecordOffset'
+     */
+    @Test
+    public void dependentObjectsRecordOffsetTest() {
+        // TODO: test dependentObjectsRecordOffset
+    }
+
+    /**
      * Test the property 'includeDetails'
      */
     @Test

@@ -71,6 +71,14 @@ public class MetadataSearchResponseTest {
     }
 
     /**
+     * Test the property 'dependentObjectsIsLastBatch'
+     */
+    @Test
+    public void dependentObjectsIsLastBatchTest() {
+        // TODO: test dependentObjectsIsLastBatch
+    }
+
+    /**
      * Test the property 'incompleteObjects'
      */
     @Test

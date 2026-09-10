@@ -23,6 +23,11 @@
 -  endpoint added
 
 
+### POST /api/rest/2.0/metadata/search
+-  added the new optional request property `dependent_objects_record_offset`
+-  added the optional property `items/dependent_objects_is_last_batch` to the response with the `200` status
+
+
 ### POST /api/rest/2.0/webhooks/{webhook_identifier}/update
 -  added the new optional request property `operation`
 

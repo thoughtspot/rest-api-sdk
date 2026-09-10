@@ -19595,6 +19595,7 @@ components:
         - ""
         stats: ""
         metadata_type: LIVEBOARD
+        dependent_objects_is_last_batch: true
         metadata_id: metadata_id
         metadata_obj_id: metadata_obj_id
       properties:
@@ -19630,6 +19631,14 @@ components:
         dependent_objects:
           description: Details of dependent objects of the metadata objects.
           nullable: true
+        dependent_objects_is_last_batch:
+          description: "Whether the returned dependent_objects page is the last one\
+            \ for this object. True when the\npage came back short of the effective\
+            \ page size. A full page reports false even when it\nhappens to be the\
+            \ final one, so a caller pages until it sees true and may pay one final\n\
+            empty page. \n  Version: 26.11.0.cl or later\n"
+          nullable: true
+          type: boolean
         incomplete_objects:
           description: Details of incomplete information of the metadata objects if
             any.
@@ -35113,10 +35122,11 @@ components:
         include_personalised_views: false
         include_visualization_headers: false
         include_only_published_objects: false
+        dependent_objects_record_offset: 6
         modified_by_user_identifiers:
         - modified_by_user_identifiers
         - modified_by_user_identifiers
-        record_offset: 6
+        record_offset: 1
         created_by_user_identifiers:
         - created_by_user_identifiers
         - created_by_user_identifiers
@@ -35143,7 +35153,7 @@ components:
         - tag_identifiers
         - tag_identifiers
         include_dependent_objects: false
-        record_size: 1
+        record_size: 5
         include_details: false
         include_discoverable_objects: true
         include_stats: false
@@ -35203,6 +35213,17 @@ components:
         dependent_objects_record_size:
           default: 50
           description: The maximum number of dependents to include per metadata object.
+          format: int32
+          type: integer
+        dependent_objects_record_offset:
+          description: "Optional. The number of dependents to skip per metadata object\
+            \ before collecting them,\nso that dependents can be fetched in bounded\
+            \ pages. Combine with\ndependent_objects_record_size as the page size,\
+            \ and keep requesting pages until\ndependent_objects_is_last_batch is\
+            \ true. When this offset is supplied, a\ndependent_objects_record_size\
+            \ of 0 means the cluster default page size. Omit it to keep\nthe pre-paging\
+            \ behaviour. A negative value is rejected. \n  Version: 26.11.0.cl or\
+            \ later\n"
           format: int32
           type: integer
         include_details:

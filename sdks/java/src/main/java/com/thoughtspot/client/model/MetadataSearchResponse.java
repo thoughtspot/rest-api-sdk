@@ -141,6 +141,11 @@ public class MetadataSearchResponse implements Serializable {
   @javax.annotation.Nullable
   private Object dependentObjects = null;
 
+  public static final String SERIALIZED_NAME_DEPENDENT_OBJECTS_IS_LAST_BATCH = "dependent_objects_is_last_batch";
+  @SerializedName(SERIALIZED_NAME_DEPENDENT_OBJECTS_IS_LAST_BATCH)
+  @javax.annotation.Nullable
+  private Boolean dependentObjectsIsLastBatch;
+
   public static final String SERIALIZED_NAME_INCOMPLETE_OBJECTS = "incomplete_objects";
   @SerializedName(SERIALIZED_NAME_INCOMPLETE_OBJECTS)
   @javax.annotation.Nullable
@@ -261,6 +266,25 @@ public class MetadataSearchResponse implements Serializable {
 
   public void setDependentObjects(@javax.annotation.Nullable Object dependentObjects) {
     this.dependentObjects = dependentObjects;
+  }
+
+
+  public MetadataSearchResponse dependentObjectsIsLastBatch(@javax.annotation.Nullable Boolean dependentObjectsIsLastBatch) {
+    this.dependentObjectsIsLastBatch = dependentObjectsIsLastBatch;
+    return this;
+  }
+
+  /**
+   * Whether the returned dependent_objects page is the last one for this object. True when the page came back short of the effective page size. A full page reports false even when it happens to be the final one, so a caller pages until it sees true and may pay one final empty page.    Version: 26.11.0.cl or later 
+   * @return dependentObjectsIsLastBatch
+   */
+  @javax.annotation.Nullable
+  public Boolean getDependentObjectsIsLastBatch() {
+    return dependentObjectsIsLastBatch;
+  }
+
+  public void setDependentObjectsIsLastBatch(@javax.annotation.Nullable Boolean dependentObjectsIsLastBatch) {
+    this.dependentObjectsIsLastBatch = dependentObjectsIsLastBatch;
   }
 
 
@@ -434,6 +458,7 @@ public class MetadataSearchResponse implements Serializable {
         Objects.equals(this.metadataType, metadataSearchResponse.metadataType) &&
         Objects.equals(this.metadataObjId, metadataSearchResponse.metadataObjId) &&
         Objects.equals(this.dependentObjects, metadataSearchResponse.dependentObjects) &&
+        Objects.equals(this.dependentObjectsIsLastBatch, metadataSearchResponse.dependentObjectsIsLastBatch) &&
         Objects.equals(this.incompleteObjects, metadataSearchResponse.incompleteObjects) &&
         Objects.equals(this.metadataDetail, metadataSearchResponse.metadataDetail) &&
         Objects.equals(this.metadataHeader, metadataSearchResponse.metadataHeader) &&
@@ -444,7 +469,7 @@ public class MetadataSearchResponse implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataId, metadataName, metadataType, metadataObjId, dependentObjects, incompleteObjects, metadataDetail, metadataHeader, visualizationHeaders, stats, additionalProperties);
+    return Objects.hash(metadataId, metadataName, metadataType, metadataObjId, dependentObjects, dependentObjectsIsLastBatch, incompleteObjects, metadataDetail, metadataHeader, visualizationHeaders, stats, additionalProperties);
   }
 
   @Override
@@ -456,6 +481,7 @@ public class MetadataSearchResponse implements Serializable {
     sb.append("    metadataType: ").append(toIndentedString(metadataType)).append("\n");
     sb.append("    metadataObjId: ").append(toIndentedString(metadataObjId)).append("\n");
     sb.append("    dependentObjects: ").append(toIndentedString(dependentObjects)).append("\n");
+    sb.append("    dependentObjectsIsLastBatch: ").append(toIndentedString(dependentObjectsIsLastBatch)).append("\n");
     sb.append("    incompleteObjects: ").append(toIndentedString(incompleteObjects)).append("\n");
     sb.append("    metadataDetail: ").append(toIndentedString(metadataDetail)).append("\n");
     sb.append("    metadataHeader: ").append(toIndentedString(metadataHeader)).append("\n");
@@ -489,6 +515,7 @@ public class MetadataSearchResponse implements Serializable {
     openapiFields.add("metadata_type");
     openapiFields.add("metadata_obj_id");
     openapiFields.add("dependent_objects");
+    openapiFields.add("dependent_objects_is_last_batch");
     openapiFields.add("incomplete_objects");
     openapiFields.add("metadata_detail");
     openapiFields.add("metadata_header");

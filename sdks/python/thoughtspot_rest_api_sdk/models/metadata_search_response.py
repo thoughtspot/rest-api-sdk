@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,13 +30,14 @@ class MetadataSearchResponse(BaseModel):
     metadata_type: StrictStr = Field(description="Type of the metadata.")
     metadata_obj_id: Optional[StrictStr] = Field(default=None, description="Custom identifier of the metadata. (Available from 10.8.0.cl onwards)")
     dependent_objects: Optional[Any] = Field(default=None, description="Details of dependent objects of the metadata objects.")
+    dependent_objects_is_last_batch: Optional[StrictBool] = Field(default=None, description="Whether the returned dependent_objects page is the last one for this object. True when the page came back short of the effective page size. A full page reports false even when it happens to be the final one, so a caller pages until it sees true and may pay one final empty page.    Version: 26.11.0.cl or later ")
     incomplete_objects: Optional[List[Any]] = Field(default=None, description="Details of incomplete information of the metadata objects if any.")
     metadata_detail: Optional[Any] = Field(default=None, description="Complete details of the metadata objects.")
     metadata_header: Optional[Any] = Field(default=None, description="Header information of the metadata objects.")
     visualization_headers: Optional[List[Any]] = Field(default=None, description="Visualization header information of the metadata objects.")
     stats: Optional[Any] = Field(default=None, description="Stats of the metadata object. Includes views, favorites, last_accessed.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["metadata_id", "metadata_name", "metadata_type", "metadata_obj_id", "dependent_objects", "incomplete_objects", "metadata_detail", "metadata_header", "visualization_headers", "stats"]
+    __properties: ClassVar[List[str]] = ["metadata_id", "metadata_name", "metadata_type", "metadata_obj_id", "dependent_objects", "dependent_objects_is_last_batch", "incomplete_objects", "metadata_detail", "metadata_header", "visualization_headers", "stats"]
 
     @field_validator('metadata_type')
     def metadata_type_validate_enum(cls, value):
@@ -111,6 +112,11 @@ class MetadataSearchResponse(BaseModel):
         if self.dependent_objects is None and "dependent_objects" in self.model_fields_set:
             _dict['dependent_objects'] = None
 
+        # set to None if dependent_objects_is_last_batch (nullable) is None
+        # and model_fields_set contains the field
+        if self.dependent_objects_is_last_batch is None and "dependent_objects_is_last_batch" in self.model_fields_set:
+            _dict['dependent_objects_is_last_batch'] = None
+
         # set to None if incomplete_objects (nullable) is None
         # and model_fields_set contains the field
         if self.incomplete_objects is None and "incomplete_objects" in self.model_fields_set:
@@ -153,6 +159,7 @@ class MetadataSearchResponse(BaseModel):
             "metadata_type": obj.get("metadata_type"),
             "metadata_obj_id": obj.get("metadata_obj_id"),
             "dependent_objects": obj.get("dependent_objects"),
+            "dependent_objects_is_last_batch": obj.get("dependent_objects_is_last_batch"),
             "incomplete_objects": obj.get("incomplete_objects"),
             "metadata_detail": obj.get("metadata_detail"),
             "metadata_header": obj.get("metadata_header"),

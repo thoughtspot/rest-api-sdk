@@ -13,6 +13,7 @@ Metadata Search Response Object.
 |**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) | Type of the metadata. |  |
 |**metadataObjId** | **String** | Custom identifier of the metadata. (Available from 10.8.0.cl onwards) |  [optional] |
 |**dependentObjects** | **Object** | Details of dependent objects of the metadata objects. |  [optional] |
+|**dependentObjectsIsLastBatch** | **Boolean** | Whether the returned dependent_objects page is the last one for this object. True when the page came back short of the effective page size. A full page reports false even when it happens to be the final one, so a caller pages until it sees true and may pay one final empty page.    Version: 26.11.0.cl or later  |  [optional] |
 |**incompleteObjects** | **List&lt;Object&gt;** | Details of incomplete information of the metadata objects if any. |  [optional] |
 |**metadataDetail** | **Object** | Complete details of the metadata objects. |  [optional] |
 |**metadataHeader** | **Object** | Header information of the metadata objects. |  [optional] |
