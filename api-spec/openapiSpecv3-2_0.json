@@ -10075,6 +10075,371 @@
         }
       }
     },
+    "/api/rest/2.0/customization/links/search": {
+      "post": {
+        "operationId": "searchLinkCustomizations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nRetrieves the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user's org. Use it to check what an org has customized before changing it, or to confirm where a scheduled email or a Share dialog will link to.\n\nCluster-level templates are the default an org inherits. Org-level templates take precedence over that default.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- `scope: CLUSTER` returns the cluster defaults, and is available only to callers in the primary org.\n- `scope: ORG` returns the authenticated user's org, and requires Orgs to be enabled.\n- Omit `scope` to return every scope the caller can reach. If neither is reachable the response is an empty list, not an error.\n- Every link type is always returned, customized or not. `is_overridden` is `true` when the value is set at the requested scope and `false` when it is inherited.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Link Customization",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchLinkCustomizationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Link preferences retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LinkPreference"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "scope": "CLUSTER",
+                        "templates": [
+                          {
+                            "type": "LIVEBOARD_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/pinboard/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "VISUALIZATION_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/pinboard/{object-id}/{sub-object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "ANSWER_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/saved-answer/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "SPOTIQ_ANALYSIS_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insight/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "UNSUBSCRIBE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/user-preference?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "GENERIC_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/{path}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "CONVERSATION_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insights/conv-assist/s/{conversation-id}?{ts-query-params}",
+                            "is_overridden": false
+                          }
+                        ]
+                      },
+                      {
+                        "scope": "ORG",
+                        "org": {
+                          "id": 1234567890,
+                          "name": "Sales"
+                        },
+                        "templates": [
+                          {
+                            "type": "LIVEBOARD_SHARE_URL",
+                            "value": "https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}",
+                            "is_overridden": true
+                          },
+                          {
+                            "type": "VISUALIZATION_SHARE_URL",
+                            "value": "https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}",
+                            "is_overridden": true
+                          },
+                          {
+                            "type": "ANSWER_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/saved-answer/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "SPOTIQ_ANALYSIS_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insight/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "UNSUBSCRIBE_URL",
+                            "value": "https://analytics.acme.com/account/email-preferences",
+                            "is_overridden": true
+                          },
+                          {
+                            "type": "GENERIC_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/{path}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "CONVERSATION_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insights/conv-assist/s/{conversation-id}?{ts-query-params}",
+                            "is_overridden": false
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Invalid value for 'scope'. Allowed values are CLUSTER, ORG."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to retrieve link templates for the cluster or org."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Cluster level embed settings can only be accessed from the primary org."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while retrieving link templates."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/links/update": {
+      "post": {
+        "operationId": "updateLinkCustomization",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nUpdates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user's org. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- `scope: CLUSTER` changes the defaults inherited by all orgs, and is available only to callers in the primary org.\n- `scope: ORG` (default) changes the authenticated user's org, and requires Orgs to be enabled.\n- List only the types you want to change in `templates`. Unlisted types are left unchanged by either operation, and a repeated type is rejected.\n- **REPLACE** (default) sets each listed type to its `value`.\n- **RESET** reverts each listed type to the value its scope inherits: the ThoughtSpot default at cluster scope, and the cluster template at org scope. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`.\n\n#### Placeholders\n\nA template is rejected unless it contains the placeholders its type requires:\n\n| Link type | Required |\n| --- | --- |\n| `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` |\n| `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` |\n| `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` |\n| `SPOTIQ_ANALYSIS_URL` | `{object-id}` |\n| `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` |\n| `GENERIC_URL` | `{path}` |\n| `UNSUBSCRIBE_URL` | none |\n\n`{ts-query-params}` is optional on any type that does not require it, including `SPOTIQ_ANALYSIS_URL` and `UNSUBSCRIBE_URL`: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Link Customization",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLinkCustomizationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Link preferences updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "missing_placeholder": {
+                    "summary": "Template is missing a required placeholder",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                          "debug": "Link template for LIVEBOARD_SHARE_URL is missing required placeholders: {object-id}, {ts-query-params}."
+                        }
+                      }
+                    }
+                  },
+                  "value_with_reset": {
+                    "summary": "Value supplied alongside RESET",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10002,
+                          "incident_id_guid": "e5f67890-1234-5678-efab-567890123456",
+                          "trace_id_guid": "e5f67890-1234-5678-efab-567890123456",
+                          "debug": "Field 'value' is not allowed when operation is RESET."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10097,
+                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                          "debug": "Authentication required to update link templates for the cluster or org."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                          "debug": "Embed settings are not available: ThoughtSpot Embedded is not enabled on this cluster."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while updating link templates."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
@@ -20603,54 +20968,8 @@
             "format": "int32",
             "description": "The version number of logical model of the cluster.",
             "nullable": true
-          },
-          "maintenance_schedule": {
-            "$ref": "#/components/schemas/MaintenanceScheduleInfo",
-            "description": "Details of the next maintenance window scheduled for the cluster. Absent when no maintenance is scheduled. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
-            "nullable": true
           }
         }
-      },
-      "MaintenanceScheduleInfo": {
-        "type": "object",
-        "properties": {
-          "start_time_in_millis": {
-            "type": "number",
-            "format": "float",
-            "description": "Start time of the maintenance window, in milliseconds since epoch.",
-            "nullable": true
-          },
-          "duration_in_seconds": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Expected duration of the maintenance window, in seconds.",
-            "nullable": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "SCHEDULED",
-              "AD_HOC"
-            ],
-            "description": "Status of the maintenance event.",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "UPGRADE",
-              "PATCH"
-            ],
-            "description": "Type of the maintenance event.",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the maintenance event.",
-            "nullable": true
-          }
-        },
-        "description": "Details of a maintenance window scheduled for the cluster."
       },
       "SystemConfig": {
         "type": "object",
@@ -26418,6 +26737,68 @@
         },
         "description": "Visualization areas assigned to a font, grouped by org context."
       },
+      "LinkPreference": {
+        "type": "object",
+        "required": [
+          "scope",
+          "templates"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ],
+            "description": "Scope these link templates apply to."
+          },
+          "org": {
+            "$ref": "#/components/schemas/Org",
+            "description": "Org these link templates belong to. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "templates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkTemplate"
+            },
+            "description": "Effective URL template for every link type at this scope. All types are always\npresent."
+          }
+        },
+        "description": "Link templates for a single scope."
+      },
+      "LinkTemplate": {
+        "type": "object",
+        "required": [
+          "type",
+          "is_overridden"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SHARE_URL",
+              "VISUALIZATION_SHARE_URL",
+              "ANSWER_SHARE_URL",
+              "SPOTIQ_ANALYSIS_URL",
+              "UNSUBSCRIBE_URL",
+              "GENERIC_URL",
+              "CONVERSATION_SHARE_URL"
+            ],
+            "description": "The link type this template applies to."
+          },
+          "value": {
+            "type": "string",
+            "description": "The effective URL template at the requested scope.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if set at this scope, false if inherited."
+          }
+        },
+        "description": "A URL template with its link type and whether it is set at the requested scope."
+      },
       "SemanticIntegrationSortOptions": {
         "type": "object",
         "properties": {
@@ -28060,14 +28441,6 @@
               ]
             },
             "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
-            "nullable": true
-          },
-          "role_identifiers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Unique ID or name of the roles that will be assigned to the group. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
             "nullable": true
           },
           "sub_group_identifiers": {
@@ -32021,6 +32394,33 @@
         },
         "description": "A visualization area assignment affected by a font deletion."
       },
+      "LinkTemplateInput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SHARE_URL",
+              "VISUALIZATION_SHARE_URL",
+              "ANSWER_SHARE_URL",
+              "SPOTIQ_ANALYSIS_URL",
+              "UNSUBSCRIBE_URL",
+              "GENERIC_URL",
+              "CONVERSATION_SHARE_URL"
+            ],
+            "description": "The link type this entry applies to."
+          },
+          "value": {
+            "type": "string",
+            "description": "URL template to set, including the placeholders this type requires. Required under\nREPLACE; supplying it with RESET is rejected.",
+            "nullable": true
+          }
+        },
+        "description": "One link type to act on, and the URL template to set for it under REPLACE."
+      },
       "SemanticIntegrationResponse": {
         "type": "object",
         "properties": {
@@ -35032,6 +35432,53 @@
         },
         "required": [
           "channel_type"
+        ]
+      },
+      "SearchLinkCustomizationsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the\nprimary org. ORG returns the authenticated user's org. Omit to return every scope\nthe caller can reach.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        }
+      },
+      "UpdateLinkCustomizationRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and\nis available only in the primary org. ORG applies to the authenticated user's org.",
+            "default": "ORG",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "operation": {
+            "description": "Operation to perform. REPLACE sets each listed type to its value. RESET reverts each\nlisted type to the value its scope inherits.",
+            "default": "REPLACE",
+            "type": "string",
+            "enum": [
+              "REPLACE",
+              "RESET"
+            ]
+          },
+          "templates": {
+            "description": "Link types to act on. Types not listed are left unchanged. Duplicate entries for the\nsame type are rejected.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkTemplateInput"
+            }
+          }
+        },
+        "required": [
+          "scope",
+          "templates"
         ]
       },
       "FetchLogsRequest": {
