@@ -14,6 +14,14 @@
       "description": "Roles for version 26.2.0.cl"
     },
     {
+      "name": "26.10.0.cl",
+      "id": "26.10.0.cl",
+      "tags": [
+        "26.10.0.cl"
+      ],
+      "description": "Roles for version 26.10.0.cl"
+    },
+    {
       "name": "10.4.0.cl",
       "id": "10.4.0.cl",
       "tags": [
@@ -76,6 +84,14 @@
         "10.7.0.cl"
       ],
       "description": "Roles for version 10.7.0.cl"
+    },
+    {
+      "name": "26.11.0.cl",
+      "id": "26.11.0.cl",
+      "tags": [
+        "26.11.0.cl"
+      ],
+      "description": "Roles for version 26.11.0.cl"
     },
     {
       "name": "26.5.0.cl",
@@ -339,6 +355,89 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/analysts/create": {
+      "post": {
+        "operationId": "createAnalyst",
+        "description": "\nCreates a Spotter Analyst: a configured agent with a name, description,\nat least one data source, and optional agent instructions, MCP\nconnectors, and starter prompts. Analysts created via API use the default\nicon until one is set in the UI.\nRequires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or\n`CAN_USE_SPOTTER` privileges, plus view access to every data source\nreferenced in `sources`. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nCreates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.\n\nRequires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.\n\n#### Usage guidelines\n\nThe request body is flat — all fields are top-level:\n\n- `name` (required): display name of the analyst.\n- `description` (required): up to 200 characters.\n- `instructions` (optional): natural-language instructions that guide the agent's behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`.\n- `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source.\n- `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst.\n- `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.\n\nIf the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.\n\n#### Error conditions\n\n- `403` — missing privileges, or no view access to a referenced data source.\n- `409` — `instructions` conflict with system guardrails.\n- `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations.\n- `429` — rate limit exceeded.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAnalystRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analyst"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analyst"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/conversation/create": {
       "post": {
         "operationId": "createConversation",
@@ -375,6 +474,89 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete": {
+      "post": {
+        "operationId": "deleteAnalyst",
+        "description": "\nPermanently deletes a Spotter Analyst. This operation is irreversible —\ndeleted analysts cannot be recovered. The request has no body; the\nresponse contains the `id` of the deleted analyst.\nRequires ownership of the analyst, or `ADMINISTRATION` or\n`CAN_MANAGE_SPOTTER` privileges. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nPermanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.\n\nRequires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.\n\n#### Usage guidelines\n\nThe request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.\n\nA successful request returns the `id` of the deleted analyst.\n\n#### Error conditions\n\n- `400` — malformed analyst identifier.\n- `403` — the caller is not the analyst's author and lacks admin / Spotter-management privileges.\n- `404` — no analyst with the given identifier exists in the caller's Org.\n- `429` — rate limit exceeded.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.10.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "analyst_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the analyst to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalystDeleteResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalystDeleteResponse"
                 }
               }
             }
@@ -1722,6 +1904,172 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/analysts/search": {
+      "post": {
+        "operationId": "searchAnalysts",
+        "description": "\nSearches Spotter Analysts. Two modes:\n- Fetch mode: when `analyst_identifier` is provided, the response contains\n  exactly that analyst and all other filters are ignored.\n- List mode: returns a paginated list of analysts visible to the caller,\n  optionally filtered by a case-insensitive substring match on the\n  analyst name (`query`) and by ownership (`type`). Results are ordered\n  by most recently accessed.\nRequires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or\n`CAN_USE_SPOTTER` privileges. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nSearches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.\n\nRequires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.\n\n#### Usage guidelines\n\nThe endpoint operates in one of two modes:\n\n**Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).\n\n**List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:\n\n- `record_size` (optional): number of records per page. Default 50, between 1 and 500.\n- `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000.\n- `query` (optional): case-insensitive substring match applied to the analyst **name only**.\n- `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.\n\nThe response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).\n\n#### Error conditions\n\n- `403` — missing privileges, or (fetch mode) no access to the requested analyst.\n- `404` — (fetch mode) no analyst with the given identifier exists in the caller's Org.\n- `422` — validation failure, such as `record_size` or `record_offset` out of range.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchAnalystsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalystSearchResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalystSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/conversations/search": {
+      "post": {
+        "operationId": "searchConversations",
+        "description": "\nSearches the saved Spotter conversations of the currently authenticated user\nby title and transcript text, with optional filters, sorting and paging. Use\nit to build a \"my conversations\" view that a user can search, rather than\npaging through the whole list with `getConversationList`.\nOnly conversations saved with `enable_save_chat: true` are searchable, and\nthe search only ever returns the caller's own conversations.\nRequires `CAN_USE_SPOTTER` privilege. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nSearches the saved Spotter conversations of the currently authenticated user by title and transcript text. Use this endpoint to build a searchable \"my conversations\" view, instead of paging through every conversation with `getConversationList`.\n\nOnly conversations saved with `enable_save_chat: true` in `createAgentConversation` are searchable, and the search only ever returns the caller's own conversations.\n\nRequires `CAN_USE_SPOTTER` privilege. Use a bearer token for the Org whose conversations should be searched.\n\n#### Usage guidelines\n\nEvery parameter is optional — an empty request body returns the most recently updated page of the caller's conversations.\n\n- `query`: text matched against the conversation title and transcript, from the first character of a word. Omit it, or send an empty string, to list every conversation in scope.\n- `data_source_identifiers`: unique IDs of data sources (models). A conversation matches when it ran against any of them.\n- `analyst_ids`: unique IDs of Spotter Analysts. A conversation matches when it ran against any of them.\n- `modified_after_time_in_millis` / `modified_before_time_in_millis`: restrict to conversations last interacted with at or after, and before, these times (epoch milliseconds).\n- `record_size`: number of records per page. Default 10, between 1 and 100.\n- `record_offset`: zero-based index of the first record. Default 0. `record_offset` plus `record_size` must not exceed 10000.\n- `sort_options`: `field_name` — `MODIFIED` (default), `TITLE`, `ANALYST`, or `MODEL` — and `order`, `ASC` or `DESC` (default).\n\nThe response contains `conversations` — the page of matches — plus `total_count`, the number of matches across all pages, and `has_more`. Each entry contains:\n\n- `conversation_identifier`: unique ID of the conversation. Pass it as `conversation_identifier` to `getConversation` to read the full transcript.\n- `snippet`: `conversation_title` and `matched_text`, the transcript line that matched the query. `matched_text` is an empty string when the query matched the title only, or when no query was sent.\n- `updated_time_in_millis`: epoch milliseconds of the caller's last interaction with the conversation.\n- `is_pinned`: whether the caller has pinned this conversation.\n- `data_sources`: array of `{ id, name }` for the data sources (models) the conversation ran against.\n- `analyst_ids`: unique IDs of the Spotter Analysts the conversation ran against. Empty when the conversation ran against the default Spotter.\n\n#### Highlighted text\n\nBoth `snippet.conversation_title` and `snippet.matched_text` are HTML-escaped, and the terms that matched `query` are wrapped in `<b>` tags. Render them as markup, or strip the tags before display — do not treat them as plain text.\n\n#### Pagination\n\nUse `record_offset` and `record_size` to page through matches, and `has_more` to drive paging controls:\n\n```\n{ \"query\": \"sales\", \"record_size\": 20, \"record_offset\": 0 }   → first page\n{ \"query\": \"sales\", \"record_size\": 20, \"record_offset\": 20 }  → second page\n```\n\n#### Example response\n\n```json\n{\n  \"conversations\": [\n    {\n      \"conversation_identifier\": \"abc123\",\n      \"snippet\": {\n        \"conversation_title\": \"<b>Sales</b> by region Q1\",\n        \"matched_text\": \"Show me <b>sales</b> by region for last quarter\"\n      },\n      \"updated_time_in_millis\": 1772712180000,\n      \"is_pinned\": true,\n      \"data_sources\": [{ \"id\": \"ds-001\", \"name\": \"Retail Sales\" }],\n      \"analyst_ids\": []\n    }\n  ],\n  \"total_count\": 1,\n  \"has_more\": false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or conversation search is not enabled on the cluster. |\n| 422  | Unprocessable — `record_size` is outside 1-100, `record_offset` is negative, or `record_offset` plus `record_size` exceeds 10000. |\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available.\n> - Only conversations created with `enable_save_chat: true` are indexed and searchable. Conversations created with `enable_save_chat: false` (the default) are not persisted and never appear in the results.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter and saved chats on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchConversationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationSearchResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send": {
       "post": {
         "operationId": "sendAgentConversationMessage",
@@ -2462,6 +2810,99 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share": {
+      "post": {
+        "operationId": "shareAnalyst",
+        "description": "\nUpdates share permissions on a Spotter Analyst, one entry per principal\n(user or group). `READ_ONLY` and `MODIFY` grant or change the principal's\naccess; `NO_ACCESS` revokes it. Granting access also shares the analyst's\ndata sources with the principal so the analyst keeps working for them.\nA successful share returns an empty `204 No Content` response.\nRequires ownership of the analyst, or `ADMINISTRATION` or\n`CAN_MANAGE_SPOTTER` privileges. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nUpdates share permissions on a Spotter Analyst for one or more principals (users or groups).\n\nRequires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.\n\n#### Usage guidelines\n\nThe analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:\n\n- `principal.identifier` (required): unique identifier of the user or group.\n- `principal.type` (required): `USER` or `USER_GROUP`.\n- `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal's access; `NO_ACCESS` revokes it.\n\nA principal may appear at most once per request. When access is granted, the analyst's data sources are automatically shared with the principal as well, so the analyst keeps working for them.\n\nA successful request returns an empty `204 No Content` response.\n\n#### Error conditions\n\n- `400` — malformed analyst identifier.\n- `403` — the caller is not the analyst's author and lacks admin / Spotter-management privileges.\n- `404` — no analyst with the given identifier exists in the caller's Org.\n- `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field.\n- `429` — rate limit exceeded.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShareAnalystRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "analyst_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the analyst to share."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share": {
       "post": {
         "operationId": "shareConversation",
@@ -2687,10 +3128,103 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update": {
+      "post": {
+        "operationId": "updateAnalyst",
+        "description": "\nUpdates a Spotter Analyst. The request body is identical to\n`createAnalyst` and the update is a full replace: the analyst is\nrewritten from the request, and optional fields omitted from the request\nare reset (no instructions, no MCP connectors, no starter prompts).\nRequires ownership of the analyst, or `ADMINISTRATION` or\n`CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot\nedit it. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nUpdates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.\n\nRequires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.\n\n#### Usage guidelines\n\nThe request body is flat — all fields are top-level:\n\n- `name` (required): display name of the analyst.\n- `description` (required): up to 200 characters.\n- `instructions` (optional): natural-language instructions that guide the agent's behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions.\n- `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst.\n- `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear.\n- `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.\n\nIf the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).\n\n#### Error conditions\n\n- `400` — malformed analyst identifier.\n- `403` — the caller is not the analyst's author and lacks admin / Spotter-management privileges.\n- `404` — no analyst with the given identifier exists in the caller's Org.\n- `409` — `instructions` conflict with system guardrails.\n- `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations.\n- `429` — rate limit exceeded.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAnalystRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "analyst_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the analyst to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analyst"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analyst"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update": {
       "post": {
         "operationId": "updateConversation",
-        "description": "\nUpdates attributes of an existing agent conversation. Currently only the\ndisplay title can be updated; additional conversation attributes may be\nsupported in future versions. At least one updatable attribute must be\nprovided in the request body. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates attributes of an existing saved agent conversation. Supports updating the conversation's display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.\n\nUse this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList`\n- At least one updatable attribute in the request body:\n    - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.\n    - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.\n\nEach attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.\n\nA successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.\n\n#### Example request\n\nRename a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\"\n}\n```\n\nPin a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"is_pinned\": true\n}\n```\n\nUpdate both attributes in a single request:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\",\n  \"is_pinned\": true\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n| 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier.\n> - There is no limit on the number of conversations a user can pin.\n> - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdates attributes of an existing agent conversation. Supports updating the\ndisplay title and the pinned state; additional conversation attributes may be\nsupported in future versions. At least one updatable attribute must be\nprovided in the request body. Each attribute is applied independently, so\nomitted attributes are left unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates attributes of an existing saved agent conversation. Supports updating the conversation's display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.\n\nUse this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList`\n- At least one updatable attribute in the request body:\n    - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.\n    - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.\n\nEach attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.\n\nA successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.\n\n#### Example request\n\nRename a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\"\n}\n```\n\nPin a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"is_pinned\": true\n}\n```\n\nUpdate both attributes in a single request:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\",\n  \"is_pinned\": true\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n| 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier.\n> - There is no limit on the number of conversations a user can pin.\n> - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.7.0.cl"
@@ -7964,6 +8498,487 @@
         }
       }
     },
+    "/api/rest/2.0/configurations/features/search": {
+      "post": {
+        "operationId": "searchFeatures",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nReturns the feature configurations available on the ThoughtSpot system, grouped by feature group.\n\n#### Pre-requisites\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo retrieve feature configurations, pass these parameters in your API request:\n\n- `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org).\n- `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.\n- `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.\n\nThe response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.\n\nThe following example retrieves the general-access features for the cluster-admin view:\n\n```\n{\n  \"scope\": \"CLUSTER\",\n  \"category\": \"GENERAL_ACCESS\"\n}\n```\n\nFor the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):\n\n```\n{\n  \"scope\": \"ORG\",\n  \"org_identifier\": 1,\n  \"category\": \"GENERAL_ACCESS\"\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Feature Management",
+          "26.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchFeaturesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Feature groups returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeatureGroup"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Cluster-admin view (scope=CLUSTER) — org-aware feature with assignments",
+                    "value": [
+                      {
+                        "feature_group": "search",
+                        "docs_url": null,
+                        "features": [
+                          {
+                            "feature_id": "orion.embraceConfig.doIndexing",
+                            "feature_name": "index_columns",
+                            "assigned_orgs": [
+                              {
+                                "org_id": 0,
+                                "org_name": "Primary"
+                              }
+                            ],
+                            "is_org_aware": true,
+                            "feature_value": null,
+                            "docs_url": null
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "example_2": {
+                    "description": "Org-admin view (scope=ORG) — element type, config, and current value for the org",
+                    "value": [
+                      {
+                        "feature_group": "search",
+                        "docs_url": null,
+                        "features": [
+                          {
+                            "feature_id": "orion.embraceConfig.doIndexing",
+                            "feature_name": "index_columns",
+                            "element_type": "toggle",
+                            "element_config": {
+                              "label": "Index columns"
+                            },
+                            "element_value": "true",
+                            "docs_url": null
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "example_3": {
+                    "description": "Empty result — no features match the requested category",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "missing_org_identifier": {
+                    "summary": "Bad Request — org_identifier is required when scope is ORG",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10000,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "org_identifier is required when scope=ORG."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient privileges.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden — ADMINISTRATION privilege required",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "Insufficient privileges."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Feature management not enabled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/configurations/features/assignments/update": {
+      "post": {
+        "operationId": "updateFeatureAssignments",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nUpdates the Org assignments for a feature. Available to cluster admins only.\n\n#### Pre-requisites\n\nRequires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo update the Org assignments for a feature, pass these parameters in your API request:\n\n- `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update.\n- `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature.\n- `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.\n\nThe following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:\n\n```\n{\n  \"feature_identifier\": \"index_columns\",\n  \"org_identifiers\": [1, 2],\n  \"operation\": \"ADD\"\n}\n```\n\nClear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):\n\n```\n{\n  \"feature_identifier\": \"index_columns\",\n  \"org_identifiers\": [],\n  \"operation\": \"REPLACE\"\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Feature Management",
+          "26.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeatureAssignmentsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Assignments updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureAssignmentResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Assign Orgs 1 and 2 to the feature (operation ADD)",
+                    "value": {
+                      "feature_id": "orion.embraceConfig.doIndexing",
+                      "feature_name": "index_columns",
+                      "assigned_orgs": [
+                        {
+                          "org_id": 1,
+                          "org_name": "Acme"
+                        },
+                        {
+                          "org_id": 2,
+                          "org_name": "Beta"
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "description": "Clear all Org assignments (operation REPLACE with an empty org_identifiers array); assigned_orgs comes back empty",
+                    "value": {
+                      "feature_id": "orion.embraceConfig.doIndexing",
+                      "feature_name": "index_columns",
+                      "assigned_orgs": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "missing_org_identifiers": {
+                    "summary": "Bad Request — org_identifiers is required",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10000,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "org_identifiers is required."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient privileges.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden — ADMINISTRATION privilege required",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "Insufficient privileges."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Feature not found or feature management not enabled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "feature_not_found": {
+                    "summary": "Not Found — feature_identifier does not match any known feature",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10000,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "Feature 'orion.__does_not_exist__' not found in config."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/configurations/features/values/update": {
+      "post": {
+        "operationId": "updateFeatureValue",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nSets the value of a feature at the cluster or Org scope.\n\n#### Pre-requisites\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo set a feature value, pass these parameters in your API request:\n\n- `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override.\n- `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.\n- `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set.\n- `feature_value` — New value to set for the feature.\n- `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.\n\nThe following example sets a per-Org value override for Org `1`:\n\n```\n{\n  \"scope\": \"ORG\",\n  \"org_identifier\": 1,\n  \"feature_identifier\": \"index_columns\",\n  \"feature_value\": \"true\"\n}\n```\n\nSet the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:\n\n```\n{\n  \"scope\": \"CLUSTER\",\n  \"feature_identifier\": \"index_columns\",\n  \"feature_value\": \"true\",\n  \"reset_org_overrides\": true\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Feature Management",
+          "26.10.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeatureValueRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Value updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureValueResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Set a per-Org value override (scope=ORG)",
+                    "value": {
+                      "feature_id": "orion.embraceConfig.doIndexing",
+                      "feature_name": "index_columns",
+                      "feature_value": "true"
+                    }
+                  },
+                  "example_2": {
+                    "description": "Set the cluster-level value and clear per-Org overrides (scope=CLUSTER, reset_org_overrides=true)",
+                    "value": {
+                      "feature_id": "orion.embraceConfig.doIndexing",
+                      "feature_name": "index_columns",
+                      "feature_value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_reset_org_overrides": {
+                    "summary": "Bad Request — reset_org_overrides is not allowed when scope is ORG",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10000,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "reset_org_overrides is only valid for scope=CLUSTER."
+                        }
+                      }
+                    }
+                  },
+                  "missing_org_identifier": {
+                    "summary": "Bad Request — org_identifier is required when scope is ORG",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10000,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "org_identifier is required when scope=ORG."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient privileges or org not assigned to feature.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden — ADMINISTRATION privilege required",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10023,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "Insufficient privileges."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Feature not found or feature management not enabled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "feature_not_found": {
+                    "summary": "Not Found — feature_identifier does not match any known feature",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10000,
+                          "incident_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "trace_id_guid": "0d2f9f6e-0000-0000-0000-000000000000",
+                          "debug": "Feature 'orion.__does_not_exist__' not found in config."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/groups/create": {
       "post": {
         "operationId": "createUserGroup",
@@ -8317,6 +9332,609 @@
           },
           "500": {
             "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/create": {
+      "post": {
+        "operationId": "createInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nCreates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.\n\n#### Usage guidelines\n\nTo create an input table, provide the following in the request body:\n\n* **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters.\n* **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata.\n* **`table_definition`** — Describes the table schema:\n  * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table's key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.\n  * `new_columns` — List of new editable columns to create. Each column requires:\n    * `name` — Column display name.\n    * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).\n    * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.\n    * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.\n  * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.\n\n**Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.\n\n#### Response\n\nThe response returns the new input table's GUID and the list of its columns,\neach with its name and unique ID:\n\n* **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations.\n* **`input_columns`** — Every column on the new table. Each entry has a `name`,\n  an `id` (the column's GUID), and `mapped_column_id` (the GUID of the model\n  column it is mapped from, present only for referenced columns). Use these IDs\n  to address specific columns in follow-up calls without a separate lookup.\n* **`message_info`** — Note set when a referenced column had to be renamed to\n  keep the input table's column names unique: a model column name that occurs\n  in more than one base table is prefixed with its base table name. Absent when\n  no column was renamed. The renamed column's final name is also its `name` in\n  `input_columns`, which is what `updateInputTable` matches on.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInputTableRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Input table created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputTableResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Input table created successfully",
+                    "value": {
+                      "input_table_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                      "input_columns": [
+                        {
+                          "name": "Region",
+                          "id": "b1c2d3e4-0000-1111-2222-333344445555",
+                          "mapped_column_id": "c7d8e9f0-1234-5678-abcd-ef0987654321"
+                        },
+                        {
+                          "name": "target_revenue",
+                          "id": "a9b8c7d6-9999-8888-7777-666655554444"
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Input table created; a referenced column was renamed to keep names unique",
+                    "value": {
+                      "input_table_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                      "input_columns": [
+                        {
+                          "name": "sales_Region",
+                          "id": "b1c2d3e4-0000-1111-2222-333344445555",
+                          "mapped_column_id": "c7d8e9f0-1234-5678-abcd-ef0987654321"
+                        },
+                        {
+                          "name": "target_revenue",
+                          "id": "a9b8c7d6-9999-8888-7777-666655554444"
+                        }
+                      ],
+                      "message_info": "The column Region appears in both sales and returns. Input Table columns must be unique, so it has been renamed to sales_Region."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — invalid payload, no columns selected, or upload disabled on the connection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Model not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/columns/create": {
+      "post": {
+        "operationId": "createInputTableColumn",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nAdds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table's ThoughtSpot metadata so the new columns are exposed on the linked model.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:\n\n* **`column_definition.columns`** — List of new editable columns to create. Each column requires:\n  * `name` — Column display name. Must not collide with an existing column on the table.\n  * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).\n  * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.\n  * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.\n\nUnlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.\n\n**Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInputTableColumnRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to add columns to."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Columns added successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputColumnResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Columns added successfully",
+                    "value": {
+                      "columns": [
+                        {
+                          "name": "forecast_revenue",
+                          "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                        },
+                        {
+                          "name": "forecast_quarter",
+                          "id": "6b3a8f21-9c4d-4e77-bf2a-1d5e7c9a0b34"
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Fixed-choice column added successfully",
+                    "value": {
+                      "columns": [
+                        {
+                          "name": "approval_status",
+                          "id": "2c9f1e04-7b6d-4a11-9c8e-5f3b7d210a46"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — invalid payload or no columns supplied.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the input table.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Input table not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/delete": {
+      "post": {
+        "operationId": "deleteInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nDeletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.\n\n**Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the input table and dropped the physical CDW table."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete": {
+      "post": {
+        "operationId": "deleteInputTableColumn",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nDeletes a single editable column from an input table. This removes the column from the input table's ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.\n\nOnly columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:\n\n* the column is a referenced (model-projected) column, or\n* the column is still referenced by an existing Answer or Liveboard.\n\nThis endpoint has no request body.\n\n**Note on obtaining `column_identifier`**: Use the `id` field returned for the\ncolumn by `createInputTableColumn` (in `columns`) or by `createInputTable` (in\n`input_columns`) as the `column_identifier`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table that owns the column."
+          },
+          {
+            "in": "path",
+            "name": "column_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the column to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the input table column and dropped the physical CDW column."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/update": {
+      "post": {
+        "operationId": "updateInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nWrites rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:\n\n* **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns.\n* **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.\n\n#### Date values\n\nPass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.\n\nAn epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.\n\nThe date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.\n\nThe ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.\n\nA date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.\n\n#### Write semantics\n\n* **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite.\n* **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`.\n* This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched.\n* The `rows` array must contain at least one row; an empty `rows` array is rejected.\n\nThe request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).\n\n#### Response\n\nThe response returns `rows_loaded` — the number of rows actually written, the\nsum of rows updated (matched) and rows inserted (new).\n\n`rows_loaded` is the count the warehouse itself reports, so it reflects what\nwas written rather than what was submitted. If the warehouse completes the load\nbut reports no count, the call fails with `500` rather than returning a count it\ncannot stand behind. The write is a MERGE keyed on the input table's key\ncolumns, so it is idempotent — retrying the same payload is safe.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInputTableRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rows loaded successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputTableUpdateResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Rows loaded successfully",
+                    "value": {
+                      "rows_loaded": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed request or unknown column name.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the input table.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Input table not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
             "content": {
               "application/json": {
                 "schema": {
@@ -16206,7 +17824,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique id or name of the variable"
+            "description": "Unique id, name, or object id of the variable"
           }
         ],
         "responses": {
@@ -16500,7 +18118,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique id or name of the variable to update."
+            "description": "Unique id, name, or object id of the variable to update."
           }
         ],
         "responses": {
@@ -19068,8 +20686,54 @@
             "format": "int32",
             "description": "The version number of logical model of the cluster.",
             "nullable": true
+          },
+          "maintenance_schedule": {
+            "$ref": "#/components/schemas/MaintenanceScheduleInfo",
+            "description": "Details of the next maintenance window scheduled for the cluster. Absent when no maintenance is scheduled. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "nullable": true
           }
         }
+      },
+      "MaintenanceScheduleInfo": {
+        "type": "object",
+        "properties": {
+          "start_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Start time of the maintenance window, in milliseconds since epoch.",
+            "nullable": true
+          },
+          "duration_in_seconds": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Expected duration of the maintenance window, in seconds.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SCHEDULED",
+              "AD_HOC"
+            ],
+            "description": "Status of the maintenance event.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "UPGRADE",
+              "PATCH"
+            ],
+            "description": "Type of the maintenance event.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the maintenance event.",
+            "nullable": true
+          }
+        },
+        "description": "Details of a maintenance window scheduled for the cluster."
       },
       "SystemConfig": {
         "type": "object",
@@ -19964,6 +21628,11 @@
           "dependent_objects": {
             "type": "object",
             "description": "Details of dependent objects of the metadata objects.",
+            "nullable": true
+          },
+          "dependent_objects_is_last_batch": {
+            "type": "boolean",
+            "description": "Whether the returned dependent_objects page is the last one for this object. True when the\npage came back short of the effective page size. A full page reports false even when it\nhappens to be the final one, so a caller pages until it sees true and may pay one final\nempty page. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
             "nullable": true
           },
           "incomplete_objects": {
@@ -22259,6 +23928,16 @@
             },
             "description": "Data sources associated with the conversation, each with an `id` and `name`.",
             "nullable": true
+          },
+          "is_pinned": {
+            "type": "boolean",
+            "description": "Whether the current user has pinned this conversation. Pinned\nconversations are surfaced first in the list. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          },
+          "analyst_id": {
+            "type": "string",
+            "description": "Unique identifier of the Spotter Analyst the conversation is associated\nwith. Null when the conversation is not associated with an analyst. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
           }
         },
         "description": "A saved agent conversation item returned in list responses."
@@ -22280,6 +23959,114 @@
           }
         },
         "description": "A data source associated with a conversation, returned as a typed entry."
+      },
+      "ConversationSortOptions": {
+        "type": "object",
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "enum": [
+              "TITLE",
+              "MODIFIED",
+              "ANALYST",
+              "MODEL"
+            ],
+            "description": "Conversation attribute to sort the matching conversations on.\nDefaults to MODIFIED.",
+            "nullable": true
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Sort order: ASC (ascending) or DESC (descending). Defaults to DESC, so the\nmost recently updated conversation comes first.",
+            "nullable": true
+          }
+        },
+        "description": "Sort options for conversation search."
+      },
+      "ConversationSearchResponse": {
+        "type": "object",
+        "properties": {
+          "conversations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationSearchResult"
+            },
+            "description": "Conversations matching the request, ordered by `sort_options`. Empty when\nnothing matches.",
+            "nullable": true
+          },
+          "total_count": {
+            "type": "object",
+            "description": "Number of conversations matching the request across all pages, not just the\npage returned.",
+            "nullable": true
+          },
+          "has_more": {
+            "type": "boolean",
+            "description": "Whether more conversations match beyond the page returned. Advance\n`record_offset` by `record_size` to fetch the next page.",
+            "nullable": true
+          }
+        },
+        "description": "Response returned by searchConversations."
+      },
+      "ConversationSearchResult": {
+        "type": "object",
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the conversation. Pass it as `conversation_identifier`\nto `getConversation` to read the full transcript.",
+            "nullable": true
+          },
+          "snippet": {
+            "$ref": "#/components/schemas/ConversationSnippet",
+            "description": "Title of the conversation and the transcript line that matched the query.",
+            "nullable": true
+          },
+          "updated_time_in_millis": {
+            "type": "object",
+            "description": "Epoch milliseconds of the caller's last interaction with the conversation.\nConversations are sorted on this field by default.",
+            "nullable": true
+          },
+          "is_pinned": {
+            "type": "boolean",
+            "description": "Whether the caller has pinned this conversation.",
+            "nullable": true
+          },
+          "data_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataSourceEntry"
+            },
+            "description": "Data sources (models) the conversation ran against, each with an `id` and\n`name`.",
+            "nullable": true
+          },
+          "analyst_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique identifiers of the Spotter Analysts the conversation ran against.\nEmpty when the conversation ran against the default Spotter.",
+            "nullable": true
+          }
+        },
+        "description": "One saved conversation matching a conversation search."
+      },
+      "ConversationSnippet": {
+        "type": "object",
+        "properties": {
+          "conversation_title": {
+            "type": "string",
+            "description": "Display title of the conversation, with the matched terms highlighted. An\nempty string when the conversation has no title.",
+            "nullable": true
+          },
+          "matched_text": {
+            "type": "string",
+            "description": "Line of the conversation transcript that matched the query, with the matched\nterms highlighted. An empty string when the query matched the title only, or\nwhen no query was sent.",
+            "nullable": true
+          }
+        },
+        "description": "Title and matching transcript line for one conversation search hit. Both\nstrings are HTML-escaped and the terms that matched the query are wrapped in\n`<b>` tags, so render them as markup or strip the tags before display."
       },
       "ConversationMessageResponse": {
         "type": "object",
@@ -23228,7 +25015,7 @@
         "properties": {
           "identifier": {
             "type": "string",
-            "description": "Unique ID or name of the variable",
+            "description": "Unique ID, name, or object ID of the variable",
             "nullable": true
           },
           "type": {
@@ -23295,6 +25082,11 @@
           "name": {
             "type": "string",
             "description": "Name of the variable"
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "Custom object identifier (obj_id) of the variable <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
           },
           "variable_type": {
             "type": "string",
@@ -24883,7 +26675,8 @@
           "type": {
             "type": "string",
             "enum": [
-              "RDBMS_SNOWFLAKE"
+              "RDBMS_SNOWFLAKE",
+              "RDBMS_DATABRICKS"
             ],
             "description": "CDW connector type.",
             "nullable": true
@@ -24947,6 +26740,107 @@
         },
         "description": "Tag reference associated with a semantic integration."
       },
+      "FeatureGroup": {
+        "type": "object",
+        "required": [
+          "features"
+        ],
+        "properties": {
+          "feature_group": {
+            "type": "string",
+            "description": "Display name of the feature group.",
+            "nullable": true
+          },
+          "docs_url": {
+            "type": "string",
+            "description": "Documentation URL for the feature group, when available.",
+            "nullable": true
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeatureDetail"
+            },
+            "description": "Feature details within this group. Each entry contains the fields relevant to\nthe requested scope; org-admin-only and cluster-admin-only fields are null in\nthe other view."
+          }
+        },
+        "description": "A named group of related features. Returned by searchFeatures; the contents of\nfeatures depend on the requested scope (cluster-admin vs. org-admin view)."
+      },
+      "FeatureDetail": {
+        "type": "object",
+        "required": [
+          "feature_id"
+        ],
+        "properties": {
+          "feature_id": {
+            "type": "string",
+            "description": "Underlying unique feature ID. The dotted-path format (for example,\n`orion.embraceConfig.doIndexing`) is internal and subject to change without\nnotice; use `feature_name` as the stable display identifier where possible."
+          },
+          "feature_name": {
+            "type": "string",
+            "description": "User-friendly feature name. Present when the feature declares one.",
+            "nullable": true
+          },
+          "assigned_orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeatureOrgInfo"
+            },
+            "description": "Orgs currently assigned to this feature. Populated in the cluster-admin view.",
+            "nullable": true
+          },
+          "is_org_aware": {
+            "type": "boolean",
+            "description": "Whether the feature is Org-aware. Org-aware features are managed via per-Org\nassignment; non-org-aware features are cluster-level toggles. Populated in the\ncluster-admin view.",
+            "nullable": true
+          },
+          "feature_value": {
+            "type": "string",
+            "description": "Current cluster-level value of the feature. Populated in the cluster-admin\nview for non-org-aware features; null for Org-aware features. Values are\nalways returned as strings; for boolean toggles this is `\"true\"` or\n`\"false\"`.",
+            "nullable": true
+          },
+          "element_type": {
+            "type": "string",
+            "description": "UI element type hint for the feature. Populated in the org-admin view.",
+            "nullable": true
+          },
+          "element_config": {
+            "type": "object",
+            "description": "UI element configuration for the feature. Populated in the org-admin view.\nAn opaque blob whose structure varies by `element_type`; a `label` string is\nthe common envelope field.",
+            "nullable": true
+          },
+          "element_value": {
+            "type": "string",
+            "description": "Current value of the feature for the requested Org. Populated in the\norg-admin view.",
+            "nullable": true
+          },
+          "docs_url": {
+            "type": "string",
+            "description": "Per-feature documentation URL, when available.",
+            "nullable": true
+          }
+        },
+        "description": "Detail for a single feature. Fields are populated according to the scope of the\nsearch: cluster-admin (CLUSTER) responses populate assigned_orgs, is_org_aware,\nand (for non-org-aware features) feature_value; org-admin (ORG) responses\npopulate element_type, element_config, and element_value."
+      },
+      "FeatureOrgInfo": {
+        "type": "object",
+        "required": [
+          "org_id",
+          "org_name"
+        ],
+        "properties": {
+          "org_id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Numeric ID of the Org."
+          },
+          "org_name": {
+            "type": "string",
+            "description": "Display name of the Org."
+          }
+        },
+        "description": "Lightweight Org identifier and display name, as returned in feature\nassignment responses.\nThe field names org_id / org_name intentionally deviate from the bare id /\nname used by the shared Org type: they are the literal wire keys emitted by\nthe Callosum backend, so they are load-bearing for Prism's response field\nmapping and cannot be renamed without a backend change."
+      },
       "GenericInfo": {
         "type": "object",
         "properties": {
@@ -24972,6 +26866,31 @@
             "nullable": true
           }
         }
+      },
+      "TokenScopeInput": {
+        "type": "object",
+        "required": [
+          "org_scope"
+        ],
+        "properties": {
+          "org_scope": {
+            "type": "string",
+            "enum": [
+              "SPECIFIC_ORGS",
+              "ALL_MEMBER_ORGS"
+            ],
+            "description": "The set of Orgs this token is authorized to operate in. SPECIFIC_ORGS authorizes the token for the Orgs listed in org_identifiers; ALL_MEMBER_ORGS authorizes it for all Orgs the user is a member of. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>"
+          },
+          "org_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "ID or name of the Orgs the token is authorized for. Required when org_scope is SPECIFIC_ORGS; ignored when org_scope is ALL_MEMBER_ORGS. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "The set of Orgs a token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator."
       },
       "JWT_User_Options": {
         "type": "object",
@@ -25276,12 +27195,47 @@
           "org_id": {
             "type": "integer",
             "format": "int32",
-            "description": "Unique identifier of the metadata.",
+            "description": "Unique identifier of the Org.",
             "nullable": true
           },
           "metadata_id": {
             "type": "string",
-            "description": "Unique identifier of the Org.",
+            "description": "Unique identifier of the metadata.",
+            "nullable": true
+          },
+          "org_scope": {
+            "type": "string",
+            "enum": [
+              "SPECIFIC_ORGS",
+              "ALL_MEMBER_ORGS"
+            ],
+            "description": "Org scope the token is authorized for. Absent for a legacy single-org token. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          },
+          "org_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrgInfo"
+            },
+            "description": "Orgs the token is authorized for when org_scope is SPECIFIC_ORGS. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          }
+        }
+      },
+      "OrgInfo": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Id."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name.",
             "nullable": true
           }
         }
@@ -25516,23 +27470,10 @@
             "type": "number",
             "format": "float",
             "description": "Token expiration time in milliseconds."
-          }
-        }
-      },
-      "OrgInfo": {
-        "type": "object",
-        "required": [
-          "id"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Id."
           },
-          "name": {
-            "type": "string",
-            "description": "Name.",
+          "scope": {
+            "$ref": "#/components/schemas/AccessTokenScope",
+            "description": "The set of Orgs this token is authorized to operate in, recorded at issuance. Absent for a legacy single-org token. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
             "nullable": true
           }
         }
@@ -25553,6 +27494,31 @@
             "nullable": true
           }
         }
+      },
+      "AccessTokenScope": {
+        "type": "object",
+        "required": [
+          "org_scope"
+        ],
+        "properties": {
+          "org_scope": {
+            "type": "string",
+            "enum": [
+              "SPECIFIC_ORGS",
+              "ALL_MEMBER_ORGS"
+            ],
+            "description": "Org scope the token is authorized for: SPECIFIC_ORGS or ALL_MEMBER_ORGS."
+          },
+          "org_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrgInfo"
+            },
+            "description": "Orgs the token is authorized for when org_scope is SPECIFIC_ORGS.",
+            "nullable": true
+          }
+        },
+        "description": "The set of Orgs a token is authorized to operate in, recorded at issuance. Used for token\ntypes (e.g. AccessToken) that have no other {@code scope} field of their own."
       },
       "AuthClusterPreferencesInput": {
         "type": "object",
@@ -26287,6 +28253,14 @@
             "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
             "nullable": true
           },
+          "role_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the roles that will be assigned to the group. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "nullable": true
+          },
           "sub_group_identifiers": {
             "type": "array",
             "items": {
@@ -26640,7 +28614,9 @@
               "DATA_SOURCE",
               "USER",
               "USER_GROUP",
-              "COLLECTION"
+              "COLLECTION",
+              "ROLE",
+              "TEMPLATE_VARIABLE"
             ],
             "description": "Optional type of the header object.",
             "nullable": true
@@ -26695,7 +28671,9 @@
               "DATA_SOURCE",
               "USER",
               "USER_GROUP",
-              "COLLECTION"
+              "COLLECTION",
+              "ROLE",
+              "TEMPLATE_VARIABLE"
             ],
             "description": "Type of metadata. Required if metadata_identifier is name of the object.",
             "nullable": true
@@ -26727,7 +28705,8 @@
               "USER_GROUP",
               "ROLE",
               "FEEDBACK",
-              "COLLECTION"
+              "COLLECTION",
+              "TEMPLATE_VARIABLE"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -28466,6 +30445,11 @@
           "conversation_identifier": {
             "type": "string",
             "description": "Unique identifier of the conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>"
+          },
+          "analyst_id": {
+            "type": "string",
+            "description": "Unique identifier of the Spotter Analyst the conversation was started\nfrom. Null when the conversation was not started from an analyst. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
           }
         }
       },
@@ -28520,6 +30504,371 @@
             "description": "Success status of the operation."
           }
         }
+      },
+      "AnalystSourceInput": {
+        "type": "object",
+        "required": [
+          "identifier",
+          "type"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Unique identifier of the data source."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the data source.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "MODEL",
+              "ANSWER",
+              "LIVEBOARD",
+              "CONVERSATION"
+            ],
+            "description": "Type of the data source."
+          }
+        },
+        "description": "A data source to attach to a Spotter Analyst."
+      },
+      "Analyst": {
+        "type": "object",
+        "required": [
+          "id",
+          "sources",
+          "mcp_connectors",
+          "starter_prompts"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the analyst."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the analyst.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the analyst.",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Natural-language instructions that guide the agent's behavior for this\nanalyst.",
+            "nullable": true
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalystSource"
+            },
+            "description": "Data sources the analyst can query."
+          },
+          "mcp_connectors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of MCP connectors linked to this analyst."
+          },
+          "starter_prompts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalystStarterPrompt"
+            },
+            "description": "User-defined starter prompts, in display order."
+          },
+          "updated_time_in_millis": {
+            "type": "object",
+            "description": "Epoch milliseconds of the last update.",
+            "nullable": true
+          },
+          "created_by": {
+            "type": "string",
+            "description": "ID of the user who created the analyst.",
+            "nullable": true
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "ID of the user who last updated the analyst.",
+            "nullable": true
+          }
+        },
+        "description": "A Spotter Analyst: a configured agent with a name, description, agent\ninstructions, data sources, MCP connectors, and starter prompts."
+      },
+      "AnalystSource": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the data source."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "MODEL",
+              "ANSWER",
+              "LIVEBOARD",
+              "CONVERSATION"
+            ],
+            "description": "Type of the data source."
+          }
+        },
+        "description": "A data source attached to a Spotter Analyst."
+      },
+      "AnalystStarterPrompt": {
+        "type": "object",
+        "required": [
+          "label",
+          "text",
+          "order",
+          "is_ai_generated"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Short display label shown in the UI."
+          },
+          "text": {
+            "type": "string",
+            "description": "Full prompt text sent to the agent."
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Display order within the list."
+          },
+          "is_ai_generated": {
+            "type": "boolean",
+            "description": "Whether this prompt was AI-generated."
+          }
+        },
+        "description": "A user-defined starter prompt shown on the Analyst landing page."
+      },
+      "AnalystDeleteResponse": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the deleted analyst."
+          }
+        },
+        "description": "Response returned after deleting a Spotter Analyst."
+      },
+      "AnalystSearchResponse": {
+        "type": "object",
+        "required": [
+          "analysts",
+          "total_size"
+        ],
+        "properties": {
+          "analysts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalystItem"
+            },
+            "description": "Page of analysts matching the request."
+          },
+          "total_size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of matches before pagination."
+          }
+        },
+        "description": "Response returned by analyst search."
+      },
+      "AnalystItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "sources",
+          "mcp_connectors",
+          "icon_id",
+          "starter_prompts"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the analyst."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the analyst.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the analyst.",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Natural-language instructions that guide the agent's behavior for this\nanalyst.",
+            "nullable": true
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalystItemSource"
+            },
+            "description": "Data sources the analyst can query."
+          },
+          "mcp_connectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalystMcpConnector"
+            },
+            "description": "MCP connectors linked to this analyst."
+          },
+          "icon_id": {
+            "type": "string",
+            "description": "Icon identifier. Empty string means the default icon."
+          },
+          "starter_prompts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalystItemStarterPrompt"
+            },
+            "description": "Starter prompts in display order, including the fixed prompt."
+          },
+          "updated_time_in_millis": {
+            "type": "object",
+            "description": "Epoch milliseconds of the last update.",
+            "nullable": true
+          },
+          "last_accessed_time_in_millis": {
+            "type": "object",
+            "description": "Epoch milliseconds of the caller's last interaction with the analyst.",
+            "nullable": true
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/AnalystUser",
+            "description": "User who created the analyst.",
+            "nullable": true
+          },
+          "updated_by": {
+            "$ref": "#/components/schemas/AnalystUser",
+            "description": "User who last updated the analyst.",
+            "nullable": true
+          }
+        },
+        "description": "A Spotter Analyst as returned in search results."
+      },
+      "AnalystItemSource": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the data source."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "MODEL",
+              "ANSWER",
+              "LIVEBOARD",
+              "CONVERSATION"
+            ],
+            "description": "Type of the data source."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the data source.",
+            "nullable": true
+          }
+        },
+        "description": "A data source returned in analyst search results."
+      },
+      "AnalystMcpConnector": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the MCP connector."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the MCP connector.",
+            "nullable": true
+          },
+          "icon_url": {
+            "type": "string",
+            "description": "Icon URL of the MCP connector.",
+            "nullable": true
+          }
+        },
+        "description": "An MCP connector returned in analyst search results."
+      },
+      "AnalystItemStarterPrompt": {
+        "type": "object",
+        "required": [
+          "label",
+          "text",
+          "order",
+          "is_fixed"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Short display label shown in the UI."
+          },
+          "text": {
+            "type": "string",
+            "description": "Full prompt text sent to the agent."
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Display order within the list."
+          },
+          "is_fixed": {
+            "type": "boolean",
+            "description": "Whether this is the server-managed fixed prompt."
+          }
+        },
+        "description": "A starter prompt returned in analyst search results. Includes the\nserver-managed fixed prompt (`is_fixed: true`, order 0)."
+      },
+      "AnalystUser": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "display_name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the user."
+          },
+          "name": {
+            "type": "string",
+            "description": "Username of the user."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Display name of the user."
+          }
+        },
+        "description": "A user reference returned in analyst search results."
       },
       "PrincipalRefInput": {
         "type": "object",
@@ -28724,7 +31073,7 @@
         "properties": {
           "variable_identifier": {
             "type": "string",
-            "description": "ID or Name of the variable"
+            "description": "ID, name, or object ID of the variable"
           },
           "variable_values": {
             "type": "array",
@@ -29065,7 +31414,15 @@
             "items": {
               "type": "string"
             },
-            "description": "Column IDs from the linked model to include in the table.\nPass an empty array to create an input table with no reference\ncolumns from the model."
+            "description": "Names of the columns on the linked model to include in the table,\nas they appear on the model. These become the input table's key\ncolumns: they are what the input table is joined to the model on,\nand what rows are matched on by updateInputTable. At least one is\nrequired — an empty array is rejected. A name must match exactly\none visible model column; a name matching none, or more than one,\nis rejected. Each must also resolve to exactly one physical base\ncolumn, so a formula, cohort, or constant model column cannot be\nreferenced."
+          },
+          "referenced_column_time_dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferencedColumnTimeDimension"
+            },
+            "description": "Optional per-column time dimension to persist at creation. Provide one\nentry per referenced date column that should open — and stay locked — at a\nspecific grain. Columns without an entry apply no bucketing (detailed).\nApplies to referenced model columns only; a column created through\nnew_columns always starts detailed.",
+            "nullable": true
           }
         },
         "description": "Definition of the input table schema."
@@ -29099,21 +31456,83 @@
             "items": {
               "type": "string"
             },
-            "description": "Optional list of permitted values for the column. When provided,\ndata written to this column is restricted to these values. Omit\nor leave empty to allow any value supported by the data type. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>",
+            "description": "Optional list of permitted values for the column, at most 500, which\nmakes it a fixed-choice column. Every non-empty value written into\nthe column by updateInputTable must then be an exact member of the\nlist, and the API rejects a write that is not. Each value must be\nnon-empty, at most 8192 characters, and representable as the column's\ndata_type — a number for the numeric types, true or false for BOOL,\nand an epoch integer for DATE, DATE_TIME, and TIME. Omit or leave\nempty to allow any value supported by the data type.",
             "nullable": true
           }
         },
         "description": "Schema definition for a single input column."
       },
+      "ReferencedColumnTimeDimension": {
+        "type": "object",
+        "required": [
+          "column_identifier",
+          "time_dimension"
+        ],
+        "properties": {
+          "column_identifier": {
+            "type": "string",
+            "description": "The referenced model column to restrict, named exactly as it is in\nreferenced_columns."
+          },
+          "time_dimension": {
+            "type": "string",
+            "enum": [
+              "HOURLY",
+              "DAILY",
+              "WEEKLY",
+              "MONTHLY",
+              "QUARTERLY",
+              "YEARLY"
+            ],
+            "description": "Time dimension (grain) to lock the column to. Applies to DATE and\nDATE_TIME columns; a grain on a TIME (time-of-day) column has no\nmeaning and is not supported. HOURLY needs a DATE_TIME column — on\na plain DATE column it is ignored and the column stays detailed."
+          }
+        },
+        "description": "Pins a referenced model date column to a specific time dimension (grain) in\nthe created input table."
+      },
       "InputTableResponse": {
         "type": "object",
         "properties": {
-          "input_table_identifier": {
+          "input_table_id": {
             "type": "string",
-            "description": "Unique ID of the newly created input table.",
+            "description": "Unique ID of the newly created input table. Pass it as the\ninput_table_identifier path parameter of the other input-table\noperations.",
+            "nullable": true
+          },
+          "input_columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnInfo"
+            },
+            "description": "Columns of the newly created input table, each with its name and unique\nID. Use these IDs to reference specific columns in follow-up calls (for\nexample, the column identifiers written by updateInputTable). Returned so\ncallers do not need a separate lookup to resolve a column name to its ID.",
+            "nullable": true
+          },
+          "message_info": {
+            "type": "string",
+            "description": "Note set when a referenced column had to be renamed to keep the input\ntable's column names unique — a model column name that occurs in more\nthan one base table is prefixed with its base table name. Absent when\nno column was renamed. Read it to learn the final name of a renamed\ncolumn, or read the name off input_columns.",
             "nullable": true
           }
         }
+      },
+      "InputColumnInfo": {
+        "type": "object",
+        "required": [
+          "name",
+          "id"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Display name of the column."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the column."
+          },
+          "mapped_column_id": {
+            "type": "string",
+            "description": "Unique ID of the model column this input column maps to (its join-key\nsource in the linked model). Empty for brand-new columns that do not map\nto any model column.",
+            "nullable": true
+          }
+        },
+        "description": "A single input table column, with its display name and unique ID. Returned\nby both createInputTable (all columns of the new table) and\ncreateInputTableColumn\n(the columns just added)."
       },
       "InputTableUpdateResponse": {
         "type": "object",
@@ -29126,6 +31545,38 @@
           }
         },
         "description": "Response returned after successfully writing rows to an input table."
+      },
+      "InputColumnDefinitionInput": {
+        "type": "object",
+        "required": [
+          "columns"
+        ],
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnSchemaInput"
+            },
+            "description": "New columns to create on the input table."
+          }
+        },
+        "description": "Definition of the new columns to add to an existing input table."
+      },
+      "InputColumnResponse": {
+        "type": "object",
+        "required": [
+          "columns"
+        ],
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnInfo"
+            },
+            "description": "Columns that were added to the input table."
+          }
+        },
+        "description": "Response returned after adding columns to an input table."
       },
       "PolicyProcessOptionsInput": {
         "type": "object",
@@ -29892,6 +32343,55 @@
         },
         "description": "Import details for a single formula."
       },
+      "FeatureAssignmentResponse": {
+        "type": "object",
+        "required": [
+          "feature_id",
+          "assigned_orgs"
+        ],
+        "properties": {
+          "feature_id": {
+            "type": "string",
+            "description": "Underlying unique feature ID. The dotted-path format (for example,\n`orion.embraceConfig.doIndexing`) is internal and subject to change without\nnotice; use `feature_name` as the stable display identifier where possible."
+          },
+          "feature_name": {
+            "type": "string",
+            "description": "User-friendly feature name. Present when the feature declares one.",
+            "nullable": true
+          },
+          "assigned_orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeatureOrgInfo"
+            },
+            "description": "Updated set of Orgs assigned to the feature."
+          }
+        },
+        "description": "Response returned when a feature's Org assignments are updated."
+      },
+      "FeatureValueResponse": {
+        "type": "object",
+        "required": [
+          "feature_id",
+          "feature_value"
+        ],
+        "properties": {
+          "feature_id": {
+            "type": "string",
+            "description": "Underlying unique feature ID. The dotted-path format (for example,\n`orion.embraceConfig.doIndexing`) is internal and subject to change without\nnotice; use `feature_name` as the stable display identifier where possible."
+          },
+          "feature_name": {
+            "type": "string",
+            "description": "User-friendly feature name. Present when the feature declares one.",
+            "nullable": true
+          },
+          "feature_value": {
+            "type": "string",
+            "description": "The value that was written."
+          }
+        },
+        "description": "Response returned when a feature's value is set."
+      },
       "Runtime_Filter": {
         "type": "object",
         "properties": {
@@ -29926,7 +32426,7 @@
         "type": "object",
         "properties": {
           "metadata_context": {
-            "description": "Context for the conversation.",
+            "description": "Context for the conversation. Required unless `analyst_identifier` is\nprovided; do not pass both.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ContextPayloadV2Input"
@@ -29940,11 +32440,59 @@
                 "$ref": "#/components/schemas/ConversationSettingsInput"
               }
             ]
+          },
+          "analyst_identifier": {
+            "description": "Unique identifier of the Spotter Analyst to start the conversation from.\nWhen provided, the conversation uses the analyst's configuration (data\nsources, agent instructions, and connectors), and `metadata_context`\nmust be omitted. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "type": "string"
           }
         },
         "required": [
-          "metadata_context",
           "conversation_settings"
+        ]
+      },
+      "CreateAnalystRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Display name of the analyst.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the analyst. Maximum 200 characters.",
+            "type": "string"
+          },
+          "instructions": {
+            "description": "Natural-language instructions that guide the agent's behavior for this\nanalyst.",
+            "type": "string"
+          },
+          "sources": {
+            "description": "Data sources the analyst can query. At least one is required, and the\ncaller must have view access to every referenced source.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalystSourceInput"
+            }
+          },
+          "mcp_connector_identifiers": {
+            "description": "Identifiers of MCP connectors to link to this analyst.",
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "starter_prompts": {
+            "description": "Plain-text starter prompts shown on the analyst landing page. Maximum 4,\neach between 10 and 250 characters; display order follows list position.",
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "sources"
         ]
       },
       "CreateConversationRequest": {
@@ -30108,6 +32656,92 @@
           }
         }
       },
+      "SearchAnalystsRequest": {
+        "type": "object",
+        "properties": {
+          "analyst_identifier": {
+            "description": "Unique identifier of an analyst. When provided, fetch mode: the response\ncontains exactly that analyst and the other filters are ignored.",
+            "type": "string"
+          },
+          "record_size": {
+            "description": "List mode: number of records per page. Default 50, maximum 500.",
+            "default": 50,
+            "type": "integer",
+            "format": "int32"
+          },
+          "record_offset": {
+            "description": "List mode: zero-based index of the first record to return.\nMaximum 10000.",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "query": {
+            "description": "List mode: case-insensitive substring match on the analyst name.",
+            "type": "string"
+          },
+          "type": {
+            "description": "List mode: ownership filter — ALL (created by or shared with me),\nCREATED_BY_ME, or SHARED_TO_ME.",
+            "default": "ALL",
+            "type": "string",
+            "enum": [
+              "ALL",
+              "CREATED_BY_ME",
+              "SHARED_TO_ME"
+            ]
+          }
+        }
+      },
+      "SearchConversationsRequest": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "description": "Text matched against the conversation title and transcript, from the first\ncharacter of a word. Omit it, or send an empty string, to list every\nconversation in scope.",
+            "type": "string"
+          },
+          "data_source_identifiers": {
+            "description": "Unique identifiers of data sources (models). A conversation matches when it\nran against any of them.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "analyst_ids": {
+            "description": "Unique identifiers of Spotter Analysts. A conversation matches when it ran\nagainst any of them.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "modified_after_time_in_millis": {
+            "description": "Only conversations last interacted with at or after this time\n(epoch milliseconds).",
+            "type": "object"
+          },
+          "modified_before_time_in_millis": {
+            "description": "Only conversations last interacted with before this time\n(epoch milliseconds).",
+            "type": "object"
+          },
+          "record_size": {
+            "description": "Number of records per page. Default 10, maximum 100.",
+            "default": 10,
+            "type": "integer",
+            "format": "int32"
+          },
+          "record_offset": {
+            "description": "Zero-based index of the first record to return. `record_offset` plus\n`record_size` must not exceed 10000.",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort_options": {
+            "description": "Order the matching conversations are returned in. Defaults to the most\nrecently updated conversation first.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConversationSortOptions"
+              }
+            ]
+          }
+        }
+      },
       "SendAgentConversationMessageRequest": {
         "type": "object",
         "properties": {
@@ -30222,6 +32856,21 @@
           "nl_instructions_info"
         ]
       },
+      "ShareAnalystRequest": {
+        "type": "object",
+        "properties": {
+          "permissions": {
+            "description": "Access changes to apply, one entry per principal. `principal.type` is\nrequired for analyst sharing, and `content_share_mode` does not apply\nto analysts and is ignored.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharePermissionsInput"
+            }
+          }
+        },
+        "required": [
+          "permissions"
+        ]
+      },
       "ShareConversationRequest": {
         "type": "object",
         "properties": {
@@ -30246,6 +32895,12 @@
             "items": {
               "$ref": "#/components/schemas/PrincipalRefInput"
             }
+          },
+          "notify_on_share": {
+            "description": "<div><span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span></div>\n\nWhen `true` (default), newly granted principals are notified of the share. When `false`, access is granted without sending a notification. Has no effect on principals passed in `revoke`. Does not re-notify a principal who already had access.",
+            "default": true,
+            "type": "boolean",
+            "nullable": true
           }
         },
         "required": [
@@ -30270,12 +32925,62 @@
           "metadata_identifier"
         ]
       },
+      "UpdateAnalystRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Display name of the analyst.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the analyst. Maximum 200 characters.",
+            "type": "string"
+          },
+          "instructions": {
+            "description": "Natural-language instructions that guide the agent's behavior for this\nanalyst. Omitting this field clears any existing instructions.",
+            "type": "string"
+          },
+          "sources": {
+            "description": "Data sources the analyst can query. At least one is required, and the\ncaller must have view access to every referenced source. Replaces the\nexisting list in full.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalystSourceInput"
+            }
+          },
+          "mcp_connector_identifiers": {
+            "description": "Identifiers of MCP connectors linked to this analyst. Replaces the\nexisting list in full; omit or pass an empty array to clear.",
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "starter_prompts": {
+            "description": "Plain-text starter prompts (max 4, each between 10 and 250 characters;\ndisplay order follows list position). Replaces the existing list in\nfull; omit or pass an empty array to clear.",
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "sources"
+        ]
+      },
       "UpdateConversationRequest": {
         "type": "object",
         "properties": {
           "title": {
-            "description": "New display title for the conversation. Omit to leave the title\nunchanged.",
+            "description": "New display title for the conversation. Omit to leave the title\nunchanged. An empty or whitespace-only value is replaced with a default\ntitle rather than rejected.",
             "type": "string"
+          },
+          "is_pinned": {
+            "description": "Pinned state of the conversation for the current user. Pinning marks a\nconversation for quick access: pinned conversations are surfaced first in\n`getConversationList`. Set to `true` to pin the conversation, `false` to\nunpin it, or omit to leave the pinned state unchanged. Applying the state\nthe conversation is already in is a no-op success. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "type": "boolean",
+            "nullable": true
           }
         }
       },
@@ -30335,6 +33040,14 @@
           "org_identifier": {
             "description": "ID or name of the Org context to log in to. If the Org ID or name is not specified but a secret key is provided, the user will be logged into the Org associated with the secret key. If neither the Org ID/name nor the secret key is provided, the user will be logged into the Org context from their previous login session.",
             "type": "string"
+          },
+          "scope": {
+            "description": "The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Only SPECIFIC_ORGS is supported for a custom (ABAC) token -- it authorizes the token for the Orgs listed in org_identifiers. Each subsequent request selects one Org from this set using the `X-Org-Selector` header. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenScopeInput"
+              }
+            ]
           },
           "persist_option": {
             "description": "Indicates whether the specified attributes should be persisted or not. RESET and NONE are not applicable if you are setting variable_values.",
@@ -30429,6 +33142,14 @@
             "type": "integer",
             "format": "int32"
           },
+          "scope": {
+            "description": "The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the `X-Org-Selector` header. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenScopeInput"
+              }
+            ]
+          },
           "email": {
             "description": "Email address of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning).",
             "type": "string"
@@ -30494,6 +33215,14 @@
             "description": "ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.",
             "type": "integer",
             "format": "int32"
+          },
+          "scope": {
+            "description": "The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the `X-Org-Selector` header. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenScopeInput"
+              }
+            ]
           },
           "email": {
             "description": "Email address of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning).",
@@ -31894,6 +34623,103 @@
           "template_properties"
         ]
       },
+      "SearchFeaturesRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Determines the administrative view for the search.\nUse CLUSTER for the cluster-admin view (returns org assignments per feature);\nuse ORG for the org-admin view (returns the current value of each feature\nassigned to the org).",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "org_identifier": {
+            "description": "Numeric ID of the Org to scope the search to. Required when scope is ORG;\nignored when scope is CLUSTER.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "category": {
+            "description": "Category of features to return. GENERAL_ACCESS returns features that are\ngenerally available; EARLY_ACCESS returns features still in early access.\nDefaults to GENERAL_ACCESS.",
+            "default": "GENERAL_ACCESS",
+            "type": "string",
+            "enum": [
+              "GENERAL_ACCESS",
+              "EARLY_ACCESS"
+            ]
+          }
+        },
+        "required": [
+          "scope"
+        ]
+      },
+      "UpdateFeatureAssignmentsRequest": {
+        "type": "object",
+        "properties": {
+          "feature_identifier": {
+            "description": "User-friendly feature name (feature_name) or the underlying feature ID\n(feature_id) of the feature whose Org assignments should be updated.",
+            "type": "string"
+          },
+          "org_identifiers": {
+            "description": "Numeric IDs of the Orgs to assign to the feature. Send an empty array with\noperation REPLACE to clear all Org assignments for this feature.",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "operation": {
+            "description": "Type of update to apply to the Org assignments. ADD assigns the given Orgs\nin addition to existing ones; REMOVE unassigns the given Orgs; REPLACE sets\nthe assignment to exactly the given Orgs. Defaults to REPLACE.",
+            "default": "REPLACE",
+            "type": "string",
+            "enum": [
+              "ADD",
+              "REMOVE",
+              "REPLACE"
+            ]
+          }
+        },
+        "required": [
+          "feature_identifier",
+          "org_identifiers"
+        ]
+      },
+      "UpdateFeatureValueRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Determines the scope at which the value is set. Use CLUSTER to set the\ncluster-level value; use ORG to set a per-Org value override.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "org_identifier": {
+            "description": "Numeric ID of the Org for which to set the value. Required when scope is\nORG; ignored when scope is CLUSTER.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "feature_identifier": {
+            "description": "User-friendly feature name (feature_name) or the underlying feature ID\n(feature_id) of the feature whose value should be set.",
+            "type": "string"
+          },
+          "feature_value": {
+            "description": "New value to set for the feature.",
+            "type": "string"
+          },
+          "reset_org_overrides": {
+            "description": "Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "scope",
+          "feature_identifier",
+          "feature_value"
+        ]
+      },
       "CreateUserGroupRequest": {
         "type": "object",
         "properties": {
@@ -32325,6 +35151,74 @@
             ]
           }
         }
+      },
+      "CreateInputTableRequest": {
+        "type": "object",
+        "properties": {
+          "table_name": {
+            "description": "Physical table name to create in the external warehouse.\nMust start with a letter or an underscore and contain only\nletters, digits, and underscores — no spaces or other\npunctuation — and be at most 128 characters.",
+            "type": "string"
+          },
+          "model_identifier": {
+            "description": "Unique ID or name of the model (worksheet) to link the\ninput table to.",
+            "type": "string"
+          },
+          "table_definition": {
+            "description": "Definition of the input table, including new columns\nand referenced model columns.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputTableDefinitionInput"
+              }
+            ]
+          }
+        },
+        "required": [
+          "table_name",
+          "model_identifier",
+          "table_definition"
+        ]
+      },
+      "CreateInputTableColumnRequest": {
+        "type": "object",
+        "properties": {
+          "column_definition": {
+            "description": "Definition of the new columns to add to the input table.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputColumnDefinitionInput"
+              }
+            ]
+          }
+        },
+        "required": [
+          "column_definition"
+        ]
+      },
+      "UpdateInputTableRequest": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "description": "Names of the columns being written, in the same order as\nthe values in each row. Must name every key column (the\ncolumns mapped from the linked model), since rows are\nmatched on those, and at least one non-key column, since\nkey columns are matched on but never assigned to.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rows": {
+            "description": "Rows to write into the input table. Each row is an array\nof string values aligned positionally with columns. A DATE\ncell takes an ISO calendar date (yyyy-MM-dd), which is\nstored with no time-zone conversion; an epoch number is\nalso accepted, but a single column must use the same form\nin every row. DATE_TIME and TIME cells take an epoch\nnumber only.",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "columns",
+          "rows"
+        ]
       },
       "SearchChannelHistoryRequest": {
         "type": "object",
@@ -32979,6 +35873,11 @@
           "dependent_objects_record_size": {
             "description": "The maximum number of dependents to include per metadata object.",
             "default": 50,
+            "type": "integer",
+            "format": "int32"
+          },
+          "dependent_objects_record_offset": {
+            "description": "Optional. The number of dependents to skip per metadata object before collecting them,\nso that dependents can be fetched in bounded pages. Combine with\ndependent_objects_record_size as the page size, and keep requesting pages until\ndependent_objects_is_last_batch is true. When this offset is supplied, a\ndependent_objects_record_size of 0 means the cluster default page size. Omit it to keep\nthe pre-paging behaviour. A negative value is rejected. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
             "type": "integer",
             "format": "int32"
           },
@@ -35392,7 +38291,7 @@
             }
           },
           "skip_validation": {
-            "description": "Skip validations of objects to be published.",
+            "description": "Skip parameterization validation. By default publishing requires an underlying\nLOGICAL_TABLE or DATA_SOURCE to carry a template variable with a value for every\ntarget org, so each org resolves its own data. Without parameterization every target\norg reads the owner org's data through the owner org's connection. Set this to true\nonly when that is intended.",
             "type": "boolean",
             "nullable": true
           }
@@ -35569,7 +38468,8 @@
             "description": "CDW connector type.",
             "type": "string",
             "enum": [
-              "RDBMS_SNOWFLAKE"
+              "RDBMS_SNOWFLAKE",
+              "RDBMS_DATABRICKS"
             ]
           },
           "description": {
@@ -36623,7 +39523,7 @@
         "type": "object",
         "properties": {
           "identifiers": {
-            "description": "Unique id(s) or name(s) of the variable(s) to delete",
+            "description": "Unique id(s), name(s), or object id(s) of the variable(s) to delete",
             "type": "array",
             "items": {
               "type": "string"
@@ -37189,8 +40089,17 @@
               "DISABLED"
             ]
           },
+          "operation": {
+            "description": "Operation to perform. REPLACE (default) updates the provided fields. RESET\nclears the sections in reset_options and accepts no other field. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "default": "REPLACE",
+            "type": "string",
+            "enum": [
+              "REPLACE",
+              "RESET"
+            ]
+          },
           "reset_options": {
-            "description": "List of optional configuration sections to clear. Each value removes the\ncorresponding configuration entirely from the webhook: AUTHENTICATION\nremoves the authentication config, SIGNATURE_VERIFICATION removes the\nsignature verification config, STORAGE_DESTINATION removes the storage\ndestination config. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
+            "description": "Sections to clear when operation is RESET. Each value removes that\nconfiguration from the webhook entirely. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
             "type": "array",
             "items": {
               "type": "string",
