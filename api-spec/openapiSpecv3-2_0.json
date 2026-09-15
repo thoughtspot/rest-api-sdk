@@ -10075,6 +10075,389 @@
         }
       }
     },
+    "/api/rest/2.0/customization/links/search": {
+      "post": {
+        "operationId": "searchLinkCustomizations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nRetrieves the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the org the caller is signed in to. Use it to check what an org has customized before changing it, or to confirm where a scheduled email or a Share dialog will link to.\n\nCluster-level templates are the default an org inherits. Org-level templates take precedence over that default.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary org.\n- `scope: ORG` returns the templates for the org the caller is signed in to, and requires Orgs to be enabled.\n- Omit `scope` to return whichever of these the caller can access.\n- Every link type is always returned, customized or not. `is_overridden` is `true` when the value differs from the one that scope would otherwise inherit, and `false` when it matches.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Link Customization",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchLinkCustomizationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Link preferences retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LinkPreference"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "scope": "CLUSTER",
+                        "templates": [
+                          {
+                            "type": "LIVEBOARD_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/pinboard/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "VISUALIZATION_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/pinboard/{object-id}/{sub-object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "ANSWER_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/saved-answer/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "SPOTIQ_ANALYSIS_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insight/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "UNSUBSCRIBE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/user-preference?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "GENERIC_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/{path}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "CONVERSATION_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insights/conv-assist/s/{conversation-id}?{ts-query-params}",
+                            "is_overridden": false
+                          }
+                        ]
+                      },
+                      {
+                        "scope": "ORG",
+                        "org": {
+                          "id": 1234567890,
+                          "name": "Sales"
+                        },
+                        "templates": [
+                          {
+                            "type": "LIVEBOARD_SHARE_URL",
+                            "value": "https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}",
+                            "is_overridden": true
+                          },
+                          {
+                            "type": "VISUALIZATION_SHARE_URL",
+                            "value": "https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}",
+                            "is_overridden": true
+                          },
+                          {
+                            "type": "ANSWER_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/saved-answer/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "SPOTIQ_ANALYSIS_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insight/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "UNSUBSCRIBE_URL",
+                            "value": "https://analytics.acme.com/account/email-preferences",
+                            "is_overridden": true
+                          },
+                          {
+                            "type": "GENERIC_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/{path}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "CONVERSATION_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insights/conv-assist/s/{conversation-id}?{ts-query-params}",
+                            "is_overridden": false
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10002,
+                            "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "debug": "[\"Cross-org operations are not supported.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10097,
+                            "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                            "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                            "debug": "[\"Authentication required to retrieve link templates for the cluster or org.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10086,
+                            "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                            "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                            "debug": "[\"Cluster config can only be accessed from PRIMARY org.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10038,
+                            "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                            "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                            "debug": "[\"Unexpected server error while retrieving link templates.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/links/update": {
+      "post": {
+        "operationId": "updateLinkCustomizations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nUpdates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the org the caller is signed in to. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- `scope: CLUSTER` changes the defaults inherited by all orgs, and is available only to callers in the primary org.\n- `scope: ORG` (default) changes the org the caller is signed in to, and requires Orgs to be enabled.\n- This is a partial update. Only the types listed in `templates` change; every other type keeps the value it resolves to today, whether that value was set at this scope or is inherited. A repeated type is rejected.\n- **REPLACE** (default) sets each listed type to its `value`.\n- **RESET** clears each listed type so it falls back to the value its scope inherits. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`.\n\n#### Placeholders\n\nA template is rejected unless it contains the placeholders its type requires. Types are listed in the order the response returns them.\n\n| Link type | Required | Example |\n| --- | --- | --- |\n| `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` |\n| `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` |\n| `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` |\n| `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` |\n| `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` |\n| `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` |\n| `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |\n\n`{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Link Customization",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLinkCustomizationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Link preferences updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "missing_placeholder": {
+                    "summary": "Template is missing a required placeholder",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10002,
+                            "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "debug": "[\"Invalid template for GENERIC_URL: value must contain {path}.\"]"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "value_with_reset": {
+                    "summary": "Value supplied alongside RESET",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10002,
+                            "incident_id_guid": "e5f67890-1234-5678-efab-567890123456",
+                            "trace_id_guid": "e5f67890-1234-5678-efab-567890123456",
+                            "debug": "[\"Field 'value' must not be supplied for RESET operation for type: UNSUBSCRIBE_URL.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10097,
+                            "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                            "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                            "debug": "[\"Authentication required to update link templates for the cluster or org.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10023,
+                            "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                            "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                            "debug": "[\"Cannot access embed settings: ThoughtSpot Embedded is not enabled for this cluster.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10038,
+                            "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                            "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                            "debug": "[\"Unexpected server error while updating link templates.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
@@ -21378,9 +21761,10 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
               "INSIGHT_SPEC",
-              "COLLECTION"
+              "COLLECTION",
+              "TEMPLATE_VARIABLE"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects",
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects\n12. TEMPLATE_VARIABLE for template variable objects",
             "nullable": true
           },
           "subtypes": {
@@ -21448,9 +21832,10 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
               "INSIGHT_SPEC",
-              "COLLECTION"
+              "COLLECTION",
+              "TEMPLATE_VARIABLE"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects"
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects\n12. TEMPLATE_VARIABLE for template variable objects"
           }
         }
       },
@@ -21533,7 +21918,8 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
               "INSIGHT_SPEC",
-              "COLLECTION"
+              "COLLECTION",
+              "TEMPLATE_VARIABLE"
             ],
             "description": "Type of the metadata."
           },
@@ -21776,13 +22162,13 @@
               "A4",
               "CONTINUOUS"
             ],
-            "description": "Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "description": "Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
             "nullable": true
           },
           "zoom_level": {
             "type": "integer",
             "format": "int32",
-            "description": "Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "description": "Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
             "nullable": true
           },
           "include_cover_page": {
@@ -21855,19 +22241,19 @@
           "image_resolution": {
             "type": "integer",
             "format": "int32",
-            "description": "Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+            "description": "Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
             "nullable": true
           },
           "image_scale": {
             "type": "integer",
             "format": "int32",
-            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
             "nullable": true
           },
           "include_header": {
             "type": "boolean",
             "default": false,
-            "description": "Indicates whether to include the header of the liveboard. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+            "description": "Indicates whether to include the header of the liveboard. <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
             "nullable": true
           }
         }
@@ -22226,19 +22612,19 @@
           "x_resolution": {
             "type": "integer",
             "format": "int32",
-            "description": "Desired width of the answer image in pixels. Ex. 1920 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "Desired width of the answer image in pixels. Ex. 1920 for Full HD image <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "nullable": true
           },
           "y_resolution": {
             "type": "integer",
             "format": "int32",
-            "description": "Desired height of the answer image in pixels. Ex. 1080 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "Desired height of the answer image in pixels. Ex. 1080 for Full HD image <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "nullable": true
           },
           "scaling": {
             "type": "integer",
             "format": "int32",
-            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "nullable": true
           }
         }
@@ -26418,6 +26804,68 @@
         },
         "description": "Visualization areas assigned to a font, grouped by org context."
       },
+      "LinkPreference": {
+        "type": "object",
+        "required": [
+          "scope",
+          "templates"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ],
+            "description": "Scope these link templates apply to."
+          },
+          "org": {
+            "$ref": "#/components/schemas/Org",
+            "description": "Org these link templates belong to. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "templates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkTemplate"
+            },
+            "description": "Effective URL template for every link type at this scope. All types are always\npresent."
+          }
+        },
+        "description": "Link templates for a single scope."
+      },
+      "LinkTemplate": {
+        "type": "object",
+        "required": [
+          "type",
+          "is_overridden"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SHARE_URL",
+              "VISUALIZATION_SHARE_URL",
+              "ANSWER_SHARE_URL",
+              "SPOTIQ_ANALYSIS_URL",
+              "UNSUBSCRIBE_URL",
+              "GENERIC_URL",
+              "CONVERSATION_SHARE_URL"
+            ],
+            "description": "The link type this template applies to."
+          },
+          "value": {
+            "type": "string",
+            "description": "The effective URL template at the requested scope.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True when the value differs from the one this scope would otherwise inherit."
+          }
+        },
+        "description": "A URL template with its link type and whether it is set at the requested scope."
+      },
       "SemanticIntegrationSortOptions": {
         "type": "object",
         "properties": {
@@ -28425,7 +28873,8 @@
               "USER_GROUP",
               "COLLECTION",
               "ROLE",
-              "TEMPLATE_VARIABLE"
+              "TEMPLATE_VARIABLE",
+              "PERSONALISED_VIEW"
             ],
             "description": "Optional type of the header object.",
             "nullable": true
@@ -28482,7 +28931,8 @@
               "USER_GROUP",
               "COLLECTION",
               "ROLE",
-              "TEMPLATE_VARIABLE"
+              "TEMPLATE_VARIABLE",
+              "PERSONALISED_VIEW"
             ],
             "description": "Type of metadata. Required if metadata_identifier is name of the object.",
             "nullable": true
@@ -32021,6 +32471,33 @@
         },
         "description": "A visualization area assignment affected by a font deletion."
       },
+      "LinkTemplateInput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SHARE_URL",
+              "VISUALIZATION_SHARE_URL",
+              "ANSWER_SHARE_URL",
+              "SPOTIQ_ANALYSIS_URL",
+              "UNSUBSCRIBE_URL",
+              "GENERIC_URL",
+              "CONVERSATION_SHARE_URL"
+            ],
+            "description": "The link type this entry applies to."
+          },
+          "value": {
+            "type": "string",
+            "description": "URL template to set, including the placeholders this type requires. Required under\nREPLACE; supplying it with RESET is rejected.",
+            "nullable": true
+          }
+        },
+        "description": "One link type to act on, and the URL template to set for it under REPLACE."
+      },
       "SemanticIntegrationResponse": {
         "type": "object",
         "properties": {
@@ -35034,6 +35511,53 @@
           "channel_type"
         ]
       },
+      "SearchLinkCustomizationsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope to retrieve. CLUSTER returns the cluster templates and is available only in the\nprimary org. ORG returns the templates for the org the caller is signed in to. Omit to\nreturn whichever of these the caller can access.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        }
+      },
+      "UpdateLinkCustomizationsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and\nis available only in the primary org. ORG applies to the org the caller is signed in to.",
+            "default": "ORG",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "operation": {
+            "description": "Operation to perform. REPLACE sets each listed type to its value. RESET reverts each\nlisted type to the value its scope inherits.",
+            "default": "REPLACE",
+            "type": "string",
+            "enum": [
+              "REPLACE",
+              "RESET"
+            ]
+          },
+          "templates": {
+            "description": "Link types to act on. This is a partial update: types not listed keep the value they\nresolve to today. Duplicate entries for the same type are rejected.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkTemplateInput"
+            }
+          }
+        },
+        "required": [
+          "scope",
+          "templates"
+        ]
+      },
       "FetchLogsRequest": {
         "type": "object",
         "properties": {
@@ -35960,7 +36484,7 @@
             ]
           },
           "png_options": {
-            "description": "Options for PNG export. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "Options for PNG export. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AnswerPngOptionsInput"
@@ -35968,11 +36492,11 @@
             ]
           },
           "personalised_view_identifier": {
-            "description": "GUID or name of the personalised view of the Answer object. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "GUID or name of the personalised view of the Answer object. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "type": "string"
           },
           "type": {
-            "description": "Type of the answer being exported. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "Type of the answer being exported. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "default": "SAVED",
             "type": "string",
             "enum": [
