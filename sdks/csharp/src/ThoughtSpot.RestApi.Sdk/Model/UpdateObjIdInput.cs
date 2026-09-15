@@ -103,7 +103,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum TEMPLATEVARIABLE for value: TEMPLATE_VARIABLE
             /// </summary>
             [EnumMember(Value = "TEMPLATE_VARIABLE")]
-            TEMPLATEVARIABLE = 11
+            TEMPLATEVARIABLE = 11,
+
+            /// <summary>
+            /// Enum PERSONALISEDVIEW for value: PERSONALISED_VIEW
+            /// </summary>
+            [EnumMember(Value = "PERSONALISED_VIEW")]
+            PERSONALISEDVIEW = 12
         }
 
 

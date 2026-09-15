@@ -42,8 +42,8 @@ class MetadataSearchResponse(BaseModel):
     @field_validator('metadata_type')
     def metadata_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC', 'COLLECTION']):
-            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC', 'COLLECTION')")
+        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC', 'COLLECTION', 'TEMPLATE_VARIABLE']):
+            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'TAG', 'USER', 'USER_GROUP', 'LOGICAL_RELATIONSHIP', 'INSIGHT_SPEC', 'COLLECTION', 'TEMPLATE_VARIABLE')")
         return value
 
     model_config = ConfigDict(

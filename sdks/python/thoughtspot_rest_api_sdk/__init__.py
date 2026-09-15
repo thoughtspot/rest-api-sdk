@@ -324,6 +324,9 @@ __all__ = [
     "JWTUserOptions",
     "JWTUserOptionsFull",
     "JobRecipient",
+    "LinkPreference",
+    "LinkTemplate",
+    "LinkTemplateInput",
     "LiveboardContent",
     "LiveboardDataResponse",
     "LiveboardOptions",
@@ -444,6 +447,7 @@ __all__ = [
     "SearchDatasetsResponseItem",
     "SearchEmailCustomizationRequest",
     "SearchFeaturesRequest",
+    "SearchLinkCustomizationsRequest",
     "SearchMetadataRequest",
     "SearchOrgsRequest",
     "SearchRoleResponse",
@@ -552,6 +556,7 @@ __all__ = [
     "UpdateFeatureAssignmentsRequest",
     "UpdateFeatureValueRequest",
     "UpdateInputTableRequest",
+    "UpdateLinkCustomizationRequest",
     "UpdateMetadataHeaderRequest",
     "UpdateMetadataObjIdRequest",
     "UpdateObjIdInput",
@@ -917,6 +922,9 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.jwt_user_options import JWTUserOptions as JWTUserOptions
     from thoughtspot_rest_api_sdk.models.jwt_user_options_full import JWTUserOptionsFull as JWTUserOptionsFull
     from thoughtspot_rest_api_sdk.models.job_recipient import JobRecipient as JobRecipient
+    from thoughtspot_rest_api_sdk.models.link_preference import LinkPreference as LinkPreference
+    from thoughtspot_rest_api_sdk.models.link_template import LinkTemplate as LinkTemplate
+    from thoughtspot_rest_api_sdk.models.link_template_input import LinkTemplateInput as LinkTemplateInput
     from thoughtspot_rest_api_sdk.models.liveboard_content import LiveboardContent as LiveboardContent
     from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse as LiveboardDataResponse
     from thoughtspot_rest_api_sdk.models.liveboard_options import LiveboardOptions as LiveboardOptions
@@ -1037,6 +1045,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.search_datasets_response_item import SearchDatasetsResponseItem as SearchDatasetsResponseItem
     from thoughtspot_rest_api_sdk.models.search_email_customization_request import SearchEmailCustomizationRequest as SearchEmailCustomizationRequest
     from thoughtspot_rest_api_sdk.models.search_features_request import SearchFeaturesRequest as SearchFeaturesRequest
+    from thoughtspot_rest_api_sdk.models.search_link_customizations_request import SearchLinkCustomizationsRequest as SearchLinkCustomizationsRequest
     from thoughtspot_rest_api_sdk.models.search_metadata_request import SearchMetadataRequest as SearchMetadataRequest
     from thoughtspot_rest_api_sdk.models.search_orgs_request import SearchOrgsRequest as SearchOrgsRequest
     from thoughtspot_rest_api_sdk.models.search_role_response import SearchRoleResponse as SearchRoleResponse
@@ -1145,6 +1154,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.update_feature_assignments_request import UpdateFeatureAssignmentsRequest as UpdateFeatureAssignmentsRequest
     from thoughtspot_rest_api_sdk.models.update_feature_value_request import UpdateFeatureValueRequest as UpdateFeatureValueRequest
     from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest as UpdateInputTableRequest
+    from thoughtspot_rest_api_sdk.models.update_link_customization_request import UpdateLinkCustomizationRequest as UpdateLinkCustomizationRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest as UpdateMetadataHeaderRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest as UpdateMetadataObjIdRequest
     from thoughtspot_rest_api_sdk.models.update_obj_id_input import UpdateObjIdInput as UpdateObjIdInput
@@ -1516,6 +1526,9 @@ from thoughtspot_rest_api_sdk.models.jwt_parameter import JWTParameter as JWTPar
 from thoughtspot_rest_api_sdk.models.jwt_user_options import JWTUserOptions as JWTUserOptions
 from thoughtspot_rest_api_sdk.models.jwt_user_options_full import JWTUserOptionsFull as JWTUserOptionsFull
 from thoughtspot_rest_api_sdk.models.job_recipient import JobRecipient as JobRecipient
+from thoughtspot_rest_api_sdk.models.link_preference import LinkPreference as LinkPreference
+from thoughtspot_rest_api_sdk.models.link_template import LinkTemplate as LinkTemplate
+from thoughtspot_rest_api_sdk.models.link_template_input import LinkTemplateInput as LinkTemplateInput
 from thoughtspot_rest_api_sdk.models.liveboard_content import LiveboardContent as LiveboardContent
 from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse as LiveboardDataResponse
 from thoughtspot_rest_api_sdk.models.liveboard_options import LiveboardOptions as LiveboardOptions
@@ -1636,6 +1649,7 @@ from thoughtspot_rest_api_sdk.models.search_data_response import SearchDataRespo
 from thoughtspot_rest_api_sdk.models.search_datasets_response_item import SearchDatasetsResponseItem as SearchDatasetsResponseItem
 from thoughtspot_rest_api_sdk.models.search_email_customization_request import SearchEmailCustomizationRequest as SearchEmailCustomizationRequest
 from thoughtspot_rest_api_sdk.models.search_features_request import SearchFeaturesRequest as SearchFeaturesRequest
+from thoughtspot_rest_api_sdk.models.search_link_customizations_request import SearchLinkCustomizationsRequest as SearchLinkCustomizationsRequest
 from thoughtspot_rest_api_sdk.models.search_metadata_request import SearchMetadataRequest as SearchMetadataRequest
 from thoughtspot_rest_api_sdk.models.search_orgs_request import SearchOrgsRequest as SearchOrgsRequest
 from thoughtspot_rest_api_sdk.models.search_role_response import SearchRoleResponse as SearchRoleResponse
@@ -1744,6 +1758,7 @@ from thoughtspot_rest_api_sdk.models.update_email_customization_request import U
 from thoughtspot_rest_api_sdk.models.update_feature_assignments_request import UpdateFeatureAssignmentsRequest as UpdateFeatureAssignmentsRequest
 from thoughtspot_rest_api_sdk.models.update_feature_value_request import UpdateFeatureValueRequest as UpdateFeatureValueRequest
 from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest as UpdateInputTableRequest
+from thoughtspot_rest_api_sdk.models.update_link_customization_request import UpdateLinkCustomizationRequest as UpdateLinkCustomizationRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest as UpdateMetadataHeaderRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest as UpdateMetadataObjIdRequest
 from thoughtspot_rest_api_sdk.models.update_obj_id_input import UpdateObjIdInput as UpdateObjIdInput

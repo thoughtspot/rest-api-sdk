@@ -81,7 +81,9 @@ public class MetadataSearchResponse implements Serializable {
     
     INSIGHT_SPEC("INSIGHT_SPEC"),
     
-    COLLECTION("COLLECTION");
+    COLLECTION("COLLECTION"),
+    
+    TEMPLATE_VARIABLE("TEMPLATE_VARIABLE");
 
     private String value;
 

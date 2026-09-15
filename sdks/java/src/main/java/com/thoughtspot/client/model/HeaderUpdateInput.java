@@ -82,7 +82,9 @@ public class HeaderUpdateInput implements Serializable {
     
     ROLE("ROLE"),
     
-    TEMPLATE_VARIABLE("TEMPLATE_VARIABLE");
+    TEMPLATE_VARIABLE("TEMPLATE_VARIABLE"),
+    
+    PERSONALISED_VIEW("PERSONALISED_VIEW");
 
     private String value;
 

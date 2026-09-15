@@ -72,9 +72,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         [DataMember(Name = "file_format", EmitDefaultValue = false)]
         public FileFormatEnum? FileFormat { get; set; }
         /// <summary>
-        /// Type of the answer being exported.   Version: 26.6.0.cl or later 
+        /// Type of the answer being exported.    Version: 26.6.0.cl or later 
         /// </summary>
-        /// <value>Type of the answer being exported.   Version: 26.6.0.cl or later </value>
+        /// <value>Type of the answer being exported.    Version: 26.6.0.cl or later </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -93,9 +93,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
 
 
         /// <summary>
-        /// Type of the answer being exported.   Version: 26.6.0.cl or later 
+        /// Type of the answer being exported.    Version: 26.6.0.cl or later 
         /// </summary>
-        /// <value>Type of the answer being exported.   Version: 26.6.0.cl or later </value>
+        /// <value>Type of the answer being exported.    Version: 26.6.0.cl or later </value>
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
@@ -109,9 +109,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="runtimeSort">JSON string representing runtime sort. { sortCol1: region, asc1 :true, sortCol2 : date }.</param>
         /// <param name="runtimeParamOverride">JSON object for setting values of parameters in runtime..</param>
         /// <param name="regionalSettings">Options for specific region specific overrides to support date/number/string/currency formatting..</param>
-        /// <param name="pngOptions">Options for PNG export.   Version: 26.6.0.cl or later .</param>
-        /// <param name="personalisedViewIdentifier">GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later .</param>
-        /// <param name="type">Type of the answer being exported.   Version: 26.6.0.cl or later  (default to TypeEnum.SAVED).</param>
+        /// <param name="pngOptions">Options for PNG export.    Version: 26.6.0.cl or later .</param>
+        /// <param name="personalisedViewIdentifier">GUID or name of the personalised view of the Answer object.    Version: 26.6.0.cl or later .</param>
+        /// <param name="type">Type of the answer being exported.    Version: 26.6.0.cl or later  (default to TypeEnum.SAVED).</param>
         public ExportAnswerReportRequest(string metadataIdentifier = default, string sessionIdentifier = default, int generationNumber = default, FileFormatEnum? fileFormat = FileFormatEnum.CSV, Object runtimeFilter = default, Object runtimeSort = default, Object runtimeParamOverride = default, RegionalSettingsInput regionalSettings = default, AnswerPngOptionsInput pngOptions = default, string personalisedViewIdentifier = default, TypeEnum? type = TypeEnum.SAVED)
         {
             this.MetadataIdentifier = metadataIdentifier;
@@ -178,16 +178,16 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public RegionalSettingsInput RegionalSettings { get; set; }
 
         /// <summary>
-        /// Options for PNG export.   Version: 26.6.0.cl or later 
+        /// Options for PNG export.    Version: 26.6.0.cl or later 
         /// </summary>
-        /// <value>Options for PNG export.   Version: 26.6.0.cl or later </value>
+        /// <value>Options for PNG export.    Version: 26.6.0.cl or later </value>
         [DataMember(Name = "png_options", EmitDefaultValue = false)]
         public AnswerPngOptionsInput PngOptions { get; set; }
 
         /// <summary>
-        /// GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later 
+        /// GUID or name of the personalised view of the Answer object.    Version: 26.6.0.cl or later 
         /// </summary>
-        /// <value>GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later </value>
+        /// <value>GUID or name of the personalised view of the Answer object.    Version: 26.6.0.cl or later </value>
         [DataMember(Name = "personalised_view_identifier", EmitDefaultValue = false)]
         public string PersonalisedViewIdentifier { get; set; }
 

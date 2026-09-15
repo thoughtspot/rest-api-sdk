@@ -153,7 +153,7 @@ public class ExportAnswerReportRequest implements Serializable {
   private String personalisedViewIdentifier;
 
   /**
-   * Type of the answer being exported.   Version: 26.6.0.cl or later 
+   * Type of the answer being exported.    Version: 26.6.0.cl or later 
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
@@ -370,7 +370,7 @@ public class ExportAnswerReportRequest implements Serializable {
   }
 
   /**
-   * Options for PNG export.   Version: 26.6.0.cl or later 
+   * Options for PNG export.    Version: 26.6.0.cl or later 
    * @return pngOptions
    */
   @javax.annotation.Nullable
@@ -389,7 +389,7 @@ public class ExportAnswerReportRequest implements Serializable {
   }
 
   /**
-   * GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later 
+   * GUID or name of the personalised view of the Answer object.    Version: 26.6.0.cl or later 
    * @return personalisedViewIdentifier
    */
   @javax.annotation.Nullable
@@ -408,7 +408,7 @@ public class ExportAnswerReportRequest implements Serializable {
   }
 
   /**
-   * Type of the answer being exported.   Version: 26.6.0.cl or later 
+   * Type of the answer being exported.    Version: 26.6.0.cl or later 
    * @return type
    */
   @javax.annotation.Nullable

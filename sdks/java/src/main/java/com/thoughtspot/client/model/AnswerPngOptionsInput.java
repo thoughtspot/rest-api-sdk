@@ -68,7 +68,7 @@ public class AnswerPngOptionsInput implements Serializable {
   }
 
   /**
-   * Desired width of the answer image in pixels. Ex. 1920 for Full HD image   Version: 26.6.0.cl or later 
+   * Desired width of the answer image in pixels. Ex. 1920 for Full HD image    Version: 26.6.0.cl or later 
    * @return xResolution
    */
   @javax.annotation.Nullable
@@ -87,7 +87,7 @@ public class AnswerPngOptionsInput implements Serializable {
   }
 
   /**
-   * Desired height of the answer image in pixels. Ex. 1080 for Full HD image   Version: 26.6.0.cl or later 
+   * Desired height of the answer image in pixels. Ex. 1080 for Full HD image    Version: 26.6.0.cl or later 
    * @return yResolution
    */
   @javax.annotation.Nullable
@@ -106,7 +106,7 @@ public class AnswerPngOptionsInput implements Serializable {
   }
 
   /**
-   * The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 26.6.0.cl or later 
+   * The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 26.6.0.cl or later 
    * @return scaling
    */
   @javax.annotation.Nullable

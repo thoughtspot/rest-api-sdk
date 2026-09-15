@@ -298,6 +298,9 @@ __export(typescript_exports, {
   JWTUserOptionsFull: () => JWTUserOptionsFull,
   JobRecipient: () => JobRecipient,
   JobsApi: () => PromiseJobsApi,
+  LinkPreference: () => LinkPreference,
+  LinkTemplate: () => LinkTemplate,
+  LinkTemplateInput: () => LinkTemplateInput,
   LiveboardContent: () => LiveboardContent,
   LiveboardDataResponse: () => LiveboardDataResponse,
   LiveboardOptions: () => LiveboardOptions,
@@ -428,6 +431,7 @@ __export(typescript_exports, {
   SearchDatasetsResponseItem: () => SearchDatasetsResponseItem,
   SearchEmailCustomizationRequest: () => SearchEmailCustomizationRequest,
   SearchFeaturesRequest: () => SearchFeaturesRequest,
+  SearchLinkCustomizationsRequest: () => SearchLinkCustomizationsRequest,
   SearchMetadataRequest: () => SearchMetadataRequest,
   SearchOrgsRequest: () => SearchOrgsRequest,
   SearchRoleResponse: () => SearchRoleResponse,
@@ -544,6 +548,7 @@ __export(typescript_exports, {
   UpdateFeatureAssignmentsRequest: () => UpdateFeatureAssignmentsRequest,
   UpdateFeatureValueRequest: () => UpdateFeatureValueRequest,
   UpdateInputTableRequest: () => UpdateInputTableRequest,
+  UpdateLinkCustomizationRequest: () => UpdateLinkCustomizationRequest,
   UpdateMetadataHeaderRequest: () => UpdateMetadataHeaderRequest,
   UpdateMetadataObjIdRequest: () => UpdateMetadataObjIdRequest,
   UpdateObjIdInput: () => UpdateObjIdInput,
@@ -10373,6 +10378,96 @@ _JobRecipient.attributeTypeMap = [
 ];
 var JobRecipient = _JobRecipient;
 
+// models/LinkPreference.ts
+var _LinkPreference = class _LinkPreference {
+  static getAttributeTypeMap() {
+    return _LinkPreference.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_LinkPreference.discriminator = void 0;
+_LinkPreference.mapping = void 0;
+_LinkPreference.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "LinkPreferenceScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "Org",
+    "format": ""
+  },
+  {
+    "name": "templates",
+    "baseName": "templates",
+    "type": "Array<LinkTemplate>",
+    "format": ""
+  }
+];
+var LinkPreference = _LinkPreference;
+
+// models/LinkTemplate.ts
+var _LinkTemplate = class _LinkTemplate {
+  static getAttributeTypeMap() {
+    return _LinkTemplate.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_LinkTemplate.discriminator = void 0;
+_LinkTemplate.mapping = void 0;
+_LinkTemplate.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "LinkTemplateTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "value",
+    "baseName": "value",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "is_overridden",
+    "baseName": "is_overridden",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var LinkTemplate = _LinkTemplate;
+
+// models/LinkTemplateInput.ts
+var _LinkTemplateInput = class _LinkTemplateInput {
+  static getAttributeTypeMap() {
+    return _LinkTemplateInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_LinkTemplateInput.discriminator = void 0;
+_LinkTemplateInput.mapping = void 0;
+_LinkTemplateInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "LinkTemplateInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "value",
+    "baseName": "value",
+    "type": "string",
+    "format": ""
+  }
+];
+var LinkTemplateInput = _LinkTemplateInput;
+
 // models/LiveboardContent.ts
 var _LiveboardContent = class _LiveboardContent {
   static getAttributeTypeMap() {
@@ -14680,6 +14775,26 @@ _SearchFeaturesRequest.attributeTypeMap = [
   }
 ];
 var SearchFeaturesRequest = _SearchFeaturesRequest;
+
+// models/SearchLinkCustomizationsRequest.ts
+var _SearchLinkCustomizationsRequest = class _SearchLinkCustomizationsRequest {
+  static getAttributeTypeMap() {
+    return _SearchLinkCustomizationsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchLinkCustomizationsRequest.discriminator = void 0;
+_SearchLinkCustomizationsRequest.mapping = void 0;
+_SearchLinkCustomizationsRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "SearchLinkCustomizationsRequestScopeEnum",
+    "format": ""
+  }
+];
+var SearchLinkCustomizationsRequest = _SearchLinkCustomizationsRequest;
 
 // models/SearchMetadataRequest.ts
 var _SearchMetadataRequest = class _SearchMetadataRequest {
@@ -19331,6 +19446,38 @@ _UpdateInputTableRequest.attributeTypeMap = [
 ];
 var UpdateInputTableRequest = _UpdateInputTableRequest;
 
+// models/UpdateLinkCustomizationRequest.ts
+var _UpdateLinkCustomizationRequest = class _UpdateLinkCustomizationRequest {
+  static getAttributeTypeMap() {
+    return _UpdateLinkCustomizationRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateLinkCustomizationRequest.discriminator = void 0;
+_UpdateLinkCustomizationRequest.mapping = void 0;
+_UpdateLinkCustomizationRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "UpdateLinkCustomizationRequestScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "UpdateLinkCustomizationRequestOperationEnum",
+    "format": ""
+  },
+  {
+    "name": "templates",
+    "baseName": "templates",
+    "type": "Array<LinkTemplateInput>",
+    "format": ""
+  }
+];
+var UpdateLinkCustomizationRequest = _UpdateLinkCustomizationRequest;
+
 // models/UpdateMetadataHeaderRequest.ts
 var _UpdateMetadataHeaderRequest = class _UpdateMetadataHeaderRequest {
   static getAttributeTypeMap() {
@@ -22218,6 +22365,9 @@ var enumsMap = /* @__PURE__ */ new Set([
   "InputColumnSchemaInputTypeEnum",
   "JWTMetadataObjectTypeEnum",
   "JobRecipientTypeEnum",
+  "LinkPreferenceScopeEnum",
+  "LinkTemplateTypeEnum",
+  "LinkTemplateInputTypeEnum",
   "MaintenanceScheduleInfoStatusEnum",
   "MaintenanceScheduleInfoTypeEnum",
   "ManageObjectPrivilegeRequestOperationEnum",
@@ -22285,6 +22435,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchDataRequestDataFormatEnum",
   "SearchFeaturesRequestScopeEnum",
   "SearchFeaturesRequestCategoryEnum",
+  "SearchLinkCustomizationsRequestScopeEnum",
   "SearchMetadataRequestDependentObjectVersionEnum",
   "SearchMetadataRequestLiveboardResponseVersionEnum",
   "SearchOrgsRequestVisibilityEnum",
@@ -22359,6 +22510,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateCustomActionRequestOperationEnum",
   "UpdateFeatureAssignmentsRequestOperationEnum",
   "UpdateFeatureValueRequestScopeEnum",
+  "UpdateLinkCustomizationRequestScopeEnum",
+  "UpdateLinkCustomizationRequestOperationEnum",
   "UpdateObjIdInputTypeEnum",
   "UpdateOrgRequestOperationEnum",
   "UpdateRoleRequestPrivilegesEnum",
@@ -22671,6 +22824,9 @@ var typeMap = {
   "JWTUserOptions": JWTUserOptions,
   "JWTUserOptionsFull": JWTUserOptionsFull,
   "JobRecipient": JobRecipient,
+  "LinkPreference": LinkPreference,
+  "LinkTemplate": LinkTemplate,
+  "LinkTemplateInput": LinkTemplateInput,
   "LiveboardContent": LiveboardContent,
   "LiveboardDataResponse": LiveboardDataResponse,
   "LiveboardOptions": LiveboardOptions,
@@ -22791,6 +22947,7 @@ var typeMap = {
   "SearchDatasetsResponseItem": SearchDatasetsResponseItem,
   "SearchEmailCustomizationRequest": SearchEmailCustomizationRequest,
   "SearchFeaturesRequest": SearchFeaturesRequest,
+  "SearchLinkCustomizationsRequest": SearchLinkCustomizationsRequest,
   "SearchMetadataRequest": SearchMetadataRequest,
   "SearchOrgsRequest": SearchOrgsRequest,
   "SearchRoleResponse": SearchRoleResponse,
@@ -22899,6 +23056,7 @@ var typeMap = {
   "UpdateFeatureAssignmentsRequest": UpdateFeatureAssignmentsRequest,
   "UpdateFeatureValueRequest": UpdateFeatureValueRequest,
   "UpdateInputTableRequest": UpdateInputTableRequest,
+  "UpdateLinkCustomizationRequest": UpdateLinkCustomizationRequest,
   "UpdateMetadataHeaderRequest": UpdateMetadataHeaderRequest,
   "UpdateMetadataObjIdRequest": UpdateMetadataObjIdRequest,
   "UpdateObjIdInput": UpdateObjIdInput,
@@ -33046,7 +33204,7 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest 
    */
   async parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
@@ -33114,7 +33272,7 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest 
    */
   async unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
@@ -35626,7 +35784,7 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest 
    */
   async publishMetadata(publishMetadataRequest, _options) {
@@ -35694,7 +35852,7 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest 
    */
   async unpublishMetadata(unpublishMetadataRequest, _options) {
@@ -42372,7 +42530,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest 
    */
   async parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
@@ -42406,7 +42564,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest 
    */
   async publishMetadata(publishMetadataRequest, _options) {
@@ -44041,7 +44199,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest 
    */
   async unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
@@ -44075,7 +44233,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest 
    */
   async unpublishMetadata(unpublishMetadataRequest, _options) {
@@ -62871,7 +63029,7 @@ var ObservableMetadataApi = class {
     return this.parameterizeMetadataWithHttpInfo(parameterizeMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options) {
@@ -62890,7 +63048,7 @@ var ObservableMetadataApi = class {
     }));
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
@@ -62923,7 +63081,7 @@ var ObservableMetadataApi = class {
     return this.searchMetadataWithHttpInfo(searchMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest, _options) {
@@ -62942,7 +63100,7 @@ var ObservableMetadataApi = class {
     }));
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
@@ -63562,7 +63720,7 @@ var ObservableSecurityApi = class {
     return this.manageObjectPrivilegeWithHttpInfo(manageObjectPrivilegeRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadataWithHttpInfo(publishMetadataRequest, _options) {
@@ -63581,7 +63739,7 @@ var ObservableSecurityApi = class {
     }));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadata(publishMetadataRequest, _options) {
@@ -63614,7 +63772,7 @@ var ObservableSecurityApi = class {
     return this.shareMetadataWithHttpInfo(shareMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadataWithHttpInfo(unpublishMetadataRequest, _options) {
@@ -63633,7 +63791,7 @@ var ObservableSecurityApi = class {
     }));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadata(unpublishMetadataRequest, _options) {
@@ -67339,7 +67497,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.parameterizeMetadataWithHttpInfo(parameterizeMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options) {
@@ -67358,14 +67516,14 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
     return this.parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadataWithHttpInfo(publishMetadataRequest, _options) {
@@ -67384,7 +67542,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadata(publishMetadataRequest, _options) {
@@ -68607,7 +68765,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.unassignTagWithHttpInfo(unassignTagRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest, _options) {
@@ -68626,14 +68784,14 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
     return this.unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadataWithHttpInfo(unpublishMetadataRequest, _options) {
@@ -68652,7 +68810,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadata(unpublishMetadataRequest, _options) {
@@ -72607,7 +72765,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options) {
@@ -72616,7 +72774,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
@@ -72643,7 +72801,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest, _options) {
@@ -72652,7 +72810,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
@@ -73088,7 +73246,7 @@ var PromiseSecurityApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadataWithHttpInfo(publishMetadataRequest, _options) {
@@ -73097,7 +73255,7 @@ var PromiseSecurityApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadata(publishMetadataRequest, _options) {
@@ -73124,7 +73282,7 @@ var PromiseSecurityApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadataWithHttpInfo(unpublishMetadataRequest, _options) {
@@ -73133,7 +73291,7 @@ var PromiseSecurityApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadata(unpublishMetadataRequest, _options) {
@@ -75719,7 +75877,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options) {
@@ -75728,7 +75886,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
@@ -75737,7 +75895,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadataWithHttpInfo(publishMetadataRequest, _options) {
@@ -75746,7 +75904,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadata(publishMetadataRequest, _options) {
@@ -76603,7 +76761,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest, _options) {
@@ -76612,7 +76770,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
@@ -76621,7 +76779,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadataWithHttpInfo(unpublishMetadataRequest, _options) {
@@ -76630,7 +76788,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadata(unpublishMetadataRequest, _options) {
@@ -78271,6 +78429,9 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   JWTUserOptionsFull,
   JobRecipient,
   JobsApi,
+  LinkPreference,
+  LinkTemplate,
+  LinkTemplateInput,
   LiveboardContent,
   LiveboardDataResponse,
   LiveboardOptions,
@@ -78401,6 +78562,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   SearchDatasetsResponseItem,
   SearchEmailCustomizationRequest,
   SearchFeaturesRequest,
+  SearchLinkCustomizationsRequest,
   SearchMetadataRequest,
   SearchOrgsRequest,
   SearchRoleResponse,
@@ -78517,6 +78679,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   UpdateFeatureAssignmentsRequest,
   UpdateFeatureValueRequest,
   UpdateInputTableRequest,
+  UpdateLinkCustomizationRequest,
   UpdateMetadataHeaderRequest,
   UpdateMetadataObjIdRequest,
   UpdateObjIdInput,

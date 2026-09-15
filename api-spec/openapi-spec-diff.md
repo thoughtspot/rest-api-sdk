@@ -3,6 +3,14 @@
 
 ## API Changes
 
+### POST /api/rest/2.0/customization/links/search
+-  endpoint added
+
+
+### POST /api/rest/2.0/customization/links/update
+-  endpoint added
+
+
 ### POST /api/rest/2.0/groups/import
 -  added the new optional request property `groups/items/role_identifiers`
 
@@ -27,9 +35,20 @@
 -  endpoint added
 
 
+### POST /api/rest/2.0/metadata/headers/update
+-  added the new `PERSONALISED_VIEW` enum value to the request property `headers_update/items/type`
+
+
 ### POST /api/rest/2.0/metadata/search
+- :warning: added the new `TEMPLATE_VARIABLE` enum value to the `items/metadata_type` response property for the response status `200`
 -  added the new optional request property `dependent_objects_record_offset`
+-  added the new `TEMPLATE_VARIABLE` enum value to the request property `exclude_objects/items/type`
+-  added the new `TEMPLATE_VARIABLE` enum value to the request property `metadata/items/type`
 -  added the optional property `items/dependent_objects_is_last_batch` to the response with the `200` status
+
+
+### POST /api/rest/2.0/metadata/update-obj-id
+-  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
 
 
 ### GET /api/rest/2.0/system

@@ -140,7 +140,7 @@ public class PngOptionsInput implements Serializable {
   }
 
   /**
-   * Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image   Version: 10.9.0.cl or later 
+   * Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image    Version: 10.9.0.cl or later 
    * @return imageResolution
    */
   @javax.annotation.Nullable
@@ -159,7 +159,7 @@ public class PngOptionsInput implements Serializable {
   }
 
   /**
-   * The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 10.9.0.cl or later 
+   * The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 10.9.0.cl or later 
    * @return imageScale
    */
   @javax.annotation.Nullable
@@ -178,7 +178,7 @@ public class PngOptionsInput implements Serializable {
   }
 
   /**
-   * Indicates whether to include the header of the liveboard.   Version: 10.9.0.cl or later 
+   * Indicates whether to include the header of the liveboard.    Version: 10.9.0.cl or later 
    * @return includeHeader
    */
   @javax.annotation.Nullable

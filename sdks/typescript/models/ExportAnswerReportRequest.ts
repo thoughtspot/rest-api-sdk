@@ -48,15 +48,15 @@ export class ExportAnswerReportRequest {
     */
     'regional_settings'?: RegionalSettingsInput;
     /**
-    * Options for PNG export.   Version: 26.6.0.cl or later 
+    * Options for PNG export.    Version: 26.6.0.cl or later 
     */
     'png_options'?: AnswerPngOptionsInput;
     /**
-    * GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later 
+    * GUID or name of the personalised view of the Answer object.    Version: 26.6.0.cl or later 
     */
     'personalised_view_identifier'?: string;
     /**
-    * Type of the answer being exported.   Version: 26.6.0.cl or later 
+    * Type of the answer being exported.    Version: 26.6.0.cl or later 
     */
     'type'?: ExportAnswerReportRequestTypeEnum;
 

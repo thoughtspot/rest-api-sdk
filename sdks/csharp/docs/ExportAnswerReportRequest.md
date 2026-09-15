@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **RuntimeSort** | **Object** | JSON string representing runtime sort. { sortCol1: region, asc1 :true, sortCol2 : date } | [optional] 
 **RuntimeParamOverride** | **Object** | JSON object for setting values of parameters in runtime. | [optional] 
 **RegionalSettings** | [**RegionalSettingsInput**](RegionalSettingsInput.md) | Options for specific region specific overrides to support date/number/string/currency formatting. | [optional] 
-**PngOptions** | [**AnswerPngOptionsInput**](AnswerPngOptionsInput.md) | Options for PNG export.   Version: 26.6.0.cl or later  | [optional] 
-**PersonalisedViewIdentifier** | **string** | GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later  | [optional] 
-**Type** | **string** | Type of the answer being exported.   Version: 26.6.0.cl or later  | [optional] [default to TypeEnum.SAVED]
+**PngOptions** | [**AnswerPngOptionsInput**](AnswerPngOptionsInput.md) | Options for PNG export.    Version: 26.6.0.cl or later  | [optional] 
+**PersonalisedViewIdentifier** | **string** | GUID or name of the personalised view of the Answer object.    Version: 26.6.0.cl or later  | [optional] 
+**Type** | **string** | Type of the answer being exported.    Version: 26.6.0.cl or later  | [optional] [default to TypeEnum.SAVED]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

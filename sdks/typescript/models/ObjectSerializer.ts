@@ -257,6 +257,9 @@ export * from '../models/JWTParameter';
 export * from '../models/JWTUserOptions';
 export * from '../models/JWTUserOptionsFull';
 export * from '../models/JobRecipient';
+export * from '../models/LinkPreference';
+export * from '../models/LinkTemplate';
+export * from '../models/LinkTemplateInput';
 export * from '../models/LiveboardContent';
 export * from '../models/LiveboardDataResponse';
 export * from '../models/LiveboardOptions';
@@ -377,6 +380,7 @@ export * from '../models/SearchDataResponse';
 export * from '../models/SearchDatasetsResponseItem';
 export * from '../models/SearchEmailCustomizationRequest';
 export * from '../models/SearchFeaturesRequest';
+export * from '../models/SearchLinkCustomizationsRequest';
 export * from '../models/SearchMetadataRequest';
 export * from '../models/SearchOrgsRequest';
 export * from '../models/SearchRoleResponse';
@@ -485,6 +489,7 @@ export * from '../models/UpdateEmailCustomizationRequest';
 export * from '../models/UpdateFeatureAssignmentsRequest';
 export * from '../models/UpdateFeatureValueRequest';
 export * from '../models/UpdateInputTableRequest';
+export * from '../models/UpdateLinkCustomizationRequest';
 export * from '../models/UpdateMetadataHeaderRequest';
 export * from '../models/UpdateMetadataObjIdRequest';
 export * from '../models/UpdateObjIdInput';
@@ -803,6 +808,9 @@ import { JWTParameter } from '../models/JWTParameter';
 import { JWTUserOptions } from '../models/JWTUserOptions';
 import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
 import { JobRecipient, JobRecipientTypeEnum      } from '../models/JobRecipient';
+import { LinkPreference, LinkPreferenceScopeEnum     } from '../models/LinkPreference';
+import { LinkTemplate, LinkTemplateTypeEnum     } from '../models/LinkTemplate';
+import { LinkTemplateInput, LinkTemplateInputTypeEnum    } from '../models/LinkTemplateInput';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';
 import { LiveboardOptions } from '../models/LiveboardOptions';
@@ -923,6 +931,7 @@ import { SearchDataResponse } from '../models/SearchDataResponse';
 import { SearchDatasetsResponseItem } from '../models/SearchDatasetsResponseItem';
 import { SearchEmailCustomizationRequest } from '../models/SearchEmailCustomizationRequest';
 import { SearchFeaturesRequest, SearchFeaturesRequestScopeEnum   , SearchFeaturesRequestCategoryEnum   } from '../models/SearchFeaturesRequest';
+import { SearchLinkCustomizationsRequest, SearchLinkCustomizationsRequestScopeEnum   } from '../models/SearchLinkCustomizationsRequest';
 import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                       , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
 import { SearchOrgsRequest  , SearchOrgsRequestVisibilityEnum  , SearchOrgsRequestStatusEnum    } from '../models/SearchOrgsRequest';
 import { SearchRoleResponse       , SearchRoleResponsePrivilegesEnum  , SearchRoleResponsePermissionEnum            } from '../models/SearchRoleResponse';
@@ -1031,6 +1040,7 @@ import { UpdateEmailCustomizationRequest } from '../models/UpdateEmailCustomizat
 import { UpdateFeatureAssignmentsRequest  , UpdateFeatureAssignmentsRequestOperationEnum   } from '../models/UpdateFeatureAssignmentsRequest';
 import { UpdateFeatureValueRequest, UpdateFeatureValueRequestScopeEnum       } from '../models/UpdateFeatureValueRequest';
 import { UpdateInputTableRequest } from '../models/UpdateInputTableRequest';
+import { UpdateLinkCustomizationRequest, UpdateLinkCustomizationRequestScopeEnum  , UpdateLinkCustomizationRequestOperationEnum    } from '../models/UpdateLinkCustomizationRequest';
 import { UpdateMetadataHeaderRequest } from '../models/UpdateMetadataHeaderRequest';
 import { UpdateMetadataObjIdRequest } from '../models/UpdateMetadataObjIdRequest';
 import { UpdateObjIdInput , UpdateObjIdInputTypeEnum     } from '../models/UpdateObjIdInput';
@@ -1218,6 +1228,9 @@ let enumsMap: Set<string> = new Set<string>([
     "InputColumnSchemaInputTypeEnum",
     "JWTMetadataObjectTypeEnum",
     "JobRecipientTypeEnum",
+    "LinkPreferenceScopeEnum",
+    "LinkTemplateTypeEnum",
+    "LinkTemplateInputTypeEnum",
     "MaintenanceScheduleInfoStatusEnum",
     "MaintenanceScheduleInfoTypeEnum",
     "ManageObjectPrivilegeRequestOperationEnum",
@@ -1285,6 +1298,7 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchDataRequestDataFormatEnum",
     "SearchFeaturesRequestScopeEnum",
     "SearchFeaturesRequestCategoryEnum",
+    "SearchLinkCustomizationsRequestScopeEnum",
     "SearchMetadataRequestDependentObjectVersionEnum",
     "SearchMetadataRequestLiveboardResponseVersionEnum",
     "SearchOrgsRequestVisibilityEnum",
@@ -1359,6 +1373,8 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateCustomActionRequestOperationEnum",
     "UpdateFeatureAssignmentsRequestOperationEnum",
     "UpdateFeatureValueRequestScopeEnum",
+    "UpdateLinkCustomizationRequestScopeEnum",
+    "UpdateLinkCustomizationRequestOperationEnum",
     "UpdateObjIdInputTypeEnum",
     "UpdateOrgRequestOperationEnum",
     "UpdateRoleRequestPrivilegesEnum",
@@ -1672,6 +1688,9 @@ let typeMap: {[index: string]: any} = {
     "JWTUserOptions": JWTUserOptions,
     "JWTUserOptionsFull": JWTUserOptionsFull,
     "JobRecipient": JobRecipient,
+    "LinkPreference": LinkPreference,
+    "LinkTemplate": LinkTemplate,
+    "LinkTemplateInput": LinkTemplateInput,
     "LiveboardContent": LiveboardContent,
     "LiveboardDataResponse": LiveboardDataResponse,
     "LiveboardOptions": LiveboardOptions,
@@ -1792,6 +1811,7 @@ let typeMap: {[index: string]: any} = {
     "SearchDatasetsResponseItem": SearchDatasetsResponseItem,
     "SearchEmailCustomizationRequest": SearchEmailCustomizationRequest,
     "SearchFeaturesRequest": SearchFeaturesRequest,
+    "SearchLinkCustomizationsRequest": SearchLinkCustomizationsRequest,
     "SearchMetadataRequest": SearchMetadataRequest,
     "SearchOrgsRequest": SearchOrgsRequest,
     "SearchRoleResponse": SearchRoleResponse,
@@ -1900,6 +1920,7 @@ let typeMap: {[index: string]: any} = {
     "UpdateFeatureAssignmentsRequest": UpdateFeatureAssignmentsRequest,
     "UpdateFeatureValueRequest": UpdateFeatureValueRequest,
     "UpdateInputTableRequest": UpdateInputTableRequest,
+    "UpdateLinkCustomizationRequest": UpdateLinkCustomizationRequest,
     "UpdateMetadataHeaderRequest": UpdateMetadataHeaderRequest,
     "UpdateMetadataObjIdRequest": UpdateMetadataObjIdRequest,
     "UpdateObjIdInput": UpdateObjIdInput,

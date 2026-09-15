@@ -157,7 +157,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+        ///   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="publishMetadataRequest"></param>
@@ -168,7 +168,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+        ///   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="publishMetadataRequest"></param>
@@ -199,7 +199,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+        ///   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="unpublishMetadataRequest"></param>
@@ -210,7 +210,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+        ///   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="unpublishMetadataRequest"></param>
@@ -388,7 +388,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+        ///   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="publishMetadataRequest"></param>
@@ -400,7 +400,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+        ///   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="publishMetadataRequest"></param>
@@ -434,7 +434,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+        ///   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="unpublishMetadataRequest"></param>
@@ -446,7 +446,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
-        ///   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+        ///   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="unpublishMetadataRequest"></param>
@@ -1803,7 +1803,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
-        ///    Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+        ///    Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="publishMetadataRequest"></param>
@@ -1814,7 +1814,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///    Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+        ///    Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="publishMetadataRequest"></param>
@@ -1864,7 +1864,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///    Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+        ///    Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="publishMetadataRequest"></param>
@@ -1876,7 +1876,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///    Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+        ///    Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="publishMetadataRequest"></param>
@@ -2059,7 +2059,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
-        ///    Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+        ///    Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="unpublishMetadataRequest"></param>
@@ -2070,7 +2070,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///    Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+        ///    Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="unpublishMetadataRequest"></param>
@@ -2120,7 +2120,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///    Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+        ///    Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="unpublishMetadataRequest"></param>
@@ -2132,7 +2132,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        ///    Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+        ///    Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="unpublishMetadataRequest"></param>

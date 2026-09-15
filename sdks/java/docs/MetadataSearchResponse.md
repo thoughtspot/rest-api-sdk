@@ -37,6 +37,7 @@ Metadata Search Response Object.
 | LOGICAL_RELATIONSHIP | &quot;LOGICAL_RELATIONSHIP&quot; |
 | INSIGHT_SPEC | &quot;INSIGHT_SPEC&quot; |
 | COLLECTION | &quot;COLLECTION&quot; |
+| TEMPLATE_VARIABLE | &quot;TEMPLATE_VARIABLE&quot; |
 
 
 ## Implemented Interfaces
