@@ -9283,7 +9283,7 @@ paths:
   /api/rest/2.0/metadata/parameterize-fields:
     post:
       description: "\nParameterize multiple fields of metadata objects. For example\
-        \ [schemaName, databaseName] for LOGICAL_TABLE. \n  Version: 26.5.0.cl or\
+        \ [schemaName, databaseName] for LOGICAL_TABLE. \n  Version: 26.10.0.cl or\
         \ later\n\n\nAllows parameterizing multiple fields of metadata objects in\
         \ ThoughtSpot. For example, you can parameterize [schemaName, databaseName]\
         \ for LOGICAL_TABLE.\n\nRequires appropriate permissions to modify the metadata\
@@ -9432,7 +9432,7 @@ paths:
   /api/rest/2.0/metadata/unparameterize:
     post:
       description: "\nRemove parameterization from fields in metadata objects. \n\
-        \  Version: 26.5.0.cl or later\n\n\nAllows removing parameterization from\
+        \  Version: 26.10.0.cl or later\n\n\nAllows removing parameterization from\
         \ fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions\
         \ to modify the metadata object.\n\nThe API endpoint allows unparameterizing\
         \ the following types of metadata objects:\n* Logical Tables\n* Connections\n\
@@ -11086,7 +11086,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.5.0.cl or later
+         Version: 26.10.0.cl or later
 
 
         Allows publishing metadata objects across organizations in ThoughtSpot.
@@ -11370,7 +11370,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.5.0.cl or later
+         Version: 26.10.0.cl or later
 
 
         Allows unpublishing metadata objects from organizations in ThoughtSpot.
@@ -16318,7 +16318,9 @@ paths:
          Version: 10.14.0.cl or later
 
 
-        Updates an existing webhook configuration by its unique id or name. Only the provided fields will be updated.
+        Updates an existing webhook configuration by its unique id or name. With the default `REPLACE` operation, only the provided fields are updated.
+
+        Use the `RESET` operation with `reset_options` to clear an optional configuration section, such as authentication or the storage destination. A `RESET` request cannot carry any other field.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.
 
@@ -35069,8 +35071,11 @@ components:
         extended_preferences:
           description: Preferences for the user
         trigger_welcome_email:
-          description: Flag to indicate whether welcome email should be sent to user.
-            This parameter is applied only on clusters on which IAM is disabled.
+          description: "Flag to indicate whether a welcome email should be sent to\
+            \ the user. This parameter applies only on clusters where IAMv2 is not\
+            \ enabled. If the flag details are not specified, then it defaults to\
+            \ true. However, a welcome email is sent only when welcome email notifications\
+            \ are enabled on the cluster and the user has a valid email address."
           nullable: true
           type: boolean
         trigger_activation_email:

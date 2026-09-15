@@ -4,34 +4,52 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for ValidateCommunicationChannelRequest */
+/**
+ * Model tests for ValidateCommunicationChannelRequest
+ */
 public class ValidateCommunicationChannelRequestTest {
-    private final ValidateCommunicationChannelRequest model =
-            new ValidateCommunicationChannelRequest();
+    private final ValidateCommunicationChannelRequest model = new ValidateCommunicationChannelRequest();
 
-    /** Model tests for ValidateCommunicationChannelRequest */
+    /**
+     * Model tests for ValidateCommunicationChannelRequest
+     */
     @Test
     public void testValidateCommunicationChannelRequest() {
         // TODO: test ValidateCommunicationChannelRequest
     }
 
-    /** Test the property 'channelType' */
+    /**
+     * Test the property 'channelType'
+     */
     @Test
     public void channelTypeTest() {
         // TODO: test channelType
     }
 
-    /** Test the property 'channelIdentifier' */
+    /**
+     * Test the property 'channelIdentifier'
+     */
     @Test
     public void channelIdentifierTest() {
         // TODO: test channelIdentifier
     }
 
-    /** Test the property 'eventType' */
+    /**
+     * Test the property 'eventType'
+     */
     @Test
     public void eventTypeTest() {
         // TODO: test eventType
     }
+
 }
