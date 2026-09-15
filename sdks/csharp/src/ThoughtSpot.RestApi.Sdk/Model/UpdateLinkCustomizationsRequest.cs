@@ -27,15 +27,15 @@ using OpenAPIDateConverter = ThoughtSpot.RestApi.Sdk.Client.OpenAPIDateConverter
 namespace ThoughtSpot.RestApi.Sdk.Model
 {
     /// <summary>
-    /// UpdateLinkCustomizationRequest
+    /// UpdateLinkCustomizationsRequest
     /// </summary>
-    [DataContract(Name = "UpdateLinkCustomizationRequest")]
-    public partial class UpdateLinkCustomizationRequest : IValidatableObject
+    [DataContract(Name = "UpdateLinkCustomizationsRequest")]
+    public partial class UpdateLinkCustomizationsRequest : IValidatableObject
     {
         /// <summary>
-        /// Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the authenticated user&#39;s org.
+        /// Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the org the caller is signed in to.
         /// </summary>
-        /// <value>Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the authenticated user&#39;s org.</value>
+        /// <value>Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the org the caller is signed in to.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ScopeEnum
         {
@@ -54,9 +54,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
 
 
         /// <summary>
-        /// Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the authenticated user&#39;s org.
+        /// Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the org the caller is signed in to.
         /// </summary>
-        /// <value>Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the authenticated user&#39;s org.</value>
+        /// <value>Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the org the caller is signed in to.</value>
         [DataMember(Name = "scope", IsRequired = true, EmitDefaultValue = true)]
         public ScopeEnum Scope { get; set; }
         /// <summary>
@@ -87,26 +87,26 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         [DataMember(Name = "operation", EmitDefaultValue = false)]
         public OperationEnum? Operation { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="UpdateLinkCustomizationRequest" /> class.
+        /// Initializes a new instance of the <see cref="UpdateLinkCustomizationsRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected UpdateLinkCustomizationRequest()
+        protected UpdateLinkCustomizationsRequest()
         {
             this.AdditionalProperties = new Dictionary<string, object>();
         }
         /// <summary>
-        /// Initializes a new instance of the <see cref="UpdateLinkCustomizationRequest" /> class.
+        /// Initializes a new instance of the <see cref="UpdateLinkCustomizationsRequest" /> class.
         /// </summary>
-        /// <param name="scope">Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the authenticated user&#39;s org. (required) (default to ScopeEnum.ORG).</param>
+        /// <param name="scope">Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the org the caller is signed in to. (required) (default to ScopeEnum.ORG).</param>
         /// <param name="operation">Operation to perform. REPLACE sets each listed type to its value. RESET reverts each listed type to the value its scope inherits. (default to OperationEnum.REPLACE).</param>
-        /// <param name="templates">Link types to act on. Types not listed are left unchanged. Duplicate entries for the same type are rejected. (required).</param>
-        public UpdateLinkCustomizationRequest(ScopeEnum scope = ScopeEnum.ORG, OperationEnum? operation = OperationEnum.REPLACE, List<LinkTemplateInput> templates = default)
+        /// <param name="templates">Link types to act on. This is a partial update: types not listed keep the value they resolve to today. Duplicate entries for the same type are rejected. (required).</param>
+        public UpdateLinkCustomizationsRequest(ScopeEnum scope = ScopeEnum.ORG, OperationEnum? operation = OperationEnum.REPLACE, List<LinkTemplateInput> templates = default)
         {
             this.Scope = scope;
             // to ensure "templates" is required (not null)
             if (templates == null)
             {
-                throw new ArgumentNullException("templates is a required property for UpdateLinkCustomizationRequest and cannot be null");
+                throw new ArgumentNullException("templates is a required property for UpdateLinkCustomizationsRequest and cannot be null");
             }
             this.Templates = templates;
             this.Operation = operation;
@@ -114,9 +114,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Link types to act on. Types not listed are left unchanged. Duplicate entries for the same type are rejected.
+        /// Link types to act on. This is a partial update: types not listed keep the value they resolve to today. Duplicate entries for the same type are rejected.
         /// </summary>
-        /// <value>Link types to act on. Types not listed are left unchanged. Duplicate entries for the same type are rejected.</value>
+        /// <value>Link types to act on. This is a partial update: types not listed keep the value they resolve to today. Duplicate entries for the same type are rejected.</value>
         [DataMember(Name = "templates", IsRequired = true, EmitDefaultValue = true)]
         public List<LinkTemplateInput> Templates { get; set; }
 
@@ -133,7 +133,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class UpdateLinkCustomizationRequest {\n");
+            sb.Append("class UpdateLinkCustomizationsRequest {\n");
             sb.Append("  Scope: ").Append(Scope).Append("\n");
             sb.Append("  Operation: ").Append(Operation).Append("\n");
             sb.Append("  Templates: ").Append(Templates).Append("\n");

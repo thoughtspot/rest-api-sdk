@@ -10,7 +10,7 @@ A URL template with its link type and whether it is set at the requested scope.
 |------------ | ------------- | ------------- | -------------|
 |**type** | [**TypeEnum**](#TypeEnum) | The link type this template applies to. |  |
 |**value** | **String** | The effective URL template at the requested scope. |  [optional] |
-|**isOverridden** | **Boolean** | True if set at this scope, false if inherited. |  |
+|**isOverridden** | **Boolean** | True when the value differs from the one this scope would otherwise inherit. |  |
 
 
 

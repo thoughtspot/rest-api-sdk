@@ -13,17 +13,17 @@
 import { LinkTemplateInput } from '../models/LinkTemplateInput';
 import { HttpFile } from '../http/http';
 
-export class UpdateLinkCustomizationRequest {
+export class UpdateLinkCustomizationsRequest {
     /**
-    * Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the authenticated user\'s org.
+    * Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the org the caller is signed in to.
     */
-    'scope': UpdateLinkCustomizationRequestScopeEnum;
+    'scope': UpdateLinkCustomizationsRequestScopeEnum;
     /**
     * Operation to perform. REPLACE sets each listed type to its value. RESET reverts each listed type to the value its scope inherits.
     */
-    'operation'?: UpdateLinkCustomizationRequestOperationEnum;
+    'operation'?: UpdateLinkCustomizationsRequestOperationEnum;
     /**
-    * Link types to act on. Types not listed are left unchanged. Duplicate entries for the same type are rejected.
+    * Link types to act on. This is a partial update: types not listed keep the value they resolve to today. Duplicate entries for the same type are rejected.
     */
     'templates': Array<LinkTemplateInput>;
 
@@ -35,13 +35,13 @@ export class UpdateLinkCustomizationRequest {
         {
             "name": "scope",
             "baseName": "scope",
-            "type": "UpdateLinkCustomizationRequestScopeEnum",
+            "type": "UpdateLinkCustomizationsRequestScopeEnum",
             "format": ""
         },
         {
             "name": "operation",
             "baseName": "operation",
-            "type": "UpdateLinkCustomizationRequestOperationEnum",
+            "type": "UpdateLinkCustomizationsRequestOperationEnum",
             "format": ""
         },
         {
@@ -52,13 +52,13 @@ export class UpdateLinkCustomizationRequest {
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateLinkCustomizationRequest.attributeTypeMap;
+        return UpdateLinkCustomizationsRequest.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
 
-    export type UpdateLinkCustomizationRequestScopeEnum = "CLUSTER" | "ORG" ;
-    export type UpdateLinkCustomizationRequestOperationEnum = "REPLACE" | "RESET" ;
+    export type UpdateLinkCustomizationsRequestScopeEnum = "CLUSTER" | "ORG" ;
+    export type UpdateLinkCustomizationsRequestOperationEnum = "REPLACE" | "RESET" ;
 

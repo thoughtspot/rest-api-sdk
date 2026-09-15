@@ -25590,7 +25590,8 @@ components:
           nullable: true
           type: string
         is_overridden:
-          description: "True if set at this scope, false if inherited."
+          description: True when the value differs from the one this scope would otherwise
+            inherit.
           type: boolean
       required:
       - is_overridden
@@ -34682,21 +34683,21 @@ components:
       properties:
         scope:
           description: |-
-            Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the
-            primary org. ORG returns the authenticated user's org. Omit to return every scope
-            the caller can reach.
+            Scope to retrieve. CLUSTER returns the cluster templates and is available only in the
+            primary org. ORG returns the templates for the org the caller is signed in to. Omit to
+            return whichever of these the caller can access.
           enum:
           - CLUSTER
           - ORG
           type: string
       type: object
-    UpdateLinkCustomizationRequest:
+    UpdateLinkCustomizationsRequest:
       properties:
         scope:
           default: ORG
           description: |-
             Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and
-            is available only in the primary org. ORG applies to the authenticated user's org.
+            is available only in the primary org. ORG applies to the org the caller is signed in to.
           enum:
           - CLUSTER
           - ORG
@@ -34712,8 +34713,8 @@ components:
           type: string
         templates:
           description: |-
-            Link types to act on. Types not listed are left unchanged. Duplicate entries for the
-            same type are rejected.
+            Link types to act on. This is a partial update: types not listed keep the value they
+            resolve to today. Duplicate entries for the same type are rejected.
           items:
             $ref: '#/components/schemas/LinkTemplateInput'
           type: array

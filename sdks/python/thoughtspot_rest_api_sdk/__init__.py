@@ -556,7 +556,7 @@ __all__ = [
     "UpdateFeatureAssignmentsRequest",
     "UpdateFeatureValueRequest",
     "UpdateInputTableRequest",
-    "UpdateLinkCustomizationRequest",
+    "UpdateLinkCustomizationsRequest",
     "UpdateMetadataHeaderRequest",
     "UpdateMetadataObjIdRequest",
     "UpdateObjIdInput",
@@ -1154,7 +1154,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.update_feature_assignments_request import UpdateFeatureAssignmentsRequest as UpdateFeatureAssignmentsRequest
     from thoughtspot_rest_api_sdk.models.update_feature_value_request import UpdateFeatureValueRequest as UpdateFeatureValueRequest
     from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest as UpdateInputTableRequest
-    from thoughtspot_rest_api_sdk.models.update_link_customization_request import UpdateLinkCustomizationRequest as UpdateLinkCustomizationRequest
+    from thoughtspot_rest_api_sdk.models.update_link_customizations_request import UpdateLinkCustomizationsRequest as UpdateLinkCustomizationsRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest as UpdateMetadataHeaderRequest
     from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest as UpdateMetadataObjIdRequest
     from thoughtspot_rest_api_sdk.models.update_obj_id_input import UpdateObjIdInput as UpdateObjIdInput
@@ -1758,7 +1758,7 @@ from thoughtspot_rest_api_sdk.models.update_email_customization_request import U
 from thoughtspot_rest_api_sdk.models.update_feature_assignments_request import UpdateFeatureAssignmentsRequest as UpdateFeatureAssignmentsRequest
 from thoughtspot_rest_api_sdk.models.update_feature_value_request import UpdateFeatureValueRequest as UpdateFeatureValueRequest
 from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest as UpdateInputTableRequest
-from thoughtspot_rest_api_sdk.models.update_link_customization_request import UpdateLinkCustomizationRequest as UpdateLinkCustomizationRequest
+from thoughtspot_rest_api_sdk.models.update_link_customizations_request import UpdateLinkCustomizationsRequest as UpdateLinkCustomizationsRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest as UpdateMetadataHeaderRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest as UpdateMetadataObjIdRequest
 from thoughtspot_rest_api_sdk.models.update_obj_id_input import UpdateObjIdInput as UpdateObjIdInput

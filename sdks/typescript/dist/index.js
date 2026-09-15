@@ -18823,27 +18823,27 @@ _UpdateInputTableRequest.attributeTypeMap = [
 ];
 var UpdateInputTableRequest = _UpdateInputTableRequest;
 
-// models/UpdateLinkCustomizationRequest.ts
-var _UpdateLinkCustomizationRequest = class _UpdateLinkCustomizationRequest {
+// models/UpdateLinkCustomizationsRequest.ts
+var _UpdateLinkCustomizationsRequest = class _UpdateLinkCustomizationsRequest {
   static getAttributeTypeMap() {
-    return _UpdateLinkCustomizationRequest.attributeTypeMap;
+    return _UpdateLinkCustomizationsRequest.attributeTypeMap;
   }
   constructor() {
   }
 };
-_UpdateLinkCustomizationRequest.discriminator = void 0;
-_UpdateLinkCustomizationRequest.mapping = void 0;
-_UpdateLinkCustomizationRequest.attributeTypeMap = [
+_UpdateLinkCustomizationsRequest.discriminator = void 0;
+_UpdateLinkCustomizationsRequest.mapping = void 0;
+_UpdateLinkCustomizationsRequest.attributeTypeMap = [
   {
     "name": "scope",
     "baseName": "scope",
-    "type": "UpdateLinkCustomizationRequestScopeEnum",
+    "type": "UpdateLinkCustomizationsRequestScopeEnum",
     "format": ""
   },
   {
     "name": "operation",
     "baseName": "operation",
-    "type": "UpdateLinkCustomizationRequestOperationEnum",
+    "type": "UpdateLinkCustomizationsRequestOperationEnum",
     "format": ""
   },
   {
@@ -18853,7 +18853,7 @@ _UpdateLinkCustomizationRequest.attributeTypeMap = [
     "format": ""
   }
 ];
-var UpdateLinkCustomizationRequest = _UpdateLinkCustomizationRequest;
+var UpdateLinkCustomizationsRequest = _UpdateLinkCustomizationsRequest;
 
 // models/UpdateMetadataHeaderRequest.ts
 var _UpdateMetadataHeaderRequest = class _UpdateMetadataHeaderRequest {
@@ -21887,8 +21887,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateCustomActionRequestOperationEnum",
   "UpdateFeatureAssignmentsRequestOperationEnum",
   "UpdateFeatureValueRequestScopeEnum",
-  "UpdateLinkCustomizationRequestScopeEnum",
-  "UpdateLinkCustomizationRequestOperationEnum",
+  "UpdateLinkCustomizationsRequestScopeEnum",
+  "UpdateLinkCustomizationsRequestOperationEnum",
   "UpdateObjIdInputTypeEnum",
   "UpdateOrgRequestOperationEnum",
   "UpdateRoleRequestPrivilegesEnum",
@@ -22433,7 +22433,7 @@ var typeMap = {
   "UpdateFeatureAssignmentsRequest": UpdateFeatureAssignmentsRequest,
   "UpdateFeatureValueRequest": UpdateFeatureValueRequest,
   "UpdateInputTableRequest": UpdateInputTableRequest,
-  "UpdateLinkCustomizationRequest": UpdateLinkCustomizationRequest,
+  "UpdateLinkCustomizationsRequest": UpdateLinkCustomizationsRequest,
   "UpdateMetadataHeaderRequest": UpdateMetadataHeaderRequest,
   "UpdateMetadataObjIdRequest": UpdateMetadataObjIdRequest,
   "UpdateObjIdInput": UpdateObjIdInput,
@@ -78055,7 +78055,7 @@ export {
   UpdateFeatureAssignmentsRequest,
   UpdateFeatureValueRequest,
   UpdateInputTableRequest,
-  UpdateLinkCustomizationRequest,
+  UpdateLinkCustomizationsRequest,
   UpdateMetadataHeaderRequest,
   UpdateMetadataObjIdRequest,
   UpdateObjIdInput,

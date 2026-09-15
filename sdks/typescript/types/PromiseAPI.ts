@@ -493,7 +493,7 @@ import { UpdateEmailCustomizationRequest } from '../models/UpdateEmailCustomizat
 import { UpdateFeatureAssignmentsRequest } from '../models/UpdateFeatureAssignmentsRequest';
 import { UpdateFeatureValueRequest } from '../models/UpdateFeatureValueRequest';
 import { UpdateInputTableRequest } from '../models/UpdateInputTableRequest';
-import { UpdateLinkCustomizationRequest } from '../models/UpdateLinkCustomizationRequest';
+import { UpdateLinkCustomizationsRequest } from '../models/UpdateLinkCustomizationsRequest';
 import { UpdateMetadataHeaderRequest } from '../models/UpdateMetadataHeaderRequest';
 import { UpdateMetadataObjIdRequest } from '../models/UpdateMetadataObjIdRequest';
 import { UpdateObjIdInput } from '../models/UpdateObjIdInput';
