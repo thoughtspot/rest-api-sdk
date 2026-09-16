@@ -354,7 +354,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="visibility">Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object. (default to VisibilityEnum.SHARABLE).</param>
         /// <param name="notifyOnShare">User preference for receiving email notifications when another ThoughtSpot user shares a metadata object such as Answer, Liveboard, or Worksheet. (default to true).</param>
         /// <param name="showOnboardingExperience">The user preference for revisiting the onboarding experience. (default to true).</param>
-        /// <param name="onboardingExperienceCompleted">flag to get the on-boarding experience is completed or not. (default to false).</param>
+        /// <param name="onboardingExperienceCompleted">Marks the user&#39;s onboarding questions as completed. (default to false).</param>
         /// <param name="homeLiveboardIdentifier">GUID of the Liveboard to set a default Liveboard for the user. ThoughtSpot displays this Liveboard on the Home page when the user logs in..</param>
         /// <param name="favoriteMetadata">Metadata objects to add to the user&#39;s favorites list..</param>
         /// <param name="preferredLocale">Locale for the user. When setting this value, do not set use_browser_language to true, otherwise the browser&#39;s language setting will take precedence and the preferred_locale value will be ignored..</param>
@@ -463,9 +463,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public bool? ShowOnboardingExperience { get; set; }
 
         /// <summary>
-        /// flag to get the on-boarding experience is completed or not.
+        /// Marks the user&#39;s onboarding questions as completed.
         /// </summary>
-        /// <value>flag to get the on-boarding experience is completed or not.</value>
+        /// <value>Marks the user&#39;s onboarding questions as completed.</value>
         [DataMember(Name = "onboarding_experience_completed", EmitDefaultValue = true)]
         public bool? OnboardingExperienceCompleted { get; set; }
 

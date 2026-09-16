@@ -38715,7 +38715,7 @@ components:
           type: boolean
         onboarding_experience_completed:
           default: false
-          description: flag to get the on-boarding experience is completed or not.
+          description: Marks the user's onboarding questions as completed.
           nullable: true
           type: boolean
         home_liveboard_identifier:

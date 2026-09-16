@@ -9320,7 +9320,7 @@
                           "id": "a9b8c7d6-9999-8888-7777-666655554444"
                         }
                       ],
-                      "message_info": "The column Region appears in both sales and returns. Input Table columns must be unique, so it has been renamed to sales_Region."
+                      "message_info": "The column Region appears in both sales and returns. Input Table columns must be unique, so it has been renamed to sales_Region to avoid conflicts."
                     }
                   }
                 }
@@ -39269,7 +39269,7 @@
             "nullable": true
           },
           "onboarding_experience_completed": {
-            "description": "flag to get the on-boarding experience is completed or not.",
+            "description": "Marks the user's onboarding questions as completed.",
             "default": false,
             "type": "boolean",
             "nullable": true

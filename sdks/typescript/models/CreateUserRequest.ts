@@ -59,7 +59,7 @@ export class CreateUserRequest {
     */
     'show_onboarding_experience'?: boolean | null;
     /**
-    * flag to get the on-boarding experience is completed or not.
+    * Marks the user\'s onboarding questions as completed.
     */
     'onboarding_experience_completed'?: boolean | null;
     /**

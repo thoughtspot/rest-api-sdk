@@ -37,7 +37,7 @@ class CreateUserRequest(BaseModel):
     visibility: Optional[StrictStr] = Field(default='SHARABLE', description="Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object.")
     notify_on_share: Optional[StrictBool] = Field(default=True, description="User preference for receiving email notifications when another ThoughtSpot user shares a metadata object such as Answer, Liveboard, or Worksheet.")
     show_onboarding_experience: Optional[StrictBool] = Field(default=True, description="The user preference for revisiting the onboarding experience.")
-    onboarding_experience_completed: Optional[StrictBool] = Field(default=False, description="flag to get the on-boarding experience is completed or not.")
+    onboarding_experience_completed: Optional[StrictBool] = Field(default=False, description="Marks the user's onboarding questions as completed.")
     home_liveboard_identifier: Optional[StrictStr] = Field(default=None, description="GUID of the Liveboard to set a default Liveboard for the user. ThoughtSpot displays this Liveboard on the Home page when the user logs in.")
     favorite_metadata: Optional[List[FavoriteMetadataInput]] = Field(default=None, description="Metadata objects to add to the user's favorites list.")
     preferred_locale: Optional[StrictStr] = Field(default=None, description="Locale for the user. When setting this value, do not set use_browser_language to true, otherwise the browser's language setting will take precedence and the preferred_locale value will be ignored.")

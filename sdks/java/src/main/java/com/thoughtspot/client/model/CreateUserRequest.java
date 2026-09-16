@@ -653,7 +653,7 @@ public class CreateUserRequest implements Serializable {
   }
 
   /**
-   * flag to get the on-boarding experience is completed or not.
+   * Marks the user&#39;s onboarding questions as completed.
    * @return onboardingExperienceCompleted
    */
   @javax.annotation.Nullable
