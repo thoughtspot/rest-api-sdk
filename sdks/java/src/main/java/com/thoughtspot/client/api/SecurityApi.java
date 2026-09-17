@@ -1024,7 +1024,7 @@ public class SecurityApi {
 
     /**
      * 
-     *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+     *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
      * @param publishMetadataRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1044,7 +1044,7 @@ public class SecurityApi {
 
     /**
      * 
-     *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+     *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
      * @param publishMetadataRequest  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1066,7 +1066,7 @@ public class SecurityApi {
 
     /**
      *  (asynchronously)
-     *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
+     *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
      * @param publishMetadataRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -1302,7 +1302,7 @@ public class SecurityApi {
 
     /**
      * 
-     *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+     *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
      * @param unpublishMetadataRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1322,7 +1322,7 @@ public class SecurityApi {
 
     /**
      * 
-     *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+     *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
      * @param unpublishMetadataRequest  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1344,7 +1344,7 @@ public class SecurityApi {
 
     /**
      *  (asynchronously)
-     *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
+     *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting &#x60;include_dependencies&#x60; to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting &#x60;force&#x60; to true - this will break all dependent objects in the unpublished organizations      
      * @param unpublishMetadataRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call

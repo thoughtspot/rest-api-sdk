@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **UseBrowserLanguage** | **bool?** | Flag to indicate whether to use the browser locale for the user in the UI. When set to true, the preferred_locale value is unset and the browser&#39;s language setting takes precedence.    Version: 26.3.0.cl or later  | [optional] 
 **ExtendedProperties** | **Object** | Properties for the user | [optional] 
 **ExtendedPreferences** | **Object** | Preferences for the user | [optional] 
-**TriggerWelcomeEmail** | **bool?** | Flag to indicate whether welcome email should be sent to user. This parameter is applied only on clusters on which IAM is disabled. | [optional] 
+**TriggerWelcomeEmail** | **bool?** | Flag to indicate whether a welcome email should be sent to the user. This parameter applies only on clusters where IAMv2 is not enabled. If the flag details are not specified, then it defaults to true. However, a welcome email is sent only when welcome email notifications are enabled on the cluster and the user has a valid email address. | [optional] 
 **TriggerActivationEmail** | **bool?** | Flag to indicate whether activation email should be sent to the user. Default value for IAMv2 users is set to true. Users must either set this to false, or enter a valid  password if they do not want to trigger an activation email. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -45,7 +45,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// </summary>
         /// <param name="metadata">Metadata objects to be published. (required).</param>
         /// <param name="orgIdentifiers">Unique ID or name of orgs to which metadata objects should be published. (required).</param>
-        /// <param name="skipValidation">Skip validations of objects to be published..</param>
+        /// <param name="skipValidation">Skip parameterization validation. By default publishing requires an underlying LOGICAL_TABLE or DATA_SOURCE to carry a template variable with a value for every target org, so each org resolves its own data. Without parameterization every target org reads the owner org&#39;s data through the owner org&#39;s connection. Set this to true only when that is intended..</param>
         public PublishMetadataRequest(List<PublishMetadataListItem> metadata = default, List<string> orgIdentifiers = default, bool? skipValidation = default)
         {
             // to ensure "metadata" is required (not null)
@@ -79,9 +79,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public List<string> OrgIdentifiers { get; set; }
 
         /// <summary>
-        /// Skip validations of objects to be published.
+        /// Skip parameterization validation. By default publishing requires an underlying LOGICAL_TABLE or DATA_SOURCE to carry a template variable with a value for every target org, so each org resolves its own data. Without parameterization every target org reads the owner org&#39;s data through the owner org&#39;s connection. Set this to true only when that is intended.
         /// </summary>
-        /// <value>Skip validations of objects to be published.</value>
+        /// <value>Skip parameterization validation. By default publishing requires an underlying LOGICAL_TABLE or DATA_SOURCE to carry a template variable with a value for every target org, so each org resolves its own data. Without parameterization every target org reads the owner org&#39;s data through the owner org&#39;s connection. Set this to true only when that is intended.</value>
         [DataMember(Name = "skip_validation", EmitDefaultValue = true)]
         public bool? SkipValidation { get; set; }
 

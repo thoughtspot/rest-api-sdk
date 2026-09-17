@@ -10122,7 +10122,7 @@ paths:
   /api/rest/2.0/metadata/parameterize-fields:
     post:
       description: "\nParameterize multiple fields of metadata objects. For example\
-        \ [schemaName, databaseName] for LOGICAL_TABLE. \n  Version: 26.5.0.cl or\
+        \ [schemaName, databaseName] for LOGICAL_TABLE. \n  Version: 26.10.0.cl or\
         \ later\n\n\nAllows parameterizing multiple fields of metadata objects in\
         \ ThoughtSpot. For example, you can parameterize [schemaName, databaseName]\
         \ for LOGICAL_TABLE.\n\nRequires appropriate permissions to modify the metadata\
@@ -10265,7 +10265,7 @@ paths:
   /api/rest/2.0/metadata/unparameterize:
     post:
       description: "\nRemove parameterization from fields in metadata objects. \n\
-        \  Version: 26.5.0.cl or later\n\n\nAllows removing parameterization from\
+        \  Version: 26.10.0.cl or later\n\n\nAllows removing parameterization from\
         \ fields in metadata objects in ThoughtSpot.\n\nRequires appropriate permissions\
         \ to modify the metadata object.\n\nThe API endpoint allows unparameterizing\
         \ the following types of metadata objects:\n* Logical Tables\n* Connections\n\
@@ -11851,7 +11851,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.5.0.cl or later
+         Version: 26.10.0.cl or later
 
 
         Allows publishing metadata objects across organizations in ThoughtSpot.
@@ -12129,7 +12129,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.5.0.cl or later
+         Version: 26.10.0.cl or later
 
 
         Allows unpublishing metadata objects from organizations in ThoughtSpot.
@@ -36945,7 +36945,12 @@ components:
             type: string
           type: array
         skip_validation:
-          description: Skip validations of objects to be published.
+          description: |-
+            Skip parameterization validation. By default publishing requires an underlying
+            LOGICAL_TABLE or DATA_SOURCE to carry a template variable with a value for every
+            target org, so each org resolves its own data. Without parameterization every target
+            org reads the owner org's data through the owner org's connection. Set this to true
+            only when that is intended.
           nullable: true
           type: boolean
       required:
@@ -37822,8 +37827,11 @@ components:
         extended_preferences:
           description: Preferences for the user
         trigger_welcome_email:
-          description: Flag to indicate whether welcome email should be sent to user.
-            This parameter is applied only on clusters on which IAM is disabled.
+          description: "Flag to indicate whether a welcome email should be sent to\
+            \ the user. This parameter applies only on clusters where IAMv2 is not\
+            \ enabled. If the flag details are not specified, then it defaults to\
+            \ true. However, a welcome email is sent only when welcome email notifications\
+            \ are enabled on the cluster and the user has a valid email address."
           nullable: true
           type: boolean
         trigger_activation_email:

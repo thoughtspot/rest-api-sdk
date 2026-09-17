@@ -37,13 +37,6 @@
 -  added the optional property `conversations/items/is_pinned` to the response with the `201` status
 
 
-### GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content
--  added the optional property `creator_user_id` to the response with the `200` status
--  added the optional property `creator_user_id` to the response with the `201` status
--  added the required property `analyst_ids` to the response with the `200` status
--  added the required property `analyst_ids` to the response with the `201` status
-
-
 ### POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share
 -  added the new optional request property `notify_on_share`
 
