@@ -35,19 +35,28 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateConversationRequest" /> class.
         /// </summary>
-        /// <param name="title">New display title for the conversation. Omit to leave the title unchanged..</param>
-        public UpdateConversationRequest(string title = default)
+        /// <param name="title">New display title for the conversation. Omit to leave the title unchanged. An empty or whitespace-only value is replaced with a default title rather than rejected..</param>
+        /// <param name="isPinned">Pinned state of the conversation for the current user. Pinning marks a conversation for quick access: pinned conversations are surfaced first in &#x60;getConversationList&#x60;. Set to &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it, or omit to leave the pinned state unchanged. Applying the state the conversation is already in is a no-op success.    Version: 26.10.0.cl or later .</param>
+        public UpdateConversationRequest(string title = default, bool? isPinned = default)
         {
             this.Title = title;
+            this.IsPinned = isPinned;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// New display title for the conversation. Omit to leave the title unchanged.
+        /// New display title for the conversation. Omit to leave the title unchanged. An empty or whitespace-only value is replaced with a default title rather than rejected.
         /// </summary>
-        /// <value>New display title for the conversation. Omit to leave the title unchanged.</value>
+        /// <value>New display title for the conversation. Omit to leave the title unchanged. An empty or whitespace-only value is replaced with a default title rather than rejected.</value>
         [DataMember(Name = "title", EmitDefaultValue = false)]
         public string Title { get; set; }
+
+        /// <summary>
+        /// Pinned state of the conversation for the current user. Pinning marks a conversation for quick access: pinned conversations are surfaced first in &#x60;getConversationList&#x60;. Set to &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it, or omit to leave the pinned state unchanged. Applying the state the conversation is already in is a no-op success.    Version: 26.10.0.cl or later 
+        /// </summary>
+        /// <value>Pinned state of the conversation for the current user. Pinning marks a conversation for quick access: pinned conversations are surfaced first in &#x60;getConversationList&#x60;. Set to &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it, or omit to leave the pinned state unchanged. Applying the state the conversation is already in is a no-op success.    Version: 26.10.0.cl or later </value>
+        [DataMember(Name = "is_pinned", EmitDefaultValue = true)]
+        public bool? IsPinned { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -64,6 +73,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class UpdateConversationRequest {\n");
             sb.Append("  Title: ").Append(Title).Append("\n");
+            sb.Append("  IsPinned: ").Append(IsPinned).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

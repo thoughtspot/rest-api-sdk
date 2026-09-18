@@ -44,8 +44,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="InputTableDefinitionInput" /> class.
         /// </summary>
         /// <param name="newColumns">New input-only columns to create in the table. (required).</param>
-        /// <param name="referencedColumns">Column IDs from the linked model to include in the table. Pass an empty array to create an input table with no reference columns from the model. (required).</param>
-        public InputTableDefinitionInput(List<InputColumnSchemaInput> newColumns = default, List<string> referencedColumns = default)
+        /// <param name="referencedColumns">Names of the columns on the linked model to include in the table, as they appear on the model. These become the input table&#39;s key columns: they are what the input table is joined to the model on, and what rows are matched on by updateInputTable. At least one is required — an empty array is rejected. A name must match exactly one visible model column; a name matching none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced. (required).</param>
+        /// <param name="referencedColumnTimeDimensions">Optional per-column time dimension to persist at creation. Provide one entry per referenced date column that should open — and stay locked — at a specific grain. Columns without an entry apply no bucketing (detailed). Applies to referenced model columns only; a column created through new_columns always starts detailed..</param>
+        public InputTableDefinitionInput(List<InputColumnSchemaInput> newColumns = default, List<string> referencedColumns = default, List<ReferencedColumnTimeDimension> referencedColumnTimeDimensions = default)
         {
             // to ensure "newColumns" is required (not null)
             if (newColumns == null)
@@ -59,6 +60,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
                 throw new ArgumentNullException("referencedColumns is a required property for InputTableDefinitionInput and cannot be null");
             }
             this.ReferencedColumns = referencedColumns;
+            this.ReferencedColumnTimeDimensions = referencedColumnTimeDimensions;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -70,11 +72,18 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public List<InputColumnSchemaInput> NewColumns { get; set; }
 
         /// <summary>
-        /// Column IDs from the linked model to include in the table. Pass an empty array to create an input table with no reference columns from the model.
+        /// Names of the columns on the linked model to include in the table, as they appear on the model. These become the input table&#39;s key columns: they are what the input table is joined to the model on, and what rows are matched on by updateInputTable. At least one is required — an empty array is rejected. A name must match exactly one visible model column; a name matching none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.
         /// </summary>
-        /// <value>Column IDs from the linked model to include in the table. Pass an empty array to create an input table with no reference columns from the model.</value>
+        /// <value>Names of the columns on the linked model to include in the table, as they appear on the model. These become the input table&#39;s key columns: they are what the input table is joined to the model on, and what rows are matched on by updateInputTable. At least one is required — an empty array is rejected. A name must match exactly one visible model column; a name matching none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.</value>
         [DataMember(Name = "referenced_columns", IsRequired = true, EmitDefaultValue = true)]
         public List<string> ReferencedColumns { get; set; }
+
+        /// <summary>
+        /// Optional per-column time dimension to persist at creation. Provide one entry per referenced date column that should open — and stay locked — at a specific grain. Columns without an entry apply no bucketing (detailed). Applies to referenced model columns only; a column created through new_columns always starts detailed.
+        /// </summary>
+        /// <value>Optional per-column time dimension to persist at creation. Provide one entry per referenced date column that should open — and stay locked — at a specific grain. Columns without an entry apply no bucketing (detailed). Applies to referenced model columns only; a column created through new_columns always starts detailed.</value>
+        [DataMember(Name = "referenced_column_time_dimensions", EmitDefaultValue = true)]
+        public List<ReferencedColumnTimeDimension> ReferencedColumnTimeDimensions { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -92,6 +101,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("class InputTableDefinitionInput {\n");
             sb.Append("  NewColumns: ").Append(NewColumns).Append("\n");
             sb.Append("  ReferencedColumns: ").Append(ReferencedColumns).Append("\n");
+            sb.Append("  ReferencedColumnTimeDimensions: ").Append(ReferencedColumnTimeDimensions).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

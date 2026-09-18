@@ -16,8 +16,9 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from thoughtspot_rest_api_sdk.models.input_column_schema_input import InputColumnSchemaInput
+from thoughtspot_rest_api_sdk.models.referenced_column_time_dimension import ReferencedColumnTimeDimension
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,9 +28,10 @@ class InputTableDefinitionInput(BaseModel):
     Definition of the input table schema.
     """ # noqa: E501
     new_columns: List[InputColumnSchemaInput] = Field(description="New input-only columns to create in the table.")
-    referenced_columns: List[StrictStr] = Field(description="Column IDs from the linked model to include in the table. Pass an empty array to create an input table with no reference columns from the model.")
+    referenced_columns: List[StrictStr] = Field(description="Names of the columns on the linked model to include in the table, as they appear on the model. These become the input table's key columns: they are what the input table is joined to the model on, and what rows are matched on by updateInputTable. At least one is required — an empty array is rejected. A name must match exactly one visible model column; a name matching none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.")
+    referenced_column_time_dimensions: Optional[List[ReferencedColumnTimeDimension]] = Field(default=None, description="Optional per-column time dimension to persist at creation. Provide one entry per referenced date column that should open — and stay locked — at a specific grain. Columns without an entry apply no bucketing (detailed). Applies to referenced model columns only; a column created through new_columns always starts detailed.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["new_columns", "referenced_columns"]
+    __properties: ClassVar[List[str]] = ["new_columns", "referenced_columns", "referenced_column_time_dimensions"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -79,10 +81,22 @@ class InputTableDefinitionInput(BaseModel):
                 if _item_new_columns:
                     _items.append(_item_new_columns.to_dict())
             _dict['new_columns'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in referenced_column_time_dimensions (list)
+        _items = []
+        if self.referenced_column_time_dimensions:
+            for _item_referenced_column_time_dimensions in self.referenced_column_time_dimensions:
+                if _item_referenced_column_time_dimensions:
+                    _items.append(_item_referenced_column_time_dimensions.to_dict())
+            _dict['referenced_column_time_dimensions'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if referenced_column_time_dimensions (nullable) is None
+        # and model_fields_set contains the field
+        if self.referenced_column_time_dimensions is None and "referenced_column_time_dimensions" in self.model_fields_set:
+            _dict['referenced_column_time_dimensions'] = None
 
         return _dict
 
@@ -97,7 +111,8 @@ class InputTableDefinitionInput(BaseModel):
 
         _obj = cls.model_validate({
             "new_columns": [InputColumnSchemaInput.from_dict(_item) for _item in obj["new_columns"]] if obj.get("new_columns") is not None else None,
-            "referenced_columns": obj.get("referenced_columns")
+            "referenced_columns": obj.get("referenced_columns"),
+            "referenced_column_time_dimensions": [ReferencedColumnTimeDimension.from_dict(_item) for _item in obj["referenced_column_time_dimensions"]] if obj.get("referenced_column_time_dimensions") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

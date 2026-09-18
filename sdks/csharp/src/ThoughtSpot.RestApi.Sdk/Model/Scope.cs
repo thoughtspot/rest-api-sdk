@@ -33,6 +33,33 @@ namespace ThoughtSpot.RestApi.Sdk.Model
     public partial class Scope : IValidatableObject
     {
         /// <summary>
+        /// Org scope the token is authorized for. Absent for a legacy single-org token.   Version: 26.10.0.cl or later 
+        /// </summary>
+        /// <value>Org scope the token is authorized for. Absent for a legacy single-org token.   Version: 26.10.0.cl or later </value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OrgScopeEnum
+        {
+            /// <summary>
+            /// Enum SPECIFICORGS for value: SPECIFIC_ORGS
+            /// </summary>
+            [EnumMember(Value = "SPECIFIC_ORGS")]
+            SPECIFICORGS = 1,
+
+            /// <summary>
+            /// Enum ALLMEMBERORGS for value: ALL_MEMBER_ORGS
+            /// </summary>
+            [EnumMember(Value = "ALL_MEMBER_ORGS")]
+            ALLMEMBERORGS = 2
+        }
+
+
+        /// <summary>
+        /// Org scope the token is authorized for. Absent for a legacy single-org token.   Version: 26.10.0.cl or later 
+        /// </summary>
+        /// <value>Org scope the token is authorized for. Absent for a legacy single-org token.   Version: 26.10.0.cl or later </value>
+        [DataMember(Name = "org_scope", EmitDefaultValue = true)]
+        public OrgScopeEnum? OrgScope { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="Scope" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -44,9 +71,11 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="Scope" /> class.
         /// </summary>
         /// <param name="accessType">Object access scope type. (required).</param>
-        /// <param name="orgId">Unique identifier of the metadata..</param>
-        /// <param name="metadataId">Unique identifier of the Org..</param>
-        public Scope(string accessType = default, int? orgId = default, string metadataId = default)
+        /// <param name="orgId">Unique identifier of the Org..</param>
+        /// <param name="metadataId">Unique identifier of the metadata..</param>
+        /// <param name="orgScope">Org scope the token is authorized for. Absent for a legacy single-org token.   Version: 26.10.0.cl or later .</param>
+        /// <param name="orgIds">Orgs the token is authorized for when org_scope is SPECIFIC_ORGS.   Version: 26.10.0.cl or later .</param>
+        public Scope(string accessType = default, int? orgId = default, string metadataId = default, OrgScopeEnum? orgScope = default, List<OrgInfo> orgIds = default)
         {
             // to ensure "accessType" is required (not null)
             if (accessType == null)
@@ -56,6 +85,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.AccessType = accessType;
             this.OrgId = orgId;
             this.MetadataId = metadataId;
+            this.OrgScope = orgScope;
+            this.OrgIds = orgIds;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -67,18 +98,25 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string AccessType { get; set; }
 
         /// <summary>
-        /// Unique identifier of the metadata.
+        /// Unique identifier of the Org.
         /// </summary>
-        /// <value>Unique identifier of the metadata.</value>
+        /// <value>Unique identifier of the Org.</value>
         [DataMember(Name = "org_id", EmitDefaultValue = true)]
         public int? OrgId { get; set; }
 
         /// <summary>
-        /// Unique identifier of the Org.
+        /// Unique identifier of the metadata.
         /// </summary>
-        /// <value>Unique identifier of the Org.</value>
+        /// <value>Unique identifier of the metadata.</value>
         [DataMember(Name = "metadata_id", EmitDefaultValue = true)]
         public string MetadataId { get; set; }
+
+        /// <summary>
+        /// Orgs the token is authorized for when org_scope is SPECIFIC_ORGS.   Version: 26.10.0.cl or later 
+        /// </summary>
+        /// <value>Orgs the token is authorized for when org_scope is SPECIFIC_ORGS.   Version: 26.10.0.cl or later </value>
+        [DataMember(Name = "org_ids", EmitDefaultValue = true)]
+        public List<OrgInfo> OrgIds { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -97,6 +135,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  AccessType: ").Append(AccessType).Append("\n");
             sb.Append("  OrgId: ").Append(OrgId).Append("\n");
             sb.Append("  MetadataId: ").Append(MetadataId).Append("\n");
+            sb.Append("  OrgScope: ").Append(OrgScope).Append("\n");
+            sb.Append("  OrgIds: ").Append(OrgIds).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

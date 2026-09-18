@@ -39,6 +39,7 @@ class SearchMetadataRequest(BaseModel):
     include_auto_created_objects: Optional[StrictBool] = Field(default=False, description="Includes system-generated metadata objects.")
     include_dependent_objects: Optional[StrictBool] = Field(default=False, description="Includes dependents of the metadata object specified in the API request. For example, a worksheet can consist of dependent objects such as Liveboards or Answers.")
     dependent_objects_record_size: Optional[StrictInt] = Field(default=50, description="The maximum number of dependents to include per metadata object.")
+    dependent_objects_record_offset: Optional[StrictInt] = Field(default=None, description="Optional. The number of dependents to skip per metadata object before collecting them, so that dependents can be fetched in bounded pages. Combine with dependent_objects_record_size as the page size, and keep requesting pages until dependent_objects_is_last_batch is true. When this offset is supplied, a dependent_objects_record_size of 0 means the cluster default page size. Omit it to keep the pre-paging behaviour. A negative value is rejected.    Version: 26.11.0.cl or later ")
     include_details: Optional[StrictBool] = Field(default=False, description="Includes complete details of the metadata objects.")
     include_personalised_views: Optional[StrictBool] = Field(default=False, description="When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects.")
     include_headers: Optional[StrictBool] = Field(default=True, description="Includes headers of the metadata objects.")
@@ -57,7 +58,7 @@ class SearchMetadataRequest(BaseModel):
     liveboard_response_version: Optional[StrictStr] = Field(default='V1', description="Indicates the model version of Liveboard to be attached in metadata detail.")
     include_only_published_objects: Optional[StrictBool] = Field(default=False, description="<div>Version: 10.11.0.cl or later </div>  If only published objects should be returned")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["metadata", "permissions", "created_by_user_identifiers", "dependent_object_version", "exclude_objects", "favorite_object_options", "include_auto_created_objects", "include_dependent_objects", "dependent_objects_record_size", "include_details", "include_personalised_views", "include_headers", "include_hidden_objects", "include_incomplete_objects", "include_visualization_headers", "include_worksheet_search_assist_data", "modified_by_user_identifiers", "record_offset", "record_size", "sort_options", "tag_identifiers", "include_stats", "include_discoverable_objects", "show_resolved_parameters", "liveboard_response_version", "include_only_published_objects"]
+    __properties: ClassVar[List[str]] = ["metadata", "permissions", "created_by_user_identifiers", "dependent_object_version", "exclude_objects", "favorite_object_options", "include_auto_created_objects", "include_dependent_objects", "dependent_objects_record_size", "dependent_objects_record_offset", "include_details", "include_personalised_views", "include_headers", "include_hidden_objects", "include_incomplete_objects", "include_visualization_headers", "include_worksheet_search_assist_data", "modified_by_user_identifiers", "record_offset", "record_size", "sort_options", "tag_identifiers", "include_stats", "include_discoverable_objects", "show_resolved_parameters", "liveboard_response_version", "include_only_published_objects"]
 
     @field_validator('dependent_object_version')
     def dependent_object_version_validate_enum(cls, value):
@@ -238,6 +239,7 @@ class SearchMetadataRequest(BaseModel):
             "include_auto_created_objects": obj.get("include_auto_created_objects") if obj.get("include_auto_created_objects") is not None else False,
             "include_dependent_objects": obj.get("include_dependent_objects") if obj.get("include_dependent_objects") is not None else False,
             "dependent_objects_record_size": obj.get("dependent_objects_record_size") if obj.get("dependent_objects_record_size") is not None else 50,
+            "dependent_objects_record_offset": obj.get("dependent_objects_record_offset"),
             "include_details": obj.get("include_details") if obj.get("include_details") is not None else False,
             "include_personalised_views": obj.get("include_personalised_views") if obj.get("include_personalised_views") is not None else False,
             "include_headers": obj.get("include_headers") if obj.get("include_headers") is not None else True,

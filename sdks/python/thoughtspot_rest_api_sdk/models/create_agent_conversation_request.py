@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from thoughtspot_rest_api_sdk.models.context_payload_v2_input import ContextPayloadV2Input
 from thoughtspot_rest_api_sdk.models.conversation_settings_input import ConversationSettingsInput
 from typing import Optional, Set
@@ -27,10 +27,11 @@ class CreateAgentConversationRequest(BaseModel):
     """
     CreateAgentConversationRequest
     """ # noqa: E501
-    metadata_context: ContextPayloadV2Input = Field(description="Context for the conversation.")
+    metadata_context: Optional[ContextPayloadV2Input] = Field(default=None, description="Context for the conversation. Required unless `analyst_identifier` is provided; do not pass both.")
     conversation_settings: ConversationSettingsInput = Field(description="Conversation settings.")
+    analyst_identifier: Optional[StrictStr] = Field(default=None, description="Unique identifier of the Spotter Analyst to start the conversation from. When provided, the conversation uses the analyst's configuration (data sources, agent instructions, and connectors), and `metadata_context` must be omitted.    Version: 26.10.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["metadata_context", "conversation_settings"]
+    __properties: ClassVar[List[str]] = ["metadata_context", "conversation_settings", "analyst_identifier"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -97,7 +98,8 @@ class CreateAgentConversationRequest(BaseModel):
 
         _obj = cls.model_validate({
             "metadata_context": ContextPayloadV2Input.from_dict(obj["metadata_context"]) if obj.get("metadata_context") is not None else None,
-            "conversation_settings": ConversationSettingsInput.from_dict(obj["conversation_settings"]) if obj.get("conversation_settings") is not None else None
+            "conversation_settings": ConversationSettingsInput.from_dict(obj["conversation_settings"]) if obj.get("conversation_settings") is not None else None,
+            "analyst_identifier": obj.get("analyst_identifier")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

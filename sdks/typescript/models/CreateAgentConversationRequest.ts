@@ -16,13 +16,17 @@ import { HttpFile } from '../http/http';
 
 export class CreateAgentConversationRequest {
     /**
-    * Context for the conversation.
+    * Context for the conversation. Required unless `analyst_identifier` is provided; do not pass both.
     */
-    'metadata_context': ContextPayloadV2Input;
+    'metadata_context'?: ContextPayloadV2Input;
     /**
     * Conversation settings.
     */
     'conversation_settings': ConversationSettingsInput;
+    /**
+    * Unique identifier of the Spotter Analyst to start the conversation from. When provided, the conversation uses the analyst\'s configuration (data sources, agent instructions, and connectors), and `metadata_context` must be omitted.    Version: 26.10.0.cl or later 
+    */
+    'analyst_identifier'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,6 +43,12 @@ export class CreateAgentConversationRequest {
             "name": "conversation_settings",
             "baseName": "conversation_settings",
             "type": "ConversationSettingsInput",
+            "format": ""
+        },
+        {
+            "name": "analyst_identifier",
+            "baseName": "analyst_identifier",
+            "type": "string",
             "format": ""
         }    ];
 

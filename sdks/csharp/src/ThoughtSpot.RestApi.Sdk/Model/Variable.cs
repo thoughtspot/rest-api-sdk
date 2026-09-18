@@ -90,11 +90,12 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// </summary>
         /// <param name="id">Unique identifier of the variable (required).</param>
         /// <param name="name">Name of the variable (required).</param>
+        /// <param name="objId">Custom object identifier (obj_id) of the variable    Version: 26.10.0.cl or later .</param>
         /// <param name="variableType">Type of the variable.</param>
         /// <param name="sensitive">If the variable is sensitive.</param>
         /// <param name="values">Values of the variable.</param>
         /// <param name="org">org.</param>
-        public Variable(string id = default, string name = default, VariableTypeEnum? variableType = default, bool? sensitive = default, List<VariableValue> values = default, VariableOrgInfo org = default)
+        public Variable(string id = default, string name = default, string objId = default, VariableTypeEnum? variableType = default, bool? sensitive = default, List<VariableValue> values = default, VariableOrgInfo org = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -108,6 +109,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
                 throw new ArgumentNullException("name is a required property for Variable and cannot be null");
             }
             this.Name = name;
+            this.ObjId = objId;
             this.VariableType = variableType;
             this.Sensitive = sensitive;
             this.Values = values;
@@ -128,6 +130,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>Name of the variable</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Custom object identifier (obj_id) of the variable    Version: 26.10.0.cl or later 
+        /// </summary>
+        /// <value>Custom object identifier (obj_id) of the variable    Version: 26.10.0.cl or later </value>
+        [DataMember(Name = "obj_id", EmitDefaultValue = true)]
+        public string ObjId { get; set; }
 
         /// <summary>
         /// If the variable is sensitive
@@ -165,6 +174,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("class Variable {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  ObjId: ").Append(ObjId).Append("\n");
             sb.Append("  VariableType: ").Append(VariableType).Append("\n");
             sb.Append("  Sensitive: ").Append(Sensitive).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");

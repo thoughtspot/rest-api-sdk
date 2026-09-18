@@ -29,8 +29,9 @@ class ShareConversationRequest(BaseModel):
     refresh_shared_content: Optional[StrictBool] = Field(default=False, description="When `true`, always regenerates the shared view from the latest conversation state, even if one already exists. When `false` (default), reuses the existing shared view.")
     grant: List[PrincipalRefInput] = Field(description="Principals to grant read-only access to the conversation.")
     revoke: List[PrincipalRefInput] = Field(description="Principals to revoke access from the conversation.")
+    notify_on_share: Optional[StrictBool] = Field(default=True, description="<div>Version: 26.10.0.cl or later </div>  When `true` (default), newly granted principals are notified of the share. When `false`, access is granted without sending a notification. Has no effect on principals passed in `revoke`. Does not re-notify a principal who already had access.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["refresh_shared_content", "grant", "revoke"]
+    __properties: ClassVar[List[str]] = ["refresh_shared_content", "grant", "revoke", "notify_on_share"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -97,6 +98,11 @@ class ShareConversationRequest(BaseModel):
         if self.refresh_shared_content is None and "refresh_shared_content" in self.model_fields_set:
             _dict['refresh_shared_content'] = None
 
+        # set to None if notify_on_share (nullable) is None
+        # and model_fields_set contains the field
+        if self.notify_on_share is None and "notify_on_share" in self.model_fields_set:
+            _dict['notify_on_share'] = None
+
         return _dict
 
     @classmethod
@@ -111,7 +117,8 @@ class ShareConversationRequest(BaseModel):
         _obj = cls.model_validate({
             "refresh_shared_content": obj.get("refresh_shared_content") if obj.get("refresh_shared_content") is not None else False,
             "grant": [PrincipalRefInput.from_dict(_item) for _item in obj["grant"]] if obj.get("grant") is not None else None,
-            "revoke": [PrincipalRefInput.from_dict(_item) for _item in obj["revoke"]] if obj.get("revoke") is not None else None
+            "revoke": [PrincipalRefInput.from_dict(_item) for _item in obj["revoke"]] if obj.get("revoke") is not None else None,
+            "notify_on_share": obj.get("notify_on_share") if obj.get("notify_on_share") is not None else True
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

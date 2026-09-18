@@ -43,7 +43,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteVariablesRequest" /> class.
         /// </summary>
-        /// <param name="identifiers">Unique id(s) or name(s) of the variable(s) to delete (required).</param>
+        /// <param name="identifiers">Unique id(s), name(s), or object id(s) of the variable(s) to delete (required).</param>
         public DeleteVariablesRequest(List<string> identifiers = default)
         {
             // to ensure "identifiers" is required (not null)
@@ -56,9 +56,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Unique id(s) or name(s) of the variable(s) to delete
+        /// Unique id(s), name(s), or object id(s) of the variable(s) to delete
         /// </summary>
-        /// <value>Unique id(s) or name(s) of the variable(s) to delete</value>
+        /// <value>Unique id(s), name(s), or object id(s) of the variable(s) to delete</value>
         [DataMember(Name = "identifiers", IsRequired = true, EmitDefaultValue = true)]
         public List<string> Identifiers { get; set; }
 

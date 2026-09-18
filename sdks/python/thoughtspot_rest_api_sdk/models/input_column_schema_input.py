@@ -28,7 +28,7 @@ class InputColumnSchemaInput(BaseModel):
     name: StrictStr = Field(description="Name of the column.")
     data_type: StrictStr = Field(description="Physical data type of the column as recognized by the connected warehouse (for example, VARCHAR, INT64, DOUBLE, BOOL, DATE). The accepted values depend on the underlying Cloud Data Warehouse.")
     type: StrictStr = Field(description="Semantic role of the column in ThoughtSpot. Use ATTRIBUTE for dimensional data such as text, dates, and identifiers, and MEASURE for numeric or aggregatable values.")
-    allowed_values: Optional[List[StrictStr]] = Field(default=None, description="Optional list of permitted values for the column. When provided, data written to this column is restricted to these values. Omit or leave empty to allow any value supported by the data type.    Version: 26.9.0.cl or later ")
+    allowed_values: Optional[List[StrictStr]] = Field(default=None, description="Optional list of permitted values for the column, at most 500, which makes it a fixed-choice column. Every non-empty value written into the column by updateInputTable must then be an exact member of the list, and the API rejects a write that is not. Each value must be non-empty, at most 8192 characters, and representable as the column's data_type — a number for the numeric types, true or false for BOOL, and an epoch integer for DATE, DATE_TIME, and TIME. Omit or leave empty to allow any value supported by the data type.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "data_type", "type", "allowed_values"]
 

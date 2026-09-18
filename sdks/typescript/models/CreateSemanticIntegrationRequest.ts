@@ -98,5 +98,5 @@ export class CreateSemanticIntegrationRequest {
     }
 }
 
-    export type CreateSemanticIntegrationRequestTypeEnum = "RDBMS_SNOWFLAKE" ;
+    export type CreateSemanticIntegrationRequestTypeEnum = "RDBMS_SNOWFLAKE" | "RDBMS_DATABRICKS" ;
 

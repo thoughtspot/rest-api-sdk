@@ -219,6 +219,7 @@ apiInstance.getCustomAccessToken(
     secret_key: "",
     validity_time_in_sec: 300,
     org_identifier: "org_identifier_example",
+    scope: null,
     persist_option: "REPLACE",
     filter_rules: [
       {
@@ -326,6 +327,7 @@ apiInstance.getFullAccessToken(
     secret_key: "",
     validity_time_in_sec: 300,
     org_id: 1,
+    scope: null,
     email: "email_example",
     display_name: "display_name_example",
     auto_create: false,
@@ -400,6 +402,7 @@ apiInstance.getObjectAccessToken(
     secret_key: "",
     validity_time_in_sec: 300,
     org_id: 1,
+    scope: null,
     email: "email_example",
     display_name: "display_name_example",
     auto_create: false,

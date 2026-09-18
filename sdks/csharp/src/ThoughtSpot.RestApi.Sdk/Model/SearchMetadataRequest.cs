@@ -98,6 +98,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="includeAutoCreatedObjects">Includes system-generated metadata objects. (default to false).</param>
         /// <param name="includeDependentObjects">Includes dependents of the metadata object specified in the API request. For example, a worksheet can consist of dependent objects such as Liveboards or Answers. (default to false).</param>
         /// <param name="dependentObjectsRecordSize">The maximum number of dependents to include per metadata object. (default to 50).</param>
+        /// <param name="dependentObjectsRecordOffset">Optional. The number of dependents to skip per metadata object before collecting them, so that dependents can be fetched in bounded pages. Combine with dependent_objects_record_size as the page size, and keep requesting pages until dependent_objects_is_last_batch is true. When this offset is supplied, a dependent_objects_record_size of 0 means the cluster default page size. Omit it to keep the pre-paging behaviour. A negative value is rejected.    Version: 26.11.0.cl or later .</param>
         /// <param name="includeDetails">Includes complete details of the metadata objects. (default to false).</param>
         /// <param name="includePersonalisedViews">When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects. (default to false).</param>
         /// <param name="includeHeaders">Includes headers of the metadata objects. (default to true).</param>
@@ -115,7 +116,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="showResolvedParameters">&lt;div&gt;Version: 10.9.0.cl or later &lt;/div&gt;  Indicates whether to show resolved parameterised values. (default to false).</param>
         /// <param name="liveboardResponseVersion">Indicates the model version of Liveboard to be attached in metadata detail. (default to LiveboardResponseVersionEnum.V1).</param>
         /// <param name="includeOnlyPublishedObjects">&lt;div&gt;Version: 10.11.0.cl or later &lt;/div&gt;  If only published objects should be returned (default to false).</param>
-        public SearchMetadataRequest(List<MetadataListItemInput> metadata = default, List<PermissionInput> permissions = default, List<string> createdByUserIdentifiers = default, DependentObjectVersionEnum? dependentObjectVersion = DependentObjectVersionEnum.V1, List<ExcludeMetadataListItemInput> excludeObjects = default, FavoriteObjectOptionsInput favoriteObjectOptions = default, bool? includeAutoCreatedObjects = false, bool? includeDependentObjects = false, int dependentObjectsRecordSize = 50, bool? includeDetails = false, bool? includePersonalisedViews = false, bool? includeHeaders = true, bool? includeHiddenObjects = false, bool? includeIncompleteObjects = false, bool? includeVisualizationHeaders = false, bool? includeWorksheetSearchAssistData = default, List<string> modifiedByUserIdentifiers = default, int recordOffset = 0, int recordSize = 10, MetadataSearchSortOptions sortOptions = default, List<string> tagIdentifiers = default, bool? includeStats = false, bool? includeDiscoverableObjects = true, bool? showResolvedParameters = false, LiveboardResponseVersionEnum? liveboardResponseVersion = LiveboardResponseVersionEnum.V1, bool? includeOnlyPublishedObjects = false)
+        public SearchMetadataRequest(List<MetadataListItemInput> metadata = default, List<PermissionInput> permissions = default, List<string> createdByUserIdentifiers = default, DependentObjectVersionEnum? dependentObjectVersion = DependentObjectVersionEnum.V1, List<ExcludeMetadataListItemInput> excludeObjects = default, FavoriteObjectOptionsInput favoriteObjectOptions = default, bool? includeAutoCreatedObjects = false, bool? includeDependentObjects = false, int dependentObjectsRecordSize = 50, int dependentObjectsRecordOffset = default, bool? includeDetails = false, bool? includePersonalisedViews = false, bool? includeHeaders = true, bool? includeHiddenObjects = false, bool? includeIncompleteObjects = false, bool? includeVisualizationHeaders = false, bool? includeWorksheetSearchAssistData = default, List<string> modifiedByUserIdentifiers = default, int recordOffset = 0, int recordSize = 10, MetadataSearchSortOptions sortOptions = default, List<string> tagIdentifiers = default, bool? includeStats = false, bool? includeDiscoverableObjects = true, bool? showResolvedParameters = false, LiveboardResponseVersionEnum? liveboardResponseVersion = LiveboardResponseVersionEnum.V1, bool? includeOnlyPublishedObjects = false)
         {
             this.Metadata = metadata;
             this.Permissions = permissions;
@@ -128,6 +129,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             // use default value if no "includeDependentObjects" provided
             this.IncludeDependentObjects = includeDependentObjects ?? false;
             this.DependentObjectsRecordSize = dependentObjectsRecordSize;
+            this.DependentObjectsRecordOffset = dependentObjectsRecordOffset;
             // use default value if no "includeDetails" provided
             this.IncludeDetails = includeDetails ?? false;
             // use default value if no "includePersonalisedViews" provided
@@ -213,6 +215,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>The maximum number of dependents to include per metadata object.</value>
         [DataMember(Name = "dependent_objects_record_size", EmitDefaultValue = false)]
         public int DependentObjectsRecordSize { get; set; }
+
+        /// <summary>
+        /// Optional. The number of dependents to skip per metadata object before collecting them, so that dependents can be fetched in bounded pages. Combine with dependent_objects_record_size as the page size, and keep requesting pages until dependent_objects_is_last_batch is true. When this offset is supplied, a dependent_objects_record_size of 0 means the cluster default page size. Omit it to keep the pre-paging behaviour. A negative value is rejected.    Version: 26.11.0.cl or later 
+        /// </summary>
+        /// <value>Optional. The number of dependents to skip per metadata object before collecting them, so that dependents can be fetched in bounded pages. Combine with dependent_objects_record_size as the page size, and keep requesting pages until dependent_objects_is_last_batch is true. When this offset is supplied, a dependent_objects_record_size of 0 means the cluster default page size. Omit it to keep the pre-paging behaviour. A negative value is rejected.    Version: 26.11.0.cl or later </value>
+        [DataMember(Name = "dependent_objects_record_offset", EmitDefaultValue = false)]
+        public int DependentObjectsRecordOffset { get; set; }
 
         /// <summary>
         /// Includes complete details of the metadata objects.
@@ -349,6 +358,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  IncludeAutoCreatedObjects: ").Append(IncludeAutoCreatedObjects).Append("\n");
             sb.Append("  IncludeDependentObjects: ").Append(IncludeDependentObjects).Append("\n");
             sb.Append("  DependentObjectsRecordSize: ").Append(DependentObjectsRecordSize).Append("\n");
+            sb.Append("  DependentObjectsRecordOffset: ").Append(DependentObjectsRecordOffset).Append("\n");
             sb.Append("  IncludeDetails: ").Append(IncludeDetails).Append("\n");
             sb.Append("  IncludePersonalisedViews: ").Append(IncludePersonalisedViews).Append("\n");
             sb.Append("  IncludeHeaders: ").Append(IncludeHeaders).Append("\n");

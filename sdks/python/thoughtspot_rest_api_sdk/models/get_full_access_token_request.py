@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from thoughtspot_rest_api_sdk.models.token_scope_input import TokenScopeInput
 from thoughtspot_rest_api_sdk.models.user_parameter_options import UserParameterOptions
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,13 +32,14 @@ class GetFullAccessTokenRequest(BaseModel):
     secret_key: Optional[StrictStr] = Field(default='', description="The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates a secret key when Trusted authentication is enabled.")
     validity_time_in_sec: Optional[StrictInt] = Field(default=300, description="Token validity duration in seconds")
     org_id: Optional[StrictInt] = Field(default=None, description="ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.")
+    scope: Optional[TokenScopeInput] = Field(default=None, description="The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the `X-Org-Selector` header.   Version: 26.10.0.cl or later ")
     email: Optional[StrictStr] = Field(default=None, description="Email address of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning).")
     display_name: Optional[StrictStr] = Field(default=None, description="Indicates display name of the user. Use this parameter to provision a user just-in-time (JIT).")
     auto_create: Optional[StrictBool] = Field(default=False, description="   Creates a new user if the specified username does not already exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required. ")
     group_identifiers: Optional[List[StrictStr]] = Field(default=None, description="ID or name of the groups to which the newly created user belongs. Use this parameter to provision a user just-in-time (JIT).")
     user_parameters: Optional[UserParameterOptions] = Field(default=None, description="<div>Deprecated: 10.4.0.cl and later </div>  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters).")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["username", "password", "secret_key", "validity_time_in_sec", "org_id", "email", "display_name", "auto_create", "group_identifiers", "user_parameters"]
+    __properties: ClassVar[List[str]] = ["username", "password", "secret_key", "validity_time_in_sec", "org_id", "scope", "email", "display_name", "auto_create", "group_identifiers", "user_parameters"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -80,6 +82,9 @@ class GetFullAccessTokenRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of scope
+        if self.scope:
+            _dict['scope'] = self.scope.to_dict()
         # override the default output from pydantic by calling `to_dict()` of user_parameters
         if self.user_parameters:
             _dict['user_parameters'] = self.user_parameters.to_dict()
@@ -110,6 +115,7 @@ class GetFullAccessTokenRequest(BaseModel):
             "secret_key": obj.get("secret_key") if obj.get("secret_key") is not None else '',
             "validity_time_in_sec": obj.get("validity_time_in_sec") if obj.get("validity_time_in_sec") is not None else 300,
             "org_id": obj.get("org_id"),
+            "scope": TokenScopeInput.from_dict(obj["scope"]) if obj.get("scope") is not None else None,
             "email": obj.get("email"),
             "display_name": obj.get("display_name"),
             "auto_create": obj.get("auto_create") if obj.get("auto_create") is not None else False,

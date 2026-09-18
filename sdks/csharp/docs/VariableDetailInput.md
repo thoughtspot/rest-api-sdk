@@ -5,7 +5,7 @@ Input for variable details in search
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Identifier** | **string** | Unique ID or name of the variable | [optional] 
+**Identifier** | **string** | Unique ID, name, or object ID of the variable | [optional] 
 **Type** | **string** | Type of variable | [optional] 
 **NamePattern** | **string** | A pattern to match case-insensitive name of the variable. User % for a wildcard match | [optional] 
 

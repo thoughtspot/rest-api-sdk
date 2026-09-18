@@ -38,8 +38,8 @@ class ExportMetadataTypeInput(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'CONNECTION', 'CUSTOM_ACTION', 'USER', 'USER_GROUP', 'ROLE', 'FEEDBACK', 'COLLECTION']):
-            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'CONNECTION', 'CUSTOM_ACTION', 'USER', 'USER_GROUP', 'ROLE', 'FEEDBACK', 'COLLECTION')")
+        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'CONNECTION', 'CUSTOM_ACTION', 'USER', 'USER_GROUP', 'ROLE', 'FEEDBACK', 'COLLECTION', 'TEMPLATE_VARIABLE']):
+            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'CONNECTION', 'CUSTOM_ACTION', 'USER', 'USER_GROUP', 'ROLE', 'FEEDBACK', 'COLLECTION', 'TEMPLATE_VARIABLE')")
         return value
 
     model_config = ConfigDict(
