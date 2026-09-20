@@ -300,6 +300,31 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test CreateInputTable
+        /// </summary>
+        [Fact]
+        public void CreateInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateInputTableRequest createInputTableRequest = null;
+            //var response = instance.CreateInputTable(createInputTableRequest);
+            //Assert.IsType<InputTableResponse>(response);
+        }
+
+        /// <summary>
+        /// Test CreateInputTableColumn
+        /// </summary>
+        [Fact]
+        public void CreateInputTableColumnTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //CreateInputTableColumnRequest createInputTableColumnRequest = null;
+            //var response = instance.CreateInputTableColumn(inputTableIdentifier, createInputTableColumnRequest);
+            //Assert.IsType<InputColumnResponse>(response);
+        }
+
+        /// <summary>
         /// Test CreateOrg
         /// </summary>
         [Fact]
@@ -603,6 +628,29 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string templateIdentifier = null;
             //instance.DeleteEmailCustomization(templateIdentifier);
+        }
+
+        /// <summary>
+        /// Test DeleteInputTable
+        /// </summary>
+        [Fact]
+        public void DeleteInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //instance.DeleteInputTable(inputTableIdentifier);
+        }
+
+        /// <summary>
+        /// Test DeleteInputTableColumn
+        /// </summary>
+        [Fact]
+        public void DeleteInputTableColumnTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //string columnIdentifier = null;
+            //instance.DeleteInputTableColumn(inputTableIdentifier, columnIdentifier);
         }
 
         /// <summary>
@@ -1627,6 +1675,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test SearchLinkCustomizations
+        /// </summary>
+        [Fact]
+        public void SearchLinkCustomizationsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchLinkCustomizationsRequest searchLinkCustomizationsRequest = null;
+            //var response = instance.SearchLinkCustomizations(searchLinkCustomizationsRequest);
+            //Assert.IsType<List<LinkPreference>>(response);
+        }
+
+        /// <summary>
         /// Test SearchMetadata
         /// </summary>
         [Fact]
@@ -2164,6 +2224,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test UpdateInputTable
+        /// </summary>
+        [Fact]
+        public void UpdateInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //UpdateInputTableRequest updateInputTableRequest = null;
+            //var response = instance.UpdateInputTable(inputTableIdentifier, updateInputTableRequest);
+            //Assert.IsType<InputTableUpdateResponse>(response);
+        }
+
+        /// <summary>
+        /// Test UpdateLinkCustomizations
+        /// </summary>
+        [Fact]
+        public void UpdateLinkCustomizationsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateLinkCustomizationsRequest updateLinkCustomizationsRequest = null;
+            //instance.UpdateLinkCustomizations(updateLinkCustomizationsRequest);
+        }
+
+        /// <summary>
         /// Test UpdateMetadataHeader
         /// </summary>
         [Fact]
@@ -2233,12 +2317,13 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string? operation = null;
             //StyleResetOptionsInput? resetOptions = null;
             //NavigationPanelInput? navigationPanel = null;
+            //AppColorThemeInput? appColorTheme = null;
             //StyleColorPaletteInput? chartColorPalette = null;
             //string? embeddedFooterText = null;
             //VisualizationFontsInput? visualizationFonts = null;
             //FileParameter? defaultLogo = null;
             //FileParameter? wideLogo = null;
-            //instance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+            //instance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
         }
 
         /// <summary>

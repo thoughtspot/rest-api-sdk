@@ -57,6 +57,7 @@ __export(typescript_exports, {
   AnswerPngOptionsInput: () => AnswerPngOptionsInput,
   AnswerResponseItem: () => AnswerResponseItem,
   ApiException: () => ApiException,
+  AppColorThemeInput: () => AppColorThemeInput,
   AssignChangeAuthorRequest: () => AssignChangeAuthorRequest,
   AssignTagRequest: () => AssignTagRequest,
   AssociateMetadataInput: () => AssociateMetadataInput,
@@ -291,6 +292,7 @@ __export(typescript_exports, {
   InputTableDefinitionInput: () => InputTableDefinitionInput,
   InputTableResponse: () => InputTableResponse,
   InputTableUpdateResponse: () => InputTableUpdateResponse,
+  InputTablesApi: () => PromiseInputTablesApi,
   IsomorphicFetchHttpLibrary: () => IsomorphicFetchHttpLibrary,
   JWTMetadataObject: () => JWTMetadataObject,
   JWTParameter: () => JWTParameter,
@@ -298,6 +300,7 @@ __export(typescript_exports, {
   JWTUserOptionsFull: () => JWTUserOptionsFull,
   JobRecipient: () => JobRecipient,
   JobsApi: () => PromiseJobsApi,
+  LinkCustomizationApi: () => PromiseLinkCustomizationApi,
   LinkPreference: () => LinkPreference,
   LinkTemplate: () => LinkTemplate,
   LinkTemplateInput: () => LinkTemplateInput,
@@ -488,6 +491,7 @@ __export(typescript_exports, {
   StorageConfigInput: () => StorageConfigInput,
   StorageDestination: () => StorageDestination,
   StorageDestinationInput: () => StorageDestinationInput,
+  StyleAppColorTheme: () => StyleAppColorTheme,
   StyleChartColorPalette: () => StyleChartColorPalette,
   StyleColorEntry: () => StyleColorEntry,
   StyleColorEntryInput: () => StyleColorEntryInput,
@@ -2201,6 +2205,32 @@ _AnswerResponseItem.attributeTypeMap = [
   }
 ];
 var AnswerResponseItem = _AnswerResponseItem;
+
+// models/AppColorThemeInput.ts
+var _AppColorThemeInput = class _AppColorThemeInput {
+  static getAttributeTypeMap() {
+    return _AppColorThemeInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AppColorThemeInput.discriminator = void 0;
+_AppColorThemeInput.mapping = void 0;
+_AppColorThemeInput.attributeTypeMap = [
+  {
+    "name": "brand_color",
+    "baseName": "brand_color",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "apply_as_top_nav_color",
+    "baseName": "apply_as_top_nav_color",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var AppColorThemeInput = _AppColorThemeInput;
 
 // models/AssignChangeAuthorRequest.ts
 var _AssignChangeAuthorRequest = class _AssignChangeAuthorRequest {
@@ -17036,6 +17066,38 @@ _StorageDestinationInput.attributeTypeMap = [
 ];
 var StorageDestinationInput = _StorageDestinationInput;
 
+// models/StyleAppColorTheme.ts
+var _StyleAppColorTheme = class _StyleAppColorTheme {
+  static getAttributeTypeMap() {
+    return _StyleAppColorTheme.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_StyleAppColorTheme.discriminator = void 0;
+_StyleAppColorTheme.mapping = void 0;
+_StyleAppColorTheme.attributeTypeMap = [
+  {
+    "name": "brand_color",
+    "baseName": "brand_color",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "apply_as_top_nav_color",
+    "baseName": "apply_as_top_nav_color",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "is_overridden",
+    "baseName": "is_overridden",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var StyleAppColorTheme = _StyleAppColorTheme;
+
 // models/StyleChartColorPalette.ts
 var _StyleChartColorPalette = class _StyleChartColorPalette {
   static getAttributeTypeMap() {
@@ -17475,6 +17537,12 @@ _StylePreference.attributeTypeMap = [
     "name": "navigation_panel",
     "baseName": "navigation_panel",
     "type": "StyleNavigationPanel",
+    "format": ""
+  },
+  {
+    "name": "app_color_theme",
+    "baseName": "app_color_theme",
+    "type": "StyleAppColorTheme",
     "format": ""
   },
   {
@@ -22600,6 +22668,7 @@ var typeMap = {
   "AnswerDetails": AnswerDetails,
   "AnswerPngOptionsInput": AnswerPngOptionsInput,
   "AnswerResponseItem": AnswerResponseItem,
+  "AppColorThemeInput": AppColorThemeInput,
   "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
   "AssignTagRequest": AssignTagRequest,
   "AssociateMetadataInput": AssociateMetadataInput,
@@ -23000,6 +23069,7 @@ var typeMap = {
   "StorageConfigInput": StorageConfigInput,
   "StorageDestination": StorageDestination,
   "StorageDestinationInput": StorageDestinationInput,
+  "StyleAppColorTheme": StyleAppColorTheme,
   "StyleChartColorPalette": StyleChartColorPalette,
   "StyleColorEntry": StyleColorEntry,
   "StyleColorEntryInput": StyleColorEntryInput,
@@ -23392,8 +23462,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23426,8 +23496,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/analysts/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23460,8 +23530,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/conversation/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23494,8 +23564,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -23519,8 +23589,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "DELETE" /* DELETE */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -23544,8 +23614,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/memory/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23574,8 +23644,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/instructions/get";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -23599,8 +23669,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -23623,8 +23693,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     if (limit !== void 0) {
       requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
     }
@@ -23657,8 +23727,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/data-source-suggestions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23691,8 +23761,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/instructions/get";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23725,8 +23795,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/relevant-questions/";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23759,8 +23829,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -23784,8 +23854,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -23809,8 +23879,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/memory/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23847,8 +23917,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier))).replace("{answer_identifier}", encodeURIComponent(String(answerIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -23874,8 +23944,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/analytical-questions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23908,8 +23978,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/analysts/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23946,8 +24016,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23984,8 +24054,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24024,8 +24094,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24060,8 +24130,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/converse/sse";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24098,8 +24168,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24132,8 +24202,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/instructions/set";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "PUT" /* PUT */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24166,8 +24236,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/instructions/set";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24204,8 +24274,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24242,8 +24312,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24276,8 +24346,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/answer/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24310,8 +24380,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -24339,8 +24409,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24377,8 +24447,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26442,8 +26512,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26472,8 +26542,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/user";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -26493,8 +26563,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/token";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -26518,8 +26588,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/custom";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26547,8 +26617,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/full";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26576,8 +26646,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/object";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26605,8 +26675,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/login";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26635,8 +26705,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/logout";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -26660,8 +26730,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/revoke";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26694,8 +26764,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26728,8 +26798,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27405,8 +27475,8 @@ var CollectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27439,8 +27509,8 @@ var CollectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27473,8 +27543,8 @@ var CollectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27511,8 +27581,8 @@ var CollectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/{collection_identifier}/update".replace("{collection_identifier}", encodeURIComponent(String(collectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27798,8 +27868,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
     const localVarPath = "/api/rest/2.0/connection-configurations/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27832,8 +27902,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
     const localVarPath = "/api/rest/2.0/connection-configurations/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27866,8 +27936,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
     const localVarPath = "/api/rest/2.0/connection-configurations/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27904,8 +27974,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
     const localVarPath = "/api/rest/2.0/connection-configurations/{configuration_identifier}/update".replace("{configuration_identifier}", encodeURIComponent(String(configurationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28170,8 +28240,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28206,8 +28276,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28240,8 +28310,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/delete".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -28265,8 +28335,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -28290,8 +28360,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -28319,8 +28389,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28353,8 +28423,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28391,8 +28461,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/resync-metadata".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28427,8 +28497,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28465,8 +28535,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/status".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28503,8 +28573,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/update".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29195,8 +29265,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29229,8 +29299,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -29254,8 +29324,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29292,8 +29362,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29558,8 +29628,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29592,8 +29662,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/delete".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -29617,8 +29687,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/generate-csv";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29651,8 +29721,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29689,8 +29759,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/update".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30026,8 +30096,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/dbt-connection";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -30101,8 +30171,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -30164,8 +30234,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/generate-tml";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -30221,8 +30291,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -30246,8 +30316,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete".replace("{dbt_connection_identifier}", encodeURIComponent(String(dbtConnectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -30281,8 +30351,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -30712,8 +30782,8 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/answer/data";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30746,8 +30816,8 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/liveboard/data";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30780,8 +30850,8 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/searchdata";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30997,8 +31067,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31033,8 +31103,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/{template_identifier}/delete".replace("{template_identifier}", encodeURIComponent(String(templateIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -31058,8 +31128,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31092,8 +31162,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31126,8 +31196,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31156,8 +31226,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -31489,8 +31559,8 @@ var FeatureManagementApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/configurations/features/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31523,8 +31593,8 @@ var FeatureManagementApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/configurations/features/assignments/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31557,8 +31627,8 @@ var FeatureManagementApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/configurations/features/values/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31798,8 +31868,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31832,8 +31902,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/{group_identifier}/delete".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -31857,8 +31927,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31891,8 +31961,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31929,8 +31999,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/{group_identifier}/update".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32240,6 +32310,485 @@ var GroupsApiResponseProcessor = class {
   }
 };
 
+// apis/InputTablesApi.ts
+var InputTablesApiRequestFactory = class extends BaseAPIRequestFactory {
+  /**
+   *   Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model\'s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model\'s metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table\'s key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table\'s GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column\'s GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table\'s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column\'s final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+   * @param createInputTableRequest 
+   */
+  async createInputTable(createInputTableRequest, _options) {
+    let _config = _options || this.configuration;
+    if (createInputTableRequest === null || createInputTableRequest === void 0) {
+      throw new RequiredError("InputTablesApi", "createInputTable", "createInputTableRequest");
+    }
+    const localVarPath = "/api/rest/2.0/input-tables/create";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(createInputTableRequest, "CreateInputTableRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table\'s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+   * @param inputTableIdentifier Unique ID of the input table to add columns to.
+   * @param createInputTableColumnRequest 
+   */
+  async createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest, _options) {
+    let _config = _options || this.configuration;
+    if (inputTableIdentifier === null || inputTableIdentifier === void 0) {
+      throw new RequiredError("InputTablesApi", "createInputTableColumn", "inputTableIdentifier");
+    }
+    if (createInputTableColumnRequest === null || createInputTableColumnRequest === void 0) {
+      throw new RequiredError("InputTablesApi", "createInputTableColumn", "createInputTableColumnRequest");
+    }
+    const localVarPath = "/api/rest/2.0/input-tables/{input_table_identifier}/columns/create".replace("{input_table_identifier}", encodeURIComponent(String(inputTableIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(createInputTableColumnRequest, "CreateInputTableColumnRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table\'s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+   * @param inputTableIdentifier Unique ID of the input table to delete.
+   */
+  async deleteInputTable(inputTableIdentifier, _options) {
+    let _config = _options || this.configuration;
+    if (inputTableIdentifier === null || inputTableIdentifier === void 0) {
+      throw new RequiredError("InputTablesApi", "deleteInputTable", "inputTableIdentifier");
+    }
+    const localVarPath = "/api/rest/2.0/input-tables/{input_table_identifier}/delete".replace("{input_table_identifier}", encodeURIComponent(String(inputTableIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table\'s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+   * @param inputTableIdentifier Unique ID of the input table that owns the column.
+   * @param columnIdentifier Unique ID of the column to delete.
+   */
+  async deleteInputTableColumn(inputTableIdentifier, columnIdentifier, _options) {
+    let _config = _options || this.configuration;
+    if (inputTableIdentifier === null || inputTableIdentifier === void 0) {
+      throw new RequiredError("InputTablesApi", "deleteInputTableColumn", "inputTableIdentifier");
+    }
+    if (columnIdentifier === null || columnIdentifier === void 0) {
+      throw new RequiredError("InputTablesApi", "deleteInputTableColumn", "columnIdentifier");
+    }
+    const localVarPath = "/api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete".replace("{input_table_identifier}", encodeURIComponent(String(inputTableIdentifier))).replace("{column_identifier}", encodeURIComponent(String(columnIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table\'s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column\'s underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster\'s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row\'s value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column\'s data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table\'s key columns, so it is idempotent — retrying the same payload is safe.      
+   * @param inputTableIdentifier Unique ID of the input table to update.
+   * @param updateInputTableRequest 
+   */
+  async updateInputTable(inputTableIdentifier, updateInputTableRequest, _options) {
+    let _config = _options || this.configuration;
+    if (inputTableIdentifier === null || inputTableIdentifier === void 0) {
+      throw new RequiredError("InputTablesApi", "updateInputTable", "inputTableIdentifier");
+    }
+    if (updateInputTableRequest === null || updateInputTableRequest === void 0) {
+      throw new RequiredError("InputTablesApi", "updateInputTable", "updateInputTableRequest");
+    }
+    const localVarPath = "/api/rest/2.0/input-tables/{input_table_identifier}/update".replace("{input_table_identifier}", encodeURIComponent(String(inputTableIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(updateInputTableRequest, "UpdateInputTableRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+};
+var InputTablesApiResponseProcessor = class {
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to createInputTable
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async createInputTableWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputTableResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Bad request \u2014 invalid payload, no columns selected, or upload disabled on the connection.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden \u2014 caller does not have MODIFY permission on the model.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Model not found.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputTableResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to createInputTableColumn
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async createInputTableColumnWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputColumnResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Bad request \u2014 invalid payload or no columns supplied.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden \u2014 caller does not have MODIFY permission on the input table.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Input table not found.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputColumnResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteInputTable
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async deleteInputTableWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("204", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteInputTableColumn
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async deleteInputTableColumnWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("204", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateInputTable
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async updateInputTableWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputTableUpdateResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Malformed request or unknown column name.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden \u2014 caller does not have MODIFY permission on the input table.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Input table not found.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputTableUpdateResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+};
+
 // apis/JobsApi.ts
 var JobsApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
@@ -32254,8 +32803,8 @@ var JobsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/jobs/history/communication-channels/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32339,6 +32888,193 @@ var JobsApiResponseProcessor = class {
   }
 };
 
+// apis/LinkCustomizationApi.ts
+var LinkCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
+  /**
+   *   Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+   * @param searchLinkCustomizationsRequest 
+   */
+  async searchLinkCustomizations(searchLinkCustomizationsRequest, _options) {
+    let _config = _options || this.configuration;
+    if (searchLinkCustomizationsRequest === null || searchLinkCustomizationsRequest === void 0) {
+      throw new RequiredError("LinkCustomizationApi", "searchLinkCustomizations", "searchLinkCustomizationsRequest");
+    }
+    const localVarPath = "/api/rest/2.0/customization/links/search";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(searchLinkCustomizationsRequest, "SearchLinkCustomizationsRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+   * @param updateLinkCustomizationsRequest 
+   */
+  async updateLinkCustomizations(updateLinkCustomizationsRequest, _options) {
+    let _config = _options || this.configuration;
+    if (updateLinkCustomizationsRequest === null || updateLinkCustomizationsRequest === void 0) {
+      throw new RequiredError("LinkCustomizationApi", "updateLinkCustomizations", "updateLinkCustomizationsRequest");
+    }
+    const localVarPath = "/api/rest/2.0/customization/links/update";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(updateLinkCustomizationsRequest, "UpdateLinkCustomizationsRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+};
+var LinkCustomizationApiResponseProcessor = class {
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to searchLinkCustomizations
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async searchLinkCustomizationsWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Array<LinkPreference>",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Array<LinkPreference>",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateLinkCustomizations
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async updateLinkCustomizationsWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("204", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+};
+
 // apis/LogApi.ts
 var LogApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
@@ -32353,8 +33089,8 @@ var LogApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/logs/fetch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32452,8 +33188,8 @@ var ManualTranslationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32486,8 +33222,8 @@ var ManualTranslationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32520,8 +33256,8 @@ var ManualTranslationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/locales/{locale}/export".replace("{locale}", encodeURIComponent(String(locale)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -32546,8 +33282,8 @@ var ManualTranslationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -32839,8 +33575,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/worksheets/convert";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32873,8 +33609,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/copyobject";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32907,8 +33643,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32941,8 +33677,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32975,8 +33711,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/export/batch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33009,8 +33745,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/answer/sql";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33043,8 +33779,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/async/status";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33077,8 +33813,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/liveboard/sql";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33111,8 +33847,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33145,8 +33881,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/async/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33181,8 +33917,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/parameterize";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33215,8 +33951,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/parameterize-fields";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33249,8 +33985,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33283,8 +34019,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/unparameterize";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33317,8 +34053,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/headers/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33351,8 +34087,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/update-obj-id";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34313,8 +35049,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34347,8 +35083,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/delete".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -34372,8 +35108,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34410,8 +35146,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/update".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34676,8 +35412,8 @@ var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/report/answer";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34710,8 +35446,8 @@ var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/report/liveboard";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34860,8 +35596,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34894,8 +35630,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/{role_identifier}/delete".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -34919,8 +35655,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34957,8 +35693,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/{role_identifier}/update".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35228,8 +35964,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35262,8 +35998,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/delete".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -35287,8 +36023,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35325,8 +36061,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/update".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35591,8 +36327,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/assign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35625,8 +36361,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/column/rules/fetch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35659,8 +36395,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/fetch-object-privileges";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35693,8 +36429,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/principals/fetch-permissions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35727,8 +36463,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/fetch-permissions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35761,8 +36497,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/manage-object-privilege";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35795,8 +36531,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/publish";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35829,8 +36565,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/share";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35863,8 +36599,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/unpublish";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35897,8 +36633,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/column/rules/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36497,8 +37233,8 @@ var SemanticIntegrationsApiRequestFactory = class extends BaseAPIRequestFactory 
     const localVarPath = "/api/rest/2.0/semantic-integrations/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36531,8 +37267,8 @@ var SemanticIntegrationsApiRequestFactory = class extends BaseAPIRequestFactory 
     const localVarPath = "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete".replace("{semantic_integration_identifier}", encodeURIComponent(String(semanticIntegrationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -36556,8 +37292,8 @@ var SemanticIntegrationsApiRequestFactory = class extends BaseAPIRequestFactory 
     const localVarPath = "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import".replace("{semantic_integration_identifier}", encodeURIComponent(String(semanticIntegrationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -36581,8 +37317,8 @@ var SemanticIntegrationsApiRequestFactory = class extends BaseAPIRequestFactory 
     const localVarPath = "/api/rest/2.0/semantic-integrations/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36876,8 +37612,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36911,8 +37647,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/logos/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     requestContext.setHeaderParam("Accept", ObjectSerializer.serialize(accept, "'application/zip'", ""));
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
@@ -36935,7 +37671,7 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest 
    */
   async searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -36946,8 +37682,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36980,8 +37716,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37003,18 +37739,19 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param operation Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param resetOptions Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-   * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+   * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+   * @param appColorTheme App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
    * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
    * @param embeddedFooterText Custom footer text for the embedded application. An empty string clears the footer.
    * @param visualizationFonts Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
    * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
    * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
    */
-  async updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
+  async updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
     let _config = _options || this.configuration;
     if (scope === null || scope === void 0) {
       throw new RequiredError("StyleCustomizationApi", "updateStyleCustomization", "scope");
@@ -37022,8 +37759,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -37044,6 +37781,9 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     }
     if (navigationPanel !== void 0) {
       localVarFormParams.append("navigation_panel", JSON.stringify(navigationPanel));
+    }
+    if (appColorTheme !== void 0) {
+      localVarFormParams.append("app_color_theme", JSON.stringify(appColorTheme));
     }
     if (chartColorPalette !== void 0) {
       localVarFormParams.append("chart_color_palette", JSON.stringify(chartColorPalette));
@@ -37098,8 +37838,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/{font_identifier}/update".replace("{font_identifier}", encodeURIComponent(String(fontIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37140,8 +37880,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/upload";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -37606,8 +38346,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37640,8 +38380,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/security-settings/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37670,8 +38410,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37691,8 +38431,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37712,8 +38452,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config-overrides";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37737,8 +38477,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37771,8 +38511,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/security-settings/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37805,8 +38545,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config-update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37839,8 +38579,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/communication-channels/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38395,8 +39135,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/assign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38429,8 +39169,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38463,8 +39203,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/delete".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -38488,8 +39228,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38522,8 +39262,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/unassign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38560,8 +39300,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/update".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38934,8 +39674,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/activate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38968,8 +39708,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/assign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39002,8 +39742,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/assign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39036,8 +39776,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/change-password";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39070,8 +39810,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/branches/commit";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39104,8 +39844,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39138,8 +39878,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39172,8 +39912,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/security-settings/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39206,8 +39946,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection-configurations/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39240,8 +39980,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/worksheets/convert";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39274,8 +40014,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/copyobject";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39308,8 +40048,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39342,8 +40082,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/analysts/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39376,8 +40116,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39410,8 +40150,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39444,8 +40184,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39478,8 +40218,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39512,8 +40252,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection-configurations/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39546,8 +40286,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/conversation/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39580,8 +40320,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39614,14 +40354,86 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(createEmailCustomizationRequest, "CreateEmailCustomizationRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model\'s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model\'s metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table\'s key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table\'s GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column\'s GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table\'s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column\'s final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+   * @param createInputTableRequest 
+   */
+  async createInputTable(createInputTableRequest, _options) {
+    let _config = _options || this.configuration;
+    if (createInputTableRequest === null || createInputTableRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "createInputTable", "createInputTableRequest");
+    }
+    const localVarPath = "/api/rest/2.0/input-tables/create";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(createInputTableRequest, "CreateInputTableRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table\'s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+   * @param inputTableIdentifier Unique ID of the input table to add columns to.
+   * @param createInputTableColumnRequest 
+   */
+  async createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest, _options) {
+    let _config = _options || this.configuration;
+    if (inputTableIdentifier === null || inputTableIdentifier === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "createInputTableColumn", "inputTableIdentifier");
+    }
+    if (createInputTableColumnRequest === null || createInputTableColumnRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "createInputTableColumn", "createInputTableColumnRequest");
+    }
+    const localVarPath = "/api/rest/2.0/input-tables/{input_table_identifier}/columns/create".replace("{input_table_identifier}", encodeURIComponent(String(inputTableIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(createInputTableColumnRequest, "CreateInputTableColumnRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -39648,8 +40460,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39682,8 +40494,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39716,8 +40528,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39750,8 +40562,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/semantic-integrations/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39784,8 +40596,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39818,8 +40630,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39852,8 +40664,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39886,8 +40698,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39920,8 +40732,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39966,8 +40778,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/dbt-connection";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -40041,8 +40853,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -40104,8 +40916,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/generate-tml";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -40161,8 +40973,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40186,8 +40998,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/deactivate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40220,8 +41032,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40245,8 +41057,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/delete".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40270,8 +41082,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40304,8 +41116,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40340,8 +41152,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40374,8 +41186,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection-configurations/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40408,8 +41220,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/delete".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40433,8 +41245,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "DELETE" /* DELETE */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40458,8 +41270,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40483,8 +41295,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete".replace("{dbt_connection_identifier}", encodeURIComponent(String(dbtConnectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40510,8 +41322,62 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/{template_identifier}/delete".replace("{template_identifier}", encodeURIComponent(String(templateIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table\'s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+   * @param inputTableIdentifier Unique ID of the input table to delete.
+   */
+  async deleteInputTable(inputTableIdentifier, _options) {
+    let _config = _options || this.configuration;
+    if (inputTableIdentifier === null || inputTableIdentifier === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "deleteInputTable", "inputTableIdentifier");
+    }
+    const localVarPath = "/api/rest/2.0/input-tables/{input_table_identifier}/delete".replace("{input_table_identifier}", encodeURIComponent(String(inputTableIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table\'s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+   * @param inputTableIdentifier Unique ID of the input table that owns the column.
+   * @param columnIdentifier Unique ID of the column to delete.
+   */
+  async deleteInputTableColumn(inputTableIdentifier, columnIdentifier, _options) {
+    let _config = _options || this.configuration;
+    if (inputTableIdentifier === null || inputTableIdentifier === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "deleteInputTableColumn", "inputTableIdentifier");
+    }
+    if (columnIdentifier === null || columnIdentifier === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "deleteInputTableColumn", "columnIdentifier");
+    }
+    const localVarPath = "/api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete".replace("{input_table_identifier}", encodeURIComponent(String(inputTableIdentifier))).replace("{column_identifier}", encodeURIComponent(String(columnIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40535,8 +41401,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40569,8 +41435,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40603,8 +41469,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/delete".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40628,8 +41494,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40662,8 +41528,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/{role_identifier}/delete".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40687,8 +41553,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/delete".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40712,8 +41578,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete".replace("{semantic_integration_identifier}", encodeURIComponent(String(semanticIntegrationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40737,8 +41603,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40771,8 +41637,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/delete".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40796,8 +41662,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/{user_identifier}/delete".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40821,8 +41687,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/{group_identifier}/delete".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40848,8 +41714,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/delete".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40873,8 +41739,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40907,8 +41773,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40941,8 +41807,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/deploy";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40975,8 +41841,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -41000,8 +41866,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/report/answer";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41034,8 +41900,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/report/liveboard";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41068,8 +41934,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41102,8 +41968,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/memory/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41136,8 +42002,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41170,8 +42036,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/export/batch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41205,8 +42071,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/logos/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     requestContext.setHeaderParam("Accept", ObjectSerializer.serialize(accept, "'application/zip'", ""));
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
@@ -41240,8 +42106,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/answer/data";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41274,8 +42140,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/answer/sql";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41308,8 +42174,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/async/status";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41342,8 +42208,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/column/rules/fetch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41376,8 +42242,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -41401,8 +42267,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/liveboard/data";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41435,8 +42301,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/liveboard/sql";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41469,8 +42335,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/logs/fetch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41503,8 +42369,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/fetch-object-privileges";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41537,8 +42403,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/principals/fetch-permissions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41571,8 +42437,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/fetch-permissions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41605,8 +42471,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/force-logout";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41639,8 +42505,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/generate-csv";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41669,8 +42535,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/instructions/get";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -41694,8 +42560,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -41718,8 +42584,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     if (limit !== void 0) {
       requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
     }
@@ -41748,8 +42614,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/user";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -41769,8 +42635,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/token";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -41794,8 +42660,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/custom";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41823,8 +42689,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/data-source-suggestions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41857,8 +42723,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/full";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41886,8 +42752,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/locales/{locale}/export".replace("{locale}", encodeURIComponent(String(locale)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -41911,8 +42777,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/instructions/get";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41945,8 +42811,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/object";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41974,8 +42840,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/relevant-questions/";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42008,8 +42874,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -42033,8 +42899,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -42054,8 +42920,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -42075,8 +42941,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -42096,8 +42962,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config-overrides";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -42117,8 +42983,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/storage-config";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -42143,8 +43009,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -42192,8 +43058,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/memory/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42226,8 +43092,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42260,8 +43126,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/async/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42294,8 +43160,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import".replace("{semantic_integration_identifier}", encodeURIComponent(String(semanticIntegrationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -42319,8 +43185,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42353,8 +43219,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42391,8 +43257,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier))).replace("{answer_identifier}", encodeURIComponent(String(answerIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -42416,8 +43282,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/login";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42446,8 +43312,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/logout";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -42471,8 +43337,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/manage-object-privilege";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42507,8 +43373,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/parameterize";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42541,8 +43407,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/parameterize-fields";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42575,8 +43441,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/publish";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42613,8 +43479,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update-values".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42649,8 +43515,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/analytical-questions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42683,8 +43549,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/reset-password";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42721,8 +43587,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/{commit_id}/revert".replace("{commit_id}", encodeURIComponent(String(commitId)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42759,8 +43625,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42793,8 +43659,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/revoke";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42827,8 +43693,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/analysts/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42861,8 +43727,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42895,8 +43761,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42929,8 +43795,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/jobs/history/communication-channels/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42963,8 +43829,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42997,8 +43863,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43031,8 +43897,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43065,8 +43931,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43099,8 +43965,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43133,8 +43999,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43167,8 +44033,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/searchdata";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43201,8 +44067,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43235,14 +44101,48 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/configurations/features/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(searchFeaturesRequest, "SearchFeaturesRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+   * @param searchLinkCustomizationsRequest 
+   */
+  async searchLinkCustomizations(searchLinkCustomizationsRequest, _options) {
+    let _config = _options || this.configuration;
+    if (searchLinkCustomizationsRequest === null || searchLinkCustomizationsRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "searchLinkCustomizations", "searchLinkCustomizationsRequest");
+    }
+    const localVarPath = "/api/rest/2.0/customization/links/search";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(searchLinkCustomizationsRequest, "SearchLinkCustomizationsRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -43269,8 +44169,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43303,8 +44203,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43337,8 +44237,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43371,8 +44271,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43405,8 +44305,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/security-settings/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43439,8 +44339,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/semantic-integrations/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43462,7 +44362,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest 
    */
   async searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -43473,8 +44373,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43507,8 +44407,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43541,8 +44441,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43575,8 +44475,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43609,8 +44509,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43643,8 +44543,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43677,8 +44577,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43715,8 +44615,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43753,8 +44653,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43793,8 +44693,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43829,8 +44729,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/converse/sse";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43867,8 +44767,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43901,8 +44801,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/instructions/set";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "PUT" /* PUT */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43935,8 +44835,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/instructions/set";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43973,8 +44873,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44011,8 +44911,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44045,8 +44945,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/share";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44079,8 +44979,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/answer/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44113,8 +45013,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -44142,8 +45042,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/resync-metadata".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44176,8 +45076,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/unassign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44210,8 +45110,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/unparameterize";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44244,8 +45144,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/unpublish";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44282,8 +45182,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44320,8 +45220,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/update".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44358,8 +45258,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/{collection_identifier}/update".replace("{collection_identifier}", encodeURIComponent(String(collectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44392,8 +45292,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/column/rules/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44426,8 +45326,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44462,8 +45362,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44500,8 +45400,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection-configurations/{configuration_identifier}/update".replace("{configuration_identifier}", encodeURIComponent(String(configurationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44538,8 +45438,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/status".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44576,8 +45476,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/update".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44614,8 +45514,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44652,8 +45552,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44696,8 +45596,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -44772,8 +45672,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44806,8 +45706,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/configurations/features/assignments/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44840,14 +45740,86 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/configurations/features/values/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(updateFeatureValueRequest, "UpdateFeatureValueRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table\'s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column\'s underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster\'s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row\'s value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column\'s data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table\'s key columns, so it is idempotent — retrying the same payload is safe.      
+   * @param inputTableIdentifier Unique ID of the input table to update.
+   * @param updateInputTableRequest 
+   */
+  async updateInputTable(inputTableIdentifier, updateInputTableRequest, _options) {
+    let _config = _options || this.configuration;
+    if (inputTableIdentifier === null || inputTableIdentifier === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "updateInputTable", "inputTableIdentifier");
+    }
+    if (updateInputTableRequest === null || updateInputTableRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "updateInputTable", "updateInputTableRequest");
+    }
+    const localVarPath = "/api/rest/2.0/input-tables/{input_table_identifier}/update".replace("{input_table_identifier}", encodeURIComponent(String(inputTableIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(updateInputTableRequest, "UpdateInputTableRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+   * @param updateLinkCustomizationsRequest 
+   */
+  async updateLinkCustomizations(updateLinkCustomizationsRequest, _options) {
+    let _config = _options || this.configuration;
+    if (updateLinkCustomizationsRequest === null || updateLinkCustomizationsRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "updateLinkCustomizations", "updateLinkCustomizationsRequest");
+    }
+    const localVarPath = "/api/rest/2.0/customization/links/update";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(updateLinkCustomizationsRequest, "UpdateLinkCustomizationsRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -44874,8 +45846,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/headers/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44908,8 +45880,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/update-obj-id";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44946,8 +45918,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/update".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -44984,8 +45956,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/{role_identifier}/update".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45022,8 +45994,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/update".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45045,18 +46017,19 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param operation Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param resetOptions Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-   * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+   * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+   * @param appColorTheme App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
    * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
    * @param embeddedFooterText Custom footer text for the embedded application. An empty string clears the footer.
    * @param visualizationFonts Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
    * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
    * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
    */
-  async updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
+  async updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
     let _config = _options || this.configuration;
     if (scope === null || scope === void 0) {
       throw new RequiredError("ThoughtSpotRestApi", "updateStyleCustomization", "scope");
@@ -45064,8 +46037,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -45086,6 +46059,9 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     }
     if (navigationPanel !== void 0) {
       localVarFormParams.append("navigation_panel", JSON.stringify(navigationPanel));
+    }
+    if (appColorTheme !== void 0) {
+      localVarFormParams.append("app_color_theme", JSON.stringify(appColorTheme));
     }
     if (chartColorPalette !== void 0) {
       localVarFormParams.append("chart_color_palette", JSON.stringify(chartColorPalette));
@@ -45140,8 +46116,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/{font_identifier}/update".replace("{font_identifier}", encodeURIComponent(String(fontIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45174,8 +46150,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config-update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45212,8 +46188,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/update".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45250,8 +46226,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/{user_identifier}/update".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45288,8 +46264,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/{group_identifier}/update".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45326,8 +46302,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45362,8 +46338,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/update-values";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45400,8 +46376,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/{webhook_identifier}/update".replace("{webhook_identifier}", encodeURIComponent(String(webhookIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45442,8 +46418,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/upload";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -45503,8 +46479,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/communication-channels/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45533,8 +46509,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -45558,8 +46534,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/branches/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -45592,8 +46568,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -46843,6 +47819,140 @@ var ThoughtSpotRestApiResponseProcessor = class {
       const body = ObjectSerializer.deserialize(
         ObjectSerializer.parse(await response.body.text(), contentType),
         "CreateEmailCustomizationResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to createInputTable
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async createInputTableWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputTableResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Bad request \u2014 invalid payload, no columns selected, or upload disabled on the connection.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden \u2014 caller does not have MODIFY permission on the model.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Model not found.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputTableResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to createInputTableColumn
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async createInputTableColumnWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputColumnResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Bad request \u2014 invalid payload or no columns supplied.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden \u2014 caller does not have MODIFY permission on the input table.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Input table not found.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputColumnResponse",
         ""
       );
       return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
@@ -48292,6 +49402,114 @@ var ThoughtSpotRestApiResponseProcessor = class {
         ""
       );
       throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteInputTable
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async deleteInputTableWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("204", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteInputTableColumn
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async deleteInputTableColumnWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("204", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
     }
     if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
       const body = ObjectSerializer.deserialize(
@@ -53457,6 +54675,65 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to searchLinkCustomizations
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async searchLinkCustomizationsWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Array<LinkPreference>",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Array<LinkPreference>",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to searchMetadata
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -56093,6 +57370,127 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to updateInputTable
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async updateInputTableWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputTableUpdateResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Malformed request or unknown column name.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden \u2014 caller does not have MODIFY permission on the input table.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Input table not found.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "InputTableUpdateResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateLinkCustomizations
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async updateLinkCustomizationsWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("204", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to updateMetadataHeader
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -57148,8 +58546,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/activate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -57182,8 +58580,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/change-password";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -57216,8 +58614,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -57250,8 +58648,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/deactivate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -57284,8 +58682,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/{user_identifier}/delete".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -57309,8 +58707,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/force-logout";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -57343,8 +58741,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -57377,8 +58775,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/reset-password";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -57411,8 +58809,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -57449,8 +58847,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/{user_identifier}/update".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58054,8 +59452,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58090,8 +59488,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/delete".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -58115,8 +59513,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58153,8 +59551,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update-values".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58187,8 +59585,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58225,8 +59623,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58261,8 +59659,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/update-values";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58689,8 +60087,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/branches/commit";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58723,8 +60121,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58757,8 +60155,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58791,8 +60189,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/deploy";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58829,8 +60227,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/{commit_id}/revert".replace("{commit_id}", encodeURIComponent(String(commitId)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58863,8 +60261,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58897,8 +60295,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58931,8 +60329,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -58965,8 +60363,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/branches/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -59531,8 +60929,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -59565,8 +60963,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -59595,8 +60993,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/storage-config";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -59620,8 +61018,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -59658,8 +61056,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/{webhook_identifier}/update".replace("{webhook_identifier}", encodeURIComponent(String(webhookIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -62557,6 +63955,149 @@ var ObservableGroupsApi = class {
     return this.updateUserGroupWithHttpInfo(groupIdentifier, updateUserGroupRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
 };
+var ObservableInputTablesApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.configuration = configuration;
+    this.requestFactory = requestFactory || new InputTablesApiRequestFactory(configuration);
+    this.responseProcessor = responseProcessor || new InputTablesApiResponseProcessor();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model\'s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model\'s metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table\'s key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table\'s GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column\'s GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table\'s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column\'s final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+   * @param createInputTableRequest
+   */
+  createInputTableWithHttpInfo(createInputTableRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.createInputTable(createInputTableRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.createInputTableWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model\'s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model\'s metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table\'s key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table\'s GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column\'s GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table\'s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column\'s final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+   * @param createInputTableRequest
+   */
+  createInputTable(createInputTableRequest, _options) {
+    return this.createInputTableWithHttpInfo(createInputTableRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table\'s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+   * @param inputTableIdentifier Unique ID of the input table to add columns to.
+   * @param createInputTableColumnRequest
+   */
+  createInputTableColumnWithHttpInfo(inputTableIdentifier, createInputTableColumnRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.createInputTableColumnWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table\'s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+   * @param inputTableIdentifier Unique ID of the input table to add columns to.
+   * @param createInputTableColumnRequest
+   */
+  createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest, _options) {
+    return this.createInputTableColumnWithHttpInfo(inputTableIdentifier, createInputTableColumnRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table\'s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+   * @param inputTableIdentifier Unique ID of the input table to delete.
+   */
+  deleteInputTableWithHttpInfo(inputTableIdentifier, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.deleteInputTable(inputTableIdentifier, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteInputTableWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table\'s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+   * @param inputTableIdentifier Unique ID of the input table to delete.
+   */
+  deleteInputTable(inputTableIdentifier, _options) {
+    return this.deleteInputTableWithHttpInfo(inputTableIdentifier, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table\'s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+   * @param inputTableIdentifier Unique ID of the input table that owns the column.
+   * @param columnIdentifier Unique ID of the column to delete.
+   */
+  deleteInputTableColumnWithHttpInfo(inputTableIdentifier, columnIdentifier, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.deleteInputTableColumn(inputTableIdentifier, columnIdentifier, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteInputTableColumnWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table\'s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+   * @param inputTableIdentifier Unique ID of the input table that owns the column.
+   * @param columnIdentifier Unique ID of the column to delete.
+   */
+  deleteInputTableColumn(inputTableIdentifier, columnIdentifier, _options) {
+    return this.deleteInputTableColumnWithHttpInfo(inputTableIdentifier, columnIdentifier, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table\'s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column\'s underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster\'s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row\'s value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column\'s data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table\'s key columns, so it is idempotent — retrying the same payload is safe.      
+   * @param inputTableIdentifier Unique ID of the input table to update.
+   * @param updateInputTableRequest
+   */
+  updateInputTableWithHttpInfo(inputTableIdentifier, updateInputTableRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.updateInputTable(inputTableIdentifier, updateInputTableRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateInputTableWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table\'s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column\'s underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster\'s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row\'s value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column\'s data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table\'s key columns, so it is idempotent — retrying the same payload is safe.      
+   * @param inputTableIdentifier Unique ID of the input table to update.
+   * @param updateInputTableRequest
+   */
+  updateInputTable(inputTableIdentifier, updateInputTableRequest, _options) {
+    return this.updateInputTableWithHttpInfo(inputTableIdentifier, updateInputTableRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+};
 var ObservableJobsApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.configuration = configuration;
@@ -62588,6 +64129,65 @@ var ObservableJobsApi = class {
    */
   searchChannelHistory(searchChannelHistoryRequest, _options) {
     return this.searchChannelHistoryWithHttpInfo(searchChannelHistoryRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+};
+var ObservableLinkCustomizationApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.configuration = configuration;
+    this.requestFactory = requestFactory || new LinkCustomizationApiRequestFactory(configuration);
+    this.responseProcessor = responseProcessor || new LinkCustomizationApiResponseProcessor();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+   * @param searchLinkCustomizationsRequest
+   */
+  searchLinkCustomizationsWithHttpInfo(searchLinkCustomizationsRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.searchLinkCustomizations(searchLinkCustomizationsRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchLinkCustomizationsWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+   * @param searchLinkCustomizationsRequest
+   */
+  searchLinkCustomizations(searchLinkCustomizationsRequest, _options) {
+    return this.searchLinkCustomizationsWithHttpInfo(searchLinkCustomizationsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+   * @param updateLinkCustomizationsRequest
+   */
+  updateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.updateLinkCustomizations(updateLinkCustomizationsRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateLinkCustomizationsWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+   * @param updateLinkCustomizationsRequest
+   */
+  updateLinkCustomizations(updateLinkCustomizationsRequest, _options) {
+    return this.updateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
 };
 var ObservableLogApi = class {
@@ -63996,7 +65596,7 @@ var ObservableStyleCustomizationApi = class {
     return this.exportStyleLogosWithHttpInfo(exportStyleLogosRequest, accept, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizationsWithHttpInfo(searchStyleCustomizationsRequest, _options) {
@@ -64015,7 +65615,7 @@ var ObservableStyleCustomizationApi = class {
     }));
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -64048,20 +65648,21 @@ var ObservableStyleCustomizationApi = class {
     return this.searchStyleFontsWithHttpInfo(searchStyleFontsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+   * @param [appColorTheme] App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
    * @param [chartColorPalette] Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
    * @param [embeddedFooterText] Custom footer text for the embedded application. An empty string clears the footer.
    * @param [visualizationFonts] Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
    * @param [defaultLogo] Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
    * @param [wideLogo] Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
    */
-  updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
+  updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
     const _config = mergeConfiguration(this.configuration, _options);
-    const requestContextPromise = this.requestFactory.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _config);
+    const requestContextPromise = this.requestFactory.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _config);
     let middlewarePreObservable = from(requestContextPromise);
     for (const middleware of _config.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -64075,19 +65676,20 @@ var ObservableStyleCustomizationApi = class {
     }));
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+   * @param [appColorTheme] App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
    * @param [chartColorPalette] Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
    * @param [embeddedFooterText] Custom footer text for the embedded application. An empty string clears the footer.
    * @param [visualizationFonts] Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
    * @param [defaultLogo] Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
    * @param [wideLogo] Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
    */
-  updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
-    return this.updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options).pipe(map((apiResponse) => apiResponse.data));
+  updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
+    return this.updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *   Version: 26.7.0.cl or later   Updates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Identify the font using `font_identifier` (UUID or name). - Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user\'s org library. - To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`. - `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.      
@@ -65107,6 +66709,60 @@ var ObservableThoughtSpotRestApi = class {
     return this.createEmailCustomizationWithHttpInfo(createEmailCustomizationRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *   Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model\'s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model\'s metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table\'s key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table\'s GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column\'s GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table\'s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column\'s final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+   * @param createInputTableRequest
+   */
+  createInputTableWithHttpInfo(createInputTableRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.createInputTable(createInputTableRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.createInputTableWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model\'s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model\'s metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table\'s key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table\'s GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column\'s GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table\'s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column\'s final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+   * @param createInputTableRequest
+   */
+  createInputTable(createInputTableRequest, _options) {
+    return this.createInputTableWithHttpInfo(createInputTableRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table\'s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+   * @param inputTableIdentifier Unique ID of the input table to add columns to.
+   * @param createInputTableColumnRequest
+   */
+  createInputTableColumnWithHttpInfo(inputTableIdentifier, createInputTableColumnRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.createInputTableColumnWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table\'s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+   * @param inputTableIdentifier Unique ID of the input table to add columns to.
+   * @param createInputTableColumnRequest
+   */
+  createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest, _options) {
+    return this.createInputTableColumnWithHttpInfo(inputTableIdentifier, createInputTableColumnRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *   Version: 9.0.0.cl or later   Creates an Org object.  To use this API, the [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview) feature must be enabled in your cluster.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.      
    * @param createOrgRequest
    */
@@ -65785,6 +67441,60 @@ var ObservableThoughtSpotRestApi = class {
    */
   deleteEmailCustomization(templateIdentifier, _options) {
     return this.deleteEmailCustomizationWithHttpInfo(templateIdentifier, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table\'s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+   * @param inputTableIdentifier Unique ID of the input table to delete.
+   */
+  deleteInputTableWithHttpInfo(inputTableIdentifier, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.deleteInputTable(inputTableIdentifier, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteInputTableWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table\'s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+   * @param inputTableIdentifier Unique ID of the input table to delete.
+   */
+  deleteInputTable(inputTableIdentifier, _options) {
+    return this.deleteInputTableWithHttpInfo(inputTableIdentifier, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table\'s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+   * @param inputTableIdentifier Unique ID of the input table that owns the column.
+   * @param columnIdentifier Unique ID of the column to delete.
+   */
+  deleteInputTableColumnWithHttpInfo(inputTableIdentifier, columnIdentifier, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.deleteInputTableColumn(inputTableIdentifier, columnIdentifier, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteInputTableColumnWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table\'s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+   * @param inputTableIdentifier Unique ID of the input table that owns the column.
+   * @param columnIdentifier Unique ID of the column to delete.
+   */
+  deleteInputTableColumn(inputTableIdentifier, columnIdentifier, _options) {
+    return this.deleteInputTableColumnWithHttpInfo(inputTableIdentifier, columnIdentifier, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *  Delete manual translations.    Version: 26.7.0.cl or later   Deletes all manual translations for the org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.  #### Usage guidelines  - This deletes **all** translation entries for the targeted org. The operation cannot be undone. - Defaults to `ORG` scope if not specified. - Set `scope` to `CLUSTER` to delete translations uploaded in the All-Org context.      
@@ -68049,6 +69759,32 @@ var ObservableThoughtSpotRestApi = class {
     return this.searchFeaturesWithHttpInfo(searchFeaturesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *   Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+   * @param searchLinkCustomizationsRequest
+   */
+  searchLinkCustomizationsWithHttpInfo(searchLinkCustomizationsRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.searchLinkCustomizations(searchLinkCustomizationsRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchLinkCustomizationsWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+   * @param searchLinkCustomizationsRequest
+   */
+  searchLinkCustomizations(searchLinkCustomizationsRequest, _options) {
+    return this.searchLinkCustomizationsWithHttpInfo(searchLinkCustomizationsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1. - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.  **NOTE**: `obj_identifier` is supported for the following object types: `LIVEBOARD`, `ANSWER`, `LOGICAL_TABLE`, `LOGICAL_COLUMN`, `CONNECTION`, `USER_GROUP`, `COLLECTION`. The response includes the `metadata_obj_id` field for objects that have a Custom object ID set.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` - `include_only_published_objects`  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
    * @param searchMetadataRequest
    */
@@ -68205,7 +69941,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.searchSemanticIntegrationsWithHttpInfo(searchSemanticIntegrationsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizationsWithHttpInfo(searchStyleCustomizationsRequest, _options) {
@@ -68224,7 +69960,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -69243,6 +70979,60 @@ var ObservableThoughtSpotRestApi = class {
     return this.updateFeatureValueWithHttpInfo(updateFeatureValueRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *   Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table\'s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column\'s underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster\'s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row\'s value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column\'s data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table\'s key columns, so it is idempotent — retrying the same payload is safe.      
+   * @param inputTableIdentifier Unique ID of the input table to update.
+   * @param updateInputTableRequest
+   */
+  updateInputTableWithHttpInfo(inputTableIdentifier, updateInputTableRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.updateInputTable(inputTableIdentifier, updateInputTableRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateInputTableWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table\'s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column\'s underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster\'s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row\'s value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column\'s data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table\'s key columns, so it is idempotent — retrying the same payload is safe.      
+   * @param inputTableIdentifier Unique ID of the input table to update.
+   * @param updateInputTableRequest
+   */
+  updateInputTable(inputTableIdentifier, updateInputTableRequest, _options) {
+    return this.updateInputTableWithHttpInfo(inputTableIdentifier, updateInputTableRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+   * @param updateLinkCustomizationsRequest
+   */
+  updateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.updateLinkCustomizations(updateLinkCustomizationsRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateLinkCustomizationsWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+   * @param updateLinkCustomizationsRequest
+   */
+  updateLinkCustomizations(updateLinkCustomizationsRequest, _options) {
+    return this.updateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *  Update header attributes for a given list of header objects.   Version: 10.6.0.cl or later   ## Prerequisites - **Privileges Required:**   - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):**   - `ORG_ADMINISTRATION` (Can manage orgs).  ---  ## Usage Guidelines  ### Parameters  1. **headers_update**      - **Description:** List of header objects with their attributes to be updated. Each object contains a list of attributes to be updated in the header.    - **Usage:**       - You must provide either `identifier` or `obj_identifier`, but not both. Both fields cannot be empty.       - When `org_identifier` is set to `-1`, only the `identifier` value is accepted; `obj_identifier` is not allowed.  2. **org_identifier**      - **Description:** GUID (Globally Unique Identifier) or name of the organization.      - **Usage:**      - Leaving this field empty assumes that the changes should be applied to the current organization       - Provide `org_guid` or `org_name` to uniquely identify the organization where changes need to be applied. .      - Provide `-1` if changes have to be applied across all the org.  ---  ## Note Currently, this API is enabled only for updating the `obj_identifier` attribute. Only `text` will be allowed in attribute\'s value.  ## Best Practices  1. **Backup Before Conversion:**      Always export metadata as a backup before initiating the update process  ---  ## Examples  ### Only `identifier` is given  ```json {   \"headers_update\":   [     {       \"identifier\": \"guid_1\",       \"obj_identifier\": \"\",       \"type\": \"LOGICAL_COLUMN\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": \"orgGuid\" } ```  ### Only `obj_identifier` is given ```json {   \"headers_update\":   [     {       \"obj_identifier\": \"custom_object_id\",       \"type\": \"ANSWER\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": \"orgName\" } ```  ### Executing update for all org `-1` ```json {   \"headers_update\":   [     {       \"identifier\": \"guid_1\",       \"type\": \"ANSWER\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": -1 } ```  ### Optional `type` is not provided ```json {   \"headers_update\":   [     {       \"identifier\": \"guid_1\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": -1 } ```     
    * @param updateMetadataHeaderRequest
    */
@@ -69379,20 +71169,21 @@ var ObservableThoughtSpotRestApi = class {
     return this.updateScheduleWithHttpInfo(scheduleIdentifier, updateScheduleRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+   * @param [appColorTheme] App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
    * @param [chartColorPalette] Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
    * @param [embeddedFooterText] Custom footer text for the embedded application. An empty string clears the footer.
    * @param [visualizationFonts] Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
    * @param [defaultLogo] Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
    * @param [wideLogo] Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
    */
-  updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
+  updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
     const _config = mergeConfiguration(this.configuration, _options);
-    const requestContextPromise = this.requestFactory.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _config);
+    const requestContextPromise = this.requestFactory.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _config);
     let middlewarePreObservable = from(requestContextPromise);
     for (const middleware of _config.middleware) {
       middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
@@ -69406,19 +71197,20 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+   * @param [appColorTheme] App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
    * @param [chartColorPalette] Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
    * @param [embeddedFooterText] Custom footer text for the embedded application. An empty string clears the footer.
    * @param [visualizationFonts] Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
    * @param [defaultLogo] Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
    * @param [wideLogo] Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
    */
-  updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
-    return this.updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options).pipe(map((apiResponse) => apiResponse.data));
+  updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
+    return this.updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *   Version: 26.7.0.cl or later   Updates the metadata of an existing custom font in the cluster-level or org-level font library. Only the fields provided in the request are modified; omitted fields remain unchanged.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Identify the font using `font_identifier` (UUID or name). - Set `scope` to `CLUSTER` to target the cluster-level library. Set `scope` to `ORG` (default) to target the authenticated user\'s org library. - To replace the font file itself (WOFF/WOFF2 binary), delete the existing font and re-upload using `uploadStyleFont`. - `color` must be a valid 6-digit hex string (e.g. `#333333`) if provided.      
@@ -72437,6 +74229,107 @@ var PromiseGroupsApi = class {
     return result.toPromise();
   }
 };
+var PromiseInputTablesApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.api = new ObservableInputTablesApi(configuration, requestFactory, responseProcessor);
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model\'s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model\'s metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table\'s key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table\'s GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column\'s GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table\'s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column\'s final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+   * @param createInputTableRequest
+   */
+  createInputTableWithHttpInfo(createInputTableRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createInputTableWithHttpInfo(createInputTableRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model\'s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model\'s metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table\'s key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table\'s GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column\'s GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table\'s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column\'s final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+   * @param createInputTableRequest
+   */
+  createInputTable(createInputTableRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createInputTable(createInputTableRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table\'s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+   * @param inputTableIdentifier Unique ID of the input table to add columns to.
+   * @param createInputTableColumnRequest
+   */
+  createInputTableColumnWithHttpInfo(inputTableIdentifier, createInputTableColumnRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createInputTableColumnWithHttpInfo(inputTableIdentifier, createInputTableColumnRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table\'s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+   * @param inputTableIdentifier Unique ID of the input table to add columns to.
+   * @param createInputTableColumnRequest
+   */
+  createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table\'s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+   * @param inputTableIdentifier Unique ID of the input table to delete.
+   */
+  deleteInputTableWithHttpInfo(inputTableIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteInputTableWithHttpInfo(inputTableIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table\'s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+   * @param inputTableIdentifier Unique ID of the input table to delete.
+   */
+  deleteInputTable(inputTableIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteInputTable(inputTableIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table\'s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+   * @param inputTableIdentifier Unique ID of the input table that owns the column.
+   * @param columnIdentifier Unique ID of the column to delete.
+   */
+  deleteInputTableColumnWithHttpInfo(inputTableIdentifier, columnIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteInputTableColumnWithHttpInfo(inputTableIdentifier, columnIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table\'s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+   * @param inputTableIdentifier Unique ID of the input table that owns the column.
+   * @param columnIdentifier Unique ID of the column to delete.
+   */
+  deleteInputTableColumn(inputTableIdentifier, columnIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteInputTableColumn(inputTableIdentifier, columnIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table\'s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column\'s underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster\'s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row\'s value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column\'s data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table\'s key columns, so it is idempotent — retrying the same payload is safe.      
+   * @param inputTableIdentifier Unique ID of the input table to update.
+   * @param updateInputTableRequest
+   */
+  updateInputTableWithHttpInfo(inputTableIdentifier, updateInputTableRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateInputTableWithHttpInfo(inputTableIdentifier, updateInputTableRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table\'s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column\'s underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster\'s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row\'s value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column\'s data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table\'s key columns, so it is idempotent — retrying the same payload is safe.      
+   * @param inputTableIdentifier Unique ID of the input table to update.
+   * @param updateInputTableRequest
+   */
+  updateInputTable(inputTableIdentifier, updateInputTableRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateInputTable(inputTableIdentifier, updateInputTableRequest, observableOptions);
+    return result.toPromise();
+  }
+};
 var PromiseJobsApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.api = new ObservableJobsApi(configuration, requestFactory, responseProcessor);
@@ -72457,6 +74350,47 @@ var PromiseJobsApi = class {
   searchChannelHistory(searchChannelHistoryRequest, _options) {
     const observableOptions = wrapOptions(_options);
     const result = this.api.searchChannelHistory(searchChannelHistoryRequest, observableOptions);
+    return result.toPromise();
+  }
+};
+var PromiseLinkCustomizationApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.api = new ObservableLinkCustomizationApi(configuration, requestFactory, responseProcessor);
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+   * @param searchLinkCustomizationsRequest
+   */
+  searchLinkCustomizationsWithHttpInfo(searchLinkCustomizationsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchLinkCustomizationsWithHttpInfo(searchLinkCustomizationsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+   * @param searchLinkCustomizationsRequest
+   */
+  searchLinkCustomizations(searchLinkCustomizationsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchLinkCustomizations(searchLinkCustomizationsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+   * @param updateLinkCustomizationsRequest
+   */
+  updateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+   * @param updateLinkCustomizationsRequest
+   */
+  updateLinkCustomizations(updateLinkCustomizationsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateLinkCustomizations(updateLinkCustomizationsRequest, observableOptions);
     return result.toPromise();
   }
 };
@@ -73438,7 +75372,7 @@ var PromiseStyleCustomizationApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizationsWithHttpInfo(searchStyleCustomizationsRequest, _options) {
@@ -73447,7 +75381,7 @@ var PromiseStyleCustomizationApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -73474,37 +75408,39 @@ var PromiseStyleCustomizationApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+   * @param [appColorTheme] App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
    * @param [chartColorPalette] Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
    * @param [embeddedFooterText] Custom footer text for the embedded application. An empty string clears the footer.
    * @param [visualizationFonts] Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
    * @param [defaultLogo] Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
    * @param [wideLogo] Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
    */
-  updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
+  updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
     const observableOptions = wrapOptions(_options);
-    const result = this.api.updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, observableOptions);
+    const result = this.api.updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, observableOptions);
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+   * @param [appColorTheme] App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
    * @param [chartColorPalette] Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
    * @param [embeddedFooterText] Custom footer text for the embedded application. An empty string clears the footer.
    * @param [visualizationFonts] Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
    * @param [defaultLogo] Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
    * @param [wideLogo] Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
    */
-  updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
+  updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
     const observableOptions = wrapOptions(_options);
-    const result = this.api.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, observableOptions);
+    const result = this.api.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, observableOptions);
     return result.toPromise();
   }
   /**
@@ -74215,6 +76151,44 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *   Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model\'s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model\'s metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table\'s key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table\'s GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column\'s GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table\'s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column\'s final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+   * @param createInputTableRequest
+   */
+  createInputTableWithHttpInfo(createInputTableRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createInputTableWithHttpInfo(createInputTableRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model\'s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model\'s metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table\'s key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table\'s GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column\'s GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table\'s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column\'s final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+   * @param createInputTableRequest
+   */
+  createInputTable(createInputTableRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createInputTable(createInputTableRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table\'s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+   * @param inputTableIdentifier Unique ID of the input table to add columns to.
+   * @param createInputTableColumnRequest
+   */
+  createInputTableColumnWithHttpInfo(inputTableIdentifier, createInputTableColumnRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createInputTableColumnWithHttpInfo(inputTableIdentifier, createInputTableColumnRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table\'s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column\'s `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+   * @param inputTableIdentifier Unique ID of the input table to add columns to.
+   * @param createInputTableColumnRequest
+   */
+  createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.0.0.cl or later   Creates an Org object.  To use this API, the [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview) feature must be enabled in your cluster.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.      
    * @param createOrgRequest
    */
@@ -74692,6 +76666,44 @@ var PromiseThoughtSpotRestApi = class {
   deleteEmailCustomization(templateIdentifier, _options) {
     const observableOptions = wrapOptions(_options);
     const result = this.api.deleteEmailCustomization(templateIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table\'s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+   * @param inputTableIdentifier Unique ID of the input table to delete.
+   */
+  deleteInputTableWithHttpInfo(inputTableIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteInputTableWithHttpInfo(inputTableIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table\'s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+   * @param inputTableIdentifier Unique ID of the input table to delete.
+   */
+  deleteInputTable(inputTableIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteInputTable(inputTableIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table\'s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+   * @param inputTableIdentifier Unique ID of the input table that owns the column.
+   * @param columnIdentifier Unique ID of the column to delete.
+   */
+  deleteInputTableColumnWithHttpInfo(inputTableIdentifier, columnIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteInputTableColumnWithHttpInfo(inputTableIdentifier, columnIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table\'s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+   * @param inputTableIdentifier Unique ID of the input table that owns the column.
+   * @param columnIdentifier Unique ID of the column to delete.
+   */
+  deleteInputTableColumn(inputTableIdentifier, columnIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteInputTableColumn(inputTableIdentifier, columnIdentifier, observableOptions);
     return result.toPromise();
   }
   /**
@@ -76261,6 +78273,24 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *   Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+   * @param searchLinkCustomizationsRequest
+   */
+  searchLinkCustomizationsWithHttpInfo(searchLinkCustomizationsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchLinkCustomizationsWithHttpInfo(searchLinkCustomizationsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+   * @param searchLinkCustomizationsRequest
+   */
+  searchLinkCustomizations(searchLinkCustomizationsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchLinkCustomizations(searchLinkCustomizationsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1. - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.  **NOTE**: `obj_identifier` is supported for the following object types: `LIVEBOARD`, `ANSWER`, `LOGICAL_TABLE`, `LOGICAL_COLUMN`, `CONNECTION`, `USER_GROUP`, `COLLECTION`. The response includes the `metadata_obj_id` field for objects that have a Custom object ID set.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` - `include_only_published_objects`  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
    * @param searchMetadataRequest
    */
@@ -76369,7 +78399,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizationsWithHttpInfo(searchStyleCustomizationsRequest, _options) {
@@ -76378,7 +78408,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -77103,6 +79133,44 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *   Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table\'s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column\'s underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster\'s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row\'s value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column\'s data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table\'s key columns, so it is idempotent — retrying the same payload is safe.      
+   * @param inputTableIdentifier Unique ID of the input table to update.
+   * @param updateInputTableRequest
+   */
+  updateInputTableWithHttpInfo(inputTableIdentifier, updateInputTableRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateInputTableWithHttpInfo(inputTableIdentifier, updateInputTableRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table\'s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column\'s underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster\'s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row\'s value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column\'s data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table\'s key columns, so it is idempotent — retrying the same payload is safe.      
+   * @param inputTableIdentifier Unique ID of the input table to update.
+   * @param updateInputTableRequest
+   */
+  updateInputTable(inputTableIdentifier, updateInputTableRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateInputTable(inputTableIdentifier, updateInputTableRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+   * @param updateLinkCustomizationsRequest
+   */
+  updateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+   * @param updateLinkCustomizationsRequest
+   */
+  updateLinkCustomizations(updateLinkCustomizationsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateLinkCustomizations(updateLinkCustomizationsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *  Update header attributes for a given list of header objects.   Version: 10.6.0.cl or later   ## Prerequisites - **Privileges Required:**   - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):**   - `ORG_ADMINISTRATION` (Can manage orgs).  ---  ## Usage Guidelines  ### Parameters  1. **headers_update**      - **Description:** List of header objects with their attributes to be updated. Each object contains a list of attributes to be updated in the header.    - **Usage:**       - You must provide either `identifier` or `obj_identifier`, but not both. Both fields cannot be empty.       - When `org_identifier` is set to `-1`, only the `identifier` value is accepted; `obj_identifier` is not allowed.  2. **org_identifier**      - **Description:** GUID (Globally Unique Identifier) or name of the organization.      - **Usage:**      - Leaving this field empty assumes that the changes should be applied to the current organization       - Provide `org_guid` or `org_name` to uniquely identify the organization where changes need to be applied. .      - Provide `-1` if changes have to be applied across all the org.  ---  ## Note Currently, this API is enabled only for updating the `obj_identifier` attribute. Only `text` will be allowed in attribute\'s value.  ## Best Practices  1. **Backup Before Conversion:**      Always export metadata as a backup before initiating the update process  ---  ## Examples  ### Only `identifier` is given  ```json {   \"headers_update\":   [     {       \"identifier\": \"guid_1\",       \"obj_identifier\": \"\",       \"type\": \"LOGICAL_COLUMN\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": \"orgGuid\" } ```  ### Only `obj_identifier` is given ```json {   \"headers_update\":   [     {       \"obj_identifier\": \"custom_object_id\",       \"type\": \"ANSWER\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": \"orgName\" } ```  ### Executing update for all org `-1` ```json {   \"headers_update\":   [     {       \"identifier\": \"guid_1\",       \"type\": \"ANSWER\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": -1 } ```  ### Optional `type` is not provided ```json {   \"headers_update\":   [     {       \"identifier\": \"guid_1\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": -1 } ```     
    * @param updateMetadataHeaderRequest
    */
@@ -77199,37 +79267,39 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+   * @param [appColorTheme] App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
    * @param [chartColorPalette] Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
    * @param [embeddedFooterText] Custom footer text for the embedded application. An empty string clears the footer.
    * @param [visualizationFonts] Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
    * @param [defaultLogo] Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
    * @param [wideLogo] Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
    */
-  updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
+  updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
     const observableOptions = wrapOptions(_options);
-    const result = this.api.updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, observableOptions);
+    const result = this.api.updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, observableOptions);
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+   * @param [navigationPanel] Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+   * @param [appColorTheme] App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
    * @param [chartColorPalette] Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
    * @param [embeddedFooterText] Custom footer text for the embedded application. An empty string clears the footer.
    * @param [visualizationFonts] Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
    * @param [defaultLogo] Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
    * @param [wideLogo] Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
    */
-  updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
+  updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _options) {
     const observableOptions = wrapOptions(_options);
-    const result = this.api.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, observableOptions);
+    const result = this.api.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, observableOptions);
     return result.toPromise();
   }
   /**
@@ -78188,6 +80258,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   AnswerPngOptionsInput,
   AnswerResponseItem,
   ApiException,
+  AppColorThemeInput,
   AssignChangeAuthorRequest,
   AssignTagRequest,
   AssociateMetadataInput,
@@ -78422,6 +80493,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   InputTableDefinitionInput,
   InputTableResponse,
   InputTableUpdateResponse,
+  InputTablesApi,
   IsomorphicFetchHttpLibrary,
   JWTMetadataObject,
   JWTParameter,
@@ -78429,6 +80501,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   JWTUserOptionsFull,
   JobRecipient,
   JobsApi,
+  LinkCustomizationApi,
   LinkPreference,
   LinkTemplate,
   LinkTemplateInput,
@@ -78619,6 +80692,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   StorageConfigInput,
   StorageDestination,
   StorageDestinationInput,
+  StyleAppColorTheme,
   StyleChartColorPalette,
   StyleColorEntry,
   StyleColorEntryInput,

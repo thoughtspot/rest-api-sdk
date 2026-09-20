@@ -25,7 +25,7 @@ class StyleResetOptionsInput(BaseModel):
     """
     Fields to revert to defaults when operation is RESET.
     """ # noqa: E501
-    style: Optional[List[StrictStr]] = Field(default=None, description="Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.")
+    style: Optional[List[StrictStr]] = Field(default=None, description="Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO, WIDE_LOGO.")
     visualization_areas: Optional[List[StrictStr]] = Field(default=None, description="Visualization areas whose font assignments should revert to the system default font.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["style", "visualization_areas"]
@@ -37,8 +37,8 @@ class StyleResetOptionsInput(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['CHART_COLOR_PALETTE', 'EMBEDDED_FOOTER_TEXT', 'NAV_PANEL_COLOR', 'DEFAULT_LOGO', 'WIDE_LOGO']):
-                raise ValueError("each list item must be one of ('CHART_COLOR_PALETTE', 'EMBEDDED_FOOTER_TEXT', 'NAV_PANEL_COLOR', 'DEFAULT_LOGO', 'WIDE_LOGO')")
+            if i not in set(['CHART_COLOR_PALETTE', 'EMBEDDED_FOOTER_TEXT', 'NAV_PANEL_COLOR', 'APP_COLOR_THEME', 'DEFAULT_LOGO', 'WIDE_LOGO']):
+                raise ValueError("each list item must be one of ('CHART_COLOR_PALETTE', 'EMBEDDED_FOOTER_TEXT', 'NAV_PANEL_COLOR', 'APP_COLOR_THEME', 'DEFAULT_LOGO', 'WIDE_LOGO')")
         return value
 
     @field_validator('visualization_areas')

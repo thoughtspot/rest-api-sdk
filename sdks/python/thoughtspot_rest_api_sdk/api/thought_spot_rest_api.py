@@ -60,6 +60,8 @@ from thoughtspot_rest_api_sdk.models.create_conversation_request import CreateCo
 from thoughtspot_rest_api_sdk.models.create_custom_action_request import CreateCustomActionRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_request import CreateEmailCustomizationRequest
 from thoughtspot_rest_api_sdk.models.create_email_customization_response import CreateEmailCustomizationResponse
+from thoughtspot_rest_api_sdk.models.create_input_table_column_request import CreateInputTableColumnRequest
+from thoughtspot_rest_api_sdk.models.create_input_table_request import CreateInputTableRequest
 from thoughtspot_rest_api_sdk.models.create_org_request import CreateOrgRequest
 from thoughtspot_rest_api_sdk.models.create_role_request import CreateRoleRequest
 from thoughtspot_rest_api_sdk.models.create_schedule_request import CreateScheduleRequest
@@ -129,6 +131,10 @@ from thoughtspot_rest_api_sdk.models.import_user_groups_request import ImportUse
 from thoughtspot_rest_api_sdk.models.import_user_groups_response import ImportUserGroupsResponse
 from thoughtspot_rest_api_sdk.models.import_users_request import ImportUsersRequest
 from thoughtspot_rest_api_sdk.models.import_users_response import ImportUsersResponse
+from thoughtspot_rest_api_sdk.models.input_column_response import InputColumnResponse
+from thoughtspot_rest_api_sdk.models.input_table_response import InputTableResponse
+from thoughtspot_rest_api_sdk.models.input_table_update_response import InputTableUpdateResponse
+from thoughtspot_rest_api_sdk.models.link_preference import LinkPreference
 from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse
 from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse
 from thoughtspot_rest_api_sdk.models.log_response import LogResponse
@@ -175,6 +181,7 @@ from thoughtspot_rest_api_sdk.models.search_data_request import SearchDataReques
 from thoughtspot_rest_api_sdk.models.search_data_response import SearchDataResponse
 from thoughtspot_rest_api_sdk.models.search_email_customization_request import SearchEmailCustomizationRequest
 from thoughtspot_rest_api_sdk.models.search_features_request import SearchFeaturesRequest
+from thoughtspot_rest_api_sdk.models.search_link_customizations_request import SearchLinkCustomizationsRequest
 from thoughtspot_rest_api_sdk.models.search_metadata_request import SearchMetadataRequest
 from thoughtspot_rest_api_sdk.models.search_orgs_request import SearchOrgsRequest
 from thoughtspot_rest_api_sdk.models.search_role_response import SearchRoleResponse
@@ -235,6 +242,8 @@ from thoughtspot_rest_api_sdk.models.update_custom_action_request import UpdateC
 from thoughtspot_rest_api_sdk.models.update_email_customization_request import UpdateEmailCustomizationRequest
 from thoughtspot_rest_api_sdk.models.update_feature_assignments_request import UpdateFeatureAssignmentsRequest
 from thoughtspot_rest_api_sdk.models.update_feature_value_request import UpdateFeatureValueRequest
+from thoughtspot_rest_api_sdk.models.update_input_table_request import UpdateInputTableRequest
+from thoughtspot_rest_api_sdk.models.update_link_customizations_request import UpdateLinkCustomizationsRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_header_request import UpdateMetadataHeaderRequest
 from thoughtspot_rest_api_sdk.models.update_metadata_obj_id_request import UpdateMetadataObjIdRequest
 from thoughtspot_rest_api_sdk.models.update_org_request import UpdateOrgRequest
@@ -8443,6 +8452,809 @@ class ThoughtSpotRestApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/rest/2.0/customization/email',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def create_input_table(
+        self,
+        create_input_table_request: CreateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> InputTableResponse:
+        """create_input_table
+
+          Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table's key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table's GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column's GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table's column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column's final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+
+        :param create_input_table_request: (required)
+        :type create_input_table_request: CreateInputTableRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_input_table_serialize(
+            create_input_table_request=create_input_table_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InputTableResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def create_input_table_with_http_info(
+        self,
+        create_input_table_request: CreateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[InputTableResponse]:
+        """create_input_table
+
+          Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table's key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table's GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column's GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table's column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column's final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+
+        :param create_input_table_request: (required)
+        :type create_input_table_request: CreateInputTableRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_input_table_serialize(
+            create_input_table_request=create_input_table_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InputTableResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def create_input_table_without_preload_content(
+        self,
+        create_input_table_request: CreateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """create_input_table
+
+          Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table's key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table's GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column's GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table's column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column's final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+
+        :param create_input_table_request: (required)
+        :type create_input_table_request: CreateInputTableRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_input_table_serialize(
+            create_input_table_request=create_input_table_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InputTableResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def create_input_table_sync(
+        self,
+        create_input_table_request: CreateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> InputTableResponse:
+        """create_input_table (synchronous)
+
+        Synchronous variant of :meth:`create_input_table`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_input_table(
+                create_input_table_request=create_input_table_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def create_input_table_sync_with_http_info(
+        self,
+        create_input_table_request: CreateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[InputTableResponse]:
+        """create_input_table (synchronous)
+
+        Synchronous variant of :meth:`create_input_table_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_input_table_with_http_info(
+                create_input_table_request=create_input_table_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def create_input_table_sync_without_preload_content(
+        self,
+        create_input_table_request: CreateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """create_input_table (synchronous)
+
+        Synchronous variant of :meth:`create_input_table_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_input_table_without_preload_content(
+                create_input_table_request=create_input_table_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _create_input_table_serialize(
+        self,
+        create_input_table_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_input_table_request is not None:
+            _body_params = create_input_table_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/input-tables/create',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def create_input_table_column(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to add columns to.")],
+        create_input_table_column_request: CreateInputTableColumnRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> InputColumnResponse:
+        """create_input_table_column
+
+          Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table's ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+
+        :param input_table_identifier: Unique ID of the input table to add columns to. (required)
+        :type input_table_identifier: str
+        :param create_input_table_column_request: (required)
+        :type create_input_table_column_request: CreateInputTableColumnRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_input_table_column_serialize(
+            input_table_identifier=input_table_identifier,
+            create_input_table_column_request=create_input_table_column_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InputColumnResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def create_input_table_column_with_http_info(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to add columns to.")],
+        create_input_table_column_request: CreateInputTableColumnRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[InputColumnResponse]:
+        """create_input_table_column
+
+          Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table's ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+
+        :param input_table_identifier: Unique ID of the input table to add columns to. (required)
+        :type input_table_identifier: str
+        :param create_input_table_column_request: (required)
+        :type create_input_table_column_request: CreateInputTableColumnRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_input_table_column_serialize(
+            input_table_identifier=input_table_identifier,
+            create_input_table_column_request=create_input_table_column_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InputColumnResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def create_input_table_column_without_preload_content(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to add columns to.")],
+        create_input_table_column_request: CreateInputTableColumnRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """create_input_table_column
+
+          Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table's ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+
+        :param input_table_identifier: Unique ID of the input table to add columns to. (required)
+        :type input_table_identifier: str
+        :param create_input_table_column_request: (required)
+        :type create_input_table_column_request: CreateInputTableColumnRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_input_table_column_serialize(
+            input_table_identifier=input_table_identifier,
+            create_input_table_column_request=create_input_table_column_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InputColumnResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def create_input_table_column_sync(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to add columns to.")],
+        create_input_table_column_request: CreateInputTableColumnRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> InputColumnResponse:
+        """create_input_table_column (synchronous)
+
+        Synchronous variant of :meth:`create_input_table_column`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_input_table_column(
+                input_table_identifier=input_table_identifier,
+                create_input_table_column_request=create_input_table_column_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def create_input_table_column_sync_with_http_info(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to add columns to.")],
+        create_input_table_column_request: CreateInputTableColumnRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[InputColumnResponse]:
+        """create_input_table_column (synchronous)
+
+        Synchronous variant of :meth:`create_input_table_column_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_input_table_column_with_http_info(
+                input_table_identifier=input_table_identifier,
+                create_input_table_column_request=create_input_table_column_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def create_input_table_column_sync_without_preload_content(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to add columns to.")],
+        create_input_table_column_request: CreateInputTableColumnRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """create_input_table_column (synchronous)
+
+        Synchronous variant of :meth:`create_input_table_column_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_input_table_column_without_preload_content(
+                input_table_identifier=input_table_identifier,
+                create_input_table_column_request=create_input_table_column_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _create_input_table_column_serialize(
+        self,
+        input_table_identifier,
+        create_input_table_column_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if input_table_identifier is not None:
+            _path_params['input_table_identifier'] = input_table_identifier
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_input_table_column_request is not None:
+            _body_params = create_input_table_column_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/input-tables/{input_table_identifier}/columns/create',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -18369,6 +19181,777 @@ class ThoughtSpotRestApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/rest/2.0/customization/email/{template_identifier}/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def delete_input_table(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """delete_input_table
+
+          Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+
+        :param input_table_identifier: Unique ID of the input table to delete. (required)
+        :type input_table_identifier: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_input_table_serialize(
+            input_table_identifier=input_table_identifier,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def delete_input_table_with_http_info(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """delete_input_table
+
+          Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+
+        :param input_table_identifier: Unique ID of the input table to delete. (required)
+        :type input_table_identifier: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_input_table_serialize(
+            input_table_identifier=input_table_identifier,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def delete_input_table_without_preload_content(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """delete_input_table
+
+          Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+
+        :param input_table_identifier: Unique ID of the input table to delete. (required)
+        :type input_table_identifier: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_input_table_serialize(
+            input_table_identifier=input_table_identifier,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def delete_input_table_sync(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """delete_input_table (synchronous)
+
+        Synchronous variant of :meth:`delete_input_table`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_input_table(
+                input_table_identifier=input_table_identifier,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def delete_input_table_sync_with_http_info(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """delete_input_table (synchronous)
+
+        Synchronous variant of :meth:`delete_input_table_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_input_table_with_http_info(
+                input_table_identifier=input_table_identifier,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def delete_input_table_sync_without_preload_content(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """delete_input_table (synchronous)
+
+        Synchronous variant of :meth:`delete_input_table_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_input_table_without_preload_content(
+                input_table_identifier=input_table_identifier,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _delete_input_table_serialize(
+        self,
+        input_table_identifier,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if input_table_identifier is not None:
+            _path_params['input_table_identifier'] = input_table_identifier
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/input-tables/{input_table_identifier}/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def delete_input_table_column(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table that owns the column.")],
+        column_identifier: Annotated[StrictStr, Field(description="Unique ID of the column to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """delete_input_table_column
+
+          Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table's ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+
+        :param input_table_identifier: Unique ID of the input table that owns the column. (required)
+        :type input_table_identifier: str
+        :param column_identifier: Unique ID of the column to delete. (required)
+        :type column_identifier: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_input_table_column_serialize(
+            input_table_identifier=input_table_identifier,
+            column_identifier=column_identifier,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def delete_input_table_column_with_http_info(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table that owns the column.")],
+        column_identifier: Annotated[StrictStr, Field(description="Unique ID of the column to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """delete_input_table_column
+
+          Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table's ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+
+        :param input_table_identifier: Unique ID of the input table that owns the column. (required)
+        :type input_table_identifier: str
+        :param column_identifier: Unique ID of the column to delete. (required)
+        :type column_identifier: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_input_table_column_serialize(
+            input_table_identifier=input_table_identifier,
+            column_identifier=column_identifier,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def delete_input_table_column_without_preload_content(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table that owns the column.")],
+        column_identifier: Annotated[StrictStr, Field(description="Unique ID of the column to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """delete_input_table_column
+
+          Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table's ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+
+        :param input_table_identifier: Unique ID of the input table that owns the column. (required)
+        :type input_table_identifier: str
+        :param column_identifier: Unique ID of the column to delete. (required)
+        :type column_identifier: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_input_table_column_serialize(
+            input_table_identifier=input_table_identifier,
+            column_identifier=column_identifier,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def delete_input_table_column_sync(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table that owns the column.")],
+        column_identifier: Annotated[StrictStr, Field(description="Unique ID of the column to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """delete_input_table_column (synchronous)
+
+        Synchronous variant of :meth:`delete_input_table_column`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_input_table_column(
+                input_table_identifier=input_table_identifier,
+                column_identifier=column_identifier,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def delete_input_table_column_sync_with_http_info(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table that owns the column.")],
+        column_identifier: Annotated[StrictStr, Field(description="Unique ID of the column to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """delete_input_table_column (synchronous)
+
+        Synchronous variant of :meth:`delete_input_table_column_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_input_table_column_with_http_info(
+                input_table_identifier=input_table_identifier,
+                column_identifier=column_identifier,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def delete_input_table_column_sync_without_preload_content(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table that owns the column.")],
+        column_identifier: Annotated[StrictStr, Field(description="Unique ID of the column to delete.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """delete_input_table_column (synchronous)
+
+        Synchronous variant of :meth:`delete_input_table_column_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_input_table_column_without_preload_content(
+                input_table_identifier=input_table_identifier,
+                column_identifier=column_identifier,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _delete_input_table_column_serialize(
+        self,
+        input_table_identifier,
+        column_identifier,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if input_table_identifier is not None:
+            _path_params['input_table_identifier'] = input_table_identifier
+        if column_identifier is not None:
+            _path_params['column_identifier'] = column_identifier
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -51890,6 +53473,394 @@ class ThoughtSpotRestApi:
 
 
     @validate_call
+    async def search_link_customizations(
+        self,
+        search_link_customizations_request: SearchLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[LinkPreference]:
+        """search_link_customizations
+
+          Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+
+        :param search_link_customizations_request: (required)
+        :type search_link_customizations_request: SearchLinkCustomizationsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_link_customizations_serialize(
+            search_link_customizations_request=search_link_customizations_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[LinkPreference]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def search_link_customizations_with_http_info(
+        self,
+        search_link_customizations_request: SearchLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[List[LinkPreference]]:
+        """search_link_customizations
+
+          Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+
+        :param search_link_customizations_request: (required)
+        :type search_link_customizations_request: SearchLinkCustomizationsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_link_customizations_serialize(
+            search_link_customizations_request=search_link_customizations_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[LinkPreference]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def search_link_customizations_without_preload_content(
+        self,
+        search_link_customizations_request: SearchLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """search_link_customizations
+
+          Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+
+        :param search_link_customizations_request: (required)
+        :type search_link_customizations_request: SearchLinkCustomizationsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_link_customizations_serialize(
+            search_link_customizations_request=search_link_customizations_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[LinkPreference]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def search_link_customizations_sync(
+        self,
+        search_link_customizations_request: SearchLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[LinkPreference]:
+        """search_link_customizations (synchronous)
+
+        Synchronous variant of :meth:`search_link_customizations`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.search_link_customizations(
+                search_link_customizations_request=search_link_customizations_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def search_link_customizations_sync_with_http_info(
+        self,
+        search_link_customizations_request: SearchLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[List[LinkPreference]]:
+        """search_link_customizations (synchronous)
+
+        Synchronous variant of :meth:`search_link_customizations_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.search_link_customizations_with_http_info(
+                search_link_customizations_request=search_link_customizations_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def search_link_customizations_sync_without_preload_content(
+        self,
+        search_link_customizations_request: SearchLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """search_link_customizations (synchronous)
+
+        Synchronous variant of :meth:`search_link_customizations_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.search_link_customizations_without_preload_content(
+                search_link_customizations_request=search_link_customizations_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _search_link_customizations_serialize(
+        self,
+        search_link_customizations_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if search_link_customizations_request is not None:
+            _body_params = search_link_customizations_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/customization/links/search',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def search_metadata(
         self,
         search_metadata_request: SearchMetadataRequest,
@@ -54236,7 +56207,7 @@ class ThoughtSpotRestApi:
     ) -> List[StylePreference]:
         """search_style_customizations
 
-          Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+          Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
 
         :param search_style_customizations_request: (required)
         :type search_style_customizations_request: SearchStyleCustomizationsRequest
@@ -54307,7 +56278,7 @@ class ThoughtSpotRestApi:
     ) -> ApiResponse[List[StylePreference]]:
         """search_style_customizations
 
-          Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+          Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
 
         :param search_style_customizations_request: (required)
         :type search_style_customizations_request: SearchStyleCustomizationsRequest
@@ -54378,7 +56349,7 @@ class ThoughtSpotRestApi:
     ) -> RESTResponseType:
         """search_style_customizations
 
-          Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+          Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
 
         :param search_style_customizations_request: (required)
         :type search_style_customizations_request: SearchStyleCustomizationsRequest
@@ -69600,6 +71571,806 @@ class ThoughtSpotRestApi:
 
 
     @validate_call
+    async def update_input_table(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to update.")],
+        update_input_table_request: UpdateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> InputTableUpdateResponse:
+        """update_input_table
+
+          Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table's key columns, so it is idempotent — retrying the same payload is safe.      
+
+        :param input_table_identifier: Unique ID of the input table to update. (required)
+        :type input_table_identifier: str
+        :param update_input_table_request: (required)
+        :type update_input_table_request: UpdateInputTableRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_input_table_serialize(
+            input_table_identifier=input_table_identifier,
+            update_input_table_request=update_input_table_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InputTableUpdateResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def update_input_table_with_http_info(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to update.")],
+        update_input_table_request: UpdateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[InputTableUpdateResponse]:
+        """update_input_table
+
+          Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table's key columns, so it is idempotent — retrying the same payload is safe.      
+
+        :param input_table_identifier: Unique ID of the input table to update. (required)
+        :type input_table_identifier: str
+        :param update_input_table_request: (required)
+        :type update_input_table_request: UpdateInputTableRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_input_table_serialize(
+            input_table_identifier=input_table_identifier,
+            update_input_table_request=update_input_table_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InputTableUpdateResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def update_input_table_without_preload_content(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to update.")],
+        update_input_table_request: UpdateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """update_input_table
+
+          Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table's key columns, so it is idempotent — retrying the same payload is safe.      
+
+        :param input_table_identifier: Unique ID of the input table to update. (required)
+        :type input_table_identifier: str
+        :param update_input_table_request: (required)
+        :type update_input_table_request: UpdateInputTableRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_input_table_serialize(
+            input_table_identifier=input_table_identifier,
+            update_input_table_request=update_input_table_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InputTableUpdateResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def update_input_table_sync(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to update.")],
+        update_input_table_request: UpdateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> InputTableUpdateResponse:
+        """update_input_table (synchronous)
+
+        Synchronous variant of :meth:`update_input_table`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.update_input_table(
+                input_table_identifier=input_table_identifier,
+                update_input_table_request=update_input_table_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def update_input_table_sync_with_http_info(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to update.")],
+        update_input_table_request: UpdateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[InputTableUpdateResponse]:
+        """update_input_table (synchronous)
+
+        Synchronous variant of :meth:`update_input_table_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.update_input_table_with_http_info(
+                input_table_identifier=input_table_identifier,
+                update_input_table_request=update_input_table_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def update_input_table_sync_without_preload_content(
+        self,
+        input_table_identifier: Annotated[StrictStr, Field(description="Unique ID of the input table to update.")],
+        update_input_table_request: UpdateInputTableRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """update_input_table (synchronous)
+
+        Synchronous variant of :meth:`update_input_table_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.update_input_table_without_preload_content(
+                input_table_identifier=input_table_identifier,
+                update_input_table_request=update_input_table_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _update_input_table_serialize(
+        self,
+        input_table_identifier,
+        update_input_table_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if input_table_identifier is not None:
+            _path_params['input_table_identifier'] = input_table_identifier
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_input_table_request is not None:
+            _body_params = update_input_table_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/input-tables/{input_table_identifier}/update',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def update_link_customizations(
+        self,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """update_link_customizations
+
+          Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+
+        :param update_link_customizations_request: (required)
+        :type update_link_customizations_request: UpdateLinkCustomizationsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_link_customizations_serialize(
+            update_link_customizations_request=update_link_customizations_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def update_link_customizations_with_http_info(
+        self,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """update_link_customizations
+
+          Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+
+        :param update_link_customizations_request: (required)
+        :type update_link_customizations_request: UpdateLinkCustomizationsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_link_customizations_serialize(
+            update_link_customizations_request=update_link_customizations_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def update_link_customizations_without_preload_content(
+        self,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """update_link_customizations
+
+          Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+
+        :param update_link_customizations_request: (required)
+        :type update_link_customizations_request: UpdateLinkCustomizationsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_link_customizations_serialize(
+            update_link_customizations_request=update_link_customizations_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def update_link_customizations_sync(
+        self,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """update_link_customizations (synchronous)
+
+        Synchronous variant of :meth:`update_link_customizations`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.update_link_customizations(
+                update_link_customizations_request=update_link_customizations_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def update_link_customizations_sync_with_http_info(
+        self,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """update_link_customizations (synchronous)
+
+        Synchronous variant of :meth:`update_link_customizations_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.update_link_customizations_with_http_info(
+                update_link_customizations_request=update_link_customizations_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def update_link_customizations_sync_without_preload_content(
+        self,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """update_link_customizations (synchronous)
+
+        Synchronous variant of :meth:`update_link_customizations_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.update_link_customizations_without_preload_content(
+                update_link_customizations_request=update_link_customizations_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _update_link_customizations_serialize(
+        self,
+        update_link_customizations_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_link_customizations_request is not None:
+            _body_params = update_link_customizations_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/customization/links/update',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def update_metadata_header(
         self,
         update_metadata_header_request: UpdateMetadataHeaderRequest,
@@ -71608,7 +74379,8 @@ class ThoughtSpotRestApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -71629,7 +74401,7 @@ class ThoughtSpotRestApi:
     ) -> None:
         """update_style_customization
 
-          Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+          Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
 
         :param scope: Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org. (required)
         :type scope: str
@@ -71637,8 +74409,10 @@ class ThoughtSpotRestApi:
         :type operation: str
         :param reset_options: Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
         :type reset_options: StyleResetOptionsInput
-        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
         :type navigation_panel: NavigationPanelInput
+        :param app_color_theme: App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
+        :type app_color_theme: AppColorThemeInput
         :param chart_color_palette: Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
         :type chart_color_palette: StyleColorPaletteInput
         :param embedded_footer_text: Custom footer text for the embedded application. An empty string clears the footer.
@@ -71676,6 +74450,7 @@ class ThoughtSpotRestApi:
             operation=operation,
             reset_options=reset_options,
             navigation_panel=navigation_panel,
+            app_color_theme=app_color_theme,
             chart_color_palette=chart_color_palette,
             embedded_footer_text=embedded_footer_text,
             visualization_fonts=visualization_fonts,
@@ -71711,7 +74486,8 @@ class ThoughtSpotRestApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -71732,7 +74508,7 @@ class ThoughtSpotRestApi:
     ) -> ApiResponse[None]:
         """update_style_customization
 
-          Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+          Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
 
         :param scope: Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org. (required)
         :type scope: str
@@ -71740,8 +74516,10 @@ class ThoughtSpotRestApi:
         :type operation: str
         :param reset_options: Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
         :type reset_options: StyleResetOptionsInput
-        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
         :type navigation_panel: NavigationPanelInput
+        :param app_color_theme: App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
+        :type app_color_theme: AppColorThemeInput
         :param chart_color_palette: Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
         :type chart_color_palette: StyleColorPaletteInput
         :param embedded_footer_text: Custom footer text for the embedded application. An empty string clears the footer.
@@ -71779,6 +74557,7 @@ class ThoughtSpotRestApi:
             operation=operation,
             reset_options=reset_options,
             navigation_panel=navigation_panel,
+            app_color_theme=app_color_theme,
             chart_color_palette=chart_color_palette,
             embedded_footer_text=embedded_footer_text,
             visualization_fonts=visualization_fonts,
@@ -71814,7 +74593,8 @@ class ThoughtSpotRestApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -71835,7 +74615,7 @@ class ThoughtSpotRestApi:
     ) -> RESTResponseType:
         """update_style_customization
 
-          Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+          Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
 
         :param scope: Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org. (required)
         :type scope: str
@@ -71843,8 +74623,10 @@ class ThoughtSpotRestApi:
         :type operation: str
         :param reset_options: Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
         :type reset_options: StyleResetOptionsInput
-        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
         :type navigation_panel: NavigationPanelInput
+        :param app_color_theme: App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
+        :type app_color_theme: AppColorThemeInput
         :param chart_color_palette: Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
         :type chart_color_palette: StyleColorPaletteInput
         :param embedded_footer_text: Custom footer text for the embedded application. An empty string clears the footer.
@@ -71882,6 +74664,7 @@ class ThoughtSpotRestApi:
             operation=operation,
             reset_options=reset_options,
             navigation_panel=navigation_panel,
+            app_color_theme=app_color_theme,
             chart_color_palette=chart_color_palette,
             embedded_footer_text=embedded_footer_text,
             visualization_fonts=visualization_fonts,
@@ -71913,7 +74696,8 @@ class ThoughtSpotRestApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -71943,6 +74727,7 @@ class ThoughtSpotRestApi:
                 operation=operation,
                 reset_options=reset_options,
                 navigation_panel=navigation_panel,
+                app_color_theme=app_color_theme,
                 chart_color_palette=chart_color_palette,
                 embedded_footer_text=embedded_footer_text,
                 visualization_fonts=visualization_fonts,
@@ -71963,7 +74748,8 @@ class ThoughtSpotRestApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -71993,6 +74779,7 @@ class ThoughtSpotRestApi:
                 operation=operation,
                 reset_options=reset_options,
                 navigation_panel=navigation_panel,
+                app_color_theme=app_color_theme,
                 chart_color_palette=chart_color_palette,
                 embedded_footer_text=embedded_footer_text,
                 visualization_fonts=visualization_fonts,
@@ -72013,7 +74800,8 @@ class ThoughtSpotRestApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -72043,6 +74831,7 @@ class ThoughtSpotRestApi:
                 operation=operation,
                 reset_options=reset_options,
                 navigation_panel=navigation_panel,
+                app_color_theme=app_color_theme,
                 chart_color_palette=chart_color_palette,
                 embedded_footer_text=embedded_footer_text,
                 visualization_fonts=visualization_fonts,
@@ -72063,6 +74852,7 @@ class ThoughtSpotRestApi:
         operation,
         reset_options,
         navigation_panel,
+        app_color_theme,
         chart_color_palette,
         embedded_footer_text,
         visualization_fonts,
@@ -72100,6 +74890,8 @@ class ThoughtSpotRestApi:
             _form_params.append(('reset_options', reset_options))
         if navigation_panel is not None:
             _form_params.append(('navigation_panel', navigation_panel))
+        if app_color_theme is not None:
+            _form_params.append(('app_color_theme', app_color_theme))
         if chart_color_palette is not None:
             _form_params.append(('chart_color_palette', chart_color_palette))
         if embedded_footer_text is not None:

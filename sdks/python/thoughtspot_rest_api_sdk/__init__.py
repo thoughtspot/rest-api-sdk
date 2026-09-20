@@ -21,7 +21,7 @@ _ts_warnings.filterwarnings(
 """  # noqa: E501
 
 
-__version__ = "2.30.0"
+__version__ = "2.31.0"
 
 # Define package exports
 __all__ = [
@@ -38,7 +38,9 @@ __all__ = [
     "EmailCustomizationApi",
     "FeatureManagementApi",
     "GroupsApi",
+    "InputTablesApi",
     "JobsApi",
+    "LinkCustomizationApi",
     "LogApi",
     "ManualTranslationApi",
     "MetadataApi",
@@ -100,6 +102,7 @@ __all__ = [
     "AnswerDetails",
     "AnswerPngOptionsInput",
     "AnswerResponseItem",
+    "AppColorThemeInput",
     "AssignChangeAuthorRequest",
     "AssignTagRequest",
     "AssociateMetadataInput",
@@ -500,6 +503,7 @@ __all__ = [
     "StorageConfigInput",
     "StorageDestination",
     "StorageDestinationInput",
+    "StyleAppColorTheme",
     "StyleChartColorPalette",
     "StyleColorEntry",
     "StyleColorEntryInput",
@@ -632,7 +636,9 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi as EmailCustomizationApi
     from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi as FeatureManagementApi
     from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi as GroupsApi
+    from thoughtspot_rest_api_sdk.api.input_tables_api import InputTablesApi as InputTablesApi
     from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi as JobsApi
+    from thoughtspot_rest_api_sdk.api.link_customization_api import LinkCustomizationApi as LinkCustomizationApi
     from thoughtspot_rest_api_sdk.api.log_api import LogApi as LogApi
     from thoughtspot_rest_api_sdk.api.manual_translation_api import ManualTranslationApi as ManualTranslationApi
     from thoughtspot_rest_api_sdk.api.metadata_api import MetadataApi as MetadataApi
@@ -698,6 +704,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.answer_details import AnswerDetails as AnswerDetails
     from thoughtspot_rest_api_sdk.models.answer_png_options_input import AnswerPngOptionsInput as AnswerPngOptionsInput
     from thoughtspot_rest_api_sdk.models.answer_response_item import AnswerResponseItem as AnswerResponseItem
+    from thoughtspot_rest_api_sdk.models.app_color_theme_input import AppColorThemeInput as AppColorThemeInput
     from thoughtspot_rest_api_sdk.models.assign_change_author_request import AssignChangeAuthorRequest as AssignChangeAuthorRequest
     from thoughtspot_rest_api_sdk.models.assign_tag_request import AssignTagRequest as AssignTagRequest
     from thoughtspot_rest_api_sdk.models.associate_metadata_input import AssociateMetadataInput as AssociateMetadataInput
@@ -1098,6 +1105,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.storage_config_input import StorageConfigInput as StorageConfigInput
     from thoughtspot_rest_api_sdk.models.storage_destination import StorageDestination as StorageDestination
     from thoughtspot_rest_api_sdk.models.storage_destination_input import StorageDestinationInput as StorageDestinationInput
+    from thoughtspot_rest_api_sdk.models.style_app_color_theme import StyleAppColorTheme as StyleAppColorTheme
     from thoughtspot_rest_api_sdk.models.style_chart_color_palette import StyleChartColorPalette as StyleChartColorPalette
     from thoughtspot_rest_api_sdk.models.style_color_entry import StyleColorEntry as StyleColorEntry
     from thoughtspot_rest_api_sdk.models.style_color_entry_input import StyleColorEntryInput as StyleColorEntryInput
@@ -1236,7 +1244,9 @@ from thoughtspot_rest_api_sdk.api.data_api import DataApi as DataApi
 from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi as EmailCustomizationApi
 from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi as FeatureManagementApi
 from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi as GroupsApi
+from thoughtspot_rest_api_sdk.api.input_tables_api import InputTablesApi as InputTablesApi
 from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi as JobsApi
+from thoughtspot_rest_api_sdk.api.link_customization_api import LinkCustomizationApi as LinkCustomizationApi
 from thoughtspot_rest_api_sdk.api.log_api import LogApi as LogApi
 from thoughtspot_rest_api_sdk.api.manual_translation_api import ManualTranslationApi as ManualTranslationApi
 from thoughtspot_rest_api_sdk.api.metadata_api import MetadataApi as MetadataApi
@@ -1302,6 +1312,7 @@ from thoughtspot_rest_api_sdk.models.answer_data_response import AnswerDataRespo
 from thoughtspot_rest_api_sdk.models.answer_details import AnswerDetails as AnswerDetails
 from thoughtspot_rest_api_sdk.models.answer_png_options_input import AnswerPngOptionsInput as AnswerPngOptionsInput
 from thoughtspot_rest_api_sdk.models.answer_response_item import AnswerResponseItem as AnswerResponseItem
+from thoughtspot_rest_api_sdk.models.app_color_theme_input import AppColorThemeInput as AppColorThemeInput
 from thoughtspot_rest_api_sdk.models.assign_change_author_request import AssignChangeAuthorRequest as AssignChangeAuthorRequest
 from thoughtspot_rest_api_sdk.models.assign_tag_request import AssignTagRequest as AssignTagRequest
 from thoughtspot_rest_api_sdk.models.associate_metadata_input import AssociateMetadataInput as AssociateMetadataInput
@@ -1702,6 +1713,7 @@ from thoughtspot_rest_api_sdk.models.storage_config import StorageConfig as Stor
 from thoughtspot_rest_api_sdk.models.storage_config_input import StorageConfigInput as StorageConfigInput
 from thoughtspot_rest_api_sdk.models.storage_destination import StorageDestination as StorageDestination
 from thoughtspot_rest_api_sdk.models.storage_destination_input import StorageDestinationInput as StorageDestinationInput
+from thoughtspot_rest_api_sdk.models.style_app_color_theme import StyleAppColorTheme as StyleAppColorTheme
 from thoughtspot_rest_api_sdk.models.style_chart_color_palette import StyleChartColorPalette as StyleChartColorPalette
 from thoughtspot_rest_api_sdk.models.style_color_entry import StyleColorEntry as StyleColorEntry
 from thoughtspot_rest_api_sdk.models.style_color_entry_input import StyleColorEntryInput as StyleColorEntryInput

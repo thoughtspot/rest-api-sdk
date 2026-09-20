@@ -47,6 +47,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.answer_details import AnswerDetails
     from thoughtspot_rest_api_sdk.models.answer_png_options_input import AnswerPngOptionsInput
     from thoughtspot_rest_api_sdk.models.answer_response_item import AnswerResponseItem
+    from thoughtspot_rest_api_sdk.models.app_color_theme_input import AppColorThemeInput
     from thoughtspot_rest_api_sdk.models.assign_change_author_request import AssignChangeAuthorRequest
     from thoughtspot_rest_api_sdk.models.assign_tag_request import AssignTagRequest
     from thoughtspot_rest_api_sdk.models.associate_metadata_input import AssociateMetadataInput
@@ -447,6 +448,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.storage_config_input import StorageConfigInput
     from thoughtspot_rest_api_sdk.models.storage_destination import StorageDestination
     from thoughtspot_rest_api_sdk.models.storage_destination_input import StorageDestinationInput
+    from thoughtspot_rest_api_sdk.models.style_app_color_theme import StyleAppColorTheme
     from thoughtspot_rest_api_sdk.models.style_chart_color_palette import StyleChartColorPalette
     from thoughtspot_rest_api_sdk.models.style_color_entry import StyleColorEntry
     from thoughtspot_rest_api_sdk.models.style_color_entry_input import StyleColorEntryInput
@@ -605,6 +607,7 @@ from thoughtspot_rest_api_sdk.models.answer_data_response import AnswerDataRespo
 from thoughtspot_rest_api_sdk.models.answer_details import AnswerDetails
 from thoughtspot_rest_api_sdk.models.answer_png_options_input import AnswerPngOptionsInput
 from thoughtspot_rest_api_sdk.models.answer_response_item import AnswerResponseItem
+from thoughtspot_rest_api_sdk.models.app_color_theme_input import AppColorThemeInput
 from thoughtspot_rest_api_sdk.models.assign_change_author_request import AssignChangeAuthorRequest
 from thoughtspot_rest_api_sdk.models.assign_tag_request import AssignTagRequest
 from thoughtspot_rest_api_sdk.models.associate_metadata_input import AssociateMetadataInput
@@ -1005,6 +1008,7 @@ from thoughtspot_rest_api_sdk.models.storage_config import StorageConfig
 from thoughtspot_rest_api_sdk.models.storage_config_input import StorageConfigInput
 from thoughtspot_rest_api_sdk.models.storage_destination import StorageDestination
 from thoughtspot_rest_api_sdk.models.storage_destination_input import StorageDestinationInput
+from thoughtspot_rest_api_sdk.models.style_app_color_theme import StyleAppColorTheme
 from thoughtspot_rest_api_sdk.models.style_chart_color_palette import StyleChartColorPalette
 from thoughtspot_rest_api_sdk.models.style_color_entry import StyleColorEntry
 from thoughtspot_rest_api_sdk.models.style_color_entry_input import StyleColorEntryInput

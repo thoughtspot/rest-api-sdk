@@ -8962,6 +8962,575 @@ paths:
       tags:
       - Groups
       - ThoughtSpotRest
+  /api/rest/2.0/input-tables/create:
+    post:
+      description: |2+
+
+         Version: 26.11.0.cl or later
+
+
+        Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.
+
+        #### Usage guidelines
+
+        To create an input table, provide the following in the request body:
+
+        * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters.
+        * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata.
+        * **`table_definition`** — Describes the table schema:
+          * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table's key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.
+          * `new_columns` — List of new editable columns to create. Each column requires:
+            * `name` — Column display name.
+            * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).
+            * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.
+            * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.
+          * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.
+
+        **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.
+
+        #### Response
+
+        The response returns the new input table's GUID and the list of its columns,
+        each with its name and unique ID:
+
+        * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations.
+        * **`input_columns`** — Every column on the new table. Each entry has a `name`,
+          an `id` (the column's GUID), and `mapped_column_id` (the GUID of the model
+          column it is mapped from, present only for referenced columns). Use these IDs
+          to address specific columns in follow-up calls without a separate lookup.
+        * **`message_info`** — Note set when a referenced column had to be renamed to
+          keep the input table's column names unique: a model column name that occurs
+          in more than one base table is prefixed with its base table name. Absent when
+          no column was renamed. The renamed column's final name is also its `name` in
+          `input_columns`, which is what `updateInputTable` matches on.
+
+
+
+
+
+      operationId: createInputTable
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInputTableRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Input table created successfully
+                  value:
+                    input_table_id: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                    input_columns:
+                    - name: Region
+                      id: b1c2d3e4-0000-1111-2222-333344445555
+                      mapped_column_id: c7d8e9f0-1234-5678-abcd-ef0987654321
+                    - name: target_revenue
+                      id: a9b8c7d6-9999-8888-7777-666655554444
+                example_2:
+                  summary: Input table created; a referenced column was renamed to
+                    keep names unique
+                  value:
+                    input_table_id: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                    input_columns:
+                    - name: sales_Region
+                      id: b1c2d3e4-0000-1111-2222-333344445555
+                      mapped_column_id: c7d8e9f0-1234-5678-abcd-ef0987654321
+                    - name: target_revenue
+                      id: a9b8c7d6-9999-8888-7777-666655554444
+                    message_info: "The column Region appears in both sales and returns.\
+                      \ Input Table columns must be unique, so it has been renamed\
+                      \ to sales_Region to avoid conflicts."
+              schema:
+                $ref: "#/components/schemas/InputTableResponse"
+          description: Input table created successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad request — invalid payload, no columns selected, or upload\
+            \ disabled on the connection."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden — caller does not have MODIFY permission on the model.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Model not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error.
+      tags:
+      - Input Tables
+      - ThoughtSpotRest
+  /api/rest/2.0/input-tables/{input_table_identifier}/columns/create:
+    post:
+      description: |2+
+
+         Version: 26.11.0.cl or later
+
+
+        Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table's ThoughtSpot metadata so the new columns are exposed on the linked model.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.
+
+        #### Usage guidelines
+
+        Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:
+
+        * **`column_definition.columns`** — List of new editable columns to create. Each column requires:
+          * `name` — Column display name. Must not collide with an existing column on the table.
+          * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).
+          * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.
+          * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.
+
+        Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.
+
+        **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.
+
+
+
+
+
+      operationId: createInputTableColumn
+      parameters:
+      - description: Unique ID of the input table to add columns to.
+        explode: false
+        in: path
+        name: input_table_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInputTableColumnRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Columns added successfully
+                  value:
+                    columns:
+                    - name: forecast_revenue
+                      id: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                    - name: forecast_quarter
+                      id: 6b3a8f21-9c4d-4e77-bf2a-1d5e7c9a0b34
+                example_2:
+                  summary: Fixed-choice column added successfully
+                  value:
+                    columns:
+                    - name: approval_status
+                      id: 2c9f1e04-7b6d-4a11-9c8e-5f3b7d210a46
+              schema:
+                $ref: "#/components/schemas/InputColumnResponse"
+          description: Columns added successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad request — invalid payload or no columns supplied.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden — caller does not have MODIFY permission on the input
+            table.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Input table not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error.
+      tags:
+      - Input Tables
+      - ThoughtSpotRest
+  /api/rest/2.0/input-tables/{input_table_identifier}/delete:
+    post:
+      description: |2+
+
+         Version: 26.11.0.cl or later
+
+
+        Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.
+
+        #### Usage guidelines
+
+        Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.
+
+        **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.
+
+
+
+
+
+      operationId: deleteInputTable
+      parameters:
+      - description: Unique ID of the input table to delete.
+        explode: false
+        in: path
+        name: input_table_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successfully deleted the input table and dropped the physical
+            CDW table.
+        "400":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while deleting the input table.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while deleting the input table.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while deleting the input table.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while deleting the input table.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - Input Tables
+      - ThoughtSpotRest
+  /api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete:
+    post:
+      description: |2+
+
+         Version: 26.11.0.cl or later
+
+
+        Deletes a single editable column from an input table. This removes the column from the input table's ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.
+
+        #### Usage guidelines
+
+        Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.
+
+        Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:
+
+        * the column is a referenced (model-projected) column, or
+        * the column is still referenced by an existing Answer or Liveboard.
+
+        This endpoint has no request body.
+
+        **Note on obtaining `column_identifier`**: Use the `id` field returned for the
+        column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in
+        `input_columns`) as the `column_identifier`.
+
+
+
+
+
+      operationId: deleteInputTableColumn
+      parameters:
+      - description: Unique ID of the input table that owns the column.
+        explode: false
+        in: path
+        name: input_table_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Unique ID of the column to delete.
+        explode: false
+        in: path
+        name: column_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successfully deleted the input table column and dropped the
+            physical CDW column.
+        "400":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while deleting the input table
+                          column.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while deleting the input table
+                          column.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while deleting the input table
+                          column.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        code: 10038
+                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                        debug: Unexpected server error while deleting the input table
+                          column.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - Input Tables
+      - ThoughtSpotRest
+  /api/rest/2.0/input-tables/{input_table_identifier}/update:
+    post:
+      description: |2+
+
+         Version: 26.11.0.cl or later
+
+
+        Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.
+
+        Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+        If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.
+
+        #### Usage guidelines
+
+        Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:
+
+        * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns.
+        * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.
+
+        #### Date values
+
+        Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.
+
+        An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.
+
+        The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.
+
+        The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.
+
+        A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.
+
+        #### Write semantics
+
+        * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite.
+        * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`.
+        * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched.
+        * The `rows` array must contain at least one row; an empty `rows` array is rejected.
+
+        The request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).
+
+        #### Response
+
+        The response returns `rows_loaded` — the number of rows actually written, the
+        sum of rows updated (matched) and rows inserted (new).
+
+        `rows_loaded` is the count the warehouse itself reports, so it reflects what
+        was written rather than what was submitted. If the warehouse completes the load
+        but reports no count, the call fails with `500` rather than returning a count it
+        cannot stand behind. The write is a MERGE keyed on the input table's key
+        columns, so it is idempotent — retrying the same payload is safe.
+
+
+
+
+
+      operationId: updateInputTable
+      parameters:
+      - description: Unique ID of the input table to update.
+        explode: false
+        in: path
+        name: input_table_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateInputTableRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Rows loaded successfully
+                  value:
+                    rows_loaded: 3
+              schema:
+                $ref: "#/components/schemas/InputTableUpdateResponse"
+          description: Rows loaded successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Malformed request or unknown column name.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden — caller does not have MODIFY permission on the input
+            table.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Input table not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error.
+      tags:
+      - Input Tables
+      - ThoughtSpotRest
   /api/rest/2.0/jobs/history/communication-channels/search:
     post:
       description: |2+
@@ -9125,6 +9694,309 @@ paths:
           description: Unexpected error
       tags:
       - Jobs
+      - ThoughtSpotRest
+  /api/rest/2.0/customization/links/search:
+    post:
+      description: |2+
+
+         Version: 26.11.0.cl or later
+
+
+        Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.
+
+        Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
+
+        #### Usage guidelines
+
+        - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org.
+        - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled.
+        - Omit `scope` to return whichever of these the caller can access.
+        - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.
+
+
+
+
+
+      operationId: searchLinkCustomizations
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchLinkCustomizationsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                  - scope: CLUSTER
+                    templates:
+                    - type: LIVEBOARD_SHARE_URL
+                      value: "https://acme.thoughtspot.cloud/#/pinboard/{object-id}?{ts-query-params}"
+                      is_overridden: false
+                    - type: VISUALIZATION_SHARE_URL
+                      value: "https://acme.thoughtspot.cloud/#/pinboard/{object-id}/{sub-object-id}?{ts-query-params}"
+                      is_overridden: false
+                    - type: ANSWER_SHARE_URL
+                      value: "https://acme.thoughtspot.cloud/#/saved-answer/{object-id}?{ts-query-params}"
+                      is_overridden: false
+                    - type: SPOTIQ_ANALYSIS_URL
+                      value: "https://acme.thoughtspot.cloud/#/insight/{object-id}?{ts-query-params}"
+                      is_overridden: false
+                    - type: UNSUBSCRIBE_URL
+                      value: "https://acme.thoughtspot.cloud/#/user-preference?{ts-query-params}"
+                      is_overridden: false
+                    - type: GENERIC_URL
+                      value: "https://acme.thoughtspot.cloud/#/{path}?{ts-query-params}"
+                      is_overridden: false
+                    - type: CONVERSATION_SHARE_URL
+                      value: "https://acme.thoughtspot.cloud/#/insights/conv-assist/s/{conversation-id}?{ts-query-params}"
+                      is_overridden: false
+                  - scope: ORG
+                    org:
+                      id: 1234567890
+                      name: Sales
+                    templates:
+                    - type: LIVEBOARD_SHARE_URL
+                      value: "https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}"
+                      is_overridden: true
+                    - type: VISUALIZATION_SHARE_URL
+                      value: "https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}"
+                      is_overridden: true
+                    - type: ANSWER_SHARE_URL
+                      value: "https://acme.thoughtspot.cloud/#/saved-answer/{object-id}?{ts-query-params}"
+                      is_overridden: false
+                    - type: SPOTIQ_ANALYSIS_URL
+                      value: "https://acme.thoughtspot.cloud/#/insight/{object-id}?{ts-query-params}"
+                      is_overridden: false
+                    - type: UNSUBSCRIBE_URL
+                      value: https://analytics.acme.com/account/email-preferences
+                      is_overridden: true
+                    - type: GENERIC_URL
+                      value: "https://acme.thoughtspot.cloud/#/{path}?{ts-query-params}"
+                      is_overridden: false
+                    - type: CONVERSATION_SHARE_URL
+                      value: "https://acme.thoughtspot.cloud/#/insights/conv-assist/s/{conversation-id}?{ts-query-params}"
+                      is_overridden: false
+              schema:
+                items:
+                  $ref: "#/components/schemas/LinkPreference"
+                type: array
+          description: Link preferences retrieved successfully.
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_request:
+                  summary: Invalid request
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 10002
+                          incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                          trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                          debug: "[\"Cross-org operations are not supported.\"]"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 10097
+                          incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                          trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                          debug: "[\"Authentication required to retrieve link templates\
+                            \ for the cluster or org.\"]"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 10086
+                          incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                          trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                          debug: "[\"Cluster config can only be accessed from PRIMARY\
+                            \ org.\"]"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 10038
+                          incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                          trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                          debug: "[\"Unexpected server error while retrieving link\
+                            \ templates.\"]"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error
+      tags:
+      - Link Customization
+      - ThoughtSpotRest
+  /api/rest/2.0/customization/links/update:
+    post:
+      description: |2+
+
+         Version: 26.11.0.cl or later
+
+
+        Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
+
+        #### Usage guidelines
+
+        - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org.
+        - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled.
+        - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected.
+        - **REPLACE** (default) sets each listed type to the `value` provided in the request.
+        - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.
+
+        #### Placeholders
+
+        A template is rejected unless it contains the placeholders its type requires.
+
+        | Link type | Required | Example |
+        | --- | --- | --- |
+        | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` |
+        | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` |
+        | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` |
+        | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` |
+        | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` |
+        | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` |
+        | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |
+
+        `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.
+
+
+
+
+
+      operationId: updateLinkCustomizations
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateLinkCustomizationsRequest"
+        required: true
+      responses:
+        "204":
+          description: Link preferences updated successfully.
+        "400":
+          content:
+            application/json:
+              examples:
+                missing_placeholder:
+                  summary: Template is missing a required placeholder
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 10002
+                          incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                          trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                          debug: "[\"Invalid template for GENERIC_URL: value must\
+                            \ contain {path}.\"]"
+                value_with_reset:
+                  summary: Value supplied alongside RESET
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 10002
+                          incident_id_guid: e5f67890-1234-5678-efab-567890123456
+                          trace_id_guid: e5f67890-1234-5678-efab-567890123456
+                          debug: "[\"Field 'value' must not be supplied for RESET\
+                            \ operation for type: UNSUBSCRIBE_URL.\"]"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              examples:
+                unauthorized_access:
+                  summary: Unauthorized access
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 10097
+                          incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                          trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                          debug: "[\"Authentication required to update link templates\
+                            \ for the cluster or org.\"]"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                forbidden_access:
+                  summary: Forbidden access
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 10023
+                          incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                          trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                          debug: "[\"Cannot access embed settings: ThoughtSpot Embedded\
+                            \ is not enabled for this cluster.\"]"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              examples:
+                unexpected_error:
+                  summary: Unexpected error
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 10038
+                          incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                          trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                          debug: "[\"Unexpected server error while updating link templates.\"\
+                            ]"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error
+      tags:
+      - Link Customization
       - ThoughtSpotRest
   /api/rest/2.0/logs/fetch:
     post:
@@ -12822,6 +13694,7 @@ paths:
         - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.
         - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.
         - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).
+        - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.
 
 
 
@@ -12845,6 +13718,10 @@ paths:
                   - scope: CLUSTER
                     navigation_panel:
                       theme: DARK
+                      is_overridden: false
+                    app_color_theme:
+                      brand_color: null
+                      apply_as_top_nav_color: false
                       is_overridden: false
                     chart_color_palette:
                       colors:
@@ -12926,6 +13803,10 @@ paths:
                     navigation_panel:
                       theme: CUSTOM
                       base_color: "#2359B6"
+                      is_overridden: true
+                    app_color_theme:
+                      brand_color: "#2359B6"
+                      apply_as_top_nav_color: true
                       is_overridden: true
                     chart_color_palette:
                       colors:
@@ -13223,7 +14104,7 @@ paths:
 
         Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.
 
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
 
         #### Usage guidelines
 
@@ -13249,6 +14130,15 @@ paths:
         - `TWO_TONE`: Dual-tone panel style.
         - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).
 
+        #### App color theme
+
+        `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.
+
+        - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`.
+        - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.
+
+        `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.
+
         #### Chart color palette
 
         Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.
@@ -13271,6 +14161,9 @@ paths:
                 contentType: application/json
                 style: form
               navigation_panel:
+                contentType: application/json
+                style: form
+              app_color_theme:
                 contentType: application/json
                 style: form
               chart_color_palette:
@@ -24507,6 +25400,10 @@ components:
           theme: DARK
           base_color: base_color
           is_overridden: true
+        app_color_theme:
+          brand_color: brand_color
+          apply_as_top_nav_color: true
+          is_overridden: true
         chart_color_palette:
           colors:
           - primary: primary
@@ -24569,6 +25466,8 @@ components:
           $ref: "#/components/schemas/StyleOrgInfo"
         navigation_panel:
           $ref: "#/components/schemas/StyleNavigationPanel"
+        app_color_theme:
+          $ref: "#/components/schemas/StyleAppColorTheme"
         chart_color_palette:
           $ref: "#/components/schemas/StyleChartColorPalette"
         embedded_footer_text:
@@ -24617,6 +25516,38 @@ components:
         is_overridden:
           description: "True if explicitly set at this scope, overriding any inherited\
             \ value."
+          nullable: true
+          type: boolean
+      type: object
+    StyleAppColorTheme:
+      description: |-
+        App color theme configuration for a specific scope -- the same stored
+        color StyleNavigationPanel expresses, as a brand color plus how it is
+        applied. Returned alongside navigation_panel when the app color theme is
+        enabled on the cluster; omitted otherwise.
+      example:
+        brand_color: brand_color
+        apply_as_top_nav_color: true
+        is_overridden: true
+      properties:
+        brand_color:
+          description: |-
+            Brand color as a 6-digit hex string. Null when no brand color is set at
+            this scope.
+          nullable: true
+          type: string
+        apply_as_top_nav_color:
+          description: |-
+            The effective setting: whether the brand color is painted on the top
+            navigation bar literally, instead of the surface shade derived from it.
+            Always the resolved value -- true iff a brand color is set, unless
+            explicitly overridden.
+          nullable: true
+          type: boolean
+        is_overridden:
+          description: |-
+            True if explicitly set at this scope (either the brand color or the
+            apply_as_top_nav_color choice), overriding any inherited value.
           nullable: true
           type: boolean
       type: object
@@ -24992,6 +25923,18 @@ components:
       type: object
     LinkPreference:
       description: Link templates for a single scope.
+      example:
+        scope: CLUSTER
+        org:
+          id: 6
+          name: name
+        templates:
+        - type: LIVEBOARD_SHARE_URL
+          value: value
+          is_overridden: true
+        - type: LIVEBOARD_SHARE_URL
+          value: value
+          is_overridden: true
       properties:
         scope:
           description: Scope these link templates apply to.
@@ -25015,6 +25958,10 @@ components:
     LinkTemplate:
       description: A URL template with its link type and whether it is set at the
         requested scope.
+      example:
+        type: LIVEBOARD_SHARE_URL
+        value: value
+        is_overridden: true
       properties:
         type:
           description: The link type this template applies to.
@@ -29981,6 +30928,16 @@ components:
       - time_dimension
       type: object
     InputTableResponse:
+      example:
+        input_table_id: input_table_id
+        input_columns:
+        - name: name
+          id: id
+          mapped_column_id: mapped_column_id
+        - name: name
+          id: id
+          mapped_column_id: mapped_column_id
+        message_info: message_info
       properties:
         input_table_id:
           description: |-
@@ -30015,6 +30972,10 @@ components:
         by both createInputTable (all columns of the new table) and
         createInputTableColumn
         (the columns just added).
+      example:
+        name: name
+        id: id
+        mapped_column_id: mapped_column_id
       properties:
         name:
           description: Display name of the column.
@@ -30035,6 +30996,8 @@ components:
       type: object
     InputTableUpdateResponse:
       description: Response returned after successfully writing rows to an input table.
+      example:
+        rows_loaded: 0
       properties:
         rows_loaded:
           description: Number of rows successfully written to the input table.
@@ -30055,6 +31018,14 @@ components:
       type: object
     InputColumnResponse:
       description: Response returned after adding columns to an input table.
+      example:
+        columns:
+        - name: name
+          id: id
+          mapped_column_id: mapped_column_id
+        - name: name
+          id: id
+          mapped_column_id: mapped_column_id
       properties:
         columns:
           description: Columns that were added to the input table.
@@ -30512,12 +31483,14 @@ components:
         style:
           description: |-
             Style fields to reset. Supported values: CHART_COLOR_PALETTE,
-            EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.
+            EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO,
+            WIDE_LOGO.
           items:
             enum:
             - CHART_COLOR_PALETTE
             - EMBEDDED_FOOTER_TEXT
             - NAV_PANEL_COLOR
+            - APP_COLOR_THEME
             - DEFAULT_LOGO
             - WIDE_LOGO
             type: string
@@ -30566,6 +31539,25 @@ components:
             is CUSTOM.
           nullable: true
           type: string
+      type: object
+    AppColorThemeInput:
+      description: |-
+        App color theme configuration -- the same stored color navigation_panel
+        writes, expressed as a brand color plus how it is applied.
+      properties:
+        brand_color:
+          description: "Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit\
+            \ to leave the\nstored color unchanged. To clear it, use operation RESET\
+            \ with\nreset_options.style: [\"APP_COLOR_THEME\"]. \n  Version: 26.10.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        apply_as_top_nav_color:
+          description: "Whether the brand color is painted on the top navigation bar\
+            \ literally,\ninstead of the surface shade derived from it. Omit to leave\
+            \ the stored\nchoice unchanged. \n  Version: 26.10.0.cl or later\n"
+          nullable: true
+          type: boolean
       type: object
     StyleColorPaletteInput:
       description: Chart color palette configuration.
@@ -30766,6 +31758,9 @@ components:
     LinkTemplateInput:
       description: "One link type to act on, and the URL template to set for it under\
         \ REPLACE."
+      example:
+        type: LIVEBOARD_SHARE_URL
+        value: value
       properties:
         type:
           description: The link type this entry applies to.
@@ -34000,6 +34995,10 @@ components:
           type: string
       type: object
     CreateInputTableRequest:
+      example:
+        table_name: table_name
+        model_identifier: model_identifier
+        table_definition: ""
       properties:
         table_name:
           description: |-
@@ -34025,6 +35024,8 @@ components:
       - table_name
       type: object
     CreateInputTableColumnRequest:
+      example:
+        column_definition: ""
       properties:
         column_definition:
           allOf:
@@ -34034,6 +35035,15 @@ components:
       - column_definition
       type: object
     UpdateInputTableRequest:
+      example:
+        columns:
+        - columns
+        - columns
+        rows:
+        - - rows
+          - rows
+        - - rows
+          - rows
       properties:
         columns:
           description: |-
@@ -34122,6 +35132,8 @@ components:
       - channel_type
       type: object
     SearchLinkCustomizationsRequest:
+      example:
+        scope: CLUSTER
       properties:
         scope:
           description: |-
@@ -34134,6 +35146,14 @@ components:
           type: string
       type: object
     UpdateLinkCustomizationsRequest:
+      example:
+        scope: ORG
+        operation: REPLACE
+        templates:
+        - type: LIVEBOARD_SHARE_URL
+          value: value
+        - type: LIVEBOARD_SHARE_URL
+          value: value
       properties:
         scope:
           default: ORG
@@ -39627,7 +40647,18 @@ components:
           - $ref: "#/components/schemas/NavigationPanelInput"
           description: |-
             Navigation panel color. Provide theme and, when theme is CUSTOM, also
-            provide base_color.
+            provide base_color. Must not be provided together with app_color_theme --
+            both update the same underlying color.
+        app_color_theme:
+          allOf:
+          - $ref: "#/components/schemas/AppColorThemeInput"
+          description: "App color theme -- the same underlying color navigation_panel\
+            \ sets,\nexpressed as a brand color plus how it is applied. brand_color\
+            \ and\napply_as_top_nav_color may be set independently; each is left unchanged\n\
+            if omitted. To clear the brand color, use operation RESET with\nreset_options.style:\
+            \ [\"APP_COLOR_THEME\"]. Supported only when the app\ncolor theme is enabled\
+            \ on the cluster. Must not be provided together\nwith navigation_panel.\
+            \ \n  Version: 26.10.0.cl or later\n"
         chart_color_palette:
           allOf:
           - $ref: "#/components/schemas/StyleColorPaletteInput"

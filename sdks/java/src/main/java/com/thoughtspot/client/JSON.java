@@ -119,6 +119,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.AnswerDetails.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.AnswerPngOptionsInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.AnswerResponseItem.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.AppColorThemeInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.AssignChangeAuthorRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.AssignTagRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.AssociateMetadataInput.CustomTypeAdapterFactory());
@@ -519,6 +520,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.StorageConfigInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.StorageDestination.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.StorageDestinationInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.StyleAppColorTheme.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.StyleChartColorPalette.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.StyleColorEntry.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.StyleColorEntryInput.CustomTypeAdapterFactory());

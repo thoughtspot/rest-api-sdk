@@ -57,16 +57,22 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             NAVPANELCOLOR = 3,
 
             /// <summary>
+            /// Enum APPCOLORTHEME for value: APP_COLOR_THEME
+            /// </summary>
+            [EnumMember(Value = "APP_COLOR_THEME")]
+            APPCOLORTHEME = 4,
+
+            /// <summary>
             /// Enum DEFAULTLOGO for value: DEFAULT_LOGO
             /// </summary>
             [EnumMember(Value = "DEFAULT_LOGO")]
-            DEFAULTLOGO = 4,
+            DEFAULTLOGO = 5,
 
             /// <summary>
             /// Enum WIDELOGO for value: WIDE_LOGO
             /// </summary>
             [EnumMember(Value = "WIDE_LOGO")]
-            WIDELOGO = 5
+            WIDELOGO = 6
         }
 
         /// <summary>
@@ -157,7 +163,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="StyleResetOptionsInput" /> class.
         /// </summary>
-        /// <param name="style">Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO..</param>
+        /// <param name="style">Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO, WIDE_LOGO..</param>
         /// <param name="visualizationAreas">Visualization areas whose font assignments should revert to the system default font..</param>
         public StyleResetOptionsInput(List<StyleEnum> style = default, List<VisualizationAreasEnum> visualizationAreas = default)
         {
@@ -167,9 +173,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.
+        /// Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO, WIDE_LOGO.
         /// </summary>
-        /// <value>Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.</value>
+        /// <value>Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO, WIDE_LOGO.</value>
         [DataMember(Name = "style", EmitDefaultValue = true)]
         public List<StyleResetOptionsInput.StyleEnum> Style { get; set; }
 

@@ -8,7 +8,7 @@ Fields to revert to defaults when operation is RESET.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**style** | [**List&lt;StyleEnum&gt;**](#List&lt;StyleEnum&gt;) | Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO. |  [optional] |
+|**style** | [**List&lt;StyleEnum&gt;**](#List&lt;StyleEnum&gt;) | Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO, WIDE_LOGO. |  [optional] |
 |**visualizationAreas** | [**List&lt;VisualizationAreasEnum&gt;**](#List&lt;VisualizationAreasEnum&gt;) | Visualization areas whose font assignments should revert to the system default font. |  [optional] |
 
 
@@ -20,6 +20,7 @@ Fields to revert to defaults when operation is RESET.
 | CHART_COLOR_PALETTE | &quot;CHART_COLOR_PALETTE&quot; |
 | EMBEDDED_FOOTER_TEXT | &quot;EMBEDDED_FOOTER_TEXT&quot; |
 | NAV_PANEL_COLOR | &quot;NAV_PANEL_COLOR&quot; |
+| APP_COLOR_THEME | &quot;APP_COLOR_THEME&quot; |
 | DEFAULT_LOGO | &quot;DEFAULT_LOGO&quot; |
 | WIDE_LOGO | &quot;WIDE_LOGO&quot; |
 

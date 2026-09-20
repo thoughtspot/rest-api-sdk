@@ -10,6 +10,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.StyleAppColorTheme;
 import com.thoughtspot.client.model.StyleChartColorPalette;
 import com.thoughtspot.client.model.StyleEmbeddedFooterText;
 import com.thoughtspot.client.model.StyleLogoStatus;
@@ -117,6 +118,11 @@ public class StylePreference implements Serializable {
   @javax.annotation.Nullable
   private StyleNavigationPanel navigationPanel;
 
+  public static final String SERIALIZED_NAME_APP_COLOR_THEME = "app_color_theme";
+  @SerializedName(SERIALIZED_NAME_APP_COLOR_THEME)
+  @javax.annotation.Nullable
+  private StyleAppColorTheme appColorTheme;
+
   public static final String SERIALIZED_NAME_CHART_COLOR_PALETTE = "chart_color_palette";
   @SerializedName(SERIALIZED_NAME_CHART_COLOR_PALETTE)
   @javax.annotation.Nullable
@@ -194,6 +200,25 @@ public class StylePreference implements Serializable {
 
   public void setNavigationPanel(@javax.annotation.Nullable StyleNavigationPanel navigationPanel) {
     this.navigationPanel = navigationPanel;
+  }
+
+
+  public StylePreference appColorTheme(@javax.annotation.Nullable StyleAppColorTheme appColorTheme) {
+    this.appColorTheme = appColorTheme;
+    return this;
+  }
+
+  /**
+   * Get appColorTheme
+   * @return appColorTheme
+   */
+  @javax.annotation.Nullable
+  public StyleAppColorTheme getAppColorTheme() {
+    return appColorTheme;
+  }
+
+  public void setAppColorTheme(@javax.annotation.Nullable StyleAppColorTheme appColorTheme) {
+    this.appColorTheme = appColorTheme;
   }
 
 
@@ -330,6 +355,7 @@ public class StylePreference implements Serializable {
     return Objects.equals(this.scope, stylePreference.scope) &&
         Objects.equals(this.org, stylePreference.org) &&
         Objects.equals(this.navigationPanel, stylePreference.navigationPanel) &&
+        Objects.equals(this.appColorTheme, stylePreference.appColorTheme) &&
         Objects.equals(this.chartColorPalette, stylePreference.chartColorPalette) &&
         Objects.equals(this.embeddedFooterText, stylePreference.embeddedFooterText) &&
         Objects.equals(this.logo, stylePreference.logo) &&
@@ -339,7 +365,7 @@ public class StylePreference implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(scope, org, navigationPanel, chartColorPalette, embeddedFooterText, logo, visualizationFonts, additionalProperties);
+    return Objects.hash(scope, org, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, logo, visualizationFonts, additionalProperties);
   }
 
   @Override
@@ -349,6 +375,7 @@ public class StylePreference implements Serializable {
     sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
     sb.append("    org: ").append(toIndentedString(org)).append("\n");
     sb.append("    navigationPanel: ").append(toIndentedString(navigationPanel)).append("\n");
+    sb.append("    appColorTheme: ").append(toIndentedString(appColorTheme)).append("\n");
     sb.append("    chartColorPalette: ").append(toIndentedString(chartColorPalette)).append("\n");
     sb.append("    embeddedFooterText: ").append(toIndentedString(embeddedFooterText)).append("\n");
     sb.append("    logo: ").append(toIndentedString(logo)).append("\n");
@@ -379,6 +406,7 @@ public class StylePreference implements Serializable {
     openapiFields.add("scope");
     openapiFields.add("org");
     openapiFields.add("navigation_panel");
+    openapiFields.add("app_color_theme");
     openapiFields.add("chart_color_palette");
     openapiFields.add("embedded_footer_text");
     openapiFields.add("logo");
@@ -415,6 +443,10 @@ public class StylePreference implements Serializable {
       // validate the optional field `navigation_panel`
       if (jsonObj.get("navigation_panel") != null && !jsonObj.get("navigation_panel").isJsonNull()) {
         StyleNavigationPanel.validateJsonElement(jsonObj.get("navigation_panel"));
+      }
+      // validate the optional field `app_color_theme`
+      if (jsonObj.get("app_color_theme") != null && !jsonObj.get("app_color_theme").isJsonNull()) {
+        StyleAppColorTheme.validateJsonElement(jsonObj.get("app_color_theme"));
       }
       // validate the optional field `chart_color_palette`
       if (jsonObj.get("chart_color_palette") != null && !jsonObj.get("chart_color_palette").isJsonNull()) {

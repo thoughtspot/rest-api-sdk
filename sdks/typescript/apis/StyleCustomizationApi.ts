@@ -8,6 +8,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
+import { AppColorThemeInput } from '../models/AppColorThemeInput';
 import { DeleteStyleFontsRequest } from '../models/DeleteStyleFontsRequest';
 import { ErrorResponse } from '../models/ErrorResponse';
 import { ExportStyleLogosRequest } from '../models/ExportStyleLogosRequest';
@@ -47,8 +48,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
 
         // Body Params
@@ -98,8 +99,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
         // Header Params
         requestContext.setHeaderParam("Accept", ObjectSerializer.serialize(accept, "'application/zip'", ""));
@@ -132,7 +133,7 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+     *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
      * @param searchStyleCustomizationsRequest 
      */
     public async searchStyleCustomizations(searchStyleCustomizationsRequest: SearchStyleCustomizationsRequest, _options?: Configuration): Promise<RequestContext> {
@@ -150,8 +151,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
 
         // Body Params
@@ -199,8 +200,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
 
         // Body Params
@@ -230,18 +231,19 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+     *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
      * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
      * @param operation Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
      * @param resetOptions Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+     * @param appColorTheme App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
      * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
      * @param embeddedFooterText Custom footer text for the embedded application. An empty string clears the footer.
      * @param visualizationFonts Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
      */
-    public async updateStyleCustomization(scope: string, operation?: string, resetOptions?: StyleResetOptionsInput, navigationPanel?: NavigationPanelInput, chartColorPalette?: StyleColorPaletteInput, embeddedFooterText?: string, visualizationFonts?: VisualizationFontsInput, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<RequestContext> {
+    public async updateStyleCustomization(scope: string, operation?: string, resetOptions?: StyleResetOptionsInput, navigationPanel?: NavigationPanelInput, appColorTheme?: AppColorThemeInput, chartColorPalette?: StyleColorPaletteInput, embeddedFooterText?: string, visualizationFonts?: VisualizationFontsInput, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'scope' is not null or undefined
@@ -258,14 +260,15 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
+
         // Path Params
         const localVarPath = '/api/rest/2.0/customization/styles/update';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
         // Form Params
         const useForm = canConsumeForm([
@@ -300,6 +303,13 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
              // spec — serialize as a JSON string (the generator does not honor
              // multipart `encoding.contentType`, and the backend parses JSON here).
              localVarFormParams.append('navigation_panel', JSON.stringify(navigationPanel));
+        }
+        if (appColorTheme !== undefined) {
+             // TODO: replace .append with .set
+             // Object form field declared with encoding: application/json in the
+             // spec — serialize as a JSON string (the generator does not honor
+             // multipart `encoding.contentType`, and the backend parses JSON here).
+             localVarFormParams.append('app_color_theme', JSON.stringify(appColorTheme));
         }
         if (chartColorPalette !== undefined) {
              // TODO: replace .append with .set
@@ -383,8 +393,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
 
         // Body Params
@@ -447,8 +457,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.30.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.30.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
         // Form Params
         const useForm = canConsumeForm([

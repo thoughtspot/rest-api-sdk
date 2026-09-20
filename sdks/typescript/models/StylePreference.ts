@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { StyleAppColorTheme } from '../models/StyleAppColorTheme';
 import { StyleChartColorPalette } from '../models/StyleChartColorPalette';
 import { StyleEmbeddedFooterText } from '../models/StyleEmbeddedFooterText';
 import { StyleLogoStatus } from '../models/StyleLogoStatus';
@@ -28,6 +29,7 @@ export class StylePreference {
     'scope'?: StylePreferenceScopeEnum | null;
     'org'?: StyleOrgInfo;
     'navigation_panel'?: StyleNavigationPanel;
+    'app_color_theme'?: StyleAppColorTheme;
     'chart_color_palette'?: StyleChartColorPalette;
     'embedded_footer_text'?: StyleEmbeddedFooterText;
     'logo'?: StyleLogoStatus;
@@ -54,6 +56,12 @@ export class StylePreference {
             "name": "navigation_panel",
             "baseName": "navigation_panel",
             "type": "StyleNavigationPanel",
+            "format": ""
+        },
+        {
+            "name": "app_color_theme",
+            "baseName": "app_color_theme",
+            "type": "StyleAppColorTheme",
             "format": ""
         },
         {

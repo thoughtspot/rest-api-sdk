@@ -57,6 +57,8 @@ public class StyleResetOptionsInput implements Serializable {
     
     NAV_PANEL_COLOR("NAV_PANEL_COLOR"),
     
+    APP_COLOR_THEME("APP_COLOR_THEME"),
+    
     DEFAULT_LOGO("DEFAULT_LOGO"),
     
     WIDE_LOGO("WIDE_LOGO");
@@ -205,7 +207,7 @@ public class StyleResetOptionsInput implements Serializable {
   }
 
   /**
-   * Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.
+   * Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO, WIDE_LOGO.
    * @return style
    */
   @javax.annotation.Nullable

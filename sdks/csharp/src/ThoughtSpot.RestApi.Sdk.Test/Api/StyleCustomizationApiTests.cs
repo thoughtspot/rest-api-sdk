@@ -113,12 +113,13 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string? operation = null;
             //StyleResetOptionsInput? resetOptions = null;
             //NavigationPanelInput? navigationPanel = null;
+            //AppColorThemeInput? appColorTheme = null;
             //StyleColorPaletteInput? chartColorPalette = null;
             //string? embeddedFooterText = null;
             //VisualizationFontsInput? visualizationFonts = null;
             //FileParameter? defaultLogo = null;
             //FileParameter? wideLogo = null;
-            //instance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+            //instance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
         }
 
         /// <summary>

@@ -33,6 +33,7 @@ export * from '../models/AnswerDataResponse';
 export * from '../models/AnswerDetails';
 export * from '../models/AnswerPngOptionsInput';
 export * from '../models/AnswerResponseItem';
+export * from '../models/AppColorThemeInput';
 export * from '../models/AssignChangeAuthorRequest';
 export * from '../models/AssignTagRequest';
 export * from '../models/AssociateMetadataInput';
@@ -433,6 +434,7 @@ export * from '../models/StorageConfig';
 export * from '../models/StorageConfigInput';
 export * from '../models/StorageDestination';
 export * from '../models/StorageDestinationInput';
+export * from '../models/StyleAppColorTheme';
 export * from '../models/StyleChartColorPalette';
 export * from '../models/StyleColorEntry';
 export * from '../models/StyleColorEntryInput';
@@ -584,6 +586,7 @@ import { AnswerDataResponse } from '../models/AnswerDataResponse';
 import { AnswerDetails     , AnswerDetailsVisualizationTypeEnum       } from '../models/AnswerDetails';
 import { AnswerPngOptionsInput } from '../models/AnswerPngOptionsInput';
 import { AnswerResponseItem } from '../models/AnswerResponseItem';
+import { AppColorThemeInput } from '../models/AppColorThemeInput';
 import { AssignChangeAuthorRequest } from '../models/AssignChangeAuthorRequest';
 import { AssignTagRequest } from '../models/AssignTagRequest';
 import { AssociateMetadataInput  , AssociateMetadataInputTypeEnum   } from '../models/AssociateMetadataInput';
@@ -984,6 +987,7 @@ import { StorageConfig } from '../models/StorageConfig';
 import { StorageConfigInput } from '../models/StorageConfigInput';
 import { StorageDestination, StorageDestinationStorageTypeEnum    } from '../models/StorageDestination';
 import { StorageDestinationInput, StorageDestinationInputStorageTypeEnum    } from '../models/StorageDestinationInput';
+import { StyleAppColorTheme } from '../models/StyleAppColorTheme';
 import { StyleChartColorPalette } from '../models/StyleChartColorPalette';
 import { StyleColorEntry } from '../models/StyleColorEntry';
 import { StyleColorEntryInput } from '../models/StyleColorEntryInput';
@@ -998,7 +1002,7 @@ import { StyleLogoSlot } from '../models/StyleLogoSlot';
 import { StyleLogoStatus } from '../models/StyleLogoStatus';
 import { StyleNavigationPanel, StyleNavigationPanelThemeEnum     } from '../models/StyleNavigationPanel';
 import { StyleOrgInfo } from '../models/StyleOrgInfo';
-import { StylePreference, StylePreferenceScopeEnum         } from '../models/StylePreference';
+import { StylePreference, StylePreferenceScopeEnum          } from '../models/StylePreference';
 import { StyleResetOptionsInput, StyleResetOptionsInputStyleEnum  , StyleResetOptionsInputVisualizationAreasEnum   } from '../models/StyleResetOptionsInput';
 import { StyleVisualizationFonts } from '../models/StyleVisualizationFonts';
 import { SyncMetadataRequest , SyncMetadataRequestSyncAttributesEnum   } from '../models/SyncMetadataRequest';
@@ -1464,6 +1468,7 @@ let typeMap: {[index: string]: any} = {
     "AnswerDetails": AnswerDetails,
     "AnswerPngOptionsInput": AnswerPngOptionsInput,
     "AnswerResponseItem": AnswerResponseItem,
+    "AppColorThemeInput": AppColorThemeInput,
     "AssignChangeAuthorRequest": AssignChangeAuthorRequest,
     "AssignTagRequest": AssignTagRequest,
     "AssociateMetadataInput": AssociateMetadataInput,
@@ -1864,6 +1869,7 @@ let typeMap: {[index: string]: any} = {
     "StorageConfigInput": StorageConfigInput,
     "StorageDestination": StorageDestination,
     "StorageDestinationInput": StorageDestinationInput,
+    "StyleAppColorTheme": StyleAppColorTheme,
     "StyleChartColorPalette": StyleChartColorPalette,
     "StyleColorEntry": StyleColorEntry,
     "StyleColorEntryInput": StyleColorEntryInput,

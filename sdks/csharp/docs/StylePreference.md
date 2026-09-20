@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Scope** | **string** | Scope at which these style preferences apply. | [optional] 
 **Org** | [**StyleOrgInfo**](StyleOrgInfo.md) |  | [optional] 
 **NavigationPanel** | [**StyleNavigationPanel**](StyleNavigationPanel.md) |  | [optional] 
+**AppColorTheme** | [**StyleAppColorTheme**](StyleAppColorTheme.md) |  | [optional] 
 **ChartColorPalette** | [**StyleChartColorPalette**](StyleChartColorPalette.md) |  | [optional] 
 **EmbeddedFooterText** | [**StyleEmbeddedFooterText**](StyleEmbeddedFooterText.md) |  | [optional] 
 **Logo** | [**StyleLogoStatus**](StyleLogoStatus.md) |  | [optional] 
