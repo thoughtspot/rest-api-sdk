@@ -14430,7 +14430,7 @@
     "/api/rest/2.0/customization/styles/search": {
       "post": {
         "operationId": "searchStyleCustomizations",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n- `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -14464,6 +14464,11 @@
                         "scope": "CLUSTER",
                         "navigation_panel": {
                           "theme": "DARK",
+                          "is_overridden": false
+                        },
+                        "app_color_theme": {
+                          "brand_color": null,
+                          "apply_as_top_nav_color": false,
                           "is_overridden": false
                         },
                         "chart_color_palette": {
@@ -14586,6 +14591,11 @@
                         "navigation_panel": {
                           "theme": "CUSTOM",
                           "base_color": "#2359B6",
+                          "is_overridden": true
+                        },
+                        "app_color_theme": {
+                          "brand_color": "#2359B6",
+                          "apply_as_top_nav_color": true,
                           "is_overridden": true
                         },
                         "chart_color_palette": {
@@ -14988,7 +14998,7 @@
     "/api/rest/2.0/customization/styles/update": {
       "post": {
         "operationId": "updateStyleCustomization",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### App color theme\n\n`app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.\n\n- `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`.\n- `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.\n\n`brand_color` and `apply_as_top_nav_color` may be set independently in the same request.\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -15026,10 +15036,18 @@
                     ]
                   },
                   "navigation_panel": {
-                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color.",
+                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color. Must not be provided together with app_color_theme --\nboth update the same underlying color.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/NavigationPanelInput"
+                      }
+                    ]
+                  },
+                  "app_color_theme": {
+                    "description": "App color theme -- the same underlying color navigation_panel sets,\nexpressed as a brand color plus how it is applied. brand_color and\napply_as_top_nav_color may be set independently; each is left unchanged\nif omitted. To clear the brand color, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. Supported only when the app\ncolor theme is enabled on the cluster. Must not be provided together\nwith navigation_panel. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AppColorThemeInput"
                       }
                     ]
                   },
@@ -15073,6 +15091,9 @@
                   "contentType": "application/json"
                 },
                 "navigation_panel": {
+                  "contentType": "application/json"
+                },
+                "app_color_theme": {
                   "contentType": "application/json"
                 },
                 "chart_color_palette": {
@@ -26415,6 +26436,11 @@
             "description": "Navigation panel color configuration.",
             "nullable": true
           },
+          "app_color_theme": {
+            "$ref": "#/components/schemas/StyleAppColorTheme",
+            "description": "App color theme configuration -- the same stored color navigation_panel\nexpresses, as a brand color plus how it is applied. Returned alongside\nnavigation_panel when the app color theme is enabled on the cluster;\nomitted otherwise. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          },
           "chart_color_palette": {
             "$ref": "#/components/schemas/StyleChartColorPalette",
             "description": "Chart color palette configuration.",
@@ -26480,6 +26506,27 @@
           }
         },
         "description": "Navigation panel color configuration for a specific scope."
+      },
+      "StyleAppColorTheme": {
+        "type": "object",
+        "properties": {
+          "brand_color": {
+            "type": "string",
+            "description": "Brand color as a 6-digit hex string. Null when no brand color is set at\nthis scope.",
+            "nullable": true
+          },
+          "apply_as_top_nav_color": {
+            "type": "boolean",
+            "description": "The effective setting: whether the brand color is painted on the top\nnavigation bar literally, instead of the surface shade derived from it.\nAlways the resolved value -- true iff a brand color is set, unless\nexplicitly overridden.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope (either the brand color or the\napply_as_top_nav_color choice), overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "App color theme configuration for a specific scope -- the same stored\ncolor StyleNavigationPanel expresses, as a brand color plus how it is\napplied. Returned alongside navigation_panel when the app color theme is\nenabled on the cluster; omitted otherwise."
       },
       "StyleChartColorPalette": {
         "type": "object",
@@ -32208,11 +32255,12 @@
                 "CHART_COLOR_PALETTE",
                 "EMBEDDED_FOOTER_TEXT",
                 "NAV_PANEL_COLOR",
+                "APP_COLOR_THEME",
                 "DEFAULT_LOGO",
                 "WIDE_LOGO"
               ]
             },
-            "description": "Style fields to reset. Supported values: CHART_COLOR_PALETTE,\nEMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.",
+            "description": "Style fields to reset. Supported values: CHART_COLOR_PALETTE,\nEMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO,\nWIDE_LOGO.",
             "nullable": true
           },
           "visualization_areas": {
@@ -32261,6 +32309,22 @@
           }
         },
         "description": "Navigation panel color configuration."
+      },
+      "AppColorThemeInput": {
+        "type": "object",
+        "properties": {
+          "brand_color": {
+            "type": "string",
+            "description": "Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit to leave the\nstored color unchanged. To clear it, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          },
+          "apply_as_top_nav_color": {
+            "type": "boolean",
+            "description": "Whether the brand color is painted on the top navigation bar literally,\ninstead of the surface shade derived from it. Omit to leave the stored\nchoice unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "App color theme configuration -- the same stored color navigation_panel\nwrites, expressed as a brand color plus how it is applied."
       },
       "StyleColorPaletteInput": {
         "type": "object",
