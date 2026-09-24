@@ -39616,7 +39616,9 @@
           },
           "last_active_time_in_millis": {
             "description": "Timestamp of the last active session of the user in milliseconds.",
-            "type": "number"
+            "default": 0,
+            "type": "number",
+            "format": "float"
           }
         }
       },
