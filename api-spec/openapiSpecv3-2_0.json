@@ -8420,7 +8420,7 @@
         "operationId": "searchFeatures",
         "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nReturns the feature configurations available on the ThoughtSpot system, grouped by feature group.\n\n#### Pre-requisites\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo retrieve feature configurations, pass these parameters in your API request:\n\n- `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org).\n- `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.\n- `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.\n\nThe response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.\n\nThe following example retrieves the general-access features for the cluster-admin view:\n\n```\n{\n  \"scope\": \"CLUSTER\",\n  \"category\": \"GENERAL_ACCESS\"\n}\n```\n\nFor the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):\n\n```\n{\n  \"scope\": \"ORG\",\n  \"org_identifier\": 1,\n  \"category\": \"GENERAL_ACCESS\"\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Feature Management",
+          "Feature Delegation",
           "26.10.0.cl"
         ],
         "requestBody": {
@@ -8560,7 +8560,7 @@
             }
           },
           "404": {
-            "description": "Feature management not enabled.",
+            "description": "Feature delegation not enabled.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8587,7 +8587,7 @@
         "operationId": "updateFeatureAssignments",
         "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nUpdates the Org assignments for a feature. Available to cluster admins only.\n\n#### Pre-requisites\n\nRequires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo update the Org assignments for a feature, pass these parameters in your API request:\n\n- `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update.\n- `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature.\n- `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.\n\nThe following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:\n\n```\n{\n  \"feature_identifier\": \"index_columns\",\n  \"org_identifiers\": [1, 2],\n  \"operation\": \"ADD\"\n}\n```\n\nClear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):\n\n```\n{\n  \"feature_identifier\": \"index_columns\",\n  \"org_identifiers\": [],\n  \"operation\": \"REPLACE\"\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Feature Management",
+          "Feature Delegation",
           "26.10.0.cl"
         ],
         "requestBody": {
@@ -8700,7 +8700,7 @@
             }
           },
           "404": {
-            "description": "Feature not found or feature management not enabled.",
+            "description": "Feature not found or feature delegation not enabled.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8742,7 +8742,7 @@
         "operationId": "updateFeatureValue",
         "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nSets the value of a feature at the cluster or Org scope.\n\n#### Pre-requisites\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo set a feature value, pass these parameters in your API request:\n\n- `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override.\n- `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.\n- `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set.\n- `feature_value` — New value to set for the feature.\n- `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.\n\nThe following example sets a per-Org value override for Org `1`:\n\n```\n{\n  \"scope\": \"ORG\",\n  \"org_identifier\": 1,\n  \"feature_identifier\": \"index_columns\",\n  \"feature_value\": \"true\"\n}\n```\n\nSet the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:\n\n```\n{\n  \"scope\": \"CLUSTER\",\n  \"feature_identifier\": \"index_columns\",\n  \"feature_value\": \"true\",\n  \"reset_org_overrides\": true\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Feature Management",
+          "Feature Delegation",
           "26.10.0.cl"
         ],
         "requestBody": {
@@ -8859,7 +8859,7 @@
             }
           },
           "404": {
-            "description": "Feature not found or feature management not enabled.",
+            "description": "Feature not found or feature delegation not enabled.",
             "content": {
               "application/json": {
                 "schema": {

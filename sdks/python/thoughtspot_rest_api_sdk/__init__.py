@@ -36,7 +36,7 @@ __all__ = [
     "DBTApi",
     "DataApi",
     "EmailCustomizationApi",
-    "FeatureManagementApi",
+    "FeatureDelegationApi",
     "GroupsApi",
     "InputTablesApi",
     "JobsApi",
@@ -634,7 +634,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.dbt_api import DBTApi as DBTApi
     from thoughtspot_rest_api_sdk.api.data_api import DataApi as DataApi
     from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi as EmailCustomizationApi
-    from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi as FeatureManagementApi
+    from thoughtspot_rest_api_sdk.api.feature_delegation_api import FeatureDelegationApi as FeatureDelegationApi
     from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi as GroupsApi
     from thoughtspot_rest_api_sdk.api.input_tables_api import InputTablesApi as InputTablesApi
     from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi as JobsApi
@@ -1242,7 +1242,7 @@ from thoughtspot_rest_api_sdk.api.custom_calendars_api import CustomCalendarsApi
 from thoughtspot_rest_api_sdk.api.dbt_api import DBTApi as DBTApi
 from thoughtspot_rest_api_sdk.api.data_api import DataApi as DataApi
 from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi as EmailCustomizationApi
-from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi as FeatureManagementApi
+from thoughtspot_rest_api_sdk.api.feature_delegation_api import FeatureDelegationApi as FeatureDelegationApi
 from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi as GroupsApi
 from thoughtspot_rest_api_sdk.api.input_tables_api import InputTablesApi as InputTablesApi
 from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi as JobsApi

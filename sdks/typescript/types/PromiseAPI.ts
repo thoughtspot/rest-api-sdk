@@ -2522,18 +2522,18 @@ export class PromiseEmailCustomizationApi {
 
 
 
-import { ObservableFeatureManagementApi } from './ObservableAPI';
+import { ObservableFeatureDelegationApi } from './ObservableAPI';
 
-import { FeatureManagementApiRequestFactory, FeatureManagementApiResponseProcessor} from "../apis/FeatureManagementApi";
-export class PromiseFeatureManagementApi {
-    private api: ObservableFeatureManagementApi
+import { FeatureDelegationApiRequestFactory, FeatureDelegationApiResponseProcessor} from "../apis/FeatureDelegationApi";
+export class PromiseFeatureDelegationApi {
+    private api: ObservableFeatureDelegationApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: FeatureManagementApiRequestFactory,
-        responseProcessor?: FeatureManagementApiResponseProcessor
+        requestFactory?: FeatureDelegationApiRequestFactory,
+        responseProcessor?: FeatureDelegationApiResponseProcessor
     ) {
-        this.api = new ObservableFeatureManagementApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableFeatureDelegationApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

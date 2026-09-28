@@ -22,12 +22,12 @@ import java.util.Map;
 import java.io.InputStream;
 
 /**
- * API tests for FeatureManagementApi
+ * API tests for FeatureDelegationApi
  */
 @Disabled
-public class FeatureManagementApiTest {
+public class FeatureDelegationApiTest {
 
-    private final FeatureManagementApi api = new FeatureManagementApi();
+    private final FeatureDelegationApi api = new FeatureDelegationApi();
 
     /**
      *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the org-admin view (returns the current value of each feature for a single Org). - &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. - &#x60;category&#x60; — Availability category of the features to return. &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60; returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;.  The response fields populated depend on the requested scope. In the cluster-admin view (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;, &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;, &#x60;element_config&#x60;, and &#x60;element_value&#x60;.  The following example retrieves the general-access features for the cluster-admin view:  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;  For the org-admin view, set &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is &#x60;ORG&#x60;; omitting it returns a 400 error):  &#x60;&#x60;&#x60; {   \&quot;scope\&quot;: \&quot;ORG\&quot;,   \&quot;org_identifier\&quot;: 1,   \&quot;category\&quot;: \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;      

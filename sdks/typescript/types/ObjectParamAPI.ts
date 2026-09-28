@@ -3098,48 +3098,48 @@ export class ObjectEmailCustomizationApi {
 
 }
 
-import { ObservableFeatureManagementApi } from "./ObservableAPI";
-import { FeatureManagementApiRequestFactory, FeatureManagementApiResponseProcessor} from "../apis/FeatureManagementApi";
+import { ObservableFeatureDelegationApi } from "./ObservableAPI";
+import { FeatureDelegationApiRequestFactory, FeatureDelegationApiResponseProcessor} from "../apis/FeatureDelegationApi";
 
-export interface FeatureManagementApiSearchFeaturesRequest {
+export interface FeatureDelegationApiSearchFeaturesRequest {
     /**
      * 
      * @type SearchFeaturesRequest
-     * @memberof FeatureManagementApisearchFeatures
+     * @memberof FeatureDelegationApisearchFeatures
      */
     searchFeaturesRequest: SearchFeaturesRequest
 }
 
-export interface FeatureManagementApiUpdateFeatureAssignmentsRequest {
+export interface FeatureDelegationApiUpdateFeatureAssignmentsRequest {
     /**
      * 
      * @type UpdateFeatureAssignmentsRequest
-     * @memberof FeatureManagementApiupdateFeatureAssignments
+     * @memberof FeatureDelegationApiupdateFeatureAssignments
      */
     updateFeatureAssignmentsRequest: UpdateFeatureAssignmentsRequest
 }
 
-export interface FeatureManagementApiUpdateFeatureValueRequest {
+export interface FeatureDelegationApiUpdateFeatureValueRequest {
     /**
      * 
      * @type UpdateFeatureValueRequest
-     * @memberof FeatureManagementApiupdateFeatureValue
+     * @memberof FeatureDelegationApiupdateFeatureValue
      */
     updateFeatureValueRequest: UpdateFeatureValueRequest
 }
 
-export class ObjectFeatureManagementApi {
-    private api: ObservableFeatureManagementApi
+export class ObjectFeatureDelegationApi {
+    private api: ObservableFeatureDelegationApi
 
-    public constructor(configuration: Configuration, requestFactory?: FeatureManagementApiRequestFactory, responseProcessor?: FeatureManagementApiResponseProcessor) {
-        this.api = new ObservableFeatureManagementApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: FeatureDelegationApiRequestFactory, responseProcessor?: FeatureDelegationApiResponseProcessor) {
+        this.api = new ObservableFeatureDelegationApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
      *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
      * @param param the request object
      */
-    public searchFeaturesWithHttpInfo(param: FeatureManagementApiSearchFeaturesRequest, options?: ConfigurationOptions): Promise<HttpInfo<Array<FeatureGroup>>> {
+    public searchFeaturesWithHttpInfo(param: FeatureDelegationApiSearchFeaturesRequest, options?: ConfigurationOptions): Promise<HttpInfo<Array<FeatureGroup>>> {
         return this.api.searchFeaturesWithHttpInfo(param.searchFeaturesRequest,  options).toPromise();
     }
 
@@ -3147,7 +3147,7 @@ export class ObjectFeatureManagementApi {
      *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
      * @param param the request object
      */
-    public searchFeatures(param: FeatureManagementApiSearchFeaturesRequest, options?: ConfigurationOptions): Promise<Array<FeatureGroup>> {
+    public searchFeatures(param: FeatureDelegationApiSearchFeaturesRequest, options?: ConfigurationOptions): Promise<Array<FeatureGroup>> {
         return this.api.searchFeatures(param.searchFeaturesRequest,  options).toPromise();
     }
 
@@ -3155,7 +3155,7 @@ export class ObjectFeatureManagementApi {
      *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
      * @param param the request object
      */
-    public updateFeatureAssignmentsWithHttpInfo(param: FeatureManagementApiUpdateFeatureAssignmentsRequest, options?: ConfigurationOptions): Promise<HttpInfo<FeatureAssignmentResponse>> {
+    public updateFeatureAssignmentsWithHttpInfo(param: FeatureDelegationApiUpdateFeatureAssignmentsRequest, options?: ConfigurationOptions): Promise<HttpInfo<FeatureAssignmentResponse>> {
         return this.api.updateFeatureAssignmentsWithHttpInfo(param.updateFeatureAssignmentsRequest,  options).toPromise();
     }
 
@@ -3163,7 +3163,7 @@ export class ObjectFeatureManagementApi {
      *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
      * @param param the request object
      */
-    public updateFeatureAssignments(param: FeatureManagementApiUpdateFeatureAssignmentsRequest, options?: ConfigurationOptions): Promise<FeatureAssignmentResponse> {
+    public updateFeatureAssignments(param: FeatureDelegationApiUpdateFeatureAssignmentsRequest, options?: ConfigurationOptions): Promise<FeatureAssignmentResponse> {
         return this.api.updateFeatureAssignments(param.updateFeatureAssignmentsRequest,  options).toPromise();
     }
 
@@ -3171,7 +3171,7 @@ export class ObjectFeatureManagementApi {
      *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
      * @param param the request object
      */
-    public updateFeatureValueWithHttpInfo(param: FeatureManagementApiUpdateFeatureValueRequest, options?: ConfigurationOptions): Promise<HttpInfo<FeatureValueResponse>> {
+    public updateFeatureValueWithHttpInfo(param: FeatureDelegationApiUpdateFeatureValueRequest, options?: ConfigurationOptions): Promise<HttpInfo<FeatureValueResponse>> {
         return this.api.updateFeatureValueWithHttpInfo(param.updateFeatureValueRequest,  options).toPromise();
     }
 
@@ -3179,7 +3179,7 @@ export class ObjectFeatureManagementApi {
      *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
      * @param param the request object
      */
-    public updateFeatureValue(param: FeatureManagementApiUpdateFeatureValueRequest, options?: ConfigurationOptions): Promise<FeatureValueResponse> {
+    public updateFeatureValue(param: FeatureDelegationApiUpdateFeatureValueRequest, options?: ConfigurationOptions): Promise<FeatureValueResponse> {
         return this.api.updateFeatureValue(param.updateFeatureValueRequest,  options).toPromise();
     }
 

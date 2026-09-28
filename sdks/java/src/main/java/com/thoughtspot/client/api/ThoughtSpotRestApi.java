@@ -19958,7 +19958,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -20032,7 +20032,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -20055,7 +20055,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -20080,7 +20080,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -26503,7 +26503,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -26577,7 +26577,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -26600,7 +26600,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -26625,7 +26625,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -26650,7 +26650,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -26724,7 +26724,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -26747,7 +26747,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -26772,7 +26772,7 @@ public class ThoughtSpotRestApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */

@@ -19,7 +19,7 @@ import { UpdateFeatureValueRequest } from '../models/UpdateFeatureValueRequest';
 /**
  * no description
  */
-export class FeatureManagementApiRequestFactory extends BaseAPIRequestFactory {
+export class FeatureDelegationApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
@@ -30,7 +30,7 @@ export class FeatureManagementApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'searchFeaturesRequest' is not null or undefined
         if (searchFeaturesRequest === null || searchFeaturesRequest === undefined) {
-            throw new RequiredError("FeatureManagementApi", "searchFeatures", "searchFeaturesRequest");
+            throw new RequiredError("FeatureDelegationApi", "searchFeatures", "searchFeaturesRequest");
         }
 
 
@@ -79,7 +79,7 @@ export class FeatureManagementApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'updateFeatureAssignmentsRequest' is not null or undefined
         if (updateFeatureAssignmentsRequest === null || updateFeatureAssignmentsRequest === undefined) {
-            throw new RequiredError("FeatureManagementApi", "updateFeatureAssignments", "updateFeatureAssignmentsRequest");
+            throw new RequiredError("FeatureDelegationApi", "updateFeatureAssignments", "updateFeatureAssignmentsRequest");
         }
 
 
@@ -128,7 +128,7 @@ export class FeatureManagementApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'updateFeatureValueRequest' is not null or undefined
         if (updateFeatureValueRequest === null || updateFeatureValueRequest === undefined) {
-            throw new RequiredError("FeatureManagementApi", "updateFeatureValue", "updateFeatureValueRequest");
+            throw new RequiredError("FeatureDelegationApi", "updateFeatureValue", "updateFeatureValueRequest");
         }
 
 
@@ -170,7 +170,7 @@ export class FeatureManagementApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class FeatureManagementApiResponseProcessor {
+export class FeatureDelegationApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
@@ -214,7 +214,7 @@ export class FeatureManagementApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ErrorResponse", ""
             ) as ErrorResponse;
-            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Feature management not enabled.", body, response.headers);
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Feature delegation not enabled.", body, response.headers);
         }
         if (isCodeInRange("500", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
@@ -278,7 +278,7 @@ export class FeatureManagementApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ErrorResponse", ""
             ) as ErrorResponse;
-            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Feature not found or feature management not enabled.", body, response.headers);
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Feature not found or feature delegation not enabled.", body, response.headers);
         }
         if (isCodeInRange("500", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
@@ -342,7 +342,7 @@ export class FeatureManagementApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ErrorResponse", ""
             ) as ErrorResponse;
-            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Feature not found or feature management not enabled.", body, response.headers);
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Feature not found or feature delegation not enabled.", body, response.headers);
         }
         if (isCodeInRange("500", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(

@@ -5164,7 +5164,7 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges. |  -  |
-| **404** | Feature management not enabled. |  -  |
+| **404** | Feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 <a id="searchLinkCustomizations"></a>
@@ -6787,7 +6787,7 @@ null (empty response body)
 | **400** | Invalid request parameters. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges. |  -  |
-| **404** | Feature not found or feature management not enabled. |  -  |
+| **404** | Feature not found or feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 <a id="updateFeatureValue"></a>
@@ -6824,7 +6824,7 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges or org not assigned to feature. |  -  |
-| **404** | Feature not found or feature management not enabled. |  -  |
+| **404** | Feature not found or feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 <a id="updateInputTable"></a>

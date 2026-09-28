@@ -1,12 +1,12 @@
-# ThoughtSpot.RestApi.Sdk.Api.FeatureManagementApi
+# ThoughtSpot.RestApi.Sdk.Api.FeatureDelegationApi
 
 All URIs are relative to *https://localhost:443*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**SearchFeatures**](FeatureManagementApi.md#searchfeatures) | **POST** /api/rest/2.0/configurations/features/search |  |
-| [**UpdateFeatureAssignments**](FeatureManagementApi.md#updatefeatureassignments) | **POST** /api/rest/2.0/configurations/features/assignments/update |  |
-| [**UpdateFeatureValue**](FeatureManagementApi.md#updatefeaturevalue) | **POST** /api/rest/2.0/configurations/features/values/update |  |
+| [**SearchFeatures**](FeatureDelegationApi.md#searchfeatures) | **POST** /api/rest/2.0/configurations/features/search |  |
+| [**UpdateFeatureAssignments**](FeatureDelegationApi.md#updatefeatureassignments) | **POST** /api/rest/2.0/configurations/features/assignments/update |  |
+| [**UpdateFeatureValue**](FeatureDelegationApi.md#updatefeaturevalue) | **POST** /api/rest/2.0/configurations/features/values/update |  |
 
 <a id="searchfeatures"></a>
 # **SearchFeatures**
@@ -39,7 +39,7 @@ namespace Example
             // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
-            var apiInstance = new FeatureManagementApi(httpClient, config, httpClientHandler);
+            var apiInstance = new FeatureDelegationApi(httpClient, config, httpClientHandler);
             var searchFeaturesRequest = new SearchFeaturesRequest(); // SearchFeaturesRequest | 
 
             try
@@ -49,7 +49,7 @@ namespace Example
             }
             catch (ApiException  e)
             {
-                Debug.Print("Exception when calling FeatureManagementApi.SearchFeatures: " + e.Message);
+                Debug.Print("Exception when calling FeatureDelegationApi.SearchFeatures: " + e.Message);
                 Debug.Print("Status Code: " + e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -71,7 +71,7 @@ try
 }
 catch (ApiException e)
 {
-    Debug.Print("Exception when calling FeatureManagementApi.SearchFeaturesWithHttpInfo: " + e.Message);
+    Debug.Print("Exception when calling FeatureDelegationApi.SearchFeaturesWithHttpInfo: " + e.Message);
     Debug.Print("Status Code: " + e.ErrorCode);
     Debug.Print(e.StackTrace);
 }
@@ -104,7 +104,7 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges. |  -  |
-| **404** | Feature management not enabled. |  -  |
+| **404** | Feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -140,7 +140,7 @@ namespace Example
             // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
-            var apiInstance = new FeatureManagementApi(httpClient, config, httpClientHandler);
+            var apiInstance = new FeatureDelegationApi(httpClient, config, httpClientHandler);
             var updateFeatureAssignmentsRequest = new UpdateFeatureAssignmentsRequest(); // UpdateFeatureAssignmentsRequest | 
 
             try
@@ -150,7 +150,7 @@ namespace Example
             }
             catch (ApiException  e)
             {
-                Debug.Print("Exception when calling FeatureManagementApi.UpdateFeatureAssignments: " + e.Message);
+                Debug.Print("Exception when calling FeatureDelegationApi.UpdateFeatureAssignments: " + e.Message);
                 Debug.Print("Status Code: " + e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -172,7 +172,7 @@ try
 }
 catch (ApiException e)
 {
-    Debug.Print("Exception when calling FeatureManagementApi.UpdateFeatureAssignmentsWithHttpInfo: " + e.Message);
+    Debug.Print("Exception when calling FeatureDelegationApi.UpdateFeatureAssignmentsWithHttpInfo: " + e.Message);
     Debug.Print("Status Code: " + e.ErrorCode);
     Debug.Print(e.StackTrace);
 }
@@ -205,7 +205,7 @@ catch (ApiException e)
 | **400** | Invalid request parameters. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges. |  -  |
-| **404** | Feature not found or feature management not enabled. |  -  |
+| **404** | Feature not found or feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -241,7 +241,7 @@ namespace Example
             // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
-            var apiInstance = new FeatureManagementApi(httpClient, config, httpClientHandler);
+            var apiInstance = new FeatureDelegationApi(httpClient, config, httpClientHandler);
             var updateFeatureValueRequest = new UpdateFeatureValueRequest(); // UpdateFeatureValueRequest | 
 
             try
@@ -251,7 +251,7 @@ namespace Example
             }
             catch (ApiException  e)
             {
-                Debug.Print("Exception when calling FeatureManagementApi.UpdateFeatureValue: " + e.Message);
+                Debug.Print("Exception when calling FeatureDelegationApi.UpdateFeatureValue: " + e.Message);
                 Debug.Print("Status Code: " + e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -273,7 +273,7 @@ try
 }
 catch (ApiException e)
 {
-    Debug.Print("Exception when calling FeatureManagementApi.UpdateFeatureValueWithHttpInfo: " + e.Message);
+    Debug.Print("Exception when calling FeatureDelegationApi.UpdateFeatureValueWithHttpInfo: " + e.Message);
     Debug.Print("Status Code: " + e.ErrorCode);
     Debug.Print(e.StackTrace);
 }
@@ -306,7 +306,7 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges or org not assigned to feature. |  -  |
-| **404** | Feature not found or feature management not enabled. |  -  |
+| **404** | Feature not found or feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

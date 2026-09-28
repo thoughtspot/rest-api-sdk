@@ -35,21 +35,21 @@ import java.util.Map;
 import java.io.InputStream;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
-public class FeatureManagementApi {
+public class FeatureDelegationApi {
     private ApiClient localVarApiClient;
     private ApiClientConfiguration localVarApiClientConfiguration;
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public FeatureManagementApi() {
+    public FeatureDelegationApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public FeatureManagementApi(ApiClient apiClient) {
+    public FeatureDelegationApi(ApiClient apiClient) {
         this.localVarApiClient = apiClient;
     }
 
-    public FeatureManagementApi(ApiClientConfiguration apiClientConfiguration) {
+    public FeatureDelegationApi(ApiClientConfiguration apiClientConfiguration) {
         this.localVarApiClientConfiguration = apiClientConfiguration;
         this.localVarApiClient = new ApiClient(apiClientConfiguration);
     }
@@ -105,7 +105,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -179,7 +179,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -202,7 +202,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -227,7 +227,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -252,7 +252,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -326,7 +326,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -349,7 +349,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -374,7 +374,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -399,7 +399,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -473,7 +473,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -496,7 +496,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -521,7 +521,7 @@ public class FeatureManagementApi {
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Feature not found or feature delegation not enabled. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */

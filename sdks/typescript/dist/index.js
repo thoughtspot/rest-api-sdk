@@ -30918,8 +30918,8 @@ var EmailCustomizationApiResponseProcessor = class {
   }
 };
 
-// apis/FeatureManagementApi.ts
-var FeatureManagementApiRequestFactory = class extends BaseAPIRequestFactory {
+// apis/FeatureDelegationApi.ts
+var FeatureDelegationApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
    *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
    * @param searchFeaturesRequest 
@@ -30927,7 +30927,7 @@ var FeatureManagementApiRequestFactory = class extends BaseAPIRequestFactory {
   async searchFeatures(searchFeaturesRequest, _options) {
     let _config = _options || this.configuration;
     if (searchFeaturesRequest === null || searchFeaturesRequest === void 0) {
-      throw new RequiredError("FeatureManagementApi", "searchFeatures", "searchFeaturesRequest");
+      throw new RequiredError("FeatureDelegationApi", "searchFeatures", "searchFeaturesRequest");
     }
     const localVarPath = "/api/rest/2.0/configurations/features/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -30961,7 +30961,7 @@ var FeatureManagementApiRequestFactory = class extends BaseAPIRequestFactory {
   async updateFeatureAssignments(updateFeatureAssignmentsRequest, _options) {
     let _config = _options || this.configuration;
     if (updateFeatureAssignmentsRequest === null || updateFeatureAssignmentsRequest === void 0) {
-      throw new RequiredError("FeatureManagementApi", "updateFeatureAssignments", "updateFeatureAssignmentsRequest");
+      throw new RequiredError("FeatureDelegationApi", "updateFeatureAssignments", "updateFeatureAssignmentsRequest");
     }
     const localVarPath = "/api/rest/2.0/configurations/features/assignments/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -30995,7 +30995,7 @@ var FeatureManagementApiRequestFactory = class extends BaseAPIRequestFactory {
   async updateFeatureValue(updateFeatureValueRequest, _options) {
     let _config = _options || this.configuration;
     if (updateFeatureValueRequest === null || updateFeatureValueRequest === void 0) {
-      throw new RequiredError("FeatureManagementApi", "updateFeatureValue", "updateFeatureValueRequest");
+      throw new RequiredError("FeatureDelegationApi", "updateFeatureValue", "updateFeatureValueRequest");
     }
     const localVarPath = "/api/rest/2.0/configurations/features/values/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
@@ -31023,7 +31023,7 @@ var FeatureManagementApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
 };
-var FeatureManagementApiResponseProcessor = class {
+var FeatureDelegationApiResponseProcessor = class {
   /**
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
@@ -31071,7 +31071,7 @@ var FeatureManagementApiResponseProcessor = class {
         "ErrorResponse",
         ""
       );
-      throw new ApiException(response.httpStatusCode, "Feature management not enabled.", body, response.headers);
+      throw new ApiException(response.httpStatusCode, "Feature delegation not enabled.", body, response.headers);
     }
     if (isCodeInRange("500", response.httpStatusCode)) {
       const body = ObjectSerializer.deserialize(
@@ -31138,7 +31138,7 @@ var FeatureManagementApiResponseProcessor = class {
         "ErrorResponse",
         ""
       );
-      throw new ApiException(response.httpStatusCode, "Feature not found or feature management not enabled.", body, response.headers);
+      throw new ApiException(response.httpStatusCode, "Feature not found or feature delegation not enabled.", body, response.headers);
     }
     if (isCodeInRange("500", response.httpStatusCode)) {
       const body = ObjectSerializer.deserialize(
@@ -31205,7 +31205,7 @@ var FeatureManagementApiResponseProcessor = class {
         "ErrorResponse",
         ""
       );
-      throw new ApiException(response.httpStatusCode, "Feature not found or feature management not enabled.", body, response.headers);
+      throw new ApiException(response.httpStatusCode, "Feature not found or feature delegation not enabled.", body, response.headers);
     }
     if (isCodeInRange("500", response.httpStatusCode)) {
       const body = ObjectSerializer.deserialize(
@@ -54024,7 +54024,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         "ErrorResponse",
         ""
       );
-      throw new ApiException(response.httpStatusCode, "Feature management not enabled.", body, response.headers);
+      throw new ApiException(response.httpStatusCode, "Feature delegation not enabled.", body, response.headers);
     }
     if (isCodeInRange("500", response.httpStatusCode)) {
       const body = ObjectSerializer.deserialize(
@@ -56652,7 +56652,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         "ErrorResponse",
         ""
       );
-      throw new ApiException(response.httpStatusCode, "Feature not found or feature management not enabled.", body, response.headers);
+      throw new ApiException(response.httpStatusCode, "Feature not found or feature delegation not enabled.", body, response.headers);
     }
     if (isCodeInRange("500", response.httpStatusCode)) {
       const body = ObjectSerializer.deserialize(
@@ -56719,7 +56719,7 @@ var ThoughtSpotRestApiResponseProcessor = class {
         "ErrorResponse",
         ""
       );
-      throw new ApiException(response.httpStatusCode, "Feature not found or feature management not enabled.", body, response.headers);
+      throw new ApiException(response.httpStatusCode, "Feature not found or feature delegation not enabled.", body, response.headers);
     }
     if (isCodeInRange("500", response.httpStatusCode)) {
       const body = ObjectSerializer.deserialize(
@@ -63104,11 +63104,11 @@ var ObservableEmailCustomizationApi = class {
     return this.validateEmailCustomizationWithHttpInfo(_options).pipe(map((apiResponse) => apiResponse.data));
   }
 };
-var ObservableFeatureManagementApi = class {
+var ObservableFeatureDelegationApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.configuration = configuration;
-    this.requestFactory = requestFactory || new FeatureManagementApiRequestFactory(configuration);
-    this.responseProcessor = responseProcessor || new FeatureManagementApiResponseProcessor();
+    this.requestFactory = requestFactory || new FeatureDelegationApiRequestFactory(configuration);
+    this.responseProcessor = responseProcessor || new FeatureDelegationApiResponseProcessor();
   }
   /**
    *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
@@ -73446,9 +73446,9 @@ var PromiseEmailCustomizationApi = class {
     return result.toPromise();
   }
 };
-var PromiseFeatureManagementApi = class {
+var PromiseFeatureDelegationApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
-    this.api = new ObservableFeatureManagementApi(configuration, requestFactory, responseProcessor);
+    this.api = new ObservableFeatureDelegationApi(configuration, requestFactory, responseProcessor);
   }
   /**
    *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
@@ -79799,9 +79799,9 @@ export {
   FavoriteMetadataItem,
   FavoriteObjectOptionsInput,
   FeatureAssignmentResponse,
+  PromiseFeatureDelegationApi as FeatureDelegationApi,
   FeatureDetail,
   FeatureGroup,
-  PromiseFeatureManagementApi as FeatureManagementApi,
   FeatureOrgInfo,
   FeatureValueResponse,
   FetchAnswerDataRequest,

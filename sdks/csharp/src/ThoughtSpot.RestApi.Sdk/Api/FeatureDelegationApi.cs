@@ -24,7 +24,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IFeatureManagementApiSync : IApiAccessor
+    public interface IFeatureDelegationApiSync : IApiAccessor
     {
         #region Synchronous Operations
         /// <summary>
@@ -96,7 +96,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IFeatureManagementApiAsync : IApiAccessor
+    public interface IFeatureDelegationApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
         /// <summary>
@@ -174,7 +174,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IFeatureManagementApi : IFeatureManagementApiSync, IFeatureManagementApiAsync
+    public interface IFeatureDelegationApi : IFeatureDelegationApiSync, IFeatureDelegationApiAsync
     {
 
     }
@@ -182,7 +182,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class FeatureManagementApi : IDisposable, IFeatureManagementApi
+    public partial class FeatureDelegationApi : IDisposable, IFeatureDelegationApi
     {
         private ThoughtSpot.RestApi.Sdk.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
@@ -256,30 +256,30 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
         // Private constructor used only by CreateAsync — skips the legacy HttpClient setup entirely.
         // The bool parameter is a sentinel to distinguish it from any future public no-arg constructor.
-        private FeatureManagementApi(bool createAsyncSentinel)
+        private FeatureDelegationApi(bool createAsyncSentinel)
         {
             this.ExceptionFactory = ThoughtSpot.RestApi.Sdk.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeatureManagementApi"/> class.
+        /// Initializes a new instance of the <see cref="FeatureDelegationApi"/> class.
         /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
         /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
         /// </summary>
         /// <returns></returns>
-        public FeatureManagementApi() : this((string)null)
+        public FeatureDelegationApi() : this((string)null)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeatureManagementApi"/> class.
+        /// Initializes a new instance of the <see cref="FeatureDelegationApi"/> class.
         /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
         /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
         /// </summary>
         /// <param name="basePath">The target service's base path in URL format.</param>
         /// <exception cref="ArgumentException"></exception>
         /// <returns></returns>
-        public FeatureManagementApi(string basePath)
+        public FeatureDelegationApi(string basePath)
         {
             this.Configuration = ThoughtSpot.RestApi.Sdk.Client.Configuration.MergeConfigurations(
                 ThoughtSpot.RestApi.Sdk.Client.GlobalConfiguration.Instance,
@@ -294,14 +294,14 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeatureManagementApi"/> class using Configuration object.
+        /// Initializes a new instance of the <see cref="FeatureDelegationApi"/> class using Configuration object.
         /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
         /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
         /// </summary>
         /// <param name="configuration">An instance of Configuration.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
-        public FeatureManagementApi(ThoughtSpot.RestApi.Sdk.Client.Configuration configuration)
+        public FeatureDelegationApi(ThoughtSpot.RestApi.Sdk.Client.Configuration configuration)
         {
             if (configuration == null) throw new ArgumentNullException("configuration");
 
@@ -318,7 +318,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeatureManagementApi"/> class.
+        /// Initializes a new instance of the <see cref="FeatureDelegationApi"/> class.
         /// </summary>
         /// <param name="client">An instance of HttpClient.</param>
         /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
@@ -328,12 +328,12 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// Some configuration settings will not be applied without passing an HttpClientHandler.
         /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
         /// </remarks>
-        public FeatureManagementApi(HttpClient client, HttpClientHandler handler = null) : this(client, (string)null, handler)
+        public FeatureDelegationApi(HttpClient client, HttpClientHandler handler = null) : this(client, (string)null, handler)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeatureManagementApi"/> class.
+        /// Initializes a new instance of the <see cref="FeatureDelegationApi"/> class.
         /// </summary>
         /// <param name="client">An instance of HttpClient.</param>
         /// <param name="basePath">The target service's base path in URL format.</param>
@@ -345,7 +345,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// Some configuration settings will not be applied without passing an HttpClientHandler.
         /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
         /// </remarks>
-        public FeatureManagementApi(HttpClient client, string basePath, HttpClientHandler handler = null)
+        public FeatureDelegationApi(HttpClient client, string basePath, HttpClientHandler handler = null)
         {
             if (client == null) throw new ArgumentNullException("client");
 
@@ -360,7 +360,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeatureManagementApi"/> class using Configuration object.
+        /// Initializes a new instance of the <see cref="FeatureDelegationApi"/> class using Configuration object.
         /// </summary>
         /// <param name="client">An instance of HttpClient.</param>
         /// <param name="configuration">An instance of Configuration.</param>
@@ -371,7 +371,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// Some configuration settings will not be applied without passing an HttpClientHandler.
         /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
         /// </remarks>
-        public FeatureManagementApi(HttpClient client, ThoughtSpot.RestApi.Sdk.Client.Configuration configuration, HttpClientHandler handler = null)
+        public FeatureDelegationApi(HttpClient client, ThoughtSpot.RestApi.Sdk.Client.Configuration configuration, HttpClientHandler handler = null)
         {
             if (configuration == null) throw new ArgumentNullException("configuration");
             if (client == null) throw new ArgumentNullException("client");
@@ -387,14 +387,14 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeatureManagementApi"/> class
+        /// Initializes a new instance of the <see cref="FeatureDelegationApi"/> class
         /// using a Configuration object and client instance.
         /// </summary>
         /// <param name="client">The client interface for synchronous API access.</param>
         /// <param name="asyncClient">The client interface for asynchronous API access.</param>
         /// <param name="configuration">The configuration object.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public FeatureManagementApi(ThoughtSpot.RestApi.Sdk.Client.ISynchronousClient client, ThoughtSpot.RestApi.Sdk.Client.IAsynchronousClient asyncClient, ThoughtSpot.RestApi.Sdk.Client.IReadableConfiguration configuration)
+        public FeatureDelegationApi(ThoughtSpot.RestApi.Sdk.Client.ISynchronousClient client, ThoughtSpot.RestApi.Sdk.Client.IAsynchronousClient asyncClient, ThoughtSpot.RestApi.Sdk.Client.IReadableConfiguration configuration)
         {
             if (client == null) throw new ArgumentNullException("client");
             if (asyncClient == null) throw new ArgumentNullException("asyncClient");
@@ -409,18 +409,18 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         // ── ApiClientConfiguration factory ───────────────────────────────────────
 
         /// <summary>
-        /// Creates a <see cref="FeatureManagementApi"/> with automatic bearer-token injection and refresh.
+        /// Creates a <see cref="FeatureDelegationApi"/> with automatic bearer-token injection and refresh.
         /// The token is fetched on first call and refreshed automatically before it expires.
         /// </summary>
         /// <remarks>This is the required entry point when streaming methods (XxxStreamAsync) are needed — direct constructor use leaves streaming unavailable.</remarks>
         /// <param name="config">Connection settings including host, credentials, and SSL options.</param>
         /// <param name="cancellationToken">Optional cancellation token.</param>
-        public static async System.Threading.Tasks.Task<FeatureManagementApi> CreateAsync(
+        public static async System.Threading.Tasks.Task<FeatureDelegationApi> CreateAsync(
             ThoughtSpot.RestApi.Sdk.ApiClientConfiguration config,
             System.Threading.CancellationToken cancellationToken = default)
         {
             var built = await BuildFromConfigAsync(config, cancellationToken).ConfigureAwait(false);
-            var instance = new FeatureManagementApi(createAsyncSentinel: true);
+            var instance = new FeatureDelegationApi(createAsyncSentinel: true);
             var apiClient = new ThoughtSpot.RestApi.Sdk.Client.ApiClient(built.HttpClient, built.Cfg.BasePath, null);
             apiClient.RetryPipeline = config.EnableRetries ? config.RetryPipeline : Polly.ResiliencePipeline<System.Net.Http.HttpResponseMessage>.Empty;
             instance._state = new ApiState(apiClient, built.HttpClient, built.BareClient, built.BareHandler, built.Cfg, config, built.RefCounter);
@@ -740,7 +740,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         {
             // verify the required parameter 'searchFeaturesRequest' is set
             if (searchFeaturesRequest == null)
-                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchFeaturesRequest' when calling FeatureManagementApi->SearchFeatures");
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchFeaturesRequest' when calling FeatureDelegationApi->SearchFeatures");
 
             ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
 
@@ -804,7 +804,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         {
             // verify the required parameter 'searchFeaturesRequest' is set
             if (searchFeaturesRequest == null)
-                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchFeaturesRequest' when calling FeatureManagementApi->SearchFeatures");
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'searchFeaturesRequest' when calling FeatureDelegationApi->SearchFeatures");
 
 
             ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
@@ -870,7 +870,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         {
             // verify the required parameter 'updateFeatureAssignmentsRequest' is set
             if (updateFeatureAssignmentsRequest == null)
-                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureAssignmentsRequest' when calling FeatureManagementApi->UpdateFeatureAssignments");
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureAssignmentsRequest' when calling FeatureDelegationApi->UpdateFeatureAssignments");
 
             ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
 
@@ -934,7 +934,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         {
             // verify the required parameter 'updateFeatureAssignmentsRequest' is set
             if (updateFeatureAssignmentsRequest == null)
-                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureAssignmentsRequest' when calling FeatureManagementApi->UpdateFeatureAssignments");
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureAssignmentsRequest' when calling FeatureDelegationApi->UpdateFeatureAssignments");
 
 
             ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
@@ -1000,7 +1000,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         {
             // verify the required parameter 'updateFeatureValueRequest' is set
             if (updateFeatureValueRequest == null)
-                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureValueRequest' when calling FeatureManagementApi->UpdateFeatureValue");
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureValueRequest' when calling FeatureDelegationApi->UpdateFeatureValue");
 
             ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
 
@@ -1064,7 +1064,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         {
             // verify the required parameter 'updateFeatureValueRequest' is set
             if (updateFeatureValueRequest == null)
-                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureValueRequest' when calling FeatureManagementApi->UpdateFeatureValue");
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'updateFeatureValueRequest' when calling FeatureDelegationApi->UpdateFeatureValue");
 
 
             ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();

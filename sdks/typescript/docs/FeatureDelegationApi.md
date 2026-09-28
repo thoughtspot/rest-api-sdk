@@ -1,12 +1,12 @@
-# ThoughtSpotRestApiSdk.FeatureManagementApi
+# ThoughtSpotRestApiSdk.FeatureDelegationApi
 
 All URIs are relative to *CLUSTER_URL*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**searchFeatures**](FeatureManagementApi.md#searchFeatures) | **POST** /api/rest/2.0/configurations/features/search | 
-[**updateFeatureAssignments**](FeatureManagementApi.md#updateFeatureAssignments) | **POST** /api/rest/2.0/configurations/features/assignments/update | 
-[**updateFeatureValue**](FeatureManagementApi.md#updateFeatureValue) | **POST** /api/rest/2.0/configurations/features/values/update | 
+[**searchFeatures**](FeatureDelegationApi.md#searchFeatures) | **POST** /api/rest/2.0/configurations/features/search | 
+[**updateFeatureAssignments**](FeatureDelegationApi.md#updateFeatureAssignments) | **POST** /api/rest/2.0/configurations/features/assignments/update | 
+[**updateFeatureValue**](FeatureDelegationApi.md#updateFeatureValue) | **POST** /api/rest/2.0/configurations/features/values/update | 
 
 
 # **searchFeatures**
@@ -18,13 +18,13 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { createBearerAuthenticationConfig, FeatureManagementApi, SearchFeaturesRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, FeatureDelegationApi, SearchFeaturesRequest } from '@thoughtspot/rest-api-sdk';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
     password: "YOUR_PASSWORD",
 });
-const apiInstance = new FeatureManagementApi(configuration);
+const apiInstance = new FeatureDelegationApi(configuration);
 
 apiInstance.searchFeatures(
   // SearchFeaturesRequest
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Insufficient privileges. |  -  |
-**404** | Feature management not enabled. |  -  |
+**404** | Feature delegation not enabled. |  -  |
 **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -83,13 +83,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createBearerAuthenticationConfig, FeatureManagementApi, UpdateFeatureAssignmentsRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, FeatureDelegationApi, UpdateFeatureAssignmentsRequest } from '@thoughtspot/rest-api-sdk';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
     password: "YOUR_PASSWORD",
 });
-const apiInstance = new FeatureManagementApi(configuration);
+const apiInstance = new FeatureDelegationApi(configuration);
 
 apiInstance.updateFeatureAssignments(
   // UpdateFeatureAssignmentsRequest
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 **400** | Invalid request parameters. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Insufficient privileges. |  -  |
-**404** | Feature not found or feature management not enabled. |  -  |
+**404** | Feature not found or feature delegation not enabled. |  -  |
 **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -150,13 +150,13 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { createBearerAuthenticationConfig, FeatureManagementApi, UpdateFeatureValueRequest } from '@thoughtspot/rest-api-sdk';
+import { createBearerAuthenticationConfig, FeatureDelegationApi, UpdateFeatureValueRequest } from '@thoughtspot/rest-api-sdk';
 
 const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
     username: "YOUR_USERNAME",
     password: "YOUR_PASSWORD",
 });
-const apiInstance = new FeatureManagementApi(configuration);
+const apiInstance = new FeatureDelegationApi(configuration);
 
 apiInstance.updateFeatureValue(
   // UpdateFeatureValueRequest
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Insufficient privileges or org not assigned to feature. |  -  |
-**404** | Feature not found or feature management not enabled. |  -  |
+**404** | Feature not found or feature delegation not enabled. |  -  |
 **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)

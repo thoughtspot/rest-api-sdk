@@ -9409,7 +9409,7 @@ Name | Type | Description  | Notes
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Insufficient privileges. |  -  |
-**404** | Feature management not enabled. |  -  |
+**404** | Feature delegation not enabled. |  -  |
 **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -12597,7 +12597,7 @@ Name | Type | Description  | Notes
 **400** | Invalid request parameters. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Insufficient privileges. |  -  |
-**404** | Feature not found or feature management not enabled. |  -  |
+**404** | Feature not found or feature delegation not enabled. |  -  |
 **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -12664,7 +12664,7 @@ Name | Type | Description  | Notes
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Insufficient privileges or org not assigned to feature. |  -  |
-**404** | Feature not found or feature management not enabled. |  -  |
+**404** | Feature not found or feature delegation not enabled. |  -  |
 **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)

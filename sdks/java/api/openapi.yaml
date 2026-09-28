@@ -8558,7 +8558,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Feature management not enabled.
+          description: Feature delegation not enabled.
         "500":
           content:
             application/json:
@@ -8566,7 +8566,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unexpected error.
       tags:
-      - Feature Management
+      - Feature Delegation
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts:
@@ -8704,7 +8704,7 @@ paths:
                         debug: Feature 'orion.__does_not_exist__' not found in config.
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Feature not found or feature management not enabled.
+          description: Feature not found or feature delegation not enabled.
         "500":
           content:
             application/json:
@@ -8712,7 +8712,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unexpected error.
       tags:
-      - Feature Management
+      - Feature Delegation
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts:
@@ -8861,7 +8861,7 @@ paths:
                         debug: Feature 'orion.__does_not_exist__' not found in config.
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Feature not found or feature management not enabled.
+          description: Feature not found or feature delegation not enabled.
         "500":
           content:
             application/json:
@@ -8869,7 +8869,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unexpected error.
       tags:
-      - Feature Management
+      - Feature Delegation
       - ThoughtSpotRest
       x-content-type: application/json
       x-accepts:

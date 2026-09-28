@@ -3534,20 +3534,20 @@ export class ObservableEmailCustomizationApi {
 
 }
 
-import { FeatureManagementApiRequestFactory, FeatureManagementApiResponseProcessor} from "../apis/FeatureManagementApi";
-export class ObservableFeatureManagementApi {
-    private requestFactory: FeatureManagementApiRequestFactory;
-    private responseProcessor: FeatureManagementApiResponseProcessor;
+import { FeatureDelegationApiRequestFactory, FeatureDelegationApiResponseProcessor} from "../apis/FeatureDelegationApi";
+export class ObservableFeatureDelegationApi {
+    private requestFactory: FeatureDelegationApiRequestFactory;
+    private responseProcessor: FeatureDelegationApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: FeatureManagementApiRequestFactory,
-        responseProcessor?: FeatureManagementApiResponseProcessor
+        requestFactory?: FeatureDelegationApiRequestFactory,
+        responseProcessor?: FeatureDelegationApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new FeatureManagementApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new FeatureManagementApiResponseProcessor();
+        this.requestFactory = requestFactory || new FeatureDelegationApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new FeatureDelegationApiResponseProcessor();
     }
 
     /**

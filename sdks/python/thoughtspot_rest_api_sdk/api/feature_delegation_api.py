@@ -28,7 +28,7 @@ from thoughtspot_rest_api_sdk.rest import RESTResponseType
 from thoughtspot_rest_api_sdk.sync_helper import run_sync
 
 
-class FeatureManagementApi:
+class FeatureDelegationApi:
     """ThoughtSpot REST API client.
 
     Auto-generated — do not edit this class manually.
@@ -36,10 +36,10 @@ class FeatureManagementApi:
 
     def __init__(self, api_client=None, configuration=None) -> None:
         # CUSTOM: accept a Configuration directly and build the ApiClient
-        # internally (Java-style `FeatureManagementApi(config)`), while still accepting
+        # internally (Java-style `FeatureDelegationApi(config)`), while still accepting
         # an explicit, shareable ApiClient. `configuration` is ignored when an
         # `api_client` is supplied.
-        if isinstance(api_client, Configuration):   # allow FeatureManagementApi(config) positionally
+        if isinstance(api_client, Configuration):   # allow FeatureDelegationApi(config) positionally
             api_client, configuration = None, api_client
         if api_client is None:
             api_client = ApiClient(configuration) if configuration is not None else ApiClient.get_default()
@@ -54,7 +54,7 @@ class FeatureManagementApi:
         self.api_client = ApiClient(configuration)
 
     async def __aenter__(self):
-        # CUSTOM: `async with FeatureManagementApi(configuration=cfg) as client:` opens
+        # CUSTOM: `async with FeatureDelegationApi(configuration=cfg) as client:` opens
         # and closes the underlying ApiClient's connection pool.
         await self.api_client.__aenter__()
         return self
