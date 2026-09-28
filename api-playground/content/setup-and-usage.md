@@ -178,7 +178,7 @@ For more information, see [Cookie-based authentication](https://developers.thoug
 # Additional resources
 Refer to the following resources for additional information on REST APIs and SDK:
 * [REST API v2.0 Reference](https://developers.thoughtspot.com/docs/rest-apiv2-reference)
-* [REST API v2.0 SDKs](https://developers.thoughtspot.com/docs/rest-api-sdk)
+* [REST API v2.0 SDKs](https://developers.thoughtspot.com/docs/rest-api-sdk-libraries)
 * [Get started with REST API v2.0](https://developers.thoughtspot.com/docs/rest-apiv2-getstarted)
 * [REST API v2.0 authentication](https://developers.thoughtspot.com/docs/api-authv2)
 
