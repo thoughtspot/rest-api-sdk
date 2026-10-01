@@ -10,6 +10,7 @@ Variable object
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** | Unique identifier of the variable |  |
 |**name** | **String** | Name of the variable |  |
+|**objId** | **String** | Custom object identifier (obj_id) of the variable    Version: 26.10.0.cl or later  |  [optional] |
 |**variableType** | [**VariableTypeEnum**](#VariableTypeEnum) | Type of the variable |  [optional] |
 |**sensitive** | **Boolean** | If the variable is sensitive |  [optional] |
 |**values** | [**List&lt;VariableValue&gt;**](VariableValue.md) | Values of the variable |  [optional] |

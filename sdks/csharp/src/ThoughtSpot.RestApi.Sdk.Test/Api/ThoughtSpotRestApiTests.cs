@@ -192,6 +192,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test CreateAnalyst
+        /// </summary>
+        [Fact]
+        public void CreateAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateAnalystRequest createAnalystRequest = null;
+            //var response = instance.CreateAnalyst(createAnalystRequest);
+            //Assert.IsType<Analyst>(response);
+        }
+
+        /// <summary>
         /// Test CreateCalendar
         /// </summary>
         [Fact]
@@ -285,6 +297,31 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //CreateEmailCustomizationRequest createEmailCustomizationRequest = null;
             //var response = instance.CreateEmailCustomization(createEmailCustomizationRequest);
             //Assert.IsType<CreateEmailCustomizationResponse>(response);
+        }
+
+        /// <summary>
+        /// Test CreateInputTable
+        /// </summary>
+        [Fact]
+        public void CreateInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateInputTableRequest createInputTableRequest = null;
+            //var response = instance.CreateInputTable(createInputTableRequest);
+            //Assert.IsType<InputTableResponse>(response);
+        }
+
+        /// <summary>
+        /// Test CreateInputTableColumn
+        /// </summary>
+        [Fact]
+        public void CreateInputTableColumnTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //CreateInputTableColumnRequest createInputTableColumnRequest = null;
+            //var response = instance.CreateInputTableColumn(inputTableIdentifier, createInputTableColumnRequest);
+            //Assert.IsType<InputColumnResponse>(response);
         }
 
         /// <summary>
@@ -471,6 +508,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test DeleteAnalyst
+        /// </summary>
+        [Fact]
+        public void DeleteAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string analystIdentifier = null;
+            //var response = instance.DeleteAnalyst(analystIdentifier);
+            //Assert.IsType<AnalystDeleteResponse>(response);
+        }
+
+        /// <summary>
         /// Test DeleteCalendar
         /// </summary>
         [Fact]
@@ -579,6 +628,29 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string templateIdentifier = null;
             //instance.DeleteEmailCustomization(templateIdentifier);
+        }
+
+        /// <summary>
+        /// Test DeleteInputTable
+        /// </summary>
+        [Fact]
+        public void DeleteInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //instance.DeleteInputTable(inputTableIdentifier);
+        }
+
+        /// <summary>
+        /// Test DeleteInputTableColumn
+        /// </summary>
+        [Fact]
+        public void DeleteInputTableColumnTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //string columnIdentifier = null;
+            //instance.DeleteInputTableColumn(inputTableIdentifier, columnIdentifier);
         }
 
         /// <summary>
@@ -1447,6 +1519,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test SearchAnalysts
+        /// </summary>
+        [Fact]
+        public void SearchAnalystsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchAnalystsRequest searchAnalystsRequest = null;
+            //var response = instance.SearchAnalysts(searchAnalystsRequest);
+            //Assert.IsType<AnalystSearchResponse>(response);
+        }
+
+        /// <summary>
         /// Test SearchAuthSettings
         /// </summary>
         [Fact]
@@ -1576,6 +1660,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //SearchEmailCustomizationRequest searchEmailCustomizationRequest = null;
             //var response = instance.SearchEmailCustomization(searchEmailCustomizationRequest);
             //Assert.IsType<List<CreateEmailCustomizationResponse>>(response);
+        }
+
+        /// <summary>
+        /// Test SearchFeatures
+        /// </summary>
+        [Fact]
+        public void SearchFeaturesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchFeaturesRequest searchFeaturesRequest = null;
+            //var response = instance.SearchFeatures(searchFeaturesRequest);
+            //Assert.IsType<List<FeatureGroup>>(response);
+        }
+
+        /// <summary>
+        /// Test SearchLinkCustomizations
+        /// </summary>
+        [Fact]
+        public void SearchLinkCustomizationsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchLinkCustomizationsRequest searchLinkCustomizationsRequest = null;
+            //var response = instance.SearchLinkCustomizations(searchLinkCustomizationsRequest);
+            //Assert.IsType<List<LinkPreference>>(response);
         }
 
         /// <summary>
@@ -1823,6 +1931,19 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test ShareAnalyst
+        /// </summary>
+        [Fact]
+        public void ShareAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string analystIdentifier = null;
+            //ShareAnalystRequest shareAnalystRequest = null;
+            //var response = instance.ShareAnalyst(analystIdentifier, shareAnalystRequest);
+            //Assert.IsType<Object>(response);
+        }
+
+        /// <summary>
         /// Test ShareConversation
         /// </summary>
         [Fact]
@@ -1912,6 +2033,19 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //UnpublishMetadataRequest unpublishMetadataRequest = null;
             //instance.UnpublishMetadata(unpublishMetadataRequest);
+        }
+
+        /// <summary>
+        /// Test UpdateAnalyst
+        /// </summary>
+        [Fact]
+        public void UpdateAnalystTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string analystIdentifier = null;
+            //UpdateAnalystRequest updateAnalystRequest = null;
+            //var response = instance.UpdateAnalyst(analystIdentifier, updateAnalystRequest);
+            //Assert.IsType<Analyst>(response);
         }
 
         /// <summary>
@@ -2063,6 +2197,54 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //UpdateEmailCustomizationRequest updateEmailCustomizationRequest = null;
             //instance.UpdateEmailCustomization(updateEmailCustomizationRequest);
+        }
+
+        /// <summary>
+        /// Test UpdateFeatureAssignments
+        /// </summary>
+        [Fact]
+        public void UpdateFeatureAssignmentsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest = null;
+            //var response = instance.UpdateFeatureAssignments(updateFeatureAssignmentsRequest);
+            //Assert.IsType<FeatureAssignmentResponse>(response);
+        }
+
+        /// <summary>
+        /// Test UpdateFeatureValue
+        /// </summary>
+        [Fact]
+        public void UpdateFeatureValueTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateFeatureValueRequest updateFeatureValueRequest = null;
+            //var response = instance.UpdateFeatureValue(updateFeatureValueRequest);
+            //Assert.IsType<FeatureValueResponse>(response);
+        }
+
+        /// <summary>
+        /// Test UpdateInputTable
+        /// </summary>
+        [Fact]
+        public void UpdateInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //UpdateInputTableRequest updateInputTableRequest = null;
+            //var response = instance.UpdateInputTable(inputTableIdentifier, updateInputTableRequest);
+            //Assert.IsType<InputTableUpdateResponse>(response);
+        }
+
+        /// <summary>
+        /// Test UpdateLinkCustomization
+        /// </summary>
+        [Fact]
+        public void UpdateLinkCustomizationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateLinkCustomizationRequest updateLinkCustomizationRequest = null;
+            //instance.UpdateLinkCustomization(updateLinkCustomizationRequest);
         }
 
         /// <summary>

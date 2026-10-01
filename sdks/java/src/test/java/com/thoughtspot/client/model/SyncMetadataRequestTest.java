@@ -4,27 +4,46 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for SyncMetadataRequest */
+/**
+ * Model tests for SyncMetadataRequest
+ */
 public class SyncMetadataRequestTest {
     private final SyncMetadataRequest model = new SyncMetadataRequest();
 
-    /** Model tests for SyncMetadataRequest */
+    /**
+     * Model tests for SyncMetadataRequest
+     */
     @Test
     public void testSyncMetadataRequest() {
         // TODO: test SyncMetadataRequest
     }
 
-    /** Test the property 'tables' */
+    /**
+     * Test the property 'tables'
+     */
     @Test
     public void tablesTest() {
         // TODO: test tables
     }
 
-    /** Test the property 'syncAttributes' */
+    /**
+     * Test the property 'syncAttributes'
+     */
     @Test
     public void syncAttributesTest() {
         // TODO: test syncAttributes
     }
+
 }

@@ -35,19 +35,37 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="InputTableResponse" /> class.
         /// </summary>
-        /// <param name="inputTableIdentifier">Unique ID of the newly created input table..</param>
-        public InputTableResponse(string inputTableIdentifier = default)
+        /// <param name="inputTableId">Unique ID of the newly created input table. Pass it as the input_table_identifier path parameter of the other input-table operations..</param>
+        /// <param name="inputColumns">Columns of the newly created input table, each with its name and unique ID. Use these IDs to reference specific columns in follow-up calls (for example, the column identifiers written by updateInputTable). Returned so callers do not need a separate lookup to resolve a column name to its ID..</param>
+        /// <param name="messageInfo">Note set when a referenced column had to be renamed to keep the input table&#39;s column names unique — a model column name that occurs in more than one base table is prefixed with its base table name. Absent when no column was renamed. Read it to learn the final name of a renamed column, or read the name off input_columns..</param>
+        public InputTableResponse(string inputTableId = default, List<InputColumnInfo> inputColumns = default, string messageInfo = default)
         {
-            this.InputTableIdentifier = inputTableIdentifier;
+            this.InputTableId = inputTableId;
+            this.InputColumns = inputColumns;
+            this.MessageInfo = messageInfo;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Unique ID of the newly created input table.
+        /// Unique ID of the newly created input table. Pass it as the input_table_identifier path parameter of the other input-table operations.
         /// </summary>
-        /// <value>Unique ID of the newly created input table.</value>
-        [DataMember(Name = "input_table_identifier", EmitDefaultValue = true)]
-        public string InputTableIdentifier { get; set; }
+        /// <value>Unique ID of the newly created input table. Pass it as the input_table_identifier path parameter of the other input-table operations.</value>
+        [DataMember(Name = "input_table_id", EmitDefaultValue = true)]
+        public string InputTableId { get; set; }
+
+        /// <summary>
+        /// Columns of the newly created input table, each with its name and unique ID. Use these IDs to reference specific columns in follow-up calls (for example, the column identifiers written by updateInputTable). Returned so callers do not need a separate lookup to resolve a column name to its ID.
+        /// </summary>
+        /// <value>Columns of the newly created input table, each with its name and unique ID. Use these IDs to reference specific columns in follow-up calls (for example, the column identifiers written by updateInputTable). Returned so callers do not need a separate lookup to resolve a column name to its ID.</value>
+        [DataMember(Name = "input_columns", EmitDefaultValue = true)]
+        public List<InputColumnInfo> InputColumns { get; set; }
+
+        /// <summary>
+        /// Note set when a referenced column had to be renamed to keep the input table&#39;s column names unique — a model column name that occurs in more than one base table is prefixed with its base table name. Absent when no column was renamed. Read it to learn the final name of a renamed column, or read the name off input_columns.
+        /// </summary>
+        /// <value>Note set when a referenced column had to be renamed to keep the input table&#39;s column names unique — a model column name that occurs in more than one base table is prefixed with its base table name. Absent when no column was renamed. Read it to learn the final name of a renamed column, or read the name off input_columns.</value>
+        [DataMember(Name = "message_info", EmitDefaultValue = true)]
+        public string MessageInfo { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -63,7 +81,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class InputTableResponse {\n");
-            sb.Append("  InputTableIdentifier: ").Append(InputTableIdentifier).Append("\n");
+            sb.Append("  InputTableId: ").Append(InputTableId).Append("\n");
+            sb.Append("  InputColumns: ").Append(InputColumns).Append("\n");
+            sb.Append("  MessageInfo: ").Append(MessageInfo).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

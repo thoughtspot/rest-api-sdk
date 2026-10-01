@@ -49,12 +49,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="secretKey">The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates a secret key when Trusted authentication is enabled. (default to &quot;&quot;).</param>
         /// <param name="validityTimeInSec">Token validity duration in seconds (default to 300).</param>
         /// <param name="orgId">ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session..</param>
+        /// <param name="scope">The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the &#x60;X-Org-Selector&#x60; header.   Version: 26.10.0.cl or later .</param>
         /// <param name="email">Email address of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning)..</param>
         /// <param name="displayName">Display name of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning)..</param>
         /// <param name="autoCreate">   Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required.  (default to false).</param>
         /// <param name="groupIdentifiers">Unique ID or name of the groups to which you want to assign the new user. You can specify this attribute to dynamically assign privileges during just-in-time (JIT) provisioning..</param>
         /// <param name="userParameters">&lt;div&gt;Deprecated: 10.4.0.cl and later &lt;/div&gt;  Define attributes such as Runtime filters and Runtime parameters to send security entitlements to a user session. For more information, see [Documentation](https://developers.thoughtspot.com/docs/abac-user-parameters)..</param>
-        public GetObjectAccessTokenRequest(string username = default, string objectId = default, string password = @"", string secretKey = @"", int validityTimeInSec = 300, int orgId = default, string email = default, string displayName = default, bool? autoCreate = false, List<string> groupIdentifiers = default, UserParameterOptions userParameters = default)
+        public GetObjectAccessTokenRequest(string username = default, string objectId = default, string password = @"", string secretKey = @"", int validityTimeInSec = 300, int orgId = default, TokenScopeInput scope = default, string email = default, string displayName = default, bool? autoCreate = false, List<string> groupIdentifiers = default, UserParameterOptions userParameters = default)
         {
             // to ensure "username" is required (not null)
             if (username == null)
@@ -69,6 +70,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.SecretKey = secretKey ?? @"";
             this.ValidityTimeInSec = validityTimeInSec;
             this.OrgId = orgId;
+            this.Scope = scope;
             this.Email = email;
             this.DisplayName = displayName;
             // use default value if no "autoCreate" provided
@@ -119,6 +121,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.</value>
         [DataMember(Name = "org_id", EmitDefaultValue = false)]
         public int OrgId { get; set; }
+
+        /// <summary>
+        /// The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the &#x60;X-Org-Selector&#x60; header.   Version: 26.10.0.cl or later 
+        /// </summary>
+        /// <value>The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the &#x60;X-Org-Selector&#x60; header.   Version: 26.10.0.cl or later </value>
+        [DataMember(Name = "scope", EmitDefaultValue = false)]
+        public TokenScopeInput Scope { get; set; }
 
         /// <summary>
         /// Email address of the user. Specify this attribute when creating a new user (just-in-time (JIT) provisioning).
@@ -175,6 +184,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  SecretKey: ").Append(SecretKey).Append("\n");
             sb.Append("  ValidityTimeInSec: ").Append(ValidityTimeInSec).Append("\n");
             sb.Append("  OrgId: ").Append(OrgId).Append("\n");
+            sb.Append("  Scope: ").Append(Scope).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  AutoCreate: ").Append(AutoCreate).Append("\n");

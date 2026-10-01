@@ -26,15 +26,15 @@ export class PngOptionsInput {
     */
     'personalised_view_id'?: string | null;
     /**
-    * Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image   Version: 10.9.0.cl or later 
+    * Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image    Version: 10.9.0.cl or later 
     */
     'image_resolution'?: number | null;
     /**
-    * The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 10.9.0.cl or later 
+    * The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 10.9.0.cl or later 
     */
     'image_scale'?: number | null;
     /**
-    * Indicates whether to include the header of the liveboard.   Version: 10.9.0.cl or later 
+    * Indicates whether to include the header of the liveboard.    Version: 10.9.0.cl or later 
     */
     'include_header'?: boolean | null;
 

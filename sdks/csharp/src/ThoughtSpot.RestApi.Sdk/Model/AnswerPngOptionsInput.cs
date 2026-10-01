@@ -35,9 +35,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AnswerPngOptionsInput" /> class.
         /// </summary>
-        /// <param name="xResolution">Desired width of the answer image in pixels. Ex. 1920 for Full HD image   Version: 26.6.0.cl or later .</param>
-        /// <param name="yResolution">Desired height of the answer image in pixels. Ex. 1080 for Full HD image   Version: 26.6.0.cl or later .</param>
-        /// <param name="scaling">The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 26.6.0.cl or later .</param>
+        /// <param name="xResolution">Desired width of the answer image in pixels. Ex. 1920 for Full HD image    Version: 26.6.0.cl or later .</param>
+        /// <param name="yResolution">Desired height of the answer image in pixels. Ex. 1080 for Full HD image    Version: 26.6.0.cl or later .</param>
+        /// <param name="scaling">The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 26.6.0.cl or later .</param>
         public AnswerPngOptionsInput(int? xResolution = default, int? yResolution = default, int? scaling = default)
         {
             this.XResolution = xResolution;
@@ -47,23 +47,23 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Desired width of the answer image in pixels. Ex. 1920 for Full HD image   Version: 26.6.0.cl or later 
+        /// Desired width of the answer image in pixels. Ex. 1920 for Full HD image    Version: 26.6.0.cl or later 
         /// </summary>
-        /// <value>Desired width of the answer image in pixels. Ex. 1920 for Full HD image   Version: 26.6.0.cl or later </value>
+        /// <value>Desired width of the answer image in pixels. Ex. 1920 for Full HD image    Version: 26.6.0.cl or later </value>
         [DataMember(Name = "x_resolution", EmitDefaultValue = true)]
         public int? XResolution { get; set; }
 
         /// <summary>
-        /// Desired height of the answer image in pixels. Ex. 1080 for Full HD image   Version: 26.6.0.cl or later 
+        /// Desired height of the answer image in pixels. Ex. 1080 for Full HD image    Version: 26.6.0.cl or later 
         /// </summary>
-        /// <value>Desired height of the answer image in pixels. Ex. 1080 for Full HD image   Version: 26.6.0.cl or later </value>
+        /// <value>Desired height of the answer image in pixels. Ex. 1080 for Full HD image    Version: 26.6.0.cl or later </value>
         [DataMember(Name = "y_resolution", EmitDefaultValue = true)]
         public int? YResolution { get; set; }
 
         /// <summary>
-        /// The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 26.6.0.cl or later 
+        /// The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 26.6.0.cl or later 
         /// </summary>
-        /// <value>The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 26.6.0.cl or later </value>
+        /// <value>The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 26.6.0.cl or later </value>
         [DataMember(Name = "scaling", EmitDefaultValue = true)]
         public int? Scaling { get; set; }
 

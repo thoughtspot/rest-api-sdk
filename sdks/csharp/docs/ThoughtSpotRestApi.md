@@ -16,6 +16,7 @@ All URIs are relative to *https://localhost:443*
 | [**ConvertWorksheetToModel**](ThoughtSpotRestApi.md#convertworksheettomodel) | **POST** /api/rest/2.0/metadata/worksheets/convert |  |
 | [**CopyObject**](ThoughtSpotRestApi.md#copyobject) | **POST** /api/rest/2.0/metadata/copyobject |  |
 | [**CreateAgentConversation**](ThoughtSpotRestApi.md#createagentconversation) | **POST** /api/rest/2.0/ai/agent/conversation/create |  |
+| [**CreateAnalyst**](ThoughtSpotRestApi.md#createanalyst) | **POST** /api/rest/2.0/ai/agent/analysts/create |  |
 | [**CreateCalendar**](ThoughtSpotRestApi.md#createcalendar) | **POST** /api/rest/2.0/calendars/create |  |
 | [**CreateCollection**](ThoughtSpotRestApi.md#createcollection) | **POST** /api/rest/2.0/collections/create |  |
 | [**CreateConfig**](ThoughtSpotRestApi.md#createconfig) | **POST** /api/rest/2.0/vcs/git/config/create |  |
@@ -24,6 +25,8 @@ All URIs are relative to *https://localhost:443*
 | [**CreateConversation**](ThoughtSpotRestApi.md#createconversation) | **POST** /api/rest/2.0/ai/conversation/create |  |
 | [**CreateCustomAction**](ThoughtSpotRestApi.md#createcustomaction) | **POST** /api/rest/2.0/customization/custom-actions |  |
 | [**CreateEmailCustomization**](ThoughtSpotRestApi.md#createemailcustomization) | **POST** /api/rest/2.0/customization/email |  |
+| [**CreateInputTable**](ThoughtSpotRestApi.md#createinputtable) | **POST** /api/rest/2.0/input-tables/create |  |
+| [**CreateInputTableColumn**](ThoughtSpotRestApi.md#createinputtablecolumn) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/columns/create |  |
 | [**CreateOrg**](ThoughtSpotRestApi.md#createorg) | **POST** /api/rest/2.0/orgs/create |  |
 | [**CreateRole**](ThoughtSpotRestApi.md#createrole) | **POST** /api/rest/2.0/roles/create |  |
 | [**CreateSchedule**](ThoughtSpotRestApi.md#createschedule) | **POST** /api/rest/2.0/schedules/create |  |
@@ -38,6 +41,7 @@ All URIs are relative to *https://localhost:443*
 | [**DbtGenerateTml**](ThoughtSpotRestApi.md#dbtgeneratetml) | **POST** /api/rest/2.0/dbt/generate-tml |  |
 | [**DbtSearch**](ThoughtSpotRestApi.md#dbtsearch) | **POST** /api/rest/2.0/dbt/search |  |
 | [**DeactivateUser**](ThoughtSpotRestApi.md#deactivateuser) | **POST** /api/rest/2.0/users/deactivate |  |
+| [**DeleteAnalyst**](ThoughtSpotRestApi.md#deleteanalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete |  |
 | [**DeleteCalendar**](ThoughtSpotRestApi.md#deletecalendar) | **POST** /api/rest/2.0/calendars/{calendar_identifier}/delete |  |
 | [**DeleteCollection**](ThoughtSpotRestApi.md#deletecollection) | **POST** /api/rest/2.0/collections/delete |  |
 | [**DeleteConfig**](ThoughtSpotRestApi.md#deleteconfig) | **POST** /api/rest/2.0/vcs/git/config/delete |  |
@@ -48,6 +52,8 @@ All URIs are relative to *https://localhost:443*
 | [**DeleteCustomAction**](ThoughtSpotRestApi.md#deletecustomaction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete |  |
 | [**DeleteDbtConnection**](ThoughtSpotRestApi.md#deletedbtconnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete |  |
 | [**DeleteEmailCustomization**](ThoughtSpotRestApi.md#deleteemailcustomization) | **POST** /api/rest/2.0/customization/email/{template_identifier}/delete |  |
+| [**DeleteInputTable**](ThoughtSpotRestApi.md#deleteinputtable) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/delete |  |
+| [**DeleteInputTableColumn**](ThoughtSpotRestApi.md#deleteinputtablecolumn) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete |  |
 | [**DeleteManualTranslations**](ThoughtSpotRestApi.md#deletemanualtranslations) | **POST** /api/rest/2.0/localizations/manual-translation/delete |  |
 | [**DeleteMetadata**](ThoughtSpotRestApi.md#deletemetadata) | **POST** /api/rest/2.0/metadata/delete |  |
 | [**DeleteOrg**](ThoughtSpotRestApi.md#deleteorg) | **POST** /api/rest/2.0/orgs/{org_identifier}/delete |  |
@@ -122,6 +128,7 @@ All URIs are relative to *https://localhost:443*
 | [**RevertCommit**](ThoughtSpotRestApi.md#revertcommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert |  |
 | [**RevokeRefreshTokens**](ThoughtSpotRestApi.md#revokerefreshtokens) | **POST** /api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens |  |
 | [**RevokeToken**](ThoughtSpotRestApi.md#revoketoken) | **POST** /api/rest/2.0/auth/token/revoke |  |
+| [**SearchAnalysts**](ThoughtSpotRestApi.md#searchanalysts) | **POST** /api/rest/2.0/ai/agent/analysts/search |  |
 | [**SearchAuthSettings**](ThoughtSpotRestApi.md#searchauthsettings) | **POST** /api/rest/2.0/auth/search |  |
 | [**SearchCalendars**](ThoughtSpotRestApi.md#searchcalendars) | **POST** /api/rest/2.0/calendars/search |  |
 | [**SearchChannelHistory**](ThoughtSpotRestApi.md#searchchannelhistory) | **POST** /api/rest/2.0/jobs/history/communication-channels/search |  |
@@ -133,6 +140,8 @@ All URIs are relative to *https://localhost:443*
 | [**SearchCustomActions**](ThoughtSpotRestApi.md#searchcustomactions) | **POST** /api/rest/2.0/customization/custom-actions/search |  |
 | [**SearchData**](ThoughtSpotRestApi.md#searchdata) | **POST** /api/rest/2.0/searchdata |  |
 | [**SearchEmailCustomization**](ThoughtSpotRestApi.md#searchemailcustomization) | **POST** /api/rest/2.0/customization/email/search |  |
+| [**SearchFeatures**](ThoughtSpotRestApi.md#searchfeatures) | **POST** /api/rest/2.0/configurations/features/search |  |
+| [**SearchLinkCustomizations**](ThoughtSpotRestApi.md#searchlinkcustomizations) | **POST** /api/rest/2.0/customization/links/search |  |
 | [**SearchMetadata**](ThoughtSpotRestApi.md#searchmetadata) | **POST** /api/rest/2.0/metadata/search |  |
 | [**SearchOrgs**](ThoughtSpotRestApi.md#searchorgs) | **POST** /api/rest/2.0/orgs/search |  |
 | [**SearchRoles**](ThoughtSpotRestApi.md#searchroles) | **POST** /api/rest/2.0/roles/search |  |
@@ -153,6 +162,7 @@ All URIs are relative to *https://localhost:443*
 | [**SendMessage**](ThoughtSpotRestApi.md#sendmessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |  |
 | [**SetAgentInstructions**](ThoughtSpotRestApi.md#setagentinstructions) | **PUT** /api/rest/2.0/ai/agent/instructions/set |  |
 | [**SetNLInstructions**](ThoughtSpotRestApi.md#setnlinstructions) | **POST** /api/rest/2.0/ai/instructions/set |  |
+| [**ShareAnalyst**](ThoughtSpotRestApi.md#shareanalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share |  |
 | [**ShareConversation**](ThoughtSpotRestApi.md#shareconversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share |  |
 | [**ShareMetadata**](ThoughtSpotRestApi.md#sharemetadata) | **POST** /api/rest/2.0/security/metadata/share |  |
 | [**SingleAnswer**](ThoughtSpotRestApi.md#singleanswer) | **POST** /api/rest/2.0/ai/answer/create |  |
@@ -161,6 +171,7 @@ All URIs are relative to *https://localhost:443*
 | [**UnassignTag**](ThoughtSpotRestApi.md#unassigntag) | **POST** /api/rest/2.0/tags/unassign |  |
 | [**UnparameterizeMetadata**](ThoughtSpotRestApi.md#unparameterizemetadata) | **POST** /api/rest/2.0/metadata/unparameterize |  |
 | [**UnpublishMetadata**](ThoughtSpotRestApi.md#unpublishmetadata) | **POST** /api/rest/2.0/security/metadata/unpublish |  |
+| [**UpdateAnalyst**](ThoughtSpotRestApi.md#updateanalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update |  |
 | [**UpdateCalendar**](ThoughtSpotRestApi.md#updatecalendar) | **POST** /api/rest/2.0/calendars/{calendar_identifier}/update |  |
 | [**UpdateCollection**](ThoughtSpotRestApi.md#updatecollection) | **POST** /api/rest/2.0/collections/{collection_identifier}/update |  |
 | [**UpdateColumnSecurityRules**](ThoughtSpotRestApi.md#updatecolumnsecurityrules) | **POST** /api/rest/2.0/security/column/rules/update |  |
@@ -173,6 +184,10 @@ All URIs are relative to *https://localhost:443*
 | [**UpdateCustomAction**](ThoughtSpotRestApi.md#updatecustomaction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update |  |
 | [**UpdateDbtConnection**](ThoughtSpotRestApi.md#updatedbtconnection) | **POST** /api/rest/2.0/dbt/update-dbt-connection |  |
 | [**UpdateEmailCustomization**](ThoughtSpotRestApi.md#updateemailcustomization) | **POST** /api/rest/2.0/customization/email/update |  |
+| [**UpdateFeatureAssignments**](ThoughtSpotRestApi.md#updatefeatureassignments) | **POST** /api/rest/2.0/configurations/features/assignments/update |  |
+| [**UpdateFeatureValue**](ThoughtSpotRestApi.md#updatefeaturevalue) | **POST** /api/rest/2.0/configurations/features/values/update |  |
+| [**UpdateInputTable**](ThoughtSpotRestApi.md#updateinputtable) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/update |  |
+| [**UpdateLinkCustomization**](ThoughtSpotRestApi.md#updatelinkcustomization) | **POST** /api/rest/2.0/customization/links/update |  |
 | [**UpdateMetadataHeader**](ThoughtSpotRestApi.md#updatemetadataheader) | **POST** /api/rest/2.0/metadata/headers/update |  |
 | [**UpdateMetadataObjId**](ThoughtSpotRestApi.md#updatemetadataobjid) | **POST** /api/rest/2.0/metadata/update-obj-id |  |
 | [**UpdateOrg**](ThoughtSpotRestApi.md#updateorg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update |  |
@@ -1371,6 +1386,107 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="createanalyst"></a>
+# **CreateAnalyst**
+> Analyst CreateAnalyst (CreateAnalystRequest createAnalystRequest)
+
+
+
+ Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent's behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateAnalystExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var createAnalystRequest = new CreateAnalystRequest(); // CreateAnalystRequest | 
+
+            try
+            {
+                Analyst result = apiInstance.CreateAnalyst(createAnalystRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateAnalyst: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateAnalystWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<Analyst> response = apiInstance.CreateAnalystWithHttpInfo(createAnalystRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateAnalystWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **createAnalystRequest** | [**CreateAnalystRequest**](CreateAnalystRequest.md) |  |  |
+
+### Return type
+
+[**Analyst**](Analyst.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="createcalendar"></a>
 # **CreateCalendar**
 > CalendarResponse CreateCalendar (CreateCalendarRequest createCalendarRequest)
@@ -2168,6 +2284,210 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="createinputtable"></a>
+# **CreateInputTable**
+> InputTableResponse CreateInputTable (CreateInputTableRequest createInputTableRequest)
+
+
+
+  Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table's key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table's GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column's GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table's column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column's final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateInputTableExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var createInputTableRequest = new CreateInputTableRequest(); // CreateInputTableRequest | 
+
+            try
+            {
+                InputTableResponse result = apiInstance.CreateInputTable(createInputTableRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateInputTable: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateInputTableWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<InputTableResponse> response = apiInstance.CreateInputTableWithHttpInfo(createInputTableRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateInputTableWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **createInputTableRequest** | [**CreateInputTableRequest**](CreateInputTableRequest.md) |  |  |
+
+### Return type
+
+[**InputTableResponse**](InputTableResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Input table created successfully. |  -  |
+| **400** | Bad request — invalid payload, no columns selected, or upload disabled on the connection. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden — caller does not have MODIFY permission on the model. |  -  |
+| **404** | Model not found. |  -  |
+| **500** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="createinputtablecolumn"></a>
+# **CreateInputTableColumn**
+> InputColumnResponse CreateInputTableColumn (string inputTableIdentifier, CreateInputTableColumnRequest createInputTableColumnRequest)
+
+
+
+  Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table's ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateInputTableColumnExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var inputTableIdentifier = "inputTableIdentifier_example";  // string | Unique ID of the input table to add columns to.
+            var createInputTableColumnRequest = new CreateInputTableColumnRequest(); // CreateInputTableColumnRequest | 
+
+            try
+            {
+                InputColumnResponse result = apiInstance.CreateInputTableColumn(inputTableIdentifier, createInputTableColumnRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateInputTableColumn: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateInputTableColumnWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<InputColumnResponse> response = apiInstance.CreateInputTableColumnWithHttpInfo(inputTableIdentifier, createInputTableColumnRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateInputTableColumnWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **inputTableIdentifier** | **string** | Unique ID of the input table to add columns to. |  |
+| **createInputTableColumnRequest** | [**CreateInputTableColumnRequest**](CreateInputTableColumnRequest.md) |  |  |
+
+### Return type
+
+[**InputColumnResponse**](InputColumnResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Columns added successfully. |  -  |
+| **400** | Bad request — invalid payload or no columns supplied. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden — caller does not have MODIFY permission on the input table. |  -  |
+| **404** | Input table not found. |  -  |
+| **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3600,6 +3920,107 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="deleteanalyst"></a>
+# **DeleteAnalyst**
+> AnalystDeleteResponse DeleteAnalyst (string analystIdentifier)
+
+
+
+ Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst's author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller's Org. - `429` — rate limit exceeded.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteAnalystExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var analystIdentifier = "analystIdentifier_example";  // string | Unique identifier of the analyst to delete.
+
+            try
+            {
+                AnalystDeleteResponse result = apiInstance.DeleteAnalyst(analystIdentifier);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteAnalyst: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteAnalystWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<AnalystDeleteResponse> response = apiInstance.DeleteAnalystWithHttpInfo(analystIdentifier);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteAnalystWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **analystIdentifier** | **string** | Unique identifier of the analyst to delete. |  |
+
+### Return type
+
+[**AnalystDeleteResponse**](AnalystDeleteResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="deletecalendar"></a>
 # **DeleteCalendar**
 > void DeleteCalendar (string calendarIdentifier)
@@ -4561,6 +4982,200 @@ void (empty response body)
 | **400** | Invalid request. |  -  |
 | **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="deleteinputtable"></a>
+# **DeleteInputTable**
+> void DeleteInputTable (string inputTableIdentifier)
+
+
+
+  Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteInputTableExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var inputTableIdentifier = "inputTableIdentifier_example";  // string | Unique ID of the input table to delete.
+
+            try
+            {
+                apiInstance.DeleteInputTable(inputTableIdentifier);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteInputTable: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteInputTableWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.DeleteInputTableWithHttpInfo(inputTableIdentifier);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteInputTableWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **inputTableIdentifier** | **string** | Unique ID of the input table to delete. |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully deleted the input table and dropped the physical CDW table. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="deleteinputtablecolumn"></a>
+# **DeleteInputTableColumn**
+> void DeleteInputTableColumn (string inputTableIdentifier, string columnIdentifier)
+
+
+
+  Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table's ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteInputTableColumnExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var inputTableIdentifier = "inputTableIdentifier_example";  // string | Unique ID of the input table that owns the column.
+            var columnIdentifier = "columnIdentifier_example";  // string | Unique ID of the column to delete.
+
+            try
+            {
+                apiInstance.DeleteInputTableColumn(inputTableIdentifier, columnIdentifier);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteInputTableColumn: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteInputTableColumnWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.DeleteInputTableColumnWithHttpInfo(inputTableIdentifier, columnIdentifier);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteInputTableColumnWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **inputTableIdentifier** | **string** | Unique ID of the input table that owns the column. |  |
+| **columnIdentifier** | **string** | Unique ID of the column to delete. |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully deleted the input table column and dropped the physical CDW column. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -5656,7 +6271,7 @@ namespace Example
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
-            var identifier = "identifier_example";  // string | Unique id or name of the variable
+            var identifier = "identifier_example";  // string | Unique id, name, or object id of the variable
 
             try
             {
@@ -5693,7 +6308,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **identifier** | **string** | Unique id or name of the variable |  |
+| **identifier** | **string** | Unique id, name, or object id of the variable |  |
 
 ### Return type
 
@@ -11074,7 +11689,7 @@ void (empty response body)
 
 
 
- Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+ Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
 
 ### Example
 ```csharp
@@ -11170,7 +11785,7 @@ void (empty response body)
 
 
 
-  Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it's dependencies to the org admins of the orgs to which it is being published.      
+  Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it's dependencies to the org admins of the orgs to which it is being published.      
 
 ### Example
 ```csharp
@@ -11854,6 +12469,107 @@ void (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="searchanalysts"></a>
+# **SearchAnalysts**
+> AnalystSearchResponse SearchAnalysts (SearchAnalystsRequest searchAnalystsRequest)
+
+
+
+ Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller's Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchAnalystsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var searchAnalystsRequest = new SearchAnalystsRequest(); // SearchAnalystsRequest | 
+
+            try
+            {
+                AnalystSearchResponse result = apiInstance.SearchAnalysts(searchAnalystsRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SearchAnalysts: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchAnalystsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<AnalystSearchResponse> response = apiInstance.SearchAnalystsWithHttpInfo(searchAnalystsRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SearchAnalystsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **searchAnalystsRequest** | [**SearchAnalystsRequest**](SearchAnalystsRequest.md) |  |  |
+
+### Return type
+
+[**AnalystSearchResponse**](AnalystSearchResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -12952,6 +13668,207 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **400** | Invalid request. |  -  |
 | **403** | Unauthorized access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="searchfeatures"></a>
+# **SearchFeatures**
+> List&lt;FeatureGroup&gt; SearchFeatures (SearchFeaturesRequest searchFeaturesRequest)
+
+
+
+  Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchFeaturesExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var searchFeaturesRequest = new SearchFeaturesRequest(); // SearchFeaturesRequest | 
+
+            try
+            {
+                List<FeatureGroup> result = apiInstance.SearchFeatures(searchFeaturesRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SearchFeatures: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchFeaturesWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<List<FeatureGroup>> response = apiInstance.SearchFeaturesWithHttpInfo(searchFeaturesRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SearchFeaturesWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **searchFeaturesRequest** | [**SearchFeaturesRequest**](SearchFeaturesRequest.md) |  |  |
+
+### Return type
+
+[**List&lt;FeatureGroup&gt;**](FeatureGroup.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Feature groups returned. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Insufficient privileges. |  -  |
+| **404** | Feature management not enabled. |  -  |
+| **500** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="searchlinkcustomizations"></a>
+# **SearchLinkCustomizations**
+> List&lt;LinkPreference&gt; SearchLinkCustomizations (SearchLinkCustomizationsRequest searchLinkCustomizationsRequest)
+
+
+
+  Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchLinkCustomizationsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var searchLinkCustomizationsRequest = new SearchLinkCustomizationsRequest(); // SearchLinkCustomizationsRequest | 
+
+            try
+            {
+                List<LinkPreference> result = apiInstance.SearchLinkCustomizations(searchLinkCustomizationsRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SearchLinkCustomizations: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchLinkCustomizationsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<List<LinkPreference>> response = apiInstance.SearchLinkCustomizationsWithHttpInfo(searchLinkCustomizationsRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SearchLinkCustomizationsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **searchLinkCustomizationsRequest** | [**SearchLinkCustomizationsRequest**](SearchLinkCustomizationsRequest.md) |  |  |
+
+### Return type
+
+[**List&lt;LinkPreference&gt;**](LinkPreference.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Link preferences retrieved successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -14971,6 +15888,109 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="shareanalyst"></a>
+# **ShareAnalyst**
+> Object ShareAnalyst (string analystIdentifier, ShareAnalystRequest shareAnalystRequest)
+
+
+
+ Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal's access; `NO_ACCESS` revokes it. Granting access also shares the analyst's data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal's access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst's data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst's author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller's Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class ShareAnalystExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var analystIdentifier = "analystIdentifier_example";  // string | Unique identifier of the analyst to share.
+            var shareAnalystRequest = new ShareAnalystRequest(); // ShareAnalystRequest | 
+
+            try
+            {
+                Object result = apiInstance.ShareAnalyst(analystIdentifier, shareAnalystRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.ShareAnalyst: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ShareAnalystWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<Object> response = apiInstance.ShareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.ShareAnalystWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **analystIdentifier** | **string** | Unique identifier of the analyst to share. |  |
+| **shareAnalystRequest** | [**ShareAnalystRequest**](ShareAnalystRequest.md) |  |  |
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="shareconversation"></a>
 # **ShareConversation**
 > void ShareConversation (string conversationIdentifier, ShareConversationRequest shareConversationRequest)
@@ -15567,7 +16587,7 @@ void (empty response body)
 
 
 
- Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable's Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+ Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable's Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
 
 ### Example
 ```csharp
@@ -15663,7 +16683,7 @@ void (empty response body)
 
 
 
-  Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+  Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
 
 ### Example
 ```csharp
@@ -15750,6 +16770,109 @@ void (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updateanalyst"></a>
+# **UpdateAnalyst**
+> Analyst UpdateAnalyst (string analystIdentifier, UpdateAnalystRequest updateAnalystRequest)
+
+
+
+ Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent's behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst's author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller's Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateAnalystExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var analystIdentifier = "analystIdentifier_example";  // string | Unique identifier of the analyst to update.
+            var updateAnalystRequest = new UpdateAnalystRequest(); // UpdateAnalystRequest | 
+
+            try
+            {
+                Analyst result = apiInstance.UpdateAnalyst(analystIdentifier, updateAnalystRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateAnalyst: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateAnalystWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<Analyst> response = apiInstance.UpdateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateAnalystWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **analystIdentifier** | **string** | Unique identifier of the analyst to update. |  |
+| **updateAnalystRequest** | [**UpdateAnalystRequest**](UpdateAnalystRequest.md) |  |  |
+
+### Return type
+
+[**Analyst**](Analyst.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -16543,7 +17666,7 @@ void (empty response body)
 
 
 
- Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation's display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+ Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation's display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
 
 ### Example
 ```csharp
@@ -16945,6 +18068,407 @@ void (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Unauthorized access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updatefeatureassignments"></a>
+# **UpdateFeatureAssignments**
+> FeatureAssignmentResponse UpdateFeatureAssignments (UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest)
+
+
+
+  Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateFeatureAssignmentsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var updateFeatureAssignmentsRequest = new UpdateFeatureAssignmentsRequest(); // UpdateFeatureAssignmentsRequest | 
+
+            try
+            {
+                FeatureAssignmentResponse result = apiInstance.UpdateFeatureAssignments(updateFeatureAssignmentsRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateFeatureAssignments: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateFeatureAssignmentsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<FeatureAssignmentResponse> response = apiInstance.UpdateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateFeatureAssignmentsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **updateFeatureAssignmentsRequest** | [**UpdateFeatureAssignmentsRequest**](UpdateFeatureAssignmentsRequest.md) |  |  |
+
+### Return type
+
+[**FeatureAssignmentResponse**](FeatureAssignmentResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Assignments updated. |  -  |
+| **400** | Invalid request parameters. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Insufficient privileges. |  -  |
+| **404** | Feature not found or feature management not enabled. |  -  |
+| **500** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updatefeaturevalue"></a>
+# **UpdateFeatureValue**
+> FeatureValueResponse UpdateFeatureValue (UpdateFeatureValueRequest updateFeatureValueRequest)
+
+
+
+  Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateFeatureValueExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var updateFeatureValueRequest = new UpdateFeatureValueRequest(); // UpdateFeatureValueRequest | 
+
+            try
+            {
+                FeatureValueResponse result = apiInstance.UpdateFeatureValue(updateFeatureValueRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateFeatureValue: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateFeatureValueWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<FeatureValueResponse> response = apiInstance.UpdateFeatureValueWithHttpInfo(updateFeatureValueRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateFeatureValueWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **updateFeatureValueRequest** | [**UpdateFeatureValueRequest**](UpdateFeatureValueRequest.md) |  |  |
+
+### Return type
+
+[**FeatureValueResponse**](FeatureValueResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Value updated. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Insufficient privileges or org not assigned to feature. |  -  |
+| **404** | Feature not found or feature management not enabled. |  -  |
+| **500** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updateinputtable"></a>
+# **UpdateInputTable**
+> InputTableUpdateResponse UpdateInputTable (string inputTableIdentifier, UpdateInputTableRequest updateInputTableRequest)
+
+
+
+  Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table's key columns, so it is idempotent — retrying the same payload is safe.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateInputTableExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var inputTableIdentifier = "inputTableIdentifier_example";  // string | Unique ID of the input table to update.
+            var updateInputTableRequest = new UpdateInputTableRequest(); // UpdateInputTableRequest | 
+
+            try
+            {
+                InputTableUpdateResponse result = apiInstance.UpdateInputTable(inputTableIdentifier, updateInputTableRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateInputTable: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateInputTableWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<InputTableUpdateResponse> response = apiInstance.UpdateInputTableWithHttpInfo(inputTableIdentifier, updateInputTableRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateInputTableWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **inputTableIdentifier** | **string** | Unique ID of the input table to update. |  |
+| **updateInputTableRequest** | [**UpdateInputTableRequest**](UpdateInputTableRequest.md) |  |  |
+
+### Return type
+
+[**InputTableUpdateResponse**](InputTableUpdateResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Rows loaded successfully. |  -  |
+| **400** | Malformed request or unknown column name. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden — caller does not have MODIFY permission on the input table. |  -  |
+| **404** | Input table not found. |  -  |
+| **500** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updatelinkcustomization"></a>
+# **UpdateLinkCustomization**
+> void UpdateLinkCustomization (UpdateLinkCustomizationRequest updateLinkCustomizationRequest)
+
+
+
+  Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user's org. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all orgs, and is available only to callers in the primary org. - `scope: ORG` (default) changes the authenticated user's org, and requires Orgs to be enabled. - List only the types you want to change in `templates`. Unlisted types are left unchanged by either operation, and a repeated type is rejected. - **REPLACE** (default) sets each listed type to its `value`. - **RESET** reverts each listed type to the value its scope inherits: the ThoughtSpot default at cluster scope, and the cluster template at org scope. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires:  | Link type | Required | | - -- | - -- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | | `GENERIC_URL` | `{path}` | | `UNSUBSCRIBE_URL` | none |  `{ts-query-params}` is optional on any type that does not require it, including `SPOTIQ_ANALYSIS_URL` and `UNSUBSCRIBE_URL`: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateLinkCustomizationExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var updateLinkCustomizationRequest = new UpdateLinkCustomizationRequest(); // UpdateLinkCustomizationRequest | 
+
+            try
+            {
+                apiInstance.UpdateLinkCustomization(updateLinkCustomizationRequest);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateLinkCustomization: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateLinkCustomizationWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.UpdateLinkCustomizationWithHttpInfo(updateLinkCustomizationRequest);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateLinkCustomizationWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **updateLinkCustomizationRequest** | [**UpdateLinkCustomizationRequest**](UpdateLinkCustomizationRequest.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Link preferences updated successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -18071,7 +19595,7 @@ namespace Example
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
-            var identifier = "identifier_example";  // string | Unique id or name of the variable to update.
+            var identifier = "identifier_example";  // string | Unique id, name, or object id of the variable to update.
             var updateVariableRequest = new UpdateVariableRequest(); // UpdateVariableRequest | 
 
             try
@@ -18109,7 +19633,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **identifier** | **string** | Unique id or name of the variable to update. |  |
+| **identifier** | **string** | Unique id, name, or object id of the variable to update. |  |
 | **updateVariableRequest** | [**UpdateVariableRequest**](UpdateVariableRequest.md) |  |  |
 
 ### Return type

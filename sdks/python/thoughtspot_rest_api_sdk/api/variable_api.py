@@ -457,7 +457,7 @@ class VariableApi:
     @validate_call
     async def delete_variable(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -475,7 +475,7 @@ class VariableApi:
 
          Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn't exist * The variable is being used by other objects      
 
-        :param identifier: Unique id or name of the variable (required)
+        :param identifier: Unique id, name, or object id of the variable (required)
         :type identifier: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -529,7 +529,7 @@ class VariableApi:
     @validate_call
     async def delete_variable_with_http_info(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -547,7 +547,7 @@ class VariableApi:
 
          Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn't exist * The variable is being used by other objects      
 
-        :param identifier: Unique id or name of the variable (required)
+        :param identifier: Unique id, name, or object id of the variable (required)
         :type identifier: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -601,7 +601,7 @@ class VariableApi:
     @validate_call
     async def delete_variable_without_preload_content(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -619,7 +619,7 @@ class VariableApi:
 
          Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn't exist * The variable is being used by other objects      
 
-        :param identifier: Unique id or name of the variable (required)
+        :param identifier: Unique id, name, or object id of the variable (required)
         :type identifier: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -669,7 +669,7 @@ class VariableApi:
     @validate_call
     def delete_variable_sync(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -703,7 +703,7 @@ class VariableApi:
     @validate_call
     def delete_variable_sync_with_http_info(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -737,7 +737,7 @@ class VariableApi:
     @validate_call
     def delete_variable_sync_without_preload_content(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2020,7 +2020,7 @@ class VariableApi:
     @validate_call
     async def update_variable(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable to update.")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable to update.")],
         update_variable_request: UpdateVariableRequest,
         _request_timeout: Union[
             None,
@@ -2039,7 +2039,7 @@ class VariableApi:
 
          Update a variable's name    Version: 26.4.0.cl or later   Allows updating a variable's name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
 
-        :param identifier: Unique id or name of the variable to update. (required)
+        :param identifier: Unique id, name, or object id of the variable to update. (required)
         :type identifier: str
         :param update_variable_request: (required)
         :type update_variable_request: UpdateVariableRequest
@@ -2095,7 +2095,7 @@ class VariableApi:
     @validate_call
     async def update_variable_with_http_info(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable to update.")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable to update.")],
         update_variable_request: UpdateVariableRequest,
         _request_timeout: Union[
             None,
@@ -2114,7 +2114,7 @@ class VariableApi:
 
          Update a variable's name    Version: 26.4.0.cl or later   Allows updating a variable's name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
 
-        :param identifier: Unique id or name of the variable to update. (required)
+        :param identifier: Unique id, name, or object id of the variable to update. (required)
         :type identifier: str
         :param update_variable_request: (required)
         :type update_variable_request: UpdateVariableRequest
@@ -2170,7 +2170,7 @@ class VariableApi:
     @validate_call
     async def update_variable_without_preload_content(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable to update.")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable to update.")],
         update_variable_request: UpdateVariableRequest,
         _request_timeout: Union[
             None,
@@ -2189,7 +2189,7 @@ class VariableApi:
 
          Update a variable's name    Version: 26.4.0.cl or later   Allows updating a variable's name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
 
-        :param identifier: Unique id or name of the variable to update. (required)
+        :param identifier: Unique id, name, or object id of the variable to update. (required)
         :type identifier: str
         :param update_variable_request: (required)
         :type update_variable_request: UpdateVariableRequest
@@ -2241,7 +2241,7 @@ class VariableApi:
     @validate_call
     def update_variable_sync(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable to update.")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable to update.")],
         update_variable_request: UpdateVariableRequest,
         _request_timeout: Union[
             None,
@@ -2277,7 +2277,7 @@ class VariableApi:
     @validate_call
     def update_variable_sync_with_http_info(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable to update.")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable to update.")],
         update_variable_request: UpdateVariableRequest,
         _request_timeout: Union[
             None,
@@ -2313,7 +2313,7 @@ class VariableApi:
     @validate_call
     def update_variable_sync_without_preload_content(
         self,
-        identifier: Annotated[StrictStr, Field(description="Unique id or name of the variable to update.")],
+        identifier: Annotated[StrictStr, Field(description="Unique id, name, or object id of the variable to update.")],
         update_variable_request: UpdateVariableRequest,
         _request_timeout: Union[
             None,

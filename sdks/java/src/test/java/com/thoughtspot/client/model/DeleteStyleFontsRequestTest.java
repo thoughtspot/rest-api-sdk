@@ -4,33 +4,54 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for DeleteStyleFontsRequest */
+/**
+ * Model tests for DeleteStyleFontsRequest
+ */
 public class DeleteStyleFontsRequestTest {
     private final DeleteStyleFontsRequest model = new DeleteStyleFontsRequest();
 
-    /** Model tests for DeleteStyleFontsRequest */
+    /**
+     * Model tests for DeleteStyleFontsRequest
+     */
     @Test
     public void testDeleteStyleFontsRequest() {
         // TODO: test DeleteStyleFontsRequest
     }
 
-    /** Test the property 'scope' */
+    /**
+     * Test the property 'scope'
+     */
     @Test
     public void scopeTest() {
         // TODO: test scope
     }
 
-    /** Test the property 'fontIdentifiers' */
+    /**
+     * Test the property 'fontIdentifiers'
+     */
     @Test
     public void fontIdentifiersTest() {
         // TODO: test fontIdentifiers
     }
 
-    /** Test the property 'dryRun' */
+    /**
+     * Test the property 'dryRun'
+     */
     @Test
     public void dryRunTest() {
         // TODO: test dryRun
     }
+
 }

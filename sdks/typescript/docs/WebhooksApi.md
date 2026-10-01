@@ -314,6 +314,7 @@ apiInstance.updateWebhookConfiguration(
       },
     ],
     status: "ENABLED",
+    operation: "REPLACE",
     reset_options: [
       "AUTHENTICATION",
     ],

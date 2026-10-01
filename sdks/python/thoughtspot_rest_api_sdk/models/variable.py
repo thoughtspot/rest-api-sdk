@@ -29,12 +29,13 @@ class Variable(BaseModel):
     """ # noqa: E501
     id: StrictStr = Field(description="Unique identifier of the variable")
     name: StrictStr = Field(description="Name of the variable")
+    obj_id: Optional[StrictStr] = Field(default=None, description="Custom object identifier (obj_id) of the variable    Version: 26.10.0.cl or later ")
     variable_type: Optional[StrictStr] = Field(default=None, description="Type of the variable")
     sensitive: Optional[StrictBool] = Field(default=None, description="If the variable is sensitive")
     values: Optional[List[VariableValue]] = Field(default=None, description="Values of the variable")
     org: Optional[VariableOrgInfo] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "variable_type", "sensitive", "values", "org"]
+    __properties: ClassVar[List[str]] = ["id", "name", "obj_id", "variable_type", "sensitive", "values", "org"]
 
     @field_validator('variable_type')
     def variable_type_validate_enum(cls, value):
@@ -102,6 +103,11 @@ class Variable(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if obj_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.obj_id is None and "obj_id" in self.model_fields_set:
+            _dict['obj_id'] = None
+
         # set to None if variable_type (nullable) is None
         # and model_fields_set contains the field
         if self.variable_type is None and "variable_type" in self.model_fields_set:
@@ -131,6 +137,7 @@ class Variable(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
+            "obj_id": obj.get("obj_id"),
             "variable_type": obj.get("variable_type"),
             "sensitive": obj.get("sensitive"),
             "values": [VariableValue.from_dict(_item) for _item in obj["values"]] if obj.get("values") is not None else None,

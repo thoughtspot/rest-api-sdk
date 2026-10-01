@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **AcceptLanguage** | **string** | The supported accept language by the cluster. | [optional] 
 **AllUserGroupMemberUserCount** | **int?** | The count of users of ALL group. | [optional] 
 **LogicalModelVersion** | **int?** | The version number of logical model of the cluster. | [optional] 
+**MaintenanceSchedule** | [**MaintenanceScheduleInfo**](MaintenanceScheduleInfo.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

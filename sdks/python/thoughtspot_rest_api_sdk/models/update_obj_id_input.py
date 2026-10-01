@@ -38,8 +38,8 @@ class UpdateObjIdInput(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'LIVEBOARD', 'ACTION_OBJECT', 'DATA_SOURCE', 'USER', 'USER_GROUP', 'COLLECTION']):
-            raise ValueError("must be one of enum values ('ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'LIVEBOARD', 'ACTION_OBJECT', 'DATA_SOURCE', 'USER', 'USER_GROUP', 'COLLECTION')")
+        if value not in set(['ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'LIVEBOARD', 'ACTION_OBJECT', 'DATA_SOURCE', 'USER', 'USER_GROUP', 'COLLECTION', 'ROLE', 'TEMPLATE_VARIABLE', 'PERSONALISED_VIEW']):
+            raise ValueError("must be one of enum values ('ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'LIVEBOARD', 'ACTION_OBJECT', 'DATA_SOURCE', 'USER', 'USER_GROUP', 'COLLECTION', 'ROLE', 'TEMPLATE_VARIABLE', 'PERSONALISED_VIEW')")
         return value
 
     model_config = ConfigDict(

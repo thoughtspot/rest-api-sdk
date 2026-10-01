@@ -28,7 +28,7 @@ class PublishMetadataRequest(BaseModel):
     """ # noqa: E501
     metadata: List[PublishMetadataListItem] = Field(description="Metadata objects to be published.")
     org_identifiers: List[StrictStr] = Field(description="Unique ID or name of orgs to which metadata objects should be published.")
-    skip_validation: Optional[StrictBool] = Field(default=None, description="Skip validations of objects to be published.")
+    skip_validation: Optional[StrictBool] = Field(default=None, description="Skip parameterization validation. By default publishing requires an underlying LOGICAL_TABLE or DATA_SOURCE to carry a template variable with a value for every target org, so each org resolves its own data. Without parameterization every target org reads the owner org's data through the owner org's connection. Set this to true only when that is intended.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["metadata", "org_identifiers", "skip_validation"]
 

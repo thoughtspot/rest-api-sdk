@@ -4,51 +4,81 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.MetadataInput;
+import com.thoughtspot.client.model.ScheduleHistoryRunsOptionsInput;
+import com.thoughtspot.client.model.SortingOptions;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for SearchSchedulesRequest */
+/**
+ * Model tests for SearchSchedulesRequest
+ */
 public class SearchSchedulesRequestTest {
     private final SearchSchedulesRequest model = new SearchSchedulesRequest();
 
-    /** Model tests for SearchSchedulesRequest */
+    /**
+     * Model tests for SearchSchedulesRequest
+     */
     @Test
     public void testSearchSchedulesRequest() {
         // TODO: test SearchSchedulesRequest
     }
 
-    /** Test the property 'metadata' */
+    /**
+     * Test the property 'metadata'
+     */
     @Test
     public void metadataTest() {
         // TODO: test metadata
     }
 
-    /** Test the property 'recordOffset' */
+    /**
+     * Test the property 'recordOffset'
+     */
     @Test
     public void recordOffsetTest() {
         // TODO: test recordOffset
     }
 
-    /** Test the property 'recordSize' */
+    /**
+     * Test the property 'recordSize'
+     */
     @Test
     public void recordSizeTest() {
         // TODO: test recordSize
     }
 
-    /** Test the property 'sortOptions' */
+    /**
+     * Test the property 'sortOptions'
+     */
     @Test
     public void sortOptionsTest() {
         // TODO: test sortOptions
     }
 
-    /** Test the property 'historyRunsOptions' */
+    /**
+     * Test the property 'historyRunsOptions'
+     */
     @Test
     public void historyRunsOptionsTest() {
         // TODO: test historyRunsOptions
     }
 
-    /** Test the property 'scheduleIdentifiers' */
+    /**
+     * Test the property 'scheduleIdentifiers'
+     */
     @Test
     public void scheduleIdentifiersTest() {
         // TODO: test scheduleIdentifiers
     }
+
 }

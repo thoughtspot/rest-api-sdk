@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **User** | [**UserInfo**](UserInfo.md) |  | 
 **CreationTimeInMillis** | **float** | Token creation time in milliseconds. | 
 **ExpirationTimeInMillis** | **float** | Token expiration time in milliseconds. | 
+**Scope** | [**AccessTokenScope**](AccessTokenScope.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

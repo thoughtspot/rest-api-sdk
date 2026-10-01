@@ -34,6 +34,10 @@ export class GroupsImportListInput {
     */
     'privileges'?: Array<GroupsImportListInputPrivilegesEnum> | null;
     /**
+    * Unique ID or name of the roles that will be assigned to the group.    Version: 26.11.0.cl or later 
+    */
+    'role_identifiers'?: Array<string> | null;
+    /**
     * Unique ID or name of the sub-groups to add to the group.
     */
     'sub_group_identifiers'?: Array<string> | null;
@@ -83,6 +87,12 @@ export class GroupsImportListInput {
             "name": "privileges",
             "baseName": "privileges",
             "type": "Array<GroupsImportListInputPrivilegesEnum>",
+            "format": ""
+        },
+        {
+            "name": "role_identifiers",
+            "baseName": "role_identifiers",
+            "type": "Array<string>",
             "format": ""
         },
         {

@@ -4,51 +4,79 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.DataSourceInfo;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for SearchDatasetsResponseItem */
+/**
+ * Model tests for SearchDatasetsResponseItem
+ */
 public class SearchDatasetsResponseItemTest {
     private final SearchDatasetsResponseItem model = new SearchDatasetsResponseItem();
 
-    /** Model tests for SearchDatasetsResponseItem */
+    /**
+     * Model tests for SearchDatasetsResponseItem
+     */
     @Test
     public void testSearchDatasetsResponseItem() {
         // TODO: test SearchDatasetsResponseItem
     }
 
-    /** Test the property 'type' */
+    /**
+     * Test the property 'type'
+     */
     @Test
     public void typeTest() {
         // TODO: test type
     }
 
-    /** Test the property 'timestampInMillis' */
+    /**
+     * Test the property 'timestampInMillis'
+     */
     @Test
     public void timestampInMillisTest() {
         // TODO: test timestampInMillis
     }
 
-    /** Test the property 'isThinking' */
+    /**
+     * Test the property 'isThinking'
+     */
     @Test
     public void isThinkingTest() {
         // TODO: test isThinking
     }
 
-    /** Test the property 'stepTitle' */
+    /**
+     * Test the property 'stepTitle'
+     */
     @Test
     public void stepTitleTest() {
         // TODO: test stepTitle
     }
 
-    /** Test the property 'text' */
+    /**
+     * Test the property 'text'
+     */
     @Test
     public void textTest() {
         // TODO: test text
     }
 
-    /** Test the property 'dataSources' */
+    /**
+     * Test the property 'dataSources'
+     */
     @Test
     public void dataSourcesTest() {
         // TODO: test dataSources
     }
+
 }

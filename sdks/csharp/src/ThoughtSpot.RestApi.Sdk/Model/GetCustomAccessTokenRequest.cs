@@ -87,6 +87,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="secretKey">The secret key string provided by the ThoughtSpot application server. ThoughtSpot generates a secret key when Trusted authentication is enabled. (default to &quot;&quot;).</param>
         /// <param name="validityTimeInSec">Token validity duration in seconds (default to 300).</param>
         /// <param name="orgIdentifier">ID or name of the Org context to log in to. If the Org ID or name is not specified but a secret key is provided, the user will be logged into the Org associated with the secret key. If neither the Org ID/name nor the secret key is provided, the user will be logged into the Org context from their previous login session..</param>
+        /// <param name="scope">The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Only SPECIFIC_ORGS is supported for a custom (ABAC) token - - it authorizes the token for the Orgs listed in org_identifiers. Each subsequent request selects one Org from this set using the &#x60;X-Org-Selector&#x60; header.   Version: 26.10.0.cl or later .</param>
         /// <param name="persistOption">Indicates whether the specified attributes should be persisted or not. RESET and NONE are not applicable if you are setting variable_values. (required).</param>
         /// <param name="filterRules">Filter rules..</param>
         /// <param name="parameterValues">Allows developers to assign parameter values for existing parameters to a user at login. Note: Using parameter values for row level security use cases will ultimately be deprecated. Developers can still pass data security values via the Custom Access token via the variable_values field and create RLS rules based on custom variables. Please refer to the [ABAC via RLS documentation](https://developers.thoughtspot.com/docs/abac-user-parameters) for more details..</param>
@@ -96,7 +97,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="displayName">(just-in-time (JIT) provisioning) Indicates display name of the user. Specify this attribute when creating a new user..</param>
         /// <param name="groups">(just-in-time (JIT) provisioning) ID or name of the groups to which the newly created user belongs. Specify this attribute when creating a new user..</param>
         /// <param name="autoCreate">   Creates a new user if the specified username does not exist in ThoughtSpot. To provision a user just-in-time (JIT), set this attribute to true.      Note: For JIT provisioning of a user, the secret_key is required. New formula variables won&#39;t be created.     Version: 10.5.0.cl or later  (default to true).</param>
-        public GetCustomAccessTokenRequest(string username = default, string password = @"", string secretKey = @"", int validityTimeInSec = 300, string orgIdentifier = default, PersistOptionEnum persistOption = default, List<FilterRules> filterRules = default, List<ParameterValues> parameterValues = default, List<VariableValues> variableValues = default, List<TokenAccessScopeObject> objects = default, string email = default, string displayName = default, List<GroupObject> groups = default, bool? autoCreate = true)
+        public GetCustomAccessTokenRequest(string username = default, string password = @"", string secretKey = @"", int validityTimeInSec = 300, string orgIdentifier = default, TokenScopeInput scope = default, PersistOptionEnum persistOption = default, List<FilterRules> filterRules = default, List<ParameterValues> parameterValues = default, List<VariableValues> variableValues = default, List<TokenAccessScopeObject> objects = default, string email = default, string displayName = default, List<GroupObject> groups = default, bool? autoCreate = true)
         {
             // to ensure "username" is required (not null)
             if (username == null)
@@ -111,6 +112,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.SecretKey = secretKey ?? @"";
             this.ValidityTimeInSec = validityTimeInSec;
             this.OrgIdentifier = orgIdentifier;
+            this.Scope = scope;
             this.FilterRules = filterRules;
             this.ParameterValues = parameterValues;
             this.VariableValues = variableValues;
@@ -157,6 +159,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>ID or name of the Org context to log in to. If the Org ID or name is not specified but a secret key is provided, the user will be logged into the Org associated with the secret key. If neither the Org ID/name nor the secret key is provided, the user will be logged into the Org context from their previous login session.</value>
         [DataMember(Name = "org_identifier", EmitDefaultValue = false)]
         public string OrgIdentifier { get; set; }
+
+        /// <summary>
+        /// The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Only SPECIFIC_ORGS is supported for a custom (ABAC) token - - it authorizes the token for the Orgs listed in org_identifiers. Each subsequent request selects one Org from this set using the &#x60;X-Org-Selector&#x60; header.   Version: 26.10.0.cl or later 
+        /// </summary>
+        /// <value>The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Only SPECIFIC_ORGS is supported for a custom (ABAC) token - - it authorizes the token for the Orgs listed in org_identifiers. Each subsequent request selects one Org from this set using the &#x60;X-Org-Selector&#x60; header.   Version: 26.10.0.cl or later </value>
+        [DataMember(Name = "scope", EmitDefaultValue = false)]
+        public TokenScopeInput Scope { get; set; }
 
         /// <summary>
         /// Filter rules.
@@ -233,6 +242,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  SecretKey: ").Append(SecretKey).Append("\n");
             sb.Append("  ValidityTimeInSec: ").Append(ValidityTimeInSec).Append("\n");
             sb.Append("  OrgIdentifier: ").Append(OrgIdentifier).Append("\n");
+            sb.Append("  Scope: ").Append(Scope).Append("\n");
             sb.Append("  PersistOption: ").Append(PersistOption).Append("\n");
             sb.Append("  FilterRules: ").Append(FilterRules).Append("\n");
             sb.Append("  ParameterValues: ").Append(ParameterValues).Append("\n");

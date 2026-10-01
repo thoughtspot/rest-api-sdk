@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **DefaultLiveboardIdentifiers** | **List&lt;string&gt;** | Unique ID of Liveboards that will be assigned as default Liveboards to the users in the group. | [optional] 
 **Description** | **string** | Description of the group. | [optional] 
 **Privileges** | **List&lt;GroupsImportListInput.PrivilegesEnum&gt;** | Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect. | [optional] 
+**RoleIdentifiers** | **List&lt;string&gt;** | Unique ID or name of the roles that will be assigned to the group.    Version: 26.11.0.cl or later  | [optional] 
 **SubGroupIdentifiers** | **List&lt;string&gt;** | Unique ID or name of the sub-groups to add to the group. | [optional] 
 **Type** | **string** | Type of the group. | [optional] 
 **UserIdentifiers** | **List&lt;string&gt;** | Unique ID or name of the users to assign to the group. | [optional] 

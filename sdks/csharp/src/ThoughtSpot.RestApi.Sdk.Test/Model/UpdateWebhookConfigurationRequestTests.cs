@@ -145,6 +145,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Operation'
+        /// </summary>
+        [Fact]
+        public void OperationTest()
+        {
+            // TODO unit test for the property 'Operation'
+        }
+
+        /// <summary>
         /// Test the property 'ResetOptions'
         /// </summary>
         [Fact]

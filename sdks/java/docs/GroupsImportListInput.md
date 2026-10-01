@@ -12,6 +12,7 @@
 |**defaultLiveboardIdentifiers** | **List&lt;String&gt;** | Unique ID of Liveboards that will be assigned as default Liveboards to the users in the group. |  [optional] |
 |**description** | **String** | Description of the group. |  [optional] |
 |**privileges** | [**List&lt;PrivilegesEnum&gt;**](#List&lt;PrivilegesEnum&gt;) | Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect. |  [optional] |
+|**roleIdentifiers** | **List&lt;String&gt;** | Unique ID or name of the roles that will be assigned to the group.    Version: 26.11.0.cl or later  |  [optional] |
 |**subGroupIdentifiers** | **List&lt;String&gt;** | Unique ID or name of the sub-groups to add to the group. |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) | Type of the group. |  [optional] |
 |**userIdentifiers** | **List&lt;String&gt;** | Unique ID or name of the users to assign to the group. |  [optional] |

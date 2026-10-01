@@ -55,6 +55,10 @@ export class SearchMetadataRequest {
     */
     'dependent_objects_record_size'?: number;
     /**
+    * Optional. The number of dependents to skip per metadata object before collecting them, so that dependents can be fetched in bounded pages. Combine with dependent_objects_record_size as the page size, and keep requesting pages until dependent_objects_is_last_batch is true. When this offset is supplied, a dependent_objects_record_size of 0 means the cluster default page size. Omit it to keep the pre-paging behaviour. A negative value is rejected.    Version: 26.11.0.cl or later 
+    */
+    'dependent_objects_record_offset'?: number;
+    /**
     * Includes complete details of the metadata objects.
     */
     'include_details'?: boolean | null;
@@ -179,6 +183,12 @@ export class SearchMetadataRequest {
         {
             "name": "dependent_objects_record_size",
             "baseName": "dependent_objects_record_size",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "dependent_objects_record_offset",
+            "baseName": "dependent_objects_record_offset",
             "type": "number",
             "format": "int32"
         },

@@ -16,6 +16,7 @@
 |**includeAutoCreatedObjects** | **Boolean** | Includes system-generated metadata objects. |  [optional] |
 |**includeDependentObjects** | **Boolean** | Includes dependents of the metadata object specified in the API request. For example, a worksheet can consist of dependent objects such as Liveboards or Answers. |  [optional] |
 |**dependentObjectsRecordSize** | **Integer** | The maximum number of dependents to include per metadata object. |  [optional] |
+|**dependentObjectsRecordOffset** | **Integer** | Optional. The number of dependents to skip per metadata object before collecting them, so that dependents can be fetched in bounded pages. Combine with dependent_objects_record_size as the page size, and keep requesting pages until dependent_objects_is_last_batch is true. When this offset is supplied, a dependent_objects_record_size of 0 means the cluster default page size. Omit it to keep the pre-paging behaviour. A negative value is rejected.    Version: 26.11.0.cl or later  |  [optional] |
 |**includeDetails** | **Boolean** | Includes complete details of the metadata objects. |  [optional] |
 |**includePersonalisedViews** | **Boolean** | When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects. |  [optional] |
 |**includeHeaders** | **Boolean** | Includes headers of the metadata objects. |  [optional] |

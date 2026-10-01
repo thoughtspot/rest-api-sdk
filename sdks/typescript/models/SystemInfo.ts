@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { MaintenanceScheduleInfo } from '../models/MaintenanceScheduleInfo';
 import { HttpFile } from '../http/http';
 
 export class SystemInfo {
@@ -105,6 +106,7 @@ export class SystemInfo {
     * The version number of logical model of the cluster.
     */
     'logical_model_version'?: number | null;
+    'maintenance_schedule'?: MaintenanceScheduleInfo;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -248,6 +250,12 @@ export class SystemInfo {
             "baseName": "logical_model_version",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "maintenance_schedule",
+            "baseName": "maintenance_schedule",
+            "type": "MaintenanceScheduleInfo",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

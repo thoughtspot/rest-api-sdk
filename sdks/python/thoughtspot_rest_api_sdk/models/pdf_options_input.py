@@ -25,8 +25,8 @@ class PdfOptionsInput(BaseModel):
     """
     PdfOptionsInput
     """ # noqa: E501
-    page_size: Optional[StrictStr] = Field(default=None, description="Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified.   Version: 26.5.0.cl or later ")
-    zoom_level: Optional[StrictInt] = Field(default=None, description="Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.   Version: 26.5.0.cl or later ")
+    page_size: Optional[StrictStr] = Field(default=None, description="Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified.    Version: 26.5.0.cl or later ")
+    zoom_level: Optional[StrictInt] = Field(default=None, description="Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.    Version: 26.5.0.cl or later ")
     include_cover_page: Optional[StrictBool] = Field(default=True, description="Indicates whether to include the cover page with the Liveboard title.")
     include_custom_logo: Optional[StrictBool] = Field(default=True, description="Indicates whether to include customized wide logo in the footer if available.")
     include_filter_page: Optional[StrictBool] = Field(default=True, description="Indicates whether to include a page with all applied filters. For `CONTINUOUS` page_size, this parameter indicates whether to include the filter header.")
