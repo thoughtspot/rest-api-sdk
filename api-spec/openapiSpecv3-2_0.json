@@ -4208,6 +4208,9 @@
           "204": {
             "description": "User login successful."
           },
+          "302": {
+            "description": "Redirect to the specified redirect_url"
+          },
           "400": {
             "description": "Invalid request.",
             "content": {
@@ -10311,8 +10314,8 @@
     },
     "/api/rest/2.0/customization/links/update": {
       "post": {
-        "operationId": "updateLinkCustomization",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nUpdates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user's org. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- `scope: CLUSTER` changes the defaults inherited by all orgs, and is available only to callers in the primary org.\n- `scope: ORG` (default) changes the authenticated user's org, and requires Orgs to be enabled.\n- List only the types you want to change in `templates`. Unlisted types are left unchanged by either operation, and a repeated type is rejected.\n- **REPLACE** (default) sets each listed type to its `value`.\n- **RESET** reverts each listed type to the value its scope inherits: the ThoughtSpot default at cluster scope, and the cluster template at org scope. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`.\n\n#### Placeholders\n\nA template is rejected unless it contains the placeholders its type requires:\n\n| Link type | Required |\n| --- | --- |\n| `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` |\n| `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` |\n| `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` |\n| `SPOTIQ_ANALYSIS_URL` | `{object-id}` |\n| `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` |\n| `GENERIC_URL` | `{path}` |\n| `UNSUBSCRIBE_URL` | none |\n\n`{ts-query-params}` is optional on any type that does not require it, including `SPOTIQ_ANALYSIS_URL` and `UNSUBSCRIBE_URL`: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.\n\n\n\n\n#### Endpoint URL\n",
+        "operationId": "updateLinkCustomizations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nUpdates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org.\n- `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled.\n- This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected.\n- **REPLACE** (default) sets each listed type to the `value` provided in the request.\n- **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.\n\n#### Placeholders\n\nA template is rejected unless it contains the placeholders its type requires.\n\n| Link type | Required | Example |\n| --- | --- | --- |\n| `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` |\n| `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` |\n| `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` |\n| `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` |\n| `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` |\n| `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` |\n| `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |\n\n`{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Link Customization",
           "26.11.0.cl"
@@ -10321,7 +10324,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateLinkCustomizationRequest"
+                "$ref": "#/components/schemas/UpdateLinkCustomizationsRequest"
               }
             }
           },
@@ -10345,10 +10348,12 @@
                     "value": {
                       "error": {
                         "message": {
-                          "code": 10002,
-                          "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                          "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-                          "debug": "Link template for LIVEBOARD_SHARE_URL is missing required placeholders: {object-id}, {ts-query-params}."
+                          "debug": {
+                            "code": 10002,
+                            "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "debug": "[\"Invalid template for GENERIC_URL: value must contain {path}.\"]"
+                          }
                         }
                       }
                     }
@@ -10358,10 +10363,12 @@
                     "value": {
                       "error": {
                         "message": {
-                          "code": 10002,
-                          "incident_id_guid": "e5f67890-1234-5678-efab-567890123456",
-                          "trace_id_guid": "e5f67890-1234-5678-efab-567890123456",
-                          "debug": "Field 'value' is not allowed when operation is RESET."
+                          "debug": {
+                            "code": 10002,
+                            "incident_id_guid": "e5f67890-1234-5678-efab-567890123456",
+                            "trace_id_guid": "e5f67890-1234-5678-efab-567890123456",
+                            "debug": "[\"Field 'value' must not be supplied for RESET operation for type: UNSUBSCRIBE_URL.\"]"
+                          }
                         }
                       }
                     }
@@ -10383,10 +10390,12 @@
                     "value": {
                       "error": {
                         "message": {
-                          "code": 10097,
-                          "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
-                          "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
-                          "debug": "Authentication required to update link templates for the cluster or org."
+                          "debug": {
+                            "code": 10097,
+                            "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                            "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                            "debug": "[\"Authentication required to update link templates for the cluster or org.\"]"
+                          }
                         }
                       }
                     }
@@ -10408,10 +10417,12 @@
                     "value": {
                       "error": {
                         "message": {
-                          "code": 10023,
-                          "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
-                          "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
-                          "debug": "Embed settings are not available: ThoughtSpot Embedded is not enabled on this cluster."
+                          "debug": {
+                            "code": 10023,
+                            "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                            "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                            "debug": "[\"Cannot access embed settings: ThoughtSpot Embedded is not enabled for this cluster.\"]"
+                          }
                         }
                       }
                     }
@@ -10433,10 +10444,12 @@
                     "value": {
                       "error": {
                         "message": {
-                          "code": 10038,
-                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
-                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
-                          "debug": "Unexpected server error while updating link templates."
+                          "debug": {
+                            "code": 10038,
+                            "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                            "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                            "debug": "[\"Unexpected server error while updating link templates.\"]"
+                          }
                         }
                       }
                     }
@@ -14420,7 +14433,7 @@
     "/api/rest/2.0/customization/styles/search": {
       "post": {
         "operationId": "searchStyleCustomizations",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n- `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -14454,6 +14467,11 @@
                         "scope": "CLUSTER",
                         "navigation_panel": {
                           "theme": "DARK",
+                          "is_overridden": false
+                        },
+                        "app_color_theme": {
+                          "brand_color": null,
+                          "apply_as_top_nav_color": false,
                           "is_overridden": false
                         },
                         "chart_color_palette": {
@@ -14576,6 +14594,11 @@
                         "navigation_panel": {
                           "theme": "CUSTOM",
                           "base_color": "#2359B6",
+                          "is_overridden": true
+                        },
+                        "app_color_theme": {
+                          "brand_color": "#2359B6",
+                          "apply_as_top_nav_color": true,
                           "is_overridden": true
                         },
                         "chart_color_palette": {
@@ -14978,7 +15001,7 @@
     "/api/rest/2.0/customization/styles/update": {
       "post": {
         "operationId": "updateStyleCustomization",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### App color theme\n\n`app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.\n\n- `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`.\n- `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.\n\n`brand_color` and `apply_as_top_nav_color` may be set independently in the same request.\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -15016,10 +15039,18 @@
                     ]
                   },
                   "navigation_panel": {
-                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color.",
+                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color. Must not be provided together with app_color_theme --\nboth update the same underlying color.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/NavigationPanelInput"
+                      }
+                    ]
+                  },
+                  "app_color_theme": {
+                    "description": "App color theme -- the same underlying color navigation_panel sets,\nexpressed as a brand color plus how it is applied. brand_color and\napply_as_top_nav_color may be set independently; each is left unchanged\nif omitted. To clear the brand color, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. Supported only when the app\ncolor theme is enabled on the cluster. Must not be provided together\nwith navigation_panel. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AppColorThemeInput"
                       }
                     ]
                   },
@@ -15063,6 +15094,9 @@
                   "contentType": "application/json"
                 },
                 "navigation_panel": {
+                  "contentType": "application/json"
+                },
+                "app_color_theme": {
                   "contentType": "application/json"
                 },
                 "chart_color_palette": {
@@ -26405,6 +26439,11 @@
             "description": "Navigation panel color configuration.",
             "nullable": true
           },
+          "app_color_theme": {
+            "$ref": "#/components/schemas/StyleAppColorTheme",
+            "description": "App color theme configuration -- the same stored color navigation_panel\nexpresses, as a brand color plus how it is applied. Returned alongside\nnavigation_panel when the app color theme is enabled on the cluster;\nomitted otherwise. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          },
           "chart_color_palette": {
             "$ref": "#/components/schemas/StyleChartColorPalette",
             "description": "Chart color palette configuration.",
@@ -26470,6 +26509,27 @@
           }
         },
         "description": "Navigation panel color configuration for a specific scope."
+      },
+      "StyleAppColorTheme": {
+        "type": "object",
+        "properties": {
+          "brand_color": {
+            "type": "string",
+            "description": "Brand color as a 6-digit hex string. Null when no brand color is set at\nthis scope.",
+            "nullable": true
+          },
+          "apply_as_top_nav_color": {
+            "type": "boolean",
+            "description": "The effective setting: whether the brand color is painted on the top\nnavigation bar literally, instead of the surface shade derived from it.\nAlways the resolved value -- true iff a brand color is set, unless\nexplicitly overridden.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope (either the brand color or the\napply_as_top_nav_color choice), overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "App color theme configuration for a specific scope -- the same stored\ncolor StyleNavigationPanel expresses, as a brand color plus how it is\napplied. Returned alongside navigation_panel when the app color theme is\nenabled on the cluster; omitted otherwise."
       },
       "StyleChartColorPalette": {
         "type": "object",
@@ -26851,7 +26911,7 @@
           },
           "is_overridden": {
             "type": "boolean",
-            "description": "True if set at this scope, false if inherited."
+            "description": "True when the value differs from the one this scope would otherwise inherit."
           }
         },
         "description": "A URL template with its link type and whether it is set at the requested scope."
@@ -32198,11 +32258,12 @@
                 "CHART_COLOR_PALETTE",
                 "EMBEDDED_FOOTER_TEXT",
                 "NAV_PANEL_COLOR",
+                "APP_COLOR_THEME",
                 "DEFAULT_LOGO",
                 "WIDE_LOGO"
               ]
             },
-            "description": "Style fields to reset. Supported values: CHART_COLOR_PALETTE,\nEMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.",
+            "description": "Style fields to reset. Supported values: CHART_COLOR_PALETTE,\nEMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO,\nWIDE_LOGO.",
             "nullable": true
           },
           "visualization_areas": {
@@ -32251,6 +32312,22 @@
           }
         },
         "description": "Navigation panel color configuration."
+      },
+      "AppColorThemeInput": {
+        "type": "object",
+        "properties": {
+          "brand_color": {
+            "type": "string",
+            "description": "Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit to leave the\nstored color unchanged. To clear it, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          },
+          "apply_as_top_nav_color": {
+            "type": "boolean",
+            "description": "Whether the brand color is painted on the top navigation bar literally,\ninstead of the surface shade derived from it. Omit to leave the stored\nchoice unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "App color theme configuration -- the same stored color navigation_panel\nwrites, expressed as a brand color plus how it is applied."
       },
       "StyleColorPaletteInput": {
         "type": "object",
@@ -33500,6 +33577,16 @@
           },
           "remember_me": {
             "description": "A flag to remember the user session. When set to true, a session cookie is created and used in subsequent API requests.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "redirect_url": {
+            "description": "URL to redirect to after a successful login. A relative path is resolved against the cluster host. When omitted, no redirect is issued and the response is unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
+          },
+          "no_url_redirection": {
+            "description": "A flag to suppress the redirect. When set to true, the resolved URL is returned in the location header instead of a 302 redirect. Applies only when redirect_url is set. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "default": false,
             "type": "boolean",
             "nullable": true
@@ -35505,7 +35592,7 @@
         "type": "object",
         "properties": {
           "scope": {
-            "description": "Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the\nprimary org. ORG returns the authenticated user's org. Omit to return every scope\nthe caller can reach.",
+            "description": "Scope to retrieve. CLUSTER returns the cluster templates and is available only in the\nprimary org. ORG returns the templates for the org the caller is signed in to. Omit to\nreturn whichever of these the caller can access.",
             "type": "string",
             "enum": [
               "CLUSTER",
@@ -35514,11 +35601,11 @@
           }
         }
       },
-      "UpdateLinkCustomizationRequest": {
+      "UpdateLinkCustomizationsRequest": {
         "type": "object",
         "properties": {
           "scope": {
-            "description": "Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and\nis available only in the primary org. ORG applies to the authenticated user's org.",
+            "description": "Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and\nis available only in the primary org. ORG applies to the org the caller is signed in to.",
             "default": "ORG",
             "type": "string",
             "enum": [
@@ -35536,7 +35623,7 @@
             ]
           },
           "templates": {
-            "description": "Link types to act on. Types not listed are left unchanged. Duplicate entries for the\nsame type are rejected.",
+            "description": "Link types to act on. This is a partial update: types not listed keep the value they\nresolve to today. Duplicate entries for the same type are rejected.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LinkTemplateInput"
@@ -39259,7 +39346,7 @@
             "nullable": true
           },
           "onboarding_experience_completed": {
-            "description": "flag to get the on-boarding experience is completed or not.",
+            "description": "Marks the user's onboarding questions as completed.",
             "default": false,
             "type": "boolean",
             "nullable": true
