@@ -33,7 +33,7 @@ namespace ThoughtSpot.RestApi.Sdk.Client
         /// Version of the package.
         /// </summary>
         /// <value>Version of the package.</value>
-        public const string Version = "2.28.0";
+        public const string Version = "2.29.0";
 
         /// <summary>
         /// Identifier for ISO 8601 DateTime Format
@@ -117,7 +117,7 @@ namespace ThoughtSpot.RestApi.Sdk.Client
         public Configuration()
         {
             Proxy = null;
-            UserAgent = WebUtility.UrlEncode("ThoughtSpot-Client/csharp/2.28.0");
+            UserAgent = WebUtility.UrlEncode("ThoughtSpot-Client/csharp/2.29.0");
             BasePath = "https://localhost:443";
             DefaultHeaders = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
@@ -550,7 +550,7 @@ namespace ThoughtSpot.RestApi.Sdk.Client
             report += "    OS: " + System.Environment.OSVersion + "\n";
             report += "    .NET Framework Version: " + System.Environment.Version  + "\n";
             report += "    Version of the API: 2.0\n";
-            report += "    SDK Package Version: 2.28.0\n";
+            report += "    SDK Package Version: 2.29.0\n";
 
             return report;
         }

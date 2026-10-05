@@ -10,6 +10,9 @@ import com.thoughtspot.client.model.ActivateUserRequest;
 import com.thoughtspot.client.model.AgentConversation;
 import com.thoughtspot.client.model.AgentConversationHistoryResponse;
 import com.thoughtspot.client.model.AgentInstructions;
+import com.thoughtspot.client.model.Analyst;
+import com.thoughtspot.client.model.AnalystDeleteResponse;
+import com.thoughtspot.client.model.AnalystSearchResponse;
 import com.thoughtspot.client.model.AnswerDataResponse;
 import com.thoughtspot.client.model.AssignChangeAuthorRequest;
 import com.thoughtspot.client.model.AssignTagRequest;
@@ -35,6 +38,7 @@ import com.thoughtspot.client.model.ConversationShareStatusResponse;
 import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
 import com.thoughtspot.client.model.CreateAgentConversationRequest;
+import com.thoughtspot.client.model.CreateAnalystRequest;
 import com.thoughtspot.client.model.CreateCalendarRequest;
 import com.thoughtspot.client.model.CreateCollectionRequest;
 import com.thoughtspot.client.model.CreateConfigRequest;
@@ -81,6 +85,9 @@ import com.thoughtspot.client.model.ExportMemoryResponse;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLRequest;
 import com.thoughtspot.client.model.ExportStyleLogosRequest;
+import com.thoughtspot.client.model.FeatureAssignmentResponse;
+import com.thoughtspot.client.model.FeatureGroup;
+import com.thoughtspot.client.model.FeatureValueResponse;
 import com.thoughtspot.client.model.FetchAnswerDataRequest;
 import com.thoughtspot.client.model.FetchAnswerSqlQueryRequest;
 import com.thoughtspot.client.model.FetchAsyncImportTaskStatusRequest;
@@ -141,6 +148,7 @@ import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
 import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
+import com.thoughtspot.client.model.SearchAnalystsRequest;
 import com.thoughtspot.client.model.SearchAuthSettingsRequest;
 import com.thoughtspot.client.model.SearchAuthSettingsResponse;
 import com.thoughtspot.client.model.SearchCalendarsRequest;
@@ -156,6 +164,7 @@ import com.thoughtspot.client.model.SearchCustomActionsRequest;
 import com.thoughtspot.client.model.SearchDataRequest;
 import com.thoughtspot.client.model.SearchDataResponse;
 import com.thoughtspot.client.model.SearchEmailCustomizationRequest;
+import com.thoughtspot.client.model.SearchFeaturesRequest;
 import com.thoughtspot.client.model.SearchMetadataRequest;
 import com.thoughtspot.client.model.SearchOrgsRequest;
 import com.thoughtspot.client.model.SearchRoleResponse;
@@ -180,6 +189,7 @@ import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.SetAgentInstructionsRequest;
 import com.thoughtspot.client.model.SetNLInstructionsRequest;
+import com.thoughtspot.client.model.ShareAnalystRequest;
 import com.thoughtspot.client.model.ShareConversationRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SharedConversationResponse;
@@ -202,6 +212,7 @@ import com.thoughtspot.client.model.TokenValidationResponse;
 import com.thoughtspot.client.model.UnassignTagRequest;
 import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UnpublishMetadataRequest;
+import com.thoughtspot.client.model.UpdateAnalystRequest;
 import com.thoughtspot.client.model.UpdateCalendarRequest;
 import com.thoughtspot.client.model.UpdateCollectionRequest;
 import com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest;
@@ -213,6 +224,8 @@ import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import com.thoughtspot.client.model.UpdateConversationRequest;
 import com.thoughtspot.client.model.UpdateCustomActionRequest;
 import com.thoughtspot.client.model.UpdateEmailCustomizationRequest;
+import com.thoughtspot.client.model.UpdateFeatureAssignmentsRequest;
+import com.thoughtspot.client.model.UpdateFeatureValueRequest;
 import com.thoughtspot.client.model.UpdateMetadataHeaderRequest;
 import com.thoughtspot.client.model.UpdateMetadataObjIdRequest;
 import com.thoughtspot.client.model.UpdateOrgRequest;
@@ -553,6 +566,50 @@ public class ThoughtSpotRestApiTest {
     public void createAgentConversationTest() throws ApiException {
         CreateAgentConversationRequest createAgentConversationRequest = null;
         AgentConversation response = api.createAgentConversation(createAgentConversationRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Creates a Spotter Analyst: a configured agent with a name, description, at least one data
+     * source, and optional agent instructions, MCP connectors, and starter prompts. Analysts
+     * created via API use the default icon until one is set in the UI. Requires at least one of
+     * &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60;
+     * privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Version:
+     * 26.10.0.cl or later Creates a Spotter Analyst: a configured agent with a name, description,
+     * data sources, and optional agent instructions, MCP connectors, and starter prompts that your
+     * users converse with in Spotter. Requires at least one of &#x60;ADMINISTRATION&#x60;,
+     * &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access
+     * to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in
+     * which the analyst should be created. #### Usage guidelines The request body is flat — all
+     * fields are top-level: - &#x60;name&#x60; (required): display name of the analyst. -
+     * &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60;
+     * (optional): natural-language instructions that guide the agent&#39;s behavior for this
+     * analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;.
+     * - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with
+     * an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60;
+     * (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;).
+     * The caller must have view access to every referenced source. -
+     * &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to
+     * the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on
+     * the analyst landing page, each between 10 and 250 characters. Display order follows list
+     * position. If the request is successful, the response contains the created analyst, including
+     * the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60;
+     * and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as
+     * structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;,
+     * &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60;
+     * (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users. ####
+     * Error conditions - &#x60;403&#x60; — missing privileges, or no view access to a referenced
+     * data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. -
+     * &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;,
+     * &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many
+     * starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createAnalystTest() throws ApiException {
+        CreateAnalystRequest createAnalystRequest = null;
+        Analyst response = api.createAnalyst(createAnalystRequest);
         // TODO: test validations
     }
 
@@ -1202,6 +1259,31 @@ public class ThoughtSpotRestApiTest {
     public void deactivateUserTest() throws ApiException {
         DeactivateUserRequest deactivateUserRequest = null;
         ResponseActivationURL response = api.deactivateUser(deactivateUserRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts
+     * cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the
+     * deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Version: 26.10.0.cl or later Permanently deletes a
+     * Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.
+     * Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it.
+     * Use a bearer token for the Org in which the analyst exists. #### Usage guidelines The request
+     * has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path
+     * parameter, as returned by the create analyst API. A successful request returns the
+     * &#x60;id&#x60; of the deleted analyst. #### Error conditions - &#x60;400&#x60; — malformed
+     * analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks
+     * admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given
+     * identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteAnalystTest() throws ApiException {
+        String analystIdentifier = null;
+        AnalystDeleteResponse response = api.deleteAnalyst(analystIdentifier);
         // TODO: test validations
     }
 
@@ -3499,7 +3581,7 @@ public class ThoughtSpotRestApiTest {
 
     /**
      * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
-     * LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple fields of metadata
+     * LOGICAL_TABLE. Version: 26.10.0.cl or later Allows parameterizing multiple fields of metadata
      * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
      * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
      * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
@@ -3521,7 +3603,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
+     * Version: 26.10.0.cl or later Allows publishing metadata objects across organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * This API will essentially share the objects along with it&#39;s dependencies to the org
@@ -3686,6 +3768,51 @@ public class ThoughtSpotRestApiTest {
     public void revokeTokenTest() throws ApiException {
         RevokeTokenRequest revokeTokenRequest = null;
         api.revokeToken(revokeTokenRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is
+     * provided, the response contains exactly that analyst and all other filters are ignored. -
+     * List mode: returns a paginated list of analysts visible to the caller, optionally filtered by
+     * a case-insensitive substring match on the analyst name (&#x60;query&#x60;) and by ownership
+     * (&#x60;type&#x60;). Results are ordered by most recently accessed. Requires at least one of
+     * &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60;
+     * privileges. Version: 26.10.0.cl or later Searches Spotter Analysts. Use this endpoint to page
+     * through the analysts visible to you, or to fetch a single analyst by its identifier. Requires
+     * at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or
+     * &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should
+     * be searched. #### Usage guidelines The endpoint operates in one of two modes: **Fetch mode**
+     * — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst
+     * (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access
+     * to the analyst (owner, shared with, or admin/Spotter-management privileges). **List mode** —
+     * when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts
+     * the caller can see, ordered by most recently accessed: - &#x60;record_size&#x60; (optional):
+     * number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60;
+     * (optional): zero-based index of the first record. Default 0, maximum 10000. -
+     * &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name
+     * only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created
+     * by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;. The response
+     * contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;,
+     * the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;,
+     * &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60;
+     * (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched
+     * &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;),
+     * &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt,
+     * marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and
+     * &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; /
+     * &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and
+     * &#x60;display_name&#x60;). #### Error conditions - &#x60;403&#x60; — missing privileges, or
+     * (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst
+     * with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation
+     * failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchAnalystsTest() throws ApiException {
+        SearchAnalystsRequest searchAnalystsRequest = null;
+        AnalystSearchResponse response = api.searchAnalysts(searchAnalystsRequest);
         // TODO: test validations
     }
 
@@ -3995,6 +4122,44 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Version: 26.10.0.cl or later Returns the feature configurations available on the ThoughtSpot
+     * system, grouped by feature group. #### Pre-requisites Requires &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To retrieve feature configurations, pass these parameters in your API request: -
+     * &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the
+     * cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the
+     * org-admin view (returns the current value of each feature for a single Org). -
+     * &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is
+     * &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. -
+     * &#x60;category&#x60; — Availability category of the features to return.
+     * &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60;
+     * returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;. The response
+     * fields populated depend on the requested scope. In the cluster-admin view
+     * (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;,
+     * &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the
+     * org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;,
+     * &#x60;element_config&#x60;, and &#x60;element_value&#x60;. The following example retrieves
+     * the general-access features for the cluster-admin view: &#x60;&#x60;&#x60; {
+     * \&quot;scope\&quot;: \&quot;CLUSTER\&quot;, \&quot;category\&quot;:
+     * \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60; For the org-admin view, set
+     * &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to
+     * scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is
+     * &#x60;ORG&#x60;; omitting it returns a 400 error): &#x60;&#x60;&#x60; { \&quot;scope\&quot;:
+     * \&quot;ORG\&quot;, \&quot;org_identifier\&quot;: 1, \&quot;category\&quot;:
+     * \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchFeaturesTest() throws ApiException {
+        SearchFeaturesRequest searchFeaturesRequest = null;
+        List<FeatureGroup> response = api.searchFeatures(searchFeaturesRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Version: 9.0.0.cl or later Gets a list of metadata objects available on the ThoughtSpot
      * system. This API endpoint is available to all users who have view access to the object. Users
      * with &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privileges can view data for
@@ -4156,7 +4321,15 @@ public class ThoughtSpotRestApiTest {
      * cluster-level style defaults. - Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to
      * retrieve preferences for the authenticated user&#39;s org. - Each field in the response
      * includes an &#x60;is_overridden&#x60; flag indicating whether the value was explicitly set at
-     * the requested scope or inherited from a parent scope (cluster or system default).
+     * the requested scope or inherited from a parent scope (cluster or system default). -
+     * &#x60;app_color_theme&#x60; (_available from 26.10.0.cl_) describes the same underlying color
+     * as &#x60;navigation_panel&#x60;, in a different form: &#x60;navigation_panel&#x60; uses the
+     * &#x60;DARK&#x60;/&#x60;TWO_TONE&#x60;/&#x60;CUSTOM&#x60; theme modes, while
+     * &#x60;app_color_theme&#x60; gives the brand color and how it is applied
+     * (&#x60;brand_color&#x60;, &#x60;apply_as_top_nav_color&#x60;). They never disagree, so use
+     * whichever your integration already reads. &#x60;app_color_theme&#x60; is returned only when
+     * the app color theme is enabled on the cluster; &#x60;navigation_panel&#x60; is always
+     * returned.
      *
      * @throws ApiException if the Api call fails
      */
@@ -4565,6 +4738,42 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     * Updates share permissions on a Spotter Analyst, one entry per principal (user or group).
+     * &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access;
+     * &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources
+     * with the principal so the analyst keeps working for them. A successful share returns an empty
+     * &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or
+     * &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Version: 26.10.0.cl
+     * or later Updates share permissions on a Spotter Analyst for one or more principals (users or
+     * groups). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the
+     * analyst exists. #### Usage guidelines The analyst is identified by the
+     * &#x60;analyst_identifier&#x60; path parameter. The request body contains a
+     * &#x60;permissions&#x60; array with one entry per principal: -
+     * &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. -
+     * &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. -
+     * &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or
+     * changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. A principal may appear
+     * at most once per request. When access is granted, the analyst&#39;s data sources are
+     * automatically shared with the principal as well, so the analyst keeps working for them. A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. #### Error
+     * conditions - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller
+     * is not the analyst&#39;s author and lacks admin / Spotter-management privileges. -
+     * &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. -
+     * &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a
+     * duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void shareAnalystTest() throws ApiException {
+        String analystIdentifier = null;
+        ShareAnalystRequest shareAnalystRequest = null;
+        Object response = api.shareAnalyst(analystIdentifier, shareAnalystRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Grants or revokes access to a shared conversation for one or more principals (users or
      * groups). When principals are added, a read-only shared view of the conversation is created
      * from its current state. Use &#x60;refresh_shared_content&#x60; to regenerate the shared view
@@ -4789,7 +4998,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Remove parameterization from fields in metadata objects. Version: 26.5.0.cl or later Allows
+     * Remove parameterization from fields in metadata objects. Version: 26.10.0.cl or later Allows
      * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
      * appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
@@ -4824,7 +5033,7 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
+     * Version: 26.10.0.cl or later Allows unpublishing metadata objects from organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * When unpublishing objects, you can: * Include dependencies by setting
@@ -4838,6 +5047,55 @@ public class ThoughtSpotRestApiTest {
     public void unpublishMetadataTest() throws ApiException {
         UnpublishMetadataRequest unpublishMetadataRequest = null;
         api.unpublishMetadata(unpublishMetadataRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the
+     * update is a full replace: the analyst is rewritten from the request, and optional fields
+     * omitted from the request are reset (no instructions, no MCP connectors, no starter prompts).
+     * Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.
+     * Version: 26.10.0.cl or later Updates a Spotter Analyst. The request body is identical to the
+     * create analyst API, and the update is a full replace: the analyst is rewritten from the
+     * request, and optional fields omitted from the request are reset. Requires ownership of the
+     * analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users
+     * the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in
+     * which the analyst exists. #### Usage guidelines The request body is flat — all fields are
+     * top-level: - &#x60;name&#x60; (required): display name of the analyst. -
+     * &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60;
+     * (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions
+     * that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field
+     * clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source
+     * the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and
+     * a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or
+     * &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added,
+     * they are automatically shared with users the analyst was previously shared with, so those
+     * users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers
+     * of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear.
+     * - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250
+     * characters; display order follows list position. Replaces the existing list in full; omit or
+     * pass an empty array to clear. If the request is successful, the response contains the updated
+     * analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch
+     * milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with
+     * &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and
+     * starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;,
+     * &#x60;order&#x60;, &#x60;is_ai_generated&#x60;). #### Error conditions - &#x60;400&#x60; —
+     * malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author
+     * and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the
+     * given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60;
+     * conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing
+     * required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty
+     * &#x60;sources&#x60; list, too many starter prompts, or field-length violations. -
+     * &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateAnalystTest() throws ApiException {
+        String analystIdentifier = null;
+        UpdateAnalystRequest updateAnalystRequest = null;
+        Analyst response = api.updateAnalyst(analystIdentifier, updateAnalystRequest);
         // TODO: test validations
     }
 
@@ -5166,9 +5424,10 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
-     * Updates attributes of an existing agent conversation. Currently only the display title can be
-     * updated; additional conversation attributes may be supported in future versions. At least one
-     * updatable attribute must be provided in the request body. Version: 26.7.0.cl or later Updates
+     * Updates attributes of an existing agent conversation. Supports updating the display title and
+     * the pinned state; additional conversation attributes may be supported in future versions. At
+     * least one updatable attribute must be provided in the request body. Each attribute is applied
+     * independently, so omitted attributes are left unchanged. Version: 26.7.0.cl or later Updates
      * attributes of an existing saved agent conversation. Supports updating the conversation&#39;s
      * display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable
      * attributes may be supported in future versions. At least one updatable attribute must be
@@ -5326,6 +5585,80 @@ public class ThoughtSpotRestApiTest {
     public void updateEmailCustomizationTest() throws ApiException {
         UpdateEmailCustomizationRequest updateEmailCustomizationRequest = null;
         api.updateEmailCustomization(updateEmailCustomizationRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.10.0.cl or later Updates the Org assignments for a feature. Available to cluster
+     * admins only. #### Pre-requisites Requires the &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint
+     * manages Org assignments across the cluster, so it must be called by a cluster admin;
+     * org-scoped admins cannot call it. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To update the Org assignments for a feature, pass these parameters in your API
+     * request: - &#x60;feature_identifier&#x60; — User-friendly feature name
+     * (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the
+     * feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an
+     * empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org
+     * assignments for this feature. - &#x60;operation&#x60; — Type of update to apply.
+     * &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60;
+     * unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs.
+     * Defaults to &#x60;REPLACE&#x60;. The following example assigns Orgs &#x60;1&#x60; and
+     * &#x60;2&#x60; to a feature, in addition to any Orgs already assigned: &#x60;&#x60;&#x60; {
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;org_identifiers\&quot;:
+     * [1, 2], \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60; Clear all Org
+     * assignments for a feature by sending an empty array with &#x60;operation&#x60; set to
+     * &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once): &#x60;&#x60;&#x60;
+     * { \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,
+     * \&quot;org_identifiers\&quot;: [], \&quot;operation\&quot;: \&quot;REPLACE\&quot; }
+     * &#x60;&#x60;&#x60;
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateFeatureAssignmentsTest() throws ApiException {
+        UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest = null;
+        FeatureAssignmentResponse response =
+                api.updateFeatureAssignments(updateFeatureAssignmentsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Version: 26.10.0.cl or later Sets the value of a feature at the cluster or Org scope. ####
+     * Pre-requisites Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To set a feature value, pass these parameters in your API request: -
+     * &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60;
+     * to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. -
+     * &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when
+     * &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;.
+     * - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or
+     * the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set.
+     * - &#x60;feature_value&#x60; — New value to set for the feature. -
+     * &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is
+     * &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this
+     * feature are also removed so that all Orgs inherit the new cluster-level value. Required when
+     * &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when
+     * &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400
+     * error. The following example sets a per-Org value override for Org &#x60;1&#x60;:
+     * &#x60;&#x60;&#x60; { \&quot;scope\&quot;: \&quot;ORG\&quot;, \&quot;org_identifier\&quot;: 1,
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;feature_value\&quot;:
+     * \&quot;true\&quot; } &#x60;&#x60;&#x60; Set the cluster-level value and clear all per-Org
+     * overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides:
+     * true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:
+     * &#x60;&#x60;&#x60; { \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;feature_value\&quot;:
+     * \&quot;true\&quot;, \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateFeatureValueTest() throws ApiException {
+        UpdateFeatureValueRequest updateFeatureValueRequest = null;
+        FeatureValueResponse response = api.updateFeatureValue(updateFeatureValueRequest);
         // TODO: test validations
     }
 
@@ -5498,10 +5831,22 @@ public class ThoughtSpotRestApiTest {
      * #### Navigation panel color Set &#x60;navigation_panel.theme&#x60; to one of: -
      * &#x60;DARK&#x60;: Default dark theme. - &#x60;TWO_TONE&#x60;: Dual-tone panel style. -
      * &#x60;CUSTOM&#x60;: User-defined color. Provide &#x60;navigation_panel.base_color&#x60; as a
-     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### Chart color palette Provide exactly 8
-     * color entries in &#x60;chart_color_palette.colors&#x60;. Each entry requires a
-     * &#x60;primary&#x60; hex color. If &#x60;secondary&#x60; shades are omitted, the server
-     * auto-generates 4 shades from the primary color. #### Font assignments Specify
+     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### App color theme
+     * &#x60;app_color_theme&#x60; (_available from 26.10.0.cl_) sets the same underlying color as
+     * &#x60;navigation_panel&#x60;, expressed as a brand color plus how it is applied. Provide
+     * exactly one of &#x60;navigation_panel&#x60; or &#x60;app_color_theme&#x60; per request;
+     * providing both returns an error. &#x60;app_color_theme&#x60; is supported only when the app
+     * color theme is enabled on the cluster; using it otherwise returns an error. -
+     * &#x60;brand_color&#x60;: Brand color as a 6-digit hex string (e.g. &#x60;#2359B6&#x60;). Omit
+     * to leave the stored color unchanged. To clear it, use &#x60;operation: RESET&#x60; with
+     * &#x60;reset_options.style&#x60; set to &#x60;APP_COLOR_THEME&#x60;. -
+     * &#x60;apply_as_top_nav_color&#x60;: Whether the brand color is painted on the top navigation
+     * bar literally, instead of the surface shade generated from it. Omit to leave the stored
+     * choice unchanged. &#x60;brand_color&#x60; and &#x60;apply_as_top_nav_color&#x60; may be set
+     * independently in the same request. #### Chart color palette Provide exactly 8 color entries
+     * in &#x60;chart_color_palette.colors&#x60;. Each entry requires a &#x60;primary&#x60; hex
+     * color. If &#x60;secondary&#x60; shades are omitted, the server auto-generates 4 shades from
+     * the primary color. #### Font assignments Specify
      * &#x60;visualization_fonts.chart_visualization_fonts&#x60;,
      * &#x60;visualization_fonts.table_visualization_fonts&#x60;, and
      * &#x60;visualization_fonts.advanced_chart_visualization_fonts&#x60; to assign custom fonts to

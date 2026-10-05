@@ -85,7 +85,15 @@ public class StyleCustomizationApiTest {
      * cluster-level style defaults. - Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to
      * retrieve preferences for the authenticated user&#39;s org. - Each field in the response
      * includes an &#x60;is_overridden&#x60; flag indicating whether the value was explicitly set at
-     * the requested scope or inherited from a parent scope (cluster or system default).
+     * the requested scope or inherited from a parent scope (cluster or system default). -
+     * &#x60;app_color_theme&#x60; (_available from 26.10.0.cl_) describes the same underlying color
+     * as &#x60;navigation_panel&#x60;, in a different form: &#x60;navigation_panel&#x60; uses the
+     * &#x60;DARK&#x60;/&#x60;TWO_TONE&#x60;/&#x60;CUSTOM&#x60; theme modes, while
+     * &#x60;app_color_theme&#x60; gives the brand color and how it is applied
+     * (&#x60;brand_color&#x60;, &#x60;apply_as_top_nav_color&#x60;). They never disagree, so use
+     * whichever your integration already reads. &#x60;app_color_theme&#x60; is returned only when
+     * the app color theme is enabled on the cluster; &#x60;navigation_panel&#x60; is always
+     * returned.
      *
      * @throws ApiException if the Api call fails
      */
@@ -142,10 +150,22 @@ public class StyleCustomizationApiTest {
      * #### Navigation panel color Set &#x60;navigation_panel.theme&#x60; to one of: -
      * &#x60;DARK&#x60;: Default dark theme. - &#x60;TWO_TONE&#x60;: Dual-tone panel style. -
      * &#x60;CUSTOM&#x60;: User-defined color. Provide &#x60;navigation_panel.base_color&#x60; as a
-     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### Chart color palette Provide exactly 8
-     * color entries in &#x60;chart_color_palette.colors&#x60;. Each entry requires a
-     * &#x60;primary&#x60; hex color. If &#x60;secondary&#x60; shades are omitted, the server
-     * auto-generates 4 shades from the primary color. #### Font assignments Specify
+     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### App color theme
+     * &#x60;app_color_theme&#x60; (_available from 26.10.0.cl_) sets the same underlying color as
+     * &#x60;navigation_panel&#x60;, expressed as a brand color plus how it is applied. Provide
+     * exactly one of &#x60;navigation_panel&#x60; or &#x60;app_color_theme&#x60; per request;
+     * providing both returns an error. &#x60;app_color_theme&#x60; is supported only when the app
+     * color theme is enabled on the cluster; using it otherwise returns an error. -
+     * &#x60;brand_color&#x60;: Brand color as a 6-digit hex string (e.g. &#x60;#2359B6&#x60;). Omit
+     * to leave the stored color unchanged. To clear it, use &#x60;operation: RESET&#x60; with
+     * &#x60;reset_options.style&#x60; set to &#x60;APP_COLOR_THEME&#x60;. -
+     * &#x60;apply_as_top_nav_color&#x60;: Whether the brand color is painted on the top navigation
+     * bar literally, instead of the surface shade generated from it. Omit to leave the stored
+     * choice unchanged. &#x60;brand_color&#x60; and &#x60;apply_as_top_nav_color&#x60; may be set
+     * independently in the same request. #### Chart color palette Provide exactly 8 color entries
+     * in &#x60;chart_color_palette.colors&#x60;. Each entry requires a &#x60;primary&#x60; hex
+     * color. If &#x60;secondary&#x60; shades are omitted, the server auto-generates 4 shades from
+     * the primary color. #### Font assignments Specify
      * &#x60;visualization_fonts.chart_visualization_fonts&#x60;,
      * &#x60;visualization_fonts.table_visualization_fonts&#x60;, and
      * &#x60;visualization_fonts.advanced_chart_visualization_fonts&#x60; to assign custom fonts to

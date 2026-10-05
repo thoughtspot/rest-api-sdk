@@ -2578,7 +2578,7 @@ public class MetadataApi {
 
     /**
      * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
-     * LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple fields of metadata
+     * LOGICAL_TABLE. Version: 26.10.0.cl or later Allows parameterizing multiple fields of metadata
      * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
      * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
      * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
@@ -2612,7 +2612,7 @@ public class MetadataApi {
 
     /**
      * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
-     * LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple fields of metadata
+     * LOGICAL_TABLE. Version: 26.10.0.cl or later Allows parameterizing multiple fields of metadata
      * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
      * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
      * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
@@ -2650,7 +2650,7 @@ public class MetadataApi {
 
     /**
      * (asynchronously) Parameterize multiple fields of metadata objects. For example [schemaName,
-     * databaseName] for LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple
+     * databaseName] for LOGICAL_TABLE. Version: 26.10.0.cl or later Allows parameterizing multiple
      * fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName,
      * databaseName] for LOGICAL_TABLE. Requires appropriate permissions to modify the metadata
      * object. The API endpoint allows parameterizing the following types of metadata objects: *
@@ -3045,7 +3045,7 @@ public class MetadataApi {
     }
 
     /**
-     * Remove parameterization from fields in metadata objects. Version: 26.5.0.cl or later Allows
+     * Remove parameterization from fields in metadata objects. Version: 26.10.0.cl or later Allows
      * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
      * appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
@@ -3090,7 +3090,7 @@ public class MetadataApi {
     }
 
     /**
-     * Remove parameterization from fields in metadata objects. Version: 26.5.0.cl or later Allows
+     * Remove parameterization from fields in metadata objects. Version: 26.10.0.cl or later Allows
      * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
      * appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
@@ -3138,7 +3138,7 @@ public class MetadataApi {
     }
 
     /**
-     * (asynchronously) Remove parameterization from fields in metadata objects. Version: 26.5.0.cl
+     * (asynchronously) Remove parameterization from fields in metadata objects. Version: 26.10.0.cl
      * or later Allows removing parameterization from fields in metadata objects in ThoughtSpot.
      * Requires appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *

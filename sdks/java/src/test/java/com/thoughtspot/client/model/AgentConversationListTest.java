@@ -51,4 +51,16 @@ public class AgentConversationListTest {
     public void dataSourceNamesTest() {
         // TODO: test dataSourceNames
     }
+
+    /** Test the property 'isPinned' */
+    @Test
+    public void isPinnedTest() {
+        // TODO: test isPinned
+    }
+
+    /** Test the property 'analystId' */
+    @Test
+    public void analystIdTest() {
+        // TODO: test analystId
+    }
 }

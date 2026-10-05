@@ -122,7 +122,9 @@ public class SemanticIntegrationSearchResponse implements Serializable {
     /** CDW connector type. */
     @JsonAdapter(TypeEnum.Adapter.class)
     public enum TypeEnum {
-        RDBMS_SNOWFLAKE("RDBMS_SNOWFLAKE");
+        RDBMS_SNOWFLAKE("RDBMS_SNOWFLAKE"),
+
+        RDBMS_DATABRICKS("RDBMS_DATABRICKS");
 
         private String value;
 

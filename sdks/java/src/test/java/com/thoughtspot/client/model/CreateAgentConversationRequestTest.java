@@ -27,4 +27,10 @@ public class CreateAgentConversationRequestTest {
     public void conversationSettingsTest() {
         // TODO: test conversationSettings
     }
+
+    /** Test the property 'analystIdentifier' */
+    @Test
+    public void analystIdentifierTest() {
+        // TODO: test analystIdentifier
+    }
 }

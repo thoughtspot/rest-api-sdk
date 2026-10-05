@@ -89,7 +89,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'ThoughtSpot-Client/python/2.28.0'
+        self.user_agent = 'ThoughtSpot-Client/python/2.29.0'
         self.client_side_validation = configuration.client_side_validation
         # CUSTOM: apply default headers configured on the Configuration so headers
         # can be set without an explicit ApiClient (Configuration-only construction).

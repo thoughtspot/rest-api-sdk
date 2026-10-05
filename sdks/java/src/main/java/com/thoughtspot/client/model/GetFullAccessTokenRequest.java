@@ -60,6 +60,12 @@ public class GetFullAccessTokenRequest implements Serializable {
     @javax.annotation.Nullable
     private Integer orgId;
 
+    public static final String SERIALIZED_NAME_SCOPE = "scope";
+
+    @SerializedName(SERIALIZED_NAME_SCOPE)
+    @javax.annotation.Nullable
+    private TokenScopeInput scope;
+
     public static final String SERIALIZED_NAME_EMAIL = "email";
 
     @SerializedName(SERIALIZED_NAME_EMAIL)
@@ -190,6 +196,27 @@ public class GetFullAccessTokenRequest implements Serializable {
 
     public void setOrgId(@javax.annotation.Nullable Integer orgId) {
         this.orgId = orgId;
+    }
+
+    public GetFullAccessTokenRequest scope(@javax.annotation.Nullable TokenScopeInput scope) {
+        this.scope = scope;
+        return this;
+    }
+
+    /**
+     * The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable
+     * to a Tenant Administrator. Each subsequent request selects one Org from this set using the
+     * &#x60;X-Org-Selector&#x60; header. Version: 26.10.0.cl or later
+     *
+     * @return scope
+     */
+    @javax.annotation.Nullable
+    public TokenScopeInput getScope() {
+        return scope;
+    }
+
+    public void setScope(@javax.annotation.Nullable TokenScopeInput scope) {
+        this.scope = scope;
     }
 
     public GetFullAccessTokenRequest email(@javax.annotation.Nullable String email) {
@@ -364,6 +391,7 @@ public class GetFullAccessTokenRequest implements Serializable {
                 && Objects.equals(
                         this.validityTimeInSec, getFullAccessTokenRequest.validityTimeInSec)
                 && Objects.equals(this.orgId, getFullAccessTokenRequest.orgId)
+                && Objects.equals(this.scope, getFullAccessTokenRequest.scope)
                 && Objects.equals(this.email, getFullAccessTokenRequest.email)
                 && Objects.equals(this.displayName, getFullAccessTokenRequest.displayName)
                 && Objects.equals(this.autoCreate, getFullAccessTokenRequest.autoCreate)
@@ -381,6 +409,7 @@ public class GetFullAccessTokenRequest implements Serializable {
                 secretKey,
                 validityTimeInSec,
                 orgId,
+                scope,
                 email,
                 displayName,
                 autoCreate,
@@ -400,6 +429,7 @@ public class GetFullAccessTokenRequest implements Serializable {
                 .append(toIndentedString(validityTimeInSec))
                 .append("\n");
         sb.append("    orgId: ").append(toIndentedString(orgId)).append("\n");
+        sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
         sb.append("    autoCreate: ").append(toIndentedString(autoCreate)).append("\n");
@@ -434,6 +464,7 @@ public class GetFullAccessTokenRequest implements Serializable {
         openapiFields.add("secret_key");
         openapiFields.add("validity_time_in_sec");
         openapiFields.add("org_id");
+        openapiFields.add("scope");
         openapiFields.add("email");
         openapiFields.add("display_name");
         openapiFields.add("auto_create");
@@ -495,6 +526,10 @@ public class GetFullAccessTokenRequest implements Serializable {
                             "Expected the field `secret_key` to be a primitive type in the JSON"
                                     + " string but got `%s`",
                             jsonObj.get("secret_key").toString()));
+        }
+        // validate the optional field `scope`
+        if (jsonObj.get("scope") != null && !jsonObj.get("scope").isJsonNull()) {
+            TokenScopeInput.validateJsonElement(jsonObj.get("scope"));
         }
         if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull())
                 && !jsonObj.get("email").isJsonPrimitive()) {

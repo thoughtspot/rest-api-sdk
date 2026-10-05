@@ -10,6 +10,7 @@ docs/AIContext.md
 docs/APIKey.md
 docs/APIKeyInput.md
 docs/AccessToken.md
+docs/AccessTokenScope.md
 docs/ActionConfig.md
 docs/ActionConfigInput.md
 docs/ActionConfigInputCreate.md
@@ -24,6 +25,17 @@ docs/AgentConversationHistoryResponse.md
 docs/AgentConversationList.md
 docs/AgentInstructions.md
 docs/AiApi.md
+docs/Analyst.md
+docs/AnalystDeleteResponse.md
+docs/AnalystItem.md
+docs/AnalystItemSource.md
+docs/AnalystItemStarterPrompt.md
+docs/AnalystMcpConnector.md
+docs/AnalystSearchResponse.md
+docs/AnalystSource.md
+docs/AnalystSourceInput.md
+docs/AnalystStarterPrompt.md
+docs/AnalystUser.md
 docs/AnswerContent.md
 docs/AnswerDataResponse.md
 docs/AnswerDetails.md
@@ -107,6 +119,7 @@ docs/ConversationShareStatusResponse.md
 docs/ConvertWorksheetToModelRequest.md
 docs/CopyObjectRequest.md
 docs/CreateAgentConversationRequest.md
+docs/CreateAnalystRequest.md
 docs/CreateCalendarRequest.md
 docs/CreateCollectionRequest.md
 docs/CreateConfigRequest.md
@@ -192,6 +205,12 @@ docs/ExternalTableInput.md
 docs/FavoriteMetadataInput.md
 docs/FavoriteMetadataItem.md
 docs/FavoriteObjectOptionsInput.md
+docs/FeatureAssignmentResponse.md
+docs/FeatureDetail.md
+docs/FeatureGroup.md
+docs/FeatureManagementApi.md
+docs/FeatureOrgInfo.md
+docs/FeatureValueResponse.md
 docs/FetchAnswerDataRequest.md
 docs/FetchAnswerSqlQueryRequest.md
 docs/FetchAsyncImportTaskStatusRequest.md
@@ -360,6 +379,7 @@ docs/SchemaObject.md
 docs/Scope.md
 docs/ScriptSrcUrls.md
 docs/ScriptSrcUrlsInput.md
+docs/SearchAnalystsRequest.md
 docs/SearchAuthSettingsRequest.md
 docs/SearchAuthSettingsResponse.md
 docs/SearchCalendarsRequest.md
@@ -376,6 +396,7 @@ docs/SearchDataRequest.md
 docs/SearchDataResponse.md
 docs/SearchDatasetsResponseItem.md
 docs/SearchEmailCustomizationRequest.md
+docs/SearchFeaturesRequest.md
 docs/SearchMetadataRequest.md
 docs/SearchOrgsRequest.md
 docs/SearchRoleResponse.md
@@ -413,6 +434,7 @@ docs/SendAgentMessageStreamingRequest.md
 docs/SendMessageRequest.md
 docs/SetAgentInstructionsRequest.md
 docs/SetNLInstructionsRequest.md
+docs/ShareAnalystRequest.md
 docs/ShareConversationRequest.md
 docs/ShareMetadataRequest.md
 docs/ShareMetadataTypeInput.md
@@ -464,6 +486,7 @@ docs/TextResponseItem.md
 docs/ThoughtSpotRestApi.md
 docs/Token.md
 docs/TokenAccessScopeObject.md
+docs/TokenScopeInput.md
 docs/TokenValidationResponse.md
 docs/ToolCallResponseItem.md
 docs/ToolResultResponseItem.md
@@ -473,6 +496,7 @@ docs/URLInputMandatory.md
 docs/UnassignTagRequest.md
 docs/UnparameterizeMetadataRequest.md
 docs/UnpublishMetadataRequest.md
+docs/UpdateAnalystRequest.md
 docs/UpdateCalendarRequest.md
 docs/UpdateCollectionRequest.md
 docs/UpdateColumnSecurityRulesRequest.md
@@ -484,6 +508,8 @@ docs/UpdateConnectionV2Request.md
 docs/UpdateConversationRequest.md
 docs/UpdateCustomActionRequest.md
 docs/UpdateEmailCustomizationRequest.md
+docs/UpdateFeatureAssignmentsRequest.md
+docs/UpdateFeatureValueRequest.md
 docs/UpdateMetadataHeaderRequest.md
 docs/UpdateMetadataObjIdRequest.md
 docs/UpdateObjIdInput.md
@@ -584,6 +610,7 @@ src/main/java/com/thoughtspot/client/api/CustomCalendarsApi.java
 src/main/java/com/thoughtspot/client/api/DataApi.java
 src/main/java/com/thoughtspot/client/api/DbtApi.java
 src/main/java/com/thoughtspot/client/api/EmailCustomizationApi.java
+src/main/java/com/thoughtspot/client/api/FeatureManagementApi.java
 src/main/java/com/thoughtspot/client/api/GroupsApi.java
 src/main/java/com/thoughtspot/client/api/JobsApi.java
 src/main/java/com/thoughtspot/client/api/LogApi.java
@@ -613,6 +640,7 @@ src/main/java/com/thoughtspot/client/model/APIKey.java
 src/main/java/com/thoughtspot/client/model/APIKeyInput.java
 src/main/java/com/thoughtspot/client/model/AbstractOpenApiSchema.java
 src/main/java/com/thoughtspot/client/model/AccessToken.java
+src/main/java/com/thoughtspot/client/model/AccessTokenScope.java
 src/main/java/com/thoughtspot/client/model/ActionConfig.java
 src/main/java/com/thoughtspot/client/model/ActionConfigInput.java
 src/main/java/com/thoughtspot/client/model/ActionConfigInputCreate.java
@@ -626,6 +654,17 @@ src/main/java/com/thoughtspot/client/model/AgentConversation.java
 src/main/java/com/thoughtspot/client/model/AgentConversationHistoryResponse.java
 src/main/java/com/thoughtspot/client/model/AgentConversationList.java
 src/main/java/com/thoughtspot/client/model/AgentInstructions.java
+src/main/java/com/thoughtspot/client/model/Analyst.java
+src/main/java/com/thoughtspot/client/model/AnalystDeleteResponse.java
+src/main/java/com/thoughtspot/client/model/AnalystItem.java
+src/main/java/com/thoughtspot/client/model/AnalystItemSource.java
+src/main/java/com/thoughtspot/client/model/AnalystItemStarterPrompt.java
+src/main/java/com/thoughtspot/client/model/AnalystMcpConnector.java
+src/main/java/com/thoughtspot/client/model/AnalystSearchResponse.java
+src/main/java/com/thoughtspot/client/model/AnalystSource.java
+src/main/java/com/thoughtspot/client/model/AnalystSourceInput.java
+src/main/java/com/thoughtspot/client/model/AnalystStarterPrompt.java
+src/main/java/com/thoughtspot/client/model/AnalystUser.java
 src/main/java/com/thoughtspot/client/model/AnswerContent.java
 src/main/java/com/thoughtspot/client/model/AnswerDataResponse.java
 src/main/java/com/thoughtspot/client/model/AnswerDetails.java
@@ -705,6 +744,7 @@ src/main/java/com/thoughtspot/client/model/ConversationShareStatusResponse.java
 src/main/java/com/thoughtspot/client/model/ConvertWorksheetToModelRequest.java
 src/main/java/com/thoughtspot/client/model/CopyObjectRequest.java
 src/main/java/com/thoughtspot/client/model/CreateAgentConversationRequest.java
+src/main/java/com/thoughtspot/client/model/CreateAnalystRequest.java
 src/main/java/com/thoughtspot/client/model/CreateCalendarRequest.java
 src/main/java/com/thoughtspot/client/model/CreateCollectionRequest.java
 src/main/java/com/thoughtspot/client/model/CreateConfigRequest.java
@@ -785,6 +825,11 @@ src/main/java/com/thoughtspot/client/model/ExternalTableInput.java
 src/main/java/com/thoughtspot/client/model/FavoriteMetadataInput.java
 src/main/java/com/thoughtspot/client/model/FavoriteMetadataItem.java
 src/main/java/com/thoughtspot/client/model/FavoriteObjectOptionsInput.java
+src/main/java/com/thoughtspot/client/model/FeatureAssignmentResponse.java
+src/main/java/com/thoughtspot/client/model/FeatureDetail.java
+src/main/java/com/thoughtspot/client/model/FeatureGroup.java
+src/main/java/com/thoughtspot/client/model/FeatureOrgInfo.java
+src/main/java/com/thoughtspot/client/model/FeatureValueResponse.java
 src/main/java/com/thoughtspot/client/model/FetchAnswerDataRequest.java
 src/main/java/com/thoughtspot/client/model/FetchAnswerSqlQueryRequest.java
 src/main/java/com/thoughtspot/client/model/FetchAsyncImportTaskStatusRequest.java
@@ -944,6 +989,7 @@ src/main/java/com/thoughtspot/client/model/SchemaObject.java
 src/main/java/com/thoughtspot/client/model/Scope.java
 src/main/java/com/thoughtspot/client/model/ScriptSrcUrls.java
 src/main/java/com/thoughtspot/client/model/ScriptSrcUrlsInput.java
+src/main/java/com/thoughtspot/client/model/SearchAnalystsRequest.java
 src/main/java/com/thoughtspot/client/model/SearchAuthSettingsRequest.java
 src/main/java/com/thoughtspot/client/model/SearchAuthSettingsResponse.java
 src/main/java/com/thoughtspot/client/model/SearchCalendarsRequest.java
@@ -960,6 +1006,7 @@ src/main/java/com/thoughtspot/client/model/SearchDataRequest.java
 src/main/java/com/thoughtspot/client/model/SearchDataResponse.java
 src/main/java/com/thoughtspot/client/model/SearchDatasetsResponseItem.java
 src/main/java/com/thoughtspot/client/model/SearchEmailCustomizationRequest.java
+src/main/java/com/thoughtspot/client/model/SearchFeaturesRequest.java
 src/main/java/com/thoughtspot/client/model/SearchMetadataRequest.java
 src/main/java/com/thoughtspot/client/model/SearchOrgsRequest.java
 src/main/java/com/thoughtspot/client/model/SearchRoleResponse.java
@@ -995,6 +1042,7 @@ src/main/java/com/thoughtspot/client/model/SendAgentMessageStreamingRequest.java
 src/main/java/com/thoughtspot/client/model/SendMessageRequest.java
 src/main/java/com/thoughtspot/client/model/SetAgentInstructionsRequest.java
 src/main/java/com/thoughtspot/client/model/SetNLInstructionsRequest.java
+src/main/java/com/thoughtspot/client/model/ShareAnalystRequest.java
 src/main/java/com/thoughtspot/client/model/ShareConversationRequest.java
 src/main/java/com/thoughtspot/client/model/ShareMetadataRequest.java
 src/main/java/com/thoughtspot/client/model/ShareMetadataTypeInput.java
@@ -1042,6 +1090,7 @@ src/main/java/com/thoughtspot/client/model/TemplatePropertiesInputCreate.java
 src/main/java/com/thoughtspot/client/model/TextResponseItem.java
 src/main/java/com/thoughtspot/client/model/Token.java
 src/main/java/com/thoughtspot/client/model/TokenAccessScopeObject.java
+src/main/java/com/thoughtspot/client/model/TokenScopeInput.java
 src/main/java/com/thoughtspot/client/model/TokenValidationResponse.java
 src/main/java/com/thoughtspot/client/model/ToolCallResponseItem.java
 src/main/java/com/thoughtspot/client/model/ToolResultResponseItem.java
@@ -1051,6 +1100,7 @@ src/main/java/com/thoughtspot/client/model/URLInputMandatory.java
 src/main/java/com/thoughtspot/client/model/UnassignTagRequest.java
 src/main/java/com/thoughtspot/client/model/UnparameterizeMetadataRequest.java
 src/main/java/com/thoughtspot/client/model/UnpublishMetadataRequest.java
+src/main/java/com/thoughtspot/client/model/UpdateAnalystRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateCalendarRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateCollectionRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateColumnSecurityRulesRequest.java
@@ -1062,6 +1112,8 @@ src/main/java/com/thoughtspot/client/model/UpdateConnectionV2Request.java
 src/main/java/com/thoughtspot/client/model/UpdateConversationRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateCustomActionRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateEmailCustomizationRequest.java
+src/main/java/com/thoughtspot/client/model/UpdateFeatureAssignmentsRequest.java
+src/main/java/com/thoughtspot/client/model/UpdateFeatureValueRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateMetadataHeaderRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateMetadataObjIdRequest.java
 src/main/java/com/thoughtspot/client/model/UpdateObjIdInput.java
@@ -1130,6 +1182,7 @@ src/test/java/com/thoughtspot/client/api/CustomCalendarsApiTest.java
 src/test/java/com/thoughtspot/client/api/DataApiTest.java
 src/test/java/com/thoughtspot/client/api/DbtApiTest.java
 src/test/java/com/thoughtspot/client/api/EmailCustomizationApiTest.java
+src/test/java/com/thoughtspot/client/api/FeatureManagementApiTest.java
 src/test/java/com/thoughtspot/client/api/GroupsApiTest.java
 src/test/java/com/thoughtspot/client/api/JobsApiTest.java
 src/test/java/com/thoughtspot/client/api/LogApiTest.java
@@ -1153,6 +1206,7 @@ src/test/java/com/thoughtspot/client/model/ACStateTest.java
 src/test/java/com/thoughtspot/client/model/AIContextTest.java
 src/test/java/com/thoughtspot/client/model/APIKeyInputTest.java
 src/test/java/com/thoughtspot/client/model/APIKeyTest.java
+src/test/java/com/thoughtspot/client/model/AccessTokenScopeTest.java
 src/test/java/com/thoughtspot/client/model/AccessTokenTest.java
 src/test/java/com/thoughtspot/client/model/ActionConfigInputCreateTest.java
 src/test/java/com/thoughtspot/client/model/ActionConfigInputTest.java
@@ -1167,6 +1221,17 @@ src/test/java/com/thoughtspot/client/model/AgentConversationHistoryResponseTest.
 src/test/java/com/thoughtspot/client/model/AgentConversationListTest.java
 src/test/java/com/thoughtspot/client/model/AgentConversationTest.java
 src/test/java/com/thoughtspot/client/model/AgentInstructionsTest.java
+src/test/java/com/thoughtspot/client/model/AnalystDeleteResponseTest.java
+src/test/java/com/thoughtspot/client/model/AnalystItemSourceTest.java
+src/test/java/com/thoughtspot/client/model/AnalystItemStarterPromptTest.java
+src/test/java/com/thoughtspot/client/model/AnalystItemTest.java
+src/test/java/com/thoughtspot/client/model/AnalystMcpConnectorTest.java
+src/test/java/com/thoughtspot/client/model/AnalystSearchResponseTest.java
+src/test/java/com/thoughtspot/client/model/AnalystSourceInputTest.java
+src/test/java/com/thoughtspot/client/model/AnalystSourceTest.java
+src/test/java/com/thoughtspot/client/model/AnalystStarterPromptTest.java
+src/test/java/com/thoughtspot/client/model/AnalystTest.java
+src/test/java/com/thoughtspot/client/model/AnalystUserTest.java
 src/test/java/com/thoughtspot/client/model/AnswerContentTest.java
 src/test/java/com/thoughtspot/client/model/AnswerDataResponseTest.java
 src/test/java/com/thoughtspot/client/model/AnswerDetailsTest.java
@@ -1246,6 +1311,7 @@ src/test/java/com/thoughtspot/client/model/ConversationTest.java
 src/test/java/com/thoughtspot/client/model/ConvertWorksheetToModelRequestTest.java
 src/test/java/com/thoughtspot/client/model/CopyObjectRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateAgentConversationRequestTest.java
+src/test/java/com/thoughtspot/client/model/CreateAnalystRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateCalendarRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateCollectionRequestTest.java
 src/test/java/com/thoughtspot/client/model/CreateConfigRequestTest.java
@@ -1326,6 +1392,11 @@ src/test/java/com/thoughtspot/client/model/ExternalTableInputTest.java
 src/test/java/com/thoughtspot/client/model/FavoriteMetadataInputTest.java
 src/test/java/com/thoughtspot/client/model/FavoriteMetadataItemTest.java
 src/test/java/com/thoughtspot/client/model/FavoriteObjectOptionsInputTest.java
+src/test/java/com/thoughtspot/client/model/FeatureAssignmentResponseTest.java
+src/test/java/com/thoughtspot/client/model/FeatureDetailTest.java
+src/test/java/com/thoughtspot/client/model/FeatureGroupTest.java
+src/test/java/com/thoughtspot/client/model/FeatureOrgInfoTest.java
+src/test/java/com/thoughtspot/client/model/FeatureValueResponseTest.java
 src/test/java/com/thoughtspot/client/model/FetchAnswerDataRequestTest.java
 src/test/java/com/thoughtspot/client/model/FetchAnswerSqlQueryRequestTest.java
 src/test/java/com/thoughtspot/client/model/FetchAsyncImportTaskStatusRequestTest.java
@@ -1485,6 +1556,7 @@ src/test/java/com/thoughtspot/client/model/SchemaObjectTest.java
 src/test/java/com/thoughtspot/client/model/ScopeTest.java
 src/test/java/com/thoughtspot/client/model/ScriptSrcUrlsInputTest.java
 src/test/java/com/thoughtspot/client/model/ScriptSrcUrlsTest.java
+src/test/java/com/thoughtspot/client/model/SearchAnalystsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchAuthSettingsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchAuthSettingsResponseTest.java
 src/test/java/com/thoughtspot/client/model/SearchCalendarsRequestTest.java
@@ -1501,6 +1573,7 @@ src/test/java/com/thoughtspot/client/model/SearchDataRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchDataResponseTest.java
 src/test/java/com/thoughtspot/client/model/SearchDatasetsResponseItemTest.java
 src/test/java/com/thoughtspot/client/model/SearchEmailCustomizationRequestTest.java
+src/test/java/com/thoughtspot/client/model/SearchFeaturesRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchMetadataRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchOrgsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SearchRoleResponseTest.java
@@ -1536,6 +1609,7 @@ src/test/java/com/thoughtspot/client/model/SendAgentMessageStreamingRequestTest.
 src/test/java/com/thoughtspot/client/model/SendMessageRequestTest.java
 src/test/java/com/thoughtspot/client/model/SetAgentInstructionsRequestTest.java
 src/test/java/com/thoughtspot/client/model/SetNLInstructionsRequestTest.java
+src/test/java/com/thoughtspot/client/model/ShareAnalystRequestTest.java
 src/test/java/com/thoughtspot/client/model/ShareConversationRequestTest.java
 src/test/java/com/thoughtspot/client/model/ShareMetadataRequestTest.java
 src/test/java/com/thoughtspot/client/model/ShareMetadataTypeInputTest.java
@@ -1582,6 +1656,7 @@ src/test/java/com/thoughtspot/client/model/TagTest.java
 src/test/java/com/thoughtspot/client/model/TemplatePropertiesInputCreateTest.java
 src/test/java/com/thoughtspot/client/model/TextResponseItemTest.java
 src/test/java/com/thoughtspot/client/model/TokenAccessScopeObjectTest.java
+src/test/java/com/thoughtspot/client/model/TokenScopeInputTest.java
 src/test/java/com/thoughtspot/client/model/TokenTest.java
 src/test/java/com/thoughtspot/client/model/TokenValidationResponseTest.java
 src/test/java/com/thoughtspot/client/model/ToolCallResponseItemTest.java
@@ -1592,6 +1667,7 @@ src/test/java/com/thoughtspot/client/model/URLTest.java
 src/test/java/com/thoughtspot/client/model/UnassignTagRequestTest.java
 src/test/java/com/thoughtspot/client/model/UnparameterizeMetadataRequestTest.java
 src/test/java/com/thoughtspot/client/model/UnpublishMetadataRequestTest.java
+src/test/java/com/thoughtspot/client/model/UpdateAnalystRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateCalendarRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateCollectionRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateColumnSecurityRulesRequestTest.java
@@ -1603,6 +1679,8 @@ src/test/java/com/thoughtspot/client/model/UpdateConnectionV2RequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateConversationRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateCustomActionRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateEmailCustomizationRequestTest.java
+src/test/java/com/thoughtspot/client/model/UpdateFeatureAssignmentsRequestTest.java
+src/test/java/com/thoughtspot/client/model/UpdateFeatureValueRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateMetadataHeaderRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateMetadataObjIdRequestTest.java
 src/test/java/com/thoughtspot/client/model/UpdateObjIdInputTest.java

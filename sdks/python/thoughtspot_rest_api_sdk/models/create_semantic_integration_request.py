@@ -38,8 +38,8 @@ class CreateSemanticIntegrationRequest(BaseModel):
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['RDBMS_SNOWFLAKE']):
-            raise ValueError("must be one of enum values ('RDBMS_SNOWFLAKE')")
+        if value not in set(['RDBMS_SNOWFLAKE', 'RDBMS_DATABRICKS']):
+            raise ValueError("must be one of enum values ('RDBMS_SNOWFLAKE', 'RDBMS_DATABRICKS')")
         return value
 
     model_config = ConfigDict(

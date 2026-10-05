@@ -26,6 +26,10 @@ export class ShareConversationRequest {
     * Principals to revoke access from the conversation.
     */
     'revoke': Array<PrincipalRefInput>;
+    /**
+    * <div>Version: 26.10.0.cl or later </div>  When `true` (default), newly granted principals are notified of the share. When `false`, access is granted without sending a notification. Has no effect on principals passed in `revoke`. Does not re-notify a principal who already had access.
+    */
+    'notify_on_share'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,6 +52,12 @@ export class ShareConversationRequest {
             "name": "revoke",
             "baseName": "revoke",
             "type": "Array<PrincipalRefInput>",
+            "format": ""
+        },
+        {
+            "name": "notify_on_share",
+            "baseName": "notify_on_share",
+            "type": "boolean",
             "format": ""
         }    ];
 

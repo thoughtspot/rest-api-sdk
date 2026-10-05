@@ -9,6 +9,7 @@ docs/AIContext.md
 docs/APIKey.md
 docs/APIKeyInput.md
 docs/AccessToken.md
+docs/AccessTokenScope.md
 docs/ActionConfig.md
 docs/ActionConfigInput.md
 docs/ActionConfigInputCreate.md
@@ -22,6 +23,17 @@ docs/AgentConversation.md
 docs/AgentConversationHistoryResponse.md
 docs/AgentConversationList.md
 docs/AgentInstructions.md
+docs/Analyst.md
+docs/AnalystDeleteResponse.md
+docs/AnalystItem.md
+docs/AnalystItemSource.md
+docs/AnalystItemStarterPrompt.md
+docs/AnalystMcpConnector.md
+docs/AnalystSearchResponse.md
+docs/AnalystSource.md
+docs/AnalystSourceInput.md
+docs/AnalystStarterPrompt.md
+docs/AnalystUser.md
 docs/AnswerContent.md
 docs/AnswerDataResponse.md
 docs/AnswerDetails.md
@@ -105,6 +117,7 @@ docs/ConversationShareStatusResponse.md
 docs/ConvertWorksheetToModelRequest.md
 docs/CopyObjectRequest.md
 docs/CreateAgentConversationRequest.md
+docs/CreateAnalystRequest.md
 docs/CreateCalendarRequest.md
 docs/CreateCollectionRequest.md
 docs/CreateConfigRequest.md
@@ -190,6 +203,12 @@ docs/ExternalTableInput.md
 docs/FavoriteMetadataInput.md
 docs/FavoriteMetadataItem.md
 docs/FavoriteObjectOptionsInput.md
+docs/FeatureAssignmentResponse.md
+docs/FeatureDetail.md
+docs/FeatureGroup.md
+docs/FeatureManagementApi.md
+docs/FeatureOrgInfo.md
+docs/FeatureValueResponse.md
 docs/FetchAnswerDataRequest.md
 docs/FetchAnswerSqlQueryRequest.md
 docs/FetchAsyncImportTaskStatusRequest.md
@@ -358,6 +377,7 @@ docs/SchemaObject.md
 docs/Scope.md
 docs/ScriptSrcUrls.md
 docs/ScriptSrcUrlsInput.md
+docs/SearchAnalystsRequest.md
 docs/SearchAuthSettingsRequest.md
 docs/SearchAuthSettingsResponse.md
 docs/SearchCalendarsRequest.md
@@ -374,6 +394,7 @@ docs/SearchDataRequest.md
 docs/SearchDataResponse.md
 docs/SearchDatasetsResponseItem.md
 docs/SearchEmailCustomizationRequest.md
+docs/SearchFeaturesRequest.md
 docs/SearchMetadataRequest.md
 docs/SearchOrgsRequest.md
 docs/SearchRoleResponse.md
@@ -411,6 +432,7 @@ docs/SendAgentMessageStreamingRequest.md
 docs/SendMessageRequest.md
 docs/SetAgentInstructionsRequest.md
 docs/SetNLInstructionsRequest.md
+docs/ShareAnalystRequest.md
 docs/ShareConversationRequest.md
 docs/ShareMetadataRequest.md
 docs/ShareMetadataTypeInput.md
@@ -462,6 +484,7 @@ docs/TextResponseItem.md
 docs/ThoughtSpotRestApi.md
 docs/Token.md
 docs/TokenAccessScopeObject.md
+docs/TokenScopeInput.md
 docs/TokenValidationResponse.md
 docs/ToolCallResponseItem.md
 docs/ToolResultResponseItem.md
@@ -471,6 +494,7 @@ docs/URLInputMandatory.md
 docs/UnassignTagRequest.md
 docs/UnparameterizeMetadataRequest.md
 docs/UnpublishMetadataRequest.md
+docs/UpdateAnalystRequest.md
 docs/UpdateCalendarRequest.md
 docs/UpdateCollectionRequest.md
 docs/UpdateColumnSecurityRulesRequest.md
@@ -482,6 +506,8 @@ docs/UpdateConnectionV2Request.md
 docs/UpdateConversationRequest.md
 docs/UpdateCustomActionRequest.md
 docs/UpdateEmailCustomizationRequest.md
+docs/UpdateFeatureAssignmentsRequest.md
+docs/UpdateFeatureValueRequest.md
 docs/UpdateMetadataHeaderRequest.md
 docs/UpdateMetadataObjIdRequest.md
 docs/UpdateObjIdInput.md
@@ -555,6 +581,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Api/CustomCalendarsApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/DBTApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/DataApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/EmailCustomizationApiTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Api/FeatureManagementApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/GroupsApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/JobsApiTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Api/LogApiTests.cs
@@ -578,6 +605,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/ACStateTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/AIContextTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/APIKeyInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/APIKeyTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AccessTokenScopeTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/AccessTokenTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ActionConfigInputCreateTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ActionConfigInputTests.cs
@@ -592,6 +620,17 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/AgentConversationHistoryResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/AgentConversationListTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/AgentConversationTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/AgentInstructionsTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystDeleteResponseTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystItemSourceTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystItemStarterPromptTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystItemTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystMcpConnectorTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystSearchResponseTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystSourceInputTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystSourceTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystStarterPromptTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/AnalystUserTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/AnswerContentTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/AnswerDataResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/AnswerDetailsTests.cs
@@ -671,6 +710,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/ConversationTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ConvertWorksheetToModelRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CopyObjectRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateAgentConversationRequestTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateAnalystRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateCalendarRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateCollectionRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/CreateConfigRequestTests.cs
@@ -751,6 +791,11 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/ExternalTableInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/FavoriteMetadataInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/FavoriteMetadataItemTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/FavoriteObjectOptionsInputTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/FeatureAssignmentResponseTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/FeatureDetailTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/FeatureGroupTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/FeatureOrgInfoTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/FeatureValueResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/FetchAnswerDataRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/FetchAnswerSqlQueryRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/FetchAsyncImportTaskStatusRequestTests.cs
@@ -910,6 +955,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/SchemaObjectTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ScopeTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ScriptSrcUrlsInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ScriptSrcUrlsTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchAnalystsRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchAuthSettingsRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchAuthSettingsResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchCalendarsRequestTests.cs
@@ -926,6 +972,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchDataRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchDataResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchDatasetsResponseItemTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchEmailCustomizationRequestTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchFeaturesRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchMetadataRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchOrgsRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SearchRoleResponseTests.cs
@@ -961,6 +1008,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/SendAgentMessageStreamingRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SendMessageRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SetAgentInstructionsRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/SetNLInstructionsRequestTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/ShareAnalystRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ShareConversationRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ShareMetadataRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ShareMetadataTypeInputTests.cs
@@ -1007,6 +1055,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/TagTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/TemplatePropertiesInputCreateTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/TextResponseItemTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/TokenAccessScopeObjectTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/TokenScopeInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/TokenTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/TokenValidationResponseTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/ToolCallResponseItemTests.cs
@@ -1017,6 +1066,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/URLTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UnassignTagRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UnparameterizeMetadataRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UnpublishMetadataRequestTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateAnalystRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateCalendarRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateCollectionRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateColumnSecurityRulesRequestTests.cs
@@ -1028,6 +1078,8 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateConnectionV2RequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateConversationRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateCustomActionRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateEmailCustomizationRequestTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateFeatureAssignmentsRequestTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateFeatureValueRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateMetadataHeaderRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateMetadataObjIdRequestTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/UpdateObjIdInputTests.cs
@@ -1097,6 +1149,7 @@ src/ThoughtSpot.RestApi.Sdk/Api/CustomCalendarsApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/DBTApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/DataApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/EmailCustomizationApi.cs
+src/ThoughtSpot.RestApi.Sdk/Api/FeatureManagementApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/GroupsApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/JobsApi.cs
 src/ThoughtSpot.RestApi.Sdk/Api/LogApi.cs
@@ -1142,6 +1195,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/APIKey.cs
 src/ThoughtSpot.RestApi.Sdk/Model/APIKeyInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/AbstractOpenAPISchema.cs
 src/ThoughtSpot.RestApi.Sdk/Model/AccessToken.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AccessTokenScope.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ActionConfig.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ActionConfigInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ActionConfigInputCreate.cs
@@ -1155,6 +1209,17 @@ src/ThoughtSpot.RestApi.Sdk/Model/AgentConversation.cs
 src/ThoughtSpot.RestApi.Sdk/Model/AgentConversationHistoryResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/AgentConversationList.cs
 src/ThoughtSpot.RestApi.Sdk/Model/AgentInstructions.cs
+src/ThoughtSpot.RestApi.Sdk/Model/Analyst.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AnalystDeleteResponse.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AnalystItem.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AnalystItemSource.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AnalystItemStarterPrompt.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AnalystMcpConnector.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AnalystSearchResponse.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AnalystSource.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AnalystSourceInput.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AnalystStarterPrompt.cs
+src/ThoughtSpot.RestApi.Sdk/Model/AnalystUser.cs
 src/ThoughtSpot.RestApi.Sdk/Model/AnswerContent.cs
 src/ThoughtSpot.RestApi.Sdk/Model/AnswerDataResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/AnswerDetails.cs
@@ -1234,6 +1299,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/ConversationShareStatusResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ConvertWorksheetToModelRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CopyObjectRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateAgentConversationRequest.cs
+src/ThoughtSpot.RestApi.Sdk/Model/CreateAnalystRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateCalendarRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateCollectionRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/CreateConfigRequest.cs
@@ -1314,6 +1380,11 @@ src/ThoughtSpot.RestApi.Sdk/Model/ExternalTableInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/FavoriteMetadataInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/FavoriteMetadataItem.cs
 src/ThoughtSpot.RestApi.Sdk/Model/FavoriteObjectOptionsInput.cs
+src/ThoughtSpot.RestApi.Sdk/Model/FeatureAssignmentResponse.cs
+src/ThoughtSpot.RestApi.Sdk/Model/FeatureDetail.cs
+src/ThoughtSpot.RestApi.Sdk/Model/FeatureGroup.cs
+src/ThoughtSpot.RestApi.Sdk/Model/FeatureOrgInfo.cs
+src/ThoughtSpot.RestApi.Sdk/Model/FeatureValueResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/FetchAnswerDataRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/FetchAnswerSqlQueryRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/FetchAsyncImportTaskStatusRequest.cs
@@ -1473,6 +1544,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/SchemaObject.cs
 src/ThoughtSpot.RestApi.Sdk/Model/Scope.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ScriptSrcUrls.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ScriptSrcUrlsInput.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SearchAnalystsRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchAuthSettingsRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchAuthSettingsResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchCalendarsRequest.cs
@@ -1489,6 +1561,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/SearchDataRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchDataResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchDatasetsResponseItem.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchEmailCustomizationRequest.cs
+src/ThoughtSpot.RestApi.Sdk/Model/SearchFeaturesRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchMetadataRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchOrgsRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SearchRoleResponse.cs
@@ -1524,6 +1597,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/SendAgentMessageStreamingRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SendMessageRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SetAgentInstructionsRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/SetNLInstructionsRequest.cs
+src/ThoughtSpot.RestApi.Sdk/Model/ShareAnalystRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ShareConversationRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ShareMetadataRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ShareMetadataTypeInput.cs
@@ -1571,6 +1645,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/TemplatePropertiesInputCreate.cs
 src/ThoughtSpot.RestApi.Sdk/Model/TextResponseItem.cs
 src/ThoughtSpot.RestApi.Sdk/Model/Token.cs
 src/ThoughtSpot.RestApi.Sdk/Model/TokenAccessScopeObject.cs
+src/ThoughtSpot.RestApi.Sdk/Model/TokenScopeInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/TokenValidationResponse.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ToolCallResponseItem.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ToolResultResponseItem.cs
@@ -1580,6 +1655,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/URLInputMandatory.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UnassignTagRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UnparameterizeMetadataRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UnpublishMetadataRequest.cs
+src/ThoughtSpot.RestApi.Sdk/Model/UpdateAnalystRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateCalendarRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateCollectionRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateColumnSecurityRulesRequest.cs
@@ -1591,6 +1667,8 @@ src/ThoughtSpot.RestApi.Sdk/Model/UpdateConnectionV2Request.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateConversationRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateCustomActionRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateEmailCustomizationRequest.cs
+src/ThoughtSpot.RestApi.Sdk/Model/UpdateFeatureAssignmentsRequest.cs
+src/ThoughtSpot.RestApi.Sdk/Model/UpdateFeatureValueRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateMetadataHeaderRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateMetadataObjIdRequest.cs
 src/ThoughtSpot.RestApi.Sdk/Model/UpdateObjIdInput.cs

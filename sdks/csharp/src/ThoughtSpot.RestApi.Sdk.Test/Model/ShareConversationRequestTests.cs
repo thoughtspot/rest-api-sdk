@@ -80,5 +80,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'Revoke'
         }
+
+        /// <summary>
+        /// Test the property 'NotifyOnShare'
+        /// </summary>
+        [Fact]
+        public void NotifyOnShareTest()
+        {
+            // TODO unit test for the property 'NotifyOnShare'
+        }
     }
 }

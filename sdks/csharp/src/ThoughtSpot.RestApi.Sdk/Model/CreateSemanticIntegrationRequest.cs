@@ -43,7 +43,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum RDBMSSNOWFLAKE for value: RDBMS_SNOWFLAKE
             /// </summary>
             [EnumMember(Value = "RDBMS_SNOWFLAKE")]
-            RDBMSSNOWFLAKE = 1
+            RDBMSSNOWFLAKE = 1,
+
+            /// <summary>
+            /// Enum RDBMSDATABRICKS for value: RDBMS_DATABRICKS
+            /// </summary>
+            [EnumMember(Value = "RDBMS_DATABRICKS")]
+            RDBMSDATABRICKS = 2
         }
 
 

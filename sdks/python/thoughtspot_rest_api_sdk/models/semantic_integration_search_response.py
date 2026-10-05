@@ -59,8 +59,8 @@ class SemanticIntegrationSearchResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['RDBMS_SNOWFLAKE']):
-            raise ValueError("must be one of enum values ('RDBMS_SNOWFLAKE')")
+        if value not in set(['RDBMS_SNOWFLAKE', 'RDBMS_DATABRICKS']):
+            raise ValueError("must be one of enum values ('RDBMS_SNOWFLAKE', 'RDBMS_DATABRICKS')")
         return value
 
     model_config = ConfigDict(

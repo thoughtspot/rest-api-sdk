@@ -435,9 +435,41 @@ _AccessToken.attributeTypeMap = [
     "baseName": "expiration_time_in_millis",
     "type": "number",
     "format": "float"
+  },
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "AccessTokenScope",
+    "format": ""
   }
 ];
 var AccessToken = _AccessToken;
+
+// models/AccessTokenScope.ts
+var _AccessTokenScope = class _AccessTokenScope {
+  static getAttributeTypeMap() {
+    return _AccessTokenScope.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AccessTokenScope.discriminator = void 0;
+_AccessTokenScope.mapping = void 0;
+_AccessTokenScope.attributeTypeMap = [
+  {
+    "name": "org_scope",
+    "baseName": "org_scope",
+    "type": "AccessTokenScopeOrgScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "org_ids",
+    "baseName": "org_ids",
+    "type": "Array<OrgInfo>",
+    "format": ""
+  }
+];
+var AccessTokenScope = _AccessTokenScope;
 
 // models/ActionConfig.ts
 var _ActionConfig = class _ActionConfig {
@@ -719,6 +751,12 @@ _AgentConversation.attributeTypeMap = [
     "baseName": "conversation_identifier",
     "type": "string",
     "format": ""
+  },
+  {
+    "name": "analyst_id",
+    "baseName": "analyst_id",
+    "type": "string",
+    "format": ""
   }
 ];
 var AgentConversation = _AgentConversation;
@@ -795,6 +833,18 @@ _AgentConversationList.attributeTypeMap = [
     "baseName": "data_source_names",
     "type": "Array<DataSourceEntry>",
     "format": ""
+  },
+  {
+    "name": "is_pinned",
+    "baseName": "is_pinned",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "analyst_id",
+    "baseName": "analyst_id",
+    "type": "string",
+    "format": ""
   }
 ];
 var AgentConversationList = _AgentConversationList;
@@ -842,6 +892,442 @@ _AgentInstructions.attributeTypeMap = [
   }
 ];
 var AgentInstructions = _AgentInstructions;
+
+// models/Analyst.ts
+var _Analyst = class _Analyst {
+  static getAttributeTypeMap() {
+    return _Analyst.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_Analyst.discriminator = void 0;
+_Analyst.mapping = void 0;
+_Analyst.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "instructions",
+    "baseName": "instructions",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "sources",
+    "baseName": "sources",
+    "type": "Array<AnalystSource>",
+    "format": ""
+  },
+  {
+    "name": "mcp_connectors",
+    "baseName": "mcp_connectors",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "starter_prompts",
+    "baseName": "starter_prompts",
+    "type": "Array<AnalystStarterPrompt>",
+    "format": ""
+  },
+  {
+    "name": "updated_time_in_millis",
+    "baseName": "updated_time_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "created_by",
+    "baseName": "created_by",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "updated_by",
+    "baseName": "updated_by",
+    "type": "string",
+    "format": ""
+  }
+];
+var Analyst = _Analyst;
+
+// models/AnalystDeleteResponse.ts
+var _AnalystDeleteResponse = class _AnalystDeleteResponse {
+  static getAttributeTypeMap() {
+    return _AnalystDeleteResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnalystDeleteResponse.discriminator = void 0;
+_AnalystDeleteResponse.mapping = void 0;
+_AnalystDeleteResponse.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  }
+];
+var AnalystDeleteResponse = _AnalystDeleteResponse;
+
+// models/AnalystItem.ts
+var _AnalystItem = class _AnalystItem {
+  static getAttributeTypeMap() {
+    return _AnalystItem.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnalystItem.discriminator = void 0;
+_AnalystItem.mapping = void 0;
+_AnalystItem.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "instructions",
+    "baseName": "instructions",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "sources",
+    "baseName": "sources",
+    "type": "Array<AnalystItemSource>",
+    "format": ""
+  },
+  {
+    "name": "mcp_connectors",
+    "baseName": "mcp_connectors",
+    "type": "Array<AnalystMcpConnector>",
+    "format": ""
+  },
+  {
+    "name": "icon_id",
+    "baseName": "icon_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "starter_prompts",
+    "baseName": "starter_prompts",
+    "type": "Array<AnalystItemStarterPrompt>",
+    "format": ""
+  },
+  {
+    "name": "updated_time_in_millis",
+    "baseName": "updated_time_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "last_accessed_time_in_millis",
+    "baseName": "last_accessed_time_in_millis",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "created_by",
+    "baseName": "created_by",
+    "type": "AnalystUser",
+    "format": ""
+  },
+  {
+    "name": "updated_by",
+    "baseName": "updated_by",
+    "type": "AnalystUser",
+    "format": ""
+  }
+];
+var AnalystItem = _AnalystItem;
+
+// models/AnalystItemSource.ts
+var _AnalystItemSource = class _AnalystItemSource {
+  static getAttributeTypeMap() {
+    return _AnalystItemSource.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnalystItemSource.discriminator = void 0;
+_AnalystItemSource.mapping = void 0;
+_AnalystItemSource.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "AnalystItemSourceTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var AnalystItemSource = _AnalystItemSource;
+
+// models/AnalystItemStarterPrompt.ts
+var _AnalystItemStarterPrompt = class _AnalystItemStarterPrompt {
+  static getAttributeTypeMap() {
+    return _AnalystItemStarterPrompt.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnalystItemStarterPrompt.discriminator = void 0;
+_AnalystItemStarterPrompt.mapping = void 0;
+_AnalystItemStarterPrompt.attributeTypeMap = [
+  {
+    "name": "label",
+    "baseName": "label",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "text",
+    "baseName": "text",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "is_fixed",
+    "baseName": "is_fixed",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var AnalystItemStarterPrompt = _AnalystItemStarterPrompt;
+
+// models/AnalystMcpConnector.ts
+var _AnalystMcpConnector = class _AnalystMcpConnector {
+  static getAttributeTypeMap() {
+    return _AnalystMcpConnector.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnalystMcpConnector.discriminator = void 0;
+_AnalystMcpConnector.mapping = void 0;
+_AnalystMcpConnector.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "icon_url",
+    "baseName": "icon_url",
+    "type": "string",
+    "format": ""
+  }
+];
+var AnalystMcpConnector = _AnalystMcpConnector;
+
+// models/AnalystSearchResponse.ts
+var _AnalystSearchResponse = class _AnalystSearchResponse {
+  static getAttributeTypeMap() {
+    return _AnalystSearchResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnalystSearchResponse.discriminator = void 0;
+_AnalystSearchResponse.mapping = void 0;
+_AnalystSearchResponse.attributeTypeMap = [
+  {
+    "name": "analysts",
+    "baseName": "analysts",
+    "type": "Array<AnalystItem>",
+    "format": ""
+  },
+  {
+    "name": "total_size",
+    "baseName": "total_size",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var AnalystSearchResponse = _AnalystSearchResponse;
+
+// models/AnalystSource.ts
+var _AnalystSource = class _AnalystSource {
+  static getAttributeTypeMap() {
+    return _AnalystSource.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnalystSource.discriminator = void 0;
+_AnalystSource.mapping = void 0;
+_AnalystSource.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "AnalystSourceTypeEnum",
+    "format": ""
+  }
+];
+var AnalystSource = _AnalystSource;
+
+// models/AnalystSourceInput.ts
+var _AnalystSourceInput = class _AnalystSourceInput {
+  static getAttributeTypeMap() {
+    return _AnalystSourceInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnalystSourceInput.discriminator = void 0;
+_AnalystSourceInput.mapping = void 0;
+_AnalystSourceInput.attributeTypeMap = [
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "AnalystSourceInputTypeEnum",
+    "format": ""
+  }
+];
+var AnalystSourceInput = _AnalystSourceInput;
+
+// models/AnalystStarterPrompt.ts
+var _AnalystStarterPrompt = class _AnalystStarterPrompt {
+  static getAttributeTypeMap() {
+    return _AnalystStarterPrompt.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnalystStarterPrompt.discriminator = void 0;
+_AnalystStarterPrompt.mapping = void 0;
+_AnalystStarterPrompt.attributeTypeMap = [
+  {
+    "name": "label",
+    "baseName": "label",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "text",
+    "baseName": "text",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "order",
+    "baseName": "order",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "is_ai_generated",
+    "baseName": "is_ai_generated",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var AnalystStarterPrompt = _AnalystStarterPrompt;
+
+// models/AnalystUser.ts
+var _AnalystUser = class _AnalystUser {
+  static getAttributeTypeMap() {
+    return _AnalystUser.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AnalystUser.discriminator = void 0;
+_AnalystUser.mapping = void 0;
+_AnalystUser.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "display_name",
+    "baseName": "display_name",
+    "type": "string",
+    "format": ""
+  }
+];
+var AnalystUser = _AnalystUser;
 
 // models/AnswerContent.ts
 var _AnswerContent = class _AnswerContent {
@@ -3559,9 +4045,65 @@ _CreateAgentConversationRequest.attributeTypeMap = [
     "baseName": "conversation_settings",
     "type": "ConversationSettingsInput",
     "format": ""
+  },
+  {
+    "name": "analyst_identifier",
+    "baseName": "analyst_identifier",
+    "type": "string",
+    "format": ""
   }
 ];
 var CreateAgentConversationRequest = _CreateAgentConversationRequest;
+
+// models/CreateAnalystRequest.ts
+var _CreateAnalystRequest = class _CreateAnalystRequest {
+  static getAttributeTypeMap() {
+    return _CreateAnalystRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateAnalystRequest.discriminator = void 0;
+_CreateAnalystRequest.mapping = void 0;
+_CreateAnalystRequest.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "instructions",
+    "baseName": "instructions",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "sources",
+    "baseName": "sources",
+    "type": "Array<AnalystSourceInput>",
+    "format": ""
+  },
+  {
+    "name": "mcp_connector_identifiers",
+    "baseName": "mcp_connector_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "starter_prompts",
+    "baseName": "starter_prompts",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var CreateAnalystRequest = _CreateAnalystRequest;
 
 // models/CreateCalendarRequest.ts
 var _CreateCalendarRequest = class _CreateCalendarRequest {
@@ -6549,6 +7091,196 @@ _FavoriteObjectOptionsInput.attributeTypeMap = [
 ];
 var FavoriteObjectOptionsInput = _FavoriteObjectOptionsInput;
 
+// models/FeatureAssignmentResponse.ts
+var _FeatureAssignmentResponse = class _FeatureAssignmentResponse {
+  static getAttributeTypeMap() {
+    return _FeatureAssignmentResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FeatureAssignmentResponse.discriminator = void 0;
+_FeatureAssignmentResponse.mapping = void 0;
+_FeatureAssignmentResponse.attributeTypeMap = [
+  {
+    "name": "feature_id",
+    "baseName": "feature_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "feature_name",
+    "baseName": "feature_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "assigned_orgs",
+    "baseName": "assigned_orgs",
+    "type": "Array<FeatureOrgInfo>",
+    "format": ""
+  }
+];
+var FeatureAssignmentResponse = _FeatureAssignmentResponse;
+
+// models/FeatureDetail.ts
+var _FeatureDetail = class _FeatureDetail {
+  static getAttributeTypeMap() {
+    return _FeatureDetail.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FeatureDetail.discriminator = void 0;
+_FeatureDetail.mapping = void 0;
+_FeatureDetail.attributeTypeMap = [
+  {
+    "name": "feature_id",
+    "baseName": "feature_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "feature_name",
+    "baseName": "feature_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "assigned_orgs",
+    "baseName": "assigned_orgs",
+    "type": "Array<FeatureOrgInfo>",
+    "format": ""
+  },
+  {
+    "name": "is_org_aware",
+    "baseName": "is_org_aware",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "feature_value",
+    "baseName": "feature_value",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "element_type",
+    "baseName": "element_type",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "element_config",
+    "baseName": "element_config",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "element_value",
+    "baseName": "element_value",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "docs_url",
+    "baseName": "docs_url",
+    "type": "string",
+    "format": ""
+  }
+];
+var FeatureDetail = _FeatureDetail;
+
+// models/FeatureGroup.ts
+var _FeatureGroup = class _FeatureGroup {
+  static getAttributeTypeMap() {
+    return _FeatureGroup.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FeatureGroup.discriminator = void 0;
+_FeatureGroup.mapping = void 0;
+_FeatureGroup.attributeTypeMap = [
+  {
+    "name": "feature_group",
+    "baseName": "feature_group",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "docs_url",
+    "baseName": "docs_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "features",
+    "baseName": "features",
+    "type": "Array<FeatureDetail>",
+    "format": ""
+  }
+];
+var FeatureGroup = _FeatureGroup;
+
+// models/FeatureOrgInfo.ts
+var _FeatureOrgInfo = class _FeatureOrgInfo {
+  static getAttributeTypeMap() {
+    return _FeatureOrgInfo.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FeatureOrgInfo.discriminator = void 0;
+_FeatureOrgInfo.mapping = void 0;
+_FeatureOrgInfo.attributeTypeMap = [
+  {
+    "name": "org_id",
+    "baseName": "org_id",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "org_name",
+    "baseName": "org_name",
+    "type": "string",
+    "format": ""
+  }
+];
+var FeatureOrgInfo = _FeatureOrgInfo;
+
+// models/FeatureValueResponse.ts
+var _FeatureValueResponse = class _FeatureValueResponse {
+  static getAttributeTypeMap() {
+    return _FeatureValueResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FeatureValueResponse.discriminator = void 0;
+_FeatureValueResponse.mapping = void 0;
+_FeatureValueResponse.attributeTypeMap = [
+  {
+    "name": "feature_id",
+    "baseName": "feature_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "feature_name",
+    "baseName": "feature_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "feature_value",
+    "baseName": "feature_value",
+    "type": "string",
+    "format": ""
+  }
+];
+var FeatureValueResponse = _FeatureValueResponse;
+
 // models/FetchAnswerDataRequest.ts
 var _FetchAnswerDataRequest = class _FetchAnswerDataRequest {
   static getAttributeTypeMap() {
@@ -7361,6 +8093,12 @@ _GetCustomAccessTokenRequest.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "TokenScopeInput",
+    "format": ""
+  },
+  {
     "name": "persist_option",
     "baseName": "persist_option",
     "type": "GetCustomAccessTokenRequestPersistOptionEnum",
@@ -7479,6 +8217,12 @@ _GetFullAccessTokenRequest.attributeTypeMap = [
     "format": "int32"
   },
   {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "TokenScopeInput",
+    "format": ""
+  },
+  {
     "name": "email",
     "baseName": "email",
     "type": "string",
@@ -7577,6 +8321,12 @@ _GetObjectAccessTokenRequest.attributeTypeMap = [
     "baseName": "org_id",
     "type": "number",
     "format": "int32"
+  },
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "TokenScopeInput",
+    "format": ""
   },
   {
     "name": "email",
@@ -12277,6 +13027,18 @@ _Scope.attributeTypeMap = [
     "baseName": "metadata_id",
     "type": "string",
     "format": ""
+  },
+  {
+    "name": "org_scope",
+    "baseName": "org_scope",
+    "type": "ScopeOrgScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "org_ids",
+    "baseName": "org_ids",
+    "type": "Array<OrgInfo>",
+    "format": ""
   }
 ];
 var Scope = _Scope;
@@ -12332,6 +13094,50 @@ _ScriptSrcUrlsInput.attributeTypeMap = [
   }
 ];
 var ScriptSrcUrlsInput = _ScriptSrcUrlsInput;
+
+// models/SearchAnalystsRequest.ts
+var _SearchAnalystsRequest = class _SearchAnalystsRequest {
+  static getAttributeTypeMap() {
+    return _SearchAnalystsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchAnalystsRequest.discriminator = void 0;
+_SearchAnalystsRequest.mapping = void 0;
+_SearchAnalystsRequest.attributeTypeMap = [
+  {
+    "name": "analyst_identifier",
+    "baseName": "analyst_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "query",
+    "baseName": "query",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "SearchAnalystsRequestTypeEnum",
+    "format": ""
+  }
+];
+var SearchAnalystsRequest = _SearchAnalystsRequest;
 
 // models/SearchAuthSettingsRequest.ts
 var _SearchAuthSettingsRequest = class _SearchAuthSettingsRequest {
@@ -13000,6 +13806,38 @@ _SearchEmailCustomizationRequest.attributeTypeMap = [
   }
 ];
 var SearchEmailCustomizationRequest = _SearchEmailCustomizationRequest;
+
+// models/SearchFeaturesRequest.ts
+var _SearchFeaturesRequest = class _SearchFeaturesRequest {
+  static getAttributeTypeMap() {
+    return _SearchFeaturesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchFeaturesRequest.discriminator = void 0;
+_SearchFeaturesRequest.mapping = void 0;
+_SearchFeaturesRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "SearchFeaturesRequestScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "category",
+    "baseName": "category",
+    "type": "SearchFeaturesRequestCategoryEnum",
+    "format": ""
+  }
+];
+var SearchFeaturesRequest = _SearchFeaturesRequest;
 
 // models/SearchMetadataRequest.ts
 var _SearchMetadataRequest = class _SearchMetadataRequest {
@@ -14679,6 +15517,26 @@ _SetNLInstructionsRequest.attributeTypeMap = [
 ];
 var SetNLInstructionsRequest = _SetNLInstructionsRequest;
 
+// models/ShareAnalystRequest.ts
+var _ShareAnalystRequest = class _ShareAnalystRequest {
+  static getAttributeTypeMap() {
+    return _ShareAnalystRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ShareAnalystRequest.discriminator = void 0;
+_ShareAnalystRequest.mapping = void 0;
+_ShareAnalystRequest.attributeTypeMap = [
+  {
+    "name": "permissions",
+    "baseName": "permissions",
+    "type": "Array<SharePermissionsInput>",
+    "format": ""
+  }
+];
+var ShareAnalystRequest = _ShareAnalystRequest;
+
 // models/ShareConversationRequest.ts
 var _ShareConversationRequest = class _ShareConversationRequest {
   static getAttributeTypeMap() {
@@ -14706,6 +15564,12 @@ _ShareConversationRequest.attributeTypeMap = [
     "name": "revoke",
     "baseName": "revoke",
     "type": "Array<PrincipalRefInput>",
+    "format": ""
+  },
+  {
+    "name": "notify_on_share",
+    "baseName": "notify_on_share",
+    "type": "boolean",
     "format": ""
   }
 ];
@@ -16561,6 +17425,32 @@ _TokenAccessScopeObject.attributeTypeMap = [
 ];
 var TokenAccessScopeObject = _TokenAccessScopeObject;
 
+// models/TokenScopeInput.ts
+var _TokenScopeInput = class _TokenScopeInput {
+  static getAttributeTypeMap() {
+    return _TokenScopeInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_TokenScopeInput.discriminator = void 0;
+_TokenScopeInput.mapping = void 0;
+_TokenScopeInput.attributeTypeMap = [
+  {
+    "name": "org_scope",
+    "baseName": "org_scope",
+    "type": "TokenScopeInputOrgScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "org_identifiers",
+    "baseName": "org_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var TokenScopeInput = _TokenScopeInput;
+
 // models/TokenValidationResponse.ts
 var _TokenValidationResponse = class _TokenValidationResponse {
   static getAttributeTypeMap() {
@@ -16950,6 +17840,56 @@ _UnpublishMetadataRequest.attributeTypeMap = [
   }
 ];
 var UnpublishMetadataRequest = _UnpublishMetadataRequest;
+
+// models/UpdateAnalystRequest.ts
+var _UpdateAnalystRequest = class _UpdateAnalystRequest {
+  static getAttributeTypeMap() {
+    return _UpdateAnalystRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateAnalystRequest.discriminator = void 0;
+_UpdateAnalystRequest.mapping = void 0;
+_UpdateAnalystRequest.attributeTypeMap = [
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "description",
+    "baseName": "description",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "instructions",
+    "baseName": "instructions",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "sources",
+    "baseName": "sources",
+    "type": "Array<AnalystSourceInput>",
+    "format": ""
+  },
+  {
+    "name": "mcp_connector_identifiers",
+    "baseName": "mcp_connector_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "starter_prompts",
+    "baseName": "starter_prompts",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var UpdateAnalystRequest = _UpdateAnalystRequest;
 
 // models/UpdateCalendarRequest.ts
 var _UpdateCalendarRequest = class _UpdateCalendarRequest {
@@ -17349,6 +18289,12 @@ _UpdateConversationRequest.attributeTypeMap = [
     "baseName": "title",
     "type": "string",
     "format": ""
+  },
+  {
+    "name": "is_pinned",
+    "baseName": "is_pinned",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var UpdateConversationRequest = _UpdateConversationRequest;
@@ -17428,6 +18374,82 @@ _UpdateEmailCustomizationRequest.attributeTypeMap = [
   }
 ];
 var UpdateEmailCustomizationRequest = _UpdateEmailCustomizationRequest;
+
+// models/UpdateFeatureAssignmentsRequest.ts
+var _UpdateFeatureAssignmentsRequest = class _UpdateFeatureAssignmentsRequest {
+  static getAttributeTypeMap() {
+    return _UpdateFeatureAssignmentsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateFeatureAssignmentsRequest.discriminator = void 0;
+_UpdateFeatureAssignmentsRequest.mapping = void 0;
+_UpdateFeatureAssignmentsRequest.attributeTypeMap = [
+  {
+    "name": "feature_identifier",
+    "baseName": "feature_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "org_identifiers",
+    "baseName": "org_identifiers",
+    "type": "Array<number>",
+    "format": "int32"
+  },
+  {
+    "name": "operation",
+    "baseName": "operation",
+    "type": "UpdateFeatureAssignmentsRequestOperationEnum",
+    "format": ""
+  }
+];
+var UpdateFeatureAssignmentsRequest = _UpdateFeatureAssignmentsRequest;
+
+// models/UpdateFeatureValueRequest.ts
+var _UpdateFeatureValueRequest = class _UpdateFeatureValueRequest {
+  static getAttributeTypeMap() {
+    return _UpdateFeatureValueRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateFeatureValueRequest.discriminator = void 0;
+_UpdateFeatureValueRequest.mapping = void 0;
+_UpdateFeatureValueRequest.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "UpdateFeatureValueRequestScopeEnum",
+    "format": ""
+  },
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "feature_identifier",
+    "baseName": "feature_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "feature_value",
+    "baseName": "feature_value",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "reset_org_overrides",
+    "baseName": "reset_org_overrides",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var UpdateFeatureValueRequest = _UpdateFeatureValueRequest;
 
 // models/UpdateMetadataHeaderRequest.ts
 var _UpdateMetadataHeaderRequest = class _UpdateMetadataHeaderRequest {
@@ -18929,6 +19951,12 @@ _Variable.attributeTypeMap = [
     "format": ""
   },
   {
+    "name": "obj_id",
+    "baseName": "obj_id",
+    "type": "string",
+    "format": ""
+  },
+  {
     "name": "variable_type",
     "baseName": "variable_type",
     "type": "VariableVariableTypeEnum",
@@ -20189,10 +21217,14 @@ var primitives = [
   "any"
 ];
 var enumsMap = /* @__PURE__ */ new Set([
+  "AccessTokenScopeOrgScopeEnum",
   "ActionConfigInputPositionEnum",
   "ActionConfigInputCreatePositionEnum",
   "AdvancedChartFontAssignmentInputVisualizationAreaEnum",
   "AdvancedChartVisualizationFontRecordVisualizationAreaEnum",
+  "AnalystItemSourceTypeEnum",
+  "AnalystSourceTypeEnum",
+  "AnalystSourceInputTypeEnum",
   "AnswerDetailsVisualizationTypeEnum",
   "AssociateMetadataInputTypeEnum",
   "AssociateMetadataInputCreateTypeEnum",
@@ -20347,6 +21379,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "RuntimeFiltersOperatorEnum",
   "RuntimeSortsOrderEnum",
   "SchedulesPdfOptionsInputPageSizeEnum",
+  "ScopeOrgScopeEnum",
+  "SearchAnalystsRequestTypeEnum",
   "SearchAuthSettingsRequestAuthTypeEnum",
   "SearchAuthSettingsRequestScopeEnum",
   "SearchAuthSettingsResponseAuthTypeEnum",
@@ -20360,6 +21394,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchConnectionResponseDataWarehouseTypeEnum",
   "SearchCustomActionsRequestTypeEnum",
   "SearchDataRequestDataFormatEnum",
+  "SearchFeaturesRequestScopeEnum",
+  "SearchFeaturesRequestCategoryEnum",
   "SearchMetadataRequestDependentObjectVersionEnum",
   "SearchMetadataRequestLiveboardResponseVersionEnum",
   "SearchOrgsRequestVisibilityEnum",
@@ -20418,6 +21454,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "TagMetadataTypeInputTypeEnum",
   "TextResponseItemContentTypeEnum",
   "TokenAccessScopeObjectTypeEnum",
+  "TokenScopeInputOrgScopeEnum",
   "ToolResultResponseItemContentTypeEnum",
   "UnparameterizeMetadataRequestMetadataTypeEnum",
   "UnparameterizeMetadataRequestFieldTypeEnum",
@@ -20431,6 +21468,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateConnectionConfigurationRequestPolicyProcessesEnum",
   "UpdateConnectionStatusRequestStatusEnum",
   "UpdateCustomActionRequestOperationEnum",
+  "UpdateFeatureAssignmentsRequestOperationEnum",
+  "UpdateFeatureValueRequestScopeEnum",
   "UpdateObjIdInputTypeEnum",
   "UpdateOrgRequestOperationEnum",
   "UpdateRoleRequestPrivilegesEnum",
@@ -20488,6 +21527,7 @@ var typeMap = {
   "APIKey": APIKey,
   "APIKeyInput": APIKeyInput,
   "AccessToken": AccessToken,
+  "AccessTokenScope": AccessTokenScope,
   "ActionConfig": ActionConfig,
   "ActionConfigInput": ActionConfigInput,
   "ActionConfigInputCreate": ActionConfigInputCreate,
@@ -20501,6 +21541,17 @@ var typeMap = {
   "AgentConversationHistoryResponse": AgentConversationHistoryResponse,
   "AgentConversationList": AgentConversationList,
   "AgentInstructions": AgentInstructions,
+  "Analyst": Analyst,
+  "AnalystDeleteResponse": AnalystDeleteResponse,
+  "AnalystItem": AnalystItem,
+  "AnalystItemSource": AnalystItemSource,
+  "AnalystItemStarterPrompt": AnalystItemStarterPrompt,
+  "AnalystMcpConnector": AnalystMcpConnector,
+  "AnalystSearchResponse": AnalystSearchResponse,
+  "AnalystSource": AnalystSource,
+  "AnalystSourceInput": AnalystSourceInput,
+  "AnalystStarterPrompt": AnalystStarterPrompt,
+  "AnalystUser": AnalystUser,
   "AnswerContent": AnswerContent,
   "AnswerDataResponse": AnswerDataResponse,
   "AnswerDetails": AnswerDetails,
@@ -20580,6 +21631,7 @@ var typeMap = {
   "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
   "CopyObjectRequest": CopyObjectRequest,
   "CreateAgentConversationRequest": CreateAgentConversationRequest,
+  "CreateAnalystRequest": CreateAnalystRequest,
   "CreateCalendarRequest": CreateCalendarRequest,
   "CreateCollectionRequest": CreateCollectionRequest,
   "CreateConfigRequest": CreateConfigRequest,
@@ -20660,6 +21712,11 @@ var typeMap = {
   "FavoriteMetadataInput": FavoriteMetadataInput,
   "FavoriteMetadataItem": FavoriteMetadataItem,
   "FavoriteObjectOptionsInput": FavoriteObjectOptionsInput,
+  "FeatureAssignmentResponse": FeatureAssignmentResponse,
+  "FeatureDetail": FeatureDetail,
+  "FeatureGroup": FeatureGroup,
+  "FeatureOrgInfo": FeatureOrgInfo,
+  "FeatureValueResponse": FeatureValueResponse,
   "FetchAnswerDataRequest": FetchAnswerDataRequest,
   "FetchAnswerSqlQueryRequest": FetchAnswerSqlQueryRequest,
   "FetchAsyncImportTaskStatusRequest": FetchAsyncImportTaskStatusRequest,
@@ -20819,6 +21876,7 @@ var typeMap = {
   "Scope": Scope,
   "ScriptSrcUrls": ScriptSrcUrls,
   "ScriptSrcUrlsInput": ScriptSrcUrlsInput,
+  "SearchAnalystsRequest": SearchAnalystsRequest,
   "SearchAuthSettingsRequest": SearchAuthSettingsRequest,
   "SearchAuthSettingsResponse": SearchAuthSettingsResponse,
   "SearchCalendarsRequest": SearchCalendarsRequest,
@@ -20835,6 +21893,7 @@ var typeMap = {
   "SearchDataResponse": SearchDataResponse,
   "SearchDatasetsResponseItem": SearchDatasetsResponseItem,
   "SearchEmailCustomizationRequest": SearchEmailCustomizationRequest,
+  "SearchFeaturesRequest": SearchFeaturesRequest,
   "SearchMetadataRequest": SearchMetadataRequest,
   "SearchOrgsRequest": SearchOrgsRequest,
   "SearchRoleResponse": SearchRoleResponse,
@@ -20870,6 +21929,7 @@ var typeMap = {
   "SendMessageRequest": SendMessageRequest,
   "SetAgentInstructionsRequest": SetAgentInstructionsRequest,
   "SetNLInstructionsRequest": SetNLInstructionsRequest,
+  "ShareAnalystRequest": ShareAnalystRequest,
   "ShareConversationRequest": ShareConversationRequest,
   "ShareMetadataRequest": ShareMetadataRequest,
   "ShareMetadataTypeInput": ShareMetadataTypeInput,
@@ -20917,6 +21977,7 @@ var typeMap = {
   "TextResponseItem": TextResponseItem,
   "Token": Token,
   "TokenAccessScopeObject": TokenAccessScopeObject,
+  "TokenScopeInput": TokenScopeInput,
   "TokenValidationResponse": TokenValidationResponse,
   "ToolCallResponseItem": ToolCallResponseItem,
   "ToolResultResponseItem": ToolResultResponseItem,
@@ -20926,6 +21987,7 @@ var typeMap = {
   "UnassignTagRequest": UnassignTagRequest,
   "UnparameterizeMetadataRequest": UnparameterizeMetadataRequest,
   "UnpublishMetadataRequest": UnpublishMetadataRequest,
+  "UpdateAnalystRequest": UpdateAnalystRequest,
   "UpdateCalendarRequest": UpdateCalendarRequest,
   "UpdateCollectionRequest": UpdateCollectionRequest,
   "UpdateColumnSecurityRulesRequest": UpdateColumnSecurityRulesRequest,
@@ -20937,6 +21999,8 @@ var typeMap = {
   "UpdateConversationRequest": UpdateConversationRequest,
   "UpdateCustomActionRequest": UpdateCustomActionRequest,
   "UpdateEmailCustomizationRequest": UpdateEmailCustomizationRequest,
+  "UpdateFeatureAssignmentsRequest": UpdateFeatureAssignmentsRequest,
+  "UpdateFeatureValueRequest": UpdateFeatureValueRequest,
   "UpdateMetadataHeaderRequest": UpdateMetadataHeaderRequest,
   "UpdateMetadataObjIdRequest": UpdateMetadataObjIdRequest,
   "UpdateObjIdInput": UpdateObjIdInput,
@@ -21272,14 +22336,48 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(createAgentConversationRequest, "CreateAgentConversationRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param createAnalystRequest 
+   */
+  async createAnalyst(createAnalystRequest, _options) {
+    let _config = _options || this.configuration;
+    if (createAnalystRequest === null || createAnalystRequest === void 0) {
+      throw new RequiredError("AIApi", "createAnalyst", "createAnalystRequest");
+    }
+    const localVarPath = "/api/rest/2.0/ai/agent/analysts/create";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(createAnalystRequest, "CreateAnalystRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -21306,8 +22404,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/conversation/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21317,6 +22415,31 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
       contentType
     );
     requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to delete.
+   */
+  async deleteAnalyst(analystIdentifier, _options) {
+    let _config = _options || this.configuration;
+    if (analystIdentifier === null || analystIdentifier === void 0) {
+      throw new RequiredError("AIApi", "deleteAnalyst", "analystIdentifier");
+    }
+    const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -21340,8 +22463,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "DELETE" /* DELETE */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -21365,8 +22488,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/memory/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21395,8 +22518,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/instructions/get";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -21420,8 +22543,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -21444,8 +22567,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     if (limit !== void 0) {
       requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
     }
@@ -21478,8 +22601,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/data-source-suggestions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21512,8 +22635,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/instructions/get";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21546,8 +22669,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/relevant-questions/";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21580,8 +22703,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -21605,8 +22728,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -21630,8 +22753,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/memory/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21668,8 +22791,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier))).replace("{answer_identifier}", encodeURIComponent(String(answerIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -21695,14 +22818,48 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/analytical-questions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(queryGetDecomposedQueryRequest, "QueryGetDecomposedQueryRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+   * @param searchAnalystsRequest 
+   */
+  async searchAnalysts(searchAnalystsRequest, _options) {
+    let _config = _options || this.configuration;
+    if (searchAnalystsRequest === null || searchAnalystsRequest === void 0) {
+      throw new RequiredError("AIApi", "searchAnalysts", "searchAnalystsRequest");
+    }
+    const localVarPath = "/api/rest/2.0/ai/agent/analysts/search";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(searchAnalystsRequest, "SearchAnalystsRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -21733,8 +22890,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21771,8 +22928,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21811,8 +22968,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21847,8 +23004,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/converse/sse";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21885,8 +23042,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21919,8 +23076,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/instructions/set";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "PUT" /* PUT */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -21953,14 +23110,52 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/instructions/set";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(setNLInstructionsRequest, "SetNLInstructionsRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal\'s access; `NO_ACCESS` revokes it. Granting access also shares the analyst\'s data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal\'s access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst\'s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to share.
+   * @param shareAnalystRequest 
+   */
+  async shareAnalyst(analystIdentifier, shareAnalystRequest, _options) {
+    let _config = _options || this.configuration;
+    if (analystIdentifier === null || analystIdentifier === void 0) {
+      throw new RequiredError("AIApi", "shareAnalyst", "analystIdentifier");
+    }
+    if (shareAnalystRequest === null || shareAnalystRequest === void 0) {
+      throw new RequiredError("AIApi", "shareAnalyst", "shareAnalystRequest");
+    }
+    const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(shareAnalystRequest, "ShareAnalystRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -21991,8 +23186,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -22025,8 +23220,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/answer/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -22059,8 +23254,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -22073,7 +23268,45 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+   *  Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to update.
+   * @param updateAnalystRequest 
+   */
+  async updateAnalyst(analystIdentifier, updateAnalystRequest, _options) {
+    let _config = _options || this.configuration;
+    if (analystIdentifier === null || analystIdentifier === void 0) {
+      throw new RequiredError("AIApi", "updateAnalyst", "analystIdentifier");
+    }
+    if (updateAnalystRequest === null || updateAnalystRequest === void 0) {
+      throw new RequiredError("AIApi", "updateAnalyst", "updateAnalystRequest");
+    }
+    const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(updateAnalystRequest, "UpdateAnalystRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
    * @param conversationIdentifier Unique identifier of the conversation to update.
    * @param updateConversationRequest 
    */
@@ -22088,8 +23321,8 @@ var AIApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -22183,6 +23416,73 @@ var AIApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to createAnalyst
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async createAnalystWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("201", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to createConversation
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -22240,6 +23540,73 @@ var AIApiResponseProcessor = class {
       const body = ObjectSerializer.deserialize(
         ObjectSerializer.parse(await response.body.text(), contentType),
         "Conversation",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteAnalyst
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async deleteAnalystWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystDeleteResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("201", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystDeleteResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystDeleteResponse",
         ""
       );
       return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
@@ -23108,6 +24475,73 @@ var AIApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to searchAnalysts
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async searchAnalystsWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystSearchResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("201", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystSearchResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystSearchResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to sendAgentConversationMessage
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -23577,6 +25011,73 @@ var AIApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to shareAnalyst
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async shareAnalystWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "any",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("201", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "any",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "any",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to shareConversation
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -23752,6 +25253,73 @@ var AIApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to updateAnalyst
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async updateAnalystWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("201", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to updateConversation
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -23818,8 +25386,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23848,8 +25416,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/user";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -23869,8 +25437,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/token";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -23894,8 +25462,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/custom";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23923,8 +25491,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/full";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23952,8 +25520,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/object";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -23981,8 +25549,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/login";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24011,8 +25579,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/logout";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -24036,8 +25604,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/revoke";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24070,8 +25638,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24104,8 +25672,8 @@ var AuthenticationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24781,8 +26349,8 @@ var CollectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24815,8 +26383,8 @@ var CollectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24849,8 +26417,8 @@ var CollectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -24887,8 +26455,8 @@ var CollectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/{collection_identifier}/update".replace("{collection_identifier}", encodeURIComponent(String(collectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25174,8 +26742,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
     const localVarPath = "/api/rest/2.0/connection-configurations/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25208,8 +26776,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
     const localVarPath = "/api/rest/2.0/connection-configurations/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25242,8 +26810,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
     const localVarPath = "/api/rest/2.0/connection-configurations/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25280,8 +26848,8 @@ var ConnectionConfigurationsApiRequestFactory = class extends BaseAPIRequestFact
     const localVarPath = "/api/rest/2.0/connection-configurations/{configuration_identifier}/update".replace("{configuration_identifier}", encodeURIComponent(String(configurationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25546,8 +27114,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25582,8 +27150,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25616,8 +27184,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/delete".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -25641,8 +27209,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -25666,8 +27234,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -25695,8 +27263,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25729,8 +27297,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25767,8 +27335,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/resync-metadata".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25803,8 +27371,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25841,8 +27409,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/status".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -25879,8 +27447,8 @@ var ConnectionsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/update".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26571,8 +28139,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26605,8 +28173,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -26630,8 +28198,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26668,8 +28236,8 @@ var CustomActionApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26934,8 +28502,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -26968,8 +28536,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/delete".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -26993,8 +28561,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/generate-csv";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27027,8 +28595,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27065,8 +28633,8 @@ var CustomCalendarsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/update".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -27402,8 +28970,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/dbt-connection";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -27477,8 +29045,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -27540,8 +29108,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/generate-tml";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -27597,8 +29165,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -27622,8 +29190,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete".replace("{dbt_connection_identifier}", encodeURIComponent(String(dbtConnectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -27657,8 +29225,8 @@ var DBTApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -28088,8 +29656,8 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/answer/data";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28122,8 +29690,8 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/liveboard/data";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28156,8 +29724,8 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/searchdata";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28373,8 +29941,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28409,8 +29977,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/{template_identifier}/delete".replace("{template_identifier}", encodeURIComponent(String(templateIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -28434,8 +30002,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28468,8 +30036,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28502,8 +30070,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28532,8 +30100,8 @@ var EmailCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -28851,6 +30419,315 @@ var EmailCustomizationApiResponseProcessor = class {
   }
 };
 
+// apis/FeatureManagementApi.ts
+var FeatureManagementApiRequestFactory = class extends BaseAPIRequestFactory {
+  /**
+   *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+   * @param searchFeaturesRequest 
+   */
+  async searchFeatures(searchFeaturesRequest, _options) {
+    let _config = _options || this.configuration;
+    if (searchFeaturesRequest === null || searchFeaturesRequest === void 0) {
+      throw new RequiredError("FeatureManagementApi", "searchFeatures", "searchFeaturesRequest");
+    }
+    const localVarPath = "/api/rest/2.0/configurations/features/search";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(searchFeaturesRequest, "SearchFeaturesRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+   * @param updateFeatureAssignmentsRequest 
+   */
+  async updateFeatureAssignments(updateFeatureAssignmentsRequest, _options) {
+    let _config = _options || this.configuration;
+    if (updateFeatureAssignmentsRequest === null || updateFeatureAssignmentsRequest === void 0) {
+      throw new RequiredError("FeatureManagementApi", "updateFeatureAssignments", "updateFeatureAssignmentsRequest");
+    }
+    const localVarPath = "/api/rest/2.0/configurations/features/assignments/update";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(updateFeatureAssignmentsRequest, "UpdateFeatureAssignmentsRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+   * @param updateFeatureValueRequest 
+   */
+  async updateFeatureValue(updateFeatureValueRequest, _options) {
+    let _config = _options || this.configuration;
+    if (updateFeatureValueRequest === null || updateFeatureValueRequest === void 0) {
+      throw new RequiredError("FeatureManagementApi", "updateFeatureValue", "updateFeatureValueRequest");
+    }
+    const localVarPath = "/api/rest/2.0/configurations/features/values/update";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(updateFeatureValueRequest, "UpdateFeatureValueRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+};
+var FeatureManagementApiResponseProcessor = class {
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to searchFeatures
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async searchFeaturesWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Array<FeatureGroup>",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Insufficient privileges.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Feature management not enabled.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Array<FeatureGroup>",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateFeatureAssignments
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async updateFeatureAssignmentsWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "FeatureAssignmentResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Invalid request parameters.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Insufficient privileges.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Feature not found or feature management not enabled.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "FeatureAssignmentResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateFeatureValue
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async updateFeatureValueWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "FeatureValueResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Insufficient privileges or org not assigned to feature.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Feature not found or feature management not enabled.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "FeatureValueResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+};
+
 // apis/GroupsApi.ts
 var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
@@ -28865,8 +30742,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28899,8 +30776,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/{group_identifier}/delete".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -28924,8 +30801,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28958,8 +30835,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -28996,8 +30873,8 @@ var GroupsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/{group_identifier}/update".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29321,8 +31198,8 @@ var JobsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/jobs/history/communication-channels/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29420,8 +31297,8 @@ var LogApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/logs/fetch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29519,8 +31396,8 @@ var ManualTranslationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29553,8 +31430,8 @@ var ManualTranslationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29587,8 +31464,8 @@ var ManualTranslationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/locales/{locale}/export".replace("{locale}", encodeURIComponent(String(locale)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -29613,8 +31490,8 @@ var ManualTranslationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -29906,8 +31783,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/worksheets/convert";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29940,8 +31817,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/copyobject";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -29974,8 +31851,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30008,8 +31885,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30042,8 +31919,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/export/batch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30076,8 +31953,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/answer/sql";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30110,8 +31987,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/async/status";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30144,8 +32021,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/liveboard/sql";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30178,8 +32055,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30212,8 +32089,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/async/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30248,8 +32125,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/parameterize";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30271,7 +32148,7 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest 
    */
   async parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
@@ -30282,8 +32159,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/parameterize-fields";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30316,8 +32193,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30339,7 +32216,7 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest 
    */
   async unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
@@ -30350,8 +32227,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/unparameterize";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30384,8 +32261,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/headers/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -30418,8 +32295,8 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/update-obj-id";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31380,8 +33257,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31414,8 +33291,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/delete".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -31439,8 +33316,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31477,8 +33354,8 @@ var OrgsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/update".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31743,8 +33620,8 @@ var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/report/answer";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31777,8 +33654,8 @@ var ReportsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/report/liveboard";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31927,8 +33804,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -31961,8 +33838,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/{role_identifier}/delete".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -31986,8 +33863,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32024,8 +33901,8 @@ var RolesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/{role_identifier}/update".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32295,8 +34172,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32329,8 +34206,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/delete".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -32354,8 +34231,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32392,8 +34269,8 @@ var SchedulesApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/update".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32658,8 +34535,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/assign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32692,8 +34569,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/column/rules/fetch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32726,8 +34603,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/fetch-object-privileges";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32760,8 +34637,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/principals/fetch-permissions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32794,8 +34671,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/fetch-permissions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32828,8 +34705,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/manage-object-privilege";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32851,7 +34728,7 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest 
    */
   async publishMetadata(publishMetadataRequest, _options) {
@@ -32862,8 +34739,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/publish";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32896,8 +34773,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/share";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32919,7 +34796,7 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest 
    */
   async unpublishMetadata(unpublishMetadataRequest, _options) {
@@ -32930,8 +34807,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/unpublish";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -32964,8 +34841,8 @@ var SecurityApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/column/rules/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33564,8 +35441,8 @@ var SemanticIntegrationsApiRequestFactory = class extends BaseAPIRequestFactory 
     const localVarPath = "/api/rest/2.0/semantic-integrations/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33598,8 +35475,8 @@ var SemanticIntegrationsApiRequestFactory = class extends BaseAPIRequestFactory 
     const localVarPath = "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete".replace("{semantic_integration_identifier}", encodeURIComponent(String(semanticIntegrationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -33623,8 +35500,8 @@ var SemanticIntegrationsApiRequestFactory = class extends BaseAPIRequestFactory 
     const localVarPath = "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import".replace("{semantic_integration_identifier}", encodeURIComponent(String(semanticIntegrationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -33648,8 +35525,8 @@ var SemanticIntegrationsApiRequestFactory = class extends BaseAPIRequestFactory 
     const localVarPath = "/api/rest/2.0/semantic-integrations/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33943,8 +35820,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -33978,8 +35855,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/logos/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     requestContext.setHeaderParam("Accept", ObjectSerializer.serialize(accept, "'application/zip'", ""));
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
@@ -34002,7 +35879,7 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest 
    */
   async searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -34013,8 +35890,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34047,8 +35924,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34070,7 +35947,7 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param operation Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param resetOptions Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
@@ -34089,8 +35966,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -34165,8 +36042,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/{font_identifier}/update".replace("{font_identifier}", encodeURIComponent(String(fontIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34207,8 +36084,8 @@ var StyleCustomizationApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/upload";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -34673,8 +36550,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34707,8 +36584,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/security-settings/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34737,8 +36614,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -34758,8 +36635,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -34779,8 +36656,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config-overrides";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -34804,8 +36681,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34838,8 +36715,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/security-settings/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34872,8 +36749,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config-update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -34906,8 +36783,8 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/communication-channels/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35462,8 +37339,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/assign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35496,8 +37373,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35530,8 +37407,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/delete".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -35555,8 +37432,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35589,8 +37466,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/unassign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -35627,8 +37504,8 @@ var TagsApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/update".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36001,8 +37878,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/activate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36035,8 +37912,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/assign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36069,8 +37946,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/assign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36103,8 +37980,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/change-password";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36137,8 +38014,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/branches/commit";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36171,8 +38048,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36205,8 +38082,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36239,8 +38116,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/security-settings/configure";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36273,8 +38150,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection-configurations/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36307,8 +38184,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/worksheets/convert";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36341,8 +38218,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/copyobject";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36375,14 +38252,48 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(createAgentConversationRequest, "CreateAgentConversationRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param createAnalystRequest 
+   */
+  async createAnalyst(createAnalystRequest, _options) {
+    let _config = _options || this.configuration;
+    if (createAnalystRequest === null || createAnalystRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "createAnalyst", "createAnalystRequest");
+    }
+    const localVarPath = "/api/rest/2.0/ai/agent/analysts/create";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(createAnalystRequest, "CreateAnalystRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -36409,8 +38320,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36443,8 +38354,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36477,8 +38388,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36511,8 +38422,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36545,8 +38456,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection-configurations/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36579,8 +38490,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/conversation/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36613,8 +38524,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36647,8 +38558,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36681,8 +38592,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36715,8 +38626,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36749,8 +38660,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36783,8 +38694,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/semantic-integrations/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36817,8 +38728,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36851,8 +38762,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36885,8 +38796,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36919,8 +38830,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36953,8 +38864,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -36999,8 +38910,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/dbt-connection";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -37074,8 +38985,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/generate-sync-tml";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -37137,8 +39048,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/generate-tml";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -37194,8 +39105,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37219,8 +39130,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/deactivate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37230,6 +39141,31 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
       contentType
     );
     requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to delete.
+   */
+  async deleteAnalyst(analystIdentifier, _options) {
+    let _config = _options || this.configuration;
+    if (analystIdentifier === null || analystIdentifier === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "deleteAnalyst", "analystIdentifier");
+    }
+    const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37253,8 +39189,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/delete".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37278,8 +39214,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37312,8 +39248,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37348,8 +39284,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37382,8 +39318,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection-configurations/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37416,8 +39352,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/delete".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37441,8 +39377,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "DELETE" /* DELETE */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37466,8 +39402,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37491,8 +39427,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/{dbt_connection_identifier}/delete".replace("{dbt_connection_identifier}", encodeURIComponent(String(dbtConnectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37518,8 +39454,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/{template_identifier}/delete".replace("{template_identifier}", encodeURIComponent(String(templateIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37543,8 +39479,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37577,8 +39513,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37611,8 +39547,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/delete".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37636,8 +39572,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37670,8 +39606,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/{role_identifier}/delete".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37695,8 +39631,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/delete".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37720,8 +39656,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete".replace("{semantic_integration_identifier}", encodeURIComponent(String(semanticIntegrationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37745,8 +39681,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37779,8 +39715,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/delete".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37804,8 +39740,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/{user_identifier}/delete".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37829,8 +39765,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/{group_identifier}/delete".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37846,7 +39782,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
    * @deprecated
    *
    *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-   * @param identifier Unique id or name of the variable
+   * @param identifier Unique id, name, or object id of the variable
    */
   async deleteVariable(identifier, _options) {
     let _config = _options || this.configuration;
@@ -37856,8 +39792,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/delete".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -37881,8 +39817,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37915,8 +39851,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37949,8 +39885,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/deploy";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -37983,8 +39919,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -38008,8 +39944,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/report/answer";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38042,8 +39978,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/report/liveboard";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38076,8 +40012,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38110,8 +40046,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/memory/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38144,8 +40080,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38178,8 +40114,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/export/batch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38213,8 +40149,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/logos/export";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     requestContext.setHeaderParam("Accept", ObjectSerializer.serialize(accept, "'application/zip'", ""));
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
@@ -38248,8 +40184,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/answer/data";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38282,8 +40218,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/answer/sql";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38316,8 +40252,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/async/status";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38350,8 +40286,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/column/rules/fetch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38384,8 +40320,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -38409,8 +40345,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/liveboard/data";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38443,8 +40379,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/liveboard/sql";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38477,8 +40413,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/logs/fetch";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38511,8 +40447,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/fetch-object-privileges";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38545,8 +40481,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/principals/fetch-permissions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38579,8 +40515,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/fetch-permissions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38613,8 +40549,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/force-logout";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38647,8 +40583,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/generate-csv";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38677,8 +40613,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/instructions/get";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -38702,8 +40638,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -38726,8 +40662,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     if (limit !== void 0) {
       requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
     }
@@ -38756,8 +40692,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/user";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -38777,8 +40713,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/token";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -38802,8 +40738,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/custom";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38831,8 +40767,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/data-source-suggestions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38865,8 +40801,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/full";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38894,8 +40830,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/locales/{locale}/export".replace("{locale}", encodeURIComponent(String(locale)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -38919,8 +40855,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/instructions/get";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38953,8 +40889,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/object";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -38982,8 +40918,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/relevant-questions/";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39016,8 +40952,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -39041,8 +40977,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -39062,8 +40998,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -39083,8 +41019,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -39104,8 +41040,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config-overrides";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -39125,8 +41061,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/storage-config";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -39151,8 +41087,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/localizations/manual-translation/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -39200,8 +41136,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/memory/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39234,8 +41170,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39268,8 +41204,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/tml/async/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39302,8 +41238,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import".replace("{semantic_integration_identifier}", encodeURIComponent(String(semanticIntegrationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -39327,8 +41263,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39361,8 +41297,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39399,8 +41335,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier))).replace("{answer_identifier}", encodeURIComponent(String(answerIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -39424,8 +41360,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/login";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39454,8 +41390,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/session/logout";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -39479,8 +41415,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/manage-object-privilege";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39515,8 +41451,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/parameterize";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39538,7 +41474,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest 
    */
   async parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
@@ -39549,8 +41485,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/parameterize-fields";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39572,7 +41508,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest 
    */
   async publishMetadata(publishMetadataRequest, _options) {
@@ -39583,8 +41519,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/publish";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39621,8 +41557,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update-values".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39657,8 +41593,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/analytical-questions";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39691,8 +41627,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/reset-password";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39729,8 +41665,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/{commit_id}/revert".replace("{commit_id}", encodeURIComponent(String(commitId)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39767,8 +41703,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39801,14 +41737,48 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/revoke";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(revokeTokenRequest, "RevokeTokenRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+   * @param searchAnalystsRequest 
+   */
+  async searchAnalysts(searchAnalystsRequest, _options) {
+    let _config = _options || this.configuration;
+    if (searchAnalystsRequest === null || searchAnalystsRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "searchAnalysts", "searchAnalystsRequest");
+    }
+    const localVarPath = "/api/rest/2.0/ai/agent/analysts/search";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(searchAnalystsRequest, "SearchAnalystsRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -39835,8 +41805,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39869,8 +41839,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39903,8 +41873,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/jobs/history/communication-channels/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39937,8 +41907,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -39971,8 +41941,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40005,8 +41975,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/preferences/communication-channels/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40039,8 +42009,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40073,8 +42043,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40107,8 +42077,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40141,8 +42111,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/searchdata";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40175,14 +42145,48 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(searchEmailCustomizationRequest, "SearchEmailCustomizationRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+   * @param searchFeaturesRequest 
+   */
+  async searchFeatures(searchFeaturesRequest, _options) {
+    let _config = _options || this.configuration;
+    if (searchFeaturesRequest === null || searchFeaturesRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "searchFeatures", "searchFeaturesRequest");
+    }
+    const localVarPath = "/api/rest/2.0/configurations/features/search";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(searchFeaturesRequest, "SearchFeaturesRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -40209,8 +42213,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40243,8 +42247,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40277,8 +42281,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40311,8 +42315,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40345,8 +42349,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/security-settings/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40379,8 +42383,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/semantic-integrations/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40402,7 +42406,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest 
    */
   async searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -40413,8 +42417,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40447,8 +42451,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40481,8 +42485,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40515,8 +42519,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40549,8 +42553,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40583,8 +42587,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40617,8 +42621,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40655,8 +42659,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40693,8 +42697,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40733,8 +42737,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40769,8 +42773,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/converse/sse";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40807,8 +42811,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40841,8 +42845,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/instructions/set";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "PUT" /* PUT */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40875,14 +42879,52 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/instructions/set";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(setNLInstructionsRequest, "SetNLInstructionsRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal\'s access; `NO_ACCESS` revokes it. Granting access also shares the analyst\'s data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal\'s access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst\'s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to share.
+   * @param shareAnalystRequest 
+   */
+  async shareAnalyst(analystIdentifier, shareAnalystRequest, _options) {
+    let _config = _options || this.configuration;
+    if (analystIdentifier === null || analystIdentifier === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "shareAnalyst", "analystIdentifier");
+    }
+    if (shareAnalystRequest === null || shareAnalystRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "shareAnalyst", "shareAnalystRequest");
+    }
+    const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(shareAnalystRequest, "ShareAnalystRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -40913,8 +42955,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40947,8 +42989,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/share";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -40981,8 +43023,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/answer/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41015,8 +43057,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -41044,8 +43086,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/resync-metadata".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41078,8 +43120,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/unassign";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41101,7 +43143,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest 
    */
   async unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
@@ -41112,8 +43154,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/unparameterize";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41135,7 +43177,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest 
    */
   async unpublishMetadata(unpublishMetadataRequest, _options) {
@@ -41146,14 +43188,52 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/metadata/unpublish";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(unpublishMetadataRequest, "UnpublishMetadataRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to update.
+   * @param updateAnalystRequest 
+   */
+  async updateAnalyst(analystIdentifier, updateAnalystRequest, _options) {
+    let _config = _options || this.configuration;
+    if (analystIdentifier === null || analystIdentifier === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "updateAnalyst", "analystIdentifier");
+    }
+    if (updateAnalystRequest === null || updateAnalystRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "updateAnalyst", "updateAnalystRequest");
+    }
+    const localVarPath = "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update".replace("{analyst_identifier}", encodeURIComponent(String(analystIdentifier)));
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(updateAnalystRequest, "UpdateAnalystRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -41184,8 +43264,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/calendars/{calendar_identifier}/update".replace("{calendar_identifier}", encodeURIComponent(String(calendarIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41222,8 +43302,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/collections/{collection_identifier}/update".replace("{collection_identifier}", encodeURIComponent(String(collectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41256,8 +43336,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/security/column/rules/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41290,8 +43370,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41326,8 +43406,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41364,8 +43444,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connection-configurations/{configuration_identifier}/update".replace("{configuration_identifier}", encodeURIComponent(String(configurationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41402,8 +43482,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/status".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41440,8 +43520,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/connections/{connection_identifier}/update".replace("{connection_identifier}", encodeURIComponent(String(connectionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41463,7 +43543,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+   *  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
    * @param conversationIdentifier Unique identifier of the conversation to update.
    * @param updateConversationRequest 
    */
@@ -41478,8 +43558,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update".replace("{conversation_identifier}", encodeURIComponent(String(conversationIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41516,8 +43596,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update".replace("{custom_action_identifier}", encodeURIComponent(String(customActionIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41560,8 +43640,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/dbt/update-dbt-connection";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -41636,14 +43716,82 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(updateEmailCustomizationRequest, "UpdateEmailCustomizationRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+   * @param updateFeatureAssignmentsRequest 
+   */
+  async updateFeatureAssignments(updateFeatureAssignmentsRequest, _options) {
+    let _config = _options || this.configuration;
+    if (updateFeatureAssignmentsRequest === null || updateFeatureAssignmentsRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "updateFeatureAssignments", "updateFeatureAssignmentsRequest");
+    }
+    const localVarPath = "/api/rest/2.0/configurations/features/assignments/update";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(updateFeatureAssignmentsRequest, "UpdateFeatureAssignmentsRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+   * @param updateFeatureValueRequest 
+   */
+  async updateFeatureValue(updateFeatureValueRequest, _options) {
+    let _config = _options || this.configuration;
+    if (updateFeatureValueRequest === null || updateFeatureValueRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "updateFeatureValue", "updateFeatureValueRequest");
+    }
+    const localVarPath = "/api/rest/2.0/configurations/features/values/update";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(updateFeatureValueRequest, "UpdateFeatureValueRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -41670,8 +43818,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/headers/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41704,8 +43852,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/metadata/update-obj-id";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41742,8 +43890,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/orgs/{org_identifier}/update".replace("{org_identifier}", encodeURIComponent(String(orgIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41780,8 +43928,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/roles/{role_identifier}/update".replace("{role_identifier}", encodeURIComponent(String(roleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41818,8 +43966,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/schedules/{schedule_identifier}/update".replace("{schedule_identifier}", encodeURIComponent(String(scheduleIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41841,7 +43989,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param operation Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param resetOptions Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
@@ -41860,8 +44008,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -41936,8 +44084,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/{font_identifier}/update".replace("{font_identifier}", encodeURIComponent(String(fontIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -41970,8 +44118,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/config-update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42008,8 +44156,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/tags/{tag_identifier}/update".replace("{tag_identifier}", encodeURIComponent(String(tagIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42046,8 +44194,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/{user_identifier}/update".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42084,8 +44232,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/groups/{group_identifier}/update".replace("{group_identifier}", encodeURIComponent(String(groupIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42108,7 +44256,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-   * @param identifier Unique id or name of the variable to update.
+   * @param identifier Unique id, name, or object id of the variable to update.
    * @param updateVariableRequest 
    */
   async updateVariable(identifier, updateVariableRequest, _options) {
@@ -42122,8 +44270,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42158,8 +44306,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/update-values";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42196,8 +44344,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/{webhook_identifier}/update".replace("{webhook_identifier}", encodeURIComponent(String(webhookIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42238,8 +44386,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/styles/fonts/upload";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const useForm = canConsumeForm([
       "multipart/form-data"
     ]);
@@ -42299,8 +44447,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/system/communication-channels/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42329,8 +44477,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/customization/email/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -42354,8 +44502,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/branches/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -42388,8 +44536,8 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/auth/token/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -43100,6 +45248,73 @@ var ThoughtSpotRestApiResponseProcessor = class {
       const body = ObjectSerializer.deserialize(
         ObjectSerializer.parse(await response.body.text(), contentType),
         "AgentConversation",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to createAnalyst
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async createAnalystWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("201", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
         ""
       );
       return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
@@ -44414,6 +46629,73 @@ var ThoughtSpotRestApiResponseProcessor = class {
       const body = ObjectSerializer.deserialize(
         ObjectSerializer.parse(await response.body.text(), contentType),
         "ResponseActivationURL",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to deleteAnalyst
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async deleteAnalystWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystDeleteResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("201", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystDeleteResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystDeleteResponse",
         ""
       );
       return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
@@ -49344,6 +51626,73 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to searchAnalysts
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async searchAnalystsWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystSearchResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("201", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystSearchResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "AnalystSearchResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to searchAuthSettings
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -49975,6 +52324,73 @@ var ThoughtSpotRestApiResponseProcessor = class {
       const body = ObjectSerializer.deserialize(
         ObjectSerializer.parse(await response.body.text(), contentType),
         "Array<CreateEmailCustomizationResponse>",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to searchFeatures
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async searchFeaturesWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Array<FeatureGroup>",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Insufficient privileges.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Feature management not enabled.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Array<FeatureGroup>",
         ""
       );
       return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
@@ -51221,6 +53637,73 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to shareAnalyst
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async shareAnalystWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "any",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("201", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "any",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "any",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to shareConversation
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -51669,6 +54152,73 @@ var ThoughtSpotRestApiResponseProcessor = class {
       const body = ObjectSerializer.deserialize(
         ObjectSerializer.parse(await response.body.text(), contentType),
         "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateAnalyst
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async updateAnalystWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("201", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "Analyst",
         ""
       );
       return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
@@ -52343,6 +54893,140 @@ var ThoughtSpotRestApiResponseProcessor = class {
       const body = ObjectSerializer.deserialize(
         ObjectSerializer.parse(await response.body.text(), contentType),
         "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateFeatureAssignments
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async updateFeatureAssignmentsWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "FeatureAssignmentResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Invalid request parameters.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Insufficient privileges.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Feature not found or feature management not enabled.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "FeatureAssignmentResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to updateFeatureValue
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async updateFeatureValueWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "FeatureValueResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Invalid request.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Insufficient privileges or org not assigned to feature.", body, response.headers);
+    }
+    if (isCodeInRange("404", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Feature not found or feature management not enabled.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error.", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "FeatureValueResponse",
         ""
       );
       return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
@@ -53408,8 +56092,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/activate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -53442,8 +56126,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/change-password";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -53476,8 +56160,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -53510,8 +56194,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/deactivate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -53544,8 +56228,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/{user_identifier}/delete".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -53569,8 +56253,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/force-logout";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -53603,8 +56287,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/import";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -53637,8 +56321,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/reset-password";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -53671,8 +56355,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -53709,8 +56393,8 @@ var UsersApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/users/{user_identifier}/update".replace("{user_identifier}", encodeURIComponent(String(userIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -54314,8 +56998,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -54340,7 +57024,7 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
    * @deprecated
    *
    *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-   * @param identifier Unique id or name of the variable
+   * @param identifier Unique id, name, or object id of the variable
    */
   async deleteVariable(identifier, _options) {
     let _config = _options || this.configuration;
@@ -54350,8 +57034,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/delete".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -54375,8 +57059,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -54413,8 +57097,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update-values".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -54447,8 +57131,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -54471,7 +57155,7 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
   }
   /**
    *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-   * @param identifier Unique id or name of the variable to update.
+   * @param identifier Unique id, name, or object id of the variable to update.
    * @param updateVariableRequest 
    */
   async updateVariable(identifier, updateVariableRequest, _options) {
@@ -54485,8 +57169,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/{identifier}/update".replace("{identifier}", encodeURIComponent(String(identifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -54521,8 +57205,8 @@ var VariableApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/template/variables/update-values";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -54949,8 +57633,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/branches/commit";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -54983,8 +57667,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55017,8 +57701,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55051,8 +57735,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/deploy";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55089,8 +57773,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/{commit_id}/revert".replace("{commit_id}", encodeURIComponent(String(commitId)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55123,8 +57807,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/commits/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55157,8 +57841,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55191,8 +57875,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/config/update";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55225,8 +57909,8 @@ var VersionControlApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/vcs/git/branches/validate";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55791,8 +58475,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/create";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55825,8 +58509,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/delete";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55855,8 +58539,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/storage-config";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "GET" /* GET */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -55880,8 +58564,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/search";
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -55918,8 +58602,8 @@ var WebhooksApiRequestFactory = class extends BaseAPIRequestFactory {
     const localVarPath = "/api/rest/2.0/webhooks/{webhook_identifier}/update".replace("{webhook_identifier}", encodeURIComponent(String(webhookIdentifier)));
     const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
-    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.28.0");
-    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.28.0");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0");
     const contentType = ObjectSerializer.getPreferredMediaType([
       "application/json"
     ]);
@@ -56268,6 +58952,32 @@ var ObservableAIApi = class {
     return this.createAgentConversationWithHttpInfo(createAgentConversationRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param createAnalystRequest
+   */
+  createAnalystWithHttpInfo(createAnalystRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.createAnalyst(createAnalystRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.createAnalystWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param createAnalystRequest
+   */
+  createAnalyst(createAnalystRequest, _options) {
+    return this.createAnalystWithHttpInfo(createAnalystRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *  Version: 10.4.0.cl or later   Creates a new conversation session tied to a specific data model for AI-driven natural language querying.  Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include: - `metadata_identifier`: the unique ID of the data source that provides context for the conversation  Optionally, you can provide: - `tokens`: a token string to set initial context for the conversation (e.g., `\"[sales],[item type],[state]\"`)  If the request is successful, ThoughtSpot returns a unique `conversation_identifier` that must be passed to `sendMessage` to continue the conversation.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
    * @param createConversationRequest
    */
@@ -56292,6 +59002,32 @@ var ObservableAIApi = class {
    */
   createConversation(createConversationRequest, _options) {
     return this.createConversationWithHttpInfo(createConversationRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to delete.
+   */
+  deleteAnalystWithHttpInfo(analystIdentifier, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.deleteAnalyst(analystIdentifier, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteAnalystWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to delete.
+   */
+  deleteAnalyst(analystIdentifier, _options) {
+    return this.deleteAnalystWithHttpInfo(analystIdentifier, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *  Deletes an existing agent conversation.    Version: 26.7.0.cl or later   Permanently deletes an existing saved agent conversation and all its associated messages. This operation is irreversible — deleted conversations cannot be recovered.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being deleted.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to delete, as returned by `createAgentConversation` or `getConversationList`  A successful request returns an empty `204 No Content` response. The deleted conversation no longer appears in `getConversationList`.  #### Example request  ```bash DELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete ```  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |  > ###### Note: > > - Deletion is permanent and cannot be undone. Ensure the correct `conversation_identifier` is used before calling this endpoint. > - Only conversations created with `enable_save_chat: true` are persisted and can be deleted via this endpoint. > - Available from version 26.7.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
@@ -56636,6 +59372,32 @@ var ObservableAIApi = class {
     return this.queryGetDecomposedQueryWithHttpInfo(queryGetDecomposedQueryRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *  Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+   * @param searchAnalystsRequest
+   */
+  searchAnalystsWithHttpInfo(searchAnalystsRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.searchAnalysts(searchAnalystsRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchAnalystsWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+   * @param searchAnalystsRequest
+   */
+  searchAnalysts(searchAnalystsRequest, _options) {
+    return this.searchAnalystsWithHttpInfo(searchAnalystsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *   Version: 26.5.0.cl or later   Sends natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.  Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.  #### Usage guidelines  The request must include:  - `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking - `messages`: an array of one or more text messages to send to the agent  The API returns an array of response objects, each containing:  - `type`: the kind of response — `text`, `answer`, or `error` - `message`: the main content of the response - `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)  #### Error responses  | Code | Description                                                                                                                      | |------|----------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |  > ###### Note: > > - This endpoint is Generally Available from version 26.5.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - For real-time streamed responses, use `sendAgentConversationMessageStreaming` instead.      
    * @param conversationIdentifier Unique identifier for the conversation (used to track context)
    * @param sendAgentConversationMessageRequest
@@ -56826,6 +59588,34 @@ var ObservableAIApi = class {
     return this.setNLInstructionsWithHttpInfo(setNLInstructionsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal\'s access; `NO_ACCESS` revokes it. Granting access also shares the analyst\'s data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal\'s access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst\'s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to share.
+   * @param shareAnalystRequest
+   */
+  shareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.shareAnalyst(analystIdentifier, shareAnalystRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.shareAnalystWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal\'s access; `NO_ACCESS` revokes it. Granting access also shares the analyst\'s data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal\'s access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst\'s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to share.
+   * @param shareAnalystRequest
+   */
+  shareAnalyst(analystIdentifier, shareAnalystRequest, _options) {
+    return this.shareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
    * @param conversationIdentifier Unique identifier of the conversation to share.
    * @param shareConversationRequest
@@ -56906,7 +59696,35 @@ var ObservableAIApi = class {
     return this.stopConversationWithHttpInfo(conversationIdentifier, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+   *  Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to update.
+   * @param updateAnalystRequest
+   */
+  updateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.updateAnalyst(analystIdentifier, updateAnalystRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateAnalystWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to update.
+   * @param updateAnalystRequest
+   */
+  updateAnalyst(analystIdentifier, updateAnalystRequest, _options) {
+    return this.updateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
    * @param conversationIdentifier Unique identifier of the conversation to update.
    * @param updateConversationRequest
    */
@@ -56926,7 +59744,7 @@ var ObservableAIApi = class {
     }));
   }
   /**
-   *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+   *  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
    * @param conversationIdentifier Unique identifier of the conversation to update.
    * @param updateConversationRequest
    */
@@ -58459,6 +61277,91 @@ var ObservableEmailCustomizationApi = class {
     return this.validateEmailCustomizationWithHttpInfo(_options).pipe(map((apiResponse) => apiResponse.data));
   }
 };
+var ObservableFeatureManagementApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.configuration = configuration;
+    this.requestFactory = requestFactory || new FeatureManagementApiRequestFactory(configuration);
+    this.responseProcessor = responseProcessor || new FeatureManagementApiResponseProcessor();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+   * @param searchFeaturesRequest
+   */
+  searchFeaturesWithHttpInfo(searchFeaturesRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.searchFeatures(searchFeaturesRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchFeaturesWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+   * @param searchFeaturesRequest
+   */
+  searchFeatures(searchFeaturesRequest, _options) {
+    return this.searchFeaturesWithHttpInfo(searchFeaturesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+   * @param updateFeatureAssignmentsRequest
+   */
+  updateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.updateFeatureAssignments(updateFeatureAssignmentsRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateFeatureAssignmentsWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+   * @param updateFeatureAssignmentsRequest
+   */
+  updateFeatureAssignments(updateFeatureAssignmentsRequest, _options) {
+    return this.updateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+   * @param updateFeatureValueRequest
+   */
+  updateFeatureValueWithHttpInfo(updateFeatureValueRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.updateFeatureValue(updateFeatureValueRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateFeatureValueWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+   * @param updateFeatureValueRequest
+   */
+  updateFeatureValue(updateFeatureValueRequest, _options) {
+    return this.updateFeatureValueWithHttpInfo(updateFeatureValueRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+};
 var ObservableGroupsApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.configuration = configuration;
@@ -59070,7 +61973,7 @@ var ObservableMetadataApi = class {
     return this.parameterizeMetadataWithHttpInfo(parameterizeMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options) {
@@ -59089,7 +61992,7 @@ var ObservableMetadataApi = class {
     }));
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
@@ -59122,7 +62025,7 @@ var ObservableMetadataApi = class {
     return this.searchMetadataWithHttpInfo(searchMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest, _options) {
@@ -59141,7 +62044,7 @@ var ObservableMetadataApi = class {
     }));
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
@@ -59761,7 +62664,7 @@ var ObservableSecurityApi = class {
     return this.manageObjectPrivilegeWithHttpInfo(manageObjectPrivilegeRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadataWithHttpInfo(publishMetadataRequest, _options) {
@@ -59780,7 +62683,7 @@ var ObservableSecurityApi = class {
     }));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadata(publishMetadataRequest, _options) {
@@ -59813,7 +62716,7 @@ var ObservableSecurityApi = class {
     return this.shareMetadataWithHttpInfo(shareMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadataWithHttpInfo(unpublishMetadataRequest, _options) {
@@ -59832,7 +62735,7 @@ var ObservableSecurityApi = class {
     }));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadata(unpublishMetadataRequest, _options) {
@@ -60037,7 +62940,7 @@ var ObservableStyleCustomizationApi = class {
     return this.exportStyleLogosWithHttpInfo(exportStyleLogosRequest, accept, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizationsWithHttpInfo(searchStyleCustomizationsRequest, _options) {
@@ -60056,7 +62959,7 @@ var ObservableStyleCustomizationApi = class {
     }));
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -60089,7 +62992,7 @@ var ObservableStyleCustomizationApi = class {
     return this.searchStyleFontsWithHttpInfo(searchStyleFontsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
@@ -60116,7 +63019,7 @@ var ObservableStyleCustomizationApi = class {
     }));
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
@@ -60914,6 +63817,32 @@ var ObservableThoughtSpotRestApi = class {
     return this.createAgentConversationWithHttpInfo(createAgentConversationRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param createAnalystRequest
+   */
+  createAnalystWithHttpInfo(createAnalystRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.createAnalyst(createAnalystRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.createAnalystWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param createAnalystRequest
+   */
+  createAnalyst(createAnalystRequest, _options) {
+    return this.createAnalystWithHttpInfo(createAnalystRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *   Version: 10.12.0.cl or later   Creates a new [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR` (**Can manage custom calendars**) privilege is required.   #### Usage guidelines  You can create a custom calendar from scratch or an existing Table in ThoughtSpot. For both methods of calendar creation, the following parameters are required:  * Name of the custom calendar. * Calendar creation method. To create a calendar from an existing table, specify the method:   - `FROM_EXISTING_TABLE` - Creates calendar from the table reference provided in the API request.  - `FROM_INPUT_PARAMS` - Creates a calendar from the parameters defined in the API request.  * Connection ID and Table name * Database and schema name attributes:   For most Cloud Data Warehouse (CDW) connectors, both `database_name` and `schema_name` attributes are required.     However, the attribute requirements are conditional and vary based on the connector type and its metadata structure. For example, for connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL, the `schema_name` is required, whereas the `database_name` attribute is not.   Similarly, connectors such as ClickHouse require you to specify the `database_name` and the schema specification in such cases is optional.  **NOTE**: If you are creating a calendar from an existing table, ensure that the referenced table matches the required DDL for custom calendars. If the schema does not match, the API returns an error.  ##### Calendar type The API allows you to create the following types of calendars:  * `MONTH_OFFSET`. The default calendar type. A `MONTH_OFFSET` calendar is offset by a few months from the standard calendar months (January to December) and the year begins with the month defined in the request. For example, if the `month_offset` value is set as `April`, the calendar year begins in April.  * `4-4-5`. Each quarter in the calendar will include two 4-week months followed by one 5-week month. * `4-5-4`. Each quarter in the calendar will include two 4-week months with a 5-week month between. * `5-4-4`. Each quarter begins with a 5-week month, followed by two 4-week months.  To start and end the calendar on a specific date, specify the dates in the `MM/DD/YYYY` format. For `MONTH_OFFSET` calendars, ensure that the `start_date` matches the month specified in the `month_offset` attribute.  You can also set the starting day of the week and customize the prefixes for year and quarter labels.  #### Examples  To create a calendar from an existing table:  ``` {   \"name\": \"MyCustomCalendar1\",   \"table_reference\": {     \"connection_identifier\": \"4db8ea22-2ff4-4224-b05a-26674717e468\",     \"table_name\": \"MyCalendarTable\",     \"database_name\": \"RETAILAPPAREL\",     \"schema_name\": \"PUBLIC\"   },   \"creation_method\": \"FROM_EXISTING_TABLE\", } ```  To create a calendar from scratch:  ``` {   \"name\": \"MyCustomCalendar1\",   \"table_reference\": {     \"connection_identifier\": \"4db8ea22-2ff4-4224-b05a-26674717e468\",     \"table_name\": \"MyCalendarTable\",     \"database_name\": \"RETAILAPPAREL\",     \"schema_name\": \"PUBLIC\"   },   \"creation_method\": \"FROM_INPUT_PARAMS\",   \"calendar_type\": \"MONTH_OFFSET\",   \"month_offset\": \"April\",   \"start_day_of_week\": \"Monday\",   \"quarter_name_prefix\": \"Q\",   \"year_name_prefix\": \"FY\",   \"start_date\": \"04/01/2025\",   \"end_date\": \"04/31/2025\" } ```      
    * @param createCalendarRequest
    */
@@ -61516,6 +64445,32 @@ var ObservableThoughtSpotRestApi = class {
     return this.deactivateUserWithHttpInfo(deactivateUserRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to delete.
+   */
+  deleteAnalystWithHttpInfo(analystIdentifier, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.deleteAnalyst(analystIdentifier, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteAnalystWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to delete.
+   */
+  deleteAnalyst(analystIdentifier, _options) {
+    return this.deleteAnalystWithHttpInfo(analystIdentifier, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *   Version: 10.12.0.cl or later   Deletes a [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR` (**Can manage custom calendars**) privilege is required.  #### Usage guidelines To delete a custom calendar, specify the calendar ID as a path parameter in the request URL.        
    * @param calendarIdentifier Unique ID or name of the Calendar.
    */
@@ -62063,7 +65018,7 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-   * @param identifier Unique id or name of the variable
+   * @param identifier Unique id, name, or object id of the variable
    */
   deleteVariableWithHttpInfo(identifier, _options) {
     const _config = mergeConfiguration(this.configuration, _options);
@@ -62082,7 +65037,7 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-   * @param identifier Unique id or name of the variable
+   * @param identifier Unique id, name, or object id of the variable
    */
   deleteVariable(identifier, _options) {
     return this.deleteVariableWithHttpInfo(identifier, _options).pipe(map((apiResponse) => apiResponse.data));
@@ -63486,7 +66441,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.parameterizeMetadataWithHttpInfo(parameterizeMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options) {
@@ -63505,14 +66460,14 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
     return this.parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadataWithHttpInfo(publishMetadataRequest, _options) {
@@ -63531,7 +66486,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadata(publishMetadataRequest, _options) {
@@ -63698,6 +66653,32 @@ var ObservableThoughtSpotRestApi = class {
    */
   revokeToken(revokeTokenRequest, _options) {
     return this.revokeTokenWithHttpInfo(revokeTokenRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *  Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+   * @param searchAnalystsRequest
+   */
+  searchAnalystsWithHttpInfo(searchAnalystsRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.searchAnalysts(searchAnalystsRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchAnalystsWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+   * @param searchAnalystsRequest
+   */
+  searchAnalysts(searchAnalystsRequest, _options) {
+    return this.searchAnalystsWithHttpInfo(searchAnalystsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *   Version: 26.6.0.cl or later   Returns the authentication configuration for the specified auth type at cluster and org level. Currently supports `TRUSTED_AUTH`.  #### Required privileges  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `CONTROL_TRUSTED_AUTH` (**Can Enable or Disable Trusted Authentication**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH` privilege is required.  #### Usage guidelines  Use `scope` to control which level of settings are returned: - `CLUSTER` — Returns cluster-level authentication status and access tokens. Accessible only from the Primary Org. - `ORG` — Returns org-level authentication status and access tokens for the current Org. Requires the per-Org authentication feature to be enabled on your instance. - If `scope` is omitted, both cluster and org-level settings are returned based on the caller\'s org context and feature availability.  The `access_tokens` array in `cluster_preferences` or `org_preferences` is omitted when no token is configured at that level.  **Note**: Access tokens returned in the response are sensitive credentials. Treat them with the same care as passwords.      
@@ -63986,6 +66967,32 @@ var ObservableThoughtSpotRestApi = class {
     return this.searchEmailCustomizationWithHttpInfo(searchEmailCustomizationRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+   * @param searchFeaturesRequest
+   */
+  searchFeaturesWithHttpInfo(searchFeaturesRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.searchFeatures(searchFeaturesRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.searchFeaturesWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+   * @param searchFeaturesRequest
+   */
+  searchFeatures(searchFeaturesRequest, _options) {
+    return this.searchFeaturesWithHttpInfo(searchFeaturesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1. - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.  **NOTE**: `obj_identifier` is supported for the following object types: `LIVEBOARD`, `ANSWER`, `LOGICAL_TABLE`, `LOGICAL_COLUMN`, `CONNECTION`, `USER_GROUP`, `COLLECTION`. The response includes the `metadata_obj_id` field for objects that have a Custom object ID set.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` - `include_only_published_objects`  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
    * @param searchMetadataRequest
    */
@@ -64142,7 +67149,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.searchSemanticIntegrationsWithHttpInfo(searchSemanticIntegrationsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizationsWithHttpInfo(searchStyleCustomizationsRequest, _options) {
@@ -64161,7 +67168,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -64514,6 +67521,34 @@ var ObservableThoughtSpotRestApi = class {
     return this.setNLInstructionsWithHttpInfo(setNLInstructionsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal\'s access; `NO_ACCESS` revokes it. Granting access also shares the analyst\'s data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal\'s access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst\'s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to share.
+   * @param shareAnalystRequest
+   */
+  shareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.shareAnalyst(analystIdentifier, shareAnalystRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.shareAnalystWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal\'s access; `NO_ACCESS` revokes it. Granting access also shares the analyst\'s data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal\'s access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst\'s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to share.
+   * @param shareAnalystRequest
+   */
+  shareAnalyst(analystIdentifier, shareAnalystRequest, _options) {
+    return this.shareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
    * @param conversationIdentifier Unique identifier of the conversation to share.
    * @param shareConversationRequest
@@ -64674,7 +67709,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.unassignTagWithHttpInfo(unassignTagRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest, _options) {
@@ -64693,14 +67728,14 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
     return this.unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadataWithHttpInfo(unpublishMetadataRequest, _options) {
@@ -64719,11 +67754,39 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadata(unpublishMetadataRequest, _options) {
     return this.unpublishMetadataWithHttpInfo(unpublishMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *  Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to update.
+   * @param updateAnalystRequest
+   */
+  updateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.updateAnalyst(analystIdentifier, updateAnalystRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateAnalystWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to update.
+   * @param updateAnalystRequest
+   */
+  updateAnalyst(analystIdentifier, updateAnalystRequest, _options) {
+    return this.updateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *   Version: 10.12.0.cl or later   Updates the properties of a [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR` (**Can manage custom calendars**) privilege is required.  #### Usage guidelines  You can update the properties of a calendar using one of the following methods: * `FROM_INPUT_PARAMS` to update the calendar properties with the values defined in the API request. * `FROM_EXISTING_TABLE` Creates a calendar from the parameters defined in the API request.  To update a custom calendar, specify the calendar ID as a path parameter in the request URL and the following parameters in the request body:    * Connection ID and Table name * Database and schema name attributes:   For most Cloud Data Warehouse (CDW) connectors, both `database_name` and `schema_name` attributes are required.     However, the attribute requirements are conditional and vary based on the connector type and its metadata structure. For example, for connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL, the `schema_name` is required, whereas the `database_name` attribute is not.   Similarly, connectors such as ClickHouse require you to specify the `database_name` and the schema specification in such cases is optional.  The API allows you to modify the calendar type, month offset value, start and end date, starting day of the week, and prefixes assigned to the year and quarter labels.     #### Examples  Update a custom calendar using an existing Table in ThoughtSpot:  ``` {   \"update_method\": \"FROM_EXISTING_TABLE\",   \"table_reference\": {     \"connection_identifier\": \"Connection1\",     \"database_name\": \"db1\",     \"table_name\": \"custom_calendar_2025\",     \"schame_name\": \"schemaVar\"   } } ```  Update a custom calendar with the attributes defined in the API request:  ``` {   \"update_method\": \"FROM_INPUT_PARAMS\",   \"table_reference\": {     \"connection_identifier\": \"Connection1\",     \"database_name\": \"db1\",     \"table_name\": \"custom_calendar_2025\",     \"schame_name\": \"schemaVar\"   },   \"month_offset\": \"August\",   \"start_day_of_week\": \"Monday\",   \"start_date\": \"08/01/2025\",   \"end_date\": \"07/31/2026\" } ```      
@@ -64944,7 +68007,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.updateConnectionV2WithHttpInfo(connectionIdentifier, updateConnectionV2Request, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+   *  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
    * @param conversationIdentifier Unique identifier of the conversation to update.
    * @param updateConversationRequest
    */
@@ -64964,7 +68027,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+   *  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
    * @param conversationIdentifier Unique identifier of the conversation to update.
    * @param updateConversationRequest
    */
@@ -65070,6 +68133,58 @@ var ObservableThoughtSpotRestApi = class {
    */
   updateEmailCustomization(updateEmailCustomizationRequest, _options) {
     return this.updateEmailCustomizationWithHttpInfo(updateEmailCustomizationRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+   * @param updateFeatureAssignmentsRequest
+   */
+  updateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.updateFeatureAssignments(updateFeatureAssignmentsRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateFeatureAssignmentsWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+   * @param updateFeatureAssignmentsRequest
+   */
+  updateFeatureAssignments(updateFeatureAssignmentsRequest, _options) {
+    return this.updateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+   * @param updateFeatureValueRequest
+   */
+  updateFeatureValueWithHttpInfo(updateFeatureValueRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.updateFeatureValue(updateFeatureValueRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.updateFeatureValueWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+   * @param updateFeatureValueRequest
+   */
+  updateFeatureValue(updateFeatureValueRequest, _options) {
+    return this.updateFeatureValueWithHttpInfo(updateFeatureValueRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *  Update header attributes for a given list of header objects.   Version: 10.6.0.cl or later   ## Prerequisites - **Privileges Required:**   - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):**   - `ORG_ADMINISTRATION` (Can manage orgs).  ---  ## Usage Guidelines  ### Parameters  1. **headers_update**      - **Description:** List of header objects with their attributes to be updated. Each object contains a list of attributes to be updated in the header.    - **Usage:**       - You must provide either `identifier` or `obj_identifier`, but not both. Both fields cannot be empty.       - When `org_identifier` is set to `-1`, only the `identifier` value is accepted; `obj_identifier` is not allowed.  2. **org_identifier**      - **Description:** GUID (Globally Unique Identifier) or name of the organization.      - **Usage:**      - Leaving this field empty assumes that the changes should be applied to the current organization       - Provide `org_guid` or `org_name` to uniquely identify the organization where changes need to be applied. .      - Provide `-1` if changes have to be applied across all the org.  ---  ## Note Currently, this API is enabled only for updating the `obj_identifier` attribute. Only `text` will be allowed in attribute\'s value.  ## Best Practices  1. **Backup Before Conversion:**      Always export metadata as a backup before initiating the update process  ---  ## Examples  ### Only `identifier` is given  ```json {   \"headers_update\":   [     {       \"identifier\": \"guid_1\",       \"obj_identifier\": \"\",       \"type\": \"LOGICAL_COLUMN\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": \"orgGuid\" } ```  ### Only `obj_identifier` is given ```json {   \"headers_update\":   [     {       \"obj_identifier\": \"custom_object_id\",       \"type\": \"ANSWER\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": \"orgName\" } ```  ### Executing update for all org `-1` ```json {   \"headers_update\":   [     {       \"identifier\": \"guid_1\",       \"type\": \"ANSWER\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": -1 } ```  ### Optional `type` is not provided ```json {   \"headers_update\":   [     {       \"identifier\": \"guid_1\",       \"attributes\":       [         {           \"name\": \"obj_id\",           \"value\": \"custom_object_id\"         }       ]     }   ],   \"org_identifier\": -1 } ```     
@@ -65208,7 +68323,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.updateScheduleWithHttpInfo(scheduleIdentifier, updateScheduleRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
@@ -65235,7 +68350,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
@@ -65389,7 +68504,7 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-   * @param identifier Unique id or name of the variable to update.
+   * @param identifier Unique id, name, or object id of the variable to update.
    * @param updateVariableRequest
    */
   updateVariableWithHttpInfo(identifier, updateVariableRequest, _options) {
@@ -65409,7 +68524,7 @@ var ObservableThoughtSpotRestApi = class {
   }
   /**
    *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-   * @param identifier Unique id or name of the variable to update.
+   * @param identifier Unique id, name, or object id of the variable to update.
    * @param updateVariableRequest
    */
   updateVariable(identifier, updateVariableRequest, _options) {
@@ -65911,7 +69026,7 @@ var ObservableVariableApi = class {
   }
   /**
    *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-   * @param identifier Unique id or name of the variable
+   * @param identifier Unique id, name, or object id of the variable
    */
   deleteVariableWithHttpInfo(identifier, _options) {
     const _config = mergeConfiguration(this.configuration, _options);
@@ -65930,7 +69045,7 @@ var ObservableVariableApi = class {
   }
   /**
    *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-   * @param identifier Unique id or name of the variable
+   * @param identifier Unique id, name, or object id of the variable
    */
   deleteVariable(identifier, _options) {
     return this.deleteVariableWithHttpInfo(identifier, _options).pipe(map((apiResponse) => apiResponse.data));
@@ -66017,7 +69132,7 @@ var ObservableVariableApi = class {
   }
   /**
    *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-   * @param identifier Unique id or name of the variable to update.
+   * @param identifier Unique id, name, or object id of the variable to update.
    * @param updateVariableRequest
    */
   updateVariableWithHttpInfo(identifier, updateVariableRequest, _options) {
@@ -66037,7 +69152,7 @@ var ObservableVariableApi = class {
   }
   /**
    *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-   * @param identifier Unique id or name of the variable to update.
+   * @param identifier Unique id, name, or object id of the variable to update.
    * @param updateVariableRequest
    */
   updateVariable(identifier, updateVariableRequest, _options) {
@@ -66475,6 +69590,24 @@ var PromiseAIApi = class {
     return result.toPromise();
   }
   /**
+   *  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param createAnalystRequest
+   */
+  createAnalystWithHttpInfo(createAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createAnalystWithHttpInfo(createAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param createAnalystRequest
+   */
+  createAnalyst(createAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createAnalyst(createAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *  Version: 10.4.0.cl or later   Creates a new conversation session tied to a specific data model for AI-driven natural language querying.  Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include: - `metadata_identifier`: the unique ID of the data source that provides context for the conversation  Optionally, you can provide: - `tokens`: a token string to set initial context for the conversation (e.g., `\"[sales],[item type],[state]\"`)  If the request is successful, ThoughtSpot returns a unique `conversation_identifier` that must be passed to `sendMessage` to continue the conversation.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks view permission on the specified metadata object. |  > ###### Note: > * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
    * @param createConversationRequest
    */
@@ -66490,6 +69623,24 @@ var PromiseAIApi = class {
   createConversation(createConversationRequest, _options) {
     const observableOptions = wrapOptions(_options);
     const result = this.api.createConversation(createConversationRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to delete.
+   */
+  deleteAnalystWithHttpInfo(analystIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteAnalystWithHttpInfo(analystIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to delete.
+   */
+  deleteAnalyst(analystIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteAnalyst(analystIdentifier, observableOptions);
     return result.toPromise();
   }
   /**
@@ -66731,6 +69882,24 @@ var PromiseAIApi = class {
     return result.toPromise();
   }
   /**
+   *  Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+   * @param searchAnalystsRequest
+   */
+  searchAnalystsWithHttpInfo(searchAnalystsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchAnalystsWithHttpInfo(searchAnalystsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+   * @param searchAnalystsRequest
+   */
+  searchAnalysts(searchAnalystsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchAnalysts(searchAnalystsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *   Version: 26.5.0.cl or later   Sends natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.  Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.  #### Usage guidelines  The request must include:  - `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking - `messages`: an array of one or more text messages to send to the agent  The API returns an array of response objects, each containing:  - `type`: the kind of response — `text`, `answer`, or `error` - `message`: the main content of the response - `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)  #### Error responses  | Code | Description                                                                                                                      | |------|----------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |  > ###### Note: > > - This endpoint is Generally Available from version 26.5.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - For real-time streamed responses, use `sendAgentConversationMessageStreaming` instead.      
    * @param conversationIdentifier Unique identifier for the conversation (used to track context)
    * @param sendAgentConversationMessageRequest
@@ -66865,6 +70034,26 @@ var PromiseAIApi = class {
     return result.toPromise();
   }
   /**
+   *  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal\'s access; `NO_ACCESS` revokes it. Granting access also shares the analyst\'s data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal\'s access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst\'s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to share.
+   * @param shareAnalystRequest
+   */
+  shareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.shareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal\'s access; `NO_ACCESS` revokes it. Granting access also shares the analyst\'s data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal\'s access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst\'s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to share.
+   * @param shareAnalystRequest
+   */
+  shareAnalyst(analystIdentifier, shareAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.shareAnalyst(analystIdentifier, shareAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
    * @param conversationIdentifier Unique identifier of the conversation to share.
    * @param shareConversationRequest
@@ -66921,7 +70110,27 @@ var PromiseAIApi = class {
     return result.toPromise();
   }
   /**
-   *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+   *  Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to update.
+   * @param updateAnalystRequest
+   */
+  updateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to update.
+   * @param updateAnalystRequest
+   */
+  updateAnalyst(analystIdentifier, updateAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateAnalyst(analystIdentifier, updateAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
    * @param conversationIdentifier Unique identifier of the conversation to update.
    * @param updateConversationRequest
    */
@@ -66931,7 +70140,7 @@ var PromiseAIApi = class {
     return result.toPromise();
   }
   /**
-   *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+   *  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
    * @param conversationIdentifier Unique identifier of the conversation to update.
    * @param updateConversationRequest
    */
@@ -68016,6 +71225,65 @@ var PromiseEmailCustomizationApi = class {
     return result.toPromise();
   }
 };
+var PromiseFeatureManagementApi = class {
+  constructor(configuration, requestFactory, responseProcessor) {
+    this.api = new ObservableFeatureManagementApi(configuration, requestFactory, responseProcessor);
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+   * @param searchFeaturesRequest
+   */
+  searchFeaturesWithHttpInfo(searchFeaturesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchFeaturesWithHttpInfo(searchFeaturesRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+   * @param searchFeaturesRequest
+   */
+  searchFeatures(searchFeaturesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchFeatures(searchFeaturesRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+   * @param updateFeatureAssignmentsRequest
+   */
+  updateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+   * @param updateFeatureAssignmentsRequest
+   */
+  updateFeatureAssignments(updateFeatureAssignmentsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateFeatureAssignments(updateFeatureAssignmentsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+   * @param updateFeatureValueRequest
+   */
+  updateFeatureValueWithHttpInfo(updateFeatureValueRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateFeatureValueWithHttpInfo(updateFeatureValueRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+   * @param updateFeatureValueRequest
+   */
+  updateFeatureValue(updateFeatureValueRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateFeatureValue(updateFeatureValueRequest, observableOptions);
+    return result.toPromise();
+  }
+};
 var PromiseGroupsApi = class {
   constructor(configuration, requestFactory, responseProcessor) {
     this.api = new ObservableGroupsApi(configuration, requestFactory, responseProcessor);
@@ -68441,7 +71709,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options) {
@@ -68450,7 +71718,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
@@ -68477,7 +71745,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest, _options) {
@@ -68486,7 +71754,7 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
@@ -68922,7 +72190,7 @@ var PromiseSecurityApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadataWithHttpInfo(publishMetadataRequest, _options) {
@@ -68931,7 +72199,7 @@ var PromiseSecurityApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadata(publishMetadataRequest, _options) {
@@ -68958,7 +72226,7 @@ var PromiseSecurityApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadataWithHttpInfo(unpublishMetadataRequest, _options) {
@@ -68967,7 +72235,7 @@ var PromiseSecurityApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadata(unpublishMetadataRequest, _options) {
@@ -69114,7 +72382,7 @@ var PromiseStyleCustomizationApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizationsWithHttpInfo(searchStyleCustomizationsRequest, _options) {
@@ -69123,7 +72391,7 @@ var PromiseStyleCustomizationApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -69150,7 +72418,7 @@ var PromiseStyleCustomizationApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
@@ -69167,7 +72435,7 @@ var PromiseStyleCustomizationApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
@@ -69729,6 +72997,24 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param createAnalystRequest
+   */
+  createAnalystWithHttpInfo(createAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createAnalystWithHttpInfo(createAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Creates a Spotter Analyst: a configured agent with a name, description, at least one data source, and optional agent instructions, MCP connectors, and starter prompts. Analysts created via API use the default icon until one is set in the UI. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`.   Version: 26.10.0.cl or later   Creates a Spotter Analyst: a configured agent with a name, description, data sources, and optional agent instructions, MCP connectors, and starter prompts that your users converse with in Spotter.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges, plus view access to every data source referenced in `sources`. Use a bearer token for the Org in which the analyst should be created.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior for this analyst. Instructions that conflict with system guardrails are rejected with `409`. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). The caller must have view access to every referenced source. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors to link to the analyst. - `starter_prompts` (optional): up to 4 plain-text prompts shown on the analyst landing page, each between 10 and 250 characters. Display order follows list position.  If the request is successful, the response contains the created analyst, including the server-assigned `id`. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`), the last-update time as `updated_time_in_millis` (epoch milliseconds), and the `created_by` and `updated_by` users.  #### Error conditions  - `403` — missing privileges, or no view access to a referenced data source. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param createAnalystRequest
+   */
+  createAnalyst(createAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.createAnalyst(createAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *   Version: 10.12.0.cl or later   Creates a new [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR` (**Can manage custom calendars**) privilege is required.   #### Usage guidelines  You can create a custom calendar from scratch or an existing Table in ThoughtSpot. For both methods of calendar creation, the following parameters are required:  * Name of the custom calendar. * Calendar creation method. To create a calendar from an existing table, specify the method:   - `FROM_EXISTING_TABLE` - Creates calendar from the table reference provided in the API request.  - `FROM_INPUT_PARAMS` - Creates a calendar from the parameters defined in the API request.  * Connection ID and Table name * Database and schema name attributes:   For most Cloud Data Warehouse (CDW) connectors, both `database_name` and `schema_name` attributes are required.     However, the attribute requirements are conditional and vary based on the connector type and its metadata structure. For example, for connectors such as Teradata, MySQL, SingleSore, Amazon Aurora MySQL, Amazon RDS MySQL, Oracle, and GCP_MYSQL, the `schema_name` is required, whereas the `database_name` attribute is not.   Similarly, connectors such as ClickHouse require you to specify the `database_name` and the schema specification in such cases is optional.  **NOTE**: If you are creating a calendar from an existing table, ensure that the referenced table matches the required DDL for custom calendars. If the schema does not match, the API returns an error.  ##### Calendar type The API allows you to create the following types of calendars:  * `MONTH_OFFSET`. The default calendar type. A `MONTH_OFFSET` calendar is offset by a few months from the standard calendar months (January to December) and the year begins with the month defined in the request. For example, if the `month_offset` value is set as `April`, the calendar year begins in April.  * `4-4-5`. Each quarter in the calendar will include two 4-week months followed by one 5-week month. * `4-5-4`. Each quarter in the calendar will include two 4-week months with a 5-week month between. * `5-4-4`. Each quarter begins with a 5-week month, followed by two 4-week months.  To start and end the calendar on a specific date, specify the dates in the `MM/DD/YYYY` format. For `MONTH_OFFSET` calendars, ensure that the `start_date` matches the month specified in the `month_offset` attribute.  You can also set the starting day of the week and customize the prefixes for year and quarter labels.  #### Examples  To create a calendar from an existing table:  ``` {   \"name\": \"MyCustomCalendar1\",   \"table_reference\": {     \"connection_identifier\": \"4db8ea22-2ff4-4224-b05a-26674717e468\",     \"table_name\": \"MyCalendarTable\",     \"database_name\": \"RETAILAPPAREL\",     \"schema_name\": \"PUBLIC\"   },   \"creation_method\": \"FROM_EXISTING_TABLE\", } ```  To create a calendar from scratch:  ``` {   \"name\": \"MyCustomCalendar1\",   \"table_reference\": {     \"connection_identifier\": \"4db8ea22-2ff4-4224-b05a-26674717e468\",     \"table_name\": \"MyCalendarTable\",     \"database_name\": \"RETAILAPPAREL\",     \"schema_name\": \"PUBLIC\"   },   \"creation_method\": \"FROM_INPUT_PARAMS\",   \"calendar_type\": \"MONTH_OFFSET\",   \"month_offset\": \"April\",   \"start_day_of_week\": \"Monday\",   \"quarter_name_prefix\": \"Q\",   \"year_name_prefix\": \"FY\",   \"start_date\": \"04/01/2025\",   \"end_date\": \"04/31/2025\" } ```      
    * @param createCalendarRequest
    */
@@ -70155,6 +73441,24 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to delete.
+   */
+  deleteAnalystWithHttpInfo(analystIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteAnalystWithHttpInfo(analystIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered. The request has no body; the response contains the `id` of the deleted analyst. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request has no body — the analyst to delete is identified by the `analyst_identifier` path parameter, as returned by the create analyst API.  A successful request returns the `id` of the deleted analyst.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to delete.
+   */
+  deleteAnalyst(analystIdentifier, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteAnalyst(analystIdentifier, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *   Version: 10.12.0.cl or later   Deletes a [custom calendar](https://docs.thoughtspot.com/cloud/latest/connections-cust-cal).  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_CUSTOM_CALENDAR` (**Can manage custom calendars**) privilege is required.  #### Usage guidelines To delete a custom calendar, specify the calendar ID as a path parameter in the request URL.        
    * @param calendarIdentifier Unique ID or name of the Calendar.
    */
@@ -70534,7 +73838,7 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-   * @param identifier Unique id or name of the variable
+   * @param identifier Unique id, name, or object id of the variable
    */
   deleteVariableWithHttpInfo(identifier, _options) {
     const observableOptions = wrapOptions(_options);
@@ -70543,7 +73847,7 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-   * @param identifier Unique id or name of the variable
+   * @param identifier Unique id, name, or object id of the variable
    */
   deleteVariable(identifier, _options) {
     const observableOptions = wrapOptions(_options);
@@ -71517,7 +74821,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options) {
@@ -71526,7 +74830,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.5.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
+   *  Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for LOGICAL_TABLE.    Version: 26.10.0.cl or later   Allows parameterizing multiple fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for LOGICAL_TABLE.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows parameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table, the field type must be `ATTRIBUTE` and field names can include: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_names specifies the exact properties of the Connection or Connection Config that need to be parameterized.  For Connection Config, supported field names include: * impersonate_user  You can parameterize multiple fields at once by providing an array of field names.      
    * @param parameterizeMetadataFieldsRequest
    */
   parameterizeMetadataFields(parameterizeMetadataFieldsRequest, _options) {
@@ -71535,7 +74839,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadataWithHttpInfo(publishMetadataRequest, _options) {
@@ -71544,7 +74848,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
+   *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
    * @param publishMetadataRequest
    */
   publishMetadata(publishMetadataRequest, _options) {
@@ -71664,6 +74968,24 @@ var PromiseThoughtSpotRestApi = class {
   revokeToken(revokeTokenRequest, _options) {
     const observableOptions = wrapOptions(_options);
     const result = this.api.revokeToken(revokeTokenRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+   * @param searchAnalystsRequest
+   */
+  searchAnalystsWithHttpInfo(searchAnalystsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchAnalystsWithHttpInfo(searchAnalystsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Searches Spotter Analysts. Two modes: - Fetch mode: when `analyst_identifier` is provided, the response contains   exactly that analyst and all other filters are ignored. - List mode: returns a paginated list of analysts visible to the caller,   optionally filtered by a case-insensitive substring match on the   analyst name (`query`) and by ownership (`type`). Results are ordered   by most recently accessed. Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Searches Spotter Analysts. Use this endpoint to page through the analysts visible to you, or to fetch a single analyst by its identifier.  Requires at least one of `ADMINISTRATION`, `CAN_MANAGE_SPOTTER`, or `CAN_USE_SPOTTER` privileges. Use a bearer token for the Org whose analysts should be searched.  #### Usage guidelines  The endpoint operates in one of two modes:  **Fetch mode** — when `analyst_identifier` is provided, the response contains exactly that analyst (`total_size` is 1) and all other filters are ignored. The caller must have access to the analyst (owner, shared with, or admin/Spotter-management privileges).  **List mode** — when `analyst_identifier` is omitted, the response is a paginated list of analysts the caller can see, ordered by most recently accessed:  - `record_size` (optional): number of records per page. Default 50, between 1 and 500. - `record_offset` (optional): zero-based index of the first record. Default 0, maximum 10000. - `query` (optional): case-insensitive substring match applied to the analyst **name only**. - `type` (optional): ownership filter — `ALL` (default; created by or shared with me), `CREATED_BY_ME`, or `SHARED_TO_ME`.  The response contains `analysts` — the page of matching analysts — and `total_size`, the total number of matches before pagination. Each analyst includes its `id`, `name`, `description`, `instructions`, `sources` (with `id`, `type`, and display `name`), enriched `mcp_connectors` (with `id`, `name`, and `icon_url`), `icon_id`, `starter_prompts` (including the server-managed fixed prompt, marked `is_fixed`), `updated_time_in_millis` and `last_accessed_time_in_millis` (epoch milliseconds), and `created_by` / `updated_by` user references (with `id`, `name`, and `display_name`).  #### Error conditions  - `403` — missing privileges, or (fetch mode) no access to the requested analyst. - `404` — (fetch mode) no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as `record_size` or `record_offset` out of range.      
+   * @param searchAnalystsRequest
+   */
+  searchAnalysts(searchAnalystsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchAnalysts(searchAnalystsRequest, observableOptions);
     return result.toPromise();
   }
   /**
@@ -71865,6 +75187,24 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+   * @param searchFeaturesRequest
+   */
+  searchFeaturesWithHttpInfo(searchFeaturesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchFeaturesWithHttpInfo(searchFeaturesRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Returns the feature configurations available on the ThoughtSpot system, grouped by feature group.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To retrieve feature configurations, pass these parameters in your API request:  - `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org). - `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.  The response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.  The following example retrieves the general-access features for the cluster-admin view:  ``` {   \"scope\": \"CLUSTER\",   \"category\": \"GENERAL_ACCESS\" } ```  For the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"category\": \"GENERAL_ACCESS\" } ```      
+   * @param searchFeaturesRequest
+   */
+  searchFeatures(searchFeaturesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.searchFeatures(searchFeaturesRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.0.0.cl or later   Gets a list of metadata objects available on the ThoughtSpot system.  This API endpoint is available to all users who have view access to the object. Users with `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges can view data for all metadata objects, including users and groups.  #### Usage guidelines  - To get all metadata objects, send the API request without any attributes. - To get metadata objects of a specific type, set the `type` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE`. - To filter metadata objects within type `LOGICAL_TABLE`, set the `subtypes` attribute. For example, to fetch a Worksheet, set the type as `LOGICAL_TABLE` & subtypes as `[WORKSHEET]`. - To get a specific metadata object, specify the GUID. - To customize your search and filter the API response, you can use several parameters.   You can search for objects created or modified by specific users, by tags applied to the objects, or by using the include parameters like `include_auto_created_objects`, `include_dependent_objects`, `include_headers`, `include_incomplete_objects`, and so on.   You can also define sorting options to sort the data retrieved in the API response. - To get discoverable objects when linientmodel is enabled you can use `include_discoverable_objects` as true else false. Default value is true. - For liveboard metadata type, to get the newer format, set the `liveboard_response_format` as V2. Default value is V1. - To retrieve only objects that are published, set the `include_only_published_objects` as true. Default value is false.  **NOTE**: `obj_identifier` is supported for the following object types: `LIVEBOARD`, `ANSWER`, `LOGICAL_TABLE`, `LOGICAL_COLUMN`, `CONNECTION`, `USER_GROUP`, `COLLECTION`. The response includes the `metadata_obj_id` field for objects that have a Custom object ID set.  **NOTE**: The following parameters support pagination of metadata records:  - `tag_identifiers` - `type` - `subtypes` - `created_by_user_identifiers` - `modified_by_user_identifiers` - `owned_by_user_identifiers` - `exclude_objects` - `include_auto_created_objects` - `favorite_object_options` - `include_only_published_objects`  **Warning**: Do not set `record_size` to `-1`. On ThoughtSpot instances with a large number of objects or users, this can lead to slow responses, excessive logging, and out-of-memory failures. Specify an explicit `record_size` and iterate through pages programmatically.      
    * @param searchMetadataRequest
    */
@@ -71973,7 +75313,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizationsWithHttpInfo(searchStyleCustomizationsRequest, _options) {
@@ -71982,7 +75322,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+   *   Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user\'s org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user\'s org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
    * @param searchStyleCustomizationsRequest
    */
   searchStyleCustomizations(searchStyleCustomizationsRequest, _options) {
@@ -72233,6 +75573,26 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal\'s access; `NO_ACCESS` revokes it. Granting access also shares the analyst\'s data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal\'s access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst\'s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to share.
+   * @param shareAnalystRequest
+   */
+  shareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.shareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Updates share permissions on a Spotter Analyst, one entry per principal (user or group). `READ_ONLY` and `MODIFY` grant or change the principal\'s access; `NO_ACCESS` revokes it. Granting access also shares the analyst\'s data sources with the principal so the analyst keeps working for them. A successful share returns an empty `204 No Content` response. Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges.   Version: 26.10.0.cl or later   Updates share permissions on a Spotter Analyst for one or more principals (users or groups).  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The analyst is identified by the `analyst_identifier` path parameter. The request body contains a `permissions` array with one entry per principal:  - `principal.identifier` (required): unique identifier of the user or group. - `principal.type` (required): `USER` or `USER_GROUP`. - `share_mode` (required): `READ_ONLY` or `MODIFY` grants (or changes) the principal\'s access; `NO_ACCESS` revokes it.  A principal may appear at most once per request. When access is granted, the analyst\'s data sources are automatically shared with the principal as well, so the analyst keeps working for them.  A successful request returns an empty `204 No Content` response.  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `422` — validation failure, such as an empty `permissions` array, a duplicate principal, or a missing field. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to share.
+   * @param shareAnalystRequest
+   */
+  shareAnalyst(analystIdentifier, shareAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.shareAnalyst(analystIdentifier, shareAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *  Grants or revokes access to a shared conversation for one or more principals (users or groups). When principals are added, a read-only shared view of the conversation is created from its current state. Use `refresh_shared_content` to regenerate the shared view with the latest conversation content. Requires `CAN_USE_SPOTTER` privilege and ownership of the specified conversation.    Version: 26.9.0.cl or later       
    * @param conversationIdentifier Unique identifier of the conversation to share.
    * @param shareConversationRequest
@@ -72345,7 +75705,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadataWithHttpInfo(unparameterizeMetadataRequest, _options) {
@@ -72354,7 +75714,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Remove parameterization from fields in metadata objects.    Version: 26.5.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
+   *  Remove parameterization from fields in metadata objects.    Version: 26.10.0.cl or later   Allows removing parameterization from fields in metadata objects in ThoughtSpot.  Requires appropriate permissions to modify the metadata object.  The API endpoint allows unparameterizing the following types of metadata objects: * Logical Tables * Connections * Connection Configs  For a Logical Table the field type must be `ATTRIBUTE` and field name can be one of: * databaseName * schemaName * tableName  For a Connection or Connection Config, the field type is always `CONNECTION_PROPERTY`. In this case, field_name specifies the exact property of the Connection or Connection Config that needs to be unparameterized.  For Connection Config, the only supported field name is: * impersonate_user  ## Restored value  The endpoint has two mutually exclusive modes, and the value that is restored differs per mode:  * Single-field mode (`field_name` + `value`) restores the supplied `value`. * Bulk mode (`metadata_entries`) ignores `value` and restores the Primary org (`org_id=0`) value of the variable bound to the field, even when the request is made from a secondary org.  In bulk mode, a secret Connection field bound to a sensitive variable is restored from the variable\'s Primary-org secret.  Bulk mode has no partial success. The request fails with `400` and nothing is changed if any field: * is a non-secret field bound to a sensitive variable, * is bound to a per-principal variable, whose value is user-specific or group-specific, * has a variable that cannot be read, because it is deleted or not visible to you, * has no Primary-org value, or * is a secret field whose value is unavailable from the secure store, which includes the case where the Confidant Vault is disabled, since the restored secret could then not be stored securely.  Such a field can still be unparameterized individually in single-field mode with an explicit `value`. Duplicate entries for the same object and field are coalesced.      
    * @param unparameterizeMetadataRequest
    */
   unparameterizeMetadata(unparameterizeMetadataRequest, _options) {
@@ -72363,7 +75723,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadataWithHttpInfo(unpublishMetadataRequest, _options) {
@@ -72372,12 +75732,32 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.5.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
+   *   Version: 26.10.0.cl or later   Allows unpublishing metadata objects from organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  When unpublishing objects, you can: * Include dependencies by setting `include_dependencies` to true - this will unpublish all dependent objects if no other published object is using them * Force unpublish by setting `force` to true - this will break all dependent objects in the unpublished organizations      
    * @param unpublishMetadataRequest
    */
   unpublishMetadata(unpublishMetadataRequest, _options) {
     const observableOptions = wrapOptions(_options);
     const result = this.api.unpublishMetadata(unpublishMetadataRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to update.
+   * @param updateAnalystRequest
+   */
+  updateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Updates a Spotter Analyst. The request body is identical to `createAnalyst` and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset (no instructions, no MCP connectors, no starter prompts). Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with cannot edit it.   Version: 26.10.0.cl or later   Updates a Spotter Analyst. The request body is identical to the create analyst API, and the update is a full replace: the analyst is rewritten from the request, and optional fields omitted from the request are reset.  Requires ownership of the analyst, or `ADMINISTRATION` or `CAN_MANAGE_SPOTTER` privileges. Users the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in which the analyst exists.  #### Usage guidelines  The request body is flat — all fields are top-level:  - `name` (required): display name of the analyst. - `description` (required): up to 200 characters. - `instructions` (optional): natural-language instructions that guide the agent\'s behavior. Instructions that conflict with system guardrails are rejected with `409`. Omitting this field clears any existing instructions. - `sources` (required): at least one data source the analyst can query, each with an `identifier`, an optional `name`, and a `type` (`MODEL`, `ANSWER`, `LIVEBOARD`, or `CONVERSATION`). Replaces the existing list in full. When new sources are added, they are automatically shared with users the analyst was previously shared with, so those users keep a working analyst. - `mcp_connector_identifiers` (optional): identifiers of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear. - `starter_prompts` (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order follows list position. Replaces the existing list in full; omit or pass an empty array to clear.  If the request is successful, the response contains the updated analyst, including the refreshed `updated_time_in_millis` timestamp (epoch milliseconds) and `updated_by` user. In responses, sources are returned with `id` and `type`, connector identifiers as `mcp_connectors`, and starter prompts as structured objects (`label`, `text`, `order`, `is_ai_generated`).  #### Error conditions  - `400` — malformed analyst identifier. - `403` — the caller is not the analyst\'s author and lacks admin / Spotter-management privileges. - `404` — no analyst with the given identifier exists in the caller\'s Org. - `409` — `instructions` conflict with system guardrails. - `422` — validation failure, such as a missing required field (`name`, `description`, or `sources`), an empty `sources` list, too many starter prompts, or field-length violations. - `429` — rate limit exceeded.      
+   * @param analystIdentifier Unique identifier of the analyst to update.
+   * @param updateAnalystRequest
+   */
+  updateAnalyst(analystIdentifier, updateAnalystRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateAnalyst(analystIdentifier, updateAnalystRequest, observableOptions);
     return result.toPromise();
   }
   /**
@@ -72535,7 +75915,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+   *  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
    * @param conversationIdentifier Unique identifier of the conversation to update.
    * @param updateConversationRequest
    */
@@ -72545,7 +75925,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *  Updates attributes of an existing agent conversation. Currently only the display title can be updated; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+   *  Updates attributes of an existing agent conversation. Supports updating the display title and the pinned state; additional conversation attributes may be supported in future versions. At least one updatable attribute must be provided in the request body. Each attribute is applied independently, so omitted attributes are left unchanged.    Version: 26.7.0.cl or later   Updates attributes of an existing saved agent conversation. Supports updating the conversation\'s display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.  Use this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.  #### Usage guidelines  The request must include:  - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList` - At least one updatable attribute in the request body:     - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.     - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.  Each attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.  A successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.  #### Example request  Rename a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\" } ```  Pin a conversation:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"is_pinned\": true } ```  Update both attributes in a single request:  ```bash POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update Content-Type: application/json  {   \"title\": \"Revenue Breakdown by Product Line\",   \"is_pinned\": true } ```  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. | | 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |  > ###### Note: > > - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier. > - There is no limit on the number of conversations a user can pin. > - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
    * @param conversationIdentifier Unique identifier of the conversation to update.
    * @param updateConversationRequest
    */
@@ -72628,6 +76008,42 @@ var PromiseThoughtSpotRestApi = class {
   updateEmailCustomization(updateEmailCustomizationRequest, _options) {
     const observableOptions = wrapOptions(_options);
     const result = this.api.updateEmailCustomization(updateEmailCustomizationRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+   * @param updateFeatureAssignmentsRequest
+   */
+  updateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Updates the Org assignments for a feature. Available to cluster admins only.  #### Pre-requisites  Requires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To update the Org assignments for a feature, pass these parameters in your API request:  - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update. - `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature. - `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.  The following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [1, 2],   \"operation\": \"ADD\" } ```  Clear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):  ``` {   \"feature_identifier\": \"index_columns\",   \"org_identifiers\": [],   \"operation\": \"REPLACE\" } ```      
+   * @param updateFeatureAssignmentsRequest
+   */
+  updateFeatureAssignments(updateFeatureAssignmentsRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateFeatureAssignments(updateFeatureAssignmentsRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+   * @param updateFeatureValueRequest
+   */
+  updateFeatureValueWithHttpInfo(updateFeatureValueRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateFeatureValueWithHttpInfo(updateFeatureValueRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *   Version: 26.10.0.cl or later   Sets the value of a feature at the cluster or Org scope.  #### Pre-requisites  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.  #### Usage guidelines  To set a feature value, pass these parameters in your API request:  - `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override. - `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`. - `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set. - `feature_value` — New value to set for the feature. - `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.  The following example sets a per-Org value override for Org `1`:  ``` {   \"scope\": \"ORG\",   \"org_identifier\": 1,   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\" } ```  Set the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:  ``` {   \"scope\": \"CLUSTER\",   \"feature_identifier\": \"index_columns\",   \"feature_value\": \"true\",   \"reset_org_overrides\": true } ```      
+   * @param updateFeatureValueRequest
+   */
+  updateFeatureValue(updateFeatureValueRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.updateFeatureValue(updateFeatureValueRequest, observableOptions);
     return result.toPromise();
   }
   /**
@@ -72727,7 +76143,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
@@ -72744,7 +76160,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+   *   Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user\'s org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
    * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
    * @param [operation] Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
    * @param [resetOptions] Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
@@ -72860,7 +76276,7 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-   * @param identifier Unique id or name of the variable to update.
+   * @param identifier Unique id, name, or object id of the variable to update.
    * @param updateVariableRequest
    */
   updateVariableWithHttpInfo(identifier, updateVariableRequest, _options) {
@@ -72870,7 +76286,7 @@ var PromiseThoughtSpotRestApi = class {
   }
   /**
    *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-   * @param identifier Unique id or name of the variable to update.
+   * @param identifier Unique id, name, or object id of the variable to update.
    * @param updateVariableRequest
    */
   updateVariable(identifier, updateVariableRequest, _options) {
@@ -73226,7 +76642,7 @@ var PromiseVariableApi = class {
   }
   /**
    *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-   * @param identifier Unique id or name of the variable
+   * @param identifier Unique id, name, or object id of the variable
    */
   deleteVariableWithHttpInfo(identifier, _options) {
     const observableOptions = wrapOptions(_options);
@@ -73235,7 +76651,7 @@ var PromiseVariableApi = class {
   }
   /**
    *  Delete a variable    Version: 10.14.0.cl or later   **Note:** This API endpoint is deprecated and will be removed from ThoughtSpot in a future release. Use [POST /api/rest/2.0/template/variables/delete](/api/rest/2.0/template/variables/delete) instead.  Allows deleting a variable from ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint requires: * The variable identifier (ID or name)  The operation will fail if: * The user lacks required permissions * The variable doesn\'t exist * The variable is being used by other objects      
-   * @param identifier Unique id or name of the variable
+   * @param identifier Unique id, name, or object id of the variable
    */
   deleteVariable(identifier, _options) {
     const observableOptions = wrapOptions(_options);
@@ -73300,7 +76716,7 @@ var PromiseVariableApi = class {
   }
   /**
    *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-   * @param identifier Unique id or name of the variable to update.
+   * @param identifier Unique id, name, or object id of the variable to update.
    * @param updateVariableRequest
    */
   updateVariableWithHttpInfo(identifier, updateVariableRequest, _options) {
@@ -73310,7 +76726,7 @@ var PromiseVariableApi = class {
   }
   /**
    *  Update a variable\'s name    Version: 26.4.0.cl or later   Allows updating a variable\'s name in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope. The CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current organization scope.  The API endpoint allows updating: * The variable name     
-   * @param identifier Unique id or name of the variable to update.
+   * @param identifier Unique id, name, or object id of the variable to update.
    * @param updateVariableRequest
    */
   updateVariable(identifier, updateVariableRequest, _options) {
@@ -73684,6 +77100,7 @@ export {
   APIKey,
   APIKeyInput,
   AccessToken,
+  AccessTokenScope,
   ActionConfig,
   ActionConfigInput,
   ActionConfigInputCreate,
@@ -73697,6 +77114,17 @@ export {
   AgentConversationHistoryResponse,
   AgentConversationList,
   AgentInstructions,
+  Analyst,
+  AnalystDeleteResponse,
+  AnalystItem,
+  AnalystItemSource,
+  AnalystItemStarterPrompt,
+  AnalystMcpConnector,
+  AnalystSearchResponse,
+  AnalystSource,
+  AnalystSourceInput,
+  AnalystStarterPrompt,
+  AnalystUser,
   AnswerContent,
   AnswerDataResponse,
   AnswerDetails,
@@ -73782,6 +77210,7 @@ export {
   ConvertWorksheetToModelRequest,
   CopyObjectRequest,
   CreateAgentConversationRequest,
+  CreateAnalystRequest,
   CreateCalendarRequest,
   CreateCollectionRequest,
   CreateConfigRequest,
@@ -73867,6 +77296,12 @@ export {
   FavoriteMetadataInput,
   FavoriteMetadataItem,
   FavoriteObjectOptionsInput,
+  FeatureAssignmentResponse,
+  FeatureDetail,
+  FeatureGroup,
+  PromiseFeatureManagementApi as FeatureManagementApi,
+  FeatureOrgInfo,
+  FeatureValueResponse,
   FetchAnswerDataRequest,
   FetchAnswerSqlQueryRequest,
   FetchAsyncImportTaskStatusRequest,
@@ -74042,6 +77477,7 @@ export {
   Scope,
   ScriptSrcUrls,
   ScriptSrcUrlsInput,
+  SearchAnalystsRequest,
   SearchAuthSettingsRequest,
   SearchAuthSettingsResponse,
   SearchCalendarsRequest,
@@ -74058,6 +77494,7 @@ export {
   SearchDataResponse,
   SearchDatasetsResponseItem,
   SearchEmailCustomizationRequest,
+  SearchFeaturesRequest,
   SearchMetadataRequest,
   SearchOrgsRequest,
   SearchRoleResponse,
@@ -74097,6 +77534,7 @@ export {
   ServerConfiguration,
   SetAgentInstructionsRequest,
   SetNLInstructionsRequest,
+  ShareAnalystRequest,
   ShareConversationRequest,
   ShareMetadataRequest,
   ShareMetadataTypeInput,
@@ -74148,6 +77586,7 @@ export {
   PromiseThoughtSpotRestApi as ThoughtSpotRestApi,
   Token,
   TokenAccessScopeObject,
+  TokenScopeInput,
   TokenValidationResponse,
   ToolCallResponseItem,
   ToolResultResponseItem,
@@ -74157,6 +77596,7 @@ export {
   UnassignTagRequest,
   UnparameterizeMetadataRequest,
   UnpublishMetadataRequest,
+  UpdateAnalystRequest,
   UpdateCalendarRequest,
   UpdateCollectionRequest,
   UpdateColumnSecurityRulesRequest,
@@ -74168,6 +77608,8 @@ export {
   UpdateConversationRequest,
   UpdateCustomActionRequest,
   UpdateEmailCustomizationRequest,
+  UpdateFeatureAssignmentsRequest,
+  UpdateFeatureValueRequest,
   UpdateMetadataHeaderRequest,
   UpdateMetadataObjIdRequest,
   UpdateObjIdInput,

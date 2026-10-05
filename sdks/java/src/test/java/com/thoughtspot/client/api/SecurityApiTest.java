@@ -239,7 +239,7 @@ public class SecurityApiTest {
     }
 
     /**
-     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
+     * Version: 26.10.0.cl or later Allows publishing metadata objects across organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * This API will essentially share the objects along with it&#39;s dependencies to the org
@@ -338,7 +338,7 @@ public class SecurityApiTest {
     }
 
     /**
-     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
+     * Version: 26.10.0.cl or later Allows unpublishing metadata objects from organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * When unpublishing objects, you can: * Include dependencies by setting
