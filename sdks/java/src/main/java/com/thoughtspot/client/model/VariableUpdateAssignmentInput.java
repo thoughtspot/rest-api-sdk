@@ -113,7 +113,7 @@ public class VariableUpdateAssignmentInput implements Serializable {
     }
 
     /**
-     * ID or Name of the variable
+     * ID, name, or object ID of the variable
      *
      * @return variableIdentifier
      */

@@ -54,6 +54,38 @@ describe('AIApi', function() {
         });     
       });
 
+      describe('createAnalyst', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "createAnalyst"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.createAnalyst(
+                    // createAnalystRequest CreateAnalystRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.createAnalyst(
+                    // createAnalystRequest CreateAnalystRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('createConversation', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -78,6 +110,38 @@ describe('AIApi', function() {
                   instance.createConversation(
                     // createConversationRequest CreateConversationRequest
                      test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('deleteAnalyst', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "deleteAnalyst"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.deleteAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.deleteAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier    
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -510,6 +574,38 @@ describe('AIApi', function() {
         });     
       });
 
+      describe('searchAnalysts', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchAnalysts"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchAnalysts(
+                    // searchAnalystsRequest SearchAnalystsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchAnalysts(
+                    // searchAnalystsRequest SearchAnalystsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('sendAgentConversationMessage', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -750,6 +846,42 @@ describe('AIApi', function() {
         });     
       });
 
+      describe('shareAnalyst', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "shareAnalyst"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.shareAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier     , 
+                    // shareAnalystRequest ShareAnalystRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.shareAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier     , 
+                    // shareAnalystRequest ShareAnalystRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('shareConversation', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -842,6 +974,42 @@ describe('AIApi', function() {
                   instance.stopConversation(
                     // conversationIdentifier conversation_identifier
                     test.Path_Variables.conversation_identifier    
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('updateAnalyst', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateAnalyst"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier     , 
+                    // updateAnalystRequest UpdateAnalystRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier     , 
+                    // updateAnalystRequest UpdateAnalystRequest
+                     test.Body   
                   )
                 ).to.be.rejectedWith(Error);
             }

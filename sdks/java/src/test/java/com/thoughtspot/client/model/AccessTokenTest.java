@@ -51,4 +51,10 @@ public class AccessTokenTest {
     public void expirationTimeInMillisTest() {
         // TODO: test expirationTimeInMillis
     }
+
+    /** Test the property 'scope' */
+    @Test
+    public void scopeTest() {
+        // TODO: test scope
+    }
 }

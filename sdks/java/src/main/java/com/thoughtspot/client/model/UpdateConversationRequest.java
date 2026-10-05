@@ -35,6 +35,12 @@ public class UpdateConversationRequest implements Serializable {
     @javax.annotation.Nullable
     private String title;
 
+    public static final String SERIALIZED_NAME_IS_PINNED = "is_pinned";
+
+    @SerializedName(SERIALIZED_NAME_IS_PINNED)
+    @javax.annotation.Nullable
+    private Boolean isPinned;
+
     public UpdateConversationRequest() {}
 
     public UpdateConversationRequest title(@javax.annotation.Nullable String title) {
@@ -43,7 +49,8 @@ public class UpdateConversationRequest implements Serializable {
     }
 
     /**
-     * New display title for the conversation. Omit to leave the title unchanged.
+     * New display title for the conversation. Omit to leave the title unchanged. An empty or
+     * whitespace-only value is replaced with a default title rather than rejected.
      *
      * @return title
      */
@@ -54,6 +61,29 @@ public class UpdateConversationRequest implements Serializable {
 
     public void setTitle(@javax.annotation.Nullable String title) {
         this.title = title;
+    }
+
+    public UpdateConversationRequest isPinned(@javax.annotation.Nullable Boolean isPinned) {
+        this.isPinned = isPinned;
+        return this;
+    }
+
+    /**
+     * Pinned state of the conversation for the current user. Pinning marks a conversation for quick
+     * access: pinned conversations are surfaced first in &#x60;getConversationList&#x60;. Set to
+     * &#x60;true&#x60; to pin the conversation, &#x60;false&#x60; to unpin it, or omit to leave the
+     * pinned state unchanged. Applying the state the conversation is already in is a no-op success.
+     * Version: 26.10.0.cl or later
+     *
+     * @return isPinned
+     */
+    @javax.annotation.Nullable
+    public Boolean getIsPinned() {
+        return isPinned;
+    }
+
+    public void setIsPinned(@javax.annotation.Nullable Boolean isPinned) {
+        this.isPinned = isPinned;
     }
 
     /**
@@ -110,13 +140,14 @@ public class UpdateConversationRequest implements Serializable {
         }
         UpdateConversationRequest updateConversationRequest = (UpdateConversationRequest) o;
         return Objects.equals(this.title, updateConversationRequest.title)
+                && Objects.equals(this.isPinned, updateConversationRequest.isPinned)
                 && Objects.equals(
                         this.additionalProperties, updateConversationRequest.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, additionalProperties);
+        return Objects.hash(title, isPinned, additionalProperties);
     }
 
     @Override
@@ -124,6 +155,7 @@ public class UpdateConversationRequest implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("class UpdateConversationRequest {\n");
         sb.append("    title: ").append(toIndentedString(title)).append("\n");
+        sb.append("    isPinned: ").append(toIndentedString(isPinned)).append("\n");
         sb.append("    additionalProperties: ")
                 .append(toIndentedString(additionalProperties))
                 .append("\n");
@@ -149,6 +181,7 @@ public class UpdateConversationRequest implements Serializable {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
         openapiFields.add("title");
+        openapiFields.add("is_pinned");
 
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();

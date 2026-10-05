@@ -45,7 +45,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// </summary>
         /// <param name="conversationId">Unique identifier of the conversation. (required).</param>
         /// <param name="conversationIdentifier">Unique identifier of the conversation.    Version: 26.5.0.cl or later  (required).</param>
-        public AgentConversation(string conversationId = default, string conversationIdentifier = default)
+        /// <param name="analystId">Unique identifier of the Spotter Analyst the conversation was started from. Null when the conversation was not started from an analyst.    Version: 26.10.0.cl or later .</param>
+        public AgentConversation(string conversationId = default, string conversationIdentifier = default, string analystId = default)
         {
             // to ensure "conversationId" is required (not null)
             if (conversationId == null)
@@ -59,6 +60,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
                 throw new ArgumentNullException("conversationIdentifier is a required property for AgentConversation and cannot be null");
             }
             this.ConversationIdentifier = conversationIdentifier;
+            this.AnalystId = analystId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -77,6 +79,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string ConversationIdentifier { get; set; }
 
         /// <summary>
+        /// Unique identifier of the Spotter Analyst the conversation was started from. Null when the conversation was not started from an analyst.    Version: 26.10.0.cl or later 
+        /// </summary>
+        /// <value>Unique identifier of the Spotter Analyst the conversation was started from. Null when the conversation was not started from an analyst.    Version: 26.10.0.cl or later </value>
+        [DataMember(Name = "analyst_id", EmitDefaultValue = true)]
+        public string AnalystId { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -92,6 +101,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("class AgentConversation {\n");
             sb.Append("  ConversationId: ").Append(ConversationId).Append("\n");
             sb.Append("  ConversationIdentifier: ").Append(ConversationIdentifier).Append("\n");
+            sb.Append("  AnalystId: ").Append(AnalystId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

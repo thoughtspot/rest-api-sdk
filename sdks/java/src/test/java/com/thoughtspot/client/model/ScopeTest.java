@@ -33,4 +33,16 @@ public class ScopeTest {
     public void metadataIdTest() {
         // TODO: test metadataId
     }
+
+    /** Test the property 'orgScope' */
+    @Test
+    public void orgScopeTest() {
+        // TODO: test orgScope
+    }
+
+    /** Test the property 'orgIds' */
+    @Test
+    public void orgIdsTest() {
+        // TODO: test orgIds
+    }
 }

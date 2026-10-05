@@ -173,5 +173,5 @@ export class SemanticIntegrationSearchResponse {
 }
 
     export type SemanticIntegrationSearchResponseImportTypeEnum = "CDW" | "FILE" ;
-    export type SemanticIntegrationSearchResponseTypeEnum = "RDBMS_SNOWFLAKE" ;
+    export type SemanticIntegrationSearchResponseTypeEnum = "RDBMS_SNOWFLAKE" | "RDBMS_DATABRICKS" ;
 

@@ -109,6 +109,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Scope'
+        /// </summary>
+        [Fact]
+        public void ScopeTest()
+        {
+            // TODO unit test for the property 'Scope'
+        }
+
+        /// <summary>
         /// Test the property 'Email'
         /// </summary>
         [Fact]

@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class DeleteVariablesRequest {
     /**
-    * Unique id(s) or name(s) of the variable(s) to delete
+    * Unique id(s), name(s), or object id(s) of the variable(s) to delete
     */
     'identifiers': Array<string>;
 

@@ -80,7 +80,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableDetailInput" /> class.
         /// </summary>
-        /// <param name="identifier">Unique ID or name of the variable.</param>
+        /// <param name="identifier">Unique ID, name, or object ID of the variable.</param>
         /// <param name="type">Type of variable.</param>
         /// <param name="namePattern">A pattern to match case-insensitive name of the variable. User % for a wildcard match.</param>
         public VariableDetailInput(string identifier = default, TypeEnum? type = default, string namePattern = default)
@@ -92,9 +92,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Unique ID or name of the variable
+        /// Unique ID, name, or object ID of the variable
         /// </summary>
-        /// <value>Unique ID or name of the variable</value>
+        /// <value>Unique ID, name, or object ID of the variable</value>
         [DataMember(Name = "identifier", EmitDefaultValue = true)]
         public string Identifier { get; set; }
 

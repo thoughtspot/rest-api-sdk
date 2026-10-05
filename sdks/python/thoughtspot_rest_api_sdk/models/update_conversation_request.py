@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -25,9 +25,10 @@ class UpdateConversationRequest(BaseModel):
     """
     UpdateConversationRequest
     """ # noqa: E501
-    title: Optional[StrictStr] = Field(default=None, description="New display title for the conversation. Omit to leave the title unchanged.")
+    title: Optional[StrictStr] = Field(default=None, description="New display title for the conversation. Omit to leave the title unchanged. An empty or whitespace-only value is replaced with a default title rather than rejected.")
+    is_pinned: Optional[StrictBool] = Field(default=None, description="Pinned state of the conversation for the current user. Pinning marks a conversation for quick access: pinned conversations are surfaced first in `getConversationList`. Set to `true` to pin the conversation, `false` to unpin it, or omit to leave the pinned state unchanged. Applying the state the conversation is already in is a no-op success.    Version: 26.10.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["title"]
+    __properties: ClassVar[List[str]] = ["title", "is_pinned"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -75,6 +76,11 @@ class UpdateConversationRequest(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if is_pinned (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_pinned is None and "is_pinned" in self.model_fields_set:
+            _dict['is_pinned'] = None
+
         return _dict
 
     @classmethod
@@ -87,7 +93,8 @@ class UpdateConversationRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "title": obj.get("title")
+            "title": obj.get("title"),
+            "is_pinned": obj.get("is_pinned")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

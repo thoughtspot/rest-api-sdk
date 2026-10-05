@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { OrgInfo } from '../models/OrgInfo';
 import { HttpFile } from '../http/http';
 
 export class Scope {
@@ -18,13 +19,21 @@ export class Scope {
     */
     'access_type': string;
     /**
-    * Unique identifier of the metadata.
+    * Unique identifier of the Org.
     */
     'org_id'?: number | null;
     /**
-    * Unique identifier of the Org.
+    * Unique identifier of the metadata.
     */
     'metadata_id'?: string | null;
+    /**
+    * Org scope the token is authorized for. Absent for a legacy single-org token.   Version: 26.10.0.cl or later 
+    */
+    'org_scope'?: ScopeOrgScopeEnum | null;
+    /**
+    * Orgs the token is authorized for when org_scope is SPECIFIC_ORGS.   Version: 26.10.0.cl or later 
+    */
+    'org_ids'?: Array<OrgInfo> | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,6 +57,18 @@ export class Scope {
             "baseName": "metadata_id",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "org_scope",
+            "baseName": "org_scope",
+            "type": "ScopeOrgScopeEnum",
+            "format": ""
+        },
+        {
+            "name": "org_ids",
+            "baseName": "org_ids",
+            "type": "Array<OrgInfo>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -57,3 +78,6 @@ export class Scope {
     public constructor() {
     }
 }
+
+    export type ScopeOrgScopeEnum = "SPECIFIC_ORGS" | "ALL_MEMBER_ORGS" ;
+

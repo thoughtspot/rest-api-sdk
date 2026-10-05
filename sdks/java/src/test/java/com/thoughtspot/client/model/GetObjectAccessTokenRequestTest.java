@@ -52,6 +52,12 @@ public class GetObjectAccessTokenRequestTest {
         // TODO: test orgId
     }
 
+    /** Test the property 'scope' */
+    @Test
+    public void scopeTest() {
+        // TODO: test scope
+    }
+
     /** Test the property 'email' */
     @Test
     public void emailTest() {

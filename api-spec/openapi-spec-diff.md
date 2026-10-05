@@ -1,156 +1,112 @@
-# API Changelog - 26.9 vs. 26.8.0.cl
+# API Changelog - 26.10.0.cl vs. 26.9
 
 
 ## API Changes
 
-### GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info
+### POST /api/rest/2.0/ai/agent/analysts/create
 -  endpoint added
 
 
-### GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content
+### POST /api/rest/2.0/ai/agent/analysts/search
 -  endpoint added
+
+
+### POST /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete
+-  endpoint added
+
+
+### POST /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share
+-  endpoint added
+
+
+### POST /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update
+-  endpoint added
+
+
+### POST /api/rest/2.0/ai/agent/conversation/create
+-  added the new optional request property `analyst_identifier`
+-  the request property `metadata_context` became optional
+-  added the optional property `analyst_id` to the response with the `200` status
+-  added the optional property `analyst_id` to the response with the `201` status
+
+
+### GET /api/rest/2.0/ai/agent/conversations
+-  added the optional property `conversations/items/analyst_id` to the response with the `200` status
+-  added the optional property `conversations/items/analyst_id` to the response with the `201` status
+-  added the optional property `conversations/items/is_pinned` to the response with the `200` status
+-  added the optional property `conversations/items/is_pinned` to the response with the `201` status
 
 
 ### POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share
--  endpoint added
+-  added the new optional request property `notify_on_share`
+
+
+### POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update
+-  added the new optional request property `is_pinned`
 
 
 ### POST /api/rest/2.0/auth/token/custom
--  added the non-success response with the status `409`
+-  added the new optional request property `scope`
+-  added the optional property `scope` to the response with the `200` status
 
 
-### POST /api/rest/2.0/collections/create
--  added the optional property `obj_id` to the response with the `200` status
+### POST /api/rest/2.0/auth/token/full
+-  added the new optional request property `scope`
+-  added the optional property `scope/org_ids` to the response with the `200` status
+-  added the optional property `scope/org_scope` to the response with the `200` status
 
 
-### POST /api/rest/2.0/collections/search
--  added the optional property `collections/items/obj_id` to the response with the `200` status
+### POST /api/rest/2.0/auth/token/object
+-  added the new optional request property `scope`
+-  added the optional property `scope/org_ids` to the response with the `200` status
+-  added the optional property `scope/org_scope` to the response with the `200` status
 
 
-### POST /api/rest/2.0/connection-configurations/create
-- :warning: added the new `SCHEDULED_LIVEBOARDS` enum value to the `policy_processes/items/` response property for the response status `200`
--  added the new `OAUTH_CLIENT_CREDENTIALS_WITH_X509` enum value to the request property `authentication_type`
--  added the new `SCHEDULED_LIVEBOARDS` enum value to the request property `policy_processes/items/`
+### POST /api/rest/2.0/auth/token/validate
+-  added the optional property `scope/org_ids` to the response with the `200` status
+-  added the optional property `scope/org_scope` to the response with the `200` status
 
 
-### POST /api/rest/2.0/connection-configurations/search
-- :warning: added the new `SCHEDULED_LIVEBOARDS` enum value to the `items/policy_processes/items/` response property for the response status `200`
+### POST /api/rest/2.0/configurations/features/assignments/update
+-  endpoint added
 
 
-### POST /api/rest/2.0/connection-configurations/{configuration_identifier}/update
--  added the new `OAUTH_CLIENT_CREDENTIALS_WITH_X509` enum value to the request property `authentication_type`
--  added the new `SCHEDULED_LIVEBOARDS` enum value to the request property `policy_processes/items/`
+### POST /api/rest/2.0/configurations/features/search
+-  endpoint added
 
 
-### POST /api/rest/2.0/connection/search
--  added the new `OAUTH_CLIENT_CREDENTIALS_WITH_X509` enum value to the request property `authentication_type`
--  added the optional property `items/obj_id` to the response with the `200` status
+### POST /api/rest/2.0/configurations/features/values/update
+-  endpoint added
 
 
-### POST /api/rest/2.0/customization/custom-actions
--  added the optional property `obj_id` to the response with the `200` status
+### POST /api/rest/2.0/metadata/headers/update
+-  added the new `ROLE` enum value to the request property `headers_update/items/type`
+-  added the new `TEMPLATE_VARIABLE` enum value to the request property `headers_update/items/type`
 
 
-### POST /api/rest/2.0/customization/custom-actions/search
--  added the optional property `items/obj_id` to the response with the `200` status
+### POST /api/rest/2.0/metadata/tml/export
+-  added the new `TEMPLATE_VARIABLE` enum value to the request property `metadata/items/type`
 
 
-### POST /api/rest/2.0/groups/create
--  added the new `CAN_ADMINISTER_SCHEDULES` enum value to the request property `privileges/items/`
--  added the new `CAN_ANALYZE_DATA` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_ANSWERS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_KPI_ALERTS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_LIVEBOARD` enum value to the request property `privileges/items/`
--  added the optional property `obj_id` to the response with the `200` status
-
-
-### POST /api/rest/2.0/groups/import
--  added the new `CAN_ADMINISTER_SCHEDULES` enum value to the request property `groups/items/privileges/items/`
--  added the new `CAN_ANALYZE_DATA` enum value to the request property `groups/items/privileges/items/`
--  added the new `CAN_CREATE_ANSWERS` enum value to the request property `groups/items/privileges/items/`
--  added the new `CAN_CREATE_KPI_ALERTS` enum value to the request property `groups/items/privileges/items/`
--  added the new `CAN_CREATE_LIVEBOARD` enum value to the request property `groups/items/privileges/items/`
-
-
-### POST /api/rest/2.0/groups/search
--  added the new `CAN_ADMINISTER_SCHEDULES` enum value to the request property `privileges/items/`
--  added the new `CAN_ANALYZE_DATA` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_ANSWERS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_KPI_ALERTS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_LIVEBOARD` enum value to the request property `privileges/items/`
--  added the optional property `items/obj_id` to the response with the `200` status
-
-
-### POST /api/rest/2.0/groups/{group_identifier}/update
--  added the new `CAN_ADMINISTER_SCHEDULES` enum value to the request property `privileges/items/`
--  added the new `CAN_ANALYZE_DATA` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_ANSWERS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_KPI_ALERTS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_LIVEBOARD` enum value to the request property `privileges/items/`
-
-
-### POST /api/rest/2.0/roles/create
-- :warning: added the new `CAN_ADMINISTER_SCHEDULES` enum value to the `privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_ANALYZE_DATA` enum value to the `privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_CREATE_ANSWERS` enum value to the `privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_CREATE_KPI_ALERTS` enum value to the `privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_CREATE_LIVEBOARD` enum value to the `privileges/items/` response property for the response status `200`
--  added the new `CAN_ADMINISTER_SCHEDULES` enum value to the request property `privileges/items/`
--  added the new `CAN_ANALYZE_DATA` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_ANSWERS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_KPI_ALERTS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_LIVEBOARD` enum value to the request property `privileges/items/`
-
-
-### POST /api/rest/2.0/roles/search
-- :warning: added the new `CAN_ADMINISTER_SCHEDULES` enum value to the `items/privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_ANALYZE_DATA` enum value to the `items/privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_CREATE_ANSWERS` enum value to the `items/privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_CREATE_KPI_ALERTS` enum value to the `items/privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_CREATE_LIVEBOARD` enum value to the `items/privileges/items/` response property for the response status `200`
--  added the new `CAN_ADMINISTER_SCHEDULES` enum value to the request property `privileges/items/`
--  added the new `CAN_ANALYZE_DATA` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_ANSWERS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_KPI_ALERTS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_LIVEBOARD` enum value to the request property `privileges/items/`
--  added the optional property `items/obj_id` to the response with the `200` status
-
-
-### POST /api/rest/2.0/roles/{role_identifier}/update
-- :warning: added the new `CAN_ADMINISTER_SCHEDULES` enum value to the `privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_ANALYZE_DATA` enum value to the `privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_CREATE_ANSWERS` enum value to the `privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_CREATE_KPI_ALERTS` enum value to the `privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_CREATE_LIVEBOARD` enum value to the `privileges/items/` response property for the response status `200`
--  added the new `CAN_ADMINISTER_SCHEDULES` enum value to the request property `privileges/items/`
--  added the new `CAN_ANALYZE_DATA` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_ANSWERS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_KPI_ALERTS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_LIVEBOARD` enum value to the request property `privileges/items/`
+### POST /api/rest/2.0/metadata/update-obj-id
+-  added the new `ROLE` enum value to the request property `metadata/items/type`
+-  added the new `TEMPLATE_VARIABLE` enum value to the request property `metadata/items/type`
 
 
 ### POST /api/rest/2.0/semantic-integrations/create
--  endpoint added
+-  added the new `RDBMS_DATABRICKS` enum value to the request property `type`
 
 
 ### POST /api/rest/2.0/semantic-integrations/search
--  endpoint added
+- :warning: added the new `RDBMS_DATABRICKS` enum value to the `items/type` response property for the response status `200`
 
 
-### POST /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete
--  endpoint added
+### POST /api/rest/2.0/template/variables/create
+-  added the optional property `obj_id` to the response with the `200` status
 
 
-### POST /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/import
--  endpoint added
-
-
-### POST /api/rest/2.0/users/search
--  added the new `CAN_ADMINISTER_SCHEDULES` enum value to the request property `privileges/items/`
--  added the new `CAN_ANALYZE_DATA` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_ANSWERS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_KPI_ALERTS` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_LIVEBOARD` enum value to the request property `privileges/items/`
+### POST /api/rest/2.0/template/variables/search
+-  added the optional property `items/obj_id` to the response with the `200` status
 
 
 

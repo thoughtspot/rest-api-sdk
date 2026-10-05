@@ -11,6 +11,7 @@ apis/CustomCalendarsApi.ts
 apis/DBTApi.ts
 apis/DataApi.ts
 apis/EmailCustomizationApi.ts
+apis/FeatureManagementApi.ts
 apis/GroupsApi.ts
 apis/JobsApi.ts
 apis/LogApi.ts
@@ -44,6 +45,7 @@ docs/CustomCalendarsApi.md
 docs/DBTApi.md
 docs/DataApi.md
 docs/EmailCustomizationApi.md
+docs/FeatureManagementApi.md
 docs/GroupsApi.md
 docs/JobsApi.md
 docs/LogApi.md
@@ -73,6 +75,7 @@ models/AIContext.ts
 models/APIKey.ts
 models/APIKeyInput.ts
 models/AccessToken.ts
+models/AccessTokenScope.ts
 models/ActionConfig.ts
 models/ActionConfigInput.ts
 models/ActionConfigInputCreate.ts
@@ -86,6 +89,17 @@ models/AgentConversation.ts
 models/AgentConversationHistoryResponse.ts
 models/AgentConversationList.ts
 models/AgentInstructions.ts
+models/Analyst.ts
+models/AnalystDeleteResponse.ts
+models/AnalystItem.ts
+models/AnalystItemSource.ts
+models/AnalystItemStarterPrompt.ts
+models/AnalystMcpConnector.ts
+models/AnalystSearchResponse.ts
+models/AnalystSource.ts
+models/AnalystSourceInput.ts
+models/AnalystStarterPrompt.ts
+models/AnalystUser.ts
 models/AnswerContent.ts
 models/AnswerDataResponse.ts
 models/AnswerDetails.ts
@@ -165,6 +179,7 @@ models/ConversationShareStatusResponse.ts
 models/ConvertWorksheetToModelRequest.ts
 models/CopyObjectRequest.ts
 models/CreateAgentConversationRequest.ts
+models/CreateAnalystRequest.ts
 models/CreateCalendarRequest.ts
 models/CreateCollectionRequest.ts
 models/CreateConfigRequest.ts
@@ -245,6 +260,11 @@ models/ExternalTableInput.ts
 models/FavoriteMetadataInput.ts
 models/FavoriteMetadataItem.ts
 models/FavoriteObjectOptionsInput.ts
+models/FeatureAssignmentResponse.ts
+models/FeatureDetail.ts
+models/FeatureGroup.ts
+models/FeatureOrgInfo.ts
+models/FeatureValueResponse.ts
 models/FetchAnswerDataRequest.ts
 models/FetchAnswerSqlQueryRequest.ts
 models/FetchAsyncImportTaskStatusRequest.ts
@@ -405,6 +425,7 @@ models/SchemaObject.ts
 models/Scope.ts
 models/ScriptSrcUrls.ts
 models/ScriptSrcUrlsInput.ts
+models/SearchAnalystsRequest.ts
 models/SearchAuthSettingsRequest.ts
 models/SearchAuthSettingsResponse.ts
 models/SearchCalendarsRequest.ts
@@ -421,6 +442,7 @@ models/SearchDataRequest.ts
 models/SearchDataResponse.ts
 models/SearchDatasetsResponseItem.ts
 models/SearchEmailCustomizationRequest.ts
+models/SearchFeaturesRequest.ts
 models/SearchMetadataRequest.ts
 models/SearchOrgsRequest.ts
 models/SearchRoleResponse.ts
@@ -456,6 +478,7 @@ models/SendAgentMessageStreamingRequest.ts
 models/SendMessageRequest.ts
 models/SetAgentInstructionsRequest.ts
 models/SetNLInstructionsRequest.ts
+models/ShareAnalystRequest.ts
 models/ShareConversationRequest.ts
 models/ShareMetadataRequest.ts
 models/ShareMetadataTypeInput.ts
@@ -503,6 +526,7 @@ models/TemplatePropertiesInputCreate.ts
 models/TextResponseItem.ts
 models/Token.ts
 models/TokenAccessScopeObject.ts
+models/TokenScopeInput.ts
 models/TokenValidationResponse.ts
 models/ToolCallResponseItem.ts
 models/ToolResultResponseItem.ts
@@ -512,6 +536,7 @@ models/URLInputMandatory.ts
 models/UnassignTagRequest.ts
 models/UnparameterizeMetadataRequest.ts
 models/UnpublishMetadataRequest.ts
+models/UpdateAnalystRequest.ts
 models/UpdateCalendarRequest.ts
 models/UpdateCollectionRequest.ts
 models/UpdateColumnSecurityRulesRequest.ts
@@ -523,6 +548,8 @@ models/UpdateConnectionV2Request.ts
 models/UpdateConversationRequest.ts
 models/UpdateCustomActionRequest.ts
 models/UpdateEmailCustomizationRequest.ts
+models/UpdateFeatureAssignmentsRequest.ts
+models/UpdateFeatureValueRequest.ts
 models/UpdateMetadataHeaderRequest.ts
 models/UpdateMetadataObjIdRequest.ts
 models/UpdateObjIdInput.ts
@@ -595,6 +622,7 @@ tests/CustomCalendarsApiTest.ts
 tests/DBTApiTest.ts
 tests/DataApiTest.ts
 tests/EmailCustomizationApiTest.ts
+tests/FeatureManagementApiTest.ts
 tests/GroupsApiTest.ts
 tests/JobsApiTest.ts
 tests/LogApiTest.ts

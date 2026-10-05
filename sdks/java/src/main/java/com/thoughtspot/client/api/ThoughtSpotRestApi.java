@@ -17,6 +17,9 @@ import com.thoughtspot.client.model.ActivateUserRequest;
 import com.thoughtspot.client.model.AgentConversation;
 import com.thoughtspot.client.model.AgentConversationHistoryResponse;
 import com.thoughtspot.client.model.AgentInstructions;
+import com.thoughtspot.client.model.Analyst;
+import com.thoughtspot.client.model.AnalystDeleteResponse;
+import com.thoughtspot.client.model.AnalystSearchResponse;
 import com.thoughtspot.client.model.AnswerDataResponse;
 import com.thoughtspot.client.model.AssignChangeAuthorRequest;
 import com.thoughtspot.client.model.AssignTagRequest;
@@ -42,6 +45,7 @@ import com.thoughtspot.client.model.ConversationShareStatusResponse;
 import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
 import com.thoughtspot.client.model.CreateAgentConversationRequest;
+import com.thoughtspot.client.model.CreateAnalystRequest;
 import com.thoughtspot.client.model.CreateCalendarRequest;
 import com.thoughtspot.client.model.CreateCollectionRequest;
 import com.thoughtspot.client.model.CreateConfigRequest;
@@ -88,6 +92,9 @@ import com.thoughtspot.client.model.ExportMemoryResponse;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLRequest;
 import com.thoughtspot.client.model.ExportStyleLogosRequest;
+import com.thoughtspot.client.model.FeatureAssignmentResponse;
+import com.thoughtspot.client.model.FeatureGroup;
+import com.thoughtspot.client.model.FeatureValueResponse;
 import com.thoughtspot.client.model.FetchAnswerDataRequest;
 import com.thoughtspot.client.model.FetchAnswerSqlQueryRequest;
 import com.thoughtspot.client.model.FetchAsyncImportTaskStatusRequest;
@@ -148,6 +155,7 @@ import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
 import com.thoughtspot.client.model.RevokeRefreshTokensResponse;
 import com.thoughtspot.client.model.RevokeTokenRequest;
 import com.thoughtspot.client.model.RoleResponse;
+import com.thoughtspot.client.model.SearchAnalystsRequest;
 import com.thoughtspot.client.model.SearchAuthSettingsRequest;
 import com.thoughtspot.client.model.SearchAuthSettingsResponse;
 import com.thoughtspot.client.model.SearchCalendarsRequest;
@@ -163,6 +171,7 @@ import com.thoughtspot.client.model.SearchCustomActionsRequest;
 import com.thoughtspot.client.model.SearchDataRequest;
 import com.thoughtspot.client.model.SearchDataResponse;
 import com.thoughtspot.client.model.SearchEmailCustomizationRequest;
+import com.thoughtspot.client.model.SearchFeaturesRequest;
 import com.thoughtspot.client.model.SearchMetadataRequest;
 import com.thoughtspot.client.model.SearchOrgsRequest;
 import com.thoughtspot.client.model.SearchRoleResponse;
@@ -188,6 +197,7 @@ import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
 import com.thoughtspot.client.model.SendMessageRequest;
 import com.thoughtspot.client.model.SetAgentInstructionsRequest;
 import com.thoughtspot.client.model.SetNLInstructionsRequest;
+import com.thoughtspot.client.model.ShareAnalystRequest;
 import com.thoughtspot.client.model.ShareConversationRequest;
 import com.thoughtspot.client.model.ShareMetadataRequest;
 import com.thoughtspot.client.model.SharedConversationResponse;
@@ -210,6 +220,7 @@ import com.thoughtspot.client.model.TokenValidationResponse;
 import com.thoughtspot.client.model.UnassignTagRequest;
 import com.thoughtspot.client.model.UnparameterizeMetadataRequest;
 import com.thoughtspot.client.model.UnpublishMetadataRequest;
+import com.thoughtspot.client.model.UpdateAnalystRequest;
 import com.thoughtspot.client.model.UpdateCalendarRequest;
 import com.thoughtspot.client.model.UpdateCollectionRequest;
 import com.thoughtspot.client.model.UpdateColumnSecurityRulesRequest;
@@ -221,6 +232,8 @@ import com.thoughtspot.client.model.UpdateConnectionV2Request;
 import com.thoughtspot.client.model.UpdateConversationRequest;
 import com.thoughtspot.client.model.UpdateCustomActionRequest;
 import com.thoughtspot.client.model.UpdateEmailCustomizationRequest;
+import com.thoughtspot.client.model.UpdateFeatureAssignmentsRequest;
+import com.thoughtspot.client.model.UpdateFeatureValueRequest;
 import com.thoughtspot.client.model.UpdateMetadataHeaderRequest;
 import com.thoughtspot.client.model.UpdateMetadataObjIdRequest;
 import com.thoughtspot.client.model.UpdateOrgRequest;
@@ -2791,6 +2804,270 @@ public class ThoughtSpotRestApi {
                 createAgentConversationValidateBeforeCall(
                         createAgentConversationRequest, _callback);
         Type localVarReturnType = new TypeToken<AgentConversation>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createAnalyst
+     *
+     * @param createAnalystRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call createAnalystCall(
+            CreateAnalystRequest createAnalystRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createAnalystRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/analysts/create";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createAnalystValidateBeforeCall(
+            CreateAnalystRequest createAnalystRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'createAnalystRequest' is set
+        if (createAnalystRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'createAnalystRequest' when calling"
+                            + " createAnalyst(Async)");
+        }
+
+        return createAnalystCall(createAnalystRequest, _callback);
+    }
+
+    /**
+     * Creates a Spotter Analyst: a configured agent with a name, description, at least one data
+     * source, and optional agent instructions, MCP connectors, and starter prompts. Analysts
+     * created via API use the default icon until one is set in the UI. Requires at least one of
+     * &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60;
+     * privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Version:
+     * 26.10.0.cl or later Creates a Spotter Analyst: a configured agent with a name, description,
+     * data sources, and optional agent instructions, MCP connectors, and starter prompts that your
+     * users converse with in Spotter. Requires at least one of &#x60;ADMINISTRATION&#x60;,
+     * &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access
+     * to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in
+     * which the analyst should be created. #### Usage guidelines The request body is flat — all
+     * fields are top-level: - &#x60;name&#x60; (required): display name of the analyst. -
+     * &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60;
+     * (optional): natural-language instructions that guide the agent&#39;s behavior for this
+     * analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;.
+     * - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with
+     * an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60;
+     * (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;).
+     * The caller must have view access to every referenced source. -
+     * &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to
+     * the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on
+     * the analyst landing page, each between 10 and 250 characters. Display order follows list
+     * position. If the request is successful, the response contains the created analyst, including
+     * the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60;
+     * and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as
+     * structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;,
+     * &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60;
+     * (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users. ####
+     * Error conditions - &#x60;403&#x60; — missing privileges, or no view access to a referenced
+     * data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. -
+     * &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;,
+     * &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many
+     * starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param createAnalystRequest (required)
+     * @return Analyst
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public Analyst createAnalyst(CreateAnalystRequest createAnalystRequest) throws ApiException {
+        ApiResponse<Analyst> localVarResp = createAnalystWithHttpInfo(createAnalystRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Creates a Spotter Analyst: a configured agent with a name, description, at least one data
+     * source, and optional agent instructions, MCP connectors, and starter prompts. Analysts
+     * created via API use the default icon until one is set in the UI. Requires at least one of
+     * &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60;
+     * privileges, plus view access to every data source referenced in &#x60;sources&#x60;. Version:
+     * 26.10.0.cl or later Creates a Spotter Analyst: a configured agent with a name, description,
+     * data sources, and optional agent instructions, MCP connectors, and starter prompts that your
+     * users converse with in Spotter. Requires at least one of &#x60;ADMINISTRATION&#x60;,
+     * &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access
+     * to every data source referenced in &#x60;sources&#x60;. Use a bearer token for the Org in
+     * which the analyst should be created. #### Usage guidelines The request body is flat — all
+     * fields are top-level: - &#x60;name&#x60; (required): display name of the analyst. -
+     * &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60;
+     * (optional): natural-language instructions that guide the agent&#39;s behavior for this
+     * analyst. Instructions that conflict with system guardrails are rejected with &#x60;409&#x60;.
+     * - &#x60;sources&#x60; (required): at least one data source the analyst can query, each with
+     * an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60;
+     * (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;).
+     * The caller must have view access to every referenced source. -
+     * &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to
+     * the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on
+     * the analyst landing page, each between 10 and 250 characters. Display order follows list
+     * position. If the request is successful, the response contains the created analyst, including
+     * the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60;
+     * and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as
+     * structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;,
+     * &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60;
+     * (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users. ####
+     * Error conditions - &#x60;403&#x60; — missing privileges, or no view access to a referenced
+     * data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. -
+     * &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;,
+     * &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many
+     * starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param createAnalystRequest (required)
+     * @return ApiResponse&lt;Analyst&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Analyst> createAnalystWithHttpInfo(CreateAnalystRequest createAnalystRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall = createAnalystValidateBeforeCall(createAnalystRequest, null);
+        Type localVarReturnType = new TypeToken<Analyst>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Creates a Spotter Analyst: a configured agent with a name, description, at
+     * least one data source, and optional agent instructions, MCP connectors, and starter prompts.
+     * Analysts created via API use the default icon until one is set in the UI. Requires at least
+     * one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or
+     * &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in
+     * &#x60;sources&#x60;. Version: 26.10.0.cl or later Creates a Spotter Analyst: a configured
+     * agent with a name, description, data sources, and optional agent instructions, MCP
+     * connectors, and starter prompts that your users converse with in Spotter. Requires at least
+     * one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or
+     * &#x60;CAN_USE_SPOTTER&#x60; privileges, plus view access to every data source referenced in
+     * &#x60;sources&#x60;. Use a bearer token for the Org in which the analyst should be created.
+     * #### Usage guidelines The request body is flat — all fields are top-level: - &#x60;name&#x60;
+     * (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200
+     * characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide
+     * the agent&#39;s behavior for this analyst. Instructions that conflict with system guardrails
+     * are rejected with &#x60;409&#x60;. - &#x60;sources&#x60; (required): at least one data source
+     * the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and
+     * a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or
+     * &#x60;CONVERSATION&#x60;). The caller must have view access to every referenced source. -
+     * &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors to link to
+     * the analyst. - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts shown on
+     * the analyst landing page, each between 10 and 250 characters. Display order follows list
+     * position. If the request is successful, the response contains the created analyst, including
+     * the server-assigned &#x60;id&#x60;. In responses, sources are returned with &#x60;id&#x60;
+     * and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, starter prompts as
+     * structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;,
+     * &#x60;is_ai_generated&#x60;), the last-update time as &#x60;updated_time_in_millis&#x60;
+     * (epoch milliseconds), and the &#x60;created_by&#x60; and &#x60;updated_by&#x60; users. ####
+     * Error conditions - &#x60;403&#x60; — missing privileges, or no view access to a referenced
+     * data source. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with system guardrails. -
+     * &#x60;422&#x60; — validation failure, such as a missing required field (&#x60;name&#x60;,
+     * &#x60;description&#x60;, or &#x60;sources&#x60;), an empty &#x60;sources&#x60; list, too many
+     * starter prompts, or field-length violations. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param createAnalystRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call createAnalystAsync(
+            CreateAnalystRequest createAnalystRequest, final ApiCallback<Analyst> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                createAnalystValidateBeforeCall(createAnalystRequest, _callback);
+        Type localVarReturnType = new TypeToken<Analyst>() {}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -7888,6 +8165,216 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for deleteAnalyst
+     *
+     * @param analystIdentifier Unique identifier of the analyst to delete. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call deleteAnalystCall(String analystIdentifier, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete"
+                        .replace(
+                                "{" + "analyst_identifier" + "}",
+                                localVarApiClient.escapeString(analystIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteAnalystValidateBeforeCall(
+            String analystIdentifier, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'analystIdentifier' is set
+        if (analystIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'analystIdentifier' when calling"
+                            + " deleteAnalyst(Async)");
+        }
+
+        return deleteAnalystCall(analystIdentifier, _callback);
+    }
+
+    /**
+     * Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts
+     * cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the
+     * deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Version: 26.10.0.cl or later Permanently deletes a
+     * Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.
+     * Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it.
+     * Use a bearer token for the Org in which the analyst exists. #### Usage guidelines The request
+     * has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path
+     * parameter, as returned by the create analyst API. A successful request returns the
+     * &#x60;id&#x60; of the deleted analyst. #### Error conditions - &#x60;400&#x60; — malformed
+     * analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks
+     * admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given
+     * identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param analystIdentifier Unique identifier of the analyst to delete. (required)
+     * @return AnalystDeleteResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public AnalystDeleteResponse deleteAnalyst(String analystIdentifier) throws ApiException {
+        ApiResponse<AnalystDeleteResponse> localVarResp =
+                deleteAnalystWithHttpInfo(analystIdentifier);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Permanently deletes a Spotter Analyst. This operation is irreversible — deleted analysts
+     * cannot be recovered. The request has no body; the response contains the &#x60;id&#x60; of the
+     * deleted analyst. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Version: 26.10.0.cl or later Permanently deletes a
+     * Spotter Analyst. This operation is irreversible — deleted analysts cannot be recovered.
+     * Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot delete it.
+     * Use a bearer token for the Org in which the analyst exists. #### Usage guidelines The request
+     * has no body — the analyst to delete is identified by the &#x60;analyst_identifier&#x60; path
+     * parameter, as returned by the create analyst API. A successful request returns the
+     * &#x60;id&#x60; of the deleted analyst. #### Error conditions - &#x60;400&#x60; — malformed
+     * analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks
+     * admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given
+     * identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param analystIdentifier Unique identifier of the analyst to delete. (required)
+     * @return ApiResponse&lt;AnalystDeleteResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<AnalystDeleteResponse> deleteAnalystWithHttpInfo(String analystIdentifier)
+            throws ApiException {
+        okhttp3.Call localVarCall = deleteAnalystValidateBeforeCall(analystIdentifier, null);
+        Type localVarReturnType = new TypeToken<AnalystDeleteResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Permanently deletes a Spotter Analyst. This operation is irreversible —
+     * deleted analysts cannot be recovered. The request has no body; the response contains the
+     * &#x60;id&#x60; of the deleted analyst. Requires ownership of the analyst, or
+     * &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Version: 26.10.0.cl
+     * or later Permanently deletes a Spotter Analyst. This operation is irreversible — deleted
+     * analysts cannot be recovered. Requires ownership of the analyst, or
+     * &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is
+     * shared with cannot delete it. Use a bearer token for the Org in which the analyst exists.
+     * #### Usage guidelines The request has no body — the analyst to delete is identified by the
+     * &#x60;analyst_identifier&#x60; path parameter, as returned by the create analyst API. A
+     * successful request returns the &#x60;id&#x60; of the deleted analyst. #### Error conditions -
+     * &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller is not the
+     * analyst&#39;s author and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no
+     * analyst with the given identifier exists in the caller&#39;s Org. - &#x60;429&#x60; — rate
+     * limit exceeded.
+     *
+     * @param analystIdentifier Unique identifier of the analyst to delete. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call deleteAnalystAsync(
+            String analystIdentifier, final ApiCallback<AnalystDeleteResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall = deleteAnalystValidateBeforeCall(analystIdentifier, _callback);
+        Type localVarReturnType = new TypeToken<AnalystDeleteResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for deleteCalendar
      *
      * @param calendarIdentifier Unique ID or name of the Calendar. (required)
@@ -11767,7 +12254,7 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for deleteVariable
      *
-     * @param identifier Unique id or name of the variable (required)
+     * @param identifier Unique id, name, or object id of the variable (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -11867,7 +12354,7 @@ public class ThoughtSpotRestApi {
      * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
      * exist * The variable is being used by other objects
      *
-     * @param identifier Unique id or name of the variable (required)
+     * @param identifier Unique id, name, or object id of the variable (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
      * @http.response.details
@@ -11898,7 +12385,7 @@ public class ThoughtSpotRestApi {
      * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
      * exist * The variable is being used by other objects
      *
-     * @param identifier Unique id or name of the variable (required)
+     * @param identifier Unique id, name, or object id of the variable (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -11931,7 +12418,7 @@ public class ThoughtSpotRestApi {
      * operation will fail if: * The user lacks required permissions * The variable doesn&#39;t
      * exist * The variable is being used by other objects
      *
-     * @param identifier Unique id or name of the variable (required)
+     * @param identifier Unique id, name, or object id of the variable (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -24772,7 +25259,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
-     * LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple fields of metadata
+     * LOGICAL_TABLE. Version: 26.10.0.cl or later Allows parameterizing multiple fields of metadata
      * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
      * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
      * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
@@ -24806,7 +25293,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * Parameterize multiple fields of metadata objects. For example [schemaName, databaseName] for
-     * LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple fields of metadata
+     * LOGICAL_TABLE. Version: 26.10.0.cl or later Allows parameterizing multiple fields of metadata
      * objects in ThoughtSpot. For example, you can parameterize [schemaName, databaseName] for
      * LOGICAL_TABLE. Requires appropriate permissions to modify the metadata object. The API
      * endpoint allows parameterizing the following types of metadata objects: * Logical Tables *
@@ -24844,7 +25331,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * (asynchronously) Parameterize multiple fields of metadata objects. For example [schemaName,
-     * databaseName] for LOGICAL_TABLE. Version: 26.5.0.cl or later Allows parameterizing multiple
+     * databaseName] for LOGICAL_TABLE. Version: 26.10.0.cl or later Allows parameterizing multiple
      * fields of metadata objects in ThoughtSpot. For example, you can parameterize [schemaName,
      * databaseName] for LOGICAL_TABLE. Requires appropriate permissions to modify the metadata
      * object. The API endpoint allows parameterizing the following types of metadata objects: *
@@ -24971,7 +25458,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
+     * Version: 26.10.0.cl or later Allows publishing metadata objects across organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * This API will essentially share the objects along with it&#39;s dependencies to the org
@@ -24996,7 +25483,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 26.5.0.cl or later Allows publishing metadata objects across organizations in
+     * Version: 26.10.0.cl or later Allows publishing metadata objects across organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * This API will essentially share the objects along with it&#39;s dependencies to the org
@@ -25024,7 +25511,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 26.5.0.cl or later Allows publishing metadata objects across
+     * (asynchronously) Version: 26.10.0.cl or later Allows publishing metadata objects across
      * organizations in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint
      * allows publishing the following types of metadata objects: * Liveboards * Answers * Logical
      * Tables This API will essentially share the objects along with it&#39;s dependencies to the
@@ -26368,6 +26855,277 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = revokeTokenValidateBeforeCall(revokeTokenRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchAnalysts
+     *
+     * @param searchAnalystsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchAnalystsCall(
+            SearchAnalystsRequest searchAnalystsRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchAnalystsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/analysts/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchAnalystsValidateBeforeCall(
+            SearchAnalystsRequest searchAnalystsRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'searchAnalystsRequest' is set
+        if (searchAnalystsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'searchAnalystsRequest' when calling"
+                            + " searchAnalysts(Async)");
+        }
+
+        return searchAnalystsCall(searchAnalystsRequest, _callback);
+    }
+
+    /**
+     * Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is
+     * provided, the response contains exactly that analyst and all other filters are ignored. -
+     * List mode: returns a paginated list of analysts visible to the caller, optionally filtered by
+     * a case-insensitive substring match on the analyst name (&#x60;query&#x60;) and by ownership
+     * (&#x60;type&#x60;). Results are ordered by most recently accessed. Requires at least one of
+     * &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60;
+     * privileges. Version: 26.10.0.cl or later Searches Spotter Analysts. Use this endpoint to page
+     * through the analysts visible to you, or to fetch a single analyst by its identifier. Requires
+     * at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or
+     * &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should
+     * be searched. #### Usage guidelines The endpoint operates in one of two modes: **Fetch mode**
+     * — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst
+     * (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access
+     * to the analyst (owner, shared with, or admin/Spotter-management privileges). **List mode** —
+     * when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts
+     * the caller can see, ordered by most recently accessed: - &#x60;record_size&#x60; (optional):
+     * number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60;
+     * (optional): zero-based index of the first record. Default 0, maximum 10000. -
+     * &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name
+     * only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created
+     * by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;. The response
+     * contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;,
+     * the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;,
+     * &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60;
+     * (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched
+     * &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;),
+     * &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt,
+     * marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and
+     * &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; /
+     * &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and
+     * &#x60;display_name&#x60;). #### Error conditions - &#x60;403&#x60; — missing privileges, or
+     * (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst
+     * with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation
+     * failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.
+     *
+     * @param searchAnalystsRequest (required)
+     * @return AnalystSearchResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public AnalystSearchResponse searchAnalysts(SearchAnalystsRequest searchAnalystsRequest)
+            throws ApiException {
+        ApiResponse<AnalystSearchResponse> localVarResp =
+                searchAnalystsWithHttpInfo(searchAnalystsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Searches Spotter Analysts. Two modes: - Fetch mode: when &#x60;analyst_identifier&#x60; is
+     * provided, the response contains exactly that analyst and all other filters are ignored. -
+     * List mode: returns a paginated list of analysts visible to the caller, optionally filtered by
+     * a case-insensitive substring match on the analyst name (&#x60;query&#x60;) and by ownership
+     * (&#x60;type&#x60;). Results are ordered by most recently accessed. Requires at least one of
+     * &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60;
+     * privileges. Version: 26.10.0.cl or later Searches Spotter Analysts. Use this endpoint to page
+     * through the analysts visible to you, or to fetch a single analyst by its identifier. Requires
+     * at least one of &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or
+     * &#x60;CAN_USE_SPOTTER&#x60; privileges. Use a bearer token for the Org whose analysts should
+     * be searched. #### Usage guidelines The endpoint operates in one of two modes: **Fetch mode**
+     * — when &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst
+     * (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access
+     * to the analyst (owner, shared with, or admin/Spotter-management privileges). **List mode** —
+     * when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts
+     * the caller can see, ordered by most recently accessed: - &#x60;record_size&#x60; (optional):
+     * number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60;
+     * (optional): zero-based index of the first record. Default 0, maximum 10000. -
+     * &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name
+     * only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created
+     * by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;. The response
+     * contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;,
+     * the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;,
+     * &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60;
+     * (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched
+     * &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;),
+     * &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt,
+     * marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and
+     * &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; /
+     * &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and
+     * &#x60;display_name&#x60;). #### Error conditions - &#x60;403&#x60; — missing privileges, or
+     * (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst
+     * with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation
+     * failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.
+     *
+     * @param searchAnalystsRequest (required)
+     * @return ApiResponse&lt;AnalystSearchResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<AnalystSearchResponse> searchAnalystsWithHttpInfo(
+            SearchAnalystsRequest searchAnalystsRequest) throws ApiException {
+        okhttp3.Call localVarCall = searchAnalystsValidateBeforeCall(searchAnalystsRequest, null);
+        Type localVarReturnType = new TypeToken<AnalystSearchResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Searches Spotter Analysts. Two modes: - Fetch mode: when
+     * &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst and
+     * all other filters are ignored. - List mode: returns a paginated list of analysts visible to
+     * the caller, optionally filtered by a case-insensitive substring match on the analyst name
+     * (&#x60;query&#x60;) and by ownership (&#x60;type&#x60;). Results are ordered by most recently
+     * accessed. Requires at least one of &#x60;ADMINISTRATION&#x60;,
+     * &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60; privileges. Version:
+     * 26.10.0.cl or later Searches Spotter Analysts. Use this endpoint to page through the analysts
+     * visible to you, or to fetch a single analyst by its identifier. Requires at least one of
+     * &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60;, or &#x60;CAN_USE_SPOTTER&#x60;
+     * privileges. Use a bearer token for the Org whose analysts should be searched. #### Usage
+     * guidelines The endpoint operates in one of two modes: **Fetch mode** — when
+     * &#x60;analyst_identifier&#x60; is provided, the response contains exactly that analyst
+     * (&#x60;total_size&#x60; is 1) and all other filters are ignored. The caller must have access
+     * to the analyst (owner, shared with, or admin/Spotter-management privileges). **List mode** —
+     * when &#x60;analyst_identifier&#x60; is omitted, the response is a paginated list of analysts
+     * the caller can see, ordered by most recently accessed: - &#x60;record_size&#x60; (optional):
+     * number of records per page. Default 50, between 1 and 500. - &#x60;record_offset&#x60;
+     * (optional): zero-based index of the first record. Default 0, maximum 10000. -
+     * &#x60;query&#x60; (optional): case-insensitive substring match applied to the analyst **name
+     * only**. - &#x60;type&#x60; (optional): ownership filter — &#x60;ALL&#x60; (default; created
+     * by or shared with me), &#x60;CREATED_BY_ME&#x60;, or &#x60;SHARED_TO_ME&#x60;. The response
+     * contains &#x60;analysts&#x60; — the page of matching analysts — and &#x60;total_size&#x60;,
+     * the total number of matches before pagination. Each analyst includes its &#x60;id&#x60;,
+     * &#x60;name&#x60;, &#x60;description&#x60;, &#x60;instructions&#x60;, &#x60;sources&#x60;
+     * (with &#x60;id&#x60;, &#x60;type&#x60;, and display &#x60;name&#x60;), enriched
+     * &#x60;mcp_connectors&#x60; (with &#x60;id&#x60;, &#x60;name&#x60;, and &#x60;icon_url&#x60;),
+     * &#x60;icon_id&#x60;, &#x60;starter_prompts&#x60; (including the server-managed fixed prompt,
+     * marked &#x60;is_fixed&#x60;), &#x60;updated_time_in_millis&#x60; and
+     * &#x60;last_accessed_time_in_millis&#x60; (epoch milliseconds), and &#x60;created_by&#x60; /
+     * &#x60;updated_by&#x60; user references (with &#x60;id&#x60;, &#x60;name&#x60;, and
+     * &#x60;display_name&#x60;). #### Error conditions - &#x60;403&#x60; — missing privileges, or
+     * (fetch mode) no access to the requested analyst. - &#x60;404&#x60; — (fetch mode) no analyst
+     * with the given identifier exists in the caller&#39;s Org. - &#x60;422&#x60; — validation
+     * failure, such as &#x60;record_size&#x60; or &#x60;record_offset&#x60; out of range.
+     *
+     * @param searchAnalystsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchAnalystsAsync(
+            SearchAnalystsRequest searchAnalystsRequest,
+            final ApiCallback<AnalystSearchResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                searchAnalystsValidateBeforeCall(searchAnalystsRequest, _callback);
+        Type localVarReturnType = new TypeToken<AnalystSearchResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -28730,6 +29488,255 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for searchFeatures
+     *
+     * @param searchFeaturesRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Feature groups returned. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchFeaturesCall(
+            SearchFeaturesRequest searchFeaturesRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchFeaturesRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/configurations/features/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchFeaturesValidateBeforeCall(
+            SearchFeaturesRequest searchFeaturesRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'searchFeaturesRequest' is set
+        if (searchFeaturesRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'searchFeaturesRequest' when calling"
+                            + " searchFeatures(Async)");
+        }
+
+        return searchFeaturesCall(searchFeaturesRequest, _callback);
+    }
+
+    /**
+     * Version: 26.10.0.cl or later Returns the feature configurations available on the ThoughtSpot
+     * system, grouped by feature group. #### Pre-requisites Requires &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To retrieve feature configurations, pass these parameters in your API request: -
+     * &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the
+     * cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the
+     * org-admin view (returns the current value of each feature for a single Org). -
+     * &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is
+     * &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. -
+     * &#x60;category&#x60; — Availability category of the features to return.
+     * &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60;
+     * returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;. The response
+     * fields populated depend on the requested scope. In the cluster-admin view
+     * (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;,
+     * &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the
+     * org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;,
+     * &#x60;element_config&#x60;, and &#x60;element_value&#x60;. The following example retrieves
+     * the general-access features for the cluster-admin view: &#x60;&#x60;&#x60; {
+     * \&quot;scope\&quot;: \&quot;CLUSTER\&quot;, \&quot;category\&quot;:
+     * \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60; For the org-admin view, set
+     * &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to
+     * scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is
+     * &#x60;ORG&#x60;; omitting it returns a 400 error): &#x60;&#x60;&#x60; { \&quot;scope\&quot;:
+     * \&quot;ORG\&quot;, \&quot;org_identifier\&quot;: 1, \&quot;category\&quot;:
+     * \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;
+     *
+     * @param searchFeaturesRequest (required)
+     * @return List&lt;FeatureGroup&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Feature groups returned. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public List<FeatureGroup> searchFeatures(SearchFeaturesRequest searchFeaturesRequest)
+            throws ApiException {
+        ApiResponse<List<FeatureGroup>> localVarResp =
+                searchFeaturesWithHttpInfo(searchFeaturesRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.10.0.cl or later Returns the feature configurations available on the ThoughtSpot
+     * system, grouped by feature group. #### Pre-requisites Requires &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To retrieve feature configurations, pass these parameters in your API request: -
+     * &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60; for the
+     * cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60; for the
+     * org-admin view (returns the current value of each feature for a single Org). -
+     * &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is
+     * &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. -
+     * &#x60;category&#x60; — Availability category of the features to return.
+     * &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60;
+     * returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;. The response
+     * fields populated depend on the requested scope. In the cluster-admin view
+     * (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;,
+     * &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the
+     * org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;,
+     * &#x60;element_config&#x60;, and &#x60;element_value&#x60;. The following example retrieves
+     * the general-access features for the cluster-admin view: &#x60;&#x60;&#x60; {
+     * \&quot;scope\&quot;: \&quot;CLUSTER\&quot;, \&quot;category\&quot;:
+     * \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60; For the org-admin view, set
+     * &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to
+     * scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is
+     * &#x60;ORG&#x60;; omitting it returns a 400 error): &#x60;&#x60;&#x60; { \&quot;scope\&quot;:
+     * \&quot;ORG\&quot;, \&quot;org_identifier\&quot;: 1, \&quot;category\&quot;:
+     * \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;
+     *
+     * @param searchFeaturesRequest (required)
+     * @return ApiResponse&lt;List&lt;FeatureGroup&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Feature groups returned. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<List<FeatureGroup>> searchFeaturesWithHttpInfo(
+            SearchFeaturesRequest searchFeaturesRequest) throws ApiException {
+        okhttp3.Call localVarCall = searchFeaturesValidateBeforeCall(searchFeaturesRequest, null);
+        Type localVarReturnType = new TypeToken<List<FeatureGroup>>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.10.0.cl or later Returns the feature configurations available on
+     * the ThoughtSpot system, grouped by feature group. #### Pre-requisites Requires
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
+     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
+     * the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. ####
+     * Usage guidelines To retrieve feature configurations, pass these parameters in your API
+     * request: - &#x60;scope&#x60; — Determines the administrative view. Use &#x60;CLUSTER&#x60;
+     * for the cluster-admin view (returns the Orgs assigned to each feature); use &#x60;ORG&#x60;
+     * for the org-admin view (returns the current value of each feature for a single Org). -
+     * &#x60;org_identifier&#x60; — Numeric ID of the Org. Required when &#x60;scope&#x60; is
+     * &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;. -
+     * &#x60;category&#x60; — Availability category of the features to return.
+     * &#x60;GENERAL_ACCESS&#x60; returns generally available features; &#x60;EARLY_ACCESS&#x60;
+     * returns features still in early access. Defaults to &#x60;GENERAL_ACCESS&#x60;. The response
+     * fields populated depend on the requested scope. In the cluster-admin view
+     * (&#x60;scope&#x3D;CLUSTER&#x60;), each feature includes &#x60;assigned_orgs&#x60;,
+     * &#x60;is_org_aware&#x60;, and (for non-org-aware features) &#x60;feature_value&#x60;. In the
+     * org-admin view (&#x60;scope&#x3D;ORG&#x60;), each feature includes &#x60;element_type&#x60;,
+     * &#x60;element_config&#x60;, and &#x60;element_value&#x60;. The following example retrieves
+     * the general-access features for the cluster-admin view: &#x60;&#x60;&#x60; {
+     * \&quot;scope\&quot;: \&quot;CLUSTER\&quot;, \&quot;category\&quot;:
+     * \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60; For the org-admin view, set
+     * &#x60;scope&#x60; to &#x60;ORG&#x60; and pass the &#x60;org_identifier&#x60; of the Org to
+     * scope the search to (&#x60;org_identifier&#x60; is required when &#x60;scope&#x60; is
+     * &#x60;ORG&#x60;; omitting it returns a 400 error): &#x60;&#x60;&#x60; { \&quot;scope\&quot;:
+     * \&quot;ORG\&quot;, \&quot;org_identifier\&quot;: 1, \&quot;category\&quot;:
+     * \&quot;GENERAL_ACCESS\&quot; } &#x60;&#x60;&#x60;
+     *
+     * @param searchFeaturesRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Feature groups returned. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call searchFeaturesAsync(
+            SearchFeaturesRequest searchFeaturesRequest,
+            final ApiCallback<List<FeatureGroup>> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                searchFeaturesValidateBeforeCall(searchFeaturesRequest, _callback);
+        Type localVarReturnType = new TypeToken<List<FeatureGroup>>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for searchMetadata
      *
      * @param searchMetadataRequest (required)
@@ -30074,7 +31081,15 @@ public class ThoughtSpotRestApi {
      * cluster-level style defaults. - Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to
      * retrieve preferences for the authenticated user&#39;s org. - Each field in the response
      * includes an &#x60;is_overridden&#x60; flag indicating whether the value was explicitly set at
-     * the requested scope or inherited from a parent scope (cluster or system default).
+     * the requested scope or inherited from a parent scope (cluster or system default). -
+     * &#x60;app_color_theme&#x60; (_available from 26.10.0.cl_) describes the same underlying color
+     * as &#x60;navigation_panel&#x60;, in a different form: &#x60;navigation_panel&#x60; uses the
+     * &#x60;DARK&#x60;/&#x60;TWO_TONE&#x60;/&#x60;CUSTOM&#x60; theme modes, while
+     * &#x60;app_color_theme&#x60; gives the brand color and how it is applied
+     * (&#x60;brand_color&#x60;, &#x60;apply_as_top_nav_color&#x60;). They never disagree, so use
+     * whichever your integration already reads. &#x60;app_color_theme&#x60; is returned only when
+     * the app color theme is enabled on the cluster; &#x60;navigation_panel&#x60; is always
+     * returned.
      *
      * @param searchStyleCustomizationsRequest (required)
      * @return List&lt;StylePreference&gt;
@@ -30107,7 +31122,15 @@ public class ThoughtSpotRestApi {
      * cluster-level style defaults. - Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to
      * retrieve preferences for the authenticated user&#39;s org. - Each field in the response
      * includes an &#x60;is_overridden&#x60; flag indicating whether the value was explicitly set at
-     * the requested scope or inherited from a parent scope (cluster or system default).
+     * the requested scope or inherited from a parent scope (cluster or system default). -
+     * &#x60;app_color_theme&#x60; (_available from 26.10.0.cl_) describes the same underlying color
+     * as &#x60;navigation_panel&#x60;, in a different form: &#x60;navigation_panel&#x60; uses the
+     * &#x60;DARK&#x60;/&#x60;TWO_TONE&#x60;/&#x60;CUSTOM&#x60; theme modes, while
+     * &#x60;app_color_theme&#x60; gives the brand color and how it is applied
+     * (&#x60;brand_color&#x60;, &#x60;apply_as_top_nav_color&#x60;). They never disagree, so use
+     * whichever your integration already reads. &#x60;app_color_theme&#x60; is returned only when
+     * the app color theme is enabled on the cluster; &#x60;navigation_panel&#x60; is always
+     * returned.
      *
      * @param searchStyleCustomizationsRequest (required)
      * @return ApiResponse&lt;List&lt;StylePreference&gt;&gt;
@@ -30141,7 +31164,15 @@ public class ThoughtSpotRestApi {
      * cluster-level style defaults. - Set &#x60;scope&#x60; to &#x60;ORG&#x60; (default) to
      * retrieve preferences for the authenticated user&#39;s org. - Each field in the response
      * includes an &#x60;is_overridden&#x60; flag indicating whether the value was explicitly set at
-     * the requested scope or inherited from a parent scope (cluster or system default).
+     * the requested scope or inherited from a parent scope (cluster or system default). -
+     * &#x60;app_color_theme&#x60; (_available from 26.10.0.cl_) describes the same underlying color
+     * as &#x60;navigation_panel&#x60;, in a different form: &#x60;navigation_panel&#x60; uses the
+     * &#x60;DARK&#x60;/&#x60;TWO_TONE&#x60;/&#x60;CUSTOM&#x60; theme modes, while
+     * &#x60;app_color_theme&#x60; gives the brand color and how it is applied
+     * (&#x60;brand_color&#x60;, &#x60;apply_as_top_nav_color&#x60;). They never disagree, so use
+     * whichever your integration already reads. &#x60;app_color_theme&#x60; is returned only when
+     * the app color theme is enabled on the cluster; &#x60;navigation_panel&#x60; is always
+     * returned.
      *
      * @param searchStyleCustomizationsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -33218,6 +34249,267 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for shareAnalyst
+     *
+     * @param analystIdentifier Unique identifier of the analyst to share. (required)
+     * @param shareAnalystRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call shareAnalystCall(
+            String analystIdentifier,
+            ShareAnalystRequest shareAnalystRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = shareAnalystRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share"
+                        .replace(
+                                "{" + "analyst_identifier" + "}",
+                                localVarApiClient.escapeString(analystIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call shareAnalystValidateBeforeCall(
+            String analystIdentifier,
+            ShareAnalystRequest shareAnalystRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'analystIdentifier' is set
+        if (analystIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'analystIdentifier' when calling"
+                            + " shareAnalyst(Async)");
+        }
+
+        // verify the required parameter 'shareAnalystRequest' is set
+        if (shareAnalystRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'shareAnalystRequest' when calling"
+                            + " shareAnalyst(Async)");
+        }
+
+        return shareAnalystCall(analystIdentifier, shareAnalystRequest, _callback);
+    }
+
+    /**
+     * Updates share permissions on a Spotter Analyst, one entry per principal (user or group).
+     * &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access;
+     * &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources
+     * with the principal so the analyst keeps working for them. A successful share returns an empty
+     * &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or
+     * &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Version: 26.10.0.cl
+     * or later Updates share permissions on a Spotter Analyst for one or more principals (users or
+     * groups). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the
+     * analyst exists. #### Usage guidelines The analyst is identified by the
+     * &#x60;analyst_identifier&#x60; path parameter. The request body contains a
+     * &#x60;permissions&#x60; array with one entry per principal: -
+     * &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. -
+     * &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. -
+     * &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or
+     * changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. A principal may appear
+     * at most once per request. When access is granted, the analyst&#39;s data sources are
+     * automatically shared with the principal as well, so the analyst keeps working for them. A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. #### Error
+     * conditions - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller
+     * is not the analyst&#39;s author and lacks admin / Spotter-management privileges. -
+     * &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. -
+     * &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a
+     * duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param analystIdentifier Unique identifier of the analyst to share. (required)
+     * @param shareAnalystRequest (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public Object shareAnalyst(String analystIdentifier, ShareAnalystRequest shareAnalystRequest)
+            throws ApiException {
+        ApiResponse<Object> localVarResp =
+                shareAnalystWithHttpInfo(analystIdentifier, shareAnalystRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Updates share permissions on a Spotter Analyst, one entry per principal (user or group).
+     * &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the principal&#39;s access;
+     * &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the analyst&#39;s data sources
+     * with the principal so the analyst keeps working for them. A successful share returns an empty
+     * &#x60;204 No Content&#x60; response. Requires ownership of the analyst, or
+     * &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Version: 26.10.0.cl
+     * or later Updates share permissions on a Spotter Analyst for one or more principals (users or
+     * groups). Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token for the Org in which the
+     * analyst exists. #### Usage guidelines The analyst is identified by the
+     * &#x60;analyst_identifier&#x60; path parameter. The request body contains a
+     * &#x60;permissions&#x60; array with one entry per principal: -
+     * &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. -
+     * &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. -
+     * &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or
+     * changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. A principal may appear
+     * at most once per request. When access is granted, the analyst&#39;s data sources are
+     * automatically shared with the principal as well, so the analyst keeps working for them. A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. #### Error
+     * conditions - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller
+     * is not the analyst&#39;s author and lacks admin / Spotter-management privileges. -
+     * &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. -
+     * &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a
+     * duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param analystIdentifier Unique identifier of the analyst to share. (required)
+     * @param shareAnalystRequest (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Object> shareAnalystWithHttpInfo(
+            String analystIdentifier, ShareAnalystRequest shareAnalystRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                shareAnalystValidateBeforeCall(analystIdentifier, shareAnalystRequest, null);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Updates share permissions on a Spotter Analyst, one entry per principal
+     * (user or group). &#x60;READ_ONLY&#x60; and &#x60;MODIFY&#x60; grant or change the
+     * principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. Granting access also shares the
+     * analyst&#39;s data sources with the principal so the analyst keeps working for them. A
+     * successful share returns an empty &#x60;204 No Content&#x60; response. Requires ownership of
+     * the analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges.
+     * Version: 26.10.0.cl or later Updates share permissions on a Spotter Analyst for one or more
+     * principals (users or groups). Requires ownership of the analyst, or
+     * &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Use a bearer token
+     * for the Org in which the analyst exists. #### Usage guidelines The analyst is identified by
+     * the &#x60;analyst_identifier&#x60; path parameter. The request body contains a
+     * &#x60;permissions&#x60; array with one entry per principal: -
+     * &#x60;principal.identifier&#x60; (required): unique identifier of the user or group. -
+     * &#x60;principal.type&#x60; (required): &#x60;USER&#x60; or &#x60;USER_GROUP&#x60;. -
+     * &#x60;share_mode&#x60; (required): &#x60;READ_ONLY&#x60; or &#x60;MODIFY&#x60; grants (or
+     * changes) the principal&#39;s access; &#x60;NO_ACCESS&#x60; revokes it. A principal may appear
+     * at most once per request. When access is granted, the analyst&#39;s data sources are
+     * automatically shared with the principal as well, so the analyst keeps working for them. A
+     * successful request returns an empty &#x60;204 No Content&#x60; response. #### Error
+     * conditions - &#x60;400&#x60; — malformed analyst identifier. - &#x60;403&#x60; — the caller
+     * is not the analyst&#39;s author and lacks admin / Spotter-management privileges. -
+     * &#x60;404&#x60; — no analyst with the given identifier exists in the caller&#39;s Org. -
+     * &#x60;422&#x60; — validation failure, such as an empty &#x60;permissions&#x60; array, a
+     * duplicate principal, or a missing field. - &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param analystIdentifier Unique identifier of the analyst to share. (required)
+     * @param shareAnalystRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call shareAnalystAsync(
+            String analystIdentifier,
+            ShareAnalystRequest shareAnalystRequest,
+            final ApiCallback<Object> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                shareAnalystValidateBeforeCall(analystIdentifier, shareAnalystRequest, _callback);
+        Type localVarReturnType = new TypeToken<Object>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for shareConversation
      *
      * @param conversationIdentifier Unique identifier of the conversation to share. (required)
@@ -34789,7 +36081,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Remove parameterization from fields in metadata objects. Version: 26.5.0.cl or later Allows
+     * Remove parameterization from fields in metadata objects. Version: 26.10.0.cl or later Allows
      * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
      * appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
@@ -34834,7 +36126,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Remove parameterization from fields in metadata objects. Version: 26.5.0.cl or later Allows
+     * Remove parameterization from fields in metadata objects. Version: 26.10.0.cl or later Allows
      * removing parameterization from fields in metadata objects in ThoughtSpot. Requires
      * appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
@@ -34882,7 +36174,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Remove parameterization from fields in metadata objects. Version: 26.5.0.cl
+     * (asynchronously) Remove parameterization from fields in metadata objects. Version: 26.10.0.cl
      * or later Allows removing parameterization from fields in metadata objects in ThoughtSpot.
      * Requires appropriate permissions to modify the metadata object. The API endpoint allows
      * unparameterizing the following types of metadata objects: * Logical Tables * Connections *
@@ -35021,7 +36313,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
+     * Version: 26.10.0.cl or later Allows unpublishing metadata objects from organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * When unpublishing objects, you can: * Include dependencies by setting
@@ -35049,7 +36341,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 26.5.0.cl or later Allows unpublishing metadata objects from organizations in
+     * Version: 26.10.0.cl or later Allows unpublishing metadata objects from organizations in
      * ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint allows
      * unpublishing the following types of metadata objects: * Liveboards * Answers * Logical Tables
      * When unpublishing objects, you can: * Include dependencies by setting
@@ -35080,7 +36372,7 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 26.5.0.cl or later Allows unpublishing metadata objects from
+     * (asynchronously) Version: 26.10.0.cl or later Allows unpublishing metadata objects from
      * organizations in ThoughtSpot. Requires ADMINISTRATION role and TENANT scope. The API endpoint
      * allows unpublishing the following types of metadata objects: * Liveboards * Answers * Logical
      * Tables When unpublishing objects, you can: * Include dependencies by setting
@@ -35111,6 +36403,309 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall =
                 unpublishMetadataValidateBeforeCall(unpublishMetadataRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateAnalyst
+     *
+     * @param analystIdentifier Unique identifier of the analyst to update. (required)
+     * @param updateAnalystRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateAnalystCall(
+            String analystIdentifier,
+            UpdateAnalystRequest updateAnalystRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateAnalystRequest;
+
+        // create path and map variables
+        String localVarPath =
+                "/api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update"
+                        .replace(
+                                "{" + "analyst_identifier" + "}",
+                                localVarApiClient.escapeString(analystIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateAnalystValidateBeforeCall(
+            String analystIdentifier,
+            UpdateAnalystRequest updateAnalystRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'analystIdentifier' is set
+        if (analystIdentifier == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'analystIdentifier' when calling"
+                            + " updateAnalyst(Async)");
+        }
+
+        // verify the required parameter 'updateAnalystRequest' is set
+        if (updateAnalystRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'updateAnalystRequest' when calling"
+                            + " updateAnalyst(Async)");
+        }
+
+        return updateAnalystCall(analystIdentifier, updateAnalystRequest, _callback);
+    }
+
+    /**
+     * Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the
+     * update is a full replace: the analyst is rewritten from the request, and optional fields
+     * omitted from the request are reset (no instructions, no MCP connectors, no starter prompts).
+     * Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.
+     * Version: 26.10.0.cl or later Updates a Spotter Analyst. The request body is identical to the
+     * create analyst API, and the update is a full replace: the analyst is rewritten from the
+     * request, and optional fields omitted from the request are reset. Requires ownership of the
+     * analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users
+     * the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in
+     * which the analyst exists. #### Usage guidelines The request body is flat — all fields are
+     * top-level: - &#x60;name&#x60; (required): display name of the analyst. -
+     * &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60;
+     * (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions
+     * that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field
+     * clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source
+     * the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and
+     * a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or
+     * &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added,
+     * they are automatically shared with users the analyst was previously shared with, so those
+     * users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers
+     * of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear.
+     * - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250
+     * characters; display order follows list position. Replaces the existing list in full; omit or
+     * pass an empty array to clear. If the request is successful, the response contains the updated
+     * analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch
+     * milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with
+     * &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and
+     * starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;,
+     * &#x60;order&#x60;, &#x60;is_ai_generated&#x60;). #### Error conditions - &#x60;400&#x60; —
+     * malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author
+     * and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the
+     * given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60;
+     * conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing
+     * required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty
+     * &#x60;sources&#x60; list, too many starter prompts, or field-length violations. -
+     * &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param analystIdentifier Unique identifier of the analyst to update. (required)
+     * @param updateAnalystRequest (required)
+     * @return Analyst
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public Analyst updateAnalyst(
+            String analystIdentifier, UpdateAnalystRequest updateAnalystRequest)
+            throws ApiException {
+        ApiResponse<Analyst> localVarResp =
+                updateAnalystWithHttpInfo(analystIdentifier, updateAnalystRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Updates a Spotter Analyst. The request body is identical to &#x60;createAnalyst&#x60; and the
+     * update is a full replace: the analyst is rewritten from the request, and optional fields
+     * omitted from the request are reset (no instructions, no MCP connectors, no starter prompts).
+     * Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with cannot edit it.
+     * Version: 26.10.0.cl or later Updates a Spotter Analyst. The request body is identical to the
+     * create analyst API, and the update is a full replace: the analyst is rewritten from the
+     * request, and optional fields omitted from the request are reset. Requires ownership of the
+     * analyst, or &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users
+     * the analyst is shared with can use it but cannot edit it. Use a bearer token for the Org in
+     * which the analyst exists. #### Usage guidelines The request body is flat — all fields are
+     * top-level: - &#x60;name&#x60; (required): display name of the analyst. -
+     * &#x60;description&#x60; (required): up to 200 characters. - &#x60;instructions&#x60;
+     * (optional): natural-language instructions that guide the agent&#39;s behavior. Instructions
+     * that conflict with system guardrails are rejected with &#x60;409&#x60;. Omitting this field
+     * clears any existing instructions. - &#x60;sources&#x60; (required): at least one data source
+     * the analyst can query, each with an &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and
+     * a &#x60;type&#x60; (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or
+     * &#x60;CONVERSATION&#x60;). Replaces the existing list in full. When new sources are added,
+     * they are automatically shared with users the analyst was previously shared with, so those
+     * users keep a working analyst. - &#x60;mcp_connector_identifiers&#x60; (optional): identifiers
+     * of MCP connectors. Replaces the existing list in full; omit or pass an empty array to clear.
+     * - &#x60;starter_prompts&#x60; (optional): up to 4 plain-text prompts, each between 10 and 250
+     * characters; display order follows list position. Replaces the existing list in full; omit or
+     * pass an empty array to clear. If the request is successful, the response contains the updated
+     * analyst, including the refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch
+     * milliseconds) and &#x60;updated_by&#x60; user. In responses, sources are returned with
+     * &#x60;id&#x60; and &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and
+     * starter prompts as structured objects (&#x60;label&#x60;, &#x60;text&#x60;,
+     * &#x60;order&#x60;, &#x60;is_ai_generated&#x60;). #### Error conditions - &#x60;400&#x60; —
+     * malformed analyst identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author
+     * and lacks admin / Spotter-management privileges. - &#x60;404&#x60; — no analyst with the
+     * given identifier exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60;
+     * conflict with system guardrails. - &#x60;422&#x60; — validation failure, such as a missing
+     * required field (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty
+     * &#x60;sources&#x60; list, too many starter prompts, or field-length violations. -
+     * &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param analystIdentifier Unique identifier of the analyst to update. (required)
+     * @param updateAnalystRequest (required)
+     * @return ApiResponse&lt;Analyst&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<Analyst> updateAnalystWithHttpInfo(
+            String analystIdentifier, UpdateAnalystRequest updateAnalystRequest)
+            throws ApiException {
+        okhttp3.Call localVarCall =
+                updateAnalystValidateBeforeCall(analystIdentifier, updateAnalystRequest, null);
+        Type localVarReturnType = new TypeToken<Analyst>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Updates a Spotter Analyst. The request body is identical to
+     * &#x60;createAnalyst&#x60; and the update is a full replace: the analyst is rewritten from the
+     * request, and optional fields omitted from the request are reset (no instructions, no MCP
+     * connectors, no starter prompts). Requires ownership of the analyst, or
+     * &#x60;ADMINISTRATION&#x60; or &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is
+     * shared with cannot edit it. Version: 26.10.0.cl or later Updates a Spotter Analyst. The
+     * request body is identical to the create analyst API, and the update is a full replace: the
+     * analyst is rewritten from the request, and optional fields omitted from the request are
+     * reset. Requires ownership of the analyst, or &#x60;ADMINISTRATION&#x60; or
+     * &#x60;CAN_MANAGE_SPOTTER&#x60; privileges. Users the analyst is shared with can use it but
+     * cannot edit it. Use a bearer token for the Org in which the analyst exists. #### Usage
+     * guidelines The request body is flat — all fields are top-level: - &#x60;name&#x60;
+     * (required): display name of the analyst. - &#x60;description&#x60; (required): up to 200
+     * characters. - &#x60;instructions&#x60; (optional): natural-language instructions that guide
+     * the agent&#39;s behavior. Instructions that conflict with system guardrails are rejected with
+     * &#x60;409&#x60;. Omitting this field clears any existing instructions. - &#x60;sources&#x60;
+     * (required): at least one data source the analyst can query, each with an
+     * &#x60;identifier&#x60;, an optional &#x60;name&#x60;, and a &#x60;type&#x60;
+     * (&#x60;MODEL&#x60;, &#x60;ANSWER&#x60;, &#x60;LIVEBOARD&#x60;, or &#x60;CONVERSATION&#x60;).
+     * Replaces the existing list in full. When new sources are added, they are automatically shared
+     * with users the analyst was previously shared with, so those users keep a working analyst. -
+     * &#x60;mcp_connector_identifiers&#x60; (optional): identifiers of MCP connectors. Replaces the
+     * existing list in full; omit or pass an empty array to clear. - &#x60;starter_prompts&#x60;
+     * (optional): up to 4 plain-text prompts, each between 10 and 250 characters; display order
+     * follows list position. Replaces the existing list in full; omit or pass an empty array to
+     * clear. If the request is successful, the response contains the updated analyst, including the
+     * refreshed &#x60;updated_time_in_millis&#x60; timestamp (epoch milliseconds) and
+     * &#x60;updated_by&#x60; user. In responses, sources are returned with &#x60;id&#x60; and
+     * &#x60;type&#x60;, connector identifiers as &#x60;mcp_connectors&#x60;, and starter prompts as
+     * structured objects (&#x60;label&#x60;, &#x60;text&#x60;, &#x60;order&#x60;,
+     * &#x60;is_ai_generated&#x60;). #### Error conditions - &#x60;400&#x60; — malformed analyst
+     * identifier. - &#x60;403&#x60; — the caller is not the analyst&#39;s author and lacks admin /
+     * Spotter-management privileges. - &#x60;404&#x60; — no analyst with the given identifier
+     * exists in the caller&#39;s Org. - &#x60;409&#x60; — &#x60;instructions&#x60; conflict with
+     * system guardrails. - &#x60;422&#x60; — validation failure, such as a missing required field
+     * (&#x60;name&#x60;, &#x60;description&#x60;, or &#x60;sources&#x60;), an empty
+     * &#x60;sources&#x60; list, too many starter prompts, or field-length violations. -
+     * &#x60;429&#x60; — rate limit exceeded.
+     *
+     * @param analystIdentifier Unique identifier of the analyst to update. (required)
+     * @param updateAnalystRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+     * <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateAnalystAsync(
+            String analystIdentifier,
+            UpdateAnalystRequest updateAnalystRequest,
+            final ApiCallback<Analyst> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                updateAnalystValidateBeforeCall(analystIdentifier, updateAnalystRequest, _callback);
+        Type localVarReturnType = new TypeToken<Analyst>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -37342,9 +38937,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Updates attributes of an existing agent conversation. Currently only the display title can be
-     * updated; additional conversation attributes may be supported in future versions. At least one
-     * updatable attribute must be provided in the request body. Version: 26.7.0.cl or later Updates
+     * Updates attributes of an existing agent conversation. Supports updating the display title and
+     * the pinned state; additional conversation attributes may be supported in future versions. At
+     * least one updatable attribute must be provided in the request body. Each attribute is applied
+     * independently, so omitted attributes are left unchanged. Version: 26.7.0.cl or later Updates
      * attributes of an existing saved agent conversation. Supports updating the conversation&#39;s
      * display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable
      * attributes may be supported in future versions. At least one updatable attribute must be
@@ -37410,9 +39006,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Updates attributes of an existing agent conversation. Currently only the display title can be
-     * updated; additional conversation attributes may be supported in future versions. At least one
-     * updatable attribute must be provided in the request body. Version: 26.7.0.cl or later Updates
+     * Updates attributes of an existing agent conversation. Supports updating the display title and
+     * the pinned state; additional conversation attributes may be supported in future versions. At
+     * least one updatable attribute must be provided in the request body. Each attribute is applied
+     * independently, so omitted attributes are left unchanged. Version: 26.7.0.cl or later Updates
      * attributes of an existing saved agent conversation. Supports updating the conversation&#39;s
      * display &#x60;title&#x60; and its &#x60;is_pinned&#x60; state; additional updatable
      * attributes may be supported in future versions. At least one updatable attribute must be
@@ -37482,9 +39079,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Updates attributes of an existing agent conversation. Currently only the
-     * display title can be updated; additional conversation attributes may be supported in future
-     * versions. At least one updatable attribute must be provided in the request body. Version:
+     * (asynchronously) Updates attributes of an existing agent conversation. Supports updating the
+     * display title and the pinned state; additional conversation attributes may be supported in
+     * future versions. At least one updatable attribute must be provided in the request body. Each
+     * attribute is applied independently, so omitted attributes are left unchanged. Version:
      * 26.7.0.cl or later Updates attributes of an existing saved agent conversation. Supports
      * updating the conversation&#39;s display &#x60;title&#x60; and its &#x60;is_pinned&#x60;
      * state; additional updatable attributes may be supported in future versions. At least one
@@ -38409,6 +40007,500 @@ public class ThoughtSpotRestApi {
                 updateEmailCustomizationValidateBeforeCall(
                         updateEmailCustomizationRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateFeatureAssignments
+     *
+     * @param updateFeatureAssignmentsRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Assignments updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateFeatureAssignmentsCall(
+            UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateFeatureAssignmentsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/configurations/features/assignments/update";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateFeatureAssignmentsValidateBeforeCall(
+            UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest,
+            final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'updateFeatureAssignmentsRequest' is set
+        if (updateFeatureAssignmentsRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'updateFeatureAssignmentsRequest' when calling"
+                            + " updateFeatureAssignments(Async)");
+        }
+
+        return updateFeatureAssignmentsCall(updateFeatureAssignmentsRequest, _callback);
+    }
+
+    /**
+     * Version: 26.10.0.cl or later Updates the Org assignments for a feature. Available to cluster
+     * admins only. #### Pre-requisites Requires the &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint
+     * manages Org assignments across the cluster, so it must be called by a cluster admin;
+     * org-scoped admins cannot call it. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To update the Org assignments for a feature, pass these parameters in your API
+     * request: - &#x60;feature_identifier&#x60; — User-friendly feature name
+     * (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the
+     * feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an
+     * empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org
+     * assignments for this feature. - &#x60;operation&#x60; — Type of update to apply.
+     * &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60;
+     * unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs.
+     * Defaults to &#x60;REPLACE&#x60;. The following example assigns Orgs &#x60;1&#x60; and
+     * &#x60;2&#x60; to a feature, in addition to any Orgs already assigned: &#x60;&#x60;&#x60; {
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;org_identifiers\&quot;:
+     * [1, 2], \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60; Clear all Org
+     * assignments for a feature by sending an empty array with &#x60;operation&#x60; set to
+     * &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once): &#x60;&#x60;&#x60;
+     * { \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,
+     * \&quot;org_identifiers\&quot;: [], \&quot;operation\&quot;: \&quot;REPLACE\&quot; }
+     * &#x60;&#x60;&#x60;
+     *
+     * @param updateFeatureAssignmentsRequest (required)
+     * @return FeatureAssignmentResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Assignments updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public FeatureAssignmentResponse updateFeatureAssignments(
+            UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest) throws ApiException {
+        ApiResponse<FeatureAssignmentResponse> localVarResp =
+                updateFeatureAssignmentsWithHttpInfo(updateFeatureAssignmentsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.10.0.cl or later Updates the Org assignments for a feature. Available to cluster
+     * admins only. #### Pre-requisites Requires the &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint
+     * manages Org assignments across the cluster, so it must be called by a cluster admin;
+     * org-scoped admins cannot call it. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To update the Org assignments for a feature, pass these parameters in your API
+     * request: - &#x60;feature_identifier&#x60; — User-friendly feature name
+     * (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the
+     * feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an
+     * empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org
+     * assignments for this feature. - &#x60;operation&#x60; — Type of update to apply.
+     * &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60;
+     * unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs.
+     * Defaults to &#x60;REPLACE&#x60;. The following example assigns Orgs &#x60;1&#x60; and
+     * &#x60;2&#x60; to a feature, in addition to any Orgs already assigned: &#x60;&#x60;&#x60; {
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;org_identifiers\&quot;:
+     * [1, 2], \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60; Clear all Org
+     * assignments for a feature by sending an empty array with &#x60;operation&#x60; set to
+     * &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once): &#x60;&#x60;&#x60;
+     * { \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,
+     * \&quot;org_identifiers\&quot;: [], \&quot;operation\&quot;: \&quot;REPLACE\&quot; }
+     * &#x60;&#x60;&#x60;
+     *
+     * @param updateFeatureAssignmentsRequest (required)
+     * @return ApiResponse&lt;FeatureAssignmentResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Assignments updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<FeatureAssignmentResponse> updateFeatureAssignmentsWithHttpInfo(
+            UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                updateFeatureAssignmentsValidateBeforeCall(updateFeatureAssignmentsRequest, null);
+        Type localVarReturnType = new TypeToken<FeatureAssignmentResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.10.0.cl or later Updates the Org assignments for a feature.
+     * Available to cluster admins only. #### Pre-requisites Requires the &#x60;ADMINISTRATION&#x60;
+     * (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org)
+     * context. This endpoint manages Org assignments across the cluster, so it must be called by a
+     * cluster admin; org-scoped admins cannot call it. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To update the Org assignments for a feature, pass these parameters in your API
+     * request: - &#x60;feature_identifier&#x60; — User-friendly feature name
+     * (&#x60;feature_name&#x60;) or the underlying feature ID (&#x60;feature_id&#x60;) of the
+     * feature to update. - &#x60;org_identifiers&#x60; — Numeric IDs of the Orgs to assign. Send an
+     * empty array with &#x60;operation&#x60; set to &#x60;REPLACE&#x60; to clear all Org
+     * assignments for this feature. - &#x60;operation&#x60; — Type of update to apply.
+     * &#x60;ADD&#x60; assigns the given Orgs in addition to the existing ones; &#x60;REMOVE&#x60;
+     * unassigns the given Orgs; &#x60;REPLACE&#x60; sets the assignment to exactly the given Orgs.
+     * Defaults to &#x60;REPLACE&#x60;. The following example assigns Orgs &#x60;1&#x60; and
+     * &#x60;2&#x60; to a feature, in addition to any Orgs already assigned: &#x60;&#x60;&#x60; {
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;org_identifiers\&quot;:
+     * [1, 2], \&quot;operation\&quot;: \&quot;ADD\&quot; } &#x60;&#x60;&#x60; Clear all Org
+     * assignments for a feature by sending an empty array with &#x60;operation&#x60; set to
+     * &#x60;REPLACE&#x60; (this is the only way to unassign every Org at once): &#x60;&#x60;&#x60;
+     * { \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;,
+     * \&quot;org_identifiers\&quot;: [], \&quot;operation\&quot;: \&quot;REPLACE\&quot; }
+     * &#x60;&#x60;&#x60;
+     *
+     * @param updateFeatureAssignmentsRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Assignments updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request parameters. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateFeatureAssignmentsAsync(
+            UpdateFeatureAssignmentsRequest updateFeatureAssignmentsRequest,
+            final ApiCallback<FeatureAssignmentResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                updateFeatureAssignmentsValidateBeforeCall(
+                        updateFeatureAssignmentsRequest, _callback);
+        Type localVarReturnType = new TypeToken<FeatureAssignmentResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateFeatureValue
+     *
+     * @param updateFeatureValueRequest (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Value updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateFeatureValueCall(
+            UpdateFeatureValueRequest updateFeatureValueRequest, final ApiCallback _callback)
+            throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {};
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null) {
+            basePath = localCustomBaseUrl;
+        } else if (localBasePaths.length > 0) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateFeatureValueRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/configurations/features/values/update";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {"application/json"};
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {"application/json"};
+        final String localVarContentType =
+                localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {"bearerAuth"};
+        return localVarApiClient.buildCall(
+                basePath,
+                localVarPath,
+                "POST",
+                localVarQueryParams,
+                localVarCollectionQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarCookieParams,
+                localVarFormParams,
+                localVarAuthNames,
+                _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateFeatureValueValidateBeforeCall(
+            UpdateFeatureValueRequest updateFeatureValueRequest, final ApiCallback _callback)
+            throws ApiException {
+        // verify the required parameter 'updateFeatureValueRequest' is set
+        if (updateFeatureValueRequest == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'updateFeatureValueRequest' when calling"
+                            + " updateFeatureValue(Async)");
+        }
+
+        return updateFeatureValueCall(updateFeatureValueRequest, _callback);
+    }
+
+    /**
+     * Version: 26.10.0.cl or later Sets the value of a feature at the cluster or Org scope. ####
+     * Pre-requisites Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To set a feature value, pass these parameters in your API request: -
+     * &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60;
+     * to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. -
+     * &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when
+     * &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;.
+     * - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or
+     * the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set.
+     * - &#x60;feature_value&#x60; — New value to set for the feature. -
+     * &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is
+     * &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this
+     * feature are also removed so that all Orgs inherit the new cluster-level value. Required when
+     * &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when
+     * &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400
+     * error. The following example sets a per-Org value override for Org &#x60;1&#x60;:
+     * &#x60;&#x60;&#x60; { \&quot;scope\&quot;: \&quot;ORG\&quot;, \&quot;org_identifier\&quot;: 1,
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;feature_value\&quot;:
+     * \&quot;true\&quot; } &#x60;&#x60;&#x60; Set the cluster-level value and clear all per-Org
+     * overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides:
+     * true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:
+     * &#x60;&#x60;&#x60; { \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;feature_value\&quot;:
+     * \&quot;true\&quot;, \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;
+     *
+     * @param updateFeatureValueRequest (required)
+     * @return FeatureValueResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Value updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public FeatureValueResponse updateFeatureValue(
+            UpdateFeatureValueRequest updateFeatureValueRequest) throws ApiException {
+        ApiResponse<FeatureValueResponse> localVarResp =
+                updateFeatureValueWithHttpInfo(updateFeatureValueRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Version: 26.10.0.cl or later Sets the value of a feature at the cluster or Org scope. ####
+     * Pre-requisites Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
+     * privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To set a feature value, pass these parameters in your API request: -
+     * &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60;
+     * to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. -
+     * &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when
+     * &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;.
+     * - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or
+     * the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set.
+     * - &#x60;feature_value&#x60; — New value to set for the feature. -
+     * &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is
+     * &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this
+     * feature are also removed so that all Orgs inherit the new cluster-level value. Required when
+     * &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when
+     * &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400
+     * error. The following example sets a per-Org value override for Org &#x60;1&#x60;:
+     * &#x60;&#x60;&#x60; { \&quot;scope\&quot;: \&quot;ORG\&quot;, \&quot;org_identifier\&quot;: 1,
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;feature_value\&quot;:
+     * \&quot;true\&quot; } &#x60;&#x60;&#x60; Set the cluster-level value and clear all per-Org
+     * overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides:
+     * true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:
+     * &#x60;&#x60;&#x60; { \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;feature_value\&quot;:
+     * \&quot;true\&quot;, \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;
+     *
+     * @param updateFeatureValueRequest (required)
+     * @return ApiResponse&lt;FeatureValueResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+     *     response body
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Value updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public ApiResponse<FeatureValueResponse> updateFeatureValueWithHttpInfo(
+            UpdateFeatureValueRequest updateFeatureValueRequest) throws ApiException {
+        okhttp3.Call localVarCall =
+                updateFeatureValueValidateBeforeCall(updateFeatureValueRequest, null);
+        Type localVarReturnType = new TypeToken<FeatureValueResponse>() {}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * (asynchronously) Version: 26.10.0.cl or later Sets the value of a feature at the cluster or
+     * Org scope. #### Pre-requisites Requires &#x60;ADMINISTRATION&#x60; (**Can administer
+     * ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. #### Usage
+     * guidelines To set a feature value, pass these parameters in your API request: -
+     * &#x60;scope&#x60; — Determines the scope at which the value is set. Use &#x60;CLUSTER&#x60;
+     * to set the cluster-level value; use &#x60;ORG&#x60; to set a per-Org value override. -
+     * &#x60;org_identifier&#x60; — Numeric ID of the Org for which to set the value. Required when
+     * &#x60;scope&#x60; is &#x60;ORG&#x60;; ignored when &#x60;scope&#x60; is &#x60;CLUSTER&#x60;.
+     * - &#x60;feature_identifier&#x60; — User-friendly feature name (&#x60;feature_name&#x60;) or
+     * the underlying feature ID (&#x60;feature_id&#x60;) of the feature whose value should be set.
+     * - &#x60;feature_value&#x60; — New value to set for the feature. -
+     * &#x60;reset_org_overrides&#x60; — Applicable only when &#x60;scope&#x60; is
+     * &#x60;CLUSTER&#x60;. When &#x60;true&#x60;, any existing per-Org value overrides for this
+     * feature are also removed so that all Orgs inherit the new cluster-level value. Required when
+     * &#x60;scope&#x60; is &#x60;CLUSTER&#x60; for an org-aware feature. Must be omitted when
+     * &#x60;scope&#x60; is &#x60;ORG&#x60;; passing it at &#x60;ORG&#x60; scope returns a 400
+     * error. The following example sets a per-Org value override for Org &#x60;1&#x60;:
+     * &#x60;&#x60;&#x60; { \&quot;scope\&quot;: \&quot;ORG\&quot;, \&quot;org_identifier\&quot;: 1,
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;feature_value\&quot;:
+     * \&quot;true\&quot; } &#x60;&#x60;&#x60; Set the cluster-level value and clear all per-Org
+     * overrides so every Org inherits the new value (CLUSTER scope). &#x60;reset_org_overrides:
+     * true&#x60; is destructive — it strips existing per-Org overrides cluster-wide:
+     * &#x60;&#x60;&#x60; { \&quot;scope\&quot;: \&quot;CLUSTER\&quot;,
+     * \&quot;feature_identifier\&quot;: \&quot;index_columns\&quot;, \&quot;feature_value\&quot;:
+     * \&quot;true\&quot;, \&quot;reset_org_overrides\&quot;: true } &#x60;&#x60;&#x60;
+     *
+     * @param updateFeatureValueRequest (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body
+     *     object
+     * @http.response.details
+     *     <table border="1">
+     * <caption>Response Details</caption>
+     * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+     * <tr><td> 200 </td><td> Value updated. </td><td>  -  </td></tr>
+     * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+     * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+     * <tr><td> 403 </td><td> Insufficient privileges or org not assigned to feature. </td><td>  -  </td></tr>
+     * <tr><td> 404 </td><td> Feature not found or feature management not enabled. </td><td>  -  </td></tr>
+     * <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     * </table>
+     */
+    public okhttp3.Call updateFeatureValueAsync(
+            UpdateFeatureValueRequest updateFeatureValueRequest,
+            final ApiCallback<FeatureValueResponse> _callback)
+            throws ApiException {
+
+        okhttp3.Call localVarCall =
+                updateFeatureValueValidateBeforeCall(updateFeatureValueRequest, _callback);
+        Type localVarReturnType = new TypeToken<FeatureValueResponse>() {}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -39729,10 +41821,22 @@ public class ThoughtSpotRestApi {
      * #### Navigation panel color Set &#x60;navigation_panel.theme&#x60; to one of: -
      * &#x60;DARK&#x60;: Default dark theme. - &#x60;TWO_TONE&#x60;: Dual-tone panel style. -
      * &#x60;CUSTOM&#x60;: User-defined color. Provide &#x60;navigation_panel.base_color&#x60; as a
-     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### Chart color palette Provide exactly 8
-     * color entries in &#x60;chart_color_palette.colors&#x60;. Each entry requires a
-     * &#x60;primary&#x60; hex color. If &#x60;secondary&#x60; shades are omitted, the server
-     * auto-generates 4 shades from the primary color. #### Font assignments Specify
+     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### App color theme
+     * &#x60;app_color_theme&#x60; (_available from 26.10.0.cl_) sets the same underlying color as
+     * &#x60;navigation_panel&#x60;, expressed as a brand color plus how it is applied. Provide
+     * exactly one of &#x60;navigation_panel&#x60; or &#x60;app_color_theme&#x60; per request;
+     * providing both returns an error. &#x60;app_color_theme&#x60; is supported only when the app
+     * color theme is enabled on the cluster; using it otherwise returns an error. -
+     * &#x60;brand_color&#x60;: Brand color as a 6-digit hex string (e.g. &#x60;#2359B6&#x60;). Omit
+     * to leave the stored color unchanged. To clear it, use &#x60;operation: RESET&#x60; with
+     * &#x60;reset_options.style&#x60; set to &#x60;APP_COLOR_THEME&#x60;. -
+     * &#x60;apply_as_top_nav_color&#x60;: Whether the brand color is painted on the top navigation
+     * bar literally, instead of the surface shade generated from it. Omit to leave the stored
+     * choice unchanged. &#x60;brand_color&#x60; and &#x60;apply_as_top_nav_color&#x60; may be set
+     * independently in the same request. #### Chart color palette Provide exactly 8 color entries
+     * in &#x60;chart_color_palette.colors&#x60;. Each entry requires a &#x60;primary&#x60; hex
+     * color. If &#x60;secondary&#x60; shades are omitted, the server auto-generates 4 shades from
+     * the primary color. #### Font assignments Specify
      * &#x60;visualization_fonts.chart_visualization_fonts&#x60;,
      * &#x60;visualization_fonts.table_visualization_fonts&#x60;, and
      * &#x60;visualization_fonts.advanced_chart_visualization_fonts&#x60; to assign custom fonts to
@@ -39816,10 +41920,22 @@ public class ThoughtSpotRestApi {
      * #### Navigation panel color Set &#x60;navigation_panel.theme&#x60; to one of: -
      * &#x60;DARK&#x60;: Default dark theme. - &#x60;TWO_TONE&#x60;: Dual-tone panel style. -
      * &#x60;CUSTOM&#x60;: User-defined color. Provide &#x60;navigation_panel.base_color&#x60; as a
-     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### Chart color palette Provide exactly 8
-     * color entries in &#x60;chart_color_palette.colors&#x60;. Each entry requires a
-     * &#x60;primary&#x60; hex color. If &#x60;secondary&#x60; shades are omitted, the server
-     * auto-generates 4 shades from the primary color. #### Font assignments Specify
+     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### App color theme
+     * &#x60;app_color_theme&#x60; (_available from 26.10.0.cl_) sets the same underlying color as
+     * &#x60;navigation_panel&#x60;, expressed as a brand color plus how it is applied. Provide
+     * exactly one of &#x60;navigation_panel&#x60; or &#x60;app_color_theme&#x60; per request;
+     * providing both returns an error. &#x60;app_color_theme&#x60; is supported only when the app
+     * color theme is enabled on the cluster; using it otherwise returns an error. -
+     * &#x60;brand_color&#x60;: Brand color as a 6-digit hex string (e.g. &#x60;#2359B6&#x60;). Omit
+     * to leave the stored color unchanged. To clear it, use &#x60;operation: RESET&#x60; with
+     * &#x60;reset_options.style&#x60; set to &#x60;APP_COLOR_THEME&#x60;. -
+     * &#x60;apply_as_top_nav_color&#x60;: Whether the brand color is painted on the top navigation
+     * bar literally, instead of the surface shade generated from it. Omit to leave the stored
+     * choice unchanged. &#x60;brand_color&#x60; and &#x60;apply_as_top_nav_color&#x60; may be set
+     * independently in the same request. #### Chart color palette Provide exactly 8 color entries
+     * in &#x60;chart_color_palette.colors&#x60;. Each entry requires a &#x60;primary&#x60; hex
+     * color. If &#x60;secondary&#x60; shades are omitted, the server auto-generates 4 shades from
+     * the primary color. #### Font assignments Specify
      * &#x60;visualization_fonts.chart_visualization_fonts&#x60;,
      * &#x60;visualization_fonts.table_visualization_fonts&#x60;, and
      * &#x60;visualization_fonts.advanced_chart_visualization_fonts&#x60; to assign custom fonts to
@@ -39907,10 +42023,22 @@ public class ThoughtSpotRestApi {
      * #### Navigation panel color Set &#x60;navigation_panel.theme&#x60; to one of: -
      * &#x60;DARK&#x60;: Default dark theme. - &#x60;TWO_TONE&#x60;: Dual-tone panel style. -
      * &#x60;CUSTOM&#x60;: User-defined color. Provide &#x60;navigation_panel.base_color&#x60; as a
-     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### Chart color palette Provide exactly 8
-     * color entries in &#x60;chart_color_palette.colors&#x60;. Each entry requires a
-     * &#x60;primary&#x60; hex color. If &#x60;secondary&#x60; shades are omitted, the server
-     * auto-generates 4 shades from the primary color. #### Font assignments Specify
+     * 6-digit hex string (e.g. &#x60;#2359B6&#x60;). #### App color theme
+     * &#x60;app_color_theme&#x60; (_available from 26.10.0.cl_) sets the same underlying color as
+     * &#x60;navigation_panel&#x60;, expressed as a brand color plus how it is applied. Provide
+     * exactly one of &#x60;navigation_panel&#x60; or &#x60;app_color_theme&#x60; per request;
+     * providing both returns an error. &#x60;app_color_theme&#x60; is supported only when the app
+     * color theme is enabled on the cluster; using it otherwise returns an error. -
+     * &#x60;brand_color&#x60;: Brand color as a 6-digit hex string (e.g. &#x60;#2359B6&#x60;). Omit
+     * to leave the stored color unchanged. To clear it, use &#x60;operation: RESET&#x60; with
+     * &#x60;reset_options.style&#x60; set to &#x60;APP_COLOR_THEME&#x60;. -
+     * &#x60;apply_as_top_nav_color&#x60;: Whether the brand color is painted on the top navigation
+     * bar literally, instead of the surface shade generated from it. Omit to leave the stored
+     * choice unchanged. &#x60;brand_color&#x60; and &#x60;apply_as_top_nav_color&#x60; may be set
+     * independently in the same request. #### Chart color palette Provide exactly 8 color entries
+     * in &#x60;chart_color_palette.colors&#x60;. Each entry requires a &#x60;primary&#x60; hex
+     * color. If &#x60;secondary&#x60; shades are omitted, the server auto-generates 4 shades from
+     * the primary color. #### Font assignments Specify
      * &#x60;visualization_fonts.chart_visualization_fonts&#x60;,
      * &#x60;visualization_fonts.table_visualization_fonts&#x60;, and
      * &#x60;visualization_fonts.advanced_chart_visualization_fonts&#x60; to assign custom fonts to
@@ -40972,7 +43100,7 @@ public class ThoughtSpotRestApi {
     /**
      * Build call for updateVariable
      *
-     * @param identifier Unique id or name of the variable to update. (required)
+     * @param identifier Unique id, name, or object id of the variable to update. (required)
      * @param updateVariableRequest (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -41078,7 +43206,7 @@ public class ThoughtSpotRestApi {
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint allows updating: * The variable name
      *
-     * @param identifier Unique id or name of the variable to update. (required)
+     * @param identifier Unique id, name, or object id of the variable to update. (required)
      * @param updateVariableRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
      *     response body
@@ -41104,7 +43232,7 @@ public class ThoughtSpotRestApi {
      * permission allows you to manage Formula Variables in the current organization scope. The API
      * endpoint allows updating: * The variable name
      *
-     * @param identifier Unique id or name of the variable to update. (required)
+     * @param identifier Unique id, name, or object id of the variable to update. (required)
      * @param updateVariableRequest (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -41133,7 +43261,7 @@ public class ThoughtSpotRestApi {
      * CAN_MANAGE_VARIABLES permission allows you to manage Formula Variables in the current
      * organization scope. The API endpoint allows updating: * The variable name
      *
-     * @param identifier Unique id or name of the variable to update. (required)
+     * @param identifier Unique id, name, or object id of the variable to update. (required)
      * @param updateVariableRequest (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call

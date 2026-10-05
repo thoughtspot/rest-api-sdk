@@ -406,6 +406,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('createAnalyst', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "createAnalyst"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.createAnalyst(
+                    // createAnalystRequest CreateAnalystRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.createAnalyst(
+                    // createAnalystRequest CreateAnalystRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('createCalendar', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -1162,6 +1194,38 @@ describe('ThoughtSpotRestApi', function() {
                   instance.deactivateUser(
                     // deactivateUserRequest DeactivateUserRequest
                      test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('deleteAnalyst', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "deleteAnalyst"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.deleteAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier    
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.deleteAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier    
                   )
                 ).to.be.rejectedWith(Error);
             }
@@ -3858,6 +3922,38 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('searchAnalysts', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchAnalysts"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchAnalysts(
+                    // searchAnalystsRequest SearchAnalystsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchAnalysts(
+                    // searchAnalystsRequest SearchAnalystsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('searchAuthSettings', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -4201,6 +4297,38 @@ describe('ThoughtSpotRestApi', function() {
                 await expect(
                   instance.searchEmailCustomization(
                     // searchEmailCustomizationRequest SearchEmailCustomizationRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('searchFeatures', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchFeatures"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchFeatures(
+                    // searchFeaturesRequest SearchFeaturesRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchFeatures(
+                    // searchFeaturesRequest SearchFeaturesRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);
@@ -4866,6 +4994,42 @@ describe('ThoughtSpotRestApi', function() {
         });     
       });
 
+      describe('shareAnalyst', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "shareAnalyst"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.shareAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier     , 
+                    // shareAnalystRequest ShareAnalystRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.shareAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier     , 
+                    // shareAnalystRequest ShareAnalystRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('shareConversation', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -5121,6 +5285,42 @@ describe('ThoughtSpotRestApi', function() {
                 await expect(
                   instance.unpublishMetadata(
                     // unpublishMetadataRequest UnpublishMetadataRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('updateAnalyst', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateAnalyst"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier     , 
+                    // updateAnalystRequest UpdateAnalystRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateAnalyst(
+                    // analystIdentifier analyst_identifier
+                    test.Path_Variables.analyst_identifier     , 
+                    // updateAnalystRequest UpdateAnalystRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);
@@ -5573,6 +5773,70 @@ describe('ThoughtSpotRestApi', function() {
                 await expect(
                   instance.updateEmailCustomization(
                     // updateEmailCustomizationRequest UpdateEmailCustomizationRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('updateFeatureAssignments', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateFeatureAssignments"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateFeatureAssignments(
+                    // updateFeatureAssignmentsRequest UpdateFeatureAssignmentsRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateFeatureAssignments(
+                    // updateFeatureAssignmentsRequest UpdateFeatureAssignmentsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('updateFeatureValue', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateFeatureValue"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateFeatureValue(
+                    // updateFeatureValueRequest UpdateFeatureValueRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateFeatureValue(
+                    // updateFeatureValueRequest UpdateFeatureValueRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);
