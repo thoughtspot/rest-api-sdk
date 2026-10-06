@@ -60,4 +60,20 @@ public class LoginRequestTest {
         // TODO: test rememberMe
     }
 
+    /**
+     * Test the property 'redirectUrl'
+     */
+    @Test
+    public void redirectUrlTest() {
+        // TODO: test redirectUrl
+    }
+
+    /**
+     * Test the property 'noUrlRedirection'
+     */
+    @Test
+    public void noUrlRedirectionTest() {
+        // TODO: test noUrlRedirection
+    }
+
 }

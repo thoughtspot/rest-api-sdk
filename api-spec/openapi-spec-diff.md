@@ -3,6 +3,17 @@
 
 ## API Changes
 
+### POST /api/rest/2.0/auth/session/login
+-  added the new optional request property `no_url_redirection`
+-  added the new optional request property `redirect_url`
+-  the response header `location` was added for the status `204`
+-  added the non-success response with the status `302`
+
+
+### POST /api/rest/2.0/calendars/generate-csv
+-  the response header `content-disposition` was added for the status `200`
+
+
 ### POST /api/rest/2.0/customization/links/update
 -  api operation id `updateLinkCustomization` removed and replaced with `updateLinkCustomizations`
 
@@ -14,6 +25,10 @@
 ### POST /api/rest/2.0/customization/styles/update
 -  added the new optional request property `app_color_theme`
 -  added the new `APP_COLOR_THEME` enum value to the request property `reset_options/allOf[#/components/schemas/StyleResetOptionsInput]/style/items/`
+
+
+### POST /api/rest/2.0/localizations/manual-translation/export
+-  the response header `content-disposition` was added for the status `200`
 
 
 

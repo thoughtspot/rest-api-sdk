@@ -29,8 +29,10 @@ class LoginRequest(BaseModel):
     password: Optional[StrictStr] = Field(default=None, description="Password of the user account")
     org_identifier: Optional[StrictStr] = Field(default=None, description="ID of the Org context to log in to. If Org ID is not specified, the user will be logged in to the Org context of their previous login session.")
     remember_me: Optional[StrictBool] = Field(default=False, description="A flag to remember the user session. When set to true, a session cookie is created and used in subsequent API requests.")
+    redirect_url: Optional[StrictStr] = Field(default=None, description="Path on this cluster to redirect to after a successful login, for example /pinboards. It must start with a single /, and an absolute URL is rejected. When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later ")
+    no_url_redirection: Optional[StrictBool] = Field(default=False, description="A flag to suppress the redirect. When set to true, the resolved URL is returned in the location header instead of a 302 redirect. Applies only when redirect_url is set.    Version: 26.12.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["username", "password", "org_identifier", "remember_me"]
+    __properties: ClassVar[List[str]] = ["username", "password", "org_identifier", "remember_me", "redirect_url", "no_url_redirection"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -83,6 +85,11 @@ class LoginRequest(BaseModel):
         if self.remember_me is None and "remember_me" in self.model_fields_set:
             _dict['remember_me'] = None
 
+        # set to None if no_url_redirection (nullable) is None
+        # and model_fields_set contains the field
+        if self.no_url_redirection is None and "no_url_redirection" in self.model_fields_set:
+            _dict['no_url_redirection'] = None
+
         return _dict
 
     @classmethod
@@ -98,7 +105,9 @@ class LoginRequest(BaseModel):
             "username": obj.get("username"),
             "password": obj.get("password"),
             "org_identifier": obj.get("org_identifier"),
-            "remember_me": obj.get("remember_me") if obj.get("remember_me") is not None else False
+            "remember_me": obj.get("remember_me") if obj.get("remember_me") is not None else False,
+            "redirect_url": obj.get("redirect_url"),
+            "no_url_redirection": obj.get("no_url_redirection") if obj.get("no_url_redirection") is not None else False
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

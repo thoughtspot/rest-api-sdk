@@ -4188,7 +4188,7 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a login session for a ThoughtSpot user with Basic authentication.\n\nIn Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.\n\n**Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.\n\nA successful login returns a session cookie that can be used in your subsequent API requests.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a login session for a ThoughtSpot user with Basic authentication.\n\nIn Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.\n\n**Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.\n\nA successful login returns a session cookie that can be used in your subsequent API requests.\n\n#### Redirecting after login\n\nTo send a browser to a specific page once the session is created, pass\n`redirect_url`. It must be a path on the same ThoughtSpot instance that served\nthe login request, for example `/pinboards`. An absolute URL is rejected with\n`400`, so that a login cannot be used to forward a newly issued session cookie\nto another host.\n\nThe path is resolved against the host the caller actually reached, which means\nthe same request works unchanged on a custom domain, behind a proxy, or on an\nOrg-specific subdomain.\n\n* **Browser flows** — omit `no_url_redirection`. The API answers `302` with the\n  resolved path in the `location` header, and the browser follows it on its own.\n  This is the usual choice when the login is submitted as an HTML form or opened\n  as a top-level navigation.\n* **SPA and non-browser clients** — set `no_url_redirection` to `true`. The API\n  keeps its normal `204` response and returns the resolved path in the\n  `location` header without redirecting, leaving the client to decide when and\n  where to navigate. Use this from `fetch`/`XMLHttpRequest` calls, which follow\n  a `302` internally and never expose it to your code.\n\nWhen `redirect_url` is omitted the response is unchanged, and\n`no_url_redirection` has no effect on its own.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -4206,7 +4206,26 @@
         "parameters": [],
         "responses": {
           "204": {
-            "description": "User login successful."
+            "description": "User login successful. Carries the location header when redirect_url was supplied with no_url_redirection",
+            "headers": {
+              "Location": {
+                "description": "Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "302": {
+            "description": "Redirect to the specified redirect_url",
+            "headers": {
+              "Location": {
+                "description": "Resolved redirect URL",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request.",
@@ -7039,6 +7058,15 @@
         "responses": {
           "200": {
             "description": "Generate custom calendar data based on specifications, as a CSV file.",
+            "headers": {
+              "Content-Disposition": {
+                "description": "Indicates that the response is a file attachment.",
+                "schema": {
+                  "type": "string",
+                  "example": "attachment; filename=\"table_name.calendar.csv\""
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -10622,6 +10650,15 @@
         "responses": {
           "200": {
             "description": "CSV file downloaded successfully.",
+            "headers": {
+              "Content-Disposition": {
+                "description": "Indicates that the response is a file attachment.",
+                "schema": {
+                  "type": "string",
+                  "example": "attachment; filename=\"manual-translation.csv\""
+                }
+              }
+            },
             "content": {
               "application/octet-stream": {}
             }
@@ -33574,6 +33611,16 @@
           },
           "remember_me": {
             "description": "A flag to remember the user session. When set to true, a session cookie is created and used in subsequent API requests.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "redirect_url": {
+            "description": "Path on this cluster to redirect to after a successful login, for example /pinboards. It must start with a single /, and an absolute URL is rejected. When omitted, no redirect is issued and the response is unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
+          },
+          "no_url_redirection": {
+            "description": "A flag to suppress the redirect. When set to true, the resolved URL is returned in the location header instead of a 302 redirect. Applies only when redirect_url is set. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "default": false,
             "type": "boolean",
             "nullable": true

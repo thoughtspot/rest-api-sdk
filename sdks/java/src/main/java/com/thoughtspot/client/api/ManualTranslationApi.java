@@ -237,7 +237,7 @@ public class ManualTranslationApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -312,7 +312,7 @@ public class ManualTranslationApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -335,7 +335,7 @@ public class ManualTranslationApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -360,7 +360,7 @@ public class ManualTranslationApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>

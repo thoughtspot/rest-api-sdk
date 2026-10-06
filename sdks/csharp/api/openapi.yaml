@@ -4421,6 +4421,32 @@ paths:
 
         A successful login returns a session cookie that can be used in your subsequent API requests.
 
+        #### Redirecting after login
+
+        To send a browser to a specific page once the session is created, pass
+        `redirect_url`. It must be a path on the same ThoughtSpot instance that served
+        the login request, for example `/pinboards`. An absolute URL is rejected with
+        `400`, so that a login cannot be used to forward a newly issued session cookie
+        to another host.
+
+        The path is resolved against the host the caller actually reached, which means
+        the same request works unchanged on a custom domain, behind a proxy, or on an
+        Org-specific subdomain.
+
+        * **Browser flows** — omit `no_url_redirection`. The API answers `302` with the
+          resolved path in the `location` header, and the browser follows it on its own.
+          This is the usual choice when the login is submitted as an HTML form or opened
+          as a top-level navigation.
+        * **SPA and non-browser clients** — set `no_url_redirection` to `true`. The API
+          keeps its normal `204` response and returns the resolved path in the
+          `location` header without redirecting, leaving the client to decide when and
+          where to navigate. Use this from `fetch`/`XMLHttpRequest` calls, which follow
+          a `302` internally and never expose it to your code.
+
+        When `redirect_url` is omitted the response is unchanged, and
+        `no_url_redirection` has no effect on its own.
+
+
 
 
 
@@ -4434,7 +4460,25 @@ paths:
         required: true
       responses:
         "204":
-          description: User login successful.
+          description: User login successful. Carries the location header when redirect_url
+            was supplied with no_url_redirection
+          headers:
+            Location:
+              description: Resolved redirect URL. Present only when redirect_url was
+                supplied with no_url_redirection
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "302":
+          description: Redirect to the specified redirect_url
+          headers:
+            Location:
+              description: Resolved redirect URL
+              explode: false
+              schema:
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -7095,6 +7139,14 @@ paths:
               schema: {}
           description: "Generate custom calendar data based on specifications, as\
             \ a CSV file."
+          headers:
+            Content-Disposition:
+              description: Indicates that the response is a file attachment.
+              explode: false
+              schema:
+                example: attachment; filename="table_name.calendar.csv"
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -10132,6 +10184,14 @@ paths:
                 format: binary
                 type: string
           description: CSV file downloaded successfully.
+          headers:
+            Content-Disposition:
+              description: Indicates that the response is a file attachment.
+              explode: false
+              schema:
+                example: attachment; filename="manual-translation.csv"
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -32951,6 +33011,8 @@ components:
         password: password
         org_identifier: org_identifier
         remember_me: false
+        redirect_url: redirect_url
+        no_url_redirection: false
       properties:
         username:
           description: Username of the ThoughtSpot user
@@ -32967,6 +33029,19 @@ components:
           default: false
           description: "A flag to remember the user session. When set to true, a session\
             \ cookie is created and used in subsequent API requests."
+          nullable: true
+          type: boolean
+        redirect_url:
+          description: "Path on this cluster to redirect to after a successful login,\
+            \ for example /pinboards. It must start with a single /, and an absolute\
+            \ URL is rejected. When omitted, no redirect is issued and the response\
+            \ is unchanged. \n  Version: 26.12.0.cl or later\n"
+          type: string
+        no_url_redirection:
+          default: false
+          description: "A flag to suppress the redirect. When set to true, the resolved\
+            \ URL is returned in the location header instead of a 302 redirect. Applies\
+            \ only when redirect_url is set. \n  Version: 26.12.0.cl or later\n"
           nullable: true
           type: boolean
       type: object

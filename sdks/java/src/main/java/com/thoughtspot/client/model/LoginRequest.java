@@ -64,6 +64,16 @@ public class LoginRequest implements Serializable {
   @javax.annotation.Nullable
   private Boolean rememberMe = false;
 
+  public static final String SERIALIZED_NAME_REDIRECT_URL = "redirect_url";
+  @SerializedName(SERIALIZED_NAME_REDIRECT_URL)
+  @javax.annotation.Nullable
+  private String redirectUrl;
+
+  public static final String SERIALIZED_NAME_NO_URL_REDIRECTION = "no_url_redirection";
+  @SerializedName(SERIALIZED_NAME_NO_URL_REDIRECTION)
+  @javax.annotation.Nullable
+  private Boolean noUrlRedirection = false;
+
   public LoginRequest() {
   }
 
@@ -142,6 +152,44 @@ public class LoginRequest implements Serializable {
     this.rememberMe = rememberMe;
   }
 
+
+  public LoginRequest redirectUrl(@javax.annotation.Nullable String redirectUrl) {
+    this.redirectUrl = redirectUrl;
+    return this;
+  }
+
+  /**
+   * Path on this cluster to redirect to after a successful login, for example /pinboards. It must start with a single /, and an absolute URL is rejected. When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later 
+   * @return redirectUrl
+   */
+  @javax.annotation.Nullable
+  public String getRedirectUrl() {
+    return redirectUrl;
+  }
+
+  public void setRedirectUrl(@javax.annotation.Nullable String redirectUrl) {
+    this.redirectUrl = redirectUrl;
+  }
+
+
+  public LoginRequest noUrlRedirection(@javax.annotation.Nullable Boolean noUrlRedirection) {
+    this.noUrlRedirection = noUrlRedirection;
+    return this;
+  }
+
+  /**
+   * A flag to suppress the redirect. When set to true, the resolved URL is returned in the location header instead of a 302 redirect. Applies only when redirect_url is set.    Version: 26.12.0.cl or later 
+   * @return noUrlRedirection
+   */
+  @javax.annotation.Nullable
+  public Boolean getNoUrlRedirection() {
+    return noUrlRedirection;
+  }
+
+  public void setNoUrlRedirection(@javax.annotation.Nullable Boolean noUrlRedirection) {
+    this.noUrlRedirection = noUrlRedirection;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -200,13 +248,15 @@ public class LoginRequest implements Serializable {
     return Objects.equals(this.username, loginRequest.username) &&
         Objects.equals(this.password, loginRequest.password) &&
         Objects.equals(this.orgIdentifier, loginRequest.orgIdentifier) &&
-        Objects.equals(this.rememberMe, loginRequest.rememberMe)&&
+        Objects.equals(this.rememberMe, loginRequest.rememberMe) &&
+        Objects.equals(this.redirectUrl, loginRequest.redirectUrl) &&
+        Objects.equals(this.noUrlRedirection, loginRequest.noUrlRedirection)&&
         Objects.equals(this.additionalProperties, loginRequest.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, password, orgIdentifier, rememberMe, additionalProperties);
+    return Objects.hash(username, password, orgIdentifier, rememberMe, redirectUrl, noUrlRedirection, additionalProperties);
   }
 
   @Override
@@ -217,6 +267,8 @@ public class LoginRequest implements Serializable {
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    orgIdentifier: ").append(toIndentedString(orgIdentifier)).append("\n");
     sb.append("    rememberMe: ").append(toIndentedString(rememberMe)).append("\n");
+    sb.append("    redirectUrl: ").append(toIndentedString(redirectUrl)).append("\n");
+    sb.append("    noUrlRedirection: ").append(toIndentedString(noUrlRedirection)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -244,6 +296,8 @@ public class LoginRequest implements Serializable {
     openapiFields.add("password");
     openapiFields.add("org_identifier");
     openapiFields.add("remember_me");
+    openapiFields.add("redirect_url");
+    openapiFields.add("no_url_redirection");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -270,6 +324,9 @@ public class LoginRequest implements Serializable {
       }
       if ((jsonObj.get("org_identifier") != null && !jsonObj.get("org_identifier").isJsonNull()) && !jsonObj.get("org_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `org_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("org_identifier").toString()));
+      }
+      if ((jsonObj.get("redirect_url") != null && !jsonObj.get("redirect_url").isJsonNull()) && !jsonObj.get("redirect_url").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `redirect_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("redirect_url").toString()));
       }
   }
 

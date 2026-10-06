@@ -10187,7 +10187,7 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -10262,7 +10262,7 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -10285,7 +10285,7 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -10310,7 +10310,7 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -12633,7 +12633,7 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -12706,7 +12706,7 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -12728,7 +12728,7 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -12752,7 +12752,7 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -16508,7 +16508,8 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> User login successful. Carries the location header when redirect_url was supplied with no_url_redirection </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
+        <tr><td> 302 </td><td> Redirect to the specified redirect_url </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -16573,14 +16574,15 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
+     *   Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.  #### Redirecting after login  To send a browser to a specific page once the session is created, pass &#x60;redirect_url&#x60;. It must be a path on the same ThoughtSpot instance that served the login request, for example &#x60;/pinboards&#x60;. An absolute URL is rejected with &#x60;400&#x60;, so that a login cannot be used to forward a newly issued session cookie to another host.  The path is resolved against the host the caller actually reached, which means the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific subdomain.  * **Browser flows** — omit &#x60;no_url_redirection&#x60;. The API answers &#x60;302&#x60; with the   resolved path in the &#x60;location&#x60; header, and the browser follows it on its own.   This is the usual choice when the login is submitted as an HTML form or opened   as a top-level navigation. * **SPA and non-browser clients** — set &#x60;no_url_redirection&#x60; to &#x60;true&#x60;. The API   keeps its normal &#x60;204&#x60; response and returns the resolved path in the   &#x60;location&#x60; header without redirecting, leaving the client to decide when and   where to navigate. Use this from &#x60;fetch&#x60;/&#x60;XMLHttpRequest&#x60; calls, which follow   a &#x60;302&#x60; internally and never expose it to your code.  When &#x60;redirect_url&#x60; is omitted the response is unchanged, and &#x60;no_url_redirection&#x60; has no effect on its own.      
      * @param loginRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> User login successful. Carries the location header when redirect_url was supplied with no_url_redirection </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
+        <tr><td> 302 </td><td> Redirect to the specified redirect_url </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -16593,7 +16595,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
+     *   Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.  #### Redirecting after login  To send a browser to a specific page once the session is created, pass &#x60;redirect_url&#x60;. It must be a path on the same ThoughtSpot instance that served the login request, for example &#x60;/pinboards&#x60;. An absolute URL is rejected with &#x60;400&#x60;, so that a login cannot be used to forward a newly issued session cookie to another host.  The path is resolved against the host the caller actually reached, which means the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific subdomain.  * **Browser flows** — omit &#x60;no_url_redirection&#x60;. The API answers &#x60;302&#x60; with the   resolved path in the &#x60;location&#x60; header, and the browser follows it on its own.   This is the usual choice when the login is submitted as an HTML form or opened   as a top-level navigation. * **SPA and non-browser clients** — set &#x60;no_url_redirection&#x60; to &#x60;true&#x60;. The API   keeps its normal &#x60;204&#x60; response and returns the resolved path in the   &#x60;location&#x60; header without redirecting, leaving the client to decide when and   where to navigate. Use this from &#x60;fetch&#x60;/&#x60;XMLHttpRequest&#x60; calls, which follow   a &#x60;302&#x60; internally and never expose it to your code.  When &#x60;redirect_url&#x60; is omitted the response is unchanged, and &#x60;no_url_redirection&#x60; has no effect on its own.      
      * @param loginRequest  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -16601,7 +16603,8 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> User login successful. Carries the location header when redirect_url was supplied with no_url_redirection </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
+        <tr><td> 302 </td><td> Redirect to the specified redirect_url </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -16615,7 +16618,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
+     *   Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.  #### Redirecting after login  To send a browser to a specific page once the session is created, pass &#x60;redirect_url&#x60;. It must be a path on the same ThoughtSpot instance that served the login request, for example &#x60;/pinboards&#x60;. An absolute URL is rejected with &#x60;400&#x60;, so that a login cannot be used to forward a newly issued session cookie to another host.  The path is resolved against the host the caller actually reached, which means the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific subdomain.  * **Browser flows** — omit &#x60;no_url_redirection&#x60;. The API answers &#x60;302&#x60; with the   resolved path in the &#x60;location&#x60; header, and the browser follows it on its own.   This is the usual choice when the login is submitted as an HTML form or opened   as a top-level navigation. * **SPA and non-browser clients** — set &#x60;no_url_redirection&#x60; to &#x60;true&#x60;. The API   keeps its normal &#x60;204&#x60; response and returns the resolved path in the   &#x60;location&#x60; header without redirecting, leaving the client to decide when and   where to navigate. Use this from &#x60;fetch&#x60;/&#x60;XMLHttpRequest&#x60; calls, which follow   a &#x60;302&#x60; internally and never expose it to your code.  When &#x60;redirect_url&#x60; is omitted the response is unchanged, and &#x60;no_url_redirection&#x60; has no effect on its own.      
      * @param loginRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -16624,7 +16627,8 @@ public class ThoughtSpotRestApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> User login successful. Carries the location header when redirect_url was supplied with no_url_redirection </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
+        <tr><td> 302 </td><td> Redirect to the specified redirect_url </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
