@@ -3,6 +3,22 @@
 
 ## API Changes
 
+### POST /api/rest/2.0/ai/usage-data/delete
+-  endpoint added
+
+
+### POST /api/rest/2.0/ai/usage-data/search
+-  endpoint added
+
+
+### POST /api/rest/2.0/ai/usage-data/update
+-  endpoint added
+
+
+### GET /api/rest/2.0/ai/usage-data/user
+-  endpoint added
+
+
 ### POST /api/rest/2.0/auth/session/login
 -  added the new optional request property `no_url_redirection`
 -  added the new optional request property `redirect_url`

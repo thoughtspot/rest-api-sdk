@@ -71,6 +71,8 @@ import com.thoughtspot.client.model.DeleteManualTranslationsRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
 import com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest;
 import com.thoughtspot.client.model.DeleteStyleFontsRequest;
+import com.thoughtspot.client.model.DeleteUsageDataRequest;
+import com.thoughtspot.client.model.DeleteUsageDataResponse;
 import com.thoughtspot.client.model.DeleteVariablesRequest;
 import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
@@ -185,6 +187,7 @@ import com.thoughtspot.client.model.SearchSemanticIntegrationsRequest;
 import com.thoughtspot.client.model.SearchStyleCustomizationsRequest;
 import com.thoughtspot.client.model.SearchStyleFontsRequest;
 import com.thoughtspot.client.model.SearchTagsRequest;
+import com.thoughtspot.client.model.SearchUsageDataRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
@@ -247,11 +250,14 @@ import com.thoughtspot.client.model.UpdateScheduleRequest;
 import com.thoughtspot.client.model.UpdateStyleFontRequest;
 import com.thoughtspot.client.model.UpdateSystemConfigRequest;
 import com.thoughtspot.client.model.UpdateTagRequest;
+import com.thoughtspot.client.model.UpdateUsageDataRequest;
 import com.thoughtspot.client.model.UpdateUserGroupRequest;
 import com.thoughtspot.client.model.UpdateUserRequest;
 import com.thoughtspot.client.model.UpdateVariableRequest;
 import com.thoughtspot.client.model.UpdateVariableValuesRequest;
 import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
+import com.thoughtspot.client.model.UsageDataForUserResponse;
+import com.thoughtspot.client.model.UsageDataResponse;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.UserGroupResponse;
 import com.thoughtspot.client.model.ValidateCommunicationChannelRequest;
@@ -1006,6 +1012,18 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     *  Deletes Spotter usage pools. Users who no longer draw from any pool are no longer metered: their Spotter usage is unlimited, not blocked. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Deletes Spotter usage pools. Use this API to remove a limit from a user, user group, or Org, or to clear every pool before switching the scope the cluster meters at.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  The request must include &#x60;keys&#x60;, with at least one entry. Each key has an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org).  Deleting a pool removes its limit rather than blocking its users. A user who no longer draws from any pool is not metered and can use Spotter without a limit.  If the request is successful, the response contains &#x60;deleted_keys&#x60;, the keys of the pools that existed and were deleted. Keys that matched no pool are omitted.  #### Error conditions  - &#x60;400&#x60; — &#x60;keys&#x60; is empty, or a key is missing its &#x60;entity_type&#x60; or &#x60;entity_identifier&#x60;. - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; - This operation cannot be undone. Recreate a pool with &#x60;updateUsageData&#x60;; its usage restarts from &#x60;0&#x60;.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteUsageDataTest() throws ApiException {
+        DeleteUsageDataRequest deleteUsageDataRequest = null;
+        DeleteUsageDataResponse response = api.deleteUsageData(deleteUsageDataRequest);
+        // TODO: test validations
+    }
+
+    /**
      *   Version: 9.0.0.cl or later   Deletes a user from the ThoughtSpot system.  If you want to remove a user from a specific Org but not from ThoughtSpot, update the group and Org mapping properties of the user object via a POST API call to the [/api/rest/2.0/users/{user_identifier}/update](#/http/api-endpoints/users/update-user) endpoint.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;USER_ADMINISTRATION&#x60; (**Can manage users**) privilege is required.      
      *
      * @throws ApiException if the Api call fails
@@ -1527,6 +1545,18 @@ public class ThoughtSpotRestApiTest {
     @Test
     public void getSystemOverrideInfoTest() throws ApiException {
         SystemOverrideInfo response = api.getSystemOverrideInfo();
+        // TODO: test validations
+    }
+
+    /**
+     *  Retrieves a user&#39;s combined Spotter usage position: every pool the user draws from, with usage, warning limits, and limits summed across them. Any user can retrieve their own usage. Retrieving another user&#39;s usage requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Retrieves a user&#39;s combined Spotter usage: every usage pool the user draws from, with usage, warning limits, and limits summed across them. Use this API to show users how many Spotter questions they have left, or to check whether a user is blocked by a usage limit.  Any user can retrieve their own usage. Retrieving another user&#39;s usage requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege; &#x60;CAN_MANAGE_SPOTTER&#x60; is not sufficient.  #### Usage guidelines  - Omit &#x60;user_identifier&#x60; to retrieve the usage of the authenticated user. - Pass &#x60;user_identifier&#x60; with a user GUID to retrieve that user&#39;s usage.  A user draws from every pool that meters them: their own pool, the pools of the user groups they belong to (including inherited groups), or their Org&#39;s pool, depending on the scope the cluster meters at. The totals in the response are sums over those pools. For example, a user in two groups with limits of 100 and 50 has a &#x60;total_limit&#x60; of 150.  If the request is successful, the response contains &#x60;summary&#x60;:  - &#x60;pools&#x60;: the individual pools the user draws from. - &#x60;total_usage&#x60;, &#x60;total_warning_limit&#x60;, and &#x60;total_limit&#x60;: sums across the pools. - &#x60;total_remaining&#x60;: questions the user can still ask. Absent when &#x60;has_unlimited_pool&#x60; is &#x60;true&#x60;. - &#x60;is_at_warning&#x60;: &#x60;true&#x60; when usage has reached the combined warning limit. - &#x60;is_at_limit&#x60;: &#x60;true&#x60; when usage has reached the combined limit and further Spotter questions are blocked. - &#x60;has_unlimited_pool&#x60;: &#x60;true&#x60; when any of the user&#39;s pools has no limit, which makes the user unlimited.  A user who draws from no pool is not metered: &#x60;pools&#x60; is empty and &#x60;is_at_limit&#x60; is &#x60;false&#x60;.  #### Error conditions  - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller requested another user&#39;s usage without &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getUsageDataForUserTest() throws ApiException {
+        String userIdentifier = null;
+        UsageDataForUserResponse response = api.getUsageDataForUser(userIdentifier);
         // TODO: test validations
     }
 
@@ -2058,6 +2088,18 @@ public class ThoughtSpotRestApiTest {
     public void searchTagsTest() throws ApiException {
         SearchTagsRequest searchTagsRequest = null;
         List<Tag> response = api.searchTags(searchTagsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Retrieves Spotter usage pools: the question allowance configured for each user, user group, or Org and how much of it has been consumed. Pass &#x60;keys&#x60; to fetch specific pools, or omit it to fetch every pool on the cluster. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Retrieves Spotter usage pools. A usage pool is the Spotter question allowance configured for a user, user group, or Org, together with how many questions have been consumed from it. Use this API to monitor usage across your users, for example to find pools that are close to their limit.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  A cluster meters Spotter usage at exactly one scope: per user, per user group, or per Org. Every pool on a cluster therefore has the same &#x60;entity_type&#x60;.  - To retrieve every pool on the cluster, send an empty request body. - To retrieve specific pools, pass &#x60;keys&#x60;, each with an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org). Keys that match no pool are omitted from the response.  If the request is successful, the response contains &#x60;usage_data&#x60;, one entry per pool:  - &#x60;key&#x60;: the entity the pool meters. - &#x60;usage&#x60;: questions consumed from the pool. - &#x60;warning_limit&#x60;: usage level at which users are warned. Absent when no warning is configured. - &#x60;limit&#x60;: maximum questions the pool allows. Absent when the pool is unlimited. - &#x60;updated_time_in_millis&#x60; and &#x60;updated_by&#x60;: when and by whom the pool was last configured.  #### Error conditions  - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; - Use &#x60;getUsageDataForUser&#x60; to see the combined usage of a single user across every pool they draw from.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchUsageDataTest() throws ApiException {
+        SearchUsageDataRequest searchUsageDataRequest = null;
+        UsageDataResponse response = api.searchUsageData(searchUsageDataRequest);
         // TODO: test validations
     }
 
@@ -2650,6 +2692,18 @@ public class ThoughtSpotRestApiTest {
         String tagIdentifier = null;
         UpdateTagRequest updateTagRequest = null;
         api.updateTag(tagIdentifier, updateTagRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Creates or updates Spotter usage pools, setting the question allowance for a user, user group, or Org. A pool that does not exist is created; fields omitted from an update keep their current value. Every key must use the scope the cluster meters at. Switching scope requires deleting the existing pools first. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Creates or updates Spotter usage pools. A usage pool sets how many Spotter questions a user, user group, or Org can ask. Use this API to provision limits for new users or groups, raise or lower an existing limit, or reset usage at the start of a billing period.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  The request must include &#x60;updates&#x60;, with at least one entry. Each entry contains:  - &#x60;key&#x60; (required): the pool to create or update, with an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org). - &#x60;limit&#x60; (optional): maximum Spotter questions the pool allows. - &#x60;warning_limit&#x60; (optional): usage level at which users are warned that they are approaching the limit. - &#x60;usage&#x60; (optional): questions consumed so far. Set to &#x60;0&#x60; to reset the pool.  A pool that does not exist is created. Fields omitted from an entry keep their current value.  A cluster meters Spotter usage at exactly one scope. The first pool created sets the scope, and every later key must use the same &#x60;entity_type&#x60;. To switch scope, delete the existing pools with &#x60;deleteUsageData&#x60; first.  If the request is successful, the response contains &#x60;usage_data&#x60;, with each updated pool as it stands after the change.  #### Error conditions  - &#x60;400&#x60; — &#x60;updates&#x60; is empty, a key is missing its &#x60;entity_type&#x60; or &#x60;entity_identifier&#x60;, or a key uses a different &#x60;entity_type&#x60; from the cluster&#39;s existing pools. - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateUsageDataTest() throws ApiException {
+        UpdateUsageDataRequest updateUsageDataRequest = null;
+        UsageDataResponse response = api.updateUsageData(updateUsageDataRequest);
         // TODO: test validations
     }
 

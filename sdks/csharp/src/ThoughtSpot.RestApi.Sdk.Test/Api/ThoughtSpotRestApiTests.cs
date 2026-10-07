@@ -754,6 +754,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test DeleteUsageData
+        /// </summary>
+        [Fact]
+        public void DeleteUsageDataTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //DeleteUsageDataRequest deleteUsageDataRequest = null;
+            //var response = instance.DeleteUsageData(deleteUsageDataRequest);
+            //Assert.IsType<DeleteUsageDataResponse>(response);
+        }
+
+        /// <summary>
         /// Test DeleteUser
         /// </summary>
         [Fact]
@@ -1271,6 +1283,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //var response = instance.GetSystemOverrideInfo();
             //Assert.IsType<SystemOverrideInfo>(response);
+        }
+
+        /// <summary>
+        /// Test GetUsageDataForUser
+        /// </summary>
+        [Fact]
+        public void GetUsageDataForUserTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string? userIdentifier = null;
+            //var response = instance.GetUsageDataForUser(userIdentifier);
+            //Assert.IsType<UsageDataForUserResponse>(response);
         }
 
         /// <summary>
@@ -1792,6 +1816,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //SearchTagsRequest searchTagsRequest = null;
             //var response = instance.SearchTags(searchTagsRequest);
             //Assert.IsType<List<Tag>>(response);
+        }
+
+        /// <summary>
+        /// Test SearchUsageData
+        /// </summary>
+        [Fact]
+        public void SearchUsageDataTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchUsageDataRequest searchUsageDataRequest = null;
+            //var response = instance.SearchUsageData(searchUsageDataRequest);
+            //Assert.IsType<UsageDataResponse>(response);
         }
 
         /// <summary>
@@ -2359,6 +2395,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string tagIdentifier = null;
             //UpdateTagRequest updateTagRequest = null;
             //instance.UpdateTag(tagIdentifier, updateTagRequest);
+        }
+
+        /// <summary>
+        /// Test UpdateUsageData
+        /// </summary>
+        [Fact]
+        public void UpdateUsageDataTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateUsageDataRequest updateUsageDataRequest = null;
+            //var response = instance.UpdateUsageData(updateUsageDataRequest);
+            //Assert.IsType<UsageDataResponse>(response);
         }
 
         /// <summary>

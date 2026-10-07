@@ -160,6 +160,8 @@ export * from '../models/DeleteMetadataRequest';
 export * from '../models/DeleteMetadataTypeInput';
 export * from '../models/DeleteOrgEmailCustomizationRequest';
 export * from '../models/DeleteStyleFontsRequest';
+export * from '../models/DeleteUsageDataRequest';
+export * from '../models/DeleteUsageDataResponse';
 export * from '../models/DeleteVariablesRequest';
 export * from '../models/DeleteWebhookConfigurationsRequest';
 export * from '../models/DeployCommitRequest';
@@ -392,6 +394,7 @@ export * from '../models/SearchSemanticIntegrationsRequest';
 export * from '../models/SearchStyleCustomizationsRequest';
 export * from '../models/SearchStyleFontsRequest';
 export * from '../models/SearchTagsRequest';
+export * from '../models/SearchUsageDataRequest';
 export * from '../models/SearchUserGroupsRequest';
 export * from '../models/SearchUsersRequest';
 export * from '../models/SearchVariablesRequest';
@@ -501,11 +504,19 @@ export * from '../models/UpdateScheduleRequest';
 export * from '../models/UpdateStyleFontRequest';
 export * from '../models/UpdateSystemConfigRequest';
 export * from '../models/UpdateTagRequest';
+export * from '../models/UpdateUsageDataRequest';
 export * from '../models/UpdateUserGroupRequest';
 export * from '../models/UpdateUserRequest';
 export * from '../models/UpdateVariableRequest';
 export * from '../models/UpdateVariableValuesRequest';
 export * from '../models/UpdateWebhookConfigurationRequest';
+export * from '../models/UsageData';
+export * from '../models/UsageDataForUserResponse';
+export * from '../models/UsageDataResponse';
+export * from '../models/UsageDataUpdateInput';
+export * from '../models/UsagePoolKey';
+export * from '../models/UsagePoolKeyInput';
+export * from '../models/UsageSummary';
 export * from '../models/User';
 export * from '../models/UserGroup';
 export * from '../models/UserGroupResponse';
@@ -713,6 +724,8 @@ import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum    } from '../models/DeleteMetadataTypeInput';
 import { DeleteOrgEmailCustomizationRequest } from '../models/DeleteOrgEmailCustomizationRequest';
 import { DeleteStyleFontsRequest, DeleteStyleFontsRequestScopeEnum     } from '../models/DeleteStyleFontsRequest';
+import { DeleteUsageDataRequest } from '../models/DeleteUsageDataRequest';
+import { DeleteUsageDataResponse } from '../models/DeleteUsageDataResponse';
 import { DeleteVariablesRequest } from '../models/DeleteVariablesRequest';
 import { DeleteWebhookConfigurationsRequest } from '../models/DeleteWebhookConfigurationsRequest';
 import { DeployCommitRequest  , DeployCommitRequestDeployTypeEnum  , DeployCommitRequestDeployPolicyEnum   } from '../models/DeployCommitRequest';
@@ -945,6 +958,7 @@ import { SearchSemanticIntegrationsRequest } from '../models/SearchSemanticInteg
 import { SearchStyleCustomizationsRequest, SearchStyleCustomizationsRequestScopeEnum   } from '../models/SearchStyleCustomizationsRequest';
 import { SearchStyleFontsRequest, SearchStyleFontsRequestScopeEnum      } from '../models/SearchStyleFontsRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
+import { SearchUsageDataRequest } from '../models/SearchUsageDataRequest';
 import { SearchUserGroupsRequest      , SearchUserGroupsRequestPrivilegesEnum   , SearchUserGroupsRequestTypeEnum   , SearchUserGroupsRequestVisibilityEnum         } from '../models/SearchUserGroupsRequest';
 import { SearchUsersRequest   , SearchUsersRequestVisibilityEnum    , SearchUsersRequestPrivilegesEnum  , SearchUsersRequestAccountTypeEnum  , SearchUsersRequestAccountStatusEnum               } from '../models/SearchUsersRequest';
 import { SearchVariablesRequest    , SearchVariablesRequestResponseContentEnum   } from '../models/SearchVariablesRequest';
@@ -1054,11 +1068,19 @@ import { UpdateScheduleRequest  , UpdateScheduleRequestMetadataTypeEnum   , Upda
 import { UpdateStyleFontRequest, UpdateStyleFontRequestScopeEnum   , UpdateStyleFontRequestWeightEnum  , UpdateStyleFontRequestStyleEnum    } from '../models/UpdateStyleFontRequest';
 import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
+import { UpdateUsageDataRequest } from '../models/UpdateUsageDataRequest';
 import { UpdateUserGroupRequest    , UpdateUserGroupRequestPrivilegesEnum   , UpdateUserGroupRequestTypeEnum   , UpdateUserGroupRequestVisibilityEnum   , UpdateUserGroupRequestOperationEnum   } from '../models/UpdateUserGroupRequest';
 import { UpdateUserRequest  , UpdateUserRequestVisibilityEnum   , UpdateUserRequestAccountStatusEnum     , UpdateUserRequestAccountTypeEnum      , UpdateUserRequestOperationEnum  , UpdateUserRequestPreferredLocaleEnum      } from '../models/UpdateUserRequest';
 import { UpdateVariableRequest } from '../models/UpdateVariableRequest';
 import { UpdateVariableValuesRequest } from '../models/UpdateVariableValuesRequest';
 import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum      , UpdateWebhookConfigurationRequestStatusEnum  , UpdateWebhookConfigurationRequestOperationEnum  , UpdateWebhookConfigurationRequestResetOptionsEnum   } from '../models/UpdateWebhookConfigurationRequest';
+import { UsageData } from '../models/UsageData';
+import { UsageDataForUserResponse } from '../models/UsageDataForUserResponse';
+import { UsageDataResponse } from '../models/UsageDataResponse';
+import { UsageDataUpdateInput } from '../models/UsageDataUpdateInput';
+import { UsagePoolKey, UsagePoolKeyEntityTypeEnum    } from '../models/UsagePoolKey';
+import { UsagePoolKeyInput, UsagePoolKeyInputEntityTypeEnum    } from '../models/UsagePoolKeyInput';
+import { UsageSummary } from '../models/UsageSummary';
 import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                    } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                      , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
@@ -1402,6 +1424,8 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateWebhookConfigurationRequestStatusEnum",
     "UpdateWebhookConfigurationRequestOperationEnum",
     "UpdateWebhookConfigurationRequestResetOptionsEnum",
+    "UsagePoolKeyEntityTypeEnum",
+    "UsagePoolKeyInputEntityTypeEnum",
     "UserVisibilityEnum",
     "UserAccountTypeEnum",
     "UserAccountStatusEnum",
@@ -1595,6 +1619,8 @@ let typeMap: {[index: string]: any} = {
     "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
     "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
     "DeleteStyleFontsRequest": DeleteStyleFontsRequest,
+    "DeleteUsageDataRequest": DeleteUsageDataRequest,
+    "DeleteUsageDataResponse": DeleteUsageDataResponse,
     "DeleteVariablesRequest": DeleteVariablesRequest,
     "DeleteWebhookConfigurationsRequest": DeleteWebhookConfigurationsRequest,
     "DeployCommitRequest": DeployCommitRequest,
@@ -1827,6 +1853,7 @@ let typeMap: {[index: string]: any} = {
     "SearchStyleCustomizationsRequest": SearchStyleCustomizationsRequest,
     "SearchStyleFontsRequest": SearchStyleFontsRequest,
     "SearchTagsRequest": SearchTagsRequest,
+    "SearchUsageDataRequest": SearchUsageDataRequest,
     "SearchUserGroupsRequest": SearchUserGroupsRequest,
     "SearchUsersRequest": SearchUsersRequest,
     "SearchVariablesRequest": SearchVariablesRequest,
@@ -1936,11 +1963,19 @@ let typeMap: {[index: string]: any} = {
     "UpdateStyleFontRequest": UpdateStyleFontRequest,
     "UpdateSystemConfigRequest": UpdateSystemConfigRequest,
     "UpdateTagRequest": UpdateTagRequest,
+    "UpdateUsageDataRequest": UpdateUsageDataRequest,
     "UpdateUserGroupRequest": UpdateUserGroupRequest,
     "UpdateUserRequest": UpdateUserRequest,
     "UpdateVariableRequest": UpdateVariableRequest,
     "UpdateVariableValuesRequest": UpdateVariableValuesRequest,
     "UpdateWebhookConfigurationRequest": UpdateWebhookConfigurationRequest,
+    "UsageData": UsageData,
+    "UsageDataForUserResponse": UsageDataForUserResponse,
+    "UsageDataResponse": UsageDataResponse,
+    "UsageDataUpdateInput": UsageDataUpdateInput,
+    "UsagePoolKey": UsagePoolKey,
+    "UsagePoolKeyInput": UsagePoolKeyInput,
+    "UsageSummary": UsageSummary,
     "User": User,
     "UserGroup": UserGroup,
     "UserGroupResponse": UserGroupResponse,

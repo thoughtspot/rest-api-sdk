@@ -85,6 +85,8 @@ import com.thoughtspot.client.model.DeleteManualTranslationsRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
 import com.thoughtspot.client.model.DeleteOrgEmailCustomizationRequest;
 import com.thoughtspot.client.model.DeleteStyleFontsRequest;
+import com.thoughtspot.client.model.DeleteUsageDataRequest;
+import com.thoughtspot.client.model.DeleteUsageDataResponse;
 import com.thoughtspot.client.model.DeleteVariablesRequest;
 import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
@@ -199,6 +201,7 @@ import com.thoughtspot.client.model.SearchSemanticIntegrationsRequest;
 import com.thoughtspot.client.model.SearchStyleCustomizationsRequest;
 import com.thoughtspot.client.model.SearchStyleFontsRequest;
 import com.thoughtspot.client.model.SearchTagsRequest;
+import com.thoughtspot.client.model.SearchUsageDataRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
@@ -261,11 +264,14 @@ import com.thoughtspot.client.model.UpdateScheduleRequest;
 import com.thoughtspot.client.model.UpdateStyleFontRequest;
 import com.thoughtspot.client.model.UpdateSystemConfigRequest;
 import com.thoughtspot.client.model.UpdateTagRequest;
+import com.thoughtspot.client.model.UpdateUsageDataRequest;
 import com.thoughtspot.client.model.UpdateUserGroupRequest;
 import com.thoughtspot.client.model.UpdateUserRequest;
 import com.thoughtspot.client.model.UpdateVariableRequest;
 import com.thoughtspot.client.model.UpdateVariableValuesRequest;
 import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
+import com.thoughtspot.client.model.UsageDataForUserResponse;
+import com.thoughtspot.client.model.UsageDataResponse;
 import com.thoughtspot.client.model.User;
 import com.thoughtspot.client.model.UserGroupResponse;
 import com.thoughtspot.client.model.ValidateCommunicationChannelRequest;
@@ -8895,6 +8901,153 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for deleteUsageData
+     * @param deleteUsageDataRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteUsageDataCall(DeleteUsageDataRequest deleteUsageDataRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = deleteUsageDataRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/usage-data/delete";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteUsageDataValidateBeforeCall(DeleteUsageDataRequest deleteUsageDataRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'deleteUsageDataRequest' is set
+        if (deleteUsageDataRequest == null) {
+            throw new ApiException("Missing the required parameter 'deleteUsageDataRequest' when calling deleteUsageData(Async)");
+        }
+
+        return deleteUsageDataCall(deleteUsageDataRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Deletes Spotter usage pools. Users who no longer draw from any pool are no longer metered: their Spotter usage is unlimited, not blocked. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Deletes Spotter usage pools. Use this API to remove a limit from a user, user group, or Org, or to clear every pool before switching the scope the cluster meters at.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  The request must include &#x60;keys&#x60;, with at least one entry. Each key has an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org).  Deleting a pool removes its limit rather than blocking its users. A user who no longer draws from any pool is not metered and can use Spotter without a limit.  If the request is successful, the response contains &#x60;deleted_keys&#x60;, the keys of the pools that existed and were deleted. Keys that matched no pool are omitted.  #### Error conditions  - &#x60;400&#x60; — &#x60;keys&#x60; is empty, or a key is missing its &#x60;entity_type&#x60; or &#x60;entity_identifier&#x60;. - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; - This operation cannot be undone. Recreate a pool with &#x60;updateUsageData&#x60;; its usage restarts from &#x60;0&#x60;.      
+     * @param deleteUsageDataRequest  (required)
+     * @return DeleteUsageDataResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public DeleteUsageDataResponse deleteUsageData(DeleteUsageDataRequest deleteUsageDataRequest) throws ApiException {
+        ApiResponse<DeleteUsageDataResponse> localVarResp = deleteUsageDataWithHttpInfo(deleteUsageDataRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Deletes Spotter usage pools. Users who no longer draw from any pool are no longer metered: their Spotter usage is unlimited, not blocked. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Deletes Spotter usage pools. Use this API to remove a limit from a user, user group, or Org, or to clear every pool before switching the scope the cluster meters at.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  The request must include &#x60;keys&#x60;, with at least one entry. Each key has an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org).  Deleting a pool removes its limit rather than blocking its users. A user who no longer draws from any pool is not metered and can use Spotter without a limit.  If the request is successful, the response contains &#x60;deleted_keys&#x60;, the keys of the pools that existed and were deleted. Keys that matched no pool are omitted.  #### Error conditions  - &#x60;400&#x60; — &#x60;keys&#x60; is empty, or a key is missing its &#x60;entity_type&#x60; or &#x60;entity_identifier&#x60;. - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; - This operation cannot be undone. Recreate a pool with &#x60;updateUsageData&#x60;; its usage restarts from &#x60;0&#x60;.      
+     * @param deleteUsageDataRequest  (required)
+     * @return ApiResponse&lt;DeleteUsageDataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<DeleteUsageDataResponse> deleteUsageDataWithHttpInfo(DeleteUsageDataRequest deleteUsageDataRequest) throws ApiException {
+        okhttp3.Call localVarCall = deleteUsageDataValidateBeforeCall(deleteUsageDataRequest, null);
+        Type localVarReturnType = new TypeToken<DeleteUsageDataResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Deletes Spotter usage pools. Users who no longer draw from any pool are no longer metered: their Spotter usage is unlimited, not blocked. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Deletes Spotter usage pools. Use this API to remove a limit from a user, user group, or Org, or to clear every pool before switching the scope the cluster meters at.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  The request must include &#x60;keys&#x60;, with at least one entry. Each key has an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org).  Deleting a pool removes its limit rather than blocking its users. A user who no longer draws from any pool is not metered and can use Spotter without a limit.  If the request is successful, the response contains &#x60;deleted_keys&#x60;, the keys of the pools that existed and were deleted. Keys that matched no pool are omitted.  #### Error conditions  - &#x60;400&#x60; — &#x60;keys&#x60; is empty, or a key is missing its &#x60;entity_type&#x60; or &#x60;entity_identifier&#x60;. - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; - This operation cannot be undone. Recreate a pool with &#x60;updateUsageData&#x60;; its usage restarts from &#x60;0&#x60;.      
+     * @param deleteUsageDataRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteUsageDataAsync(DeleteUsageDataRequest deleteUsageDataRequest, final ApiCallback<DeleteUsageDataResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteUsageDataValidateBeforeCall(deleteUsageDataRequest, _callback);
+        Type localVarReturnType = new TypeToken<DeleteUsageDataResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for deleteUser
      * @param userIdentifier GUID / name of the user (required)
      * @param _callback Callback for upload/download progress
@@ -15188,6 +15341,151 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = getSystemOverrideInfoValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<SystemOverrideInfo>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getUsageDataForUser
+     * @param userIdentifier GUID of the user whose usage to retrieve. Defaults to the authenticated user. Passing another user&#39;s GUID requires &#x60;ADMINISTRATION&#x60; privilege. (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getUsageDataForUserCall(String userIdentifier, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/usage-data/user";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userIdentifier != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("user_identifier", userIdentifier));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getUsageDataForUserValidateBeforeCall(String userIdentifier, final ApiCallback _callback) throws ApiException {
+        return getUsageDataForUserCall(userIdentifier, _callback);
+
+    }
+
+    /**
+     * 
+     *  Retrieves a user&#39;s combined Spotter usage position: every pool the user draws from, with usage, warning limits, and limits summed across them. Any user can retrieve their own usage. Retrieving another user&#39;s usage requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Retrieves a user&#39;s combined Spotter usage: every usage pool the user draws from, with usage, warning limits, and limits summed across them. Use this API to show users how many Spotter questions they have left, or to check whether a user is blocked by a usage limit.  Any user can retrieve their own usage. Retrieving another user&#39;s usage requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege; &#x60;CAN_MANAGE_SPOTTER&#x60; is not sufficient.  #### Usage guidelines  - Omit &#x60;user_identifier&#x60; to retrieve the usage of the authenticated user. - Pass &#x60;user_identifier&#x60; with a user GUID to retrieve that user&#39;s usage.  A user draws from every pool that meters them: their own pool, the pools of the user groups they belong to (including inherited groups), or their Org&#39;s pool, depending on the scope the cluster meters at. The totals in the response are sums over those pools. For example, a user in two groups with limits of 100 and 50 has a &#x60;total_limit&#x60; of 150.  If the request is successful, the response contains &#x60;summary&#x60;:  - &#x60;pools&#x60;: the individual pools the user draws from. - &#x60;total_usage&#x60;, &#x60;total_warning_limit&#x60;, and &#x60;total_limit&#x60;: sums across the pools. - &#x60;total_remaining&#x60;: questions the user can still ask. Absent when &#x60;has_unlimited_pool&#x60; is &#x60;true&#x60;. - &#x60;is_at_warning&#x60;: &#x60;true&#x60; when usage has reached the combined warning limit. - &#x60;is_at_limit&#x60;: &#x60;true&#x60; when usage has reached the combined limit and further Spotter questions are blocked. - &#x60;has_unlimited_pool&#x60;: &#x60;true&#x60; when any of the user&#39;s pools has no limit, which makes the user unlimited.  A user who draws from no pool is not metered: &#x60;pools&#x60; is empty and &#x60;is_at_limit&#x60; is &#x60;false&#x60;.  #### Error conditions  - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller requested another user&#39;s usage without &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+     * @param userIdentifier GUID of the user whose usage to retrieve. Defaults to the authenticated user. Passing another user&#39;s GUID requires &#x60;ADMINISTRATION&#x60; privilege. (optional)
+     * @return UsageDataForUserResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public UsageDataForUserResponse getUsageDataForUser(String userIdentifier) throws ApiException {
+        ApiResponse<UsageDataForUserResponse> localVarResp = getUsageDataForUserWithHttpInfo(userIdentifier);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Retrieves a user&#39;s combined Spotter usage position: every pool the user draws from, with usage, warning limits, and limits summed across them. Any user can retrieve their own usage. Retrieving another user&#39;s usage requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Retrieves a user&#39;s combined Spotter usage: every usage pool the user draws from, with usage, warning limits, and limits summed across them. Use this API to show users how many Spotter questions they have left, or to check whether a user is blocked by a usage limit.  Any user can retrieve their own usage. Retrieving another user&#39;s usage requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege; &#x60;CAN_MANAGE_SPOTTER&#x60; is not sufficient.  #### Usage guidelines  - Omit &#x60;user_identifier&#x60; to retrieve the usage of the authenticated user. - Pass &#x60;user_identifier&#x60; with a user GUID to retrieve that user&#39;s usage.  A user draws from every pool that meters them: their own pool, the pools of the user groups they belong to (including inherited groups), or their Org&#39;s pool, depending on the scope the cluster meters at. The totals in the response are sums over those pools. For example, a user in two groups with limits of 100 and 50 has a &#x60;total_limit&#x60; of 150.  If the request is successful, the response contains &#x60;summary&#x60;:  - &#x60;pools&#x60;: the individual pools the user draws from. - &#x60;total_usage&#x60;, &#x60;total_warning_limit&#x60;, and &#x60;total_limit&#x60;: sums across the pools. - &#x60;total_remaining&#x60;: questions the user can still ask. Absent when &#x60;has_unlimited_pool&#x60; is &#x60;true&#x60;. - &#x60;is_at_warning&#x60;: &#x60;true&#x60; when usage has reached the combined warning limit. - &#x60;is_at_limit&#x60;: &#x60;true&#x60; when usage has reached the combined limit and further Spotter questions are blocked. - &#x60;has_unlimited_pool&#x60;: &#x60;true&#x60; when any of the user&#39;s pools has no limit, which makes the user unlimited.  A user who draws from no pool is not metered: &#x60;pools&#x60; is empty and &#x60;is_at_limit&#x60; is &#x60;false&#x60;.  #### Error conditions  - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller requested another user&#39;s usage without &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+     * @param userIdentifier GUID of the user whose usage to retrieve. Defaults to the authenticated user. Passing another user&#39;s GUID requires &#x60;ADMINISTRATION&#x60; privilege. (optional)
+     * @return ApiResponse&lt;UsageDataForUserResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<UsageDataForUserResponse> getUsageDataForUserWithHttpInfo(String userIdentifier) throws ApiException {
+        okhttp3.Call localVarCall = getUsageDataForUserValidateBeforeCall(userIdentifier, null);
+        Type localVarReturnType = new TypeToken<UsageDataForUserResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Retrieves a user&#39;s combined Spotter usage position: every pool the user draws from, with usage, warning limits, and limits summed across them. Any user can retrieve their own usage. Retrieving another user&#39;s usage requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Retrieves a user&#39;s combined Spotter usage: every usage pool the user draws from, with usage, warning limits, and limits summed across them. Use this API to show users how many Spotter questions they have left, or to check whether a user is blocked by a usage limit.  Any user can retrieve their own usage. Retrieving another user&#39;s usage requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege; &#x60;CAN_MANAGE_SPOTTER&#x60; is not sufficient.  #### Usage guidelines  - Omit &#x60;user_identifier&#x60; to retrieve the usage of the authenticated user. - Pass &#x60;user_identifier&#x60; with a user GUID to retrieve that user&#39;s usage.  A user draws from every pool that meters them: their own pool, the pools of the user groups they belong to (including inherited groups), or their Org&#39;s pool, depending on the scope the cluster meters at. The totals in the response are sums over those pools. For example, a user in two groups with limits of 100 and 50 has a &#x60;total_limit&#x60; of 150.  If the request is successful, the response contains &#x60;summary&#x60;:  - &#x60;pools&#x60;: the individual pools the user draws from. - &#x60;total_usage&#x60;, &#x60;total_warning_limit&#x60;, and &#x60;total_limit&#x60;: sums across the pools. - &#x60;total_remaining&#x60;: questions the user can still ask. Absent when &#x60;has_unlimited_pool&#x60; is &#x60;true&#x60;. - &#x60;is_at_warning&#x60;: &#x60;true&#x60; when usage has reached the combined warning limit. - &#x60;is_at_limit&#x60;: &#x60;true&#x60; when usage has reached the combined limit and further Spotter questions are blocked. - &#x60;has_unlimited_pool&#x60;: &#x60;true&#x60; when any of the user&#39;s pools has no limit, which makes the user unlimited.  A user who draws from no pool is not metered: &#x60;pools&#x60; is empty and &#x60;is_at_limit&#x60; is &#x60;false&#x60;.  #### Error conditions  - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller requested another user&#39;s usage without &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+     * @param userIdentifier GUID of the user whose usage to retrieve. Defaults to the authenticated user. Passing another user&#39;s GUID requires &#x60;ADMINISTRATION&#x60; privilege. (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getUsageDataForUserAsync(String userIdentifier, final ApiCallback<UsageDataForUserResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getUsageDataForUserValidateBeforeCall(userIdentifier, _callback);
+        Type localVarReturnType = new TypeToken<UsageDataForUserResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -21522,6 +21820,153 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = searchTagsValidateBeforeCall(searchTagsRequest, _callback);
         Type localVarReturnType = new TypeToken<List<Tag>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchUsageData
+     * @param searchUsageDataRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchUsageDataCall(SearchUsageDataRequest searchUsageDataRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchUsageDataRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/usage-data/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchUsageDataValidateBeforeCall(SearchUsageDataRequest searchUsageDataRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'searchUsageDataRequest' is set
+        if (searchUsageDataRequest == null) {
+            throw new ApiException("Missing the required parameter 'searchUsageDataRequest' when calling searchUsageData(Async)");
+        }
+
+        return searchUsageDataCall(searchUsageDataRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Retrieves Spotter usage pools: the question allowance configured for each user, user group, or Org and how much of it has been consumed. Pass &#x60;keys&#x60; to fetch specific pools, or omit it to fetch every pool on the cluster. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Retrieves Spotter usage pools. A usage pool is the Spotter question allowance configured for a user, user group, or Org, together with how many questions have been consumed from it. Use this API to monitor usage across your users, for example to find pools that are close to their limit.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  A cluster meters Spotter usage at exactly one scope: per user, per user group, or per Org. Every pool on a cluster therefore has the same &#x60;entity_type&#x60;.  - To retrieve every pool on the cluster, send an empty request body. - To retrieve specific pools, pass &#x60;keys&#x60;, each with an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org). Keys that match no pool are omitted from the response.  If the request is successful, the response contains &#x60;usage_data&#x60;, one entry per pool:  - &#x60;key&#x60;: the entity the pool meters. - &#x60;usage&#x60;: questions consumed from the pool. - &#x60;warning_limit&#x60;: usage level at which users are warned. Absent when no warning is configured. - &#x60;limit&#x60;: maximum questions the pool allows. Absent when the pool is unlimited. - &#x60;updated_time_in_millis&#x60; and &#x60;updated_by&#x60;: when and by whom the pool was last configured.  #### Error conditions  - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; - Use &#x60;getUsageDataForUser&#x60; to see the combined usage of a single user across every pool they draw from.      
+     * @param searchUsageDataRequest  (required)
+     * @return UsageDataResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public UsageDataResponse searchUsageData(SearchUsageDataRequest searchUsageDataRequest) throws ApiException {
+        ApiResponse<UsageDataResponse> localVarResp = searchUsageDataWithHttpInfo(searchUsageDataRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Retrieves Spotter usage pools: the question allowance configured for each user, user group, or Org and how much of it has been consumed. Pass &#x60;keys&#x60; to fetch specific pools, or omit it to fetch every pool on the cluster. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Retrieves Spotter usage pools. A usage pool is the Spotter question allowance configured for a user, user group, or Org, together with how many questions have been consumed from it. Use this API to monitor usage across your users, for example to find pools that are close to their limit.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  A cluster meters Spotter usage at exactly one scope: per user, per user group, or per Org. Every pool on a cluster therefore has the same &#x60;entity_type&#x60;.  - To retrieve every pool on the cluster, send an empty request body. - To retrieve specific pools, pass &#x60;keys&#x60;, each with an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org). Keys that match no pool are omitted from the response.  If the request is successful, the response contains &#x60;usage_data&#x60;, one entry per pool:  - &#x60;key&#x60;: the entity the pool meters. - &#x60;usage&#x60;: questions consumed from the pool. - &#x60;warning_limit&#x60;: usage level at which users are warned. Absent when no warning is configured. - &#x60;limit&#x60;: maximum questions the pool allows. Absent when the pool is unlimited. - &#x60;updated_time_in_millis&#x60; and &#x60;updated_by&#x60;: when and by whom the pool was last configured.  #### Error conditions  - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; - Use &#x60;getUsageDataForUser&#x60; to see the combined usage of a single user across every pool they draw from.      
+     * @param searchUsageDataRequest  (required)
+     * @return ApiResponse&lt;UsageDataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<UsageDataResponse> searchUsageDataWithHttpInfo(SearchUsageDataRequest searchUsageDataRequest) throws ApiException {
+        okhttp3.Call localVarCall = searchUsageDataValidateBeforeCall(searchUsageDataRequest, null);
+        Type localVarReturnType = new TypeToken<UsageDataResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Retrieves Spotter usage pools: the question allowance configured for each user, user group, or Org and how much of it has been consumed. Pass &#x60;keys&#x60; to fetch specific pools, or omit it to fetch every pool on the cluster. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Retrieves Spotter usage pools. A usage pool is the Spotter question allowance configured for a user, user group, or Org, together with how many questions have been consumed from it. Use this API to monitor usage across your users, for example to find pools that are close to their limit.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  A cluster meters Spotter usage at exactly one scope: per user, per user group, or per Org. Every pool on a cluster therefore has the same &#x60;entity_type&#x60;.  - To retrieve every pool on the cluster, send an empty request body. - To retrieve specific pools, pass &#x60;keys&#x60;, each with an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org). Keys that match no pool are omitted from the response.  If the request is successful, the response contains &#x60;usage_data&#x60;, one entry per pool:  - &#x60;key&#x60;: the entity the pool meters. - &#x60;usage&#x60;: questions consumed from the pool. - &#x60;warning_limit&#x60;: usage level at which users are warned. Absent when no warning is configured. - &#x60;limit&#x60;: maximum questions the pool allows. Absent when the pool is unlimited. - &#x60;updated_time_in_millis&#x60; and &#x60;updated_by&#x60;: when and by whom the pool was last configured.  #### Error conditions  - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; - Use &#x60;getUsageDataForUser&#x60; to see the combined usage of a single user across every pool they draw from.      
+     * @param searchUsageDataRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchUsageDataAsync(SearchUsageDataRequest searchUsageDataRequest, final ApiCallback<UsageDataResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = searchUsageDataValidateBeforeCall(searchUsageDataRequest, _callback);
+        Type localVarReturnType = new TypeToken<UsageDataResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -28462,6 +28907,153 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = updateTagValidateBeforeCall(tagIdentifier, updateTagRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateUsageData
+     * @param updateUsageDataRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateUsageDataCall(UpdateUsageDataRequest updateUsageDataRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateUsageDataRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/usage-data/update";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateUsageDataValidateBeforeCall(UpdateUsageDataRequest updateUsageDataRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'updateUsageDataRequest' is set
+        if (updateUsageDataRequest == null) {
+            throw new ApiException("Missing the required parameter 'updateUsageDataRequest' when calling updateUsageData(Async)");
+        }
+
+        return updateUsageDataCall(updateUsageDataRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Creates or updates Spotter usage pools, setting the question allowance for a user, user group, or Org. A pool that does not exist is created; fields omitted from an update keep their current value. Every key must use the scope the cluster meters at. Switching scope requires deleting the existing pools first. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Creates or updates Spotter usage pools. A usage pool sets how many Spotter questions a user, user group, or Org can ask. Use this API to provision limits for new users or groups, raise or lower an existing limit, or reset usage at the start of a billing period.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  The request must include &#x60;updates&#x60;, with at least one entry. Each entry contains:  - &#x60;key&#x60; (required): the pool to create or update, with an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org). - &#x60;limit&#x60; (optional): maximum Spotter questions the pool allows. - &#x60;warning_limit&#x60; (optional): usage level at which users are warned that they are approaching the limit. - &#x60;usage&#x60; (optional): questions consumed so far. Set to &#x60;0&#x60; to reset the pool.  A pool that does not exist is created. Fields omitted from an entry keep their current value.  A cluster meters Spotter usage at exactly one scope. The first pool created sets the scope, and every later key must use the same &#x60;entity_type&#x60;. To switch scope, delete the existing pools with &#x60;deleteUsageData&#x60; first.  If the request is successful, the response contains &#x60;usage_data&#x60;, with each updated pool as it stands after the change.  #### Error conditions  - &#x60;400&#x60; — &#x60;updates&#x60; is empty, a key is missing its &#x60;entity_type&#x60; or &#x60;entity_identifier&#x60;, or a key uses a different &#x60;entity_type&#x60; from the cluster&#39;s existing pools. - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+     * @param updateUsageDataRequest  (required)
+     * @return UsageDataResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public UsageDataResponse updateUsageData(UpdateUsageDataRequest updateUsageDataRequest) throws ApiException {
+        ApiResponse<UsageDataResponse> localVarResp = updateUsageDataWithHttpInfo(updateUsageDataRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Creates or updates Spotter usage pools, setting the question allowance for a user, user group, or Org. A pool that does not exist is created; fields omitted from an update keep their current value. Every key must use the scope the cluster meters at. Switching scope requires deleting the existing pools first. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Creates or updates Spotter usage pools. A usage pool sets how many Spotter questions a user, user group, or Org can ask. Use this API to provision limits for new users or groups, raise or lower an existing limit, or reset usage at the start of a billing period.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  The request must include &#x60;updates&#x60;, with at least one entry. Each entry contains:  - &#x60;key&#x60; (required): the pool to create or update, with an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org). - &#x60;limit&#x60; (optional): maximum Spotter questions the pool allows. - &#x60;warning_limit&#x60; (optional): usage level at which users are warned that they are approaching the limit. - &#x60;usage&#x60; (optional): questions consumed so far. Set to &#x60;0&#x60; to reset the pool.  A pool that does not exist is created. Fields omitted from an entry keep their current value.  A cluster meters Spotter usage at exactly one scope. The first pool created sets the scope, and every later key must use the same &#x60;entity_type&#x60;. To switch scope, delete the existing pools with &#x60;deleteUsageData&#x60; first.  If the request is successful, the response contains &#x60;usage_data&#x60;, with each updated pool as it stands after the change.  #### Error conditions  - &#x60;400&#x60; — &#x60;updates&#x60; is empty, a key is missing its &#x60;entity_type&#x60; or &#x60;entity_identifier&#x60;, or a key uses a different &#x60;entity_type&#x60; from the cluster&#39;s existing pools. - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+     * @param updateUsageDataRequest  (required)
+     * @return ApiResponse&lt;UsageDataResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<UsageDataResponse> updateUsageDataWithHttpInfo(UpdateUsageDataRequest updateUsageDataRequest) throws ApiException {
+        okhttp3.Call localVarCall = updateUsageDataValidateBeforeCall(updateUsageDataRequest, null);
+        Type localVarReturnType = new TypeToken<UsageDataResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Creates or updates Spotter usage pools, setting the question allowance for a user, user group, or Org. A pool that does not exist is created; fields omitted from an update keep their current value. Every key must use the scope the cluster meters at. Switching scope requires deleting the existing pools first. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Creates or updates Spotter usage pools. A usage pool sets how many Spotter questions a user, user group, or Org can ask. Use this API to provision limits for new users or groups, raise or lower an existing limit, or reset usage at the start of a billing period.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  The request must include &#x60;updates&#x60;, with at least one entry. Each entry contains:  - &#x60;key&#x60; (required): the pool to create or update, with an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org). - &#x60;limit&#x60; (optional): maximum Spotter questions the pool allows. - &#x60;warning_limit&#x60; (optional): usage level at which users are warned that they are approaching the limit. - &#x60;usage&#x60; (optional): questions consumed so far. Set to &#x60;0&#x60; to reset the pool.  A pool that does not exist is created. Fields omitted from an entry keep their current value.  A cluster meters Spotter usage at exactly one scope. The first pool created sets the scope, and every later key must use the same &#x60;entity_type&#x60;. To switch scope, delete the existing pools with &#x60;deleteUsageData&#x60; first.  If the request is successful, the response contains &#x60;usage_data&#x60;, with each updated pool as it stands after the change.  #### Error conditions  - &#x60;400&#x60; — &#x60;updates&#x60; is empty, a key is missing its &#x60;entity_type&#x60; or &#x60;entity_identifier&#x60;, or a key uses a different &#x60;entity_type&#x60; from the cluster&#39;s existing pools. - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+     * @param updateUsageDataRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateUsageDataAsync(UpdateUsageDataRequest updateUsageDataRequest, final ApiCallback<UsageDataResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateUsageDataValidateBeforeCall(updateUsageDataRequest, _callback);
+        Type localVarReturnType = new TypeToken<UsageDataResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
