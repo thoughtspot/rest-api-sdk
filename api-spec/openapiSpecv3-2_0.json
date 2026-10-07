@@ -6680,7 +6680,7 @@
     "/api/rest/2.0/customization/custom-actions": {
       "post": {
         "operationId": "createCustomAction",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nCreates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n#### Usage Guidelines\n\nThe API lets you create the following types of custom actions:\n\n* URL-based action     \n  Allows pushing data to an external URL.\n* Callback action        \n  Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.\n\nBy default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.\n\nBy default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.\n\nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.\n\nCreates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n#### Usage Guidelines\n\nThe API lets you create the following types of custom actions:\n\n* URL-based action     \n  Allows pushing data to an external URL.\n* Callback action        \n  Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.\n\nBy default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.\n\nBy default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.\n\nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Action",
           "9.6.0.cl"
@@ -6825,13 +6825,14 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete": {
       "post": {
         "operationId": "deleteCustomAction",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nRemoves the custom action specified in the API request.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.\n\nRemoves the custom action specified in the API request.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Action",
           "9.6.0.cl"
@@ -6951,13 +6952,14 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/rest/2.0/customization/custom-actions/search": {
       "post": {
         "operationId": "searchCustomActions",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nGets custom actions configured on the cluster.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.\n\nGets custom actions configured on the cluster.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Action",
           "9.6.0.cl"
@@ -7090,13 +7092,14 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update": {
       "post": {
         "operationId": "updateCustomAction",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\nUpdates a custom action.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n#### Usage Guidelines\n\nThe API allows you to modify the following properties:\n\n* Name of the custom action\n* Action availability to groups\n* Association to metadata objects\n* Authentication settings for a URL-based action\n\nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.6.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.\n\nUpdates a custom action.\n\nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.\n\n#### Usage Guidelines\n\nThe API allows you to modify the following properties:\n\n* Name of the custom action\n* Action availability to groups\n* Association to metadata objects\n* Authentication settings for a URL-based action\n\nFor more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Custom Action",
           "9.6.0.cl"
@@ -7226,7 +7229,8 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/api/rest/2.0/calendars/create": {
