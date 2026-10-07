@@ -38,6 +38,14 @@
       "description": "Roles for version 26.7.0.cl"
     },
     {
+      "name": "26.11.0.cl",
+      "id": "26.11.0.cl",
+      "tags": [
+        "26.11.0.cl"
+      ],
+      "description": "Roles for version 26.11.0.cl"
+    },
+    {
       "name": "26.8.0.cl",
       "id": "26.8.0.cl",
       "tags": [
@@ -164,14 +172,6 @@
         "10.10.0.cl"
       ],
       "description": "Roles for version 10.10.0.cl"
-    },
-    {
-      "name": "26.11.0.cl",
-      "id": "26.11.0.cl",
-      "tags": [
-        "26.11.0.cl"
-      ],
-      "description": "Roles for version 26.11.0.cl"
     },
     {
       "name": "10.6.0.cl",
@@ -626,6 +626,89 @@
         "responses": {
           "204": {
             "description": "Successfully deleted the agent conversation."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/usage-data/delete": {
+      "post": {
+        "operationId": "deleteUsageData",
+        "description": "\nDeletes Spotter usage pools. Users who no longer draw from any pool are\nno longer metered: their Spotter usage is unlimited, not blocked.\nRequires `ADMINISTRATION` privilege. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nDeletes Spotter usage pools. Use this API to remove a limit from a user, user group, or Org, or to clear every pool before switching the scope the cluster meters at.\n\nRequires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.\n\n#### Usage guidelines\n\nThe request must include `keys`, with at least one entry. Each key has an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org).\n\nDeleting a pool removes its limit rather than blocking its users. A user who no longer draws from any pool is not metered and can use Spotter without a limit.\n\nIf the request is successful, the response contains `deleted_keys`, the keys of the pools that existed and were deleted. Keys that matched no pool are omitted.\n\n#### Error conditions\n\n- `400` — `keys` is empty, or a key is missing its `entity_type` or `entity_identifier`.\n- `401` — authentication token is missing, expired, or invalid.\n- `403` — the caller does not have `ADMINISTRATION` privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - This operation cannot be undone. Recreate a pool with `updateUsageData`; its usage restarts from `0`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteUsageDataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteUsageDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteUsageDataResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Operation failed",
@@ -1555,6 +1638,89 @@
         }
       }
     },
+    "/api/rest/2.0/ai/usage-data/user": {
+      "get": {
+        "operationId": "getUsageDataForUser",
+        "description": "\nRetrieves a user's combined Spotter usage position: every pool the user\ndraws from, with usage, warning limits, and limits summed across them.\nAny user can retrieve their own usage. Retrieving another user's usage\nrequires `ADMINISTRATION` privilege. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nRetrieves a user's combined Spotter usage: every usage pool the user draws from, with usage, warning limits, and limits summed across them. Use this API to show users how many Spotter questions they have left, or to check whether a user is blocked by a usage limit.\n\nAny user can retrieve their own usage. Retrieving another user's usage requires `ADMINISTRATION` (Can administer ThoughtSpot) privilege; `CAN_MANAGE_SPOTTER` is not sufficient.\n\n#### Usage guidelines\n\n- Omit `user_identifier` to retrieve the usage of the authenticated user.\n- Pass `user_identifier` with a user GUID to retrieve that user's usage.\n\nA user draws from every pool that meters them: their own pool, the pools of the user groups they belong to (including inherited groups), or their Org's pool, depending on the scope the cluster meters at. The totals in the response are sums over those pools. For example, a user in two groups with limits of 100 and 50 has a `total_limit` of 150.\n\nIf the request is successful, the response contains `summary`:\n\n- `pools`: the individual pools the user draws from.\n- `total_usage`, `total_warning_limit`, and `total_limit`: sums across the pools.\n- `total_remaining`: questions the user can still ask. Absent when `has_unlimited_pool` is `true`.\n- `is_at_warning`: `true` when usage has reached the combined warning limit.\n- `is_at_limit`: `true` when usage has reached the combined limit and further Spotter questions are blocked.\n- `has_unlimited_pool`: `true` when any of the user's pools has no limit, which makes the user unlimited.\n\nA user who draws from no pool is not metered: `pools` is empty and `is_at_limit` is `false`.\n\n#### Error conditions\n\n- `401` — authentication token is missing, expired, or invalid.\n- `403` — the caller requested another user's usage without `ADMINISTRATION` privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.11.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the user whose usage to retrieve. Defaults to the authenticated\nuser. Passing another user's GUID requires `ADMINISTRATION` privilege."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataForUserResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataForUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/memory/import": {
       "post": {
         "operationId": "importMemory",
@@ -1940,6 +2106,89 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AnalystSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/usage-data/search": {
+      "post": {
+        "operationId": "searchUsageData",
+        "description": "\nRetrieves Spotter usage pools: the question allowance configured for each\nuser, user group, or Org and how much of it has been consumed. Pass `keys`\nto fetch specific pools, or omit it to fetch every pool on the cluster.\nRequires `ADMINISTRATION` privilege. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nRetrieves Spotter usage pools. A usage pool is the Spotter question allowance configured for a user, user group, or Org, together with how many questions have been consumed from it. Use this API to monitor usage across your users, for example to find pools that are close to their limit.\n\nRequires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.\n\n#### Usage guidelines\n\nA cluster meters Spotter usage at exactly one scope: per user, per user group, or per Org. Every pool on a cluster therefore has the same `entity_type`.\n\n- To retrieve every pool on the cluster, send an empty request body.\n- To retrieve specific pools, pass `keys`, each with an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org). Keys that match no pool are omitted from the response.\n\nIf the request is successful, the response contains `usage_data`, one entry per pool:\n\n- `key`: the entity the pool meters.\n- `usage`: questions consumed from the pool.\n- `warning_limit`: usage level at which users are warned. Absent when no warning is configured.\n- `limit`: maximum questions the pool allows. Absent when the pool is unlimited.\n- `updated_time_in_millis` and `updated_by`: when and by whom the pool was last configured.\n\n#### Error conditions\n\n- `401` — authentication token is missing, expired, or invalid.\n- `403` — the caller does not have `ADMINISTRATION` privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - Use `getUsageDataForUser` to see the combined usage of a single user across every pool they draw from.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchUsageDataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataResponse"
                 }
               }
             }
@@ -3170,6 +3419,89 @@
         "responses": {
           "204": {
             "description": "Successfully updated the agent conversation."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/usage-data/update": {
+      "post": {
+        "operationId": "updateUsageData",
+        "description": "\nCreates or updates Spotter usage pools, setting the question allowance\nfor a user, user group, or Org. A pool that does not exist is created;\nfields omitted from an update keep their current value.\nEvery key must use the scope the cluster meters at. Switching scope\nrequires deleting the existing pools first.\nRequires `ADMINISTRATION` privilege. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nCreates or updates Spotter usage pools. A usage pool sets how many Spotter questions a user, user group, or Org can ask. Use this API to provision limits for new users or groups, raise or lower an existing limit, or reset usage at the start of a billing period.\n\nRequires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.\n\n#### Usage guidelines\n\nThe request must include `updates`, with at least one entry. Each entry contains:\n\n- `key` (required): the pool to create or update, with an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org).\n- `limit` (optional): maximum Spotter questions the pool allows.\n- `warning_limit` (optional): usage level at which users are warned that they are approaching the limit.\n- `usage` (optional): questions consumed so far. Set to `0` to reset the pool.\n\nA pool that does not exist is created. Fields omitted from an entry keep their current value.\n\nA cluster meters Spotter usage at exactly one scope. The first pool created sets the scope, and every later key must use the same `entity_type`. To switch scope, delete the existing pools with `deleteUsageData` first.\n\nIf the request is successful, the response contains `usage_data`, with each updated pool as it stands after the change.\n\n#### Error conditions\n\n- `400` — `updates` is empty, a key is missing its `entity_type` or `entity_identifier`, or a key uses a different `entity_type` from the cluster's existing pools.\n- `401` — authentication token is missing, expired, or invalid.\n- `403` — the caller does not have `ADMINISTRATION` privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUsageDataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Operation failed",
@@ -25213,6 +25545,170 @@
         },
         "description": "Response returned by getSharedContent. Contains the full read-only view\nof the shared conversation including messages and data source metadata."
       },
+      "UsagePoolKeyInput": {
+        "type": "object",
+        "required": [
+          "entity_type",
+          "entity_identifier"
+        ],
+        "properties": {
+          "entity_type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP",
+              "ORG"
+            ],
+            "description": "Type of entity the pool meters: `USER`, `USER_GROUP`, or `ORG`. Must\nmatch the scope the cluster meters at."
+          },
+          "entity_identifier": {
+            "type": "string",
+            "description": "GUID of the user or user group, or the ID of the Org, that the pool\nmeters."
+          }
+        },
+        "description": "Identifies a Spotter usage pool by the entity it meters."
+      },
+      "UsageDataResponse": {
+        "type": "object",
+        "required": [
+          "usage_data"
+        ],
+        "properties": {
+          "usage_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageData"
+            },
+            "description": "The requested Spotter usage pools, as they stand after the request."
+          }
+        },
+        "description": "Response returned by `searchUsageData` and `updateUsageData`."
+      },
+      "UsageData": {
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "properties": {
+          "key": {
+            "$ref": "#/components/schemas/UsagePoolKey",
+            "description": "Entity the pool meters."
+          },
+          "usage": {
+            "type": "object",
+            "description": "Number of Spotter questions consumed from the pool.",
+            "nullable": true
+          },
+          "warning_limit": {
+            "type": "object",
+            "description": "Usage level at which users drawing from the pool are warned that they\nare approaching the limit. Absent when no warning is configured.",
+            "nullable": true
+          },
+          "limit": {
+            "type": "object",
+            "description": "Maximum number of Spotter questions the pool allows. Absent when the pool\nis unlimited.",
+            "nullable": true
+          },
+          "updated_time_in_millis": {
+            "type": "object",
+            "description": "Epoch milliseconds of the last change to the pool's configuration.",
+            "nullable": true
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "ID of the user who last changed the pool's configuration.",
+            "nullable": true
+          }
+        },
+        "description": "A Spotter usage pool: the question allowance configured for a user, user\ngroup, or Org, and how much of it has been consumed."
+      },
+      "UsagePoolKey": {
+        "type": "object",
+        "required": [
+          "entity_type",
+          "entity_identifier"
+        ],
+        "properties": {
+          "entity_type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP",
+              "ORG"
+            ],
+            "description": "Type of entity the pool meters."
+          },
+          "entity_identifier": {
+            "type": "string",
+            "description": "GUID of the user or user group, or the ID of the Org, that the pool\nmeters."
+          }
+        },
+        "description": "Identifies a Spotter usage pool by the entity it meters."
+      },
+      "UsageDataForUserResponse": {
+        "type": "object",
+        "required": [
+          "summary"
+        ],
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/UsageSummary",
+            "description": "The user's combined usage position across every pool they draw from."
+          }
+        },
+        "description": "Response returned by `getUsageDataForUser`."
+      },
+      "UsageSummary": {
+        "type": "object",
+        "required": [
+          "pools",
+          "is_at_warning",
+          "is_at_limit",
+          "has_unlimited_pool"
+        ],
+        "properties": {
+          "pools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageData"
+            },
+            "description": "The individual pools the user draws from."
+          },
+          "total_usage": {
+            "type": "object",
+            "description": "Questions consumed across all of the user's pools.",
+            "nullable": true
+          },
+          "total_warning_limit": {
+            "type": "object",
+            "description": "Sum of the warning limits of the user's pools.",
+            "nullable": true
+          },
+          "total_limit": {
+            "type": "object",
+            "description": "Sum of the limits of the user's pools.",
+            "nullable": true
+          },
+          "total_remaining": {
+            "type": "object",
+            "description": "Questions the user can still ask before reaching the limit. Absent when\n`has_unlimited_pool` is `true`.",
+            "nullable": true
+          },
+          "is_at_warning": {
+            "type": "boolean",
+            "description": "`true` when usage has reached the combined warning limit."
+          },
+          "is_at_limit": {
+            "type": "boolean",
+            "description": "`true` when usage has reached the combined limit and further Spotter\nquestions are blocked."
+          },
+          "has_unlimited_pool": {
+            "type": "boolean",
+            "description": "`true` when at least one of the user's pools has no limit, which makes the\nuser unlimited."
+          }
+        },
+        "description": "A user's combined Spotter usage position across every pool they draw from.\nTotals are sums over the pools: a user in two groups with limits of 100 and\n50 has a total limit of 150."
+      },
       "RiseGQLArgWrapper": {
         "type": "object",
         "required": [
@@ -31213,6 +31709,50 @@
         },
         "description": "A user reference returned in analyst search results."
       },
+      "UsageDataUpdateInput": {
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "properties": {
+          "key": {
+            "$ref": "#/components/schemas/UsagePoolKeyInput",
+            "description": "Pool to create or update."
+          },
+          "limit": {
+            "type": "object",
+            "description": "Maximum number of Spotter questions the pool allows.",
+            "nullable": true
+          },
+          "warning_limit": {
+            "type": "object",
+            "description": "Usage level at which users drawing from the pool are warned that they are\napproaching the limit.",
+            "nullable": true
+          },
+          "usage": {
+            "type": "object",
+            "description": "Number of questions consumed from the pool. Set to `0` to reset the pool's\nusage, for example at the start of a billing period.",
+            "nullable": true
+          }
+        },
+        "description": "A change to one Spotter usage pool. The pool is created if it does not\nexist. Fields that are omitted keep their current value."
+      },
+      "DeleteUsageDataResponse": {
+        "type": "object",
+        "required": [
+          "deleted_keys"
+        ],
+        "properties": {
+          "deleted_keys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsagePoolKey"
+            },
+            "description": "Keys of the pools that existed and were deleted. Keys that matched no pool\nare omitted."
+          }
+        },
+        "description": "Response returned by `deleteUsageData`."
+      },
       "PrincipalRefInput": {
         "type": "object",
         "required": [
@@ -32898,6 +33438,21 @@
           "metadata_identifier"
         ]
       },
+      "DeleteUsageDataRequest": {
+        "type": "object",
+        "properties": {
+          "keys": {
+            "description": "Pools to delete. At least one is required.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsagePoolKeyInput"
+            }
+          }
+        },
+        "required": [
+          "keys"
+        ]
+      },
       "ExportMemoryRequest": {
         "type": "object",
         "properties": {
@@ -33075,6 +33630,18 @@
               "CREATED_BY_ME",
               "SHARED_TO_ME"
             ]
+          }
+        }
+      },
+      "SearchUsageDataRequest": {
+        "type": "object",
+        "properties": {
+          "keys": {
+            "description": "Pools to retrieve. Omit to retrieve every pool on the cluster. Keys that\nmatch no pool are ignored.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsagePoolKeyInput"
+            }
           }
         }
       },
@@ -33319,6 +33886,21 @@
             "nullable": true
           }
         }
+      },
+      "UpdateUsageDataRequest": {
+        "type": "object",
+        "properties": {
+          "updates": {
+            "description": "Changes to apply, one entry per pool. At least one is required.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageDataUpdateInput"
+            }
+          }
+        },
+        "required": [
+          "updates"
+        ]
       },
       "ConfigureAuthSettingsRequest": {
         "type": "object",
