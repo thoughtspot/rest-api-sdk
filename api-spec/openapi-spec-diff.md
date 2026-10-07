@@ -26,6 +26,16 @@
 -  added the non-success response with the status `302`
 
 
+### POST /api/rest/2.0/auth/token/full
+-  added the new optional request property `org_identifier`
+-  request property `org_id` deprecated
+
+
+### POST /api/rest/2.0/auth/token/object
+-  added the new optional request property `org_identifier`
+-  request property `org_id` deprecated
+
+
 ### POST /api/rest/2.0/calendars/generate-csv
 -  the response header `content-disposition` was added for the status `200`
 

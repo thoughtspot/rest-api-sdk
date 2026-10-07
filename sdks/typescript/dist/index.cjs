@@ -8973,6 +8973,12 @@ _GetFullAccessTokenRequest.attributeTypeMap = [
     "format": "int32"
   },
   {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
     "name": "scope",
     "baseName": "scope",
     "type": "TokenScopeInput",
@@ -9077,6 +9083,12 @@ _GetObjectAccessTokenRequest.attributeTypeMap = [
     "baseName": "org_id",
     "type": "number",
     "format": "int32"
+  },
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
   },
   {
     "name": "scope",

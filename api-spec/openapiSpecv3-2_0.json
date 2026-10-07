@@ -34174,7 +34174,12 @@
           "org_id": {
             "description": "ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "deprecated": true
+          },
+          "org_identifier": {
+            "description": "ID or name of the Org context to log in to. Takes precedence over org_id when both are provided. If neither is specified and a secret key is provided, the user will be logged into the org corresponding to the secret key; otherwise, the user will be logged in to the Org context of their previous login session. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
           },
           "scope": {
             "description": "The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the `X-Org-Selector` header. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
@@ -34248,7 +34253,12 @@
           "org_id": {
             "description": "ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "deprecated": true
+          },
+          "org_identifier": {
+            "description": "ID or name of the Org context to log in to. Takes precedence over org_id when both are provided. If neither is specified and a secret key is provided, the user will be logged into the org corresponding to the secret key; otherwise, the user will be logged in to the Org context of their previous login session. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
           },
           "scope": {
             "description": "The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the `X-Org-Selector` header. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
