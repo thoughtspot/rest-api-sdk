@@ -17873,6 +17873,36 @@ paths:
                       id: 7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d
                       name: mike_rodriguez
                 example_3:
+                  description: Webhook with AWS S3 storage destination
+                  value:
+                    id: e2f1a0b9-c8d7-4e6f-a5b4-3c2d1e0f9a8b
+                    name: S3 Storage Webhook
+                    description: Webhook that uploads payloads to an S3 bucket
+                    org:
+                      id: "0"
+                      name: Primary
+                    url: https://api.example.com/webhooks
+                    events:
+                    - LIVEBOARD_SCHEDULE
+                    storage_destination:
+                      storage_type: AWS_S3
+                      storage_config:
+                        aws_s3_config:
+                          bucket_name: my-webhook-files
+                          region: us-west-2
+                          role_arn: arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole
+                          external_id: ts-webhook-a1b2c3d4-7890
+                          path_prefix: thoughtspot-webhooks/
+                    status: DISABLED
+                    creation_time_in_millis: 1724279130789
+                    modification_time_in_millis: 1724279130789
+                    created_by:
+                      id: 5b4c3d2e-1f0a-4b9c-8d7e-6f5a4b3c2d1e
+                      name: james_okafor
+                    last_modified_by:
+                      id: 5b4c3d2e-1f0a-4b9c-8d7e-6f5a4b3c2d1e
+                      name: james_okafor
+                example_4:
                   description: Webhook with GCP GCS storage destination
                   value:
                     id: c9d8e7f6-a5b4-4321-9876-fedcba012345
@@ -17899,6 +17929,33 @@ paths:
                     last_modified_by:
                       id: 3a2b1c4d-5e6f-7890-abcd-ef0123456789
                       name: priya_sharma
+                example_5:
+                  description: "Webhook with Basic authentication, created in DISABLED\
+                    \ status"
+                  value:
+                    id: d3c2b1a0-9f8e-4d7c-b6a5-4f3e2d1c0b9a
+                    name: Basic Auth Webhook
+                    description: Webhook created disabled until the receiving endpoint
+                      is ready
+                    org:
+                      id: "0"
+                      name: Primary
+                    url: https://hooks.example.com/thoughtspot
+                    events:
+                    - LIVEBOARD_SCHEDULE
+                    authentication:
+                      BASIC_AUTH:
+                        username: webhook_user
+                        password: '***'
+                    status: DISABLED
+                    creation_time_in_millis: 1724280730912
+                    modification_time_in_millis: 1724280730912
+                    created_by:
+                      id: 4c3d2e1f-0a9b-4c8d-7e6f-5a4b3c2d1e0f
+                      name: lucas_moreau
+                    last_modified_by:
+                      id: 4c3d2e1f-0a9b-4c8d-7e6f-5a4b3c2d1e0f
+                      name: lucas_moreau
               schema:
                 $ref: "#/components/schemas/WebhookResponse"
           description: Webhook configuration created successfully
@@ -18409,6 +18466,39 @@ paths:
                       total_count: 2
                       has_more: false
                 example_2:
+                  description: "Search filtered by status, returning a webhook with\
+                    \ S3 storage"
+                  value:
+                    webhooks:
+                    - id: e2f1a0b9-c8d7-4e6f-a5b4-3c2d1e0f9a8b
+                      name: S3 Storage Webhook
+                      org:
+                        id: "0"
+                        name: Primary
+                      url: https://api.example.com/webhooks
+                      events:
+                      - LIVEBOARD_SCHEDULE
+                      storage_destination:
+                        storage_type: AWS_S3
+                        storage_config:
+                          aws_s3_config:
+                            bucket_name: my-webhook-files
+                            region: us-west-2
+                            role_arn: arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole
+                            external_id: ts-webhook-a1b2c3d4-7890
+                            path_prefix: thoughtspot-webhooks/
+                      status: DISABLED
+                      creation_time_in_millis: 1724279130789
+                      modification_time_in_millis: 1724279130789
+                      created_by:
+                        id: 5b4c3d2e-1f0a-4b9c-8d7e-6f5a4b3c2d1e
+                        name: james_okafor
+                    pagination:
+                      record_offset: 0
+                      record_size: 50
+                      total_count: 1
+                      has_more: false
+                example_3:
                   description: Empty search results
                   value:
                     webhooks: []
