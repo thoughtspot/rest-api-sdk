@@ -23145,7 +23145,11 @@
                     "type": "boolean",
                     "description": "Whether dependents that the user cannot access are included in dependents."
                   }
-                }
+                },
+                "required": [
+                  "dependents"
+                ],
+                "additionalProperties": false
               }
             ]
           },
