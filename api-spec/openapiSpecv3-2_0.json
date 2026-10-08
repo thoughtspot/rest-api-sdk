@@ -22320,20 +22320,94 @@
           },
           "dependent_objects": {
             "type": "object",
-            "description": "Details of dependent objects of the metadata objects.\n\nReturned when include_dependent_objects is true. With dependent_object_version V1 (default), the outer key is the GUID of the searched object, the inner key is the dependent's metadata type, and the value is a list of dependent headers (same keys as metadata_header). With V2, the same map is wrapped as {\"dependents\": {...}, \"hasInaccessibleDependents\": boolean, \"areInaccessibleDependentsReturned\": boolean}.",
+            "description": "Details of dependent objects of the metadata objects.\n\nReturned when include_dependent_objects is true. The shape depends on dependent_object_version: V1 (default) is a map keyed by the GUID of the searched object; V2 wraps the same map in a dependents key and adds two flags. Keys inside dependent headers are camelCase. If the dependents cannot be fetched, this field contains an error message string instead of an object.",
             "nullable": true,
-            "additionalProperties": {
-              "type": "object",
-              "description": "Dependents of one object, keyed by metadata type, for example QUESTION_ANSWER_BOOK, PINBOARD_ANSWER_BOOK or LOGICAL_TABLE.",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
+            "oneOf": [
+              {
+                "title": "V1 (default)",
+                "type": "object",
+                "description": "Map of searched object GUID to its dependents, grouped by metadata type.",
+                "x-additionalPropertiesName": "object_guid",
+                "additionalProperties": {
                   "type": "object",
-                  "description": "Header of a dependent object; same keys as metadata_header.",
-                  "additionalProperties": true
+                  "description": "Dependents of one object, keyed by metadata type, for example QUESTION_ANSWER_BOOK, PINBOARD_ANSWER_BOOK or LOGICAL_TABLE.",
+                  "x-additionalPropertiesName": "metadata_type",
+                  "additionalProperties": {
+                    "type": "array",
+                    "description": "Headers of the dependent objects of this type.",
+                    "items": {
+                      "type": "object",
+                      "description": "Header of a dependent object; same keys as metadata_header.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "GUID of the dependent object."
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Name of the dependent object."
+                        },
+                        "author": {
+                          "type": "string",
+                          "description": "GUID of the user who created the dependent object."
+                        },
+                        "created": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Creation time, in epoch milliseconds."
+                        },
+                        "modified": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Last modified time, in epoch milliseconds."
+                        },
+                        "isDeleted": {
+                          "type": "boolean",
+                          "description": "Whether the dependent object is deleted."
+                        },
+                        "isHidden": {
+                          "type": "boolean",
+                          "description": "Whether the dependent object is hidden."
+                        }
+                      },
+                      "additionalProperties": true
+                    }
+                  }
+                }
+              },
+              {
+                "title": "V2",
+                "type": "object",
+                "description": "Returned when dependent_object_version is V2.",
+                "properties": {
+                  "dependents": {
+                    "type": "object",
+                    "description": "Same map as the V1 shape: searched object GUID, then metadata type, then a list of dependent headers.",
+                    "x-additionalPropertiesName": "object_guid",
+                    "additionalProperties": {
+                      "type": "object",
+                      "x-additionalPropertiesName": "metadata_type",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "description": "Header of a dependent object; same keys as metadata_header.",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  },
+                  "hasInaccessibleDependents": {
+                    "type": "boolean",
+                    "description": "Whether the object has dependents that the user cannot access."
+                  },
+                  "areInaccessibleDependentsReturned": {
+                    "type": "boolean",
+                    "description": "Whether dependents that the user cannot access are included in dependents."
+                  }
                 }
               }
-            },
+            ],
             "example": {
               "33248a57-cc70-4e39-9199-fb5092283381": {
                 "QUESTION_ANSWER_BOOK": [
@@ -22517,6 +22591,18 @@
                   "type": "object"
                 },
                 "description": "Tags assigned to the object."
+              },
+              "isFavorite": {
+                "type": "boolean",
+                "description": "Present and true only when the object is a favorite of the current user."
+              },
+              "localised_alias": {
+                "type": "string",
+                "description": "Localized name of the object, when one is set. Unlike other keys, this key is snake_case."
+              },
+              "localised_description": {
+                "type": "string",
+                "description": "Localized description of the object, when one is set. Unlike other keys, this key is snake_case."
               }
             },
             "additionalProperties": true,
@@ -22607,7 +22693,7 @@
                 "vizType": "CHART"
               }
             },
-            "description": "Visualization header information of the metadata objects.\n\nReturned for Liveboards when include_visualization_headers is true. Keys are camelCase and keys with no value are omitted. Filter entries have vizType FILTER. Times are epoch milliseconds.",
+            "description": "Visualization header information of the metadata objects.\n\nReturned for Liveboards when include_visualization_headers is true. Keys are camelCase and keys with no value are omitted. Filter entries have vizType FILTER. Times are epoch milliseconds. If the headers cannot be fetched, the list contains a single error message string instead.",
             "nullable": true
           },
           "stats": {
