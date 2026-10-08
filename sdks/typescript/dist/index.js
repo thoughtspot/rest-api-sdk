@@ -849,6 +849,122 @@ _AgentConversationList.attributeTypeMap = [
 ];
 var AgentConversationList = _AgentConversationList;
 
+// models/AgentConversationV2.ts
+var _AgentConversationV2 = class _AgentConversationV2 {
+  static getAttributeTypeMap() {
+    return _AgentConversationV2.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentConversationV2.discriminator = void 0;
+_AgentConversationV2.mapping = void 0;
+_AgentConversationV2.attributeTypeMap = [
+  {
+    "name": "conversation_identifier",
+    "baseName": "conversation_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var AgentConversationV2 = _AgentConversationV2;
+
+// models/AgentEvent.ts
+var _AgentEvent = class _AgentEvent {
+  static getAttributeTypeMap() {
+    return _AgentEvent.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentEvent.discriminator = void 0;
+_AgentEvent.mapping = void 0;
+_AgentEvent.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "invocation_id",
+    "baseName": "invocation_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "partial",
+    "baseName": "partial",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "error_code",
+    "baseName": "error_code",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "content",
+    "baseName": "content",
+    "type": "AgentEventContent",
+    "format": ""
+  }
+];
+var AgentEvent = _AgentEvent;
+
+// models/AgentEventContent.ts
+var _AgentEventContent = class _AgentEventContent {
+  static getAttributeTypeMap() {
+    return _AgentEventContent.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentEventContent.discriminator = void 0;
+_AgentEventContent.mapping = void 0;
+_AgentEventContent.attributeTypeMap = [
+  {
+    "name": "role",
+    "baseName": "role",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "parts",
+    "baseName": "parts",
+    "type": "Array<AgentEventPart>",
+    "format": ""
+  }
+];
+var AgentEventContent = _AgentEventContent;
+
+// models/AgentEventPart.ts
+var _AgentEventPart = class _AgentEventPart {
+  static getAttributeTypeMap() {
+    return _AgentEventPart.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentEventPart.discriminator = void 0;
+_AgentEventPart.mapping = void 0;
+_AgentEventPart.attributeTypeMap = [
+  {
+    "name": "text",
+    "baseName": "text",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "thought",
+    "baseName": "thought",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var AgentEventPart = _AgentEventPart;
+
 // models/AgentInstructions.ts
 var _AgentInstructions = class _AgentInstructions {
   static getAttributeTypeMap() {
@@ -892,6 +1008,280 @@ _AgentInstructions.attributeTypeMap = [
   }
 ];
 var AgentInstructions = _AgentInstructions;
+
+// models/AgentProgress.ts
+var _AgentProgress = class _AgentProgress {
+  static getAttributeTypeMap() {
+    return _AgentProgress.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentProgress.discriminator = void 0;
+_AgentProgress.mapping = void 0;
+_AgentProgress.attributeTypeMap = [
+  {
+    "name": "code",
+    "baseName": "code",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "tool_call_id",
+    "baseName": "tool_call_id",
+    "type": "string",
+    "format": ""
+  }
+];
+var AgentProgress = _AgentProgress;
+
+// models/AgentStopResponse.ts
+var _AgentStopResponse = class _AgentStopResponse {
+  static getAttributeTypeMap() {
+    return _AgentStopResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentStopResponse.discriminator = void 0;
+_AgentStopResponse.mapping = void 0;
+_AgentStopResponse.attributeTypeMap = [
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "string",
+    "format": ""
+  }
+];
+var AgentStopResponse = _AgentStopResponse;
+
+// models/AgentStreamDone.ts
+var _AgentStreamDone = class _AgentStreamDone {
+  static getAttributeTypeMap() {
+    return _AgentStreamDone.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentStreamDone.discriminator = void 0;
+_AgentStreamDone.mapping = void 0;
+_AgentStreamDone.attributeTypeMap = [
+  {
+    "name": "conversation_identifier",
+    "baseName": "conversation_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var AgentStreamDone = _AgentStreamDone;
+
+// models/AgentStreamError.ts
+var _AgentStreamError = class _AgentStreamError {
+  static getAttributeTypeMap() {
+    return _AgentStreamError.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentStreamError.discriminator = void 0;
+_AgentStreamError.mapping = void 0;
+_AgentStreamError.attributeTypeMap = [
+  {
+    "name": "code",
+    "baseName": "code",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "source",
+    "baseName": "source",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "display_message",
+    "baseName": "display_message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "error_bucket",
+    "baseName": "error_bucket",
+    "type": "string",
+    "format": ""
+  }
+];
+var AgentStreamError = _AgentStreamError;
+
+// models/AgentStreamFrame.ts
+var _AgentStreamFrame = class _AgentStreamFrame {
+  static getAttributeTypeMap() {
+    return _AgentStreamFrame.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentStreamFrame.discriminator = void 0;
+_AgentStreamFrame.mapping = void 0;
+_AgentStreamFrame.attributeTypeMap = [
+  {
+    "name": "event",
+    "baseName": "event",
+    "type": "AgentEvent",
+    "format": ""
+  },
+  {
+    "name": "tool_call",
+    "baseName": "tool_call",
+    "type": "AgentToolCall",
+    "format": ""
+  },
+  {
+    "name": "progress",
+    "baseName": "progress",
+    "type": "AgentProgress",
+    "format": ""
+  },
+  {
+    "name": "tool_result",
+    "baseName": "tool_result",
+    "type": "AgentToolResult",
+    "format": ""
+  },
+  {
+    "name": "error",
+    "baseName": "error",
+    "type": "AgentStreamError",
+    "format": ""
+  },
+  {
+    "name": "done",
+    "baseName": "done",
+    "type": "AgentStreamDone",
+    "format": ""
+  }
+];
+var AgentStreamFrame = _AgentStreamFrame;
+
+// models/AgentToolCall.ts
+var _AgentToolCall = class _AgentToolCall {
+  static getAttributeTypeMap() {
+    return _AgentToolCall.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentToolCall.discriminator = void 0;
+_AgentToolCall.mapping = void 0;
+_AgentToolCall.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "args",
+    "baseName": "args",
+    "type": "any",
+    "format": ""
+  }
+];
+var AgentToolCall = _AgentToolCall;
+
+// models/AgentToolResult.ts
+var _AgentToolResult = class _AgentToolResult {
+  static getAttributeTypeMap() {
+    return _AgentToolResult.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentToolResult.discriminator = void 0;
+_AgentToolResult.mapping = void 0;
+_AgentToolResult.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "is_error",
+    "baseName": "is_error",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "text",
+    "baseName": "text",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "answer",
+    "baseName": "answer",
+    "type": "any",
+    "format": ""
+  }
+];
+var AgentToolResult = _AgentToolResult;
+
+// models/AgentTurnResponse.ts
+var _AgentTurnResponse = class _AgentTurnResponse {
+  static getAttributeTypeMap() {
+    return _AgentTurnResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_AgentTurnResponse.discriminator = void 0;
+_AgentTurnResponse.mapping = void 0;
+_AgentTurnResponse.attributeTypeMap = [
+  {
+    "name": "conversation_identifier",
+    "baseName": "conversation_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "events",
+    "baseName": "events",
+    "type": "Array<AgentStreamFrame>",
+    "format": ""
+  }
+];
+var AgentTurnResponse = _AgentTurnResponse;
 
 // models/Analyst.ts
 var _Analyst = class _Analyst {
@@ -4080,6 +4470,32 @@ _CreateAgentConversationRequest.attributeTypeMap = [
   }
 ];
 var CreateAgentConversationRequest = _CreateAgentConversationRequest;
+
+// models/CreateAgentConversationV2Request.ts
+var _CreateAgentConversationV2Request = class _CreateAgentConversationV2Request {
+  static getAttributeTypeMap() {
+    return _CreateAgentConversationV2Request.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateAgentConversationV2Request.discriminator = void 0;
+_CreateAgentConversationV2Request.mapping = void 0;
+_CreateAgentConversationV2Request.attributeTypeMap = [
+  {
+    "name": "data_source_identifiers",
+    "baseName": "data_source_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "additional_instructions",
+    "baseName": "additional_instructions",
+    "type": "string",
+    "format": ""
+  }
+];
+var CreateAgentConversationV2Request = _CreateAgentConversationV2Request;
 
 // models/CreateAnalystRequest.ts
 var _CreateAnalystRequest = class _CreateAnalystRequest {
@@ -15823,6 +16239,58 @@ _SendAgentConversationMessageStreamingRequest.attributeTypeMap = [
 ];
 var SendAgentConversationMessageStreamingRequest = _SendAgentConversationMessageStreamingRequest;
 
+// models/SendAgentConversationMessageStreamingV2Request.ts
+var _SendAgentConversationMessageStreamingV2Request = class _SendAgentConversationMessageStreamingV2Request {
+  static getAttributeTypeMap() {
+    return _SendAgentConversationMessageStreamingV2Request.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SendAgentConversationMessageStreamingV2Request.discriminator = void 0;
+_SendAgentConversationMessageStreamingV2Request.mapping = void 0;
+_SendAgentConversationMessageStreamingV2Request.attributeTypeMap = [
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "conversation_identifier",
+    "baseName": "conversation_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var SendAgentConversationMessageStreamingV2Request = _SendAgentConversationMessageStreamingV2Request;
+
+// models/SendAgentConversationMessageV2Request.ts
+var _SendAgentConversationMessageV2Request = class _SendAgentConversationMessageV2Request {
+  static getAttributeTypeMap() {
+    return _SendAgentConversationMessageV2Request.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SendAgentConversationMessageV2Request.discriminator = void 0;
+_SendAgentConversationMessageV2Request.mapping = void 0;
+_SendAgentConversationMessageV2Request.attributeTypeMap = [
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "conversation_identifier",
+    "baseName": "conversation_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var SendAgentConversationMessageV2Request = _SendAgentConversationMessageV2Request;
+
 // models/SendAgentMessageRequest.ts
 var _SendAgentMessageRequest = class _SendAgentMessageRequest {
   static getAttributeTypeMap() {
@@ -22372,7 +22840,19 @@ var typeMap = {
   "AgentConversation": AgentConversation,
   "AgentConversationHistoryResponse": AgentConversationHistoryResponse,
   "AgentConversationList": AgentConversationList,
+  "AgentConversationV2": AgentConversationV2,
+  "AgentEvent": AgentEvent,
+  "AgentEventContent": AgentEventContent,
+  "AgentEventPart": AgentEventPart,
   "AgentInstructions": AgentInstructions,
+  "AgentProgress": AgentProgress,
+  "AgentStopResponse": AgentStopResponse,
+  "AgentStreamDone": AgentStreamDone,
+  "AgentStreamError": AgentStreamError,
+  "AgentStreamFrame": AgentStreamFrame,
+  "AgentToolCall": AgentToolCall,
+  "AgentToolResult": AgentToolResult,
+  "AgentTurnResponse": AgentTurnResponse,
   "Analyst": Analyst,
   "AnalystDeleteResponse": AnalystDeleteResponse,
   "AnalystItem": AnalystItem,
@@ -22464,6 +22944,7 @@ var typeMap = {
   "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
   "CopyObjectRequest": CopyObjectRequest,
   "CreateAgentConversationRequest": CreateAgentConversationRequest,
+  "CreateAgentConversationV2Request": CreateAgentConversationV2Request,
   "CreateAnalystRequest": CreateAnalystRequest,
   "CreateCalendarRequest": CreateCalendarRequest,
   "CreateCollectionRequest": CreateCollectionRequest,
@@ -22770,6 +23251,8 @@ var typeMap = {
   "SemanticIntegrationTagReference": SemanticIntegrationTagReference,
   "SendAgentConversationMessageRequest": SendAgentConversationMessageRequest,
   "SendAgentConversationMessageStreamingRequest": SendAgentConversationMessageStreamingRequest,
+  "SendAgentConversationMessageStreamingV2Request": SendAgentConversationMessageStreamingV2Request,
+  "SendAgentConversationMessageV2Request": SendAgentConversationMessageV2Request,
   "SendAgentMessageRequest": SendAgentMessageRequest,
   "SendAgentMessageResponse": SendAgentMessageResponse,
   "SendAgentMessageStreamingRequest": SendAgentMessageStreamingRequest,
@@ -81119,7 +81602,19 @@ export {
   AgentConversation,
   AgentConversationHistoryResponse,
   AgentConversationList,
+  AgentConversationV2,
+  AgentEvent,
+  AgentEventContent,
+  AgentEventPart,
   AgentInstructions,
+  AgentProgress,
+  AgentStopResponse,
+  AgentStreamDone,
+  AgentStreamError,
+  AgentStreamFrame,
+  AgentToolCall,
+  AgentToolResult,
+  AgentTurnResponse,
   Analyst,
   AnalystDeleteResponse,
   AnalystItem,
@@ -81217,6 +81712,7 @@ export {
   ConvertWorksheetToModelRequest,
   CopyObjectRequest,
   CreateAgentConversationRequest,
+  CreateAgentConversationV2Request,
   CreateAnalystRequest,
   CreateCalendarRequest,
   CreateCollectionRequest,
@@ -81550,6 +82046,8 @@ export {
   PromiseSemanticIntegrationsApi as SemanticIntegrationsApi,
   SendAgentConversationMessageRequest,
   SendAgentConversationMessageStreamingRequest,
+  SendAgentConversationMessageStreamingV2Request,
+  SendAgentConversationMessageV2Request,
   SendAgentMessageRequest,
   SendAgentMessageResponse,
   SendAgentMessageStreamingRequest,

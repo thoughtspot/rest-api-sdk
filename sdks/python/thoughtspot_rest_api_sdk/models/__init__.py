@@ -30,7 +30,19 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.agent_conversation import AgentConversation
     from thoughtspot_rest_api_sdk.models.agent_conversation_history_response import AgentConversationHistoryResponse
     from thoughtspot_rest_api_sdk.models.agent_conversation_list import AgentConversationList
+    from thoughtspot_rest_api_sdk.models.agent_conversation_v2 import AgentConversationV2
+    from thoughtspot_rest_api_sdk.models.agent_event import AgentEvent
+    from thoughtspot_rest_api_sdk.models.agent_event_content import AgentEventContent
+    from thoughtspot_rest_api_sdk.models.agent_event_part import AgentEventPart
     from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions
+    from thoughtspot_rest_api_sdk.models.agent_progress import AgentProgress
+    from thoughtspot_rest_api_sdk.models.agent_stop_response import AgentStopResponse
+    from thoughtspot_rest_api_sdk.models.agent_stream_done import AgentStreamDone
+    from thoughtspot_rest_api_sdk.models.agent_stream_error import AgentStreamError
+    from thoughtspot_rest_api_sdk.models.agent_stream_frame import AgentStreamFrame
+    from thoughtspot_rest_api_sdk.models.agent_tool_call import AgentToolCall
+    from thoughtspot_rest_api_sdk.models.agent_tool_result import AgentToolResult
+    from thoughtspot_rest_api_sdk.models.agent_turn_response import AgentTurnResponse
     from thoughtspot_rest_api_sdk.models.analyst import Analyst
     from thoughtspot_rest_api_sdk.models.analyst_delete_response import AnalystDeleteResponse
     from thoughtspot_rest_api_sdk.models.analyst_item import AnalystItem
@@ -122,6 +134,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest
     from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest
     from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest
+    from thoughtspot_rest_api_sdk.models.create_agent_conversation_v2_request import CreateAgentConversationV2Request
     from thoughtspot_rest_api_sdk.models.create_analyst_request import CreateAnalystRequest
     from thoughtspot_rest_api_sdk.models.create_calendar_request import CreateCalendarRequest
     from thoughtspot_rest_api_sdk.models.create_collection_request import CreateCollectionRequest
@@ -428,6 +441,8 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.semantic_integration_tag_reference import SemanticIntegrationTagReference
     from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_request import SendAgentConversationMessageRequest
     from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_request import SendAgentConversationMessageStreamingRequest
+    from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_v2_request import SendAgentConversationMessageStreamingV2Request
+    from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_v2_request import SendAgentConversationMessageV2Request
     from thoughtspot_rest_api_sdk.models.send_agent_message_request import SendAgentMessageRequest
     from thoughtspot_rest_api_sdk.models.send_agent_message_response import SendAgentMessageResponse
     from thoughtspot_rest_api_sdk.models.send_agent_message_streaming_request import SendAgentMessageStreamingRequest
@@ -601,7 +616,19 @@ from thoughtspot_rest_api_sdk.models.advanced_chart_visualization_font_record im
 from thoughtspot_rest_api_sdk.models.agent_conversation import AgentConversation
 from thoughtspot_rest_api_sdk.models.agent_conversation_history_response import AgentConversationHistoryResponse
 from thoughtspot_rest_api_sdk.models.agent_conversation_list import AgentConversationList
+from thoughtspot_rest_api_sdk.models.agent_conversation_v2 import AgentConversationV2
+from thoughtspot_rest_api_sdk.models.agent_event import AgentEvent
+from thoughtspot_rest_api_sdk.models.agent_event_content import AgentEventContent
+from thoughtspot_rest_api_sdk.models.agent_event_part import AgentEventPart
 from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions
+from thoughtspot_rest_api_sdk.models.agent_progress import AgentProgress
+from thoughtspot_rest_api_sdk.models.agent_stop_response import AgentStopResponse
+from thoughtspot_rest_api_sdk.models.agent_stream_done import AgentStreamDone
+from thoughtspot_rest_api_sdk.models.agent_stream_error import AgentStreamError
+from thoughtspot_rest_api_sdk.models.agent_stream_frame import AgentStreamFrame
+from thoughtspot_rest_api_sdk.models.agent_tool_call import AgentToolCall
+from thoughtspot_rest_api_sdk.models.agent_tool_result import AgentToolResult
+from thoughtspot_rest_api_sdk.models.agent_turn_response import AgentTurnResponse
 from thoughtspot_rest_api_sdk.models.analyst import Analyst
 from thoughtspot_rest_api_sdk.models.analyst_delete_response import AnalystDeleteResponse
 from thoughtspot_rest_api_sdk.models.analyst_item import AnalystItem
@@ -693,6 +720,7 @@ from thoughtspot_rest_api_sdk.models.conversation_share_status_response import C
 from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest
 from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest
 from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest
+from thoughtspot_rest_api_sdk.models.create_agent_conversation_v2_request import CreateAgentConversationV2Request
 from thoughtspot_rest_api_sdk.models.create_analyst_request import CreateAnalystRequest
 from thoughtspot_rest_api_sdk.models.create_calendar_request import CreateCalendarRequest
 from thoughtspot_rest_api_sdk.models.create_collection_request import CreateCollectionRequest
@@ -999,6 +1027,8 @@ from thoughtspot_rest_api_sdk.models.semantic_integration_sort_options import Se
 from thoughtspot_rest_api_sdk.models.semantic_integration_tag_reference import SemanticIntegrationTagReference
 from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_request import SendAgentConversationMessageRequest
 from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_request import SendAgentConversationMessageStreamingRequest
+from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_v2_request import SendAgentConversationMessageStreamingV2Request
+from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_v2_request import SendAgentConversationMessageV2Request
 from thoughtspot_rest_api_sdk.models.send_agent_message_request import SendAgentMessageRequest
 from thoughtspot_rest_api_sdk.models.send_agent_message_response import SendAgentMessageResponse
 from thoughtspot_rest_api_sdk.models.send_agent_message_streaming_request import SendAgentMessageStreamingRequest

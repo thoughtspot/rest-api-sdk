@@ -16,7 +16,19 @@ export * from '../models/AdvancedChartVisualizationFontRecord';
 export * from '../models/AgentConversation';
 export * from '../models/AgentConversationHistoryResponse';
 export * from '../models/AgentConversationList';
+export * from '../models/AgentConversationV2';
+export * from '../models/AgentEvent';
+export * from '../models/AgentEventContent';
+export * from '../models/AgentEventPart';
 export * from '../models/AgentInstructions';
+export * from '../models/AgentProgress';
+export * from '../models/AgentStopResponse';
+export * from '../models/AgentStreamDone';
+export * from '../models/AgentStreamError';
+export * from '../models/AgentStreamFrame';
+export * from '../models/AgentToolCall';
+export * from '../models/AgentToolResult';
+export * from '../models/AgentTurnResponse';
 export * from '../models/Analyst';
 export * from '../models/AnalystDeleteResponse';
 export * from '../models/AnalystItem';
@@ -108,6 +120,7 @@ export * from '../models/ConversationShareStatusResponse';
 export * from '../models/ConvertWorksheetToModelRequest';
 export * from '../models/CopyObjectRequest';
 export * from '../models/CreateAgentConversationRequest';
+export * from '../models/CreateAgentConversationV2Request';
 export * from '../models/CreateAnalystRequest';
 export * from '../models/CreateCalendarRequest';
 export * from '../models/CreateCollectionRequest';
@@ -414,6 +427,8 @@ export * from '../models/SemanticIntegrationSortOptions';
 export * from '../models/SemanticIntegrationTagReference';
 export * from '../models/SendAgentConversationMessageRequest';
 export * from '../models/SendAgentConversationMessageStreamingRequest';
+export * from '../models/SendAgentConversationMessageStreamingV2Request';
+export * from '../models/SendAgentConversationMessageV2Request';
 export * from '../models/SendAgentMessageRequest';
 export * from '../models/SendAgentMessageResponse';
 export * from '../models/SendAgentMessageStreamingRequest';
@@ -580,7 +595,19 @@ import { AdvancedChartVisualizationFontRecord, AdvancedChartVisualizationFontRec
 import { AgentConversation } from '../models/AgentConversation';
 import { AgentConversationHistoryResponse } from '../models/AgentConversationHistoryResponse';
 import { AgentConversationList } from '../models/AgentConversationList';
+import { AgentConversationV2 } from '../models/AgentConversationV2';
+import { AgentEvent } from '../models/AgentEvent';
+import { AgentEventContent } from '../models/AgentEventContent';
+import { AgentEventPart } from '../models/AgentEventPart';
 import { AgentInstructions } from '../models/AgentInstructions';
+import { AgentProgress } from '../models/AgentProgress';
+import { AgentStopResponse } from '../models/AgentStopResponse';
+import { AgentStreamDone } from '../models/AgentStreamDone';
+import { AgentStreamError } from '../models/AgentStreamError';
+import { AgentStreamFrame } from '../models/AgentStreamFrame';
+import { AgentToolCall } from '../models/AgentToolCall';
+import { AgentToolResult } from '../models/AgentToolResult';
+import { AgentTurnResponse } from '../models/AgentTurnResponse';
 import { Analyst } from '../models/Analyst';
 import { AnalystDeleteResponse } from '../models/AnalystDeleteResponse';
 import { AnalystItem } from '../models/AnalystItem';
@@ -672,6 +699,7 @@ import { ConversationShareStatusResponse } from '../models/ConversationShareStat
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest  , CopyObjectRequestTypeEnum    } from '../models/CopyObjectRequest';
 import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
+import { CreateAgentConversationV2Request } from '../models/CreateAgentConversationV2Request';
 import { CreateAnalystRequest } from '../models/CreateAnalystRequest';
 import { CreateCalendarRequest , CreateCalendarRequestCreationMethodEnum     , CreateCalendarRequestCalendarTypeEnum  , CreateCalendarRequestMonthOffsetEnum  , CreateCalendarRequestStartDayOfWeekEnum     } from '../models/CreateCalendarRequest';
 import { CreateCollectionRequest } from '../models/CreateCollectionRequest';
@@ -978,6 +1006,8 @@ import { SemanticIntegrationSortOptions, SemanticIntegrationSortOptionsFieldName
 import { SemanticIntegrationTagReference } from '../models/SemanticIntegrationTagReference';
 import { SendAgentConversationMessageRequest } from '../models/SendAgentConversationMessageRequest';
 import { SendAgentConversationMessageStreamingRequest } from '../models/SendAgentConversationMessageStreamingRequest';
+import { SendAgentConversationMessageStreamingV2Request } from '../models/SendAgentConversationMessageStreamingV2Request';
+import { SendAgentConversationMessageV2Request } from '../models/SendAgentConversationMessageV2Request';
 import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
 import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';
@@ -1475,7 +1505,19 @@ let typeMap: {[index: string]: any} = {
     "AgentConversation": AgentConversation,
     "AgentConversationHistoryResponse": AgentConversationHistoryResponse,
     "AgentConversationList": AgentConversationList,
+    "AgentConversationV2": AgentConversationV2,
+    "AgentEvent": AgentEvent,
+    "AgentEventContent": AgentEventContent,
+    "AgentEventPart": AgentEventPart,
     "AgentInstructions": AgentInstructions,
+    "AgentProgress": AgentProgress,
+    "AgentStopResponse": AgentStopResponse,
+    "AgentStreamDone": AgentStreamDone,
+    "AgentStreamError": AgentStreamError,
+    "AgentStreamFrame": AgentStreamFrame,
+    "AgentToolCall": AgentToolCall,
+    "AgentToolResult": AgentToolResult,
+    "AgentTurnResponse": AgentTurnResponse,
     "Analyst": Analyst,
     "AnalystDeleteResponse": AnalystDeleteResponse,
     "AnalystItem": AnalystItem,
@@ -1567,6 +1609,7 @@ let typeMap: {[index: string]: any} = {
     "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
     "CopyObjectRequest": CopyObjectRequest,
     "CreateAgentConversationRequest": CreateAgentConversationRequest,
+    "CreateAgentConversationV2Request": CreateAgentConversationV2Request,
     "CreateAnalystRequest": CreateAnalystRequest,
     "CreateCalendarRequest": CreateCalendarRequest,
     "CreateCollectionRequest": CreateCollectionRequest,
@@ -1873,6 +1916,8 @@ let typeMap: {[index: string]: any} = {
     "SemanticIntegrationTagReference": SemanticIntegrationTagReference,
     "SendAgentConversationMessageRequest": SendAgentConversationMessageRequest,
     "SendAgentConversationMessageStreamingRequest": SendAgentConversationMessageStreamingRequest,
+    "SendAgentConversationMessageStreamingV2Request": SendAgentConversationMessageStreamingV2Request,
+    "SendAgentConversationMessageV2Request": SendAgentConversationMessageV2Request,
     "SendAgentMessageRequest": SendAgentMessageRequest,
     "SendAgentMessageResponse": SendAgentMessageResponse,
     "SendAgentMessageStreamingRequest": SendAgentMessageStreamingRequest,

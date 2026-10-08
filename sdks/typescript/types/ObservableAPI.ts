@@ -21,7 +21,19 @@ import { AdvancedChartVisualizationFontRecord } from '../models/AdvancedChartVis
 import { AgentConversation } from '../models/AgentConversation';
 import { AgentConversationHistoryResponse } from '../models/AgentConversationHistoryResponse';
 import { AgentConversationList } from '../models/AgentConversationList';
+import { AgentConversationV2 } from '../models/AgentConversationV2';
+import { AgentEvent } from '../models/AgentEvent';
+import { AgentEventContent } from '../models/AgentEventContent';
+import { AgentEventPart } from '../models/AgentEventPart';
 import { AgentInstructions } from '../models/AgentInstructions';
+import { AgentProgress } from '../models/AgentProgress';
+import { AgentStopResponse } from '../models/AgentStopResponse';
+import { AgentStreamDone } from '../models/AgentStreamDone';
+import { AgentStreamError } from '../models/AgentStreamError';
+import { AgentStreamFrame } from '../models/AgentStreamFrame';
+import { AgentToolCall } from '../models/AgentToolCall';
+import { AgentToolResult } from '../models/AgentToolResult';
+import { AgentTurnResponse } from '../models/AgentTurnResponse';
 import { Analyst } from '../models/Analyst';
 import { AnalystDeleteResponse } from '../models/AnalystDeleteResponse';
 import { AnalystItem } from '../models/AnalystItem';
@@ -113,6 +125,7 @@ import { ConversationShareStatusResponse } from '../models/ConversationShareStat
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest } from '../models/CopyObjectRequest';
 import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
+import { CreateAgentConversationV2Request } from '../models/CreateAgentConversationV2Request';
 import { CreateAnalystRequest } from '../models/CreateAnalystRequest';
 import { CreateCalendarRequest } from '../models/CreateCalendarRequest';
 import { CreateCollectionRequest } from '../models/CreateCollectionRequest';
@@ -419,6 +432,8 @@ import { SemanticIntegrationSortOptions } from '../models/SemanticIntegrationSor
 import { SemanticIntegrationTagReference } from '../models/SemanticIntegrationTagReference';
 import { SendAgentConversationMessageRequest } from '../models/SendAgentConversationMessageRequest';
 import { SendAgentConversationMessageStreamingRequest } from '../models/SendAgentConversationMessageStreamingRequest';
+import { SendAgentConversationMessageStreamingV2Request } from '../models/SendAgentConversationMessageStreamingV2Request';
+import { SendAgentConversationMessageV2Request } from '../models/SendAgentConversationMessageV2Request';
 import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
 import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';

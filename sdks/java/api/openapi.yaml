@@ -23909,37 +23909,6 @@ components:
       - instructions
       - scope
       type: object
-    AgentInstructions:
-      description: Admin instructions configured for the AI agent.
-      example:
-        instructions: instructions
-        last_updated_by: last_updated_by
-        updated_at: updated_at
-        created_at: created_at
-        id: id
-      properties:
-        id:
-          description: Unique identifier of the record.
-          nullable: true
-          type: string
-        instructions:
-          description: The admin instructions text for the agent.
-          type: string
-        created_at:
-          description: ISO timestamp when the instructions were created.
-          nullable: true
-          type: string
-        updated_at:
-          description: ISO timestamp when the instructions were last updated.
-          nullable: true
-          type: string
-        last_updated_by:
-          description: User ID of the admin who last updated the instructions.
-          nullable: true
-          type: string
-      required:
-      - instructions
-      type: object
     AgentConversationHistoryResponse:
       description: Response returned by getConversationList.
       example:
@@ -24066,6 +24035,37 @@ components:
       required:
       - id
       - name
+      type: object
+    AgentInstructions:
+      description: Admin instructions configured for the AI agent.
+      example:
+        instructions: instructions
+        last_updated_by: last_updated_by
+        updated_at: updated_at
+        created_at: created_at
+        id: id
+      properties:
+        id:
+          description: Unique identifier of the record.
+          nullable: true
+          type: string
+        instructions:
+          description: The admin instructions text for the agent.
+          type: string
+        created_at:
+          description: ISO timestamp when the instructions were created.
+          nullable: true
+          type: string
+        updated_at:
+          description: ISO timestamp when the instructions were last updated.
+          nullable: true
+          type: string
+        last_updated_by:
+          description: User ID of the admin who last updated the instructions.
+          nullable: true
+          type: string
+      required:
+      - instructions
       type: object
     ConversationMessageResponse:
       description: |-
@@ -31047,6 +31047,251 @@ components:
       - conversation_id
       - conversation_identifier
       type: object
+    AgentConversationV2:
+      description: A Spotter X conversation.
+      properties:
+        conversation_identifier:
+          description: "Unique identifier of the conversation. Pass it to subsequent\
+            \ requests to\ncontinue the same conversation. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          type: string
+      required:
+      - conversation_identifier
+      type: object
+    AgentStreamFrame:
+      description: |-
+        One frame of an agent response. On the streaming endpoint each SSE `data:` line
+        is one frame, and a turn streams many over a single connection. Exactly one
+        field is set on any given frame: route on which one is present. New frame
+        types are added as new fields, so a frame where none of the fields you know is
+        set is a frame of a type you do not recognize: skip it.
+      properties:
+        event:
+          $ref: '#/components/schemas/AgentEvent'
+        tool_call:
+          $ref: '#/components/schemas/AgentToolCall'
+        progress:
+          $ref: '#/components/schemas/AgentProgress'
+        tool_result:
+          $ref: '#/components/schemas/AgentToolResult'
+        error:
+          $ref: '#/components/schemas/AgentStreamError'
+        done:
+          $ref: '#/components/schemas/AgentStreamDone'
+      type: object
+    AgentEvent:
+      description: Text from Spotter — its reasoning or its answer.
+      properties:
+        id:
+          description: "Identifies a single event. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        invocation_id:
+          description: "Stable for one turn; every event of the same turn shares it.\
+            \ \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        partial:
+          description: "`true` for an incremental chunk, `false` for a frame restating\
+            \ a completed\nsegment; absent on a complete event. Restated text is not\
+            \ republished, and\nframes arrive in order over a single response, so\
+            \ appending every part is\nsafe. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: boolean
+        error_code:
+          description: "Set when the turn failed while producing this event. \n  Version:\
+            \ 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        content:
+          $ref: '#/components/schemas/AgentEventContent'
+      required:
+      - content
+      type: object
+    AgentEventContent:
+      description: The content of one agent event.
+      properties:
+        role:
+          description: "Always `model`: the events a caller sees are Spotter speaking.\
+            \ Mirrors the\nagent wire format, and is reserved for conversations with\
+            \ more than one\nspeaker. \n  Version: 26.12.0.cl or later\n"
+          type: string
+        parts:
+          description: "The text this event carries. Empty when `error_code` is set.\
+            \ \n  Version: 26.12.0.cl or later\n"
+          items:
+            $ref: '#/components/schemas/AgentEventPart'
+          type: array
+      required:
+      - parts
+      - role
+      type: object
+    AgentEventPart:
+      description: |-
+        One piece of text from Spotter, with a flag marking reasoning apart from the
+        answer itself.
+      properties:
+        text:
+          description: "The text to render. Text arrives incrementally, so concatenate\
+            \ parts in the\norder received. \n  Version: 26.12.0.cl or later\n"
+          type: string
+        thought:
+          description: "`true` when this text is Spotter's reasoning rather than its\
+            \ answer. Use it\nto render reasoning separately, or to hide it. Absent\
+            \ otherwise; treat\nabsence as `false`. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: boolean
+      required:
+      - text
+      type: object
+    AgentToolCall:
+      description: "A step Spotter started, such as querying a data source."
+      properties:
+        id:
+          description: "Correlates this call with its `progress` and `tool_result`\
+            \ frames. Absent\nwhen the backend did not assign one; a step's frames\
+            \ then arrive in order, so\nmatch them by position. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        name:
+          description: "Name of the step that ran. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        args:
+          description: "The arguments the step ran with, forwarded as the backend\
+            \ produced them. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+      type: object
+    AgentProgress:
+      description: "A stage of a step in flight, so you can show what Spotter is doing."
+      properties:
+        code:
+          description: "Stage code. Treat an unfamiliar value as \"still working\"\
+            \ rather than an error. \n  Version: 26.12.0.cl or later\n"
+          type: string
+        message:
+          description: "Human-facing status text, when the backend supplies one. \n\
+            \  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        tool_call_id:
+          description: "The `tool_call` this stage belongs to. Absent when that call\
+            \ has no `id`. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+      required:
+      - code
+      type: object
+    AgentToolResult:
+      description: "What a step produced, including any answer."
+      properties:
+        id:
+          description: "Correlates with the `tool_call` and `progress` frames of the\
+            \ same step.\nAbsent when that call has no `id`. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        name:
+          description: "The step that produced this result. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        is_error:
+          description: "`true` when the step failed. Spotter usually explains the\
+            \ failure in the text\nthat follows, so this is a signal to read rather\
+            \ than a reason to stop.\nAbsent when the step did not report an outcome;\
+            \ treat absence as `false`. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: boolean
+        text:
+          description: "The step's own human-readable summary. For a data query it\
+            \ includes a sample\nof the rows — read `answer.table_data.total_rows`\
+            \ for the true count. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        answer:
+          description: "The ThoughtSpot answer the step produced, forwarded as the\
+            \ backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link\
+            \ it. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+      type: object
+    AgentStreamError:
+      description: A failure that ended the turn.
+      properties:
+        code:
+          description: "Machine-readable status, always a string. Quote it when reporting\
+            \ an issue. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        message:
+          description: "Diagnostic detail. Not written for end users — render `display_message`.\
+            \ \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        source:
+          description: "Which layer produced the failure. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        display_message:
+          description: "Text safe to show a user. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        error_bucket:
+          description: "What the caller should do: `RETRY`, `REFRESH`, `NEW_CHAT`\
+            \ or `SUPPORT`. Treat\nan unrecognized value as `SUPPORT`. \n  Version:\
+            \ 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+      type: object
+    AgentStreamDone:
+      description: End of turn. Always last.
+      properties:
+        conversation_identifier:
+          description: "The conversation this turn belonged to, repeated so a client\
+            \ that cannot read\nresponse headers can still continue it. \n  Version:\
+            \ 26.12.0.cl or later\n"
+          type: string
+      required:
+      - conversation_identifier
+      type: object
+    AgentTurnResponse:
+      description: "A completed agent turn: every frame the streaming endpoint publishes,\
+        \ collected."
+      properties:
+        conversation_identifier:
+          description: "The conversation the turn belongs to. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          type: string
+        events:
+          description: "The frames of the turn, in the order Spotter produced them.\
+            \ The number of\nframes is not capped and the list is never truncated:\
+            \ a turn too large or too\nlong to return whole fails with an HTTP error\
+            \ instead. For long turns, use\nthe streaming endpoint. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          items:
+            $ref: '#/components/schemas/AgentStreamFrame'
+          type: array
+      required:
+      - conversation_identifier
+      - events
+      type: object
+    AgentStopResponse:
+      description: The outcome of stopping a conversation's in-progress response.
+      properties:
+        status:
+          description: "What happened. Stopping a conversation with no turn running\
+            \ is reported here\nrather than as an error. \n  Version: 26.12.0.cl or\
+            \ later\n"
+          nullable: true
+          type: string
+        message:
+          description: "Human-readable detail, when the backend supplies it. \n  Version:\
+            \ 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+      type: object
     SendAgentMessageResponse:
       example:
         success: true
@@ -33361,6 +33606,23 @@ components:
       required:
       - conversation_settings
       type: object
+    CreateAgentConversationV2Request:
+      properties:
+        data_source_identifiers:
+          default: []
+          description: "Unique identifiers of the data sources to scope the conversation\
+            \ to. When\nempty, Spotter selects the most relevant data source for each\
+            \ question. \n  Version: 26.12.0.cl or later\n"
+          items:
+            type: string
+          type: array
+        additional_instructions:
+          description: "Guidance appended to the agent's instructions on every message\
+            \ in this\nconversation. Use it to set a persona, a preferred output format,\
+            \ or\ndomain rules. Cannot be changed after the conversation is created.\
+            \ \n  Version: 26.12.0.cl or later\n"
+          type: string
+      type: object
     CreateAnalystRequest:
       example:
         instructions: instructions
@@ -33692,6 +33954,34 @@ components:
           type: array
       required:
       - messages
+      type: object
+    SendAgentConversationMessageStreamingV2Request:
+      properties:
+        message:
+          description: "The message to send to Spotter. \n  Version: 26.12.0.cl or\
+            \ later\n"
+          type: string
+        conversation_identifier:
+          description: "Conversation to send the message in. When omitted, a new conversation\
+            \ is\ncreated and its identifier is returned in the\n`x-conversation-identifier`\
+            \ response header. \n  Version: 26.12.0.cl or later\n"
+          type: string
+      required:
+      - message
+      type: object
+    SendAgentConversationMessageV2Request:
+      properties:
+        message:
+          description: "The message to send to Spotter. \n  Version: 26.12.0.cl or\
+            \ later\n"
+          type: string
+        conversation_identifier:
+          description: "Conversation to send the message in. When omitted, a new conversation\
+            \ is\ncreated and its identifier is returned in the\n`x-conversation-identifier`\
+            \ response header. \n  Version: 26.12.0.cl or later\n"
+          type: string
+      required:
+      - message
       type: object
     SendAgentMessageRequest:
       example:
@@ -42165,6 +42455,11 @@ x-roles:
   tags:
   - 26.2.0.cl
   description: Roles for version 26.2.0.cl
+- name: 26.12.0.cl
+  id: 26.12.0.cl
+  tags:
+  - 26.12.0.cl
+  description: Roles for version 26.12.0.cl
 - name: 26.10.0.cl
   id: 26.10.0.cl
   tags:
