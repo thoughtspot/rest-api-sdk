@@ -93,6 +93,42 @@
 -  the response header `content-disposition` was added for the status `200`
 
 
+### POST /api/rest/2.0/version-control/branch/promote
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/commit
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/commit/restore
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/config/create
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/config/delete
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/config/search
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/config/update
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/deploy
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/runs/search
+-  endpoint added
+
+
 
 
 ## Components

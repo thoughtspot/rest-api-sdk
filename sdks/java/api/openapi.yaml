@@ -22369,6 +22369,266 @@ components:
           nullable: true
           type: string
       type: object
+    VersionControlConfigList:
+      description: The configurations you can read. Zero or one while the scope is
+        your own Org.
+      properties:
+        configs:
+          description: The configurations.
+          items:
+            $ref: '#/components/schemas/VersionControlConfig'
+          type: array
+      required:
+      - configs
+      type: object
+    VersionControlConfig:
+      description: An Org's stored version control configuration.
+      properties:
+        org:
+          $ref: '#/components/schemas/Org'
+        provider:
+          description: Version control provider hosting the repository.
+          enum:
+          - GITHUB
+          - GITLAB
+          - BITBUCKET
+          - AZURE_DEVOPS
+          type: string
+        repository_url:
+          description: HTTPS URL of the repository this Org versions to.
+          type: string
+        commit_branch:
+          description: Branch that versioning runs commit to.
+          type: string
+        root_dir:
+          description: |-
+            Repository-relative directory that every write resolves under. Absent when
+            writes go to the repository root.
+          nullable: true
+          type: string
+        credential:
+          $ref: '#/components/schemas/VersionControlCredentialStatus'
+        disabled_operations:
+          description: Operations turned off for this Org. Empty when none are.
+          items:
+            enum:
+            - COMMIT
+            - DEPLOY
+            type: string
+          type: array
+        created_by:
+          $ref: '#/components/schemas/VersionControlPrincipal'
+        creation_time_in_millis:
+          description: "Creation time, in milliseconds since the Unix epoch."
+          format: float
+          type: number
+        last_modified_by:
+          $ref: '#/components/schemas/VersionControlPrincipal'
+        modification_time_in_millis:
+          description: "Last write time, in milliseconds since the Unix epoch."
+          format: float
+          type: number
+      required:
+      - commit_branch
+      - created_by
+      - creation_time_in_millis
+      - credential
+      - disabled_operations
+      - last_modified_by
+      - modification_time_in_millis
+      - org
+      - provider
+      - repository_url
+      type: object
+    VersionControlCredentialStatus:
+      description: "What is reported about a stored credential: its type, and nothing\
+        \ else."
+      properties:
+        type:
+          description: How the credential is held.
+          enum:
+          - ACCESS_TOKEN
+          type: string
+        username:
+          description: Username presented with the token over HTTPS.
+          nullable: true
+          type: string
+      required:
+      - type
+      type: object
+    VersionControlPrincipal:
+      description: |-
+        A user. Only the GUID is always carried; a display name is reported when one can
+        be resolved without an extra lookup.
+      properties:
+        id:
+          description: GUID of the user.
+          type: string
+        name:
+          description: Name of the user.
+          nullable: true
+          type: string
+      required:
+      - id
+      type: object
+    VersionControlObjectInput:
+      description: "One object a versioning run can report, used to filter run search."
+      properties:
+        identifier:
+          description: |-
+            Object ID of the metadata object, such as a Liveboard, an Answer or a Model.
+            This is the cross-Org object ID, not the Org-local GUID.
+          type: string
+        type:
+          description: |-
+            Type of the metadata object. Required when the identifier is a name, since a
+            name can belong to more than one type.
+          enum:
+          - LIVEBOARD
+          - ANSWER
+          - LOGICAL_TABLE
+          nullable: true
+          type: string
+      required:
+      - identifier
+      type: object
+    VersionControlRunList:
+      description: "A page of runs in your Org, newest first."
+      properties:
+        runs:
+          description: "Current outcome of each matching run, newest first."
+          items:
+            $ref: '#/components/schemas/VersionControlRunStatus'
+          type: array
+        last_batch:
+          description: |-
+            True when no runs follow this page, so a caller that receives a full page
+            knows whether to ask for the next one.
+          nullable: true
+          type: boolean
+      required:
+      - runs
+      type: object
+    VersionControlRunStatus:
+      description: Current outcome of one run.
+      properties:
+        id:
+          description: "ID of the run, as returned when it was admitted."
+          type: string
+        type:
+          description: Which operation admitted the run.
+          enum:
+          - COMMIT
+          - DEPLOY
+          - RESTORE
+          type: string
+        state:
+          description: Where the run stands.
+          enum:
+          - RUNNING
+          - SUCCESS
+          - PARTIAL_SUCCESS
+          - FAILED
+          type: string
+        message:
+          description: "What happened, in prose. Always present when state is FAILED."
+          nullable: true
+          type: string
+        accepted_time_in_millis:
+          description: "Admission time, in milliseconds since the Unix epoch."
+          format: float
+          type: number
+        end_time_in_millis:
+          description: |-
+            Time the run reached a terminal state, in milliseconds since the Unix epoch.
+            Absent while state is RUNNING.
+          format: float
+          nullable: true
+          type: number
+        author:
+          $ref: '#/components/schemas/VersionControlPrincipal'
+        branch:
+          description: |-
+            Branch the run used, which is the Org's configured branch at admission. A
+            later edit to the Org's configuration does not change it.
+          type: string
+        revision:
+          description: |-
+            On a commit, the commit this run produced. On a deploy, the revision being
+            deployed. On a restore, the restore commit. Absent until the commit is pushed,
+            and on a run that failed before pushing.
+          nullable: true
+          type: string
+        objects:
+          description: |-
+            Per-object outcomes known so far. This grows while state is RUNNING, and is
+            complete once the run is terminal.
+          items:
+            $ref: '#/components/schemas/VersionControlObjectResult'
+          type: array
+      required:
+      - accepted_time_in_millis
+      - author
+      - branch
+      - id
+      - objects
+      - state
+      - type
+      type: object
+    VersionControlObjectResult:
+      description: Outcome for one object in a run.
+      properties:
+        id:
+          description: |-
+            Object ID of the object. The same object carries the same ID in every Org, so
+            this is not the Org-local GUID. On a commit this is the resolved object ID even
+            when the request named the object by name or GUID.
+          type: string
+        type:
+          description: Type of the object.
+          enum:
+          - LIVEBOARD
+          - ANSWER
+          - LOGICAL_TABLE
+          nullable: true
+          type: string
+        file_name:
+          description: Repository path of the object's file.
+          nullable: true
+          type: string
+        action:
+          description: What the run did to the object.
+          enum:
+          - CREATE
+          - UPDATE
+          - UPSERT
+          - DELETE
+          nullable: true
+          type: string
+        status:
+          description: Outcome for the object.
+          enum:
+          - SUCCESS
+          - VALIDATED
+          - FAILED
+          - SKIPPED
+          type: string
+        message:
+          description: |-
+            Why the object is FAILED or SKIPPED, always present then. It may also carry a
+            warning on SUCCESS or VALIDATED.
+          nullable: true
+          type: string
+        is_dependency:
+          description: |-
+            True for an object the request did not name, exported because a requested
+            object depends on it. Commit runs only.
+          nullable: true
+          type: boolean
+      required:
+      - id
+      - status
+      type: object
     ConnectionInput:
       example:
         identifier: identifier
@@ -29807,6 +30067,282 @@ components:
           description: Any error or warning with the deployment
           nullable: true
           type: string
+      type: object
+    VersionControlCredentialInput:
+      description: Credential ThoughtSpot uses to reach an Org's repository.
+      properties:
+        type:
+          description: How the credential is held.
+          enum:
+          - ACCESS_TOKEN
+          type: string
+        username:
+          description: "Username presented with the token over HTTPS, for example\
+            \ svc-version-control."
+          nullable: true
+          type: string
+        access_token:
+          description: |-
+            Access token granting repository contents read and write, and metadata read.
+            Add the provider's repository-rules read permission for rule-aware validation.
+            Required when type is ACCESS_TOKEN.
+          nullable: true
+          type: string
+      required:
+      - type
+      type: object
+    VersionControlCommitObjectInput:
+      description: One object to version on the commit endpoint.
+      properties:
+        identifier:
+          description: |-
+            Object ID of the metadata object, such as a Liveboard or an Answer. This is
+            the cross-Org object ID, not the Org-local GUID and not the object name, and
+            it requires object IDs to be enabled on the cluster.
+          type: string
+        type:
+          description: |-
+            Type of the metadata object. Required when the identifier is a name, since a
+            name can belong to more than one type.
+          enum:
+          - LIVEBOARD
+          - ANSWER
+          nullable: true
+          type: string
+      required:
+      - identifier
+      type: object
+    VersionControlCommitResponse:
+      description: |-
+        Admission receipt for a versioning run. It confirms the request was accepted and
+        identifies the run; it says nothing about what was committed.
+      properties:
+        run_id:
+          description: |-
+            ID of this run, and the trace key across the API, the worker, the Git commit
+            and the logs. Pass it to run search to read per-object outcomes.
+          type: string
+        accepted_time_in_millis:
+          description: "Admission time, in milliseconds since the Unix epoch."
+          format: float
+          type: number
+        author:
+          $ref: '#/components/schemas/VersionControlPrincipal'
+      required:
+      - accepted_time_in_millis
+      - author
+      - run_id
+      type: object
+    VersionControlPromoteSourceInput:
+      description: |-
+        Where a promotion takes content from. Name the source either by Org or by
+        branch, not both: an Org and the branch it versions to determine each other, and
+        the response reports both.
+      properties:
+        org_identifier:
+          description: |-
+            Unique ID or name of the Org to promote from. Promoting from any Org other
+            than your own requires tenant administration privilege.
+          nullable: true
+          type: string
+        source_branch:
+          description: "Branch to promote from, when naming it directly rather than\
+            \ by Org."
+          nullable: true
+          type: string
+        source_revision:
+          description: |-
+            Revision to promote, for example a Git commit SHA. Required when the strategy
+            type is CHERRY_PICK, and ignored otherwise.
+          nullable: true
+          type: string
+      type: object
+    VersionControlPromoteStrategyInput:
+      description: How a promotion is applied.
+      properties:
+        type:
+          description: How the source is applied to the target branch.
+          enum:
+          - MERGE
+          - SQUASH
+          - FAST_FORWARD
+          - CHERRY_PICK
+          type: string
+        conflict_policy:
+          default: FAIL_REQUEST
+          description: What to do when files conflict.
+          enum:
+          - FAIL_REQUEST
+          - USE_SOURCE
+          - USE_TARGET
+          nullable: true
+          type: string
+      required:
+      - type
+      type: object
+    VersionControlPromotionResponse:
+      description: "What a promotion did, or on a dry run what one would do."
+      properties:
+        source:
+          $ref: '#/components/schemas/VersionControlOrgBranch'
+        target:
+          $ref: '#/components/schemas/VersionControlOrgBranch'
+        branch_divergence:
+          $ref: '#/components/schemas/VersionControlBranchDivergence'
+        revision_details:
+          $ref: '#/components/schemas/VersionControlRevisionDetails'
+        file_changes:
+          $ref: '#/components/schemas/VersionControlFileChanges'
+      required:
+      - file_changes
+      - source
+      - target
+      type: object
+    VersionControlOrgBranch:
+      description: "An Org and the branch it versions to, as resolved by ThoughtSpot."
+      properties:
+        org:
+          $ref: '#/components/schemas/Org'
+        branch:
+          description: Branch that Org versions to.
+          type: string
+      required:
+      - branch
+      - org
+      type: object
+    VersionControlBranchDivergence:
+      description: How far apart two branches are.
+      properties:
+        ahead_by:
+          description: Commits on the source that are not yet on the target.
+          format: int32
+          nullable: true
+          type: integer
+        behind_by:
+          description: Commits on the target that are not on the source.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    VersionControlRevisionDetails:
+      description: |-
+        The revision the target branch points at after a promotion. Absent on a dry run,
+        since nothing was written.
+      properties:
+        revision:
+          description: |-
+            Identifier of the revision. For a Git-backed repository this is the commit
+            SHA.
+          type: string
+        message:
+          description: Commit message used.
+          nullable: true
+          type: string
+        committed_time_in_millis:
+          description: "Commit time, in milliseconds since the Unix epoch."
+          format: float
+          type: number
+        author:
+          $ref: '#/components/schemas/VersionControlPrincipal'
+      required:
+      - author
+      - committed_time_in_millis
+      - revision
+      type: object
+    VersionControlFileChanges:
+      description: |-
+        Files a promotion changed, or would change on a dry run, one list per kind of
+        change. Every list is present and empty when that kind has none, so total_count
+        is the sum of their lengths.
+      properties:
+        total_count:
+          description: "Total files changed, across all kinds of change."
+          format: int32
+          type: integer
+        added:
+          description: Repository paths of files added.
+          items:
+            type: string
+          type: array
+        modified:
+          description: Repository paths of files modified.
+          items:
+            type: string
+          type: array
+        deleted:
+          description: Repository paths of files deleted.
+          items:
+            type: string
+          type: array
+        conflicts:
+          description: |-
+            Repository paths of files that conflicted and were resolved in favor of the
+            side named by conflict_policy. Empty under FAIL_REQUEST, which fails the
+            request rather than returning a body whenever anything conflicts.
+          items:
+            type: string
+          type: array
+      required:
+      - added
+      - conflicts
+      - deleted
+      - modified
+      - total_count
+      type: object
+    VersionControlDeployResponse:
+      description: |-
+        Admission receipt for a deploy run. It identifies the run and the revisions it
+        was admitted against; it says nothing about what was imported.
+      properties:
+        run_id:
+          description: |-
+            ID of this run, and the trace key across the API, the worker and the logs.
+            Pass it to run search to read per-object outcomes.
+          type: string
+        target_deployment_revision:
+          description: |-
+            Revision this run was admitted against, pinned at admission. Resolved from the
+            head of the configured branch when target_revision was omitted.
+          type: string
+        last_deployed_revision:
+          description: |-
+            Revision the Org last received, which this run compared against. Absent when
+            there was none: the Org's first deploy, or deploy_type FULL.
+          nullable: true
+          type: string
+        accepted_time_in_millis:
+          description: "Admission time, in milliseconds since the Unix epoch."
+          format: float
+          type: number
+      required:
+      - accepted_time_in_millis
+      - run_id
+      - target_deployment_revision
+      type: object
+    VersionControlRestoreResponse:
+      description: |-
+        Admission receipt for a restore run. The revision was resolved and the run has
+        started; it says nothing about what was restored. The restore commit is not here
+        because it does not exist until the run pushes it: read it from run search as
+        the run's revision, along with the per-object outcomes.
+      properties:
+        run_id:
+          description: |-
+            ID of this run, and the trace key across the API, the worker, the Git commit
+            and the logs.
+          type: string
+        target_revision:
+          description: "Revision whose content is restored, in full form. Pinned at\
+            \ admission."
+          type: string
+        accepted_time_in_millis:
+          description: "Admission time, in milliseconds since the Unix epoch."
+          format: float
+          type: number
+      required:
+      - accepted_time_in_millis
+      - run_id
+      - target_revision
       type: object
     CreateConnectionResponse:
       example:
@@ -41942,6 +42478,246 @@ components:
       required:
       - source_branch_name
       - target_branch_name
+      type: object
+    CreateCommitRequest:
+      properties:
+        objects:
+          description: |-
+            Objects to version in this run, named by object ID. Every object must be
+            distinct, must already exist in your Org, and must be a Liveboard or an
+            Answer. A run carries at most 50.
+          items:
+            $ref: '#/components/schemas/VersionControlCommitObjectInput'
+          type: array
+        commit_message:
+          description: |-
+            Message for the single Git commit this run produces. Omit this to let
+            ThoughtSpot generate one.
+          type: string
+        prune_deleted_object_files:
+          default: false
+          description: |-
+            Remove the repository file of any named object that no longer exists in
+            ThoughtSpot, so the branch stops carrying deleted content.
+          nullable: true
+          type: boolean
+      required:
+      - objects
+      type: object
+    CreateVersionControlConfigRequest:
+      properties:
+        provider:
+          description: |-
+            Version control provider hosting the repository. Only SaaS-hosted
+            ThoughtSpot instances can reach an external provider.
+          enum:
+          - GITHUB
+          - GITLAB
+          - BITBUCKET
+          - AZURE_DEVOPS
+          type: string
+        repository_url:
+          description: |-
+            HTTPS URL of the repository your Org versions to, for example
+            https://github.com/example-org/example-repo.git. Plain HTTP is rejected.
+          type: string
+        commit_branch:
+          description: |-
+            Branch that versioning runs commit to, for example main or prod. Every
+            commit, deploy and restore for this Org uses this branch.
+          type: string
+        root_dir:
+          description: |-
+            Repository-relative directory that every write must resolve under, for
+            example analytics/prod. The path must
+            be relative, and each segment must begin with a letter, digit, underscore or
+            hyphen, which keeps writes inside the directory.
+          type: string
+        credential:
+          allOf:
+          - $ref: '#/components/schemas/VersionControlCredentialInput'
+          description: Credential ThoughtSpot uses to reach the repository.
+        disabled_operations:
+          description: |-
+            Operations to turn off for this Org. COMMIT stops the commit endpoint and
+            DEPLOY stops the deploy endpoint; restore performs both, so disabling
+            either one also stops a restore. Send an empty array to disable nothing.
+          items:
+            enum:
+            - COMMIT
+            - DEPLOY
+            type: string
+          type: array
+      required:
+      - commit_branch
+      - credential
+      - provider
+      - repository_url
+      type: object
+    DeployRevisionRequest:
+      properties:
+        target_revision:
+          description: |-
+            Revision to deploy, for example a Git commit SHA. Omit this to resolve and
+            pin the head of your Org's configured branch. Either way the revision must
+            be reachable from that branch.
+          type: string
+        deploy_type:
+          default: DELTA
+          description: |-
+            What to compare the revision against. DELTA compares it with the revision
+            this Org last received, which is what makes the Org converge on the branch.
+            FULL ignores the deploy marker, treats every object at the revision as a
+            change, and observes no removals.
+          enum:
+          - DELTA
+          - FULL
+          type: string
+        deploy_policy:
+          default: ALL_OR_NONE
+          description: How far the run goes and how it settles per-object failures.
+          enum:
+          - ALL_OR_NONE
+          - PARTIAL
+          - VALIDATE_ONLY
+          type: string
+      type: object
+    PromoteBranchRequest:
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/VersionControlPromoteSourceInput'
+          description: "Where to promote content from, named either by Org or by branch."
+        strategy:
+          allOf:
+          - $ref: '#/components/schemas/VersionControlPromoteStrategyInput'
+          description: |-
+            How the source is applied to your Org's branch, and what to do when files
+            conflict.
+        commit_message:
+          description: Message for the promotion commit. Omit this to let Git generate
+            one.
+          type: string
+        dry_run:
+          default: true
+          description: |-
+            Report what the promotion would change without writing anything. Defaults to
+            true, so a request that omits this performs a dry run.
+          nullable: true
+          type: boolean
+      required:
+      - source
+      - strategy
+      type: object
+    RestoreRevisionRequest:
+      properties:
+        target_revision:
+          description: |-
+            Revision whose content the branch and the Org are restored to, for example a
+            Git commit SHA. It must be reachable from your Org's configured branch, and
+            must not be its head, since restoring the head changes nothing.
+          type: string
+        restore_policy:
+          default: ALL_OR_NONE
+          description: |-
+            How far the run goes and how it settles per-object failures. Same values and
+            meaning as deploy_policy on the deploy endpoint; under VALIDATE_ONLY nothing
+            is committed either.
+          enum:
+          - ALL_OR_NONE
+          - PARTIAL
+          - VALIDATE_ONLY
+          type: string
+      required:
+      - target_revision
+      type: object
+    SearchVersionControlRunsRequest:
+      properties:
+        run_identifiers:
+          description: |-
+            Runs to read, as run IDs returned when each run was admitted, at most 100.
+            Omit this to return your Org's runs, newest first. Paging applies either way.
+          items:
+            type: string
+          type: array
+        run_type:
+          description: |-
+            Return only runs admitted by this operation. COMMIT is your Org's commit
+            history, DEPLOY the content it received, RESTORE the rollbacks it ran.
+            Omit this to return every type.
+          enum:
+          - COMMIT
+          - DEPLOY
+          - RESTORE
+          type: string
+        objects:
+          description: |-
+            Return only runs that carry a result for at least one of these objects.
+            Objects are named as on the commit endpoint, except that the type may also
+            be LOGICAL_TABLE: a run can report a type that a commit does not accept.
+            Omit this to return runs regardless of the objects they touched.
+          items:
+            $ref: '#/components/schemas/VersionControlObjectInput'
+          type: array
+        record_offset:
+          default: 0
+          description: |-
+            The starting record number from where the runs should be included, in
+            newest-first order.
+          format: int32
+          type: integer
+        record_size:
+          default: 10
+          description: |-
+            The number of runs that should be included, between 1 and 100. Applies to
+            run_identifiers too: naming more runs than this returns only the first page.
+          format: int32
+          type: integer
+      type: object
+    UpdateVersionControlConfigRequest:
+      properties:
+        provider:
+          description: |-
+            Version control provider hosting the repository. Omit this to leave the
+            stored provider unchanged.
+          enum:
+          - GITHUB
+          - GITLAB
+          - BITBUCKET
+          - AZURE_DEVOPS
+          type: string
+        repository_url:
+          description: |-
+            HTTPS URL of the repository your Org versions to. Omit this to leave the
+            stored repository unchanged.
+          type: string
+        commit_branch:
+          description: |-
+            Branch that versioning runs commit to. Omit this to leave the stored branch
+            unchanged.
+          type: string
+        root_dir:
+          description: |-
+            Repository-relative directory that every write must resolve under. Omit
+            this to leave the stored directory unchanged.
+          type: string
+        credential:
+          allOf:
+          - $ref: '#/components/schemas/VersionControlCredentialInput'
+          description: |-
+            Credential ThoughtSpot uses to reach the repository. Omit this to keep the
+            stored credential, unless the provider, host or repository owner changed, in
+            which case a new credential is required.
+        disabled_operations:
+          description: |-
+            Operations to turn off for this Org, replacing whatever is stored. Send an
+            empty array to disable nothing. Omit this to leave the stored set unchanged.
+          items:
+            enum:
+            - COMMIT
+            - DEPLOY
+            type: string
+          type: array
       type: object
     CreateWebhookConfigurationRequest:
       example:

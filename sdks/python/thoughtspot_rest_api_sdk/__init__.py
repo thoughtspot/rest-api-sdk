@@ -193,6 +193,7 @@ __all__ = [
     "CreateAnalystRequest",
     "CreateCalendarRequest",
     "CreateCollectionRequest",
+    "CreateCommitRequest",
     "CreateConfigRequest",
     "CreateConnectionConfigurationRequest",
     "CreateConnectionRequest",
@@ -211,6 +212,7 @@ __all__ = [
     "CreateUserGroupRequest",
     "CreateUserRequest",
     "CreateVariableRequest",
+    "CreateVersionControlConfigRequest",
     "CreateWebhookConfigurationRequest",
     "CronExpression",
     "CronExpressionInput",
@@ -248,6 +250,7 @@ __all__ = [
     "DeleteWebhookConfigurationsRequest",
     "DeployCommitRequest",
     "DeployResponse",
+    "DeployRevisionRequest",
     "EntityHeader",
     "ErrorResponse",
     "EurekaDataSourceSuggestionResponse",
@@ -398,6 +401,7 @@ __all__ = [
     "PrincipalsInput",
     "PrincipalsListItem",
     "PrincipalsListItemInput",
+    "PromoteBranchRequest",
     "PublicFileInfo",
     "PublishMetadataListItem",
     "PublishMetadataRequest",
@@ -425,6 +429,7 @@ __all__ = [
     "ResponseSuccessfulEntities",
     "ResponseSuccessfulEntity",
     "ResponseWorksheetToModelConversion",
+    "RestoreRevisionRequest",
     "RevertCommitRequest",
     "RevertResponse",
     "RevertedMetadata",
@@ -480,6 +485,7 @@ __all__ = [
     "SearchUserGroupsRequest",
     "SearchUsersRequest",
     "SearchVariablesRequest",
+    "SearchVersionControlRunsRequest",
     "SearchWebhookConfigurationsRequest",
     "SecuritySettingsClusterPreferences",
     "SecuritySettingsClusterPreferencesInput",
@@ -593,6 +599,7 @@ __all__ = [
     "UpdateUserRequest",
     "UpdateVariableRequest",
     "UpdateVariableValuesRequest",
+    "UpdateVersionControlConfigRequest",
     "UpdateWebhookConfigurationRequest",
     "UsageData",
     "UsageDataForUserResponse",
@@ -622,6 +629,26 @@ __all__ = [
     "VariableUpdateScopeInput",
     "VariableValue",
     "VariableValues",
+    "VersionControlBranchDivergence",
+    "VersionControlCommitObjectInput",
+    "VersionControlCommitResponse",
+    "VersionControlConfig",
+    "VersionControlConfigList",
+    "VersionControlCredentialInput",
+    "VersionControlCredentialStatus",
+    "VersionControlDeployResponse",
+    "VersionControlFileChanges",
+    "VersionControlObjectInput",
+    "VersionControlObjectResult",
+    "VersionControlOrgBranch",
+    "VersionControlPrincipal",
+    "VersionControlPromoteSourceInput",
+    "VersionControlPromoteStrategyInput",
+    "VersionControlPromotionResponse",
+    "VersionControlRestoreResponse",
+    "VersionControlRevisionDetails",
+    "VersionControlRunList",
+    "VersionControlRunStatus",
     "VisualizationFontsInput",
     "WebhookAuthApiKey",
     "WebhookAuthApiKeyInput",
@@ -821,6 +848,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.create_analyst_request import CreateAnalystRequest as CreateAnalystRequest
     from thoughtspot_rest_api_sdk.models.create_calendar_request import CreateCalendarRequest as CreateCalendarRequest
     from thoughtspot_rest_api_sdk.models.create_collection_request import CreateCollectionRequest as CreateCollectionRequest
+    from thoughtspot_rest_api_sdk.models.create_commit_request import CreateCommitRequest as CreateCommitRequest
     from thoughtspot_rest_api_sdk.models.create_config_request import CreateConfigRequest as CreateConfigRequest
     from thoughtspot_rest_api_sdk.models.create_connection_configuration_request import CreateConnectionConfigurationRequest as CreateConnectionConfigurationRequest
     from thoughtspot_rest_api_sdk.models.create_connection_request import CreateConnectionRequest as CreateConnectionRequest
@@ -839,6 +867,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.create_user_group_request import CreateUserGroupRequest as CreateUserGroupRequest
     from thoughtspot_rest_api_sdk.models.create_user_request import CreateUserRequest as CreateUserRequest
     from thoughtspot_rest_api_sdk.models.create_variable_request import CreateVariableRequest as CreateVariableRequest
+    from thoughtspot_rest_api_sdk.models.create_version_control_config_request import CreateVersionControlConfigRequest as CreateVersionControlConfigRequest
     from thoughtspot_rest_api_sdk.models.create_webhook_configuration_request import CreateWebhookConfigurationRequest as CreateWebhookConfigurationRequest
     from thoughtspot_rest_api_sdk.models.cron_expression import CronExpression as CronExpression
     from thoughtspot_rest_api_sdk.models.cron_expression_input import CronExpressionInput as CronExpressionInput
@@ -876,6 +905,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.delete_webhook_configurations_request import DeleteWebhookConfigurationsRequest as DeleteWebhookConfigurationsRequest
     from thoughtspot_rest_api_sdk.models.deploy_commit_request import DeployCommitRequest as DeployCommitRequest
     from thoughtspot_rest_api_sdk.models.deploy_response import DeployResponse as DeployResponse
+    from thoughtspot_rest_api_sdk.models.deploy_revision_request import DeployRevisionRequest as DeployRevisionRequest
     from thoughtspot_rest_api_sdk.models.entity_header import EntityHeader as EntityHeader
     from thoughtspot_rest_api_sdk.models.error_response import ErrorResponse as ErrorResponse
     from thoughtspot_rest_api_sdk.models.eureka_data_source_suggestion_response import EurekaDataSourceSuggestionResponse as EurekaDataSourceSuggestionResponse
@@ -1026,6 +1056,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.principals_input import PrincipalsInput as PrincipalsInput
     from thoughtspot_rest_api_sdk.models.principals_list_item import PrincipalsListItem as PrincipalsListItem
     from thoughtspot_rest_api_sdk.models.principals_list_item_input import PrincipalsListItemInput as PrincipalsListItemInput
+    from thoughtspot_rest_api_sdk.models.promote_branch_request import PromoteBranchRequest as PromoteBranchRequest
     from thoughtspot_rest_api_sdk.models.public_file_info import PublicFileInfo as PublicFileInfo
     from thoughtspot_rest_api_sdk.models.publish_metadata_list_item import PublishMetadataListItem as PublishMetadataListItem
     from thoughtspot_rest_api_sdk.models.publish_metadata_request import PublishMetadataRequest as PublishMetadataRequest
@@ -1053,6 +1084,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.response_successful_entities import ResponseSuccessfulEntities as ResponseSuccessfulEntities
     from thoughtspot_rest_api_sdk.models.response_successful_entity import ResponseSuccessfulEntity as ResponseSuccessfulEntity
     from thoughtspot_rest_api_sdk.models.response_worksheet_to_model_conversion import ResponseWorksheetToModelConversion as ResponseWorksheetToModelConversion
+    from thoughtspot_rest_api_sdk.models.restore_revision_request import RestoreRevisionRequest as RestoreRevisionRequest
     from thoughtspot_rest_api_sdk.models.revert_commit_request import RevertCommitRequest as RevertCommitRequest
     from thoughtspot_rest_api_sdk.models.revert_response import RevertResponse as RevertResponse
     from thoughtspot_rest_api_sdk.models.reverted_metadata import RevertedMetadata as RevertedMetadata
@@ -1108,6 +1140,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.search_user_groups_request import SearchUserGroupsRequest as SearchUserGroupsRequest
     from thoughtspot_rest_api_sdk.models.search_users_request import SearchUsersRequest as SearchUsersRequest
     from thoughtspot_rest_api_sdk.models.search_variables_request import SearchVariablesRequest as SearchVariablesRequest
+    from thoughtspot_rest_api_sdk.models.search_version_control_runs_request import SearchVersionControlRunsRequest as SearchVersionControlRunsRequest
     from thoughtspot_rest_api_sdk.models.search_webhook_configurations_request import SearchWebhookConfigurationsRequest as SearchWebhookConfigurationsRequest
     from thoughtspot_rest_api_sdk.models.security_settings_cluster_preferences import SecuritySettingsClusterPreferences as SecuritySettingsClusterPreferences
     from thoughtspot_rest_api_sdk.models.security_settings_cluster_preferences_input import SecuritySettingsClusterPreferencesInput as SecuritySettingsClusterPreferencesInput
@@ -1221,6 +1254,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.update_user_request import UpdateUserRequest as UpdateUserRequest
     from thoughtspot_rest_api_sdk.models.update_variable_request import UpdateVariableRequest as UpdateVariableRequest
     from thoughtspot_rest_api_sdk.models.update_variable_values_request import UpdateVariableValuesRequest as UpdateVariableValuesRequest
+    from thoughtspot_rest_api_sdk.models.update_version_control_config_request import UpdateVersionControlConfigRequest as UpdateVersionControlConfigRequest
     from thoughtspot_rest_api_sdk.models.update_webhook_configuration_request import UpdateWebhookConfigurationRequest as UpdateWebhookConfigurationRequest
     from thoughtspot_rest_api_sdk.models.usage_data import UsageData as UsageData
     from thoughtspot_rest_api_sdk.models.usage_data_for_user_response import UsageDataForUserResponse as UsageDataForUserResponse
@@ -1250,6 +1284,26 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.variable_update_scope_input import VariableUpdateScopeInput as VariableUpdateScopeInput
     from thoughtspot_rest_api_sdk.models.variable_value import VariableValue as VariableValue
     from thoughtspot_rest_api_sdk.models.variable_values import VariableValues as VariableValues
+    from thoughtspot_rest_api_sdk.models.version_control_branch_divergence import VersionControlBranchDivergence as VersionControlBranchDivergence
+    from thoughtspot_rest_api_sdk.models.version_control_commit_object_input import VersionControlCommitObjectInput as VersionControlCommitObjectInput
+    from thoughtspot_rest_api_sdk.models.version_control_commit_response import VersionControlCommitResponse as VersionControlCommitResponse
+    from thoughtspot_rest_api_sdk.models.version_control_config import VersionControlConfig as VersionControlConfig
+    from thoughtspot_rest_api_sdk.models.version_control_config_list import VersionControlConfigList as VersionControlConfigList
+    from thoughtspot_rest_api_sdk.models.version_control_credential_input import VersionControlCredentialInput as VersionControlCredentialInput
+    from thoughtspot_rest_api_sdk.models.version_control_credential_status import VersionControlCredentialStatus as VersionControlCredentialStatus
+    from thoughtspot_rest_api_sdk.models.version_control_deploy_response import VersionControlDeployResponse as VersionControlDeployResponse
+    from thoughtspot_rest_api_sdk.models.version_control_file_changes import VersionControlFileChanges as VersionControlFileChanges
+    from thoughtspot_rest_api_sdk.models.version_control_object_input import VersionControlObjectInput as VersionControlObjectInput
+    from thoughtspot_rest_api_sdk.models.version_control_object_result import VersionControlObjectResult as VersionControlObjectResult
+    from thoughtspot_rest_api_sdk.models.version_control_org_branch import VersionControlOrgBranch as VersionControlOrgBranch
+    from thoughtspot_rest_api_sdk.models.version_control_principal import VersionControlPrincipal as VersionControlPrincipal
+    from thoughtspot_rest_api_sdk.models.version_control_promote_source_input import VersionControlPromoteSourceInput as VersionControlPromoteSourceInput
+    from thoughtspot_rest_api_sdk.models.version_control_promote_strategy_input import VersionControlPromoteStrategyInput as VersionControlPromoteStrategyInput
+    from thoughtspot_rest_api_sdk.models.version_control_promotion_response import VersionControlPromotionResponse as VersionControlPromotionResponse
+    from thoughtspot_rest_api_sdk.models.version_control_restore_response import VersionControlRestoreResponse as VersionControlRestoreResponse
+    from thoughtspot_rest_api_sdk.models.version_control_revision_details import VersionControlRevisionDetails as VersionControlRevisionDetails
+    from thoughtspot_rest_api_sdk.models.version_control_run_list import VersionControlRunList as VersionControlRunList
+    from thoughtspot_rest_api_sdk.models.version_control_run_status import VersionControlRunStatus as VersionControlRunStatus
     from thoughtspot_rest_api_sdk.models.visualization_fonts_input import VisualizationFontsInput as VisualizationFontsInput
     from thoughtspot_rest_api_sdk.models.webhook_auth_api_key import WebhookAuthApiKey as WebhookAuthApiKey
     from thoughtspot_rest_api_sdk.models.webhook_auth_api_key_input import WebhookAuthApiKeyInput as WebhookAuthApiKeyInput
@@ -1455,6 +1509,7 @@ from thoughtspot_rest_api_sdk.models.create_agent_conversation_v2_request import
 from thoughtspot_rest_api_sdk.models.create_analyst_request import CreateAnalystRequest as CreateAnalystRequest
 from thoughtspot_rest_api_sdk.models.create_calendar_request import CreateCalendarRequest as CreateCalendarRequest
 from thoughtspot_rest_api_sdk.models.create_collection_request import CreateCollectionRequest as CreateCollectionRequest
+from thoughtspot_rest_api_sdk.models.create_commit_request import CreateCommitRequest as CreateCommitRequest
 from thoughtspot_rest_api_sdk.models.create_config_request import CreateConfigRequest as CreateConfigRequest
 from thoughtspot_rest_api_sdk.models.create_connection_configuration_request import CreateConnectionConfigurationRequest as CreateConnectionConfigurationRequest
 from thoughtspot_rest_api_sdk.models.create_connection_request import CreateConnectionRequest as CreateConnectionRequest
@@ -1473,6 +1528,7 @@ from thoughtspot_rest_api_sdk.models.create_tag_request import CreateTagRequest 
 from thoughtspot_rest_api_sdk.models.create_user_group_request import CreateUserGroupRequest as CreateUserGroupRequest
 from thoughtspot_rest_api_sdk.models.create_user_request import CreateUserRequest as CreateUserRequest
 from thoughtspot_rest_api_sdk.models.create_variable_request import CreateVariableRequest as CreateVariableRequest
+from thoughtspot_rest_api_sdk.models.create_version_control_config_request import CreateVersionControlConfigRequest as CreateVersionControlConfigRequest
 from thoughtspot_rest_api_sdk.models.create_webhook_configuration_request import CreateWebhookConfigurationRequest as CreateWebhookConfigurationRequest
 from thoughtspot_rest_api_sdk.models.cron_expression import CronExpression as CronExpression
 from thoughtspot_rest_api_sdk.models.cron_expression_input import CronExpressionInput as CronExpressionInput
@@ -1510,6 +1566,7 @@ from thoughtspot_rest_api_sdk.models.delete_variables_request import DeleteVaria
 from thoughtspot_rest_api_sdk.models.delete_webhook_configurations_request import DeleteWebhookConfigurationsRequest as DeleteWebhookConfigurationsRequest
 from thoughtspot_rest_api_sdk.models.deploy_commit_request import DeployCommitRequest as DeployCommitRequest
 from thoughtspot_rest_api_sdk.models.deploy_response import DeployResponse as DeployResponse
+from thoughtspot_rest_api_sdk.models.deploy_revision_request import DeployRevisionRequest as DeployRevisionRequest
 from thoughtspot_rest_api_sdk.models.entity_header import EntityHeader as EntityHeader
 from thoughtspot_rest_api_sdk.models.error_response import ErrorResponse as ErrorResponse
 from thoughtspot_rest_api_sdk.models.eureka_data_source_suggestion_response import EurekaDataSourceSuggestionResponse as EurekaDataSourceSuggestionResponse
@@ -1660,6 +1717,7 @@ from thoughtspot_rest_api_sdk.models.principal_ref_input import PrincipalRefInpu
 from thoughtspot_rest_api_sdk.models.principals_input import PrincipalsInput as PrincipalsInput
 from thoughtspot_rest_api_sdk.models.principals_list_item import PrincipalsListItem as PrincipalsListItem
 from thoughtspot_rest_api_sdk.models.principals_list_item_input import PrincipalsListItemInput as PrincipalsListItemInput
+from thoughtspot_rest_api_sdk.models.promote_branch_request import PromoteBranchRequest as PromoteBranchRequest
 from thoughtspot_rest_api_sdk.models.public_file_info import PublicFileInfo as PublicFileInfo
 from thoughtspot_rest_api_sdk.models.publish_metadata_list_item import PublishMetadataListItem as PublishMetadataListItem
 from thoughtspot_rest_api_sdk.models.publish_metadata_request import PublishMetadataRequest as PublishMetadataRequest
@@ -1687,6 +1745,7 @@ from thoughtspot_rest_api_sdk.models.response_schedule_run import ResponseSchedu
 from thoughtspot_rest_api_sdk.models.response_successful_entities import ResponseSuccessfulEntities as ResponseSuccessfulEntities
 from thoughtspot_rest_api_sdk.models.response_successful_entity import ResponseSuccessfulEntity as ResponseSuccessfulEntity
 from thoughtspot_rest_api_sdk.models.response_worksheet_to_model_conversion import ResponseWorksheetToModelConversion as ResponseWorksheetToModelConversion
+from thoughtspot_rest_api_sdk.models.restore_revision_request import RestoreRevisionRequest as RestoreRevisionRequest
 from thoughtspot_rest_api_sdk.models.revert_commit_request import RevertCommitRequest as RevertCommitRequest
 from thoughtspot_rest_api_sdk.models.revert_response import RevertResponse as RevertResponse
 from thoughtspot_rest_api_sdk.models.reverted_metadata import RevertedMetadata as RevertedMetadata
@@ -1742,6 +1801,7 @@ from thoughtspot_rest_api_sdk.models.search_usage_data_request import SearchUsag
 from thoughtspot_rest_api_sdk.models.search_user_groups_request import SearchUserGroupsRequest as SearchUserGroupsRequest
 from thoughtspot_rest_api_sdk.models.search_users_request import SearchUsersRequest as SearchUsersRequest
 from thoughtspot_rest_api_sdk.models.search_variables_request import SearchVariablesRequest as SearchVariablesRequest
+from thoughtspot_rest_api_sdk.models.search_version_control_runs_request import SearchVersionControlRunsRequest as SearchVersionControlRunsRequest
 from thoughtspot_rest_api_sdk.models.search_webhook_configurations_request import SearchWebhookConfigurationsRequest as SearchWebhookConfigurationsRequest
 from thoughtspot_rest_api_sdk.models.security_settings_cluster_preferences import SecuritySettingsClusterPreferences as SecuritySettingsClusterPreferences
 from thoughtspot_rest_api_sdk.models.security_settings_cluster_preferences_input import SecuritySettingsClusterPreferencesInput as SecuritySettingsClusterPreferencesInput
@@ -1855,6 +1915,7 @@ from thoughtspot_rest_api_sdk.models.update_user_group_request import UpdateUser
 from thoughtspot_rest_api_sdk.models.update_user_request import UpdateUserRequest as UpdateUserRequest
 from thoughtspot_rest_api_sdk.models.update_variable_request import UpdateVariableRequest as UpdateVariableRequest
 from thoughtspot_rest_api_sdk.models.update_variable_values_request import UpdateVariableValuesRequest as UpdateVariableValuesRequest
+from thoughtspot_rest_api_sdk.models.update_version_control_config_request import UpdateVersionControlConfigRequest as UpdateVersionControlConfigRequest
 from thoughtspot_rest_api_sdk.models.update_webhook_configuration_request import UpdateWebhookConfigurationRequest as UpdateWebhookConfigurationRequest
 from thoughtspot_rest_api_sdk.models.usage_data import UsageData as UsageData
 from thoughtspot_rest_api_sdk.models.usage_data_for_user_response import UsageDataForUserResponse as UsageDataForUserResponse
@@ -1884,6 +1945,26 @@ from thoughtspot_rest_api_sdk.models.variable_update_assignment_input import Var
 from thoughtspot_rest_api_sdk.models.variable_update_scope_input import VariableUpdateScopeInput as VariableUpdateScopeInput
 from thoughtspot_rest_api_sdk.models.variable_value import VariableValue as VariableValue
 from thoughtspot_rest_api_sdk.models.variable_values import VariableValues as VariableValues
+from thoughtspot_rest_api_sdk.models.version_control_branch_divergence import VersionControlBranchDivergence as VersionControlBranchDivergence
+from thoughtspot_rest_api_sdk.models.version_control_commit_object_input import VersionControlCommitObjectInput as VersionControlCommitObjectInput
+from thoughtspot_rest_api_sdk.models.version_control_commit_response import VersionControlCommitResponse as VersionControlCommitResponse
+from thoughtspot_rest_api_sdk.models.version_control_config import VersionControlConfig as VersionControlConfig
+from thoughtspot_rest_api_sdk.models.version_control_config_list import VersionControlConfigList as VersionControlConfigList
+from thoughtspot_rest_api_sdk.models.version_control_credential_input import VersionControlCredentialInput as VersionControlCredentialInput
+from thoughtspot_rest_api_sdk.models.version_control_credential_status import VersionControlCredentialStatus as VersionControlCredentialStatus
+from thoughtspot_rest_api_sdk.models.version_control_deploy_response import VersionControlDeployResponse as VersionControlDeployResponse
+from thoughtspot_rest_api_sdk.models.version_control_file_changes import VersionControlFileChanges as VersionControlFileChanges
+from thoughtspot_rest_api_sdk.models.version_control_object_input import VersionControlObjectInput as VersionControlObjectInput
+from thoughtspot_rest_api_sdk.models.version_control_object_result import VersionControlObjectResult as VersionControlObjectResult
+from thoughtspot_rest_api_sdk.models.version_control_org_branch import VersionControlOrgBranch as VersionControlOrgBranch
+from thoughtspot_rest_api_sdk.models.version_control_principal import VersionControlPrincipal as VersionControlPrincipal
+from thoughtspot_rest_api_sdk.models.version_control_promote_source_input import VersionControlPromoteSourceInput as VersionControlPromoteSourceInput
+from thoughtspot_rest_api_sdk.models.version_control_promote_strategy_input import VersionControlPromoteStrategyInput as VersionControlPromoteStrategyInput
+from thoughtspot_rest_api_sdk.models.version_control_promotion_response import VersionControlPromotionResponse as VersionControlPromotionResponse
+from thoughtspot_rest_api_sdk.models.version_control_restore_response import VersionControlRestoreResponse as VersionControlRestoreResponse
+from thoughtspot_rest_api_sdk.models.version_control_revision_details import VersionControlRevisionDetails as VersionControlRevisionDetails
+from thoughtspot_rest_api_sdk.models.version_control_run_list import VersionControlRunList as VersionControlRunList
+from thoughtspot_rest_api_sdk.models.version_control_run_status import VersionControlRunStatus as VersionControlRunStatus
 from thoughtspot_rest_api_sdk.models.visualization_fonts_input import VisualizationFontsInput as VisualizationFontsInput
 from thoughtspot_rest_api_sdk.models.webhook_auth_api_key import WebhookAuthApiKey as WebhookAuthApiKey
 from thoughtspot_rest_api_sdk.models.webhook_auth_api_key_input import WebhookAuthApiKeyInput as WebhookAuthApiKeyInput

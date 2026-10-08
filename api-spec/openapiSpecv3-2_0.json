@@ -20280,6 +20280,922 @@
         }
       }
     },
+    "/api/rest/2.0/version-control/commit": {
+      "post": {
+        "operationId": "createCommit",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Objects are named by object ID, not by GUID or name, so object IDs must be enabled on the cluster. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.\n\nAdmission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCommitRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlCommitResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Commit run admitted; read per-object outcomes from run search",
+                    "value": {
+                      "run_id": "7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07",
+                      "accepted_time_in_millis": 1783500062000,
+                      "author": {
+                        "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                        "name": "svc-version-control"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Covers a malformed body, a duplicate object, and a paused repository.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access. Also returned when the org's disabled_operations holds COMMIT.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The caller's org has no version control configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/config/create": {
+      "post": {
+        "operationId": "createVersionControlConfig",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nConfigures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.\n\nUse this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVersionControlConfigRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The stored configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlConfig"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Org connected to a GitHub repository, with both operations enabled",
+                    "value": {
+                      "org": {
+                        "id": 823630514,
+                        "name": "dev-org"
+                      },
+                      "provider": "GITHUB",
+                      "repository_url": "https://github.com/example-org/example-repo.git",
+                      "commit_branch": "dev",
+                      "root_dir": "analytics/dev",
+                      "credential": {
+                        "type": "ACCESS_TOKEN",
+                        "username": "svc-version-control"
+                      },
+                      "disabled_operations": [],
+                      "created_by": {
+                        "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                        "name": "svc-version-control"
+                      },
+                      "creation_time_in_millis": 1785495800000,
+                      "last_modified_by": {
+                        "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                        "name": "svc-version-control"
+                      },
+                      "modification_time_in_millis": 1786612365000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. The org is already configured, another org already commits to this repository and branch, or the org is still served by the legacy Callosum VCS surface.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/config/delete": {
+      "post": {
+        "operationId": "deleteVersionControlConfig",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nRevokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.\n\nUse this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successfully revoked version control for the Org."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/deploy": {
+      "post": {
+        "operationId": "deployRevision",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeployRevisionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request was admitted and the deploy run has started. The body is a receipt, not a result: nothing is imported yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlDeployResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Delta deploy admitted against the head of the configured branch",
+                    "value": {
+                      "run_id": "7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07",
+                      "target_deployment_revision": "4f9e2b7c1d3a5e8f0b2c4d6a8e0f1b3c5d7e9a1b",
+                      "last_deployed_revision": "a1b2c3d4e5f60718293a4b5c6d7e8f9012345678",
+                      "accepted_time_in_millis": 1783500062000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request, and nothing was admitted. Covers a malformed body, an unknown, ambiguous or unreachable target_revision, and a paused repository. error.message names the reason.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access. Also returned when the org's disabled_operations holds DEPLOY.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The caller's org has no version control configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. Another deploy, restore or versioning run is already in flight for the caller's org. Nothing was started; retry once it finishes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/branch/promote": {
+      "post": {
+        "operationId": "promoteBranch",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nMerges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.\n\n`dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Promoting from any Org other than your own also requires tenant administration privilege in the source Org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromoteBranchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The promotion was carried out, or with dry_run true would have been. Conflicting content appears here only when conflict_policy resolved it.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlPromotionResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Dry run reporting what a merge from dev into prod would change",
+                    "value": {
+                      "source": {
+                        "org": {
+                          "id": 823630514,
+                          "name": "dev-org"
+                        },
+                        "branch": "dev"
+                      },
+                      "target": {
+                        "org": {
+                          "id": 912847563,
+                          "name": "prod-org"
+                        },
+                        "branch": "prod"
+                      },
+                      "branch_divergence": {
+                        "ahead_by": 3,
+                        "behind_by": 1
+                      },
+                      "file_changes": {
+                        "total_count": 3,
+                        "added": [
+                          "liveboards/revenue_dashboard_q3.liveboard.tml"
+                        ],
+                        "modified": [
+                          "answers/top_accounts.answer.tml"
+                        ],
+                        "deleted": [
+                          "answers/retired_metric.answer.tml"
+                        ],
+                        "conflicts": []
+                      }
+                    }
+                  },
+                  "example_2": {
+                    "description": "Real promotion (dry_run false) merging dev into prod, with the resulting revision",
+                    "value": {
+                      "source": {
+                        "org": {
+                          "id": 823630514,
+                          "name": "dev-org"
+                        },
+                        "branch": "dev"
+                      },
+                      "target": {
+                        "org": {
+                          "id": 912847563,
+                          "name": "prod-org"
+                        },
+                        "branch": "prod"
+                      },
+                      "branch_divergence": {
+                        "ahead_by": 3,
+                        "behind_by": 1
+                      },
+                      "revision_details": {
+                        "revision": "9c1d4e7a2b8f0c3d5e6a1b4f7c9e2d0a8b3f5c71",
+                        "message": "Promote dev into prod",
+                        "committed_time_in_millis": 1783500062000,
+                        "author": {
+                          "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                          "name": "svc-version-control"
+                        }
+                      },
+                      "file_changes": {
+                        "total_count": 3,
+                        "added": [
+                          "liveboards/revenue_dashboard_q3.liveboard.tml"
+                        ],
+                        "modified": [
+                          "answers/top_accounts.answer.tml"
+                        ],
+                        "deleted": [
+                          "answers/retired_metric.answer.tml"
+                        ],
+                        "conflicts": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The promotion could not be carried out, and nothing was written. Covers a source that names neither an org nor a branch, a cherry-pick with no source_revision, an unknown branch or commit, content that conflicts while conflict_policy is FAIL_REQUEST, which is equally a 400 on a dry run because the real promotion could not have completed either, branches with unrelated histories, and a target branch the provider protects. error.message names the reason.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An org involved has no version control configuration: the caller's org, which then has no branch to promote into, or the org named by source.org_identifier, which then has none to promote from.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/commit/restore": {
+      "post": {
+        "operationId": "restoreRevision",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.\n\nUse this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestoreRevisionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request was admitted and the restore run has started. The body is a receipt, not a result: nothing is committed or imported yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlRestoreResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Restore admitted; the restore commit appears in run search once pushed",
+                    "value": {
+                      "run_id": "7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07",
+                      "target_revision": "4f9e2b7c1d3a5e8f0b2c4d6a8e0f1b3c5d7e9a1b",
+                      "accepted_time_in_millis": 1783500062000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request, and nothing was admitted. Covers a malformed body, a target_revision that is unknown, ambiguous, unreachable from the branch or is its head, and a paused repository. error.message names the reason.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access. Also returned when the org's disabled_operations holds COMMIT or DEPLOY.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The caller's org has no version control configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. Another restore, deploy or versioning run is already in flight for the caller's org. Nothing was started; retry once it finishes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/config/search": {
+      "post": {
+        "operationId": "searchVersionControlConfigs",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nReturns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.\n\nUse this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Zero or one configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlConfigList"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "The caller's Org configuration",
+                    "value": {
+                      "configs": [
+                        {
+                          "org": {
+                            "id": 823630514,
+                            "name": "dev-org"
+                          },
+                          "provider": "GITHUB",
+                          "repository_url": "https://github.com/example-org/example-repo.git",
+                          "commit_branch": "dev",
+                          "root_dir": "analytics/dev",
+                          "credential": {
+                            "type": "ACCESS_TOKEN",
+                            "username": "svc-version-control"
+                          },
+                          "disabled_operations": [],
+                          "created_by": {
+                            "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                            "name": "svc-version-control"
+                          },
+                          "creation_time_in_millis": 1785495800000,
+                          "last_modified_by": {
+                            "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                            "name": "svc-version-control"
+                          },
+                          "modification_time_in_millis": 1786612365000
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/runs/search": {
+      "post": {
+        "operationId": "searchVersionControlRuns",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nReturns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.\n\nUse this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org's commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchVersionControlRunsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The runs' current outcomes. A run identifier that does not exist in the caller's org is left out, not reported as an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlRunList"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "A commit run that partially succeeded, with its per-object outcomes",
+                    "value": {
+                      "runs": [
+                        {
+                          "id": "7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07",
+                          "type": "COMMIT",
+                          "state": "PARTIAL_SUCCESS",
+                          "message": "1 of 2 objects committed",
+                          "accepted_time_in_millis": 1783500062000,
+                          "end_time_in_millis": 1783500064500,
+                          "author": {
+                            "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                            "name": "svc-version-control"
+                          },
+                          "branch": "dev",
+                          "revision": "4f9e2b7c1d3a5e8f0b2c4d6a8e0f1b3c5d7e9a1b",
+                          "objects": [
+                            {
+                              "id": "d7f3a1c8-4b2e-11ef-9c1a-0242ac120002",
+                              "type": "LIVEBOARD",
+                              "file_name": "liveboards/revenue_dashboard_q3.liveboard.tml",
+                              "action": "UPDATE",
+                              "status": "SUCCESS",
+                              "is_dependency": false
+                            },
+                            {
+                              "id": "b2c4d6a8-e0f1-11ef-9c1a-0242ac120002",
+                              "type": "ANSWER",
+                              "action": "CREATE",
+                              "status": "SKIPPED",
+                              "message": "Object does not have versioning enabled",
+                              "is_dependency": false
+                            }
+                          ]
+                        }
+                      ],
+                      "last_batch": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an unknown run_type, and a record_offset or record_size out of range.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/config/update": {
+      "post": {
+        "operationId": "updateVersionControlConfig",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nChanges your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.\n\nUse this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVersionControlConfigRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successfully updated the version control configuration for the Org."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/webhooks/create": {
       "post": {
         "operationId": "createWebhookConfiguration",
@@ -24335,6 +25251,317 @@
             "nullable": true
           }
         }
+      },
+      "VersionControlConfigList": {
+        "type": "object",
+        "required": [
+          "configs"
+        ],
+        "properties": {
+          "configs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionControlConfig"
+            },
+            "description": "The configurations."
+          }
+        },
+        "description": "The configurations you can read. Zero or one while the scope is your own Org."
+      },
+      "VersionControlConfig": {
+        "type": "object",
+        "required": [
+          "org",
+          "provider",
+          "repository_url",
+          "commit_branch",
+          "credential",
+          "disabled_operations",
+          "created_by",
+          "creation_time_in_millis",
+          "last_modified_by",
+          "modification_time_in_millis"
+        ],
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/Org",
+            "description": "Org this configuration belongs to."
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "GITHUB",
+              "GITLAB",
+              "BITBUCKET",
+              "AZURE_DEVOPS"
+            ],
+            "description": "Version control provider hosting the repository."
+          },
+          "repository_url": {
+            "type": "string",
+            "description": "HTTPS URL of the repository this Org versions to."
+          },
+          "commit_branch": {
+            "type": "string",
+            "description": "Branch that versioning runs commit to."
+          },
+          "root_dir": {
+            "type": "string",
+            "description": "Repository-relative directory that every write resolves under. Absent when\nwrites go to the repository root.",
+            "nullable": true
+          },
+          "credential": {
+            "$ref": "#/components/schemas/VersionControlCredentialStatus",
+            "description": "What is reported about the stored credential."
+          },
+          "disabled_operations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COMMIT",
+                "DEPLOY"
+              ]
+            },
+            "description": "Operations turned off for this Org. Empty when none are."
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/VersionControlPrincipal",
+            "description": "User who created this configuration."
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Creation time, in milliseconds since the Unix epoch."
+          },
+          "last_modified_by": {
+            "$ref": "#/components/schemas/VersionControlPrincipal",
+            "description": "User who last changed this configuration."
+          },
+          "modification_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Last write time, in milliseconds since the Unix epoch."
+          }
+        },
+        "description": "An Org's stored version control configuration."
+      },
+      "VersionControlCredentialStatus": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ACCESS_TOKEN"
+            ],
+            "description": "How the credential is held."
+          },
+          "username": {
+            "type": "string",
+            "description": "Username presented with the token over HTTPS.",
+            "nullable": true
+          }
+        },
+        "description": "What is reported about a stored credential: its type, and nothing else."
+      },
+      "VersionControlPrincipal": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "GUID of the user."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the user.",
+            "nullable": true
+          }
+        },
+        "description": "A user. Only the GUID is always carried; a display name is reported when one can\nbe resolved without an extra lookup."
+      },
+      "VersionControlObjectInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Object ID of the metadata object, such as a Liveboard, an Answer or a Model.\nThis is the cross-Org object ID, not the Org-local GUID."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "Type of the metadata object. Required when the identifier is a name, since a\nname can belong to more than one type.",
+            "nullable": true
+          }
+        },
+        "description": "One object a versioning run can report, used to filter run search."
+      },
+      "VersionControlRunList": {
+        "type": "object",
+        "required": [
+          "runs"
+        ],
+        "properties": {
+          "runs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionControlRunStatus"
+            },
+            "description": "Current outcome of each matching run, newest first."
+          },
+          "last_batch": {
+            "type": "boolean",
+            "description": "True when no runs follow this page, so a caller that receives a full page\nknows whether to ask for the next one.",
+            "nullable": true
+          }
+        },
+        "description": "A page of runs in your Org, newest first."
+      },
+      "VersionControlRunStatus": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "state",
+          "accepted_time_in_millis",
+          "author",
+          "branch",
+          "objects"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the run, as returned when it was admitted."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "COMMIT",
+              "DEPLOY",
+              "RESTORE"
+            ],
+            "description": "Which operation admitted the run."
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "RUNNING",
+              "SUCCESS",
+              "PARTIAL_SUCCESS",
+              "FAILED"
+            ],
+            "description": "Where the run stands."
+          },
+          "message": {
+            "type": "string",
+            "description": "What happened, in prose. Always present when state is FAILED.",
+            "nullable": true
+          },
+          "accepted_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Admission time, in milliseconds since the Unix epoch."
+          },
+          "end_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Time the run reached a terminal state, in milliseconds since the Unix epoch.\nAbsent while state is RUNNING.",
+            "nullable": true
+          },
+          "author": {
+            "$ref": "#/components/schemas/VersionControlPrincipal",
+            "description": "User who made the request. The name is the display name as it was when the run\nwas admitted, not as it is now."
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch the run used, which is the Org's configured branch at admission. A\nlater edit to the Org's configuration does not change it."
+          },
+          "revision": {
+            "type": "string",
+            "description": "On a commit, the commit this run produced. On a deploy, the revision being\ndeployed. On a restore, the restore commit. Absent until the commit is pushed,\nand on a run that failed before pushing.",
+            "nullable": true
+          },
+          "objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionControlObjectResult"
+            },
+            "description": "Per-object outcomes known so far. This grows while state is RUNNING, and is\ncomplete once the run is terminal."
+          }
+        },
+        "description": "Current outcome of one run."
+      },
+      "VersionControlObjectResult": {
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Object ID of the object. The same object carries the same ID in every Org, so\nthis is not the Org-local GUID. On a commit this is the resolved object ID even\nwhen the request named the object by name or GUID."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "Type of the object.",
+            "nullable": true
+          },
+          "file_name": {
+            "type": "string",
+            "description": "Repository path of the object's file.",
+            "nullable": true
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "CREATE",
+              "UPDATE",
+              "UPSERT",
+              "DELETE"
+            ],
+            "description": "What the run did to the object.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "VALIDATED",
+              "FAILED",
+              "SKIPPED"
+            ],
+            "description": "Outcome for the object."
+          },
+          "message": {
+            "type": "string",
+            "description": "Why the object is FAILED or SKIPPED, always present then. It may also carry a\nwarning on SUCCESS or VALIDATED.",
+            "nullable": true
+          },
+          "is_dependency": {
+            "type": "boolean",
+            "description": "True for an object the request did not name, exported because a requested\nobject depends on it. Commit runs only.",
+            "nullable": true
+          }
+        },
+        "description": "Outcome for one object in a run."
       },
       "ConnectionInput": {
         "type": "object",
@@ -30745,6 +31972,326 @@
             "nullable": true
           }
         }
+      },
+      "VersionControlCredentialInput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ACCESS_TOKEN"
+            ],
+            "description": "How the credential is held."
+          },
+          "username": {
+            "type": "string",
+            "description": "Username presented with the token over HTTPS, for example svc-version-control.",
+            "nullable": true
+          },
+          "access_token": {
+            "type": "string",
+            "description": "Access token granting repository contents read and write, and metadata read.\nAdd the provider's repository-rules read permission for rule-aware validation.\nRequired when type is ACCESS_TOKEN.",
+            "nullable": true
+          }
+        },
+        "description": "Credential ThoughtSpot uses to reach an Org's repository."
+      },
+      "VersionControlCommitObjectInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Object ID of the metadata object, such as a Liveboard or an Answer. This is\nthe cross-Org object ID, not the Org-local GUID and not the object name, and\nit requires object IDs to be enabled on the cluster."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER"
+            ],
+            "description": "Type of the metadata object. Required when the identifier is a name, since a\nname can belong to more than one type.",
+            "nullable": true
+          }
+        },
+        "description": "One object to version on the commit endpoint."
+      },
+      "VersionControlCommitResponse": {
+        "type": "object",
+        "required": [
+          "run_id",
+          "accepted_time_in_millis",
+          "author"
+        ],
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "description": "ID of this run, and the trace key across the API, the worker, the Git commit\nand the logs. Pass it to run search to read per-object outcomes."
+          },
+          "accepted_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Admission time, in milliseconds since the Unix epoch."
+          },
+          "author": {
+            "$ref": "#/components/schemas/VersionControlPrincipal",
+            "description": "User who made the request, who becomes the Git author of the commit."
+          }
+        },
+        "description": "Admission receipt for a versioning run. It confirms the request was accepted and\nidentifies the run; it says nothing about what was committed."
+      },
+      "VersionControlPromoteSourceInput": {
+        "type": "object",
+        "properties": {
+          "org_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the Org to promote from. Promoting from any Org other\nthan your own requires tenant administration privilege.",
+            "nullable": true
+          },
+          "source_branch": {
+            "type": "string",
+            "description": "Branch to promote from, when naming it directly rather than by Org.",
+            "nullable": true
+          },
+          "source_revision": {
+            "type": "string",
+            "description": "Revision to promote, for example a Git commit SHA. Required when the strategy\ntype is CHERRY_PICK, and ignored otherwise.",
+            "nullable": true
+          }
+        },
+        "description": "Where a promotion takes content from. Name the source either by Org or by\nbranch, not both: an Org and the branch it versions to determine each other, and\nthe response reports both."
+      },
+      "VersionControlPromoteStrategyInput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "MERGE",
+              "SQUASH",
+              "FAST_FORWARD",
+              "CHERRY_PICK"
+            ],
+            "description": "How the source is applied to the target branch."
+          },
+          "conflict_policy": {
+            "type": "string",
+            "enum": [
+              "FAIL_REQUEST",
+              "USE_SOURCE",
+              "USE_TARGET"
+            ],
+            "default": "FAIL_REQUEST",
+            "description": "What to do when files conflict.",
+            "nullable": true
+          }
+        },
+        "description": "How a promotion is applied."
+      },
+      "VersionControlPromotionResponse": {
+        "type": "object",
+        "required": [
+          "source",
+          "target",
+          "file_changes"
+        ],
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/VersionControlOrgBranch",
+            "description": "Where content was promoted from, as resolved."
+          },
+          "target": {
+            "$ref": "#/components/schemas/VersionControlOrgBranch",
+            "description": "Where the promotion wrote, as resolved."
+          },
+          "branch_divergence": {
+            "$ref": "#/components/schemas/VersionControlBranchDivergence",
+            "description": "How far apart the branches were. Not meaningful for a cherry-pick.",
+            "nullable": true
+          },
+          "revision_details": {
+            "$ref": "#/components/schemas/VersionControlRevisionDetails",
+            "description": "The revision the target branch points at after the promotion. Absent on a dry\nrun.",
+            "nullable": true
+          },
+          "file_changes": {
+            "$ref": "#/components/schemas/VersionControlFileChanges",
+            "description": "Files changed, or that would be changed, grouped by kind of change."
+          }
+        },
+        "description": "What a promotion did, or on a dry run what one would do."
+      },
+      "VersionControlOrgBranch": {
+        "type": "object",
+        "required": [
+          "org",
+          "branch"
+        ],
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/Org",
+            "description": "Org whose configured branch this is."
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch that Org versions to."
+          }
+        },
+        "description": "An Org and the branch it versions to, as resolved by ThoughtSpot."
+      },
+      "VersionControlBranchDivergence": {
+        "type": "object",
+        "properties": {
+          "ahead_by": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Commits on the source that are not yet on the target.",
+            "nullable": true
+          },
+          "behind_by": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Commits on the target that are not on the source.",
+            "nullable": true
+          }
+        },
+        "description": "How far apart two branches are."
+      },
+      "VersionControlRevisionDetails": {
+        "type": "object",
+        "required": [
+          "revision",
+          "committed_time_in_millis",
+          "author"
+        ],
+        "properties": {
+          "revision": {
+            "type": "string",
+            "description": "Identifier of the revision. For a Git-backed repository this is the commit\nSHA."
+          },
+          "message": {
+            "type": "string",
+            "description": "Commit message used.",
+            "nullable": true
+          },
+          "committed_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Commit time, in milliseconds since the Unix epoch."
+          },
+          "author": {
+            "$ref": "#/components/schemas/VersionControlPrincipal",
+            "description": "User who promoted, who becomes the Git author of the commit."
+          }
+        },
+        "description": "The revision the target branch points at after a promotion. Absent on a dry run,\nsince nothing was written."
+      },
+      "VersionControlFileChanges": {
+        "type": "object",
+        "required": [
+          "total_count",
+          "added",
+          "modified",
+          "deleted",
+          "conflicts"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total files changed, across all kinds of change."
+          },
+          "added": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Repository paths of files added."
+          },
+          "modified": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Repository paths of files modified."
+          },
+          "deleted": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Repository paths of files deleted."
+          },
+          "conflicts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Repository paths of files that conflicted and were resolved in favor of the\nside named by conflict_policy. Empty under FAIL_REQUEST, which fails the\nrequest rather than returning a body whenever anything conflicts."
+          }
+        },
+        "description": "Files a promotion changed, or would change on a dry run, one list per kind of\nchange. Every list is present and empty when that kind has none, so total_count\nis the sum of their lengths."
+      },
+      "VersionControlDeployResponse": {
+        "type": "object",
+        "required": [
+          "run_id",
+          "target_deployment_revision",
+          "accepted_time_in_millis"
+        ],
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "description": "ID of this run, and the trace key across the API, the worker and the logs.\nPass it to run search to read per-object outcomes."
+          },
+          "target_deployment_revision": {
+            "type": "string",
+            "description": "Revision this run was admitted against, pinned at admission. Resolved from the\nhead of the configured branch when target_revision was omitted."
+          },
+          "last_deployed_revision": {
+            "type": "string",
+            "description": "Revision the Org last received, which this run compared against. Absent when\nthere was none: the Org's first deploy, or deploy_type FULL.",
+            "nullable": true
+          },
+          "accepted_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Admission time, in milliseconds since the Unix epoch."
+          }
+        },
+        "description": "Admission receipt for a deploy run. It identifies the run and the revisions it\nwas admitted against; it says nothing about what was imported."
+      },
+      "VersionControlRestoreResponse": {
+        "type": "object",
+        "required": [
+          "run_id",
+          "target_revision",
+          "accepted_time_in_millis"
+        ],
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "description": "ID of this run, and the trace key across the API, the worker, the Git commit\nand the logs."
+          },
+          "target_revision": {
+            "type": "string",
+            "description": "Revision whose content is restored, in full form. Pinned at admission."
+          },
+          "accepted_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Admission time, in milliseconds since the Unix epoch."
+          }
+        },
+        "description": "Admission receipt for a restore run. The revision was resolved and the run has\nstarted; it says nothing about what was restored. The restore commit is not here\nbecause it does not exist until the run pushes it: read it from run search as\nthe run's revision, along with the per-object outcomes."
       },
       "CreateConnectionResponse": {
         "type": "object",
@@ -42005,6 +43552,254 @@
           "source_branch_name",
           "target_branch_name"
         ]
+      },
+      "CreateCommitRequest": {
+        "type": "object",
+        "properties": {
+          "objects": {
+            "description": "Objects to version in this run, named by object ID. Every object must be\ndistinct, must already exist in your Org, and must be a Liveboard or an\nAnswer. A run carries at most 50.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionControlCommitObjectInput"
+            }
+          },
+          "commit_message": {
+            "description": "Message for the single Git commit this run produces. Omit this to let\nThoughtSpot generate one.",
+            "type": "string"
+          },
+          "prune_deleted_object_files": {
+            "description": "Remove the repository file of any named object that no longer exists in\nThoughtSpot, so the branch stops carrying deleted content.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "objects"
+        ]
+      },
+      "CreateVersionControlConfigRequest": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "description": "Version control provider hosting the repository. Only SaaS-hosted\nThoughtSpot instances can reach an external provider.",
+            "type": "string",
+            "enum": [
+              "GITHUB",
+              "GITLAB",
+              "BITBUCKET",
+              "AZURE_DEVOPS"
+            ]
+          },
+          "repository_url": {
+            "description": "HTTPS URL of the repository your Org versions to, for example\nhttps://github.com/example-org/example-repo.git. Plain HTTP is rejected.",
+            "type": "string"
+          },
+          "commit_branch": {
+            "description": "Branch that versioning runs commit to, for example main or prod. Every\ncommit, deploy and restore for this Org uses this branch.",
+            "type": "string"
+          },
+          "root_dir": {
+            "description": "Repository-relative directory that every write must resolve under, for\nexample analytics/prod. The path must\nbe relative, and each segment must begin with a letter, digit, underscore or\nhyphen, which keeps writes inside the directory.",
+            "type": "string"
+          },
+          "credential": {
+            "description": "Credential ThoughtSpot uses to reach the repository.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionControlCredentialInput"
+              }
+            ]
+          },
+          "disabled_operations": {
+            "description": "Operations to turn off for this Org. COMMIT stops the commit endpoint and\nDEPLOY stops the deploy endpoint; restore performs both, so disabling\neither one also stops a restore. Send an empty array to disable nothing.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COMMIT",
+                "DEPLOY"
+              ]
+            }
+          }
+        },
+        "required": [
+          "provider",
+          "repository_url",
+          "commit_branch",
+          "credential"
+        ]
+      },
+      "DeployRevisionRequest": {
+        "type": "object",
+        "properties": {
+          "target_revision": {
+            "description": "Revision to deploy, for example a Git commit SHA. Omit this to resolve and\npin the head of your Org's configured branch. Either way the revision must\nbe reachable from that branch.",
+            "type": "string"
+          },
+          "deploy_type": {
+            "description": "What to compare the revision against. DELTA compares it with the revision\nthis Org last received, which is what makes the Org converge on the branch.\nFULL ignores the deploy marker, treats every object at the revision as a\nchange, and observes no removals.",
+            "default": "DELTA",
+            "type": "string",
+            "enum": [
+              "DELTA",
+              "FULL"
+            ]
+          },
+          "deploy_policy": {
+            "description": "How far the run goes and how it settles per-object failures.",
+            "default": "ALL_OR_NONE",
+            "type": "string",
+            "enum": [
+              "ALL_OR_NONE",
+              "PARTIAL",
+              "VALIDATE_ONLY"
+            ]
+          }
+        }
+      },
+      "PromoteBranchRequest": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "description": "Where to promote content from, named either by Org or by branch.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionControlPromoteSourceInput"
+              }
+            ]
+          },
+          "strategy": {
+            "description": "How the source is applied to your Org's branch, and what to do when files\nconflict.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionControlPromoteStrategyInput"
+              }
+            ]
+          },
+          "commit_message": {
+            "description": "Message for the promotion commit. Omit this to let Git generate one.",
+            "type": "string"
+          },
+          "dry_run": {
+            "description": "Report what the promotion would change without writing anything. Defaults to\ntrue, so a request that omits this performs a dry run.",
+            "default": true,
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "source",
+          "strategy"
+        ]
+      },
+      "RestoreRevisionRequest": {
+        "type": "object",
+        "properties": {
+          "target_revision": {
+            "description": "Revision whose content the branch and the Org are restored to, for example a\nGit commit SHA. It must be reachable from your Org's configured branch, and\nmust not be its head, since restoring the head changes nothing.",
+            "type": "string"
+          },
+          "restore_policy": {
+            "description": "How far the run goes and how it settles per-object failures. Same values and\nmeaning as deploy_policy on the deploy endpoint; under VALIDATE_ONLY nothing\nis committed either.",
+            "default": "ALL_OR_NONE",
+            "type": "string",
+            "enum": [
+              "ALL_OR_NONE",
+              "PARTIAL",
+              "VALIDATE_ONLY"
+            ]
+          }
+        },
+        "required": [
+          "target_revision"
+        ]
+      },
+      "SearchVersionControlRunsRequest": {
+        "type": "object",
+        "properties": {
+          "run_identifiers": {
+            "description": "Runs to read, as run IDs returned when each run was admitted, at most 100.\nOmit this to return your Org's runs, newest first. Paging applies either way.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "run_type": {
+            "description": "Return only runs admitted by this operation. COMMIT is your Org's commit\nhistory, DEPLOY the content it received, RESTORE the rollbacks it ran.\nOmit this to return every type.",
+            "type": "string",
+            "enum": [
+              "COMMIT",
+              "DEPLOY",
+              "RESTORE"
+            ]
+          },
+          "objects": {
+            "description": "Return only runs that carry a result for at least one of these objects.\nObjects are named as on the commit endpoint, except that the type may also\nbe LOGICAL_TABLE: a run can report a type that a commit does not accept.\nOmit this to return runs regardless of the objects they touched.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionControlObjectInput"
+            }
+          },
+          "record_offset": {
+            "description": "The starting record number from where the runs should be included, in\nnewest-first order.",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "record_size": {
+            "description": "The number of runs that should be included, between 1 and 100. Applies to\nrun_identifiers too: naming more runs than this returns only the first page.",
+            "default": 10,
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateVersionControlConfigRequest": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "description": "Version control provider hosting the repository. Omit this to leave the\nstored provider unchanged.",
+            "type": "string",
+            "enum": [
+              "GITHUB",
+              "GITLAB",
+              "BITBUCKET",
+              "AZURE_DEVOPS"
+            ]
+          },
+          "repository_url": {
+            "description": "HTTPS URL of the repository your Org versions to. Omit this to leave the\nstored repository unchanged.",
+            "type": "string"
+          },
+          "commit_branch": {
+            "description": "Branch that versioning runs commit to. Omit this to leave the stored branch\nunchanged.",
+            "type": "string"
+          },
+          "root_dir": {
+            "description": "Repository-relative directory that every write must resolve under. Omit\nthis to leave the stored directory unchanged.",
+            "type": "string"
+          },
+          "credential": {
+            "description": "Credential ThoughtSpot uses to reach the repository. Omit this to keep the\nstored credential, unless the provider, host or repository owner changed, in\nwhich case a new credential is required.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionControlCredentialInput"
+              }
+            ]
+          },
+          "disabled_operations": {
+            "description": "Operations to turn off for this Org, replacing whatever is stored. Send an\nempty array to disable nothing. Omit this to leave the stored set unchanged.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COMMIT",
+                "DEPLOY"
+              ]
+            }
+          }
+        }
       },
       "CreateWebhookConfigurationRequest": {
         "type": "object",

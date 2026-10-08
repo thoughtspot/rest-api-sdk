@@ -4665,6 +4665,38 @@ _CreateCollectionRequest.attributeTypeMap = [
 ];
 var CreateCollectionRequest = _CreateCollectionRequest;
 
+// models/CreateCommitRequest.ts
+var _CreateCommitRequest = class _CreateCommitRequest {
+  static getAttributeTypeMap() {
+    return _CreateCommitRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateCommitRequest.discriminator = void 0;
+_CreateCommitRequest.mapping = void 0;
+_CreateCommitRequest.attributeTypeMap = [
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<VersionControlCommitObjectInput>",
+    "format": ""
+  },
+  {
+    "name": "commit_message",
+    "baseName": "commit_message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "prune_deleted_object_files",
+    "baseName": "prune_deleted_object_files",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var CreateCommitRequest = _CreateCommitRequest;
+
 // models/CreateConfigRequest.ts
 var _CreateConfigRequest = class _CreateConfigRequest {
   static getAttributeTypeMap() {
@@ -5540,6 +5572,56 @@ _CreateVariableRequest.attributeTypeMap = [
   }
 ];
 var CreateVariableRequest = _CreateVariableRequest;
+
+// models/CreateVersionControlConfigRequest.ts
+var _CreateVersionControlConfigRequest = class _CreateVersionControlConfigRequest {
+  static getAttributeTypeMap() {
+    return _CreateVersionControlConfigRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_CreateVersionControlConfigRequest.discriminator = void 0;
+_CreateVersionControlConfigRequest.mapping = void 0;
+_CreateVersionControlConfigRequest.attributeTypeMap = [
+  {
+    "name": "provider",
+    "baseName": "provider",
+    "type": "CreateVersionControlConfigRequestProviderEnum",
+    "format": ""
+  },
+  {
+    "name": "repository_url",
+    "baseName": "repository_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "commit_branch",
+    "baseName": "commit_branch",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "root_dir",
+    "baseName": "root_dir",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "credential",
+    "baseName": "credential",
+    "type": "VersionControlCredentialInput",
+    "format": ""
+  },
+  {
+    "name": "disabled_operations",
+    "baseName": "disabled_operations",
+    "type": "Array<CreateVersionControlConfigRequestDisabledOperationsEnum>",
+    "format": ""
+  }
+];
+var CreateVersionControlConfigRequest = _CreateVersionControlConfigRequest;
 
 // models/CreateWebhookConfigurationRequest.ts
 var _CreateWebhookConfigurationRequest = class _CreateWebhookConfigurationRequest {
@@ -6742,6 +6824,38 @@ _DeployResponse.attributeTypeMap = [
   }
 ];
 var DeployResponse = _DeployResponse;
+
+// models/DeployRevisionRequest.ts
+var _DeployRevisionRequest = class _DeployRevisionRequest {
+  static getAttributeTypeMap() {
+    return _DeployRevisionRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DeployRevisionRequest.discriminator = void 0;
+_DeployRevisionRequest.mapping = void 0;
+_DeployRevisionRequest.attributeTypeMap = [
+  {
+    "name": "target_revision",
+    "baseName": "target_revision",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "deploy_type",
+    "baseName": "deploy_type",
+    "type": "DeployRevisionRequestDeployTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "deploy_policy",
+    "baseName": "deploy_policy",
+    "type": "DeployRevisionRequestDeployPolicyEnum",
+    "format": ""
+  }
+];
+var DeployRevisionRequest = _DeployRevisionRequest;
 
 // models/EntityHeader.ts
 var _EntityHeader = class _EntityHeader {
@@ -12065,6 +12179,44 @@ _PrincipalsListItemInput.attributeTypeMap = [
 ];
 var PrincipalsListItemInput = _PrincipalsListItemInput;
 
+// models/PromoteBranchRequest.ts
+var _PromoteBranchRequest = class _PromoteBranchRequest {
+  static getAttributeTypeMap() {
+    return _PromoteBranchRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_PromoteBranchRequest.discriminator = void 0;
+_PromoteBranchRequest.mapping = void 0;
+_PromoteBranchRequest.attributeTypeMap = [
+  {
+    "name": "source",
+    "baseName": "source",
+    "type": "VersionControlPromoteSourceInput",
+    "format": ""
+  },
+  {
+    "name": "strategy",
+    "baseName": "strategy",
+    "type": "VersionControlPromoteStrategyInput",
+    "format": ""
+  },
+  {
+    "name": "commit_message",
+    "baseName": "commit_message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "dry_run",
+    "baseName": "dry_run",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var PromoteBranchRequest = _PromoteBranchRequest;
+
 // models/PublicFileInfo.ts
 var _PublicFileInfo = class _PublicFileInfo {
   static getAttributeTypeMap() {
@@ -13114,6 +13266,32 @@ _ResponseWorksheetToModelConversion.attributeTypeMap = [
   }
 ];
 var ResponseWorksheetToModelConversion = _ResponseWorksheetToModelConversion;
+
+// models/RestoreRevisionRequest.ts
+var _RestoreRevisionRequest = class _RestoreRevisionRequest {
+  static getAttributeTypeMap() {
+    return _RestoreRevisionRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_RestoreRevisionRequest.discriminator = void 0;
+_RestoreRevisionRequest.mapping = void 0;
+_RestoreRevisionRequest.attributeTypeMap = [
+  {
+    "name": "target_revision",
+    "baseName": "target_revision",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "restore_policy",
+    "baseName": "restore_policy",
+    "type": "RestoreRevisionRequestRestorePolicyEnum",
+    "format": ""
+  }
+];
+var RestoreRevisionRequest = _RestoreRevisionRequest;
 
 // models/RevertCommitRequest.ts
 var _RevertCommitRequest = class _RevertCommitRequest {
@@ -15624,6 +15802,50 @@ _SearchVariablesRequest.attributeTypeMap = [
   }
 ];
 var SearchVariablesRequest = _SearchVariablesRequest;
+
+// models/SearchVersionControlRunsRequest.ts
+var _SearchVersionControlRunsRequest = class _SearchVersionControlRunsRequest {
+  static getAttributeTypeMap() {
+    return _SearchVersionControlRunsRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SearchVersionControlRunsRequest.discriminator = void 0;
+_SearchVersionControlRunsRequest.mapping = void 0;
+_SearchVersionControlRunsRequest.attributeTypeMap = [
+  {
+    "name": "run_identifiers",
+    "baseName": "run_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "run_type",
+    "baseName": "run_type",
+    "type": "SearchVersionControlRunsRequestRunTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<VersionControlObjectInput>",
+    "format": ""
+  },
+  {
+    "name": "record_offset",
+    "baseName": "record_offset",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "record_size",
+    "baseName": "record_size",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var SearchVersionControlRunsRequest = _SearchVersionControlRunsRequest;
 
 // models/SearchWebhookConfigurationsRequest.ts
 var _SearchWebhookConfigurationsRequest = class _SearchWebhookConfigurationsRequest {
@@ -20087,6 +20309,56 @@ _UpdateVariableValuesRequest.attributeTypeMap = [
 ];
 var UpdateVariableValuesRequest = _UpdateVariableValuesRequest;
 
+// models/UpdateVersionControlConfigRequest.ts
+var _UpdateVersionControlConfigRequest = class _UpdateVersionControlConfigRequest {
+  static getAttributeTypeMap() {
+    return _UpdateVersionControlConfigRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_UpdateVersionControlConfigRequest.discriminator = void 0;
+_UpdateVersionControlConfigRequest.mapping = void 0;
+_UpdateVersionControlConfigRequest.attributeTypeMap = [
+  {
+    "name": "provider",
+    "baseName": "provider",
+    "type": "UpdateVersionControlConfigRequestProviderEnum",
+    "format": ""
+  },
+  {
+    "name": "repository_url",
+    "baseName": "repository_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "commit_branch",
+    "baseName": "commit_branch",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "root_dir",
+    "baseName": "root_dir",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "credential",
+    "baseName": "credential",
+    "type": "VersionControlCredentialInput",
+    "format": ""
+  },
+  {
+    "name": "disabled_operations",
+    "baseName": "disabled_operations",
+    "type": "Array<UpdateVersionControlConfigRequestDisabledOperationsEnum>",
+    "format": ""
+  }
+];
+var UpdateVersionControlConfigRequest = _UpdateVersionControlConfigRequest;
+
 // models/UpdateWebhookConfigurationRequest.ts
 var _UpdateWebhookConfigurationRequest = class _UpdateWebhookConfigurationRequest {
   static getAttributeTypeMap() {
@@ -21549,6 +21821,736 @@ _VariableValues.attributeTypeMap = [
 ];
 var VariableValues = _VariableValues;
 
+// models/VersionControlBranchDivergence.ts
+var _VersionControlBranchDivergence = class _VersionControlBranchDivergence {
+  static getAttributeTypeMap() {
+    return _VersionControlBranchDivergence.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlBranchDivergence.discriminator = void 0;
+_VersionControlBranchDivergence.mapping = void 0;
+_VersionControlBranchDivergence.attributeTypeMap = [
+  {
+    "name": "ahead_by",
+    "baseName": "ahead_by",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "behind_by",
+    "baseName": "behind_by",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var VersionControlBranchDivergence = _VersionControlBranchDivergence;
+
+// models/VersionControlCommitObjectInput.ts
+var _VersionControlCommitObjectInput = class _VersionControlCommitObjectInput {
+  static getAttributeTypeMap() {
+    return _VersionControlCommitObjectInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlCommitObjectInput.discriminator = void 0;
+_VersionControlCommitObjectInput.mapping = void 0;
+_VersionControlCommitObjectInput.attributeTypeMap = [
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "VersionControlCommitObjectInputTypeEnum",
+    "format": ""
+  }
+];
+var VersionControlCommitObjectInput = _VersionControlCommitObjectInput;
+
+// models/VersionControlCommitResponse.ts
+var _VersionControlCommitResponse = class _VersionControlCommitResponse {
+  static getAttributeTypeMap() {
+    return _VersionControlCommitResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlCommitResponse.discriminator = void 0;
+_VersionControlCommitResponse.mapping = void 0;
+_VersionControlCommitResponse.attributeTypeMap = [
+  {
+    "name": "run_id",
+    "baseName": "run_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "accepted_time_in_millis",
+    "baseName": "accepted_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "author",
+    "baseName": "author",
+    "type": "VersionControlPrincipal",
+    "format": ""
+  }
+];
+var VersionControlCommitResponse = _VersionControlCommitResponse;
+
+// models/VersionControlConfig.ts
+var _VersionControlConfig = class _VersionControlConfig {
+  static getAttributeTypeMap() {
+    return _VersionControlConfig.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlConfig.discriminator = void 0;
+_VersionControlConfig.mapping = void 0;
+_VersionControlConfig.attributeTypeMap = [
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "Org",
+    "format": ""
+  },
+  {
+    "name": "provider",
+    "baseName": "provider",
+    "type": "VersionControlConfigProviderEnum",
+    "format": ""
+  },
+  {
+    "name": "repository_url",
+    "baseName": "repository_url",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "commit_branch",
+    "baseName": "commit_branch",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "root_dir",
+    "baseName": "root_dir",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "credential",
+    "baseName": "credential",
+    "type": "VersionControlCredentialStatus",
+    "format": ""
+  },
+  {
+    "name": "disabled_operations",
+    "baseName": "disabled_operations",
+    "type": "Array<VersionControlConfigDisabledOperationsEnum>",
+    "format": ""
+  },
+  {
+    "name": "created_by",
+    "baseName": "created_by",
+    "type": "VersionControlPrincipal",
+    "format": ""
+  },
+  {
+    "name": "creation_time_in_millis",
+    "baseName": "creation_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "last_modified_by",
+    "baseName": "last_modified_by",
+    "type": "VersionControlPrincipal",
+    "format": ""
+  },
+  {
+    "name": "modification_time_in_millis",
+    "baseName": "modification_time_in_millis",
+    "type": "number",
+    "format": "float"
+  }
+];
+var VersionControlConfig = _VersionControlConfig;
+
+// models/VersionControlConfigList.ts
+var _VersionControlConfigList = class _VersionControlConfigList {
+  static getAttributeTypeMap() {
+    return _VersionControlConfigList.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlConfigList.discriminator = void 0;
+_VersionControlConfigList.mapping = void 0;
+_VersionControlConfigList.attributeTypeMap = [
+  {
+    "name": "configs",
+    "baseName": "configs",
+    "type": "Array<VersionControlConfig>",
+    "format": ""
+  }
+];
+var VersionControlConfigList = _VersionControlConfigList;
+
+// models/VersionControlCredentialInput.ts
+var _VersionControlCredentialInput = class _VersionControlCredentialInput {
+  static getAttributeTypeMap() {
+    return _VersionControlCredentialInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlCredentialInput.discriminator = void 0;
+_VersionControlCredentialInput.mapping = void 0;
+_VersionControlCredentialInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "VersionControlCredentialInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "username",
+    "baseName": "username",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "access_token",
+    "baseName": "access_token",
+    "type": "string",
+    "format": ""
+  }
+];
+var VersionControlCredentialInput = _VersionControlCredentialInput;
+
+// models/VersionControlCredentialStatus.ts
+var _VersionControlCredentialStatus = class _VersionControlCredentialStatus {
+  static getAttributeTypeMap() {
+    return _VersionControlCredentialStatus.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlCredentialStatus.discriminator = void 0;
+_VersionControlCredentialStatus.mapping = void 0;
+_VersionControlCredentialStatus.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "VersionControlCredentialStatusTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "username",
+    "baseName": "username",
+    "type": "string",
+    "format": ""
+  }
+];
+var VersionControlCredentialStatus = _VersionControlCredentialStatus;
+
+// models/VersionControlDeployResponse.ts
+var _VersionControlDeployResponse = class _VersionControlDeployResponse {
+  static getAttributeTypeMap() {
+    return _VersionControlDeployResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlDeployResponse.discriminator = void 0;
+_VersionControlDeployResponse.mapping = void 0;
+_VersionControlDeployResponse.attributeTypeMap = [
+  {
+    "name": "run_id",
+    "baseName": "run_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "target_deployment_revision",
+    "baseName": "target_deployment_revision",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "last_deployed_revision",
+    "baseName": "last_deployed_revision",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "accepted_time_in_millis",
+    "baseName": "accepted_time_in_millis",
+    "type": "number",
+    "format": "float"
+  }
+];
+var VersionControlDeployResponse = _VersionControlDeployResponse;
+
+// models/VersionControlFileChanges.ts
+var _VersionControlFileChanges = class _VersionControlFileChanges {
+  static getAttributeTypeMap() {
+    return _VersionControlFileChanges.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlFileChanges.discriminator = void 0;
+_VersionControlFileChanges.mapping = void 0;
+_VersionControlFileChanges.attributeTypeMap = [
+  {
+    "name": "total_count",
+    "baseName": "total_count",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "added",
+    "baseName": "added",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "modified",
+    "baseName": "modified",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "deleted",
+    "baseName": "deleted",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "conflicts",
+    "baseName": "conflicts",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var VersionControlFileChanges = _VersionControlFileChanges;
+
+// models/VersionControlObjectInput.ts
+var _VersionControlObjectInput = class _VersionControlObjectInput {
+  static getAttributeTypeMap() {
+    return _VersionControlObjectInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlObjectInput.discriminator = void 0;
+_VersionControlObjectInput.mapping = void 0;
+_VersionControlObjectInput.attributeTypeMap = [
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "VersionControlObjectInputTypeEnum",
+    "format": ""
+  }
+];
+var VersionControlObjectInput = _VersionControlObjectInput;
+
+// models/VersionControlObjectResult.ts
+var _VersionControlObjectResult = class _VersionControlObjectResult {
+  static getAttributeTypeMap() {
+    return _VersionControlObjectResult.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlObjectResult.discriminator = void 0;
+_VersionControlObjectResult.mapping = void 0;
+_VersionControlObjectResult.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "VersionControlObjectResultTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "file_name",
+    "baseName": "file_name",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "action",
+    "baseName": "action",
+    "type": "VersionControlObjectResultActionEnum",
+    "format": ""
+  },
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "VersionControlObjectResultStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "is_dependency",
+    "baseName": "is_dependency",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var VersionControlObjectResult = _VersionControlObjectResult;
+
+// models/VersionControlOrgBranch.ts
+var _VersionControlOrgBranch = class _VersionControlOrgBranch {
+  static getAttributeTypeMap() {
+    return _VersionControlOrgBranch.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlOrgBranch.discriminator = void 0;
+_VersionControlOrgBranch.mapping = void 0;
+_VersionControlOrgBranch.attributeTypeMap = [
+  {
+    "name": "org",
+    "baseName": "org",
+    "type": "Org",
+    "format": ""
+  },
+  {
+    "name": "branch",
+    "baseName": "branch",
+    "type": "string",
+    "format": ""
+  }
+];
+var VersionControlOrgBranch = _VersionControlOrgBranch;
+
+// models/VersionControlPrincipal.ts
+var _VersionControlPrincipal = class _VersionControlPrincipal {
+  static getAttributeTypeMap() {
+    return _VersionControlPrincipal.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlPrincipal.discriminator = void 0;
+_VersionControlPrincipal.mapping = void 0;
+_VersionControlPrincipal.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "name",
+    "baseName": "name",
+    "type": "string",
+    "format": ""
+  }
+];
+var VersionControlPrincipal = _VersionControlPrincipal;
+
+// models/VersionControlPromoteSourceInput.ts
+var _VersionControlPromoteSourceInput = class _VersionControlPromoteSourceInput {
+  static getAttributeTypeMap() {
+    return _VersionControlPromoteSourceInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlPromoteSourceInput.discriminator = void 0;
+_VersionControlPromoteSourceInput.mapping = void 0;
+_VersionControlPromoteSourceInput.attributeTypeMap = [
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "source_branch",
+    "baseName": "source_branch",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "source_revision",
+    "baseName": "source_revision",
+    "type": "string",
+    "format": ""
+  }
+];
+var VersionControlPromoteSourceInput = _VersionControlPromoteSourceInput;
+
+// models/VersionControlPromoteStrategyInput.ts
+var _VersionControlPromoteStrategyInput = class _VersionControlPromoteStrategyInput {
+  static getAttributeTypeMap() {
+    return _VersionControlPromoteStrategyInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlPromoteStrategyInput.discriminator = void 0;
+_VersionControlPromoteStrategyInput.mapping = void 0;
+_VersionControlPromoteStrategyInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "VersionControlPromoteStrategyInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "conflict_policy",
+    "baseName": "conflict_policy",
+    "type": "VersionControlPromoteStrategyInputConflictPolicyEnum",
+    "format": ""
+  }
+];
+var VersionControlPromoteStrategyInput = _VersionControlPromoteStrategyInput;
+
+// models/VersionControlPromotionResponse.ts
+var _VersionControlPromotionResponse = class _VersionControlPromotionResponse {
+  static getAttributeTypeMap() {
+    return _VersionControlPromotionResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlPromotionResponse.discriminator = void 0;
+_VersionControlPromotionResponse.mapping = void 0;
+_VersionControlPromotionResponse.attributeTypeMap = [
+  {
+    "name": "source",
+    "baseName": "source",
+    "type": "VersionControlOrgBranch",
+    "format": ""
+  },
+  {
+    "name": "target",
+    "baseName": "target",
+    "type": "VersionControlOrgBranch",
+    "format": ""
+  },
+  {
+    "name": "branch_divergence",
+    "baseName": "branch_divergence",
+    "type": "VersionControlBranchDivergence",
+    "format": ""
+  },
+  {
+    "name": "revision_details",
+    "baseName": "revision_details",
+    "type": "VersionControlRevisionDetails",
+    "format": ""
+  },
+  {
+    "name": "file_changes",
+    "baseName": "file_changes",
+    "type": "VersionControlFileChanges",
+    "format": ""
+  }
+];
+var VersionControlPromotionResponse = _VersionControlPromotionResponse;
+
+// models/VersionControlRestoreResponse.ts
+var _VersionControlRestoreResponse = class _VersionControlRestoreResponse {
+  static getAttributeTypeMap() {
+    return _VersionControlRestoreResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlRestoreResponse.discriminator = void 0;
+_VersionControlRestoreResponse.mapping = void 0;
+_VersionControlRestoreResponse.attributeTypeMap = [
+  {
+    "name": "run_id",
+    "baseName": "run_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "target_revision",
+    "baseName": "target_revision",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "accepted_time_in_millis",
+    "baseName": "accepted_time_in_millis",
+    "type": "number",
+    "format": "float"
+  }
+];
+var VersionControlRestoreResponse = _VersionControlRestoreResponse;
+
+// models/VersionControlRevisionDetails.ts
+var _VersionControlRevisionDetails = class _VersionControlRevisionDetails {
+  static getAttributeTypeMap() {
+    return _VersionControlRevisionDetails.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlRevisionDetails.discriminator = void 0;
+_VersionControlRevisionDetails.mapping = void 0;
+_VersionControlRevisionDetails.attributeTypeMap = [
+  {
+    "name": "revision",
+    "baseName": "revision",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "committed_time_in_millis",
+    "baseName": "committed_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "author",
+    "baseName": "author",
+    "type": "VersionControlPrincipal",
+    "format": ""
+  }
+];
+var VersionControlRevisionDetails = _VersionControlRevisionDetails;
+
+// models/VersionControlRunList.ts
+var _VersionControlRunList = class _VersionControlRunList {
+  static getAttributeTypeMap() {
+    return _VersionControlRunList.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlRunList.discriminator = void 0;
+_VersionControlRunList.mapping = void 0;
+_VersionControlRunList.attributeTypeMap = [
+  {
+    "name": "runs",
+    "baseName": "runs",
+    "type": "Array<VersionControlRunStatus>",
+    "format": ""
+  },
+  {
+    "name": "last_batch",
+    "baseName": "last_batch",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var VersionControlRunList = _VersionControlRunList;
+
+// models/VersionControlRunStatus.ts
+var _VersionControlRunStatus = class _VersionControlRunStatus {
+  static getAttributeTypeMap() {
+    return _VersionControlRunStatus.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_VersionControlRunStatus.discriminator = void 0;
+_VersionControlRunStatus.mapping = void 0;
+_VersionControlRunStatus.attributeTypeMap = [
+  {
+    "name": "id",
+    "baseName": "id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "VersionControlRunStatusTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "state",
+    "baseName": "state",
+    "type": "VersionControlRunStatusStateEnum",
+    "format": ""
+  },
+  {
+    "name": "message",
+    "baseName": "message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "accepted_time_in_millis",
+    "baseName": "accepted_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "end_time_in_millis",
+    "baseName": "end_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "author",
+    "baseName": "author",
+    "type": "VersionControlPrincipal",
+    "format": ""
+  },
+  {
+    "name": "branch",
+    "baseName": "branch",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "revision",
+    "baseName": "revision",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "objects",
+    "baseName": "objects",
+    "type": "Array<VersionControlObjectResult>",
+    "format": ""
+  }
+];
+var VersionControlRunStatus = _VersionControlRunStatus;
+
 // models/VisualizationFontsInput.ts
 var _VisualizationFontsInput = class _VisualizationFontsInput {
   static getAttributeTypeMap() {
@@ -22578,6 +23580,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "CreateUserRequestPreferredLocaleEnum",
   "CreateVariableRequestTypeEnum",
   "CreateVariableRequestDataTypeEnum",
+  "CreateVersionControlConfigRequestProviderEnum",
+  "CreateVersionControlConfigRequestDisabledOperationsEnum",
   "CreateWebhookConfigurationRequestEventsEnum",
   "CreateWebhookConfigurationRequestStatusEnum",
   "CustomActionMetadataTypeInputTypeEnum",
@@ -22586,6 +23590,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "DeleteStyleFontsRequestScopeEnum",
   "DeployCommitRequestDeployTypeEnum",
   "DeployCommitRequestDeployPolicyEnum",
+  "DeployRevisionRequestDeployTypeEnum",
+  "DeployRevisionRequestDeployPolicyEnum",
   "EventChannelConfigEventTypeEnum",
   "EventChannelConfigChannelsEnum",
   "EventChannelConfigInputEventTypeEnum",
@@ -22680,6 +23686,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ResourceResponseItemTransportTypeEnum",
   "ResponseMessageMessageTypeEnum",
   "ResponseMessageVisualizationTypeEnum",
+  "RestoreRevisionRequestRestorePolicyEnum",
   "RevertCommitRequestRevertPolicyEnum",
   "RoleResponsePrivilegesEnum",
   "RoleResponsePermissionEnum",
@@ -22723,6 +23730,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SearchUsersRequestAccountTypeEnum",
   "SearchUsersRequestAccountStatusEnum",
   "SearchVariablesRequestResponseContentEnum",
+  "SearchVersionControlRunsRequestRunTypeEnum",
   "SearchWebhookConfigurationsRequestEventTypeEnum",
   "SearchWebhookConfigurationsRequestStatusEnum",
   "SecuritySettingsClusterPreferencesTrustedAuthStatusEnum",
@@ -22799,6 +23807,8 @@ var enumsMap = /* @__PURE__ */ new Set([
   "UpdateUserRequestAccountTypeEnum",
   "UpdateUserRequestOperationEnum",
   "UpdateUserRequestPreferredLocaleEnum",
+  "UpdateVersionControlConfigRequestProviderEnum",
+  "UpdateVersionControlConfigRequestDisabledOperationsEnum",
   "UpdateWebhookConfigurationRequestEventsEnum",
   "UpdateWebhookConfigurationRequestStatusEnum",
   "UpdateWebhookConfigurationRequestOperationEnum",
@@ -22822,6 +23832,19 @@ var enumsMap = /* @__PURE__ */ new Set([
   "VariableUpdateAssignmentInputOperationEnum",
   "VariableUpdateScopeInputPrincipalTypeEnum",
   "VariableValuePrincipalTypeEnum",
+  "VersionControlCommitObjectInputTypeEnum",
+  "VersionControlConfigProviderEnum",
+  "VersionControlConfigDisabledOperationsEnum",
+  "VersionControlCredentialInputTypeEnum",
+  "VersionControlCredentialStatusTypeEnum",
+  "VersionControlObjectInputTypeEnum",
+  "VersionControlObjectResultTypeEnum",
+  "VersionControlObjectResultActionEnum",
+  "VersionControlObjectResultStatusEnum",
+  "VersionControlPromoteStrategyInputTypeEnum",
+  "VersionControlPromoteStrategyInputConflictPolicyEnum",
+  "VersionControlRunStatusTypeEnum",
+  "VersionControlRunStatusStateEnum",
   "WebhookResponseEventsEnum",
   "WebhookResponseStatusEnum",
   "WebhookSignatureVerificationTypeEnum",
@@ -22961,6 +23984,7 @@ var typeMap = {
   "CreateAnalystRequest": CreateAnalystRequest,
   "CreateCalendarRequest": CreateCalendarRequest,
   "CreateCollectionRequest": CreateCollectionRequest,
+  "CreateCommitRequest": CreateCommitRequest,
   "CreateConfigRequest": CreateConfigRequest,
   "CreateConnectionConfigurationRequest": CreateConnectionConfigurationRequest,
   "CreateConnectionRequest": CreateConnectionRequest,
@@ -22979,6 +24003,7 @@ var typeMap = {
   "CreateUserGroupRequest": CreateUserGroupRequest,
   "CreateUserRequest": CreateUserRequest,
   "CreateVariableRequest": CreateVariableRequest,
+  "CreateVersionControlConfigRequest": CreateVersionControlConfigRequest,
   "CreateWebhookConfigurationRequest": CreateWebhookConfigurationRequest,
   "CronExpression": CronExpression,
   "CronExpressionInput": CronExpressionInput,
@@ -23016,6 +24041,7 @@ var typeMap = {
   "DeleteWebhookConfigurationsRequest": DeleteWebhookConfigurationsRequest,
   "DeployCommitRequest": DeployCommitRequest,
   "DeployResponse": DeployResponse,
+  "DeployRevisionRequest": DeployRevisionRequest,
   "EntityHeader": EntityHeader,
   "ErrorResponse": ErrorResponse,
   "EurekaDataSourceSuggestionResponse": EurekaDataSourceSuggestionResponse,
@@ -23166,6 +24192,7 @@ var typeMap = {
   "PrincipalsInput": PrincipalsInput,
   "PrincipalsListItem": PrincipalsListItem,
   "PrincipalsListItemInput": PrincipalsListItemInput,
+  "PromoteBranchRequest": PromoteBranchRequest,
   "PublicFileInfo": PublicFileInfo,
   "PublishMetadataListItem": PublishMetadataListItem,
   "PublishMetadataRequest": PublishMetadataRequest,
@@ -23193,6 +24220,7 @@ var typeMap = {
   "ResponseSuccessfulEntities": ResponseSuccessfulEntities,
   "ResponseSuccessfulEntity": ResponseSuccessfulEntity,
   "ResponseWorksheetToModelConversion": ResponseWorksheetToModelConversion,
+  "RestoreRevisionRequest": RestoreRevisionRequest,
   "RevertCommitRequest": RevertCommitRequest,
   "RevertResponse": RevertResponse,
   "RevertedMetadata": RevertedMetadata,
@@ -23248,6 +24276,7 @@ var typeMap = {
   "SearchUserGroupsRequest": SearchUserGroupsRequest,
   "SearchUsersRequest": SearchUsersRequest,
   "SearchVariablesRequest": SearchVariablesRequest,
+  "SearchVersionControlRunsRequest": SearchVersionControlRunsRequest,
   "SearchWebhookConfigurationsRequest": SearchWebhookConfigurationsRequest,
   "SecuritySettingsClusterPreferences": SecuritySettingsClusterPreferences,
   "SecuritySettingsClusterPreferencesInput": SecuritySettingsClusterPreferencesInput,
@@ -23361,6 +24390,7 @@ var typeMap = {
   "UpdateUserRequest": UpdateUserRequest,
   "UpdateVariableRequest": UpdateVariableRequest,
   "UpdateVariableValuesRequest": UpdateVariableValuesRequest,
+  "UpdateVersionControlConfigRequest": UpdateVersionControlConfigRequest,
   "UpdateWebhookConfigurationRequest": UpdateWebhookConfigurationRequest,
   "UsageData": UsageData,
   "UsageDataForUserResponse": UsageDataForUserResponse,
@@ -23390,6 +24420,26 @@ var typeMap = {
   "VariableUpdateScopeInput": VariableUpdateScopeInput,
   "VariableValue": VariableValue,
   "VariableValues": VariableValues,
+  "VersionControlBranchDivergence": VersionControlBranchDivergence,
+  "VersionControlCommitObjectInput": VersionControlCommitObjectInput,
+  "VersionControlCommitResponse": VersionControlCommitResponse,
+  "VersionControlConfig": VersionControlConfig,
+  "VersionControlConfigList": VersionControlConfigList,
+  "VersionControlCredentialInput": VersionControlCredentialInput,
+  "VersionControlCredentialStatus": VersionControlCredentialStatus,
+  "VersionControlDeployResponse": VersionControlDeployResponse,
+  "VersionControlFileChanges": VersionControlFileChanges,
+  "VersionControlObjectInput": VersionControlObjectInput,
+  "VersionControlObjectResult": VersionControlObjectResult,
+  "VersionControlOrgBranch": VersionControlOrgBranch,
+  "VersionControlPrincipal": VersionControlPrincipal,
+  "VersionControlPromoteSourceInput": VersionControlPromoteSourceInput,
+  "VersionControlPromoteStrategyInput": VersionControlPromoteStrategyInput,
+  "VersionControlPromotionResponse": VersionControlPromotionResponse,
+  "VersionControlRestoreResponse": VersionControlRestoreResponse,
+  "VersionControlRevisionDetails": VersionControlRevisionDetails,
+  "VersionControlRunList": VersionControlRunList,
+  "VersionControlRunStatus": VersionControlRunStatus,
   "VisualizationFontsInput": VisualizationFontsInput,
   "WebhookAuthApiKey": WebhookAuthApiKey,
   "WebhookAuthApiKeyInput": WebhookAuthApiKeyInput,
@@ -81745,6 +82795,7 @@ export {
   CreateAnalystRequest,
   CreateCalendarRequest,
   CreateCollectionRequest,
+  CreateCommitRequest,
   CreateConfigRequest,
   CreateConnectionConfigurationRequest,
   CreateConnectionRequest,
@@ -81763,6 +82814,7 @@ export {
   CreateUserGroupRequest,
   CreateUserRequest,
   CreateVariableRequest,
+  CreateVersionControlConfigRequest,
   CreateWebhookConfigurationRequest,
   CronExpression,
   CronExpressionInput,
@@ -81804,6 +82856,7 @@ export {
   DeleteWebhookConfigurationsRequest,
   DeployCommitRequest,
   DeployResponse,
+  DeployRevisionRequest,
   PromiseEmailCustomizationApi as EmailCustomizationApi,
   EntityHeader,
   ErrorResponse,
@@ -81968,6 +83021,7 @@ export {
   PrincipalsInput,
   PrincipalsListItem,
   PrincipalsListItemInput,
+  PromoteBranchRequest,
   PublicFileInfo,
   PublishMetadataListItem,
   PublishMetadataRequest,
@@ -81999,6 +83053,7 @@ export {
   ResponseSuccessfulEntities,
   ResponseSuccessfulEntity,
   ResponseWorksheetToModelConversion,
+  RestoreRevisionRequest,
   RevertCommitRequest,
   RevertResponse,
   RevertedMetadata,
@@ -82056,6 +83111,7 @@ export {
   SearchUserGroupsRequest,
   SearchUsersRequest,
   SearchVariablesRequest,
+  SearchVersionControlRunsRequest,
   SearchWebhookConfigurationsRequest,
   PromiseSecurityApi as SecurityApi,
   SecuritySettingsClusterPreferences,
@@ -82177,6 +83233,7 @@ export {
   UpdateUserRequest,
   UpdateVariableRequest,
   UpdateVariableValuesRequest,
+  UpdateVersionControlConfigRequest,
   UpdateWebhookConfigurationRequest,
   UsageData,
   UsageDataForUserResponse,
@@ -82209,6 +83266,26 @@ export {
   VariableValue,
   VariableValues,
   PromiseVersionControlApi as VersionControlApi,
+  VersionControlBranchDivergence,
+  VersionControlCommitObjectInput,
+  VersionControlCommitResponse,
+  VersionControlConfig,
+  VersionControlConfigList,
+  VersionControlCredentialInput,
+  VersionControlCredentialStatus,
+  VersionControlDeployResponse,
+  VersionControlFileChanges,
+  VersionControlObjectInput,
+  VersionControlObjectResult,
+  VersionControlOrgBranch,
+  VersionControlPrincipal,
+  VersionControlPromoteSourceInput,
+  VersionControlPromoteStrategyInput,
+  VersionControlPromotionResponse,
+  VersionControlRestoreResponse,
+  VersionControlRevisionDetails,
+  VersionControlRunList,
+  VersionControlRunStatus,
   VisualizationFontsInput,
   WebhookAuthApiKey,
   WebhookAuthApiKeyInput,
