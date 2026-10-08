@@ -46,6 +46,63 @@ import com.thoughtspot.client.JSON;
 public class CreateAgentConversationV2Request implements Serializable {
   private static final long serialVersionUID = 1L;
 
+  /**
+   * What the conversation is grounded in. &#x60;DATA_SOURCE&#x60; scopes it to &#x60;data_source_identifiers&#x60;; &#x60;ANALYST&#x60; creates it from the saved analyst in &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later 
+   */
+  @JsonAdapter(SourceEnum.Adapter.class)
+  public enum SourceEnum {
+    DATA_SOURCE("DATA_SOURCE"),
+    
+    ANALYST("ANALYST");
+
+    private String value;
+
+    SourceEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static SourceEnum fromValue(String value) {
+      for (SourceEnum b : SourceEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<SourceEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final SourceEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public SourceEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return SourceEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      SourceEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_SOURCE = "source";
+  @SerializedName(SERIALIZED_NAME_SOURCE)
+  @javax.annotation.Nullable
+  private SourceEnum source = SourceEnum.DATA_SOURCE;
+
   public static final String SERIALIZED_NAME_DATA_SOURCE_IDENTIFIERS = "data_source_identifiers";
   @SerializedName(SERIALIZED_NAME_DATA_SOURCE_IDENTIFIERS)
   @javax.annotation.Nullable
@@ -56,8 +113,32 @@ public class CreateAgentConversationV2Request implements Serializable {
   @javax.annotation.Nullable
   private String additionalInstructions;
 
+  public static final String SERIALIZED_NAME_ANALYST_IDENTIFIER = "analyst_identifier";
+  @SerializedName(SERIALIZED_NAME_ANALYST_IDENTIFIER)
+  @javax.annotation.Nullable
+  private String analystIdentifier;
+
   public CreateAgentConversationV2Request() {
   }
+
+  public CreateAgentConversationV2Request source(@javax.annotation.Nullable SourceEnum source) {
+    this.source = source;
+    return this;
+  }
+
+  /**
+   * What the conversation is grounded in. &#x60;DATA_SOURCE&#x60; scopes it to &#x60;data_source_identifiers&#x60;; &#x60;ANALYST&#x60; creates it from the saved analyst in &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later 
+   * @return source
+   */
+  @javax.annotation.Nullable
+  public SourceEnum getSource() {
+    return source;
+  }
+
+  public void setSource(@javax.annotation.Nullable SourceEnum source) {
+    this.source = source;
+  }
+
 
   public CreateAgentConversationV2Request dataSourceIdentifiers(@javax.annotation.Nullable List<String> dataSourceIdentifiers) {
     this.dataSourceIdentifiers = dataSourceIdentifiers;
@@ -73,7 +154,7 @@ public class CreateAgentConversationV2Request implements Serializable {
   }
 
   /**
-   * Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question.    Version: 26.12.0.cl or later 
+   * Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question. Only valid when &#x60;source&#x60; is &#x60;DATA_SOURCE&#x60;.    Version: 26.12.0.cl or later 
    * @return dataSourceIdentifiers
    */
   @javax.annotation.Nullable
@@ -92,7 +173,7 @@ public class CreateAgentConversationV2Request implements Serializable {
   }
 
   /**
-   * Guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created.    Version: 26.12.0.cl or later 
+   * Guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created. Only valid when &#x60;source&#x60; is &#x60;DATA_SOURCE&#x60;.    Version: 26.12.0.cl or later 
    * @return additionalInstructions
    */
   @javax.annotation.Nullable
@@ -102,6 +183,25 @@ public class CreateAgentConversationV2Request implements Serializable {
 
   public void setAdditionalInstructions(@javax.annotation.Nullable String additionalInstructions) {
     this.additionalInstructions = additionalInstructions;
+  }
+
+
+  public CreateAgentConversationV2Request analystIdentifier(@javax.annotation.Nullable String analystIdentifier) {
+    this.analystIdentifier = analystIdentifier;
+    return this;
+  }
+
+  /**
+   * Unique identifier of the saved analyst to create the conversation from. Required when &#x60;source&#x60; is &#x60;ANALYST&#x60;, and not allowed otherwise.    Version: 26.12.0.cl or later 
+   * @return analystIdentifier
+   */
+  @javax.annotation.Nullable
+  public String getAnalystIdentifier() {
+    return analystIdentifier;
+  }
+
+  public void setAnalystIdentifier(@javax.annotation.Nullable String analystIdentifier) {
+    this.analystIdentifier = analystIdentifier;
   }
 
   /**
@@ -159,22 +259,26 @@ public class CreateAgentConversationV2Request implements Serializable {
       return false;
     }
     CreateAgentConversationV2Request createAgentConversationV2Request = (CreateAgentConversationV2Request) o;
-    return Objects.equals(this.dataSourceIdentifiers, createAgentConversationV2Request.dataSourceIdentifiers) &&
-        Objects.equals(this.additionalInstructions, createAgentConversationV2Request.additionalInstructions)&&
+    return Objects.equals(this.source, createAgentConversationV2Request.source) &&
+        Objects.equals(this.dataSourceIdentifiers, createAgentConversationV2Request.dataSourceIdentifiers) &&
+        Objects.equals(this.additionalInstructions, createAgentConversationV2Request.additionalInstructions) &&
+        Objects.equals(this.analystIdentifier, createAgentConversationV2Request.analystIdentifier)&&
         Objects.equals(this.additionalProperties, createAgentConversationV2Request.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(dataSourceIdentifiers, additionalInstructions, additionalProperties);
+    return Objects.hash(source, dataSourceIdentifiers, additionalInstructions, analystIdentifier, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateAgentConversationV2Request {\n");
+    sb.append("    source: ").append(toIndentedString(source)).append("\n");
     sb.append("    dataSourceIdentifiers: ").append(toIndentedString(dataSourceIdentifiers)).append("\n");
     sb.append("    additionalInstructions: ").append(toIndentedString(additionalInstructions)).append("\n");
+    sb.append("    analystIdentifier: ").append(toIndentedString(analystIdentifier)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -198,8 +302,10 @@ public class CreateAgentConversationV2Request implements Serializable {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
+    openapiFields.add("source");
     openapiFields.add("data_source_identifiers");
     openapiFields.add("additional_instructions");
+    openapiFields.add("analyst_identifier");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -218,12 +324,22 @@ public class CreateAgentConversationV2Request implements Serializable {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if ((jsonObj.get("source") != null && !jsonObj.get("source").isJsonNull()) && !jsonObj.get("source").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `source` to be a primitive type in the JSON string but got `%s`", jsonObj.get("source").toString()));
+      }
+      // validate the optional field `source`
+      if (jsonObj.get("source") != null && !jsonObj.get("source").isJsonNull()) {
+        SourceEnum.validateJsonElement(jsonObj.get("source"));
+      }
       // ensure the optional json data is an array if present
       if (jsonObj.get("data_source_identifiers") != null && !jsonObj.get("data_source_identifiers").isJsonNull() && !jsonObj.get("data_source_identifiers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `data_source_identifiers` to be an array in the JSON string but got `%s`", jsonObj.get("data_source_identifiers").toString()));
       }
       if ((jsonObj.get("additional_instructions") != null && !jsonObj.get("additional_instructions").isJsonNull()) && !jsonObj.get("additional_instructions").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `additional_instructions` to be a primitive type in the JSON string but got `%s`", jsonObj.get("additional_instructions").toString()));
+      }
+      if ((jsonObj.get("analyst_identifier") != null && !jsonObj.get("analyst_identifier").isJsonNull()) && !jsonObj.get("analyst_identifier").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `analyst_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("analyst_identifier").toString()));
       }
   }
 

@@ -366,7 +366,7 @@
     "/api/rest/2.0/ai/agent/v2/conversation/create": {
       "post": {
         "operationId": "createAgentConversationV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nCreates a new Spotter conversation and returns its identifier.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to any data source specified in the request.\n\n#### Usage guidelines\n\nA conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.\n\nBoth parameters are optional; send an empty body to create a conversation with no customization.\n\n- `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored.\n- `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `\"Answer concisely and always report revenue in thousands.\"` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short.\n\nConversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.\n\n#### Example request\n\n```json\n{\n  \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"],\n  \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\"\n}\n```\n\n#### Example response\n\n```json\n{\n  \"conversation_identifier\": \"5612260428840173568\"\n}\n```\n\nTreat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.\n\n#### Error responses\n\n| Code | Description                                                                                            |\n| ---- | ------------------------------------------------------------------------------------------------------ |\n| 400  | Bad request — the request fails validation, for example `additional_instructions` exceeds the maximum length. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                   |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks view permission on a specified data source. |\n| 404  | Not found — no data source with the given identifier exists in the caller's Org.                       |\n| 500  | Internal server error — an unexpected failure while creating the conversation.                         |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nCreates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to any data source or analyst specified in the request.\n\n#### Usage guidelines\n\nA conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.\n\n`source` decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.\n\n- `source` (default: `DATA_SOURCE`): what the conversation is grounded in.\n  - `DATA_SOURCE`: data sources, set with `data_source_identifiers` and optionally `additional_instructions`. `analyst_identifier` is not allowed.\n  - `ANALYST`: a saved analyst, set with `analyst_identifier`, which is then required. The analyst brings its own instructions, data sources and connectors, so `data_source_identifiers` and `additional_instructions` are not allowed.\n- `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored.\n- `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `\"Answer concisely and always report revenue in thousands.\"` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short.\n- `analyst_identifier`: the saved analyst to create the conversation from.\n\nA parameter that does not apply to the `source` fails the request with a 400 rather than being ignored.\n\nConversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.\n\n#### Example requests\n\n```json\n{\n  \"source\": \"DATA_SOURCE\",\n  \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"],\n  \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\"\n}\n```\n\n```json\n{\n  \"source\": \"ANALYST\",\n  \"analyst_identifier\": \"0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\"\n}\n```\n\n#### Example response\n\n```json\n{\n  \"conversation_identifier\": \"5612260428840173568\"\n}\n```\n\nTreat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                                                                                                                                                                                               |\n| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| 400  | Bad request — the request fails validation; `analyst_identifier` is missing when `source` is `ANALYST`; a parameter that does not apply to the `source` is set; or the analyst in `analyst_identifier`, or a data source in `data_source_identifiers`, does not exist or the caller cannot view it (the message lists those identifiers). |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst.                                                                                                                                                                                                                             |\n| 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.12.0.cl"
@@ -407,6 +407,12 @@
                     "summary": "Conversation created, scoped to several data sources",
                     "value": {
                       "conversation_identifier": "8401773265129884672"
+                    }
+                  },
+                  "example_4": {
+                    "summary": "Conversation created from an analyst",
+                    "value": {
+                      "conversation_identifier": "6930417752281636864"
                     }
                   }
                 }
@@ -502,97 +508,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Analyst"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/analysts/{analyst_identifier}/conversation/create": {
-      "post": {
-        "operationId": "createAnalystConversationV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nCreates a Spotter conversation from a saved analyst.\n\nRequires `CAN_USE_SPOTTER` privilege, and access to the analyst.\n\nAn analyst carries its own instructions, data sources and connectors. Creating a conversation from one applies all of that automatically, so the conversation behaves as the analyst was configured to without the caller restating any of it.\n\n#### Usage guidelines\n\n- `analyst_identifier` (required): the saved analyst to create the conversation from.\n\nThe analyst's configuration is resolved server-side from its identifier. Nothing else is caller-supplied, so a conversation cannot be given instructions or data sources the analyst does not carry.\n\nUse the returned `conversation_identifier` with `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to ask questions in the conversation. To create a conversation that is not backed by an analyst, use `createAgentConversationV2` instead.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 400  | Bad request — `analyst_identifier` is missing.                                       |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst. |\n| 404  | Not found — no analyst with the given identifier exists.                             |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "analyst_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique identifier of the saved analyst to create the conversation from. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationV2"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "A conversation created from a saved analyst",
-                    "value": {
-                      "conversation_identifier": "5612260428840173568"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationV2"
                 }
               }
             }
@@ -1323,147 +1238,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AgentConversationHistoryResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationHistoryResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/conversations": {
-      "get": {
-        "operationId": "getConversationListV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nLists the Spotter conversations belonging to the authenticated user.\n\nRequires `CAN_USE_SPOTTER` privilege. A user sees only their own conversations.\n\nUse this to build a conversation history view, or to find a `conversation_identifier` to continue an earlier exchange with `sendAgentConversationMessageV2`.\n\n#### Usage guidelines\n\n- `batch_size` (optional): how many conversations to return. Defaults to 20.\n- `offset` (optional): zero-based index of the first conversation to return. Page by adding `batch_size` to it until `has_more` is `false`.\n- `query` (optional): a case-insensitive substring matched against conversation titles. Paging applies to the matched set.\n\nConversations are ordered with pinned ones first, then most recently updated. A conversation the title generator has not named yet has no `conversation_title`.\n\n`data_source_identifiers` is present when the conversation was scoped to specific data sources at creation; it is absent for a conversation that let Spotter choose.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege.        |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "batch_size",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Maximum number of conversations to return. Defaults to 20 when omitted. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Zero-based index of the first conversation to return, for paging. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          {
-            "in": "query",
-            "name": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Case-insensitive substring to match against conversation titles. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationHistoryResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "A page of conversations, pinned first then most recently updated",
-                    "value": {
-                      "conversations": [
-                        {
-                          "conversation_identifier": "5612260428840173568",
-                          "conversation_title": "Sales by region, last quarter",
-                          "updated_at": "2026-09-30T18:22:04Z",
-                          "is_pinned": true,
-                          "data_source_identifiers": [
-                            "cd252e5c-b552-49a8-821d-3eadaa049cca"
-                          ]
-                        },
-                        {
-                          "conversation_identifier": "5612260428840173999",
-                          "conversation_title": "Jacket sales in the east",
-                          "updated_at": "2026-09-29T11:07:41Z",
-                          "is_pinned": false
-                        }
-                      ],
-                      "has_more": true
-                    }
-                  },
-                  "example_2": {
-                    "summary": "The last page, and a conversation the title generator has not named yet",
-                    "value": {
-                      "conversations": [
-                        {
-                          "conversation_identifier": "5612260428840174111",
-                          "updated_at": "2026-09-28T09:14:52Z",
-                          "is_pinned": false
-                        }
-                      ],
-                      "has_more": false
-                    }
-                  }
                 }
               }
             }
@@ -25554,6 +25328,39 @@
           }
         }
       },
+      "AgentInstructions": {
+        "type": "object",
+        "required": [
+          "instructions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the record.",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "string",
+            "description": "The admin instructions text for the agent."
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were created.",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were last updated.",
+            "nullable": true
+          },
+          "last_updated_by": {
+            "type": "string",
+            "description": "User ID of the admin who last updated the instructions.",
+            "nullable": true
+          }
+        },
+        "description": "Admin instructions configured for the AI agent."
+      },
       "AgentConversationHistoryResponse": {
         "type": "object",
         "properties": {
@@ -25644,39 +25451,6 @@
           }
         },
         "description": "A data source associated with a conversation, returned as a typed entry."
-      },
-      "AgentInstructions": {
-        "type": "object",
-        "required": [
-          "instructions"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the record.",
-            "nullable": true
-          },
-          "instructions": {
-            "type": "string",
-            "description": "The admin instructions text for the agent."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "ISO timestamp when the instructions were created.",
-            "nullable": true
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "ISO timestamp when the instructions were last updated.",
-            "nullable": true
-          },
-          "last_updated_by": {
-            "type": "string",
-            "description": "User ID of the admin who last updated the instructions.",
-            "nullable": true
-          }
-        },
-        "description": "Admin instructions configured for the AI agent."
       },
       "ConversationMessageResponse": {
         "type": "object",
@@ -34682,8 +34456,17 @@
       "CreateAgentConversationV2Request": {
         "type": "object",
         "properties": {
+          "source": {
+            "description": "What the conversation is grounded in. `DATA_SOURCE` scopes it to\n`data_source_identifiers`; `ANALYST` creates it from the saved analyst in\n`analyst_identifier`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "default": "DATA_SOURCE",
+            "type": "string",
+            "enum": [
+              "DATA_SOURCE",
+              "ANALYST"
+            ]
+          },
           "data_source_identifiers": {
-            "description": "Unique identifiers of the data sources to scope the conversation to. When\nempty, Spotter selects the most relevant data source for each question. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "description": "Unique identifiers of the data sources to scope the conversation to. When\nempty, Spotter selects the most relevant data source for each question.\nOnly valid when `source` is `DATA_SOURCE`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "default": [],
             "type": "array",
             "items": {
@@ -34691,7 +34474,11 @@
             }
           },
           "additional_instructions": {
-            "description": "Guidance appended to the agent's instructions on every message in this\nconversation. Use it to set a persona, a preferred output format, or\ndomain rules. Cannot be changed after the conversation is created. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "description": "Guidance appended to the agent's instructions on every message in this\nconversation. Use it to set a persona, a preferred output format, or\ndomain rules. Cannot be changed after the conversation is created. Only\nvalid when `source` is `DATA_SOURCE`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
+          },
+          "analyst_identifier": {
+            "description": "Unique identifier of the saved analyst to create the conversation from.\nRequired when `source` is `ANALYST`, and not allowed otherwise. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "type": "string"
           }
         }

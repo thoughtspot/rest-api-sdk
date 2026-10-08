@@ -14,19 +14,33 @@ import { HttpFile } from '../http/http';
 
 export class CreateAgentConversationV2Request {
     /**
-    * Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question.    Version: 26.12.0.cl or later 
+    * What the conversation is grounded in. `DATA_SOURCE` scopes it to `data_source_identifiers`; `ANALYST` creates it from the saved analyst in `analyst_identifier`.    Version: 26.12.0.cl or later 
+    */
+    'source'?: CreateAgentConversationV2RequestSourceEnum;
+    /**
+    * Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question. Only valid when `source` is `DATA_SOURCE`.    Version: 26.12.0.cl or later 
     */
     'data_source_identifiers'?: Array<string>;
     /**
-    * Guidance appended to the agent\'s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created.    Version: 26.12.0.cl or later 
+    * Guidance appended to the agent\'s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created. Only valid when `source` is `DATA_SOURCE`.    Version: 26.12.0.cl or later 
     */
     'additional_instructions'?: string;
+    /**
+    * Unique identifier of the saved analyst to create the conversation from. Required when `source` is `ANALYST`, and not allowed otherwise.    Version: 26.12.0.cl or later 
+    */
+    'analyst_identifier'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "source",
+            "baseName": "source",
+            "type": "CreateAgentConversationV2RequestSourceEnum",
+            "format": ""
+        },
         {
             "name": "data_source_identifiers",
             "baseName": "data_source_identifiers",
@@ -38,6 +52,12 @@ export class CreateAgentConversationV2Request {
             "baseName": "additional_instructions",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "analyst_identifier",
+            "baseName": "analyst_identifier",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -47,3 +67,6 @@ export class CreateAgentConversationV2Request {
     public constructor() {
     }
 }
+
+    export type CreateAgentConversationV2RequestSourceEnum = "DATA_SOURCE" | "ANALYST" ;
+

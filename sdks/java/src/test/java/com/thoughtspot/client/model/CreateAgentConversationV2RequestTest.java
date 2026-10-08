@@ -31,6 +31,14 @@ public class CreateAgentConversationV2RequestTest {
     }
 
     /**
+     * Test the property 'source'
+     */
+    @Test
+    public void sourceTest() {
+        // TODO: test source
+    }
+
+    /**
      * Test the property 'dataSourceIdentifiers'
      */
     @Test
@@ -44,6 +52,14 @@ public class CreateAgentConversationV2RequestTest {
     @Test
     public void additionalInstructionsTest() {
         // TODO: test additionalInstructions
+    }
+
+    /**
+     * Test the property 'analystIdentifier'
+     */
+    @Test
+    public void analystIdentifierTest() {
+        // TODO: test analystIdentifier
     }
 
 }

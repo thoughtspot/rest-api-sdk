@@ -699,7 +699,7 @@ import { ConversationShareStatusResponse } from '../models/ConversationShareStat
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest  , CopyObjectRequestTypeEnum    } from '../models/CopyObjectRequest';
 import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
-import { CreateAgentConversationV2Request } from '../models/CreateAgentConversationV2Request';
+import { CreateAgentConversationV2Request, CreateAgentConversationV2RequestSourceEnum      } from '../models/CreateAgentConversationV2Request';
 import { CreateAnalystRequest } from '../models/CreateAnalystRequest';
 import { CreateCalendarRequest , CreateCalendarRequestCreationMethodEnum     , CreateCalendarRequestCalendarTypeEnum  , CreateCalendarRequestMonthOffsetEnum  , CreateCalendarRequestStartDayOfWeekEnum     } from '../models/CreateCalendarRequest';
 import { CreateCollectionRequest } from '../models/CreateCollectionRequest';
@@ -1206,6 +1206,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ConversationPrincipalInfoTypeEnum",
     "ConversationPrincipalInfoPermissionEnum",
     "CopyObjectRequestTypeEnum",
+    "CreateAgentConversationV2RequestSourceEnum",
     "CreateCalendarRequestCreationMethodEnum",
     "CreateCalendarRequestCalendarTypeEnum",
     "CreateCalendarRequestMonthOffsetEnum",

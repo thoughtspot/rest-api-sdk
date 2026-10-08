@@ -33,30 +33,68 @@ namespace ThoughtSpot.RestApi.Sdk.Model
     public partial class CreateAgentConversationV2Request : IValidatableObject
     {
         /// <summary>
+        /// What the conversation is grounded in. &#x60;DATA_SOURCE&#x60; scopes it to &#x60;data_source_identifiers&#x60;; &#x60;ANALYST&#x60; creates it from the saved analyst in &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later 
+        /// </summary>
+        /// <value>What the conversation is grounded in. &#x60;DATA_SOURCE&#x60; scopes it to &#x60;data_source_identifiers&#x60;; &#x60;ANALYST&#x60; creates it from the saved analyst in &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later </value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum SourceEnum
+        {
+            /// <summary>
+            /// Enum DATASOURCE for value: DATA_SOURCE
+            /// </summary>
+            [EnumMember(Value = "DATA_SOURCE")]
+            DATASOURCE = 1,
+
+            /// <summary>
+            /// Enum ANALYST for value: ANALYST
+            /// </summary>
+            [EnumMember(Value = "ANALYST")]
+            ANALYST = 2
+        }
+
+
+        /// <summary>
+        /// What the conversation is grounded in. &#x60;DATA_SOURCE&#x60; scopes it to &#x60;data_source_identifiers&#x60;; &#x60;ANALYST&#x60; creates it from the saved analyst in &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later 
+        /// </summary>
+        /// <value>What the conversation is grounded in. &#x60;DATA_SOURCE&#x60; scopes it to &#x60;data_source_identifiers&#x60;; &#x60;ANALYST&#x60; creates it from the saved analyst in &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later </value>
+        [DataMember(Name = "source", EmitDefaultValue = false)]
+        public SourceEnum? Source { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="CreateAgentConversationV2Request" /> class.
         /// </summary>
-        /// <param name="dataSourceIdentifiers">Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question.    Version: 26.12.0.cl or later .</param>
-        /// <param name="additionalInstructions">Guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created.    Version: 26.12.0.cl or later .</param>
-        public CreateAgentConversationV2Request(List<string> dataSourceIdentifiers = default, string additionalInstructions = default)
+        /// <param name="source">What the conversation is grounded in. &#x60;DATA_SOURCE&#x60; scopes it to &#x60;data_source_identifiers&#x60;; &#x60;ANALYST&#x60; creates it from the saved analyst in &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later  (default to SourceEnum.DATASOURCE).</param>
+        /// <param name="dataSourceIdentifiers">Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question. Only valid when &#x60;source&#x60; is &#x60;DATA_SOURCE&#x60;.    Version: 26.12.0.cl or later .</param>
+        /// <param name="additionalInstructions">Guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created. Only valid when &#x60;source&#x60; is &#x60;DATA_SOURCE&#x60;.    Version: 26.12.0.cl or later .</param>
+        /// <param name="analystIdentifier">Unique identifier of the saved analyst to create the conversation from. Required when &#x60;source&#x60; is &#x60;ANALYST&#x60;, and not allowed otherwise.    Version: 26.12.0.cl or later .</param>
+        public CreateAgentConversationV2Request(SourceEnum? source = SourceEnum.DATASOURCE, List<string> dataSourceIdentifiers = default, string additionalInstructions = default, string analystIdentifier = default)
         {
+            this.Source = source;
             this.DataSourceIdentifiers = dataSourceIdentifiers;
             this.AdditionalInstructions = additionalInstructions;
+            this.AnalystIdentifier = analystIdentifier;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question.    Version: 26.12.0.cl or later 
+        /// Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question. Only valid when &#x60;source&#x60; is &#x60;DATA_SOURCE&#x60;.    Version: 26.12.0.cl or later 
         /// </summary>
-        /// <value>Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question.    Version: 26.12.0.cl or later </value>
+        /// <value>Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question. Only valid when &#x60;source&#x60; is &#x60;DATA_SOURCE&#x60;.    Version: 26.12.0.cl or later </value>
         [DataMember(Name = "data_source_identifiers", EmitDefaultValue = false)]
         public List<string> DataSourceIdentifiers { get; set; }
 
         /// <summary>
-        /// Guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created.    Version: 26.12.0.cl or later 
+        /// Guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created. Only valid when &#x60;source&#x60; is &#x60;DATA_SOURCE&#x60;.    Version: 26.12.0.cl or later 
         /// </summary>
-        /// <value>Guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created.    Version: 26.12.0.cl or later </value>
+        /// <value>Guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created. Only valid when &#x60;source&#x60; is &#x60;DATA_SOURCE&#x60;.    Version: 26.12.0.cl or later </value>
         [DataMember(Name = "additional_instructions", EmitDefaultValue = false)]
         public string AdditionalInstructions { get; set; }
+
+        /// <summary>
+        /// Unique identifier of the saved analyst to create the conversation from. Required when &#x60;source&#x60; is &#x60;ANALYST&#x60;, and not allowed otherwise.    Version: 26.12.0.cl or later 
+        /// </summary>
+        /// <value>Unique identifier of the saved analyst to create the conversation from. Required when &#x60;source&#x60; is &#x60;ANALYST&#x60;, and not allowed otherwise.    Version: 26.12.0.cl or later </value>
+        [DataMember(Name = "analyst_identifier", EmitDefaultValue = false)]
+        public string AnalystIdentifier { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -72,8 +110,10 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class CreateAgentConversationV2Request {\n");
+            sb.Append("  Source: ").Append(Source).Append("\n");
             sb.Append("  DataSourceIdentifiers: ").Append(DataSourceIdentifiers).Append("\n");
             sb.Append("  AdditionalInstructions: ").Append(AdditionalInstructions).Append("\n");
+            sb.Append("  AnalystIdentifier: ").Append(AnalystIdentifier).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

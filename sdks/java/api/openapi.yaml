@@ -23922,6 +23922,37 @@ components:
       - instructions
       - scope
       type: object
+    AgentInstructions:
+      description: Admin instructions configured for the AI agent.
+      example:
+        instructions: instructions
+        last_updated_by: last_updated_by
+        updated_at: updated_at
+        created_at: created_at
+        id: id
+      properties:
+        id:
+          description: Unique identifier of the record.
+          nullable: true
+          type: string
+        instructions:
+          description: The admin instructions text for the agent.
+          type: string
+        created_at:
+          description: ISO timestamp when the instructions were created.
+          nullable: true
+          type: string
+        updated_at:
+          description: ISO timestamp when the instructions were last updated.
+          nullable: true
+          type: string
+        last_updated_by:
+          description: User ID of the admin who last updated the instructions.
+          nullable: true
+          type: string
+      required:
+      - instructions
+      type: object
     AgentConversationHistoryResponse:
       description: Response returned by getConversationList.
       example:
@@ -24048,37 +24079,6 @@ components:
       required:
       - id
       - name
-      type: object
-    AgentInstructions:
-      description: Admin instructions configured for the AI agent.
-      example:
-        instructions: instructions
-        last_updated_by: last_updated_by
-        updated_at: updated_at
-        created_at: created_at
-        id: id
-      properties:
-        id:
-          description: Unique identifier of the record.
-          nullable: true
-          type: string
-        instructions:
-          description: The admin instructions text for the agent.
-          type: string
-        created_at:
-          description: ISO timestamp when the instructions were created.
-          nullable: true
-          type: string
-        updated_at:
-          description: ISO timestamp when the instructions were last updated.
-          nullable: true
-          type: string
-        last_updated_by:
-          description: User ID of the admin who last updated the instructions.
-          nullable: true
-          type: string
-      required:
-      - instructions
       type: object
     ConversationMessageResponse:
       description: |-
@@ -33621,11 +33621,21 @@ components:
       type: object
     CreateAgentConversationV2Request:
       properties:
+        source:
+          default: DATA_SOURCE
+          description: "What the conversation is grounded in. `DATA_SOURCE` scopes\
+            \ it to\n`data_source_identifiers`; `ANALYST` creates it from the saved\
+            \ analyst in\n`analyst_identifier`. \n  Version: 26.12.0.cl or later\n"
+          enum:
+          - DATA_SOURCE
+          - ANALYST
+          type: string
         data_source_identifiers:
           default: []
           description: "Unique identifiers of the data sources to scope the conversation\
             \ to. When\nempty, Spotter selects the most relevant data source for each\
-            \ question. \n  Version: 26.12.0.cl or later\n"
+            \ question.\nOnly valid when `source` is `DATA_SOURCE`. \n  Version: 26.12.0.cl\
+            \ or later\n"
           items:
             type: string
           type: array
@@ -33633,6 +33643,12 @@ components:
           description: "Guidance appended to the agent's instructions on every message\
             \ in this\nconversation. Use it to set a persona, a preferred output format,\
             \ or\ndomain rules. Cannot be changed after the conversation is created.\
+            \ Only\nvalid when `source` is `DATA_SOURCE`. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          type: string
+        analyst_identifier:
+          description: "Unique identifier of the saved analyst to create the conversation\
+            \ from.\nRequired when `source` is `ANALYST`, and not allowed otherwise.\
             \ \n  Version: 26.12.0.cl or later\n"
           type: string
       type: object

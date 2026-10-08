@@ -55,6 +55,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Source'
+        /// </summary>
+        [Fact]
+        public void SourceTest()
+        {
+            // TODO unit test for the property 'Source'
+        }
+
+        /// <summary>
         /// Test the property 'DataSourceIdentifiers'
         /// </summary>
         [Fact]
@@ -70,6 +79,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         public void AdditionalInstructionsTest()
         {
             // TODO unit test for the property 'AdditionalInstructions'
+        }
+
+        /// <summary>
+        /// Test the property 'AnalystIdentifier'
+        /// </summary>
+        [Fact]
+        public void AnalystIdentifierTest()
+        {
+            // TODO unit test for the property 'AnalystIdentifier'
         }
     }
 }

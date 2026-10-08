@@ -3,10 +3,6 @@
 
 ## API Changes
 
-### POST /api/rest/2.0/ai/agent/v2/analysts/{analyst_identifier}/conversation/create
--  endpoint added
-
-
 ### POST /api/rest/2.0/ai/agent/v2/conversation/create
 -  endpoint added
 
@@ -20,10 +16,6 @@
 
 
 ### POST /api/rest/2.0/ai/agent/v2/conversation/{conversation_identifier}/stop-response
--  endpoint added
-
-
-### GET /api/rest/2.0/ai/agent/v2/conversations
 -  endpoint added
 
 

@@ -4483,6 +4483,12 @@ _CreateAgentConversationV2Request.discriminator = void 0;
 _CreateAgentConversationV2Request.mapping = void 0;
 _CreateAgentConversationV2Request.attributeTypeMap = [
   {
+    "name": "source",
+    "baseName": "source",
+    "type": "CreateAgentConversationV2RequestSourceEnum",
+    "format": ""
+  },
+  {
     "name": "data_source_identifiers",
     "baseName": "data_source_identifiers",
     "type": "Array<string>",
@@ -4491,6 +4497,12 @@ _CreateAgentConversationV2Request.attributeTypeMap = [
   {
     "name": "additional_instructions",
     "baseName": "additional_instructions",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "analyst_identifier",
+    "baseName": "analyst_identifier",
     "type": "string",
     "format": ""
   }
@@ -22542,6 +22554,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ConversationPrincipalInfoTypeEnum",
   "ConversationPrincipalInfoPermissionEnum",
   "CopyObjectRequestTypeEnum",
+  "CreateAgentConversationV2RequestSourceEnum",
   "CreateCalendarRequestCreationMethodEnum",
   "CreateCalendarRequestCalendarTypeEnum",
   "CreateCalendarRequestMonthOffsetEnum",

@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -25,10 +25,22 @@ class CreateAgentConversationV2Request(BaseModel):
     """
     CreateAgentConversationV2Request
     """ # noqa: E501
-    data_source_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question.    Version: 26.12.0.cl or later ")
-    additional_instructions: Optional[StrictStr] = Field(default=None, description="Guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created.    Version: 26.12.0.cl or later ")
+    source: Optional[StrictStr] = Field(default='DATA_SOURCE', description="What the conversation is grounded in. `DATA_SOURCE` scopes it to `data_source_identifiers`; `ANALYST` creates it from the saved analyst in `analyst_identifier`.    Version: 26.12.0.cl or later ")
+    data_source_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique identifiers of the data sources to scope the conversation to. When empty, Spotter selects the most relevant data source for each question. Only valid when `source` is `DATA_SOURCE`.    Version: 26.12.0.cl or later ")
+    additional_instructions: Optional[StrictStr] = Field(default=None, description="Guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. Cannot be changed after the conversation is created. Only valid when `source` is `DATA_SOURCE`.    Version: 26.12.0.cl or later ")
+    analyst_identifier: Optional[StrictStr] = Field(default=None, description="Unique identifier of the saved analyst to create the conversation from. Required when `source` is `ANALYST`, and not allowed otherwise.    Version: 26.12.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["data_source_identifiers", "additional_instructions"]
+    __properties: ClassVar[List[str]] = ["source", "data_source_identifiers", "additional_instructions", "analyst_identifier"]
+
+    @field_validator('source')
+    def source_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['DATA_SOURCE', 'ANALYST']):
+            raise ValueError("must be one of enum values ('DATA_SOURCE', 'ANALYST')")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,8 +100,10 @@ class CreateAgentConversationV2Request(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "source": obj.get("source") if obj.get("source") is not None else 'DATA_SOURCE',
             "data_source_identifiers": obj.get("data_source_identifiers"),
-            "additional_instructions": obj.get("additional_instructions")
+            "additional_instructions": obj.get("additional_instructions"),
+            "analyst_identifier": obj.get("analyst_identifier")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
