@@ -14,6 +14,14 @@
       "description": "Roles for version 26.2.0.cl"
     },
     {
+      "name": "26.12.0.cl",
+      "id": "26.12.0.cl",
+      "tags": [
+        "26.12.0.cl"
+      ],
+      "description": "Roles for version 26.12.0.cl"
+    },
+    {
       "name": "26.10.0.cl",
       "id": "26.10.0.cl",
       "tags": [
@@ -355,6 +363,109 @@
         }
       }
     },
+    "/api/rest/2.0/ai/agent/v2/conversation/create": {
+      "post": {
+        "operationId": "createAgentConversationV2",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nCreates a new Spotter conversation and returns its identifier.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to any data source specified in the request.\n\n#### Usage guidelines\n\nA conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.\n\nBoth parameters are optional; send an empty body to create a conversation with no customization.\n\n- `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored.\n- `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `\"Answer concisely and always report revenue in thousands.\"` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short.\n\nConversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.\n\n#### Example request\n\n```json\n{\n  \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"],\n  \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\"\n}\n```\n\n#### Example response\n\n```json\n{\n  \"conversation_identifier\": \"5612260428840173568\"\n}\n```\n\nTreat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.\n\n#### Error responses\n\n| Code | Description                                                                                            |\n| ---- | ------------------------------------------------------------------------------------------------------ |\n| 400  | Bad request — the request fails validation, for example `additional_instructions` exceeds the maximum length. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                   |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks view permission on a specified data source. |\n| 404  | Not found — no data source with the given identifier exists in the caller's Org.                       |\n| 500  | Internal server error — an unexpected failure while creating the conversation.                         |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentConversationV2Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversationV2"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Conversation created",
+                    "value": {
+                      "conversation_identifier": "5612260428840173568"
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Conversation created, scoped to a single data source",
+                    "value": {
+                      "conversation_identifier": "7258889042597511168"
+                    }
+                  },
+                  "example_3": {
+                    "summary": "Conversation created, scoped to several data sources",
+                    "value": {
+                      "conversation_identifier": "8401773265129884672"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversationV2"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/agent/analysts/create": {
       "post": {
         "operationId": "createAnalyst",
@@ -391,6 +502,97 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Analyst"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/v2/analysts/{analyst_identifier}/conversation/create": {
+      "post": {
+        "operationId": "createAnalystConversationV2",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nCreates a Spotter conversation from a saved analyst.\n\nRequires `CAN_USE_SPOTTER` privilege, and access to the analyst.\n\nAn analyst carries its own instructions, data sources and connectors. Creating a conversation from one applies all of that automatically, so the conversation behaves as the analyst was configured to without the caller restating any of it.\n\n#### Usage guidelines\n\n- `analyst_identifier` (required): the saved analyst to create the conversation from.\n\nThe analyst's configuration is resolved server-side from its identifier. Nothing else is caller-supplied, so a conversation cannot be given instructions or data sources the analyst does not carry.\n\nUse the returned `conversation_identifier` with `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to ask questions in the conversation. To create a conversation that is not backed by an analyst, use `createAgentConversationV2` instead.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 400  | Bad request — `analyst_identifier` is missing.                                       |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst. |\n| 404  | Not found — no analyst with the given identifier exists.                             |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.12.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "analyst_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the saved analyst to create the conversation from. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversationV2"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "A conversation created from a saved analyst",
+                    "value": {
+                      "conversation_identifier": "5612260428840173568"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversationV2"
                 }
               }
             }
@@ -626,6 +828,72 @@
         "responses": {
           "204": {
             "description": "Successfully deleted the agent conversation."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/v2/conversations/{conversation_identifier}/delete": {
+      "delete": {
+        "operationId": "deleteConversationV2",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nDeletes a Spotter conversation and its history.\n\nRequires `CAN_USE_SPOTTER` privilege. A user can delete only their own conversations.\n\nUse this to let a user clear a conversation from their history. The deletion is permanent — the conversation and the turns it contains cannot be recovered, and answers produced during it are no longer reachable through the conversation.\n\n#### Usage guidelines\n\n- `conversation_identifier` (required): the conversation to delete.\n\nReturns `204 No Content` on success. Deleting a conversation that does not exist, or that belongs to another user, returns `404`.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege.        |\n| 404  | Not found — no conversation with the given identifier exists for this user.          |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.12.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation to delete. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the conversation."
           },
           "400": {
             "description": "Operation failed",
@@ -1055,6 +1323,147 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AgentConversationHistoryResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversationHistoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/v2/conversations": {
+      "get": {
+        "operationId": "getConversationListV2",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nLists the Spotter conversations belonging to the authenticated user.\n\nRequires `CAN_USE_SPOTTER` privilege. A user sees only their own conversations.\n\nUse this to build a conversation history view, or to find a `conversation_identifier` to continue an earlier exchange with `sendAgentConversationMessageV2`.\n\n#### Usage guidelines\n\n- `batch_size` (optional): how many conversations to return. Defaults to 20.\n- `offset` (optional): zero-based index of the first conversation to return. Page by adding `batch_size` to it until `has_more` is `false`.\n- `query` (optional): a case-insensitive substring matched against conversation titles. Paging applies to the matched set.\n\nConversations are ordered with pinned ones first, then most recently updated. A conversation the title generator has not named yet has no `conversation_title`.\n\n`data_source_identifiers` is present when the conversation was scoped to specific data sources at creation; it is absent for a conversation that let Spotter choose.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege.        |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.12.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "batch_size",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Maximum number of conversations to return. Defaults to 20 when omitted. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Zero-based index of the first conversation to return, for paging. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Case-insensitive substring to match against conversation titles. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConversationHistoryResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "A page of conversations, pinned first then most recently updated",
+                    "value": {
+                      "conversations": [
+                        {
+                          "conversation_identifier": "5612260428840173568",
+                          "conversation_title": "Sales by region, last quarter",
+                          "updated_at": "2026-09-30T18:22:04Z",
+                          "is_pinned": true,
+                          "data_source_identifiers": [
+                            "cd252e5c-b552-49a8-821d-3eadaa049cca"
+                          ]
+                        },
+                        {
+                          "conversation_identifier": "5612260428840173999",
+                          "conversation_title": "Jacket sales in the east",
+                          "updated_at": "2026-09-29T11:07:41Z",
+                          "is_pinned": false
+                        }
+                      ],
+                      "has_more": true
+                    }
+                  },
+                  "example_2": {
+                    "summary": "The last page, and a conversation the title generator has not named yet",
+                    "value": {
+                      "conversations": [
+                        {
+                          "conversation_identifier": "5612260428840174111",
+                          "updated_at": "2026-09-28T09:14:52Z",
+                          "is_pinned": false
+                        }
+                      ],
+                      "has_more": false
+                    }
+                  }
                 }
               }
             }
@@ -2532,6 +2941,404 @@
         "x-streaming": true
       }
     },
+    "/api/rest/2.0/ai/agent/v2/conversation/send/stream": {
+      "post": {
+        "operationId": "sendAgentConversationMessageStreamingV2",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nSends a message to Spotter and streams the response back as Server-Sent Events.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.\n\n#### Usage guidelines\n\n- `message` (required): the question to ask Spotter.\n- `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the `x-conversation-identifier` response header, so a follow-up question can continue the same exchange.\n\nSend `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.\n\n#### Response format\n\nEach event is a `data:` line carrying a single JSON object, with exactly one top-level key:\n\n| Key           | Meaning                                                             |\n| ------------- | ------------------------------------------------------------------- |\n| `event`       | Text from Spotter — its reasoning or its answer.                    |\n| `tool_call`   | Spotter started a step, such as querying a data source.             |\n| `progress`    | A stage of a step in flight, so you can show what Spotter is doing. |\n| `tool_result` | A step finished; carries its result, including any answer produced. |\n| `error`       | The turn failed.                                                    |\n| `done`        | End of turn. Always last.                                           |\n\nA turn that queries data runs them in this order:\n\n```\ntool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done\n```\n\n`tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.\n\nIgnore any key you don't recognise — new event types may be added.\n\nLines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.\n\nAn event with content has the shape:\n\n```json\n{\n  \"event\": {\n    \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",\n    \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",\n    \"partial\": true,\n    \"content\": {\n      \"role\": \"model\",\n      \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]\n    }\n  }\n}\n```\n\n- `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received.\n- `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it.\n- `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment.\n- `invocation_id` is stable for one turn; `id` identifies a single event.\n\n#### Steps: tool_call, progress, tool_result\n\nWhen Spotter needs to do something — query a data source, run code — it reports the step as it happens.\n\n**`tool_call`** announces the step and the arguments it ran with:\n\n```json\n{\n  \"tool_call\": {\n    \"id\": \"toolu_01AMjCrr\",\n    \"name\": \"spotter_tools_fetch_and_visualize_data\",\n    \"args\": {\n      \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n      \"english_query\": \"total sales by region last quarter\"\n    }\n  }\n}\n```\n\n**`progress`** reports each stage while the step runs:\n\n```json\n{\n  \"progress\": {\n    \"code\": \"ANSWER_GEN\",\n    \"message\": \"Verifying results with the Trust Layer\",\n    \"tool_call_id\": \"toolu_01AMjCrr\"\n  }\n}\n```\n\n`message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.\n\n**`tool_result`** carries what the step produced:\n\n```json\n{\n  \"tool_result\": {\n    \"id\": \"toolu_01AMjCrr\",\n    \"name\": \"spotter_tools_fetch_and_visualize_data\",\n    \"is_error\": false,\n    \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",\n    \"answer\": {\n      \"title\": \"total sales by region last quarter\",\n      \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",\n      \"gen_no\": 2,\n      \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",\n      \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n      \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",\n      \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },\n      \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }\n    }\n  }\n}\n```\n\n- `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count.\n- `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted.\n- `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.\n\n`args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.\n\n#### End of turn\n\nThe stream ends with a terminal event:\n\n```json\n{ \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }\n```\n\nNothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.\n\n`done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.\n\nThe `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the parameter.\n\n#### Errors during a turn\n\nIf the turn fails after streaming has begun, an event carries an error instead of content:\n\n```json\n{\n  \"error\": {\n    \"code\": \"409\",\n    \"message\": \"session busy: lease held by invocation 7f3a\",\n    \"source\": \"transport\",\n    \"display_message\": \"Another request is still running in this conversation.\",\n    \"error_bucket\": \"RETRY\"\n  }\n}\n```\n\nRender `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.\n\nA failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.\n\nA failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:\n\n```json\n{\n  \"event\": {\n    \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",\n    \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",\n    \"error_code\": \"MALFORMED_FUNCTION_CALL\",\n    \"content\": { \"role\": \"model\", \"parts\": [] }\n  }\n}\n```\n\nThe two report different things:\n\n| Where                     | What failed                                                                   | What to do                                                                   |\n| ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |\n| `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            |\n| `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |\n\n`error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.\n\n#### Error responses\n\nErrors detected before streaming begins are returned as a normal HTTP response.\n\n| Code | Description                                                                                                        |\n| ---- | ------------------------------------------------------------------------------------------------------------------ |\n| 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is not a string.               |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation. |\n| 404  | Not found — no conversation with the given identifier exists for this user.                                        |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - The streaming protocol uses Server-Sent Events (SSE).\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAgentConversationMessageStreamingV2Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentStreamFrame"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "SSE stream -- each event is a data: line carrying one JSON object. Events arrive over time; this shows a step (tool_call, progress, tool_result), the streamed answer text, and the terminal done event.",
+                    "value": [
+                      {
+                        "tool_call": {
+                          "id": "toolu_01AMjCrr",
+                          "name": "spotter_tools_fetch_and_visualize_data",
+                          "args": {
+                            "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                            "english_query": "total sales by region last quarter"
+                          }
+                        }
+                      },
+                      {
+                        "progress": {
+                          "code": "TML_GEN",
+                          "message": "Translating the request with the Reasoning Engine",
+                          "tool_call_id": "toolu_01AMjCrr"
+                        }
+                      },
+                      {
+                        "tool_result": {
+                          "id": "toolu_01AMjCrr",
+                          "name": "spotter_tools_fetch_and_visualize_data",
+                          "is_error": false,
+                          "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`\nChart type: ADVANCED_COLUMN",
+                          "answer": {
+                            "title": "total sales by region last quarter",
+                            "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
+                            "gen_no": 2,
+                            "transaction_id": "6fafbc09-1b08-4c49-a017-fa331612a76f",
+                            "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                            "sage_query": "[sales] [region] [date] = 'last quarter'",
+                            "visualization": {
+                              "chart_type": "ADVANCED_COLUMN"
+                            },
+                            "table_data": {
+                              "total_rows": 5,
+                              "columns": [
+                                {
+                                  "name": "region",
+                                  "type": "ATTRIBUTE"
+                                },
+                                {
+                                  "name": "Total sales",
+                                  "type": "MEASURE"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "event": {
+                          "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
+                          "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                          "partial": true,
+                          "content": {
+                            "role": "model",
+                            "parts": [
+                              {
+                                "text": "The user is asking for data",
+                                "thought": true
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "event": {
+                          "id": "10552f5a-c275-4e06-8af3-596676cbff71",
+                          "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                          "partial": true,
+                          "content": {
+                            "role": "model",
+                            "parts": [
+                              {
+                                "text": "Total sales last quarter were highest in the West"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "event": {
+                          "id": "2f8b1c44-7ad9-4e02-b3d1-90c4f5a7e618",
+                          "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                          "partial": false,
+                          "content": {
+                            "role": "model",
+                            "parts": [
+                              {
+                                "text": "Total sales last quarter were highest in the West region."
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "done": {
+                          "conversation_identifier": "5612260428840173568"
+                        }
+                      }
+                    ]
+                  },
+                  "example_2": {
+                    "summary": "A turn that fails after streaming has begun — render display_message, branch on error_bucket. The stream still ends with done.",
+                    "value": [
+                      {
+                        "error": {
+                          "code": "409",
+                          "message": "session busy: lease held by invocation 7f3a",
+                          "source": "transport",
+                          "display_message": "Another request is still running in this conversation.",
+                          "error_bucket": "RETRY"
+                        }
+                      },
+                      {
+                        "done": {
+                          "conversation_identifier": "5612260428840173568"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentStreamFrame"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/v2/conversation/send": {
+      "post": {
+        "operationId": "sendAgentConversationMessageV2",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nSends a message to Spotter and returns the complete response once the turn has finished.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.\n\nUse this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreamingV2` instead.\n\n#### Usage guidelines\n\n- `message` (required): the question to ask Spotter.\n- `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the `x-conversation-identifier` response header.\n\nThis endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.\n\n#### Response format\n\n```json\n{\n  \"conversation_identifier\": \"5612260428840173568\",\n  \"events\": [\n    { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },\n    { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },\n    { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },\n    {\n      \"event\": {\n        \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }\n      }\n    },\n    { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }\n  ]\n}\n```\n\n`events` contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreamingV2` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.\n\nTo render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.\n\nA turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint's \"Errors during a turn\" section explains how the two differ.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                     |\n| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is empty or not a string.                                                   |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation.                                              |\n| 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     |\n| 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use `sendAgentConversationMessageStreamingV2` for questions that run long. |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAgentConversationMessageV2Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentTurnResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "A completed turn. `events` carries the same frames the streaming endpoint publishes, in order.",
+                    "value": {
+                      "conversation_identifier": "5612260428840173568",
+                      "events": [
+                        {
+                          "tool_call": {
+                            "id": "toolu_01AMjCrr",
+                            "name": "spotter_tools_fetch_and_visualize_data",
+                            "args": {
+                              "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                              "english_query": "total sales by region last quarter"
+                            }
+                          }
+                        },
+                        {
+                          "progress": {
+                            "code": "TML_GEN",
+                            "message": "Translating the request with the Reasoning Engine",
+                            "tool_call_id": "toolu_01AMjCrr"
+                          }
+                        },
+                        {
+                          "tool_result": {
+                            "id": "toolu_01AMjCrr",
+                            "name": "spotter_tools_fetch_and_visualize_data",
+                            "is_error": false,
+                            "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`",
+                            "answer": {
+                              "title": "total sales by region last quarter",
+                              "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
+                              "gen_no": 2,
+                              "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                              "sage_query": "[sales] [region] [date] = 'last quarter'",
+                              "visualization": {
+                                "chart_type": "ADVANCED_COLUMN"
+                              },
+                              "table_data": {
+                                "total_rows": 5
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "event": {
+                            "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
+                            "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                            "partial": true,
+                            "content": {
+                              "role": "model",
+                              "parts": [
+                                {
+                                  "text": "The user is asking for data",
+                                  "thought": true
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "event": {
+                            "id": "10552f5a-c275-4e06-8af3-596676cbff71",
+                            "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                            "partial": true,
+                            "content": {
+                              "role": "model",
+                              "parts": [
+                                {
+                                  "text": "Total sales last quarter were highest in the West region."
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "done": {
+                            "conversation_identifier": "5612260428840173568"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "A turn that failed. The error frame carries display_message and error_bucket; done still closes the turn.",
+                    "value": {
+                      "conversation_identifier": "5612260428840173568",
+                      "events": [
+                        {
+                          "error": {
+                            "code": "409",
+                            "message": "session busy: lease held by invocation 7f3a",
+                            "source": "transport",
+                            "display_message": "Another request is still running in this conversation.",
+                            "error_bucket": "RETRY"
+                          }
+                        },
+                        {
+                          "done": {
+                            "conversation_identifier": "5612260428840173568"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentTurnResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/agent/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendAgentMessage",
@@ -3250,6 +4057,104 @@
         "responses": {
           "204": {
             "description": "Successfully stopped the in-progress agent conversation response for the given."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/agent/v2/conversation/{conversation_identifier}/stop-response": {
+      "post": {
+        "operationId": "stopConversationV2",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStops the response currently being generated in a Spotter conversation.\n\nRequires `CAN_USE_SPOTTER` privilege, and access to the conversation.\n\nUse this to back a \"stop generating\" control: a user who has seen enough, or asked the wrong question, can end the turn without waiting for it to finish.\n\n#### Usage guidelines\n\n- `conversation_identifier` (required): the conversation whose in-progress response to stop.\n\nThe conversation survives — only the running turn ends. The next question can be asked in the same conversation, and the partial answer stays in its history.\n\nThe turn is stopped gracefully: the step in flight is allowed to finish, so the stream closes cleanly rather than being cut mid-frame. A caller streaming the turn sees it end normally with a `done` event.\n\nStopping a conversation with no turn running is not an error — the response reports that there was nothing to stop.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege.        |\n| 404  | Not found — no conversation with the given identifier exists for this user.          |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.12.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "conversation_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the conversation whose in-progress response to stop. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentStopResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "The running turn was stopped",
+                    "value": {
+                      "status": "stopped",
+                      "message": "Session stopped gracefully."
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Nothing was running; not an error",
+                    "value": {
+                      "status": "no_active_turn"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentStopResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Operation failed",
@@ -24645,39 +25550,6 @@
           }
         }
       },
-      "AgentInstructions": {
-        "type": "object",
-        "required": [
-          "instructions"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the record.",
-            "nullable": true
-          },
-          "instructions": {
-            "type": "string",
-            "description": "The admin instructions text for the agent."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "ISO timestamp when the instructions were created.",
-            "nullable": true
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "ISO timestamp when the instructions were last updated.",
-            "nullable": true
-          },
-          "last_updated_by": {
-            "type": "string",
-            "description": "User ID of the admin who last updated the instructions.",
-            "nullable": true
-          }
-        },
-        "description": "Admin instructions configured for the AI agent."
-      },
       "AgentConversationHistoryResponse": {
         "type": "object",
         "properties": {
@@ -24768,6 +25640,39 @@
           }
         },
         "description": "A data source associated with a conversation, returned as a typed entry."
+      },
+      "AgentInstructions": {
+        "type": "object",
+        "required": [
+          "instructions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the record.",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "string",
+            "description": "The admin instructions text for the agent."
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were created.",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were last updated.",
+            "nullable": true
+          },
+          "last_updated_by": {
+            "type": "string",
+            "description": "User ID of the admin who last updated the instructions.",
+            "nullable": true
+          }
+        },
+        "description": "Admin instructions configured for the AI agent."
       },
       "ConversationMessageResponse": {
         "type": "object",
@@ -31408,6 +32313,283 @@
           }
         }
       },
+      "AgentConversationV2": {
+        "type": "object",
+        "required": [
+          "conversation_identifier"
+        ],
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "Unique identifier of the conversation. Pass it to subsequent requests to\ncontinue the same conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        },
+        "description": "A Spotter X conversation."
+      },
+      "AgentStreamFrame": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "$ref": "#/components/schemas/AgentEvent",
+            "description": "Text from Spotter — its reasoning or its answer. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "tool_call": {
+            "$ref": "#/components/schemas/AgentToolCall",
+            "description": "Spotter started a step, such as querying a data source. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "progress": {
+            "$ref": "#/components/schemas/AgentProgress",
+            "description": "A stage of a step in flight. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "tool_result": {
+            "$ref": "#/components/schemas/AgentToolResult",
+            "description": "A step finished; carries its result, including any answer produced. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/AgentStreamError",
+            "description": "The turn failed. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "done": {
+            "$ref": "#/components/schemas/AgentStreamDone",
+            "description": "End of turn. Always last. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "One frame of an agent response. On the streaming endpoint each SSE `data:` line\nis one frame, and a turn streams many over a single connection. Exactly one\nfield is set on any given frame: route on which one is present. New frame\ntypes are added as new fields, so a frame where none of the fields you know is\nset is a frame of a type you do not recognize: skip it."
+      },
+      "AgentEvent": {
+        "type": "object",
+        "required": [
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifies a single event. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "invocation_id": {
+            "type": "string",
+            "description": "Stable for one turn; every event of the same turn shares it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "partial": {
+            "type": "boolean",
+            "description": "`true` for an incremental chunk, `false` for a frame restating a completed\nsegment; absent on a complete event. Restated text is not republished, and\nframes arrive in order over a single response, so appending every part is\nsafe. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "error_code": {
+            "type": "string",
+            "description": "Set when the turn failed while producing this event. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "content": {
+            "$ref": "#/components/schemas/AgentEventContent",
+            "description": "The text this event carries. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        },
+        "description": "Text from Spotter — its reasoning or its answer."
+      },
+      "AgentEventContent": {
+        "type": "object",
+        "required": [
+          "role",
+          "parts"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "description": "Always `model`: the events a caller sees are Spotter speaking. Mirrors the\nagent wire format, and is reserved for conversations with more than one\nspeaker. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEventPart"
+            },
+            "description": "The text this event carries. Empty when `error_code` is set. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        },
+        "description": "The content of one agent event."
+      },
+      "AgentEventPart": {
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to render. Text arrives incrementally, so concatenate parts in the\norder received. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          },
+          "thought": {
+            "type": "boolean",
+            "description": "`true` when this text is Spotter's reasoning rather than its answer. Use it\nto render reasoning separately, or to hide it. Absent otherwise; treat\nabsence as `false`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "One piece of text from Spotter, with a flag marking reasoning apart from the\nanswer itself."
+      },
+      "AgentToolCall": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Correlates this call with its `progress` and `tool_result` frames. Absent\nwhen the backend did not assign one; a step's frames then arrive in order, so\nmatch them by position. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the step that ran. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "args": {
+            "type": "object",
+            "description": "The arguments the step ran with, forwarded as the backend produced them. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "A step Spotter started, such as querying a data source."
+      },
+      "AgentProgress": {
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Stage code. Treat an unfamiliar value as \"still working\" rather than an error. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-facing status text, when the backend supplies one. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "The `tool_call` this stage belongs to. Absent when that call has no `id`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "A stage of a step in flight, so you can show what Spotter is doing."
+      },
+      "AgentToolResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Correlates with the `tool_call` and `progress` frames of the same step.\nAbsent when that call has no `id`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The step that produced this result. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "is_error": {
+            "type": "boolean",
+            "description": "`true` when the step failed. Spotter usually explains the failure in the text\nthat follows, so this is a signal to read rather than a reason to stop.\nAbsent when the step did not report an outcome; treat absence as `false`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "description": "The step's own human-readable summary. For a data query it includes a sample\nof the rows — read `answer.table_data.total_rows` for the true count. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "answer": {
+            "type": "object",
+            "description": "The ThoughtSpot answer the step produced, forwarded as the backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "What a step produced, including any answer."
+      },
+      "AgentStreamError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable status, always a string. Quote it when reporting an issue. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Diagnostic detail. Not written for end users — render `display_message`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "source": {
+            "type": "string",
+            "description": "Which layer produced the failure. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "display_message": {
+            "type": "string",
+            "description": "Text safe to show a user. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "error_bucket": {
+            "type": "string",
+            "description": "What the caller should do: `RETRY`, `REFRESH`, `NEW_CHAT` or `SUPPORT`. Treat\nan unrecognized value as `SUPPORT`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "A failure that ended the turn."
+      },
+      "AgentStreamDone": {
+        "type": "object",
+        "required": [
+          "conversation_identifier"
+        ],
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "The conversation this turn belonged to, repeated so a client that cannot read\nresponse headers can still continue it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        },
+        "description": "End of turn. Always last."
+      },
+      "AgentTurnResponse": {
+        "type": "object",
+        "required": [
+          "conversation_identifier",
+          "events"
+        ],
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "The conversation the turn belongs to. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentStreamFrame"
+            },
+            "description": "The frames of the turn, in the order Spotter produced them. The number of\nframes is not capped and the list is never truncated: a turn too large or too\nlong to return whole fails with an HTTP error instead. For long turns, use\nthe streaming endpoint. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        },
+        "description": "A completed agent turn: every frame the streaming endpoint publishes, collected."
+      },
+      "AgentStopResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "What happened. Stopping a conversation with no turn running is reported here\nrather than as an error. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable detail, when the backend supplies it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "The outcome of stopping a conversation's in-progress response."
+      },
       "SendAgentMessageResponse": {
         "type": "object",
         "required": [
@@ -33493,6 +34675,23 @@
           "conversation_settings"
         ]
       },
+      "CreateAgentConversationV2Request": {
+        "type": "object",
+        "properties": {
+          "data_source_identifiers": {
+            "description": "Unique identifiers of the data sources to scope the conversation to. When\nempty, Spotter selects the most relevant data source for each question. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "additional_instructions": {
+            "description": "Guidance appended to the agent's instructions on every message in this\nconversation. Use it to set a persona, a preferred output format, or\ndomain rules. Cannot be changed after the conversation is created. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
+          }
+        }
+      },
       "CreateAnalystRequest": {
         "type": "object",
         "properties": {
@@ -33789,6 +34988,38 @@
         },
         "required": [
           "messages"
+        ]
+      },
+      "SendAgentConversationMessageStreamingV2Request": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "description": "The message to send to Spotter. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
+          },
+          "conversation_identifier": {
+            "description": "Conversation to send the message in. When omitted, a new conversation is\ncreated and its identifier is returned in the\n`x-conversation-identifier` response header. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "SendAgentConversationMessageV2Request": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "description": "The message to send to Spotter. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
+          },
+          "conversation_identifier": {
+            "description": "Conversation to send the message in. When omitted, a new conversation is\ncreated and its identifier is returned in the\n`x-conversation-identifier` response header. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
         ]
       },
       "SendAgentMessageRequest": {
