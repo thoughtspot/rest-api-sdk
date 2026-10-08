@@ -38,6 +38,14 @@
       "description": "Roles for version 26.7.0.cl"
     },
     {
+      "name": "26.11.0.cl",
+      "id": "26.11.0.cl",
+      "tags": [
+        "26.11.0.cl"
+      ],
+      "description": "Roles for version 26.11.0.cl"
+    },
+    {
       "name": "26.8.0.cl",
       "id": "26.8.0.cl",
       "tags": [
@@ -618,6 +626,89 @@
         "responses": {
           "204": {
             "description": "Successfully deleted the agent conversation."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/usage-data/delete": {
+      "post": {
+        "operationId": "deleteUsageData",
+        "description": "\nDeletes Spotter usage pools. Users who no longer draw from any pool are\nno longer metered: their Spotter usage is unlimited, not blocked.\nRequires `ADMINISTRATION` privilege. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nDeletes Spotter usage pools. Use this API to remove a limit from a user, user group, or Org, or to clear every pool before switching the scope the cluster meters at.\n\nRequires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.\n\n#### Usage guidelines\n\nThe request must include `keys`, with at least one entry. Each key has an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org).\n\nDeleting a pool removes its limit rather than blocking its users. A user who no longer draws from any pool is not metered and can use Spotter without a limit.\n\nIf the request is successful, the response contains `deleted_keys`, the keys of the pools that existed and were deleted. Keys that matched no pool are omitted.\n\n#### Error conditions\n\n- `400` — `keys` is empty, or a key is missing its `entity_type` or `entity_identifier`.\n- `401` — authentication token is missing, expired, or invalid.\n- `403` — the caller does not have `ADMINISTRATION` privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - This operation cannot be undone. Recreate a pool with `updateUsageData`; its usage restarts from `0`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteUsageDataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteUsageDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteUsageDataResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Operation failed",
@@ -1547,6 +1638,89 @@
         }
       }
     },
+    "/api/rest/2.0/ai/usage-data/user": {
+      "get": {
+        "operationId": "getUsageDataForUser",
+        "description": "\nRetrieves a user's combined Spotter usage position: every pool the user\ndraws from, with usage, warning limits, and limits summed across them.\nAny user can retrieve their own usage. Retrieving another user's usage\nrequires `ADMINISTRATION` privilege. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nRetrieves a user's combined Spotter usage: every usage pool the user draws from, with usage, warning limits, and limits summed across them. Use this API to show users how many Spotter questions they have left, or to check whether a user is blocked by a usage limit.\n\nAny user can retrieve their own usage. Retrieving another user's usage requires `ADMINISTRATION` (Can administer ThoughtSpot) privilege; `CAN_MANAGE_SPOTTER` is not sufficient.\n\n#### Usage guidelines\n\n- Omit `user_identifier` to retrieve the usage of the authenticated user.\n- Pass `user_identifier` with a user GUID to retrieve that user's usage.\n\nA user draws from every pool that meters them: their own pool, the pools of the user groups they belong to (including inherited groups), or their Org's pool, depending on the scope the cluster meters at. The totals in the response are sums over those pools. For example, a user in two groups with limits of 100 and 50 has a `total_limit` of 150.\n\nIf the request is successful, the response contains `summary`:\n\n- `pools`: the individual pools the user draws from.\n- `total_usage`, `total_warning_limit`, and `total_limit`: sums across the pools.\n- `total_remaining`: questions the user can still ask. Absent when `has_unlimited_pool` is `true`.\n- `is_at_warning`: `true` when usage has reached the combined warning limit.\n- `is_at_limit`: `true` when usage has reached the combined limit and further Spotter questions are blocked.\n- `has_unlimited_pool`: `true` when any of the user's pools has no limit, which makes the user unlimited.\n\nA user who draws from no pool is not metered: `pools` is empty and `is_at_limit` is `false`.\n\n#### Error conditions\n\n- `401` — authentication token is missing, expired, or invalid.\n- `403` — the caller requested another user's usage without `ADMINISTRATION` privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.11.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the user whose usage to retrieve. Defaults to the authenticated\nuser. Passing another user's GUID requires `ADMINISTRATION` privilege."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataForUserResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataForUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/memory/import": {
       "post": {
         "operationId": "importMemory",
@@ -1932,6 +2106,89 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AnalystSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/usage-data/search": {
+      "post": {
+        "operationId": "searchUsageData",
+        "description": "\nRetrieves Spotter usage pools: the question allowance configured for each\nuser, user group, or Org and how much of it has been consumed. Pass `keys`\nto fetch specific pools, or omit it to fetch every pool on the cluster.\nRequires `ADMINISTRATION` privilege. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nRetrieves Spotter usage pools. A usage pool is the Spotter question allowance configured for a user, user group, or Org, together with how many questions have been consumed from it. Use this API to monitor usage across your users, for example to find pools that are close to their limit.\n\nRequires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.\n\n#### Usage guidelines\n\nA cluster meters Spotter usage at exactly one scope: per user, per user group, or per Org. Every pool on a cluster therefore has the same `entity_type`.\n\n- To retrieve every pool on the cluster, send an empty request body.\n- To retrieve specific pools, pass `keys`, each with an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org). Keys that match no pool are omitted from the response.\n\nIf the request is successful, the response contains `usage_data`, one entry per pool:\n\n- `key`: the entity the pool meters.\n- `usage`: questions consumed from the pool.\n- `warning_limit`: usage level at which users are warned. Absent when no warning is configured.\n- `limit`: maximum questions the pool allows. Absent when the pool is unlimited.\n- `updated_time_in_millis` and `updated_by`: when and by whom the pool was last configured.\n\n#### Error conditions\n\n- `401` — authentication token is missing, expired, or invalid.\n- `403` — the caller does not have `ADMINISTRATION` privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n> - Use `getUsageDataForUser` to see the combined usage of a single user across every pool they draw from.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchUsageDataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataResponse"
                 }
               }
             }
@@ -3206,6 +3463,89 @@
         }
       }
     },
+    "/api/rest/2.0/ai/usage-data/update": {
+      "post": {
+        "operationId": "updateUsageData",
+        "description": "\nCreates or updates Spotter usage pools, setting the question allowance\nfor a user, user group, or Org. A pool that does not exist is created;\nfields omitted from an update keep their current value.\nEvery key must use the scope the cluster meters at. Switching scope\nrequires deleting the existing pools first.\nRequires `ADMINISTRATION` privilege. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nCreates or updates Spotter usage pools. A usage pool sets how many Spotter questions a user, user group, or Org can ask. Use this API to provision limits for new users or groups, raise or lower an existing limit, or reset usage at the start of a billing period.\n\nRequires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.\n\n#### Usage guidelines\n\nThe request must include `updates`, with at least one entry. Each entry contains:\n\n- `key` (required): the pool to create or update, with an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org).\n- `limit` (optional): maximum Spotter questions the pool allows.\n- `warning_limit` (optional): usage level at which users are warned that they are approaching the limit.\n- `usage` (optional): questions consumed so far. Set to `0` to reset the pool.\n\nA pool that does not exist is created. Fields omitted from an entry keep their current value.\n\nA cluster meters Spotter usage at exactly one scope. The first pool created sets the scope, and every later key must use the same `entity_type`. To switch scope, delete the existing pools with `deleteUsageData` first.\n\nIf the request is successful, the response contains `usage_data`, with each updated pool as it stands after the change.\n\n#### Error conditions\n\n- `400` — `updates` is empty, a key is missing its `entity_type` or `entity_identifier`, or a key uses a different `entity_type` from the cluster's existing pools.\n- `401` — authentication token is missing, expired, or invalid.\n- `403` — the caller does not have `ADMINISTRATION` privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUsageDataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/auth/configure": {
       "post": {
         "operationId": "configureAuthSettings",
@@ -4180,7 +4520,7 @@
     "/api/rest/2.0/auth/session/login": {
       "post": {
         "operationId": "login",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a login session for a ThoughtSpot user with Basic authentication.\n\nIn Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.\n\n**Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.\n\nA successful login returns a session cookie that can be used in your subsequent API requests.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nCreates a login session for a ThoughtSpot user with Basic authentication.\n\nIn Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.\n\n**Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.\n\nA successful login returns a session cookie that can be used in your subsequent API requests.\n\n#### Redirecting after login\n\nTo send a browser to a specific page once the session is created, pass\n`redirect_url`. It must be a path on the same ThoughtSpot instance that served\nthe login request, for example `/pinboards`. An absolute URL is rejected with\n`400`, so that a login cannot be used to forward a newly issued session cookie\nto another host.\n\nThe path is resolved against the host the caller actually reached, which means\nthe same request works unchanged on a custom domain, behind a proxy, or on an\nOrg-specific subdomain.\n\n* **Browser flows** — omit `no_url_redirection`. The API answers `302` with the\n  resolved path in the `location` header, and the browser follows it on its own.\n  This is the usual choice when the login is submitted as an HTML form or opened\n  as a top-level navigation.\n* **SPA and non-browser clients** — set `no_url_redirection` to `true`. The API\n  keeps its normal `204` response and returns the resolved path in the\n  `location` header without redirecting, leaving the client to decide when and\n  where to navigate. Use this from `fetch`/`XMLHttpRequest` calls, which follow\n  a `302` internally and never expose it to your code.\n\nWhen `redirect_url` is omitted the response is unchanged, and\n`no_url_redirection` has no effect on its own.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -4198,7 +4538,26 @@
         "parameters": [],
         "responses": {
           "204": {
-            "description": "User login successful."
+            "description": "User login successful. Carries the location header when redirect_url was supplied with no_url_redirection",
+            "headers": {
+              "Location": {
+                "description": "Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "302": {
+            "description": "Redirect to the specified redirect_url",
+            "headers": {
+              "Location": {
+                "description": "Resolved redirect URL",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request.",
@@ -7031,6 +7390,15 @@
         "responses": {
           "200": {
             "description": "Generate custom calendar data based on specifications, as a CSV file.",
+            "headers": {
+              "Content-Disposition": {
+                "description": "Indicates that the response is a file attachment.",
+                "schema": {
+                  "type": "string",
+                  "example": "attachment; filename=\"table_name.calendar.csv\""
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -8412,7 +8780,7 @@
         "operationId": "searchFeatures",
         "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nReturns the feature configurations available on the ThoughtSpot system, grouped by feature group.\n\n#### Pre-requisites\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo retrieve feature configurations, pass these parameters in your API request:\n\n- `scope` — Determines the administrative view. Use `CLUSTER` for the cluster-admin view (returns the Orgs assigned to each feature); use `ORG` for the org-admin view (returns the current value of each feature for a single Org).\n- `org_identifier` — Numeric ID of the Org. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.\n- `category` — Availability category of the features to return. `GENERAL_ACCESS` returns generally available features; `EARLY_ACCESS` returns features still in early access. Defaults to `GENERAL_ACCESS`.\n\nThe response fields populated depend on the requested scope. In the cluster-admin view (`scope=CLUSTER`), each feature includes `assigned_orgs`, `is_org_aware`, and (for non-org-aware features) `feature_value`. In the org-admin view (`scope=ORG`), each feature includes `element_type`, `element_config`, and `element_value`.\n\nThe following example retrieves the general-access features for the cluster-admin view:\n\n```\n{\n  \"scope\": \"CLUSTER\",\n  \"category\": \"GENERAL_ACCESS\"\n}\n```\n\nFor the org-admin view, set `scope` to `ORG` and pass the `org_identifier` of the Org to scope the search to (`org_identifier` is required when `scope` is `ORG`; omitting it returns a 400 error):\n\n```\n{\n  \"scope\": \"ORG\",\n  \"org_identifier\": 1,\n  \"category\": \"GENERAL_ACCESS\"\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Feature Management",
+          "Feature Delegation",
           "26.10.0.cl"
         ],
         "requestBody": {
@@ -8552,7 +8920,7 @@
             }
           },
           "404": {
-            "description": "Feature management not enabled.",
+            "description": "Feature delegation not enabled.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8579,7 +8947,7 @@
         "operationId": "updateFeatureAssignments",
         "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nUpdates the Org assignments for a feature. Available to cluster admins only.\n\n#### Pre-requisites\n\nRequires the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege in the cluster-admin (All-Org / default-org) context. This endpoint manages Org assignments across the cluster, so it must be called by a cluster admin; org-scoped admins cannot call it.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo update the Org assignments for a feature, pass these parameters in your API request:\n\n- `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature to update.\n- `org_identifiers` — Numeric IDs of the Orgs to assign. Send an empty array with `operation` set to `REPLACE` to clear all Org assignments for this feature.\n- `operation` — Type of update to apply. `ADD` assigns the given Orgs in addition to the existing ones; `REMOVE` unassigns the given Orgs; `REPLACE` sets the assignment to exactly the given Orgs. Defaults to `REPLACE`.\n\nThe following example assigns Orgs `1` and `2` to a feature, in addition to any Orgs already assigned:\n\n```\n{\n  \"feature_identifier\": \"index_columns\",\n  \"org_identifiers\": [1, 2],\n  \"operation\": \"ADD\"\n}\n```\n\nClear all Org assignments for a feature by sending an empty array with `operation` set to `REPLACE` (this is the only way to unassign every Org at once):\n\n```\n{\n  \"feature_identifier\": \"index_columns\",\n  \"org_identifiers\": [],\n  \"operation\": \"REPLACE\"\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Feature Management",
+          "Feature Delegation",
           "26.10.0.cl"
         ],
         "requestBody": {
@@ -8692,7 +9060,7 @@
             }
           },
           "404": {
-            "description": "Feature not found or feature management not enabled.",
+            "description": "Feature not found or feature delegation not enabled.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8734,7 +9102,7 @@
         "operationId": "updateFeatureValue",
         "description": "\n <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>\n\nSets the value of a feature at the cluster or Org scope.\n\n#### Pre-requisites\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required.\n\n#### Usage guidelines\n\nTo set a feature value, pass these parameters in your API request:\n\n- `scope` — Determines the scope at which the value is set. Use `CLUSTER` to set the cluster-level value; use `ORG` to set a per-Org value override.\n- `org_identifier` — Numeric ID of the Org for which to set the value. Required when `scope` is `ORG`; ignored when `scope` is `CLUSTER`.\n- `feature_identifier` — User-friendly feature name (`feature_name`) or the underlying feature ID (`feature_id`) of the feature whose value should be set.\n- `feature_value` — New value to set for the feature.\n- `reset_org_overrides` — Applicable only when `scope` is `CLUSTER`. When `true`, any existing per-Org value overrides for this feature are also removed so that all Orgs inherit the new cluster-level value. Required when `scope` is `CLUSTER` for an org-aware feature. Must be omitted when `scope` is `ORG`; passing it at `ORG` scope returns a 400 error.\n\nThe following example sets a per-Org value override for Org `1`:\n\n```\n{\n  \"scope\": \"ORG\",\n  \"org_identifier\": 1,\n  \"feature_identifier\": \"index_columns\",\n  \"feature_value\": \"true\"\n}\n```\n\nSet the cluster-level value and clear all per-Org overrides so every Org inherits the new value (CLUSTER scope). `reset_org_overrides: true` is destructive — it strips existing per-Org overrides cluster-wide:\n\n```\n{\n  \"scope\": \"CLUSTER\",\n  \"feature_identifier\": \"index_columns\",\n  \"feature_value\": \"true\",\n  \"reset_org_overrides\": true\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
-          "Feature Management",
+          "Feature Delegation",
           "26.10.0.cl"
         ],
         "requestBody": {
@@ -8851,7 +9219,7 @@
             }
           },
           "404": {
-            "description": "Feature not found or feature management not enabled.",
+            "description": "Feature not found or feature delegation not enabled.",
             "content": {
               "application/json": {
                 "schema": {
@@ -9252,6 +9620,609 @@
         }
       }
     },
+    "/api/rest/2.0/input-tables/create": {
+      "post": {
+        "operationId": "createInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nCreates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.\n\n#### Usage guidelines\n\nTo create an input table, provide the following in the request body:\n\n* **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters.\n* **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata.\n* **`table_definition`** — Describes the table schema:\n  * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table's key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.\n  * `new_columns` — List of new editable columns to create. Each column requires:\n    * `name` — Column display name.\n    * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).\n    * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.\n    * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.\n  * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.\n\n**Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.\n\n#### Response\n\nThe response returns the new input table's GUID and the list of its columns,\neach with its name and unique ID:\n\n* **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations.\n* **`input_columns`** — Every column on the new table. Each entry has a `name`,\n  an `id` (the column's GUID), and `mapped_column_id` (the GUID of the model\n  column it is mapped from, present only for referenced columns). Use these IDs\n  to address specific columns in follow-up calls without a separate lookup.\n* **`message_info`** — Note set when a referenced column had to be renamed to\n  keep the input table's column names unique: a model column name that occurs\n  in more than one base table is prefixed with its base table name. Absent when\n  no column was renamed. The renamed column's final name is also its `name` in\n  `input_columns`, which is what `updateInputTable` matches on.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInputTableRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Input table created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputTableResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Input table created successfully",
+                    "value": {
+                      "input_table_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                      "input_columns": [
+                        {
+                          "name": "Region",
+                          "id": "b1c2d3e4-0000-1111-2222-333344445555",
+                          "mapped_column_id": "c7d8e9f0-1234-5678-abcd-ef0987654321"
+                        },
+                        {
+                          "name": "target_revenue",
+                          "id": "a9b8c7d6-9999-8888-7777-666655554444"
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Input table created; a referenced column was renamed to keep names unique",
+                    "value": {
+                      "input_table_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                      "input_columns": [
+                        {
+                          "name": "sales_Region",
+                          "id": "b1c2d3e4-0000-1111-2222-333344445555",
+                          "mapped_column_id": "c7d8e9f0-1234-5678-abcd-ef0987654321"
+                        },
+                        {
+                          "name": "target_revenue",
+                          "id": "a9b8c7d6-9999-8888-7777-666655554444"
+                        }
+                      ],
+                      "message_info": "The column Region appears in both sales and returns. Input Table columns must be unique, so it has been renamed to sales_Region to avoid conflicts."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — invalid payload, no columns selected, or upload disabled on the connection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Model not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/columns/create": {
+      "post": {
+        "operationId": "createInputTableColumn",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nAdds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table's ThoughtSpot metadata so the new columns are exposed on the linked model.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:\n\n* **`column_definition.columns`** — List of new editable columns to create. Each column requires:\n  * `name` — Column display name. Must not collide with an existing column on the table.\n  * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).\n  * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.\n  * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.\n\nUnlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.\n\n**Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInputTableColumnRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to add columns to."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Columns added successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputColumnResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Columns added successfully",
+                    "value": {
+                      "columns": [
+                        {
+                          "name": "forecast_revenue",
+                          "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+                        },
+                        {
+                          "name": "forecast_quarter",
+                          "id": "6b3a8f21-9c4d-4e77-bf2a-1d5e7c9a0b34"
+                        }
+                      ]
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Fixed-choice column added successfully",
+                    "value": {
+                      "columns": [
+                        {
+                          "name": "approval_status",
+                          "id": "2c9f1e04-7b6d-4a11-9c8e-5f3b7d210a46"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — invalid payload or no columns supplied.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the input table.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Input table not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/delete": {
+      "post": {
+        "operationId": "deleteInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nDeletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.\n\n**Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the input table and dropped the physical CDW table."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete": {
+      "post": {
+        "operationId": "deleteInputTableColumn",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nDeletes a single editable column from an input table. This removes the column from the input table's ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.\n\nOnly columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:\n\n* the column is a referenced (model-projected) column, or\n* the column is still referenced by an existing Answer or Liveboard.\n\nThis endpoint has no request body.\n\n**Note on obtaining `column_identifier`**: Use the `id` field returned for the\ncolumn by `createInputTableColumn` (in `columns`) or by `createInputTable` (in\n`input_columns`) as the `column_identifier`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table that owns the column."
+          },
+          {
+            "in": "path",
+            "name": "column_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the column to delete."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the input table column and dropped the physical CDW column."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "code": 10038,
+                          "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                          "debug": "Unexpected server error while deleting the input table column."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/input-tables/{input_table_identifier}/update": {
+      "post": {
+        "operationId": "updateInputTable",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nWrites rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:\n\n* **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns.\n* **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.\n\n#### Date values\n\nPass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.\n\nAn epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.\n\nThe date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.\n\nThe ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.\n\nA date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.\n\n#### Write semantics\n\n* **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite.\n* **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`.\n* This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched.\n* The `rows` array must contain at least one row; an empty `rows` array is rejected.\n\nThe request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).\n\n#### Response\n\nThe response returns `rows_loaded` — the number of rows actually written, the\nsum of rows updated (matched) and rows inserted (new).\n\n`rows_loaded` is the count the warehouse itself reports, so it reflects what\nwas written rather than what was submitted. If the warehouse completes the load\nbut reports no count, the call fails with `500` rather than returning a count it\ncannot stand behind. The write is a MERGE keyed on the input table's key\ncolumns, so it is idempotent — retrying the same payload is safe.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Input Tables",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInputTableRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "input_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the input table to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rows loaded successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputTableUpdateResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Rows loaded successfully",
+                    "value": {
+                      "rows_loaded": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed request or unknown column name.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden — caller does not have MODIFY permission on the input table.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Input table not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/jobs/history/communication-channels/search": {
       "post": {
         "operationId": "searchChannelHistory",
@@ -9464,6 +10435,389 @@
         }
       }
     },
+    "/api/rest/2.0/customization/links/search": {
+      "post": {
+        "operationId": "searchLinkCustomizations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nRetrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.\n\nCluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org.\n- `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled.\n- Omit `scope` to return whichever of these the caller can access.\n- Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Link Customization",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchLinkCustomizationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Link preferences retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LinkPreference"
+                  }
+                },
+                "examples": {
+                  "example_1": {
+                    "value": [
+                      {
+                        "scope": "CLUSTER",
+                        "templates": [
+                          {
+                            "type": "LIVEBOARD_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/pinboard/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "VISUALIZATION_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/pinboard/{object-id}/{sub-object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "ANSWER_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/saved-answer/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "SPOTIQ_ANALYSIS_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insight/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "UNSUBSCRIBE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/user-preference?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "GENERIC_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/{path}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "CONVERSATION_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insights/conv-assist/s/{conversation-id}?{ts-query-params}",
+                            "is_overridden": false
+                          }
+                        ]
+                      },
+                      {
+                        "scope": "ORG",
+                        "org": {
+                          "id": 1234567890,
+                          "name": "Sales"
+                        },
+                        "templates": [
+                          {
+                            "type": "LIVEBOARD_SHARE_URL",
+                            "value": "https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}",
+                            "is_overridden": true
+                          },
+                          {
+                            "type": "VISUALIZATION_SHARE_URL",
+                            "value": "https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}",
+                            "is_overridden": true
+                          },
+                          {
+                            "type": "ANSWER_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/saved-answer/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "SPOTIQ_ANALYSIS_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insight/{object-id}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "UNSUBSCRIBE_URL",
+                            "value": "https://analytics.acme.com/account/email-preferences",
+                            "is_overridden": true
+                          },
+                          {
+                            "type": "GENERIC_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/{path}?{ts-query-params}",
+                            "is_overridden": false
+                          },
+                          {
+                            "type": "CONVERSATION_SHARE_URL",
+                            "value": "https://acme.thoughtspot.cloud/#/insights/conv-assist/s/{conversation-id}?{ts-query-params}",
+                            "is_overridden": false
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_request": {
+                    "summary": "Invalid request",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10002,
+                            "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "debug": "[\"Cross-org operations are not supported.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10097,
+                            "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                            "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                            "debug": "[\"Authentication required to retrieve link templates for the cluster or org.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10086,
+                            "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                            "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                            "debug": "[\"Cluster config can only be accessed from PRIMARY org.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10038,
+                            "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                            "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                            "debug": "[\"Unexpected server error while retrieving link templates.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/customization/links/update": {
+      "post": {
+        "operationId": "updateLinkCustomizations",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nUpdates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org.\n- `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled.\n- This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected.\n- **REPLACE** (default) sets each listed type to the `value` provided in the request.\n- **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.\n\n#### Placeholders\n\nA template is rejected unless it contains the placeholders its type requires.\n\n| Link type | Required | Example |\n| --- | --- | --- |\n| `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` |\n| `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` |\n| `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` |\n| `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` |\n| `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` |\n| `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` |\n| `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |\n\n`{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Link Customization",
+          "26.11.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLinkCustomizationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Link preferences updated successfully."
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "missing_placeholder": {
+                    "summary": "Template is missing a required placeholder",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10002,
+                            "incident_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "trace_id_guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                            "debug": "[\"Invalid template for GENERIC_URL: value must contain {path}.\"]"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "value_with_reset": {
+                    "summary": "Value supplied alongside RESET",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10002,
+                            "incident_id_guid": "e5f67890-1234-5678-efab-567890123456",
+                            "trace_id_guid": "e5f67890-1234-5678-efab-567890123456",
+                            "debug": "[\"Field 'value' must not be supplied for RESET operation for type: UNSUBSCRIBE_URL.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized_access": {
+                    "summary": "Unauthorized access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10097,
+                            "incident_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                            "trace_id_guid": "b2c3d4e5-f678-9012-bcde-f23456789012",
+                            "debug": "[\"Authentication required to update link templates for the cluster or org.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "forbidden_access": {
+                    "summary": "Forbidden access",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10023,
+                            "incident_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                            "trace_id_guid": "c3d4e5f6-7890-1234-cdef-345678901234",
+                            "debug": "[\"Cannot access embed settings: ThoughtSpot Embedded is not enabled for this cluster.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unexpected_error": {
+                    "summary": "Unexpected error",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 10038,
+                            "incident_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                            "trace_id_guid": "d4e5f678-9012-3456-defa-456789012345",
+                            "debug": "[\"Unexpected server error while updating link templates.\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/logs/fetch": {
       "post": {
         "operationId": "fetchLogs",
@@ -9628,6 +10982,15 @@
         "responses": {
           "200": {
             "description": "CSV file downloaded successfully.",
+            "headers": {
+              "Content-Disposition": {
+                "description": "Indicates that the response is a file attachment.",
+                "schema": {
+                  "type": "string",
+                  "example": "attachment; filename=\"manual-translation.csv\""
+                }
+              }
+            },
             "content": {
               "application/octet-stream": {}
             }
@@ -14042,10 +15405,18 @@
                     ]
                   },
                   "navigation_panel": {
-                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color.",
+                    "description": "Navigation panel color. Provide theme and, when theme is CUSTOM, also\nprovide base_color. Must not be provided together with app_color_theme --\nboth update the same underlying color.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/NavigationPanelInput"
+                      }
+                    ]
+                  },
+                  "app_color_theme": {
+                    "description": "App color theme -- the same underlying color navigation_panel sets,\nexpressed as a brand color plus how it is applied. brand_color and\napply_as_top_nav_color may be set independently; each is left unchanged\nif omitted. To clear the brand color, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. Supported only when the app\ncolor theme is enabled on the cluster. Must not be provided together\nwith navigation_panel. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AppColorThemeInput"
                       }
                     ]
                   },
@@ -14089,6 +15460,9 @@
                   "contentType": "application/json"
                 },
                 "navigation_panel": {
+                  "contentType": "application/json"
+                },
+                "app_color_theme": {
                   "contentType": "application/json"
                 },
                 "chart_color_palette": {
@@ -20002,8 +21376,54 @@
             "format": "int32",
             "description": "The version number of logical model of the cluster.",
             "nullable": true
+          },
+          "maintenance_schedule": {
+            "$ref": "#/components/schemas/MaintenanceScheduleInfo",
+            "description": "Details of the next maintenance window scheduled for the cluster. Absent when no maintenance is scheduled. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "nullable": true
           }
         }
+      },
+      "MaintenanceScheduleInfo": {
+        "type": "object",
+        "properties": {
+          "start_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Start time of the maintenance window, in milliseconds since epoch.",
+            "nullable": true
+          },
+          "duration_in_seconds": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Expected duration of the maintenance window, in seconds.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SCHEDULED",
+              "AD_HOC"
+            ],
+            "description": "Status of the maintenance event.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "UPGRADE",
+              "PATCH"
+            ],
+            "description": "Type of the maintenance event.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the maintenance event.",
+            "nullable": true
+          }
+        },
+        "description": "Details of a maintenance window scheduled for the cluster."
       },
       "SystemConfig": {
         "type": "object",
@@ -20731,9 +22151,10 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
               "INSIGHT_SPEC",
-              "COLLECTION"
+              "COLLECTION",
+              "TEMPLATE_VARIABLE"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects",
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view.\n5. CONNECTION for creating or modify data connections.\n6. TAG for tag objects.\n7. USER for user objects.\n8. USER_GROUP for group objects.\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects\n12. TEMPLATE_VARIABLE for template variable objects",
             "nullable": true
           },
           "subtypes": {
@@ -20801,9 +22222,10 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
               "INSIGHT_SPEC",
-              "COLLECTION"
+              "COLLECTION",
+              "TEMPLATE_VARIABLE"
             ],
-            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects"
+            "description": "Type of metadata. Required if the name of the object is set as identifier. This attribute is optional when the object GUID is specified as identifier.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view\n4. LOGICAL_COLUMN for a column of any data object such as table, worksheet or view\n5. CONNECTION for connection objects\n6. TAG for tag objects\n7. USER for user objects\n8. USER_GROUP for group objects\n9. LOGICAL_RELATIONSHIP for table or worksheet joins. A join combines from one or several data object by using matching values.\n10. INSIGHT_SPEC for SpotIQ objects\n11. COLLECTION for collection objects\n12. TEMPLATE_VARIABLE for template variable objects"
           }
         }
       },
@@ -20886,7 +22308,8 @@
               "USER_GROUP",
               "LOGICAL_RELATIONSHIP",
               "INSIGHT_SPEC",
-              "COLLECTION"
+              "COLLECTION",
+              "TEMPLATE_VARIABLE"
             ],
             "description": "Type of the metadata."
           },
@@ -20897,7 +22320,39 @@
           },
           "dependent_objects": {
             "type": "object",
-            "description": "Details of dependent objects of the metadata objects.",
+            "description": "Details of dependent objects of the metadata objects.\n\nReturned when include_dependent_objects is true. With dependent_object_version V1 (default), the outer key is the GUID of the searched object, the inner key is the dependent's metadata type, and the value is a list of dependent headers (same keys as metadata_header). With V2, the same map is wrapped as {\"dependents\": {...}, \"hasInaccessibleDependents\": boolean, \"areInaccessibleDependentsReturned\": boolean}.",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "object",
+              "description": "Dependents of one object, keyed by metadata type, for example QUESTION_ANSWER_BOOK, PINBOARD_ANSWER_BOOK or LOGICAL_TABLE.",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Header of a dependent object; same keys as metadata_header.",
+                  "additionalProperties": true
+                }
+              }
+            },
+            "example": {
+              "33248a57-cc70-4e39-9199-fb5092283381": {
+                "QUESTION_ANSWER_BOOK": [
+                  {
+                    "id": "6f2ae0c2-2e3b-4b8b-9a0e-1d2c3b4a5f60",
+                    "name": "Revenue by region",
+                    "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                    "created": 1583190552457,
+                    "modified": 1583190552457,
+                    "isDeleted": false,
+                    "isHidden": false
+                  }
+                ]
+              }
+            }
+          },
+          "dependent_objects_is_last_batch": {
+            "type": "boolean",
+            "description": "Whether the returned dependent_objects page is the last one for this object. True when the\npage came back short of the effective page size. A full page reports false even when it\nhappens to be the final one, so a caller pages until it sees true and may pay one final\nempty page. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
             "nullable": true
           },
           "incomplete_objects": {
@@ -20915,21 +22370,213 @@
           },
           "metadata_header": {
             "type": "object",
-            "description": "Header information of the metadata objects.",
-            "nullable": true
+            "description": "Header information of the metadata objects.\n\nReturned when include_headers is true. Keys are camelCase. The keys below are common to all metadata types; each type adds its own keys (for example, Liveboards add hasTabs and totalContainerCount). Keys with no value are omitted. Times are epoch milliseconds.",
+            "nullable": true,
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "GUID of the object."
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the object."
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the object."
+              },
+              "author": {
+                "type": "string",
+                "description": "GUID of the user who created the object."
+              },
+              "authorName": {
+                "type": "string",
+                "description": "Username of the author."
+              },
+              "authorDisplayName": {
+                "type": "string",
+                "description": "Display name of the author."
+              },
+              "created": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Creation time, in epoch milliseconds."
+              },
+              "modified": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Last modified time, in epoch milliseconds."
+              },
+              "modifiedBy": {
+                "type": "string",
+                "description": "GUID of the user who last modified the object."
+              },
+              "owner": {
+                "type": "string",
+                "description": "GUID of the owner object."
+              },
+              "indexVersion": {
+                "type": "integer",
+                "description": "Index version of the object."
+              },
+              "generationNum": {
+                "type": "integer",
+                "description": "Generation number of the object."
+              },
+              "isDeleted": {
+                "type": "boolean",
+                "description": "Whether the object is deleted."
+              },
+              "isHidden": {
+                "type": "boolean",
+                "description": "Whether the object is hidden."
+              },
+              "isExternal": {
+                "type": "boolean",
+                "description": "Whether the object is external."
+              },
+              "isDeprecated": {
+                "type": "boolean",
+                "description": "Whether the object is deprecated."
+              },
+              "isSharedViaConnection": {
+                "type": "boolean",
+                "description": "Whether the object is shared through a connection."
+              },
+              "aiAnswerGenerationDisabled": {
+                "type": "boolean",
+                "description": "Whether AI answer generation is disabled."
+              },
+              "orgIds": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "description": "IDs of the Orgs the object belongs to."
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "Tags assigned to the object."
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "hasTabs": false,
+              "totalContainerCount": 3,
+              "id": "33248a57-cc70-4e39-9199-fb5092283381",
+              "indexVersion": 37,
+              "generationNum": 37,
+              "name": "Basic Pinboard 2",
+              "description": "This pinboard contains a chart, a table and a headline visualization based on TPCH.",
+              "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+              "authorName": "tsadmin",
+              "authorDisplayName": "Administrator",
+              "created": 1487731361818,
+              "modified": 1583190552457,
+              "modifiedBy": "59481331-ee53-42be-a548-bd87be6ddd4a",
+              "owner": "33248a57-cc70-4e39-9199-fb5092283381",
+              "isDeleted": false,
+              "isHidden": false,
+              "orgIds": [
+                0
+              ],
+              "tags": [],
+              "aiAnswerGenerationDisabled": false,
+              "isExternal": false,
+              "isDeprecated": false,
+              "isSharedViaConnection": false
+            }
           },
           "visualization_headers": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "GUID of the visualization."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Name of the visualization."
+                },
+                "author": {
+                  "type": "string",
+                  "description": "GUID of the user who created the visualization."
+                },
+                "created": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "Creation time, in epoch milliseconds."
+                },
+                "modified": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "Last modified time, in epoch milliseconds."
+                },
+                "modifiedBy": {
+                  "type": "string",
+                  "description": "GUID of the user who last modified the visualization."
+                },
+                "owner": {
+                  "type": "string",
+                  "description": "GUID of the owner object."
+                },
+                "size": {
+                  "type": "string",
+                  "description": "Tile size of the visualization on the Liveboard."
+                },
+                "vizType": {
+                  "type": "string",
+                  "description": "Type of the visualization, for example CHART, TABLE or FILTER."
+                },
+                "title": {
+                  "type": "object",
+                  "description": "Title of the visualization, as {\"value\": <localized text>}."
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "id": "a1b2c3d4-0000-4000-8000-000000000001",
+                "name": "Revenue by region",
+                "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                "created": 1583190552457,
+                "modified": 1583190552457,
+                "modifiedBy": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                "owner": "33248a57-cc70-4e39-9199-fb5092283381",
+                "vizType": "CHART"
+              }
             },
-            "description": "Visualization header information of the metadata objects.",
+            "description": "Visualization header information of the metadata objects.\n\nReturned for Liveboards when include_visualization_headers is true. Keys are camelCase and keys with no value are omitted. Filter entries have vizType FILTER. Times are epoch milliseconds.",
             "nullable": true
           },
           "stats": {
             "type": "object",
-            "description": "Stats of the metadata object. Includes views, favorites, last_accessed.",
-            "nullable": true
+            "description": "Stats of the metadata object. Includes views, favorites, last_accessed.\n\nReturned only when include_stats is true, and only for objects that have stats (answers and Liveboards). last_accessed is epoch time in milliseconds and is omitted when unknown.",
+            "nullable": true,
+            "properties": {
+              "views": {
+                "type": "integer",
+                "description": "Number of views of the object."
+              },
+              "favorites": {
+                "type": "integer",
+                "description": "Number of users who marked the object as a favorite."
+              },
+              "last_accessed": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Last access time, in epoch milliseconds."
+              }
+            },
+            "example": {
+              "views": 42,
+              "favorites": 3,
+              "last_accessed": 1727712000000
+            }
           }
         },
         "description": "Metadata Search Response Object."
@@ -21124,13 +22771,13 @@
               "A4",
               "CONTINUOUS"
             ],
-            "description": "Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "description": "Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
             "nullable": true
           },
           "zoom_level": {
             "type": "integer",
             "format": "int32",
-            "description": "Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
+            "description": "Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified. <br/>  <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>",
             "nullable": true
           },
           "include_cover_page": {
@@ -21203,19 +22850,19 @@
           "image_resolution": {
             "type": "integer",
             "format": "int32",
-            "description": "Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+            "description": "Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
             "nullable": true
           },
           "image_scale": {
             "type": "integer",
             "format": "int32",
-            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
             "nullable": true
           },
           "include_header": {
             "type": "boolean",
             "default": false,
-            "description": "Indicates whether to include the header of the liveboard. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
+            "description": "Indicates whether to include the header of the liveboard. <br/>  <span class=\"since-beta-tag\">Version: 10.9.0.cl or later</span>",
             "nullable": true
           }
         }
@@ -21574,19 +23221,19 @@
           "x_resolution": {
             "type": "integer",
             "format": "int32",
-            "description": "Desired width of the answer image in pixels. Ex. 1920 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "Desired width of the answer image in pixels. Ex. 1920 for Full HD image <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "nullable": true
           },
           "y_resolution": {
             "type": "integer",
             "format": "int32",
-            "description": "Desired height of the answer image in pixels. Ex. 1080 for Full HD image <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "Desired height of the answer image in pixels. Ex. 1080 for Full HD image <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "nullable": true
           },
           "scaling": {
             "type": "integer",
             "format": "int32",
-            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "The scale of the image in percentage. Ex. 100 for 100% scale. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "nullable": true
           }
         }
@@ -24117,6 +25764,170 @@
         },
         "description": "Response returned by getSharedContent. Contains the full read-only view\nof the shared conversation including messages and data source metadata."
       },
+      "UsagePoolKeyInput": {
+        "type": "object",
+        "required": [
+          "entity_type",
+          "entity_identifier"
+        ],
+        "properties": {
+          "entity_type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP",
+              "ORG"
+            ],
+            "description": "Type of entity the pool meters: `USER`, `USER_GROUP`, or `ORG`. Must\nmatch the scope the cluster meters at."
+          },
+          "entity_identifier": {
+            "type": "string",
+            "description": "GUID of the user or user group, or the ID of the Org, that the pool\nmeters."
+          }
+        },
+        "description": "Identifies a Spotter usage pool by the entity it meters."
+      },
+      "UsageDataResponse": {
+        "type": "object",
+        "required": [
+          "usage_data"
+        ],
+        "properties": {
+          "usage_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageData"
+            },
+            "description": "The requested Spotter usage pools, as they stand after the request."
+          }
+        },
+        "description": "Response returned by `searchUsageData` and `updateUsageData`."
+      },
+      "UsageData": {
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "properties": {
+          "key": {
+            "$ref": "#/components/schemas/UsagePoolKey",
+            "description": "Entity the pool meters."
+          },
+          "usage": {
+            "type": "object",
+            "description": "Number of Spotter questions consumed from the pool.",
+            "nullable": true
+          },
+          "warning_limit": {
+            "type": "object",
+            "description": "Usage level at which users drawing from the pool are warned that they\nare approaching the limit. Absent when no warning is configured.",
+            "nullable": true
+          },
+          "limit": {
+            "type": "object",
+            "description": "Maximum number of Spotter questions the pool allows. Absent when the pool\nis unlimited.",
+            "nullable": true
+          },
+          "updated_time_in_millis": {
+            "type": "object",
+            "description": "Epoch milliseconds of the last change to the pool's configuration.",
+            "nullable": true
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "ID of the user who last changed the pool's configuration.",
+            "nullable": true
+          }
+        },
+        "description": "A Spotter usage pool: the question allowance configured for a user, user\ngroup, or Org, and how much of it has been consumed."
+      },
+      "UsagePoolKey": {
+        "type": "object",
+        "required": [
+          "entity_type",
+          "entity_identifier"
+        ],
+        "properties": {
+          "entity_type": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "USER_GROUP",
+              "ORG"
+            ],
+            "description": "Type of entity the pool meters."
+          },
+          "entity_identifier": {
+            "type": "string",
+            "description": "GUID of the user or user group, or the ID of the Org, that the pool\nmeters."
+          }
+        },
+        "description": "Identifies a Spotter usage pool by the entity it meters."
+      },
+      "UsageDataForUserResponse": {
+        "type": "object",
+        "required": [
+          "summary"
+        ],
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/UsageSummary",
+            "description": "The user's combined usage position across every pool they draw from."
+          }
+        },
+        "description": "Response returned by `getUsageDataForUser`."
+      },
+      "UsageSummary": {
+        "type": "object",
+        "required": [
+          "pools",
+          "is_at_warning",
+          "is_at_limit",
+          "has_unlimited_pool"
+        ],
+        "properties": {
+          "pools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageData"
+            },
+            "description": "The individual pools the user draws from."
+          },
+          "total_usage": {
+            "type": "object",
+            "description": "Questions consumed across all of the user's pools.",
+            "nullable": true
+          },
+          "total_warning_limit": {
+            "type": "object",
+            "description": "Sum of the warning limits of the user's pools.",
+            "nullable": true
+          },
+          "total_limit": {
+            "type": "object",
+            "description": "Sum of the limits of the user's pools.",
+            "nullable": true
+          },
+          "total_remaining": {
+            "type": "object",
+            "description": "Questions the user can still ask before reaching the limit. Absent when\n`has_unlimited_pool` is `true`.",
+            "nullable": true
+          },
+          "is_at_warning": {
+            "type": "boolean",
+            "description": "`true` when usage has reached the combined warning limit."
+          },
+          "is_at_limit": {
+            "type": "boolean",
+            "description": "`true` when usage has reached the combined limit and further Spotter\nquestions are blocked."
+          },
+          "has_unlimited_pool": {
+            "type": "boolean",
+            "description": "`true` when at least one of the user's pools has no limit, which makes the\nuser unlimited."
+          }
+        },
+        "description": "A user's combined Spotter usage position across every pool they draw from.\nTotals are sums over the pools: a user in two groups with limits of 100 and\n50 has a total limit of 150."
+      },
       "RiseGQLArgWrapper": {
         "type": "object",
         "required": [
@@ -25377,6 +27188,11 @@
             "description": "Navigation panel color configuration.",
             "nullable": true
           },
+          "app_color_theme": {
+            "$ref": "#/components/schemas/StyleAppColorTheme",
+            "description": "App color theme configuration -- the same stored color navigation_panel\nexpresses, as a brand color plus how it is applied. Returned alongside\nnavigation_panel when the app color theme is enabled on the cluster;\nomitted otherwise. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          },
           "chart_color_palette": {
             "$ref": "#/components/schemas/StyleChartColorPalette",
             "description": "Chart color palette configuration.",
@@ -25442,6 +27258,27 @@
           }
         },
         "description": "Navigation panel color configuration for a specific scope."
+      },
+      "StyleAppColorTheme": {
+        "type": "object",
+        "properties": {
+          "brand_color": {
+            "type": "string",
+            "description": "Brand color as a 6-digit hex string. Null when no brand color is set at\nthis scope.",
+            "nullable": true
+          },
+          "apply_as_top_nav_color": {
+            "type": "boolean",
+            "description": "The effective setting: whether the brand color is painted on the top\nnavigation bar literally, instead of the surface shade derived from it.\nAlways the resolved value -- true iff a brand color is set, unless\nexplicitly overridden.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True if explicitly set at this scope (either the brand color or the\napply_as_top_nav_color choice), overriding any inherited value.",
+            "nullable": true
+          }
+        },
+        "description": "App color theme configuration for a specific scope -- the same stored\ncolor StyleNavigationPanel expresses, as a brand color plus how it is\napplied. Returned alongside navigation_panel when the app color theme is\nenabled on the cluster; omitted otherwise."
       },
       "StyleChartColorPalette": {
         "type": "object",
@@ -25765,6 +27602,68 @@
           }
         },
         "description": "Visualization areas assigned to a font, grouped by org context."
+      },
+      "LinkPreference": {
+        "type": "object",
+        "required": [
+          "scope",
+          "templates"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ],
+            "description": "Scope these link templates apply to."
+          },
+          "org": {
+            "$ref": "#/components/schemas/Org",
+            "description": "Org these link templates belong to. Present only when scope is ORG.",
+            "nullable": true
+          },
+          "templates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkTemplate"
+            },
+            "description": "Effective URL template for every link type at this scope. All types are always\npresent."
+          }
+        },
+        "description": "Link templates for a single scope."
+      },
+      "LinkTemplate": {
+        "type": "object",
+        "required": [
+          "type",
+          "is_overridden"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SHARE_URL",
+              "VISUALIZATION_SHARE_URL",
+              "ANSWER_SHARE_URL",
+              "SPOTIQ_ANALYSIS_URL",
+              "UNSUBSCRIBE_URL",
+              "GENERIC_URL",
+              "CONVERSATION_SHARE_URL"
+            ],
+            "description": "The link type this template applies to."
+          },
+          "value": {
+            "type": "string",
+            "description": "The effective URL template at the requested scope.",
+            "nullable": true
+          },
+          "is_overridden": {
+            "type": "boolean",
+            "description": "True when the value differs from the one this scope would otherwise inherit."
+          }
+        },
+        "description": "A URL template with its link type and whether it is set at the requested scope."
       },
       "SemanticIntegrationSortOptions": {
         "type": "object",
@@ -27410,6 +29309,14 @@
             "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
             "nullable": true
           },
+          "role_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Unique ID or name of the roles that will be assigned to the group. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "nullable": true
+          },
           "sub_group_identifiers": {
             "type": "array",
             "items": {
@@ -27765,7 +29672,8 @@
               "USER_GROUP",
               "COLLECTION",
               "ROLE",
-              "TEMPLATE_VARIABLE"
+              "TEMPLATE_VARIABLE",
+              "PERSONALISED_VIEW"
             ],
             "description": "Optional type of the header object.",
             "nullable": true
@@ -27822,7 +29730,8 @@
               "USER_GROUP",
               "COLLECTION",
               "ROLE",
-              "TEMPLATE_VARIABLE"
+              "TEMPLATE_VARIABLE",
+              "PERSONALISED_VIEW"
             ],
             "description": "Type of metadata. Required if metadata_identifier is name of the object.",
             "nullable": true
@@ -30019,6 +31928,50 @@
         },
         "description": "A user reference returned in analyst search results."
       },
+      "UsageDataUpdateInput": {
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "properties": {
+          "key": {
+            "$ref": "#/components/schemas/UsagePoolKeyInput",
+            "description": "Pool to create or update."
+          },
+          "limit": {
+            "type": "object",
+            "description": "Maximum number of Spotter questions the pool allows.",
+            "nullable": true
+          },
+          "warning_limit": {
+            "type": "object",
+            "description": "Usage level at which users drawing from the pool are warned that they are\napproaching the limit.",
+            "nullable": true
+          },
+          "usage": {
+            "type": "object",
+            "description": "Number of questions consumed from the pool. Set to `0` to reset the pool's\nusage, for example at the start of a billing period.",
+            "nullable": true
+          }
+        },
+        "description": "A change to one Spotter usage pool. The pool is created if it does not\nexist. Fields that are omitted keep their current value."
+      },
+      "DeleteUsageDataResponse": {
+        "type": "object",
+        "required": [
+          "deleted_keys"
+        ],
+        "properties": {
+          "deleted_keys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsagePoolKey"
+            },
+            "description": "Keys of the pools that existed and were deleted. Keys that matched no pool\nare omitted."
+          }
+        },
+        "description": "Response returned by `deleteUsageData`."
+      },
       "PrincipalRefInput": {
         "type": "object",
         "required": [
@@ -30563,7 +32516,15 @@
             "items": {
               "type": "string"
             },
-            "description": "Column IDs from the linked model to include in the table.\nPass an empty array to create an input table with no reference\ncolumns from the model."
+            "description": "Names of the columns on the linked model to include in the table,\nas they appear on the model. These become the input table's key\ncolumns: they are what the input table is joined to the model on,\nand what rows are matched on by updateInputTable. At least one is\nrequired — an empty array is rejected. A name must match exactly\none visible model column; a name matching none, or more than one,\nis rejected. Each must also resolve to exactly one physical base\ncolumn, so a formula, cohort, or constant model column cannot be\nreferenced."
+          },
+          "referenced_column_time_dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferencedColumnTimeDimension"
+            },
+            "description": "Optional per-column time dimension to persist at creation. Provide one\nentry per referenced date column that should open — and stay locked — at a\nspecific grain. Columns without an entry apply no bucketing (detailed).\nApplies to referenced model columns only; a column created through\nnew_columns always starts detailed.",
+            "nullable": true
           }
         },
         "description": "Definition of the input table schema."
@@ -30597,21 +32558,83 @@
             "items": {
               "type": "string"
             },
-            "description": "Optional list of permitted values for the column. When provided,\ndata written to this column is restricted to these values. Omit\nor leave empty to allow any value supported by the data type. <br/>  <span class=\"since-beta-tag\">Version: 26.9.0.cl or later</span>",
+            "description": "Optional list of permitted values for the column, at most 500, which\nmakes it a fixed-choice column. Every non-empty value written into\nthe column by updateInputTable must then be an exact member of the\nlist, and the API rejects a write that is not. Each value must be\nnon-empty, at most 8192 characters, and representable as the column's\ndata_type — a number for the numeric types, true or false for BOOL,\nand an epoch integer for DATE, DATE_TIME, and TIME. Omit or leave\nempty to allow any value supported by the data type.",
             "nullable": true
           }
         },
         "description": "Schema definition for a single input column."
       },
+      "ReferencedColumnTimeDimension": {
+        "type": "object",
+        "required": [
+          "column_identifier",
+          "time_dimension"
+        ],
+        "properties": {
+          "column_identifier": {
+            "type": "string",
+            "description": "The referenced model column to restrict, named exactly as it is in\nreferenced_columns."
+          },
+          "time_dimension": {
+            "type": "string",
+            "enum": [
+              "HOURLY",
+              "DAILY",
+              "WEEKLY",
+              "MONTHLY",
+              "QUARTERLY",
+              "YEARLY"
+            ],
+            "description": "Time dimension (grain) to lock the column to. Applies to DATE and\nDATE_TIME columns; a grain on a TIME (time-of-day) column has no\nmeaning and is not supported. HOURLY needs a DATE_TIME column — on\na plain DATE column it is ignored and the column stays detailed."
+          }
+        },
+        "description": "Pins a referenced model date column to a specific time dimension (grain) in\nthe created input table."
+      },
       "InputTableResponse": {
         "type": "object",
         "properties": {
-          "input_table_identifier": {
+          "input_table_id": {
             "type": "string",
-            "description": "Unique ID of the newly created input table.",
+            "description": "Unique ID of the newly created input table. Pass it as the\ninput_table_identifier path parameter of the other input-table\noperations.",
+            "nullable": true
+          },
+          "input_columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnInfo"
+            },
+            "description": "Columns of the newly created input table, each with its name and unique\nID. Use these IDs to reference specific columns in follow-up calls (for\nexample, the column identifiers written by updateInputTable). Returned so\ncallers do not need a separate lookup to resolve a column name to its ID.",
+            "nullable": true
+          },
+          "message_info": {
+            "type": "string",
+            "description": "Note set when a referenced column had to be renamed to keep the input\ntable's column names unique — a model column name that occurs in more\nthan one base table is prefixed with its base table name. Absent when\nno column was renamed. Read it to learn the final name of a renamed\ncolumn, or read the name off input_columns.",
             "nullable": true
           }
         }
+      },
+      "InputColumnInfo": {
+        "type": "object",
+        "required": [
+          "name",
+          "id"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Display name of the column."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the column."
+          },
+          "mapped_column_id": {
+            "type": "string",
+            "description": "Unique ID of the model column this input column maps to (its join-key\nsource in the linked model). Empty for brand-new columns that do not map\nto any model column.",
+            "nullable": true
+          }
+        },
+        "description": "A single input table column, with its display name and unique ID. Returned\nby both createInputTable (all columns of the new table) and\ncreateInputTableColumn\n(the columns just added)."
       },
       "InputTableUpdateResponse": {
         "type": "object",
@@ -30624,6 +32647,38 @@
           }
         },
         "description": "Response returned after successfully writing rows to an input table."
+      },
+      "InputColumnDefinitionInput": {
+        "type": "object",
+        "required": [
+          "columns"
+        ],
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnSchemaInput"
+            },
+            "description": "New columns to create on the input table."
+          }
+        },
+        "description": "Definition of the new columns to add to an existing input table."
+      },
+      "InputColumnResponse": {
+        "type": "object",
+        "required": [
+          "columns"
+        ],
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InputColumnInfo"
+            },
+            "description": "Columns that were added to the input table."
+          }
+        },
+        "description": "Response returned after adding columns to an input table."
       },
       "PolicyProcessOptionsInput": {
         "type": "object",
@@ -30996,11 +33051,12 @@
                 "CHART_COLOR_PALETTE",
                 "EMBEDDED_FOOTER_TEXT",
                 "NAV_PANEL_COLOR",
+                "APP_COLOR_THEME",
                 "DEFAULT_LOGO",
                 "WIDE_LOGO"
               ]
             },
-            "description": "Style fields to reset. Supported values: CHART_COLOR_PALETTE,\nEMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.",
+            "description": "Style fields to reset. Supported values: CHART_COLOR_PALETTE,\nEMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO,\nWIDE_LOGO.",
             "nullable": true
           },
           "visualization_areas": {
@@ -31049,6 +33105,22 @@
           }
         },
         "description": "Navigation panel color configuration."
+      },
+      "AppColorThemeInput": {
+        "type": "object",
+        "properties": {
+          "brand_color": {
+            "type": "string",
+            "description": "Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit to leave the\nstored color unchanged. To clear it, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          },
+          "apply_as_top_nav_color": {
+            "type": "boolean",
+            "description": "Whether the brand color is painted on the top navigation bar literally,\ninstead of the surface shade derived from it. Omit to leave the stored\nchoice unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "App color theme configuration -- the same stored color navigation_panel\nwrites, expressed as a brand color plus how it is applied."
       },
       "StyleColorPaletteInput": {
         "type": "object",
@@ -31258,6 +33330,33 @@
           }
         },
         "description": "A visualization area assignment affected by a font deletion."
+      },
+      "LinkTemplateInput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD_SHARE_URL",
+              "VISUALIZATION_SHARE_URL",
+              "ANSWER_SHARE_URL",
+              "SPOTIQ_ANALYSIS_URL",
+              "UNSUBSCRIBE_URL",
+              "GENERIC_URL",
+              "CONVERSATION_SHARE_URL"
+            ],
+            "description": "The link type this entry applies to."
+          },
+          "value": {
+            "type": "string",
+            "description": "URL template to set, including the placeholders this type requires. Required under\nREPLACE; supplying it with RESET is rejected.",
+            "nullable": true
+          }
+        },
+        "description": "One link type to act on, and the URL template to set for it under REPLACE."
       },
       "SemanticIntegrationResponse": {
         "type": "object",
@@ -31558,6 +33657,21 @@
           "metadata_identifier"
         ]
       },
+      "DeleteUsageDataRequest": {
+        "type": "object",
+        "properties": {
+          "keys": {
+            "description": "Pools to delete. At least one is required.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsagePoolKeyInput"
+            }
+          }
+        },
+        "required": [
+          "keys"
+        ]
+      },
       "ExportMemoryRequest": {
         "type": "object",
         "properties": {
@@ -31735,6 +33849,18 @@
               "CREATED_BY_ME",
               "SHARED_TO_ME"
             ]
+          }
+        }
+      },
+      "SearchUsageDataRequest": {
+        "type": "object",
+        "properties": {
+          "keys": {
+            "description": "Pools to retrieve. Omit to retrieve every pool on the cluster. Keys that\nmatch no pool are ignored.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsagePoolKeyInput"
+            }
           }
         }
       },
@@ -31979,6 +34105,21 @@
             "nullable": true
           }
         }
+      },
+      "UpdateUsageDataRequest": {
+        "type": "object",
+        "properties": {
+          "updates": {
+            "description": "Changes to apply, one entry per pool. At least one is required.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageDataUpdateInput"
+            }
+          }
+        },
+        "required": [
+          "updates"
+        ]
       },
       "ConfigureAuthSettingsRequest": {
         "type": "object",
@@ -32271,6 +34412,16 @@
           },
           "remember_me": {
             "description": "A flag to remember the user session. When set to true, a session cookie is created and used in subsequent API requests.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "redirect_url": {
+            "description": "Path on this cluster to redirect to after a successful login, for example /pinboards. It must start with a single /, and an absolute URL is rejected. When omitted, no redirect is issued and the response is unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "type": "string"
+          },
+          "no_url_redirection": {
+            "description": "A flag to suppress the redirect. When set to true, the resolved URL is returned in the location header instead of a 302 redirect. Applies only when redirect_url is set. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "default": false,
             "type": "boolean",
             "nullable": true
@@ -34148,6 +36299,74 @@
           }
         }
       },
+      "CreateInputTableRequest": {
+        "type": "object",
+        "properties": {
+          "table_name": {
+            "description": "Physical table name to create in the external warehouse.\nMust start with a letter or an underscore and contain only\nletters, digits, and underscores — no spaces or other\npunctuation — and be at most 128 characters.",
+            "type": "string"
+          },
+          "model_identifier": {
+            "description": "Unique ID or name of the model (worksheet) to link the\ninput table to.",
+            "type": "string"
+          },
+          "table_definition": {
+            "description": "Definition of the input table, including new columns\nand referenced model columns.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputTableDefinitionInput"
+              }
+            ]
+          }
+        },
+        "required": [
+          "table_name",
+          "model_identifier",
+          "table_definition"
+        ]
+      },
+      "CreateInputTableColumnRequest": {
+        "type": "object",
+        "properties": {
+          "column_definition": {
+            "description": "Definition of the new columns to add to the input table.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputColumnDefinitionInput"
+              }
+            ]
+          }
+        },
+        "required": [
+          "column_definition"
+        ]
+      },
+      "UpdateInputTableRequest": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "description": "Names of the columns being written, in the same order as\nthe values in each row. Must name every key column (the\ncolumns mapped from the linked model), since rows are\nmatched on those, and at least one non-key column, since\nkey columns are matched on but never assigned to.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rows": {
+            "description": "Rows to write into the input table. Each row is an array\nof string values aligned positionally with columns. A DATE\ncell takes an ISO calendar date (yyyy-MM-dd), which is\nstored with no time-zone conversion; an epoch number is\nalso accepted, but a single column must use the same form\nin every row. DATE_TIME and TIME cells take an epoch\nnumber only.",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "columns",
+          "rows"
+        ]
+      },
       "SearchChannelHistoryRequest": {
         "type": "object",
         "properties": {
@@ -34202,6 +36421,53 @@
         },
         "required": [
           "channel_type"
+        ]
+      },
+      "SearchLinkCustomizationsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope to retrieve. CLUSTER returns the cluster templates and is available only in the\nprimary org. ORG returns the templates for the org the caller is signed in to. Omit to\nreturn whichever of these the caller can access.",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          }
+        }
+      },
+      "UpdateLinkCustomizationsRequest": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "description": "Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and\nis available only in the primary org. ORG applies to the org the caller is signed in to.",
+            "default": "ORG",
+            "type": "string",
+            "enum": [
+              "CLUSTER",
+              "ORG"
+            ]
+          },
+          "operation": {
+            "description": "Operation to perform. REPLACE sets each listed type to its value. RESET reverts each\nlisted type to the value its scope inherits.",
+            "default": "REPLACE",
+            "type": "string",
+            "enum": [
+              "REPLACE",
+              "RESET"
+            ]
+          },
+          "templates": {
+            "description": "Link types to act on. This is a partial update: types not listed keep the value they\nresolve to today. Duplicate entries for the same type are rejected.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkTemplateInput"
+            }
+          }
+        },
+        "required": [
+          "scope",
+          "templates"
         ]
       },
       "FetchLogsRequest": {
@@ -34804,6 +37070,11 @@
             "type": "integer",
             "format": "int32"
           },
+          "dependent_objects_record_offset": {
+            "description": "Optional. The number of dependents to skip per metadata object before collecting them,\nso that dependents can be fetched in bounded pages. Combine with\ndependent_objects_record_size as the page size, and keep requesting pages until\ndependent_objects_is_last_batch is true. When this offset is supplied, a\ndependent_objects_record_size of 0 means the cluster default page size. Omit it to keep\nthe pre-paging behaviour. A negative value is rejected. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "type": "integer",
+            "format": "int32"
+          },
           "include_details": {
             "description": "Includes complete details of the metadata objects.",
             "default": false,
@@ -35125,7 +37396,7 @@
             ]
           },
           "png_options": {
-            "description": "Options for PNG export. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "Options for PNG export. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AnswerPngOptionsInput"
@@ -35133,11 +37404,11 @@
             ]
           },
           "personalised_view_identifier": {
-            "description": "GUID or name of the personalised view of the Answer object. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "GUID or name of the personalised view of the Answer object. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "type": "string"
           },
           "type": {
-            "description": "Type of the answer being exported. <br/> <span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
+            "description": "Type of the answer being exported. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>",
             "default": "SAVED",
             "type": "string",
             "enum": [
@@ -37910,7 +40181,7 @@
             "nullable": true
           },
           "onboarding_experience_completed": {
-            "description": "flag to get the on-boarding experience is completed or not.",
+            "description": "Marks the user's onboarding questions as completed.",
             "default": false,
             "type": "boolean",
             "nullable": true
@@ -39012,8 +41283,17 @@
               "DISABLED"
             ]
           },
+          "operation": {
+            "description": "Operation to perform. REPLACE (default) updates the provided fields. RESET\nclears the sections in reset_options and accepts no other field. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "default": "REPLACE",
+            "type": "string",
+            "enum": [
+              "REPLACE",
+              "RESET"
+            ]
+          },
           "reset_options": {
-            "description": "List of optional configuration sections to clear. Each value removes the\ncorresponding configuration entirely from the webhook: AUTHENTICATION\nremoves the authentication config, SIGNATURE_VERIFICATION removes the\nsignature verification config, STORAGE_DESTINATION removes the storage\ndestination config. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
+            "description": "Sections to clear when operation is RESET. Each value removes that\nconfiguration from the webhook entirely. <br/>  <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>",
             "type": "array",
             "items": {
               "type": "string",
