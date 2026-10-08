@@ -7717,9 +7717,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResponseCustomAction:
-        """create_custom_action
+        """(Deprecated) create_custom_action
 
-          Version: 9.6.0.cl or later   Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
         :param create_custom_action_request: (required)
         :type create_custom_action_request: CreateCustomActionRequest
@@ -7744,6 +7744,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions is deprecated.", DeprecationWarning)
 
         _param = self._create_custom_action_serialize(
             create_custom_action_request=create_custom_action_request,
@@ -7788,9 +7789,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ResponseCustomAction]:
-        """create_custom_action
+        """(Deprecated) create_custom_action
 
-          Version: 9.6.0.cl or later   Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
         :param create_custom_action_request: (required)
         :type create_custom_action_request: CreateCustomActionRequest
@@ -7815,6 +7816,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions is deprecated.", DeprecationWarning)
 
         _param = self._create_custom_action_serialize(
             create_custom_action_request=create_custom_action_request,
@@ -7859,9 +7861,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_custom_action
+        """(Deprecated) create_custom_action
 
-          Version: 9.6.0.cl or later   Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
         :param create_custom_action_request: (required)
         :type create_custom_action_request: CreateCustomActionRequest
@@ -7886,6 +7888,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions is deprecated.", DeprecationWarning)
 
         _param = self._create_custom_action_serialize(
             create_custom_action_request=create_custom_action_request,
@@ -7926,7 +7929,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResponseCustomAction:
-        """create_custom_action (synchronous)
+        """(Deprecated) create_custom_action (synchronous)
 
         Synchronous variant of :meth:`create_custom_action`. It calls the asynchronous
         method and blocks until it completes.
@@ -7960,7 +7963,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ResponseCustomAction]:
-        """create_custom_action (synchronous)
+        """(Deprecated) create_custom_action (synchronous)
 
         Synchronous variant of :meth:`create_custom_action_with_http_info`. It calls the
         asynchronous method and blocks until it completes.
@@ -7994,7 +7997,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_custom_action (synchronous)
+        """(Deprecated) create_custom_action (synchronous)
 
         Synchronous variant of :meth:`create_custom_action_without_preload_content`. It calls
         the asynchronous method and blocks until it completes.
@@ -18094,9 +18097,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_custom_action
+        """(Deprecated) delete_custom_action
 
-          Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
 
         :param custom_action_identifier: Unique ID or name of the custom action. (required)
         :type custom_action_identifier: str
@@ -18121,6 +18124,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete is deprecated.", DeprecationWarning)
 
         _param = self._delete_custom_action_serialize(
             custom_action_identifier=custom_action_identifier,
@@ -18165,9 +18169,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_custom_action
+        """(Deprecated) delete_custom_action
 
-          Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
 
         :param custom_action_identifier: Unique ID or name of the custom action. (required)
         :type custom_action_identifier: str
@@ -18192,6 +18196,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete is deprecated.", DeprecationWarning)
 
         _param = self._delete_custom_action_serialize(
             custom_action_identifier=custom_action_identifier,
@@ -18236,9 +18241,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_custom_action
+        """(Deprecated) delete_custom_action
 
-          Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
 
         :param custom_action_identifier: Unique ID or name of the custom action. (required)
         :type custom_action_identifier: str
@@ -18263,6 +18268,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete is deprecated.", DeprecationWarning)
 
         _param = self._delete_custom_action_serialize(
             custom_action_identifier=custom_action_identifier,
@@ -18303,7 +18309,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_custom_action (synchronous)
+        """(Deprecated) delete_custom_action (synchronous)
 
         Synchronous variant of :meth:`delete_custom_action`. It calls the asynchronous
         method and blocks until it completes.
@@ -18337,7 +18343,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_custom_action (synchronous)
+        """(Deprecated) delete_custom_action (synchronous)
 
         Synchronous variant of :meth:`delete_custom_action_with_http_info`. It calls the
         asynchronous method and blocks until it completes.
@@ -18371,7 +18377,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_custom_action (synchronous)
+        """(Deprecated) delete_custom_action (synchronous)
 
         Synchronous variant of :meth:`delete_custom_action_without_preload_content`. It calls
         the asynchronous method and blocks until it completes.
@@ -52717,9 +52723,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ResponseCustomAction]:
-        """search_custom_actions
+        """(Deprecated) search_custom_actions
 
-          Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
 
         :param search_custom_actions_request: (required)
         :type search_custom_actions_request: SearchCustomActionsRequest
@@ -52744,6 +52750,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions/search is deprecated.", DeprecationWarning)
 
         _param = self._search_custom_actions_serialize(
             search_custom_actions_request=search_custom_actions_request,
@@ -52788,9 +52795,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[ResponseCustomAction]]:
-        """search_custom_actions
+        """(Deprecated) search_custom_actions
 
-          Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
 
         :param search_custom_actions_request: (required)
         :type search_custom_actions_request: SearchCustomActionsRequest
@@ -52815,6 +52822,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions/search is deprecated.", DeprecationWarning)
 
         _param = self._search_custom_actions_serialize(
             search_custom_actions_request=search_custom_actions_request,
@@ -52859,9 +52867,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """search_custom_actions
+        """(Deprecated) search_custom_actions
 
-          Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
 
         :param search_custom_actions_request: (required)
         :type search_custom_actions_request: SearchCustomActionsRequest
@@ -52886,6 +52894,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions/search is deprecated.", DeprecationWarning)
 
         _param = self._search_custom_actions_serialize(
             search_custom_actions_request=search_custom_actions_request,
@@ -52926,7 +52935,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ResponseCustomAction]:
-        """search_custom_actions (synchronous)
+        """(Deprecated) search_custom_actions (synchronous)
 
         Synchronous variant of :meth:`search_custom_actions`. It calls the asynchronous
         method and blocks until it completes.
@@ -52960,7 +52969,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[ResponseCustomAction]]:
-        """search_custom_actions (synchronous)
+        """(Deprecated) search_custom_actions (synchronous)
 
         Synchronous variant of :meth:`search_custom_actions_with_http_info`. It calls the
         asynchronous method and blocks until it completes.
@@ -52994,7 +53003,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """search_custom_actions (synchronous)
+        """(Deprecated) search_custom_actions (synchronous)
 
         Synchronous variant of :meth:`search_custom_actions_without_preload_content`. It calls
         the asynchronous method and blocks until it completes.
@@ -70582,9 +70591,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """update_custom_action
+        """(Deprecated) update_custom_action
 
-          Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
         :param custom_action_identifier: Unique ID or name of the custom action. (required)
         :type custom_action_identifier: str
@@ -70611,6 +70620,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update is deprecated.", DeprecationWarning)
 
         _param = self._update_custom_action_serialize(
             custom_action_identifier=custom_action_identifier,
@@ -70657,9 +70667,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """update_custom_action
+        """(Deprecated) update_custom_action
 
-          Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
         :param custom_action_identifier: Unique ID or name of the custom action. (required)
         :type custom_action_identifier: str
@@ -70686,6 +70696,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update is deprecated.", DeprecationWarning)
 
         _param = self._update_custom_action_serialize(
             custom_action_identifier=custom_action_identifier,
@@ -70732,9 +70743,9 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_custom_action
+        """(Deprecated) update_custom_action
 
-          Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+          Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
         :param custom_action_identifier: Unique ID or name of the custom action. (required)
         :type custom_action_identifier: str
@@ -70761,6 +70772,7 @@ class ThoughtSpotRestApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update is deprecated.", DeprecationWarning)
 
         _param = self._update_custom_action_serialize(
             custom_action_identifier=custom_action_identifier,
@@ -70803,7 +70815,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """update_custom_action (synchronous)
+        """(Deprecated) update_custom_action (synchronous)
 
         Synchronous variant of :meth:`update_custom_action`. It calls the asynchronous
         method and blocks until it completes.
@@ -70839,7 +70851,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """update_custom_action (synchronous)
+        """(Deprecated) update_custom_action (synchronous)
 
         Synchronous variant of :meth:`update_custom_action_with_http_info`. It calls the
         asynchronous method and blocks until it completes.
@@ -70875,7 +70887,7 @@ class ThoughtSpotRestApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_custom_action (synchronous)
+        """(Deprecated) update_custom_action (synchronous)
 
         Synchronous variant of :meth:`update_custom_action_without_preload_content`. It calls
         the asynchronous method and blocks until it completes.

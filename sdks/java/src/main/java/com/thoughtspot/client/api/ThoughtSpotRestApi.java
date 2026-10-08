@@ -3073,7 +3073,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call createCustomActionCall(CreateCustomActionRequest createCustomActionRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -3119,6 +3121,7 @@ public class ThoughtSpotRestApi {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call createCustomActionValidateBeforeCall(CreateCustomActionRequest createCustomActionRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'createCustomActionRequest' is set
@@ -3132,7 +3135,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.6.0.cl or later   Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in &#x60;group_identifiers&#x60;.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in &#x60;default_action_config&#x60; property and specify the GUID or name of the object in &#x60;associate_metadata&#x60;.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in &#x60;group_identifiers&#x60;.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in &#x60;default_action_config&#x60; property and specify the GUID or name of the object in &#x60;associate_metadata&#x60;.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
      * @param createCustomActionRequest  (required)
      * @return ResponseCustomAction
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -3146,7 +3149,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ResponseCustomAction createCustomAction(CreateCustomActionRequest createCustomActionRequest) throws ApiException {
         ApiResponse<ResponseCustomAction> localVarResp = createCustomActionWithHttpInfo(createCustomActionRequest);
         return localVarResp.getData();
@@ -3154,7 +3159,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.6.0.cl or later   Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in &#x60;group_identifiers&#x60;.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in &#x60;default_action_config&#x60; property and specify the GUID or name of the object in &#x60;associate_metadata&#x60;.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in &#x60;group_identifiers&#x60;.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in &#x60;default_action_config&#x60; property and specify the GUID or name of the object in &#x60;associate_metadata&#x60;.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
      * @param createCustomActionRequest  (required)
      * @return ApiResponse&lt;ResponseCustomAction&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -3168,7 +3173,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<ResponseCustomAction> createCustomActionWithHttpInfo(CreateCustomActionRequest createCustomActionRequest) throws ApiException {
         okhttp3.Call localVarCall = createCustomActionValidateBeforeCall(createCustomActionRequest, null);
         Type localVarReturnType = new TypeToken<ResponseCustomAction>(){}.getType();
@@ -3177,7 +3184,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.6.0.cl or later   Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in &#x60;group_identifiers&#x60;.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in &#x60;default_action_config&#x60; property and specify the GUID or name of the object in &#x60;associate_metadata&#x60;.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in &#x60;group_identifiers&#x60;.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in &#x60;default_action_config&#x60; property and specify the GUID or name of the object in &#x60;associate_metadata&#x60;.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
      * @param createCustomActionRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -3192,7 +3199,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call createCustomActionAsync(CreateCustomActionRequest createCustomActionRequest, final ApiCallback<ResponseCustomAction> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = createCustomActionValidateBeforeCall(createCustomActionRequest, _callback);
@@ -6951,7 +6960,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call deleteCustomActionCall(String customActionIdentifier, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -6997,6 +7008,7 @@ public class ThoughtSpotRestApi {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteCustomActionValidateBeforeCall(String customActionIdentifier, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'customActionIdentifier' is set
@@ -7010,7 +7022,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Removes the custom action specified in the API request.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -7023,14 +7035,16 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public void deleteCustomAction(String customActionIdentifier) throws ApiException {
         deleteCustomActionWithHttpInfo(customActionIdentifier);
     }
 
     /**
      * 
-     *   Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Removes the custom action specified in the API request.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -7044,7 +7058,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> deleteCustomActionWithHttpInfo(String customActionIdentifier) throws ApiException {
         okhttp3.Call localVarCall = deleteCustomActionValidateBeforeCall(customActionIdentifier, null);
         return localVarApiClient.execute(localVarCall);
@@ -7052,7 +7068,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Removes the custom action specified in the API request.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -7067,7 +7083,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call deleteCustomActionAsync(String customActionIdentifier, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteCustomActionValidateBeforeCall(customActionIdentifier, _callback);
@@ -19837,7 +19855,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call searchCustomActionsCall(SearchCustomActionsRequest searchCustomActionsRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -19883,6 +19903,7 @@ public class ThoughtSpotRestApi {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call searchCustomActionsValidateBeforeCall(SearchCustomActionsRequest searchCustomActionsRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'searchCustomActionsRequest' is set
@@ -19896,7 +19917,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Gets custom actions configured on the cluster.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
      * @param searchCustomActionsRequest  (required)
      * @return List&lt;ResponseCustomAction&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -19910,7 +19931,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public List<ResponseCustomAction> searchCustomActions(SearchCustomActionsRequest searchCustomActionsRequest) throws ApiException {
         ApiResponse<List<ResponseCustomAction>> localVarResp = searchCustomActionsWithHttpInfo(searchCustomActionsRequest);
         return localVarResp.getData();
@@ -19918,7 +19941,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Gets custom actions configured on the cluster.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
      * @param searchCustomActionsRequest  (required)
      * @return ApiResponse&lt;List&lt;ResponseCustomAction&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -19932,7 +19955,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<List<ResponseCustomAction>> searchCustomActionsWithHttpInfo(SearchCustomActionsRequest searchCustomActionsRequest) throws ApiException {
         okhttp3.Call localVarCall = searchCustomActionsValidateBeforeCall(searchCustomActionsRequest, null);
         Type localVarReturnType = new TypeToken<List<ResponseCustomAction>>(){}.getType();
@@ -19941,7 +19966,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Gets custom actions configured on the cluster.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
      * @param searchCustomActionsRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -19956,7 +19981,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call searchCustomActionsAsync(SearchCustomActionsRequest searchCustomActionsRequest, final ApiCallback<List<ResponseCustomAction>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = searchCustomActionsValidateBeforeCall(searchCustomActionsRequest, _callback);
@@ -26440,7 +26467,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call updateCustomActionCall(String customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -26487,6 +26516,7 @@ public class ThoughtSpotRestApi {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call updateCustomActionValidateBeforeCall(String customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'customActionIdentifier' is set
@@ -26505,7 +26535,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.6.0.cl or later   Updates a custom action.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Updates a custom action.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
      * @param updateCustomActionRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -26519,14 +26549,16 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public void updateCustomAction(String customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest) throws ApiException {
         updateCustomActionWithHttpInfo(customActionIdentifier, updateCustomActionRequest);
     }
 
     /**
      * 
-     *   Version: 9.6.0.cl or later   Updates a custom action.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Updates a custom action.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
      * @param updateCustomActionRequest  (required)
      * @return ApiResponse&lt;Void&gt;
@@ -26541,7 +26573,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> updateCustomActionWithHttpInfo(String customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest) throws ApiException {
         okhttp3.Call localVarCall = updateCustomActionValidateBeforeCall(customActionIdentifier, updateCustomActionRequest, null);
         return localVarApiClient.execute(localVarCall);
@@ -26549,7 +26583,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.6.0.cl or later   Updates a custom action.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+     *   Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Updates a custom action.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
      * @param updateCustomActionRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -26565,7 +26599,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call updateCustomActionAsync(String customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = updateCustomActionValidateBeforeCall(customActionIdentifier, updateCustomActionRequest, _callback);

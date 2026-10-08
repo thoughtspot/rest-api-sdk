@@ -68,6 +68,22 @@
 -  the response header `content-disposition` was added for the status `200`
 
 
+### POST /api/rest/2.0/customization/custom-actions
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/search
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update
+-  endpoint deprecated
+
+
 ### POST /api/rest/2.0/customization/links/update
 -  api operation id `updateLinkCustomization` removed and replaced with `updateLinkCustomizations`
 
