@@ -22358,15 +22358,72 @@
           "incomplete_objects": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Reason code for the incomplete object."
+                },
+                "codeNumber": {
+                  "type": "integer",
+                  "description": "Numeric form of the reason code."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Message describing why the object is incomplete."
+                },
+                "header": {
+                  "type": "object",
+                  "description": "Header of the missing or inaccessible object; same keys as metadata_header.",
+                  "additionalProperties": true
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Metadata type of the missing or inaccessible object, for example LOGICAL_TABLE."
+                }
+              },
+              "additionalProperties": true
             },
-            "description": "Details of incomplete information of the metadata objects if any.",
+            "description": "Details of incomplete information of the metadata objects if any.\n\nReturned when include_details and include_incomplete_objects are both true. Each item explains why the object is incomplete, for example a missing or inaccessible dependency. Keys are camelCase. If the details cannot be fetched, the list contains a single error message string instead.",
             "nullable": true
           },
           "metadata_detail": {
             "type": "object",
-            "description": "Complete details of the metadata objects.",
-            "nullable": true
+            "description": "Complete details of the metadata objects.\n\nReturned when include_details is true. Contains the full definition of the object, so its keys depend on the metadata type (for example, an Answer, a Liveboard or a Table each have different keys). Keys are camelCase. Most types include the common keys below. If the details cannot be fetched, this field contains an error message string instead of an object.",
+            "nullable": true,
+            "properties": {
+              "header": {
+                "type": "object",
+                "description": "Header of the object; same keys as metadata_header.",
+                "additionalProperties": true
+              },
+              "complete": {
+                "type": "boolean",
+                "description": "Whether the object is complete. False when it references objects that are missing or inaccessible."
+              },
+              "incompleteDetail": {
+                "type": "array",
+                "description": "Reasons the object is incomplete; same item keys as incomplete_objects.",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "header": {
+                "id": "33248a57-cc70-4e39-9199-fb5092283381",
+                "name": "Basic Pinboard 2",
+                "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                "created": 1487731361818,
+                "modified": 1583190552457,
+                "isDeleted": false,
+                "isHidden": false
+              },
+              "complete": true,
+              "incompleteDetail": []
+            }
           },
           "metadata_header": {
             "type": "object",
