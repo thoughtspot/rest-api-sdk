@@ -14,14 +14,6 @@
       "description": "Roles for version 26.2.0.cl"
     },
     {
-      "name": "26.12.0.cl",
-      "id": "26.12.0.cl",
-      "tags": [
-        "26.12.0.cl"
-      ],
-      "description": "Roles for version 26.12.0.cl"
-    },
-    {
       "name": "26.10.0.cl",
       "id": "26.10.0.cl",
       "tags": [
@@ -252,6 +244,14 @@
         "9.7.0.cl"
       ],
       "description": "Roles for version 9.7.0.cl"
+    },
+    {
+      "name": "26.12.0.cl",
+      "id": "26.12.0.cl",
+      "tags": [
+        "26.12.0.cl"
+      ],
+      "description": "Roles for version 26.12.0.cl"
     }
   ],
   "tags": [],
@@ -363,109 +363,6 @@
         }
       }
     },
-    "/api/rest/2.0/ai/agent/v2/conversation/create": {
-      "post": {
-        "operationId": "createAgentConversationV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nCreates a new Spotter conversation and returns its identifier.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to any data source specified in the request.\n\n#### Usage guidelines\n\nA conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.\n\nBoth parameters are optional; send an empty body to create a conversation with no customization.\n\n- `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored.\n- `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `\"Answer concisely and always report revenue in thousands.\"` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short.\n\nConversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.\n\n#### Example request\n\n```json\n{\n  \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"],\n  \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\"\n}\n```\n\n#### Example response\n\n```json\n{\n  \"conversation_identifier\": \"5612260428840173568\"\n}\n```\n\nTreat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.\n\n#### Error responses\n\n| Code | Description                                                                                            |\n| ---- | ------------------------------------------------------------------------------------------------------ |\n| 400  | Bad request — the request fails validation, for example `additional_instructions` exceeds the maximum length. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                   |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks view permission on a specified data source. |\n| 404  | Not found — no data source with the given identifier exists in the caller's Org.                       |\n| 500  | Internal server error — an unexpected failure while creating the conversation.                         |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAgentConversationV2Request"
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationV2"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "Conversation created",
-                    "value": {
-                      "conversation_identifier": "5612260428840173568"
-                    }
-                  },
-                  "example_2": {
-                    "summary": "Conversation created, scoped to a single data source",
-                    "value": {
-                      "conversation_identifier": "7258889042597511168"
-                    }
-                  },
-                  "example_3": {
-                    "summary": "Conversation created, scoped to several data sources",
-                    "value": {
-                      "conversation_identifier": "8401773265129884672"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationV2"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/ai/agent/analysts/create": {
       "post": {
         "operationId": "createAnalyst",
@@ -502,97 +399,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Analyst"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/analysts/{analyst_identifier}/conversation/create": {
-      "post": {
-        "operationId": "createAnalystConversationV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nCreates a Spotter conversation from a saved analyst.\n\nRequires `CAN_USE_SPOTTER` privilege, and access to the analyst.\n\nAn analyst carries its own instructions, data sources and connectors. Creating a conversation from one applies all of that automatically, so the conversation behaves as the analyst was configured to without the caller restating any of it.\n\n#### Usage guidelines\n\n- `analyst_identifier` (required): the saved analyst to create the conversation from.\n\nThe analyst's configuration is resolved server-side from its identifier. Nothing else is caller-supplied, so a conversation cannot be given instructions or data sources the analyst does not carry.\n\nUse the returned `conversation_identifier` with `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to ask questions in the conversation. To create a conversation that is not backed by an analyst, use `createAgentConversationV2` instead.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 400  | Bad request — `analyst_identifier` is missing.                                       |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst. |\n| 404  | Not found — no analyst with the given identifier exists.                             |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "analyst_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique identifier of the saved analyst to create the conversation from. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationV2"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "A conversation created from a saved analyst",
-                    "value": {
-                      "conversation_identifier": "5612260428840173568"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationV2"
                 }
               }
             }
@@ -828,72 +634,6 @@
         "responses": {
           "204": {
             "description": "Successfully deleted the agent conversation."
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/conversations/{conversation_identifier}/delete": {
-      "delete": {
-        "operationId": "deleteConversationV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nDeletes a Spotter conversation and its history.\n\nRequires `CAN_USE_SPOTTER` privilege. A user can delete only their own conversations.\n\nUse this to let a user clear a conversation from their history. The deletion is permanent — the conversation and the turns it contains cannot be recovered, and answers produced during it are no longer reachable through the conversation.\n\n#### Usage guidelines\n\n- `conversation_identifier` (required): the conversation to delete.\n\nReturns `204 No Content` on success. Deleting a conversation that does not exist, or that belongs to another user, returns `404`.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege.        |\n| 404  | Not found — no conversation with the given identifier exists for this user.          |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "conversation_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique identifier of the conversation to delete. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successfully deleted the conversation."
           },
           "400": {
             "description": "Operation failed",
@@ -1323,147 +1063,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AgentConversationHistoryResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationHistoryResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/conversations": {
-      "get": {
-        "operationId": "getConversationListV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nLists the Spotter conversations belonging to the authenticated user.\n\nRequires `CAN_USE_SPOTTER` privilege. A user sees only their own conversations.\n\nUse this to build a conversation history view, or to find a `conversation_identifier` to continue an earlier exchange with `sendAgentConversationMessageV2`.\n\n#### Usage guidelines\n\n- `batch_size` (optional): how many conversations to return. Defaults to 20.\n- `offset` (optional): zero-based index of the first conversation to return. Page by adding `batch_size` to it until `has_more` is `false`.\n- `query` (optional): a case-insensitive substring matched against conversation titles. Paging applies to the matched set.\n\nConversations are ordered with pinned ones first, then most recently updated. A conversation the title generator has not named yet has no `conversation_title`.\n\n`data_source_identifiers` is present when the conversation was scoped to specific data sources at creation; it is absent for a conversation that let Spotter choose.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege.        |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "batch_size",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Maximum number of conversations to return. Defaults to 20 when omitted. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Zero-based index of the first conversation to return, for paging. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          {
-            "in": "query",
-            "name": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Case-insensitive substring to match against conversation titles. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationHistoryResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "A page of conversations, pinned first then most recently updated",
-                    "value": {
-                      "conversations": [
-                        {
-                          "conversation_identifier": "5612260428840173568",
-                          "conversation_title": "Sales by region, last quarter",
-                          "updated_at": "2026-09-30T18:22:04Z",
-                          "is_pinned": true,
-                          "data_source_identifiers": [
-                            "cd252e5c-b552-49a8-821d-3eadaa049cca"
-                          ]
-                        },
-                        {
-                          "conversation_identifier": "5612260428840173999",
-                          "conversation_title": "Jacket sales in the east",
-                          "updated_at": "2026-09-29T11:07:41Z",
-                          "is_pinned": false
-                        }
-                      ],
-                      "has_more": true
-                    }
-                  },
-                  "example_2": {
-                    "summary": "The last page, and a conversation the title generator has not named yet",
-                    "value": {
-                      "conversations": [
-                        {
-                          "conversation_identifier": "5612260428840174111",
-                          "updated_at": "2026-09-28T09:14:52Z",
-                          "is_pinned": false
-                        }
-                      ],
-                      "has_more": false
-                    }
-                  }
                 }
               }
             }
@@ -2941,404 +2540,6 @@
         "x-streaming": true
       }
     },
-    "/api/rest/2.0/ai/agent/v2/conversation/send/stream": {
-      "post": {
-        "operationId": "sendAgentConversationMessageStreamingV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nSends a message to Spotter and streams the response back as Server-Sent Events.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.\n\n#### Usage guidelines\n\n- `message` (required): the question to ask Spotter.\n- `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the `x-conversation-identifier` response header, so a follow-up question can continue the same exchange.\n\nSend `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.\n\n#### Response format\n\nEach event is a `data:` line carrying a single JSON object, with exactly one top-level key:\n\n| Key           | Meaning                                                             |\n| ------------- | ------------------------------------------------------------------- |\n| `event`       | Text from Spotter — its reasoning or its answer.                    |\n| `tool_call`   | Spotter started a step, such as querying a data source.             |\n| `progress`    | A stage of a step in flight, so you can show what Spotter is doing. |\n| `tool_result` | A step finished; carries its result, including any answer produced. |\n| `error`       | The turn failed.                                                    |\n| `done`        | End of turn. Always last.                                           |\n\nA turn that queries data runs them in this order:\n\n```\ntool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done\n```\n\n`tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.\n\nIgnore any key you don't recognise — new event types may be added.\n\nLines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.\n\nAn event with content has the shape:\n\n```json\n{\n  \"event\": {\n    \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",\n    \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",\n    \"partial\": true,\n    \"content\": {\n      \"role\": \"model\",\n      \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]\n    }\n  }\n}\n```\n\n- `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received.\n- `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it.\n- `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment.\n- `invocation_id` is stable for one turn; `id` identifies a single event.\n\n#### Steps: tool_call, progress, tool_result\n\nWhen Spotter needs to do something — query a data source, run code — it reports the step as it happens.\n\n**`tool_call`** announces the step and the arguments it ran with:\n\n```json\n{\n  \"tool_call\": {\n    \"id\": \"toolu_01AMjCrr\",\n    \"name\": \"spotter_tools_fetch_and_visualize_data\",\n    \"args\": {\n      \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n      \"english_query\": \"total sales by region last quarter\"\n    }\n  }\n}\n```\n\n**`progress`** reports each stage while the step runs:\n\n```json\n{\n  \"progress\": {\n    \"code\": \"ANSWER_GEN\",\n    \"message\": \"Verifying results with the Trust Layer\",\n    \"tool_call_id\": \"toolu_01AMjCrr\"\n  }\n}\n```\n\n`message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.\n\n**`tool_result`** carries what the step produced:\n\n```json\n{\n  \"tool_result\": {\n    \"id\": \"toolu_01AMjCrr\",\n    \"name\": \"spotter_tools_fetch_and_visualize_data\",\n    \"is_error\": false,\n    \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",\n    \"answer\": {\n      \"title\": \"total sales by region last quarter\",\n      \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",\n      \"gen_no\": 2,\n      \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",\n      \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n      \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",\n      \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },\n      \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }\n    }\n  }\n}\n```\n\n- `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count.\n- `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted.\n- `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.\n\n`args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.\n\n#### End of turn\n\nThe stream ends with a terminal event:\n\n```json\n{ \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }\n```\n\nNothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.\n\n`done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.\n\nThe `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the parameter.\n\n#### Errors during a turn\n\nIf the turn fails after streaming has begun, an event carries an error instead of content:\n\n```json\n{\n  \"error\": {\n    \"code\": \"409\",\n    \"message\": \"session busy: lease held by invocation 7f3a\",\n    \"source\": \"transport\",\n    \"display_message\": \"Another request is still running in this conversation.\",\n    \"error_bucket\": \"RETRY\"\n  }\n}\n```\n\nRender `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.\n\nA failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.\n\nA failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:\n\n```json\n{\n  \"event\": {\n    \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",\n    \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",\n    \"error_code\": \"MALFORMED_FUNCTION_CALL\",\n    \"content\": { \"role\": \"model\", \"parts\": [] }\n  }\n}\n```\n\nThe two report different things:\n\n| Where                     | What failed                                                                   | What to do                                                                   |\n| ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |\n| `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            |\n| `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |\n\n`error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.\n\n#### Error responses\n\nErrors detected before streaming begins are returned as a normal HTTP response.\n\n| Code | Description                                                                                                        |\n| ---- | ------------------------------------------------------------------------------------------------------------------ |\n| 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is not a string.               |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation. |\n| 404  | Not found — no conversation with the given identifier exists for this user.                                        |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - The streaming protocol uses Server-Sent Events (SSE).\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SendAgentConversationMessageStreamingV2Request"
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentStreamFrame"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "SSE stream -- each event is a data: line carrying one JSON object. Events arrive over time; this shows a step (tool_call, progress, tool_result), the streamed answer text, and the terminal done event.",
-                    "value": [
-                      {
-                        "tool_call": {
-                          "id": "toolu_01AMjCrr",
-                          "name": "spotter_tools_fetch_and_visualize_data",
-                          "args": {
-                            "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
-                            "english_query": "total sales by region last quarter"
-                          }
-                        }
-                      },
-                      {
-                        "progress": {
-                          "code": "TML_GEN",
-                          "message": "Translating the request with the Reasoning Engine",
-                          "tool_call_id": "toolu_01AMjCrr"
-                        }
-                      },
-                      {
-                        "tool_result": {
-                          "id": "toolu_01AMjCrr",
-                          "name": "spotter_tools_fetch_and_visualize_data",
-                          "is_error": false,
-                          "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`\nChart type: ADVANCED_COLUMN",
-                          "answer": {
-                            "title": "total sales by region last quarter",
-                            "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
-                            "gen_no": 2,
-                            "transaction_id": "6fafbc09-1b08-4c49-a017-fa331612a76f",
-                            "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
-                            "sage_query": "[sales] [region] [date] = 'last quarter'",
-                            "visualization": {
-                              "chart_type": "ADVANCED_COLUMN"
-                            },
-                            "table_data": {
-                              "total_rows": 5,
-                              "columns": [
-                                {
-                                  "name": "region",
-                                  "type": "ATTRIBUTE"
-                                },
-                                {
-                                  "name": "Total sales",
-                                  "type": "MEASURE"
-                                }
-                              ]
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "event": {
-                          "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
-                          "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
-                          "partial": true,
-                          "content": {
-                            "role": "model",
-                            "parts": [
-                              {
-                                "text": "The user is asking for data",
-                                "thought": true
-                              }
-                            ]
-                          }
-                        }
-                      },
-                      {
-                        "event": {
-                          "id": "10552f5a-c275-4e06-8af3-596676cbff71",
-                          "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
-                          "partial": true,
-                          "content": {
-                            "role": "model",
-                            "parts": [
-                              {
-                                "text": "Total sales last quarter were highest in the West"
-                              }
-                            ]
-                          }
-                        }
-                      },
-                      {
-                        "event": {
-                          "id": "2f8b1c44-7ad9-4e02-b3d1-90c4f5a7e618",
-                          "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
-                          "partial": false,
-                          "content": {
-                            "role": "model",
-                            "parts": [
-                              {
-                                "text": "Total sales last quarter were highest in the West region."
-                              }
-                            ]
-                          }
-                        }
-                      },
-                      {
-                        "done": {
-                          "conversation_identifier": "5612260428840173568"
-                        }
-                      }
-                    ]
-                  },
-                  "example_2": {
-                    "summary": "A turn that fails after streaming has begun — render display_message, branch on error_bucket. The stream still ends with done.",
-                    "value": [
-                      {
-                        "error": {
-                          "code": "409",
-                          "message": "session busy: lease held by invocation 7f3a",
-                          "source": "transport",
-                          "display_message": "Another request is still running in this conversation.",
-                          "error_bucket": "RETRY"
-                        }
-                      },
-                      {
-                        "done": {
-                          "conversation_identifier": "5612260428840173568"
-                        }
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentStreamFrame"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/conversation/send": {
-      "post": {
-        "operationId": "sendAgentConversationMessageV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nSends a message to Spotter and returns the complete response once the turn has finished.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.\n\nUse this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreamingV2` instead.\n\n#### Usage guidelines\n\n- `message` (required): the question to ask Spotter.\n- `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the `x-conversation-identifier` response header.\n\nThis endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.\n\n#### Response format\n\n```json\n{\n  \"conversation_identifier\": \"5612260428840173568\",\n  \"events\": [\n    { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },\n    { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },\n    { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },\n    {\n      \"event\": {\n        \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }\n      }\n    },\n    { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }\n  ]\n}\n```\n\n`events` contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreamingV2` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.\n\nTo render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.\n\nA turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint's \"Errors during a turn\" section explains how the two differ.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                     |\n| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is empty or not a string.                                                   |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation.                                              |\n| 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     |\n| 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use `sendAgentConversationMessageStreamingV2` for questions that run long. |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SendAgentConversationMessageV2Request"
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentTurnResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "A completed turn. `events` carries the same frames the streaming endpoint publishes, in order.",
-                    "value": {
-                      "conversation_identifier": "5612260428840173568",
-                      "events": [
-                        {
-                          "tool_call": {
-                            "id": "toolu_01AMjCrr",
-                            "name": "spotter_tools_fetch_and_visualize_data",
-                            "args": {
-                              "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
-                              "english_query": "total sales by region last quarter"
-                            }
-                          }
-                        },
-                        {
-                          "progress": {
-                            "code": "TML_GEN",
-                            "message": "Translating the request with the Reasoning Engine",
-                            "tool_call_id": "toolu_01AMjCrr"
-                          }
-                        },
-                        {
-                          "tool_result": {
-                            "id": "toolu_01AMjCrr",
-                            "name": "spotter_tools_fetch_and_visualize_data",
-                            "is_error": false,
-                            "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`",
-                            "answer": {
-                              "title": "total sales by region last quarter",
-                              "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
-                              "gen_no": 2,
-                              "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
-                              "sage_query": "[sales] [region] [date] = 'last quarter'",
-                              "visualization": {
-                                "chart_type": "ADVANCED_COLUMN"
-                              },
-                              "table_data": {
-                                "total_rows": 5
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "event": {
-                            "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
-                            "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
-                            "partial": true,
-                            "content": {
-                              "role": "model",
-                              "parts": [
-                                {
-                                  "text": "The user is asking for data",
-                                  "thought": true
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        {
-                          "event": {
-                            "id": "10552f5a-c275-4e06-8af3-596676cbff71",
-                            "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
-                            "partial": true,
-                            "content": {
-                              "role": "model",
-                              "parts": [
-                                {
-                                  "text": "Total sales last quarter were highest in the West region."
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        {
-                          "done": {
-                            "conversation_identifier": "5612260428840173568"
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  "example_2": {
-                    "summary": "A turn that failed. The error frame carries display_message and error_bucket; done still closes the turn.",
-                    "value": {
-                      "conversation_identifier": "5612260428840173568",
-                      "events": [
-                        {
-                          "error": {
-                            "code": "409",
-                            "message": "session busy: lease held by invocation 7f3a",
-                            "source": "transport",
-                            "display_message": "Another request is still running in this conversation.",
-                            "error_bucket": "RETRY"
-                          }
-                        },
-                        {
-                          "done": {
-                            "conversation_identifier": "5612260428840173568"
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentTurnResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/ai/agent/{conversation_identifier}/converse": {
       "post": {
         "operationId": "sendAgentMessage",
@@ -4057,104 +3258,6 @@
         "responses": {
           "204": {
             "description": "Successfully stopped the in-progress agent conversation response for the given."
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/conversation/{conversation_identifier}/stop-response": {
-      "post": {
-        "operationId": "stopConversationV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStops the response currently being generated in a Spotter conversation.\n\nRequires `CAN_USE_SPOTTER` privilege, and access to the conversation.\n\nUse this to back a \"stop generating\" control: a user who has seen enough, or asked the wrong question, can end the turn without waiting for it to finish.\n\n#### Usage guidelines\n\n- `conversation_identifier` (required): the conversation whose in-progress response to stop.\n\nThe conversation survives — only the running turn ends. The next question can be asked in the same conversation, and the partial answer stays in its history.\n\nThe turn is stopped gracefully: the step in flight is allowed to finish, so the stream closes cleanly rather than being cut mid-frame. A caller streaming the turn sees it end normally with a `done` event.\n\nStopping a conversation with no turn running is not an error — the response reports that there was nothing to stop.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege.        |\n| 404  | Not found — no conversation with the given identifier exists for this user.          |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "conversation_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique identifier of the conversation whose in-progress response to stop. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentStopResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "The running turn was stopped",
-                    "value": {
-                      "status": "stopped",
-                      "message": "Session stopped gracefully."
-                    }
-                  },
-                  "example_2": {
-                    "summary": "Nothing was running; not an error",
-                    "value": {
-                      "status": "no_active_turn"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentStopResponse"
-                }
-              }
-            }
           },
           "400": {
             "description": "Operation failed",
@@ -20502,6 +19605,876 @@
         }
       }
     },
+    "/api/rest/2.0/version-control/commit": {
+      "post": {
+        "operationId": "commitVersionControl",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Objects are named by object ID, not by GUID or name, so object IDs must be enabled on the cluster. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.\n\nAdmission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommitVersionControlRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlCommitResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Commit run admitted; read per-object outcomes from run search",
+                    "value": {
+                      "run_id": "7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07",
+                      "accepted_time_in_millis": 1783500062000,
+                      "author": {
+                        "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                        "name": "svc-version-control"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Covers a malformed body, a duplicate object, and a paused repository.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access. Also returned when the org's disabled_operations holds COMMIT.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The caller's org has no version control configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/config/create": {
+      "post": {
+        "operationId": "createVersionControlConfig",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nConfigures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to. The credential you supply is stored in a secrets vault and is never returned by any endpoint.\n\nUse this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVersionControlConfigRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The stored configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlConfig"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Org connected to a GitHub repository, with both operations enabled",
+                    "value": {
+                      "org": {
+                        "id": 823630514,
+                        "name": "dev-org"
+                      },
+                      "provider": "GITHUB",
+                      "repository_url": "https://github.com/example-org/example-repo.git",
+                      "commit_branch": "dev",
+                      "root_dir": "analytics/dev",
+                      "credential": {
+                        "type": "ACCESS_TOKEN",
+                        "username": "svc-version-control"
+                      },
+                      "disabled_operations": [],
+                      "created_by": {
+                        "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                        "name": "svc-version-control"
+                      },
+                      "creation_time_in_millis": 1785495800000,
+                      "last_modified_by": {
+                        "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                        "name": "svc-version-control"
+                      },
+                      "modification_time_in_millis": 1786612365000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. The org is already configured, another org already commits to this repository and branch, or the org is still served by the legacy Callosum VCS surface.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/config/delete": {
+      "post": {
+        "operationId": "deleteVersionControlConfig",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nRevokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.\n\nUse this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successfully revoked version control for the Org."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/deploy": {
+      "post": {
+        "operationId": "deployVersionControl",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.\n\nThis overwrites the Org and it deletes. The Org's live content is never read, so an edit made there after the revision was committed is replaced with no conflict, and a file that left the branch deletes its object. Read the per-object outcomes from the run search endpoint.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeployVersionControlRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request was admitted and the deploy run has started. The body is a receipt, not a result: nothing is imported yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlDeployResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Delta deploy admitted against the head of the configured branch",
+                    "value": {
+                      "run_id": "7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07",
+                      "target_deployment_revision": "4f9e2b7c1d3a5e8f0b2c4d6a8e0f1b3c5d7e9a1b",
+                      "last_deployed_revision": "a1b2c3d4e5f60718293a4b5c6d7e8f9012345678",
+                      "accepted_time_in_millis": 1783500062000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request, and nothing was admitted. Covers a malformed body, an unknown, ambiguous or unreachable target_revision, and a paused repository. error.message names the reason.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access. Also returned when the org's disabled_operations holds DEPLOY.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The caller's org has no version control configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. Another deploy, restore or versioning run is already in flight for the caller's org. Nothing was started; retry once it finishes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/branch/promote": {
+      "post": {
+        "operationId": "promoteVersionControlBranch",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nMerges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.\n\n`dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Promoting from any Org other than your own also requires tenant administration privilege in the source Org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromoteVersionControlBranchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The promotion was carried out, or with dry_run true would have been. Conflicting content appears here only when conflict_policy resolved it.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlPromotionResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Dry run reporting what a merge from dev into prod would change",
+                    "value": {
+                      "source": {
+                        "org": {
+                          "id": 823630514,
+                          "name": "dev-org"
+                        },
+                        "branch": "dev"
+                      },
+                      "target": {
+                        "org": {
+                          "id": 912847563,
+                          "name": "prod-org"
+                        },
+                        "branch": "prod"
+                      },
+                      "branch_divergence": {
+                        "ahead_by": 3,
+                        "behind_by": 1
+                      },
+                      "file_changes": {
+                        "total_count": 3,
+                        "added": [
+                          "liveboards/revenue_dashboard_q3.liveboard.tml"
+                        ],
+                        "modified": [
+                          "answers/top_accounts.answer.tml"
+                        ],
+                        "deleted": [
+                          "answers/retired_metric.answer.tml"
+                        ],
+                        "conflicts": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The promotion could not be carried out, and nothing was written. Covers a source that names neither an org nor a branch, a cherry-pick with no source_revision, an unknown branch or commit, content that conflicts while conflict_policy is FAIL_REQUEST, which is equally a 400 on a dry run because the real promotion could not have completed either, branches with unrelated histories, and a target branch the provider protects. error.message names the reason.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An org involved has no version control configuration: the caller's org, which then has no branch to promote into, or the org named by source.org_identifier, which then has none to promote from.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/commit/restore": {
+      "post": {
+        "operationId": "restoreVersionControl",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.\n\nUse this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestoreVersionControlRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request was admitted and the restore run has started. The body is a receipt, not a result: nothing is committed or imported yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlRestoreResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "Restore admitted; the restore commit appears in run search once pushed",
+                    "value": {
+                      "run_id": "7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07",
+                      "target_revision": "4f9e2b7c1d3a5e8f0b2c4d6a8e0f1b3c5d7e9a1b",
+                      "accepted_time_in_millis": 1783500062000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request, and nothing was admitted. Covers a malformed body, a target_revision that is unknown, ambiguous, unreachable from the branch or is its head, and a paused repository. error.message names the reason.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access. Also returned when the org's disabled_operations holds COMMIT or DEPLOY.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The caller's org has no version control configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. Another restore, deploy or versioning run is already in flight for the caller's org. Nothing was started; retry once it finishes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/config/search": {
+      "post": {
+        "operationId": "searchVersionControlConfigs",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nReturns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.\n\nUse this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Zero or one configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlConfigList"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "The caller's Org configuration",
+                    "value": {
+                      "configs": [
+                        {
+                          "org": {
+                            "id": 823630514,
+                            "name": "dev-org"
+                          },
+                          "provider": "GITHUB",
+                          "repository_url": "https://github.com/example-org/example-repo.git",
+                          "commit_branch": "dev",
+                          "root_dir": "analytics/dev",
+                          "credential": {
+                            "type": "ACCESS_TOKEN",
+                            "username": "svc-version-control"
+                          },
+                          "disabled_operations": [],
+                          "created_by": {
+                            "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                            "name": "svc-version-control"
+                          },
+                          "creation_time_in_millis": 1785495800000,
+                          "last_modified_by": {
+                            "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                            "name": "svc-version-control"
+                          },
+                          "modification_time_in_millis": 1786612365000
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/runs/search": {
+      "post": {
+        "operationId": "searchVersionControlRuns",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nReturns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.\n\nUse this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org's commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchVersionControlRunsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The runs' current outcomes. A run identifier that does not exist in the caller's org is left out, not reported as an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionControlRunList"
+                },
+                "examples": {
+                  "example_1": {
+                    "description": "A commit run that partially succeeded, with its per-object outcomes",
+                    "value": {
+                      "runs": [
+                        {
+                          "id": "7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07",
+                          "type": "COMMIT",
+                          "state": "PARTIAL_SUCCESS",
+                          "message": "1 of 2 objects committed",
+                          "accepted_time_in_millis": 1783500062000,
+                          "end_time_in_millis": 1783500064500,
+                          "author": {
+                            "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                            "name": "svc-version-control"
+                          },
+                          "branch": "dev",
+                          "revision": "4f9e2b7c1d3a5e8f0b2c4d6a8e0f1b3c5d7e9a1b",
+                          "objects": [
+                            {
+                              "id": "d7f3a1c8-4b2e-11ef-9c1a-0242ac120002",
+                              "type": "LIVEBOARD",
+                              "file_name": "liveboards/revenue_dashboard_q3.liveboard.tml",
+                              "action": "UPDATE",
+                              "status": "SUCCESS",
+                              "is_dependency": false
+                            },
+                            {
+                              "id": "b2c4d6a8-e0f1-11ef-9c1a-0242ac120002",
+                              "type": "ANSWER",
+                              "action": "CREATE",
+                              "status": "SKIPPED",
+                              "message": "Object does not have versioning enabled",
+                              "is_dependency": false
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an unknown run_type, and a record_offset or record_size out of range.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/version-control/config/update": {
+      "post": {
+        "operationId": "updateVersionControlConfig",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nChanges your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.\n\nUse this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Version Control V2",
+          "26.12.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVersionControlConfigRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successfully updated the version control configuration for the Org."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/webhooks/create": {
       "post": {
         "operationId": "createWebhookConfiguration",
@@ -24558,6 +24531,312 @@
           }
         }
       },
+      "VersionControlConfigList": {
+        "type": "object",
+        "required": [
+          "configs"
+        ],
+        "properties": {
+          "configs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionControlConfig"
+            },
+            "description": "The configurations."
+          }
+        },
+        "description": "The configurations you can read. Zero or one while the scope is your own Org."
+      },
+      "VersionControlConfig": {
+        "type": "object",
+        "required": [
+          "org",
+          "provider",
+          "repository_url",
+          "commit_branch",
+          "credential",
+          "disabled_operations",
+          "created_by",
+          "creation_time_in_millis",
+          "last_modified_by",
+          "modification_time_in_millis"
+        ],
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/Org",
+            "description": "Org this configuration belongs to."
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "GITHUB",
+              "GITLAB",
+              "BITBUCKET",
+              "AZURE_DEVOPS"
+            ],
+            "description": "Version control provider hosting the repository."
+          },
+          "repository_url": {
+            "type": "string",
+            "description": "HTTPS URL of the repository this Org versions to."
+          },
+          "commit_branch": {
+            "type": "string",
+            "description": "Branch that versioning runs commit to."
+          },
+          "root_dir": {
+            "type": "string",
+            "description": "Repository-relative directory that every write resolves under. Absent when\nwrites go to the repository root.",
+            "nullable": true
+          },
+          "credential": {
+            "$ref": "#/components/schemas/VersionControlCredentialStatus",
+            "description": "What is reported about the stored credential."
+          },
+          "disabled_operations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COMMIT",
+                "DEPLOY"
+              ]
+            },
+            "description": "Operations turned off for this Org. Empty when none are."
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/VersionControlPrincipal",
+            "description": "User who created this configuration."
+          },
+          "creation_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Creation time, in milliseconds since the Unix epoch."
+          },
+          "last_modified_by": {
+            "$ref": "#/components/schemas/VersionControlPrincipal",
+            "description": "User who last changed this configuration."
+          },
+          "modification_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Last write time, in milliseconds since the Unix epoch."
+          }
+        },
+        "description": "An Org's stored version control configuration."
+      },
+      "VersionControlCredentialStatus": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ACCESS_TOKEN"
+            ],
+            "description": "How the credential is held."
+          },
+          "username": {
+            "type": "string",
+            "description": "Username presented with the token over HTTPS.",
+            "nullable": true
+          }
+        },
+        "description": "What is reported about a stored credential: its type, and nothing else. Neither\nthe credential nor its vault location is ever returned."
+      },
+      "VersionControlPrincipal": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "GUID of the user."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the user.",
+            "nullable": true
+          }
+        },
+        "description": "A user. Only the GUID is always carried; a display name is reported when one can\nbe resolved without an extra lookup."
+      },
+      "VersionControlObjectInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Object ID of the metadata object, such as a Liveboard, an Answer or a Model.\nThis is the cross-Org object ID, not the Org-local GUID."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "Type of the metadata object. Required when the identifier is a name, since a\nname can belong to more than one type.",
+            "nullable": true
+          }
+        },
+        "description": "One object a versioning run can report, used to filter run search."
+      },
+      "VersionControlRunList": {
+        "type": "object",
+        "required": [
+          "runs"
+        ],
+        "properties": {
+          "runs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionControlRunStatus"
+            },
+            "description": "Current outcome of each matching run, newest first."
+          }
+        },
+        "description": "A page of runs in your Org, newest first."
+      },
+      "VersionControlRunStatus": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "state",
+          "accepted_time_in_millis",
+          "author",
+          "branch",
+          "objects"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the run, as returned when it was admitted."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "COMMIT",
+              "DEPLOY",
+              "RESTORE"
+            ],
+            "description": "Which operation admitted the run."
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "RUNNING",
+              "SUCCESS",
+              "PARTIAL_SUCCESS",
+              "FAILED"
+            ],
+            "description": "Where the run stands."
+          },
+          "message": {
+            "type": "string",
+            "description": "What happened, in prose. Always present when state is FAILED.",
+            "nullable": true
+          },
+          "accepted_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Admission time, in milliseconds since the Unix epoch."
+          },
+          "end_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Time the run reached a terminal state, in milliseconds since the Unix epoch.\nAbsent while state is RUNNING.",
+            "nullable": true
+          },
+          "author": {
+            "$ref": "#/components/schemas/VersionControlPrincipal",
+            "description": "User who made the request. The name is the display name as it was when the run\nwas admitted, not as it is now."
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch the run used, which is the Org's configured branch at admission. A\nlater edit to the Org's configuration does not change it."
+          },
+          "revision": {
+            "type": "string",
+            "description": "On a commit, the commit this run produced. On a deploy, the revision being\ndeployed. On a restore, the restore commit. Absent until the commit is pushed,\nand on a run that failed before pushing.",
+            "nullable": true
+          },
+          "objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionControlObjectResult"
+            },
+            "description": "Per-object outcomes known so far. This grows while state is RUNNING, and is\ncomplete once the run is terminal."
+          }
+        },
+        "description": "Current outcome of one run."
+      },
+      "VersionControlObjectResult": {
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Object ID of the object. The same object carries the same ID in every Org, so\nthis is not the Org-local GUID. On a commit this is the resolved object ID even\nwhen the request named the object by name or GUID."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER",
+              "LOGICAL_TABLE"
+            ],
+            "description": "Type of the object.",
+            "nullable": true
+          },
+          "file_name": {
+            "type": "string",
+            "description": "Repository path of the object's file.",
+            "nullable": true
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "CREATE",
+              "UPDATE",
+              "UPSERT",
+              "DELETE"
+            ],
+            "description": "What the run did to the object.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "VALIDATED",
+              "FAILED",
+              "SKIPPED"
+            ],
+            "description": "Outcome for the object."
+          },
+          "message": {
+            "type": "string",
+            "description": "Why the object is FAILED or SKIPPED, always present then. It may also carry a\nwarning on SUCCESS or VALIDATED.",
+            "nullable": true
+          },
+          "is_dependency": {
+            "type": "boolean",
+            "description": "True for an object the request did not name, exported because a requested\nobject depends on it. Commit runs only.",
+            "nullable": true
+          }
+        },
+        "description": "Outcome for one object in a run."
+      },
       "ConnectionInput": {
         "type": "object",
         "properties": {
@@ -25550,6 +25829,39 @@
           }
         }
       },
+      "AgentInstructions": {
+        "type": "object",
+        "required": [
+          "instructions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the record.",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "string",
+            "description": "The admin instructions text for the agent."
+          },
+          "created_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were created.",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "ISO timestamp when the instructions were last updated.",
+            "nullable": true
+          },
+          "last_updated_by": {
+            "type": "string",
+            "description": "User ID of the admin who last updated the instructions.",
+            "nullable": true
+          }
+        },
+        "description": "Admin instructions configured for the AI agent."
+      },
       "AgentConversationHistoryResponse": {
         "type": "object",
         "properties": {
@@ -25640,39 +25952,6 @@
           }
         },
         "description": "A data source associated with a conversation, returned as a typed entry."
-      },
-      "AgentInstructions": {
-        "type": "object",
-        "required": [
-          "instructions"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the record.",
-            "nullable": true
-          },
-          "instructions": {
-            "type": "string",
-            "description": "The admin instructions text for the agent."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "ISO timestamp when the instructions were created.",
-            "nullable": true
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "ISO timestamp when the instructions were last updated.",
-            "nullable": true
-          },
-          "last_updated_by": {
-            "type": "string",
-            "description": "User ID of the admin who last updated the instructions.",
-            "nullable": true
-          }
-        },
-        "description": "Admin instructions configured for the AI agent."
       },
       "ConversationMessageResponse": {
         "type": "object",
@@ -30968,6 +31247,326 @@
           }
         }
       },
+      "VersionControlCredentialInput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ACCESS_TOKEN"
+            ],
+            "description": "How the credential is held."
+          },
+          "username": {
+            "type": "string",
+            "description": "Username presented with the token over HTTPS, for example svc-version-control.\nOptional for providers that ignore it, and required for BITBUCKET, whose app\npasswords are unusable without the account name.",
+            "nullable": true
+          },
+          "access_token": {
+            "type": "string",
+            "description": "Access token granting repository contents read and write, and metadata read.\nAdd the provider's repository-rules read permission for rule-aware validation.\nRequired when type is ACCESS_TOKEN.",
+            "nullable": true
+          }
+        },
+        "description": "Credential ThoughtSpot uses to reach an Org's repository. Write-only: it is\nstored in a secrets vault and never returned by any endpoint."
+      },
+      "VersionControlCommitObjectInput": {
+        "type": "object",
+        "required": [
+          "identifier"
+        ],
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "Object ID of the metadata object, such as a Liveboard or an Answer. This is\nthe cross-Org object ID, not the Org-local GUID and not the object name, and\nit requires object IDs to be enabled on the cluster."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIVEBOARD",
+              "ANSWER"
+            ],
+            "description": "Type of the metadata object. Required when the identifier is a name, since a\nname can belong to more than one type.",
+            "nullable": true
+          }
+        },
+        "description": "One object to version on the commit endpoint."
+      },
+      "VersionControlCommitResponse": {
+        "type": "object",
+        "required": [
+          "run_id",
+          "accepted_time_in_millis",
+          "author"
+        ],
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "description": "ID of this run, and the trace key across the API, the worker, the Git commit\nand the logs. Pass it to run search to read per-object outcomes."
+          },
+          "accepted_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Admission time, in milliseconds since the Unix epoch."
+          },
+          "author": {
+            "$ref": "#/components/schemas/VersionControlPrincipal",
+            "description": "User who made the request, who becomes the Git author of the commit."
+          }
+        },
+        "description": "Admission receipt for a versioning run. It confirms the request was accepted and\nidentifies the run; it says nothing about what was committed."
+      },
+      "VersionControlPromoteSourceInput": {
+        "type": "object",
+        "properties": {
+          "org_identifier": {
+            "type": "string",
+            "description": "Unique ID or name of the Org to promote from. Promoting from any Org other\nthan your own requires tenant administration privilege.",
+            "nullable": true
+          },
+          "source_branch": {
+            "type": "string",
+            "description": "Branch to promote from, when naming it directly rather than by Org.",
+            "nullable": true
+          },
+          "source_revision": {
+            "type": "string",
+            "description": "Revision to promote, for example a Git commit SHA. Required when the strategy\ntype is CHERRY_PICK, and ignored otherwise.",
+            "nullable": true
+          }
+        },
+        "description": "Where a promotion takes content from. Name the source either by Org or by\nbranch, not both: an Org and the branch it versions to determine each other, and\nthe response reports both."
+      },
+      "VersionControlPromoteStrategyInput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "MERGE",
+              "SQUASH",
+              "FAST_FORWARD",
+              "CHERRY_PICK"
+            ],
+            "description": "How the source is applied to the target branch."
+          },
+          "conflict_policy": {
+            "type": "string",
+            "enum": [
+              "FAIL_REQUEST",
+              "USE_SOURCE",
+              "USE_TARGET"
+            ],
+            "default": "FAIL_REQUEST",
+            "description": "What to do when files conflict.",
+            "nullable": true
+          }
+        },
+        "description": "How a promotion is applied."
+      },
+      "VersionControlPromotionResponse": {
+        "type": "object",
+        "required": [
+          "source",
+          "target",
+          "file_changes"
+        ],
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/VersionControlOrgBranch",
+            "description": "Where content was promoted from, as resolved."
+          },
+          "target": {
+            "$ref": "#/components/schemas/VersionControlOrgBranch",
+            "description": "Where the promotion wrote, as resolved."
+          },
+          "branch_divergence": {
+            "$ref": "#/components/schemas/VersionControlBranchDivergence",
+            "description": "How far apart the branches were. Not meaningful for a cherry-pick.",
+            "nullable": true
+          },
+          "revision_details": {
+            "$ref": "#/components/schemas/VersionControlRevisionDetails",
+            "description": "The revision the target branch points at after the promotion. Absent on a dry\nrun.",
+            "nullable": true
+          },
+          "file_changes": {
+            "$ref": "#/components/schemas/VersionControlFileChanges",
+            "description": "Files changed, or that would be changed, grouped by kind of change."
+          }
+        },
+        "description": "What a promotion did, or on a dry run what one would do."
+      },
+      "VersionControlOrgBranch": {
+        "type": "object",
+        "required": [
+          "org",
+          "branch"
+        ],
+        "properties": {
+          "org": {
+            "$ref": "#/components/schemas/Org",
+            "description": "The Org."
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch that Org versions to."
+          }
+        },
+        "description": "An Org and the branch it versions to, as resolved by ThoughtSpot."
+      },
+      "VersionControlBranchDivergence": {
+        "type": "object",
+        "properties": {
+          "ahead_by": {
+            "type": "number",
+            "format": "float",
+            "description": "Commits on the source that are not yet on the target.",
+            "nullable": true
+          },
+          "behind_by": {
+            "type": "number",
+            "format": "float",
+            "description": "Commits on the target that are not on the source.",
+            "nullable": true
+          }
+        },
+        "description": "How far apart two branches are."
+      },
+      "VersionControlRevisionDetails": {
+        "type": "object",
+        "required": [
+          "revision",
+          "committed_time_in_millis",
+          "author"
+        ],
+        "properties": {
+          "revision": {
+            "type": "string",
+            "description": "Identifier of the revision. For a Git-backed repository this is the commit\nSHA."
+          },
+          "message": {
+            "type": "string",
+            "description": "Commit message used.",
+            "nullable": true
+          },
+          "committed_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Commit time, in milliseconds since the Unix epoch."
+          },
+          "author": {
+            "$ref": "#/components/schemas/VersionControlPrincipal",
+            "description": "User who promoted, who becomes the Git author of the commit."
+          }
+        },
+        "description": "The revision the target branch points at after a promotion. Absent on a dry run,\nsince nothing was written."
+      },
+      "VersionControlFileChanges": {
+        "type": "object",
+        "required": [
+          "total_count",
+          "added",
+          "modified",
+          "deleted",
+          "conflicts"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "number",
+            "format": "float",
+            "description": "Total files changed, across all kinds of change."
+          },
+          "added": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Repository paths of files added."
+          },
+          "modified": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Repository paths of files modified."
+          },
+          "deleted": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Repository paths of files deleted."
+          },
+          "conflicts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Repository paths of files that conflicted and were resolved in favor of the\nside named by conflict_policy. Empty under FAIL_REQUEST, which fails the\nrequest rather than returning a body whenever anything conflicts."
+          }
+        },
+        "description": "Files a promotion changed, or would change on a dry run, one list per kind of\nchange. Every list is present and empty when that kind has none, so total_count\nis the sum of their lengths."
+      },
+      "VersionControlDeployResponse": {
+        "type": "object",
+        "required": [
+          "run_id",
+          "target_deployment_revision",
+          "accepted_time_in_millis"
+        ],
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "description": "ID of this run, and the trace key across the API, the worker and the logs.\nPass it to run search to read per-object outcomes."
+          },
+          "target_deployment_revision": {
+            "type": "string",
+            "description": "Revision this run was admitted against, pinned at admission. Resolved from the\nhead of the configured branch when target_revision was omitted."
+          },
+          "last_deployed_revision": {
+            "type": "string",
+            "description": "Revision the Org last received, which this run compared against. Absent when\nthere was none: the Org's first deploy, or deploy_type FULL.",
+            "nullable": true
+          },
+          "accepted_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Admission time, in milliseconds since the Unix epoch."
+          }
+        },
+        "description": "Admission receipt for a deploy run. It identifies the run and the revisions it\nwas admitted against; it says nothing about what was imported."
+      },
+      "VersionControlRestoreResponse": {
+        "type": "object",
+        "required": [
+          "run_id",
+          "target_revision",
+          "accepted_time_in_millis"
+        ],
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "description": "ID of this run, and the trace key across the API, the worker, the Git commit\nand the logs."
+          },
+          "target_revision": {
+            "type": "string",
+            "description": "Revision whose content is restored, in full form. Pinned at admission."
+          },
+          "accepted_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Admission time, in milliseconds since the Unix epoch."
+          }
+        },
+        "description": "Admission receipt for a restore run. The revision was resolved and the run has\nstarted; it says nothing about what was restored. The restore commit is not here\nbecause it does not exist until the run pushes it: read it from run search as\nthe run's revision, along with the per-object outcomes."
+      },
       "CreateConnectionResponse": {
         "type": "object",
         "required": [
@@ -32312,283 +32911,6 @@
             "nullable": true
           }
         }
-      },
-      "AgentConversationV2": {
-        "type": "object",
-        "required": [
-          "conversation_identifier"
-        ],
-        "properties": {
-          "conversation_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the conversation. Pass it to subsequent requests to\ncontinue the same conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        },
-        "description": "A Spotter X conversation."
-      },
-      "AgentStreamFrame": {
-        "type": "object",
-        "properties": {
-          "event": {
-            "$ref": "#/components/schemas/AgentEvent",
-            "description": "Text from Spotter — its reasoning or its answer. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "tool_call": {
-            "$ref": "#/components/schemas/AgentToolCall",
-            "description": "Spotter started a step, such as querying a data source. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "progress": {
-            "$ref": "#/components/schemas/AgentProgress",
-            "description": "A stage of a step in flight. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "tool_result": {
-            "$ref": "#/components/schemas/AgentToolResult",
-            "description": "A step finished; carries its result, including any answer produced. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "error": {
-            "$ref": "#/components/schemas/AgentStreamError",
-            "description": "The turn failed. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "done": {
-            "$ref": "#/components/schemas/AgentStreamDone",
-            "description": "End of turn. Always last. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "One frame of an agent response. On the streaming endpoint each SSE `data:` line\nis one frame, and a turn streams many over a single connection. Exactly one\nfield is set on any given frame: route on which one is present. New frame\ntypes are added as new fields, so a frame where none of the fields you know is\nset is a frame of a type you do not recognize: skip it."
-      },
-      "AgentEvent": {
-        "type": "object",
-        "required": [
-          "content"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Identifies a single event. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "invocation_id": {
-            "type": "string",
-            "description": "Stable for one turn; every event of the same turn shares it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "partial": {
-            "type": "boolean",
-            "description": "`true` for an incremental chunk, `false` for a frame restating a completed\nsegment; absent on a complete event. Restated text is not republished, and\nframes arrive in order over a single response, so appending every part is\nsafe. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "error_code": {
-            "type": "string",
-            "description": "Set when the turn failed while producing this event. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "content": {
-            "$ref": "#/components/schemas/AgentEventContent",
-            "description": "The text this event carries. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        },
-        "description": "Text from Spotter — its reasoning or its answer."
-      },
-      "AgentEventContent": {
-        "type": "object",
-        "required": [
-          "role",
-          "parts"
-        ],
-        "properties": {
-          "role": {
-            "type": "string",
-            "description": "Always `model`: the events a caller sees are Spotter speaking. Mirrors the\nagent wire format, and is reserved for conversations with more than one\nspeaker. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          "parts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentEventPart"
-            },
-            "description": "The text this event carries. Empty when `error_code` is set. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        },
-        "description": "The content of one agent event."
-      },
-      "AgentEventPart": {
-        "type": "object",
-        "required": [
-          "text"
-        ],
-        "properties": {
-          "text": {
-            "type": "string",
-            "description": "The text to render. Text arrives incrementally, so concatenate parts in the\norder received. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          "thought": {
-            "type": "boolean",
-            "description": "`true` when this text is Spotter's reasoning rather than its answer. Use it\nto render reasoning separately, or to hide it. Absent otherwise; treat\nabsence as `false`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "One piece of text from Spotter, with a flag marking reasoning apart from the\nanswer itself."
-      },
-      "AgentToolCall": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Correlates this call with its `progress` and `tool_result` frames. Absent\nwhen the backend did not assign one; a step's frames then arrive in order, so\nmatch them by position. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the step that ran. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "args": {
-            "type": "object",
-            "description": "The arguments the step ran with, forwarded as the backend produced them. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "A step Spotter started, such as querying a data source."
-      },
-      "AgentProgress": {
-        "type": "object",
-        "required": [
-          "code"
-        ],
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Stage code. Treat an unfamiliar value as \"still working\" rather than an error. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          "message": {
-            "type": "string",
-            "description": "Human-facing status text, when the backend supplies one. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "tool_call_id": {
-            "type": "string",
-            "description": "The `tool_call` this stage belongs to. Absent when that call has no `id`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "A stage of a step in flight, so you can show what Spotter is doing."
-      },
-      "AgentToolResult": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Correlates with the `tool_call` and `progress` frames of the same step.\nAbsent when that call has no `id`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The step that produced this result. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "is_error": {
-            "type": "boolean",
-            "description": "`true` when the step failed. Spotter usually explains the failure in the text\nthat follows, so this is a signal to read rather than a reason to stop.\nAbsent when the step did not report an outcome; treat absence as `false`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "text": {
-            "type": "string",
-            "description": "The step's own human-readable summary. For a data query it includes a sample\nof the rows — read `answer.table_data.total_rows` for the true count. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "answer": {
-            "type": "object",
-            "description": "The ThoughtSpot answer the step produced, forwarded as the backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "What a step produced, including any answer."
-      },
-      "AgentStreamError": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Machine-readable status, always a string. Quote it when reporting an issue. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "message": {
-            "type": "string",
-            "description": "Diagnostic detail. Not written for end users — render `display_message`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "source": {
-            "type": "string",
-            "description": "Which layer produced the failure. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "display_message": {
-            "type": "string",
-            "description": "Text safe to show a user. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "error_bucket": {
-            "type": "string",
-            "description": "What the caller should do: `RETRY`, `REFRESH`, `NEW_CHAT` or `SUPPORT`. Treat\nan unrecognized value as `SUPPORT`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "A failure that ended the turn."
-      },
-      "AgentStreamDone": {
-        "type": "object",
-        "required": [
-          "conversation_identifier"
-        ],
-        "properties": {
-          "conversation_identifier": {
-            "type": "string",
-            "description": "The conversation this turn belonged to, repeated so a client that cannot read\nresponse headers can still continue it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        },
-        "description": "End of turn. Always last."
-      },
-      "AgentTurnResponse": {
-        "type": "object",
-        "required": [
-          "conversation_identifier",
-          "events"
-        ],
-        "properties": {
-          "conversation_identifier": {
-            "type": "string",
-            "description": "The conversation the turn belongs to. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          "events": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentStreamFrame"
-            },
-            "description": "The frames of the turn, in the order Spotter produced them. The number of\nframes is not capped and the list is never truncated: a turn too large or too\nlong to return whole fails with an HTTP error instead. For long turns, use\nthe streaming endpoint. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        },
-        "description": "A completed agent turn: every frame the streaming endpoint publishes, collected."
-      },
-      "AgentStopResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "description": "What happened. Stopping a conversation with no turn running is reported here\nrather than as an error. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "message": {
-            "type": "string",
-            "description": "Human-readable detail, when the backend supplies it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "The outcome of stopping a conversation's in-progress response."
       },
       "SendAgentMessageResponse": {
         "type": "object",
@@ -34675,23 +34997,6 @@
           "conversation_settings"
         ]
       },
-      "CreateAgentConversationV2Request": {
-        "type": "object",
-        "properties": {
-          "data_source_identifiers": {
-            "description": "Unique identifiers of the data sources to scope the conversation to. When\nempty, Spotter selects the most relevant data source for each question. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "default": [],
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "additional_instructions": {
-            "description": "Guidance appended to the agent's instructions on every message in this\nconversation. Use it to set a persona, a preferred output format, or\ndomain rules. Cannot be changed after the conversation is created. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "type": "string"
-          }
-        }
-      },
       "CreateAnalystRequest": {
         "type": "object",
         "properties": {
@@ -34988,38 +35293,6 @@
         },
         "required": [
           "messages"
-        ]
-      },
-      "SendAgentConversationMessageStreamingV2Request": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "description": "The message to send to Spotter. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "type": "string"
-          },
-          "conversation_identifier": {
-            "description": "Conversation to send the message in. When omitted, a new conversation is\ncreated and its identifier is returned in the\n`x-conversation-identifier` response header. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "type": "string"
-          }
-        },
-        "required": [
-          "message"
-        ]
-      },
-      "SendAgentConversationMessageV2Request": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "description": "The message to send to Spotter. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "type": "string"
-          },
-          "conversation_identifier": {
-            "description": "Conversation to send the message in. When omitted, a new conversation is\ncreated and its identifier is returned in the\n`x-conversation-identifier` response header. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "type": "string"
-          }
-        },
-        "required": [
-          "message"
         ]
       },
       "SendAgentMessageRequest": {
@@ -42214,6 +42487,254 @@
           "source_branch_name",
           "target_branch_name"
         ]
+      },
+      "CommitVersionControlRequest": {
+        "type": "object",
+        "properties": {
+          "objects": {
+            "description": "Objects to version in this run, named by object ID. Every object must be\ndistinct, must already exist in your Org, and must be a Liveboard or an\nAnswer. A run carries at most 50.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionControlCommitObjectInput"
+            }
+          },
+          "commit_message": {
+            "description": "Message for the single Git commit this run produces. Omit this to let\nThoughtSpot generate one.",
+            "type": "string"
+          },
+          "prune_deleted_object_files": {
+            "description": "Remove the repository file of any named object that no longer exists in\nThoughtSpot, so the branch stops carrying deleted content.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "objects"
+        ]
+      },
+      "CreateVersionControlConfigRequest": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "description": "Version control provider hosting the repository. Only SaaS-hosted\nThoughtSpot instances can reach an external provider.",
+            "type": "string",
+            "enum": [
+              "GITHUB",
+              "GITLAB",
+              "BITBUCKET",
+              "AZURE_DEVOPS"
+            ]
+          },
+          "repository_url": {
+            "description": "HTTPS URL of the repository your Org versions to, for example\nhttps://github.com/example-org/example-repo.git. Plain HTTP is rejected.",
+            "type": "string"
+          },
+          "commit_branch": {
+            "description": "Branch that versioning runs commit to, for example main or prod. Every\ncommit, deploy and restore for this Org uses this branch.",
+            "type": "string"
+          },
+          "root_dir": {
+            "description": "Repository-relative directory that every write must resolve under, for\nexample analytics/prod. Omit this to use the repository root. The path must\nbe relative, and each segment must begin with a letter, digit, underscore or\nhyphen, which keeps writes inside the directory.",
+            "type": "string"
+          },
+          "credential": {
+            "description": "Credential ThoughtSpot uses to reach the repository. Stored in a secrets\nvault and never returned by any endpoint.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionControlCredentialInput"
+              }
+            ]
+          },
+          "disabled_operations": {
+            "description": "Operations to turn off for this Org. COMMIT stops the commit endpoint and\nDEPLOY stops the deploy endpoint; restore performs both, so disabling\neither one also stops a restore. Send an empty array to disable nothing.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COMMIT",
+                "DEPLOY"
+              ]
+            }
+          }
+        },
+        "required": [
+          "provider",
+          "repository_url",
+          "commit_branch",
+          "credential"
+        ]
+      },
+      "DeployVersionControlRequest": {
+        "type": "object",
+        "properties": {
+          "target_revision": {
+            "description": "Revision to deploy, for example a Git commit SHA. Omit this to resolve and\npin the head of your Org's configured branch. Either way the revision must\nbe reachable from that branch.",
+            "type": "string"
+          },
+          "deploy_type": {
+            "description": "What to compare the revision against. DELTA compares it with the revision\nthis Org last received, which is what makes the Org converge on the branch.\nFULL ignores the deploy marker, treats every object at the revision as a\nchange, and observes no removals.",
+            "default": "DELTA",
+            "type": "string",
+            "enum": [
+              "DELTA",
+              "FULL"
+            ]
+          },
+          "deploy_policy": {
+            "description": "How far the run goes and how it settles per-object failures.",
+            "default": "ALL_OR_NONE",
+            "type": "string",
+            "enum": [
+              "ALL_OR_NONE",
+              "PARTIAL",
+              "VALIDATE_ONLY"
+            ]
+          }
+        }
+      },
+      "PromoteVersionControlBranchRequest": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "description": "Where to promote content from, named either by Org or by branch.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionControlPromoteSourceInput"
+              }
+            ]
+          },
+          "strategy": {
+            "description": "How the source is applied to your Org's branch, and what to do when files\nconflict.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionControlPromoteStrategyInput"
+              }
+            ]
+          },
+          "commit_message": {
+            "description": "Message for the promotion commit. Omit this to let Git generate one.",
+            "type": "string"
+          },
+          "dry_run": {
+            "description": "Report what the promotion would change without writing anything. Defaults to\ntrue, so a request that omits this performs a dry run.",
+            "default": true,
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "source",
+          "strategy"
+        ]
+      },
+      "RestoreVersionControlRequest": {
+        "type": "object",
+        "properties": {
+          "target_revision": {
+            "description": "Revision whose content the branch and the Org are restored to, for example a\nGit commit SHA. It must be reachable from your Org's configured branch, and\nmust not be its head, since restoring the head changes nothing.",
+            "type": "string"
+          },
+          "restore_policy": {
+            "description": "How far the run goes and how it settles per-object failures. Same values and\nmeaning as deploy_policy on the deploy endpoint; under VALIDATE_ONLY nothing\nis committed either.",
+            "default": "ALL_OR_NONE",
+            "type": "string",
+            "enum": [
+              "ALL_OR_NONE",
+              "PARTIAL",
+              "VALIDATE_ONLY"
+            ]
+          }
+        },
+        "required": [
+          "target_revision"
+        ]
+      },
+      "SearchVersionControlRunsRequest": {
+        "type": "object",
+        "properties": {
+          "run_identifiers": {
+            "description": "Runs to read, as run IDs returned when each run was admitted, at most 100.\nOmit this to return your Org's runs, newest first. Paging applies either way.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "run_type": {
+            "description": "Return only runs admitted by this operation. COMMIT is your Org's commit\nhistory, DEPLOY the content it received, RESTORE the rollbacks it ran.\nOmit this to return every type.",
+            "type": "string",
+            "enum": [
+              "COMMIT",
+              "DEPLOY",
+              "RESTORE"
+            ]
+          },
+          "objects": {
+            "description": "Return only runs that carry a result for at least one of these objects.\nObjects are named as on the commit endpoint, except that the type may also\nbe LOGICAL_TABLE: a run can report a type that a commit does not accept.\nOmit this to return runs regardless of the objects they touched.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionControlObjectInput"
+            }
+          },
+          "record_offset": {
+            "description": "The starting record number from where the runs should be included, in\nnewest-first order.",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "record_size": {
+            "description": "The number of runs that should be included, between 1 and 100. Applies to\nrun_identifiers too: naming more runs than this returns only the first page.",
+            "default": 10,
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateVersionControlConfigRequest": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "description": "Version control provider hosting the repository. Omit this to leave the\nstored provider unchanged.",
+            "type": "string",
+            "enum": [
+              "GITHUB",
+              "GITLAB",
+              "BITBUCKET",
+              "AZURE_DEVOPS"
+            ]
+          },
+          "repository_url": {
+            "description": "HTTPS URL of the repository your Org versions to. Omit this to leave the\nstored repository unchanged.",
+            "type": "string"
+          },
+          "commit_branch": {
+            "description": "Branch that versioning runs commit to. Omit this to leave the stored branch\nunchanged.",
+            "type": "string"
+          },
+          "root_dir": {
+            "description": "Repository-relative directory that every write must resolve under. Omit\nthis to leave the stored directory unchanged.",
+            "type": "string"
+          },
+          "credential": {
+            "description": "Credential ThoughtSpot uses to reach the repository. Omit this to keep the\nstored credential, unless the provider, host or repository owner changed, in\nwhich case a new credential is required.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionControlCredentialInput"
+              }
+            ]
+          },
+          "disabled_operations": {
+            "description": "Operations to turn off for this Org, replacing whatever is stored. Send an\nempty array to disable nothing. Omit this to leave the stored set unchanged.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COMMIT",
+                "DEPLOY"
+              ]
+            }
+          }
+        }
       },
       "CreateWebhookConfigurationRequest": {
         "type": "object",
