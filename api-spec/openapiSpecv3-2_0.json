@@ -12764,8 +12764,43 @@
                             "incompleteDetail": []
                           }
                         },
-                        "tags": [],
-                        "configs": [],
+                        "tags": [
+                          {
+                            "id": "7840759b-2cbf-4dca-aaa4-f8b86a8b9dcd",
+                            "indexVersion": 0,
+                            "generationNum": 38,
+                            "name": "try me",
+                            "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                            "created": 1412881252884,
+                            "modified": 1412881301302,
+                            "modifiedBy": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                            "owner": "7840759b-2cbf-4dca-aaa4-f8b86a8b9dcd",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "clientState": {
+                              "color": "#fbc17c"
+                            },
+                            "orgIds": [
+                              0
+                            ],
+                            "tags": [],
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false
+                          }
+                        ],
+                        "configs": [
+                          {
+                            "id": "a1b2c3d4-0000-4000-8000-000000000003",
+                            "name": "Connection configuration",
+                            "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                            "created": 1666194878943,
+                            "modified": 1666194878943,
+                            "isDeleted": false,
+                            "isHidden": false
+                          }
+                        ],
                         "isConnectionConfigurationDisabled": false,
                         "aiAnswerGenerationDisabled": false,
                         "isExternal": false,
@@ -12787,7 +12822,17 @@
                       },
                       "complete": true,
                       "incompleteDetail": [],
-                      "personalised_views": []
+                      "personalised_views": [
+                        {
+                          "guid": "a1b2c3d4-0000-4000-8000-000000000001",
+                          "name": "My view",
+                          "isPublic": false,
+                          "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "authorDisplayName": "Administrator",
+                          "createdAt": 1666195248714,
+                          "updatedAt": 1666195248714
+                        }
+                      ]
                     },
                     "metadata_header": {
                       "hasTabs": false,
@@ -12815,8 +12860,43 @@
                       "isAutoDelete": false,
                       "ownerOrgId": 0,
                       "resolvedObjects": {},
-                      "tags": [],
-                      "configs": [],
+                      "tags": [
+                        {
+                          "id": "7840759b-2cbf-4dca-aaa4-f8b86a8b9dcd",
+                          "indexVersion": 0,
+                          "generationNum": 38,
+                          "name": "try me",
+                          "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "created": 1412881252884,
+                          "modified": 1412881301302,
+                          "modifiedBy": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "owner": "7840759b-2cbf-4dca-aaa4-f8b86a8b9dcd",
+                          "isDeleted": false,
+                          "isHidden": false,
+                          "clientState": {
+                            "color": "#fbc17c"
+                          },
+                          "orgIds": [
+                            0
+                          ],
+                          "tags": [],
+                          "aiAnswerGenerationDisabled": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false
+                        }
+                      ],
+                      "configs": [
+                        {
+                          "id": "a1b2c3d4-0000-4000-8000-000000000003",
+                          "name": "Connection configuration",
+                          "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "created": 1666194878943,
+                          "modified": 1666194878943,
+                          "isDeleted": false,
+                          "isHidden": false
+                        }
+                      ],
                       "isConnectionConfigurationDisabled": false,
                       "type": "",
                       "aiAnswerGenerationDisabled": false,
@@ -12855,7 +12935,11 @@
                         "owner": "9bd202f5-d431-44bf-9a07-b4f7be372125"
                       }
                     ],
-                    "stats": null
+                    "stats": {
+                      "views": 42,
+                      "favorites": 3,
+                      "last_accessed": 1666195248714
+                    }
                   },
                   {
                     "metadata_id": "4d4a779a-93f1-4422-bda9-a83f422ea937",
@@ -12873,7 +12957,9 @@
                         "bea79810-145f-4ad0-a02c-4177a6e7d861",
                         "9bd202f5-d431-44bf-9a07-b4f7be372125"
                       ],
-                      "inheritedFolders": [],
+                      "inheritedFolders": [
+                        "a1b2c3d4-0000-4000-8000-000000000002"
+                      ],
                       "state": "ACTIVE",
                       "visibility": "SHARABLE",
                       "header": {
@@ -12907,8 +12993,46 @@
                         "isPublished": false,
                         "csrProtected": false
                       },
-                      "complete": true,
-                      "incompleteDetail": []
+                      "complete": false,
+                      "incompleteDetail": [
+                        {
+                          "code": "BASE_OBJECT_MISSING",
+                          "codeNumber": 10005,
+                          "message": "Missing owner GUID for storable: {\"id\":\"4d4a779a-93f1-4422-bda9-a83f422ea937\",\"name\":\"Sales collection\",\"type\":\"Folder\"}",
+                          "header": {
+                            "id": "4d4a779a-93f1-4422-bda9-a83f422ea937",
+                            "indexVersion": 156,
+                            "generationNum": 156,
+                            "name": "Sales collection",
+                            "description": "",
+                            "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                            "created": 1791476207822,
+                            "modified": 1791476219803,
+                            "modifiedBy": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "ownerOrgId": 0,
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "objId": "sales-collection-4d4a779a",
+                            "contentUpgradeId": "LIVEBOARD_RBAC_PRIVILEGES_V2_UPGRADE",
+                            "headerUpgradeId": "LIVEBOARD_RBAC_PRIVILEGES_V2_UPGRADE",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "type": "FOLDER"
+                        }
+                      ]
                     },
                     "metadata_header": {
                       "id": "4d4a779a-93f1-4422-bda9-a83f422ea937",
@@ -23269,11 +23393,15 @@
                   },
                   "tags": {
                     "type": "array",
-                    "items": {}
+                    "items": {
+                      "type": "object"
+                    }
                   },
                   "configs": {
                     "type": "array",
-                    "items": {}
+                    "items": {
+                      "type": "object"
+                    }
                   },
                   "isConnectionConfigurationDisabled": {
                     "type": "boolean"
@@ -23341,12 +23469,56 @@
               },
               "incompleteDetail": {
                 "type": "array",
-                "items": {},
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "codeNumber": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "header": {
+                      "type": "object"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  }
+                },
                 "description": "Returned for every metadata_type documented here (LIVEBOARD, COLLECTION)."
               },
               "personalised_views": {
                 "type": "array",
-                "items": {},
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "guid": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "isPublic": {
+                      "type": "boolean"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "authorDisplayName": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "integer"
+                    },
+                    "updatedAt": {
+                      "type": "integer"
+                    }
+                  }
+                },
                 "description": "Returned for metadata_type: LIVEBOARD."
               },
               "folderContent": {
@@ -23362,7 +23534,9 @@
               },
               "inheritedFolders": {
                 "type": "array",
-                "items": {},
+                "items": {
+                  "type": "string"
+                },
                 "description": "Returned for metadata_type: COLLECTION."
               },
               "state": {
@@ -23483,12 +23657,99 @@
               },
               "tags": {
                 "type": "array",
-                "items": {},
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "indexVersion": {
+                      "type": "integer"
+                    },
+                    "generationNum": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "created": {
+                      "type": "integer"
+                    },
+                    "modified": {
+                      "type": "integer"
+                    },
+                    "modifiedBy": {
+                      "type": "string"
+                    },
+                    "owner": {
+                      "type": "string"
+                    },
+                    "isDeleted": {
+                      "type": "boolean"
+                    },
+                    "isHidden": {
+                      "type": "boolean"
+                    },
+                    "clientState": {
+                      "type": "object"
+                    },
+                    "orgIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "aiAnswerGenerationDisabled": {
+                      "type": "boolean"
+                    },
+                    "isExternal": {
+                      "type": "boolean"
+                    },
+                    "isDeprecated": {
+                      "type": "boolean"
+                    },
+                    "isSharedViaConnection": {
+                      "type": "boolean"
+                    }
+                  }
+                },
                 "description": "Returned for every metadata_type documented here (LIVEBOARD, COLLECTION)."
               },
               "configs": {
                 "type": "array",
-                "items": {},
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "created": {
+                      "type": "integer"
+                    },
+                    "modified": {
+                      "type": "integer"
+                    },
+                    "isDeleted": {
+                      "type": "boolean"
+                    },
+                    "isHidden": {
+                      "type": "boolean"
+                    }
+                  }
+                },
                 "description": "Returned for every metadata_type documented here (LIVEBOARD, COLLECTION)."
               },
               "isConnectionConfigurationDisabled": {
@@ -23648,8 +23909,28 @@
           },
           "stats": {
             "type": "object",
-            "description": "Stats of the metadata object. Includes views, favorites, last_accessed.",
-            "nullable": true
+            "description": "Stats of the metadata object. Includes views, favorites, last_accessed.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned for metadata_type: LIVEBOARD.",
+            "nullable": true,
+            "properties": {
+              "views": {
+                "type": "integer",
+                "description": "Returned for metadata_type: LIVEBOARD."
+              },
+              "favorites": {
+                "type": "integer",
+                "description": "Returned for metadata_type: LIVEBOARD."
+              },
+              "last_accessed": {
+                "type": "integer",
+                "description": "Returned for metadata_type: LIVEBOARD."
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "views": 42,
+              "favorites": 3,
+              "last_accessed": 1666195248714
+            }
           }
         },
         "description": "Metadata Search Response Object.",
@@ -24298,8 +24579,43 @@
                   "incompleteDetail": []
                 }
               },
-              "tags": [],
-              "configs": [],
+              "tags": [
+                {
+                  "id": "7840759b-2cbf-4dca-aaa4-f8b86a8b9dcd",
+                  "indexVersion": 0,
+                  "generationNum": 38,
+                  "name": "try me",
+                  "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                  "created": 1412881252884,
+                  "modified": 1412881301302,
+                  "modifiedBy": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                  "owner": "7840759b-2cbf-4dca-aaa4-f8b86a8b9dcd",
+                  "isDeleted": false,
+                  "isHidden": false,
+                  "clientState": {
+                    "color": "#fbc17c"
+                  },
+                  "orgIds": [
+                    0
+                  ],
+                  "tags": [],
+                  "aiAnswerGenerationDisabled": false,
+                  "isExternal": false,
+                  "isDeprecated": false,
+                  "isSharedViaConnection": false
+                }
+              ],
+              "configs": [
+                {
+                  "id": "a1b2c3d4-0000-4000-8000-000000000003",
+                  "name": "Connection configuration",
+                  "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                  "created": 1666194878943,
+                  "modified": 1666194878943,
+                  "isDeleted": false,
+                  "isHidden": false
+                }
+              ],
               "isConnectionConfigurationDisabled": false,
               "aiAnswerGenerationDisabled": false,
               "isExternal": false,
@@ -24321,7 +24637,17 @@
             },
             "complete": true,
             "incompleteDetail": [],
-            "personalised_views": []
+            "personalised_views": [
+              {
+                "guid": "a1b2c3d4-0000-4000-8000-000000000001",
+                "name": "My view",
+                "isPublic": false,
+                "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                "authorDisplayName": "Administrator",
+                "createdAt": 1666195248714,
+                "updatedAt": 1666195248714
+              }
+            ]
           },
           "metadata_header": {
             "hasTabs": false,
@@ -24349,8 +24675,43 @@
             "isAutoDelete": false,
             "ownerOrgId": 0,
             "resolvedObjects": {},
-            "tags": [],
-            "configs": [],
+            "tags": [
+              {
+                "id": "7840759b-2cbf-4dca-aaa4-f8b86a8b9dcd",
+                "indexVersion": 0,
+                "generationNum": 38,
+                "name": "try me",
+                "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                "created": 1412881252884,
+                "modified": 1412881301302,
+                "modifiedBy": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                "owner": "7840759b-2cbf-4dca-aaa4-f8b86a8b9dcd",
+                "isDeleted": false,
+                "isHidden": false,
+                "clientState": {
+                  "color": "#fbc17c"
+                },
+                "orgIds": [
+                  0
+                ],
+                "tags": [],
+                "aiAnswerGenerationDisabled": false,
+                "isExternal": false,
+                "isDeprecated": false,
+                "isSharedViaConnection": false
+              }
+            ],
+            "configs": [
+              {
+                "id": "a1b2c3d4-0000-4000-8000-000000000003",
+                "name": "Connection configuration",
+                "author": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                "created": 1666194878943,
+                "modified": 1666194878943,
+                "isDeleted": false,
+                "isHidden": false
+              }
+            ],
             "isConnectionConfigurationDisabled": false,
             "type": "",
             "aiAnswerGenerationDisabled": false,
@@ -24389,7 +24750,11 @@
               "owner": "9bd202f5-d431-44bf-9a07-b4f7be372125"
             }
           ],
-          "stats": null
+          "stats": {
+            "views": 42,
+            "favorites": 3,
+            "last_accessed": 1666195248714
+          }
         }
       },
       "GetAsyncImportStatusResponse": {
