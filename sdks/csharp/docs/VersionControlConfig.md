@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Provider** | **string** | Version control provider hosting the repository. | 
 **RepositoryUrl** | **string** | HTTPS URL of the repository this Org versions to. | 
 **CommitBranch** | **string** | Branch that versioning runs commit to. | 
-**RootDir** | **string** | Repository-relative directory that every write resolves under. Absent when writes go to the repository root. | [optional] 
+**RootDir** | **string** | Repository-relative directory that every write resolves under. Empty when writes go to the repository root. | [optional] 
 **Credential** | [**VersionControlCredentialStatus**](VersionControlCredentialStatus.md) |  | 
 **DisabledOperations** | **List&lt;VersionControlConfig.DisabledOperationsEnum&gt;** | Operations turned off for this Org. Empty when none are. | 
 **CreatedBy** | [**VersionControlPrincipal**](VersionControlPrincipal.md) |  | 

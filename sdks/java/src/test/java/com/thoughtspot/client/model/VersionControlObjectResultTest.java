@@ -29,11 +29,11 @@ public class VersionControlObjectResultTest {
     }
 
     /**
-     * Test the property 'id'
+     * Test the property 'objId'
      */
     @Test
-    public void idTest() {
-        // TODO: test id
+    public void objIdTest() {
+        // TODO: test objId
     }
 
     /**

@@ -17,11 +17,11 @@ import { HttpFile } from '../http/http';
 */
 export class VersionControlObjectInput {
     /**
-    * Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID.
+    * Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID and not the object name.
     */
     'identifier': string;
     /**
-    * Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type.
+    * Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
     */
     'type'?: VersionControlObjectInputTypeEnum | null;
 

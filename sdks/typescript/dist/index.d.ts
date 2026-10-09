@@ -7273,7 +7273,7 @@ declare class CreateCollectionRequest {
 */
 declare class VersionControlCommitObjectInput {
     /**
-    * Object ID of the metadata object, such as a Liveboard or an Answer. This is the cross-Org object ID, not the Org-local GUID and not the object name, and it requires object IDs to be enabled on the cluster.
+    * GUID, object ID, or name of the metadata object, such as a Liveboard or an Answer. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.
     */
     'identifier': string;
     /**
@@ -7314,7 +7314,7 @@ type VersionControlCommitObjectInputTypeEnum = "LIVEBOARD" | "ANSWER";
 
 declare class CreateCommitRequest {
     /**
-    * Objects to version in this run, named by object ID. Every object must be distinct, must already exist in your Org, and must be a Liveboard or an Answer. A run carries at most 50.
+    * Objects to version in this run, each named by GUID, object ID, or name with its type. Every object must already exist in your Org, must have an object ID, and must be a Liveboard or an Answer. An object named more than once is versioned once. A run carries at most 50.
     */
     'objects': Array<VersionControlCommitObjectInput>;
     /**
@@ -7322,7 +7322,7 @@ declare class CreateCommitRequest {
     */
     'commit_message'?: string;
     /**
-    * Remove the repository file of any named object that no longer exists in ThoughtSpot, so the branch stops carrying deleted content.
+    * Also check every file on the branch against the objects in your Org, and remove the file of any object that no longer exists there, so the branch stops carrying deleted content. This is not limited to the objects in this request.
     */
     'prune_deleted_object_files'?: boolean | null;
     static readonly discriminator: string | undefined;
@@ -17703,19 +17703,19 @@ declare class PrincipalsListItem {
  * Do not edit the class manually.
  */
 /**
-* Where a promotion takes content from. Name the source either by Org or by branch, not both: an Org and the branch it versions to determine each other, and the response reports both.
+* Where a promotion takes content from. Name the source by exactly one of Org or branch, for every strategy including CHERRY_PICK: an Org and the branch it versions to determine each other, and the response reports both. The source Org must version to the same repository as your Org.
 */
 declare class VersionControlPromoteSourceInput {
     /**
-    * Unique ID or name of the Org to promote from. Promoting from any Org other than your own requires tenant administration privilege.
+    * Unique ID or name of the Org to promote from. Promoting from any Org other than your own requires tenant administration privilege, or ADMINISTRATION privilege in the source Org.
     */
     'org_identifier'?: string | null;
     /**
-    * Branch to promote from, when naming it directly rather than by Org.
+    * Branch to promote from, when naming it directly rather than by Org. It must be the branch some Org in your repository versions to, and that Org is the source Org for the privilege check.
     */
     'source_branch'?: string | null;
     /**
-    * Revision to promote, for example a Git commit SHA. Required when the strategy type is CHERRY_PICK, and ignored otherwise.
+    * Revision to promote, for example a Git commit SHA. Required when the strategy type is CHERRY_PICK, together with org_identifier or source_branch, and ignored otherwise.
     */
     'source_revision'?: string | null;
     static readonly discriminator: string | undefined;
@@ -21953,11 +21953,11 @@ type SearchVariablesRequestResponseContentEnum = "METADATA" | "METADATA_AND_VALU
 */
 declare class VersionControlObjectInput {
     /**
-    * Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID.
+    * Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID and not the object name.
     */
     'identifier': string;
     /**
-    * Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type.
+    * Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
     */
     'type'?: VersionControlObjectInputTypeEnum | null;
     static readonly discriminator: string | undefined;
@@ -22002,7 +22002,7 @@ declare class SearchVersionControlRunsRequest {
     */
     'run_type'?: SearchVersionControlRunsRequestRunTypeEnum;
     /**
-    * Return only runs that carry a result for at least one of these objects. Objects are named as on the commit endpoint, except that the type may also be LOGICAL_TABLE: a run can report a type that a commit does not accept. Omit this to return runs regardless of the objects they touched.
+    * Return only runs that carry a result for at least one of these objects, each named by object ID. An object that no longer exists can still be named, so a deleted object\'s history stays searchable. Repeated objects are collapsed. Omit this to return runs regardless of the objects they touched.
     */
     'objects'?: Array<VersionControlObjectInput>;
     /**
@@ -28050,7 +28050,7 @@ declare class VersionControlCommitResponse {
  * Do not edit the class manually.
  */
 /**
-* What is reported about a stored credential: its type, and nothing else.
+* What is reported about a stored credential: its type and username. The credential itself is never returned.
 */
 declare class VersionControlCredentialStatus {
     /**
@@ -28111,7 +28111,7 @@ declare class VersionControlConfig {
     */
     'commit_branch': string;
     /**
-    * Repository-relative directory that every write resolves under. Absent when writes go to the repository root.
+    * Repository-relative directory that every write resolves under. Empty when writes go to the repository root.
     */
     'root_dir'?: string | null;
     'credential': VersionControlCredentialStatus;
@@ -28311,7 +28311,7 @@ declare class VersionControlObjectResult {
     /**
     * Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID.
     */
-    'id': string;
+    'obj_id': string;
     /**
     * Type of the object.
     */

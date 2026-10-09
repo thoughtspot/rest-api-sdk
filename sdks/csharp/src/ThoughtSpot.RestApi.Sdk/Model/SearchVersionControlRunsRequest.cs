@@ -70,7 +70,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// </summary>
         /// <param name="runIdentifiers">Runs to read, as run IDs returned when each run was admitted, at most 100. Omit this to return your Org&#39;s runs, newest first. Paging applies either way..</param>
         /// <param name="runType">Return only runs admitted by this operation. COMMIT is your Org&#39;s commit history, DEPLOY the content it received, RESTORE the rollbacks it ran. Omit this to return every type..</param>
-        /// <param name="objects">Return only runs that carry a result for at least one of these objects. Objects are named as on the commit endpoint, except that the type may also be LOGICAL_TABLE: a run can report a type that a commit does not accept. Omit this to return runs regardless of the objects they touched..</param>
+        /// <param name="objects">Return only runs that carry a result for at least one of these objects, each named by object ID. An object that no longer exists can still be named, so a deleted object&#39;s history stays searchable. Repeated objects are collapsed. Omit this to return runs regardless of the objects they touched..</param>
         /// <param name="recordOffset">The starting record number from where the runs should be included, in newest-first order. (default to 0).</param>
         /// <param name="recordSize">The number of runs that should be included, between 1 and 100. Applies to run_identifiers too: naming more runs than this returns only the first page. (default to 10).</param>
         public SearchVersionControlRunsRequest(List<string> runIdentifiers = default, RunTypeEnum? runType = default, List<VersionControlObjectInput> objects = default, int recordOffset = 0, int recordSize = 10)
@@ -91,9 +91,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public List<string> RunIdentifiers { get; set; }
 
         /// <summary>
-        /// Return only runs that carry a result for at least one of these objects. Objects are named as on the commit endpoint, except that the type may also be LOGICAL_TABLE: a run can report a type that a commit does not accept. Omit this to return runs regardless of the objects they touched.
+        /// Return only runs that carry a result for at least one of these objects, each named by object ID. An object that no longer exists can still be named, so a deleted object&#39;s history stays searchable. Repeated objects are collapsed. Omit this to return runs regardless of the objects they touched.
         /// </summary>
-        /// <value>Return only runs that carry a result for at least one of these objects. Objects are named as on the commit endpoint, except that the type may also be LOGICAL_TABLE: a run can report a type that a commit does not accept. Omit this to return runs regardless of the objects they touched.</value>
+        /// <value>Return only runs that carry a result for at least one of these objects, each named by object ID. An object that no longer exists can still be named, so a deleted object&#39;s history stays searchable. Repeated objects are collapsed. Omit this to return runs regardless of the objects they touched.</value>
         [DataMember(Name = "objects", EmitDefaultValue = false)]
         public List<VersionControlObjectInput> Objects { get; set; }
 

@@ -19,7 +19,7 @@ export class VersionControlObjectResult {
     /**
     * Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID.
     */
-    'id': string;
+    'obj_id': string;
     /**
     * Type of the object.
     */
@@ -51,8 +51,8 @@ export class VersionControlObjectResult {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "obj_id",
+            "baseName": "obj_id",
             "type": "string",
             "format": ""
         },

@@ -55,12 +55,12 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Id'
+        /// Test the property 'ObjId'
         /// </summary>
         [Fact]
-        public void IdTest()
+        public void ObjIdTest()
         {
-            // TODO unit test for the property 'Id'
+            // TODO unit test for the property 'ObjId'
         }
 
         /// <summary>

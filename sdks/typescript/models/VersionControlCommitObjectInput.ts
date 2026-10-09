@@ -17,7 +17,7 @@ import { HttpFile } from '../http/http';
 */
 export class VersionControlCommitObjectInput {
     /**
-    * Object ID of the metadata object, such as a Liveboard or an Answer. This is the cross-Org object ID, not the Org-local GUID and not the object name, and it requires object IDs to be enabled on the cluster.
+    * GUID, object ID, or name of the metadata object, such as a Liveboard or an Answer. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.
     */
     'identifier': string;
     /**

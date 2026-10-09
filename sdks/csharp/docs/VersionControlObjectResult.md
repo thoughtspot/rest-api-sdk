@@ -5,7 +5,7 @@ Outcome for one object in a run.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID. | 
+**ObjId** | **string** | Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID. | 
 **Type** | **string** | Type of the object. | [optional] 
 **FileName** | **string** | Repository path of the object&#39;s file. | [optional] 
 **Action** | **string** | What the run did to the object. | [optional] 

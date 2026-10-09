@@ -25,8 +25,8 @@ class VersionControlObjectInput(BaseModel):
     """
     One object a versioning run can report, used to filter run search.
     """ # noqa: E501
-    identifier: StrictStr = Field(description="Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID.")
-    type: Optional[StrictStr] = Field(default=None, description="Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type.")
+    identifier: StrictStr = Field(description="Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID and not the object name.")
+    type: Optional[StrictStr] = Field(default=None, description="Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["identifier", "type"]
 

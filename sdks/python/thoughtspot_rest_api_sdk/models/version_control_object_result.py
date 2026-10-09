@@ -25,7 +25,7 @@ class VersionControlObjectResult(BaseModel):
     """
     Outcome for one object in a run.
     """ # noqa: E501
-    id: StrictStr = Field(description="Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID.")
+    obj_id: StrictStr = Field(description="Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID.")
     type: Optional[StrictStr] = Field(default=None, description="Type of the object.")
     file_name: Optional[StrictStr] = Field(default=None, description="Repository path of the object's file.")
     action: Optional[StrictStr] = Field(default=None, description="What the run did to the object.")
@@ -33,7 +33,7 @@ class VersionControlObjectResult(BaseModel):
     message: Optional[StrictStr] = Field(default=None, description="Why the object is FAILED or SKIPPED, always present then. It may also carry a warning on SUCCESS or VALIDATED.")
     is_dependency: Optional[StrictBool] = Field(default=None, description="True for an object the request did not name, exported because a requested object depends on it. Commit runs only.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "type", "file_name", "action", "status", "message", "is_dependency"]
+    __properties: ClassVar[List[str]] = ["obj_id", "type", "file_name", "action", "status", "message", "is_dependency"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -145,7 +145,7 @@ class VersionControlObjectResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
+            "obj_id": obj.get("obj_id"),
             "type": obj.get("type"),
             "file_name": obj.get("file_name"),
             "action": obj.get("action"),

@@ -27,7 +27,7 @@ using OpenAPIDateConverter = ThoughtSpot.RestApi.Sdk.Client.OpenAPIDateConverter
 namespace ThoughtSpot.RestApi.Sdk.Model
 {
     /// <summary>
-    /// Where a promotion takes content from. Name the source either by Org or by branch, not both: an Org and the branch it versions to determine each other, and the response reports both.
+    /// Where a promotion takes content from. Name the source by exactly one of Org or branch, for every strategy including CHERRY_PICK: an Org and the branch it versions to determine each other, and the response reports both. The source Org must version to the same repository as your Org.
     /// </summary>
     [DataContract(Name = "VersionControlPromoteSourceInput")]
     public partial class VersionControlPromoteSourceInput : IValidatableObject
@@ -35,9 +35,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VersionControlPromoteSourceInput" /> class.
         /// </summary>
-        /// <param name="orgIdentifier">Unique ID or name of the Org to promote from. Promoting from any Org other than your own requires tenant administration privilege..</param>
-        /// <param name="sourceBranch">Branch to promote from, when naming it directly rather than by Org..</param>
-        /// <param name="sourceRevision">Revision to promote, for example a Git commit SHA. Required when the strategy type is CHERRY_PICK, and ignored otherwise..</param>
+        /// <param name="orgIdentifier">Unique ID or name of the Org to promote from. Promoting from any Org other than your own requires tenant administration privilege, or ADMINISTRATION privilege in the source Org..</param>
+        /// <param name="sourceBranch">Branch to promote from, when naming it directly rather than by Org. It must be the branch some Org in your repository versions to, and that Org is the source Org for the privilege check..</param>
+        /// <param name="sourceRevision">Revision to promote, for example a Git commit SHA. Required when the strategy type is CHERRY_PICK, together with org_identifier or source_branch, and ignored otherwise..</param>
         public VersionControlPromoteSourceInput(string orgIdentifier = default, string sourceBranch = default, string sourceRevision = default)
         {
             this.OrgIdentifier = orgIdentifier;
@@ -47,23 +47,23 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Unique ID or name of the Org to promote from. Promoting from any Org other than your own requires tenant administration privilege.
+        /// Unique ID or name of the Org to promote from. Promoting from any Org other than your own requires tenant administration privilege, or ADMINISTRATION privilege in the source Org.
         /// </summary>
-        /// <value>Unique ID or name of the Org to promote from. Promoting from any Org other than your own requires tenant administration privilege.</value>
+        /// <value>Unique ID or name of the Org to promote from. Promoting from any Org other than your own requires tenant administration privilege, or ADMINISTRATION privilege in the source Org.</value>
         [DataMember(Name = "org_identifier", EmitDefaultValue = true)]
         public string OrgIdentifier { get; set; }
 
         /// <summary>
-        /// Branch to promote from, when naming it directly rather than by Org.
+        /// Branch to promote from, when naming it directly rather than by Org. It must be the branch some Org in your repository versions to, and that Org is the source Org for the privilege check.
         /// </summary>
-        /// <value>Branch to promote from, when naming it directly rather than by Org.</value>
+        /// <value>Branch to promote from, when naming it directly rather than by Org. It must be the branch some Org in your repository versions to, and that Org is the source Org for the privilege check.</value>
         [DataMember(Name = "source_branch", EmitDefaultValue = true)]
         public string SourceBranch { get; set; }
 
         /// <summary>
-        /// Revision to promote, for example a Git commit SHA. Required when the strategy type is CHERRY_PICK, and ignored otherwise.
+        /// Revision to promote, for example a Git commit SHA. Required when the strategy type is CHERRY_PICK, together with org_identifier or source_branch, and ignored otherwise.
         /// </summary>
-        /// <value>Revision to promote, for example a Git commit SHA. Required when the strategy type is CHERRY_PICK, and ignored otherwise.</value>
+        /// <value>Revision to promote, for example a Git commit SHA. Required when the strategy type is CHERRY_PICK, together with org_identifier or source_branch, and ignored otherwise.</value>
         [DataMember(Name = "source_revision", EmitDefaultValue = true)]
         public string SourceRevision { get; set; }
 

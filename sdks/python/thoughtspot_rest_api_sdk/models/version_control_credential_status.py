@@ -23,7 +23,7 @@ from pydantic_core import to_jsonable_python
 
 class VersionControlCredentialStatus(BaseModel):
     """
-    What is reported about a stored credential: its type, and nothing else.
+    What is reported about a stored credential: its type and username. The credential itself is never returned.
     """ # noqa: E501
     type: StrictStr = Field(description="How the credential is held.")
     username: Optional[StrictStr] = Field(default=None, description="Username presented with the token over HTTPS.")

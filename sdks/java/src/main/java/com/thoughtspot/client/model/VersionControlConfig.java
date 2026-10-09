@@ -297,7 +297,7 @@ public class VersionControlConfig implements Serializable {
   }
 
   /**
-   * Repository-relative directory that every write resolves under. Absent when writes go to the repository root.
+   * Repository-relative directory that every write resolves under. Empty when writes go to the repository root.
    * @return rootDir
    */
   @javax.annotation.Nullable

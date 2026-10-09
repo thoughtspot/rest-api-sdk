@@ -105,7 +105,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="provider">Version control provider hosting the repository. (required).</param>
         /// <param name="repositoryUrl">HTTPS URL of the repository this Org versions to. (required).</param>
         /// <param name="commitBranch">Branch that versioning runs commit to. (required).</param>
-        /// <param name="rootDir">Repository-relative directory that every write resolves under. Absent when writes go to the repository root..</param>
+        /// <param name="rootDir">Repository-relative directory that every write resolves under. Empty when writes go to the repository root..</param>
         /// <param name="credential">credential (required).</param>
         /// <param name="disabledOperations">Operations turned off for this Org. Empty when none are. (required).</param>
         /// <param name="createdBy">createdBy (required).</param>
@@ -184,9 +184,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string CommitBranch { get; set; }
 
         /// <summary>
-        /// Repository-relative directory that every write resolves under. Absent when writes go to the repository root.
+        /// Repository-relative directory that every write resolves under. Empty when writes go to the repository root.
         /// </summary>
-        /// <value>Repository-relative directory that every write resolves under. Absent when writes go to the repository root.</value>
+        /// <value>Repository-relative directory that every write resolves under. Empty when writes go to the repository root.</value>
         [DataMember(Name = "root_dir", EmitDefaultValue = true)]
         public string RootDir { get; set; }
 

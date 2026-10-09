@@ -22836,8 +22836,8 @@ _VersionControlObjectResult.discriminator = void 0;
 _VersionControlObjectResult.mapping = void 0;
 _VersionControlObjectResult.attributeTypeMap = [
   {
-    "name": "id",
-    "baseName": "id",
+    "name": "obj_id",
+    "baseName": "obj_id",
     "type": "string",
     "format": ""
   },

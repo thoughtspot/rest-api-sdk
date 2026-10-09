@@ -13,7 +13,7 @@
 import { HttpFile } from '../http/http';
 
 /**
-* What is reported about a stored credential: its type, and nothing else.
+* What is reported about a stored credential: its type and username. The credential itself is never returned.
 */
 export class VersionControlCredentialStatus {
     /**

@@ -38,7 +38,7 @@ import java.util.Set;
 import com.thoughtspot.client.JSON;
 
 /**
- * What is reported about a stored credential: its type, and nothing else.
+ * What is reported about a stored credential: its type and username. The credential itself is never returned.
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class VersionControlCredentialStatus implements Serializable {

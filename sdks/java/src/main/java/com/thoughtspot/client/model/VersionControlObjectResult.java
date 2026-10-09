@@ -44,10 +44,10 @@ import com.thoughtspot.client.JSON;
 public class VersionControlObjectResult implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
+  public static final String SERIALIZED_NAME_OBJ_ID = "obj_id";
+  @SerializedName(SERIALIZED_NAME_OBJ_ID)
   @javax.annotation.Nonnull
-  private String id;
+  private String objId;
 
   /**
    * Type of the object.
@@ -248,22 +248,22 @@ public class VersionControlObjectResult implements Serializable {
   public VersionControlObjectResult() {
   }
 
-  public VersionControlObjectResult id(@javax.annotation.Nonnull String id) {
-    this.id = id;
+  public VersionControlObjectResult objId(@javax.annotation.Nonnull String objId) {
+    this.objId = objId;
     return this;
   }
 
   /**
    * Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID.
-   * @return id
+   * @return objId
    */
   @javax.annotation.Nonnull
-  public String getId() {
-    return id;
+  public String getObjId() {
+    return objId;
   }
 
-  public void setId(@javax.annotation.Nonnull String id) {
-    this.id = id;
+  public void setObjId(@javax.annotation.Nonnull String objId) {
+    this.objId = objId;
   }
 
 
@@ -435,7 +435,7 @@ public class VersionControlObjectResult implements Serializable {
       return false;
     }
     VersionControlObjectResult versionControlObjectResult = (VersionControlObjectResult) o;
-    return Objects.equals(this.id, versionControlObjectResult.id) &&
+    return Objects.equals(this.objId, versionControlObjectResult.objId) &&
         Objects.equals(this.type, versionControlObjectResult.type) &&
         Objects.equals(this.fileName, versionControlObjectResult.fileName) &&
         Objects.equals(this.action, versionControlObjectResult.action) &&
@@ -447,14 +447,14 @@ public class VersionControlObjectResult implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, fileName, action, status, message, isDependency, additionalProperties);
+    return Objects.hash(objId, type, fileName, action, status, message, isDependency, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class VersionControlObjectResult {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    objId: ").append(toIndentedString(objId)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
     sb.append("    action: ").append(toIndentedString(action)).append("\n");
@@ -484,7 +484,7 @@ public class VersionControlObjectResult implements Serializable {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("id");
+    openapiFields.add("obj_id");
     openapiFields.add("type");
     openapiFields.add("file_name");
     openapiFields.add("action");
@@ -494,7 +494,7 @@ public class VersionControlObjectResult implements Serializable {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("id");
+    openapiRequiredFields.add("obj_id");
     openapiRequiredFields.add("status");
   }
 
@@ -518,8 +518,8 @@ public class VersionControlObjectResult implements Serializable {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      if (!jsonObj.get("obj_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `obj_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("obj_id").toString()));
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));

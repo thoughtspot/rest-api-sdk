@@ -32,7 +32,7 @@ class VersionControlConfig(BaseModel):
     provider: StrictStr = Field(description="Version control provider hosting the repository.")
     repository_url: StrictStr = Field(description="HTTPS URL of the repository this Org versions to.")
     commit_branch: StrictStr = Field(description="Branch that versioning runs commit to.")
-    root_dir: Optional[StrictStr] = Field(default=None, description="Repository-relative directory that every write resolves under. Absent when writes go to the repository root.")
+    root_dir: Optional[StrictStr] = Field(default=None, description="Repository-relative directory that every write resolves under. Empty when writes go to the repository root.")
     credential: VersionControlCredentialStatus
     disabled_operations: List[StrictStr] = Field(description="Operations turned off for this Org. Empty when none are.")
     created_by: VersionControlPrincipal

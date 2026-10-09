@@ -26,9 +26,9 @@ class CreateCommitRequest(BaseModel):
     """
     CreateCommitRequest
     """ # noqa: E501
-    objects: List[VersionControlCommitObjectInput] = Field(description="Objects to version in this run, named by object ID. Every object must be distinct, must already exist in your Org, and must be a Liveboard or an Answer. A run carries at most 50.")
+    objects: List[VersionControlCommitObjectInput] = Field(description="Objects to version in this run, each named by GUID, object ID, or name with its type. Every object must already exist in your Org, must have an object ID, and must be a Liveboard or an Answer. An object named more than once is versioned once. A run carries at most 50.")
     commit_message: Optional[StrictStr] = Field(default=None, description="Message for the single Git commit this run produces. Omit this to let ThoughtSpot generate one.")
-    prune_deleted_object_files: Optional[StrictBool] = Field(default=False, description="Remove the repository file of any named object that no longer exists in ThoughtSpot, so the branch stops carrying deleted content.")
+    prune_deleted_object_files: Optional[StrictBool] = Field(default=False, description="Also check every file on the branch against the objects in your Org, and remove the file of any object that no longer exists there, so the branch stops carrying deleted content. This is not limited to the objects in this request.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["objects", "commit_message", "prune_deleted_object_files"]
 

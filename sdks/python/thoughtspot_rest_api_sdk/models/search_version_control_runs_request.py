@@ -28,7 +28,7 @@ class SearchVersionControlRunsRequest(BaseModel):
     """ # noqa: E501
     run_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Runs to read, as run IDs returned when each run was admitted, at most 100. Omit this to return your Org's runs, newest first. Paging applies either way.")
     run_type: Optional[StrictStr] = Field(default=None, description="Return only runs admitted by this operation. COMMIT is your Org's commit history, DEPLOY the content it received, RESTORE the rollbacks it ran. Omit this to return every type.")
-    objects: Optional[List[VersionControlObjectInput]] = Field(default=None, description="Return only runs that carry a result for at least one of these objects. Objects are named as on the commit endpoint, except that the type may also be LOGICAL_TABLE: a run can report a type that a commit does not accept. Omit this to return runs regardless of the objects they touched.")
+    objects: Optional[List[VersionControlObjectInput]] = Field(default=None, description="Return only runs that carry a result for at least one of these objects, each named by object ID. An object that no longer exists can still be named, so a deleted object's history stays searchable. Repeated objects are collapsed. Omit this to return runs regardless of the objects they touched.")
     record_offset: Optional[StrictInt] = Field(default=0, description="The starting record number from where the runs should be included, in newest-first order.")
     record_size: Optional[StrictInt] = Field(default=10, description="The number of runs that should be included, between 1 and 100. Applies to run_identifiers too: naming more runs than this returns only the first page.")
     additional_properties: Dict[str, Any] = {}

@@ -189,7 +189,7 @@ public class SearchVersionControlRunsRequest implements Serializable {
   }
 
   /**
-   * Return only runs that carry a result for at least one of these objects. Objects are named as on the commit endpoint, except that the type may also be LOGICAL_TABLE: a run can report a type that a commit does not accept. Omit this to return runs regardless of the objects they touched.
+   * Return only runs that carry a result for at least one of these objects, each named by object ID. An object that no longer exists can still be named, so a deleted object&#39;s history stays searchable. Repeated objects are collapsed. Omit this to return runs regardless of the objects they touched.
    * @return objects
    */
   @javax.annotation.Nullable

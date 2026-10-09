@@ -50,7 +50,7 @@ public class VersionControlObjectInput implements Serializable {
   private String identifier;
 
   /**
-   * Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type.
+   * Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
@@ -117,7 +117,7 @@ public class VersionControlObjectInput implements Serializable {
   }
 
   /**
-   * Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID.
+   * Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID and not the object name.
    * @return identifier
    */
   @javax.annotation.Nonnull
@@ -136,7 +136,7 @@ public class VersionControlObjectInput implements Serializable {
   }
 
   /**
-   * Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type.
+   * Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
    * @return type
    */
   @javax.annotation.Nullable

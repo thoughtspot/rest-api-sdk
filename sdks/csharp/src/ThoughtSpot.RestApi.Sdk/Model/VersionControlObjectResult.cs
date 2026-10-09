@@ -154,21 +154,21 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VersionControlObjectResult" /> class.
         /// </summary>
-        /// <param name="id">Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID. (required).</param>
+        /// <param name="objId">Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID. (required).</param>
         /// <param name="type">Type of the object..</param>
         /// <param name="fileName">Repository path of the object&#39;s file..</param>
         /// <param name="action">What the run did to the object..</param>
         /// <param name="status">Outcome for the object. (required).</param>
         /// <param name="message">Why the object is FAILED or SKIPPED, always present then. It may also carry a warning on SUCCESS or VALIDATED..</param>
         /// <param name="isDependency">True for an object the request did not name, exported because a requested object depends on it. Commit runs only..</param>
-        public VersionControlObjectResult(string id = default, TypeEnum? type = default, string fileName = default, ActionEnum? action = default, StatusEnum status = default, string message = default, bool? isDependency = default)
+        public VersionControlObjectResult(string objId = default, TypeEnum? type = default, string fileName = default, ActionEnum? action = default, StatusEnum status = default, string message = default, bool? isDependency = default)
         {
-            // to ensure "id" is required (not null)
-            if (id == null)
+            // to ensure "objId" is required (not null)
+            if (objId == null)
             {
-                throw new ArgumentNullException("id is a required property for VersionControlObjectResult and cannot be null");
+                throw new ArgumentNullException("objId is a required property for VersionControlObjectResult and cannot be null");
             }
-            this.Id = id;
+            this.ObjId = objId;
             this.Status = status;
             this.Type = type;
             this.FileName = fileName;
@@ -182,8 +182,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID.
         /// </summary>
         /// <value>Object ID of the object. The same object carries the same ID in every Org, so this is not the Org-local GUID. On a commit this is the resolved object ID even when the request named the object by name or GUID.</value>
-        [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
-        public string Id { get; set; }
+        [DataMember(Name = "obj_id", IsRequired = true, EmitDefaultValue = true)]
+        public string ObjId { get; set; }
 
         /// <summary>
         /// Repository path of the object&#39;s file.
@@ -220,7 +220,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class VersionControlObjectResult {\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  ObjId: ").Append(ObjId).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  FileName: ").Append(FileName).Append("\n");
             sb.Append("  Action: ").Append(Action).Append("\n");

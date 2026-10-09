@@ -33,9 +33,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
     public partial class VersionControlObjectInput : IValidatableObject
     {
         /// <summary>
-        /// Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type.
+        /// Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
         /// </summary>
-        /// <value>Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type.</value>
+        /// <value>Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -60,9 +60,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
 
 
         /// <summary>
-        /// Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type.
+        /// Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
         /// </summary>
-        /// <value>Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type.</value>
+        /// <value>Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.</value>
         [DataMember(Name = "type", EmitDefaultValue = true)]
         public TypeEnum? Type { get; set; }
         /// <summary>
@@ -76,8 +76,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VersionControlObjectInput" /> class.
         /// </summary>
-        /// <param name="identifier">Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID. (required).</param>
-        /// <param name="type">Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type..</param>
+        /// <param name="identifier">Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID and not the object name. (required).</param>
+        /// <param name="type">Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency..</param>
         public VersionControlObjectInput(string identifier = default, TypeEnum? type = default)
         {
             // to ensure "identifier" is required (not null)
@@ -91,9 +91,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID.
+        /// Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID and not the object name.
         /// </summary>
-        /// <value>Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID.</value>
+        /// <value>Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID and not the object name.</value>
         [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = true)]
         public string Identifier { get; set; }
 

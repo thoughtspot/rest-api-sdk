@@ -27,7 +27,7 @@ using OpenAPIDateConverter = ThoughtSpot.RestApi.Sdk.Client.OpenAPIDateConverter
 namespace ThoughtSpot.RestApi.Sdk.Model
 {
     /// <summary>
-    /// What is reported about a stored credential: its type, and nothing else.
+    /// What is reported about a stored credential: its type and username. The credential itself is never returned.
     /// </summary>
     [DataContract(Name = "VersionControlCredentialStatus")]
     public partial class VersionControlCredentialStatus : IValidatableObject
