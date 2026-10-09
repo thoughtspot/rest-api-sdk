@@ -91,7 +91,6 @@ __all__ = [
     "AgentEventPart",
     "AgentInstructions",
     "AgentProgress",
-    "AgentStopResponse",
     "AgentStreamDone",
     "AgentStreamError",
     "AgentStreamFrame",
@@ -746,7 +745,6 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.agent_event_part import AgentEventPart as AgentEventPart
     from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions as AgentInstructions
     from thoughtspot_rest_api_sdk.models.agent_progress import AgentProgress as AgentProgress
-    from thoughtspot_rest_api_sdk.models.agent_stop_response import AgentStopResponse as AgentStopResponse
     from thoughtspot_rest_api_sdk.models.agent_stream_done import AgentStreamDone as AgentStreamDone
     from thoughtspot_rest_api_sdk.models.agent_stream_error import AgentStreamError as AgentStreamError
     from thoughtspot_rest_api_sdk.models.agent_stream_frame import AgentStreamFrame as AgentStreamFrame
@@ -1407,7 +1405,6 @@ from thoughtspot_rest_api_sdk.models.agent_event_content import AgentEventConten
 from thoughtspot_rest_api_sdk.models.agent_event_part import AgentEventPart as AgentEventPart
 from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions as AgentInstructions
 from thoughtspot_rest_api_sdk.models.agent_progress import AgentProgress as AgentProgress
-from thoughtspot_rest_api_sdk.models.agent_stop_response import AgentStopResponse as AgentStopResponse
 from thoughtspot_rest_api_sdk.models.agent_stream_done import AgentStreamDone as AgentStreamDone
 from thoughtspot_rest_api_sdk.models.agent_stream_error import AgentStreamError as AgentStreamError
 from thoughtspot_rest_api_sdk.models.agent_stream_frame import AgentStreamFrame as AgentStreamFrame

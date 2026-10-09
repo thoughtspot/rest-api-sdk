@@ -787,72 +787,6 @@
         }
       }
     },
-    "/api/rest/2.0/ai/agent/v2/conversations/{conversation_identifier}/delete": {
-      "delete": {
-        "operationId": "deleteConversationV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nDeletes a Spotter conversation and its history.\n\nRequires `CAN_USE_SPOTTER` privilege. A user can delete only their own conversations.\n\nUse this to let a user clear a conversation from their history. The deletion is permanent — the conversation and the turns it contains cannot be recovered, and answers produced during it are no longer reachable through the conversation.\n\n#### Usage guidelines\n\n- `conversation_identifier` (required): the conversation to delete.\n\nReturns `204 No Content` on success. Deleting a conversation that does not exist, or that belongs to another user, returns `404`.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege.        |\n| 404  | Not found — no conversation with the given identifier exists for this user.          |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "conversation_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique identifier of the conversation to delete. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successfully deleted the conversation."
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/rest/2.0/ai/usage-data/delete": {
       "post": {
         "operationId": "deleteUsageData",
@@ -3831,104 +3765,6 @@
         "responses": {
           "204": {
             "description": "Successfully stopped the in-progress agent conversation response for the given."
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/conversation/{conversation_identifier}/stop-response": {
-      "post": {
-        "operationId": "stopConversationV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStops the response currently being generated in a Spotter conversation.\n\nRequires `CAN_USE_SPOTTER` privilege, and access to the conversation.\n\nUse this to back a \"stop generating\" control: a user who has seen enough, or asked the wrong question, can end the turn without waiting for it to finish.\n\n#### Usage guidelines\n\n- `conversation_identifier` (required): the conversation whose in-progress response to stop.\n\nThe conversation survives — only the running turn ends. The next question can be asked in the same conversation, and the partial answer stays in its history.\n\nThe turn is stopped gracefully: the step in flight is allowed to finish, so the stream closes cleanly rather than being cut mid-frame. A caller streaming the turn sees it end normally with a `done` event.\n\nStopping a conversation with no turn running is not an error — the response reports that there was nothing to stop.\n\n#### Error responses\n\n| Code | Description                                                                          |\n| ---- | -------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                 |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege.        |\n| 404  | Not found — no conversation with the given identifier exists for this user.          |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "conversation_identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unique identifier of the conversation whose in-progress response to stop. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentStopResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "The running turn was stopped",
-                    "value": {
-                      "status": "stopped",
-                      "message": "Session stopped gracefully."
-                    }
-                  },
-                  "example_2": {
-                    "summary": "Nothing was running; not an error",
-                    "value": {
-                      "status": "no_active_turn"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentStopResponse"
-                }
-              }
-            }
           },
           "400": {
             "description": "Operation failed",
@@ -33898,22 +33734,6 @@
           }
         },
         "description": "A completed agent turn: every frame the streaming endpoint publishes, collected."
-      },
-      "AgentStopResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "description": "What happened. Stopping a conversation with no turn running is reported here\nrather than as an error. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "message": {
-            "type": "string",
-            "description": "Human-readable detail, when the backend supplies it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "The outcome of stopping a conversation's in-progress response."
       },
       "SendAgentMessageResponse": {
         "type": "object",

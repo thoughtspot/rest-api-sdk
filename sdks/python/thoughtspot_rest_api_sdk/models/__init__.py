@@ -36,7 +36,6 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.agent_event_part import AgentEventPart
     from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions
     from thoughtspot_rest_api_sdk.models.agent_progress import AgentProgress
-    from thoughtspot_rest_api_sdk.models.agent_stop_response import AgentStopResponse
     from thoughtspot_rest_api_sdk.models.agent_stream_done import AgentStreamDone
     from thoughtspot_rest_api_sdk.models.agent_stream_error import AgentStreamError
     from thoughtspot_rest_api_sdk.models.agent_stream_frame import AgentStreamFrame
@@ -649,7 +648,6 @@ from thoughtspot_rest_api_sdk.models.agent_event_content import AgentEventConten
 from thoughtspot_rest_api_sdk.models.agent_event_part import AgentEventPart
 from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions
 from thoughtspot_rest_api_sdk.models.agent_progress import AgentProgress
-from thoughtspot_rest_api_sdk.models.agent_stop_response import AgentStopResponse
 from thoughtspot_rest_api_sdk.models.agent_stream_done import AgentStreamDone
 from thoughtspot_rest_api_sdk.models.agent_stream_error import AgentStreamError
 from thoughtspot_rest_api_sdk.models.agent_stream_frame import AgentStreamFrame

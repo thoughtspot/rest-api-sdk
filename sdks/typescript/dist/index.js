@@ -1041,32 +1041,6 @@ _AgentProgress.attributeTypeMap = [
 ];
 var AgentProgress = _AgentProgress;
 
-// models/AgentStopResponse.ts
-var _AgentStopResponse = class _AgentStopResponse {
-  static getAttributeTypeMap() {
-    return _AgentStopResponse.attributeTypeMap;
-  }
-  constructor() {
-  }
-};
-_AgentStopResponse.discriminator = void 0;
-_AgentStopResponse.mapping = void 0;
-_AgentStopResponse.attributeTypeMap = [
-  {
-    "name": "status",
-    "baseName": "status",
-    "type": "string",
-    "format": ""
-  },
-  {
-    "name": "message",
-    "baseName": "message",
-    "type": "string",
-    "format": ""
-  }
-];
-var AgentStopResponse = _AgentStopResponse;
-
 // models/AgentStreamDone.ts
 var _AgentStreamDone = class _AgentStreamDone {
   static getAttributeTypeMap() {
@@ -23882,7 +23856,6 @@ var typeMap = {
   "AgentEventPart": AgentEventPart,
   "AgentInstructions": AgentInstructions,
   "AgentProgress": AgentProgress,
-  "AgentStopResponse": AgentStopResponse,
   "AgentStreamDone": AgentStreamDone,
   "AgentStreamError": AgentStreamError,
   "AgentStreamFrame": AgentStreamFrame,
@@ -82687,7 +82660,6 @@ export {
   AgentEventPart,
   AgentInstructions,
   AgentProgress,
-  AgentStopResponse,
   AgentStreamDone,
   AgentStreamError,
   AgentStreamFrame,

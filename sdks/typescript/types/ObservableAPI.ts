@@ -27,7 +27,6 @@ import { AgentEventContent } from '../models/AgentEventContent';
 import { AgentEventPart } from '../models/AgentEventPart';
 import { AgentInstructions } from '../models/AgentInstructions';
 import { AgentProgress } from '../models/AgentProgress';
-import { AgentStopResponse } from '../models/AgentStopResponse';
 import { AgentStreamDone } from '../models/AgentStreamDone';
 import { AgentStreamError } from '../models/AgentStreamError';
 import { AgentStreamFrame } from '../models/AgentStreamFrame';

@@ -22,7 +22,6 @@ export * from '../models/AgentEventContent';
 export * from '../models/AgentEventPart';
 export * from '../models/AgentInstructions';
 export * from '../models/AgentProgress';
-export * from '../models/AgentStopResponse';
 export * from '../models/AgentStreamDone';
 export * from '../models/AgentStreamError';
 export * from '../models/AgentStreamFrame';
@@ -628,7 +627,6 @@ import { AgentEventContent } from '../models/AgentEventContent';
 import { AgentEventPart } from '../models/AgentEventPart';
 import { AgentInstructions } from '../models/AgentInstructions';
 import { AgentProgress } from '../models/AgentProgress';
-import { AgentStopResponse } from '../models/AgentStopResponse';
 import { AgentStreamDone } from '../models/AgentStreamDone';
 import { AgentStreamError } from '../models/AgentStreamError';
 import { AgentStreamFrame } from '../models/AgentStreamFrame';
@@ -1587,7 +1585,6 @@ let typeMap: {[index: string]: any} = {
     "AgentEventPart": AgentEventPart,
     "AgentInstructions": AgentInstructions,
     "AgentProgress": AgentProgress,
-    "AgentStopResponse": AgentStopResponse,
     "AgentStreamDone": AgentStreamDone,
     "AgentStreamError": AgentStreamError,
     "AgentStreamFrame": AgentStreamFrame,

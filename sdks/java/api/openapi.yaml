@@ -31826,21 +31826,6 @@ components:
       - conversation_identifier
       - events
       type: object
-    AgentStopResponse:
-      description: The outcome of stopping a conversation's in-progress response.
-      properties:
-        status:
-          description: "What happened. Stopping a conversation with no turn running\
-            \ is reported here\nrather than as an error. \n  Version: 26.12.0.cl or\
-            \ later\n"
-          nullable: true
-          type: string
-        message:
-          description: "Human-readable detail, when the backend supplies it. \n  Version:\
-            \ 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-      type: object
     SendAgentMessageResponse:
       example:
         success: true
