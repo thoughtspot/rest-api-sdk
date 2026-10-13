@@ -33581,7 +33581,26 @@
             "description": "Feature details within this group. Each entry contains the fields relevant to\nthe requested scope; org-admin-only and cluster-admin-only fields are null in\nthe other view."
           }
         },
-        "description": "A named group of related features. Returned by searchFeatures; the contents of\nfeatures depend on the requested scope (cluster-admin vs. org-admin view)."
+        "description": "A named group of related features. Returned by searchFeatures; the contents of\nfeatures depend on the requested scope (cluster-admin vs. org-admin view).",
+        "example": {
+          "feature_group": "search",
+          "docs_url": null,
+          "features": [
+            {
+              "feature_id": "orion.embraceConfig.doIndexing",
+              "feature_name": "index_columns",
+              "assigned_orgs": [
+                {
+                  "org_id": 0,
+                  "org_name": "Primary"
+                }
+              ],
+              "is_org_aware": true,
+              "feature_value": null,
+              "docs_url": null
+            }
+          ]
+        }
       },
       "FeatureDetail": {
         "type": "object",
@@ -33623,8 +33642,17 @@
           },
           "element_config": {
             "type": "object",
-            "description": "UI element configuration for the feature. Populated in the org-admin view.\nAn opaque blob whose structure varies by `element_type`; a `label` string is\nthe common envelope field.",
-            "nullable": true
+            "description": "UI element configuration for the feature. Populated in the org-admin view.\nAn opaque blob whose structure varies by `element_type`; a `label` string is\nthe common envelope field.\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "label": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "label": "Index columns"
+            }
           },
           "element_value": {
             "type": "string",
