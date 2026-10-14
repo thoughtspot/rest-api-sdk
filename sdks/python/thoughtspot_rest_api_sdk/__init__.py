@@ -349,6 +349,7 @@ __all__ = [
     "LinkTemplateInput",
     "LiveboardContent",
     "LiveboardDataResponse",
+    "LiveboardDetailsInput",
     "LiveboardOptions",
     "LiveboardOptionsInput",
     "LoadAnswerResponse",
@@ -1003,6 +1004,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.link_template_input import LinkTemplateInput as LinkTemplateInput
     from thoughtspot_rest_api_sdk.models.liveboard_content import LiveboardContent as LiveboardContent
     from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse as LiveboardDataResponse
+    from thoughtspot_rest_api_sdk.models.liveboard_details_input import LiveboardDetailsInput as LiveboardDetailsInput
     from thoughtspot_rest_api_sdk.models.liveboard_options import LiveboardOptions as LiveboardOptions
     from thoughtspot_rest_api_sdk.models.liveboard_options_input import LiveboardOptionsInput as LiveboardOptionsInput
     from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse as LoadAnswerResponse
@@ -1663,6 +1665,7 @@ from thoughtspot_rest_api_sdk.models.link_template import LinkTemplate as LinkTe
 from thoughtspot_rest_api_sdk.models.link_template_input import LinkTemplateInput as LinkTemplateInput
 from thoughtspot_rest_api_sdk.models.liveboard_content import LiveboardContent as LiveboardContent
 from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse as LiveboardDataResponse
+from thoughtspot_rest_api_sdk.models.liveboard_details_input import LiveboardDetailsInput as LiveboardDetailsInput
 from thoughtspot_rest_api_sdk.models.liveboard_options import LiveboardOptions as LiveboardOptions
 from thoughtspot_rest_api_sdk.models.liveboard_options_input import LiveboardOptionsInput as LiveboardOptionsInput
 from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse as LoadAnswerResponse

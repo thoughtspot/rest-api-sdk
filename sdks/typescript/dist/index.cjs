@@ -323,6 +323,7 @@ __export(typescript_exports, {
   LinkTemplateInput: () => LinkTemplateInput,
   LiveboardContent: () => LiveboardContent,
   LiveboardDataResponse: () => LiveboardDataResponse,
+  LiveboardDetailsInput: () => LiveboardDetailsInput,
   LiveboardOptions: () => LiveboardOptions,
   LiveboardOptionsInput: () => LiveboardOptionsInput,
   LoadAnswerResponse: () => LoadAnswerResponse,
@@ -11218,6 +11219,56 @@ _LiveboardDataResponse.attributeTypeMap = [
 ];
 var LiveboardDataResponse = _LiveboardDataResponse;
 
+// models/LiveboardDetailsInput.ts
+var _LiveboardDetailsInput = class _LiveboardDetailsInput {
+  static getAttributeTypeMap() {
+    return _LiveboardDetailsInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_LiveboardDetailsInput.discriminator = void 0;
+_LiveboardDetailsInput.mapping = void 0;
+_LiveboardDetailsInput.attributeTypeMap = [
+  {
+    "name": "liveboard_filters",
+    "baseName": "liveboard_filters",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "liveboard_tabs",
+    "baseName": "liveboard_tabs",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "container_layouts",
+    "baseName": "container_layouts",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "visualizations",
+    "baseName": "visualizations",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "parameter_overrides",
+    "baseName": "parameter_overrides",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "personalized_views",
+    "baseName": "personalized_views",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var LiveboardDetailsInput = _LiveboardDetailsInput;
+
 // models/LiveboardOptions.ts
 var _LiveboardOptions = class _LiveboardOptions {
   static getAttributeTypeMap() {
@@ -15603,6 +15654,12 @@ _SearchMetadataRequest.attributeTypeMap = [
     "name": "include_personalised_views",
     "baseName": "include_personalised_views",
     "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "liveboard_details",
+    "baseName": "liveboard_details",
+    "type": "LiveboardDetailsInput",
     "format": ""
   },
   {
@@ -24793,6 +24850,7 @@ var typeMap = {
   "LinkTemplateInput": LinkTemplateInput,
   "LiveboardContent": LiveboardContent,
   "LiveboardDataResponse": LiveboardDataResponse,
+  "LiveboardDetailsInput": LiveboardDetailsInput,
   "LiveboardOptions": LiveboardOptions,
   "LiveboardOptionsInput": LiveboardOptionsInput,
   "LoadAnswerResponse": LoadAnswerResponse,
@@ -83618,6 +83676,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   LinkTemplateInput,
   LiveboardContent,
   LiveboardDataResponse,
+  LiveboardDetailsInput,
   LiveboardOptions,
   LiveboardOptionsInput,
   LoadAnswerResponse,

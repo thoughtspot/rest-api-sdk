@@ -12,6 +12,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.model.ExcludeMetadataListItemInput;
 import com.thoughtspot.client.model.FavoriteObjectOptionsInput;
+import com.thoughtspot.client.model.LiveboardDetailsInput;
 import com.thoughtspot.client.model.MetadataListItemInput;
 import com.thoughtspot.client.model.MetadataSearchSortOptions;
 import com.thoughtspot.client.model.PermissionInput;
@@ -162,6 +163,11 @@ public class SearchMetadataRequest implements Serializable {
   @SerializedName(SERIALIZED_NAME_INCLUDE_PERSONALISED_VIEWS)
   @javax.annotation.Nullable
   private Boolean includePersonalisedViews = false;
+
+  public static final String SERIALIZED_NAME_LIVEBOARD_DETAILS = "liveboard_details";
+  @SerializedName(SERIALIZED_NAME_LIVEBOARD_DETAILS)
+  @javax.annotation.Nullable
+  private LiveboardDetailsInput liveboardDetails;
 
   public static final String SERIALIZED_NAME_INCLUDE_HEADERS = "include_headers";
   @SerializedName(SERIALIZED_NAME_INCLUDE_HEADERS)
@@ -540,7 +546,7 @@ public class SearchMetadataRequest implements Serializable {
   }
 
   /**
-   * When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects.
+   * When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects. Personalised views are also included when liveboard_details.personalized_views is true.
    * @return includePersonalisedViews
    */
   @javax.annotation.Nullable
@@ -550,6 +556,25 @@ public class SearchMetadataRequest implements Serializable {
 
   public void setIncludePersonalisedViews(@javax.annotation.Nullable Boolean includePersonalisedViews) {
     this.includePersonalisedViews = includePersonalisedViews;
+  }
+
+
+  public SearchMetadataRequest liveboardDetails(@javax.annotation.Nullable LiveboardDetailsInput liveboardDetails) {
+    this.liveboardDetails = liveboardDetails;
+    return this;
+  }
+
+  /**
+   * &lt;div&gt;Version: 26.10.0.cl or later &lt;/div&gt;  Selects which parts of a Liveboard&#39;s &#x60;metadata_detail&#x60; are returned, so that a request can skip the parts it does not need.  Applies only to &#x60;LIVEBOARD&#x60; objects, and only when &#x60;include_details&#x60; is &#x60;true&#x60; and &#x60;liveboard_response_version&#x60; is &#x60;V2&#x60;. Otherwise it is ignored.  * &#x60;liveboard_filters&#x60;, &#x60;liveboard_tabs&#x60;, &#x60;container_layouts&#x60;, &#x60;visualizations&#x60;, &#x60;parameter_overrides&#x60;: default to &#x60;true&#x60;. Set a field to &#x60;false&#x60; to exclude that part of the Liveboard. * &#x60;personalized_views&#x60;: defaults to &#x60;false&#x60;. Personalised views are included when either this field or &#x60;include_personalised_views&#x60; is &#x60;true&#x60;.  The Liveboard header, type, and style are always returned. Excluded collections are returned empty.  To fetch only the personalised views of a Liveboard, set every other field to &#x60;false&#x60;. The Liveboard definition is then not loaded, and &#x60;metadata_detail&#x60; contains only &#x60;personalised_views&#x60;:  &#x60;&#x60;&#x60;json \&quot;liveboard_details\&quot;: {   \&quot;liveboard_filters\&quot;: false,   \&quot;liveboard_tabs\&quot;: false,   \&quot;container_layouts\&quot;: false,   \&quot;visualizations\&quot;: false,   \&quot;parameter_overrides\&quot;: false,   \&quot;personalized_views\&quot;: true } &#x60;&#x60;&#x60;
+   * @return liveboardDetails
+   */
+  @javax.annotation.Nullable
+  public LiveboardDetailsInput getLiveboardDetails() {
+    return liveboardDetails;
+  }
+
+  public void setLiveboardDetails(@javax.annotation.Nullable LiveboardDetailsInput liveboardDetails) {
+    this.liveboardDetails = liveboardDetails;
   }
 
 
@@ -920,6 +945,7 @@ public class SearchMetadataRequest implements Serializable {
         Objects.equals(this.dependentObjectsRecordOffset, searchMetadataRequest.dependentObjectsRecordOffset) &&
         Objects.equals(this.includeDetails, searchMetadataRequest.includeDetails) &&
         Objects.equals(this.includePersonalisedViews, searchMetadataRequest.includePersonalisedViews) &&
+        Objects.equals(this.liveboardDetails, searchMetadataRequest.liveboardDetails) &&
         Objects.equals(this.includeHeaders, searchMetadataRequest.includeHeaders) &&
         Objects.equals(this.includeHiddenObjects, searchMetadataRequest.includeHiddenObjects) &&
         Objects.equals(this.includeIncompleteObjects, searchMetadataRequest.includeIncompleteObjects) &&
@@ -940,7 +966,7 @@ public class SearchMetadataRequest implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadata, permissions, createdByUserIdentifiers, dependentObjectVersion, excludeObjects, favoriteObjectOptions, includeAutoCreatedObjects, includeDependentObjects, dependentObjectsRecordSize, dependentObjectsRecordOffset, includeDetails, includePersonalisedViews, includeHeaders, includeHiddenObjects, includeIncompleteObjects, includeVisualizationHeaders, includeWorksheetSearchAssistData, modifiedByUserIdentifiers, recordOffset, recordSize, sortOptions, tagIdentifiers, includeStats, includeDiscoverableObjects, showResolvedParameters, liveboardResponseVersion, includeOnlyPublishedObjects, additionalProperties);
+    return Objects.hash(metadata, permissions, createdByUserIdentifiers, dependentObjectVersion, excludeObjects, favoriteObjectOptions, includeAutoCreatedObjects, includeDependentObjects, dependentObjectsRecordSize, dependentObjectsRecordOffset, includeDetails, includePersonalisedViews, liveboardDetails, includeHeaders, includeHiddenObjects, includeIncompleteObjects, includeVisualizationHeaders, includeWorksheetSearchAssistData, modifiedByUserIdentifiers, recordOffset, recordSize, sortOptions, tagIdentifiers, includeStats, includeDiscoverableObjects, showResolvedParameters, liveboardResponseVersion, includeOnlyPublishedObjects, additionalProperties);
   }
 
   @Override
@@ -959,6 +985,7 @@ public class SearchMetadataRequest implements Serializable {
     sb.append("    dependentObjectsRecordOffset: ").append(toIndentedString(dependentObjectsRecordOffset)).append("\n");
     sb.append("    includeDetails: ").append(toIndentedString(includeDetails)).append("\n");
     sb.append("    includePersonalisedViews: ").append(toIndentedString(includePersonalisedViews)).append("\n");
+    sb.append("    liveboardDetails: ").append(toIndentedString(liveboardDetails)).append("\n");
     sb.append("    includeHeaders: ").append(toIndentedString(includeHeaders)).append("\n");
     sb.append("    includeHiddenObjects: ").append(toIndentedString(includeHiddenObjects)).append("\n");
     sb.append("    includeIncompleteObjects: ").append(toIndentedString(includeIncompleteObjects)).append("\n");
@@ -1009,6 +1036,7 @@ public class SearchMetadataRequest implements Serializable {
     openapiFields.add("dependent_objects_record_offset");
     openapiFields.add("include_details");
     openapiFields.add("include_personalised_views");
+    openapiFields.add("liveboard_details");
     openapiFields.add("include_headers");
     openapiFields.add("include_hidden_objects");
     openapiFields.add("include_incomplete_objects");
@@ -1098,6 +1126,10 @@ public class SearchMetadataRequest implements Serializable {
       // validate the optional field `favorite_object_options`
       if (jsonObj.get("favorite_object_options") != null && !jsonObj.get("favorite_object_options").isJsonNull()) {
         FavoriteObjectOptionsInput.validateJsonElement(jsonObj.get("favorite_object_options"));
+      }
+      // validate the optional field `liveboard_details`
+      if (jsonObj.get("liveboard_details") != null && !jsonObj.get("liveboard_details").isJsonNull()) {
+        LiveboardDetailsInput.validateJsonElement(jsonObj.get("liveboard_details"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("modified_by_user_identifiers") != null && !jsonObj.get("modified_by_user_identifiers").isJsonNull() && !jsonObj.get("modified_by_user_identifiers").isJsonArray()) {

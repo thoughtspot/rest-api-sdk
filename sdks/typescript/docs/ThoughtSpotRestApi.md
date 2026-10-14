@@ -9671,6 +9671,7 @@ apiInstance.searchMetadata(
     dependent_objects_record_offset: 1,
     include_details: false,
     include_personalised_views: false,
+    liveboard_details: null,
     include_headers: true,
     include_hidden_objects: false,
     include_incomplete_objects: false,

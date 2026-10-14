@@ -85,6 +85,10 @@
 -  the response header `content-disposition` was added for the status `200`
 
 
+### POST /api/rest/2.0/metadata/search
+-  added the new optional request property `liveboard_details`
+
+
 ### POST /api/rest/2.0/version-control/branch/promote
 -  endpoint added
 

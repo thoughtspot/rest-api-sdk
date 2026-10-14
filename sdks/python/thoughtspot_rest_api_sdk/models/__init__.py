@@ -294,6 +294,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.link_template_input import LinkTemplateInput
     from thoughtspot_rest_api_sdk.models.liveboard_content import LiveboardContent
     from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse
+    from thoughtspot_rest_api_sdk.models.liveboard_details_input import LiveboardDetailsInput
     from thoughtspot_rest_api_sdk.models.liveboard_options import LiveboardOptions
     from thoughtspot_rest_api_sdk.models.liveboard_options_input import LiveboardOptionsInput
     from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse
@@ -906,6 +907,7 @@ from thoughtspot_rest_api_sdk.models.link_template import LinkTemplate
 from thoughtspot_rest_api_sdk.models.link_template_input import LinkTemplateInput
 from thoughtspot_rest_api_sdk.models.liveboard_content import LiveboardContent
 from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse
+from thoughtspot_rest_api_sdk.models.liveboard_details_input import LiveboardDetailsInput
 from thoughtspot_rest_api_sdk.models.liveboard_options import LiveboardOptions
 from thoughtspot_rest_api_sdk.models.liveboard_options_input import LiveboardOptionsInput
 from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse

@@ -285,6 +285,7 @@ import { LinkTemplate } from '../models/LinkTemplate';
 import { LinkTemplateInput } from '../models/LinkTemplateInput';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';
+import { LiveboardDetailsInput } from '../models/LiveboardDetailsInput';
 import { LiveboardOptions } from '../models/LiveboardOptions';
 import { LiveboardOptionsInput } from '../models/LiveboardOptionsInput';
 import { LoadAnswerResponse } from '../models/LoadAnswerResponse';

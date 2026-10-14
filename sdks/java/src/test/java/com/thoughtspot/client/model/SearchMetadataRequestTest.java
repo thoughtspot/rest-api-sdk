@@ -11,6 +11,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.thoughtspot.client.model.ExcludeMetadataListItemInput;
 import com.thoughtspot.client.model.FavoriteObjectOptionsInput;
+import com.thoughtspot.client.model.LiveboardDetailsInput;
 import com.thoughtspot.client.model.MetadataListItemInput;
 import com.thoughtspot.client.model.MetadataSearchSortOptions;
 import com.thoughtspot.client.model.PermissionInput;
@@ -129,6 +130,14 @@ public class SearchMetadataRequestTest {
     @Test
     public void includePersonalisedViewsTest() {
         // TODO: test includePersonalisedViews
+    }
+
+    /**
+     * Test the property 'liveboardDetails'
+     */
+    @Test
+    public void liveboardDetailsTest() {
+        // TODO: test liveboardDetails
     }
 
     /**
