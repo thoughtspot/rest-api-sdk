@@ -50311,6 +50311,557 @@
             }
           }
         }
+      },
+      "Webhook_Kpi_Alert_Payload": {
+        "type": "object",
+        "description": "Body that ThoughtSpot sends to the webhook endpoint when a KPI alert fires. Sent as application/json in a POST request.",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Webhook_Kpi_Alert_Notification"
+          }
+        }
+      },
+      "Webhook_Kpi_Alert_Notification": {
+        "type": "object",
+        "description": "KPI alert notification. notificationType says which of the *WebhookNotification fields is set; the others are omitted.",
+        "properties": {
+          "schemaVersion": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ],
+            "description": "Version of the payload schema."
+          },
+          "schemaType": {
+            "type": "string",
+            "enum": [
+              "MONITOR"
+            ],
+            "description": "Type of the payload schema."
+          },
+          "notificationType": {
+            "type": "string",
+            "enum": [
+              "SELF_SUBSCRIPTION",
+              "DELETION",
+              "UPDATION",
+              "FAILURE",
+              "SUBSCRIPTION",
+              "SCHEDULE_METRIC_UPDATE",
+              "THRESHOLD_METRIC_UPDATE",
+              "AUTOMATIC_SELF_SUBSCRIPTION",
+              "THRESHOLD_BY_ATTRIBUTE",
+              "SCHEDULED_BY_ATTRIBUTE",
+              "ANOMALY_METRIC_UPDATE"
+            ],
+            "description": "Event that triggered the notification."
+          },
+          "currentUser": {
+            "$ref": "#/components/schemas/Webhook_Kpi_Alert_User",
+            "description": "User the notification is for."
+          },
+          "alertOrgId": {
+            "type": "string",
+            "description": "ID of the org the KPI alert belongs to."
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Webhook_Kpi_Alert_User_Group"
+            },
+            "description": "Groups subscribed to the KPI alert."
+          },
+          "deletionWebhookNotification": {
+            "$ref": "#/components/schemas/Webhook_Kpi_Alert_Deletion"
+          },
+          "failureWebhookNotification": {
+            "type": "object",
+            "description": "Set when notificationType is FAILURE.",
+            "properties": {
+              "monitorRuleForWebhook": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule",
+                "description": "KPI alert that triggered the notification."
+              },
+              "modifyUrl": {
+                "type": "string",
+                "description": "URL to modify the KPI alert."
+              },
+              "unsubscribeUrl": {
+                "type": "string",
+                "description": "URL to unsubscribe from the KPI alert."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Reason the KPI alert run failed."
+              }
+            }
+          },
+          "scheduledMetricUpdateWebhookNotification": {
+            "type": "object",
+            "description": "Set when notificationType is SCHEDULE_METRIC_UPDATE.",
+            "properties": {
+              "monitorRuleForWebhook": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule",
+                "description": "KPI alert that triggered the notification."
+              },
+              "modifyUrl": {
+                "type": "string",
+                "description": "URL to modify the KPI alert."
+              },
+              "unsubscribeUrl": {
+                "type": "string",
+                "description": "URL to unsubscribe from the KPI alert."
+              },
+              "ruleExecutionDetails": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule_Execution_Details",
+                "description": "Result of the KPI alert run that sent this notification."
+              }
+            }
+          },
+          "selfSubscriptionWebhookNotification": {
+            "type": "object",
+            "description": "Set when notificationType is SELF_SUBSCRIPTION.",
+            "properties": {
+              "monitorRuleForWebhook": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule",
+                "description": "KPI alert that triggered the notification."
+              },
+              "modifyUrl": {
+                "type": "string",
+                "description": "URL to modify the KPI alert."
+              },
+              "unsubscribeUrl": {
+                "type": "string",
+                "description": "URL to unsubscribe from the KPI alert."
+              },
+              "ruleExecutionDetails": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule_Execution_Details",
+                "description": "Result of the KPI alert run that sent this notification."
+              }
+            }
+          },
+          "subscriptionWebhookNotification": {
+            "type": "object",
+            "description": "Set when notificationType is SUBSCRIPTION.",
+            "properties": {
+              "monitorRuleForWebhook": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule",
+                "description": "KPI alert that triggered the notification."
+              },
+              "modifyUrl": {
+                "type": "string",
+                "description": "URL to modify the KPI alert."
+              },
+              "unsubscribeUrl": {
+                "type": "string",
+                "description": "URL to unsubscribe from the KPI alert."
+              },
+              "subscribedByUser": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_User",
+                "description": "User who subscribed the recipient."
+              },
+              "ruleExecutionDetails": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule_Execution_Details",
+                "description": "Result of the KPI alert run that sent this notification."
+              }
+            }
+          },
+          "thresholdReachedMetricUpdateWebhookNotification": {
+            "type": "object",
+            "description": "Set when notificationType is THRESHOLD_METRIC_UPDATE.",
+            "properties": {
+              "monitorRuleForWebhook": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule",
+                "description": "KPI alert that triggered the notification."
+              },
+              "modifyUrl": {
+                "type": "string",
+                "description": "URL to modify the KPI alert."
+              },
+              "unsubscribeUrl": {
+                "type": "string",
+                "description": "URL to unsubscribe from the KPI alert."
+              },
+              "ruleExecutionDetails": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule_Execution_Details",
+                "description": "Result of the KPI alert run that sent this notification."
+              }
+            }
+          },
+          "updationWebhookNotification": {
+            "type": "object",
+            "description": "Set when notificationType is UPDATION.",
+            "properties": {
+              "monitorRuleForWebhook": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule",
+                "description": "KPI alert that triggered the notification."
+              },
+              "modifyUrl": {
+                "type": "string",
+                "description": "URL to modify the KPI alert."
+              },
+              "unsubscribeUrl": {
+                "type": "string",
+                "description": "URL to unsubscribe from the KPI alert."
+              }
+            }
+          },
+          "automaticSelfSubscriptionWebhookNotification": {
+            "type": "object",
+            "description": "Set when notificationType is AUTOMATIC_SELF_SUBSCRIPTION.",
+            "properties": {
+              "monitorRuleForWebhook": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule",
+                "description": "KPI alert that triggered the notification."
+              },
+              "modifyUrl": {
+                "type": "string",
+                "description": "URL to modify the KPI alert."
+              },
+              "unsubscribeUrl": {
+                "type": "string",
+                "description": "URL to unsubscribe from the KPI alert."
+              },
+              "ruleExecutionDetails": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule_Execution_Details",
+                "description": "Result of the KPI alert run that sent this notification."
+              }
+            }
+          },
+          "scheduledByAttrMetricUpdateWebhookNotification": {
+            "type": "object",
+            "description": "Set when notificationType is SCHEDULED_BY_ATTRIBUTE.",
+            "properties": {
+              "monitorRuleForWebhook": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule",
+                "description": "KPI alert that triggered the notification."
+              },
+              "modifyUrl": {
+                "type": "string",
+                "description": "URL to modify the KPI alert."
+              },
+              "unsubscribeUrl": {
+                "type": "string",
+                "description": "URL to unsubscribe from the KPI alert."
+              },
+              "alertByAttrExecutionDetails": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_By_Attribute_Execution_Details",
+                "description": "Per-attribute results of the KPI alert run."
+              }
+            }
+          },
+          "thresholdByAttrMetricUpdateWebhookNotification": {
+            "type": "object",
+            "description": "Set when notificationType is THRESHOLD_BY_ATTRIBUTE.",
+            "properties": {
+              "monitorRuleForWebhook": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule",
+                "description": "KPI alert that triggered the notification."
+              },
+              "modifyUrl": {
+                "type": "string",
+                "description": "URL to modify the KPI alert."
+              },
+              "unsubscribeUrl": {
+                "type": "string",
+                "description": "URL to unsubscribe from the KPI alert."
+              },
+              "alertByAttrExecutionDetails": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_By_Attribute_Execution_Details",
+                "description": "Per-attribute results of the KPI alert run."
+              }
+            }
+          },
+          "anomalyMetricWebhookNotification": {
+            "type": "object",
+            "description": "Set when notificationType is ANOMALY_METRIC_UPDATE.",
+            "properties": {
+              "monitorRuleForWebhook": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Rule",
+                "description": "KPI alert that triggered the notification."
+              },
+              "modifyUrl": {
+                "type": "string",
+                "description": "URL to modify the KPI alert."
+              },
+              "unsubscribeUrl": {
+                "type": "string",
+                "description": "URL to unsubscribe from the KPI alert."
+              },
+              "anomalyDetails": {
+                "$ref": "#/components/schemas/Webhook_Kpi_Alert_Anomaly_Details",
+                "description": "Anomaly detected by the KPI alert run."
+              }
+            }
+          }
+        }
+      },
+      "Webhook_Kpi_Alert_Rule": {
+        "type": "object",
+        "description": "KPI alert that triggered the notification.",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "description": "Unique ID of the KPI alert."
+          },
+          "ruleName": {
+            "type": "string",
+            "description": "Name of the KPI alert."
+          },
+          "metricId": {
+            "$ref": "#/components/schemas/Webhook_Kpi_Alert_Metric_Id"
+          },
+          "metricName": {
+            "type": "string",
+            "description": "Name of the KPI the alert is set on."
+          },
+          "alertType": {
+            "type": "string",
+            "enum": [
+              "Scheduled",
+              "Threshold",
+              "Anomaly",
+              "ScheduledByAttribute",
+              "ThresholdByAttribute"
+            ],
+            "description": "Type of the KPI alert."
+          },
+          "metricUrl": {
+            "type": "string",
+            "description": "URL of the KPI visualization."
+          },
+          "conditionString": {
+            "type": "string",
+            "description": "Readable form of the alert condition."
+          },
+          "scheduleString": {
+            "type": "string",
+            "description": "Readable form of the alert schedule."
+          },
+          "customMessage": {
+            "type": "string",
+            "description": "Custom message set on the KPI alert."
+          }
+        }
+      },
+      "Webhook_Kpi_Alert_Metric_Id": {
+        "type": "object",
+        "description": "Identifies the KPI the alert is set on: either pinboardVizId or answerId is set.",
+        "properties": {
+          "pinboardVizId": {
+            "type": "object",
+            "description": "Liveboard visualization the KPI alert is set on.",
+            "properties": {
+              "pinboardId": {
+                "type": "string",
+                "description": "Unique ID of the Liveboard."
+              },
+              "vizId": {
+                "type": "string",
+                "description": "Unique ID of the visualization in the Liveboard."
+              },
+              "pinboardObjId": {
+                "type": "string",
+                "description": "Custom object ID of the Liveboard."
+              }
+            }
+          },
+          "answerId": {
+            "type": "string",
+            "description": "Unique ID of the Answer the KPI alert is set on."
+          },
+          "personalisedViewId": {
+            "type": "string",
+            "description": "Unique ID of the personalised view, if any."
+          },
+          "answerObjId": {
+            "type": "string",
+            "description": "Custom object ID of the Answer."
+          }
+        }
+      },
+      "Webhook_Kpi_Alert_User": {
+        "type": "object",
+        "description": "ThoughtSpot user referenced by the notification.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the user."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of the user."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the user."
+          },
+          "userName": {
+            "type": "string",
+            "description": "Username of the user."
+          }
+        }
+      },
+      "Webhook_Kpi_Alert_User_Group": {
+        "type": "object",
+        "description": "ThoughtSpot group subscribed to the KPI alert.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the group."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of the group."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the group."
+          },
+          "groupName": {
+            "type": "string",
+            "description": "Name of the group."
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Webhook_Kpi_Alert_User"
+            },
+            "description": "Users who belong to the group."
+          }
+        }
+      },
+      "Webhook_Kpi_Alert_Deletion": {
+        "type": "object",
+        "description": "Set when notificationType is DELETION.",
+        "properties": {
+          "ruleName": {
+            "type": "string",
+            "description": "Name of the deleted KPI alert."
+          },
+          "metricName": {
+            "type": "string",
+            "description": "Name of the KPI the alert was set on."
+          },
+          "metricId": {
+            "$ref": "#/components/schemas/Webhook_Kpi_Alert_Metric_Id"
+          },
+          "deletedByUser": {
+            "$ref": "#/components/schemas/Webhook_Kpi_Alert_User",
+            "description": "User who deleted the KPI alert."
+          }
+        }
+      },
+      "Webhook_Kpi_Alert_Rule_Execution_Details": {
+        "type": "object",
+        "description": "Result of a KPI alert run.",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "description": "Unique ID of the KPI alert."
+          },
+          "currentMetricValue": {
+            "type": "string",
+            "description": "Value of the KPI at the time of the run."
+          },
+          "percentageChange": {
+            "type": "string",
+            "description": "Percentage change of the KPI from the previous period."
+          },
+          "executionTimestamp": {
+            "type": "string",
+            "description": "Time of the KPI alert run."
+          }
+        }
+      },
+      "Webhook_Kpi_Alert_Anomaly_Details": {
+        "type": "object",
+        "description": "Anomaly detected by a KPI alert run.",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "description": "Unique ID of the KPI alert."
+          },
+          "currentMetricValue": {
+            "type": "string",
+            "description": "Value of the KPI at the time of the run."
+          },
+          "percentageChange": {
+            "type": "string",
+            "description": "Percentage change of the KPI from the previous period."
+          },
+          "anomalyDetectedTimestamp": {
+            "type": "string",
+            "description": "Time the anomaly was detected."
+          },
+          "upperBound": {
+            "type": "string",
+            "description": "Upper bound of the expected KPI range."
+          },
+          "lowerBound": {
+            "type": "string",
+            "description": "Lower bound of the expected KPI range."
+          },
+          "isAnomaly": {
+            "type": "boolean",
+            "description": "Whether the KPI value is an anomaly."
+          },
+          "prediction": {
+            "type": "string",
+            "description": "Predicted value of the KPI."
+          }
+        }
+      },
+      "Webhook_Kpi_Alert_By_Attribute_Execution_Details": {
+        "type": "object",
+        "description": "Per-attribute results of a KPI alert run.",
+        "properties": {
+          "attributeAnswerUrl": {
+            "type": "string",
+            "description": "URL of the Answer generated for the alert across attributes."
+          },
+          "attributeName": {
+            "type": "string",
+            "description": "Name of the attribute configured in the alert."
+          },
+          "attributeResult": {
+            "type": "array",
+            "description": "Attribute values that crossed the threshold.",
+            "items": {
+              "type": "object",
+              "description": "KPI values for one attribute value.",
+              "properties": {
+                "attributeValue": {
+                  "type": "string",
+                  "description": "Value of the attribute."
+                },
+                "latestValue": {
+                  "type": "string",
+                  "description": "KPI value for the latest period."
+                },
+                "comparisonValue": {
+                  "type": "string",
+                  "description": "KPI value for the comparison period."
+                },
+                "percentageChange": {
+                  "type": "string",
+                  "description": "Percentage change from the comparison period."
+                }
+              }
+            }
+          },
+          "latestPeriod": {
+            "type": "string",
+            "description": "Readable form of the latest period."
+          },
+          "comparisonPeriod": {
+            "type": "string",
+            "description": "Readable form of the comparison period."
+          }
+        }
       }
     },
     "securitySchemes": {
