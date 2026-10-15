@@ -22982,6 +22982,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - CAN_VIEW_FOLDERS
+            - CAN_MODIFY_FOLDERS
             - CAN_MODIDY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_MANAGE_AGENTSPOT
@@ -22998,6 +22999,10 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            - CAN_MANAGE_INPUT_TABLES
+            - CAN_EDIT_INPUT_TABLES
+            - CAN_CREATE_DATA_APP
+            - CAN_CREATE_MUZE_STUDIO_TEMPLATES
             type: string
           type: array
         permission:
@@ -38249,6 +38254,7 @@ components:
             - CAN_ACCESS_ANALYST_STUDIO
             - CAN_MANAGE_ANALYST_STUDIO
             - CAN_VIEW_FOLDERS
+            - CAN_MODIFY_FOLDERS
             - CAN_MODIDY_FOLDERS
             - CAN_MANAGE_VARIABLES
             - CAN_MANAGE_AGENTSPOT
@@ -38265,6 +38271,10 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            - CAN_MANAGE_INPUT_TABLES
+            - CAN_EDIT_INPUT_TABLES
+            - CAN_CREATE_DATA_APP
+            - CAN_CREATE_MUZE_STUDIO_TEMPLATES
             type: string
           type: array
         deprecated:

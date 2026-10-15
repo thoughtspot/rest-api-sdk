@@ -48,10 +48,6 @@
 -  request property `org_id` deprecated
 
 
-### POST /api/rest/2.0/calendars/generate-csv
--  the response header `content-disposition` was added for the status `200`
-
-
 ### POST /api/rest/2.0/customization/custom-actions
 -  endpoint deprecated
 
@@ -68,10 +64,6 @@
 -  endpoint deprecated
 
 
-### POST /api/rest/2.0/customization/links/update
--  api operation id `updateLinkCustomization` removed and replaced with `updateLinkCustomizations`
-
-
 ### POST /api/rest/2.0/customization/styles/search
 -  added the optional property `items/app_color_theme` to the response with the `200` status
 
@@ -81,12 +73,21 @@
 -  added the new `APP_COLOR_THEME` enum value to the request property `reset_options/allOf[#/components/schemas/StyleResetOptionsInput]/style/items/`
 
 
-### POST /api/rest/2.0/localizations/manual-translation/export
--  the response header `content-disposition` was added for the status `200`
-
-
 ### POST /api/rest/2.0/metadata/search
 -  added the new optional request property `liveboard_details`
+
+
+### POST /api/rest/2.0/roles/search
+- :warning: added the new `CAN_CREATE_DATA_APP` enum value to the `items/privileges/items/` response property for the response status `200`
+- :warning: added the new `CAN_CREATE_MUZE_STUDIO_TEMPLATES` enum value to the `items/privileges/items/` response property for the response status `200`
+- :warning: added the new `CAN_EDIT_INPUT_TABLES` enum value to the `items/privileges/items/` response property for the response status `200`
+- :warning: added the new `CAN_MANAGE_INPUT_TABLES` enum value to the `items/privileges/items/` response property for the response status `200`
+- :warning: added the new `CAN_MODIFY_FOLDERS` enum value to the `items/privileges/items/` response property for the response status `200`
+-  added the new `CAN_CREATE_DATA_APP` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_MUZE_STUDIO_TEMPLATES` enum value to the request property `privileges/items/`
+-  added the new `CAN_EDIT_INPUT_TABLES` enum value to the request property `privileges/items/`
+-  added the new `CAN_MANAGE_INPUT_TABLES` enum value to the request property `privileges/items/`
+-  added the new `CAN_MODIFY_FOLDERS` enum value to the request property `privileges/items/`
 
 
 ### POST /api/rest/2.0/version-control/branch/promote
@@ -125,10 +126,6 @@
 -  endpoint added
 
 
-
-
-## Components
--  removed the schema `UpdateLinkCustomizationRequest`
 
 
 
