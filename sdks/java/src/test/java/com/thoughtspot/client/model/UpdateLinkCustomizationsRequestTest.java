@@ -18,17 +18,17 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for UpdateLinkCustomizationRequest
+ * Model tests for UpdateLinkCustomizationsRequest
  */
-public class UpdateLinkCustomizationRequestTest {
-    private final UpdateLinkCustomizationRequest model = new UpdateLinkCustomizationRequest();
+public class UpdateLinkCustomizationsRequestTest {
+    private final UpdateLinkCustomizationsRequest model = new UpdateLinkCustomizationsRequest();
 
     /**
-     * Model tests for UpdateLinkCustomizationRequest
+     * Model tests for UpdateLinkCustomizationsRequest
      */
     @Test
-    public void testUpdateLinkCustomizationRequest() {
-        // TODO: test UpdateLinkCustomizationRequest
+    public void testUpdateLinkCustomizationsRequest() {
+        // TODO: test UpdateLinkCustomizationsRequest
     }
 
     /**

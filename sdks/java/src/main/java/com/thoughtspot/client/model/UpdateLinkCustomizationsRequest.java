@@ -41,14 +41,14 @@ import java.util.Set;
 import com.thoughtspot.client.JSON;
 
 /**
- * UpdateLinkCustomizationRequest
+ * UpdateLinkCustomizationsRequest
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
-public class UpdateLinkCustomizationRequest implements Serializable {
+public class UpdateLinkCustomizationsRequest implements Serializable {
   private static final long serialVersionUID = 1L;
 
   /**
-   * Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the authenticated user&#39;s org.
+   * Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the org the caller is signed in to.
    */
   @JsonAdapter(ScopeEnum.Adapter.class)
   public enum ScopeEnum {
@@ -166,16 +166,16 @@ public class UpdateLinkCustomizationRequest implements Serializable {
   @javax.annotation.Nonnull
   private List<LinkTemplateInput> templates;
 
-  public UpdateLinkCustomizationRequest() {
+  public UpdateLinkCustomizationsRequest() {
   }
 
-  public UpdateLinkCustomizationRequest scope(@javax.annotation.Nonnull ScopeEnum scope) {
+  public UpdateLinkCustomizationsRequest scope(@javax.annotation.Nonnull ScopeEnum scope) {
     this.scope = scope;
     return this;
   }
 
   /**
-   * Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the authenticated user&#39;s org.
+   * Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the org the caller is signed in to.
    * @return scope
    */
   @javax.annotation.Nonnull
@@ -188,7 +188,7 @@ public class UpdateLinkCustomizationRequest implements Serializable {
   }
 
 
-  public UpdateLinkCustomizationRequest operation(@javax.annotation.Nullable OperationEnum operation) {
+  public UpdateLinkCustomizationsRequest operation(@javax.annotation.Nullable OperationEnum operation) {
     this.operation = operation;
     return this;
   }
@@ -207,12 +207,12 @@ public class UpdateLinkCustomizationRequest implements Serializable {
   }
 
 
-  public UpdateLinkCustomizationRequest templates(@javax.annotation.Nonnull List<LinkTemplateInput> templates) {
+  public UpdateLinkCustomizationsRequest templates(@javax.annotation.Nonnull List<LinkTemplateInput> templates) {
     this.templates = templates;
     return this;
   }
 
-  public UpdateLinkCustomizationRequest addTemplatesItem(LinkTemplateInput templatesItem) {
+  public UpdateLinkCustomizationsRequest addTemplatesItem(LinkTemplateInput templatesItem) {
     if (this.templates == null) {
       this.templates = new ArrayList<>();
     }
@@ -221,7 +221,7 @@ public class UpdateLinkCustomizationRequest implements Serializable {
   }
 
   /**
-   * Link types to act on. Types not listed are left unchanged. Duplicate entries for the same type are rejected.
+   * Link types to act on. This is a partial update: types not listed keep the value they resolve to today. Duplicate entries for the same type are rejected.
    * @return templates
    */
   @javax.annotation.Nonnull
@@ -246,9 +246,9 @@ public class UpdateLinkCustomizationRequest implements Serializable {
    *
    * @param key name of the property
    * @param value value of the property
-   * @return the UpdateLinkCustomizationRequest instance itself
+   * @return the UpdateLinkCustomizationsRequest instance itself
    */
-  public UpdateLinkCustomizationRequest putAdditionalProperty(String key, Object value) {
+  public UpdateLinkCustomizationsRequest putAdditionalProperty(String key, Object value) {
     if (this.additionalProperties == null) {
         this.additionalProperties = new HashMap<String, Object>();
     }
@@ -287,11 +287,11 @@ public class UpdateLinkCustomizationRequest implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UpdateLinkCustomizationRequest updateLinkCustomizationRequest = (UpdateLinkCustomizationRequest) o;
-    return Objects.equals(this.scope, updateLinkCustomizationRequest.scope) &&
-        Objects.equals(this.operation, updateLinkCustomizationRequest.operation) &&
-        Objects.equals(this.templates, updateLinkCustomizationRequest.templates)&&
-        Objects.equals(this.additionalProperties, updateLinkCustomizationRequest.additionalProperties);
+    UpdateLinkCustomizationsRequest updateLinkCustomizationsRequest = (UpdateLinkCustomizationsRequest) o;
+    return Objects.equals(this.scope, updateLinkCustomizationsRequest.scope) &&
+        Objects.equals(this.operation, updateLinkCustomizationsRequest.operation) &&
+        Objects.equals(this.templates, updateLinkCustomizationsRequest.templates)&&
+        Objects.equals(this.additionalProperties, updateLinkCustomizationsRequest.additionalProperties);
   }
 
   @Override
@@ -302,7 +302,7 @@ public class UpdateLinkCustomizationRequest implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UpdateLinkCustomizationRequest {\n");
+    sb.append("class UpdateLinkCustomizationsRequest {\n");
     sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
     sb.append("    operation: ").append(toIndentedString(operation)).append("\n");
     sb.append("    templates: ").append(toIndentedString(templates)).append("\n");
@@ -343,17 +343,17 @@ public class UpdateLinkCustomizationRequest implements Serializable {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to UpdateLinkCustomizationRequest
+   * @throws IOException if the JSON Element is invalid with respect to UpdateLinkCustomizationsRequest
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!UpdateLinkCustomizationRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in UpdateLinkCustomizationRequest is not found in the empty JSON string", UpdateLinkCustomizationRequest.openapiRequiredFields.toString()));
+        if (!UpdateLinkCustomizationsRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in UpdateLinkCustomizationsRequest is not found in the empty JSON string", UpdateLinkCustomizationsRequest.openapiRequiredFields.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : UpdateLinkCustomizationRequest.openapiRequiredFields) {
+      for (String requiredField : UpdateLinkCustomizationsRequest.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
@@ -387,16 +387,16 @@ public class UpdateLinkCustomizationRequest implements Serializable {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!UpdateLinkCustomizationRequest.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'UpdateLinkCustomizationRequest' and its subtypes
+       if (!UpdateLinkCustomizationsRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'UpdateLinkCustomizationsRequest' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<UpdateLinkCustomizationRequest> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(UpdateLinkCustomizationRequest.class));
+       final TypeAdapter<UpdateLinkCustomizationsRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(UpdateLinkCustomizationsRequest.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<UpdateLinkCustomizationRequest>() {
+       return (TypeAdapter<T>) new TypeAdapter<UpdateLinkCustomizationsRequest>() {
            @Override
-           public void write(JsonWriter out, UpdateLinkCustomizationRequest value) throws IOException {
+           public void write(JsonWriter out, UpdateLinkCustomizationsRequest value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              obj.remove("additionalProperties");
              // serialize additional properties
@@ -424,12 +424,12 @@ public class UpdateLinkCustomizationRequest implements Serializable {
            }
 
            @Override
-           public UpdateLinkCustomizationRequest read(JsonReader in) throws IOException {
+           public UpdateLinkCustomizationsRequest read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              JsonObject jsonObj = jsonElement.getAsJsonObject();
              // store additional fields in the deserialized instance
-             UpdateLinkCustomizationRequest instance = thisAdapter.fromJsonTree(jsonObj);
+             UpdateLinkCustomizationsRequest instance = thisAdapter.fromJsonTree(jsonObj);
              for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                if (!openapiFields.contains(entry.getKey())) {
                  if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -456,18 +456,18 @@ public class UpdateLinkCustomizationRequest implements Serializable {
   }
 
   /**
-   * Create an instance of UpdateLinkCustomizationRequest given an JSON string
+   * Create an instance of UpdateLinkCustomizationsRequest given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of UpdateLinkCustomizationRequest
-   * @throws IOException if the JSON string is invalid with respect to UpdateLinkCustomizationRequest
+   * @return An instance of UpdateLinkCustomizationsRequest
+   * @throws IOException if the JSON string is invalid with respect to UpdateLinkCustomizationsRequest
    */
-  public static UpdateLinkCustomizationRequest fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, UpdateLinkCustomizationRequest.class);
+  public static UpdateLinkCustomizationsRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, UpdateLinkCustomizationsRequest.class);
   }
 
   /**
-   * Convert an instance of UpdateLinkCustomizationRequest to an JSON string
+   * Convert an instance of UpdateLinkCustomizationsRequest to an JSON string
    *
    * @return JSON string
    */

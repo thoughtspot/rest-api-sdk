@@ -45,7 +45,7 @@ public class SearchLinkCustomizationsRequest implements Serializable {
   private static final long serialVersionUID = 1L;
 
   /**
-   * Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the primary org. ORG returns the authenticated user&#39;s org. Omit to return every scope the caller can reach.
+   * Scope to retrieve. CLUSTER returns the cluster templates and is available only in the primary org. ORG returns the templates for the org the caller is signed in to. Omit to return whichever of these the caller can access.
    */
   @JsonAdapter(ScopeEnum.Adapter.class)
   public enum ScopeEnum {
@@ -110,7 +110,7 @@ public class SearchLinkCustomizationsRequest implements Serializable {
   }
 
   /**
-   * Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the primary org. ORG returns the authenticated user&#39;s org. Omit to return every scope the caller can reach.
+   * Scope to retrieve. CLUSTER returns the cluster templates and is available only in the primary org. ORG returns the templates for the org the caller is signed in to. Omit to return whichever of these the caller can access.
    * @return scope
    */
   @javax.annotation.Nullable

@@ -4521,6 +4521,32 @@ paths:
 
         A successful login returns a session cookie that can be used in your subsequent API requests.
 
+        #### Redirecting after login
+
+        To send a browser to a specific page once the session is created, pass
+        `redirect_url`. It must be a path on the same ThoughtSpot instance that served
+        the login request, for example `/pinboards`. An absolute URL is rejected with
+        `400`, so that a login cannot be used to forward a newly issued session cookie
+        to another host.
+
+        The path is resolved against the host the caller actually reached, which means
+        the same request works unchanged on a custom domain, behind a proxy, or on an
+        Org-specific subdomain.
+
+        * **Browser flows** — omit `no_url_redirection`. The API answers `302` with the
+          resolved path in the `location` header, and the browser follows it on its own.
+          This is the usual choice when the login is submitted as an HTML form or opened
+          as a top-level navigation.
+        * **SPA and non-browser clients** — set `no_url_redirection` to `true`. The API
+          keeps its normal `204` response and returns the resolved path in the
+          `location` header without redirecting, leaving the client to decide when and
+          where to navigate. Use this from `fetch`/`XMLHttpRequest` calls, which follow
+          a `302` internally and never expose it to your code.
+
+        When `redirect_url` is omitted the response is unchanged, and
+        `no_url_redirection` has no effect on its own.
+
+
 
 
 
@@ -6658,10 +6684,13 @@ paths:
       - application/json
   /api/rest/2.0/customization/custom-actions:
     post:
-      description: "\n Version: 9.6.0.cl or later\n\n\nCreates a custom action that\
-        \ appears as a menu action on a saved Answer or Liveboard visualization.\n\
-        \nRequires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can\
-        \ administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
+      description: "\n Version: 9.6.0.cl or later\n\n\n**Note:** This API endpoint\
+        \ is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl.\
+        \ Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action)\
+        \ in the Visual Embed SDK instead.\n\nCreates a custom action that appears\
+        \ as a menu action on a saved Answer or Liveboard visualization.\n\nRequires\
+        \ `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer\
+        \ ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
         \ is enabled on your instance, the `DEVELOPER` (**Has developer privilege**)\
         \ privilege is required.\n\n#### Usage Guidelines\n\nThe API lets you create\
         \ the following types of custom actions:\n\n* URL-based action     \n  Allows\
@@ -6781,6 +6810,8 @@ paths:
          Version: 9.6.0.cl or later
 
 
+        **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.
+
         Removes the custom action specified in the API request.
 
         Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
@@ -6879,6 +6910,8 @@ paths:
 
          Version: 9.6.0.cl or later
 
+
+        **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.
 
         Gets custom actions configured on the cluster.
 
@@ -6982,6 +7015,8 @@ paths:
 
          Version: 9.6.0.cl or later
 
+
+        **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.
 
         Updates a custom action.
 
@@ -7280,6 +7315,14 @@ paths:
               schema: {}
           description: "Generate custom calendar data based on specifications, as\
             \ a CSV file."
+          headers:
+            Content-Disposition:
+              description: Indicates that the response is a file attachment.
+              explode: false
+              schema:
+                example: attachment; filename="table_name.calendar.csv"
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -10146,45 +10189,45 @@ paths:
          Version: 26.11.0.cl or later
 
 
-        Updates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user's org. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.
+        Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.
 
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
 
         #### Usage guidelines
 
-        - `scope: CLUSTER` changes the defaults inherited by all orgs, and is available only to callers in the primary org.
-        - `scope: ORG` (default) changes the authenticated user's org, and requires Orgs to be enabled.
-        - List only the types you want to change in `templates`. Unlisted types are left unchanged by either operation, and a repeated type is rejected.
-        - **REPLACE** (default) sets each listed type to its `value`.
-        - **RESET** reverts each listed type to the value its scope inherits: the ThoughtSpot default at cluster scope, and the cluster template at org scope. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`.
+        - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org.
+        - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled.
+        - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected.
+        - **REPLACE** (default) sets each listed type to the `value` provided in the request.
+        - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.
 
         #### Placeholders
 
-        A template is rejected unless it contains the placeholders its type requires:
+        A template is rejected unless it contains the placeholders its type requires.
 
-        | Link type | Required |
-        | --- | --- |
-        | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` |
-        | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` |
-        | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` |
-        | `SPOTIQ_ANALYSIS_URL` | `{object-id}` |
-        | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` |
-        | `GENERIC_URL` | `{path}` |
-        | `UNSUBSCRIBE_URL` | none |
+        | Link type | Required | Example |
+        | --- | --- | --- |
+        | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` |
+        | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` |
+        | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` |
+        | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` |
+        | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` |
+        | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` |
+        | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |
 
-        `{ts-query-params}` is optional on any type that does not require it, including `SPOTIQ_ANALYSIS_URL` and `UNSUBSCRIBE_URL`: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.
-
-
+        `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.
 
 
 
-      operationId: updateLinkCustomization
+
+
+      operationId: updateLinkCustomizations
       parameters: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateLinkCustomizationRequest'
+              $ref: '#/components/schemas/UpdateLinkCustomizationsRequest'
         required: true
       responses:
         "204":
@@ -10198,20 +10241,23 @@ paths:
                   value:
                     error:
                       message:
-                        code: 10002
-                        incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-                        trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-                        debug: "Link template for LIVEBOARD_SHARE_URL is missing required\
-                          \ placeholders: {object-id}, {ts-query-params}."
+                        debug:
+                          code: 10002
+                          incident_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                          trace_id_guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                          debug: "[\"Invalid template for GENERIC_URL: value must\
+                            \ contain {path}.\"]"
                 value_with_reset:
                   summary: Value supplied alongside RESET
                   value:
                     error:
                       message:
-                        code: 10002
-                        incident_id_guid: e5f67890-1234-5678-efab-567890123456
-                        trace_id_guid: e5f67890-1234-5678-efab-567890123456
-                        debug: Field 'value' is not allowed when operation is RESET.
+                        debug:
+                          code: 10002
+                          incident_id_guid: e5f67890-1234-5678-efab-567890123456
+                          trace_id_guid: e5f67890-1234-5678-efab-567890123456
+                          debug: "[\"Field 'value' must not be supplied for RESET\
+                            \ operation for type: UNSUBSCRIBE_URL.\"]"
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Invalid request.
@@ -10224,11 +10270,12 @@ paths:
                   value:
                     error:
                       message:
-                        code: 10097
-                        incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
-                        trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
-                        debug: Authentication required to update link templates for
-                          the cluster or org.
+                        debug:
+                          code: 10097
+                          incident_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                          trace_id_guid: b2c3d4e5-f678-9012-bcde-f23456789012
+                          debug: "[\"Authentication required to update link templates\
+                            \ for the cluster or org.\"]"
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized access.
@@ -10241,11 +10288,12 @@ paths:
                   value:
                     error:
                       message:
-                        code: 10023
-                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
-                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
-                        debug: "Embed settings are not available: ThoughtSpot Embedded\
-                          \ is not enabled on this cluster."
+                        debug:
+                          code: 10023
+                          incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                          trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                          debug: "[\"Cannot access embed settings: ThoughtSpot Embedded\
+                            \ is not enabled for this cluster.\"]"
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden access.
@@ -10258,10 +10306,12 @@ paths:
                   value:
                     error:
                       message:
-                        code: 10038
-                        incident_id_guid: d4e5f678-9012-3456-defa-456789012345
-                        trace_id_guid: d4e5f678-9012-3456-defa-456789012345
-                        debug: Unexpected server error while updating link templates.
+                        debug:
+                          code: 10038
+                          incident_id_guid: d4e5f678-9012-3456-defa-456789012345
+                          trace_id_guid: d4e5f678-9012-3456-defa-456789012345
+                          debug: "[\"Unexpected server error while updating link templates.\"\
+                            ]"
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unexpected error
@@ -10411,6 +10461,14 @@ paths:
                 format: binary
                 type: string
           description: CSV file downloaded successfully.
+          headers:
+            Content-Disposition:
+              description: Indicates that the response is a file attachment.
+              explode: false
+              schema:
+                example: attachment; filename="manual-translation.csv"
+                type: string
+              style: simple
         "400":
           content:
             application/json:
@@ -14118,6 +14176,7 @@ paths:
         - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.
         - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.
         - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).
+        - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.
 
 
 
@@ -14141,6 +14200,10 @@ paths:
                   - scope: CLUSTER
                     navigation_panel:
                       theme: DARK
+                      is_overridden: false
+                    app_color_theme:
+                      brand_color: null
+                      apply_as_top_nav_color: false
                       is_overridden: false
                     chart_color_palette:
                       colors:
@@ -14222,6 +14285,10 @@ paths:
                     navigation_panel:
                       theme: CUSTOM
                       base_color: '#2359B6'
+                      is_overridden: true
+                    app_color_theme:
+                      brand_color: '#2359B6'
+                      apply_as_top_nav_color: true
                       is_overridden: true
                     chart_color_palette:
                       colors:
@@ -14525,7 +14592,7 @@ paths:
 
         Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.
 
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.
 
         #### Usage guidelines
 
@@ -14550,6 +14617,15 @@ paths:
         - `DARK`: Default dark theme.
         - `TWO_TONE`: Dual-tone panel style.
         - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).
+
+        #### App color theme
+
+        `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.
+
+        - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`.
+        - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.
+
+        `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.
 
         #### Chart color palette
 
@@ -18031,6 +18107,36 @@ paths:
                       id: 7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d
                       name: mike_rodriguez
                 example_3:
+                  description: Webhook with AWS S3 storage destination
+                  value:
+                    id: e2f1a0b9-c8d7-4e6f-a5b4-3c2d1e0f9a8b
+                    name: S3 Storage Webhook
+                    description: Webhook that uploads payloads to an S3 bucket
+                    org:
+                      id: "0"
+                      name: Primary
+                    url: https://api.example.com/webhooks
+                    events:
+                    - LIVEBOARD_SCHEDULE
+                    storage_destination:
+                      storage_type: AWS_S3
+                      storage_config:
+                        aws_s3_config:
+                          bucket_name: my-webhook-files
+                          region: us-west-2
+                          role_arn: arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole
+                          external_id: ts-webhook-a1b2c3d4-7890
+                          path_prefix: thoughtspot-webhooks/
+                    status: DISABLED
+                    creation_time_in_millis: 1724279130789
+                    modification_time_in_millis: 1724279130789
+                    created_by:
+                      id: 5b4c3d2e-1f0a-4b9c-8d7e-6f5a4b3c2d1e
+                      name: james_okafor
+                    last_modified_by:
+                      id: 5b4c3d2e-1f0a-4b9c-8d7e-6f5a4b3c2d1e
+                      name: james_okafor
+                example_4:
                   description: Webhook with GCP GCS storage destination
                   value:
                     id: c9d8e7f6-a5b4-4321-9876-fedcba012345
@@ -18057,6 +18163,33 @@ paths:
                     last_modified_by:
                       id: 3a2b1c4d-5e6f-7890-abcd-ef0123456789
                       name: priya_sharma
+                example_5:
+                  description: "Webhook with Basic authentication, created in DISABLED\
+                    \ status"
+                  value:
+                    id: d3c2b1a0-9f8e-4d7c-b6a5-4f3e2d1c0b9a
+                    name: Basic Auth Webhook
+                    description: Webhook created disabled until the receiving endpoint
+                      is ready
+                    org:
+                      id: "0"
+                      name: Primary
+                    url: https://hooks.example.com/thoughtspot
+                    events:
+                    - LIVEBOARD_SCHEDULE
+                    authentication:
+                      BASIC_AUTH:
+                        username: webhook_user
+                        password: '***'
+                    status: DISABLED
+                    creation_time_in_millis: 1724280730912
+                    modification_time_in_millis: 1724280730912
+                    created_by:
+                      id: 4c3d2e1f-0a9b-4c8d-7e6f-5a4b3c2d1e0f
+                      name: lucas_moreau
+                    last_modified_by:
+                      id: 4c3d2e1f-0a9b-4c8d-7e6f-5a4b3c2d1e0f
+                      name: lucas_moreau
               schema:
                 $ref: '#/components/schemas/WebhookResponse'
           description: Webhook configuration created successfully
@@ -18575,6 +18708,39 @@ paths:
                       total_count: 2
                       has_more: false
                 example_2:
+                  description: "Search filtered by status, returning a webhook with\
+                    \ S3 storage"
+                  value:
+                    webhooks:
+                    - id: e2f1a0b9-c8d7-4e6f-a5b4-3c2d1e0f9a8b
+                      name: S3 Storage Webhook
+                      org:
+                        id: "0"
+                        name: Primary
+                      url: https://api.example.com/webhooks
+                      events:
+                      - LIVEBOARD_SCHEDULE
+                      storage_destination:
+                        storage_type: AWS_S3
+                        storage_config:
+                          aws_s3_config:
+                            bucket_name: my-webhook-files
+                            region: us-west-2
+                            role_arn: arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole
+                            external_id: ts-webhook-a1b2c3d4-7890
+                            path_prefix: thoughtspot-webhooks/
+                      status: DISABLED
+                      creation_time_in_millis: 1724279130789
+                      modification_time_in_millis: 1724279130789
+                      created_by:
+                        id: 5b4c3d2e-1f0a-4b9c-8d7e-6f5a4b3c2d1e
+                        name: james_okafor
+                    pagination:
+                      record_offset: 0
+                      record_size: 50
+                      total_count: 1
+                      has_more: false
+                example_3:
                   description: Empty search results
                   value:
                     webhooks: []
@@ -26490,7 +26656,8 @@ components:
           nullable: true
           type: string
         is_overridden:
-          description: "True if set at this scope, false if inherited."
+          description: True when the value differs from the one this scope would otherwise
+            inherit.
           type: boolean
       required:
       - is_overridden
@@ -35626,15 +35793,15 @@ components:
       properties:
         scope:
           description: |-
-            Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the
-            primary org. ORG returns the authenticated user's org. Omit to return every scope
-            the caller can reach.
+            Scope to retrieve. CLUSTER returns the cluster templates and is available only in the
+            primary org. ORG returns the templates for the org the caller is signed in to. Omit to
+            return whichever of these the caller can access.
           enum:
           - CLUSTER
           - ORG
           type: string
       type: object
-    UpdateLinkCustomizationRequest:
+    UpdateLinkCustomizationsRequest:
       example:
         scope: ORG
         templates:
@@ -35648,7 +35815,7 @@ components:
           default: ORG
           description: |-
             Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and
-            is available only in the primary org. ORG applies to the authenticated user's org.
+            is available only in the primary org. ORG applies to the org the caller is signed in to.
           enum:
           - CLUSTER
           - ORG
@@ -35664,8 +35831,8 @@ components:
           type: string
         templates:
           description: |-
-            Link types to act on. Types not listed are left unchanged. Duplicate entries for the
-            same type are rejected.
+            Link types to act on. This is a partial update: types not listed keep the value they
+            resolve to today. Duplicate entries for the same type are rejected.
           items:
             $ref: '#/components/schemas/LinkTemplateInput'
           type: array
@@ -39666,7 +39833,7 @@ components:
           type: boolean
         onboarding_experience_completed:
           default: false
-          description: flag to get the on-boarding experience is completed or not.
+          description: Marks the user's onboarding questions as completed.
           nullable: true
           type: boolean
         home_liveboard_identifier:

@@ -16,7 +16,7 @@ from typing_extensions import Annotated
 from typing import List
 from thoughtspot_rest_api_sdk.models.link_preference import LinkPreference
 from thoughtspot_rest_api_sdk.models.search_link_customizations_request import SearchLinkCustomizationsRequest
-from thoughtspot_rest_api_sdk.models.update_link_customization_request import UpdateLinkCustomizationRequest
+from thoughtspot_rest_api_sdk.models.update_link_customizations_request import UpdateLinkCustomizationsRequest
 
 from thoughtspot_rest_api_sdk.api_client import ApiClient, RequestSerialized
 from thoughtspot_rest_api_sdk.api_response import ApiResponse
@@ -449,9 +449,9 @@ class LinkCustomizationApi:
 
 
     @validate_call
-    async def update_link_customization(
+    async def update_link_customizations(
         self,
-        update_link_customization_request: UpdateLinkCustomizationRequest,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -465,12 +465,12 @@ class LinkCustomizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """update_link_customization
+        """update_link_customizations
 
-          Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user's org. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all orgs, and is available only to callers in the primary org. - `scope: ORG` (default) changes the authenticated user's org, and requires Orgs to be enabled. - List only the types you want to change in `templates`. Unlisted types are left unchanged by either operation, and a repeated type is rejected. - **REPLACE** (default) sets each listed type to its `value`. - **RESET** reverts each listed type to the value its scope inherits: the ThoughtSpot default at cluster scope, and the cluster template at org scope. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires:  | Link type | Required | | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | | `GENERIC_URL` | `{path}` | | `UNSUBSCRIBE_URL` | none |  `{ts-query-params}` is optional on any type that does not require it, including `SPOTIQ_ANALYSIS_URL` and `UNSUBSCRIBE_URL`: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+          Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
 
-        :param update_link_customization_request: (required)
-        :type update_link_customization_request: UpdateLinkCustomizationRequest
+        :param update_link_customizations_request: (required)
+        :type update_link_customizations_request: UpdateLinkCustomizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -493,8 +493,8 @@ class LinkCustomizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_link_customization_serialize(
-            update_link_customization_request=update_link_customization_request,
+        _param = self._update_link_customizations_serialize(
+            update_link_customizations_request=update_link_customizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -520,9 +520,9 @@ class LinkCustomizationApi:
 
 
     @validate_call
-    async def update_link_customization_with_http_info(
+    async def update_link_customizations_with_http_info(
         self,
-        update_link_customization_request: UpdateLinkCustomizationRequest,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -536,12 +536,12 @@ class LinkCustomizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """update_link_customization
+        """update_link_customizations
 
-          Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user's org. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all orgs, and is available only to callers in the primary org. - `scope: ORG` (default) changes the authenticated user's org, and requires Orgs to be enabled. - List only the types you want to change in `templates`. Unlisted types are left unchanged by either operation, and a repeated type is rejected. - **REPLACE** (default) sets each listed type to its `value`. - **RESET** reverts each listed type to the value its scope inherits: the ThoughtSpot default at cluster scope, and the cluster template at org scope. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires:  | Link type | Required | | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | | `GENERIC_URL` | `{path}` | | `UNSUBSCRIBE_URL` | none |  `{ts-query-params}` is optional on any type that does not require it, including `SPOTIQ_ANALYSIS_URL` and `UNSUBSCRIBE_URL`: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+          Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
 
-        :param update_link_customization_request: (required)
-        :type update_link_customization_request: UpdateLinkCustomizationRequest
+        :param update_link_customizations_request: (required)
+        :type update_link_customizations_request: UpdateLinkCustomizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -564,8 +564,8 @@ class LinkCustomizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_link_customization_serialize(
-            update_link_customization_request=update_link_customization_request,
+        _param = self._update_link_customizations_serialize(
+            update_link_customizations_request=update_link_customizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -591,9 +591,9 @@ class LinkCustomizationApi:
 
 
     @validate_call
-    async def update_link_customization_without_preload_content(
+    async def update_link_customizations_without_preload_content(
         self,
-        update_link_customization_request: UpdateLinkCustomizationRequest,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -607,12 +607,12 @@ class LinkCustomizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_link_customization
+        """update_link_customizations
 
-          Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user's org. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all orgs, and is available only to callers in the primary org. - `scope: ORG` (default) changes the authenticated user's org, and requires Orgs to be enabled. - List only the types you want to change in `templates`. Unlisted types are left unchanged by either operation, and a repeated type is rejected. - **REPLACE** (default) sets each listed type to its `value`. - **RESET** reverts each listed type to the value its scope inherits: the ThoughtSpot default at cluster scope, and the cluster template at org scope. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires:  | Link type | Required | | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | | `GENERIC_URL` | `{path}` | | `UNSUBSCRIBE_URL` | none |  `{ts-query-params}` is optional on any type that does not require it, including `SPOTIQ_ANALYSIS_URL` and `UNSUBSCRIBE_URL`: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+          Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
 
-        :param update_link_customization_request: (required)
-        :type update_link_customization_request: UpdateLinkCustomizationRequest
+        :param update_link_customizations_request: (required)
+        :type update_link_customizations_request: UpdateLinkCustomizationsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -635,8 +635,8 @@ class LinkCustomizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_link_customization_serialize(
-            update_link_customization_request=update_link_customization_request,
+        _param = self._update_link_customizations_serialize(
+            update_link_customizations_request=update_link_customizations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -658,9 +658,9 @@ class LinkCustomizationApi:
 
 
     @validate_call
-    def update_link_customization_sync(
+    def update_link_customizations_sync(
         self,
-        update_link_customization_request: UpdateLinkCustomizationRequest,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -674,14 +674,14 @@ class LinkCustomizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """update_link_customization (synchronous)
+        """update_link_customizations (synchronous)
 
-        Synchronous variant of :meth:`update_link_customization`. It calls the asynchronous
+        Synchronous variant of :meth:`update_link_customizations`. It calls the asynchronous
         method and blocks until it completes.
         """ # noqa: E501
         return run_sync(
-            self.update_link_customization(
-                update_link_customization_request=update_link_customization_request,
+            self.update_link_customizations(
+                update_link_customizations_request=update_link_customizations_request,
                 _request_timeout=_request_timeout,
                 _request_auth=_request_auth,
                 _content_type=_content_type,
@@ -692,9 +692,9 @@ class LinkCustomizationApi:
 
 
     @validate_call
-    def update_link_customization_sync_with_http_info(
+    def update_link_customizations_sync_with_http_info(
         self,
-        update_link_customization_request: UpdateLinkCustomizationRequest,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -708,14 +708,14 @@ class LinkCustomizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """update_link_customization (synchronous)
+        """update_link_customizations (synchronous)
 
-        Synchronous variant of :meth:`update_link_customization_with_http_info`. It calls the
+        Synchronous variant of :meth:`update_link_customizations_with_http_info`. It calls the
         asynchronous method and blocks until it completes.
         """ # noqa: E501
         return run_sync(
-            self.update_link_customization_with_http_info(
-                update_link_customization_request=update_link_customization_request,
+            self.update_link_customizations_with_http_info(
+                update_link_customizations_request=update_link_customizations_request,
                 _request_timeout=_request_timeout,
                 _request_auth=_request_auth,
                 _content_type=_content_type,
@@ -726,9 +726,9 @@ class LinkCustomizationApi:
 
 
     @validate_call
-    def update_link_customization_sync_without_preload_content(
+    def update_link_customizations_sync_without_preload_content(
         self,
-        update_link_customization_request: UpdateLinkCustomizationRequest,
+        update_link_customizations_request: UpdateLinkCustomizationsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -742,14 +742,14 @@ class LinkCustomizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_link_customization (synchronous)
+        """update_link_customizations (synchronous)
 
-        Synchronous variant of :meth:`update_link_customization_without_preload_content`. It calls
+        Synchronous variant of :meth:`update_link_customizations_without_preload_content`. It calls
         the asynchronous method and blocks until it completes.
         """ # noqa: E501
         return run_sync(
-            self.update_link_customization_without_preload_content(
-                update_link_customization_request=update_link_customization_request,
+            self.update_link_customizations_without_preload_content(
+                update_link_customizations_request=update_link_customizations_request,
                 _request_timeout=_request_timeout,
                 _request_auth=_request_auth,
                 _content_type=_content_type,
@@ -759,9 +759,9 @@ class LinkCustomizationApi:
         )
 
 
-    def _update_link_customization_serialize(
+    def _update_link_customizations_serialize(
         self,
-        update_link_customization_request,
+        update_link_customizations_request,
         _request_auth,
         _content_type,
         _headers,
@@ -787,8 +787,8 @@ class LinkCustomizationApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_link_customization_request is not None:
-            _body_params = update_link_customization_request
+        if update_link_customizations_request is not None:
+            _body_params = update_link_customizations_request
 
 
         # set the HTTP header `Accept`

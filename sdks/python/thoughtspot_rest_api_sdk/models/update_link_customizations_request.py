@@ -22,13 +22,13 @@ from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
 
-class UpdateLinkCustomizationRequest(BaseModel):
+class UpdateLinkCustomizationsRequest(BaseModel):
     """
-    UpdateLinkCustomizationRequest
+    UpdateLinkCustomizationsRequest
     """ # noqa: E501
-    scope: StrictStr = Field(description="Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the authenticated user's org.")
+    scope: StrictStr = Field(description="Scope to apply the templates at. CLUSTER sets the defaults inherited by all orgs and is available only in the primary org. ORG applies to the org the caller is signed in to.")
     operation: Optional[StrictStr] = Field(default='REPLACE', description="Operation to perform. REPLACE sets each listed type to its value. RESET reverts each listed type to the value its scope inherits.")
-    templates: List[LinkTemplateInput] = Field(description="Link types to act on. Types not listed are left unchanged. Duplicate entries for the same type are rejected.")
+    templates: List[LinkTemplateInput] = Field(description="Link types to act on. This is a partial update: types not listed keep the value they resolve to today. Duplicate entries for the same type are rejected.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["scope", "operation", "templates"]
 
@@ -67,7 +67,7 @@ class UpdateLinkCustomizationRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UpdateLinkCustomizationRequest from a JSON string"""
+        """Create an instance of UpdateLinkCustomizationsRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -106,7 +106,7 @@ class UpdateLinkCustomizationRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UpdateLinkCustomizationRequest from a dict"""
+        """Create an instance of UpdateLinkCustomizationsRequest from a dict"""
         if obj is None:
             return None
 

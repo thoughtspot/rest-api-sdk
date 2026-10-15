@@ -102,7 +102,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// </summary>
         /// <param name="type">The link type this template applies to. (required).</param>
         /// <param name="value">The effective URL template at the requested scope..</param>
-        /// <param name="isOverridden">True if set at this scope, false if inherited. (required).</param>
+        /// <param name="isOverridden">True when the value differs from the one this scope would otherwise inherit. (required).</param>
         public LinkTemplate(TypeEnum type = default, string value = default, bool isOverridden = default)
         {
             this.Type = type;
@@ -119,9 +119,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string Value { get; set; }
 
         /// <summary>
-        /// True if set at this scope, false if inherited.
+        /// True when the value differs from the one this scope would otherwise inherit.
         /// </summary>
-        /// <value>True if set at this scope, false if inherited.</value>
+        /// <value>True when the value differs from the one this scope would otherwise inherit.</value>
         [DataMember(Name = "is_overridden", IsRequired = true, EmitDefaultValue = true)]
         public bool IsOverridden { get; set; }
 

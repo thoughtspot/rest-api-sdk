@@ -382,7 +382,7 @@ public class CustomCalendarsApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -455,7 +455,7 @@ public class CustomCalendarsApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -477,7 +477,7 @@ public class CustomCalendarsApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -501,7 +501,7 @@ public class CustomCalendarsApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>

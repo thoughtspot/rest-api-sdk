@@ -575,7 +575,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.UpdateFeatureAssignmentsRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.UpdateFeatureValueRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.UpdateInputTableRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.UpdateLinkCustomizationRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.UpdateLinkCustomizationsRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.UpdateMetadataHeaderRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.UpdateMetadataObjIdRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.UpdateObjIdInput.CustomTypeAdapterFactory());

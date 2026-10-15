@@ -25,7 +25,7 @@ class SearchLinkCustomizationsRequest(BaseModel):
     """
     SearchLinkCustomizationsRequest
     """ # noqa: E501
-    scope: Optional[StrictStr] = Field(default=None, description="Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the primary org. ORG returns the authenticated user's org. Omit to return every scope the caller can reach.")
+    scope: Optional[StrictStr] = Field(default=None, description="Scope to retrieve. CLUSTER returns the cluster templates and is available only in the primary org. ORG returns the templates for the org the caller is signed in to. Omit to return whichever of these the caller can access.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["scope"]
 

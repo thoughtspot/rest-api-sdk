@@ -187,7 +187,7 @@ All URIs are relative to *https://localhost:443*
 | [**UpdateFeatureAssignments**](ThoughtSpotRestApi.md#updatefeatureassignments) | **POST** /api/rest/2.0/configurations/features/assignments/update |  |
 | [**UpdateFeatureValue**](ThoughtSpotRestApi.md#updatefeaturevalue) | **POST** /api/rest/2.0/configurations/features/values/update |  |
 | [**UpdateInputTable**](ThoughtSpotRestApi.md#updateinputtable) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/update |  |
-| [**UpdateLinkCustomization**](ThoughtSpotRestApi.md#updatelinkcustomization) | **POST** /api/rest/2.0/customization/links/update |  |
+| [**UpdateLinkCustomizations**](ThoughtSpotRestApi.md#updatelinkcustomizations) | **POST** /api/rest/2.0/customization/links/update |  |
 | [**UpdateMetadataHeader**](ThoughtSpotRestApi.md#updatemetadataheader) | **POST** /api/rest/2.0/metadata/headers/update |  |
 | [**UpdateMetadataObjId**](ThoughtSpotRestApi.md#updatemetadataobjid) | **POST** /api/rest/2.0/metadata/update-obj-id |  |
 | [**UpdateOrg**](ThoughtSpotRestApi.md#updateorg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update |  |
@@ -2094,7 +2094,7 @@ catch (ApiException e)
 
 
 
-  Version: 9.6.0.cl or later   Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
 ### Example
 ```csharp
@@ -4704,7 +4704,7 @@ void (empty response body)
 
 
 
-  Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
 
 ### Example
 ```csharp
@@ -7023,7 +7023,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | CSV file downloaded successfully. |  -  |
+| **200** | CSV file downloaded successfully. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -8723,7 +8723,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Generate custom calendar data based on specifications, as a CSV file. |  -  |
+| **200** | Generate custom calendar data based on specifications, as a CSV file. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -11310,7 +11310,7 @@ catch (ApiException e)
 
 
 
-  Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
+  Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.  #### Redirecting after login  To send a browser to a specific page once the session is created, pass `redirect_url`. It must be a path on the same ThoughtSpot instance that served the login request, for example `/pinboards`. An absolute URL is rejected with `400`, so that a login cannot be used to forward a newly issued session cookie to another host.  The path is resolved against the host the caller actually reached, which means the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific subdomain.  * **Browser flows** — omit `no_url_redirection`. The API answers `302` with the   resolved path in the `location` header, and the browser follows it on its own.   This is the usual choice when the login is submitted as an HTML form or opened   as a top-level navigation. * **SPA and non-browser clients** — set `no_url_redirection` to `true`. The API   keeps its normal `204` response and returns the resolved path in the   `location` header without redirecting, leaving the client to decide when and   where to navigate. Use this from `fetch`/`XMLHttpRequest` calls, which follow   a `302` internally and never expose it to your code.  When `redirect_url` is omitted the response is unchanged, and `no_url_redirection` has no effect on its own.      
 
 ### Example
 ```csharp
@@ -13379,7 +13379,7 @@ catch (ApiException e)
 
 
 
-  Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
 
 ### Example
 ```csharp
@@ -14479,7 +14479,7 @@ catch (ApiException e)
 
 
 
-  Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).      
+  Version: 26.7.0.cl or later   Retrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults. - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org. - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default). - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.      
 
 ### Example
 ```csharp
@@ -17764,7 +17764,7 @@ void (empty response body)
 
 
 
-  Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
 ### Example
 ```csharp
@@ -18377,13 +18377,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a id="updatelinkcustomization"></a>
-# **UpdateLinkCustomization**
-> void UpdateLinkCustomization (UpdateLinkCustomizationRequest updateLinkCustomizationRequest)
+<a id="updatelinkcustomizations"></a>
+# **UpdateLinkCustomizations**
+> void UpdateLinkCustomizations (UpdateLinkCustomizationsRequest updateLinkCustomizationsRequest)
 
 
 
-  Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user's org. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all orgs, and is available only to callers in the primary org. - `scope: ORG` (default) changes the authenticated user's org, and requires Orgs to be enabled. - List only the types you want to change in `templates`. Unlisted types are left unchanged by either operation, and a repeated type is rejected. - **REPLACE** (default) sets each listed type to its `value`. - **RESET** reverts each listed type to the value its scope inherits: the ThoughtSpot default at cluster scope, and the cluster template at org scope. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires:  | Link type | Required | | - -- | - -- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | | `GENERIC_URL` | `{path}` | | `UNSUBSCRIBE_URL` | none |  `{ts-query-params}` is optional on any type that does not require it, including `SPOTIQ_ANALYSIS_URL` and `UNSUBSCRIBE_URL`: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+  Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | - -- | - -- | - -- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
 
 ### Example
 ```csharp
@@ -18396,7 +18396,7 @@ using ThoughtSpot.RestApi.Sdk.Model;
 
 namespace Example
 {
-    public class UpdateLinkCustomizationExample
+    public class UpdateLinkCustomizationsExample
     {
         public static void Main()
         {
@@ -18409,15 +18409,15 @@ namespace Example
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
-            var updateLinkCustomizationRequest = new UpdateLinkCustomizationRequest(); // UpdateLinkCustomizationRequest | 
+            var updateLinkCustomizationsRequest = new UpdateLinkCustomizationsRequest(); // UpdateLinkCustomizationsRequest | 
 
             try
             {
-                apiInstance.UpdateLinkCustomization(updateLinkCustomizationRequest);
+                apiInstance.UpdateLinkCustomizations(updateLinkCustomizationsRequest);
             }
             catch (ApiException  e)
             {
-                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateLinkCustomization: " + e.Message);
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateLinkCustomizations: " + e.Message);
                 Debug.Print("Status Code: " + e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -18426,17 +18426,17 @@ namespace Example
 }
 ```
 
-#### Using the UpdateLinkCustomizationWithHttpInfo variant
+#### Using the UpdateLinkCustomizationsWithHttpInfo variant
 This returns an ApiResponse object which contains the response data, status code and headers.
 
 ```csharp
 try
 {
-    apiInstance.UpdateLinkCustomizationWithHttpInfo(updateLinkCustomizationRequest);
+    apiInstance.UpdateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest);
 }
 catch (ApiException e)
 {
-    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateLinkCustomizationWithHttpInfo: " + e.Message);
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateLinkCustomizationsWithHttpInfo: " + e.Message);
     Debug.Print("Status Code: " + e.ErrorCode);
     Debug.Print(e.StackTrace);
 }
@@ -18446,7 +18446,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **updateLinkCustomizationRequest** | [**UpdateLinkCustomizationRequest**](UpdateLinkCustomizationRequest.md) |  |  |
+| **updateLinkCustomizationsRequest** | [**UpdateLinkCustomizationsRequest**](UpdateLinkCustomizationsRequest.md) |  |  |
 
 ### Return type
 
@@ -18969,7 +18969,7 @@ void (empty response body)
 
 
 
-  Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**)  privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
+  Version: 26.7.0.cl or later   Updates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  Two operations are supported via the `operation` field:  - **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged. - **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.  #### Logo upload  Logo files are uploaded as binary fields using `multipart/form-data`:  - `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG. - `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.  To reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.  #### Navigation panel color  Set `navigation_panel.theme` to one of:  - `DARK`: Default dark theme. - `TWO_TONE`: Dual-tone panel style. - `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).  #### App color theme  `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.  - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`. - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.  `brand_color` and `apply_as_top_nav_color` may be set independently in the same request.  #### Chart color palette  Provide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.  #### Font assignments  Specify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.      
 
 ### Example
 ```csharp

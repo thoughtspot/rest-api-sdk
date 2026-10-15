@@ -25,7 +25,7 @@ export class LinkTemplate {
     */
     'value'?: string | null;
     /**
-    * True if set at this scope, false if inherited.
+    * True when the value differs from the one this scope would otherwise inherit.
     */
     'is_overridden': boolean;
 

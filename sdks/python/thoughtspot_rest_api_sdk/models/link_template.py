@@ -27,7 +27,7 @@ class LinkTemplate(BaseModel):
     """ # noqa: E501
     type: StrictStr = Field(description="The link type this template applies to.")
     value: Optional[StrictStr] = Field(default=None, description="The effective URL template at the requested scope.")
-    is_overridden: StrictBool = Field(description="True if set at this scope, false if inherited.")
+    is_overridden: StrictBool = Field(description="True when the value differs from the one this scope would otherwise inherit.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["type", "value", "is_overridden"]
 

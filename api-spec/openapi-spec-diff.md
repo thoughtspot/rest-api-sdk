@@ -3,6 +3,10 @@
 
 ## API Changes
 
+### POST /api/rest/2.0/calendars/generate-csv
+-  the response header `content-disposition` was added for the status `200`
+
+
 ### POST /api/rest/2.0/customization/links/search
 -  endpoint added
 
@@ -33,6 +37,10 @@
 
 ### POST /api/rest/2.0/input-tables/{input_table_identifier}/update
 -  endpoint added
+
+
+### POST /api/rest/2.0/localizations/manual-translation/export
+-  the response header `content-disposition` was added for the status `200`
 
 
 ### POST /api/rest/2.0/metadata/headers/update

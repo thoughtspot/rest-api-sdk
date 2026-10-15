@@ -5,7 +5,7 @@ All URIs are relative to *CLUSTER_URL*
 | Method | HTTP request |
 |------------- | ------------- |
 | [**searchLinkCustomizations**](LinkCustomizationApi.md#searchLinkCustomizations) | **POST** /api/rest/2.0/customization/links/search |
-| [**updateLinkCustomization**](LinkCustomizationApi.md#updateLinkCustomization) | **POST** /api/rest/2.0/customization/links/update |
+| [**updateLinkCustomizations**](LinkCustomizationApi.md#updateLinkCustomizations) | **POST** /api/rest/2.0/customization/links/update |
 
 
 <a id="searchLinkCustomizations"></a>
@@ -44,19 +44,19 @@ All URIs are relative to *CLUSTER_URL*
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
-<a id="updateLinkCustomization"></a>
-# **updateLinkCustomization**
-> updateLinkCustomization(updateLinkCustomizationRequest)
+<a id="updateLinkCustomizations"></a>
+# **updateLinkCustomizations**
+> updateLinkCustomizations(updateLinkCustomizationsRequest)
 
 
 
-  Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user&#39;s org. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - &#x60;scope: CLUSTER&#x60; changes the defaults inherited by all orgs, and is available only to callers in the primary org. - &#x60;scope: ORG&#x60; (default) changes the authenticated user&#39;s org, and requires Orgs to be enabled. - List only the types you want to change in &#x60;templates&#x60;. Unlisted types are left unchanged by either operation, and a repeated type is rejected. - **REPLACE** (default) sets each listed type to its &#x60;value&#x60;. - **RESET** reverts each listed type to the value its scope inherits: the ThoughtSpot default at cluster scope, and the cluster template at org scope. Supply only &#x60;type&#x60;; a &#x60;value&#x60; alongside &#x60;RESET&#x60; is rejected. To clear every override, list all types with &#x60;RESET&#x60;.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires:  | Link type | Required | | --- | --- | | &#x60;LIVEBOARD_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{ts-query-params}&#x60; | | &#x60;VISUALIZATION_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{sub-object-id}&#x60;, &#x60;{ts-query-params}&#x60; | | &#x60;ANSWER_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{ts-query-params}&#x60; | | &#x60;SPOTIQ_ANALYSIS_URL&#x60; | &#x60;{object-id}&#x60; | | &#x60;CONVERSATION_SHARE_URL&#x60; | &#x60;{conversation-id}&#x60;, &#x60;{ts-query-params}&#x60; | | &#x60;GENERIC_URL&#x60; | &#x60;{path}&#x60; | | &#x60;UNSUBSCRIBE_URL&#x60; | none |  &#x60;{ts-query-params}&#x60; is optional on any type that does not require it, including &#x60;SPOTIQ_ANALYSIS_URL&#x60; and &#x60;UNSUBSCRIBE_URL&#x60;: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+  Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - &#x60;scope: CLUSTER&#x60; changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - &#x60;scope: ORG&#x60; (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in &#x60;templates&#x60; change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the &#x60;value&#x60; provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only &#x60;type&#x60;; a &#x60;value&#x60; alongside &#x60;RESET&#x60; is rejected. To clear every override, list all types with &#x60;RESET&#x60;. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | &#x60;LIVEBOARD_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}&#x60; | | &#x60;VISUALIZATION_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{sub-object-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}&#x60; | | &#x60;ANSWER_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/answers/{object-id}?{ts-query-params}&#x60; | | &#x60;SPOTIQ_ANALYSIS_URL&#x60; | &#x60;{object-id}&#x60; | &#x60;https://analytics.acme.com/insights/{object-id}&#x60; | | &#x60;UNSUBSCRIBE_URL&#x60; | none | &#x60;https://analytics.acme.com/account/email-preferences&#x60; | | &#x60;GENERIC_URL&#x60; | &#x60;{path}&#x60; | &#x60;https://analytics.acme.com/{path}&#x60; | | &#x60;CONVERSATION_SHARE_URL&#x60; | &#x60;{conversation-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}&#x60; |  &#x60;{ts-query-params}&#x60; is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
 
 ### Parameters
 
 | Name | Type |
 |------------- | ------------- |
-| **updateLinkCustomizationRequest** | [**UpdateLinkCustomizationRequest**](UpdateLinkCustomizationRequest.md)
+| **updateLinkCustomizationsRequest** | [**UpdateLinkCustomizationsRequest**](UpdateLinkCustomizationsRequest.md)
 
 ### Return type
 

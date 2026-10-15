@@ -33,9 +33,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
     public partial class SearchLinkCustomizationsRequest : IValidatableObject
     {
         /// <summary>
-        /// Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the primary org. ORG returns the authenticated user&#39;s org. Omit to return every scope the caller can reach.
+        /// Scope to retrieve. CLUSTER returns the cluster templates and is available only in the primary org. ORG returns the templates for the org the caller is signed in to. Omit to return whichever of these the caller can access.
         /// </summary>
-        /// <value>Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the primary org. ORG returns the authenticated user&#39;s org. Omit to return every scope the caller can reach.</value>
+        /// <value>Scope to retrieve. CLUSTER returns the cluster templates and is available only in the primary org. ORG returns the templates for the org the caller is signed in to. Omit to return whichever of these the caller can access.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ScopeEnum
         {
@@ -54,15 +54,15 @@ namespace ThoughtSpot.RestApi.Sdk.Model
 
 
         /// <summary>
-        /// Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the primary org. ORG returns the authenticated user&#39;s org. Omit to return every scope the caller can reach.
+        /// Scope to retrieve. CLUSTER returns the cluster templates and is available only in the primary org. ORG returns the templates for the org the caller is signed in to. Omit to return whichever of these the caller can access.
         /// </summary>
-        /// <value>Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the primary org. ORG returns the authenticated user&#39;s org. Omit to return every scope the caller can reach.</value>
+        /// <value>Scope to retrieve. CLUSTER returns the cluster templates and is available only in the primary org. ORG returns the templates for the org the caller is signed in to. Omit to return whichever of these the caller can access.</value>
         [DataMember(Name = "scope", EmitDefaultValue = false)]
         public ScopeEnum? Scope { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchLinkCustomizationsRequest" /> class.
         /// </summary>
-        /// <param name="scope">Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the primary org. ORG returns the authenticated user&#39;s org. Omit to return every scope the caller can reach..</param>
+        /// <param name="scope">Scope to retrieve. CLUSTER returns the cluster templates and is available only in the primary org. ORG returns the templates for the org the caller is signed in to. Omit to return whichever of these the caller can access..</param>
         public SearchLinkCustomizationsRequest(ScopeEnum? scope = default)
         {
             this.Scope = scope;

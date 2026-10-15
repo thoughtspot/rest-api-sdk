@@ -489,7 +489,7 @@ export * from '../models/UpdateEmailCustomizationRequest';
 export * from '../models/UpdateFeatureAssignmentsRequest';
 export * from '../models/UpdateFeatureValueRequest';
 export * from '../models/UpdateInputTableRequest';
-export * from '../models/UpdateLinkCustomizationRequest';
+export * from '../models/UpdateLinkCustomizationsRequest';
 export * from '../models/UpdateMetadataHeaderRequest';
 export * from '../models/UpdateMetadataObjIdRequest';
 export * from '../models/UpdateObjIdInput';
@@ -1040,7 +1040,7 @@ import { UpdateEmailCustomizationRequest } from '../models/UpdateEmailCustomizat
 import { UpdateFeatureAssignmentsRequest  , UpdateFeatureAssignmentsRequestOperationEnum   } from '../models/UpdateFeatureAssignmentsRequest';
 import { UpdateFeatureValueRequest, UpdateFeatureValueRequestScopeEnum       } from '../models/UpdateFeatureValueRequest';
 import { UpdateInputTableRequest } from '../models/UpdateInputTableRequest';
-import { UpdateLinkCustomizationRequest, UpdateLinkCustomizationRequestScopeEnum  , UpdateLinkCustomizationRequestOperationEnum    } from '../models/UpdateLinkCustomizationRequest';
+import { UpdateLinkCustomizationsRequest, UpdateLinkCustomizationsRequestScopeEnum  , UpdateLinkCustomizationsRequestOperationEnum    } from '../models/UpdateLinkCustomizationsRequest';
 import { UpdateMetadataHeaderRequest } from '../models/UpdateMetadataHeaderRequest';
 import { UpdateMetadataObjIdRequest } from '../models/UpdateMetadataObjIdRequest';
 import { UpdateObjIdInput , UpdateObjIdInputTypeEnum     } from '../models/UpdateObjIdInput';
@@ -1373,8 +1373,8 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateCustomActionRequestOperationEnum",
     "UpdateFeatureAssignmentsRequestOperationEnum",
     "UpdateFeatureValueRequestScopeEnum",
-    "UpdateLinkCustomizationRequestScopeEnum",
-    "UpdateLinkCustomizationRequestOperationEnum",
+    "UpdateLinkCustomizationsRequestScopeEnum",
+    "UpdateLinkCustomizationsRequestOperationEnum",
     "UpdateObjIdInputTypeEnum",
     "UpdateOrgRequestOperationEnum",
     "UpdateRoleRequestPrivilegesEnum",
@@ -1920,7 +1920,7 @@ let typeMap: {[index: string]: any} = {
     "UpdateFeatureAssignmentsRequest": UpdateFeatureAssignmentsRequest,
     "UpdateFeatureValueRequest": UpdateFeatureValueRequest,
     "UpdateInputTableRequest": UpdateInputTableRequest,
-    "UpdateLinkCustomizationRequest": UpdateLinkCustomizationRequest,
+    "UpdateLinkCustomizationsRequest": UpdateLinkCustomizationsRequest,
     "UpdateMetadataHeaderRequest": UpdateMetadataHeaderRequest,
     "UpdateMetadataObjIdRequest": UpdateMetadataObjIdRequest,
     "UpdateObjIdInput": UpdateObjIdInput,

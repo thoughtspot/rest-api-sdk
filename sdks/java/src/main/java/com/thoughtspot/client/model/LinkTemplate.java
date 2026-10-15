@@ -168,7 +168,7 @@ public class LinkTemplate implements Serializable {
   }
 
   /**
-   * True if set at this scope, false if inherited.
+   * True when the value differs from the one this scope would otherwise inherit.
    * @return isOverridden
    */
   @javax.annotation.Nonnull

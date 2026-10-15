@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**scope** | [**ScopeEnum**](#ScopeEnum) | Scope to retrieve. CLUSTER returns the cluster defaults and is available only in the primary org. ORG returns the authenticated user&#39;s org. Omit to return every scope the caller can reach. |  [optional] |
+|**scope** | [**ScopeEnum**](#ScopeEnum) | Scope to retrieve. CLUSTER returns the cluster templates and is available only in the primary org. ORG returns the templates for the org the caller is signed in to. Omit to return whichever of these the caller can access. |  [optional] |
 
 
 

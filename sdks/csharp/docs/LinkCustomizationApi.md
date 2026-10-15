@@ -5,7 +5,7 @@ All URIs are relative to *https://localhost:443*
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
 | [**SearchLinkCustomizations**](LinkCustomizationApi.md#searchlinkcustomizations) | **POST** /api/rest/2.0/customization/links/search |  |
-| [**UpdateLinkCustomization**](LinkCustomizationApi.md#updatelinkcustomization) | **POST** /api/rest/2.0/customization/links/update |  |
+| [**UpdateLinkCustomizations**](LinkCustomizationApi.md#updatelinkcustomizations) | **POST** /api/rest/2.0/customization/links/update |  |
 
 <a id="searchlinkcustomizations"></a>
 # **SearchLinkCustomizations**
@@ -107,13 +107,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a id="updatelinkcustomization"></a>
-# **UpdateLinkCustomization**
-> void UpdateLinkCustomization (UpdateLinkCustomizationRequest updateLinkCustomizationRequest)
+<a id="updatelinkcustomizations"></a>
+# **UpdateLinkCustomizations**
+> void UpdateLinkCustomizations (UpdateLinkCustomizationsRequest updateLinkCustomizationsRequest)
 
 
 
-  Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at cluster level or for the authenticated user's org. Use it to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all orgs, and is available only to callers in the primary org. - `scope: ORG` (default) changes the authenticated user's org, and requires Orgs to be enabled. - List only the types you want to change in `templates`. Unlisted types are left unchanged by either operation, and a repeated type is rejected. - **REPLACE** (default) sets each listed type to its `value`. - **RESET** reverts each listed type to the value its scope inherits: the ThoughtSpot default at cluster scope, and the cluster template at org scope. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires:  | Link type | Required | | - -- | - -- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | | `GENERIC_URL` | `{path}` | | `UNSUBSCRIBE_URL` | none |  `{ts-query-params}` is optional on any type that does not require it, including `SPOTIQ_ANALYSIS_URL` and `UNSUBSCRIBE_URL`: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+  Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | - -- | - -- | - -- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
 
 ### Example
 ```csharp
@@ -126,7 +126,7 @@ using ThoughtSpot.RestApi.Sdk.Model;
 
 namespace Example
 {
-    public class UpdateLinkCustomizationExample
+    public class UpdateLinkCustomizationsExample
     {
         public static void Main()
         {
@@ -139,15 +139,15 @@ namespace Example
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new LinkCustomizationApi(httpClient, config, httpClientHandler);
-            var updateLinkCustomizationRequest = new UpdateLinkCustomizationRequest(); // UpdateLinkCustomizationRequest | 
+            var updateLinkCustomizationsRequest = new UpdateLinkCustomizationsRequest(); // UpdateLinkCustomizationsRequest | 
 
             try
             {
-                apiInstance.UpdateLinkCustomization(updateLinkCustomizationRequest);
+                apiInstance.UpdateLinkCustomizations(updateLinkCustomizationsRequest);
             }
             catch (ApiException  e)
             {
-                Debug.Print("Exception when calling LinkCustomizationApi.UpdateLinkCustomization: " + e.Message);
+                Debug.Print("Exception when calling LinkCustomizationApi.UpdateLinkCustomizations: " + e.Message);
                 Debug.Print("Status Code: " + e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -156,17 +156,17 @@ namespace Example
 }
 ```
 
-#### Using the UpdateLinkCustomizationWithHttpInfo variant
+#### Using the UpdateLinkCustomizationsWithHttpInfo variant
 This returns an ApiResponse object which contains the response data, status code and headers.
 
 ```csharp
 try
 {
-    apiInstance.UpdateLinkCustomizationWithHttpInfo(updateLinkCustomizationRequest);
+    apiInstance.UpdateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest);
 }
 catch (ApiException e)
 {
-    Debug.Print("Exception when calling LinkCustomizationApi.UpdateLinkCustomizationWithHttpInfo: " + e.Message);
+    Debug.Print("Exception when calling LinkCustomizationApi.UpdateLinkCustomizationsWithHttpInfo: " + e.Message);
     Debug.Print("Status Code: " + e.ErrorCode);
     Debug.Print(e.StackTrace);
 }
@@ -176,7 +176,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **updateLinkCustomizationRequest** | [**UpdateLinkCustomizationRequest**](UpdateLinkCustomizationRequest.md) |  |  |
+| **updateLinkCustomizationsRequest** | [**UpdateLinkCustomizationsRequest**](UpdateLinkCustomizationsRequest.md) |  |  |
 
 ### Return type
 

@@ -2237,14 +2237,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Test UpdateLinkCustomization
+        /// Test UpdateLinkCustomizations
         /// </summary>
         [Fact]
-        public void UpdateLinkCustomizationTest()
+        public void UpdateLinkCustomizationsTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //UpdateLinkCustomizationRequest updateLinkCustomizationRequest = null;
-            //instance.UpdateLinkCustomization(updateLinkCustomizationRequest);
+            //UpdateLinkCustomizationsRequest updateLinkCustomizationsRequest = null;
+            //instance.UpdateLinkCustomizations(updateLinkCustomizationsRequest);
         }
 
         /// <summary>
