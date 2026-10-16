@@ -5,7 +5,11 @@ rm -rf $PWD/build $PWD/spec
 mkdir $PWD/build $PWD/spec
 
 # prepare spec
-cp ../api-spec/* spec/
+PLAYGROUND_SPEC=../api-spec/openapiSpecv3-2_0.playground.json
+find ../api-spec -maxdepth 1 -type f ! -name openapiSpecv3-2_0.playground.json -exec cp {} spec/ \;
+if [ -f $PLAYGROUND_SPEC ]; then
+  cp $PLAYGROUND_SPEC spec/openapiSpecv3-2_0.json
+fi
 
 if [ -f $PWD/processSpec.js ]; then
   npx node processSpec.js
