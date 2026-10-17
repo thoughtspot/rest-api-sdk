@@ -14,11 +14,11 @@ import { HttpFile } from '../http/http';
 
 export class PdfOptionsInput {
     /**
-    * Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified.   Version: 26.5.0.cl or later 
+    * Size of PDF page. `A4` generates a paginated A4 PDF. `CONTINUOUS` generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to `A4` if not specified.    Version: 26.5.0.cl or later 
     */
     'page_size'?: PdfOptionsInputPageSizeEnum | null;
     /**
-    * Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.   Version: 26.5.0.cl or later 
+    * Zoom level percentage for the PDF. Only applicable when `page_size` is `CONTINUOUS`. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.    Version: 26.5.0.cl or later 
     */
     'zoom_level'?: number | null;
     /**

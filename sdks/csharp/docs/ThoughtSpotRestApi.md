@@ -16,15 +16,19 @@ All URIs are relative to *https://localhost:443*
 | [**ConvertWorksheetToModel**](ThoughtSpotRestApi.md#convertworksheettomodel) | **POST** /api/rest/2.0/metadata/worksheets/convert |  |
 | [**CopyObject**](ThoughtSpotRestApi.md#copyobject) | **POST** /api/rest/2.0/metadata/copyobject |  |
 | [**CreateAgentConversation**](ThoughtSpotRestApi.md#createagentconversation) | **POST** /api/rest/2.0/ai/agent/conversation/create |  |
+| [**CreateAgentConversationV2**](ThoughtSpotRestApi.md#createagentconversationv2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/create |  |
 | [**CreateAnalyst**](ThoughtSpotRestApi.md#createanalyst) | **POST** /api/rest/2.0/ai/agent/analysts/create |  |
 | [**CreateCalendar**](ThoughtSpotRestApi.md#createcalendar) | **POST** /api/rest/2.0/calendars/create |  |
 | [**CreateCollection**](ThoughtSpotRestApi.md#createcollection) | **POST** /api/rest/2.0/collections/create |  |
+| [**CreateCommit**](ThoughtSpotRestApi.md#createcommit) | **POST** /api/rest/2.0/version-control/commit |  |
 | [**CreateConfig**](ThoughtSpotRestApi.md#createconfig) | **POST** /api/rest/2.0/vcs/git/config/create |  |
 | [**CreateConnection**](ThoughtSpotRestApi.md#createconnection) | **POST** /api/rest/2.0/connection/create |  |
 | [**CreateConnectionConfiguration**](ThoughtSpotRestApi.md#createconnectionconfiguration) | **POST** /api/rest/2.0/connection-configurations/create |  |
 | [**CreateConversation**](ThoughtSpotRestApi.md#createconversation) | **POST** /api/rest/2.0/ai/conversation/create |  |
 | [**CreateCustomAction**](ThoughtSpotRestApi.md#createcustomaction) | **POST** /api/rest/2.0/customization/custom-actions |  |
 | [**CreateEmailCustomization**](ThoughtSpotRestApi.md#createemailcustomization) | **POST** /api/rest/2.0/customization/email |  |
+| [**CreateInputTable**](ThoughtSpotRestApi.md#createinputtable) | **POST** /api/rest/2.0/input-tables/create |  |
+| [**CreateInputTableColumn**](ThoughtSpotRestApi.md#createinputtablecolumn) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/columns/create |  |
 | [**CreateOrg**](ThoughtSpotRestApi.md#createorg) | **POST** /api/rest/2.0/orgs/create |  |
 | [**CreateRole**](ThoughtSpotRestApi.md#createrole) | **POST** /api/rest/2.0/roles/create |  |
 | [**CreateSchedule**](ThoughtSpotRestApi.md#createschedule) | **POST** /api/rest/2.0/schedules/create |  |
@@ -33,6 +37,7 @@ All URIs are relative to *https://localhost:443*
 | [**CreateUser**](ThoughtSpotRestApi.md#createuser) | **POST** /api/rest/2.0/users/create |  |
 | [**CreateUserGroup**](ThoughtSpotRestApi.md#createusergroup) | **POST** /api/rest/2.0/groups/create |  |
 | [**CreateVariable**](ThoughtSpotRestApi.md#createvariable) | **POST** /api/rest/2.0/template/variables/create |  |
+| [**CreateVersionControlConfig**](ThoughtSpotRestApi.md#createversioncontrolconfig) | **POST** /api/rest/2.0/version-control/config/create |  |
 | [**CreateWebhookConfiguration**](ThoughtSpotRestApi.md#createwebhookconfiguration) | **POST** /api/rest/2.0/webhooks/create |  |
 | [**DbtConnection**](ThoughtSpotRestApi.md#dbtconnection) | **POST** /api/rest/2.0/dbt/dbt-connection |  |
 | [**DbtGenerateSyncTml**](ThoughtSpotRestApi.md#dbtgeneratesynctml) | **POST** /api/rest/2.0/dbt/generate-sync-tml |  |
@@ -50,6 +55,8 @@ All URIs are relative to *https://localhost:443*
 | [**DeleteCustomAction**](ThoughtSpotRestApi.md#deletecustomaction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete |  |
 | [**DeleteDbtConnection**](ThoughtSpotRestApi.md#deletedbtconnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete |  |
 | [**DeleteEmailCustomization**](ThoughtSpotRestApi.md#deleteemailcustomization) | **POST** /api/rest/2.0/customization/email/{template_identifier}/delete |  |
+| [**DeleteInputTable**](ThoughtSpotRestApi.md#deleteinputtable) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/delete |  |
+| [**DeleteInputTableColumn**](ThoughtSpotRestApi.md#deleteinputtablecolumn) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete |  |
 | [**DeleteManualTranslations**](ThoughtSpotRestApi.md#deletemanualtranslations) | **POST** /api/rest/2.0/localizations/manual-translation/delete |  |
 | [**DeleteMetadata**](ThoughtSpotRestApi.md#deletemetadata) | **POST** /api/rest/2.0/metadata/delete |  |
 | [**DeleteOrg**](ThoughtSpotRestApi.md#deleteorg) | **POST** /api/rest/2.0/orgs/{org_identifier}/delete |  |
@@ -59,12 +66,15 @@ All URIs are relative to *https://localhost:443*
 | [**DeleteSemanticIntegration**](ThoughtSpotRestApi.md#deletesemanticintegration) | **POST** /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete |  |
 | [**DeleteStyleFonts**](ThoughtSpotRestApi.md#deletestylefonts) | **POST** /api/rest/2.0/customization/styles/fonts/delete |  |
 | [**DeleteTag**](ThoughtSpotRestApi.md#deletetag) | **POST** /api/rest/2.0/tags/{tag_identifier}/delete |  |
+| [**DeleteUsageData**](ThoughtSpotRestApi.md#deleteusagedata) | **POST** /api/rest/2.0/ai/usage-data/delete |  |
 | [**DeleteUser**](ThoughtSpotRestApi.md#deleteuser) | **POST** /api/rest/2.0/users/{user_identifier}/delete |  |
 | [**DeleteUserGroup**](ThoughtSpotRestApi.md#deleteusergroup) | **POST** /api/rest/2.0/groups/{group_identifier}/delete |  |
 | [**DeleteVariable**](ThoughtSpotRestApi.md#deletevariable) | **POST** /api/rest/2.0/template/variables/{identifier}/delete |  |
 | [**DeleteVariables**](ThoughtSpotRestApi.md#deletevariables) | **POST** /api/rest/2.0/template/variables/delete |  |
+| [**DeleteVersionControlConfig**](ThoughtSpotRestApi.md#deleteversioncontrolconfig) | **POST** /api/rest/2.0/version-control/config/delete |  |
 | [**DeleteWebhookConfigurations**](ThoughtSpotRestApi.md#deletewebhookconfigurations) | **POST** /api/rest/2.0/webhooks/delete |  |
 | [**DeployCommit**](ThoughtSpotRestApi.md#deploycommit) | **POST** /api/rest/2.0/vcs/git/commits/deploy |  |
+| [**DeployRevision**](ThoughtSpotRestApi.md#deployrevision) | **POST** /api/rest/2.0/version-control/deploy |  |
 | [**DownloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadconnectionmetadatachanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |  |
 | [**ExportAnswerReport**](ThoughtSpotRestApi.md#exportanswerreport) | **POST** /api/rest/2.0/report/answer |  |
 | [**ExportLiveboardReport**](ThoughtSpotRestApi.md#exportliveboardreport) | **POST** /api/rest/2.0/report/liveboard |  |
@@ -103,6 +113,7 @@ All URIs are relative to *https://localhost:443*
 | [**GetSystemConfig**](ThoughtSpotRestApi.md#getsystemconfig) | **GET** /api/rest/2.0/system/config |  |
 | [**GetSystemInformation**](ThoughtSpotRestApi.md#getsysteminformation) | **GET** /api/rest/2.0/system |  |
 | [**GetSystemOverrideInfo**](ThoughtSpotRestApi.md#getsystemoverrideinfo) | **GET** /api/rest/2.0/system/config-overrides |  |
+| [**GetUsageDataForUser**](ThoughtSpotRestApi.md#getusagedataforuser) | **GET** /api/rest/2.0/ai/usage-data/user |  |
 | [**GetWebhookStorageConfig**](ThoughtSpotRestApi.md#getwebhookstorageconfig) | **GET** /api/rest/2.0/webhooks/storage-config |  |
 | [**ImportManualTranslations**](ThoughtSpotRestApi.md#importmanualtranslations) | **POST** /api/rest/2.0/localizations/manual-translation/import |  |
 | [**ImportMemory**](ThoughtSpotRestApi.md#importmemory) | **POST** /api/rest/2.0/ai/memory/import |  |
@@ -117,10 +128,12 @@ All URIs are relative to *https://localhost:443*
 | [**ManageObjectPrivilege**](ThoughtSpotRestApi.md#manageobjectprivilege) | **POST** /api/rest/2.0/security/metadata/manage-object-privilege |  |
 | [**ParameterizeMetadata**](ThoughtSpotRestApi.md#parameterizemetadata) | **POST** /api/rest/2.0/metadata/parameterize |  |
 | [**ParameterizeMetadataFields**](ThoughtSpotRestApi.md#parameterizemetadatafields) | **POST** /api/rest/2.0/metadata/parameterize-fields |  |
+| [**PromoteBranch**](ThoughtSpotRestApi.md#promotebranch) | **POST** /api/rest/2.0/version-control/branch/promote |  |
 | [**PublishMetadata**](ThoughtSpotRestApi.md#publishmetadata) | **POST** /api/rest/2.0/security/metadata/publish |  |
 | [**PutVariableValues**](ThoughtSpotRestApi.md#putvariablevalues) | **POST** /api/rest/2.0/template/variables/{identifier}/update-values |  |
 | [**QueryGetDecomposedQuery**](ThoughtSpotRestApi.md#querygetdecomposedquery) | **POST** /api/rest/2.0/ai/analytical-questions |  |
 | [**ResetUserPassword**](ThoughtSpotRestApi.md#resetuserpassword) | **POST** /api/rest/2.0/users/reset-password |  |
+| [**RestoreRevision**](ThoughtSpotRestApi.md#restorerevision) | **POST** /api/rest/2.0/version-control/commit/restore |  |
 | [**RevertCommit**](ThoughtSpotRestApi.md#revertcommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert |  |
 | [**RevokeRefreshTokens**](ThoughtSpotRestApi.md#revokerefreshtokens) | **POST** /api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens |  |
 | [**RevokeToken**](ThoughtSpotRestApi.md#revoketoken) | **POST** /api/rest/2.0/auth/token/revoke |  |
@@ -137,6 +150,7 @@ All URIs are relative to *https://localhost:443*
 | [**SearchData**](ThoughtSpotRestApi.md#searchdata) | **POST** /api/rest/2.0/searchdata |  |
 | [**SearchEmailCustomization**](ThoughtSpotRestApi.md#searchemailcustomization) | **POST** /api/rest/2.0/customization/email/search |  |
 | [**SearchFeatures**](ThoughtSpotRestApi.md#searchfeatures) | **POST** /api/rest/2.0/configurations/features/search |  |
+| [**SearchLinkCustomizations**](ThoughtSpotRestApi.md#searchlinkcustomizations) | **POST** /api/rest/2.0/customization/links/search |  |
 | [**SearchMetadata**](ThoughtSpotRestApi.md#searchmetadata) | **POST** /api/rest/2.0/metadata/search |  |
 | [**SearchOrgs**](ThoughtSpotRestApi.md#searchorgs) | **POST** /api/rest/2.0/orgs/search |  |
 | [**SearchRoles**](ThoughtSpotRestApi.md#searchroles) | **POST** /api/rest/2.0/roles/search |  |
@@ -146,12 +160,17 @@ All URIs are relative to *https://localhost:443*
 | [**SearchStyleCustomizations**](ThoughtSpotRestApi.md#searchstylecustomizations) | **POST** /api/rest/2.0/customization/styles/search |  |
 | [**SearchStyleFonts**](ThoughtSpotRestApi.md#searchstylefonts) | **POST** /api/rest/2.0/customization/styles/fonts/search |  |
 | [**SearchTags**](ThoughtSpotRestApi.md#searchtags) | **POST** /api/rest/2.0/tags/search |  |
+| [**SearchUsageData**](ThoughtSpotRestApi.md#searchusagedata) | **POST** /api/rest/2.0/ai/usage-data/search |  |
 | [**SearchUserGroups**](ThoughtSpotRestApi.md#searchusergroups) | **POST** /api/rest/2.0/groups/search |  |
 | [**SearchUsers**](ThoughtSpotRestApi.md#searchusers) | **POST** /api/rest/2.0/users/search |  |
 | [**SearchVariables**](ThoughtSpotRestApi.md#searchvariables) | **POST** /api/rest/2.0/template/variables/search |  |
+| [**SearchVersionControlConfigs**](ThoughtSpotRestApi.md#searchversioncontrolconfigs) | **POST** /api/rest/2.0/version-control/config/search |  |
+| [**SearchVersionControlRuns**](ThoughtSpotRestApi.md#searchversioncontrolruns) | **POST** /api/rest/2.0/version-control/runs/search |  |
 | [**SearchWebhookConfigurations**](ThoughtSpotRestApi.md#searchwebhookconfigurations) | **POST** /api/rest/2.0/webhooks/search |  |
 | [**SendAgentConversationMessage**](ThoughtSpotRestApi.md#sendagentconversationmessage) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send |  |
 | [**SendAgentConversationMessageStreaming**](ThoughtSpotRestApi.md#sendagentconversationmessagestreaming) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream |  |
+| [**SendAgentConversationMessageStreamingV2**](ThoughtSpotRestApi.md#sendagentconversationmessagestreamingv2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/send/stream |  |
+| [**SendAgentConversationMessageV2**](ThoughtSpotRestApi.md#sendagentconversationmessagev2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/send |  |
 | [**SendAgentMessage**](ThoughtSpotRestApi.md#sendagentmessage) | **POST** /api/rest/2.0/ai/agent/{conversation_identifier}/converse |  |
 | [**SendAgentMessageStreaming**](ThoughtSpotRestApi.md#sendagentmessagestreaming) | **POST** /api/rest/2.0/ai/agent/converse/sse |  |
 | [**SendMessage**](ThoughtSpotRestApi.md#sendmessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |  |
@@ -181,6 +200,8 @@ All URIs are relative to *https://localhost:443*
 | [**UpdateEmailCustomization**](ThoughtSpotRestApi.md#updateemailcustomization) | **POST** /api/rest/2.0/customization/email/update |  |
 | [**UpdateFeatureAssignments**](ThoughtSpotRestApi.md#updatefeatureassignments) | **POST** /api/rest/2.0/configurations/features/assignments/update |  |
 | [**UpdateFeatureValue**](ThoughtSpotRestApi.md#updatefeaturevalue) | **POST** /api/rest/2.0/configurations/features/values/update |  |
+| [**UpdateInputTable**](ThoughtSpotRestApi.md#updateinputtable) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/update |  |
+| [**UpdateLinkCustomizations**](ThoughtSpotRestApi.md#updatelinkcustomizations) | **POST** /api/rest/2.0/customization/links/update |  |
 | [**UpdateMetadataHeader**](ThoughtSpotRestApi.md#updatemetadataheader) | **POST** /api/rest/2.0/metadata/headers/update |  |
 | [**UpdateMetadataObjId**](ThoughtSpotRestApi.md#updatemetadataobjid) | **POST** /api/rest/2.0/metadata/update-obj-id |  |
 | [**UpdateOrg**](ThoughtSpotRestApi.md#updateorg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update |  |
@@ -190,10 +211,12 @@ All URIs are relative to *https://localhost:443*
 | [**UpdateStyleFont**](ThoughtSpotRestApi.md#updatestylefont) | **POST** /api/rest/2.0/customization/styles/fonts/{font_identifier}/update |  |
 | [**UpdateSystemConfig**](ThoughtSpotRestApi.md#updatesystemconfig) | **POST** /api/rest/2.0/system/config-update |  |
 | [**UpdateTag**](ThoughtSpotRestApi.md#updatetag) | **POST** /api/rest/2.0/tags/{tag_identifier}/update |  |
+| [**UpdateUsageData**](ThoughtSpotRestApi.md#updateusagedata) | **POST** /api/rest/2.0/ai/usage-data/update |  |
 | [**UpdateUser**](ThoughtSpotRestApi.md#updateuser) | **POST** /api/rest/2.0/users/{user_identifier}/update |  |
 | [**UpdateUserGroup**](ThoughtSpotRestApi.md#updateusergroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update |  |
 | [**UpdateVariable**](ThoughtSpotRestApi.md#updatevariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update |  |
 | [**UpdateVariableValues**](ThoughtSpotRestApi.md#updatevariablevalues) | **POST** /api/rest/2.0/template/variables/update-values |  |
+| [**UpdateVersionControlConfig**](ThoughtSpotRestApi.md#updateversioncontrolconfig) | **POST** /api/rest/2.0/version-control/config/update |  |
 | [**UpdateWebhookConfiguration**](ThoughtSpotRestApi.md#updatewebhookconfiguration) | **POST** /api/rest/2.0/webhooks/{webhook_identifier}/update |  |
 | [**UploadStyleFont**](ThoughtSpotRestApi.md#uploadstylefont) | **POST** /api/rest/2.0/customization/styles/fonts/upload |  |
 | [**ValidateCommunicationChannel**](ThoughtSpotRestApi.md#validatecommunicationchannel) | **POST** /api/rest/2.0/system/communication-channels/validate |  |
@@ -1379,6 +1402,107 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="createagentconversationv2"></a>
+# **CreateAgentConversationV2**
+> AgentConversationV2 CreateAgentConversationV2 (CreateAgentConversationV2Request createAgentConversationV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to any data source or analyst specified in the request.  #### Usage guidelines  A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.  `source` decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.  - `source` (default: `DATA_SOURCE`): what the conversation is grounded in.   - `DATA_SOURCE`: data sources, set with `data_source_identifiers` and optionally `additional_instructions`. `analyst_identifier` is not allowed.   - `ANALYST`: a saved analyst, set with `analyst_identifier`, which is then required. The analyst brings its own instructions, data sources and connectors, so `data_source_identifiers` and `additional_instructions` are not allowed. - `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored. - `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `\"Answer concisely and always report revenue in thousands.\"` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. - `analyst_identifier`: the saved analyst to create the conversation from.  A parameter that does not apply to the `source` fails the request with a 400 rather than being ignored.  Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.  #### Example requests  ```json {   \"source\": \"DATA_SOURCE\",   \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"],   \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\" } ```  ```json {   \"source\": \"ANALYST\",   \"analyst_identifier\": \"0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\" } ```  #### Example response  ```json {   \"conversation_identifier\": \"5612260428840173568\" } ```  Treat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.  #### Error responses  | Code | Description                                                                                                                                                                                                                                                                                                                               | | - -- - | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | 400  | Bad request — the request fails validation; `analyst_identifier` is missing when `source` is `ANALYST`; a parameter that does not apply to the `source` is set; or the analyst in `analyst_identifier`, or a data source in `data_source_identifiers`, does not exist or the caller cannot view it (the message lists those identifiers). | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst.                                                                                                                                                                                                                             | | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateAgentConversationV2Example
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var createAgentConversationV2Request = new CreateAgentConversationV2Request(); // CreateAgentConversationV2Request | 
+
+            try
+            {
+                AgentConversationV2 result = apiInstance.CreateAgentConversationV2(createAgentConversationV2Request);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateAgentConversationV2: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateAgentConversationV2WithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<AgentConversationV2> response = apiInstance.CreateAgentConversationV2WithHttpInfo(createAgentConversationV2Request);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateAgentConversationV2WithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **createAgentConversationV2Request** | [**CreateAgentConversationV2Request**](CreateAgentConversationV2Request.md) |  |  |
+
+### Return type
+
+[**AgentConversationV2**](AgentConversationV2.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="createanalyst"></a>
 # **CreateAnalyst**
 > Analyst CreateAnalyst (CreateAnalystRequest createAnalystRequest)
@@ -1676,6 +1800,108 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="createcommit"></a>
+# **CreateCommit**
+> VersionControlCommitResponse CreateCommit (CreateCommitRequest createCommitRequest)
+
+
+
+  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateCommitExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var createCommitRequest = new CreateCommitRequest(); // CreateCommitRequest | 
+
+            try
+            {
+                VersionControlCommitResponse result = apiInstance.CreateCommit(createCommitRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateCommit: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateCommitWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlCommitResponse> response = apiInstance.CreateCommitWithHttpInfo(createCommitRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateCommitWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **createCommitRequest** | [**CreateCommitRequest**](CreateCommitRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlCommitResponse**](VersionControlCommitResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. |  -  |
+| **400** | Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | The caller&#39;s org has no version control configuration. |  -  |
+| **409** | Conflict. A name matches more than one object of the given type; name the object by GUID or object id instead. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2087,7 +2313,7 @@ catch (ApiException e)
 
 
 
-  Version: 9.6.0.cl or later   Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in `group_identifiers`.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set `visibility` to `false` in `default_action_config` property and specify the GUID or name of the object in `associate_metadata`.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
 ### Example
 ```csharp
@@ -2277,6 +2503,210 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="createinputtable"></a>
+# **CreateInputTable**
+> InputTableResponse CreateInputTable (CreateInputTableRequest createInputTableRequest)
+
+
+
+  Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model's external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the model named by `model_identifier`, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **`table_name`** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **`model_identifier`** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model's metadata. * **`table_definition`** — Describes the table schema:   * `referenced_columns` — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table's key columns: they are what the input table is joined to the model on, and what rows are matched on by `updateInputTable`. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * `new_columns` — List of new editable columns to create. Each column requires:     * `name` — Column display name.     * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).     * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.     * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.   * `referenced_column_time_dimensions` — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a `column_identifier` (the model column name, exactly as given in `referenced_columns`) and a `time_dimension` grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted `time_dimension` values are the calendar grains `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, and `YEARLY`. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a `DATE` or `DATE_TIME` column; a grain on a `TIME` (time-of-day) column has no meaning and is not supported. `HOURLY` needs a `DATE_TIME` column — on a plain `DATE` column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through `new_columns` always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has `CREATE TABLE` permissions in the target schema.  #### Response  The response returns the new input table's GUID and the list of its columns, each with its name and unique ID:  * **`input_table_id`** — GUID of the newly created input table. Pass it as the `input_table_identifier` path parameter of the other input-table operations. * **`input_columns`** — Every column on the new table. Each entry has a `name`,   an `id` (the column's GUID), and `mapped_column_id` (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **`message_info`** — Note set when a referenced column had to be renamed to   keep the input table's column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column's final name is also its `name` in   `input_columns`, which is what `updateInputTable` matches on.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateInputTableExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var createInputTableRequest = new CreateInputTableRequest(); // CreateInputTableRequest | 
+
+            try
+            {
+                InputTableResponse result = apiInstance.CreateInputTable(createInputTableRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateInputTable: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateInputTableWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<InputTableResponse> response = apiInstance.CreateInputTableWithHttpInfo(createInputTableRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateInputTableWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **createInputTableRequest** | [**CreateInputTableRequest**](CreateInputTableRequest.md) |  |  |
+
+### Return type
+
+[**InputTableResponse**](InputTableResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Input table created successfully. |  -  |
+| **400** | Bad request — invalid payload, no columns selected, or upload disabled on the connection. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden — caller does not have MODIFY permission on the model. |  -  |
+| **404** | Model not found. |  -  |
+| **500** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="createinputtablecolumn"></a>
+# **CreateInputTableColumn**
+> InputColumnResponse CreateInputTableColumn (string inputTableIdentifier, CreateInputTableColumnRequest createInputTableColumnRequest)
+
+
+
+  Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (`ALTER TABLE ... ADD COLUMN`) and refreshes the input table's ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and describe the columns to add in the request body:  * **`column_definition.columns`** — List of new editable columns to create. Each column requires:   * `name` — Column display name. Must not collide with an existing column on the table.   * `data_type` — Warehouse data type (for example, `VARCHAR`, `DOUBLE`, `DATE`).   * `type` — Semantic role of the column: `ATTRIBUTE` for dimension columns or `MEASURE` for numeric columns.   * `allowed_values` — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by `updateInputTable` must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column's `data_type`: a number for the numeric types, `true` or `false` for `BOOL`, and an epoch integer for `DATE`, `DATE_TIME`, and `TIME`. Omit it to accept any value the data type supports.  Unlike `createInputTable`, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via `deleteInputTableColumn`.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateInputTableColumnExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var inputTableIdentifier = "inputTableIdentifier_example";  // string | Unique ID of the input table to add columns to.
+            var createInputTableColumnRequest = new CreateInputTableColumnRequest(); // CreateInputTableColumnRequest | 
+
+            try
+            {
+                InputColumnResponse result = apiInstance.CreateInputTableColumn(inputTableIdentifier, createInputTableColumnRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateInputTableColumn: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateInputTableColumnWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<InputColumnResponse> response = apiInstance.CreateInputTableColumnWithHttpInfo(inputTableIdentifier, createInputTableColumnRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateInputTableColumnWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **inputTableIdentifier** | **string** | Unique ID of the input table to add columns to. |  |
+| **createInputTableColumnRequest** | [**CreateInputTableColumnRequest**](CreateInputTableColumnRequest.md) |  |  |
+
+### Return type
+
+[**InputColumnResponse**](InputColumnResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Columns added successfully. |  -  |
+| **400** | Bad request — invalid payload or no columns supplied. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden — caller does not have MODIFY permission on the input table. |  -  |
+| **404** | Input table not found. |  -  |
+| **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3078,6 +3508,107 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="createversioncontrolconfig"></a>
+# **CreateVersionControlConfig**
+> VersionControlConfig CreateVersionControlConfig (CreateVersionControlConfigRequest createVersionControlConfigRequest)
+
+
+
+  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateVersionControlConfigExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var createVersionControlConfigRequest = new CreateVersionControlConfigRequest(); // CreateVersionControlConfigRequest | 
+
+            try
+            {
+                VersionControlConfig result = apiInstance.CreateVersionControlConfig(createVersionControlConfigRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateVersionControlConfig: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateVersionControlConfigWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlConfig> response = apiInstance.CreateVersionControlConfigWithHttpInfo(createVersionControlConfigRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateVersionControlConfigWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **createVersionControlConfigRequest** | [**CreateVersionControlConfigRequest**](CreateVersionControlConfigRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlConfig**](VersionControlConfig.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The stored configuration. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **409** | Conflict. The org is already configured, another org already commits to this repository and branch, or the org is still served by the legacy Callosum VCS surface. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4493,7 +5024,7 @@ void (empty response body)
 
 
 
-  Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Removes the custom action specified in the API request.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
 
 ### Example
 ```csharp
@@ -4771,6 +5302,200 @@ void (empty response body)
 | **400** | Invalid request. |  -  |
 | **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="deleteinputtable"></a>
+# **DeleteInputTable**
+> void DeleteInputTable (string inputTableIdentifier)
+
+
+
+  Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the `input_table_identifier` path parameter. The owner model (worksheet) is derived from the input table's metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteInputTableExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var inputTableIdentifier = "inputTableIdentifier_example";  // string | Unique ID of the input table to delete.
+
+            try
+            {
+                apiInstance.DeleteInputTable(inputTableIdentifier);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteInputTable: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteInputTableWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.DeleteInputTableWithHttpInfo(inputTableIdentifier);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteInputTableWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **inputTableIdentifier** | **string** | Unique ID of the input table to delete. |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully deleted the input table and dropped the physical CDW table. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="deleteinputtablecolumn"></a>
+# **DeleteInputTableColumn**
+> void DeleteInputTableColumn (string inputTableIdentifier, string columnIdentifier)
+
+
+
+  Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table's ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and the column GUID as the `column_identifier` path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining `column_identifier`**: Use the `id` field returned for the column by `createInputTableColumn` (in `columns`) or by `createInputTable` (in `input_columns`) as the `column_identifier`.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteInputTableColumnExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var inputTableIdentifier = "inputTableIdentifier_example";  // string | Unique ID of the input table that owns the column.
+            var columnIdentifier = "columnIdentifier_example";  // string | Unique ID of the column to delete.
+
+            try
+            {
+                apiInstance.DeleteInputTableColumn(inputTableIdentifier, columnIdentifier);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteInputTableColumn: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteInputTableColumnWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.DeleteInputTableColumnWithHttpInfo(inputTableIdentifier, columnIdentifier);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteInputTableColumnWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **inputTableIdentifier** | **string** | Unique ID of the input table that owns the column. |  |
+| **columnIdentifier** | **string** | Unique ID of the column to delete. |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully deleted the input table column and dropped the physical CDW column. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -5642,6 +6367,107 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="deleteusagedata"></a>
+# **DeleteUsageData**
+> DeleteUsageDataResponse DeleteUsageData (DeleteUsageDataRequest deleteUsageDataRequest)
+
+
+
+ Deletes Spotter usage pools. Users who no longer draw from any pool are no longer metered: their Spotter usage is unlimited, not blocked. Requires `ADMINISTRATION` privilege.   Version: 26.11.0.cl or later   Deletes Spotter usage pools. Use this API to remove a limit from a user, user group, or Org, or to clear every pool before switching the scope the cluster meters at.  Requires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.  #### Usage guidelines  The request must include `keys`, with at least one entry. Each key has an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org).  Deleting a pool removes its limit rather than blocking its users. A user who no longer draws from any pool is not metered and can use Spotter without a limit.  If the request is successful, the response contains `deleted_keys`, the keys of the pools that existed and were deleted. Keys that matched no pool are omitted.  #### Error conditions  - `400` — `keys` is empty, or a key is missing its `entity_type` or `entity_identifier`. - `401` — authentication token is missing, expired, or invalid. - `403` — the caller does not have `ADMINISTRATION` privilege.  > ###### Note: > > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > - This operation cannot be undone. Recreate a pool with `updateUsageData`; its usage restarts from `0`.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteUsageDataExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var deleteUsageDataRequest = new DeleteUsageDataRequest(); // DeleteUsageDataRequest | 
+
+            try
+            {
+                DeleteUsageDataResponse result = apiInstance.DeleteUsageData(deleteUsageDataRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteUsageData: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteUsageDataWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<DeleteUsageDataResponse> response = apiInstance.DeleteUsageDataWithHttpInfo(deleteUsageDataRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteUsageDataWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **deleteUsageDataRequest** | [**DeleteUsageDataRequest**](DeleteUsageDataRequest.md) |  |  |
+
+### Return type
+
+[**DeleteUsageDataResponse**](DeleteUsageDataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="deleteuser"></a>
 # **DeleteUser**
 > void DeleteUser (string userIdentifier)
@@ -6026,6 +6852,97 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="deleteversioncontrolconfig"></a>
+# **DeleteVersionControlConfig**
+> void DeleteVersionControlConfig ()
+
+
+
+  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteVersionControlConfigExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+
+            try
+            {
+                apiInstance.DeleteVersionControlConfig();
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteVersionControlConfig: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteVersionControlConfigWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.DeleteVersionControlConfigWithHttpInfo();
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteVersionControlConfigWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully revoked version control for the Org. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="deletewebhookconfigurations"></a>
 # **DeleteWebhookConfigurations**
 > WebhookDeleteResponse DeleteWebhookConfigurations (DeleteWebhookConfigurationsRequest deleteWebhookConfigurationsRequest)
@@ -6222,6 +7139,108 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="deployrevision"></a>
+# **DeployRevision**
+> VersionControlDeployResponse DeployRevision (DeployRevisionRequest deployRevisionRequest)
+
+
+
+  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeployRevisionExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var deployRevisionRequest = new DeployRevisionRequest(); // DeployRevisionRequest | 
+
+            try
+            {
+                VersionControlDeployResponse result = apiInstance.DeployRevision(deployRevisionRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeployRevision: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeployRevisionWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlDeployResponse> response = apiInstance.DeployRevisionWithHttpInfo(deployRevisionRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeployRevisionWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **deployRevisionRequest** | [**DeployRevisionRequest**](DeployRevisionRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlDeployResponse**](VersionControlDeployResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The request was admitted and the deploy run has started. The body is a receipt, not a result: nothing is imported yet. |  -  |
+| **400** | Invalid request, and nothing was admitted. Covers a malformed body, an unknown, ambiguous or unreachable target_revision, a paused repository, and an org whose disabled_operations holds DEPLOY. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | The caller&#39;s org has no version control configuration. |  -  |
+| **409** | Conflict. Another deploy, restore or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6618,7 +7637,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | CSV file downloaded successfully. |  -  |
+| **200** | CSV file downloaded successfully. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -8318,7 +9337,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Generate custom calendar data based on specifications, as a CSV file. |  -  |
+| **200** | Generate custom calendar data based on specifications, as a CSV file. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -10001,6 +11020,107 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="getusagedataforuser"></a>
+# **GetUsageDataForUser**
+> UsageDataForUserResponse GetUsageDataForUser (string? userIdentifier = null)
+
+
+
+ Retrieves a user's combined Spotter usage position: every pool the user draws from, with usage, warning limits, and limits summed across them. Any user can retrieve their own usage. Retrieving another user's usage requires `ADMINISTRATION` privilege.   Version: 26.11.0.cl or later   Retrieves a user's combined Spotter usage: every usage pool the user draws from, with usage, warning limits, and limits summed across them. Use this API to show users how many Spotter questions they have left, or to check whether a user is blocked by a usage limit.  Any user can retrieve their own usage. Retrieving another user's usage requires `ADMINISTRATION` (Can administer ThoughtSpot) privilege; `CAN_MANAGE_SPOTTER` is not sufficient.  #### Usage guidelines  - Omit `user_identifier` to retrieve the usage of the authenticated user. - Pass `user_identifier` with a user GUID to retrieve that user's usage.  A user draws from every pool that meters them: their own pool, the pools of the user groups they belong to (including inherited groups), or their Org's pool, depending on the scope the cluster meters at. The totals in the response are sums over those pools. For example, a user in two groups with limits of 100 and 50 has a `total_limit` of 150.  If the request is successful, the response contains `summary`:  - `pools`: the individual pools the user draws from. - `total_usage`, `total_warning_limit`, and `total_limit`: sums across the pools. - `total_remaining`: questions the user can still ask. Absent when `has_unlimited_pool` is `true`. - `is_at_warning`: `true` when usage has reached the combined warning limit. - `is_at_limit`: `true` when usage has reached the combined limit and further Spotter questions are blocked. - `has_unlimited_pool`: `true` when any of the user's pools has no limit, which makes the user unlimited.  A user who draws from no pool is not metered: `pools` is empty and `is_at_limit` is `false`.  #### Error conditions  - `401` — authentication token is missing, expired, or invalid. - `403` — the caller requested another user's usage without `ADMINISTRATION` privilege.  > ###### Note: > > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class GetUsageDataForUserExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var userIdentifier = "userIdentifier_example";  // string? | GUID of the user whose usage to retrieve. Defaults to the authenticated user. Passing another user's GUID requires `ADMINISTRATION` privilege. (optional) 
+
+            try
+            {
+                UsageDataForUserResponse result = apiInstance.GetUsageDataForUser(userIdentifier);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.GetUsageDataForUser: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetUsageDataForUserWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<UsageDataForUserResponse> response = apiInstance.GetUsageDataForUserWithHttpInfo(userIdentifier);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.GetUsageDataForUserWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userIdentifier** | **string?** | GUID of the user whose usage to retrieve. Defaults to the authenticated user. Passing another user&#39;s GUID requires &#x60;ADMINISTRATION&#x60; privilege. | [optional]  |
+
+### Return type
+
+[**UsageDataForUserResponse**](UsageDataForUserResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="getwebhookstorageconfig"></a>
 # **GetWebhookStorageConfig**
 > List&lt;WebhookStorageConfigInfo&gt; GetWebhookStorageConfig ()
@@ -10905,7 +12025,7 @@ catch (ApiException e)
 
 
 
-  Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
+  Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using `username` and `password` attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (`username`  and `password` ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.  #### Redirecting after login  To send a browser to a specific page once the session is created, pass `redirect_url`. It must be a path on the same ThoughtSpot instance that served the login request, for example `/pinboards`. An absolute URL is rejected with `400`, so that a login cannot be used to forward a newly issued session cookie to another host.  The path is resolved against the host the caller actually reached, which means the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific subdomain.  * **Browser flows** — omit `no_url_redirection`. The API answers `302` with the   resolved path in the `location` header, and the browser follows it on its own.   This is the usual choice when the login is submitted as an HTML form or opened   as a top-level navigation. * **SPA and non-browser clients** — set `no_url_redirection` to `true`. The API   keeps its normal `204` response and returns the resolved path in the   `location` header without redirecting, leaving the client to decide when and   where to navigate. Use this from `fetch`/`XMLHttpRequest` calls, which follow   a `302` internally and never expose it to your code.  When `redirect_url` is omitted the response is unchanged, and `no_url_redirection` has no effect on its own.      
 
 ### Example
 ```csharp
@@ -10987,7 +12107,8 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | User login successful. |  -  |
+| **204** | User login successful. Carries the location header when redirect_url was supplied with no_url_redirection |  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  |
+| **302** | Redirect to the specified redirect_url |  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -11370,6 +12491,107 @@ void (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="promotebranch"></a>
+# **PromoteBranch**
+> VersionControlPromotionResponse PromoteBranch (PromoteBranchRequest promoteBranchRequest)
+
+
+
+  Version: 26.12.0.cl or later   Merges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class PromoteBranchExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var promoteBranchRequest = new PromoteBranchRequest(); // PromoteBranchRequest | 
+
+            try
+            {
+                VersionControlPromotionResponse result = apiInstance.PromoteBranch(promoteBranchRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.PromoteBranch: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the PromoteBranchWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlPromotionResponse> response = apiInstance.PromoteBranchWithHttpInfo(promoteBranchRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.PromoteBranchWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **promoteBranchRequest** | [**PromoteBranchRequest**](PromoteBranchRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlPromotionResponse**](VersionControlPromotionResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The promotion was carried out, or with dry_run true would have been. Conflicting content appears here only when conflict_policy resolved it. |  -  |
+| **400** | The promotion could not be carried out, and nothing was written. Covers a source that names both or neither of an org and a branch, a cherry-pick with no source_revision, a source org that versions to a different repository, a source_branch that no org in the caller&#39;s repository versions to, an unknown branch or commit, content that conflicts while conflict_policy is FAIL_REQUEST, which is equally a 400 on a dry run because the real promotion could not have completed either, branches with unrelated histories, and a target branch the provider protects. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. Also returned when the caller is neither a tenant administrator nor an administrator of the source org. |  -  |
+| **404** | An org involved has no version control configuration: the caller&#39;s org, which then has no branch to promote into, or the org named by source.org_identifier, which then has none to promote from. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -11761,6 +12983,108 @@ void (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="restorerevision"></a>
+# **RestoreRevision**
+> VersionControlRestoreResponse RestoreRevision (RestoreRevisionRequest restoreRevisionRequest)
+
+
+
+  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class RestoreRevisionExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var restoreRevisionRequest = new RestoreRevisionRequest(); // RestoreRevisionRequest | 
+
+            try
+            {
+                VersionControlRestoreResponse result = apiInstance.RestoreRevision(restoreRevisionRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.RestoreRevision: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the RestoreRevisionWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlRestoreResponse> response = apiInstance.RestoreRevisionWithHttpInfo(restoreRevisionRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.RestoreRevisionWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **restoreRevisionRequest** | [**RestoreRevisionRequest**](RestoreRevisionRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlRestoreResponse**](VersionControlRestoreResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The request was admitted and the restore run has started. The body is a receipt, not a result: nothing is committed or imported yet. |  -  |
+| **400** | Invalid request, and nothing was admitted. Covers a malformed body, a target_revision that is unknown, ambiguous, unreachable from the branch or is its head, a paused repository, and an org whose disabled_operations holds COMMIT or DEPLOY. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | The caller&#39;s org has no version control configuration. |  -  |
+| **409** | Conflict. Another restore, deploy or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12974,7 +14298,7 @@ catch (ApiException e)
 
 
 
-  Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Gets custom actions configured on the cluster.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.      
 
 ### Example
 ```csharp
@@ -13363,8 +14687,108 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges. |  -  |
-| **404** | Feature management not enabled. |  -  |
+| **404** | Feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="searchlinkcustomizations"></a>
+# **SearchLinkCustomizations**
+> List&lt;LinkPreference&gt; SearchLinkCustomizations (SearchLinkCustomizationsRequest searchLinkCustomizationsRequest)
+
+
+
+  Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` returns the cluster templates, and is available only to callers in the primary Org. - `scope: ORG` returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit `scope` to return whichever of these the caller can access. - Every link type is always returned, customized or not. `is_overridden` is `true` when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for `ORG`, the ThoughtSpot default for `CLUSTER` — and `false` when it matches.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchLinkCustomizationsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var searchLinkCustomizationsRequest = new SearchLinkCustomizationsRequest(); // SearchLinkCustomizationsRequest | 
+
+            try
+            {
+                List<LinkPreference> result = apiInstance.SearchLinkCustomizations(searchLinkCustomizationsRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SearchLinkCustomizations: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchLinkCustomizationsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<List<LinkPreference>> response = apiInstance.SearchLinkCustomizationsWithHttpInfo(searchLinkCustomizationsRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SearchLinkCustomizationsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **searchLinkCustomizationsRequest** | [**SearchLinkCustomizationsRequest**](SearchLinkCustomizationsRequest.md) |  |  |
+
+### Return type
+
+[**List&lt;LinkPreference&gt;**](LinkPreference.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Link preferences retrieved successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -14268,6 +15692,107 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="searchusagedata"></a>
+# **SearchUsageData**
+> UsageDataResponse SearchUsageData (SearchUsageDataRequest searchUsageDataRequest)
+
+
+
+ Retrieves Spotter usage pools: the question allowance configured for each user, user group, or Org and how much of it has been consumed. Pass `keys` to fetch specific pools, or omit it to fetch every pool on the cluster. Requires `ADMINISTRATION` privilege.   Version: 26.11.0.cl or later   Retrieves Spotter usage pools. A usage pool is the Spotter question allowance configured for a user, user group, or Org, together with how many questions have been consumed from it. Use this API to monitor usage across your users, for example to find pools that are close to their limit.  Requires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.  #### Usage guidelines  A cluster meters Spotter usage at exactly one scope: per user, per user group, or per Org. Every pool on a cluster therefore has the same `entity_type`.  - To retrieve every pool on the cluster, send an empty request body. - To retrieve specific pools, pass `keys`, each with an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org). Keys that match no pool are omitted from the response.  If the request is successful, the response contains `usage_data`, one entry per pool:  - `key`: the entity the pool meters. - `usage`: questions consumed from the pool. - `warning_limit`: usage level at which users are warned. Absent when no warning is configured. - `limit`: maximum questions the pool allows. Absent when the pool is unlimited. - `updated_time_in_millis` and `updated_by`: when and by whom the pool was last configured.  #### Error conditions  - `401` — authentication token is missing, expired, or invalid. - `403` — the caller does not have `ADMINISTRATION` privilege.  > ###### Note: > > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > - Use `getUsageDataForUser` to see the combined usage of a single user across every pool they draw from.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchUsageDataExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var searchUsageDataRequest = new SearchUsageDataRequest(); // SearchUsageDataRequest | 
+
+            try
+            {
+                UsageDataResponse result = apiInstance.SearchUsageData(searchUsageDataRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SearchUsageData: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchUsageDataWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<UsageDataResponse> response = apiInstance.SearchUsageDataWithHttpInfo(searchUsageDataRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SearchUsageDataWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **searchUsageDataRequest** | [**SearchUsageDataRequest**](SearchUsageDataRequest.md) |  |  |
+
+### Return type
+
+[**UsageDataResponse**](UsageDataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="searchusergroups"></a>
 # **SearchUserGroups**
 > List&lt;UserGroupResponse&gt; SearchUserGroups (SearchUserGroupsRequest searchUserGroupsRequest)
@@ -14568,6 +16093,201 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="searchversioncontrolconfigs"></a>
+# **SearchVersionControlConfigs**
+> VersionControlConfigList SearchVersionControlConfigs ()
+
+
+
+  Version: 26.12.0.cl or later   Returns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchVersionControlConfigsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+
+            try
+            {
+                VersionControlConfigList result = apiInstance.SearchVersionControlConfigs();
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SearchVersionControlConfigs: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchVersionControlConfigsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlConfigList> response = apiInstance.SearchVersionControlConfigsWithHttpInfo();
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SearchVersionControlConfigsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+### Return type
+
+[**VersionControlConfigList**](VersionControlConfigList.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Zero or one configuration. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="searchversioncontrolruns"></a>
+# **SearchVersionControlRuns**
+> VersionControlRunList SearchVersionControlRuns (SearchVersionControlRunsRequest searchVersionControlRunsRequest)
+
+
+
+  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org's commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchVersionControlRunsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var searchVersionControlRunsRequest = new SearchVersionControlRunsRequest(); // SearchVersionControlRunsRequest | 
+
+            try
+            {
+                VersionControlRunList result = apiInstance.SearchVersionControlRuns(searchVersionControlRunsRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SearchVersionControlRuns: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchVersionControlRunsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlRunList> response = apiInstance.SearchVersionControlRunsWithHttpInfo(searchVersionControlRunsRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SearchVersionControlRunsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **searchVersionControlRunsRequest** | [**SearchVersionControlRunsRequest**](SearchVersionControlRunsRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlRunList**](VersionControlRunList.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The runs&#39; current outcomes. A run identifier that does not exist in the caller&#39;s org is left out, not reported as an error. |  -  |
+| **400** | Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type, and a record_offset or record_size out of range. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="searchwebhookconfigurations"></a>
 # **SearchWebhookConfigurations**
 > WebhookSearchResponse SearchWebhookConfigurations (SearchWebhookConfigurationsRequest searchWebhookConfigurationsRequest)
@@ -14851,6 +16571,208 @@ catch (ApiException e)
 ### Return type
 
 [**SendAgentMessageResponse**](SendAgentMessageResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="sendagentconversationmessagestreamingv2"></a>
+# **SendAgentConversationMessageStreamingV2**
+> AgentStreamFrame SendAgentConversationMessageStreamingV2 (SendAgentConversationMessageStreamingV2Request sendAgentConversationMessageStreamingV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Sends a message to Spotter and streams the response back as Server-Sent Events.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.  #### Usage guidelines  - `message` (required): the question to ask Spotter. - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the `x-conversation-identifier` response header, so a follow-up question can continue the same exchange.  Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.  #### Response format  Each event is a `data:` line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | - -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | `event`       | Text from Spotter — its reasoning or its answer.                    | | `tool_call`   | Spotter started a step, such as querying a data source.             | | `progress`    | A stage of a step in flight, so you can show what Spotter is doing. | | `tool_result` | A step finished; carries its result, including any answer produced. | | `error`       | The turn failed.                                                    | | `done`        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  ``` tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done ```  `tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.  Ignore any key you don't recognise — new event types may be added.  Lines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.  An event with content has the shape:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"partial\": true,     \"content\": {       \"role\": \"model\",       \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]     }   } } ```  - `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment. - `invocation_id` is stable for one turn; `id` identifies a single event.  #### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **`tool_call`** announces the step and the arguments it ran with:  ```json {   \"tool_call\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"args\": {       \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"english_query\": \"total sales by region last quarter\"     }   } } ```  **`progress`** reports each stage while the step runs:  ```json {   \"progress\": {     \"code\": \"ANSWER_GEN\",     \"message\": \"Verifying results with the Trust Layer\",     \"tool_call_id\": \"toolu_01AMjCrr\"   } } ```  `message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.  **`tool_result`** carries what the step produced:  ```json {   \"tool_result\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"is_error\": false,     \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",     \"answer\": {       \"title\": \"total sales by region last quarter\",       \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",       \"gen_no\": 2,       \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",       \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",       \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },       \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }     }   } } ```  - `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count. - `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted. - `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  `args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  #### End of turn  The stream ends with a terminal event:  ```json { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } } ```  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  `done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.  The `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the parameter.  #### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  ```json {   \"error\": {     \"code\": \"409\",     \"message\": \"session busy: lease held by invocation 7f3a\",     \"source\": \"transport\",     \"display_message\": \"Another request is still running in this conversation.\",     \"error_bucket\": \"RETRY\"   } } ```  Render `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.  A failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"error_code\": \"MALFORMED_FUNCTION_CALL\",     \"content\": { \"role\": \"model\", \"parts\": [] }   } } ```  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | - -- -- -- -- -- -- -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - | | `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            | | `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |  `error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                        | | - -- - | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - | | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is not a string.               | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation. | | 404  | Not found — no conversation with the given identifier exists for this user.                                        |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - The streaming protocol uses Server-Sent Events (SSE).      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SendAgentConversationMessageStreamingV2Example
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var sendAgentConversationMessageStreamingV2Request = new SendAgentConversationMessageStreamingV2Request(); // SendAgentConversationMessageStreamingV2Request | 
+
+            try
+            {
+                AgentStreamFrame result = apiInstance.SendAgentConversationMessageStreamingV2(sendAgentConversationMessageStreamingV2Request);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SendAgentConversationMessageStreamingV2: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SendAgentConversationMessageStreamingV2WithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<AgentStreamFrame> response = apiInstance.SendAgentConversationMessageStreamingV2WithHttpInfo(sendAgentConversationMessageStreamingV2Request);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SendAgentConversationMessageStreamingV2WithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **sendAgentConversationMessageStreamingV2Request** | [**SendAgentConversationMessageStreamingV2Request**](SendAgentConversationMessageStreamingV2Request.md) |  |  |
+
+### Return type
+
+[**AgentStreamFrame**](AgentStreamFrame.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="sendagentconversationmessagev2"></a>
+# **SendAgentConversationMessageV2**
+> AgentTurnResponse SendAgentConversationMessageV2 (SendAgentConversationMessageV2Request sendAgentConversationMessageV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Sends a message to Spotter and returns the complete response once the turn has finished.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreamingV2` instead.  #### Usage guidelines  - `message` (required): the question to ask Spotter. - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the `x-conversation-identifier` response header.  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.  #### Response format  ```json {   \"conversation_identifier\": \"5612260428840173568\",   \"events\": [     { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },     { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },     { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },     {       \"event\": {         \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }       }     },     { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }   ] } ```  `events` contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreamingV2` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.  To render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint's \"Errors during a turn\" section explains how the two differ.  #### Error responses  | Code | Description                                                                                                                                                     | | - -- - | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is empty or not a string.                                                   | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation.                                              | | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     | | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use `sendAgentConversationMessageStreamingV2` for questions that run long. |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SendAgentConversationMessageV2Example
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var sendAgentConversationMessageV2Request = new SendAgentConversationMessageV2Request(); // SendAgentConversationMessageV2Request | 
+
+            try
+            {
+                AgentTurnResponse result = apiInstance.SendAgentConversationMessageV2(sendAgentConversationMessageV2Request);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SendAgentConversationMessageV2: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SendAgentConversationMessageV2WithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<AgentTurnResponse> response = apiInstance.SendAgentConversationMessageV2WithHttpInfo(sendAgentConversationMessageV2Request);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SendAgentConversationMessageV2WithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **sendAgentConversationMessageV2Request** | [**SendAgentConversationMessageV2Request**](SendAgentConversationMessageV2Request.md) |  |  |
+
+### Return type
+
+[**AgentTurnResponse**](AgentTurnResponse.md)
 
 ### Authorization
 
@@ -17259,7 +19181,7 @@ void (empty response body)
 
 
 
-  Version: 9.6.0.cl or later   Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Updates a custom action.  Requires `DEVELOPER` (**Has Developer privilege**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `DEVELOPER` (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
 ### Example
 ```csharp
@@ -17663,7 +19585,7 @@ catch (ApiException e)
 | **400** | Invalid request parameters. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges. |  -  |
-| **404** | Feature not found or feature management not enabled. |  -  |
+| **404** | Feature not found or feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -17764,8 +19686,207 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges or org not assigned to feature. |  -  |
-| **404** | Feature not found or feature management not enabled. |  -  |
+| **404** | Feature not found or feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updateinputtable"></a>
+# **UpdateInputTable**
+> InputTableUpdateResponse UpdateInputTable (string inputTableIdentifier, UpdateInputTableRequest updateInputTableRequest)
+
+
+
+  Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:  * **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.  #### Date values  Pass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The `rows` array must contain at least one row; an empty `rows` array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).  #### Response  The response returns `rows_loaded` — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  `rows_loaded` is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with `500` rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table's key columns, so it is idempotent — retrying the same payload is safe.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateInputTableExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var inputTableIdentifier = "inputTableIdentifier_example";  // string | Unique ID of the input table to update.
+            var updateInputTableRequest = new UpdateInputTableRequest(); // UpdateInputTableRequest | 
+
+            try
+            {
+                InputTableUpdateResponse result = apiInstance.UpdateInputTable(inputTableIdentifier, updateInputTableRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateInputTable: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateInputTableWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<InputTableUpdateResponse> response = apiInstance.UpdateInputTableWithHttpInfo(inputTableIdentifier, updateInputTableRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateInputTableWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **inputTableIdentifier** | **string** | Unique ID of the input table to update. |  |
+| **updateInputTableRequest** | [**UpdateInputTableRequest**](UpdateInputTableRequest.md) |  |  |
+
+### Return type
+
+[**InputTableUpdateResponse**](InputTableUpdateResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Rows loaded successfully. |  -  |
+| **400** | Malformed request or unknown column name. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden — caller does not have MODIFY permission on the input table. |  -  |
+| **404** | Input table not found. |  -  |
+| **500** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updatelinkcustomizations"></a>
+# **UpdateLinkCustomizations**
+> void UpdateLinkCustomizations (UpdateLinkCustomizationsRequest updateLinkCustomizationsRequest)
+
+
+
+  Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.  #### Usage guidelines  - `scope: CLUSTER` changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - `scope: ORG` (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in `templates` change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the `value` provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only `type`; a `value` alongside `RESET` is rejected. To clear every override, list all types with `RESET`. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | - -- | - -- | - -- | | `LIVEBOARD_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}` | | `VISUALIZATION_SHARE_URL` | `{object-id}`, `{sub-object-id}`, `{ts-query-params}` | `https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}` | | `ANSWER_SHARE_URL` | `{object-id}`, `{ts-query-params}` | `https://analytics.acme.com/answers/{object-id}?{ts-query-params}` | | `SPOTIQ_ANALYSIS_URL` | `{object-id}` | `https://analytics.acme.com/insights/{object-id}` | | `UNSUBSCRIBE_URL` | none | `https://analytics.acme.com/account/email-preferences` | | `GENERIC_URL` | `{path}` | `https://analytics.acme.com/{path}` | | `CONVERSATION_SHARE_URL` | `{conversation-id}`, `{ts-query-params}` | `https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}` |  `{ts-query-params}` is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateLinkCustomizationsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var updateLinkCustomizationsRequest = new UpdateLinkCustomizationsRequest(); // UpdateLinkCustomizationsRequest | 
+
+            try
+            {
+                apiInstance.UpdateLinkCustomizations(updateLinkCustomizationsRequest);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateLinkCustomizations: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateLinkCustomizationsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.UpdateLinkCustomizationsWithHttpInfo(updateLinkCustomizationsRequest);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateLinkCustomizationsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **updateLinkCustomizationsRequest** | [**UpdateLinkCustomizationsRequest**](UpdateLinkCustomizationsRequest.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Link preferences updated successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -18261,7 +20382,7 @@ void (empty response body)
 
 <a id="updatestylecustomization"></a>
 # **UpdateStyleCustomization**
-> void UpdateStyleCustomization (string scope, string? operation = null, StyleResetOptionsInput? resetOptions = null, NavigationPanelInput? navigationPanel = null, StyleColorPaletteInput? chartColorPalette = null, string? embeddedFooterText = null, VisualizationFontsInput? visualizationFonts = null, FileParameter? defaultLogo = null, FileParameter? wideLogo = null)
+> void UpdateStyleCustomization (string scope, string? operation = null, StyleResetOptionsInput? resetOptions = null, NavigationPanelInput? navigationPanel = null, AppColorThemeInput? appColorTheme = null, StyleColorPaletteInput? chartColorPalette = null, string? embeddedFooterText = null, VisualizationFontsInput? visualizationFonts = null, FileParameter? defaultLogo = null, FileParameter? wideLogo = null)
 
 
 
@@ -18294,7 +20415,8 @@ namespace Example
             var scope = "CLUSTER";  // string | Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org. (default to ORG)
             var operation = "REPLACE";  // string? | Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional)  (default to REPLACE)
             var resetOptions = new StyleResetOptionsInput?(); // StyleResetOptionsInput? | Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional) 
-            var navigationPanel = new NavigationPanelInput?(); // NavigationPanelInput? | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional) 
+            var navigationPanel = new NavigationPanelInput?(); // NavigationPanelInput? | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional) 
+            var appColorTheme = new AppColorThemeInput?(); // AppColorThemeInput? | App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional) 
             var chartColorPalette = new StyleColorPaletteInput?(); // StyleColorPaletteInput? | Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional) 
             var embeddedFooterText = "embeddedFooterText_example";  // string? | Custom footer text for the embedded application. An empty string clears the footer. (optional) 
             var visualizationFonts = new VisualizationFontsInput?(); // VisualizationFontsInput? | Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional) 
@@ -18303,7 +20425,7 @@ namespace Example
 
             try
             {
-                apiInstance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+                apiInstance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
             }
             catch (ApiException  e)
             {
@@ -18322,7 +20444,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    apiInstance.UpdateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+    apiInstance.UpdateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
 }
 catch (ApiException e)
 {
@@ -18339,7 +20461,8 @@ catch (ApiException e)
 | **scope** | **string** | Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org. | [default to ORG] |
 | **operation** | **string?** | Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. | [optional] [default to REPLACE] |
 | **resetOptions** | [**StyleResetOptionsInput?**](StyleResetOptionsInput?.md) | Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. | [optional]  |
-| **navigationPanel** | [**NavigationPanelInput?**](NavigationPanelInput?.md) | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. | [optional]  |
+| **navigationPanel** | [**NavigationPanelInput?**](NavigationPanelInput?.md) | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. | [optional]  |
+| **appColorTheme** | [**AppColorThemeInput?**](AppColorThemeInput?.md) | App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  | [optional]  |
 | **chartColorPalette** | [**StyleColorPaletteInput?**](StyleColorPaletteInput?.md) | Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. | [optional]  |
 | **embeddedFooterText** | **string?** | Custom footer text for the embedded application. An empty string clears the footer. | [optional]  |
 | **visualizationFonts** | [**VisualizationFontsInput?**](VisualizationFontsInput?.md) | Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. | [optional]  |
@@ -18660,6 +20783,107 @@ void (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updateusagedata"></a>
+# **UpdateUsageData**
+> UsageDataResponse UpdateUsageData (UpdateUsageDataRequest updateUsageDataRequest)
+
+
+
+ Creates or updates Spotter usage pools, setting the question allowance for a user, user group, or Org. A pool that does not exist is created; fields omitted from an update keep their current value. Every key must use the scope the cluster meters at. Switching scope requires deleting the existing pools first. Requires `ADMINISTRATION` privilege.   Version: 26.11.0.cl or later   Creates or updates Spotter usage pools. A usage pool sets how many Spotter questions a user, user group, or Org can ask. Use this API to provision limits for new users or groups, raise or lower an existing limit, or reset usage at the start of a billing period.  Requires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.  #### Usage guidelines  The request must include `updates`, with at least one entry. Each entry contains:  - `key` (required): the pool to create or update, with an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org). - `limit` (optional): maximum Spotter questions the pool allows. - `warning_limit` (optional): usage level at which users are warned that they are approaching the limit. - `usage` (optional): questions consumed so far. Set to `0` to reset the pool.  A pool that does not exist is created. Fields omitted from an entry keep their current value.  A cluster meters Spotter usage at exactly one scope. The first pool created sets the scope, and every later key must use the same `entity_type`. To switch scope, delete the existing pools with `deleteUsageData` first.  If the request is successful, the response contains `usage_data`, with each updated pool as it stands after the change.  #### Error conditions  - `400` — `updates` is empty, a key is missing its `entity_type` or `entity_identifier`, or a key uses a different `entity_type` from the cluster's existing pools. - `401` — authentication token is missing, expired, or invalid. - `403` — the caller does not have `ADMINISTRATION` privilege.  > ###### Note: > > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateUsageDataExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var updateUsageDataRequest = new UpdateUsageDataRequest(); // UpdateUsageDataRequest | 
+
+            try
+            {
+                UsageDataResponse result = apiInstance.UpdateUsageData(updateUsageDataRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateUsageData: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateUsageDataWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<UsageDataResponse> response = apiInstance.UpdateUsageDataWithHttpInfo(updateUsageDataRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateUsageDataWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **updateUsageDataRequest** | [**UpdateUsageDataRequest**](UpdateUsageDataRequest.md) |  |  |
+
+### Return type
+
+[**UsageDataResponse**](UsageDataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -19050,6 +21274,102 @@ void (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updateversioncontrolconfig"></a>
+# **UpdateVersionControlConfig**
+> void UpdateVersionControlConfig (UpdateVersionControlConfigRequest updateVersionControlConfigRequest)
+
+
+
+  Version: 26.12.0.cl or later   Changes your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateVersionControlConfigExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var updateVersionControlConfigRequest = new UpdateVersionControlConfigRequest(); // UpdateVersionControlConfigRequest | 
+
+            try
+            {
+                apiInstance.UpdateVersionControlConfig(updateVersionControlConfigRequest);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateVersionControlConfig: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateVersionControlConfigWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.UpdateVersionControlConfigWithHttpInfo(updateVersionControlConfigRequest);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateVersionControlConfigWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **updateVersionControlConfigRequest** | [**UpdateVersionControlConfigRequest**](UpdateVersionControlConfigRequest.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully updated the version control configuration for the Org. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

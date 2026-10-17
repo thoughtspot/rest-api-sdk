@@ -367,11 +367,12 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="defaultLiveboardIdentifiers">Unique ID of Liveboards that will be assigned as default Liveboards to the users in the group..</param>
         /// <param name="description">Description of the group..</param>
         /// <param name="privileges">Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect..</param>
+        /// <param name="roleIdentifiers">Unique ID or name of the roles that will be assigned to the group.    Version: 26.11.0.cl or later .</param>
         /// <param name="subGroupIdentifiers">Unique ID or name of the sub-groups to add to the group..</param>
         /// <param name="type">Type of the group..</param>
         /// <param name="userIdentifiers">Unique ID or name of the users to assign to the group..</param>
         /// <param name="visibility">Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects..</param>
-        public GroupsImportListInput(string displayName = default, string groupIdentifier = default, List<string> defaultLiveboardIdentifiers = default, string description = default, List<PrivilegesEnum> privileges = default, List<string> subGroupIdentifiers = default, TypeEnum? type = default, List<string> userIdentifiers = default, VisibilityEnum? visibility = default)
+        public GroupsImportListInput(string displayName = default, string groupIdentifier = default, List<string> defaultLiveboardIdentifiers = default, string description = default, List<PrivilegesEnum> privileges = default, List<string> roleIdentifiers = default, List<string> subGroupIdentifiers = default, TypeEnum? type = default, List<string> userIdentifiers = default, VisibilityEnum? visibility = default)
         {
             // to ensure "displayName" is required (not null)
             if (displayName == null)
@@ -388,6 +389,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.DefaultLiveboardIdentifiers = defaultLiveboardIdentifiers;
             this.Description = description;
             this.Privileges = privileges;
+            this.RoleIdentifiers = roleIdentifiers;
             this.SubGroupIdentifiers = subGroupIdentifiers;
             this.Type = type;
             this.UserIdentifiers = userIdentifiers;
@@ -431,6 +433,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public List<GroupsImportListInput.PrivilegesEnum> Privileges { get; set; }
 
         /// <summary>
+        /// Unique ID or name of the roles that will be assigned to the group.    Version: 26.11.0.cl or later 
+        /// </summary>
+        /// <value>Unique ID or name of the roles that will be assigned to the group.    Version: 26.11.0.cl or later </value>
+        [DataMember(Name = "role_identifiers", EmitDefaultValue = true)]
+        public List<string> RoleIdentifiers { get; set; }
+
+        /// <summary>
         /// Unique ID or name of the sub-groups to add to the group.
         /// </summary>
         /// <value>Unique ID or name of the sub-groups to add to the group.</value>
@@ -463,6 +472,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  DefaultLiveboardIdentifiers: ").Append(DefaultLiveboardIdentifiers).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Privileges: ").Append(Privileges).Append("\n");
+            sb.Append("  RoleIdentifiers: ").Append(RoleIdentifiers).Append("\n");
             sb.Append("  SubGroupIdentifiers: ").Append(SubGroupIdentifiers).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  UserIdentifiers: ").Append(UserIdentifiers).Append("\n");

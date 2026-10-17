@@ -18,7 +18,7 @@
 |**visibility** | [**VisibilityEnum**](#VisibilityEnum) | Visibility of the users. When set to SHARABLE, the user is visible to other users and groups when they try to share an object. |  [optional] |
 |**notifyOnShare** | **Boolean** | User preference for receiving email notifications when another ThoughtSpot user shares a metadata object such as Answer, Liveboard, or Worksheet. |  [optional] |
 |**showOnboardingExperience** | **Boolean** | The user preference for revisiting the onboarding experience. |  [optional] |
-|**onboardingExperienceCompleted** | **Boolean** | flag to get the on-boarding experience is completed or not. |  [optional] |
+|**onboardingExperienceCompleted** | **Boolean** | Marks the user&#39;s onboarding questions as completed. |  [optional] |
 |**homeLiveboardIdentifier** | **String** | GUID of the Liveboard to set a default Liveboard for the user. ThoughtSpot displays this Liveboard on the Home page when the user logs in. |  [optional] |
 |**favoriteMetadata** | [**List&lt;FavoriteMetadataInput&gt;**](FavoriteMetadataInput.md) | Metadata objects to add to the user&#39;s favorites list. |  [optional] |
 |**preferredLocale** | [**PreferredLocaleEnum**](#PreferredLocaleEnum) | Locale for the user. When setting this value, do not set use_browser_language to true, otherwise the browser&#39;s language setting will take precedence and the preferred_locale value will be ignored. |  [optional] |

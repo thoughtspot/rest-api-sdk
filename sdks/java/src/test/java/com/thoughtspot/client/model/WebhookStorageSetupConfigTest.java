@@ -4,63 +4,94 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for WebhookStorageSetupConfig */
+/**
+ * Model tests for WebhookStorageSetupConfig
+ */
 public class WebhookStorageSetupConfigTest {
     private final WebhookStorageSetupConfig model = new WebhookStorageSetupConfig();
 
-    /** Model tests for WebhookStorageSetupConfig */
+    /**
+     * Model tests for WebhookStorageSetupConfig
+     */
     @Test
     public void testWebhookStorageSetupConfig() {
         // TODO: test WebhookStorageSetupConfig
     }
 
-    /** Test the property 'configType' */
+    /**
+     * Test the property 'configType'
+     */
     @Test
     public void configTypeTest() {
         // TODO: test configType
     }
 
-    /** Test the property 'awsAccountId' */
+    /**
+     * Test the property 'awsAccountId'
+     */
     @Test
     public void awsAccountIdTest() {
         // TODO: test awsAccountId
     }
 
-    /** Test the property 'gcpServiceAccountId' */
+    /**
+     * Test the property 'gcpServiceAccountId'
+     */
     @Test
     public void gcpServiceAccountIdTest() {
         // TODO: test gcpServiceAccountId
     }
 
-    /** Test the property 'oidcProvider' */
+    /**
+     * Test the property 'oidcProvider'
+     */
     @Test
     public void oidcProviderTest() {
         // TODO: test oidcProvider
     }
 
-    /** Test the property 'trustPolicyTemplate' */
+    /**
+     * Test the property 'trustPolicyTemplate'
+     */
     @Test
     public void trustPolicyTemplateTest() {
         // TODO: test trustPolicyTemplate
     }
 
-    /** Test the property 'serviceAccountEmail' */
+    /**
+     * Test the property 'serviceAccountEmail'
+     */
     @Test
     public void serviceAccountEmailTest() {
         // TODO: test serviceAccountEmail
     }
 
-    /** Test the property 'requiredRole' */
+    /**
+     * Test the property 'requiredRole'
+     */
     @Test
     public void requiredRoleTest() {
         // TODO: test requiredRole
     }
 
-    /** Test the property 'setupInstructions' */
+    /**
+     * Test the property 'setupInstructions'
+     */
     @Test
     public void setupInstructionsTest() {
         // TODO: test setupInstructions
     }
+
 }

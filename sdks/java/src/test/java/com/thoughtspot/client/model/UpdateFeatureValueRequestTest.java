@@ -4,45 +4,68 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for UpdateFeatureValueRequest */
+/**
+ * Model tests for UpdateFeatureValueRequest
+ */
 public class UpdateFeatureValueRequestTest {
     private final UpdateFeatureValueRequest model = new UpdateFeatureValueRequest();
 
-    /** Model tests for UpdateFeatureValueRequest */
+    /**
+     * Model tests for UpdateFeatureValueRequest
+     */
     @Test
     public void testUpdateFeatureValueRequest() {
         // TODO: test UpdateFeatureValueRequest
     }
 
-    /** Test the property 'scope' */
+    /**
+     * Test the property 'scope'
+     */
     @Test
     public void scopeTest() {
         // TODO: test scope
     }
 
-    /** Test the property 'orgIdentifier' */
+    /**
+     * Test the property 'orgIdentifier'
+     */
     @Test
     public void orgIdentifierTest() {
         // TODO: test orgIdentifier
     }
 
-    /** Test the property 'featureIdentifier' */
+    /**
+     * Test the property 'featureIdentifier'
+     */
     @Test
     public void featureIdentifierTest() {
         // TODO: test featureIdentifier
     }
 
-    /** Test the property 'featureValue' */
+    /**
+     * Test the property 'featureValue'
+     */
     @Test
     public void featureValueTest() {
         // TODO: test featureValue
     }
 
-    /** Test the property 'resetOrgOverrides' */
+    /**
+     * Test the property 'resetOrgOverrides'
+     */
     @Test
     public void resetOrgOverridesTest() {
         // TODO: test resetOrgOverrides
     }
+
 }

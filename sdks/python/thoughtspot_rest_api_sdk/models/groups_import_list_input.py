@@ -30,12 +30,13 @@ class GroupsImportListInput(BaseModel):
     default_liveboard_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique ID of Liveboards that will be assigned as default Liveboards to the users in the group.")
     description: Optional[StrictStr] = Field(default=None, description="Description of the group.")
     privileges: Optional[List[StrictStr]] = Field(default=None, description="Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.")
+    role_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique ID or name of the roles that will be assigned to the group.    Version: 26.11.0.cl or later ")
     sub_group_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique ID or name of the sub-groups to add to the group.")
     type: Optional[StrictStr] = Field(default=None, description="Type of the group.")
     user_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique ID or name of the users to assign to the group.")
     visibility: Optional[StrictStr] = Field(default=None, description="Visibility of the group. The SHARABLE makes a group visible to other users and groups, and thus allows them to share objects.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["display_name", "group_identifier", "default_liveboard_identifiers", "description", "privileges", "sub_group_identifiers", "type", "user_identifiers", "visibility"]
+    __properties: ClassVar[List[str]] = ["display_name", "group_identifier", "default_liveboard_identifiers", "description", "privileges", "role_identifiers", "sub_group_identifiers", "type", "user_identifiers", "visibility"]
 
     @field_validator('privileges')
     def privileges_validate_enum(cls, value):
@@ -129,6 +130,11 @@ class GroupsImportListInput(BaseModel):
         if self.privileges is None and "privileges" in self.model_fields_set:
             _dict['privileges'] = None
 
+        # set to None if role_identifiers (nullable) is None
+        # and model_fields_set contains the field
+        if self.role_identifiers is None and "role_identifiers" in self.model_fields_set:
+            _dict['role_identifiers'] = None
+
         # set to None if sub_group_identifiers (nullable) is None
         # and model_fields_set contains the field
         if self.sub_group_identifiers is None and "sub_group_identifiers" in self.model_fields_set:
@@ -166,6 +172,7 @@ class GroupsImportListInput(BaseModel):
             "default_liveboard_identifiers": obj.get("default_liveboard_identifiers"),
             "description": obj.get("description"),
             "privileges": obj.get("privileges"),
+            "role_identifiers": obj.get("role_identifiers"),
             "sub_group_identifiers": obj.get("sub_group_identifiers"),
             "type": obj.get("type"),
             "user_identifiers": obj.get("user_identifiers"),

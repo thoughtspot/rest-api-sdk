@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from thoughtspot_rest_api_sdk.models.maintenance_schedule_info import MaintenanceScheduleInfo
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -48,8 +49,9 @@ class SystemInfo(BaseModel):
     accept_language: Optional[StrictStr] = Field(default=None, description="The supported accept language by the cluster.")
     all_user_group_member_user_count: Optional[StrictInt] = Field(default=None, description="The count of users of ALL group.")
     logical_model_version: Optional[StrictInt] = Field(default=None, description="The version number of logical model of the cluster.")
+    maintenance_schedule: Optional[MaintenanceScheduleInfo] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "release_version", "time_zone", "locale", "date_format", "api_version", "type", "environment", "license", "date_time_format", "time_format", "system_user_id", "super_user_id", "hidden_object_id", "system_group_id", "tsadmin_user_id", "admin_group_id", "all_tables_connection_id", "all_user_group_id", "accept_language", "all_user_group_member_user_count", "logical_model_version"]
+    __properties: ClassVar[List[str]] = ["id", "name", "release_version", "time_zone", "locale", "date_format", "api_version", "type", "environment", "license", "date_time_format", "time_format", "system_user_id", "super_user_id", "hidden_object_id", "system_group_id", "tsadmin_user_id", "admin_group_id", "all_tables_connection_id", "all_user_group_id", "accept_language", "all_user_group_member_user_count", "logical_model_version", "maintenance_schedule"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -92,6 +94,9 @@ class SystemInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of maintenance_schedule
+        if self.maintenance_schedule:
+            _dict['maintenance_schedule'] = self.maintenance_schedule.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -246,7 +251,8 @@ class SystemInfo(BaseModel):
             "all_user_group_id": obj.get("all_user_group_id"),
             "accept_language": obj.get("accept_language"),
             "all_user_group_member_user_count": obj.get("all_user_group_member_user_count"),
-            "logical_model_version": obj.get("logical_model_version")
+            "logical_model_version": obj.get("logical_model_version"),
+            "maintenance_schedule": MaintenanceScheduleInfo.from_dict(obj["maintenance_schedule"]) if obj.get("maintenance_schedule") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

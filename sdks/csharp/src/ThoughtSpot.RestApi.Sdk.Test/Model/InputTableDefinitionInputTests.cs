@@ -71,5 +71,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'ReferencedColumns'
         }
+
+        /// <summary>
+        /// Test the property 'ReferencedColumnTimeDimensions'
+        /// </summary>
+        [Fact]
+        public void ReferencedColumnTimeDimensionsTest()
+        {
+            // TODO unit test for the property 'ReferencedColumnTimeDimensions'
+        }
     }
 }

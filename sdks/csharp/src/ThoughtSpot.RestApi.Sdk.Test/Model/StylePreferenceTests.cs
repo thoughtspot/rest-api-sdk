@@ -82,6 +82,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'AppColorTheme'
+        /// </summary>
+        [Fact]
+        public void AppColorThemeTest()
+        {
+            // TODO unit test for the property 'AppColorTheme'
+        }
+
+        /// <summary>
         /// Test the property 'ChartColorPalette'
         /// </summary>
         [Fact]

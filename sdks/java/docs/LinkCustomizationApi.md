@@ -1,0 +1,82 @@
+# LinkCustomizationApi
+
+All URIs are relative to *CLUSTER_URL*
+
+| Method | HTTP request |
+|------------- | ------------- |
+| [**searchLinkCustomizations**](LinkCustomizationApi.md#searchLinkCustomizations) | **POST** /api/rest/2.0/customization/links/search |
+| [**updateLinkCustomizations**](LinkCustomizationApi.md#updateLinkCustomizations) | **POST** /api/rest/2.0/customization/links/update |
+
+
+<a id="searchLinkCustomizations"></a>
+# **searchLinkCustomizations**
+> List&lt;LinkPreference&gt; searchLinkCustomizations(searchLinkCustomizationsRequest)
+
+
+
+  Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - &#x60;scope: CLUSTER&#x60; returns the cluster templates, and is available only to callers in the primary Org. - &#x60;scope: ORG&#x60; returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit &#x60;scope&#x60; to return whichever of these the caller can access. - Every link type is always returned, customized or not. &#x60;is_overridden&#x60; is &#x60;true&#x60; when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for &#x60;ORG&#x60;, the ThoughtSpot default for &#x60;CLUSTER&#x60; — and &#x60;false&#x60; when it matches.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchLinkCustomizationsRequest** | [**SearchLinkCustomizationsRequest**](SearchLinkCustomizationsRequest.md)
+
+### Return type
+
+[**List&lt;LinkPreference&gt;**](LinkPreference.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Link preferences retrieved successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="updateLinkCustomizations"></a>
+# **updateLinkCustomizations**
+> updateLinkCustomizations(updateLinkCustomizationsRequest)
+
+
+
+  Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - &#x60;scope: CLUSTER&#x60; changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - &#x60;scope: ORG&#x60; (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in &#x60;templates&#x60; change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the &#x60;value&#x60; provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only &#x60;type&#x60;; a &#x60;value&#x60; alongside &#x60;RESET&#x60; is rejected. To clear every override, list all types with &#x60;RESET&#x60;. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | &#x60;LIVEBOARD_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}&#x60; | | &#x60;VISUALIZATION_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{sub-object-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}&#x60; | | &#x60;ANSWER_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/answers/{object-id}?{ts-query-params}&#x60; | | &#x60;SPOTIQ_ANALYSIS_URL&#x60; | &#x60;{object-id}&#x60; | &#x60;https://analytics.acme.com/insights/{object-id}&#x60; | | &#x60;UNSUBSCRIBE_URL&#x60; | none | &#x60;https://analytics.acme.com/account/email-preferences&#x60; | | &#x60;GENERIC_URL&#x60; | &#x60;{path}&#x60; | &#x60;https://analytics.acme.com/{path}&#x60; | | &#x60;CONVERSATION_SHARE_URL&#x60; | &#x60;{conversation-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}&#x60; |  &#x60;{ts-query-params}&#x60; is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **updateLinkCustomizationsRequest** | [**UpdateLinkCustomizationsRequest**](UpdateLinkCustomizationsRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Link preferences updated successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+

@@ -30,6 +30,7 @@ Favorite object options.
 | COLLECTION | &quot;COLLECTION&quot; |
 | ROLE | &quot;ROLE&quot; |
 | TEMPLATE_VARIABLE | &quot;TEMPLATE_VARIABLE&quot; |
+| PERSONALISED_VIEW | &quot;PERSONALISED_VIEW&quot; |
 
 
 ## Implemented Interfaces

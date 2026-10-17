@@ -4,21 +4,37 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.AnswerDetails;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for LoadAnswerResponse */
+/**
+ * Model tests for LoadAnswerResponse
+ */
 public class LoadAnswerResponseTest {
     private final LoadAnswerResponse model = new LoadAnswerResponse();
 
-    /** Model tests for LoadAnswerResponse */
+    /**
+     * Model tests for LoadAnswerResponse
+     */
     @Test
     public void testLoadAnswerResponse() {
         // TODO: test LoadAnswerResponse
     }
 
-    /** Test the property 'answer' */
+    /**
+     * Test the property 'answer'
+     */
     @Test
     public void answerTest() {
         // TODO: test answer
     }
+
 }

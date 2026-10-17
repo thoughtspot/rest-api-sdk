@@ -38,9 +38,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="includeCoverPage">Indicates whether to include the cover page with the Liveboard title. (default to false).</param>
         /// <param name="includeFilterPage">Indicates whether to include a page with all applied filters. (default to false).</param>
         /// <param name="personalisedViewId">Indicates personalised view of the Liveboard in case of png.</param>
-        /// <param name="imageResolution">Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image   Version: 10.9.0.cl or later .</param>
-        /// <param name="imageScale">The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 10.9.0.cl or later .</param>
-        /// <param name="includeHeader">Indicates whether to include the header of the liveboard.   Version: 10.9.0.cl or later  (default to false).</param>
+        /// <param name="imageResolution">Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image    Version: 10.9.0.cl or later .</param>
+        /// <param name="imageScale">The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 10.9.0.cl or later .</param>
+        /// <param name="includeHeader">Indicates whether to include the header of the liveboard.    Version: 10.9.0.cl or later  (default to false).</param>
         public PngOptionsInput(bool? includeCoverPage = false, bool? includeFilterPage = false, string personalisedViewId = default, int? imageResolution = default, int? imageScale = default, bool? includeHeader = false)
         {
             // use default value if no "includeCoverPage" provided
@@ -77,23 +77,23 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string PersonalisedViewId { get; set; }
 
         /// <summary>
-        /// Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image   Version: 10.9.0.cl or later 
+        /// Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image    Version: 10.9.0.cl or later 
         /// </summary>
-        /// <value>Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image   Version: 10.9.0.cl or later </value>
+        /// <value>Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image    Version: 10.9.0.cl or later </value>
         [DataMember(Name = "image_resolution", EmitDefaultValue = true)]
         public int? ImageResolution { get; set; }
 
         /// <summary>
-        /// The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 10.9.0.cl or later 
+        /// The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 10.9.0.cl or later 
         /// </summary>
-        /// <value>The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 10.9.0.cl or later </value>
+        /// <value>The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 10.9.0.cl or later </value>
         [DataMember(Name = "image_scale", EmitDefaultValue = true)]
         public int? ImageScale { get; set; }
 
         /// <summary>
-        /// Indicates whether to include the header of the liveboard.   Version: 10.9.0.cl or later 
+        /// Indicates whether to include the header of the liveboard.    Version: 10.9.0.cl or later 
         /// </summary>
-        /// <value>Indicates whether to include the header of the liveboard.   Version: 10.9.0.cl or later </value>
+        /// <value>Indicates whether to include the header of the liveboard.    Version: 10.9.0.cl or later </value>
         [DataMember(Name = "include_header", EmitDefaultValue = true)]
         public bool? IncludeHeader { get; set; }
 

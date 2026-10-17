@@ -16,15 +16,19 @@ All URIs are relative to *CLUSTER_URL*
 | [**convertWorksheetToModel**](ThoughtSpotRestApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert |
 | [**copyObject**](ThoughtSpotRestApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject |
 | [**createAgentConversation**](ThoughtSpotRestApi.md#createAgentConversation) | **POST** /api/rest/2.0/ai/agent/conversation/create |
+| [**createAgentConversationV2**](ThoughtSpotRestApi.md#createAgentConversationV2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/create |
 | [**createAnalyst**](ThoughtSpotRestApi.md#createAnalyst) | **POST** /api/rest/2.0/ai/agent/analysts/create |
 | [**createCalendar**](ThoughtSpotRestApi.md#createCalendar) | **POST** /api/rest/2.0/calendars/create |
 | [**createCollection**](ThoughtSpotRestApi.md#createCollection) | **POST** /api/rest/2.0/collections/create |
+| [**createCommit**](ThoughtSpotRestApi.md#createCommit) | **POST** /api/rest/2.0/version-control/commit |
 | [**createConfig**](ThoughtSpotRestApi.md#createConfig) | **POST** /api/rest/2.0/vcs/git/config/create |
 | [**createConnection**](ThoughtSpotRestApi.md#createConnection) | **POST** /api/rest/2.0/connection/create |
 | [**createConnectionConfiguration**](ThoughtSpotRestApi.md#createConnectionConfiguration) | **POST** /api/rest/2.0/connection-configurations/create |
 | [**createConversation**](ThoughtSpotRestApi.md#createConversation) | **POST** /api/rest/2.0/ai/conversation/create |
 | [**createCustomAction**](ThoughtSpotRestApi.md#createCustomAction) | **POST** /api/rest/2.0/customization/custom-actions |
 | [**createEmailCustomization**](ThoughtSpotRestApi.md#createEmailCustomization) | **POST** /api/rest/2.0/customization/email |
+| [**createInputTable**](ThoughtSpotRestApi.md#createInputTable) | **POST** /api/rest/2.0/input-tables/create |
+| [**createInputTableColumn**](ThoughtSpotRestApi.md#createInputTableColumn) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/columns/create |
 | [**createOrg**](ThoughtSpotRestApi.md#createOrg) | **POST** /api/rest/2.0/orgs/create |
 | [**createRole**](ThoughtSpotRestApi.md#createRole) | **POST** /api/rest/2.0/roles/create |
 | [**createSchedule**](ThoughtSpotRestApi.md#createSchedule) | **POST** /api/rest/2.0/schedules/create |
@@ -33,6 +37,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**createUser**](ThoughtSpotRestApi.md#createUser) | **POST** /api/rest/2.0/users/create |
 | [**createUserGroup**](ThoughtSpotRestApi.md#createUserGroup) | **POST** /api/rest/2.0/groups/create |
 | [**createVariable**](ThoughtSpotRestApi.md#createVariable) | **POST** /api/rest/2.0/template/variables/create |
+| [**createVersionControlConfig**](ThoughtSpotRestApi.md#createVersionControlConfig) | **POST** /api/rest/2.0/version-control/config/create |
 | [**createWebhookConfiguration**](ThoughtSpotRestApi.md#createWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/create |
 | [**dbtConnection**](ThoughtSpotRestApi.md#dbtConnection) | **POST** /api/rest/2.0/dbt/dbt-connection |
 | [**dbtGenerateSyncTml**](ThoughtSpotRestApi.md#dbtGenerateSyncTml) | **POST** /api/rest/2.0/dbt/generate-sync-tml |
@@ -50,6 +55,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**deleteCustomAction**](ThoughtSpotRestApi.md#deleteCustomAction) | **POST** /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete |
 | [**deleteDbtConnection**](ThoughtSpotRestApi.md#deleteDbtConnection) | **POST** /api/rest/2.0/dbt/{dbt_connection_identifier}/delete |
 | [**deleteEmailCustomization**](ThoughtSpotRestApi.md#deleteEmailCustomization) | **POST** /api/rest/2.0/customization/email/{template_identifier}/delete |
+| [**deleteInputTable**](ThoughtSpotRestApi.md#deleteInputTable) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/delete |
+| [**deleteInputTableColumn**](ThoughtSpotRestApi.md#deleteInputTableColumn) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete |
 | [**deleteManualTranslations**](ThoughtSpotRestApi.md#deleteManualTranslations) | **POST** /api/rest/2.0/localizations/manual-translation/delete |
 | [**deleteMetadata**](ThoughtSpotRestApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete |
 | [**deleteOrg**](ThoughtSpotRestApi.md#deleteOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/delete |
@@ -59,12 +66,15 @@ All URIs are relative to *CLUSTER_URL*
 | [**deleteSemanticIntegration**](ThoughtSpotRestApi.md#deleteSemanticIntegration) | **POST** /api/rest/2.0/semantic-integrations/{semantic_integration_identifier}/delete |
 | [**deleteStyleFonts**](ThoughtSpotRestApi.md#deleteStyleFonts) | **POST** /api/rest/2.0/customization/styles/fonts/delete |
 | [**deleteTag**](ThoughtSpotRestApi.md#deleteTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/delete |
+| [**deleteUsageData**](ThoughtSpotRestApi.md#deleteUsageData) | **POST** /api/rest/2.0/ai/usage-data/delete |
 | [**deleteUser**](ThoughtSpotRestApi.md#deleteUser) | **POST** /api/rest/2.0/users/{user_identifier}/delete |
 | [**deleteUserGroup**](ThoughtSpotRestApi.md#deleteUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/delete |
 | [**deleteVariable**](ThoughtSpotRestApi.md#deleteVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/delete |
 | [**deleteVariables**](ThoughtSpotRestApi.md#deleteVariables) | **POST** /api/rest/2.0/template/variables/delete |
+| [**deleteVersionControlConfig**](ThoughtSpotRestApi.md#deleteVersionControlConfig) | **POST** /api/rest/2.0/version-control/config/delete |
 | [**deleteWebhookConfigurations**](ThoughtSpotRestApi.md#deleteWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/delete |
 | [**deployCommit**](ThoughtSpotRestApi.md#deployCommit) | **POST** /api/rest/2.0/vcs/git/commits/deploy |
+| [**deployRevision**](ThoughtSpotRestApi.md#deployRevision) | **POST** /api/rest/2.0/version-control/deploy |
 | [**downloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |
 | [**exportAnswerReport**](ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer |
 | [**exportLiveboardReport**](ThoughtSpotRestApi.md#exportLiveboardReport) | **POST** /api/rest/2.0/report/liveboard |
@@ -103,6 +113,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**getSystemConfig**](ThoughtSpotRestApi.md#getSystemConfig) | **GET** /api/rest/2.0/system/config |
 | [**getSystemInformation**](ThoughtSpotRestApi.md#getSystemInformation) | **GET** /api/rest/2.0/system |
 | [**getSystemOverrideInfo**](ThoughtSpotRestApi.md#getSystemOverrideInfo) | **GET** /api/rest/2.0/system/config-overrides |
+| [**getUsageDataForUser**](ThoughtSpotRestApi.md#getUsageDataForUser) | **GET** /api/rest/2.0/ai/usage-data/user |
 | [**getWebhookStorageConfig**](ThoughtSpotRestApi.md#getWebhookStorageConfig) | **GET** /api/rest/2.0/webhooks/storage-config |
 | [**importManualTranslations**](ThoughtSpotRestApi.md#importManualTranslations) | **POST** /api/rest/2.0/localizations/manual-translation/import |
 | [**importMemory**](ThoughtSpotRestApi.md#importMemory) | **POST** /api/rest/2.0/ai/memory/import |
@@ -117,10 +128,12 @@ All URIs are relative to *CLUSTER_URL*
 | [**manageObjectPrivilege**](ThoughtSpotRestApi.md#manageObjectPrivilege) | **POST** /api/rest/2.0/security/metadata/manage-object-privilege |
 | [**parameterizeMetadata**](ThoughtSpotRestApi.md#parameterizeMetadata) | **POST** /api/rest/2.0/metadata/parameterize |
 | [**parameterizeMetadataFields**](ThoughtSpotRestApi.md#parameterizeMetadataFields) | **POST** /api/rest/2.0/metadata/parameterize-fields |
+| [**promoteBranch**](ThoughtSpotRestApi.md#promoteBranch) | **POST** /api/rest/2.0/version-control/branch/promote |
 | [**publishMetadata**](ThoughtSpotRestApi.md#publishMetadata) | **POST** /api/rest/2.0/security/metadata/publish |
 | [**putVariableValues**](ThoughtSpotRestApi.md#putVariableValues) | **POST** /api/rest/2.0/template/variables/{identifier}/update-values |
 | [**queryGetDecomposedQuery**](ThoughtSpotRestApi.md#queryGetDecomposedQuery) | **POST** /api/rest/2.0/ai/analytical-questions |
 | [**resetUserPassword**](ThoughtSpotRestApi.md#resetUserPassword) | **POST** /api/rest/2.0/users/reset-password |
+| [**restoreRevision**](ThoughtSpotRestApi.md#restoreRevision) | **POST** /api/rest/2.0/version-control/commit/restore |
 | [**revertCommit**](ThoughtSpotRestApi.md#revertCommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert |
 | [**revokeRefreshTokens**](ThoughtSpotRestApi.md#revokeRefreshTokens) | **POST** /api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens |
 | [**revokeToken**](ThoughtSpotRestApi.md#revokeToken) | **POST** /api/rest/2.0/auth/token/revoke |
@@ -137,6 +150,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchData**](ThoughtSpotRestApi.md#searchData) | **POST** /api/rest/2.0/searchdata |
 | [**searchEmailCustomization**](ThoughtSpotRestApi.md#searchEmailCustomization) | **POST** /api/rest/2.0/customization/email/search |
 | [**searchFeatures**](ThoughtSpotRestApi.md#searchFeatures) | **POST** /api/rest/2.0/configurations/features/search |
+| [**searchLinkCustomizations**](ThoughtSpotRestApi.md#searchLinkCustomizations) | **POST** /api/rest/2.0/customization/links/search |
 | [**searchMetadata**](ThoughtSpotRestApi.md#searchMetadata) | **POST** /api/rest/2.0/metadata/search |
 | [**searchOrgs**](ThoughtSpotRestApi.md#searchOrgs) | **POST** /api/rest/2.0/orgs/search |
 | [**searchRoles**](ThoughtSpotRestApi.md#searchRoles) | **POST** /api/rest/2.0/roles/search |
@@ -146,12 +160,17 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchStyleCustomizations**](ThoughtSpotRestApi.md#searchStyleCustomizations) | **POST** /api/rest/2.0/customization/styles/search |
 | [**searchStyleFonts**](ThoughtSpotRestApi.md#searchStyleFonts) | **POST** /api/rest/2.0/customization/styles/fonts/search |
 | [**searchTags**](ThoughtSpotRestApi.md#searchTags) | **POST** /api/rest/2.0/tags/search |
+| [**searchUsageData**](ThoughtSpotRestApi.md#searchUsageData) | **POST** /api/rest/2.0/ai/usage-data/search |
 | [**searchUserGroups**](ThoughtSpotRestApi.md#searchUserGroups) | **POST** /api/rest/2.0/groups/search |
 | [**searchUsers**](ThoughtSpotRestApi.md#searchUsers) | **POST** /api/rest/2.0/users/search |
 | [**searchVariables**](ThoughtSpotRestApi.md#searchVariables) | **POST** /api/rest/2.0/template/variables/search |
+| [**searchVersionControlConfigs**](ThoughtSpotRestApi.md#searchVersionControlConfigs) | **POST** /api/rest/2.0/version-control/config/search |
+| [**searchVersionControlRuns**](ThoughtSpotRestApi.md#searchVersionControlRuns) | **POST** /api/rest/2.0/version-control/runs/search |
 | [**searchWebhookConfigurations**](ThoughtSpotRestApi.md#searchWebhookConfigurations) | **POST** /api/rest/2.0/webhooks/search |
 | [**sendAgentConversationMessage**](ThoughtSpotRestApi.md#sendAgentConversationMessage) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send |
 | [**sendAgentConversationMessageStreaming**](ThoughtSpotRestApi.md#sendAgentConversationMessageStreaming) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream |
+| [**sendAgentConversationMessageStreamingV2**](ThoughtSpotRestApi.md#sendAgentConversationMessageStreamingV2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/send/stream |
+| [**sendAgentConversationMessageV2**](ThoughtSpotRestApi.md#sendAgentConversationMessageV2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/send |
 | [**sendAgentMessage**](ThoughtSpotRestApi.md#sendAgentMessage) | **POST** /api/rest/2.0/ai/agent/{conversation_identifier}/converse |
 | [**sendAgentMessageStreaming**](ThoughtSpotRestApi.md#sendAgentMessageStreaming) | **POST** /api/rest/2.0/ai/agent/converse/sse |
 | [**sendMessage**](ThoughtSpotRestApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
@@ -181,6 +200,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**updateEmailCustomization**](ThoughtSpotRestApi.md#updateEmailCustomization) | **POST** /api/rest/2.0/customization/email/update |
 | [**updateFeatureAssignments**](ThoughtSpotRestApi.md#updateFeatureAssignments) | **POST** /api/rest/2.0/configurations/features/assignments/update |
 | [**updateFeatureValue**](ThoughtSpotRestApi.md#updateFeatureValue) | **POST** /api/rest/2.0/configurations/features/values/update |
+| [**updateInputTable**](ThoughtSpotRestApi.md#updateInputTable) | **POST** /api/rest/2.0/input-tables/{input_table_identifier}/update |
+| [**updateLinkCustomizations**](ThoughtSpotRestApi.md#updateLinkCustomizations) | **POST** /api/rest/2.0/customization/links/update |
 | [**updateMetadataHeader**](ThoughtSpotRestApi.md#updateMetadataHeader) | **POST** /api/rest/2.0/metadata/headers/update |
 | [**updateMetadataObjId**](ThoughtSpotRestApi.md#updateMetadataObjId) | **POST** /api/rest/2.0/metadata/update-obj-id |
 | [**updateOrg**](ThoughtSpotRestApi.md#updateOrg) | **POST** /api/rest/2.0/orgs/{org_identifier}/update |
@@ -190,10 +211,12 @@ All URIs are relative to *CLUSTER_URL*
 | [**updateStyleFont**](ThoughtSpotRestApi.md#updateStyleFont) | **POST** /api/rest/2.0/customization/styles/fonts/{font_identifier}/update |
 | [**updateSystemConfig**](ThoughtSpotRestApi.md#updateSystemConfig) | **POST** /api/rest/2.0/system/config-update |
 | [**updateTag**](ThoughtSpotRestApi.md#updateTag) | **POST** /api/rest/2.0/tags/{tag_identifier}/update |
+| [**updateUsageData**](ThoughtSpotRestApi.md#updateUsageData) | **POST** /api/rest/2.0/ai/usage-data/update |
 | [**updateUser**](ThoughtSpotRestApi.md#updateUser) | **POST** /api/rest/2.0/users/{user_identifier}/update |
 | [**updateUserGroup**](ThoughtSpotRestApi.md#updateUserGroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update |
 | [**updateVariable**](ThoughtSpotRestApi.md#updateVariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update |
 | [**updateVariableValues**](ThoughtSpotRestApi.md#updateVariableValues) | **POST** /api/rest/2.0/template/variables/update-values |
+| [**updateVersionControlConfig**](ThoughtSpotRestApi.md#updateVersionControlConfig) | **POST** /api/rest/2.0/version-control/config/update |
 | [**updateWebhookConfiguration**](ThoughtSpotRestApi.md#updateWebhookConfiguration) | **POST** /api/rest/2.0/webhooks/{webhook_identifier}/update |
 | [**uploadStyleFont**](ThoughtSpotRestApi.md#uploadStyleFont) | **POST** /api/rest/2.0/customization/styles/fonts/upload |
 | [**validateCommunicationChannel**](ThoughtSpotRestApi.md#validateCommunicationChannel) | **POST** /api/rest/2.0/system/communication-channels/validate |
@@ -636,6 +659,43 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Operation failed |  -  |
 
+<a id="createAgentConversationV2"></a>
+# **createAgentConversationV2**
+> AgentConversationV2 createAgentConversationV2(createAgentConversationV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to any data source or analyst specified in the request.  #### Usage guidelines  A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned &#x60;conversation_identifier&#x60; to &#x60;sendAgentConversationMessageV2&#x60; or &#x60;sendAgentConversationMessageStreamingV2&#x60; to send messages within it.  &#x60;source&#x60; decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.  - &#x60;source&#x60; (default: &#x60;DATA_SOURCE&#x60;): what the conversation is grounded in.   - &#x60;DATA_SOURCE&#x60;: data sources, set with &#x60;data_source_identifiers&#x60; and optionally &#x60;additional_instructions&#x60;. &#x60;analyst_identifier&#x60; is not allowed.   - &#x60;ANALYST&#x60;: a saved analyst, set with &#x60;analyst_identifier&#x60;, which is then required. The analyst brings its own instructions, data sources and connectors, so &#x60;data_source_identifiers&#x60; and &#x60;additional_instructions&#x60; are not allowed. - &#x60;data_source_identifiers&#x60; (default: &#x60;[]&#x60;): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored. - &#x60;additional_instructions&#x60;: guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, &#x60;\&quot;Answer concisely and always report revenue in thousands.\&quot;&#x60; It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. - &#x60;analyst_identifier&#x60;: the saved analyst to create the conversation from.  A parameter that does not apply to the &#x60;source&#x60; fails the request with a 400 rather than being ignored.  Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.  #### Example requests  &#x60;&#x60;&#x60;json {   \&quot;source\&quot;: \&quot;DATA_SOURCE\&quot;,   \&quot;data_source_identifiers\&quot;: [\&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;],   \&quot;additional_instructions\&quot;: \&quot;Answer concisely and always report revenue in thousands.\&quot; } &#x60;&#x60;&#x60;  &#x60;&#x60;&#x60;json {   \&quot;source\&quot;: \&quot;ANALYST\&quot;,   \&quot;analyst_identifier\&quot;: \&quot;0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\&quot; } &#x60;&#x60;&#x60;  #### Example response  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } &#x60;&#x60;&#x60;  Treat &#x60;conversation_identifier&#x60; as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.  #### Error responses  | Code | Description                                                                                                                                                                                                                                                                                                                               | | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — the request fails validation; &#x60;analyst_identifier&#x60; is missing when &#x60;source&#x60; is &#x60;ANALYST&#x60;; a parameter that does not apply to the &#x60;source&#x60; is set; or the analyst in &#x60;analyst_identifier&#x60;, or a data source in &#x60;data_source_identifiers&#x60;, does not exist or the caller cannot view it (the message lists those identifiers). | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the analyst.                                                                                                                                                                                                                             | | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createAgentConversationV2Request** | [**CreateAgentConversationV2Request**](CreateAgentConversationV2Request.md)
+
+### Return type
+
+[**AgentConversationV2**](AgentConversationV2.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
 <a id="createAnalyst"></a>
 # **createAnalyst**
 > Analyst createAnalyst(createAnalystRequest)
@@ -743,6 +803,44 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="createCommit"></a>
+# **createCommit**
+> VersionControlCommitResponse createCommit(createCommitRequest)
+
+
+
+  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createCommitRequest** | [**CreateCommitRequest**](CreateCommitRequest.md)
+
+### Return type
+
+[**VersionControlCommitResponse**](VersionControlCommitResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. |  -  |
+| **400** | Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | The caller&#39;s org has no version control configuration. |  -  |
+| **409** | Conflict. A name matches more than one object of the given type; name the object by GUID or object id instead. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="createConfig"></a>
@@ -896,7 +994,7 @@ null (empty response body)
 
 
 
-  Version: 9.6.0.cl or later   Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in &#x60;group_identifiers&#x60;.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in &#x60;default_action_config&#x60; property and specify the GUID or name of the object in &#x60;associate_metadata&#x60;.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Creates a custom action that appears as a menu action on a saved Answer or Liveboard visualization.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API lets you create the following types of custom actions:  * URL-based action        Allows pushing data to an external URL. * Callback action           Triggers a callback to the host application and initiates a response payload on an embedded ThoughtSpot instance.  By default, custom actions are visible to only administrator or developer users. To make a custom action available to other users, and specify the groups in &#x60;group_identifiers&#x60;.  By default, the custom action is set as a _global_ action on all visualizations and saved Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in &#x60;default_action_config&#x60; property and specify the GUID or name of the object in &#x60;associate_metadata&#x60;.  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
 ### Parameters
 
@@ -960,6 +1058,81 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
+
+<a id="createInputTable"></a>
+# **createInputTable**
+> InputTableResponse createInputTable(createInputTableRequest)
+
+
+
+  Version: 26.11.0.cl or later   Creates an input table and links it to a ThoughtSpot model (worksheet). An input table is a user-editable table stored in the model&#39;s external Cloud Data Warehouse (CDW) connection. It lets analysts enter or import data directly from the ThoughtSpot UI without requiring access to the underlying warehouse.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_INPUT_TABLES&#x60; (**Can manage input tables**) privilege is required. The caller must also have &#x60;MODIFY&#x60; permission on the model named by &#x60;model_identifier&#x60;, because the new input table is attached to that model.  #### Usage guidelines  To create an input table, provide the following in the request body:  * **&#x60;table_name&#x60;** — Physical name of the table to create in the external warehouse. Must start with a letter or an underscore and contain only letters, digits, and underscores — no spaces or other punctuation — and be at most 128 characters. * **&#x60;model_identifier&#x60;** — GUID or name of the model (worksheet) to link the input table to. The connection, database, and schema used to create the physical table are derived from this model&#39;s metadata. * **&#x60;table_definition&#x60;** — Describes the table schema:   * &#x60;referenced_columns&#x60; — Names of the columns on the linked model to include as read-only reference columns in the input table, written exactly as they appear on the model. These become the input table&#39;s key columns: they are what the input table is joined to the model on, and what rows are matched on by &#x60;updateInputTable&#x60;. **At least one referenced column is required** — an empty array is rejected. Each name must match exactly one visible model column; a name that matches none, or more than one, is rejected. Each must also resolve to exactly one physical base column, so a formula, cohort, or constant model column cannot be referenced.   * &#x60;new_columns&#x60; — List of new editable columns to create. Each column requires:     * &#x60;name&#x60; — Column display name.     * &#x60;data_type&#x60; — Warehouse data type (for example, &#x60;VARCHAR&#x60;, &#x60;DOUBLE&#x60;, &#x60;DATE&#x60;).     * &#x60;type&#x60; — Semantic role of the column: &#x60;ATTRIBUTE&#x60; for dimension columns or &#x60;MEASURE&#x60; for numeric columns.     * &#x60;allowed_values&#x60; — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by &#x60;updateInputTable&#x60; must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column&#39;s &#x60;data_type&#x60;: a number for the numeric types, &#x60;true&#x60; or &#x60;false&#x60; for &#x60;BOOL&#x60;, and an epoch integer for &#x60;DATE&#x60;, &#x60;DATE_TIME&#x60;, and &#x60;TIME&#x60;. Omit it to accept any value the data type supports.   * &#x60;referenced_column_time_dimensions&#x60; — Optional list that locks selected date columns to a specific time dimension (grain) at creation. Each entry has a &#x60;column_identifier&#x60; (the model column name, exactly as given in &#x60;referenced_columns&#x60;) and a &#x60;time_dimension&#x60; grain. Only date columns that need a grain require an entry; omit a column to apply no bucketing (detailed). Accepted &#x60;time_dimension&#x60; values are the calendar grains &#x60;HOURLY&#x60;, &#x60;DAILY&#x60;, &#x60;WEEKLY&#x60;, &#x60;MONTHLY&#x60;, &#x60;QUARTERLY&#x60;, and &#x60;YEARLY&#x60;. A date-part grain (day of week, month of year, and so on) is not accepted: it yields an integer position rather than a date, which cannot be joined back to the model column. Bucket a &#x60;DATE&#x60; or &#x60;DATE_TIME&#x60; column; a grain on a &#x60;TIME&#x60; (time-of-day) column has no meaning and is not supported. &#x60;HOURLY&#x60; needs a &#x60;DATE_TIME&#x60; column — on a plain &#x60;DATE&#x60; column it is ignored and the column stays detailed. This field applies to referenced model columns only; a column created through &#x60;new_columns&#x60; always starts detailed.  **Note**: The physical table is created in the same connection, database, and schema as the linked model. Ensure the connection user has &#x60;CREATE TABLE&#x60; permissions in the target schema.  #### Response  The response returns the new input table&#39;s GUID and the list of its columns, each with its name and unique ID:  * **&#x60;input_table_id&#x60;** — GUID of the newly created input table. Pass it as the &#x60;input_table_identifier&#x60; path parameter of the other input-table operations. * **&#x60;input_columns&#x60;** — Every column on the new table. Each entry has a &#x60;name&#x60;,   an &#x60;id&#x60; (the column&#39;s GUID), and &#x60;mapped_column_id&#x60; (the GUID of the model   column it is mapped from, present only for referenced columns). Use these IDs   to address specific columns in follow-up calls without a separate lookup. * **&#x60;message_info&#x60;** — Note set when a referenced column had to be renamed to   keep the input table&#39;s column names unique: a model column name that occurs   in more than one base table is prefixed with its base table name. Absent when   no column was renamed. The renamed column&#39;s final name is also its &#x60;name&#x60; in   &#x60;input_columns&#x60;, which is what &#x60;updateInputTable&#x60; matches on.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createInputTableRequest** | [**CreateInputTableRequest**](CreateInputTableRequest.md)
+
+### Return type
+
+[**InputTableResponse**](InputTableResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Input table created successfully. |  -  |
+| **400** | Bad request — invalid payload, no columns selected, or upload disabled on the connection. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden — caller does not have MODIFY permission on the model. |  -  |
+| **404** | Model not found. |  -  |
+| **500** | Unexpected error. |  -  |
+
+<a id="createInputTableColumn"></a>
+# **createInputTableColumn**
+> InputColumnResponse createInputTableColumn(inputTableIdentifier, createInputTableColumnRequest)
+
+
+
+  Version: 26.11.0.cl or later   Adds one or more new editable columns to an existing input table. This widens the physical table in the external Cloud Data Warehouse (CDW) (&#x60;ALTER TABLE ... ADD COLUMN&#x60;) and refreshes the input table&#39;s ThoughtSpot metadata so the new columns are exposed on the linked model.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_INPUT_TABLES&#x60; (**Can manage input tables**) privilege is required. The caller must also have &#x60;MODIFY&#x60; permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the &#x60;input_table_identifier&#x60; path parameter and describe the columns to add in the request body:  * **&#x60;column_definition.columns&#x60;** — List of new editable columns to create. Each column requires:   * &#x60;name&#x60; — Column display name. Must not collide with an existing column on the table.   * &#x60;data_type&#x60; — Warehouse data type (for example, &#x60;VARCHAR&#x60;, &#x60;DOUBLE&#x60;, &#x60;DATE&#x60;).   * &#x60;type&#x60; — Semantic role of the column: &#x60;ATTRIBUTE&#x60; for dimension columns or &#x60;MEASURE&#x60; for numeric columns.   * &#x60;allowed_values&#x60; — Optional list of at most 500 permitted values, which turns the column into a fixed-choice column. Every non-empty value later written into it by &#x60;updateInputTable&#x60; must be an exact member of the list, and a write that is not is rejected. Each value must be non-empty, at most 8192 characters, and representable as the column&#39;s &#x60;data_type&#x60;: a number for the numeric types, &#x60;true&#x60; or &#x60;false&#x60; for &#x60;BOOL&#x60;, and an epoch integer for &#x60;DATE&#x60;, &#x60;DATE_TIME&#x60;, and &#x60;TIME&#x60;. Omit it to accept any value the data type supports.  Unlike &#x60;createInputTable&#x60;, there are no referenced (model-projected) columns here — only brand-new columns are added, so a column added this way is never a key column and never carries a time dimension.  **Note**: The response returns the added columns with their generated GUIDs. Use these when targeting a column for deletion via &#x60;deleteInputTableColumn&#x60;.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **inputTableIdentifier** | **String**
+| **createInputTableColumnRequest** | [**CreateInputTableColumnRequest**](CreateInputTableColumnRequest.md)
+
+### Return type
+
+[**InputColumnResponse**](InputColumnResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Columns added successfully. |  -  |
+| **400** | Bad request — invalid payload or no columns supplied. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden — caller does not have MODIFY permission on the input table. |  -  |
+| **404** | Input table not found. |  -  |
+| **500** | Unexpected error. |  -  |
 
 <a id="createOrg"></a>
 # **createOrg**
@@ -1249,6 +1422,43 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="createVersionControlConfig"></a>
+# **createVersionControlConfig**
+> VersionControlConfig createVersionControlConfig(createVersionControlConfigRequest)
+
+
+
+  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send &#x60;disabled_operations&#x60; on the update endpoint instead of deleting the configuration.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createVersionControlConfigRequest** | [**CreateVersionControlConfigRequest**](CreateVersionControlConfigRequest.md)
+
+### Return type
+
+[**VersionControlConfig**](VersionControlConfig.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The stored configuration. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **409** | Conflict. The org is already configured, another org already commits to this repository and branch, or the org is still served by the legacy Callosum VCS surface. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="createWebhookConfiguration"></a>
@@ -1776,7 +1986,7 @@ null (empty response body)
 
 
 
-  Version: 9.6.0.cl or later   Removes the custom action specified in the API request.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Removes the custom action specified in the API request.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
 
 ### Parameters
 
@@ -1876,6 +2086,79 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **403** | Unauthorized access. |  -  |
 | **500** | Unexpected error |  -  |
+
+<a id="deleteInputTable"></a>
+# **deleteInputTable**
+> deleteInputTable(inputTableIdentifier)
+
+
+
+  Version: 26.11.0.cl or later   Deletes an input table. This operation unlinks the input table from its owner model, removes it from the connection metadata, and drops the physical table from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in the input table is permanently deleted.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_INPUT_TABLES&#x60; (**Can manage input tables**) privilege is required. The caller must also have &#x60;MODIFY&#x60; permission on the input table object.  #### Usage guidelines  Specify the GUID of the input table to delete as the &#x60;input_table_identifier&#x60; path parameter. The owner model (worksheet) is derived from the input table&#39;s metadata and is used to locate and clean up the associated connection entry.  **Note**: Deleting an input table does not delete the linked model. However, any Answers or Liveboards that reference columns from the deleted input table will lose access to that data and may return errors until the affected visualizations are updated.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **inputTableIdentifier** | **String**
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully deleted the input table and dropped the physical CDW table. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="deleteInputTableColumn"></a>
+# **deleteInputTableColumn**
+> deleteInputTableColumn(inputTableIdentifier, columnIdentifier)
+
+
+
+  Version: 26.11.0.cl or later   Deletes a single editable column from an input table. This removes the column from the input table&#39;s ThoughtSpot metadata and drops the physical column from the Cloud Data Warehouse (CDW). This action is irreversible — all data stored in that column is permanently deleted.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_INPUT_TABLES&#x60; (**Can manage input tables**) privilege is required. The caller must also have &#x60;MODIFY&#x60; permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the &#x60;input_table_identifier&#x60; path parameter and the column GUID as the &#x60;column_identifier&#x60; path parameter.  Only columns added directly to the input table (editable, non-referenced columns) may be deleted. The request is rejected if:  * the column is a referenced (model-projected) column, or * the column is still referenced by an existing Answer or Liveboard.  This endpoint has no request body.  **Note on obtaining &#x60;column_identifier&#x60;**: Use the &#x60;id&#x60; field returned for the column by &#x60;createInputTableColumn&#x60; (in &#x60;columns&#x60;) or by &#x60;createInputTable&#x60; (in &#x60;input_columns&#x60;) as the &#x60;column_identifier&#x60;.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **inputTableIdentifier** | **String**
+| **columnIdentifier** | **String**
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully deleted the input table column and dropped the physical CDW column. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 <a id="deleteManualTranslations"></a>
 # **deleteManualTranslations**
@@ -2201,6 +2484,43 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="deleteUsageData"></a>
+# **deleteUsageData**
+> DeleteUsageDataResponse deleteUsageData(deleteUsageDataRequest)
+
+
+
+ Deletes Spotter usage pools. Users who no longer draw from any pool are no longer metered: their Spotter usage is unlimited, not blocked. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Deletes Spotter usage pools. Use this API to remove a limit from a user, user group, or Org, or to clear every pool before switching the scope the cluster meters at.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  The request must include &#x60;keys&#x60;, with at least one entry. Each key has an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org).  Deleting a pool removes its limit rather than blocking its users. A user who no longer draws from any pool is not metered and can use Spotter without a limit.  If the request is successful, the response contains &#x60;deleted_keys&#x60;, the keys of the pools that existed and were deleted. Keys that matched no pool are omitted.  #### Error conditions  - &#x60;400&#x60; — &#x60;keys&#x60; is empty, or a key is missing its &#x60;entity_type&#x60; or &#x60;entity_identifier&#x60;. - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; - This operation cannot be undone. Recreate a pool with &#x60;updateUsageData&#x60;; its usage restarts from &#x60;0&#x60;.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **deleteUsageDataRequest** | [**DeleteUsageDataRequest**](DeleteUsageDataRequest.md)
+
+### Return type
+
+[**DeleteUsageDataResponse**](DeleteUsageDataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
 <a id="deleteUser"></a>
 # **deleteUser**
 > deleteUser(userIdentifier)
@@ -2345,6 +2665,39 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="deleteVersionControlConfig"></a>
+# **deleteVersionControlConfig**
+> deleteVersionControlConfig()
+
+
+
+  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set &#x60;disabled_operations&#x60; on the update endpoint instead.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully revoked version control for the Org. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
 <a id="deleteWebhookConfigurations"></a>
 # **deleteWebhookConfigurations**
 > WebhookDeleteResponse deleteWebhookConfigurations(deleteWebhookConfigurationsRequest)
@@ -2415,6 +2768,44 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="deployRevision"></a>
+# **deployRevision**
+> VersionControlDeployResponse deployRevision(deployRevisionRequest)
+
+
+
+  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60; and the pinned revision.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **deployRevisionRequest** | [**DeployRevisionRequest**](DeployRevisionRequest.md)
+
+### Return type
+
+[**VersionControlDeployResponse**](VersionControlDeployResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The request was admitted and the deploy run has started. The body is a receipt, not a result: nothing is imported yet. |  -  |
+| **400** | Invalid request, and nothing was admitted. Covers a malformed body, an unknown, ambiguous or unreachable target_revision, a paused repository, and an org whose disabled_operations holds DEPLOY. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | The caller&#39;s org has no version control configuration. |  -  |
+| **409** | Conflict. Another deploy, restore or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="downloadConnectionMetadataChanges"></a>
@@ -2555,7 +2946,7 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | CSV file downloaded successfully. |  -  |
+| **200** | CSV file downloaded successfully. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -3170,7 +3561,7 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Generate custom calendar data based on specifications, as a CSV file. |  -  |
+| **200** | Generate custom calendar data based on specifications, as a CSV file. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -3782,6 +4173,43 @@ This endpoint does not need any parameter.
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="getUsageDataForUser"></a>
+# **getUsageDataForUser**
+> UsageDataForUserResponse getUsageDataForUser(userIdentifier)
+
+
+
+ Retrieves a user&#39;s combined Spotter usage position: every pool the user draws from, with usage, warning limits, and limits summed across them. Any user can retrieve their own usage. Retrieving another user&#39;s usage requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Retrieves a user&#39;s combined Spotter usage: every usage pool the user draws from, with usage, warning limits, and limits summed across them. Use this API to show users how many Spotter questions they have left, or to check whether a user is blocked by a usage limit.  Any user can retrieve their own usage. Retrieving another user&#39;s usage requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege; &#x60;CAN_MANAGE_SPOTTER&#x60; is not sufficient.  #### Usage guidelines  - Omit &#x60;user_identifier&#x60; to retrieve the usage of the authenticated user. - Pass &#x60;user_identifier&#x60; with a user GUID to retrieve that user&#39;s usage.  A user draws from every pool that meters them: their own pool, the pools of the user groups they belong to (including inherited groups), or their Org&#39;s pool, depending on the scope the cluster meters at. The totals in the response are sums over those pools. For example, a user in two groups with limits of 100 and 50 has a &#x60;total_limit&#x60; of 150.  If the request is successful, the response contains &#x60;summary&#x60;:  - &#x60;pools&#x60;: the individual pools the user draws from. - &#x60;total_usage&#x60;, &#x60;total_warning_limit&#x60;, and &#x60;total_limit&#x60;: sums across the pools. - &#x60;total_remaining&#x60;: questions the user can still ask. Absent when &#x60;has_unlimited_pool&#x60; is &#x60;true&#x60;. - &#x60;is_at_warning&#x60;: &#x60;true&#x60; when usage has reached the combined warning limit. - &#x60;is_at_limit&#x60;: &#x60;true&#x60; when usage has reached the combined limit and further Spotter questions are blocked. - &#x60;has_unlimited_pool&#x60;: &#x60;true&#x60; when any of the user&#39;s pools has no limit, which makes the user unlimited.  A user who draws from no pool is not metered: &#x60;pools&#x60; is empty and &#x60;is_at_limit&#x60; is &#x60;false&#x60;.  #### Error conditions  - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller requested another user&#39;s usage without &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **userIdentifier** | **String**
+
+### Return type
+
+[**UsageDataForUserResponse**](UsageDataForUserResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
 <a id="getWebhookStorageConfig"></a>
 # **getWebhookStorageConfig**
 > List&lt;WebhookStorageConfigInfo&gt; getWebhookStorageConfig()
@@ -4114,7 +4542,7 @@ null (empty response body)
 
 
 
-  Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.     
+  Version: 9.0.0.cl or later   Creates a login session for a ThoughtSpot user with Basic authentication.  In Basic authentication method, REST clients log in to ThoughtSpot using &#x60;username&#x60; and &#x60;password&#x60; attributes. On a multi-tenant cluster with Orgs, users can pass the ID of the Org in the API request to log in to a specific Org context.  **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API login request with basic authentication (&#x60;username&#x60;  and &#x60;password&#x60; ) returns an error. Contact ThoughtSpot Support for assistance.  A successful login returns a session cookie that can be used in your subsequent API requests.  #### Redirecting after login  To send a browser to a specific page once the session is created, pass &#x60;redirect_url&#x60;. It must be a path on the same ThoughtSpot instance that served the login request, for example &#x60;/pinboards&#x60;. An absolute URL is rejected with &#x60;400&#x60;, so that a login cannot be used to forward a newly issued session cookie to another host.  The path is resolved against the host the caller actually reached, which means the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific subdomain.  * **Browser flows** — omit &#x60;no_url_redirection&#x60;. The API answers &#x60;302&#x60; with the   resolved path in the &#x60;location&#x60; header, and the browser follows it on its own.   This is the usual choice when the login is submitted as an HTML form or opened   as a top-level navigation. * **SPA and non-browser clients** — set &#x60;no_url_redirection&#x60; to &#x60;true&#x60;. The API   keeps its normal &#x60;204&#x60; response and returns the resolved path in the   &#x60;location&#x60; header without redirecting, leaving the client to decide when and   where to navigate. Use this from &#x60;fetch&#x60;/&#x60;XMLHttpRequest&#x60; calls, which follow   a &#x60;302&#x60; internally and never expose it to your code.  When &#x60;redirect_url&#x60; is omitted the response is unchanged, and &#x60;no_url_redirection&#x60; has no effect on its own.      
 
 ### Parameters
 
@@ -4138,7 +4566,8 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | User login successful. |  -  |
+| **204** | User login successful. Carries the location header when redirect_url was supplied with no_url_redirection |  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  |
+| **302** | Redirect to the specified redirect_url |  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -4285,6 +4714,43 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="promoteBranch"></a>
+# **promoteBranch**
+> VersionControlPromotionResponse promoteBranch(promoteBranchRequest)
+
+
+
+  Version: 26.12.0.cl or later   Merges content from another Org&#39;s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org&#39;s live content changes until a deploy.  &#x60;dry_run&#x60; defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or &#x60;ADMINISTRATION&#x60; privilege in the source Org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **promoteBranchRequest** | [**PromoteBranchRequest**](PromoteBranchRequest.md)
+
+### Return type
+
+[**VersionControlPromotionResponse**](VersionControlPromotionResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The promotion was carried out, or with dry_run true would have been. Conflicting content appears here only when conflict_policy resolved it. |  -  |
+| **400** | The promotion could not be carried out, and nothing was written. Covers a source that names both or neither of an org and a branch, a cherry-pick with no source_revision, a source org that versions to a different repository, a source_branch that no org in the caller&#39;s repository versions to, an unknown branch or commit, content that conflicts while conflict_policy is FAIL_REQUEST, which is equally a 400 on a dry run because the real promotion could not have completed either, branches with unrelated histories, and a target branch the provider protects. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. Also returned when the caller is neither a tenant administrator nor an administrator of the source org. |  -  |
+| **404** | An org involved has no version control configuration: the caller&#39;s org, which then has no branch to promote into, or the org named by source.org_identifier, which then has none to promote from. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="publishMetadata"></a>
 # **publishMetadata**
 > publishMetadata(publishMetadataRequest)
@@ -4429,6 +4895,44 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="restoreRevision"></a>
+# **restoreRevision**
+> VersionControlRestoreResponse restoreRevision(restoreRevisionRequest)
+
+
+
+  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a &#x60;run_id&#x60;.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **restoreRevisionRequest** | [**RestoreRevisionRequest**](RestoreRevisionRequest.md)
+
+### Return type
+
+[**VersionControlRestoreResponse**](VersionControlRestoreResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The request was admitted and the restore run has started. The body is a receipt, not a result: nothing is committed or imported yet. |  -  |
+| **400** | Invalid request, and nothing was admitted. Covers a malformed body, a target_revision that is unknown, ambiguous, unreachable from the branch or is its head, a paused repository, and an org whose disabled_operations holds COMMIT or DEPLOY. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | The caller&#39;s org has no version control configuration. |  -  |
+| **409** | Conflict. Another restore, deploy or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="revertCommit"></a>
@@ -4874,7 +5378,7 @@ null (empty response body)
 
 
 
-  Version: 9.6.0.cl or later   Gets custom actions configured on the cluster.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Gets custom actions configured on the cluster.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.      
 
 ### Parameters
 
@@ -5009,8 +5513,44 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges. |  -  |
-| **404** | Feature management not enabled. |  -  |
+| **404** | Feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
+
+<a id="searchLinkCustomizations"></a>
+# **searchLinkCustomizations**
+> List&lt;LinkPreference&gt; searchLinkCustomizations(searchLinkCustomizationsRequest)
+
+
+
+  Version: 26.11.0.cl or later   Retrieves the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to verify what an Org has customized before modifying it, or to confirm the destination URLs used in scheduled emails and the Share dialog.  Cluster-level templates serve as the default that Orgs inherit. Org-level templates override that default.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - &#x60;scope: CLUSTER&#x60; returns the cluster templates, and is available only to callers in the primary Org. - &#x60;scope: ORG&#x60; returns the templates for the Org the caller is signed in to, and requires Orgs to be enabled. - Omit &#x60;scope&#x60; to return whichever of these the caller can access. - Every link type is always returned, customized or not. &#x60;is_overridden&#x60; is &#x60;true&#x60; when the scope you asked for stores a value that differs from the one it would otherwise inherit — the cluster template for &#x60;ORG&#x60;, the ThoughtSpot default for &#x60;CLUSTER&#x60; — and &#x60;false&#x60; when it matches.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchLinkCustomizationsRequest** | [**SearchLinkCustomizationsRequest**](SearchLinkCustomizationsRequest.md)
+
+### Return type
+
+[**List&lt;LinkPreference&gt;**](LinkPreference.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Link preferences retrieved successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
 <a id="searchMetadata"></a>
 # **searchMetadata**
@@ -5336,6 +5876,43 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="searchUsageData"></a>
+# **searchUsageData**
+> UsageDataResponse searchUsageData(searchUsageDataRequest)
+
+
+
+ Retrieves Spotter usage pools: the question allowance configured for each user, user group, or Org and how much of it has been consumed. Pass &#x60;keys&#x60; to fetch specific pools, or omit it to fetch every pool on the cluster. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Retrieves Spotter usage pools. A usage pool is the Spotter question allowance configured for a user, user group, or Org, together with how many questions have been consumed from it. Use this API to monitor usage across your users, for example to find pools that are close to their limit.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  A cluster meters Spotter usage at exactly one scope: per user, per user group, or per Org. Every pool on a cluster therefore has the same &#x60;entity_type&#x60;.  - To retrieve every pool on the cluster, send an empty request body. - To retrieve specific pools, pass &#x60;keys&#x60;, each with an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org). Keys that match no pool are omitted from the response.  If the request is successful, the response contains &#x60;usage_data&#x60;, one entry per pool:  - &#x60;key&#x60;: the entity the pool meters. - &#x60;usage&#x60;: questions consumed from the pool. - &#x60;warning_limit&#x60;: usage level at which users are warned. Absent when no warning is configured. - &#x60;limit&#x60;: maximum questions the pool allows. Absent when the pool is unlimited. - &#x60;updated_time_in_millis&#x60; and &#x60;updated_by&#x60;: when and by whom the pool was last configured.  #### Error conditions  - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; - Use &#x60;getUsageDataForUser&#x60; to see the combined usage of a single user across every pool they draw from.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchUsageDataRequest** | [**SearchUsageDataRequest**](SearchUsageDataRequest.md)
+
+### Return type
+
+[**UsageDataResponse**](UsageDataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
 <a id="searchUserGroups"></a>
 # **searchUserGroups**
 > List&lt;UserGroupResponse&gt; searchUserGroups(searchUserGroupsRequest)
@@ -5444,6 +6021,75 @@ null (empty response body)
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="searchVersionControlConfigs"></a>
+# **searchVersionControlConfigs**
+> VersionControlConfigList searchVersionControlConfigs()
+
+
+
+  Version: 26.12.0.cl or later   Returns your Org&#39;s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**VersionControlConfigList**](VersionControlConfigList.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Zero or one configuration. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="searchVersionControlRuns"></a>
+# **searchVersionControlRuns**
+> VersionControlRunList searchVersionControlRuns(searchVersionControlRunsRequest)
+
+
+
+  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a &#x60;run_id&#x60;.  Use this to follow a run to completion, to explain a &#x60;PARTIAL_SUCCESS&#x60;, or to read an Org&#39;s commit history by filtering on &#x60;run_type&#x60; &#x60;COMMIT&#x60;. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with &#x60;record_offset&#x60; and &#x60;record_size&#x60;, which accepts between 1 and 100 runs.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **searchVersionControlRunsRequest** | [**SearchVersionControlRunsRequest**](SearchVersionControlRunsRequest.md)
+
+### Return type
+
+[**VersionControlRunList**](VersionControlRunList.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The runs&#39; current outcomes. A run identifier that does not exist in the caller&#39;s org is left out, not reported as an error. |  -  |
+| **400** | Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type, and a record_offset or record_size out of range. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
 <a id="searchWebhookConfigurations"></a>
 # **searchWebhookConfigurations**
 > WebhookSearchResponse searchWebhookConfigurations(searchWebhookConfigurationsRequest)
@@ -5536,6 +6182,80 @@ null (empty response body)
 ### Return type
 
 [**SendAgentMessageResponse**](SendAgentMessageResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="sendAgentConversationMessageStreamingV2"></a>
+# **sendAgentConversationMessageStreamingV2**
+> AgentStreamFrame sendAgentConversationMessageStreamingV2(sendAgentConversationMessageStreamingV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Sends a message to Spotter and streams the response back as Server-Sent Events.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to the data sources the conversation is scoped to.  #### Usage guidelines  - &#x60;message&#x60; (required): the question to ask Spotter. - &#x60;conversation_identifier&#x60; (optional): the conversation to ask in, as returned by &#x60;createAgentConversationV2&#x60;. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the &#x60;x-conversation-identifier&#x60; response header, so a follow-up question can continue the same exchange.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  #### Response format  Each event is a &#x60;data:&#x60; line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | &#x60;event&#x60;       | Text from Spotter — its reasoning or its answer.                    | | &#x60;tool_call&#x60;   | Spotter started a step, such as querying a data source.             | | &#x60;progress&#x60;    | A stage of a step in flight, so you can show what Spotter is doing. | | &#x60;tool_result&#x60; | A step finished; carries its result, including any answer produced. | | &#x60;error&#x60;       | The turn failed.                                                    | | &#x60;done&#x60;        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  &#x60;&#x60;&#x60; tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done &#x60;&#x60;&#x60;  &#x60;tool_call&#x60;, &#x60;progress&#x60; and &#x60;tool_result&#x60; for one step share a &#x60;tool_call_id&#x60;, so you can group them. A turn may run several steps, or none.  Ignore any key you don&#39;t recognise — new event types may be added.  Lines beginning with &#x60;:&#x60; are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with &#x60;:&#x60;.  An event with content has the shape:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;partial\&quot;: true,     \&quot;content\&quot;: {       \&quot;role\&quot;: \&quot;model\&quot;,       \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot; asking for data\&quot;, \&quot;thought\&quot;: true }]     }   } } &#x60;&#x60;&#x60;  - &#x60;parts[].text&#x60; carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - &#x60;parts[].thought&#x60; is &#x60;true&#x60; when the text is Spotter&#39;s reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - &#x60;partial&#x60; is &#x60;true&#x60; for an incremental chunk and &#x60;false&#x60; for a frame that restates the accumulated text of a completed segment. - &#x60;invocation_id&#x60; is stable for one turn; &#x60;id&#x60; identifies a single event.  #### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **&#x60;tool_call&#x60;** announces the step and the arguments it ran with:  &#x60;&#x60;&#x60;json {   \&quot;tool_call\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;args\&quot;: {       \&quot;dataset_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;english_query\&quot;: \&quot;total sales by region last quarter\&quot;     }   } } &#x60;&#x60;&#x60;  **&#x60;progress&#x60;** reports each stage while the step runs:  &#x60;&#x60;&#x60;json {   \&quot;progress\&quot;: {     \&quot;code\&quot;: \&quot;ANSWER_GEN\&quot;,     \&quot;message\&quot;: \&quot;Verifying results with the Trust Layer\&quot;,     \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot;   } } &#x60;&#x60;&#x60;  &#x60;message&#x60; is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar &#x60;code&#x60; as \&quot;still working\&quot; rather than an error.  **&#x60;tool_result&#x60;** carries what the step produced:  &#x60;&#x60;&#x60;json {   \&quot;tool_result\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;is_error\&quot;: false,     \&quot;text\&quot;: \&quot;**total sales by region last quarter**\\nTML query: &#x60;[sales] [region] [date] &#x3D; &#39;last quarter&#39;&#x60;\\n...\&quot;,     \&quot;answer\&quot;: {       \&quot;title\&quot;: \&quot;total sales by region last quarter\&quot;,       \&quot;session_id\&quot;: \&quot;c5c25b33-74b8-4e83-b7f3-f7f384323903\&quot;,       \&quot;gen_no\&quot;: 2,       \&quot;transaction_id\&quot;: \&quot;6fafbc09-1b08-4c49-a017-fa331612a76f\&quot;,       \&quot;worksheet_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;sage_query\&quot;: \&quot;[sales] [region] [date] &#x3D; &#39;last quarter&#39;\&quot;,       \&quot;visualization\&quot;: { \&quot;chart_type\&quot;: \&quot;ADVANCED_COLUMN\&quot; },       \&quot;table_data\&quot;: { \&quot;total_rows\&quot;: 5, \&quot;columns\&quot;: [{ \&quot;name\&quot;: \&quot;region\&quot;, \&quot;type\&quot;: \&quot;ATTRIBUTE\&quot; }] }     }   } } &#x60;&#x60;&#x60;  - &#x60;text&#x60; is the step&#39;s own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read &#x60;answer.table_data.total_rows&#x60; for the true count. - &#x60;answer&#x60; is present when the step produced a ThoughtSpot answer. Use &#x60;session_id&#x60; with &#x60;gen_no&#x60; to fetch or deep-link it, and &#x60;sage_query&#x60; to show how the question was interpreted. - &#x60;is_error&#x60; is &#x60;true&#x60; when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  &#x60;args&#x60; and &#x60;answer&#x60; are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  #### End of turn  The stream ends with a terminal event:  &#x60;&#x60;&#x60;json { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } } &#x60;&#x60;&#x60;  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a &#x60;done&#x60; event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  &#x60;done&#x60; reports that the stream completed, not that the turn succeeded; a turn that emitted an &#x60;error&#x60; event still ends with &#x60;done&#x60;. Check for an &#x60;error&#x60; event to determine the outcome.  The &#x60;conversation_identifier&#x60; is repeated here so a client that cannot read response headers — a browser &#x60;EventSource&#x60;, for example — can still continue a conversation it created by omitting the parameter.  #### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;409\&quot;,     \&quot;message\&quot;: \&quot;session busy: lease held by invocation 7f3a\&quot;,     \&quot;source\&quot;: \&quot;transport\&quot;,     \&quot;display_message\&quot;: \&quot;Another request is still running in this conversation.\&quot;,     \&quot;error_bucket\&quot;: \&quot;RETRY\&quot;   } } &#x60;&#x60;&#x60;  Render &#x60;display_message&#x60;, not &#x60;message&#x60; — the latter is diagnostic and not written for end users. &#x60;code&#x60; is always a string; quote it when reporting an issue. Branch on &#x60;error_bucket&#x60;: &#x60;RETRY&#x60; (retry the request), &#x60;REFRESH&#x60; (reload and retry), &#x60;NEW_CHAT&#x60; (start a new conversation), &#x60;SUPPORT&#x60; (contact support). Treat any unrecognized value as &#x60;SUPPORT&#x60;.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a &#x60;done&#x60; event and no &#x60;error&#x60; event.  A failure can also be reported on an &#x60;event&#x60; itself, when Spotter fails while producing that event. Its &#x60;error_code&#x60; is set and its &#x60;parts&#x60; are empty:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;error_code\&quot;: \&quot;MALFORMED_FUNCTION_CALL\&quot;,     \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [] }   } } &#x60;&#x60;&#x60;  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | &#x60;error&#x60; frame             | The turn as a whole. Carries &#x60;display_message&#x60; and &#x60;error_bucket&#x60;.            | Show &#x60;display_message&#x60; and act on &#x60;error_bucket&#x60;.                            | | &#x60;event&#x60; with &#x60;error_code&#x60; | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an &#x60;error&#x60; frame follows, act on that. |  &#x60;error_code&#x60; is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                        | | ---- | ------------------------------------------------------------------------------------------------------------------ | | 400  | Bad request — &#x60;message&#x60; is missing or is not a string, or &#x60;conversation_identifier&#x60; is not a string.               | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the conversation. | | 404  | Not found — no conversation with the given identifier exists for this user.                                        |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming protocol uses Server-Sent Events (SSE).      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **sendAgentConversationMessageStreamingV2Request** | [**SendAgentConversationMessageStreamingV2Request**](SendAgentConversationMessageStreamingV2Request.md)
+
+### Return type
+
+[**AgentStreamFrame**](AgentStreamFrame.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="sendAgentConversationMessageV2"></a>
+# **sendAgentConversationMessageV2**
+> AgentTurnResponse sendAgentConversationMessageV2(sendAgentConversationMessageV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Sends a message to Spotter and returns the complete response once the turn has finished.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to the data sources the conversation is scoped to.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use &#x60;sendAgentConversationMessageStreamingV2&#x60; instead.  #### Usage guidelines  - &#x60;message&#x60; (required): the question to ask Spotter. - &#x60;conversation_identifier&#x60; (optional): the conversation to ask in, as returned by &#x60;createAgentConversationV2&#x60;. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the &#x60;x-conversation-identifier&#x60; response header.  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client&#39;s read timeout to several minutes; a turn that runs too long is ended with a &#x60;504&#x60;.  #### Response format  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot;,   \&quot;events\&quot;: [     { \&quot;tool_call\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot; } },     { \&quot;progress\&quot;: { \&quot;code\&quot;: \&quot;TML_GEN\&quot;, \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot; } },     { \&quot;tool_result\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;answer\&quot;: { \&quot;session_id\&quot;: \&quot;c5c25b33\&quot; } } },     {       \&quot;event\&quot;: {         \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot; }] }       }     },     { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } }   ] } &#x60;&#x60;&#x60;  &#x60;events&#x60; contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under &#x60;sendAgentConversationMessageStreamingV2&#x60; — &#x60;event&#x60;, &#x60;tool_call&#x60;, &#x60;progress&#x60;, &#x60;tool_result&#x60;, &#x60;error&#x60; and &#x60;done&#x60;.  To render the answer, concatenate &#x60;parts[].text&#x60; from each &#x60;event&#x60; frame in order, skipping parts marked &#x60;thought: true&#x60; if you do not want to show Spotter&#39;s reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an &#x60;error&#x60; frame; &#x60;done&#x60; reports that the turn ended, not that it succeeded. An &#x60;event&#x60; can also carry an &#x60;error_code&#x60; when Spotter failed while producing that event; the streaming endpoint&#39;s \&quot;Errors during a turn\&quot; section explains how the two differ.  #### Error responses  | Code | Description                                                                                                                                                     | | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;message&#x60; is missing or is not a string, or &#x60;conversation_identifier&#x60; is empty or not a string.                                                   | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the conversation.                                              | | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     | | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use &#x60;sendAgentConversationMessageStreamingV2&#x60; for questions that run long. |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **sendAgentConversationMessageV2Request** | [**SendAgentConversationMessageV2Request**](SendAgentConversationMessageV2Request.md)
+
+### Return type
+
+[**AgentTurnResponse**](AgentTurnResponse.md)
 
 ### Authorization
 
@@ -6449,7 +7169,7 @@ null (empty response body)
 
 
 
-  Version: 9.6.0.cl or later   Updates a custom action.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
+  Version: 9.6.0.cl or later   **Note:** This API endpoint is deprecated from 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual Embed SDK instead.  Updates a custom action.  Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.  #### Usage Guidelines  The API allows you to modify the following properties:  * Name of the custom action * Action availability to groups * Association to metadata objects * Authentication settings for a URL-based action  For more information, see [Custom actions](https://developers.thoughtspot.com/docs/custom-action-intro).      
 
 ### Parameters
 
@@ -6596,7 +7316,7 @@ null (empty response body)
 | **400** | Invalid request parameters. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges. |  -  |
-| **404** | Feature not found or feature management not enabled. |  -  |
+| **404** | Feature not found or feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 <a id="updateFeatureValue"></a>
@@ -6633,8 +7353,82 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges or org not assigned to feature. |  -  |
-| **404** | Feature not found or feature management not enabled. |  -  |
+| **404** | Feature not found or feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
+
+<a id="updateInputTable"></a>
+# **updateInputTable**
+> InputTableUpdateResponse updateInputTable(inputTableIdentifier, updateInputTableRequest)
+
+
+
+  Version: 26.11.0.cl or later   Writes rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table&#39;s existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.  Requires &#x60;DATAMANAGEMENT&#x60; (**Can manage data**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the &#x60;CAN_MANAGE_INPUT_TABLES&#x60; (**Can manage input tables**) privilege is required. The caller must also have &#x60;MODIFY&#x60; permission on the input table object.  #### Usage guidelines  Specify the input table GUID as the &#x60;input_table_identifier&#x60; path parameter and provide the row data in the request body:  * **&#x60;columns&#x60;** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns. * **&#x60;rows&#x60;** — List of rows to write. Each row is an array of string values in the same order as &#x60;columns&#x60;, and must contain exactly one value per column. All cell values are passed as strings regardless of the column&#39;s underlying data type. An empty value writes &#x60;NULL&#x60; into that cell.  #### Date values  Pass a &#x60;DATE&#x60; cell as an **ISO calendar date** — &#x60;yyyy-MM-dd&#x60;, for example &#x60;2025-01-01&#x60;. The value is stored exactly as written, with no time-zone conversion.  An epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster&#39;s local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.  The date format is declared once per column, so every row must use the same form for a given column: a &#x60;DATE&#x60; column carrying an ISO date in one row and an epoch number in another is rejected.  The ISO form applies to &#x60;DATE&#x60; columns only. &#x60;DATE_TIME&#x60; and &#x60;TIME&#x60; columns accept an epoch number only, and an ISO value in one of them is rejected.  A date value in neither accepted form for its column — including a calendar-invalid ISO date such as &#x60;2026-02-30&#x60; — is rejected with a validation error.  #### Write semantics  * **Matched rows** (the key already exists): only the non-key columns present in &#x60;columns&#x60; are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite. * **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to &#x60;NULL&#x60;. * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched. * The &#x60;rows&#x60; array must contain at least one row; an empty &#x60;rows&#x60; array is rejected.  The request is rejected with a validation error when a column name does not match the table schema, a row&#39;s value count does not match the number of &#x60;columns&#x60;, a required key column is omitted, no non-key column is named, or a value is not compatible with its column&#39;s data type (including a date value in neither accepted form for its column).  #### Response  The response returns &#x60;rows_loaded&#x60; — the number of rows actually written, the sum of rows updated (matched) and rows inserted (new).  &#x60;rows_loaded&#x60; is the count the warehouse itself reports, so it reflects what was written rather than what was submitted. If the warehouse completes the load but reports no count, the call fails with &#x60;500&#x60; rather than returning a count it cannot stand behind. The write is a MERGE keyed on the input table&#39;s key columns, so it is idempotent — retrying the same payload is safe.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **inputTableIdentifier** | **String**
+| **updateInputTableRequest** | [**UpdateInputTableRequest**](UpdateInputTableRequest.md)
+
+### Return type
+
+[**InputTableUpdateResponse**](InputTableUpdateResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Rows loaded successfully. |  -  |
+| **400** | Malformed request or unknown column name. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden — caller does not have MODIFY permission on the input table. |  -  |
+| **404** | Input table not found. |  -  |
+| **500** | Unexpected error. |  -  |
+
+<a id="updateLinkCustomizations"></a>
+# **updateLinkCustomizations**
+> updateLinkCustomizations(updateLinkCustomizationsRequest)
+
+
+
+  Version: 26.11.0.cl or later   Updates the URL templates ThoughtSpot uses when it generates a shareable link, at the cluster level or for the Org the caller is signed in to. Use this endpoint to point shared links at your own embedding application, so a link in a scheduled email or a Share dialog opens your page instead of the ThoughtSpot application.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege.  #### Usage guidelines  - &#x60;scope: CLUSTER&#x60; changes the defaults inherited by all Orgs, and is available only to callers in the primary Org. - &#x60;scope: ORG&#x60; (default) changes the Org the caller is signed in to, and requires Orgs to be enabled. - This is a partial update. Only the types listed in &#x60;templates&#x60; change; every other type keeps its current value, whether set at this scope or inherited. A repeated type is rejected. - **REPLACE** (default) sets each listed type to the &#x60;value&#x60; provided in the request. - **RESET** clears each listed type, so an Org falls back to the cluster template and the cluster falls back to the ThoughtSpot default. Supply only &#x60;type&#x60;; a &#x60;value&#x60; alongside &#x60;RESET&#x60; is rejected. To clear every override, list all types with &#x60;RESET&#x60;. Resetting at cluster level changes only the cluster default: an Org that has set its own value keeps it.  #### Placeholders  A template is rejected unless it contains the placeholders its type requires.  | Link type | Required | Example | | --- | --- | --- | | &#x60;LIVEBOARD_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/dashboards/{object-id}?{ts-query-params}&#x60; | | &#x60;VISUALIZATION_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{sub-object-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/dashboards/{object-id}/charts/{sub-object-id}?{ts-query-params}&#x60; | | &#x60;ANSWER_SHARE_URL&#x60; | &#x60;{object-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/answers/{object-id}?{ts-query-params}&#x60; | | &#x60;SPOTIQ_ANALYSIS_URL&#x60; | &#x60;{object-id}&#x60; | &#x60;https://analytics.acme.com/insights/{object-id}&#x60; | | &#x60;UNSUBSCRIBE_URL&#x60; | none | &#x60;https://analytics.acme.com/account/email-preferences&#x60; | | &#x60;GENERIC_URL&#x60; | &#x60;{path}&#x60; | &#x60;https://analytics.acme.com/{path}&#x60; | | &#x60;CONVERSATION_SHARE_URL&#x60; | &#x60;{conversation-id}&#x60;, &#x60;{ts-query-params}&#x60; | &#x60;https://analytics.acme.com/spotter/{conversation-id}?{ts-query-params}&#x60; |  &#x60;{ts-query-params}&#x60; is optional on any type that does not require it: it is substituted wherever it appears and removed when there is nothing to substitute, so it never reaches a generated link.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **updateLinkCustomizationsRequest** | [**UpdateLinkCustomizationsRequest**](UpdateLinkCustomizationsRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Link preferences updated successfully. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
 
 <a id="updateMetadataHeader"></a>
 # **updateMetadataHeader**
@@ -6821,7 +7615,7 @@ null (empty response body)
 
 <a id="updateStyleCustomization"></a>
 # **updateStyleCustomization**
-> updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo)
+> updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo)
 
 
 
@@ -6835,6 +7629,7 @@ null (empty response body)
 | **operation** | **String**
 | **resetOptions** | [**StyleResetOptionsInput**](StyleResetOptionsInput.md)
 | **navigationPanel** | [**NavigationPanelInput**](NavigationPanelInput.md)
+| **appColorTheme** | [**AppColorThemeInput**](AppColorThemeInput.md)
 | **chartColorPalette** | [**StyleColorPaletteInput**](StyleColorPaletteInput.md)
 | **embeddedFooterText** | **String**
 | **visualizationFonts** | [**VisualizationFontsInput**](VisualizationFontsInput.md)
@@ -6972,6 +7767,43 @@ null (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+<a id="updateUsageData"></a>
+# **updateUsageData**
+> UsageDataResponse updateUsageData(updateUsageDataRequest)
+
+
+
+ Creates or updates Spotter usage pools, setting the question allowance for a user, user group, or Org. A pool that does not exist is created; fields omitted from an update keep their current value. Every key must use the scope the cluster meters at. Switching scope requires deleting the existing pools first. Requires &#x60;ADMINISTRATION&#x60; privilege.   Version: 26.11.0.cl or later   Creates or updates Spotter usage pools. A usage pool sets how many Spotter questions a user, user group, or Org can ask. Use this API to provision limits for new users or groups, raise or lower an existing limit, or reset usage at the start of a billing period.  Requires &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot) privilege. Users with only &#x60;CAN_MANAGE_SPOTTER&#x60;, and Org administrators without cluster-level &#x60;ADMINISTRATION&#x60;, cannot call this API.  #### Usage guidelines  The request must include &#x60;updates&#x60;, with at least one entry. Each entry contains:  - &#x60;key&#x60; (required): the pool to create or update, with an &#x60;entity_type&#x60; (&#x60;USER&#x60;, &#x60;USER_GROUP&#x60;, or &#x60;ORG&#x60;) and an &#x60;entity_identifier&#x60; (the GUID of the user or user group, or the ID of the Org). - &#x60;limit&#x60; (optional): maximum Spotter questions the pool allows. - &#x60;warning_limit&#x60; (optional): usage level at which users are warned that they are approaching the limit. - &#x60;usage&#x60; (optional): questions consumed so far. Set to &#x60;0&#x60; to reset the pool.  A pool that does not exist is created. Fields omitted from an entry keep their current value.  A cluster meters Spotter usage at exactly one scope. The first pool created sets the scope, and every later key must use the same &#x60;entity_type&#x60;. To switch scope, delete the existing pools with &#x60;deleteUsageData&#x60; first.  If the request is successful, the response contains &#x60;usage_data&#x60;, with each updated pool as it stands after the change.  #### Error conditions  - &#x60;400&#x60; — &#x60;updates&#x60; is empty, a key is missing its &#x60;entity_type&#x60; or &#x60;entity_identifier&#x60;, or a key uses a different &#x60;entity_type&#x60; from the cluster&#39;s existing pools. - &#x60;401&#x60; — authentication token is missing, expired, or invalid. - &#x60;403&#x60; — the caller does not have &#x60;ADMINISTRATION&#x60; privilege.  &gt; ###### Note: &gt; &gt; - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **updateUsageDataRequest** | [**UpdateUsageDataRequest**](UpdateUsageDataRequest.md)
+
+### Return type
+
+[**UsageDataResponse**](UsageDataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 <a id="updateUser"></a>
 # **updateUser**
@@ -7119,6 +7951,42 @@ null (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+<a id="updateVersionControlConfig"></a>
+# **updateVersionControlConfig**
+> updateVersionControlConfig(updateVersionControlConfigRequest)
+
+
+
+  Version: 26.12.0.cl or later   Changes your Org&#39;s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through &#x60;disabled_operations&#x60;. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **updateVersionControlConfigRequest** | [**UpdateVersionControlConfigRequest**](UpdateVersionControlConfigRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully updated the version control configuration for the Org. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 <a id="updateWebhookConfiguration"></a>
 # **updateWebhookConfiguration**

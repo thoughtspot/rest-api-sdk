@@ -37,6 +37,10 @@ export class MetadataSearchResponse {
     */
     'dependent_objects'?: any | null;
     /**
+    * Whether the returned dependent_objects page is the last one for this object. True when the page came back short of the effective page size. A full page reports false even when it happens to be the final one, so a caller pages until it sees true and may pay one final empty page.    Version: 26.11.0.cl or later 
+    */
+    'dependent_objects_is_last_batch'?: boolean | null;
+    /**
     * Details of incomplete information of the metadata objects if any.
     */
     'incomplete_objects'?: Array<any> | null;
@@ -93,6 +97,12 @@ export class MetadataSearchResponse {
             "format": ""
         },
         {
+            "name": "dependent_objects_is_last_batch",
+            "baseName": "dependent_objects_is_last_batch",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "incomplete_objects",
             "baseName": "incomplete_objects",
             "type": "Array<any>",
@@ -131,5 +141,5 @@ export class MetadataSearchResponse {
     }
 }
 
-    export type MetadataSearchResponseMetadataTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP" | "INSIGHT_SPEC" | "COLLECTION" ;
+    export type MetadataSearchResponseMetadataTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "TAG" | "USER" | "USER_GROUP" | "LOGICAL_RELATIONSHIP" | "INSIGHT_SPEC" | "COLLECTION" | "TEMPLATE_VARIABLE" ;
 

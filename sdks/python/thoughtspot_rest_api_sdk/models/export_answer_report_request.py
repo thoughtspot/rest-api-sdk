@@ -35,9 +35,9 @@ class ExportAnswerReportRequest(BaseModel):
     runtime_sort: Optional[Any] = Field(default=None, description="JSON string representing runtime sort. { sortCol1: region, asc1 :true, sortCol2 : date }")
     runtime_param_override: Optional[Any] = Field(default=None, description="JSON object for setting values of parameters in runtime.")
     regional_settings: Optional[RegionalSettingsInput] = Field(default=None, description="Options for specific region specific overrides to support date/number/string/currency formatting.")
-    png_options: Optional[AnswerPngOptionsInput] = Field(default=None, description="Options for PNG export.   Version: 26.6.0.cl or later ")
-    personalised_view_identifier: Optional[StrictStr] = Field(default=None, description="GUID or name of the personalised view of the Answer object.   Version: 26.6.0.cl or later ")
-    type: Optional[StrictStr] = Field(default='SAVED', description="Type of the answer being exported.   Version: 26.6.0.cl or later ")
+    png_options: Optional[AnswerPngOptionsInput] = Field(default=None, description="Options for PNG export.    Version: 26.6.0.cl or later ")
+    personalised_view_identifier: Optional[StrictStr] = Field(default=None, description="GUID or name of the personalised view of the Answer object.    Version: 26.6.0.cl or later ")
+    type: Optional[StrictStr] = Field(default='SAVED', description="Type of the answer being exported.    Version: 26.6.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["metadata_identifier", "session_identifier", "generation_number", "file_format", "runtime_filter", "runtime_sort", "runtime_param_override", "regional_settings", "png_options", "personalised_view_identifier", "type"]
 

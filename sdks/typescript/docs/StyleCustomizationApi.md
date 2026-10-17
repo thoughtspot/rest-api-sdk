@@ -295,7 +295,9 @@ apiInstance.updateStyleCustomization(
   "REPLACE" , 
   // StyleResetOptionsInput | Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)
   null , 
-  // NavigationPanelInput | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)
+  // NavigationPanelInput | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color. (optional)
+  null , 
+  // AppColorThemeInput | App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)
   null , 
   // StyleColorPaletteInput | Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)
   null , 
@@ -322,7 +324,8 @@ Name | Type | Description  | Notes
  **scope** | [**string**]**Array<&#39;CLUSTER&#39; &#124; &#39;ORG&#39;>** | Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org. | defaults to 'ORG'
  **operation** | [**string**]**Array<&#39;REPLACE&#39; &#124; &#39;RESET&#39;>** | Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. | (optional) defaults to 'REPLACE'
  **resetOptions** | **StyleResetOptionsInput** | Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. | (optional) defaults to undefined
- **navigationPanel** | **NavigationPanelInput** | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. | (optional) defaults to undefined
+ **navigationPanel** | **NavigationPanelInput** | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color. | (optional) defaults to undefined
+ **appColorTheme** | **AppColorThemeInput** | App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  | (optional) defaults to undefined
  **chartColorPalette** | **StyleColorPaletteInput** | Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. | (optional) defaults to undefined
  **embeddedFooterText** | [**string**] | Custom footer text for the embedded application. An empty string clears the footer. | (optional) defaults to undefined
  **visualizationFonts** | **VisualizationFontsInput** | Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. | (optional) defaults to undefined

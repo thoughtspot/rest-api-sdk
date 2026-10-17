@@ -65,15 +65,17 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="scope">Scope at which these style preferences apply..</param>
         /// <param name="org">org.</param>
         /// <param name="navigationPanel">navigationPanel.</param>
+        /// <param name="appColorTheme">appColorTheme.</param>
         /// <param name="chartColorPalette">chartColorPalette.</param>
         /// <param name="embeddedFooterText">embeddedFooterText.</param>
         /// <param name="logo">logo.</param>
         /// <param name="visualizationFonts">visualizationFonts.</param>
-        public StylePreference(ScopeEnum? scope = default, StyleOrgInfo org = default, StyleNavigationPanel navigationPanel = default, StyleChartColorPalette chartColorPalette = default, StyleEmbeddedFooterText embeddedFooterText = default, StyleLogoStatus logo = default, StyleVisualizationFonts visualizationFonts = default)
+        public StylePreference(ScopeEnum? scope = default, StyleOrgInfo org = default, StyleNavigationPanel navigationPanel = default, StyleAppColorTheme appColorTheme = default, StyleChartColorPalette chartColorPalette = default, StyleEmbeddedFooterText embeddedFooterText = default, StyleLogoStatus logo = default, StyleVisualizationFonts visualizationFonts = default)
         {
             this.Scope = scope;
             this.Org = org;
             this.NavigationPanel = navigationPanel;
+            this.AppColorTheme = appColorTheme;
             this.ChartColorPalette = chartColorPalette;
             this.EmbeddedFooterText = embeddedFooterText;
             this.Logo = logo;
@@ -92,6 +94,12 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// </summary>
         [DataMember(Name = "navigation_panel", EmitDefaultValue = false)]
         public StyleNavigationPanel NavigationPanel { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AppColorTheme
+        /// </summary>
+        [DataMember(Name = "app_color_theme", EmitDefaultValue = false)]
+        public StyleAppColorTheme AppColorTheme { get; set; }
 
         /// <summary>
         /// Gets or Sets ChartColorPalette
@@ -134,6 +142,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  Scope: ").Append(Scope).Append("\n");
             sb.Append("  Org: ").Append(Org).Append("\n");
             sb.Append("  NavigationPanel: ").Append(NavigationPanel).Append("\n");
+            sb.Append("  AppColorTheme: ").Append(AppColorTheme).Append("\n");
             sb.Append("  ChartColorPalette: ").Append(ChartColorPalette).Append("\n");
             sb.Append("  EmbeddedFooterText: ").Append(EmbeddedFooterText).Append("\n");
             sb.Append("  Logo: ").Append(Logo).Append("\n");

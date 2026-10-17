@@ -109,6 +109,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'OrgIdentifier'
+        /// </summary>
+        [Fact]
+        public void OrgIdentifierTest()
+        {
+            // TODO unit test for the property 'OrgIdentifier'
+        }
+
+        /// <summary>
         /// Test the property 'Scope'
         /// </summary>
         [Fact]

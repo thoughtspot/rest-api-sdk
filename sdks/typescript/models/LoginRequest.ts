@@ -29,6 +29,14 @@ export class LoginRequest {
     * A flag to remember the user session. When set to true, a session cookie is created and used in subsequent API requests.
     */
     'remember_me'?: boolean | null;
+    /**
+    * Path on this cluster to redirect to after a successful login, for example /pinboards. It must start with a single /, and an absolute URL is rejected. When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later 
+    */
+    'redirect_url'?: string;
+    /**
+    * A flag to suppress the redirect. When set to true, the resolved URL is returned in the location header instead of a 302 redirect. Applies only when redirect_url is set.    Version: 26.12.0.cl or later 
+    */
+    'no_url_redirection'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -56,6 +64,18 @@ export class LoginRequest {
         {
             "name": "remember_me",
             "baseName": "remember_me",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "redirect_url",
+            "baseName": "redirect_url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "no_url_redirection",
+            "baseName": "no_url_redirection",
             "type": "boolean",
             "format": ""
         }    ];

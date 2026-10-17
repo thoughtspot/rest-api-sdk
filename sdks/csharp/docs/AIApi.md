@@ -5,10 +5,12 @@ All URIs are relative to *https://localhost:443*
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
 | [**CreateAgentConversation**](AIApi.md#createagentconversation) | **POST** /api/rest/2.0/ai/agent/conversation/create |  |
+| [**CreateAgentConversationV2**](AIApi.md#createagentconversationv2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/create |  |
 | [**CreateAnalyst**](AIApi.md#createanalyst) | **POST** /api/rest/2.0/ai/agent/analysts/create |  |
 | [**CreateConversation**](AIApi.md#createconversation) | **POST** /api/rest/2.0/ai/conversation/create |  |
 | [**DeleteAnalyst**](AIApi.md#deleteanalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete |  |
 | [**DeleteConversation**](AIApi.md#deleteconversation) | **DELETE** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete |  |
+| [**DeleteUsageData**](AIApi.md#deleteusagedata) | **POST** /api/rest/2.0/ai/usage-data/delete |  |
 | [**ExportMemory**](AIApi.md#exportmemory) | **POST** /api/rest/2.0/ai/memory/export |  |
 | [**GetAgentInstructions**](AIApi.md#getagentinstructions) | **GET** /api/rest/2.0/ai/agent/instructions/get |  |
 | [**GetConversation**](AIApi.md#getconversation) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages |  |
@@ -18,12 +20,16 @@ All URIs are relative to *https://localhost:443*
 | [**GetRelevantQuestions**](AIApi.md#getrelevantquestions) | **POST** /api/rest/2.0/ai/relevant-questions/ |  |
 | [**GetShareInfo**](AIApi.md#getshareinfo) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info |  |
 | [**GetSharedContent**](AIApi.md#getsharedcontent) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content |  |
+| [**GetUsageDataForUser**](AIApi.md#getusagedataforuser) | **GET** /api/rest/2.0/ai/usage-data/user |  |
 | [**ImportMemory**](AIApi.md#importmemory) | **POST** /api/rest/2.0/ai/memory/import |  |
 | [**LoadAnswer**](AIApi.md#loadanswer) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details |  |
 | [**QueryGetDecomposedQuery**](AIApi.md#querygetdecomposedquery) | **POST** /api/rest/2.0/ai/analytical-questions |  |
 | [**SearchAnalysts**](AIApi.md#searchanalysts) | **POST** /api/rest/2.0/ai/agent/analysts/search |  |
+| [**SearchUsageData**](AIApi.md#searchusagedata) | **POST** /api/rest/2.0/ai/usage-data/search |  |
 | [**SendAgentConversationMessage**](AIApi.md#sendagentconversationmessage) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send |  |
 | [**SendAgentConversationMessageStreaming**](AIApi.md#sendagentconversationmessagestreaming) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream |  |
+| [**SendAgentConversationMessageStreamingV2**](AIApi.md#sendagentconversationmessagestreamingv2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/send/stream |  |
+| [**SendAgentConversationMessageV2**](AIApi.md#sendagentconversationmessagev2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/send |  |
 | [**SendAgentMessage**](AIApi.md#sendagentmessage) | **POST** /api/rest/2.0/ai/agent/{conversation_identifier}/converse |  |
 | [**SendAgentMessageStreaming**](AIApi.md#sendagentmessagestreaming) | **POST** /api/rest/2.0/ai/agent/converse/sse |  |
 | [**SendMessage**](AIApi.md#sendmessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |  |
@@ -35,6 +41,7 @@ All URIs are relative to *https://localhost:443*
 | [**StopConversation**](AIApi.md#stopconversation) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response |  |
 | [**UpdateAnalyst**](AIApi.md#updateanalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update |  |
 | [**UpdateConversation**](AIApi.md#updateconversation) | **POST** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update |  |
+| [**UpdateUsageData**](AIApi.md#updateusagedata) | **POST** /api/rest/2.0/ai/usage-data/update |  |
 
 <a id="createagentconversation"></a>
 # **CreateAgentConversation**
@@ -114,6 +121,107 @@ catch (ApiException e)
 ### Return type
 
 [**AgentConversation**](AgentConversation.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="createagentconversationv2"></a>
+# **CreateAgentConversationV2**
+> AgentConversationV2 CreateAgentConversationV2 (CreateAgentConversationV2Request createAgentConversationV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to any data source or analyst specified in the request.  #### Usage guidelines  A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.  `source` decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.  - `source` (default: `DATA_SOURCE`): what the conversation is grounded in.   - `DATA_SOURCE`: data sources, set with `data_source_identifiers` and optionally `additional_instructions`. `analyst_identifier` is not allowed.   - `ANALYST`: a saved analyst, set with `analyst_identifier`, which is then required. The analyst brings its own instructions, data sources and connectors, so `data_source_identifiers` and `additional_instructions` are not allowed. - `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored. - `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `\"Answer concisely and always report revenue in thousands.\"` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. - `analyst_identifier`: the saved analyst to create the conversation from.  A parameter that does not apply to the `source` fails the request with a 400 rather than being ignored.  Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.  #### Example requests  ```json {   \"source\": \"DATA_SOURCE\",   \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"],   \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\" } ```  ```json {   \"source\": \"ANALYST\",   \"analyst_identifier\": \"0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\" } ```  #### Example response  ```json {   \"conversation_identifier\": \"5612260428840173568\" } ```  Treat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.  #### Error responses  | Code | Description                                                                                                                                                                                                                                                                                                                               | | - -- - | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | 400  | Bad request — the request fails validation; `analyst_identifier` is missing when `source` is `ANALYST`; a parameter that does not apply to the `source` is set; or the analyst in `analyst_identifier`, or a data source in `data_source_identifiers`, does not exist or the caller cannot view it (the message lists those identifiers). | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst.                                                                                                                                                                                                                             | | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateAgentConversationV2Example
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var createAgentConversationV2Request = new CreateAgentConversationV2Request(); // CreateAgentConversationV2Request | 
+
+            try
+            {
+                AgentConversationV2 result = apiInstance.CreateAgentConversationV2(createAgentConversationV2Request);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.CreateAgentConversationV2: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateAgentConversationV2WithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<AgentConversationV2> response = apiInstance.CreateAgentConversationV2WithHttpInfo(createAgentConversationV2Request);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.CreateAgentConversationV2WithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **createAgentConversationV2Request** | [**CreateAgentConversationV2Request**](CreateAgentConversationV2Request.md) |  |  |
+
+### Return type
+
+[**AgentConversationV2**](AgentConversationV2.md)
 
 ### Authorization
 
@@ -529,6 +637,107 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Successfully deleted the agent conversation. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="deleteusagedata"></a>
+# **DeleteUsageData**
+> DeleteUsageDataResponse DeleteUsageData (DeleteUsageDataRequest deleteUsageDataRequest)
+
+
+
+ Deletes Spotter usage pools. Users who no longer draw from any pool are no longer metered: their Spotter usage is unlimited, not blocked. Requires `ADMINISTRATION` privilege.   Version: 26.11.0.cl or later   Deletes Spotter usage pools. Use this API to remove a limit from a user, user group, or Org, or to clear every pool before switching the scope the cluster meters at.  Requires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.  #### Usage guidelines  The request must include `keys`, with at least one entry. Each key has an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org).  Deleting a pool removes its limit rather than blocking its users. A user who no longer draws from any pool is not metered and can use Spotter without a limit.  If the request is successful, the response contains `deleted_keys`, the keys of the pools that existed and were deleted. Keys that matched no pool are omitted.  #### Error conditions  - `400` — `keys` is empty, or a key is missing its `entity_type` or `entity_identifier`. - `401` — authentication token is missing, expired, or invalid. - `403` — the caller does not have `ADMINISTRATION` privilege.  > ###### Note: > > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > - This operation cannot be undone. Recreate a pool with `updateUsageData`; its usage restarts from `0`.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteUsageDataExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var deleteUsageDataRequest = new DeleteUsageDataRequest(); // DeleteUsageDataRequest | 
+
+            try
+            {
+                DeleteUsageDataResponse result = apiInstance.DeleteUsageData(deleteUsageDataRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.DeleteUsageData: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteUsageDataWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<DeleteUsageDataResponse> response = apiInstance.DeleteUsageDataWithHttpInfo(deleteUsageDataRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.DeleteUsageDataWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **deleteUsageDataRequest** | [**DeleteUsageDataRequest**](DeleteUsageDataRequest.md) |  |  |
+
+### Return type
+
+[**DeleteUsageDataResponse**](DeleteUsageDataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
 | **400** | Operation failed |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -1444,6 +1653,107 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="getusagedataforuser"></a>
+# **GetUsageDataForUser**
+> UsageDataForUserResponse GetUsageDataForUser (string? userIdentifier = null)
+
+
+
+ Retrieves a user's combined Spotter usage position: every pool the user draws from, with usage, warning limits, and limits summed across them. Any user can retrieve their own usage. Retrieving another user's usage requires `ADMINISTRATION` privilege.   Version: 26.11.0.cl or later   Retrieves a user's combined Spotter usage: every usage pool the user draws from, with usage, warning limits, and limits summed across them. Use this API to show users how many Spotter questions they have left, or to check whether a user is blocked by a usage limit.  Any user can retrieve their own usage. Retrieving another user's usage requires `ADMINISTRATION` (Can administer ThoughtSpot) privilege; `CAN_MANAGE_SPOTTER` is not sufficient.  #### Usage guidelines  - Omit `user_identifier` to retrieve the usage of the authenticated user. - Pass `user_identifier` with a user GUID to retrieve that user's usage.  A user draws from every pool that meters them: their own pool, the pools of the user groups they belong to (including inherited groups), or their Org's pool, depending on the scope the cluster meters at. The totals in the response are sums over those pools. For example, a user in two groups with limits of 100 and 50 has a `total_limit` of 150.  If the request is successful, the response contains `summary`:  - `pools`: the individual pools the user draws from. - `total_usage`, `total_warning_limit`, and `total_limit`: sums across the pools. - `total_remaining`: questions the user can still ask. Absent when `has_unlimited_pool` is `true`. - `is_at_warning`: `true` when usage has reached the combined warning limit. - `is_at_limit`: `true` when usage has reached the combined limit and further Spotter questions are blocked. - `has_unlimited_pool`: `true` when any of the user's pools has no limit, which makes the user unlimited.  A user who draws from no pool is not metered: `pools` is empty and `is_at_limit` is `false`.  #### Error conditions  - `401` — authentication token is missing, expired, or invalid. - `403` — the caller requested another user's usage without `ADMINISTRATION` privilege.  > ###### Note: > > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class GetUsageDataForUserExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var userIdentifier = "userIdentifier_example";  // string? | GUID of the user whose usage to retrieve. Defaults to the authenticated user. Passing another user's GUID requires `ADMINISTRATION` privilege. (optional) 
+
+            try
+            {
+                UsageDataForUserResponse result = apiInstance.GetUsageDataForUser(userIdentifier);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.GetUsageDataForUser: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetUsageDataForUserWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<UsageDataForUserResponse> response = apiInstance.GetUsageDataForUserWithHttpInfo(userIdentifier);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.GetUsageDataForUserWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userIdentifier** | **string?** | GUID of the user whose usage to retrieve. Defaults to the authenticated user. Passing another user&#39;s GUID requires &#x60;ADMINISTRATION&#x60; privilege. | [optional]  |
+
+### Return type
+
+[**UsageDataForUserResponse**](UsageDataForUserResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="importmemory"></a>
 # **ImportMemory**
 > ImportMemoryResponse ImportMemory (ImportMemoryRequest importMemoryRequest)
@@ -1850,6 +2160,107 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="searchusagedata"></a>
+# **SearchUsageData**
+> UsageDataResponse SearchUsageData (SearchUsageDataRequest searchUsageDataRequest)
+
+
+
+ Retrieves Spotter usage pools: the question allowance configured for each user, user group, or Org and how much of it has been consumed. Pass `keys` to fetch specific pools, or omit it to fetch every pool on the cluster. Requires `ADMINISTRATION` privilege.   Version: 26.11.0.cl or later   Retrieves Spotter usage pools. A usage pool is the Spotter question allowance configured for a user, user group, or Org, together with how many questions have been consumed from it. Use this API to monitor usage across your users, for example to find pools that are close to their limit.  Requires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.  #### Usage guidelines  A cluster meters Spotter usage at exactly one scope: per user, per user group, or per Org. Every pool on a cluster therefore has the same `entity_type`.  - To retrieve every pool on the cluster, send an empty request body. - To retrieve specific pools, pass `keys`, each with an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org). Keys that match no pool are omitted from the response.  If the request is successful, the response contains `usage_data`, one entry per pool:  - `key`: the entity the pool meters. - `usage`: questions consumed from the pool. - `warning_limit`: usage level at which users are warned. Absent when no warning is configured. - `limit`: maximum questions the pool allows. Absent when the pool is unlimited. - `updated_time_in_millis` and `updated_by`: when and by whom the pool was last configured.  #### Error conditions  - `401` — authentication token is missing, expired, or invalid. - `403` — the caller does not have `ADMINISTRATION` privilege.  > ###### Note: > > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. > - Use `getUsageDataForUser` to see the combined usage of a single user across every pool they draw from.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchUsageDataExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var searchUsageDataRequest = new SearchUsageDataRequest(); // SearchUsageDataRequest | 
+
+            try
+            {
+                UsageDataResponse result = apiInstance.SearchUsageData(searchUsageDataRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.SearchUsageData: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchUsageDataWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<UsageDataResponse> response = apiInstance.SearchUsageDataWithHttpInfo(searchUsageDataRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.SearchUsageDataWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **searchUsageDataRequest** | [**SearchUsageDataRequest**](SearchUsageDataRequest.md) |  |  |
+
+### Return type
+
+[**UsageDataResponse**](UsageDataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="sendagentconversationmessage"></a>
 # **SendAgentConversationMessage**
 > Object SendAgentConversationMessage (string conversationIdentifier, SendAgentConversationMessageRequest sendAgentConversationMessageRequest)
@@ -2033,6 +2444,208 @@ catch (ApiException e)
 ### Return type
 
 [**SendAgentMessageResponse**](SendAgentMessageResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="sendagentconversationmessagestreamingv2"></a>
+# **SendAgentConversationMessageStreamingV2**
+> AgentStreamFrame SendAgentConversationMessageStreamingV2 (SendAgentConversationMessageStreamingV2Request sendAgentConversationMessageStreamingV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Sends a message to Spotter and streams the response back as Server-Sent Events.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.  #### Usage guidelines  - `message` (required): the question to ask Spotter. - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the `x-conversation-identifier` response header, so a follow-up question can continue the same exchange.  Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.  #### Response format  Each event is a `data:` line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | - -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | `event`       | Text from Spotter — its reasoning or its answer.                    | | `tool_call`   | Spotter started a step, such as querying a data source.             | | `progress`    | A stage of a step in flight, so you can show what Spotter is doing. | | `tool_result` | A step finished; carries its result, including any answer produced. | | `error`       | The turn failed.                                                    | | `done`        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  ``` tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done ```  `tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.  Ignore any key you don't recognise — new event types may be added.  Lines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.  An event with content has the shape:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"partial\": true,     \"content\": {       \"role\": \"model\",       \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]     }   } } ```  - `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment. - `invocation_id` is stable for one turn; `id` identifies a single event.  #### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **`tool_call`** announces the step and the arguments it ran with:  ```json {   \"tool_call\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"args\": {       \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"english_query\": \"total sales by region last quarter\"     }   } } ```  **`progress`** reports each stage while the step runs:  ```json {   \"progress\": {     \"code\": \"ANSWER_GEN\",     \"message\": \"Verifying results with the Trust Layer\",     \"tool_call_id\": \"toolu_01AMjCrr\"   } } ```  `message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.  **`tool_result`** carries what the step produced:  ```json {   \"tool_result\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"is_error\": false,     \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",     \"answer\": {       \"title\": \"total sales by region last quarter\",       \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",       \"gen_no\": 2,       \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",       \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",       \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },       \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }     }   } } ```  - `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count. - `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted. - `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  `args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  #### End of turn  The stream ends with a terminal event:  ```json { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } } ```  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  `done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.  The `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the parameter.  #### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  ```json {   \"error\": {     \"code\": \"409\",     \"message\": \"session busy: lease held by invocation 7f3a\",     \"source\": \"transport\",     \"display_message\": \"Another request is still running in this conversation.\",     \"error_bucket\": \"RETRY\"   } } ```  Render `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.  A failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"error_code\": \"MALFORMED_FUNCTION_CALL\",     \"content\": { \"role\": \"model\", \"parts\": [] }   } } ```  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | - -- -- -- -- -- -- -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - | | `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            | | `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |  `error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                        | | - -- - | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - | | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is not a string.               | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation. | | 404  | Not found — no conversation with the given identifier exists for this user.                                        |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - The streaming protocol uses Server-Sent Events (SSE).      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SendAgentConversationMessageStreamingV2Example
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var sendAgentConversationMessageStreamingV2Request = new SendAgentConversationMessageStreamingV2Request(); // SendAgentConversationMessageStreamingV2Request | 
+
+            try
+            {
+                AgentStreamFrame result = apiInstance.SendAgentConversationMessageStreamingV2(sendAgentConversationMessageStreamingV2Request);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.SendAgentConversationMessageStreamingV2: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SendAgentConversationMessageStreamingV2WithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<AgentStreamFrame> response = apiInstance.SendAgentConversationMessageStreamingV2WithHttpInfo(sendAgentConversationMessageStreamingV2Request);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.SendAgentConversationMessageStreamingV2WithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **sendAgentConversationMessageStreamingV2Request** | [**SendAgentConversationMessageStreamingV2Request**](SendAgentConversationMessageStreamingV2Request.md) |  |  |
+
+### Return type
+
+[**AgentStreamFrame**](AgentStreamFrame.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="sendagentconversationmessagev2"></a>
+# **SendAgentConversationMessageV2**
+> AgentTurnResponse SendAgentConversationMessageV2 (SendAgentConversationMessageV2Request sendAgentConversationMessageV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Sends a message to Spotter and returns the complete response once the turn has finished.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreamingV2` instead.  #### Usage guidelines  - `message` (required): the question to ask Spotter. - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the `x-conversation-identifier` response header.  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.  #### Response format  ```json {   \"conversation_identifier\": \"5612260428840173568\",   \"events\": [     { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },     { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },     { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },     {       \"event\": {         \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }       }     },     { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }   ] } ```  `events` contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreamingV2` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.  To render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint's \"Errors during a turn\" section explains how the two differ.  #### Error responses  | Code | Description                                                                                                                                                     | | - -- - | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is empty or not a string.                                                   | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation.                                              | | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     | | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use `sendAgentConversationMessageStreamingV2` for questions that run long. |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SendAgentConversationMessageV2Example
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var sendAgentConversationMessageV2Request = new SendAgentConversationMessageV2Request(); // SendAgentConversationMessageV2Request | 
+
+            try
+            {
+                AgentTurnResponse result = apiInstance.SendAgentConversationMessageV2(sendAgentConversationMessageV2Request);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.SendAgentConversationMessageV2: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SendAgentConversationMessageV2WithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<AgentTurnResponse> response = apiInstance.SendAgentConversationMessageV2WithHttpInfo(sendAgentConversationMessageV2Request);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.SendAgentConversationMessageV2WithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **sendAgentConversationMessageV2Request** | [**SendAgentConversationMessageV2Request**](SendAgentConversationMessageV2Request.md) |  |  |
+
+### Return type
+
+[**AgentTurnResponse**](AgentTurnResponse.md)
 
 ### Authorization
 
@@ -3157,6 +3770,107 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Successfully updated the agent conversation. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updateusagedata"></a>
+# **UpdateUsageData**
+> UsageDataResponse UpdateUsageData (UpdateUsageDataRequest updateUsageDataRequest)
+
+
+
+ Creates or updates Spotter usage pools, setting the question allowance for a user, user group, or Org. A pool that does not exist is created; fields omitted from an update keep their current value. Every key must use the scope the cluster meters at. Switching scope requires deleting the existing pools first. Requires `ADMINISTRATION` privilege.   Version: 26.11.0.cl or later   Creates or updates Spotter usage pools. A usage pool sets how many Spotter questions a user, user group, or Org can ask. Use this API to provision limits for new users or groups, raise or lower an existing limit, or reset usage at the start of a billing period.  Requires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level `ADMINISTRATION`, cannot call this API.  #### Usage guidelines  The request must include `updates`, with at least one entry. Each entry contains:  - `key` (required): the pool to create or update, with an `entity_type` (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user or user group, or the ID of the Org). - `limit` (optional): maximum Spotter questions the pool allows. - `warning_limit` (optional): usage level at which users are warned that they are approaching the limit. - `usage` (optional): questions consumed so far. Set to `0` to reset the pool.  A pool that does not exist is created. Fields omitted from an entry keep their current value.  A cluster meters Spotter usage at exactly one scope. The first pool created sets the scope, and every later key must use the same `entity_type`. To switch scope, delete the existing pools with `deleteUsageData` first.  If the request is successful, the response contains `usage_data`, with each updated pool as it stands after the change.  #### Error conditions  - `400` — `updates` is empty, a key is missing its `entity_type` or `entity_identifier`, or a key uses a different `entity_type` from the cluster's existing pools. - `401` — authentication token is missing, expired, or invalid. - `403` — the caller does not have `ADMINISTRATION` privilege.  > ###### Note: > > - This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateUsageDataExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var updateUsageDataRequest = new UpdateUsageDataRequest(); // UpdateUsageDataRequest | 
+
+            try
+            {
+                UsageDataResponse result = apiInstance.UpdateUsageData(updateUsageDataRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.UpdateUsageData: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateUsageDataWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<UsageDataResponse> response = apiInstance.UpdateUsageDataWithHttpInfo(updateUsageDataRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.UpdateUsageDataWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **updateUsageDataRequest** | [**UpdateUsageDataRequest**](UpdateUsageDataRequest.md) |  |  |
+
+### Return type
+
+[**UsageDataResponse**](UsageDataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
 | **400** | Operation failed |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

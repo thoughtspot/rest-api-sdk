@@ -66,6 +66,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test CreateAgentConversationV2
+        /// </summary>
+        [Fact]
+        public void CreateAgentConversationV2Test()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateAgentConversationV2Request createAgentConversationV2Request = null;
+            //var response = instance.CreateAgentConversationV2(createAgentConversationV2Request);
+            //Assert.IsType<AgentConversationV2>(response);
+        }
+
+        /// <summary>
         /// Test CreateAnalyst
         /// </summary>
         [Fact]
@@ -110,6 +122,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string conversationIdentifier = null;
             //instance.DeleteConversation(conversationIdentifier);
+        }
+
+        /// <summary>
+        /// Test DeleteUsageData
+        /// </summary>
+        [Fact]
+        public void DeleteUsageDataTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //DeleteUsageDataRequest deleteUsageDataRequest = null;
+            //var response = instance.DeleteUsageData(deleteUsageDataRequest);
+            //Assert.IsType<DeleteUsageDataResponse>(response);
         }
 
         /// <summary>
@@ -222,6 +246,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test GetUsageDataForUser
+        /// </summary>
+        [Fact]
+        public void GetUsageDataForUserTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string? userIdentifier = null;
+            //var response = instance.GetUsageDataForUser(userIdentifier);
+            //Assert.IsType<UsageDataForUserResponse>(response);
+        }
+
+        /// <summary>
         /// Test ImportMemory
         /// </summary>
         [Fact]
@@ -271,6 +307,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test SearchUsageData
+        /// </summary>
+        [Fact]
+        public void SearchUsageDataTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchUsageDataRequest searchUsageDataRequest = null;
+            //var response = instance.SearchUsageData(searchUsageDataRequest);
+            //Assert.IsType<UsageDataResponse>(response);
+        }
+
+        /// <summary>
         /// Test SendAgentConversationMessage
         /// </summary>
         [Fact]
@@ -294,6 +342,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest = null;
             //var response = instance.SendAgentConversationMessageStreaming(conversationIdentifier, sendAgentConversationMessageStreamingRequest);
             //Assert.IsType<SendAgentMessageResponse>(response);
+        }
+
+        /// <summary>
+        /// Test SendAgentConversationMessageStreamingV2
+        /// </summary>
+        [Fact]
+        public void SendAgentConversationMessageStreamingV2Test()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SendAgentConversationMessageStreamingV2Request sendAgentConversationMessageStreamingV2Request = null;
+            //var response = instance.SendAgentConversationMessageStreamingV2(sendAgentConversationMessageStreamingV2Request);
+            //Assert.IsType<AgentStreamFrame>(response);
+        }
+
+        /// <summary>
+        /// Test SendAgentConversationMessageV2
+        /// </summary>
+        [Fact]
+        public void SendAgentConversationMessageV2Test()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SendAgentConversationMessageV2Request sendAgentConversationMessageV2Request = null;
+            //var response = instance.SendAgentConversationMessageV2(sendAgentConversationMessageV2Request);
+            //Assert.IsType<AgentTurnResponse>(response);
         }
 
         /// <summary>
@@ -429,6 +501,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string conversationIdentifier = null;
             //UpdateConversationRequest updateConversationRequest = null;
             //instance.UpdateConversation(conversationIdentifier, updateConversationRequest);
+        }
+
+        /// <summary>
+        /// Test UpdateUsageData
+        /// </summary>
+        [Fact]
+        public void UpdateUsageDataTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateUsageDataRequest updateUsageDataRequest = null;
+            //var response = instance.UpdateUsageData(updateUsageDataRequest);
+            //Assert.IsType<UsageDataResponse>(response);
         }
     }
 }

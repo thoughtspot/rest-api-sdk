@@ -1648,7 +1648,8 @@ class StyleCustomizationApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -1677,8 +1678,10 @@ class StyleCustomizationApi:
         :type operation: str
         :param reset_options: Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
         :type reset_options: StyleResetOptionsInput
-        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
         :type navigation_panel: NavigationPanelInput
+        :param app_color_theme: App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
+        :type app_color_theme: AppColorThemeInput
         :param chart_color_palette: Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
         :type chart_color_palette: StyleColorPaletteInput
         :param embedded_footer_text: Custom footer text for the embedded application. An empty string clears the footer.
@@ -1716,6 +1719,7 @@ class StyleCustomizationApi:
             operation=operation,
             reset_options=reset_options,
             navigation_panel=navigation_panel,
+            app_color_theme=app_color_theme,
             chart_color_palette=chart_color_palette,
             embedded_footer_text=embedded_footer_text,
             visualization_fonts=visualization_fonts,
@@ -1751,7 +1755,8 @@ class StyleCustomizationApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -1780,8 +1785,10 @@ class StyleCustomizationApi:
         :type operation: str
         :param reset_options: Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
         :type reset_options: StyleResetOptionsInput
-        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
         :type navigation_panel: NavigationPanelInput
+        :param app_color_theme: App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
+        :type app_color_theme: AppColorThemeInput
         :param chart_color_palette: Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
         :type chart_color_palette: StyleColorPaletteInput
         :param embedded_footer_text: Custom footer text for the embedded application. An empty string clears the footer.
@@ -1819,6 +1826,7 @@ class StyleCustomizationApi:
             operation=operation,
             reset_options=reset_options,
             navigation_panel=navigation_panel,
+            app_color_theme=app_color_theme,
             chart_color_palette=chart_color_palette,
             embedded_footer_text=embedded_footer_text,
             visualization_fonts=visualization_fonts,
@@ -1854,7 +1862,8 @@ class StyleCustomizationApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -1883,8 +1892,10 @@ class StyleCustomizationApi:
         :type operation: str
         :param reset_options: Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
         :type reset_options: StyleResetOptionsInput
-        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+        :param navigation_panel: Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
         :type navigation_panel: NavigationPanelInput
+        :param app_color_theme: App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
+        :type app_color_theme: AppColorThemeInput
         :param chart_color_palette: Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
         :type chart_color_palette: StyleColorPaletteInput
         :param embedded_footer_text: Custom footer text for the embedded application. An empty string clears the footer.
@@ -1922,6 +1933,7 @@ class StyleCustomizationApi:
             operation=operation,
             reset_options=reset_options,
             navigation_panel=navigation_panel,
+            app_color_theme=app_color_theme,
             chart_color_palette=chart_color_palette,
             embedded_footer_text=embedded_footer_text,
             visualization_fonts=visualization_fonts,
@@ -1953,7 +1965,8 @@ class StyleCustomizationApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -1983,6 +1996,7 @@ class StyleCustomizationApi:
                 operation=operation,
                 reset_options=reset_options,
                 navigation_panel=navigation_panel,
+                app_color_theme=app_color_theme,
                 chart_color_palette=chart_color_palette,
                 embedded_footer_text=embedded_footer_text,
                 visualization_fonts=visualization_fonts,
@@ -2003,7 +2017,8 @@ class StyleCustomizationApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -2033,6 +2048,7 @@ class StyleCustomizationApi:
                 operation=operation,
                 reset_options=reset_options,
                 navigation_panel=navigation_panel,
+                app_color_theme=app_color_theme,
                 chart_color_palette=chart_color_palette,
                 embedded_footer_text=embedded_footer_text,
                 visualization_fonts=visualization_fonts,
@@ -2053,7 +2069,8 @@ class StyleCustomizationApi:
         scope: Annotated[StrictStr, Field(description="Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org.")],
         operation: Annotated[Optional[StrictStr], Field(description="Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.")] = None,
         reset_options: Annotated[Optional[Any], Field(description="Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.")] = None,
-        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.")] = None,
+        navigation_panel: Annotated[Optional[Any], Field(description="Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.")] = None,
+        app_color_theme: Annotated[Optional[Any], Field(description="App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later ")] = None,
         chart_color_palette: Annotated[Optional[Any], Field(description="Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.")] = None,
         embedded_footer_text: Annotated[Optional[StrictStr], Field(description="Custom footer text for the embedded application. An empty string clears the footer.")] = None,
         visualization_fonts: Annotated[Optional[Any], Field(description="Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.")] = None,
@@ -2083,6 +2100,7 @@ class StyleCustomizationApi:
                 operation=operation,
                 reset_options=reset_options,
                 navigation_panel=navigation_panel,
+                app_color_theme=app_color_theme,
                 chart_color_palette=chart_color_palette,
                 embedded_footer_text=embedded_footer_text,
                 visualization_fonts=visualization_fonts,
@@ -2103,6 +2121,7 @@ class StyleCustomizationApi:
         operation,
         reset_options,
         navigation_panel,
+        app_color_theme,
         chart_color_palette,
         embedded_footer_text,
         visualization_fonts,
@@ -2140,6 +2159,8 @@ class StyleCustomizationApi:
             _form_params.append(('reset_options', reset_options))
         if navigation_panel is not None:
             _form_params.append(('navigation_panel', navigation_panel))
+        if app_color_theme is not None:
+            _form_params.append(('app_color_theme', app_color_theme))
         if chart_color_palette is not None:
             _form_params.append(('chart_color_palette', chart_color_palette))
         if embedded_footer_text is not None:

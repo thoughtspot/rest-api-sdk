@@ -100,6 +100,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'RoleIdentifiers'
+        /// </summary>
+        [Fact]
+        public void RoleIdentifiersTest()
+        {
+            // TODO unit test for the property 'RoleIdentifiers'
+        }
+
+        /// <summary>
         /// Test the property 'SubGroupIdentifiers'
         /// </summary>
         [Fact]

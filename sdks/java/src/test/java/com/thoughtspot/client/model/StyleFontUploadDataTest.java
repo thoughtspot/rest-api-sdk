@@ -4,27 +4,44 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for StyleFontUploadData */
+/**
+ * Model tests for StyleFontUploadData
+ */
 public class StyleFontUploadDataTest {
     private final StyleFontUploadData model = new StyleFontUploadData();
 
-    /** Model tests for StyleFontUploadData */
+    /**
+     * Model tests for StyleFontUploadData
+     */
     @Test
     public void testStyleFontUploadData() {
         // TODO: test StyleFontUploadData
     }
 
-    /** Test the property 'id' */
+    /**
+     * Test the property 'id'
+     */
     @Test
     public void idTest() {
         // TODO: test id
     }
 
-    /** Test the property 'name' */
+    /**
+     * Test the property 'name'
+     */
     @Test
     public void nameTest() {
         // TODO: test name
     }
+
 }

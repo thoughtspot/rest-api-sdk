@@ -1,112 +1,112 @@
-# API Changelog - 26.10.0.cl vs. 26.9
+# API Changelog - 26.12.0.cl vs. 26.11.0.cl
 
 
 ## API Changes
 
-### POST /api/rest/2.0/ai/agent/analysts/create
+### POST /api/rest/2.0/ai/agent/v2/conversation/create
 -  endpoint added
 
 
-### POST /api/rest/2.0/ai/agent/analysts/search
+### POST /api/rest/2.0/ai/agent/v2/conversation/send
 -  endpoint added
 
 
-### POST /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete
+### POST /api/rest/2.0/ai/agent/v2/conversation/send/stream
 -  endpoint added
 
 
-### POST /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/share
+### POST /api/rest/2.0/ai/usage-data/delete
 -  endpoint added
 
 
-### POST /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/update
+### POST /api/rest/2.0/ai/usage-data/search
 -  endpoint added
 
 
-### POST /api/rest/2.0/ai/agent/conversation/create
--  added the new optional request property `analyst_identifier`
--  the request property `metadata_context` became optional
--  added the optional property `analyst_id` to the response with the `200` status
--  added the optional property `analyst_id` to the response with the `201` status
+### POST /api/rest/2.0/ai/usage-data/update
+-  endpoint added
 
 
-### GET /api/rest/2.0/ai/agent/conversations
--  added the optional property `conversations/items/analyst_id` to the response with the `200` status
--  added the optional property `conversations/items/analyst_id` to the response with the `201` status
--  added the optional property `conversations/items/is_pinned` to the response with the `200` status
--  added the optional property `conversations/items/is_pinned` to the response with the `201` status
+### GET /api/rest/2.0/ai/usage-data/user
+-  endpoint added
 
 
-### POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/share
--  added the new optional request property `notify_on_share`
-
-
-### POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update
--  added the new optional request property `is_pinned`
-
-
-### POST /api/rest/2.0/auth/token/custom
--  added the new optional request property `scope`
--  added the optional property `scope` to the response with the `200` status
+### POST /api/rest/2.0/auth/session/login
+-  added the new optional request property `no_url_redirection`
+-  added the new optional request property `redirect_url`
+-  the response header `location` was added for the status `204`
+-  added the non-success response with the status `302`
 
 
 ### POST /api/rest/2.0/auth/token/full
--  added the new optional request property `scope`
--  added the optional property `scope/org_ids` to the response with the `200` status
--  added the optional property `scope/org_scope` to the response with the `200` status
+-  added the new optional request property `org_identifier`
+-  request property `org_id` deprecated
 
 
 ### POST /api/rest/2.0/auth/token/object
--  added the new optional request property `scope`
--  added the optional property `scope/org_ids` to the response with the `200` status
--  added the optional property `scope/org_scope` to the response with the `200` status
+-  added the new optional request property `org_identifier`
+-  request property `org_id` deprecated
 
 
-### POST /api/rest/2.0/auth/token/validate
--  added the optional property `scope/org_ids` to the response with the `200` status
--  added the optional property `scope/org_scope` to the response with the `200` status
+### POST /api/rest/2.0/customization/custom-actions
+-  endpoint deprecated
 
 
-### POST /api/rest/2.0/configurations/features/assignments/update
+### POST /api/rest/2.0/customization/custom-actions/search
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/styles/search
+-  added the optional property `items/app_color_theme` to the response with the `200` status
+
+
+### POST /api/rest/2.0/customization/styles/update
+-  added the new optional request property `app_color_theme`
+-  added the new `APP_COLOR_THEME` enum value to the request property `reset_options/allOf[#/components/schemas/StyleResetOptionsInput]/style/items/`
+
+
+### POST /api/rest/2.0/version-control/branch/promote
 -  endpoint added
 
 
-### POST /api/rest/2.0/configurations/features/search
+### POST /api/rest/2.0/version-control/commit
 -  endpoint added
 
 
-### POST /api/rest/2.0/configurations/features/values/update
+### POST /api/rest/2.0/version-control/commit/restore
 -  endpoint added
 
 
-### POST /api/rest/2.0/metadata/headers/update
--  added the new `ROLE` enum value to the request property `headers_update/items/type`
--  added the new `TEMPLATE_VARIABLE` enum value to the request property `headers_update/items/type`
+### POST /api/rest/2.0/version-control/config/create
+-  endpoint added
 
 
-### POST /api/rest/2.0/metadata/tml/export
--  added the new `TEMPLATE_VARIABLE` enum value to the request property `metadata/items/type`
+### POST /api/rest/2.0/version-control/config/delete
+-  endpoint added
 
 
-### POST /api/rest/2.0/metadata/update-obj-id
--  added the new `ROLE` enum value to the request property `metadata/items/type`
--  added the new `TEMPLATE_VARIABLE` enum value to the request property `metadata/items/type`
+### POST /api/rest/2.0/version-control/config/search
+-  endpoint added
 
 
-### POST /api/rest/2.0/semantic-integrations/create
--  added the new `RDBMS_DATABRICKS` enum value to the request property `type`
+### POST /api/rest/2.0/version-control/config/update
+-  endpoint added
 
 
-### POST /api/rest/2.0/semantic-integrations/search
-- :warning: added the new `RDBMS_DATABRICKS` enum value to the `items/type` response property for the response status `200`
+### POST /api/rest/2.0/version-control/deploy
+-  endpoint added
 
 
-### POST /api/rest/2.0/template/variables/create
--  added the optional property `obj_id` to the response with the `200` status
-
-
-### POST /api/rest/2.0/template/variables/search
--  added the optional property `items/obj_id` to the response with the `200` status
+### POST /api/rest/2.0/version-control/runs/search
+-  endpoint added
 
 
 

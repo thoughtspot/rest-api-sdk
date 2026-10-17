@@ -4,45 +4,69 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.SemanticIntegrationReport;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for SemanticIntegrationResponse */
+/**
+ * Model tests for SemanticIntegrationResponse
+ */
 public class SemanticIntegrationResponseTest {
     private final SemanticIntegrationResponse model = new SemanticIntegrationResponse();
 
-    /** Model tests for SemanticIntegrationResponse */
+    /**
+     * Model tests for SemanticIntegrationResponse
+     */
     @Test
     public void testSemanticIntegrationResponse() {
         // TODO: test SemanticIntegrationResponse
     }
 
-    /** Test the property 'id' */
+    /**
+     * Test the property 'id'
+     */
     @Test
     public void idTest() {
         // TODO: test id
     }
 
-    /** Test the property 'name' */
+    /**
+     * Test the property 'name'
+     */
     @Test
     public void nameTest() {
         // TODO: test name
     }
 
-    /** Test the property 'modelId' */
+    /**
+     * Test the property 'modelId'
+     */
     @Test
     public void modelIdTest() {
         // TODO: test modelId
     }
 
-    /** Test the property 'modelName' */
+    /**
+     * Test the property 'modelName'
+     */
     @Test
     public void modelNameTest() {
         // TODO: test modelName
     }
 
-    /** Test the property 'semanticReport' */
+    /**
+     * Test the property 'semanticReport'
+     */
     @Test
     public void semanticReportTest() {
         // TODO: test semanticReport
     }
+
 }

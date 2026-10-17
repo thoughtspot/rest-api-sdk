@@ -4,393 +4,365 @@
 
 package com.thoughtspot.client.model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import java.util.Objects;
 import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.thoughtspot.client.JSON;
+import com.thoughtspot.client.model.FeatureOrgInfo;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.io.Serializable;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Set;
 
-/** Response returned when a feature&#39;s Org assignments are updated. */
-@javax.annotation.Generated(
-        value = "org.openapitools.codegen.languages.JavaClientCodegen",
-        comments = "Generator version: 7.12.0")
+import com.thoughtspot.client.JSON;
+
+/**
+ * Response returned when a feature&#39;s Org assignments are updated.
+ */
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class FeatureAssignmentResponse implements Serializable {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    public static final String SERIALIZED_NAME_FEATURE_ID = "feature_id";
+  public static final String SERIALIZED_NAME_FEATURE_ID = "feature_id";
+  @SerializedName(SERIALIZED_NAME_FEATURE_ID)
+  @javax.annotation.Nonnull
+  private String featureId;
 
-    @SerializedName(SERIALIZED_NAME_FEATURE_ID)
-    @javax.annotation.Nonnull
-    private String featureId;
+  public static final String SERIALIZED_NAME_FEATURE_NAME = "feature_name";
+  @SerializedName(SERIALIZED_NAME_FEATURE_NAME)
+  @javax.annotation.Nullable
+  private String featureName;
 
-    public static final String SERIALIZED_NAME_FEATURE_NAME = "feature_name";
+  public static final String SERIALIZED_NAME_ASSIGNED_ORGS = "assigned_orgs";
+  @SerializedName(SERIALIZED_NAME_ASSIGNED_ORGS)
+  @javax.annotation.Nonnull
+  private List<FeatureOrgInfo> assignedOrgs;
 
-    @SerializedName(SERIALIZED_NAME_FEATURE_NAME)
-    @javax.annotation.Nullable
-    private String featureName;
+  public FeatureAssignmentResponse() {
+  }
 
-    public static final String SERIALIZED_NAME_ASSIGNED_ORGS = "assigned_orgs";
+  public FeatureAssignmentResponse featureId(@javax.annotation.Nonnull String featureId) {
+    this.featureId = featureId;
+    return this;
+  }
 
-    @SerializedName(SERIALIZED_NAME_ASSIGNED_ORGS)
-    @javax.annotation.Nonnull
-    private List<FeatureOrgInfo> assignedOrgs;
+  /**
+   * Underlying unique feature ID. The dotted-path format (for example, &#x60;orion.embraceConfig.doIndexing&#x60;) is internal and subject to change without notice; use &#x60;feature_name&#x60; as the stable display identifier where possible.
+   * @return featureId
+   */
+  @javax.annotation.Nonnull
+  public String getFeatureId() {
+    return featureId;
+  }
 
-    public FeatureAssignmentResponse() {}
+  public void setFeatureId(@javax.annotation.Nonnull String featureId) {
+    this.featureId = featureId;
+  }
 
-    public FeatureAssignmentResponse featureId(@javax.annotation.Nonnull String featureId) {
-        this.featureId = featureId;
-        return this;
+
+  public FeatureAssignmentResponse featureName(@javax.annotation.Nullable String featureName) {
+    this.featureName = featureName;
+    return this;
+  }
+
+  /**
+   * User-friendly feature name. Present when the feature declares one.
+   * @return featureName
+   */
+  @javax.annotation.Nullable
+  public String getFeatureName() {
+    return featureName;
+  }
+
+  public void setFeatureName(@javax.annotation.Nullable String featureName) {
+    this.featureName = featureName;
+  }
+
+
+  public FeatureAssignmentResponse assignedOrgs(@javax.annotation.Nonnull List<FeatureOrgInfo> assignedOrgs) {
+    this.assignedOrgs = assignedOrgs;
+    return this;
+  }
+
+  public FeatureAssignmentResponse addAssignedOrgsItem(FeatureOrgInfo assignedOrgsItem) {
+    if (this.assignedOrgs == null) {
+      this.assignedOrgs = new ArrayList<>();
     }
+    this.assignedOrgs.add(assignedOrgsItem);
+    return this;
+  }
 
-    /**
-     * Underlying unique feature ID. The dotted-path format (for example,
-     * &#x60;orion.embraceConfig.doIndexing&#x60;) is internal and subject to change without notice;
-     * use &#x60;feature_name&#x60; as the stable display identifier where possible.
-     *
-     * @return featureId
-     */
-    @javax.annotation.Nonnull
-    public String getFeatureId() {
-        return featureId;
+  /**
+   * Updated set of Orgs assigned to the feature.
+   * @return assignedOrgs
+   */
+  @javax.annotation.Nonnull
+  public List<FeatureOrgInfo> getAssignedOrgs() {
+    return assignedOrgs;
+  }
+
+  public void setAssignedOrgs(@javax.annotation.Nonnull List<FeatureOrgInfo> assignedOrgs) {
+    this.assignedOrgs = assignedOrgs;
+  }
+
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   *
+   * @param key name of the property
+   * @param value value of the property
+   * @return the FeatureAssignmentResponse instance itself
+   */
+  public FeatureAssignmentResponse putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
     }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
 
-    public void setFeatureId(@javax.annotation.Nonnull String featureId) {
-        this.featureId = featureId;
+  /**
+   * Return the additional (undeclared) property.
+   *
+   * @return a map of objects
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   *
+   * @param key name of the property
+   * @return an object
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
     }
+    return this.additionalProperties.get(key);
+  }
 
-    public FeatureAssignmentResponse featureName(@javax.annotation.Nullable String featureName) {
-        this.featureName = featureName;
-        return this;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-
-    /**
-     * User-friendly feature name. Present when the feature declares one.
-     *
-     * @return featureName
-     */
-    @javax.annotation.Nullable
-    public String getFeatureName() {
-        return featureName;
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
+    FeatureAssignmentResponse featureAssignmentResponse = (FeatureAssignmentResponse) o;
+    return Objects.equals(this.featureId, featureAssignmentResponse.featureId) &&
+        Objects.equals(this.featureName, featureAssignmentResponse.featureName) &&
+        Objects.equals(this.assignedOrgs, featureAssignmentResponse.assignedOrgs)&&
+        Objects.equals(this.additionalProperties, featureAssignmentResponse.additionalProperties);
+  }
 
-    public void setFeatureName(@javax.annotation.Nullable String featureName) {
-        this.featureName = featureName;
+  @Override
+  public int hashCode() {
+    return Objects.hash(featureId, featureName, assignedOrgs, additionalProperties);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class FeatureAssignmentResponse {\n");
+    sb.append("    featureId: ").append(toIndentedString(featureId)).append("\n");
+    sb.append("    featureName: ").append(toIndentedString(featureName)).append("\n");
+    sb.append("    assignedOrgs: ").append(toIndentedString(assignedOrgs)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
     }
+    return o.toString().replace("\n", "\n    ");
+  }
 
-    public FeatureAssignmentResponse assignedOrgs(
-            @javax.annotation.Nonnull List<FeatureOrgInfo> assignedOrgs) {
-        this.assignedOrgs = assignedOrgs;
-        return this;
-    }
 
-    public FeatureAssignmentResponse addAssignedOrgsItem(FeatureOrgInfo assignedOrgsItem) {
-        if (this.assignedOrgs == null) {
-            this.assignedOrgs = new ArrayList<>();
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("feature_id");
+    openapiFields.add("feature_name");
+    openapiFields.add("assigned_orgs");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("feature_id");
+    openapiRequiredFields.add("assigned_orgs");
+  }
+
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to FeatureAssignmentResponse
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!FeatureAssignmentResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in FeatureAssignmentResponse is not found in the empty JSON string", FeatureAssignmentResponse.openapiRequiredFields.toString()));
         }
-        this.assignedOrgs.add(assignedOrgsItem);
-        return this;
-    }
+      }
 
-    /**
-     * Updated set of Orgs assigned to the feature.
-     *
-     * @return assignedOrgs
-     */
-    @javax.annotation.Nonnull
-    public List<FeatureOrgInfo> getAssignedOrgs() {
-        return assignedOrgs;
-    }
-
-    public void setAssignedOrgs(@javax.annotation.Nonnull List<FeatureOrgInfo> assignedOrgs) {
-        this.assignedOrgs = assignedOrgs;
-    }
-
-    /**
-     * A container for additional, undeclared properties. This is a holder for any undeclared
-     * properties as specified with the 'additionalProperties' keyword in the OAS document.
-     */
-    private Map<String, Object> additionalProperties;
-
-    /**
-     * Set the additional (undeclared) property with the specified name and value. If the property
-     * does not already exist, create it otherwise replace it.
-     *
-     * @param key name of the property
-     * @param value value of the property
-     * @return the FeatureAssignmentResponse instance itself
-     */
-    public FeatureAssignmentResponse putAdditionalProperty(String key, Object value) {
-        if (this.additionalProperties == null) {
-            this.additionalProperties = new HashMap<String, Object>();
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : FeatureAssignmentResponse.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
-        this.additionalProperties.put(key, value);
-        return this;
-    }
-
-    /**
-     * Return the additional (undeclared) property.
-     *
-     * @return a map of objects
-     */
-    public Map<String, Object> getAdditionalProperties() {
-        return additionalProperties;
-    }
-
-    /**
-     * Return the additional (undeclared) property with the specified name.
-     *
-     * @param key name of the property
-     * @return an object
-     */
-    public Object getAdditionalProperty(String key) {
-        if (this.additionalProperties == null) {
-            return null;
-        }
-        return this.additionalProperties.get(key);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FeatureAssignmentResponse featureAssignmentResponse = (FeatureAssignmentResponse) o;
-        return Objects.equals(this.featureId, featureAssignmentResponse.featureId)
-                && Objects.equals(this.featureName, featureAssignmentResponse.featureName)
-                && Objects.equals(this.assignedOrgs, featureAssignmentResponse.assignedOrgs)
-                && Objects.equals(
-                        this.additionalProperties, featureAssignmentResponse.additionalProperties);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(featureId, featureName, assignedOrgs, additionalProperties);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class FeatureAssignmentResponse {\n");
-        sb.append("    featureId: ").append(toIndentedString(featureId)).append("\n");
-        sb.append("    featureName: ").append(toIndentedString(featureName)).append("\n");
-        sb.append("    assignedOrgs: ").append(toIndentedString(assignedOrgs)).append("\n");
-        sb.append("    additionalProperties: ")
-                .append(toIndentedString(additionalProperties))
-                .append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces (except the first
-     * line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
-
-    public static HashSet<String> openapiFields;
-    public static HashSet<String> openapiRequiredFields;
-
-    static {
-        // a set of all properties/fields (JSON key names)
-        openapiFields = new HashSet<String>();
-        openapiFields.add("feature_id");
-        openapiFields.add("feature_name");
-        openapiFields.add("assigned_orgs");
-
-        // a set of required properties/fields (JSON key names)
-        openapiRequiredFields = new HashSet<String>();
-        openapiRequiredFields.add("feature_id");
-        openapiRequiredFields.add("assigned_orgs");
-    }
-
-    /**
-     * Validates the JSON Element and throws an exception if issues found
-     *
-     * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to FeatureAssignmentResponse
-     */
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-        if (jsonElement == null) {
-            if (!FeatureAssignmentResponse.openapiRequiredFields
-                    .isEmpty()) { // has required fields but JSON element is null
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field(s) %s in FeatureAssignmentResponse is not"
-                                        + " found in the empty JSON string",
-                                FeatureAssignmentResponse.openapiRequiredFields.toString()));
-            }
-        }
-
-        // check to make sure all required properties/fields are present in the JSON string
-        for (String requiredField : FeatureAssignmentResponse.openapiRequiredFields) {
-            if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The required field `%s` is not found in the JSON string: %s",
-                                requiredField, jsonElement.toString()));
-            }
-        }
+      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-        if (!jsonObj.get("feature_id").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `feature_id` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("feature_id").toString()));
-        }
-        if ((jsonObj.get("feature_name") != null && !jsonObj.get("feature_name").isJsonNull())
-                && !jsonObj.get("feature_name").isJsonPrimitive()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `feature_name` to be a primitive type in the JSON"
-                                    + " string but got `%s`",
-                            jsonObj.get("feature_name").toString()));
-        }
-        // ensure the json data is an array
-        if (!jsonObj.get("assigned_orgs").isJsonArray()) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Expected the field `assigned_orgs` to be an array in the JSON string"
-                                    + " but got `%s`",
-                            jsonObj.get("assigned_orgs").toString()));
-        }
+      if (!jsonObj.get("feature_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `feature_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("feature_id").toString()));
+      }
+      if ((jsonObj.get("feature_name") != null && !jsonObj.get("feature_name").isJsonNull()) && !jsonObj.get("feature_name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `feature_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("feature_name").toString()));
+      }
+      // ensure the json data is an array
+      if (!jsonObj.get("assigned_orgs").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `assigned_orgs` to be an array in the JSON string but got `%s`", jsonObj.get("assigned_orgs").toString()));
+      }
 
-        JsonArray jsonArrayassignedOrgs = jsonObj.getAsJsonArray("assigned_orgs");
-        // validate the required field `assigned_orgs` (array)
-        for (int i = 0; i < jsonArrayassignedOrgs.size(); i++) {
-            FeatureOrgInfo.validateJsonElement(jsonArrayassignedOrgs.get(i));
-        }
-        ;
+      JsonArray jsonArrayassignedOrgs = jsonObj.getAsJsonArray("assigned_orgs");
+      // validate the required field `assigned_orgs` (array)
+      for (int i = 0; i < jsonArrayassignedOrgs.size(); i++) {
+        FeatureOrgInfo.validateJsonElement(jsonArrayassignedOrgs.get(i));
+      };
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!FeatureAssignmentResponse.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'FeatureAssignmentResponse' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<FeatureAssignmentResponse> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(FeatureAssignmentResponse.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<FeatureAssignmentResponse>() {
+           @Override
+           public void write(JsonWriter out, FeatureAssignmentResponse value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additional properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                   if (jsonElement.isJsonArray()) {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                   } else {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                   }
+                 }
+               }
+             }
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public FeatureAssignmentResponse read(JsonReader in) throws IOException {
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             // store additional fields in the deserialized instance
+             FeatureAssignmentResponse instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else if (entry.getValue().isJsonArray()) {
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), List.class));
+                 } else { // JSON object
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), HashMap.class));
+                 }
+               }
+             }
+             return instance;
+           }
+
+       }.nullSafe();
     }
+  }
 
-    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-        @SuppressWarnings("unchecked")
-        @Override
-        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!FeatureAssignmentResponse.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'FeatureAssignmentResponse' and its
-                // subtypes
-            }
-            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<FeatureAssignmentResponse> thisAdapter =
-                    gson.getDelegateAdapter(this, TypeToken.get(FeatureAssignmentResponse.class));
+  /**
+   * Create an instance of FeatureAssignmentResponse given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of FeatureAssignmentResponse
+   * @throws IOException if the JSON string is invalid with respect to FeatureAssignmentResponse
+   */
+  public static FeatureAssignmentResponse fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, FeatureAssignmentResponse.class);
+  }
 
-            return (TypeAdapter<T>)
-                    new TypeAdapter<FeatureAssignmentResponse>() {
-                        @Override
-                        public void write(JsonWriter out, FeatureAssignmentResponse value)
-                                throws IOException {
-                            JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-                            obj.remove("additionalProperties");
-                            // serialize additional properties
-                            if (value.getAdditionalProperties() != null) {
-                                for (Map.Entry<String, Object> entry :
-                                        value.getAdditionalProperties().entrySet()) {
-                                    if (entry.getValue() instanceof String)
-                                        obj.addProperty(entry.getKey(), (String) entry.getValue());
-                                    else if (entry.getValue() instanceof Number)
-                                        obj.addProperty(entry.getKey(), (Number) entry.getValue());
-                                    else if (entry.getValue() instanceof Boolean)
-                                        obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
-                                    else if (entry.getValue() instanceof Character)
-                                        obj.addProperty(
-                                                entry.getKey(), (Character) entry.getValue());
-                                    else {
-                                        JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-                                        if (jsonElement.isJsonArray()) {
-                                            obj.add(entry.getKey(), jsonElement.getAsJsonArray());
-                                        } else {
-                                            obj.add(entry.getKey(), jsonElement.getAsJsonObject());
-                                        }
-                                    }
-                                }
-                            }
-                            elementAdapter.write(out, obj);
-                        }
-
-                        @Override
-                        public FeatureAssignmentResponse read(JsonReader in) throws IOException {
-                            JsonElement jsonElement = elementAdapter.read(in);
-                            validateJsonElement(jsonElement);
-                            JsonObject jsonObj = jsonElement.getAsJsonObject();
-                            // store additional fields in the deserialized instance
-                            FeatureAssignmentResponse instance = thisAdapter.fromJsonTree(jsonObj);
-                            for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
-                                if (!openapiFields.contains(entry.getKey())) {
-                                    if (entry.getValue().isJsonPrimitive()) { // primitive type
-                                        if (entry.getValue().getAsJsonPrimitive().isString())
-                                            instance.putAdditionalProperty(
-                                                    entry.getKey(), entry.getValue().getAsString());
-                                        else if (entry.getValue().getAsJsonPrimitive().isNumber())
-                                            instance.putAdditionalProperty(
-                                                    entry.getKey(), entry.getValue().getAsNumber());
-                                        else if (entry.getValue().getAsJsonPrimitive().isBoolean())
-                                            instance.putAdditionalProperty(
-                                                    entry.getKey(),
-                                                    entry.getValue().getAsBoolean());
-                                        else
-                                            throw new IllegalArgumentException(
-                                                    String.format(
-                                                            "The field `%s` has unknown primitive"
-                                                                    + " type. Value: %s",
-                                                            entry.getKey(),
-                                                            entry.getValue().toString()));
-                                    } else if (entry.getValue().isJsonArray()) {
-                                        instance.putAdditionalProperty(
-                                                entry.getKey(),
-                                                gson.fromJson(entry.getValue(), List.class));
-                                    } else { // JSON object
-                                        instance.putAdditionalProperty(
-                                                entry.getKey(),
-                                                gson.fromJson(entry.getValue(), HashMap.class));
-                                    }
-                                }
-                            }
-                            return instance;
-                        }
-                    }.nullSafe();
-        }
-    }
-
-    /**
-     * Create an instance of FeatureAssignmentResponse given an JSON string
-     *
-     * @param jsonString JSON string
-     * @return An instance of FeatureAssignmentResponse
-     * @throws IOException if the JSON string is invalid with respect to FeatureAssignmentResponse
-     */
-    public static FeatureAssignmentResponse fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, FeatureAssignmentResponse.class);
-    }
-
-    /**
-     * Convert an instance of FeatureAssignmentResponse to an JSON string
-     *
-     * @return JSON string
-     */
-    public String toJson() {
-        return JSON.getGson().toJson(this);
-    }
+  /**
+   * Convert an instance of FeatureAssignmentResponse to an JSON string
+   *
+   * @return JSON string
+   */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
+

@@ -58,7 +58,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="acceptLanguage">The supported accept language by the cluster..</param>
         /// <param name="allUserGroupMemberUserCount">The count of users of ALL group..</param>
         /// <param name="logicalModelVersion">The version number of logical model of the cluster..</param>
-        public SystemInfo(string id = default, string name = default, string releaseVersion = default, string varTimeZone = default, string locale = default, string dateFormat = default, string apiVersion = default, string type = default, string varEnvironment = default, string license = default, string dateTimeFormat = default, string timeFormat = default, string systemUserId = default, string superUserId = default, string hiddenObjectId = default, string systemGroupId = default, string tsadminUserId = default, string adminGroupId = default, string allTablesConnectionId = default, string allUserGroupId = default, string acceptLanguage = default, int? allUserGroupMemberUserCount = default, int? logicalModelVersion = default)
+        /// <param name="maintenanceSchedule">maintenanceSchedule.</param>
+        public SystemInfo(string id = default, string name = default, string releaseVersion = default, string varTimeZone = default, string locale = default, string dateFormat = default, string apiVersion = default, string type = default, string varEnvironment = default, string license = default, string dateTimeFormat = default, string timeFormat = default, string systemUserId = default, string superUserId = default, string hiddenObjectId = default, string systemGroupId = default, string tsadminUserId = default, string adminGroupId = default, string allTablesConnectionId = default, string allUserGroupId = default, string acceptLanguage = default, int? allUserGroupMemberUserCount = default, int? logicalModelVersion = default, MaintenanceScheduleInfo maintenanceSchedule = default)
         {
             this.Id = id;
             this.Name = name;
@@ -83,6 +84,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.AcceptLanguage = acceptLanguage;
             this.AllUserGroupMemberUserCount = allUserGroupMemberUserCount;
             this.LogicalModelVersion = logicalModelVersion;
+            this.MaintenanceSchedule = maintenanceSchedule;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -248,6 +250,12 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public int? LogicalModelVersion { get; set; }
 
         /// <summary>
+        /// Gets or Sets MaintenanceSchedule
+        /// </summary>
+        [DataMember(Name = "maintenance_schedule", EmitDefaultValue = false)]
+        public MaintenanceScheduleInfo MaintenanceSchedule { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -284,6 +292,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  AcceptLanguage: ").Append(AcceptLanguage).Append("\n");
             sb.Append("  AllUserGroupMemberUserCount: ").Append(AllUserGroupMemberUserCount).Append("\n");
             sb.Append("  LogicalModelVersion: ").Append(LogicalModelVersion).Append("\n");
+            sb.Append("  MaintenanceSchedule: ").Append(MaintenanceSchedule).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

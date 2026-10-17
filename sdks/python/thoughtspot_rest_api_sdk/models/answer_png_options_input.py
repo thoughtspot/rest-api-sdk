@@ -25,9 +25,9 @@ class AnswerPngOptionsInput(BaseModel):
     """
     AnswerPngOptionsInput
     """ # noqa: E501
-    x_resolution: Optional[StrictInt] = Field(default=None, description="Desired width of the answer image in pixels. Ex. 1920 for Full HD image   Version: 26.6.0.cl or later ")
-    y_resolution: Optional[StrictInt] = Field(default=None, description="Desired height of the answer image in pixels. Ex. 1080 for Full HD image   Version: 26.6.0.cl or later ")
-    scaling: Optional[StrictInt] = Field(default=None, description="The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 26.6.0.cl or later ")
+    x_resolution: Optional[StrictInt] = Field(default=None, description="Desired width of the answer image in pixels. Ex. 1920 for Full HD image    Version: 26.6.0.cl or later ")
+    y_resolution: Optional[StrictInt] = Field(default=None, description="Desired height of the answer image in pixels. Ex. 1080 for Full HD image    Version: 26.6.0.cl or later ")
+    scaling: Optional[StrictInt] = Field(default=None, description="The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 26.6.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["x_resolution", "y_resolution", "scaling"]
 

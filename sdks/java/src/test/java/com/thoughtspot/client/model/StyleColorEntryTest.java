@@ -4,27 +4,46 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for StyleColorEntry */
+/**
+ * Model tests for StyleColorEntry
+ */
 public class StyleColorEntryTest {
     private final StyleColorEntry model = new StyleColorEntry();
 
-    /** Model tests for StyleColorEntry */
+    /**
+     * Model tests for StyleColorEntry
+     */
     @Test
     public void testStyleColorEntry() {
         // TODO: test StyleColorEntry
     }
 
-    /** Test the property 'primary' */
+    /**
+     * Test the property 'primary'
+     */
     @Test
     public void primaryTest() {
         // TODO: test primary
     }
 
-    /** Test the property 'secondary' */
+    /**
+     * Test the property 'secondary'
+     */
     @Test
     public void secondaryTest() {
         // TODO: test secondary
     }
+
 }

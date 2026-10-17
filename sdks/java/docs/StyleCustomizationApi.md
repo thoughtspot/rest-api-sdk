@@ -160,7 +160,7 @@ All URIs are relative to *CLUSTER_URL*
 
 <a id="updateStyleCustomization"></a>
 # **updateStyleCustomization**
-> updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo)
+> updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo)
 
 
 
@@ -174,6 +174,7 @@ All URIs are relative to *CLUSTER_URL*
 | **operation** | **String**
 | **resetOptions** | [**StyleResetOptionsInput**](StyleResetOptionsInput.md)
 | **navigationPanel** | [**NavigationPanelInput**](NavigationPanelInput.md)
+| **appColorTheme** | [**AppColorThemeInput**](AppColorThemeInput.md)
 | **chartColorPalette** | [**StyleColorPaletteInput**](StyleColorPaletteInput.md)
 | **embeddedFooterText** | **String**
 | **visualizationFonts** | [**VisualizationFontsInput**](VisualizationFontsInput.md)

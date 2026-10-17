@@ -8,6 +8,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
+import { AppColorThemeInput } from '../models/AppColorThemeInput';
 import { DeleteStyleFontsRequest } from '../models/DeleteStyleFontsRequest';
 import { ErrorResponse } from '../models/ErrorResponse';
 import { ExportStyleLogosRequest } from '../models/ExportStyleLogosRequest';
@@ -47,8 +48,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
 
         // Body Params
@@ -98,8 +99,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
         // Header Params
         requestContext.setHeaderParam("Accept", ObjectSerializer.serialize(accept, "'application/zip'", ""));
@@ -150,8 +151,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
 
         // Body Params
@@ -199,8 +200,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
 
         // Body Params
@@ -234,14 +235,15 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
      * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user\\\&#39;s org.
      * @param operation Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults.
      * @param resetOptions Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults.
-     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color.
+     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color.
+     * @param appColorTheme App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later 
      * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors.
      * @param embeddedFooterText Custom footer text for the embedded application. An empty string clears the footer.
      * @param visualizationFonts Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged.
      * @param defaultLogo Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG.
      * @param wideLogo Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG.
      */
-    public async updateStyleCustomization(scope: string, operation?: string, resetOptions?: StyleResetOptionsInput, navigationPanel?: NavigationPanelInput, chartColorPalette?: StyleColorPaletteInput, embeddedFooterText?: string, visualizationFonts?: VisualizationFontsInput, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<RequestContext> {
+    public async updateStyleCustomization(scope: string, operation?: string, resetOptions?: StyleResetOptionsInput, navigationPanel?: NavigationPanelInput, appColorTheme?: AppColorThemeInput, chartColorPalette?: StyleColorPaletteInput, embeddedFooterText?: string, visualizationFonts?: VisualizationFontsInput, defaultLogo?: HttpFile, wideLogo?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'scope' is not null or undefined
@@ -258,14 +260,15 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
+
         // Path Params
         const localVarPath = '/api/rest/2.0/customization/styles/update';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
         // Form Params
         const useForm = canConsumeForm([
@@ -300,6 +303,13 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
              // spec — serialize as a JSON string (the generator does not honor
              // multipart `encoding.contentType`, and the backend parses JSON here).
              localVarFormParams.append('navigation_panel', JSON.stringify(navigationPanel));
+        }
+        if (appColorTheme !== undefined) {
+             // TODO: replace .append with .set
+             // Object form field declared with encoding: application/json in the
+             // spec — serialize as a JSON string (the generator does not honor
+             // multipart `encoding.contentType`, and the backend parses JSON here).
+             localVarFormParams.append('app_color_theme', JSON.stringify(appColorTheme));
         }
         if (chartColorPalette !== undefined) {
              // TODO: replace .append with .set
@@ -383,8 +393,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
 
         // Body Params
@@ -447,8 +457,8 @@ export class StyleCustomizationApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.29.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.29.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.31.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.31.0")
 
         // Form Params
         const useForm = canConsumeForm([

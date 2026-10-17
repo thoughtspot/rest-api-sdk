@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from thoughtspot_rest_api_sdk.models.style_app_color_theme import StyleAppColorTheme
 from thoughtspot_rest_api_sdk.models.style_chart_color_palette import StyleChartColorPalette
 from thoughtspot_rest_api_sdk.models.style_embedded_footer_text import StyleEmbeddedFooterText
 from thoughtspot_rest_api_sdk.models.style_logo_status import StyleLogoStatus
@@ -34,12 +35,13 @@ class StylePreference(BaseModel):
     scope: Optional[StrictStr] = Field(default=None, description="Scope at which these style preferences apply.")
     org: Optional[StyleOrgInfo] = None
     navigation_panel: Optional[StyleNavigationPanel] = None
+    app_color_theme: Optional[StyleAppColorTheme] = None
     chart_color_palette: Optional[StyleChartColorPalette] = None
     embedded_footer_text: Optional[StyleEmbeddedFooterText] = None
     logo: Optional[StyleLogoStatus] = None
     visualization_fonts: Optional[StyleVisualizationFonts] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["scope", "org", "navigation_panel", "chart_color_palette", "embedded_footer_text", "logo", "visualization_fonts"]
+    __properties: ClassVar[List[str]] = ["scope", "org", "navigation_panel", "app_color_theme", "chart_color_palette", "embedded_footer_text", "logo", "visualization_fonts"]
 
     @field_validator('scope')
     def scope_validate_enum(cls, value):
@@ -98,6 +100,9 @@ class StylePreference(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of navigation_panel
         if self.navigation_panel:
             _dict['navigation_panel'] = self.navigation_panel.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of app_color_theme
+        if self.app_color_theme:
+            _dict['app_color_theme'] = self.app_color_theme.to_dict()
         # override the default output from pydantic by calling `to_dict()` of chart_color_palette
         if self.chart_color_palette:
             _dict['chart_color_palette'] = self.chart_color_palette.to_dict()
@@ -135,6 +140,7 @@ class StylePreference(BaseModel):
             "scope": obj.get("scope"),
             "org": StyleOrgInfo.from_dict(obj["org"]) if obj.get("org") is not None else None,
             "navigation_panel": StyleNavigationPanel.from_dict(obj["navigation_panel"]) if obj.get("navigation_panel") is not None else None,
+            "app_color_theme": StyleAppColorTheme.from_dict(obj["app_color_theme"]) if obj.get("app_color_theme") is not None else None,
             "chart_color_palette": StyleChartColorPalette.from_dict(obj["chart_color_palette"]) if obj.get("chart_color_palette") is not None else None,
             "embedded_footer_text": StyleEmbeddedFooterText.from_dict(obj["embedded_footer_text"]) if obj.get("embedded_footer_text") is not None else None,
             "logo": StyleLogoStatus.from_dict(obj["logo"]) if obj.get("logo") is not None else None,

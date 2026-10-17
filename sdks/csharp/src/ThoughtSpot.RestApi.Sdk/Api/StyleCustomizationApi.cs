@@ -123,14 +123,15 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="scope">Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org.</param>
         /// <param name="operation">Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)</param>
         /// <param name="resetOptions">Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)</param>
-        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)</param>
+        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional)</param>
+        /// <param name="appColorTheme">App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)</param>
         /// <param name="chartColorPalette">Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)</param>
         /// <param name="embeddedFooterText">Custom footer text for the embedded application. An empty string clears the footer. (optional)</param>
         /// <param name="visualizationFonts">Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)</param>
         /// <param name="defaultLogo">Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <param name="wideLogo">Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <returns></returns>
-        void UpdateStyleCustomization(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?));
+        void UpdateStyleCustomization(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), AppColorThemeInput? appColorTheme = default(AppColorThemeInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?));
 
         /// <summary>
         /// 
@@ -142,14 +143,15 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="scope">Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org.</param>
         /// <param name="operation">Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)</param>
         /// <param name="resetOptions">Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)</param>
-        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)</param>
+        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional)</param>
+        /// <param name="appColorTheme">App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)</param>
         /// <param name="chartColorPalette">Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)</param>
         /// <param name="embeddedFooterText">Custom footer text for the embedded application. An empty string clears the footer. (optional)</param>
         /// <param name="visualizationFonts">Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)</param>
         /// <param name="defaultLogo">Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <param name="wideLogo">Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> UpdateStyleCustomizationWithHttpInfo(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?));
+        ApiResponse<Object> UpdateStyleCustomizationWithHttpInfo(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), AppColorThemeInput? appColorTheme = default(AppColorThemeInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?));
         /// <summary>
         /// 
         /// </summary>
@@ -317,7 +319,8 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="scope">Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org.</param>
         /// <param name="operation">Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)</param>
         /// <param name="resetOptions">Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)</param>
-        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)</param>
+        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional)</param>
+        /// <param name="appColorTheme">App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)</param>
         /// <param name="chartColorPalette">Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)</param>
         /// <param name="embeddedFooterText">Custom footer text for the embedded application. An empty string clears the footer. (optional)</param>
         /// <param name="visualizationFonts">Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)</param>
@@ -325,7 +328,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="wideLogo">Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task UpdateStyleCustomizationAsync(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task UpdateStyleCustomizationAsync(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), AppColorThemeInput? appColorTheme = default(AppColorThemeInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// 
@@ -337,7 +340,8 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="scope">Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org.</param>
         /// <param name="operation">Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)</param>
         /// <param name="resetOptions">Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)</param>
-        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)</param>
+        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional)</param>
+        /// <param name="appColorTheme">App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)</param>
         /// <param name="chartColorPalette">Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)</param>
         /// <param name="embeddedFooterText">Custom footer text for the embedded application. An empty string clears the footer. (optional)</param>
         /// <param name="visualizationFonts">Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)</param>
@@ -345,7 +349,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="wideLogo">Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> UpdateStyleCustomizationWithHttpInfoAsync(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> UpdateStyleCustomizationWithHttpInfoAsync(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), AppColorThemeInput? appColorTheme = default(AppColorThemeInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -1495,16 +1499,17 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="scope">Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org.</param>
         /// <param name="operation">Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)</param>
         /// <param name="resetOptions">Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)</param>
-        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)</param>
+        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional)</param>
+        /// <param name="appColorTheme">App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)</param>
         /// <param name="chartColorPalette">Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)</param>
         /// <param name="embeddedFooterText">Custom footer text for the embedded application. An empty string clears the footer. (optional)</param>
         /// <param name="visualizationFonts">Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)</param>
         /// <param name="defaultLogo">Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <param name="wideLogo">Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <returns></returns>
-        public void UpdateStyleCustomization(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?))
+        public void UpdateStyleCustomization(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), AppColorThemeInput? appColorTheme = default(AppColorThemeInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?))
         {
-            UpdateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+            UpdateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
         }
 
         /// <summary>
@@ -1514,14 +1519,15 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="scope">Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org.</param>
         /// <param name="operation">Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)</param>
         /// <param name="resetOptions">Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)</param>
-        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)</param>
+        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional)</param>
+        /// <param name="appColorTheme">App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)</param>
         /// <param name="chartColorPalette">Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)</param>
         /// <param name="embeddedFooterText">Custom footer text for the embedded application. An empty string clears the footer. (optional)</param>
         /// <param name="visualizationFonts">Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)</param>
         /// <param name="defaultLogo">Binary image for the DEFAULT logo slot (square app icon and favicon; recommended 140x140 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <param name="wideLogo">Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> UpdateStyleCustomizationWithHttpInfo(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?))
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> UpdateStyleCustomizationWithHttpInfo(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), AppColorThemeInput? appColorTheme = default(AppColorThemeInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?))
         {
             // verify the required parameter 'scope' is set
             if (scope == null)
@@ -1556,6 +1562,10 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (navigationPanel != null)
             {
                 localVarRequestOptions.FormParameters.Add("navigation_panel", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.Serialize(navigationPanel)); // form parameter
+            }
+            if (appColorTheme != null)
+            {
+                localVarRequestOptions.FormParameters.Add("app_color_theme", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.Serialize(appColorTheme)); // form parameter
             }
             if (chartColorPalette != null)
             {
@@ -1604,7 +1614,8 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="scope">Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org.</param>
         /// <param name="operation">Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)</param>
         /// <param name="resetOptions">Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)</param>
-        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)</param>
+        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional)</param>
+        /// <param name="appColorTheme">App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)</param>
         /// <param name="chartColorPalette">Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)</param>
         /// <param name="embeddedFooterText">Custom footer text for the embedded application. An empty string clears the footer. (optional)</param>
         /// <param name="visualizationFonts">Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)</param>
@@ -1612,9 +1623,9 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="wideLogo">Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task UpdateStyleCustomizationAsync(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task UpdateStyleCustomizationAsync(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), AppColorThemeInput? appColorTheme = default(AppColorThemeInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
-            await UpdateStyleCustomizationWithHttpInfoAsync(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, cancellationToken).ConfigureAwait(false);
+            await UpdateStyleCustomizationWithHttpInfoAsync(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1624,7 +1635,8 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="scope">Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org.</param>
         /// <param name="operation">Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)</param>
         /// <param name="resetOptions">Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)</param>
-        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)</param>
+        /// <param name="navigationPanel">Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional)</param>
+        /// <param name="appColorTheme">App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)</param>
         /// <param name="chartColorPalette">Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)</param>
         /// <param name="embeddedFooterText">Custom footer text for the embedded application. An empty string clears the footer. (optional)</param>
         /// <param name="visualizationFonts">Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)</param>
@@ -1632,7 +1644,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="wideLogo">Binary image for the WIDE logo slot (horizontal top nav bar logo; recommended 230x45 px). Accepted formats: PNG, JPG. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> UpdateStyleCustomizationWithHttpInfoAsync(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> UpdateStyleCustomizationWithHttpInfoAsync(string scope, string? operation = default(string?), StyleResetOptionsInput? resetOptions = default(StyleResetOptionsInput?), NavigationPanelInput? navigationPanel = default(NavigationPanelInput?), AppColorThemeInput? appColorTheme = default(AppColorThemeInput?), StyleColorPaletteInput? chartColorPalette = default(StyleColorPaletteInput?), string? embeddedFooterText = default(string?), VisualizationFontsInput? visualizationFonts = default(VisualizationFontsInput?), FileParameter? defaultLogo = default(FileParameter?), FileParameter? wideLogo = default(FileParameter?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'scope' is set
             if (scope == null)
@@ -1669,6 +1681,10 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (navigationPanel != null)
             {
                 localVarRequestOptions.FormParameters.Add("navigation_panel", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.Serialize(navigationPanel)); // form parameter
+            }
+            if (appColorTheme != null)
+            {
+                localVarRequestOptions.FormParameters.Add("app_color_theme", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.Serialize(appColorTheme)); // form parameter
             }
             if (chartColorPalette != null)
             {
